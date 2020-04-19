@@ -1,1 +1,13 @@
-{}
+{
+	"sidebar": {
+		"abtests": "А/B тесты",
+		"abtests-active": "Активные тесты",
+		"abtests-archive": "Архив тестов",
+		"coupons": "Купоны",
+		"crm": "Заявки",
+		"emails": "Email адреса",
+		"help": "Поддержка",
+		"sites": "Сайты",
+		"widgets": "Виджеты"
+	}
+}
