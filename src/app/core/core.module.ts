@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreRoutingModule } from './core-routing.module';
 import { ChatComponent } from './chat/chat.component';
-import { HeaderLineComponent } from './header-line/header-line.component';
+import { ColorLineComponent } from './color-line/color-line.component';
+import { PreloaderComponent } from './preloader/preloader.component';
 
 
 @NgModule({
-  declarations: [ ChatComponent, HeaderLineComponent ],
+  declarations: [ ChatComponent, ColorLineComponent, PreloaderComponent ],
   imports: [
     CommonModule,
     CoreRoutingModule
@@ -14,7 +15,7 @@ import { HeaderLineComponent } from './header-line/header-line.component';
   exports: [
     CoreRoutingModule,
     ChatComponent,
-    HeaderLineComponent
+    ColorLineComponent
   ]
 })
 export class CoreModule { }

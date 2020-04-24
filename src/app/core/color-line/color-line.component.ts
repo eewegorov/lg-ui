@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header-line',
-  templateUrl: './header-line.component.html',
-  styleUrls: ['./header-line.component.scss']
+  templateUrl: './color-line.component.html',
+  styleUrls: ['./color-line.component.scss']
 })
-export class HeaderLineComponent implements OnInit {
+export class ColorLineComponent implements OnInit {
 
   constructor() { }
 

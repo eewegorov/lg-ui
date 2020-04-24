@@ -1,0 +1,21 @@
+.widget-page-preloader-all {
+  background-color: #edf0f5;
+  height: 50%;
+  min-height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 9;
+}
+
+.widget-page-preloader-all .widget-page-preloader-all-inner {
+  background-image: url("/assets/images/core/preloader.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 60px;
+  width: 60px;
+  margin-left: -30px;
+  left: 50%;
+  position: absolute;
+  top: 300px;
+}

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderLineComponent } from './header-line.component';
+import { PreloaderComponent } from './preloader.component';
 
-describe('HeaderLineComponent', () => {
-  let component: HeaderLineComponent;
-  let fixture: ComponentFixture<HeaderLineComponent>;
+describe('PreloaderComponent', () => {
+  let component: PreloaderComponent;
+  let fixture: ComponentFixture<PreloaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderLineComponent ]
+      declarations: [ PreloaderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderLineComponent);
+    fixture = TestBed.createComponent(PreloaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
