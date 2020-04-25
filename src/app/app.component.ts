@@ -11,6 +11,4 @@ export class AppComponent {
   constructor(private translateService: TranslateService) {
     this.translateService.use(defaultLocale);
   }
-
-  title = 'lg-ui';
 }

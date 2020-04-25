@@ -1,2 +1,85 @@
-<p>header works!</p>
-<app-dropdown></app-dropdown>
+<div id="header">
+  <div
+    id="logo"
+    class="light-version logo-svg__menu"
+    [class.default]="!yandexRef" [class.yandex]="yandexRef"
+  >
+  </div>
+  <nav role="navigation" class="main-nav-head">
+    <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
+    <div class="small-logo">
+      <span class="text-primary">LeadGenic</span>
+    </div>
+
+    <a routerLink="/site/list">
+      <button
+        id="goCabinet"
+        class="btn btn-notselected saveButton-toolbar"
+        routerLinkActive="btn-default"
+      >
+        {{ 'header.cabinet' | translate }}
+      </button>
+    </a>
+
+    <a routerLink="/user/partner">
+      <button
+        id="goPartner"
+        class="btn btn-notselected saveButton-toolbar"
+        routerLinkActive="btn-default"
+      >
+        {{ 'header.partner' | translate }}
+      </button>
+    </a>
+
+    <a
+      *ngIf="yandexRef"
+      href="https://kassa.yandex.ru/"
+      target="_blank"
+    >
+      <button
+        id="goYandex"
+        class="btn btn-notselected saveButton-toolbar"
+      >
+        {{ 'header.yandex' | translate }}
+      </button>
+    </a>
+
+    <div class="navbar-right">
+
+
+      <ul class="nav navbar-nav no-borders">
+        <li class="toolbar-text-like">
+          <span class="lg-like">{{ 'header.like' | translate }}</span>
+        </li>
+        <li class="toolbar-fb-like">
+          <div id="fb-root"></div>
+          <div
+            class="fb-like"
+            data-href="https://leadgenic.com/"
+            data-layout="button_count"
+            data-action="like"
+            data-show-faces="false"
+            data-share="false"
+          ></div>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown">
+            <i class="pe-7s-user"></i><span class="userinfo">{{ login }} <b class="caret"></b></span>
+          </a>
+          <ul class="dropdown-menu hdropdown animated flipInX">
+            <li>
+              <a routerLink="/user/"><i class="fa fa-cogs"></i>
+                {{ 'header.settings' | translate }}
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a routerLink="/logout">
+            <i class="pe-7s-upload pe-rotate-90"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
