@@ -1,4 +1,11 @@
 {
+	"header": {
+		"cabinet": "Кабинет",
+		"like": "Нравится LeadGenic?",
+		"partner": "Партнерская программа",
+		"settings": "Настройки",
+		"yandex": "Яндекс касса"
+	},
 	"sidebar": {
 		"abtests": "А/B тесты",
 		"abtests-active": "Активные тесты",

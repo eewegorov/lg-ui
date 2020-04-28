@@ -1,4 +1,11 @@
 {
+	"header": {
+		"cabinet": "",
+		"like": "",
+		"partner": "",
+		"settings": "",
+		"yandex": ""
+	},
 	"sidebar": {
 		"abtests": "",
 		"abtests-active": "",
