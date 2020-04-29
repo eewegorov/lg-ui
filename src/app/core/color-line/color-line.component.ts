@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-header-line',
+  selector: 'app-color-line',
   templateUrl: './color-line.component.html',
   styleUrls: ['./color-line.component.scss']
 })
