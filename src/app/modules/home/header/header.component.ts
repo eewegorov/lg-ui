@@ -6,12 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  public login: string;
+  public login: string = 'eevegorov@yandex.ru';
   public yandexRef = false;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.facebookInit();
+  }
+
+  private facebookInit(): void {
     (function (d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
