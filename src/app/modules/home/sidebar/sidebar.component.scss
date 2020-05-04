@@ -1,0 +1,75 @@
+#menu {
+  width: 180px;
+  bottom: 0;
+  float: left;
+  left: 0;
+  position: fixed;
+  overflow: auto;
+  top: 62px;
+  transition: all 0.4s ease 0s;
+}
+
+#side-menu {
+  background: #f7f9fa;
+}
+
+#side-menu li a {
+  display: flex;
+  color: #6a6c6f;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 14px;
+}
+
+#side-menu li:first-child {
+  border-top: 1px solid #e4e5e7;
+}
+
+#side-menu li.active a, #side-menu li:hover a {
+  color: #34495e;
+}
+
+#side-menu li .nav-second-level li a {
+  padding: 10px 10px 10px 30px;
+  color: #6a6c6f;
+  text-transform: none;
+  font-weight: 400;
+}
+
+#side-menu li .nav-second-level li.active a {
+  color: #000;
+}
+
+#side-menu.nav > li > a:hover, #side-menu.nav > li > a:focus {
+  background: #fff;
+}
+
+#side-menu li.active {
+  background: #fff;
+}
+
+#side-menu .nav-label {
+  margin-left: 5px;
+  vertical-align: middle;
+  width: 110px;
+}
+
+.icons-for-sidemenu {
+  font-size: 18px;
+  width: 25px;
+  margin-top: 1.5px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.arrow {
+  margin-top: 3px;
+}
+
+.fa.arrow:before {
+  content: "\f104";
+}
+
+.active > a > .fa.arrow:before {
+  content: "\f107";
+}
