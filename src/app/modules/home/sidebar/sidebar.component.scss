@@ -73,3 +73,13 @@
 .active > a > .fa.arrow:before {
   content: "\f107";
 }
+
+.lg-sidebar-banner {
+  cursor: pointer;
+  width: 100%;
+  height: 212px;
+  background-image: url("/assets/images/banners/servicesetup_v31.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+}

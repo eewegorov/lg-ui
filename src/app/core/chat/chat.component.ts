@@ -10,16 +10,16 @@ export class ChatComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-      (function(d, w, c) {
+      ((d, w, c) => {
         w.ChatraID = 'yPvYHpZ5e7hfvJAg6';
-        var s = d.createElement('script');
-        w[c] = w[c] || function() {
-          (w[c].q = w[c].q || []).push(arguments);
-        };
+        const s = d.createElement('script');
+        w[c] = w[c] || ((args) => {
+          (w[c].q = w[c].q || []).push(...args);
+        });
         s.async = true;
-        s.src = (d.location.protocol === 'https:' ? 'https:': 'http:')
+        s.src = (d.location.protocol === 'https:' ? 'https:' : 'http:')
           + '//call.chatra.io/chatra.js';
-        if (d.head) d.head.appendChild(s);
+        if (d.head) { d.head.appendChild(s); }
       })(document, window, 'Chatra');
   }
 
