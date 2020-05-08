@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +10,20 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   public login: string;
   public yandexRef = false;
+  public isPartnerPage = false;
 
-  constructor() { }
+  constructor(private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.isPartnerPage = event.url === '/user/partner';
+    });
+  }
 
   ngOnInit(): void {
     this.facebookInit();
     this.login = 'eevegorov@yandex.ru';
+
   }
 
   private facebookInit(): void {

@@ -1,5 +1,6 @@
 <div id="header">
   <div
+    routerLink="/"
     id="logo"
     class="light-version logo-svg__menu"
     [class.default]="!yandexRef" [class.yandex]="yandexRef"
@@ -7,7 +8,10 @@
   </div>
   <nav role="navigation" class="main-nav-head">
     <div class="header-link"><i class="fa fa-bars"></i></div>
-    <div class="small-logo">
+    <div
+      routerLink="/"
+      class="small-logo"
+    >
       <span class="text-primary">LeadGenic</span>
     </div>
 
@@ -15,7 +19,7 @@
       <button
         id="goCabinet"
         class="btn btn-notselected saveButton-toolbar"
-        routerLinkActive="btn-default"
+        [class.btn-default]="!isPartnerPage"
       >
         {{ 'header.cabinet' | translate }}
       </button>

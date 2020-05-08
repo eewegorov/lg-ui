@@ -39,10 +39,6 @@ body {
   border:0;
 }
 
-a {
-  transition: .1s linear;
-}
-
 a:link, a:hover, a:visited {
   text-decoration: none;
   color: #000;
@@ -50,7 +46,7 @@ a:link, a:hover, a:visited {
 }
 
 .wrapper {
-  margin: 62px 0 0 180px;
+  margin: 42px 0 0 180px;
   padding: 20px 20px 20px 20px;
   background: #edf0f5;
   border-left: 1px solid #e4e5e7;
