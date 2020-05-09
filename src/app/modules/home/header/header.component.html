@@ -7,7 +7,12 @@
   >
   </div>
   <nav role="navigation" class="main-nav-head">
-    <div class="header-link"><i class="fa fa-bars"></i></div>
+    <div
+      class="header-link"
+      (click)="handleMinimalizeSidebar()"
+    >
+      <i class="fa fa-bars"></i>
+    </div>
     <div
       routerLink="/"
       class="small-logo"

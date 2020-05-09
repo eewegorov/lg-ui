@@ -2,6 +2,30 @@ a {
   transition: .1s linear;
 }
 
+.hide-sidebar #menu {
+  margin-left: -180px
+}
+
+.hide-sidebar .wrapper {
+  margin-left: 0
+}
+
+.page-small #menu {
+  margin-left: -180px
+}
+
+.page-small .wrapper {
+  margin-left: 0
+}
+
+.page-small.show-sidebar #menu {
+  margin-left: 0
+}
+
+.page-small.show-sidebar .wrapper {
+  margin-left: 180px
+}
+
 #menu {
   width: 180px;
   bottom: 0;

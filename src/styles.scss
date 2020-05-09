@@ -14,6 +14,20 @@ $pe-7s-font-path: "../node_modules/pe7-icon/dist/fonts" !default;
   box-sizing: border-box;
 }
 
+:focus {
+  outline: none;
+}
+
+::-moz-focus-inner {
+  border: 0;
+}
+
+a:link, a:hover, a:visited {
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+}
+
 html {
   height: 100%;
   margin: 0;
@@ -31,18 +45,28 @@ body {
   height: 90%;
 }
 
-:focus {
-  outline:none;
+body.hide-sidebar #menu {
+  margin-left: -180px
 }
 
-::-moz-focus-inner {
-  border:0;
+body.hide-sidebar .wrapper {
+  margin-left: 0
 }
 
-a:link, a:hover, a:visited {
-  text-decoration: none;
-  color: #000;
-  cursor: pointer;
+body.page-small #menu {
+  margin-left: -180px
+}
+
+body.page-small .wrapper {
+  margin-left: 0
+}
+
+body.page-small.show-sidebar #menu {
+  margin-left: 0
+}
+
+body.page-small.show-sidebar .wrapper {
+  margin-left: 180px
 }
 
 .wrapper {
