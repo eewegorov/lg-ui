@@ -17,13 +17,12 @@
         </a>
       </li>
 
-      <li routerLinkActive="active">
-        <a routerLink="/abtests/archive/">
+      <li [class.active]="abtestsMenuExpanded">
+        <a class="has-arrow" [attr.aria-expanded]="abtestsMenuExpanded">
           <i class="pe-7s-shuffle icons-for-sidemenu"></i>
           <span class="nav-label">{{ 'sidebar.abtests' | translate }}</span>
-          <span class="fa arrow"></span>
         </a>
-        <ul class="nav nav-second-level">
+        <ul class="nav nav-second-level" [class.mm-show]="abtestsMenuExpanded">
           <li routerLinkActive="active">
             <a routerLink="/abtests/active/">{{ 'sidebar.abtests-active' | translate }}</a>
           </li>

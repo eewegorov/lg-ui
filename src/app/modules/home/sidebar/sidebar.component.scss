@@ -2,30 +2,6 @@ a {
   transition: .1s linear;
 }
 
-.hide-sidebar #menu {
-  margin-left: -180px
-}
-
-.hide-sidebar .wrapper {
-  margin-left: 0
-}
-
-.page-small #menu {
-  margin-left: -180px
-}
-
-.page-small .wrapper {
-  margin-left: 0
-}
-
-.page-small.show-sidebar #menu {
-  margin-left: 0
-}
-
-.page-small.show-sidebar .wrapper {
-  margin-left: 180px
-}
-
 #menu {
   width: 180px;
   bottom: 0;
@@ -53,18 +29,27 @@ a {
   border-top: 1px solid #e4e5e7;
 }
 
-#side-menu li.active a, #side-menu li:hover a {
+#side-menu li.mm-active a, #side-menu li:hover a {
   color: #34495e;
 }
 
+#side-menu li .nav-second-level {
+  flex-direction: row;
+}
+
+#side-menu li .nav-second-level li {
+  width: 100%;
+}
+
 #side-menu li .nav-second-level li a {
+  width: 100%;
   padding: 10px 10px 10px 30px;
   color: #6a6c6f;
   text-transform: none;
   font-weight: 400;
 }
 
-#side-menu li .nav-second-level li.active a {
+#side-menu li .nav-second-level li.mm-active a, #side-menu li .nav-second-level li.active a {
   color: #000;
 }
 
@@ -72,7 +57,7 @@ a {
   background: #fff;
 }
 
-#side-menu li.active {
+#side-menu li.mm-active, #side-menu li.active {
   background: #fff;
 }
 
@@ -90,18 +75,6 @@ a {
   text-align: center;
 }
 
-.arrow {
-  margin-top: 3px;
-}
-
-.fa.arrow:before {
-  content: "\f104";
-}
-
-.active > a > .fa.arrow:before {
-  content: "\f107";
-}
-
 .lg-sidebar-banner {
   cursor: pointer;
   width: 100%;
@@ -110,4 +83,8 @@ a {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center top;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: #eee;
 }

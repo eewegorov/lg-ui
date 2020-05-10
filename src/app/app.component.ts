@@ -1,16 +1,30 @@
-import { Component, HostListener } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, HostListener } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { defaultLocale } from './configs/languages';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('fadeIn', [
+      state('out', style({ opacity: 0 })),
+      state('in', style({ opacity: 1 })),
+      transition('out => in', animate('1000ms ease-in')),
+    ])
+  ]
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
+  public state = 'out';
+
   constructor(private translateService: TranslateService) {
     this.translateService.use(defaultLocale);
     this.setBodySmall();
+  }
+
+  ngAfterViewInit(): void {
+    this.state = this.state && this.state === 'in' ? 'out' : 'in';
   }
 
   @HostListener('window:resize', ['$event'])

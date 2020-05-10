@@ -18,7 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     SharedModule,
     HomeRoutingModule,
-    TranslateModule.forChild()
+    TranslateModule
   ]
 })
 export class HomeModule { }
