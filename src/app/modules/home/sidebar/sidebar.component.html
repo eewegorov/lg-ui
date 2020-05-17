@@ -1,52 +1,52 @@
 <app-modal></app-modal>
 <aside id="menu">
   <div id="navigation">
-    <ul class="nav" id="side-menu">
+    <ul class="nav" id="side-menu" #menu>
 
-      <li routerLinkActive="active">
+      <li routerLinkActive="active mm-active">
         <a routerLink="/site/list">
           <i class="pe-7s-monitor icons-for-sidemenu"></i>
           <span class="nav-label">{{ 'sidebar.sites' | translate }}</span>
         </a>
       </li>
 
-      <li routerLinkActive="active">
+      <li routerLinkActive="active mm-active">
         <a routerLink="/widgets">
           <i class="pe-7s-network icons-for-sidemenu"></i>
           <span class="nav-label">{{ 'sidebar.widgets' | translate }}</span>
         </a>
       </li>
 
-      <li [class.active]="abtestsMenuExpanded">
+      <li [class.active]="abtestsMenuExpanded" [class.mm-active]="abtestsMenuExpanded">
         <a class="has-arrow" [attr.aria-expanded]="abtestsMenuExpanded">
           <i class="pe-7s-shuffle icons-for-sidemenu"></i>
           <span class="nav-label">{{ 'sidebar.abtests' | translate }}</span>
         </a>
         <ul class="nav nav-second-level" [class.mm-show]="abtestsMenuExpanded">
-          <li routerLinkActive="active">
+          <li routerLinkActive="active mm-active">
             <a routerLink="/abtests/active/">{{ 'sidebar.abtests-active' | translate }}</a>
           </li>
-          <li routerLinkActive="active">
+          <li routerLinkActive="active mm-active">
             <a routerLink="/abtests/archive/">{{ 'sidebar.abtests-archive' | translate }}</a>
           </li>
         </ul>
       </li>
 
-      <li routerLinkActive="active">
+      <li routerLinkActive="active mm-active">
         <a routerLink="/coupons">
           <i class="pe-7s-scissors icons-for-sidemenu"></i>
           <span class="nav-label">{{ 'sidebar.coupons' | translate }}</span>
         </a>
       </li>
 
-      <li routerLinkActive="active">
+      <li routerLinkActive="active mm-active">
         <a routerLink="/crm">
           <i class="pe-7s-user icons-for-sidemenu"></i>
           <span class="nav-label">{{ 'sidebar.crm' | translate }}</span>
         </a>
       </li>
 
-      <li routerLinkActive="active">
+      <li routerLinkActive="active mm-active">
         <a routerLink="/reports/emails">
           <i class="pe-7s-mail icons-for-sidemenu"></i>
           <span class="nav-label">{{ 'sidebar.emails' | translate }}</span>

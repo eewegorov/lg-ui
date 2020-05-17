@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   {
     path: '', component: HomeComponent, children: [
-      { path: '', redirectTo: '/site/list', pathMatch: 'full' },
+      { path: '', redirectTo: 'site/list', pathMatch: 'full' },
       { path: 'site', loadChildren: () => import('../sites/sites.module').then(m => m.SitesModule) },
       { path: 'widgets', loadChildren: () => import('../widgets/widgets.module').then(m => m.WidgetsModule) },
       { path: 'abtests', loadChildren: () => import('../abtests/abtests.module').then(m => m.AbtestsModule) },

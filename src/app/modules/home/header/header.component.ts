@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.facebookInit();
     this.login = 'eevegorov@yandex.ru';
-
   }
 
   private facebookInit(): void {
@@ -38,7 +37,7 @@ export class HeaderComponent implements OnInit {
     })(document, 'script', 'facebook-jssdk');
   }
 
-  handleMinimalizeSidebar() {
+  public handleMinimalizeSidebar(event: Event): void {
     event.preventDefault();
     if ($(window).width() < 769) {
       $("body").toggleClass("show-sidebar");
