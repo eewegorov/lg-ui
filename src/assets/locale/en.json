@@ -7,7 +7,16 @@
 		"yandex": ""
 	},
 	"login": {
-		"enter": ""
+		"enter": "",
+		"error": "",
+		"forgot_password": "",
+		"login": "",
+		"password": "",
+		"register": "",
+		"remember_checkbox": "",
+		"remember_note": "",
+		"unique_password": "",
+		"user": ""
 	},
 	"sidebar": {
 		"abtests": "",
