@@ -1,0 +1,72 @@
+h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 200;
+  font-size: 24px;
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  font-weight: bold;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+.hpanel {
+  border: none;
+  box-shadow: none;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.hpanel .panel-body {
+  background: #fff;
+  border: 1px solid #e4e5e7;
+  border-radius: 2px;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.form-group {
+  margin-bottom: 5px;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  line-height: 16px;
+  padding: 2px 12px;
+  font-size: 14px;
+  color: #555;
+  background-color: #fff;
+  border: 1px solid #e4e5e7;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.errorMessage {
+  color: #D80E31;
+}
+
+.small {
+  font-size: 85%;
+}
+
+.help-block {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+}
+
+
+@media (max-width: 419px) {
+  .form-control {
+    width: 250px;
+  }
+}

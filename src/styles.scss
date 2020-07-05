@@ -3,7 +3,9 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&lang=en");
 
 $pe-7s-font-path: "../node_modules/pe7-icon/dist/fonts" !default;
-@import "node_modules/pe7-icon/dist/scss/pe-icon-7-stroke";
+@import "../node_modules/pe7-icon/dist/scss/pe-icon-7-stroke";
+
+@import "../node_modules/icheck/skins/square/green.css";
 
 * {
   box-sizing: border-box;
@@ -85,4 +87,24 @@ body.page-small.show-sidebar .wrapper {
 
 .nav {
   flex-direction: column;
+}
+
+.icheckbox_square-green.checked {
+  background-position: -48px 0;
+}
+
+.icheckbox_square-green {
+  background-position: 0 0;
+}
+
+.icheckbox_square-green, .iradio_square-green {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  background: url("assets/images/account/green.png") no-repeat;
+  border: none;
+  cursor: pointer;
 }
