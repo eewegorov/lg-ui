@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['../shared/shared.scss', './login.component.scss']
 })
 export class LoginComponent implements OnInit {
   @ViewChild('ichecks', { static: true }) ichecks: ElementRef;

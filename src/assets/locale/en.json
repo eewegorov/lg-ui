@@ -9,7 +9,13 @@
 	"login": {
 		"enter": "",
 		"error": "",
+		"forgot": "",
+		"forgot_not_found": "",
 		"forgot_password": "",
+		"forgot_remember": "",
+		"forgot_send": "",
+		"forgot_under_input": "",
+		"forgot_we_send": "",
 		"login": "",
 		"password": "",
 		"register": "",
