@@ -1,1 +1,44 @@
-<p>register works!</p>
+<h3>{{ 'login.register_title' | translate }}</h3>
+<div id="registerPanel" class="hpanel">
+  <div class="panel-body">
+    <form id="formRegister">
+      <div class="form-group">
+        <label class="control-label" for="usernameReg">{{ 'login.user' | translate }}:</label>
+        <input
+          type="text"
+          placeholder="example@gmail.com"
+          autocomplete="off"
+          name="username"
+          id="usernameReg"
+          class="form-control"
+        >
+        <span class="errorMessage errorMessageRegister login small"></span>
+        <span class="help-block small">{{ 'login.unique_login' | translate }}</span>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="passwordReg">{{ 'login.passnew' | translate }}:</label>
+        <input type="password" placeholder="********" autocomplete="off" name="password" id="passwordReg" class="form-control">
+        <span class="errorMessage errorMessageRegister pwd small"></span>
+        <span class="help-block small help-block-pwds" id="showPassLog"><i class="pe-7s-look fa-3x pointer showPassLog"></i>Показать пароль</span>
+      </div>
+      <button type="submit" class="btn btn-success btn-block" id="buttonRegister">{{ 'login.register' | translate }}</button>
+      <span class="help-block small" style="margin-bottom: 25px;font-size: 63%;">
+        Нажимая "Зарегистрироваться", вы даете
+        <a href="https://static.leadgenic.com/oferta_ru/leadgenic_oferta.pdf" target="blank">согласие</a>
+        на обработку своих персональных данных
+      </span>
+      <span class="help-block small help-block_label">ИЛИ</span>
+      <button
+        class="btn btn-warning btn-block"
+        data-auth="REG"
+        style="background-color: #ffdb4dd9;margin-bottom: 30px;">
+        Зарегистрируйтесь через <span style="color:#f00;">Я</span>ндекс
+      </button>
+
+      <span class="help-block small">Уже есть аккаунт?</span>
+      <button routerLink="/account/login" type="button" class="btn btn-default btn-block" data-action="loginLayer">
+        {{ 'login.login' | translate }}
+      </button>
+    </form>
+  </div>
+</div>

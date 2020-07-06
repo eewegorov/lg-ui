@@ -22,7 +22,6 @@
       <button type="submit" class="btn btn-success btn-block" id="buttonLogin">{{ 'login.login' | translate }}</button>
       <span class="help-block small help-block_label">ИЛИ</span>
       <button
-        type="button"
         class="btn btn-warning btn-block"
         data-auth="AUTH"
         style="background-color: #ffdb4dd9; margin-bottom: 30px;"
@@ -30,7 +29,7 @@
         Войти через <span style="color:#f00;">Я</span>ндекс
       </button>
       <span class="help-block small">Еще не зарегистрированы?</span>
-      <button type="button" class="btn btn-default btn-block" data-action="registerLayer">
+      <button routerLink="/account/register" type="button" class="btn btn-default btn-block" data-action="registerLayer">
         {{ 'login.register' | translate }}
       </button>
       <a routerLink="/account/forgot" class="forgotPass" data-action="passwordLayer">

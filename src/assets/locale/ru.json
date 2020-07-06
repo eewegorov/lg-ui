@@ -17,10 +17,13 @@
 		"forgot_under_input": "Введите ваш Email для восстановления пароля",
 		"forgot_we_send": "Мы отправили письмо. Проверьте Email",
 		"login": "Войти",
+		"passnew": "Придумайте пароль",
 		"password": "Пароль",
 		"register": "Зарегистрироваться",
+		"register_title": "Регистрация в системе",
 		"remember_checkbox": "Запомнить меня",
 		"remember_note": "Если компьютер личный",
+		"unique_login": "Используется как имя пользователя",
 		"unique_password": "Ваш уникальный пароль",
 		"user": "Введите email"
 	},

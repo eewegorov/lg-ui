@@ -1,0 +1,38 @@
+#formRegister span.help-block a {
+  color: inherit;
+  text-decoration: underline;
+}
+#formRegister span.help-block a:hover {
+  text-decoration: none;
+}
+
+#formRegister span.help-block a {
+  color: inherit;
+  text-decoration: underline;
+}
+#formRegister span.help-block a:hover {
+  text-decoration: none;
+}
+
+.errorMessageRegister {
+  display: none;
+}
+
+.help-block-pwds {
+  height: 18px;
+  float: right;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+i.showPassLog {
+  height: 18px;
+  vertical-align: top;
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+#buttonRegister {
+  margin-top: 10px;
+  margin-bottom: 6px;
+}

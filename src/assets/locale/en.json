@@ -17,10 +17,13 @@
 		"forgot_under_input": "",
 		"forgot_we_send": "",
 		"login": "",
+		"passnew": "",
 		"password": "",
 		"register": "",
+		"register_title": "",
 		"remember_checkbox": "",
 		"remember_note": "",
+		"unique_login": "",
 		"unique_password": "",
 		"user": ""
 	},
