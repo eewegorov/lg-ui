@@ -17,9 +17,24 @@
       </div>
       <div class="form-group">
         <label class="control-label" for="passwordReg">{{ 'login.passnew' | translate }}:</label>
-        <input type="password" placeholder="********" autocomplete="off" name="password" id="passwordReg" class="form-control">
+        <input
+          type="password"
+          placeholder="********"
+          autocomplete="off"
+          name="password"
+          id="passwordReg"
+          class="form-control"
+          #password
+        >
         <span class="errorMessage errorMessageRegister pwd small"></span>
-        <span class="help-block small help-block-pwds" id="showPassLog"><i class="pe-7s-look fa-3x pointer showPassLog"></i>Показать пароль</span>
+        <span
+          class="help-block small help-block-pwds"
+          id="showPassLog"
+          (mouseover)="togglePassword('text')"
+          (mouseleave)="togglePassword('password')"
+        >
+          <i class="pe-7s-look fa-3x pointer showPassLog"></i>Показать пароль
+        </span>
       </div>
       <button type="submit" class="btn btn-success btn-block" id="buttonRegister">{{ 'login.register' | translate }}</button>
       <span class="help-block small" style="margin-bottom: 25px;font-size: 63%;">
@@ -31,7 +46,9 @@
       <button
         class="btn btn-warning btn-block"
         data-auth="REG"
-        style="background-color: #ffdb4dd9;margin-bottom: 30px;">
+        style="background-color: #ffdb4dd9;margin-bottom: 30px;"
+        (click)="regYandex($event)"
+      >
         Зарегистрируйтесь через <span style="color:#f00;">Я</span>ндекс
       </button>
 

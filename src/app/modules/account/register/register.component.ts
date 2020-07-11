@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { OAuthResponse } from '../models/account';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-register',
@@ -6,10 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['../shared/shared.scss', './register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  @ViewChild('password') private password: ElementRef;
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
+  }
+
+  public regYandex(event: Event) {
+    this.accountService.handleYandex(event, 'REG').subscribe((response: OAuthResponse) => {
+      if (response.code === 200) {
+        window.location.href = response.data.url;
+      }
+    });
+  }
+
+  public togglePassword(type: 'password' | 'text') {
+    this.password.nativeElement.setAttribute('type', type);
   }
 
 }

@@ -1,7 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AccountApiService } from '../services/account-api.service';
-import { OAuthData, OAuthResponse } from '../models/account';
+import { ActivatedRoute } from '@angular/router';
+import { OAuthResponse } from '../models/account';
+import { AccountService } from '../services/account.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -10,22 +13,17 @@ import { OAuthData, OAuthResponse } from '../models/account';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('ichecks', { static: true }) private ichecks: ElementRef;
-  @ViewChild('yandex', { static: true }) private yandex: ElementRef;
-  public loginForm: FormGroup;
-  public error: string;
+  public error: boolean;
 
-  constructor(private accountApiService: AccountApiService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private accountService: AccountService
+  ) {
+    this.error = this.route.snapshot.queryParams['error'] === '';
+  }
 
   ngOnInit(): void {
     this.initIchecks();
-    this.resetForm();
-  }
-
-  private resetForm() {
-    this.loginForm = new FormGroup({
-      username: new FormControl('', [ Validators.required, Validators.minLength(2) ]),
-      password: new FormControl('', [ Validators.required, Validators.minLength(6) ])
-    });
   }
 
   private initIchecks() {
@@ -36,12 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   public authYandex(event: Event) {
-    (event.target as HTMLButtonElement).disabled = true;
-    const yandexOAuthData: OAuthData = {
-      service: 'YANDEX',
-      action: 'AUTH'
-    };
-    this.accountApiService.postOAuth(yandexOAuthData).subscribe((response: OAuthResponse) => {
+    this.accountService.handleYandex(event, 'AUTH').subscribe((response: OAuthResponse) => {
       (event.target as HTMLButtonElement).disabled = false;
       if (response.code === 200) {
         window.location.href = response.data.url;
