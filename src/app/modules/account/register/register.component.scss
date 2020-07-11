@@ -14,7 +14,7 @@
   text-decoration: none;
 }
 
-.errorMessageRegister {
+.valid {
   display: none;
 }
 
@@ -35,4 +35,8 @@ i.showPassLog {
 #buttonRegister {
   margin-top: 10px;
   margin-bottom: 6px;
+}
+
+#buttonRegister:disabled {
+  border-color: #ddd;
 }

@@ -9,6 +9,7 @@
 	"login": {
 		"enter": "",
 		"error": "",
+		"error_password": "",
 		"forgot": "",
 		"forgot_not_found": "",
 		"forgot_password": "",
@@ -17,8 +18,8 @@
 		"forgot_under_input": "",
 		"forgot_we_send": "",
 		"login": "",
-		"passnew": "",
 		"password": "",
+		"password_new": "",
 		"register": "",
 		"register_title": "",
 		"remember_checkbox": "",

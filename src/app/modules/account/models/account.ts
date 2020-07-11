@@ -12,3 +12,18 @@ export interface OAuthResponse {
   success: boolean;
   data: OAuthUrlData;
 }
+
+export interface RegistrationData {
+  login: string;
+  password: string;
+}
+
+export interface RegistrationResponse {
+  rows: [ RegistrationResponseRow ];
+}
+export interface RegistrationResponseRow {
+  code: number;
+  context: string;
+  message: string;
+  object: string;
+}
