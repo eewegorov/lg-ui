@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { OAuthData, OAuthResponse, RegistrationData, RegistrationResponse } from '../models/account';
+import { OAuthData, OAuthResponse, RegistrationResponse } from '../models/account';
 import { environment } from '../../../../environments/environment';
 
 
@@ -18,5 +18,9 @@ export class AccountApiService {
 
   public postRegistration(data: FormData): Observable<RegistrationResponse> {
     return this.http.post<RegistrationResponse>(`${ environment.authUrl }/create`, data);
+  }
+
+  public postReset(data: FormData): Observable<RegistrationResponse> {
+    return this.http.post<RegistrationResponse>(`${ environment.authUrl }/resetPassword`, data);
   }
 }

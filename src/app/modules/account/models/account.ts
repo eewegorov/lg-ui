@@ -21,9 +21,14 @@ export interface RegistrationData {
 export interface RegistrationResponse {
   rows: [ RegistrationResponseRow ];
 }
+
 export interface RegistrationResponseRow {
   code: number;
   context: string;
   message: string;
   object: string;
+}
+
+export interface ResetData {
+  email: string;
 }

@@ -1,5 +1,5 @@
 <h3>{{ 'login.register_title' | translate }}</h3>
-<div id="registerPanel" class="hpanel">
+<div id="registerPanel" class="hpanel" [class.valid]="autoRegister">
   <div class="panel-body">
     <form id="formRegister" (ngSubmit)="reg(f)" #f="ngForm">
       <div class="form-group">
@@ -11,7 +11,7 @@
           name="login"
           id="usernameReg"
           class="form-control"
-          ngModel
+          [ngModel]="registrationEmail"
           required
         >
         <span class="errorMessage small" [class.valid]="!invalidLogin">
@@ -77,7 +77,25 @@
   </div>
 </div>
 
-<form id="formLogin" class="valid" method="post" action="https://app.leadgenic.ru/account/login" #loginForm>
+<div *ngIf="autoRegister" id="autoRegisterPanel" class="hpanel">
+  <div class="panel-body">
+    <span class="errorMessage errorMessageLogin"></span>
+    <div class="messageCenterReset" style="height: auto;">
+      <h1>Спасибо за регистрацию!</h1>
+      <p>Пароль от LeadGenic отправлен вам на почту. Сейчас вы будете перенаправлены в свой личный кабинет.</p>
+    </div>
+  </div>
+</div>
+<div *ngIf="autoRegister" id="autoRegisterErrorPanel" class="hpanel">
+  <div class="panel-body">
+    <span class="errorMessage errorMessageAutoRegister"></span>
+  </div>
+</div>
+<div *ngIf="autoRegister" id="autoRegisterLoadingPanel" class="hpanel">
+  <div class="panel-loading"></div>
+</div>
+
+<form id="formLogin" class="valid" method="post" action="/account/login" #loginForm>
   <input
     type="text"
     placeholder="example@gmail.com"
