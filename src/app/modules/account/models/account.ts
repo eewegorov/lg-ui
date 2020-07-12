@@ -26,7 +26,11 @@ export interface RegistrationResponseRow {
   code: number;
   context: string;
   message: string;
-  object: string;
+  object: RegistrationObject | string;
+}
+
+export interface RegistrationObject {
+  login: string;
 }
 
 export interface ResetData {

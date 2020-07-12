@@ -40,3 +40,19 @@ i.showPassLog {
 #buttonRegister:disabled {
   border-color: #ddd;
 }
+
+.messageCenterReset {
+  text-align: center;
+  margin: 15px auto 0 auto;
+  height: 64px;
+}
+
+.panel-loading {
+  background-image: url("~src/assets/images/core/preloader.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 60px;
+  width: 60px;
+  margin: 20px auto 0;
+}

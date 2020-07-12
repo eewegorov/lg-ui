@@ -31,7 +31,6 @@ export class PasswordRecoveryComponent implements OnInit, OnDestroy {
       for (let i = 0; i < response.rows.length; i++) {
         if (response.rows[i].code == 400) {
           this.invalidLogin = true;
-          $(".errorMessagePassword").show();
         } else if (response.rows[i].code == 202) {
           this.resetDone = true;
         }

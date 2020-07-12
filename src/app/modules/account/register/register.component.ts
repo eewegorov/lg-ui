@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
-import { OAuthResponse, RegistrationResponse } from '../models/account';
+import { OAuthResponse, RegistrationObject, RegistrationResponse } from '../models/account';
 import { AccountService } from '../services/account.service';
 
 
@@ -17,12 +17,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
   @ViewChild('f', { static: true }) private regForm: NgForm;
   @ViewChild('loginForm') private loginForm: ElementRef;
   public autoRegister = false;
+  public autoRegisterPanel = false;
+  public autoRegisterLoadingPanel = false;
+  public autoRegisterError = false;
   public loading = false;
   public invalidLogin = false;
   public invalidPassword = false;
   public errorLogin = '';
   public errorPassword = '';
   public registrationEmail = '';
+  public registrationPassword = '';
+  public autoRegisterErrorMessage = '';
   private regSub: SubscriptionLike;
   private regYandexSub: SubscriptionLike;
 
@@ -35,7 +40,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.autoRegFocus();
+    this.autoReg();
   }
 
   public reg(form: NgForm) {
@@ -78,9 +83,40 @@ export class RegisterComponent implements OnInit, OnDestroy {
     (event.target as HTMLInputElement).placeholder = text;
   }
 
-  private autoRegFocus() {
+  private autoReg() {
     if (!this.autoRegister && this.registrationEmail) {
       this.password.nativeElement.focus();
+    } else if (this.autoRegister && this.registrationEmail) {
+      this.autoRegisterLoadingPanel = true;
+      setTimeout(() => {
+        this.regSub = this.accountService.handleRegistration(this.regForm.value).subscribe((response: RegistrationResponse) => {
+          let newUserName: string;
+          let newUserPwd: string;
+          this.autoRegisterLoadingPanel = false;
+          for (let i = 0; i < response.rows.length; i++) {
+            if (response.rows[i].code === 400) {
+              this.autoRegisterError = true;
+              this.autoRegisterErrorMessage = response.rows[i].message;
+            } else if (response.rows[i].code === 201) {
+              if (response.rows[i].message === "user created") {
+                newUserName = (response.rows[i].object as RegistrationObject).login ;
+              }
+              if (response.rows[i].message === "password") {
+                newUserPwd = response.rows[i].object as string;
+              }
+              if (newUserName && newUserPwd) {
+                this.autoRegisterError = false;
+                this.autoRegisterPanel = true;
+                setTimeout(() => {
+                  this.registrationEmail = newUserName;
+                  this.registrationPassword = newUserPwd;
+                  this.loginForm.nativeElement.submit();
+                }, 2000);
+              }
+            }
+          }
+        });
+      }, 50);
     }
   }
 
