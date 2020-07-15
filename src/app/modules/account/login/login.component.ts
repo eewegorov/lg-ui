@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
-import { OAuthResponse } from '../models/account';
+import { AuthResponse, OAuthResponse } from '../models/account';
 import { AccountService } from '../services/account.service';
 
 
@@ -12,6 +13,7 @@ import { AccountService } from '../services/account.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   @ViewChild('ichecks', { static: true }) private ichecks: ElementRef;
+  public loginForm: FormGroup;
   public error: boolean;
   private authSub: SubscriptionLike;
 
@@ -24,12 +26,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initIchecks();
+    this.resetForm();
   }
 
-  private initIchecks() {
-    ($(this.ichecks.nativeElement) as any).iCheck({
-      checkboxClass: 'icheckbox_square-green',
-      radioClass: 'iradio_square-green',
+  public submitAuth() {
+    this.authSub = this.accountService.handleAuth(this.loginForm.value).subscribe((response: AuthResponse) => {
+      console.log(response);
     });
   }
 
@@ -39,6 +41,20 @@ export class LoginComponent implements OnInit, OnDestroy {
       if (response.code === 200) {
         window.location.href = response.data.url;
       }
+    });
+  }
+
+  private initIchecks() {
+    ($(this.ichecks.nativeElement) as any).iCheck({
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green',
+    });
+  }
+
+  private resetForm() {
+    this.loginForm = new FormGroup({
+      username: new FormControl('', [ Validators.required ]),
+      password: new FormControl('', [ Validators.required ])
     });
   }
 

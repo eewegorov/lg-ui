@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OAuthData, OAuthResponse, RegistrationData, RegistrationResponse, ResetData } from '../models/account';
+import {
+  AuthRequest, AuthResponse,
+  OAuthRequest,
+  OAuthResponse,
+  RegistrationRequest,
+  RegistrationResponse,
+  ResetData
+} from '../models/account';
 import { AccountApiService } from './account-api.service';
 
 
@@ -13,14 +20,22 @@ export class AccountService {
 
   public handleYandex(event: Event, action: 'AUTH' | 'REG'): Observable<OAuthResponse> {
     (event.target as HTMLButtonElement).disabled = true;
-    const yandexOAuthData: OAuthData = {
+    const yandexOAuthData: OAuthRequest = {
       service: 'YANDEX',
       action
     };
     return this.accountApiService.postOAuth(yandexOAuthData);
   }
 
-  public handleRegistration(data: RegistrationData): Observable<RegistrationResponse> {
+  public handleAuth(data: AuthRequest): Observable<AuthResponse> {
+    const preparedData = {
+      ...data,
+      grant_type: 'password'
+    };
+    return this.accountApiService.postAuth(preparedData);
+  }
+
+  public handleRegistration(data: RegistrationRequest): Observable<RegistrationResponse> {
     const formData: FormData = new FormData();
     formData.append('login', data.login);
     if (data.password) {
