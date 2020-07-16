@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { SitesRoutingModule } from './sites-routing.module';
 import { SiteAddComponent } from './site-add/site-add.component';
 import { SiteSettingsComponent } from './site-settings/site-settings.component';
@@ -16,7 +17,8 @@ import { SitesComponent } from './sites/sites.component';
   ],
   imports: [
     CommonModule,
-    SitesRoutingModule
+    SitesRoutingModule,
+    TranslateModule
   ]
 })
 export class SitesModule { }

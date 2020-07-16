@@ -8,6 +8,7 @@ import { MissingTranslationService } from './core/services/missingTranslation.se
 import { CoreModule } from './core/core.module';
 import { ApiInterceptor } from './core/services/api.interceptor';
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AppComponent } from './app.component';
         useClass: MissingTranslationService
       },
     }),
-    CoreModule
+    CoreModule,
+    NgbModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

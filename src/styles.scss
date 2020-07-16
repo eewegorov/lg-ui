@@ -48,27 +48,27 @@ body {
 }
 
 body.hide-sidebar #menu {
-  margin-left: -180px
+  margin-left: -180px;
 }
 
 body.hide-sidebar .wrapper {
-  margin-left: 0
+  margin-left: 0;
 }
 
 body.page-small #menu {
-  margin-left: -180px
+  margin-left: -180px;
 }
 
 body.page-small .wrapper {
-  margin-left: 0
+  margin-left: 0;
 }
 
 body.page-small.show-sidebar #menu {
-  margin-left: 0
+  margin-left: 0;
 }
 
 body.page-small.show-sidebar .wrapper {
-  margin-left: 180px
+  margin-left: 180px;
 }
 
 .wrapper {
@@ -81,8 +81,14 @@ body.page-small.show-sidebar .wrapper {
   min-height: 100%;
 }
 
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 200;
+}
+
 .text-primary {
-  color: #34495e
+  color: #34495e;
 }
 
 .nav {
@@ -108,3 +114,32 @@ body.page-small.show-sidebar .wrapper {
   border: none;
   cursor: pointer;
 }
+
+.btn-success.btn-outline {
+  color: #62cb31;
+}
+
+.btn-success {
+  background-color: #62cb31;
+  border-color: #62cb31;
+  color: #FFFFFF;
+  font-size: 18px;
+}
+
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+  background-color: #74d348;
+  border-color: #74d348;
+  color: #FFFFFF;
+}
+
+.btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+  background-image: none;
+}
+
+.btn-success.disabled, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled.active, .btn-success[disabled], .btn-success[disabled]:hover, .btn-success[disabled]:focus, .btn-success[disabled]:active, .btn-success.active[disabled], fieldset[disabled] .btn-success, fieldset[disabled] .btn-success:hover, fieldset[disabled] .btn-success:focus, fieldset[disabled] .btn-success:active, fieldset[disabled] .btn-success.active {
+  background-color: #56b22b;
+  border-color: #56b22b;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

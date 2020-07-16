@@ -23,6 +23,7 @@
     "@angular/router": "^9.1.4",
     "@biesbjerg/ngx-translate-extract": "^6.0.4",
     "@fortawesome/fontawesome-free": "^5.13.0",
+    "@ng-bootstrap/ng-bootstrap": "^6.2.0",
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
     "animate.css": "^3.7.2",

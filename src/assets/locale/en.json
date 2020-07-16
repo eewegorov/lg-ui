@@ -1,4 +1,20 @@
 {
+	"client": {
+		"site": {
+			"title": ""
+		}
+	},
+	"filters": {
+		"compare": {
+			"contain": "",
+			"end": "",
+			"equal": "",
+			"start": ""
+		}
+	},
+	"global": {
+		"cancel": ""
+	},
 	"header": {
 		"cabinet": "",
 		"like": "",
@@ -38,5 +54,31 @@
 		"help": "",
 		"sites": "",
 		"widgets": ""
+	},
+	"sitelist": {
+		"addSite": "",
+		"edit": {
+			"code": "",
+			"targets": ""
+		},
+		"empty": {
+			"subtitle": "",
+			"title": ""
+		},
+		"form": {
+			"name": "",
+			"targets": {
+				"add": "",
+				"col1": "",
+				"col2": "",
+				"com1": "",
+				"com2": "",
+				"desc1": "",
+				"desc2": ""
+			},
+			"url": ""
+		},
+		"save": "",
+		"vkEnable": ""
 	}
 }
