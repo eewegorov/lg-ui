@@ -1,5 +1,7 @@
 @CHARSET "UTF-8";
 
+@import "./_vars.scss";
+
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&lang=en");
 
 $pe-7s-font-path: "../node_modules/pe7-icon/dist/fonts" !default;
@@ -140,6 +142,3 @@ h1, .h1, h2, .h2, h3, .h3 {
   background-color: #56b22b;
   border-color: #56b22b;
 }
-
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';

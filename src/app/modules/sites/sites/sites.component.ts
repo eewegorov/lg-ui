@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SiteAddComponent } from '../site-add/site-add.component';
 
 @Component({
   selector: 'app-sites',
@@ -7,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./sites.component.scss']
 })
 export class SitesComponent implements OnInit {
+  private hidePhoneFieldInModal = false;
 
   constructor(private modalService: NgbModal) { }
 
@@ -14,19 +16,7 @@ export class SitesComponent implements OnInit {
   }
 
   public openModalForCreatingNewSite() {
-    const modalRef = this.modalService.open(NgbdModalContent);
-    modalRef.componentInstance.name = 'World';
-    ModalService.showModal({
-      templateUrl: "../js/site/create-site-modal/create-site-modal-template.html",
-      controller: "CreateSiteModalController",
-      inputs: {
-        hidePhone: $scope.hidePhoneFieldInModal
-      }
-    }).then(function (modal) {
-      modal.element.modal();
-      modal.close.then(function (result) {
-        $("body").removeClass("modal-open");
-      });
-    });
+    const modalRef = this.modalService.open(SiteAddComponent);
+    modalRef.componentInstance.hidePhone = this.hidePhoneFieldInModal;
   }
 }
