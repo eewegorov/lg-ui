@@ -11,7 +11,7 @@ import { Site } from '../models/sites';
   styleUrls: ['./sites.component.scss']
 })
 export class SitesComponent implements OnInit, OnDestroy {
-  public sites: Site[]
+  public sites: Site[];
   public isSitesListLoaded = false;
   private hidePhoneFieldInModal = false;
   private sitesSub: SubscriptionLike;
@@ -32,7 +32,7 @@ export class SitesComponent implements OnInit, OnDestroy {
 
   private getSites() {
     this.sitesSub = this.sitesService.getSites().subscribe((response: Site[]) => {
-      this.sites = response;
+      this.sites = this.sitesService.sites = response;
     });
   }
 

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentModalComponent } from '../components/payment-modal/payment-modal.component';
 import { TariffPlan, TariffPlansResponse } from '../models/tariffPlans';
@@ -13,11 +15,13 @@ import { CoreApiService } from './core-api.service';
 export class BillingService {
 
   constructor(
+    private translate: TranslateService,
+    private toastr: ToastrService,
     private modalService: NgbModal,
     private coreApiService: CoreApiService
   ) { }
 
-  public checkTariffPlans(siteId, title, subscription, siteName, expTime) {
+  public checkTariffPlans(siteId, title, subscription, siteName?, expTime?) {
     this.getTariffPlans().subscribe((response: TariffPlan[]) => {
       if (response.length) {
         const inputs = {
@@ -30,7 +34,7 @@ export class BillingService {
         };
         this.showTariffPlansModal(inputs);
       } else {
-        toastr["error"]($translate.instant("billing.notify.noPlans"), "");
+        this.toastr.error(this.translate.instant("billing.notify.noPlans"));
       }
     });
   }

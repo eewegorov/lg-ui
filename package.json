@@ -12,7 +12,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^9.1.4",
+    "@angular/animations": "^9.1.12",
     "@angular/common": "^9.1.4",
     "@angular/compiler": "^9.1.4",
     "@angular/core": "^9.1.4",
@@ -32,6 +32,7 @@
     "icheck": "^1.0.2",
     "jquery": "^3.5.1",
     "metismenu": "^3.0.6",
+    "ngx-toastr": "^13.0.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

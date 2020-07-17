@@ -14,7 +14,7 @@
   <div *ngIf="!isSitesListLoaded" class="widget-page-preloader-all-inner"></div>
 
   <div *ngIf="isSitesListLoaded" class="content animate-panel">
-    <div ng-if="!sites.length" class="col-lg-12 margined-top-30">
+    <div *ngIf="!sites.length" class="col-lg-12 margined-top-30">
       <h3 class="f-0 text-center">{{ 'sitelist.empty.title' | translate }}</h3>
       <h4 class="f-2 text-center">{{ 'sitelist.empty.subtitle' | translate }}</h4>
     </div>

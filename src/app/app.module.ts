@@ -2,13 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
 import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MissingTranslationService } from './core/services/missingTranslation.service';
 import { CoreModule } from './core/core.module';
 import { ApiInterceptor } from './core/services/api.interceptor';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -31,8 +33,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         useClass: MissingTranslationService
       },
     }),
-    CoreModule,
-    NgbModule
+    NgbModule,
+    ToastrModule.forRoot(),
+    CoreModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

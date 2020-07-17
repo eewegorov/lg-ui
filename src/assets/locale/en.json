@@ -1,4 +1,15 @@
 {
+	"billing": {
+		"modal": {
+			"paysum": {
+				"btn": "",
+				"label": ""
+			}
+		},
+		"notify": {
+			"noPlans": ""
+		}
+	},
 	"client": {
 		"site": {
 			"title": ""
@@ -13,7 +24,10 @@
 		}
 	},
 	"global": {
-		"cancel": ""
+		"cancel": "",
+		"currency": {
+			"ruble": ""
+		}
 	},
 	"header": {
 		"cabinet": "",
@@ -44,6 +58,11 @@
 		"unique_password": "",
 		"user": ""
 	},
+	"settings": {
+		"script": {
+			"apicode": ""
+		}
+	},
 	"sidebar": {
 		"abtests": "",
 		"abtests-active": "",
@@ -66,7 +85,17 @@
 			"title": ""
 		},
 		"form": {
+			"goto": "",
+			"gotoaway": "",
+			"gotopoints": "",
+			"gotowidgets": "",
 			"name": "",
+			"phone": "",
+			"save": "",
+			"smartpoints": {
+				"desc1": "",
+				"settings": ""
+			},
 			"targets": {
 				"add": "",
 				"col1": "",
@@ -76,9 +105,13 @@
 				"desc1": "",
 				"desc2": ""
 			},
+			"title": "",
 			"url": ""
 		},
 		"save": "",
+		"tarrif": {
+			"length": ""
+		},
 		"vkEnable": ""
 	}
 }
