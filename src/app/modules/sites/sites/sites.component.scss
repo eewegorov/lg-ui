@@ -37,4 +37,20 @@
   text-align: right;
 }
 
+.content {
+  padding: 0 40px 40px 40px;
+  min-width: 320px
+}
+
+.animate-panel {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 15px 15px 15px 15px;
+    min-width: 320px
+  }
+}
+
 

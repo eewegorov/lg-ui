@@ -1,12 +1,12 @@
+import { ApiResponse } from '../../../core/models/api';
+
 export interface AuthRequest {
   username: string;
   password: string;
   grant_type: string;
 }
 
-export interface AuthResponse {
-  code: number;
-  success: boolean;
+export interface AuthResponse extends ApiResponse {
   data: AuthData;
 }
 
@@ -28,9 +28,7 @@ export interface OAuthData {
   url: string;
 }
 
-export interface OAuthResponse {
-  code: number;
-  success: boolean;
+export interface OAuthResponse extends ApiResponse {
   data: OAuthData;
 }
 

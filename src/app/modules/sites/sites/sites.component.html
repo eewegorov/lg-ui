@@ -11,11 +11,9 @@
     </div>
   </div>
 
-  <input type="hidden" id="sitesCount" value="${sites.size()}"/>
+  <div *ngIf="!isSitesListLoaded" class="widget-page-preloader-all-inner"></div>
 
-  <div ng-show="!isSitesListLoaded" class="widget-page-preloader-all-inner"></div>
-
-  <div class="content animate-panel" ng-show="isSitesListLoaded">
+  <div *ngIf="isSitesListLoaded" class="content animate-panel">
     <div ng-if="!sites.length" class="col-lg-12 margined-top-30">
       <h3 class="f-0 text-center">{{ 'sitelist.empty.title' | translate }}</h3>
       <h4 class="f-2 text-center">{{ 'sitelist.empty.subtitle' | translate }}</h4>
