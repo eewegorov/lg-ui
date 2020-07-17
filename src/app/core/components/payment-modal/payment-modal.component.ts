@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentModalComponent implements OnInit {
   public title = '';
-  public planLabels = {};
+  public planLabels;
+  public price;
 
   constructor() { }
 

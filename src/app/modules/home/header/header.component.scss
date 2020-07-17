@@ -48,11 +48,11 @@
 }
 
 #logo.logo-svg__menu.default {
-  background-image: url('/assets/images/header/logo_LG_black.svg');
+  background-image: url('~src/assets/images/header/logo_LG_black.svg');
 }
 
 #logo.logo-svg__menu.yandex {
-  background-image: url('/assets/images/header/logo_LG_yandex.svg');
+  background-image: url('~src/assets/images/header/logo_LG_yandex.svg');
 }
 
 .header-link {
@@ -212,6 +212,7 @@ span.userinfo {
   right: 0;
   font-size: 13px;
   border-radius: 3px;
+  transition: height 1s ease;
 }
 
 .dropdown-menu.hdropdown {
