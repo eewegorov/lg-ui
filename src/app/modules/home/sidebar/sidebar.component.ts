@@ -18,7 +18,6 @@ export class SidebarComponent implements OnInit {
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.abtestsMenuExpanded = event.url.includes('/abtests/');
-      console.log(this.abtestsMenuExpanded);
     });
   }
 

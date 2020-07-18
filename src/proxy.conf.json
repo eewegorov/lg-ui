@@ -1,0 +1,7 @@
+{
+  "/api/rest/v1": {
+    "target": "https://app.leadgenic.ru/api/rest/v1",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
