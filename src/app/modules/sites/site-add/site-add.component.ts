@@ -1,5 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SubscriptionLike } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ApiResponse } from '../../../core/models/api';
+import { CreateSiteData } from '../models/sites';
+import { SitesService } from '../services/sites.service';
+
 
 @Component({
   selector: 'app-site-add',
@@ -8,10 +15,62 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class SiteAddComponent implements OnInit {
   @Input() public hidePhone: boolean;
+  public newSiteForm: FormGroup;
+  private createdSite: CreateSiteData;
+  public tab = 1;
+  public isUrlInvalid = false;
+  private createSiteSub: SubscriptionLike;
 
-  constructor(public activeModal: NgbActiveModal) { }
+
+  constructor(
+    private activeModal: NgbActiveModal,
+    private sitesService: SitesService
+  ) { }
 
   ngOnInit(): void {
+    this.resetForm();
   }
+
+  public createSite() {
+    const newSiteData = Object.assign({}, this.newSiteForm.getRawValue());
+    delete newSiteData.phone;
+    this.createSiteSub = this.sitesService.createSite(newSiteData).pipe(
+      switchMap(
+        (response: CreateSiteData) => {
+          this.createdSite = {
+            id: response.id,
+            link: this.sitesService.generatePath(response.link),
+          };
+          if (this.newSiteForm.controls['phone'].value) {
+            return this.sitesService.savePhoneFromSite({ phone: this.newSiteForm.controls['phone'].value });
+          }
+        })
+    ).subscribe(
+      (response: ApiResponse) => {
+        this.tab = 2;
+      },
+      error => {
+        console.log(error);
+        this.isUrlInvalid = true;
+      }
+    );
+  }
+
+  public enableTyping(): void {
+    this.isUrlInvalid = false;
+  }
+
+  public closeModal(): void {
+    this.activeModal.close();
+  }
+
+  private resetForm() {
+    this.newSiteForm = new FormGroup({
+      name: new FormControl('', [ Validators.required ]),
+      url: new FormControl('', [ Validators.required ]),
+      phone: new FormControl('')
+    });
+  }
+
 
 }

@@ -4,8 +4,10 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiResponse } from '../../../core/models/api';
-import { Site, SitesResponse } from '../models/sites';
+import { CreateSiteData, CreateSiteRequest, CreateSiteResponse, Site, SitesResponse } from '../models/sites';
+import { CoreApiService } from '../../../core/services/core-api.service';
 import { BillingService } from '../../../core/services/billing.service';
+import { Phone } from '../../../core/models/user';
 
 
 @Injectable({
@@ -16,6 +18,7 @@ export class SitesService {
 
   constructor(
     private translate: TranslateService,
+    private coreApiService: CoreApiService,
     private billingService: BillingService,
     private sitesApiService: SitesApiService
   ) { }
@@ -25,6 +28,27 @@ export class SitesService {
       map((response: SitesResponse) => response.data),
       catchError(this.handleError)
     );
+  }
+
+  public createSite(data: CreateSiteRequest): Observable<CreateSiteData> {
+    return this.sitesApiService.postSites(data).pipe(
+      map((response: CreateSiteResponse) => response.data),
+      catchError(this.handleError)
+    );
+  }
+
+  public savePhoneFromSite(data: Phone): Observable<ApiResponse> {
+    return this.coreApiService.savePhone(data);
+  }
+
+  public generatePath(path: string, needUrl: boolean = false): string {
+    let scriptPath = "<!-- BEGIN LEADGENIC CODE {literal} -->\r\n";
+    scriptPath +=  "<!-- Put this script tag before the </body> tag of your page -->";
+    scriptPath += '\r\n<script type="text/javascript" charset="UTF-8" async src="';
+    scriptPath += needUrl ? ("https://gate.leadgenic.ru/getscript?site=" + path) : path;
+    scriptPath += '"></script>\r\n';
+    scriptPath += '<!-- {/literal} END LEADGENIC CODE -->';
+    return scriptPath;
   }
 
   private handleError(error: ApiResponse) {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { SitesResponse } from '../models/sites';
+import { CreateSiteRequest, CreateSiteResponse, SitesResponse } from '../models/sites';
 
 
 @Injectable({
@@ -14,5 +14,9 @@ export class SitesApiService {
 
   public getRawSites(): Observable<SitesResponse> {
     return this.http.get<SitesResponse>(`${ environment.url }/sites/statistics`);
+  }
+
+  public postSites(data: CreateSiteRequest): Observable<CreateSiteResponse> {
+    return this.http.post<CreateSiteResponse>(`${ environment.url }/sites/statistics`, data);
   }
 }

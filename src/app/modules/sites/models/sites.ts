@@ -19,3 +19,17 @@ export interface DayStat {
   date: number;
   value: number;
 }
+
+export interface CreateSiteRequest {
+  name: string;
+  url: string;
+}
+
+export interface CreateSiteResponse extends ApiResponse{
+  data: CreateSiteData;
+}
+
+export interface CreateSiteData {
+  id: string;
+  link: string;
+}

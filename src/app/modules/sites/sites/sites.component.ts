@@ -25,12 +25,15 @@ export class SitesComponent implements OnInit, OnDestroy {
     this.getSites();
   }
 
-  public openModalForCreatingNewSite() {
-    const modalRef = this.modalService.open(SiteAddComponent);
+  public openModalForCreatingNewSite(): void {
+    const modalRef = this.modalService.open(SiteAddComponent, {
+        size: 'lg',
+        windowClass: 'animate__animated animate__slideInDown animate__faster'
+      });
     modalRef.componentInstance.hidePhone = this.hidePhoneFieldInModal;
   }
 
-  private getSites() {
+  private getSites(): void {
     this.sitesSub = this.sitesService.getSites().subscribe((response: Site[]) => {
       this.sites = this.sitesService.sites = response;
     });

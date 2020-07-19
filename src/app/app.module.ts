@@ -8,9 +8,9 @@ import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ng
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MissingTranslationService } from './core/services/missingTranslation.service';
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 import { ApiInterceptor } from './core/services/api.interceptor';
 import { AppComponent } from './app.component';
-
 
 
 @NgModule({
@@ -35,7 +35,8 @@ import { AppComponent } from './app.component';
     }),
     NgbModule,
     ToastrModule.forRoot(),
-    CoreModule
+    CoreModule,
+    SharedModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

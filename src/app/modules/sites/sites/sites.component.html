@@ -1,20 +1,18 @@
-<div class="sites-list-page">
+<div class="d-flex justify-content-between sites-list-page">
   <h1 class="widget-title-main">{{ 'client.site.title' | translate }}</h1>
   <div class="toolbar-content">
-    <div class="btnpanel">
-      <button
-        type="button"
-        class="btn btn-lg w-xs m-t-sm btn-success btn-add-new-site"
-        (click)="openModalForCreatingNewSite()"
-      ><i class="fa fa-plus-circle"></i> {{ 'sitelist.addSite' | translate }}
-      </button>
-    </div>
+    <button
+      type="button"
+      class="btn btn-lg btn-success"
+      (click)="openModalForCreatingNewSite()"
+    ><i class="fa fa-plus-circle"></i> {{ 'sitelist.addSite' | translate }}
+    </button>
   </div>
 
   <div *ngIf="!isSitesListLoaded" class="widget-page-preloader-all-inner"></div>
 
   <div *ngIf="isSitesListLoaded" class="content animate-panel">
-    <div *ngIf="!sites.length" class="col-lg-12 margined-top-30">
+    <div *ngIf="!sites.length" class="col-lg-12">
       <h3 class="f-0 text-center">{{ 'sitelist.empty.title' | translate }}</h3>
       <h4 class="f-2 text-center">{{ 'sitelist.empty.subtitle' | translate }}</h4>
     </div>
@@ -91,7 +89,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'global.cancel' | translate }}</button>
-        <button id="siteSave" type="button" class="btn btn-primary">{{ 'sitelist.save' | translate }}</button>
+        <button id="siteSave" type="button" class="btn btn-primary">{{ 'sitelist.save.title' | translate }}</button>
       </div>
     </div>
   </div>

@@ -1,5 +1,4 @@
 .color-line {
-  position: fixed;
   background: #f7f9fa;
   height: 6px;
   width: 100%;
@@ -10,4 +9,12 @@
   background-size: 100% 6px;
   background-position: 50% 100%;
   background-repeat: no-repeat
+}
+
+.core {
+  position: fixed;
+}
+
+.modals {
+  position: relative;
 }

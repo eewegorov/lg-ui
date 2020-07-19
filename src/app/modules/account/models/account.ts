@@ -18,7 +18,6 @@ export interface AuthData {
   scope: string;
 }
 
-
 export interface OAuthRequest {
   service: string;
   action: string;

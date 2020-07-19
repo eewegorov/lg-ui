@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-color-line',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./color-line.component.scss']
 })
 export class ColorLineComponent implements OnInit {
+  @Input() type: 'core' | 'modals' = 'core';
 
   constructor() { }
 

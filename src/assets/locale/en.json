@@ -60,7 +60,21 @@
 	},
 	"settings": {
 		"script": {
-			"apicode": ""
+			"apicode": {
+				"title": "",
+				"tooltip": ""
+			}
+		},
+		"site": {
+			"integration": {
+				"paymentLabel": ""
+			},
+			"update": {
+				"crm": {
+					"paymentLabel": ""
+				},
+				"paymentLabel": ""
+			}
 		}
 	},
 	"sidebar": {
@@ -85,16 +99,26 @@
 			"title": ""
 		},
 		"form": {
+			"code": {
+				"desc1": ""
+			},
 			"goto": "",
 			"gotoaway": "",
 			"gotopoints": "",
 			"gotowidgets": "",
 			"name": "",
-			"phone": "",
+			"phone": {
+				"desc": "",
+				"title": ""
+			},
 			"save": "",
 			"smartpoints": {
 				"desc1": "",
 				"settings": ""
+			},
+			"start": {
+				"desc1": "",
+				"desc2": ""
 			},
 			"targets": {
 				"add": "",
@@ -108,10 +132,20 @@
 			"title": "",
 			"url": ""
 		},
-		"save": "",
+		"save": {
+			"done": "",
+			"title": ""
+		},
 		"tarrif": {
-			"length": ""
+			"length": "",
+			"title": ""
 		},
 		"vkEnable": ""
+	},
+	"widgetsList": {
+		"payment": {
+			"limit": "",
+			"options": ""
+		}
 	}
 }
