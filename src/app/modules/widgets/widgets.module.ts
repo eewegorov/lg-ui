@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { WidgetsListComponent } from './widgets-list/widgets-list.component';
 import { WidgetCardComponent } from './widget-card/widget-card.component';
@@ -18,6 +19,7 @@ import { WidgetEditComponent } from './widget-edit/widget-edit.component';
   ],
   imports: [
     CommonModule,
+    TranslateModule,
     WidgetsRoutingModule
   ]
 })
