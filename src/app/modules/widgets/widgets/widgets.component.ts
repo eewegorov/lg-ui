@@ -9,10 +9,10 @@ import { WidgetService } from '../services/widget.service';
 export class WidgetsComponent implements OnInit {
   widgets;
   companies;
-  company;
-  currentSite;
-  site;
-  currentCompany;
+  company = { name: '' };
+  currentSite = { name: '' };
+  site = { name: '' };
+  currentCompany = { id: '', name: '' };
   defCompanyName;
   types: { id: string; name: string; }[];
 

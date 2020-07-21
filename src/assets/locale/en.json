@@ -15,6 +15,9 @@
 			"title": ""
 		}
 	},
+	"containerized": {
+		"title": ""
+	},
 	"filters": {
 		"compare": {
 			"contain": "",
@@ -75,6 +78,9 @@
 				},
 				"paymentLabel": ""
 			}
+		},
+		"widgets": {
+			"select": ""
 		}
 	},
 	"sidebar": {
@@ -143,9 +149,43 @@
 		"vkEnable": ""
 	},
 	"widgetsList": {
+		"add": {
+			"alt": "",
+			"title": ""
+		},
+		"clone": {
+			"company": {
+				"add": {
+					"label": ""
+				}
+			}
+		},
+		"company": {
+			"add": {
+				"tooltip": ""
+			},
+			"delete": {
+				"tooltip": ""
+			}
+		},
+		"listPlaceholder": "",
+		"listPlaceholder2": "",
+		"listPlaceholder3": "",
+		"listTitle": "",
 		"payment": {
 			"limit": "",
 			"options": ""
-		}
+		},
+		"selectCompany": "",
+		"selectSite": "",
+		"site": {
+			"default": {
+				"title": "",
+				"tooltip": ""
+			}
+		},
+		"sitePlaceholder": "",
+		"sitePlaceholder2": "",
+		"title": ""
 	}
 }
