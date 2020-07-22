@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiResponse } from '../../../core/models/api';
-import { CreateSiteData, CreateSiteRequest, CreateSiteResponse, Site, SitesResponse } from '../models/sites';
+import { CreateSiteData, CreateSiteRequest, CreateSiteResponse, Payment, Site, SitesResponse } from '../models/sites';
 import { CoreApiService } from '../../../core/services/core-api.service';
 import { BillingService } from '../../../core/services/billing.service';
 import { Phone } from '../../../core/models/user';
@@ -15,6 +15,7 @@ import { Phone } from '../../../core/models/user';
 })
 export class SitesService {
   public sites: Site[];
+  private currentSiteId: string;
 
   constructor(
     private translate: TranslateService,
@@ -51,10 +52,14 @@ export class SitesService {
     return scriptPath;
   }
 
+  public getCurrentSiteId(): string {
+    return this.currentSiteId;
+  }
+
   private handleError(error: ApiResponse) {
     if (error.message) {
       let errors = error.message.split(":");
-      if (errors[0] === "WIDGETS_LIMIT" && errors[1]) {
+      if (errors[0] === Payment.WIDGETS_LIMIT && errors[1]) {
         this.prepareResponseForPaymentService(errors[0], errors[1]);
       }
       console.log(errors[0], errors[1], errors[2]);
@@ -63,35 +68,35 @@ export class SitesService {
     return throwError('HTTP Error');
   }
 
-  private prepareResponseForPaymentService(type, siteId) {
-    if (type === "WIDGETS_LIMIT") {
+  private prepareResponseForPaymentService(type: Payment, siteId): void {
+    if (type === Payment.WIDGETS_LIMIT) {
       this.billingService.checkTariffPlans(siteId,
-        this.translate.instant("sitelist.tarrif.title"),
-        this.translate.instant("widgetsList.payment.limit", { siteName: this.getSiteById(siteId).name }));
-    } else if (type === "CONTAINER_WIDGETS_LIMIT") {
+        this.translate.instant('sitelist.tarrif.title'),
+        this.translate.instant('widgetsList.payment.limit', { siteName: this.getSiteById(siteId).name }));
+    } else if (type === Payment.CONTAINER_WIDGETS_LIMIT) {
       this.billingService.checkTariffPlans(siteId,
-        this.translate.instant("sitelist.tarrif.title"),
-        this.translate.instant("widgetsList.payment.limit.container", { siteName: this.getSiteById(siteId).name }));
-    } else if (type === "INTEGRATION_PAYMENT") {
+        this.translate.instant('sitelist.tarrif.title'),
+        this.translate.instant('widgetsList.payment.limit.container', { siteName: this.getSiteById(siteId).name }));
+    } else if (type === Payment.INTEGRATION_PAYMENT) {
       this.billingService.checkTariffPlans(siteId,
-        this.translate.instant("sitelist.tarrif.title"),
-        this.translate.instant("settings.site.integration.paymentLabel", { siteName: this.getSiteById(siteId).name }));
-    } else if (type === "WIDGET_HAS_PAYMENT_OPTIONS") {
+        this.translate.instant('sitelist.tarrif.title'),
+        this.translate.instant('settings.site.integration.paymentLabel', { siteName: this.getSiteById(siteId).name }));
+    } else if (type === Payment.WIDGET_HAS_PAYMENT_OPTIONS) {
       this.billingService.checkTariffPlans(siteId,
-        this.translate.instant("sitelist.tarrif.title"),
-        this.translate.instant("widgetsList.payment.options", { siteName: this.getSiteById(siteId).name }));
-    } else if (type === "PAYMENT_SETTINGS") {
+        this.translate.instant('sitelist.tarrif.title'),
+        this.translate.instant('widgetsList.payment.options', { siteName: this.getSiteById(siteId).name }));
+    } else if (type === Payment.PAYMENT_SETTINGS) {
       this.billingService.checkTariffPlans(siteId,
-        this.translate.instant("sitelist.tarrif.title"),
-        this.translate.instant("settings.site.update.paymentLabel", { siteName: this.getSiteById(siteId).name }));
-    } else if (type === "MAX_LEADS_SHOW_REACHED") {
+        this.translate.instant('sitelist.tarrif.title'),
+        this.translate.instant('settings.site.update.paymentLabel', { siteName: this.getSiteById(siteId).name }));
+    } else if (type === Payment.MAX_LEADS_SHOW_REACHED) {
       this.billingService.checkTariffPlans(siteId,
-        this.translate.instant("sitelist.tarrif.title"),
-        this.translate.instant("settings.site.update.crm.paymentLabel", { siteName: this.getSiteById(siteId).name }));
+        this.translate.instant('sitelist.tarrif.title'),
+        this.translate.instant('settings.site.update.crm.paymentLabel', { siteName: this.getSiteById(siteId).name }));
     }
   }
 
-  private getSiteById(id) {
+  private getSiteById(id): Site {
     return this.sites.find((item) => {
       return item.id === id;
     });

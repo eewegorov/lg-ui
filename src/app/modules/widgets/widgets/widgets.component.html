@@ -1,11 +1,11 @@
-<div class="toolbar-content widgets-toolbar no-animate row" ng-show="sites.length > 0">
+<div class="toolbar-content widgets-toolbar" ng-show="sites.length > 0">
   <div class="textcontent">
-    <div class="row margined-left-0">{{ 'widgetsList.title' | translate }}</div>
-    <div class="row">
+    <h1 class="title-main">{{ 'widgetsList.title' | translate }}</h1>
+    <div class="row col-lg-12 select-site">
       <!-- Site selector -->
       <div class="col-lg-6">
-        <div class="row margined-left-0 select-site-title select-site-title-top"><h5>{{ 'widgetsList.selectSite' | translate }}:</h5></div>
-        <div class="dropdown site-selector">
+        <div class="row select-site-title"><h5>{{ 'widgetsList.selectSite' | translate }}:</h5></div>
+        <div class="row dropdown site-selector">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <span class="dropdown-selected-cropp">{{ currentSite.name }}</span>
             <span class="caret"></span>
@@ -17,23 +17,38 @@
       </div>
       <!-- Company selector -->
       <div class="col-lg-6">
-        <div class="row margined-left-0 select-site-title"><h5>{{ 'widgetsList.selectCompany' | translate }}:</h5></div>
-        <div class="width-350">
-          <div ng-show="!newCompany.on">
+        <div class="row select-site-title"><h5>{{ 'widgetsList.selectCompany' | translate }}:</h5></div>
+        <div class="row width-350">
+          <div *ngIf="!newCompany.on">
             <div class="dropdown site-selector floated-left" style="min-width: 255px!important; width: 255px;">
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <span class="dropdown-selected-cropp" style="max-width: 215px!important;">{{ currentCompany.name || defCompanyName }}</span>
                 <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" ng-show="companies.length">
+              <ul class="dropdown-menu" *ngIf="companies.length">
                 <li ng-repeat="company in companies" ng-click="changeCurrentCompany(company)"><a href="#">{{ company.name || defCompanyName}}</a></li>
               </ul>
             </div>
 
-            <button ng-click="newCompany.on = true" class="btn btn-default floated-left margined-top-10half hovered-btn-blue margined-left-5" data-container="body" data-toggle="tooltip" data-placement="top" data-title="{{ 'widgetsList.company.add.tooltip' | translate }}">
+            <button
+              (click)="newCompany.on = true"
+              class="btn btn-default floated-left margined-top-10half hovered-btn-blue margined-left-5"
+              data-container="body"
+              data-toggle="tooltip"
+              data-placement="top"
+              data-title="{{ 'widgetsList.company.add.tooltip' | translate }}"
+            >
               <i class="fa fa-plus"></i>
             </button>
-            <button ng-click="deleteCompany()" ng-if="!currentCompany.default" class="btn btn-default floated-left margined-top-10half hovered-btn-red margined-left-5" data-container="body" data-toggle="tooltip" data-placement="top" data-title="{{ 'widgetsList.company.delete.tooltip' | translate }}">
+            <button
+              (click)="deleteCompany()"
+              *ngIf="!currentCompany.default"
+              class="btn btn-default floated-left margined-top-10half hovered-btn-red margined-left-5"
+              data-container="body"
+              data-toggle="tooltip"
+              data-placement="top"
+              data-title="{{ 'widgetsList.company.delete.tooltip' | translate }}"
+            >
               <i class="fa fa-trash"></i>
             </button>
           </div>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CampaignDeleteComponent } from '../campaign-delete/campaign-delete.component';
 import { WidgetService } from '../services/widget.service';
+import { SitesService } from '../../sites/services/sites.service';
 
 @Component({
   selector: 'app-widgets',
@@ -8,16 +11,24 @@ import { WidgetService } from '../services/widget.service';
 })
 export class WidgetsComponent implements OnInit {
   widgets;
-  companies;
+  companies = [];
   company = { name: '' };
   currentSite = { name: '' };
   site = { name: '' };
-  currentCompany = { id: '', name: '' };
+  currentCompany = { id: '', name: '', default: false };
   defCompanyName;
   types: { id: string; name: string; }[];
+  newCompany = {
+    on: false,
+    name: ""
+  };
 
 
-  constructor(private widgetService: WidgetService) { }
+  constructor(
+    private modalService: NgbModal,
+    private siteService: SitesService,
+    private widgetService: WidgetService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +36,19 @@ export class WidgetsComponent implements OnInit {
   public getTypeItem(typeId: string): { id: string; name: string; } {
     return this.types.find((item) => {
       return item.id === typeId
+    });
+  }
+
+  public deleteCompany() {
+    const modalRef = this.modalService.open(CampaignDeleteComponent, {
+      size: 'lg',
+      windowClass: 'animate__animated animate__slideInDown animate__faster'
+    });
+    modalRef.componentInstance.companies = this.companies;
+    modalRef.componentInstance.deletedCompany = this.currentCompany;
+    modalRef.result.then((deletedId: boolean) => {
+      if (!deletedId) return false;
+      this.getAllWidgetsForSite(this.siteService.getCurrentSiteId());
     });
   }
 
@@ -46,5 +70,32 @@ export class WidgetsComponent implements OnInit {
       return item.companyId === this.currentCompany.id;
     });
   };
+
+  private getAllWidgetsForSite(siteId, stayCompany?) {
+    ABTestsService.getTests().then(function(responseAB) {
+      ABTestsService.setListOfABTests(responseAB.data);
+
+      WidgetService.getWidgetsList(siteId).then(function (response) {
+        if (response.code === 200) {
+          $scope.companies = response.data.companies;
+          if (!stayCompany) {
+            $scope.currentCompany = WidgetService.getDefaultCompany($scope.companies);
+          }
+          $scope.containers = response.data.containers;
+          WidgetService.setContainers($scope.containers);
+          $scope.smartPoints = response.data.smartPoints;
+          $scope.widgets = response.data.widgets;
+          if (enableWidgetsModal) {
+            enableWidgetsModal = false;
+            $timeout(function() {
+              $scope.createNewWidget();
+            }, 500);
+          }
+        } else {
+          SiteService.parseError(response);
+        }
+      });
+    });
+  }
 
 }

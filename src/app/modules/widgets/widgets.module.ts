@@ -8,6 +8,7 @@ import { WidgetCardComponent } from './widget-card/widget-card.component';
 import { WidgetAddComponent } from './widget-add/widget-add.component';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetEditComponent } from './widget-edit/widget-edit.component';
+import { CampaignDeleteComponent } from './campaign-delete/campaign-delete.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { WidgetEditComponent } from './widget-edit/widget-edit.component';
     WidgetCardComponent,
     WidgetAddComponent,
     WidgetsComponent,
-    WidgetEditComponent
+    WidgetEditComponent,
+    CampaignDeleteComponent
   ],
   imports: [
     CommonModule,
