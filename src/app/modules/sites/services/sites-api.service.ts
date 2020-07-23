@@ -12,7 +12,7 @@ export class SitesApiService {
 
   constructor(private http: HttpClient) { }
 
-  public getRawSites(): Observable<SitesResponse> {
+  public getSites(): Observable<SitesResponse> {
     return this.http.get<SitesResponse>(`${ environment.url }/sites/statistics`);
   }
 

@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { switchMap } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CampaignDeleteComponent } from '../campaign-delete/campaign-delete.component';
-import { WidgetService } from '../services/widget.service';
+import { Entities } from '../models/widgets';
+import { Abtest } from '../../abtests/models/abtests';
+import { AbtestsService } from '../../abtests/services/abtests.service';
 import { SitesService } from '../../sites/services/sites.service';
+import { WidgetService } from '../services/widget.service';
+
 
 @Component({
   selector: 'app-widgets',
@@ -12,6 +18,8 @@ import { SitesService } from '../../sites/services/sites.service';
 export class WidgetsComponent implements OnInit {
   widgets;
   companies = [];
+  containers = [];
+  smartPoints;
   company = { name: '' };
   currentSite = { name: '' };
   site = { name: '' };
@@ -22,15 +30,19 @@ export class WidgetsComponent implements OnInit {
     on: false,
     name: ""
   };
+  enableWidgetsModal = false;
 
 
   constructor(
+    private location: Location,
     private modalService: NgbModal,
     private siteService: SitesService,
+    private abtestsService: AbtestsService,
     private widgetService: WidgetService
   ) { }
 
   ngOnInit(): void {
+    this.enableWidgetsModal = this.location.path().includes('enableModal');
   }
 
   public getTypeItem(typeId: string): { id: string; name: string; } {
@@ -72,30 +84,52 @@ export class WidgetsComponent implements OnInit {
   };
 
   private getAllWidgetsForSite(siteId, stayCompany?) {
-    ABTestsService.getTests().then(function(responseAB) {
-      ABTestsService.setListOfABTests(responseAB.data);
-
-      WidgetService.getWidgetsList(siteId).then(function (response) {
-        if (response.code === 200) {
-          $scope.companies = response.data.companies;
-          if (!stayCompany) {
-            $scope.currentCompany = WidgetService.getDefaultCompany($scope.companies);
-          }
-          $scope.containers = response.data.containers;
-          WidgetService.setContainers($scope.containers);
-          $scope.smartPoints = response.data.smartPoints;
-          $scope.widgets = response.data.widgets;
-          if (enableWidgetsModal) {
-            enableWidgetsModal = false;
-            $timeout(function() {
-              $scope.createNewWidget();
-            }, 500);
-          }
-        } else {
-          SiteService.parseError(response);
-        }
-      });
+    this.abtestsService.getTests().pipe(
+      switchMap((response: Abtest[]) => {
+        this.abtestsService.setListOfABTests(response);
+        return this.widgetService.getWidgetsList(siteId);
+      })
+    ).subscribe((response: Entities) => {
+      this.companies = response.companies;
+      if (!stayCompany) {
+        this.currentCompany = this.widgetService.getDefaultCompany(this.companies);
+      }
+      this.containers = response.containers;
+      this.widgetService.setContainers(this.containers);
+      this.smartPoints = response.smartPoints;
+      this.widgets = response.widgets;
+      if (this.enableWidgetsModal) {
+        this.enableWidgetsModal = false;
+        setTimeout(() => {
+          this.createNewWidget();
+        }, 500);
+      }
     });
   }
+
+  private createNewWidget() {
+    // TODO: Check tariffExp
+    if (SiteService.isSiteHasExpTariff($scope.currentSite) && getWidgetsCount() >= 3) {
+      BillingService.checkTariffPlans($scope.currentSite.id,
+        $translate.instant("sitelist.tarrif.title"),
+        $translate.instant("widgetsList.payment.limit", {siteName: $scope.currentSite.name}));
+    } else {
+      ModalService.showModal({
+        templateUrl: "../js/widgets/new-widget-modal/new-widget-modal-template.html",
+        controller: "NewWidgetModalController",
+        inputs: {
+          currentSite: $scope.currentSite,
+          companies: WidgetService.getUndefaultCompanies($scope.companies),
+          currentCompany: $scope.currentCompany
+        }
+      }).then(function (modal) {
+        modal.element.modal();
+        modal.close.then(function (result) {
+          $("body").removeClass("modal-open");
+          // TODO: Implement logic when close modal. Don't forget "result"
+        });
+      });
+    }
+  };
 
 }

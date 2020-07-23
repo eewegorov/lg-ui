@@ -1,40 +1,38 @@
 import { Injectable } from '@angular/core';
-import { SitesApiService } from './sites-api.service';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
 import { ApiResponse } from '../../../core/models/api';
-import { CreateSiteData, CreateSiteRequest, CreateSiteResponse, Payment, Site, SitesResponse } from '../models/sites';
-import { CoreApiService } from '../../../core/services/core-api.service';
-import { BillingService } from '../../../core/services/billing.service';
 import { Phone } from '../../../core/models/user';
+import { CreateSiteData, CreateSiteRequest, CreateSiteResponse, Site, SitesResponse } from '../models/sites';
+import { CoreApiService } from '../../../core/services/core-api.service';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { SitesApiService } from './sites-api.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SitesService {
-  public sites: Site[];
+
   private currentSiteId: string;
 
   constructor(
-    private translate: TranslateService,
     private coreApiService: CoreApiService,
-    private billingService: BillingService,
+    private errorHandlerService: ErrorHandlerService,
     private sitesApiService: SitesApiService
   ) { }
 
   public getSites(): Observable<Site[]> {
-    return this.sitesApiService.getRawSites().pipe(
+    return this.sitesApiService.getSites().pipe(
       map((response: SitesResponse) => response.data),
-      catchError(this.handleError)
+      catchError(this.errorHandlerService.handleError)
     );
   }
 
   public createSite(data: CreateSiteRequest): Observable<CreateSiteData> {
     return this.sitesApiService.postSites(data).pipe(
       map((response: CreateSiteResponse) => response.data),
-      catchError(this.handleError)
+      catchError(this.errorHandlerService.handleError)
     );
   }
 
@@ -56,49 +54,5 @@ export class SitesService {
     return this.currentSiteId;
   }
 
-  private handleError(error: ApiResponse) {
-    if (error.message) {
-      let errors = error.message.split(":");
-      if (errors[0] === Payment.WIDGETS_LIMIT && errors[1]) {
-        this.prepareResponseForPaymentService(errors[0], errors[1]);
-      }
-      console.log(errors[0], errors[1], errors[2]);
-    }
-    console.log('Http request error: ', error);
-    return throwError('HTTP Error');
-  }
 
-  private prepareResponseForPaymentService(type: Payment, siteId): void {
-    if (type === Payment.WIDGETS_LIMIT) {
-      this.billingService.checkTariffPlans(siteId,
-        this.translate.instant('sitelist.tarrif.title'),
-        this.translate.instant('widgetsList.payment.limit', { siteName: this.getSiteById(siteId).name }));
-    } else if (type === Payment.CONTAINER_WIDGETS_LIMIT) {
-      this.billingService.checkTariffPlans(siteId,
-        this.translate.instant('sitelist.tarrif.title'),
-        this.translate.instant('widgetsList.payment.limit.container', { siteName: this.getSiteById(siteId).name }));
-    } else if (type === Payment.INTEGRATION_PAYMENT) {
-      this.billingService.checkTariffPlans(siteId,
-        this.translate.instant('sitelist.tarrif.title'),
-        this.translate.instant('settings.site.integration.paymentLabel', { siteName: this.getSiteById(siteId).name }));
-    } else if (type === Payment.WIDGET_HAS_PAYMENT_OPTIONS) {
-      this.billingService.checkTariffPlans(siteId,
-        this.translate.instant('sitelist.tarrif.title'),
-        this.translate.instant('widgetsList.payment.options', { siteName: this.getSiteById(siteId).name }));
-    } else if (type === Payment.PAYMENT_SETTINGS) {
-      this.billingService.checkTariffPlans(siteId,
-        this.translate.instant('sitelist.tarrif.title'),
-        this.translate.instant('settings.site.update.paymentLabel', { siteName: this.getSiteById(siteId).name }));
-    } else if (type === Payment.MAX_LEADS_SHOW_REACHED) {
-      this.billingService.checkTariffPlans(siteId,
-        this.translate.instant('sitelist.tarrif.title'),
-        this.translate.instant('settings.site.update.crm.paymentLabel', { siteName: this.getSiteById(siteId).name }));
-    }
-  }
-
-  private getSiteById(id): Site {
-    return this.sites.find((item) => {
-      return item.id === id;
-    });
-  }
 }
