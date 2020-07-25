@@ -32,6 +32,12 @@ export class WidgetService {
     });
   }
 
+  public getUndefaultCompanies(companies) {
+    return companies.filter(function (item) {
+      return !item.default;
+    });
+  }
+
   public setContainers(containers) {
     this.currentContainers = containers;
   }

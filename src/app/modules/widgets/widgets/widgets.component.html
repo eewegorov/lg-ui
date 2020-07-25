@@ -70,7 +70,7 @@
     </div>
   </div>
   <div class="btnpanel padding-top-75">
-    <div><button ng-click="createNewWidget()" type="button" class="btn btn-lg w-xs btn-success"><i class="fa fa-plus-circle"></i> {{ 'widgetsList.add.title' | translate }}</button></div>
+    <div><button (click)="createNewWidget()" type="button" class="btn btn-lg w-xs btn-success"><i class="fa fa-plus-circle"></i> {{ 'widgetsList.add.title' | translate }}</button></div>
     <div id="buyWidgetDevelopmentContainer"><a href="#" id="buyWidgetDevelopment">{{ 'widgetsList.add.alt' | translate }}</a></div>
   </div>
 </div>

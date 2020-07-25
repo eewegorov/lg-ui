@@ -1,1 +1,111 @@
-<p>widget-add works!</p>
+<!-- New Widget Modal Window -->
+<div class="modal modal-flex fade" ng-class="{'gallery-flex-modal': newWidgetStep === 1}" tabindex="-1" role="dialog" aria-hidden="true" data-exptime="0">
+  <div class="modal-dialog" tooltiped>
+    <div class="modal-content">
+      <div class="color-line"></div>
+      <div class="modal-header text-center" ng-if="newWidgetStep === 2 || newWidgetStep === 3 || newWidgetStep === 4">
+        <h4 class="modal-title">{{ 'widgetsList.add.modal.title' | translate }}</h4>
+      </div>
+      <div class="modal-body">
+        <div id="step1" class="active" ng-show="newWidgetStep === 1">
+          <div class="create-widget-m" ng-class="{'main-content-container-loader': isLoaderActive}">
+            <div class="filters-loader"></div>
+            <div class="container-for-loader">
+              <div class="templates-gallery-header">
+                <div class="header-modal">
+                  <span>{{ 'widgetsList.add.params.mockup.title' | translate }}</span>
+                  <button class="btn w-xs btn-success"
+                          ng-click="createNullWidget()">{{ 'widgetsList.add.params.mockup.notselect' | translate }}</button>
+                </div>
+                <span class="sub-text">{{ 'widgetsList.add.modal.gallery.desc' | translate }}</span>
+              </div>
+
+              <!--<templates-gallery-directive types="typesForGallery" callback="chooseTemplateWidget"></templates-gallery-directive>-->
+            </div>
+          </div>
+        </div>
+
+        <div id="step2" class="p-m max-w-868" ng-show="newWidgetStep === 2">
+          <label class="big-label">{{ 'widgetsList.add.chooseType.label' | translate }}:</label>
+          <div class="row">
+            <div class="col-lg-3 widget-type-view" ng-repeat="type in widgetTypes" ng-click="setType(type)">
+              <img src="{{type.previewLink}}" alt="preview">
+              <div class="view-name">{{type.name}}</div>
+              <div class="view-desc">{{type.description}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="step3" class="p-m max-w-868" ng-show="newWidgetStep === 3">
+          <label class="big-label">{{ 'widgetsList.add.chooseTemplate.label' | translate }}:</label>
+          <div class="row">
+            <div class="col-lg-4 widget-type-view" ng-repeat="template in templates | filter:editableWidget.typeId" ng-click="setTemplate(template)">
+              <img src="{{template.previewLink}}" alt="preview">
+              <div class="view-name">{{template.name}}</div>
+              <div class="view-desc">{{template.description}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="step4" class="p-m max-w-868" ng-show="newWidgetStep === 4">
+          <label class="big-label">{{ 'widgetsList.add.params.label' | translate }}:</label>
+          <div class="row margined-top-20">
+            <div class="col-lg-12">
+              <div class="row margined-bottom-15 margined-left-0 select-site-title">
+                <h5>{{ 'widgetsList.add.params.name' | translate }}:</h5>
+              </div>
+              <input type="text" class="form-control" ng-model="editableWidget.name">
+              <span class="underow-comment">{{ 'widgetsList.add.params.name.tooltip' | translate }}</span>
+            </div>
+            <div class="col-lg-12" ng-show="editableWidget.companyMode === 0">
+              <div class="row margined-bottom-15 margined-left-0 select-site-title">
+                <h5>{{ 'widgetsList.selectCompany' | translate }}: <a data-toggle="tooltip"
+                                                                        data-placement="top"
+                                                                        title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
+                                                                        class="info-link" href="#"><i class="fa fa-info-circle"></i></a></h5>
+              </div>
+              <div class="dropdown widget-company-selector" style="float: left; width: calc(100% - 50px)" ng-class="!editableWidget.companyId ? 'has-error' : ''">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <span class="dropdown-selected-cropp" style="max-width:90%">{{editableWidget.company}}</span>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" ng-show="companies.length">
+                  <li ng-repeat="company in getFilteredCompanies()" ng-click="changeCompany(company)"><a href="javascript:void(0);">{{company.name}}</a></li>
+                </ul>
+              </div>
+
+              <div class="remove-sub-item">
+                <a ng-click="openAddCompanyMode()" href="javascript:void(0);" >
+                  <i class="remove-sub-item colored-blue pe-7s-plus"
+                     data-toggle="tooltip" data-placement="top" data-container="body"
+                     title="{{ 'widgetsList.add.params.company.add.tooltip' | translate }}"></i>
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-12" ng-class="(editableWidget.company.trim().length == 0)?'has-error':''" ng-show="editableWidget.companyMode === 1">
+              <div class="row margined-bottom-15 margined-left-0 select-site-title">
+                <h5>{{ 'widgetsList.add.params.company.add.name' | translate }}: <a data-toggle="tooltip"
+                                                                                      data-placement="top"
+                                                                                      title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
+                                                                                      class="info-link" href="#"><i class="fa fa-info-circle"></i></a></h5>
+              </div>
+              <input type="text" class="form-control" ng-model="editableWidget.company">
+              <span class="underow-comment">{{ 'widgetsList.add.params.company.under' | translate }}</span>
+              <a href="#"
+                 ng-show="companies.length"
+                 ng-click="closeAddCompanyMode()"
+                 class="companies-underline">{{ 'widgetsList.add.params.company.add.back' | translate }}</a>
+            </div>
+            <div class="col-lg-12 margined-top-30">
+              <button ng-click="closeNewWidgetModal(false)"
+                      class="btn btn-lg w-xs btn-default floated-left">{{ 'widgetsList.add.params.cancel' | translate }}</button>
+              <button ng-disabled="(editableWidget.companyMode == 0 && editableWidget.companyId == null) || (editableWidget.companyMode == 1 && editableWidget.company.trim().length == 0)"
+                      ng-click="addWidget()" type="button"
+                      class="btn btn-lg w-xs btn-success floated-right">{{ 'widgetsList.add.modal.gallery.gotosettings' | translate }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

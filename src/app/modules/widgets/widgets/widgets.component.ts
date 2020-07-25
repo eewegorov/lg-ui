@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CampaignDeleteComponent } from '../campaign-delete/campaign-delete.component';
+import { WidgetAddComponent } from '../widget-add/widget-add.component';
 import { Entities } from '../models/widgets';
 import { Abtest } from '../../abtests/models/abtests';
+import { BillingService } from '../../../core/services/billing.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { WidgetService } from '../services/widget.service';
@@ -21,7 +24,7 @@ export class WidgetsComponent implements OnInit {
   containers = [];
   smartPoints;
   company = { name: '' };
-  currentSite = { name: '' };
+  currentSite = { id: '', name: '' };
   site = { name: '' };
   currentCompany = { id: '', name: '', default: false };
   defCompanyName;
@@ -35,8 +38,10 @@ export class WidgetsComponent implements OnInit {
 
   constructor(
     private location: Location,
+    private translate: TranslateService,
     private modalService: NgbModal,
-    private siteService: SitesService,
+    private billingService: BillingService,
+    private sitesService: SitesService,
     private abtestsService: AbtestsService,
     private widgetService: WidgetService
   ) { }
@@ -60,7 +65,7 @@ export class WidgetsComponent implements OnInit {
     modalRef.componentInstance.deletedCompany = this.currentCompany;
     modalRef.result.then((deletedId: boolean) => {
       if (!deletedId) return false;
-      this.getAllWidgetsForSite(this.siteService.getCurrentSiteId());
+      this.getAllWidgetsForSite(this.sitesService.getCurrentSiteId());
     });
   }
 
@@ -107,29 +112,41 @@ export class WidgetsComponent implements OnInit {
     });
   }
 
-  private createNewWidget() {
+  public createNewWidget() {
     // TODO: Check tariffExp
-    if (SiteService.isSiteHasExpTariff($scope.currentSite) && getWidgetsCount() >= 3) {
-      BillingService.checkTariffPlans($scope.currentSite.id,
-        $translate.instant("sitelist.tarrif.title"),
-        $translate.instant("widgetsList.payment.limit", {siteName: $scope.currentSite.name}));
+    if (this.sitesService.isSiteHasExpTariff(this.currentSite) && this.getWidgetsCount() >= 3) {
+      this.billingService.checkTariffPlans(this.currentSite.id,
+        this.translate.instant("sitelist.tarrif.title"),
+        this.translate.instant("widgetsList.payment.limit", {siteName: this.currentSite.name}));
     } else {
-      ModalService.showModal({
-        templateUrl: "../js/widgets/new-widget-modal/new-widget-modal-template.html",
-        controller: "NewWidgetModalController",
-        inputs: {
-          currentSite: $scope.currentSite,
-          companies: WidgetService.getUndefaultCompanies($scope.companies),
-          currentCompany: $scope.currentCompany
-        }
-      }).then(function (modal) {
-        modal.element.modal();
-        modal.close.then(function (result) {
-          $("body").removeClass("modal-open");
-          // TODO: Implement logic when close modal. Don't forget "result"
-        });
+      const modalRef = this.modalService.open(WidgetAddComponent, {
+        size: 'lg',
+        windowClass: 'animate__animated animate__slideInDown animate__faster'
+      });
+      modalRef.componentInstance.currentSite = this.currentSite;
+      modalRef.componentInstance.companies = this.widgetService.getUndefaultCompanies(this.companies);
+      modalRef.componentInstance.currentCompany = this.currentCompany;
+      modalRef.result.then((result) => {
+        // TODO: Implement logic when close modal. Don't forget "result"
       });
     }
-  };
+  }
+
+  private getWidgetsCount(): number {
+    const keys = Object.keys(this.widgets);
+    let count = 0;
+    for (let i = 0; i < keys.length; i++) {
+      count += this.widgets[keys[i]].length;
+    }
+    return count + this.getContainerizedWidgetLength();
+  }
+
+  private getContainerizedWidgetLength(): number {
+    let count = 0;
+    this.containers.forEach(function(container) {
+      count += container.widgets.length;
+    });
+    return count;
+  }
 
 }

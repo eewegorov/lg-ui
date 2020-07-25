@@ -13,7 +13,7 @@ import { SitesApiService } from './sites-api.service';
   providedIn: 'root'
 })
 export class SitesService {
-
+  public sites;
   private currentSiteId: string;
 
   constructor(
@@ -52,6 +52,20 @@ export class SitesService {
 
   public getCurrentSiteId(): string {
     return this.currentSiteId;
+  }
+
+  public isSiteHasExpTariff(site): boolean {
+    if (this.isSiteHasFreeTariff(site)) {
+      return true;
+    } else {
+      var d = new Date();
+      var expTime = site.tariffExp - d.getTime();
+      return expTime <= 0;
+    }
+  }
+
+  private isSiteHasFreeTariff(site): boolean {
+    return (!site.tariffExp && !site.tariffName) || site.tariffName === "Бесплатный";
   }
 
 
