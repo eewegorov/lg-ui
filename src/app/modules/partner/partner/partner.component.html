@@ -1,1 +1,144 @@
-<p>partner works!</p>
+<h1 class="partner-title">{{ 'global.partner' | translate }}</h1>
+<div class="content">
+  <div class="row no-animate">
+    <div class="col-lg-8">
+      <div class="row anfp">
+        <div class="col-lg-12">
+          <div class="hpanel">
+            <div class="panel-body">
+              <div class="margined-bottom-15"><h3>{{ 'partner.ads.panel' | translate }}</h3></div>
+              <div class="ads-container text-center" style="width: 200px; float:left;">
+                <span class="text-left padding-bottom-10" style="display: block;">200 x 200</span>
+                <div class="ads-code">
+                  <a href="{{ partnerUrl }}" target="_blank"><img style="width: 200px; height: 200px; cursor: pointer;" src="https://static.leadgenic.com/ads/200.jpg"></a>
+                </div>
+                <button type="button" class="show-code btn w-xs btn-info margined-top-15" ng-click="showCode($event)">{{ 'partner.showcode' | translate }}</button>
+              </div>
+
+              <div class="ads-container text-center" style="width: 240px; float: left; margin-left: 70px;">
+                <span class="text-left padding-bottom-10" style="display: block;">240 x 400</span>
+                <div class="ads-code">
+                  <a href="{{ partnerUrl }}" target="_blank"><img style="width: 240px; height: 400px; cursor: pointer;" src="https://static.leadgenic.com/ads/240.jpg"></a>
+                </div>
+                <button type="button" class="show-code btn w-xs btn-info margined-top-15" ng-click="showCode($event)">{{ 'partner.showcode' | translate }}</button>
+              </div>
+
+              <div class="ads-container text-center margined-top-20" style="width: 468px; float: left; margin-left: 70px;">
+                <span class="text-left padding-bottom-10" style="display: block;">468 x 60</span>
+                <div class="ads-code">
+                  <a href="{{ partnerUrl }}" target="_blank"><img style="width: 468px; height: 60px; cursor: pointer;" src="https://static.leadgenic.com/ads/468.jpg"></a>
+                </div>
+                <button type="button" class="show-code btn w-xs btn-info margined-top-15" ng-click="showCode($event)">{{ 'partner.showcode' | translate }}</button>
+              </div>
+
+              <div class="ads-container text-center margined-top-20" style="width: 500px; float: left; margin-left: 70px;">
+                <span class="text-left padding-bottom-10" style="display: block;">500 x 200</span>
+                <div class="ads-code">
+                  <a href="{{ partnerUrl }}" target="_blank"><img style="width: 500px; height: 200px; cursor: pointer;" src="https://static.leadgenic.com/ads/500.jpg"></a>
+                </div>
+                <button type="button" class="show-code btn w-xs btn-info margined-top-15" ng-click="showCode($event)">{{ 'partner.showcode' | translate }}</button>
+              </div>
+
+              <div class="ads-container text-center margined-top-20" style="width: 728px; float: left; margin-left: 70px;">
+                <span class="text-left padding-bottom-10" style="display: block;">728 x 90</span>
+                <div class="ads-code">
+                  <a href="{{ partnerUrl }}" target="_blank"><img style="width: 728px; height: 90px; cursor: pointer;" src="https://static.leadgenic.com/ads/728.jpg"></a>
+                </div>
+                <button type="button" class="show-code btn w-xs btn-info margined-top-15" ng-click="showCode($event)">{{ 'partner.showcode' | translate }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="row anfp">
+        <div class="col-lg-12">
+          <div class="hpanel">
+            <div class="panel-body">
+              <h2>{{ 'partner.yourlink' | translate }}</h2>
+              <input select-on-click type="text" name="partnerlink" class="form-control" id="partnerlink" readonly ng-model="partnerUrl">
+              <div class="row margined-top-10 padding10">
+                <div class="partnerlink-description col-lg-6">
+                  {{ 'partner.yourlink.description' | translate }}
+                </div>
+                <div class="partnerlink-socialnetworks col-lg-6">
+                  <i class="fa fa-facebook-square" ng-click="fbLink()"></i>
+                  <i class="fa fa-vk" ng-click="vkLink()"></i>
+                  <i class="fa fa-twitter" ng-click="twLink()"></i>
+                </div>
+              </div>
+              <hr/>
+              <div class="row margined-top10 padding10">
+                <div class="col-lg-6 partnerlink-description">{{ 'partner.add.title' | translate }}</div>
+                <div class="col-lg-6 text-right"><button id="addPartner" type="button" ng-click="createRef()" class="btn w-xs btn-success">{{ 'partner.add.button' | translate }}</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row anfp partner-saldo-wr">
+        <div class="col-lg-12">
+          <div class="hpanel">
+            <div class="panel-body">
+              <h2>{{ 'partner.saldo' | translate }}</h2>
+              <h1 class="text-center partner-payment"><span id="partner-saldo" class="partner-payment">{{ partnerBalance }}</span> <i class="fa fa-rub"></i></h1>
+              <h5>{{ 'partner.saldo.desc' | translate }}</h5>
+              <br>
+              <div id="wallet-container">
+                <label class="control-label margined-bottom-10">{{ 'partner.wallet' | translate }}:</label>
+                <input type="text" class="form-control" id="walletid" ng-model="walletId" autocomplete="off" style="width: calc(100% - 120px);">
+                <button id="walletSave" type="button" ng-click="setWallet()" class="btn w-xs btn-success" ng-disabled="!walletId">{{ 'global.save' | translate }}</button>
+                <span class="validate">Validate info</span>
+              </div>
+
+              <hr/>
+              <div style="font-size:11px;">{{ 'partner.wallet.description' | translate }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row anfp partner-stats-wr">
+        <div class="col-lg-12">
+          <div class="hpanel">
+            <div class="panel-body">
+              <h2 class="m-b-xs">{{ 'partner.statistics' | translate }}</h2>
+              <div class="partner-stats-block">
+                <div>
+                  <span>{{ regUsers }}</span>
+                  <p ng-bind-html="'partner.allUsers' | translate"></p>
+                </div>
+                <div>
+                  <span>{{ earnedMoney }} <i class="fa fa-rub"></i></span>
+                  <p ng-bind-html="'partner.earnedMoney' | translate"></p>
+                </div>
+              </div>
+              <h3 class="margined-bottom-15">{{ 'partner.transactions' | translate }}:</h3>
+
+              <div class="partner-transaction-wr" ng-show="transactions.length">
+                <div class="partner-transaction row" ng-repeat="item in transactions track by $index">
+                  <div class="col-lg-3">{{ item.date | date : "dd.MM.yy" }}</div>
+                  <div class="col-lg-5">
+                    <div ng-if="item.type === 'DEBIT'">{{ 'partner.transactions.debit' | translate }}</div>
+                    <div ng-if="item.type === 'CREDIT'">{{ 'partner.transactions.credit' | translate }}</div>
+                  </div>
+                  <div class="col-lg-4 text-right">
+                    <div ng-if="item.type === 'DEBIT'" style="color:#62cb31;">- <span>{{ item.sum }}</span> ₽</div>
+                    <div ng-if="item.type === 'CREDIT'" style="color:#3498db;">+ <span>{{ item.sum }}</span> ₽</div>
+                  </div>
+                </div>
+
+                <div class="text-center" ng-if="!loadingTransaction && !allTransactionsLoaded"><span class="show-more" ng-click="loadMore()">{{ 'partner.transactions.showMore' | translate }}</span></div>
+                <div class="show-more-spinner" ng-if="loadingTransaction"></div>
+              </div>
+
+              <div class="text-center" ng-show="!transactions.length || loadingTransaction">{{ 'partner.transactions.empty' | translate }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

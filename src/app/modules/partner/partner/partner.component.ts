@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./partner.component.scss']
 })
 export class PartnerComponent implements OnInit {
+  public partnerUrl;
+  public partnerBalance;
+  public regUsers;
+  public earnedMoney;
+  public item;
 
   constructor() { }
 

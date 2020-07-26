@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ApiResponse } from '../models/api';
 import { TariffPlansResponse } from '../models/tariffPlans';
-import { Phone } from '../models/user';
+import { Phone, Wallet } from '../models/user';
 
 
 @Injectable({
@@ -21,4 +21,9 @@ export class CoreApiService {
   public savePhone(data: Phone): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${ environment.url }/me/phone`, data);
   }
+
+  public setWallet(wallet: Wallet): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${ environment.url }/me/wallet`, wallet);
+  }
+  
 }

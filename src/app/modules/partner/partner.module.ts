@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { PartnerRoutingModule } from './partner-routing.module';
 import { PartnerComponent } from './partner/partner.component';
 import { PromotionalComponent } from './promotional/promotional.component';
@@ -22,6 +23,7 @@ import { PartnerBannerComponent } from './partner-banner/partner-banner.componen
   ],
   imports: [
     CommonModule,
+    TranslateModule,
     PartnerRoutingModule
   ]
 })

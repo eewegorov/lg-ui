@@ -4,8 +4,8 @@ import { catchError, map } from 'rxjs/operators';
 import { ApiResponse } from '../../../core/models/api';
 import { Phone } from '../../../core/models/user';
 import { CreateSiteData, CreateSiteRequest, CreateSiteResponse, Site, SitesResponse } from '../models/sites';
-import { CoreApiService } from '../../../core/services/core-api.service';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { CoreApiService } from '../../../core/services/core-api.service';
 import { SitesApiService } from './sites-api.service';
 
 
@@ -17,8 +17,8 @@ export class SitesService {
   private currentSiteId: string;
 
   constructor(
-    private coreApiService: CoreApiService,
     private errorHandlerService: ErrorHandlerService,
+    private coreApiService: CoreApiService,
     private sitesApiService: SitesApiService
   ) { }
 

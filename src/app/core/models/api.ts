@@ -4,3 +4,13 @@ export interface ApiResponse {
   errors: {};
   message: string;
 }
+
+export interface ApiLimitResponse extends ApiResponse {
+  meta: Meta;
+}
+
+export interface Meta {
+  limit: number;
+  offset: number;
+  count: number;
+}
