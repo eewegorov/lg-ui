@@ -9,10 +9,10 @@ export class WidgetAddComponent implements OnInit {
   @Input() public currentSite;
   @Input() public companies;
   @Input() public currentCompany;
-  type;
-  template;
-  editableWidget;
-  company;
+  type = { name: '', description: '', previewLink: '' };
+  template = { name: '', description: '', previewLink: '' };
+  editableWidget = { company: '' };
+  company = { name: '' };
 
   constructor() { }
 

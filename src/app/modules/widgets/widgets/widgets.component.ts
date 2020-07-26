@@ -19,7 +19,7 @@ import { WidgetService } from '../services/widget.service';
   styleUrls: ['./widgets.component.scss']
 })
 export class WidgetsComponent implements OnInit {
-  widgets;
+  widgets = [];
   companies = [];
   containers = [];
   smartPoints;
@@ -116,11 +116,11 @@ export class WidgetsComponent implements OnInit {
     // TODO: Check tariffExp
     if (this.sitesService.isSiteHasExpTariff(this.currentSite) && this.getWidgetsCount() >= 3) {
       this.billingService.checkTariffPlans(this.currentSite.id,
-        this.translate.instant("sitelist.tarrif.title"),
+        this.translate.instant("sitelist.tariff.title"),
         this.translate.instant("widgetsList.payment.limit", {siteName: this.currentSite.name}));
     } else {
       const modalRef = this.modalService.open(WidgetAddComponent, {
-        size: 'lg',
+        size: 'xl',
         windowClass: 'animate__animated animate__slideInDown animate__faster'
       });
       modalRef.componentInstance.currentSite = this.currentSite;
@@ -143,7 +143,7 @@ export class WidgetsComponent implements OnInit {
 
   private getContainerizedWidgetLength(): number {
     let count = 0;
-    this.containers.forEach(function(container) {
+    this.containers.forEach((container) => {
       count += container.widgets.length;
     });
     return count;

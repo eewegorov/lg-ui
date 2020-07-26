@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { UiSwitchModule } from 'ngx-ui-switch';
+import { SharedModule } from '../../shared/shared.module';
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { WidgetsListComponent } from './widgets-list/widgets-list.component';
 import { WidgetCardComponent } from './widget-card/widget-card.component';
@@ -24,6 +25,7 @@ import { CampaignDeleteComponent } from './campaign-delete/campaign-delete.compo
     CommonModule,
     TranslateModule,
     UiSwitchModule,
+    SharedModule,
     WidgetsRoutingModule
   ]
 })

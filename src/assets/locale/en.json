@@ -30,7 +30,8 @@
 		"cancel": "",
 		"currency": {
 			"ruble": ""
-		}
+		},
+		"save": ""
 	},
 	"header": {
 		"cabinet": "",
@@ -60,6 +61,38 @@
 		"unique_login": "",
 		"unique_password": "",
 		"user": ""
+	},
+	"partner": {
+		"add": {
+			"button": "",
+			"title": ""
+		},
+		"ads": {
+			"panel": ""
+		},
+		"allUsers": "",
+		"earnedMoney": "",
+		"saldo": {
+			"desc": "",
+			"title": ""
+		},
+		"showcode": "",
+		"statistics": "",
+		"transactions": {
+			"credit": "",
+			"debit": "",
+			"empty": "",
+			"showMore": "",
+			"title": ""
+		},
+		"wallet": {
+			"description": "",
+			"title": ""
+		},
+		"yourlink": {
+			"description": "",
+			"title": ""
+		}
 	},
 	"settings": {
 		"script": {
@@ -142,7 +175,7 @@
 			"done": "",
 			"title": ""
 		},
-		"tarrif": {
+		"tariff": {
 			"length": "",
 			"title": ""
 		},
@@ -151,6 +184,35 @@
 	"widgetsList": {
 		"add": {
 			"alt": "",
+			"chooseTemplate": {
+				"label": ""
+			},
+			"chooseType": {
+				"label": ""
+			},
+			"modal": {
+				"gallery": {
+					"desc": "",
+					"gotosettings": ""
+				},
+				"title": ""
+			},
+			"params": {
+				"company": {
+					"add": {
+						"back": "",
+						"name": ""
+					},
+					"tooltip": "",
+					"under": ""
+				},
+				"label": "",
+				"mockup": {
+					"notselect": "",
+					"title": ""
+				},
+				"name": ""
+			},
 			"title": ""
 		},
 		"clone": {
@@ -165,6 +227,12 @@
 				"tooltip": ""
 			},
 			"delete": {
+				"move": "",
+				"one": {
+					"company": ""
+				},
+				"remove": "",
+				"title": "",
 				"tooltip": ""
 			}
 		},

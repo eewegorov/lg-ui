@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { UiService } from '../../../core/services/ui.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,10 @@ export class HeaderComponent implements OnInit {
   public yandexRef = false;
   public isPartnerPage = false;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private uiService: UiService
+  ) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
@@ -39,10 +43,6 @@ export class HeaderComponent implements OnInit {
 
   public handleMinimalizeSidebar(event: Event): void {
     event.preventDefault();
-    if ($(window).width() < 769) {
-      $("body").toggleClass("show-sidebar");
-    } else {
-      $("body").toggleClass("hide-sidebar");
-    }
+    this.uiService.toggleSidebar();
   }
 }

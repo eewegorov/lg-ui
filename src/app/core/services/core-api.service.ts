@@ -25,5 +25,5 @@ export class CoreApiService {
   public setWallet(wallet: Wallet): Observable<ApiResponse> {
     return this.http.put<ApiResponse>(`${ environment.url }/me/wallet`, wallet);
   }
-  
+
 }
