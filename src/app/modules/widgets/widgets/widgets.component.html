@@ -1,4 +1,4 @@
-<div class="toolbar-content widgets-toolbar" ng-show="sites.length > 0">
+<div *ngIf="sites.length > 0" class="toolbar-content widgets-toolbar">
   <div class="textcontent">
     <h1 class="title-main">{{ 'widgetsList.title' | translate }}</h1>
     <div class="row col-lg-12 select-site">
@@ -11,7 +11,9 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <li ng-repeat="site in sites" ng-click="changeCurrentSite(site)"><a href="#">{{ site.name }}</a></li>
+            <li *ngFor="let site of sites" (click)="changeCurrentSite(site)">
+              <a href="#">{{ site.name }}</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -26,7 +28,9 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" *ngIf="companies.length">
-                <li ng-repeat="company in companies" ng-click="changeCurrentCompany(company)"><a href="#">{{ company.name || defCompanyName}}</a></li>
+                <li *ngFor="let company of companies" (click)="changeCurrentCompany(company)">
+                  <a href="#">{{ company.name || defCompanyName }}</a>
+                </li>
               </ul>
             </div>
 

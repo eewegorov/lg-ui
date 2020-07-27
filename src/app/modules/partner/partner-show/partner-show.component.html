@@ -1,0 +1,19 @@
+<div class="modal-content">
+  <div class="color-line"></div>
+  <div class="modal-header text-center">
+    <h4 class="modal-title">{{ 'partner.ads.code' | translate }}</h4>
+  </div>
+  <div class="modal-body">
+    <div class="p-lr-15">
+      <div><label for="code">{{ 'partner.ads.comment' | translate }}:</label></div>
+      <textarea select-on-click id="code" cols="30" rows="5" class="form-control" ngModel="refCode" readonly></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="text-right m-r">
+      <a class="btn btn-default floated-right"
+         (click)="closeModal()"
+      >{{ 'global.close' | translate }}</a>
+    </div>
+  </div>
+</div>

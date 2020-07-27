@@ -28,6 +28,7 @@
 	},
 	"global": {
 		"cancel": "",
+		"close": "",
 		"currency": {
 			"ruble": ""
 		},
@@ -68,6 +69,8 @@
 			"title": ""
 		},
 		"ads": {
+			"code": "",
+			"comment": "",
 			"panel": ""
 		},
 		"allUsers": "",
