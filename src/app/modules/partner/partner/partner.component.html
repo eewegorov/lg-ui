@@ -56,22 +56,29 @@
         <div class="col-lg-12">
           <div class="hpanel">
             <div class="panel-body">
-              <h2>{{ 'partner.yourlink.title' | translate }}</h2>
-              <input select-on-click type="text" name="partnerlink" class="form-control" id="partnerlink" readonly ng-model="partnerUrl">
-              <div class="row margined-top-10 padding10">
-                <div class="partnerlink-description col-lg-6">
+              <h3>{{ 'partner.yourlink.title' | translate }}</h3>
+              <input
+                type="text"
+                id="partnerlink"
+                class="form-control"
+                [ngModel]="partnerUrl"
+                appSelectOnClick
+                readonly
+              >
+              <div class="row mt-1 p-2">
+                <div class="partnerlink-description col-lg-5">
                   {{ 'partner.yourlink.description' | translate }}
                 </div>
-                <div class="partnerlink-socialnetworks col-lg-6">
-                  <i class="fa fa-facebook-square" ng-click="fbLink()"></i>
-                  <i class="fa fa-vk" ng-click="vkLink()"></i>
-                  <i class="fa fa-twitter" ng-click="twLink()"></i>
+                <div class="partnerlink-socialnetworks col-lg-7">
+                  <i class="fab fa-facebook-square" (click)="fbLink()"></i>
+                  <i class="fab fa-vk" (click)="vkLink()"></i>
+                  <i class="fab fa-twitter" (click)="twLink()"></i>
                 </div>
               </div>
               <hr/>
-              <div class="row margined-top10 padding10">
+              <div class="row mt-1 p-2">
                 <div class="col-lg-6 partnerlink-description">{{ 'partner.add.title' | translate }}</div>
-                <div class="col-lg-6 text-right"><button id="addPartner" type="button" ng-click="createRef()" class="btn w-xs btn-success">{{ 'partner.add.button' | translate }}</button></div>
+                <div class="col-lg-6 text-right"><button id="addPartner" type="button" ng-click="createRef()" class="btn btn-success text-wrap">{{ 'partner.add.button' | translate }}</button></div>
               </div>
             </div>
           </div>
@@ -82,7 +89,7 @@
         <div class="col-lg-12">
           <div class="hpanel">
             <div class="panel-body">
-              <h2>{{ 'partner.saldo.title' | translate }}</h2>
+              <h3>{{ 'partner.saldo.title' | translate }}</h3>
               <h1 class="text-center partner-payment"><span id="partner-saldo" class="partner-payment">{{ partnerBalance }}</span> <i class="fa fa-rub"></i></h1>
               <h5>{{ 'partner.saldo.desc' | translate }}</h5>
               <br>
@@ -104,7 +111,7 @@
         <div class="col-lg-12">
           <div class="hpanel">
             <div class="panel-body">
-              <h2 class="m-b-xs">{{ 'partner.statistics' | translate }}</h2>
+              <h3 class="m-b-xs">{{ 'partner.statistics' | translate }}</h3>
               <div class="partner-stats-block">
                 <div>
                   <span>{{ regUsers }}</span>

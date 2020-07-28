@@ -34,7 +34,7 @@ export class BillingService {
         };
         this.showTariffPlansModal(inputs);
       } else {
-        this.toastr.error(this.translate.instant("billing.notify.noPlans"));
+        this.toastr.error(this.translate.instant('billing.notify.noPlans'));
       }
     });
   }

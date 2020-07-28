@@ -37,3 +37,50 @@
   white-space: nowrap;
   font-size: 14px;
 }
+
+#partnerlink {
+  cursor: text;
+  font-size: 12px;
+}
+
+@media (max-width: 1360px) {
+  #partnerlink {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 1150px) {
+  #partnerlink {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 990px) {
+  #partnerlink {
+    font-size: 10px;
+  }
+}
+
+.partnerlink-description {
+  font-size: 11px;
+}
+
+.partnerlink-socialnetworks {
+  text-align: right;
+}
+
+.partnerlink-socialnetworks .fab {
+  cursor: pointer;
+  font-size:   35px;
+  margin-left: 10px;
+}
+
+@media (max-width: 1280px) {
+  .partnerlink-socialnetworks .fab {
+    margin-left: 5px;
+  }
+}
+
+.partnerlink-socialnetworks .fab:hover {
+  color: #3498db;
+}

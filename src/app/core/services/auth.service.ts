@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
-import { Token } from '../models/token';
 import { environment } from '../../../environments/environment';
+import { Token } from '../models/token';
+
 
 @Injectable({
   providedIn: 'root'

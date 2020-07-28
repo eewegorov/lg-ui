@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../../shared/shared.module';
 import { PartnerRoutingModule } from './partner-routing.module';
 import { PartnerComponent } from './partner/partner.component';
 import { PromotionalComponent } from './promotional/promotional.component';
@@ -11,6 +12,7 @@ import { PartnerBalanceComponent } from './partner-balance/partner-balance.compo
 import { PartnerStatisticsComponent } from './partner-statistics/partner-statistics.component';
 import { PartnerBannerComponent } from './partner-banner/partner-banner.component';
 import { PartnerShowComponent } from './partner-show/partner-show.component';
+
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import { PartnerShowComponent } from './partner-show/partner-show.component';
     CommonModule,
     FormsModule,
     TranslateModule,
+    SharedModule,
     PartnerRoutingModule
   ]
 })

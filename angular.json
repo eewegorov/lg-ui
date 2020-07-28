@@ -29,7 +29,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/metismenu/dist/metisMenu.min.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/ngx-ui-switch/ui-switch.component.css",
@@ -41,7 +41,7 @@
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/metismenu/dist/metisMenu.min.js",
-              "node_modules/icheck/icheck.js"
+              "node_modules/icheck/icheck.min.js"
             ],
             "allowedCommonJsDependencies": [
               "metismenu",

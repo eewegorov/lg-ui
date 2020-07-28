@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ModalComponent } from './components/modal/modal.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { ColorLineComponent } from './components/color-line/color-line.component';
+import { SelectOnClickDirective } from './directives/select-on-click.directive';
 
 
 
@@ -10,7 +11,8 @@ import { ColorLineComponent } from './components/color-line/color-line.component
   declarations: [
     ModalComponent,
     DropdownComponent,
-    ColorLineComponent
+    ColorLineComponent,
+    SelectOnClickDirective
   ],
   imports: [
     CommonModule
@@ -18,7 +20,8 @@ import { ColorLineComponent } from './components/color-line/color-line.component
   exports: [
     ModalComponent,
     DropdownComponent,
-    ColorLineComponent
+    ColorLineComponent,
+    SelectOnClickDirective
   ]
 })
 export class SharedModule { }
