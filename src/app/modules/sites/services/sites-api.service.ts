@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { CreateSiteRequest, CreateSiteResponse, SitesResponse } from '../models/sites';
+import { CreateSiteRequest, CreateSiteResponse, SitesResponse } from '../../../core/models/sites';
 
 
 @Injectable({

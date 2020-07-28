@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  url: '/api/rest/v1',
-  authUrl: '/api/v1',
-  accountUrl: 'https://app.leadgenic.ru/account'
+  url: 'http://84.201.173.190/api/rest/v1',
+  oauthUrl: 'http://84.201.173.190/oauth',
 };
 
 /*

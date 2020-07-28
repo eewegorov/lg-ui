@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SubscriptionLike } from 'rxjs';
-import { RegistrationResponse } from '../models/account';
+import { RegistrationResponse } from '../../../core/models/account';
 import { AccountService } from '../services/account.service';
 
 

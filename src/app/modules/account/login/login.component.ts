@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
-import { AuthResponse, OAuthResponse } from '../models/account';
+import { AuthResponse, OAuthResponse } from '../../../core/models/account';
 import { AccountService } from '../services/account.service';
 
 

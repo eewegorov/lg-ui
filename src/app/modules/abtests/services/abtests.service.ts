@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Abtest, AbtestsResponse } from '../models/abtests';
+import { Abtest, AbtestsResponse } from '../../../core/models/abtests';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { AbtestsApiService } from './abtests-api.service';
 

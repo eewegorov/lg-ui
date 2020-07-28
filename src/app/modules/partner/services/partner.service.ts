@@ -11,7 +11,7 @@ import {
   Transaction,
   TransactionsResponse,
   UserEmail
-} from '../models/partner';
+} from '../../../core/models/partner';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { CoreApiService } from '../../../core/services/core-api.service';
 import { PartnerApiService } from './partner-api.service';

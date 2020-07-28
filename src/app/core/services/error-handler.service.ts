@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { throwError } from 'rxjs';
 import { Payment } from '../models/payment';
 import { ApiResponse } from '../models/api';
-import { Site } from '../../modules/sites/models/sites';
+import { Site } from '../models/sites';
 import { BillingService } from './billing.service';
 
 

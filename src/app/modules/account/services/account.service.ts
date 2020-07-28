@@ -7,7 +7,7 @@ import {
   RegistrationRequest,
   RegistrationResponse,
   ResetData
-} from '../models/account';
+} from '../../../core/models/account';
 import { AccountApiService } from './account-api.service';
 
 

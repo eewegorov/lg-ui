@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ApiResponse } from '../../../core/models/api';
 import { Phone } from '../../../core/models/user';
-import { CreateSiteData, CreateSiteRequest, CreateSiteResponse, Site, SitesResponse } from '../models/sites';
+import { CreateSiteData, CreateSiteRequest, CreateSiteResponse, Site, SitesResponse } from '../../../core/models/sites';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { CoreApiService } from '../../../core/services/core-api.service';
 import { SitesApiService } from './sites-api.service';

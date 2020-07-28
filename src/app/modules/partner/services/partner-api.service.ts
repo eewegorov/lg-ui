@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
-import { IncomeBalanceResponse, RegistrationsResponse, TransactionsResponse, UserEmail } from '../models/partner';
+import { IncomeBalanceResponse, RegistrationsResponse, TransactionsResponse, UserEmail } from '../../../core/models/partner';
 
 
 @Injectable({

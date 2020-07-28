@@ -1,4 +1,4 @@
-import { ApiLimitResponse, ApiResponse } from '../../../core/models/api';
+import { ApiLimitResponse, ApiResponse } from './api';
 
 export interface TransactionsResponse extends ApiLimitResponse {
   data: Transaction[];

@@ -1,4 +1,4 @@
-import { ApiResponse } from '../../../core/models/api';
+import { ApiResponse } from './api';
 
 export interface SitesResponse extends ApiResponse {
   data: Site[];

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Entities, WidgetsResponse } from '../models/widgets';
+import { Entities, WidgetsResponse } from '../../../core/models/widgets';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { WidgetApiService } from './widget-api.service';
 

@@ -3,7 +3,7 @@ import { SubscriptionLike } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SiteAddComponent } from '../site-add/site-add.component';
 import { SitesService } from '../services/sites.service';
-import { Site } from '../models/sites';
+import { Site } from '../../../core/models/sites';
 
 @Component({
   selector: 'app-sites',

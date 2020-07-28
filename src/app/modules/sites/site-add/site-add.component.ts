@@ -4,7 +4,7 @@ import { SubscriptionLike } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiResponse } from '../../../core/models/api';
-import { CreateSiteData } from '../models/sites';
+import { CreateSiteData } from '../../../core/models/sites';
 import { SitesService } from '../services/sites.service';
 
 
