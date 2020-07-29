@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
-import { AuthResponse, OAuthResponse } from '../../../core/models/account';
+import { OAuthResponse } from '../../../core/models/account';
 import { AccountService } from '../services/account.service';
 
 
@@ -30,9 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public submitAuth() {
-    this.authSub = this.accountService.handleAuth(this.loginForm.value).subscribe((response: AuthResponse) => {
-      console.log(response);
-    });
+    this.authSub = this.accountService.handleAuth(this.loginForm.value).subscribe();
   }
 
   public authYandex(event: Event) {

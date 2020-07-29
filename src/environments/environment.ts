@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  url: 'http://84.201.173.190/api/rest/v1',
-  oauthUrl: 'http://84.201.173.190/oauth',
+  url: '/api/rest/v1',
+  oauthUrl: '/oauth',
 };
 
 /*

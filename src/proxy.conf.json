@@ -1,6 +1,11 @@
 {
-  "/api/rest/v1": {
-    "target": "https://app.leadgenic.ru/api/rest/v1",
+  "/oauth": {
+    "target": "http://130.193.39.124",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api": {
+    "target": "http://130.193.39.124",
     "secure": false,
     "changeOrigin": true
   }
