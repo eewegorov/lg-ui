@@ -21,7 +21,7 @@ export class AuthService {
     return this.http.post<Token>(`${ environment.oauthUrl }/token`,
       null, {
         headers: new HttpHeaders({
-          'Authorization': 'Basic ' + btoa('ui:ui')
+          'Authorization': `Basic ${btoa('ui:ui')}`
         }),
         params: {
           password: data.password,

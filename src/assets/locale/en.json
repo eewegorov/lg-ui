@@ -66,6 +66,16 @@
 	"partner": {
 		"add": {
 			"button": "",
+			"done": {
+				"desc": "",
+				"title": ""
+			},
+			"modal": {
+				"button": "",
+				"description": "",
+				"field": "",
+				"title": ""
+			},
 			"title": ""
 		},
 		"ads": {

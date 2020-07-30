@@ -78,14 +78,23 @@
               <hr/>
               <div class="row mt-1 p-2">
                 <div class="col-lg-6 partnerlink-description">{{ 'partner.add.title' | translate }}</div>
-                <div class="col-lg-6 text-right"><button id="addPartner" type="button" ng-click="createRef()" class="btn btn-success text-wrap">{{ 'partner.add.button' | translate }}</button></div>
+                <div class="col-lg-6 text-right">
+                  <button
+                    type="button"
+                    id="addPartner"
+                    class="btn btn-success text-wrap"
+                    (click)="createRef()"
+                  >
+                    {{ 'partner.add.button' | translate }}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="row anfp partner-saldo-wr">
+      <div class="row partner-saldo-wr">
         <div class="col-lg-12">
           <div class="hpanel">
             <div class="panel-body">
