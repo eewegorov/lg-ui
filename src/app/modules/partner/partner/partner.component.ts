@@ -15,10 +15,12 @@ import { UiService } from '../../../core/services/ui.service';
 })
 export class PartnerComponent implements OnInit, OnDestroy {
   public partnerUrl = 'https://leadgenic.ru?refid=5e3d68dd0cf202ad4b7abc45';
-  public partnerBalance;
-  public regUsers;
-  public earnedMoney;
+  public partnerBalance = 0;
+  public regUsers = 0;
+  public earnedMoney = 0;
   public item = { date: 0, sum: '' };
+  public walletId: string;
+  public transactions = [];
 
   constructor(
     private translate: TranslateService,
@@ -35,7 +37,8 @@ export class PartnerComponent implements OnInit, OnDestroy {
     // TODO: Need refactor jquery
     const code = $(event.currentTarget).closest('.ads-container').find('.code').html();
     const modalRef = this.modalService.open(PartnerShowComponent, {
-      windowClass: 'animate__animated animate__slideInDown animate__faster'
+      windowClass: 'animate__animated animate__slideInDown animate__faster',
+      size: 'lg'
     });
     modalRef.componentInstance.refCode = code.trim();
   }
@@ -57,7 +60,8 @@ export class PartnerComponent implements OnInit, OnDestroy {
 
   public createRef(): void {
     const modalRef = this.modalService.open(ReferralAddComponent, {
-      windowClass: 'animate__animated animate__slideInDown animate__faster'
+      windowClass: 'animate__animated animate__slideInDown animate__faster',
+      size: 'lg'
     });
 
     modalRef.result.then((result) => {
@@ -67,6 +71,10 @@ export class PartnerComponent implements OnInit, OnDestroy {
         }
       }, 100);
     });
+  }
+
+  public setWallet() {
+
   }
 
   ngOnDestroy(): void {

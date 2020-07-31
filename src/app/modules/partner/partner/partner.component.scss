@@ -91,3 +91,68 @@
   font-size: 14px;
   margin-top: -12px;
 }
+
+.partner-payment {
+  color: #419641;
+  font-weight: 800;
+  font-size: 55px;
+}
+
+.fa-ruble-sign {
+  padding-left: 15px;
+}
+
+.wallet-container_row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+#walletSave {
+  width: 130px;
+  margin-left: 20px;
+}
+
+.partner-stats-wr .show-more-spinner {
+  background-image: url("~src/assets/images/core/preloader.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 20px;
+}
+
+.partner-stats-block {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.partner-stats-block div {
+  min-width: 50%;
+  flex-basis: 50%;
+}
+
+.partner-stats-block div:first-child {
+  margin-right: 15px;
+}
+
+.partner-stats-block span {
+  display: block;
+  font-size: 40px;
+}
+
+.partner-stats-block span .fa-rub {
+  font-size: 25px;
+}
+
+.partner-stats-block p {
+  font-size: 12px;
+  line-height: 14px;
+  margin: 0;
+}
+
+.partner-transaction-wr {
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

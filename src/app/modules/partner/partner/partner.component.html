@@ -99,14 +99,24 @@
           <div class="hpanel">
             <div class="panel-body">
               <h3>{{ 'partner.saldo.title' | translate }}</h3>
-              <h1 class="text-center partner-payment"><span id="partner-saldo" class="partner-payment">{{ partnerBalance }}</span> <i class="fa fa-rub"></i></h1>
+              <h1 class="text-center partner-payment">
+                <span id="partner-saldo" class="partner-payment">{{ partnerBalance }}</span> <i class="fa fa-ruble-sign"></i>
+              </h1>
               <h5>{{ 'partner.saldo.desc' | translate }}</h5>
               <br>
               <div id="wallet-container">
-                <label class="control-label margined-bottom-10">{{ 'partner.wallet.title' | translate }}:</label>
-                <input type="text" class="form-control" id="walletid" ng-model="walletId" autocomplete="off" style="width: calc(100% - 120px);">
-                <button id="walletSave" type="button" ng-click="setWallet()" class="btn w-xs btn-success" ng-disabled="!walletId">{{ 'global.save' | translate }}</button>
-                <span class="validate">Validate info</span>
+                <label for="walletid" class="control-label font-weight-bold mb-2">{{ 'partner.wallet.title' | translate }}:</label>
+                <div class="wallet-container_row">
+                  <input type="text" class="form-control" id="walletid" [ngModel]="walletId" autocomplete="off">
+                  <button
+                    id="walletSave"
+                    class="btn btn-success"
+                    [disabled]="!walletId"
+                    (click)="setWallet()"
+                  >
+                    {{ 'global.save' | translate }}
+                  </button>
+                </div>
               </div>
 
               <hr/>
@@ -116,11 +126,11 @@
         </div>
       </div>
 
-      <div class="row anfp partner-stats-wr">
+      <div class="row partner-stats-wr">
         <div class="col-lg-12">
           <div class="hpanel">
             <div class="panel-body">
-              <h3 class="m-b-xs">{{ 'partner.statistics' | translate }}</h3>
+              <h3>{{ 'partner.statistics' | translate }}</h3>
               <div class="partner-stats-block">
                 <div>
                   <span>{{ regUsers }}</span>

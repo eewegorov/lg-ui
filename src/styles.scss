@@ -120,6 +120,11 @@ h5 {
   flex-direction: column;
 }
 
+.modal-footer > * {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .icheckbox_square-green.checked {
   background-position: -48px 0;
 }

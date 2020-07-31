@@ -1,23 +1,22 @@
 <app-color-line type="modals"></app-color-line>
-<div class="modal-header text-center">
+<div class="modal-header text-center justify-content-center">
   <h4 class="modal-title">{{ 'partner.add.modal.title' | translate }}</h4>
 </div>
 <div class="modal-body">
-  <div class="p-lr-15">
-    <div class="margined-bottom-10">{{ 'partner.add.modal.description' | translate }}</div>
-    <div id="partner-reg-container">
-      <label class="control-label" for="refMail">{{ 'partner.add.modal.field' | translate }}:</label>
-      <input type="text" id="refMail" name="partneremail" [ngModel]="refMail" class="form-control">
-    </div>
+  <div>{{ 'partner.add.modal.description' | translate }}</div>
+  <div id="partner-reg-container">
+    <label class="control-label font-weight-bold" for="refMail">{{ 'partner.add.modal.field' | translate }}:</label>
+    <input type="text" id="refMail" name="partneremail" [ngModel]="refMail" class="form-control">
   </div>
 </div>
-<div class="modal-footer">
-  <div class="p-lr-15">
+<div class="modal-footer justify-content-between">
     <a class="btn btn-default floated-left"
        (click)="closeModal()"
        href="">{{ 'global.cancel' | translate }}</a>
-    <button class="btn btn-success" href=""
-       (click)="createRef()"
-       [disabled]="!refMail">{{ 'partner.add.modal.button' | translate }}</button>
-  </div>
+    <button
+      class="btn btn-success"
+      href=""
+      (click)="createRef()"
+      [disabled]="!refMail">{{ 'partner.add.modal.button' | translate }}
+    </button>
 </div>
