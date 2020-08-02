@@ -6,7 +6,6 @@ import { environment } from '../../../environments/environment';
 import { Token } from '../models/token';
 import { AuthRequest } from '../models/account';
 import { CoreApiService } from './core-api.service';
-import { User, UserResponse } from '../models/user';
 import { ErrorHandlerService } from './error-handler.service';
 
 
@@ -73,13 +72,6 @@ export class AuthService {
 
   public getJwtToken() {
     return localStorage.getItem(this.ACCESS_TOKEN);
-  }
-
-  public getMeInfo(): Observable<User> {
-    return this.coreApiService.getMeInfo().pipe(
-      map((response: UserResponse) => response.data),
-      catchError(this.errorHandlerService.handleError)
-    );
   }
 
   private doLoginUser(username: string, token: Token) {

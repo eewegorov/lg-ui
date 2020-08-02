@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ApiResponse } from '../../../core/models/api';
-import { Phone } from '../../../core/models/user';
 import { CreateSiteData, CreateSiteRequest, CreateSiteResponse, Site, SitesResponse } from '../../../core/models/sites';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
-import { CoreApiService } from '../../../core/services/core-api.service';
 import { SitesApiService } from './sites-api.service';
 
 
@@ -18,7 +15,6 @@ export class SitesService {
 
   constructor(
     private errorHandlerService: ErrorHandlerService,
-    private coreApiService: CoreApiService,
     private sitesApiService: SitesApiService
   ) { }
 
@@ -34,10 +30,6 @@ export class SitesService {
       map((response: CreateSiteResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
-  }
-
-  public savePhoneFromSite(data: Phone): Observable<ApiResponse> {
-    return this.coreApiService.savePhone(data);
   }
 
   public generatePath(path: string, needUrl: boolean = false): string {

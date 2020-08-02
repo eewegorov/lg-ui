@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiResponse } from '../../../core/models/api';
 import { CreateSiteData } from '../../../core/models/sites';
+import { UserService } from '../../user/services/user.service';
 import { SitesService } from '../services/sites.service';
 
 
@@ -24,6 +25,7 @@ export class SiteAddComponent implements OnInit {
 
   constructor(
     private activeModal: NgbActiveModal,
+    private userService: UserService,
     private sitesService: SitesService
   ) { }
 
@@ -42,7 +44,7 @@ export class SiteAddComponent implements OnInit {
             link: this.sitesService.generatePath(response.link),
           };
           if (this.newSiteForm.controls['phone'].value) {
-            return this.sitesService.savePhoneFromSite({ phone: this.newSiteForm.controls['phone'].value });
+            return this.userService.savePhone({ phone: this.newSiteForm.controls['phone'].value });
           }
         })
     ).subscribe(

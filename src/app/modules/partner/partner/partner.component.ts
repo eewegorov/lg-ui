@@ -9,7 +9,7 @@ import { MAIN_URL } from '../../../configs/urls';
 import { User } from '../../../core/models/user';
 import { IncomeBalance, Registrations, Transaction } from '../../../core/models/partner';
 import { UiService } from '../../../core/services/ui.service';
-import { AuthService } from '../../../core/services/auth.service';
+import { UserService } from '../../user/services/user.service';
 import { PartnerService } from '../services/partner.service';
 
 
@@ -24,7 +24,6 @@ export class PartnerComponent implements OnInit, OnDestroy {
   public partnerBalance = 0;
   public regUsers = 0;
   public earnedMoney = 0;
-  public item = { date: 0, sum: '' };
   public walletId: string;
   public transactions: Transaction[] = [];
   public loadingTransaction = false;
@@ -45,14 +44,14 @@ export class PartnerComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private toastr: ToastrService,
     private uiService: UiService,
-    private authService: AuthService,
+    private userService: UserService,
     private partnerService: PartnerService
   ) { }
 
   ngOnInit(): void {
     this.uiService.toggleSidebar(true);
 
-    this.meInfoSub = this.authService.getMeInfo().subscribe((response: User) => {
+    this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
         this.partnerUrl = MAIN_URL + "?refid=" + response.id;
         this.walletId = response.wallet;
     });
