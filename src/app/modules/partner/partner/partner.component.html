@@ -145,22 +145,22 @@
 
               <div class="partner-transaction-wr" *ngIf="transactions.length">
                 <div class="partner-transaction row" *ngFor="let item of transactions; trackBy: trackById">
-                  <div class="col-lg-3">{{ item.date | date : "dd.MM.yy" }}</div>
+                  <div class="col-lg-3">{{ item.date | date:'dd.MM.yy' }}</div>
                   <div class="col-lg-5">
-                    <div ng-if="item.type === 'DEBIT'">{{ 'partner.transactions.debit' | translate }}</div>
-                    <div ng-if="item.type === 'CREDIT'">{{ 'partner.transactions.credit' | translate }}</div>
+                    <div *ngIf="item.type === 'DEBIT'">{{ 'partner.transactions.debit' | translate }}</div>
+                    <div *ngIf="item.type === 'CREDIT'">{{ 'partner.transactions.credit' | translate }}</div>
                   </div>
                   <div class="col-lg-4 text-right">
-                    <div ng-if="item.type === 'DEBIT'" style="color:#62cb31;">- <span>{{ item.sum }}</span> ₽</div>
-                    <div ng-if="item.type === 'CREDIT'" style="color:#3498db;">+ <span>{{ item.sum }}</span> ₽</div>
+                    <div *ngIf="item.type === 'DEBIT'" style="color:#62cb31;">- <span>{{ item.sum }}</span> ₽</div>
+                    <div *ngIf="item.type === 'CREDIT'" style="color:#3498db;">+ <span>{{ item.sum }}</span> ₽</div>
                   </div>
                 </div>
 
-                <div class="text-center" ng-if="!loadingTransaction && !allTransactionsLoaded"><span class="show-more" ng-click="loadMore()">{{ 'partner.transactions.showMore' | translate }}</span></div>
-                <div class="show-more-spinner" ng-if="loadingTransaction"></div>
+                <div class="text-center" *ngIf="!loadingTransaction && !allTransactionsLoaded"><span class="show-more" (click)="loadMore()">{{ 'partner.transactions.showMore' | translate }}</span></div>
+                <div class="show-more-spinner" *ngIf="loadingTransaction"></div>
               </div>
 
-              <div class="text-center" ng-show="!transactions.length || loadingTransaction">{{ 'partner.transactions.empty' | translate }}</div>
+              <div class="text-center" *ngIf="!transactions.length || loadingTransaction">{{ 'partner.transactions.empty' | translate }}</div>
             </div>
           </div>
         </div>

@@ -1,10 +1,16 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { SubscriptionLike } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PartnerShowComponent } from '../partner-show/partner-show.component';
 import { ReferralAddComponent } from '../referral-add/referral-add.component';
+import { MAIN_URL } from '../../../configs/urls';
+import { User } from '../../../core/models/user';
+import { IncomeBalance, Registrations, Transaction } from '../../../core/models/partner';
 import { UiService } from '../../../core/services/ui.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { PartnerService } from '../services/partner.service';
 
 
 @Component({
@@ -20,17 +26,50 @@ export class PartnerComponent implements OnInit, OnDestroy {
   public earnedMoney = 0;
   public item = { date: 0, sum: '' };
   public walletId: string;
-  public transactions = [];
+  public transactions: Transaction[];
+  public loadingTransaction = false;
+  public allTransactionsLoaded = false;
+  private transactionsParams = {
+    limit: 10,
+    offset: 0
+  };
+  private meInfoSub: SubscriptionLike;
+  private earnedMoneySub: SubscriptionLike;
+  private partnerBalanceSub: SubscriptionLike;
+  private registrationsSub: SubscriptionLike;
+  private transactionsSub: SubscriptionLike;
+  private walletSub: SubscriptionLike;
 
   constructor(
     private translate: TranslateService,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    private uiService: UiService
+    private uiService: UiService,
+    private authService: AuthService,
+    private partnerService: PartnerService
   ) { }
 
   ngOnInit(): void {
     this.uiService.toggleSidebar(true);
+
+    this.meInfoSub = this.authService.getMeInfo().subscribe((response: User) => {
+        this.partnerUrl = MAIN_URL + "?refid=" + response.id;
+        this.walletId = response.wallet;
+    });
+
+    this.earnedMoneySub = this.partnerService.getEarnedMoney().subscribe((response: IncomeBalance) => {
+      this.earnedMoney = response.sum;
+    });
+
+    this.partnerBalanceSub = this.partnerService.getPartnerBalance().subscribe((response: IncomeBalance) => {
+      this.partnerBalance = response.sum;
+    });
+
+    this.registrationsSub = this.partnerService.getRegistrations().subscribe((response: Registrations) => {
+      this.regUsers = response.count;
+    });
+
+    this.getTransactions(this.transactionsParams);
   }
 
   public showCode(event: Event): void {
@@ -74,15 +113,55 @@ export class PartnerComponent implements OnInit, OnDestroy {
   }
 
   public setWallet() {
+    this.walletSub = this.partnerService.setWallet(this.walletId).subscribe((response: boolean) => {
+      if (response) {
+        this.toastr.success(this.translate.instant('partner.wallet.save.desc'), this.translate.instant('partner.wallet.save.title'));
+      } else {
+        this.toastr.error(this.translate.instant('partner.wallet.error.yandex'), this.translate.instant('global.error.title'));
+      }
+    });
+  }
 
+  public loadMore() {
+    this.getTransactions(this.transactionsParams);
   }
 
   public trackById(index, item) {
     return item.id;
   }
 
+  private getTransactions(params) {
+    this.loadingTransaction = true;
+    this.transactionsSub = this.partnerService.getTransactions(params).subscribe((response: Transaction[]) => {
+      this.transactions = this.transactions.concat(response);
+      if (response.length < 10) {
+        this.allTransactionsLoaded = true;
+      }
+      this.transactionsParams.offset += response.length;
+      this.loadingTransaction = false;
+    });
+  }
+
   ngOnDestroy(): void {
     this.uiService.toggleSidebar(false);
+    if (this.meInfoSub) {
+      this.meInfoSub.unsubscribe();
+    }
+    if (this.earnedMoneySub) {
+      this.earnedMoneySub.unsubscribe();
+    }
+    if (this.partnerBalanceSub) {
+      this.partnerBalanceSub.unsubscribe();
+    }
+    if (this.registrationsSub) {
+      this.registrationsSub.unsubscribe();
+    }
+    if (this.transactionsSub) {
+      this.transactionsSub.unsubscribe();
+    }
+    if (this.walletSub) {
+      this.walletSub.unsubscribe();
+    }
   }
 
 }

@@ -162,3 +162,19 @@
   font-size: 25px;
   vertical-align: middle;
 }
+
+.partner-stats-wr .show-more-spinner {
+  background-image: url("~src/assets/images/core/preloader.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 20px;
+}
+
+.show-more {
+  cursor: pointer;
+  color: #3498db;
+}
+.show-more:hover {
+  color: #2f6b93;
+}

@@ -64,10 +64,10 @@ export class PartnerService {
     );
   }
 
-  public setWallet(walletValue: number): Observable<string> {
+  public setWallet(walletValue: string): Observable<boolean> {
     const wallet: Wallet = { value: walletValue };
     return this.coreApiService.setWallet(wallet).pipe(
-      map((response: ApiResponse) => response.message),
+      map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
     );
   }

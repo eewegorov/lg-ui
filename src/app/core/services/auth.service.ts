@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, mapTo, tap } from 'rxjs/operators';
+import { catchError, map, mapTo, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Token } from '../models/token';
 import { AuthRequest } from '../models/account';
+import { CoreApiService } from './core-api.service';
+import { User, UserResponse } from '../models/user';
+import { ErrorHandlerService } from './error-handler.service';
 
 
 @Injectable({
@@ -15,7 +18,11 @@ export class AuthService {
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
   private loggedUser: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private errorHandlerService: ErrorHandlerService,
+    private coreApiService: CoreApiService
+  ) {}
 
   public login(data: AuthRequest): Observable<boolean> {
     return this.http.post<Token>(`${ environment.oauthUrl }/token`,
@@ -66,6 +73,13 @@ export class AuthService {
 
   public getJwtToken() {
     return localStorage.getItem(this.ACCESS_TOKEN);
+  }
+
+  public getMeInfo(): Observable<User> {
+    return this.coreApiService.getMeInfo().pipe(
+      map((response: UserResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
   }
 
   private doLoginUser(username: string, token: Token) {

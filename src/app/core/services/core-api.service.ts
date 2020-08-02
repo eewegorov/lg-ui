@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ApiResponse } from '../models/api';
 import { TariffPlansResponse } from '../models/tariffPlans';
-import { Phone, Wallet } from '../models/user';
+import { Phone, UserResponse, Wallet } from '../models/user';
 
 
 @Injectable({
@@ -13,6 +13,10 @@ import { Phone, Wallet } from '../models/user';
 export class CoreApiService {
 
   constructor(private http: HttpClient) { }
+
+  public getMeInfo(): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${ environment.url }/me`);
+  }
 
   public getTariffPlans(): Observable<TariffPlansResponse> {
     return this.http.get<TariffPlansResponse>(`${ environment.url }/plans`);
