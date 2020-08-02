@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { CouponsRoutingModule } from './coupons-routing.module';
 import { CouponsListComponent } from './coupons-list/coupons-list.component';
 import { CouponAddComponent } from './coupon-add/coupon-add.component';
@@ -18,6 +19,7 @@ import { CouponsComponent } from './coupons/coupons.component';
   ],
   imports: [
     CommonModule,
+    TranslateModule,
     CouponsRoutingModule
   ]
 })

@@ -18,6 +18,23 @@
 	"containerized": {
 		"title": ""
 	},
+	"coupons": {
+		"addCoupon": "",
+		"empty": {
+			"help": "",
+			"subtitle": "",
+			"title": ""
+		},
+		"grid": {
+			"coupon": {
+				"code": "",
+				"control": "",
+				"name": "",
+				"type": ""
+			}
+		},
+		"title": ""
+	},
 	"filters": {
 		"compare": {
 			"contain": "",

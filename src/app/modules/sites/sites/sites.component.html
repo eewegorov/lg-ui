@@ -1,11 +1,13 @@
-<div class="toolbar-content justify-content-between sites-list-page">
-  <h1 class="title-main">{{ 'client.site.title' | translate }}</h1>
-  <button
-    type="button"
-    class="btn btn-lg btn-success"
-    (click)="openModalForCreatingNewSite()"
-  ><i class="fa fa-plus-circle"></i> {{ 'sitelist.addSite' | translate }}
-  </button>
+<div class="flex-column toolbar-content sites-list-page">
+  <div class="row col-lg-12 justify-content-between">
+    <h1 class="title-main">{{ 'client.site.title' | translate }}</h1>
+    <button
+      type="button"
+      class="btn btn-lg btn-success"
+      (click)="openModalForCreatingNewSite()"
+    ><i class="fa fa-plus-circle"></i> {{ 'sitelist.addSite' | translate }}
+    </button>
+  </div>
 
   <div *ngIf="!isSitesListLoaded" class="widget-page-preloader-all-inner"></div>
 

@@ -11,7 +11,7 @@ import { Site } from '../../../core/models/sites';
   styleUrls: ['./sites.component.scss']
 })
 export class SitesComponent implements OnInit, OnDestroy {
-  public sites: Site[];
+  public sites: Site[] = [];
   public isSitesListLoaded = false;
   private hidePhoneFieldInModal = false;
   private sitesSub: SubscriptionLike;

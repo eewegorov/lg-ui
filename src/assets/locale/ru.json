@@ -18,6 +18,23 @@
 	"containerized": {
 		"title": "Статичные виджеты"
 	},
+	"coupons": {
+		"addCoupon": "Добавить купон",
+		"empty": {
+			"help": "Если вы еще не знаете, как работать с купонами, то <a href=\"https://leadgenic.userecho.com/knowledge-bases/2/articles/511-instruktsiya-po-rabote-s-kuponami\" target=\"_blank\">прочитайте эту инструкцию</a> перед началом работы",
+			"subtitle": "Нажмите на кнопку в правом верхнем углу, чтобы добавить первый",
+			"title": "Вы еще не добавили ни одного купона"
+		},
+		"grid": {
+			"coupon": {
+				"code": "Код для использования в автоответчике",
+				"control": "Управление",
+				"name": "Название купона",
+				"type": "Тип купона"
+			}
+		},
+		"title": "Купоны"
+	},
 	"filters": {
 		"compare": {
 			"contain": "Содержит",
