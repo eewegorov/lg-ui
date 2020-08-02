@@ -12,7 +12,7 @@
                 <div class="code">
                   <a href="{{ partnerUrl }}" target="_blank"><img style="width: 200px; height: 200px; cursor: pointer;" src="/assets/images/partner/200.jpg"></a>
                 </div>
-                <button type="button" class="show-code btn btn-info" (click)="showCode($event)">{{ 'partner.showcode' | translate }}</button>
+                <button type="button" class="show-code btn btn-info partner-btn" (click)="showCode($event)">{{ 'partner.showcode' | translate }}</button>
               </div>
 
               <div class="ads-container text-center" style="width: 240px; float: left; margin-left: 70px;">
@@ -20,7 +20,7 @@
                 <div class="code">
                   <a href="{{ partnerUrl }}" target="_blank"><img style="width: 240px; height: 400px; cursor: pointer;" src="/assets/images/partner/240.jpg"></a>
                 </div>
-                <button type="button" class="show-code btn btn-info" (click)="showCode($event)">{{ 'partner.showcode' | translate }}</button>
+                <button type="button" class="show-code btn btn-info partner-btn" (click)="showCode($event)">{{ 'partner.showcode' | translate }}</button>
               </div>
 
               <div class="ads-container text-center" style="width: 468px; float: left; margin-left: 70px;">
@@ -28,7 +28,7 @@
                 <div class="code">
                   <a href="{{ partnerUrl }}" target="_blank"><img style="width: 468px; height: 60px; cursor: pointer;" src="/assets/images/partner/468.jpg"></a>
                 </div>
-                <button type="button" class="show-code btn btn-info" (click)="showCode($event)">{{ 'partner.showcode' | translate }}</button>
+                <button type="button" class="show-code btn btn-info partner-btn" (click)="showCode($event)">{{ 'partner.showcode' | translate }}</button>
               </div>
 
               <div class="ads-container text-center" style="width: 500px; float: left; margin-left: 70px;">
@@ -36,7 +36,7 @@
                 <div class="code">
                   <a href="{{ partnerUrl }}" target="_blank"><img style="width: 500px; height: 200px; cursor: pointer;" src="/assets/images/partner/500.jpg"></a>
                 </div>
-                <button type="button" class="show-code btn btn-info" (click)="showCode($event)">{{ 'partner.showcode' | translate }}</button>
+                <button type="button" class="show-code btn btn-info partner-btn" (click)="showCode($event)">{{ 'partner.showcode' | translate }}</button>
               </div>
 
               <div class="ads-container text-center" style="width: 728px; float: left; margin-left: 70px;">
@@ -44,7 +44,7 @@
                 <div class="code">
                   <a href="{{ partnerUrl }}" target="_blank"><img style="width: 728px; height: 90px; cursor: pointer;" src="/assets/images/partner/728.jpg"></a>
                 </div>
-                <button type="button" class="show-code btn btn-info" (click)="showCode($event)">{{ 'partner.showcode' | translate }}</button>
+                <button type="button" class="show-code btn btn-info partner-btn" (click)="showCode($event)">{{ 'partner.showcode' | translate }}</button>
               </div>
             </div>
           </div>
@@ -82,7 +82,7 @@
                   <button
                     type="button"
                     id="addPartner"
-                    class="btn btn-success text-wrap"
+                    class="btn btn-success text-wrap partner-btn"
                     (click)="createRef()"
                   >
                     {{ 'partner.add.button' | translate }}
@@ -110,7 +110,7 @@
                   <input type="text" class="form-control" id="walletid" [ngModel]="walletId" autocomplete="off">
                   <button
                     id="walletSave"
-                    class="btn btn-success"
+                    class="btn btn-success partner-btn"
                     [disabled]="!walletId"
                     (click)="setWallet()"
                   >

@@ -32,6 +32,8 @@
 		"currency": {
 			"ruble": ""
 		},
+		"done": "",
+		"error": "",
 		"save": ""
 	},
 	"header": {
@@ -66,10 +68,7 @@
 	"partner": {
 		"add": {
 			"button": "",
-			"done": {
-				"desc": "",
-				"title": ""
-			},
+			"done": "",
 			"modal": {
 				"button": "",
 				"description": "",
@@ -100,6 +99,10 @@
 		},
 		"wallet": {
 			"description": "",
+			"error": {
+				"yandex": ""
+			},
+			"save": "",
 			"title": ""
 		},
 		"yourlink": {
@@ -193,6 +196,19 @@
 			"title": ""
 		},
 		"vkEnable": ""
+	},
+	"userInfo": {
+		"email": "",
+		"general": "",
+		"isNeedStatsNotificationss": "",
+		"notifications": "",
+		"passwordChange": "",
+		"passwordChanged": "",
+		"passwordNew": "",
+		"passwordOld": "",
+		"phone": "",
+		"saveGeneral": "",
+		"settingsChanged": ""
 	},
 	"widgetsList": {
 		"add": {

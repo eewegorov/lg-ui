@@ -26,7 +26,7 @@ export class PartnerComponent implements OnInit, OnDestroy {
   public earnedMoney = 0;
   public item = { date: 0, sum: '' };
   public walletId: string;
-  public transactions: Transaction[];
+  public transactions: Transaction[] = [];
   public loadingTransaction = false;
   public allTransactionsLoaded = false;
   private transactionsParams = {
@@ -106,7 +106,7 @@ export class PartnerComponent implements OnInit, OnDestroy {
     modalRef.result.then((result) => {
       setTimeout(() => {
         if (result && result.success) {
-          this.toastr.success(this.translate.instant('partner.add.done.desc'), this.translate.instant('partner.add.done.title'));
+          this.toastr.success(this.translate.instant('partner.add.done'), this.translate.instant('global.done'));
         }
       }, 100);
     });
@@ -115,9 +115,9 @@ export class PartnerComponent implements OnInit, OnDestroy {
   public setWallet() {
     this.walletSub = this.partnerService.setWallet(this.walletId).subscribe((response: boolean) => {
       if (response) {
-        this.toastr.success(this.translate.instant('partner.wallet.save.desc'), this.translate.instant('partner.wallet.save.title'));
+        this.toastr.success(this.translate.instant('partner.wallet.save'), this.translate.instant('global.done'));
       } else {
-        this.toastr.error(this.translate.instant('partner.wallet.error.yandex'), this.translate.instant('global.error.title'));
+        this.toastr.error(this.translate.instant('partner.wallet.error.yandex'), this.translate.instant('global.error'));
       }
     });
   }
