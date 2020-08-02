@@ -1,11 +1,11 @@
 {
-  "/oauth": {
-    "target": "http://130.193.39.124",
+  "/oauth/*": {
+    "target": "http://localhost",
     "secure": false,
     "changeOrigin": true
   },
-  "/api": {
-    "target": "http://130.193.39.124",
+  "/api/*": {
+    "target": "http://localhost",
     "secure": false,
     "changeOrigin": true
   }

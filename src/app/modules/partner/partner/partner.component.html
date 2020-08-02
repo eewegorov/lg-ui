@@ -137,14 +137,14 @@
                   <p [innerHTML]="'partner.allUsers' | translate"></p>
                 </div>
                 <div>
-                  <span>{{ earnedMoney }} <i class="fa fa-rub"></i></span>
+                  <span>{{ earnedMoney }} <i class="fa fa-ruble-sign"></i></span>
                   <p [innerHTML]="'partner.earnedMoney' | translate"></p>
                 </div>
               </div>
-              <h3 class="margined-bottom-15">{{ 'partner.transactions.title' | translate }}:</h3>
+              <h4 class="mt-3">{{ 'partner.transactions.title' | translate }}:</h4>
 
-              <div class="partner-transaction-wr" ng-show="transactions.length">
-                <div class="partner-transaction row" ng-repeat="item in transactions track by $index">
+              <div class="partner-transaction-wr" *ngIf="transactions.length">
+                <div class="partner-transaction row" *ngFor="let item of transactions; trackBy: trackById">
                   <div class="col-lg-3">{{ item.date | date : "dd.MM.yy" }}</div>
                   <div class="col-lg-5">
                     <div ng-if="item.type === 'DEBIT'">{{ 'partner.transactions.debit' | translate }}</div>

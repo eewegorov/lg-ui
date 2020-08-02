@@ -98,14 +98,18 @@
   font-size: 55px;
 }
 
-.fa-ruble-sign {
-  padding-left: 15px;
+#partner-saldo {
+  padding-right: 15px;
 }
 
 .wallet-container_row {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+#walletid {
+  width: calc(100% - 130px);
 }
 
 #walletSave {
@@ -139,10 +143,7 @@
 .partner-stats-block span {
   display: block;
   font-size: 40px;
-}
-
-.partner-stats-block span .fa-rub {
-  font-size: 25px;
+  vertical-align: middle;
 }
 
 .partner-stats-block p {
@@ -155,4 +156,9 @@
   max-height: 400px;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.partner-stats-block .fa {
+  font-size: 25px;
+  vertical-align: middle;
 }

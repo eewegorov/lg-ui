@@ -40,12 +40,7 @@ export class AccountService {
   }
 
   public handleRegistration(data: RegistrationRequest): Observable<RegistrationResponse> {
-    const formData: FormData = new FormData();
-    formData.append('login', data.login);
-    if (data.password) {
-      formData.append('password', data.password);
-    }
-    return this.accountApiService.postRegistration(formData);
+    return this.accountApiService.postRegistration(data);
   }
 
   public handleReset(data: ResetData): Observable<RegistrationResponse> {

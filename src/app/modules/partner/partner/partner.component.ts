@@ -77,6 +77,10 @@ export class PartnerComponent implements OnInit, OnDestroy {
 
   }
 
+  public trackById(index, item) {
+    return item.id;
+  }
+
   ngOnDestroy(): void {
     this.uiService.toggleSidebar(false);
   }
