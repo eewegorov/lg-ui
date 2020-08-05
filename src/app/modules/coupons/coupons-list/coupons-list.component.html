@@ -1,1 +1,32 @@
-<p>coupons-list works!</p>
+<div class="ab-grid__item" tooltiped>
+  <div class="ab-grid__item--name-coupon">
+    <a href="#"
+       editable-text="item.name"
+       onbeforesave="updateCoupon($data)">
+      <!--<span long-text="{{ coupon.name }}" max-total-characters="44"></span>--> <i class="fa fa-pencil"></i></a>
+  </div>
+  <div class="ab-grid__item--code-coupon">
+        <span ng-click="copyCouponCode()" ng-bind="::couponCodeToPaste"
+              data-container="body" data-toggle="tooltip" data-placement="top" title="{{ 'coupons.coupon.copied.tooltip' | translate }}"></span>
+  </div>
+
+  <div class="ab-grid__item--type-coupon">
+    <span ng-if="item.type === 'REUSABLE'">{{ 'coupons.modal.newCoupon.tab2.title' | translate }}</span>
+    <span ng-if="item.type !== 'REUSABLE'">{{ 'coupons.modal.newCoupon.tab1.title' | translate }}</span>
+  </div>
+  <div class="ab-grid__item--actions-coupon">
+    <div class="btn-group edit-btns">
+      <button ng-click="openEditableCouponModal()"
+              class="btn btn-xs btn-default"
+              data-container="body" data-toggle="tooltip" data-placement="top"
+              title="{{ 'coupons.coupon.edit.tooltip' | translate }}"><i class="fa fa-gears"></i></button>
+
+      <button class="btn btn-xs btn-default"
+              ng-click="removeCoupon()"
+              data-container="body"  data-toggle="tooltip" data-placement="top"
+              title="{{ 'coupons.coupon.delete.tooltip' | translate }}">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>
+  </div>
+</div>

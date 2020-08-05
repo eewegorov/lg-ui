@@ -1,33 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CouponAddComponent } from '../coupon-add/coupon-add.component';
+import { CouponService } from '../services/coupon.service';
+import { Coupon } from '../../../core/models/coupons';
+import { Location } from '@angular/common';
+import { SubscriptionLike } from 'rxjs';
 
 @Component({
   selector: 'app-coupons',
   templateUrl: './coupons.component.html',
   styleUrls: ['./coupons.component.scss']
 })
-export class CouponsComponent implements OnInit {
-  private coupons = [];
+export class CouponsComponent implements OnInit, OnDestroy {
+  public coupons = [{
+    id: '12121',
+    code: 'wqqwe',
+    name: 'fsdfs',
+    type: 'sdfsf'
+  }, {
+    id: '12123',
+    code: 'wqqwe',
+    name: 'fsdfs',
+    type: 'sdfsf'
+  }];
+  private enableCouponModal = false;
+  private couponsSub: SubscriptionLike;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(
+    private location: Location,
+    private modalService: NgbModal,
+    private couponService: CouponService
+  ) {
+    this.enableCouponModal = this.location.path().includes('enableCouponModal');
+  }
 
   ngOnInit(): void {
+    this.getCouponsList();
   }
 
   public getCouponsList() {
-    this.coupons = [];
-    /*CouponsService.getCouponsList().then(function (response) {
-      if (response.code === 200) {
-        $scope.isSitesListLoaded = true;
-        $scope.coupons = response.data;
+    /*this.coupons = [];
+    this.couponsSub = this.couponService.getCouponsList().subscribe((response: Coupon[]) => {
+      this.coupons = response;
 
-        if (enableCouponModal) {
-          enableCouponModal = false;
-          $timeout(function() {
-            openCouponModal();
-          }, 500);
-        }
+      if (this.enableCouponModal) {
+        this.enableCouponModal = false;
+        setTimeout(() => {
+          this.openCouponModal();
+        }, 500);
       }
     });*/
   }
@@ -40,9 +60,19 @@ export class CouponsComponent implements OnInit {
     modalRef.componentInstance.currentCoupon = coupon || null;
     modalRef.result.then((result: boolean) => {
       if (result) {
-        /*getCouponsList();*/
+        this.getCouponsList();
       }
     });
+  }
+
+  public trackById(index, item) {
+    return item.id;
+  }
+
+  ngOnDestroy(): void {
+    if (this.couponsSub) {
+      this.couponsSub.unsubscribe();
+    }
   }
 
 }

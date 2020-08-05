@@ -45,10 +45,11 @@ export class WidgetsComponent implements OnInit {
     private sitesService: SitesService,
     private abtestsService: AbtestsService,
     private widgetService: WidgetService
-  ) { }
+  ) {
+    this.enableWidgetsModal = this.location.path().includes('enableModal');
+  }
 
   ngOnInit(): void {
-    this.enableWidgetsModal = this.location.path().includes('enableModal');
   }
 
   public getTypeItem(typeId: string): { id: string; name: string; } {

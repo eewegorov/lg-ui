@@ -1,5 +1,5 @@
-<div class="flex-column">
-  <div class="row col-lg-12 justify-content-between">
+<div class="flex-column toolbar-content">
+  <div class="row col-lg-12 pr-0 justify-content-between">
     <h1 class="title-main">{{ 'coupons.title' | translate }}</h1>
     <button
       type="button"
@@ -10,14 +10,14 @@
   </div>
 
   <div class="content">
-    <div class="row">
-      <div ng-if="!coupons.length" class="col-lg-12 margined-top-30">
+    <div class="row pr-3">
+      <div *ngIf="!coupons.length" class="col-lg-12 mt-4">
         <h3 class="f-0 text-center">{{ 'coupons.empty.title' | translate }}</h3>
         <h4 class="f-2 text-center">{{ 'coupons.empty.subtitle' | translate }}</h4>
         <h6 class="f-3 text-center underline-links blue-links hover-links" [innerHTML]="'coupons.empty.help' | translate"></h6>
       </div>
 
-      <div class="col-lg-12 coupons-wrapper-scr" ng-if="coupons.length">
+      <div class="col-lg-12 coupons-wrapper-scr" *ngIf="coupons.length">
         <div class="coupons-items-block test-item">
           <div class="ab-content">
             <div class="ab-grid">
@@ -28,11 +28,12 @@
                 <div class="ab-grid__header--actions-coupon">{{ 'coupons.grid.coupon.control' | translate }}</div>
               </div>
               <div class="ab-grid__body">
-                <!--<coupon-item-directive
-                  ng-repeat="coupon in coupons track by $index"
-                  class="grid-coupon-item"
-                  ng-class-even="'bg-for-line-grid'"
-                  item="coupon"></coupon-item-directive>-->
+                <app-coupons-list
+                  *ngFor="let coupon of coupons; trackBy: trackById; let isEven = even"
+                  [class.bg-for-line-grid]="isEven"
+                  [coupon]="coupon"
+                >
+                </app-coupons-list>
               </div>
             </div>
           </div>
