@@ -16,7 +16,7 @@ export class SitesApiService {
     return this.http.get<SitesResponse>(`${ environment.url }/sites/statistics`);
   }
 
-  public postSites(data: CreateSiteRequest): Observable<CreateSiteResponse> {
+  public createSite(data: CreateSiteRequest): Observable<CreateSiteResponse> {
     return this.http.post<CreateSiteResponse>(`${ environment.url }/sites/statistics`, data);
   }
 }

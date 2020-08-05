@@ -26,7 +26,7 @@ export class SitesService {
   }
 
   public createSite(data: CreateSiteRequest): Observable<CreateSiteData> {
-    return this.sitesApiService.postSites(data).pipe(
+    return this.sitesApiService.createSite(data).pipe(
       map((response: CreateSiteResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
