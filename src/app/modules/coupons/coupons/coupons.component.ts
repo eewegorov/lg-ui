@@ -16,7 +16,7 @@ export class CouponsComponent implements OnInit, OnDestroy {
     id: '12121',
     code: 'wqqwe',
     name: 'fsdfs',
-    type: 'sdfsf'
+    type: 'REUSABLE'
   }, {
     id: '12123',
     code: 'wqqwe',

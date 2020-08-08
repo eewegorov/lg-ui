@@ -8,6 +8,7 @@ import { CouponsListComponent } from './coupons-list/coupons-list.component';
 import { CouponAddComponent } from './coupon-add/coupon-add.component';
 import { CouponMultipleComponent } from './coupon-multiple/coupon-multiple.component';
 import { CouponUniqueComponent } from './coupon-unique/coupon-unique.component';
+import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CouponUniqueComponent } from './coupon-unique/coupon-unique.component';
     CommonModule,
     FormsModule,
     TranslateModule,
-    CouponsRoutingModule
+    CouponsRoutingModule,
+    CoolInlineEditFieldModule
   ]
 })
 export class CouponsModule { }

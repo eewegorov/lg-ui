@@ -1,10 +1,12 @@
 <div class="ab-grid__item">
   <div class="ab-grid__item--name-coupon">
-    <a href="#"
-       [ngModel]="coupon.name"
-       contenteditable="true"
-       onbeforesave="updateCoupon($data)">
-      <!--<span long-text="{{ coupon.name }}" max-total-characters="44"></span>--> <i class="fa fa-pencil"></i></a>
+    <cool-inline-edit-field
+      name="name"
+      [(ngModel)]="coupon.name"
+      (editStarted)="fixOldCoupon($event)"
+      (saved)="updateCoupon($event)"
+    >
+    </cool-inline-edit-field>
   </div>
   <div class="ab-grid__item--code-coupon">
         <span ng-click="copyCouponCode()" [innerHTML]="couponCodeToPaste"
