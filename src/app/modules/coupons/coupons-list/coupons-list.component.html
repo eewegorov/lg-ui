@@ -1,5 +1,5 @@
-<div class="ab-grid__item">
-  <div class="ab-grid__item--name-coupon">
+<div class="ab-grid__item" [class.bg-for-line-grid]="isColoredRow">
+  <div class="ab-grid__item--name-coupon font-weight-bold">
     <cool-inline-edit-field
       name="name"
       [(ngModel)]="coupon.name"
@@ -9,8 +9,16 @@
     </cool-inline-edit-field>
   </div>
   <div class="ab-grid__item--code-coupon">
-        <span ng-click="copyCouponCode()" [innerHTML]="couponCodeToPaste"
-              data-container="body" data-toggle="tooltip" data-placement="top" title="{{ 'coupons.coupon.copied.tooltip' | translate }}"></span>
+    <span
+      (click)="copyCouponCode()"
+      [innerHTML]="couponCodeToPaste"
+      data-container="body"
+      data-toggle="tooltip"
+      data-placement="top"
+      title="{{ 'coupons.coupon.copied.tooltip' | translate }}"
+      #copyText
+    >
+    </span>
   </div>
 
   <div class="ab-grid__item--type-coupon">
@@ -19,16 +27,22 @@
   </div>
   <div class="ab-grid__item--actions-coupon">
     <div class="btn-group edit-btns">
-      <button ng-click="openEditableCouponModal()"
-              class="btn btn-xs btn-default"
-              data-container="body" data-toggle="tooltip" data-placement="top"
-              title="{{ 'coupons.coupon.edit.tooltip' | translate }}"><i class="fa fa-gears"></i></button>
+      <button
+        (click)="openEditableCouponModal()"
+        class="btn btn-sm btn-default"
+        data-container="body" data-toggle="tooltip" data-placement="top"
+        title="{{ 'coupons.coupon.edit.tooltip' | translate }}"
+        #editButton
+      ><i class="fa fa-cogs"></i>
+      </button>
 
-      <button class="btn btn-xs btn-default"
-              ng-click="removeCoupon()"
-              data-container="body"  data-toggle="tooltip" data-placement="top"
-              title="{{ 'coupons.coupon.delete.tooltip' | translate }}">
-        <i class="fa fa-trash"></i>
+      <button
+        (click)="removeCoupon()"
+        class="btn btn-sm btn-default"
+        data-container="body" data-toggle="tooltip" data-placement="top"
+        title="{{ 'coupons.coupon.delete.tooltip' | translate }}"
+        #deleteButton
+      ><i class="fa fa-trash"></i>
       </button>
     </div>
   </div>

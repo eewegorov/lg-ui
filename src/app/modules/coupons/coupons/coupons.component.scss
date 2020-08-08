@@ -30,42 +30,24 @@
 }
 
 .ab-grid__header--name-coupon {
-  flex-basis: 35%;
-  max-width: 35%;
+  flex-basis: 32%;
+  max-width: 32%;
 }
 
 .ab-grid__header--code-coupon  {
-  flex-basis: 30%;
-  max-width: 30%;
+  flex-basis: 29%;
+  max-width: 29%;
 }
 
 .ab-grid__header--type-coupon {
-  flex-basis: 27%;
-  max-width: 27%;
+  flex-basis: 26%;
+  max-width: 26%;
 }
 
 .ab-grid__header--actions-coupon {
-  flex-basis: 8%;
-  max-width: 8%;
-}
-
-.coupons-wrapper-scr .ng-submitted .editable-input.editable-has-buttons {
-  border-color: red;
-}
-
-.coupons-wrapper-scr .ab-grid__item .editable-input {
-  width: 200px !important;
-  height: 30px;
-}
-
-.coupons-wrapper-scr .ab-grid__item .editable-buttons .btn {
-  line-height: 16px !important;
-  padding-left: 9px;
-  padding-right: 9px;
-}
-
-.bg-for-line-grid {
-  background-color: #fcfcfc;
+  flex-basis: 13%;
+  max-width: 13%;
+  margin-right: 2px;
 }
 
 

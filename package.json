@@ -41,6 +41,7 @@
     "ngx-ui-switch": "^9.0.2",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
+    "sweetalert2": "^9.17.1",
     "tslib": "^2.0.0",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.2"

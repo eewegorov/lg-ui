@@ -29,9 +29,8 @@
               </div>
               <div class="ab-grid__body">
                 <app-coupons-list
-                  *ngFor="let coupon of coupons; trackBy: trackById; let isEven = even"
-                  class="grid-coupon-item"
-                  [class.bg-for-line-grid]="isEven"
+                  *ngFor="let coupon of coupons; trackBy: trackById; let isOdd = odd"
+                  [isColoredRow]="isOdd"
                   [coupon]="coupon"
                 >
                 </app-coupons-list>

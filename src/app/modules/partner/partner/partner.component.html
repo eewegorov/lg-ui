@@ -107,7 +107,7 @@
               <div id="wallet-container">
                 <label for="walletid" class="control-label font-weight-bold mb-2">{{ 'partner.wallet.title' | translate }}:</label>
                 <div class="wallet-container_row">
-                  <input type="text" class="form-control" id="walletid" [ngModel]="walletId" autocomplete="off">
+                  <input type="text" class="form-control" id="walletid" [(ngModel)]="walletId" autocomplete="off">
                   <button
                     id="walletSave"
                     class="btn btn-success partner-btn"

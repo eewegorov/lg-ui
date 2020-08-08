@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CouponAddComponent } from '../coupon-add/coupon-add.component';
 import { ApiResponse } from '../../../core/models/api';
 import {
   Coupon,
@@ -21,6 +23,7 @@ import { CouponApiService } from './coupon-api.service';
 export class CouponService {
 
   constructor(
+    private modalService: NgbModal,
     private errorHandlerService: ErrorHandlerService,
     private couponApiService: CouponApiService
   ) { }
@@ -58,5 +61,18 @@ export class CouponService {
       map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
     );
+  }
+
+  public openCouponModal(coupon?) {
+    const modalRef = this.modalService.open(CouponAddComponent, {
+      size: 'lg',
+      windowClass: 'animate__animated animate__slideInDown animate__faster'
+    });
+    modalRef.componentInstance.currentCoupon = coupon || null;
+    modalRef.result.then((result: boolean) => {
+      if (result) {
+        this.getCouponsList();
+      }
+    });
   }
 }

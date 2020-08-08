@@ -22,9 +22,13 @@
 		"addCoupon": "",
 		"coupon": {
 			"copied": {
+				"desc": "",
 				"tooltip": ""
 			},
 			"delete": {
+				"desc": "",
+				"text": "",
+				"title": "",
 				"tooltip": ""
 			},
 			"edit": {
@@ -321,6 +325,11 @@
 		},
 		"sitePlaceholder": "",
 		"sitePlaceholder2": "",
-		"title": ""
+		"title": "",
+		"widget": {
+			"delete": {
+				"cancel": ""
+			}
+		}
 	}
 }

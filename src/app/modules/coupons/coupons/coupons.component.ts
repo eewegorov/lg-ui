@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CouponAddComponent } from '../coupon-add/coupon-add.component';
 import { CouponService } from '../services/coupon.service';
@@ -52,17 +52,8 @@ export class CouponsComponent implements OnInit, OnDestroy {
     });*/
   }
 
-  public openCouponModal(coupon?) {
-    const modalRef = this.modalService.open(CouponAddComponent, {
-      size: 'lg',
-      windowClass: 'animate__animated animate__slideInDown animate__faster'
-    });
-    modalRef.componentInstance.currentCoupon = coupon || null;
-    modalRef.result.then((result: boolean) => {
-      if (result) {
-        this.getCouponsList();
-      }
-    });
+  public openCouponModal() {
+    this.couponService.openCouponModal();
   }
 
   public trackById(index, item) {

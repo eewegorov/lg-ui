@@ -32,7 +32,15 @@ import { AppComponent } from './app.component';
         useClass: MissingTranslationService
       },
     }),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      closeButton: true,
+      newestOnTop: false,
+      progressBar: false,
+      positionClass: 'toast-top-center',
+      preventDuplicates: false,
+      timeOut: 5000,
+      extendedTimeOut: 1000,
+    }),
     CoreModule,
     SharedModule
   ],
