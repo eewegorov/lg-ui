@@ -20,6 +20,17 @@
 	},
 	"coupons": {
 		"addCoupon": "",
+		"coupon": {
+			"copied": {
+				"tooltip": ""
+			},
+			"delete": {
+				"tooltip": ""
+			},
+			"edit": {
+				"tooltip": ""
+			}
+		},
 		"empty": {
 			"help": "",
 			"subtitle": "",
@@ -31,6 +42,16 @@
 				"control": "",
 				"name": "",
 				"type": ""
+			}
+		},
+		"modal": {
+			"newCoupon": {
+				"tab1": {
+					"title": ""
+				},
+				"tab2": {
+					"title": ""
+				}
 			}
 		},
 		"title": ""

@@ -1,0 +1,58 @@
+.ab-grid__item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ab-grid__item--name-coupon,
+.ab-grid__item--code-coupon,
+.ab-grid__item--type-coupon,
+.ab-grid__item--actions-coupon {
+  padding: 7px 10px;
+  height: 44px;
+  font-size: 14px;
+  line-height: 28px;
+}
+
+.ab-grid__item--name-coupon {
+  padding-left: 10px;
+  position: relative;
+}
+
+.ab-grid__item--name-coupon {
+  flex-basis: 35%;
+  max-width: 35%;
+}
+
+.ab-grid__item--code-coupon {
+  flex-basis: 30%;
+  max-width: 30%;
+}
+
+.ab-grid__item--type-coupon {
+  flex-basis: 27%;
+  max-width: 27%;
+}
+
+.ab-grid__item--actions-coupon {
+  flex-basis: 8%;
+  max-width: 8%;
+}
+
+.ab-grid__item--actions-coupon .btn {
+  line-height: 23px;
+  padding-left: 12px;
+  padding-right: 10px;
+}
+
+.ab-grid__item--actions-coupon {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ab-grid__item--code-coupon {
+  cursor: pointer;
+}
+
+.ab-grid__item--code-coupon:hover {
+  color: #333;
+}

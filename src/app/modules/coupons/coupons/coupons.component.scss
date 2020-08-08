@@ -12,87 +12,56 @@
 }
 
 .ab-grid__header {
+  display: flex;
+  justify-content: space-between;
   text-transform: uppercase;
   background-color: #f7f7f7;
 }
 
-.ab-grid__header,
-.ab-grid__item {
-  display: flex;
-  justify-content: space-between;
+.ab-grid__header--name-coupon,
+.ab-grid__header--code-coupon,
+.ab-grid__header--type-coupon,
+.ab-grid__header--actions-coupon {
+  padding: 7px 10px;
 }
 
-.coupons-wrapper-scr .ab-grid__header--name-coupon,
-.coupons-wrapper-scr .ab-grid__header--code-coupon,
-.coupons-wrapper-scr .ab-grid__header--type-coupon,
-.coupons-wrapper-scr .ab-grid__header--actions-coupon {
-  padding: 7px 10px;
-}
-.coupons-wrapper-scr .ab-grid__item--name-coupon,
-.coupons-wrapper-scr .ab-grid__item--code-coupon,
-.coupons-wrapper-scr .ab-grid__item--type-coupon,
-.coupons-wrapper-scr .ab-grid__item--actions-coupon {
-  padding: 7px 10px;
-  height: 44px;
-  font-size: 14px;
-  line-height: 28px;
-}
-.coupons-wrapper-scr .ab-grid__item--name-coupon {
-  padding-left: 10px;
-  position: relative;
-}
-.coupons-wrapper-scr .ab-grid__header--actions-coupon {
+.ab-grid__header--actions-coupon {
   text-align: right;
 }
-.coupons-wrapper-scr .ab-grid__header--name-coupon,
-.coupons-wrapper-scr .ab-grid__item--name-coupon {
+
+.ab-grid__header--name-coupon {
   flex-basis: 35%;
   max-width: 35%;
 }
-.coupons-wrapper-scr .ab-grid__header--code-coupon,
-.coupons-wrapper-scr .ab-grid__item--code-coupon {
+
+.ab-grid__header--code-coupon  {
   flex-basis: 30%;
   max-width: 30%;
 }
-.coupons-wrapper-scr .ab-grid__header--type-coupon,
-.coupons-wrapper-scr .ab-grid__item--type-coupon {
+
+.ab-grid__header--type-coupon {
   flex-basis: 27%;
   max-width: 27%;
 }
-.coupons-wrapper-scr .ab-grid__header--actions-coupon,
-.coupons-wrapper-scr .ab-grid__item--actions-coupon {
+
+.ab-grid__header--actions-coupon {
   flex-basis: 8%;
   max-width: 8%;
 }
-.coupons-wrapper-scr .ab-grid__item--actions-coupon .btn {
-  line-height: 23px;
-  padding-left: 12px;
-  padding-right: 10px;
-}
-.coupons-wrapper-scr .ab-grid__item--actions-coupon {
-  display: flex;
-  justify-content: flex-end;
-}
-.coupons-wrapper-scr .ab-grid__item--code-coupon {
-  cursor: pointer;
-}
-.coupons-wrapper-scr .ab-grid__item--code-coupon:hover {
-  color: #333;
-}
+
 .coupons-wrapper-scr .ng-submitted .editable-input.editable-has-buttons {
   border-color: red;
 }
+
 .coupons-wrapper-scr .ab-grid__item .editable-input {
   width: 200px !important;
   height: 30px;
 }
+
 .coupons-wrapper-scr .ab-grid__item .editable-buttons .btn {
   line-height: 16px !important;
   padding-left: 9px;
   padding-right: 9px;
-}
-.coupons-wrapper-scr .bg-for-line-grid .ab-grid__item {
-  background-color: #fcfcfc;
 }
 
 .bg-for-line-grid {
