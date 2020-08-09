@@ -1,11 +1,4 @@
 {
-	"admin": {
-		"sitelist": {
-			"table": {
-				"onPage": ""
-			}
-		}
-	},
 	"billing": {
 		"modal": {
 			"paysum": {
@@ -63,7 +56,6 @@
 					"title": ""
 				},
 				"tab1": {
-					"save": "",
 					"title": ""
 				},
 				"tab2": {
@@ -88,9 +80,6 @@
 		}
 	},
 	"crm": {
-		"notification": {
-			"text": ""
-		},
 		"page": {
 			"filter": {
 				"period": "",
@@ -98,7 +87,8 @@
 				"title": ""
 			},
 			"notification": {
-				"btn": ""
+				"btn": "",
+				"text": ""
 			},
 			"table": {
 				"refresh": "",
@@ -320,6 +310,9 @@
 		"save": {
 			"done": "",
 			"title": ""
+		},
+		"table": {
+			"onPage": ""
 		},
 		"tariff": {
 			"length": "",

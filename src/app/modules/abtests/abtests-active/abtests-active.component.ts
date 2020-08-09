@@ -14,7 +14,7 @@ export class AbtestsActiveComponent implements OnInit {
     id: 'dfsdfds12',
     name: 'dsfsfsf',
     description: 'dsfsfdsf'
-  }
+  };
   public item = {
     name: 'dfdsfds',
     convInfo: {
@@ -22,7 +22,7 @@ export class AbtestsActiveComponent implements OnInit {
       s: 3,
       conversion: 23
     }
-  }
+  };
   public type = {
     type: 'asddad',
     title: 'dsfdsfds'
@@ -37,7 +37,7 @@ export class AbtestsActiveComponent implements OnInit {
   };
   public cat = {
     name: 'dsfsdf'
-  }
+  };
 
   constructor() { }
 

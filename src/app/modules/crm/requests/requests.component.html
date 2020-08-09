@@ -92,7 +92,7 @@
   <div class="crm-notification-container" ng-show="isNotificationEnable">
     <div class="crm-notification-block">
       <div class="crm-notification-icon"></div>
-      <div class="crm-notification-text">{{ 'crm.notification.text' | translate }}</div>
+      <div class="crm-notification-text">{{ 'crm.page.notification.text' | translate }}</div>
       <button class="btn btn-default" ng-click="cookieSet()">{{ 'crm.page.notification.btn' | translate }}</button>
     </div>
   </div>
@@ -140,7 +140,7 @@
 
           <div class="site-list-table__bottom-settings">
             <div class="site-list-table__onpage">
-              <label>{{ 'admin.sitelist.table.onPage' | translate }}</label>
+              <label>{{ 'sitelist.table.onPage' | translate }}</label>
               <select name="leads_length"
                       ng-init="searchParams.limit = limitOptions[1]"
                       ng-change="updateTable()"
