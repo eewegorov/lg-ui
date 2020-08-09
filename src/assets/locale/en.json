@@ -49,17 +49,21 @@
 			},
 			"newCoupon": {
 				"code": {
+					"desc": "",
 					"title": ""
 				},
 				"description": "",
 				"name": {
+					"desc": "",
 					"title": ""
 				},
 				"tab1": {
 					"title": ""
 				},
 				"tab2": {
+					"desc": "",
 					"list": {
+						"desc": "",
 						"title": ""
 					},
 					"needDefault": {
@@ -68,12 +72,14 @@
 					"save": "",
 					"threshold": {
 						"desc1": "",
+						"desc2": "",
 						"title": ""
 					},
 					"title": ""
 				},
 				"title": "",
 				"value": {
+					"desc": "",
 					"title": ""
 				}
 			}

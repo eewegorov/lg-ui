@@ -280,3 +280,15 @@ h5 {
 .toast-error .toast-progress {
   background-color: #e74c3c;
 }
+
+.underline-links a {
+  text-decoration: underline !important;
+}
+
+.blue-links a {
+  color: #4fa6e0;
+}
+
+.hover-links a:hover {
+  text-decoration: none !important;
+}

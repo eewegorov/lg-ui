@@ -65,7 +65,7 @@ export class CouponService {
 
   public openCouponModal(coupon?) {
     const modalRef = this.modalService.open(CouponAddComponent, {
-      size: 'lg',
+      size: 'xl',
       windowClass: 'animate__animated animate__slideInDown animate__faster'
     });
     modalRef.componentInstance.currentCoupon = coupon || null;

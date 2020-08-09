@@ -39,7 +39,7 @@ export class CouponsComponent implements OnInit, OnDestroy {
   }
 
   public getCouponsList() {
-    /*this.coupons = [];
+    this.coupons = [];
     this.couponsSub = this.couponService.getCouponsList().subscribe((response: Coupon[]) => {
       this.coupons = response;
 
@@ -49,7 +49,7 @@ export class CouponsComponent implements OnInit, OnDestroy {
           this.openCouponModal();
         }, 500);
       }
-    });*/
+    });
   }
 
   public openCouponModal() {
