@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { UiSwitchModule } from 'ngx-ui-switch';
 import { AbtestsRoutingModule } from './abtests-routing.module';
 import { AbtestsActiveComponent } from './abtests-active/abtests-active.component';
 import { AbtestsArchiveComponent } from './abtests-archive/abtests-archive.component';
@@ -12,6 +14,8 @@ import { AbtestsArchiveComponent } from './abtests-archive/abtests-archive.compo
   ],
   imports: [
     CommonModule,
+    TranslateModule,
+    UiSwitchModule,
     AbtestsRoutingModule
   ]
 })

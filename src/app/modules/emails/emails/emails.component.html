@@ -126,7 +126,7 @@
                       ><i class="fa fa-download"></i> {{ 'reports.emails.stat.download.btn' | translate }}</a></div>
                     </div>
                     <div class="list-item">
-                      <h3 class="no-margins font-extra-bold">{{overallStats.periodCount | number:'0'}}</h3>
+                      <h3 class="no-margins font-extra-bold">{{overallStats.periodCount | number:'0.0'}}</h3>
                       <small>{{ 'reports.emails.stat.period' | translate }}</small>
                       <div class="download-btn"><a class="btn btn-default hovered-btn-blue tooltiped" ng-click="downloadByPeriod()"
                                                    data-toggle="tooltip" data-placement="top" data-container="body"
@@ -134,7 +134,7 @@
                       ><i class="fa fa-download"></i> {{ 'reports.emails.stat.download.btn' | translate }}</a></div>
                     </div>
                     <div class="list-item">
-                      <h3 class="no-margins font-extra-bold">{{overallStats.periodAvg | number:'2'}}</h3>
+                      <h3 class="no-margins font-extra-bold">{{overallStats.periodAvg | number:'0.2'}}</h3>
                       <small>{{ 'reports.emails.stat.period.avg' | translate }}</small>
                     </div>
                   </div>
