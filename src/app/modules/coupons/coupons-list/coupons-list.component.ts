@@ -14,9 +14,6 @@ import { CouponService } from '../services/coupon.service';
 export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() public coupon;
   @Input() public isColoredRow = false;
-  @ViewChild('copyText', { static: true }) private copyText: ElementRef;
-  @ViewChild('editButton', { static: true }) private editButton: ElementRef;
-  @ViewChild('deleteButton', { static: true }) private deleteButton: ElementRef;
   public couponCodeToPaste: string;
   private fixedCoupon;
   private updatedEarlier = false;

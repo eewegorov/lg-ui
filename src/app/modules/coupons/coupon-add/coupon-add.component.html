@@ -1,1 +1,107 @@
-<p>coupon-add works!</p>
+<app-color-line type="modals"></app-color-line>
+<div class="modal-header text-center">
+  <h3 ng-if="!currentCoupon">{{ 'coupons.modal.newCoupon.title' | translate }}</h3>
+  <h3 ng-if="currentCoupon">{{ 'coupons.modal.editCoupon.title' | translate }}</h3>
+  <h5 ng-if="currentCoupon" ng-bind="::couponTypeLabel"></h5>
+</div>
+<div class="modal-body">
+  <div class="coupon-switcher-wr" ng-if="!currentCoupon">
+    <h5>{{ 'coupons.modal.newCoupon.description' | translate }}</h5>
+    <div class="coupon-select-mode btn-group">
+      <span class="btn btn-default" ng-click="setCouponType($event, 'SINGABLE')" ng-class="{active: isCurrentActiveCouponType('SINGABLE')}">{{ 'coupons.modal.newCoupon.tab1.title' | translate }}</span>
+      <span class="btn btn-default" ng-click="setCouponType($event, 'REUSABLE')" ng-class="{active: isCurrentActiveCouponType('REUSABLE')}">{{ 'coupons.modal.newCoupon.tab2.title' | translate }}</span>
+    </div>
+  </div>
+  <div class="coupon-tab" ng-show="isCurrentActiveCouponType('SINGABLE')">
+    <h6 ng-if="!currentCoupon" ng-bind-html="'coupons.modal.newCoupon.tab1.desc' | translate"></h6>
+    <div class="coupon-tab-item">
+      <label class="control-label">{{ 'coupons.modal.newCoupon.name.title' | translate }}</label>
+      <input type="text" ng-model="editableCoupon.name" class="form-control" name="name">
+      <span class="small m-t-md" ng-bind-html="'coupons.modal.newCoupon.name.desc' | translate"></span>
+    </div>
+
+    <div class="coupon-tab-item">
+      <label class="control-label">{{ 'coupons.modal.newCoupon.code.title' | translate }}</label>
+      <input type="text" ng-model="editableCoupon.code" class="form-control" name="name" ng-disabled="currentCoupon">
+      <span ng-if="!currentCoupon" class="small m-t-md" ng-bind-html="'coupons.modal.newCoupon.code.desc' | translate"></span>
+    </div>
+
+    <div class="coupon-tab-item">
+      <label class="control-label">{{ 'coupons.modal.newCoupon.value.title' | translate }}</label>
+      <input type="text" ng-model="editableCoupon.defaultValue" class="form-control" name="name">
+      <span class="small m-t-md" ng-bind-html="'coupons.modal.newCoupon.value.desc' | translate"></span>
+    </div>
+  </div>
+
+  <div class="coupon-tab" ng-show="isCurrentActiveCouponType('REUSABLE')">
+    <h6 ng-if="!currentCoupon" ng-bind-html="'coupons.modal.newCoupon.tab2.desc' | translate"></h6>
+    <div class="coupon-tab-item">
+      <label class="control-label">{{ 'coupons.modal.newCoupon.name.title' | translate }}</label>
+      <input type="text" ng-model="editableCoupon.name" class="form-control" name="name">
+      <span class="small m-t-md" ng-bind-html="'coupons.modal.newCoupon.name.desc' | translate"></span>
+    </div>
+
+    <div class="coupon-tab-item">
+      <label class="control-label">{{ 'coupons.modal.newCoupon.code.title' | translate }}</label>
+      <input type="text" ng-model="editableCoupon.code" class="form-control" name="name" ng-disabled="currentCoupon">
+      <span ng-if="!currentCoupon" class="small m-t-md" ng-bind-html="'coupons.modal.newCoupon.code.desc' | translate"></span>
+    </div>
+
+    <div class="coupon-tab-item">
+      <label class="control-label">{{ 'coupons.modal.newCoupon.tab2.list.title' | translate }}</label>
+      <textarea type="text" ng-model="tags" class="form-control" rows="5"></textarea>
+      <span class="small m-t-md" ng-bind-html="'coupons.modal.newCoupon.tab2.list.desc' | translate"></span>
+    </div>
+
+    <div class="coupon-tab-item">
+      <ui-switch class="switch-xs" ng-model="editableCoupon.needUseDefault"></ui-switch>
+      <label class="control-label switcher-label-xs control-label-des">{{ 'coupons.modal.newCoupon.tab2.needDefault.title' | translate }}</label>
+    </div>
+
+    <div class="coupon-tab-item" ng-if="editableCoupon.needUseDefault">
+      <label class="control-label">{{ 'coupons.modal.newCoupon.value.title' | translate }}</label>
+      <input type="text" ng-model="editableCoupon.defaultValue" class="form-control" name="name">
+      <span class="small m-t-md" ng-bind-html="'coupons.modal.newCoupon.value.desc' | translate"></span>
+    </div>
+
+    <div class="coupon-tab-item">
+      <label class="control-label">
+        {{ 'coupons.modal.newCoupon.tab2.threshold.title' | translate }}
+        <a data-container="body" data-toggle="tooltip" data-placement="top" data-title="{{ 'coupons.modal.newCoupon.tab2.threshold.desc1' | translate }}" class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+      </label>
+      <input type="number" ng-model="editableCoupon.notificationThreshold" class="form-control" name="name">
+      <span class="small m-t-md" ng-bind-html="'coupons.modal.newCoupon.tab2.threshold.desc2' | translate"></span>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="text-right m-t-xs">
+    <a class="btn btn-default floated-left"
+       ng-click="closeCreateCouponModal(false)"
+       href="">{{ 'global.cancel' | translate }}</a>
+
+    <a class="btn btn-success"
+       href=""
+       ng-if="!currentCoupon && (currentActiveCouponType === 'SINGABLE')"
+       ng-click="createCoupon()"
+       ng-disabled="!editableCoupon.code || !editableCoupon.name || !editableCoupon.defaultValue">{{ 'coupons.modal.newCoupon.tab1.save' | translate }}</a>
+
+    <a class="btn btn-success"
+       href=""
+       ng-if="!currentCoupon && (currentActiveCouponType === 'REUSABLE')"
+       ng-click="createCoupon()"
+       ng-disabled="!editableCoupon.code || !editableCoupon.name || (editableCoupon.notificationThreshold === null) || (editableCoupon.needUseDefault && !editableCoupon.defaultValue) || !tags.length">{{ 'coupons.modal.newCoupon.tab1.save' | translate }}</a>
+
+    <a class="btn btn-success"
+       href=""
+       ng-if="currentCoupon && (currentActiveCouponType === 'SINGABLE')"
+       ng-click="createCoupon()"
+       ng-disabled="!editableCoupon.code || !editableCoupon.name || !editableCoupon.defaultValue">{{ 'coupons.modal.newCoupon.tab2.save' | translate }}</a>
+
+    <a class="btn btn-success"
+       href=""
+       ng-if="currentCoupon && (currentActiveCouponType === 'REUSABLE')"
+       ng-click="createCoupon()"
+       ng-disabled="!editableCoupon.code || !editableCoupon.name || (editableCoupon.notificationThreshold === null) || (editableCoupon.needUseDefault && !editableCoupon.defaultValue) || !tags.length">{{ 'coupons.modal.newCoupon.tab2.save' | translate }}</a>
+  </div>
+</div>
