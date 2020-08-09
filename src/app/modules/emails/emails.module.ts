@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { EmailsRoutingModule } from './emails-routing.module';
 import { EmailsBestComponent } from './emails-best/emails-best.component';
 import { EmailsLastComponent } from './emails-last/emails-last.component';
@@ -18,6 +19,7 @@ import { EmailsComponent } from './emails/emails.component';
   ],
   imports: [
     CommonModule,
+    TranslateModule,
     EmailsRoutingModule
   ]
 })
