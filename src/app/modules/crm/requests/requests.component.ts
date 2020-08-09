@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./requests.component.scss']
 })
 export class RequestsComponent implements OnInit {
+  public item = {
+    widgetName: 'fsdf',
+    date: '1231231',
+    state: 'sdfsf',
+    status: 'asdasda'
+  };
+  public periodStart;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public showYesterdayDate() {
+
   }
 
 }

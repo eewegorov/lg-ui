@@ -1,1 +1,166 @@
-<p>requests works!</p>
+<div ng-controller="CRMPageController" ng-cloak class="crm-page-controller-main-bl">
+  <h1 class="widget-title-main">{{ 'crm.page.title' | translate }}</h1>
+
+  <div>
+    <div class="hpanel">
+      <div class="panel-heading">
+        <span class="panelTitle">{{ 'сrm.page.filter.title' | translate }}</span>
+      </div>
+
+      <div class="panel-body">
+        <div class="filters-flexed">
+
+          <div class="filter-flexed__item">
+            <h5 class="font-normal">{{ 'сrm.page.filter.sites' | translate }}:</h5>
+            <!--<select id="siteSelector" ng-model="sitesIds" ui-select2="{ multiple: true}" data-placeholder="{{ 'сrm.page.filter.sites.placeholder' | translate }}" multiple="true">
+              <option value="0000000000000000">{{ 'сrm.page.filter.sites.all' | translate }}</option>
+              <option ng-repeat="item in allSites" value="{{item.id}}">{{item.name}}</option>
+            </select>-->
+          </div>
+
+          <div class="filter-flexed__item">
+            <h5 class="font-normal">{{ 'сrm.page.filter.period' | translate }}:</h5>
+            <div class="btn-group btn-group__period-selector">
+              <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'TODAY'">{{ 'reports.emails.period.today' | translate }}</label>
+              <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'YESTERDAY'">{{ 'reports.emails.period.yerstaday' | translate }}</label>
+              <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'WEEK'">{{ 'reports.emails.period.week' | translate }}</label>
+              <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'DECADE'">{{ 'reports.emails.period.decade' | translate }}</label>
+              <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'MONTH'">{{ 'reports.emails.period.month' | translate }}</label>
+              <button id="periods-custom"
+                      uib-popover-template="popoverTemplate"
+                      append-to-body="true"
+                      popover-placement="left"
+                      popover-trigger="'outsideClick'"
+                      popover-is-open="periodPopoverIsOpen"
+                      type="button"
+                      class="btn btn-default"
+                      ng-class="(periodType === 'USER') ? 'active' : ''"
+                      ng-click="initDateSelector()">{{ 'reports.emails.period.user' | translate }}</button>
+              <script type="text/ng-template" id="periodSelector.html">
+                <div id="custom-period-container-template">
+                  <div class="custom-period-container">
+                    <div class="row">
+                      <div class="col-lg-6 text-left">
+                        <label class="control-label">{{ 'vkprofiles.period.dateStart' | translate }}:</label>
+                        <div class='input-group date' id='req-period-start'>
+                          <input type='text' class="form-control" />
+                          <span class="input-group-addon">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 text-left">
+                        <label class="control-label">{{ 'vkprofiles.period.dateEnd' | translate }}:</label>
+                        <div class='input-group date' id='req-period-end'>
+                          <input type='text' class="form-control" />
+                          <span class="input-group-addon">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row popover-btns-container">
+                      <div class="col-lg-11 col-lg-offset-1 text-right">
+                        <button id="periodApply" ng-click="periodApply()" type="button" class="btn w-xs btn-success">{{ 'vkprofiles.period.start' | translate }}</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </script>
+
+            </div>
+            <h1 class="request-period-name">
+              <span>{{ 'reports.emails.filter.from' | translate }}</span>
+              <span> {{periodStart | date : 'd.MM.yyyy' }}</span>
+              <span> {{ 'reports.emails.filter.to' | translate }}</span>
+              <span> {{showYesterdayDate() | date : 'd.MM.yyyy'}}</span>
+            </h1>
+          </div>
+
+          <div class="filter-flexed__item">
+            <h5 class="font-normal">{{ 'сrm.page.filter.states' | translate }}:</h5>
+            <!--<select id="statesSelector" ng-model="statesIds" ui-select2="{ multiple: true}" data-placeholder="{{ 'сrm.page.filter.states.placeholder' | translate }}" multiple="true">
+              <option value="0000000000000000">{{ 'сrm.page.filter.states.all' | translate }}</option>
+              <option ng-repeat="item in states" value="{{item.type}}">{{item.label}}</option>
+            </select>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="crm-notification-container" ng-show="isNotificationEnable">
+    <div class="crm-notification-block">
+      <div class="crm-notification-icon"></div>
+      <div class="crm-notification-text">{{ 'crm.page.notification.text' | translate }}</div>
+      <button class="btn btn-default" ng-click="cookieSet()">{{ 'crm.page.notification.btn' | translate }}</button>
+    </div>
+  </div>
+
+  <div class="crm-table-wr">
+    <div class="hpanel">
+      <div class="panel-heading">
+        <span class="panelTitle">{{ 'сrm.page.table.title' | translate }}</span>
+      </div>
+
+      <div class="panel-body table-container-test">
+        <div ng-show="!initTables" class="crm-table__loader"></div>
+        <div ng-show="initTables" class="crm-table-pos">
+          <button class="btn w-xs btn-info update-crm-table" ng-click="updateTable()" type="button"><i class="fa fa-refresh"></i> {{ 'сrm.page.table.refresh' | translate }}</button>
+          <table class="row-border table table-striped table-bordered hover">
+            <thead>
+            <tr>
+              <th>{{ 'сrm.page.table.th1' | translate }}</th>
+              <th>{{ 'сrm.page.table.th2' | translate }}</th>
+              <th class="dtable-max-220">{{ 'сrm.page.table.th3' | translate }}</th>
+              <th>{{ 'сrm.page.table.th4' | translate }}</th>
+              <th class="dtable-max-160 sorting" ng-class="sortingDesc ? 'sorting_desc' : 'sorting_asc'" ng-click="changeDateSorting()">{{ 'сrm.page.table.th5' | translate }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in leads"
+                ng-click="openLeadInfo(item, $index)"
+                class="clickable-row-info"
+                ng-class="{'active-row': currentOpenedRow === $index}"
+                tooltiped>
+              <td class="crm-table-widget-name"
+                  data-container=".table-container-test"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  data-title="{{ 'сrm.page.table.tooltip' | translate }}">{{ item.widgetName }}</td>
+              <!--<td><span long-text="{{item.siteName}}"
+                        max-total-characters="20"></span></td>-->
+              <!--<td class="crm-table-site-url dtable-max-220"><span long-text="{{item.pageUrl}}"
+                                                                  max-total-characters="38"></span></td>-->
+              <td><span class="lead-state-container label font-normal-size crm-table-state__{{item.state}}">{{ item.status }}</span></td>
+              <td class="dtable-max-160">{{ item.date | date : "dd.MM.y, hh:mm a" }}</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="site-list-table__bottom-settings">
+            <div class="site-list-table__onpage">
+              <label>{{ 'admin.sitelist.table.onPage' | translate }}</label>
+              <select name="leads_length"
+                      ng-init="searchParams.limit = limitOptions[1]"
+                      ng-change="updateTable()"
+                      ng-model="searchParams.limit"
+                      ng-options="option.value for option in limitOptions"
+                      class="form-control input-sm">
+              </select>
+            </div>
+
+            <div class="site-list-arrows btn-group">
+              <button ng-click="prevList()"
+                      ng-disabled="searchParams.offset === 0"
+                      class="btn btn-default"><i class="fa fa-chevron-left"></i></button>
+              <button ng-click="nextList()"
+                      ng-disabled="leads.length < searchParams.limit.value"
+                      class="btn btn-default"><i class="fa fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
