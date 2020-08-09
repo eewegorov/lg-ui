@@ -2,7 +2,7 @@
      ng-controller="ReportsEmailController"
      ng-cloak
      tooltiped>
-  <h1 class="widget-title-main">{{ 'reports.emails.page.title' | translate }}</h1>
+  <h1 class="widget-title-main">{{ 'sidebar.emails' | translate }}</h1>
   <div>
     <!--<div class="row" ng-init="
 						localization.reports.emails.clear.title  = '<spring:message code="reports.emails.clear.title"/>';
@@ -29,7 +29,7 @@
             <div class="panel-body">
               <div class="row">
                 <div class="reports-emails-toolbar-left">
-                  <h5 class="font-normal">{{ 'reports.emails.sitelist.label' | translate }}:</h5>
+                  <h5 class="font-normal">{{ 'sidebar.sites' | translate }}:</h5>
                   <!--<select id="siteSelector" ng-model="sitesIds" ui-select2="{ multiple: true}" data-placeholder="{{ 'reports.emails.sitelist.placeholder' | translate }}" multiple="true">
                     <option value="0000000000000000">{{ 'reports.emails.sitelist.all' | translate }}</option>
                     <option ng-repeat="item in allSites" value="{{item.id}}">{{item.name}}</option>
@@ -39,7 +39,7 @@
                   <h5 class="font-normal">{{ 'reports.emails.period.title' | translate }}:</h5>
                   <div class="btn-group">
                     <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'TODAY'">{{ 'reports.emails.period.today' | translate }}</label>
-                    <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'YESTERDAY'">{{ 'reports.emails.period.yerstaday' | translate }}</label>
+                    <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'YESTERDAY'">{{ 'reports.emails.period.yesterday' | translate }}</label>
                     <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'WEEK'">{{ 'reports.emails.period.week' | translate }}</label>
                     <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'DECADE'">{{ 'reports.emails.period.decade' | translate }}</label>
                     <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'MONTH'">{{ 'reports.emails.period.month' | translate }}</label>

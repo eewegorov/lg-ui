@@ -90,7 +90,7 @@
        href=""
        ng-if="!currentCoupon && (currentActiveCouponType === 'REUSABLE')"
        ng-click="createCoupon()"
-       ng-disabled="!editableCoupon.code || !editableCoupon.name || (editableCoupon.notificationThreshold === null) || (editableCoupon.needUseDefault && !editableCoupon.defaultValue) || !tags.length">{{ 'coupons.modal.newCoupon.tab1.save' | translate }}</a>
+       ng-disabled="!editableCoupon.code || !editableCoupon.name || (editableCoupon.notificationThreshold === null) || (editableCoupon.needUseDefault && !editableCoupon.defaultValue) || !tags.length">{{ 'coupons.addCoupon' | translate }}</a>
 
     <a class="btn btn-success"
        href=""

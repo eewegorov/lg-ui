@@ -1,4 +1,11 @@
 {
+	"admin": {
+		"sitelist": {
+			"table": {
+				"onPage": ""
+			}
+		}
+	},
 	"billing": {
 		"modal": {
 			"paysum": {
@@ -8,11 +15,6 @@
 		},
 		"notify": {
 			"noPlans": ""
-		}
-	},
-	"client": {
-		"site": {
-			"title": ""
 		}
 	},
 	"containerized": {
@@ -49,16 +51,65 @@
 			}
 		},
 		"modal": {
+			"editCoupon": {
+				"title": ""
+			},
 			"newCoupon": {
+				"code": {
+					"title": ""
+				},
+				"description": "",
+				"name": {
+					"title": ""
+				},
 				"tab1": {
+					"save": "",
 					"title": ""
 				},
 				"tab2": {
+					"list": {
+						"title": ""
+					},
+					"needDefault": {
+						"title": ""
+					},
+					"save": "",
+					"threshold": {
+						"desc1": "",
+						"title": ""
+					},
+					"title": ""
+				},
+				"title": "",
+				"value": {
 					"title": ""
 				}
 			}
+		}
+	},
+	"crm": {
+		"notification": {
+			"text": ""
 		},
-		"title": ""
+		"page": {
+			"filter": {
+				"period": "",
+				"states": "",
+				"title": ""
+			},
+			"notification": {
+				"btn": ""
+			},
+			"table": {
+				"refresh": "",
+				"th1": "",
+				"th2": "",
+				"th3": "",
+				"th4": "",
+				"th5": "",
+				"tooltip": ""
+			}
+		}
 	},
 	"filters": {
 		"compare": {
@@ -151,6 +202,43 @@
 			"description": "",
 			"title": ""
 		}
+	},
+	"reports": {
+		"emails": {
+			"best": "",
+			"config": "",
+			"filter": {
+				"from": "",
+				"to": ""
+			},
+			"last": "",
+			"period": {
+				"decade": "",
+				"month": "",
+				"title": "",
+				"today": "",
+				"user": "",
+				"week": "",
+				"yesterday": ""
+			},
+			"remove": {
+				"btn": ""
+			},
+			"sites": {
+				"sites": "",
+				"value": ""
+			},
+			"stat": {
+				"download": {
+					"btn": "",
+					"tooltip": ""
+				},
+				"overall": "",
+				"period": ""
+			},
+			"statistics": ""
+		},
+		"sitePlaceholder": ""
 	},
 	"settings": {
 		"script": {
@@ -255,6 +343,7 @@
 	"widgetsList": {
 		"add": {
 			"alt": "",
+			"chooseSite": "",
 			"chooseTemplate": {
 				"label": ""
 			},
@@ -282,7 +371,8 @@
 					"notselect": "",
 					"title": ""
 				},
-				"name": ""
+				"name": "",
+				"select": ""
 			},
 			"title": ""
 		},
@@ -325,7 +415,6 @@
 		},
 		"sitePlaceholder": "",
 		"sitePlaceholder2": "",
-		"title": "",
 		"widget": {
 			"delete": {
 				"cancel": ""
