@@ -5,6 +5,7 @@ import { CouponService } from '../services/coupon.service';
 import { Coupon } from '../../../core/models/coupons';
 import { Location } from '@angular/common';
 import { SubscriptionLike } from 'rxjs';
+import { CouponModalService } from '../services/coupon-modal.service';
 
 @Component({
   selector: 'app-coupons',
@@ -29,6 +30,7 @@ export class CouponsComponent implements OnInit, OnDestroy {
   constructor(
     private location: Location,
     private modalService: NgbModal,
+    private couponModalService: CouponModalService,
     private couponService: CouponService
   ) {
     this.enableCouponModal = this.location.path().includes('enableCouponModal');
@@ -53,7 +55,7 @@ export class CouponsComponent implements OnInit, OnDestroy {
   }
 
   public openCouponModal() {
-    this.couponService.openCouponModal();
+    this.couponModalService.openCouponModal();
   }
 
   public trackById(index, item) {

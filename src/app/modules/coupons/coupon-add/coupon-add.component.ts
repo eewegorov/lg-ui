@@ -1,33 +1,63 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { UtilsService } from '../../../core/services/utils.service';
 import { CouponService } from '../services/coupon.service';
+
 
 @Component({
   selector: 'app-coupon-add',
   templateUrl: './coupon-add.component.html',
   styleUrls: ['./coupon-add.component.scss']
 })
-export class CouponAddComponent implements OnInit {
+export class CouponAddComponent implements OnInit, AfterViewChecked {
   @Input() public currentCoupon;
   public couponTypeLabel;
   public editableCoupon;
-  public tags;
+  public tags = '';
   public currentActiveCouponType;
 
   constructor(
+    private translate: TranslateService,
     private activeModal: NgbActiveModal,
+    private utilsService: UtilsService,
     private couponService: CouponService
   ) { }
 
   ngOnInit(): void {
+    if (this.currentCoupon) {
+      this.currentActiveCouponType = this.currentCoupon.type;
+
+      this.couponTypeLabel = this.currentCoupon.type === "REUSABLE" ?
+        this.translate.instant('coupons.modal.newCoupon.tab2.title') :
+        this.translate.instant('coupons.modal.newCoupon.tab1.title');
+
+      this.editableCoupon = { ...this.currentCoupon };
+      if (this.currentActiveCouponType === 'REUSABLE') {
+        this.tags = this.mappedCoupons(this.editableCoupon.values);
+      }
+    } else {
+      this.currentActiveCouponType = 'SINGABLE';
+      this.editableCoupon = {
+        name: '',
+        code: this.utilsService.generateShortID(),
+        value: '',
+        needUseDefault: false,
+        notificationThreshold: 10
+      };
+    }
   }
 
+  ngAfterViewChecked(): void {
+    (<any>$('[data-toggle="tooltip"]')).tooltip();
+  }
+  
   public setCouponType(newTab) {
     this.currentActiveCouponType = newTab;
     this.editableCoupon.type = newTab;
   };
 
-  public isCurrentActiveCouponType(tab) {
+  public isCurrentActiveCouponType(tab: string): boolean {
     return this.currentActiveCouponType === tab;
   };
 
@@ -45,7 +75,7 @@ export class CouponAddComponent implements OnInit {
       needUseDefault: null,
       notificationThreshold: null
     };
-    if (this.currentActiveCouponType === "REUSABLE") {
+    if (this.currentActiveCouponType === 'REUSABLE') {
       couponForSave.values = this.unmappedCoupons(this.tags);
       couponForSave.needUseDefault = this.editableCoupon.needUseDefault;
       couponForSave.notificationThreshold = this.editableCoupon.notificationThreshold;
@@ -69,7 +99,11 @@ export class CouponAddComponent implements OnInit {
   };
 
   private unmappedCoupons(list: string): string[] {
-    return list.split("\n");
+    return list.split('\n');
+  }
+
+  private mappedCoupons(list: string[]): string {
+    return list.join('\n');
   }
 
 }

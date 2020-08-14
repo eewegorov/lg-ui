@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2'
 import { CouponById } from '../../../core/models/coupons';
 import { CouponService } from '../services/coupon.service';
+import { CouponModalService } from '../services/coupon-modal.service';
 
 @Component({
   selector: 'app-coupons-list',
@@ -22,6 +23,7 @@ export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
     private translate: TranslateService,
     private modalService: NgbModal,
     private toastr: ToastrService,
+    private couponModalService: CouponModalService,
     private couponService: CouponService
   ) { }
 
@@ -87,7 +89,7 @@ export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
   public openEditableCouponModal() {
     this.couponService.getCouponById(this.coupon.id).subscribe((response: CouponById) => {
       if (response) {
-        this.couponService.openCouponModal(response);
+        this.couponModalService.openCouponModal(response);
       }
     });
   }

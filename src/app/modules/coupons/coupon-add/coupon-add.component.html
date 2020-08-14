@@ -1,35 +1,35 @@
 <app-color-line type="modals"></app-color-line>
-<div class="modal-header text-center">
-  <h3 *ngIf="!currentCoupon">{{ 'coupons.modal.newCoupon.title' | translate }}</h3>
-  <h3 *ngIf="currentCoupon">{{ 'coupons.modal.editCoupon.title' | translate }}</h3>
+<div class="modal-header d-flex flex-column align-items-center">
+  <h3 *ngIf="!currentCoupon" class="modal-title">{{ 'coupons.modal.newCoupon.title' | translate }}</h3>
+  <h3 *ngIf="currentCoupon" class="modal-title">{{ 'coupons.modal.editCoupon.title' | translate }}</h3>
   <h5 *ngIf="currentCoupon" [innerHTML]="couponTypeLabel"></h5>
 </div>
 <div class="modal-body">
   <div class="coupon-switcher-wr" *ngIf="!currentCoupon">
     <h5>{{ 'coupons.modal.newCoupon.description' | translate }}</h5>
-    <div class="coupon-select-mode btn-group">
+    <div class="btn-group">
       <span class="btn btn-default" (click)="setCouponType('SINGABLE')" [ngClass]="{active: isCurrentActiveCouponType('SINGABLE')}">{{ 'coupons.modal.newCoupon.tab1.title' | translate }}</span>
       <span class="btn btn-default" (click)="setCouponType('REUSABLE')" [ngClass]="{active: isCurrentActiveCouponType('REUSABLE')}">{{ 'coupons.modal.newCoupon.tab2.title' | translate }}</span>
     </div>
   </div>
   <div class="coupon-tab" *ngIf="isCurrentActiveCouponType('SINGABLE')">
-    <h6 *ngIf="!currentCoupon" ng-bind-html="'coupons.modal.newCoupon.tab1.desc' | translate"></h6>
+    <h6 *ngIf="!currentCoupon" [innerHTML]="'coupons.modal.newCoupon.tab1.desc' | translate"></h6>
     <div class="coupon-tab-item">
       <label for="name" class="control-label">{{ 'coupons.modal.newCoupon.name.title' | translate }}</label>
       <input type="text" id="name" class="form-control" name="name" [ngModel]="editableCoupon.name">
-      <span class="small m-t-md" ng-bind-html="'coupons.modal.newCoupon.name.desc' | translate"></span>
+      <span class="small" [innerHTML]="'coupons.modal.newCoupon.name.desc' | translate"></span>
     </div>
 
     <div class="coupon-tab-item">
       <label for="code" class="control-label">{{ 'coupons.modal.newCoupon.code.title' | translate }}</label>
       <input type="text" id="code" class="form-control" name="name" [ngModel]="editableCoupon.code" [disabled]="currentCoupon">
-      <span *ngIf="!currentCoupon" class="small m-t-md" [innerHTML]="'coupons.modal.newCoupon.code.desc' | translate"></span>
+      <span *ngIf="!currentCoupon" class="small" [innerHTML]="'coupons.modal.newCoupon.code.desc' | translate"></span>
     </div>
 
     <div class="coupon-tab-item">
       <label for="defaultValue" class="control-label">{{ 'coupons.modal.newCoupon.value.title' | translate }}</label>
       <input type="text" id="defaultValue" class="form-control" name="name" [ngModel]="editableCoupon.defaultValue">
-      <span class="small m-t-md" [innerHTML]="'coupons.modal.newCoupon.value.desc' | translate"></span>
+      <span class="small" [innerHTML]="'coupons.modal.newCoupon.value.desc' | translate"></span>
     </div>
   </div>
 
@@ -38,7 +38,7 @@
     <div class="coupon-tab-item">
       <label for="name2" class="control-label">{{ 'coupons.modal.newCoupon.name.title' | translate }}</label>
       <input type="text" id="name2" class="form-control" name="name" [ngModel]="editableCoupon.name">
-      <span class="small m-t-md" [innerHTML]="'coupons.modal.newCoupon.name.desc' | translate"></span>
+      <span class="small" [innerHTML]="'coupons.modal.newCoupon.name.desc' | translate"></span>
     </div>
 
     <div class="coupon-tab-item">
@@ -50,54 +50,62 @@
     <div class="coupon-tab-item">
       <label for="tags" class="control-label">{{ 'coupons.modal.newCoupon.tab2.list.title' | translate }}</label>
       <textarea type="text" id="tags" class="form-control" rows="5" [ngModel]="tags"></textarea>
-      <span class="small m-t-md" [innerHTML]="'coupons.modal.newCoupon.tab2.list.desc' | translate"></span>
+      <span class="small" [innerHTML]="'coupons.modal.newCoupon.tab2.list.desc' | translate"></span>
     </div>
 
-    <div class="coupon-tab-item">
-      <ui-switch class="switch-xs" [checked]="editableCoupon.needUseDefault"></ui-switch>
+    <div class="coupon-tab-item d-flex align-items-center">
+      <ui-switch size="small" class="align-self-start" [checked]="editableCoupon.needUseDefault"></ui-switch>
       <label class="control-label switcher-label-xs control-label-des">{{ 'coupons.modal.newCoupon.tab2.needDefault.title' | translate }}</label>
     </div>
 
     <div class="coupon-tab-item" *ngIf="editableCoupon.needUseDefault">
       <label for="defaultValue2" class="control-label">{{ 'coupons.modal.newCoupon.value.title' | translate }}</label>
       <input type="text" id="defaultValue2" class="form-control" name="name" [ngModel]="editableCoupon.defaultValue">
-      <span class="small m-t-md" [innerHTML]="'coupons.modal.newCoupon.value.desc' | translate"></span>
+      <span class="small" [innerHTML]="'coupons.modal.newCoupon.value.desc' | translate"></span>
     </div>
 
     <div class="coupon-tab-item">
       <label for="notificationThreshold" class="control-label">
         {{ 'coupons.modal.newCoupon.tab2.threshold.title' | translate }}
-        <a data-container="body" data-toggle="tooltip" data-placement="top" data-title="{{ 'coupons.modal.newCoupon.tab2.threshold.desc1' | translate }}" class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+        <a data-container="body" data-toggle="tooltip" data-placement="top" data-title="{{ 'coupons.modal.newCoupon.tab2.threshold.desc1' | translate }}" class="info-link"><i class="fa fa-info-circle"></i></a>
       </label>
       <input type="number" id="notificationThreshold" [ngModel]="editableCoupon.notificationThreshold" class="form-control" name="name">
-      <span class="small m-t-md" [innerHTML]="'coupons.modal.newCoupon.tab2.threshold.desc2' | translate"></span>
+      <span class="small" [innerHTML]="'coupons.modal.newCoupon.tab2.threshold.desc2' | translate"></span>
     </div>
   </div>
 </div>
-<div class="modal-footer">
-  <div class="text-right m-t-xs">
-    <button class="btn btn-default floated-left"
-       (click)="closeModal()"
-       href="">{{ 'global.cancel' | translate }}</button>
-
-    <button class="btn btn-success"
-       *ngIf="!currentCoupon && (currentActiveCouponType === 'SINGABLE')"
-       (click)="createCoupon()"
-       [disabled]="!editableCoupon.code || !editableCoupon.name || !editableCoupon.defaultValue">{{ 'coupons.addCoupon' | translate }}</button>
-
-    <button class="btn btn-success"
-       *ngIf="!currentCoupon && (currentActiveCouponType === 'REUSABLE')"
-       (click)="createCoupon()"
-       [disabled]="!editableCoupon.code || !editableCoupon.name || (editableCoupon.notificationThreshold === null) || (editableCoupon.needUseDefault && !editableCoupon.defaultValue) || !tags.length">{{ 'coupons.addCoupon' | translate }}</button>
-
-    <button class="btn btn-success"
-       *ngIf="currentCoupon && (currentActiveCouponType === 'SINGABLE')"
-       (click)="createCoupon()"
-       [disabled]="!editableCoupon.code || !editableCoupon.name || !editableCoupon.defaultValue">{{ 'coupons.modal.newCoupon.tab2.save' | translate }}</button>
-
-    <button class="btn btn-success"
-       *ngIf="currentCoupon && (currentActiveCouponType === 'REUSABLE')"
-       (click)="createCoupon()"
-       [disabled]="!editableCoupon.code || !editableCoupon.name || (editableCoupon.notificationThreshold === null) || (editableCoupon.needUseDefault && !editableCoupon.defaultValue) || !tags.length">{{ 'coupons.modal.newCoupon.tab2.save' | translate }}</button>
-  </div>
+<div class="modal-footer d-flex justify-content-between m-1">
+  <button class="btn btn-default"
+     (click)="closeModal()"
+  >
+    {{ 'global.cancel' | translate }}
+  </button>
+  <button class="btn btn-success"
+     *ngIf="!currentCoupon && (currentActiveCouponType === 'SINGABLE')"
+     (click)="createCoupon()"
+     [disabled]="!editableCoupon.code || !editableCoupon.name || !editableCoupon.defaultValue"
+  >
+    {{ 'coupons.addCoupon' | translate }}
+  </button>
+  <button class="btn btn-success"
+     *ngIf="!currentCoupon && (currentActiveCouponType === 'REUSABLE')"
+     (click)="createCoupon()"
+     [disabled]="!editableCoupon.code || !editableCoupon.name || (editableCoupon.notificationThreshold === null) || (editableCoupon.needUseDefault && !editableCoupon.defaultValue) || !tags.length"
+  >
+    {{ 'coupons.addCoupon' | translate }}
+  </button>
+  <button class="btn btn-success"
+     *ngIf="currentCoupon && (currentActiveCouponType === 'SINGABLE')"
+     (click)="createCoupon()"
+     [disabled]="!editableCoupon.code || !editableCoupon.name || !editableCoupon.defaultValue"
+  >
+    {{ 'coupons.modal.newCoupon.tab2.save' | translate }}
+  </button>
+  <button class="btn btn-success"
+     *ngIf="currentCoupon && (currentActiveCouponType === 'REUSABLE')"
+     (click)="createCoupon()"
+     [disabled]="!editableCoupon.code || !editableCoupon.name || (editableCoupon.notificationThreshold === null) || (editableCoupon.needUseDefault && !editableCoupon.defaultValue) || !tags.length"
+  >
+    {{ 'coupons.modal.newCoupon.tab2.save' | translate }}
+  </button>
 </div>

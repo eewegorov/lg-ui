@@ -97,6 +97,10 @@ h5 {
   font-size: 14px;
 }
 
+h6 {
+  font-size: 12px;
+}
+
 .text-primary {
   color: #34495e;
 }
@@ -112,7 +116,7 @@ h5 {
 }
 
 .modal-title {
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .nav {
@@ -122,6 +126,10 @@ h5 {
 .modal-footer > * {
   margin-left: 0;
   margin-right: 0;
+}
+
+.control-label {
+  font-weight: bold;
 }
 
 .hpanel {

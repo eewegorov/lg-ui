@@ -5,22 +5,22 @@
     <input type="hidden" id="locale-settings" value="{{ 'userInfo.settingsChanged' | translate }}" />
     <form class="form-horizontal">
       <div class="form-group panelcontent" data-item="phone">
-        <label for="phone" class="control-label font-weight-bold">{{ 'userInfo.phone' | translate }}:</label>
+        <label for="phone" class="control-label">{{ 'userInfo.phone' | translate }}:</label>
         <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="user.phone">
         <span class="validate"></span>
       </div>
       <div class="form-group panelcontent" data-item="email">
-        <label for="email" class="control-label font-weight-bold">{{ 'userInfo.email' | translate }}:</label>
+        <label for="email" class="control-label">{{ 'userInfo.email' | translate }}:</label>
         <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email">
         <span class="validate"></span>
       </div>
       <div class="form-group row col-lg-12 align-items-center" data-item="ntEnabled">
         <ui-switch size="small" [checked]="user.notificated"></ui-switch>
-        <label class="control-label font-weight-bold ml-2 pt-2">{{ 'userInfo.notifications' | translate }}</label>
+        <label class="control-label ml-2 pt-2">{{ 'userInfo.notifications' | translate }}</label>
       </div>
       <div class="form-group row col-lg-12 align-items-center" data-item="ntEnabled">
         <ui-switch size="small" [checked]="user.needStatsNotifications"></ui-switch>
-        <label class="control-label font-weight-bold ml-2 pt-2">{{ 'userInfo.isNeedStatsNotificationss' | translate }}</label>
+        <label class="control-label ml-2 pt-2">{{ 'userInfo.isNeedStatsNotificationss' | translate }}</label>
       </div>
       <div class="text-right">
         <button
@@ -42,12 +42,12 @@
     <form class="form-horizontal">
       <div class="form-group panelcontent">
         <div class="form-group panelcontent" data-item="oldpas">
-          <label for="oldpas" class="control-label font-weight-bold">{{ 'userInfo.passwordOld' | translate }}:</label>
+          <label for="oldpas" class="control-label">{{ 'userInfo.passwordOld' | translate }}:</label>
           <input type="password" class="form-control" id="oldpas">
           <span class="validate"></span>
         </div>
         <div class="form-group panelcontent" data-item="newpas">
-          <label for="newpas" class="control-label font-weight-bold">{{ 'userInfo.passwordNew' | translate }}:</label>
+          <label for="newpas" class="control-label">{{ 'userInfo.passwordNew' | translate }}:</label>
           <div class="row">
             <div class="col-lg-11">
               <input type="password" class="form-control" id="newpas" #password>
