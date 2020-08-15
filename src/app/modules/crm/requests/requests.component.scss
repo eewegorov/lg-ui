@@ -1,0 +1,69 @@
+.panel-heading {
+  font-size: 15px;
+  font-weight: 300;
+  padding: 10px -0px;
+}
+
+.filters-flexed {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.filter-flexed__item {
+  flex-basis: 48%;
+  width: 48%;
+}
+
+.filter-flexed__item .btn-group__period-selector {
+  display: flex;
+}
+
+.filter-flexed__item .btn-group__period-selector .btn {
+  float: none!important;
+  flex-grow: 1;
+}
+
+.filter-flexed__item .request-period-name {
+  padding-top: 5px;
+  text-align: right;
+  margin-bottom: 5px;
+}
+
+.site-list-table__onpage select {
+  max-width: 66px;
+}
+
+.font-normal {
+  font-size: 14px;
+}
+
+@media (max-width: 1000px) {
+  .filter-flexed__item {
+    flex-basis: 100%;
+    width: 100% !important;
+    margin-top: 5px;
+  }
+
+  .filter-flexed__item .btn-group__period-selector {
+    flex-wrap: wrap;
+  }
+
+  .filter-flexed__item .popover.left {
+    top: 120px;
+    left: 10px;
+  }
+
+  .filter-flexed__item .popover.left > .arrow {
+    top: -11px;
+    left: 50%;
+    margin-left: -11px;
+    border-top-width: 0;
+    border-bottom-color: #999;
+    border-bottom-color: rgba(0, 0, 0, .25);
+    right: auto;
+    margin-top: 0;
+    border-right-width: 11px;
+    border-left-color: transparent;
+  }
+}

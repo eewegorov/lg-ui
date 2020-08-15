@@ -90,6 +90,10 @@
 		"page": {
 			"filter": {
 				"period": "",
+				"sites": {
+					"all": "",
+					"placeholder": ""
+				},
 				"states": "",
 				"title": ""
 			},

@@ -5,6 +5,8 @@ import { CrmRoutingModule } from './crm-routing.module';
 import { RequestsListComponent } from './requests-list/requests-list.component';
 import { RequestsFilterComponent } from './requests-filter/requests-filter.component';
 import { RequestsComponent } from './requests/requests.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { RequestsComponent } from './requests/requests.component';
   imports: [
     CommonModule,
     TranslateModule,
-    CrmRoutingModule
+    CrmRoutingModule,
+    NgSelectModule,
+    FormsModule
   ]
 })
 export class CrmModule { }

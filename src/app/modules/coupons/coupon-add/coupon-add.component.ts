@@ -51,7 +51,7 @@ export class CouponAddComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked(): void {
     (<any>$('[data-toggle="tooltip"]')).tooltip();
   }
-  
+
   public setCouponType(newTab) {
     this.currentActiveCouponType = newTab;
     this.editableCoupon.type = newTab;

@@ -1,21 +1,25 @@
-<div ng-controller="CRMPageController" ng-cloak class="crm-page-controller-main-bl">
-  <h1 class="widget-title-main">{{ 'sidebar.crm' | translate }}</h1>
-
+<div class="flex-column toolbar-content">
+  <h1 class="title-main">{{ 'sidebar.crm' | translate }}</h1>
   <div>
     <div class="hpanel">
       <div class="panel-heading">
-        <span class="panelTitle">{{ 'crm.page.filter.title' | translate }}</span>
+        <span>{{ 'crm.page.filter.title' | translate }}</span>
       </div>
 
       <div class="panel-body">
         <div class="filters-flexed">
-
           <div class="filter-flexed__item">
             <h5 class="font-normal">{{ 'sidebar.sites' | translate }}:</h5>
-            <!--<select id="siteSelector" ng-model="sitesIds" ui-select2="{ multiple: true}" data-placeholder="{{ 'crm.page.filter.sites.placeholder' | translate }}" multiple="true">
-              <option value="0000000000000000">{{ 'crm.page.filter.sites.all' | translate }}</option>
-              <option ng-repeat="item in allSites" value="{{item.id}}">{{item.name}}</option>
-            </select>-->
+            <ng-select
+              id="siteSelector"
+              bindValue="id"
+              bindLabel="name"
+              [items]="allSites"
+              [placeholder]="'crm.page.filter.sites.placeholder' | translate"
+              multiple="true"
+              [(ngModel)]="sitesIds"
+              (change)="checkFilters()"
+            ></ng-select>
           </div>
 
           <div class="filter-flexed__item">
