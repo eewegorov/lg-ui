@@ -18,7 +18,7 @@
               [placeholder]="'crm.page.filter.sites.placeholder' | translate"
               multiple="true"
               [(ngModel)]="sitesIds"
-              (change)="checkFilters()"
+              (add)="checkFilters($event, 'sites')"
             ></ng-select>
           </div>
 

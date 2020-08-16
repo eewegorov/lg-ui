@@ -16,13 +16,15 @@ export class RequestsComponent implements OnInit {
   public periodStart;
   public allSites = [];
   public sitesIds = [];
+  private ALL_SITE_ID = '0000000000000000';
+  private ONE_DAY = 86400000;
 
   constructor(private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.translate.get('crm.page.filter.sites.all').subscribe((translation: string) => {
       this.allSites = [{
-        id: '0000000000000000',
+        id: this.ALL_SITE_ID,
         name: translation
       }, {
         "id": "5f120a7646e0fb00012c2632",
@@ -39,7 +41,7 @@ export class RequestsComponent implements OnInit {
         "tariffExp": 1595881811225,
         "trial": true
       }];
-      this.sitesIds = ['0000000000000000'];
+      this.sitesIds = [this.ALL_SITE_ID];
     });
 
   }
@@ -48,17 +50,17 @@ export class RequestsComponent implements OnInit {
 
   }
 
-  public checkFilters() {
-    /*if (newValue !== undefined) {
-      if (oldValue !== undefined && oldValue.length >= 1 && oldValue.indexOf(ALL_SITE_ID) === -1 && newValue.indexOf(ALL_SITE_ID) > -1) {
-        this.validateFields(newValue, type, true);
-      } else {
-        this.validateFields(newValue, type);
-      }
-    }*/
+  public checkFilters(newValue, type: 'sites' | 'states') {
+    if (newValue.id === this.ALL_SITE_ID) {
+      this.sitesIds = [this.ALL_SITE_ID];
+      this.validateFields(newValue, type, true);
+    } else {
+      this.sitesIds = this.sitesIds.filter(item => item !== this.ALL_SITE_ID);
+      this.validateFields(newValue, type, false);
+    }
   }
 
-  private validateFields(list, type, setAllSite) {
+  private validateFields(newValue, type: 'sites' | 'states', setAllSite: boolean) {
     /*if (angular.isUndefined(list)) {
       return;
     }
