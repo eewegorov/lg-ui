@@ -25,37 +25,43 @@
 
           <div class="filter-flexed__item">
             <h5 class="font-normal">{{ 'crm.page.filter.period' | translate }}:</h5>
-            <div class="btn-group btn-group__period-selector">
-              <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'TODAY'">{{ 'reports.emails.period.today' | translate }}</label>
-              <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'YESTERDAY'">{{ 'reports.emails.period.yesterday' | translate }}</label>
-              <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'WEEK'">{{ 'reports.emails.period.week' | translate }}</label>
-              <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'DECADE'">{{ 'reports.emails.period.decade' | translate }}</label>
-              <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'MONTH'">{{ 'reports.emails.period.month' | translate }}</label>
-              <button id="periods-custom"
-                      uib-popover-template="popoverTemplate"
-                      append-to-body="true"
-                      popover-placement="left"
-                      popover-trigger="'outsideClick'"
-                      popover-is-open="periodPopoverIsOpen"
-                      type="button"
-                      class="btn btn-default"
-                      ng-class="(periodType === 'USER') ? 'active' : ''"
-                      ng-click="initDateSelector()">{{ 'reports.emails.period.user' | translate }}</button>
-              <script type="text/ng-template" id="periodSelector.html">
+            <div
+              class="btn-group btn-group-toggle btn-group__period-selector"
+              ngbRadioGroup
+              name="radioBasic"
+              [(ngModel)]="periodType"
+            >
+              <label ngbButtonLabel class="btn btn-default">
+                <input ngbButton type="radio" [value]="'TODAY'"> {{ 'reports.emails.period.today' | translate }}
+              </label>
+              <label ngbButtonLabel class="btn btn-default">
+                <input ngbButton type="radio" [value]="'YESTERDAY'"> {{ 'reports.emails.period.yesterday' | translate }}
+              </label>
+              <label ngbButtonLabel class="btn btn-default">
+                <input ngbButton type="radio" [value]="'WEEK'"> {{ 'reports.emails.period.week' | translate }}
+              </label>
+              <label ngbButtonLabel class="btn btn-default">
+                <input ngbButton type="radio" [value]="'DECADE'"> {{ 'reports.emails.period.decade' | translate }}
+              </label>
+              <label ngbButtonLabel class="btn btn-default">
+                <input ngbButton type="radio" [value]="'MONTH'"> {{ 'reports.emails.period.month' | translate }}
+              </label>
+              <ng-template #popContent>
                 <div id="custom-period-container-template">
                   <div class="custom-period-container">
                     <div class="row">
                       <div class="col-lg-6 text-left">
-                        <label class="control-label">{{ 'vkprofiles.period.dateStart' | translate }}:</label>
+                        <label class="control-label">{{ 'global.period.dateStart' | translate }}:</label>
                         <div class='input-group date' id='req-period-start'>
-                          <input type='text' class="form-control" />
-                          <span class="input-group-addon">
-                                                                <span class="glyphicon glyphicon-calendar"></span>
-                                                            </span>
+                          <input class="form-control" placeholder="DD.MM.YYYY"
+                                 name="dp" [(ngModel)]="periodStart" ngbDatepicker #d="ngbDatepicker">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                          </div>
                         </div>
                       </div>
                       <div class="col-lg-6 text-left">
-                        <label class="control-label">{{ 'vkprofiles.period.dateEnd' | translate }}:</label>
+                        <label class="control-label">{{ 'global.period.dateEnd' | translate }}:</label>
                         <div class='input-group date' id='req-period-end'>
                           <input type='text' class="form-control" />
                           <span class="input-group-addon">
@@ -66,12 +72,26 @@
                     </div>
                     <div class="row popover-btns-container">
                       <div class="col-lg-11 col-lg-offset-1 text-right">
-                        <button id="periodApply" ng-click="periodApply()" type="button" class="btn w-xs btn-success">{{ 'vkprofiles.period.start' | translate }}</button>
+                        <button id="periodApply" ng-click="periodApply()" type="button" class="btn w-xs btn-success">{{ 'global.period.start' | translate }}</button>
                       </div>
                     </div>
                   </div>
                 </div>
-              </script>
+              </ng-template>
+              <button
+                type="button"
+                id="periods-custom"
+                class="btn btn-default"
+                [ngClass]="(periodType === 'USER') ? 'active' : ''"
+                [ngbPopover]="popContent"
+                [autoClose]="'outside'"
+                placement="left"
+                container="body"
+                (click)="initDateSelector()"
+                #p="ngbPopover"
+              >
+                {{ 'reports.emails.period.user' | translate }}
+              </button>
 
             </div>
             <h1 class="request-period-name">

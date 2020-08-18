@@ -88,6 +88,14 @@
 	},
 	"crm": {
 		"page": {
+			"card": {
+				"status": {
+					"bad": "",
+					"new": "",
+					"onWork": "",
+					"success": ""
+				}
+			},
 			"filter": {
 				"period": "",
 				"sites": {
@@ -102,6 +110,10 @@
 				"text": ""
 			},
 			"table": {
+				"extra": {
+					"default": "",
+					"widget": ""
+				},
 				"refresh": "",
 				"th1": "",
 				"th2": "",
@@ -128,6 +140,11 @@
 		},
 		"done": "",
 		"error": "",
+		"period": {
+			"dateEnd": "",
+			"dateStart": "",
+			"start": ""
+		},
 		"save": ""
 	},
 	"header": {

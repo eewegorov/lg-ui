@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { timeout } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { CrmService } from '../services/crm.service';
 import { Lead } from '../../../core/models/crm';
-import { timeout } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-requests',
@@ -11,6 +13,7 @@ import { timeout } from 'rxjs/operators';
   styleUrls: ['./requests.component.scss']
 })
 export class RequestsComponent implements OnInit {
+  @ViewChild('p') popover: NgbPopover;
   public item = {
     widgetName: 'fsdf',
     date: '1231231',
@@ -18,6 +21,7 @@ export class RequestsComponent implements OnInit {
     status: 'asdasda'
   };
   public periodStart;
+  public periodType;
   private periodEnd;
   public allSites = [];
   public sitesIds = [];
@@ -63,11 +67,11 @@ export class RequestsComponent implements OnInit {
       }];
       this.sitesIds = [this.ALL_SITE_ID];
     });
-    this.translate.get('сrm.page.table.extra.default').subscribe((translation: string) => {
+    this.translate.get('crm.page.table.extra.default').subscribe((translation: string) => {
       this.defaultName = translation;
     });
 
-    this.translate.get('сrm.page.table.extra').subscribe((translation: string) => {
+    this.translate.get('crm.page.table.extra.widget').subscribe((translation: string) => {
       this.defaultExtraName = translation;
     });
 
@@ -76,6 +80,25 @@ export class RequestsComponent implements OnInit {
   public showYesterdayDate() {
 
   }
+
+  public initDateSelector() {
+    /*setTimeout(function () {
+      $("#req-period-start").datetimepicker({
+        format        : 'DD.MM.YYYY',
+        locale        : 'ru',
+        showClose     : true,
+        defaultDate   : moment($scope.periodStart)
+      });
+      $("#req-period-end").datetimepicker({
+        format        : 'DD.MM.YYYY',
+        locale        : 'ru',
+        showClose     : true,
+        defaultDate   : moment($scope.showYesterdayDate())
+      });
+      this.popover.open();
+    }, 50);*/
+
+  };
 
   public checkFilters(newValue) {
     if (newValue.id === this.ALL_SITE_ID) {
@@ -127,13 +150,13 @@ export class RequestsComponent implements OnInit {
 
   private setStatusByState(state) {
     if (state === 'NEW') {
-      return this.translate.instant('сrm.page.card.status.new');
+      return this.translate.instant('crm.page.card.status.new');
     } else if (state === 'INWORK') {
-      return this.translate.instant('сrm.page.card.status.onWork');
+      return this.translate.instant('crm.page.card.status.onWork');
     } else if (state === 'INVALID') {
-      return this.translate.instant('сrm.page.card.status.bad');
+      return this.translate.instant('crm.page.card.status.bad');
     } else if (state === 'SUCCESS') {
-      return this.translate.instant('сrm.page.card.status.success');
+      return this.translate.instant('crm.page.card.status.success');
     }
   }
 
