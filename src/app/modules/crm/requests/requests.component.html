@@ -48,33 +48,32 @@
               </label>
               <ng-template #popContent>
                 <div id="custom-period-container-template">
-                  <div class="custom-period-container">
-                    <div class="row">
-                      <div class="col-lg-6 text-left">
-                        <label class="control-label">{{ 'global.period.dateStart' | translate }}:</label>
-                        <div class='input-group date' id='req-period-start'>
-                          <input class="form-control" placeholder="DD.MM.YYYY"
-                                 name="dp" [(ngModel)]="periodStart" ngbDatepicker #d="ngbDatepicker">
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                          </div>
-                        </div>
+                  <div class="d-flex flex-column">
+                    <div class="text-left">
+                      <label class="control-label m-0">{{ 'global.period.dateStart' | translate }}:</label>
+                      <div class='input-group date' id='req-period-start'>
+                        <ngbd-datepicker-i18n [(ngModel)]="periodStart"></ngbd-datepicker-i18n>
+                        <!--<input class="form-control" placeholder="DD.MM.YYYY"
+                               name="dp" [(ngModel)]="periodStart" ngbDatepicker #d1="ngbDatepicker">
+                        <div class="input-group-append">
+                          <button class="btn btn-default fa fa-calendar-alt" (click)="d1.toggle()" type="button"></button>
+                        </div>-->
                       </div>
-                      <div class="col-lg-6 text-left">
-                        <label class="control-label">{{ 'global.period.dateEnd' | translate }}:</label>
-                        <div class='input-group date' id='req-period-end'>
-                          <input type='text' class="form-control" />
-                          <span class="input-group-addon">
-                                                                <span class="glyphicon glyphicon-calendar"></span>
-                                                            </span>
+                    </div>
+                    <div class="text-left mt-3">
+                      <label class="control-label m-0">{{ 'global.period.dateEnd' | translate }}:</label>
+                      <div class='input-group date' id='req-period-end'>
+                        <input class="form-control" placeholder="DD.MM.YYYY"
+                               name="dp" [(ngModel)]="periodEnd" ngbDatepicker #d2="ngbDatepicker">
+                        <div class="input-group-append">
+                          <button class="btn btn-default fa fa-calendar-alt" (click)="d2.toggle()" type="button"></button>
                         </div>
                       </div>
                     </div>
-                    <div class="row popover-btns-container">
-                      <div class="col-lg-11 col-lg-offset-1 text-right">
-                        <button id="periodApply" ng-click="periodApply()" type="button" class="btn w-xs btn-success">{{ 'global.period.start' | translate }}</button>
-                      </div>
-                    </div>
+                  </div>
+                  <div class="text-right mt-3">
+                      <button id="periodApply" ng-click="periodApply()" type="button" class="btn w-xs btn-success">{{ 'global.period.start' | translate }}</button>
+
                   </div>
                 </div>
               </ng-template>
@@ -85,8 +84,8 @@
                 [ngClass]="(periodType === 'USER') ? 'active' : ''"
                 [ngbPopover]="popContent"
                 [autoClose]="'outside'"
-                placement="left"
                 container="body"
+                placement="{{ innerWidth < 850 ? 'bottom' : 'left' }}"
                 (click)="initDateSelector()"
                 #p="ngbPopover"
               >

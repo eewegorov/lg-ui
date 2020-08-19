@@ -58,7 +58,15 @@
   box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
 }
 
-@media (max-width: 1000px) {
+.input-group-append .btn-default {
+  border-color: #bbb;
+}
+
+.input-group-append .btn-default:hover {
+  border-color: #999;
+}
+
+@media (max-width: 1310px) {
   .filter-flexed__item {
     flex-basis: 100%;
     width: 100% !important;

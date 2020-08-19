@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { timeout } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerI18n, NgbDateStruct, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { CrmService } from '../services/crm.service';
 import { Lead } from '../../../core/models/crm';
@@ -14,6 +14,7 @@ import { Lead } from '../../../core/models/crm';
 })
 export class RequestsComponent implements OnInit {
   @ViewChild('p') popover: NgbPopover;
+  public innerWidth: number;
   public item = {
     widgetName: 'fsdf',
     date: '1231231',
@@ -21,8 +22,9 @@ export class RequestsComponent implements OnInit {
     status: 'asdasda'
   };
   public periodStart;
+  public periodEnd;
   public periodType;
-  private periodEnd;
+
   public allSites = [];
   public sitesIds = [];
   public statesIds = [];
@@ -43,7 +45,8 @@ export class RequestsComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private crmService: CrmService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.translate.get('crm.page.filter.sites.all').subscribe((translation: string) => {
@@ -74,7 +77,11 @@ export class RequestsComponent implements OnInit {
     this.translate.get('crm.page.table.extra.widget').subscribe((translation: string) => {
       this.defaultExtraName = translation;
     });
+  }
 
+  @HostListener('window:resize', ['$event'])
+  private onResize(event) {
+    this.innerWidth = event.target.innerWidth;
   }
 
   public showYesterdayDate() {
