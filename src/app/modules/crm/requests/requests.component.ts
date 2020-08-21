@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbDatepickerI18n, NgbDateStruct, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { CrmService } from '../services/crm.service';
-import { Lead } from '../../../core/models/crm';
+import { Lead, Periods } from '../../../core/models/crm';
 
 
 @Component({
@@ -21,9 +21,9 @@ export class RequestsComponent implements OnInit {
     state: 'sdfsf',
     status: 'asdasda'
   };
-  public periodStart;
-  public periodEnd;
-  public periodType;
+  public periodStart: Date;
+  public periodEnd: Date;
+  public periodType = 'WEEK';
 
   public allSites = [];
   public sitesIds = [];
@@ -77,6 +77,7 @@ export class RequestsComponent implements OnInit {
     this.translate.get('crm.page.table.extra.widget').subscribe((translation: string) => {
       this.defaultExtraName = translation;
     });
+    this.changePeriod(this.periodType);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -85,27 +86,40 @@ export class RequestsComponent implements OnInit {
   }
 
   public showYesterdayDate() {
-
+    const yesterday = new Date(this.getToday().getTime() - this.ONE_DAY)
+    return this.periodType === "YESTERDAY" ? yesterday : this.periodEnd;
   }
 
-  public initDateSelector() {
-    /*setTimeout(function () {
-      $("#req-period-start").datetimepicker({
-        format        : 'DD.MM.YYYY',
-        locale        : 'ru',
-        showClose     : true,
-        defaultDate   : moment($scope.periodStart)
-      });
-      $("#req-period-end").datetimepicker({
-        format        : 'DD.MM.YYYY',
-        locale        : 'ru',
-        showClose     : true,
-        defaultDate   : moment($scope.showYesterdayDate())
-      });
-      this.popover.open();
-    }, 50);*/
+  private changePeriod(value: string) {
+    if (value === Periods.TODAY) {
+      this.periodStart = new Date();
+      this.periodStart.setHours(0,0,0,0);
+      this.periodEnd = new Date(this.getToday().getTime());
+    } else if (value === Periods.YESTERDAY) {
+      this.periodEnd = new Date(this.getToday().getTime() - 2*this.ONE_DAY);
+      this.periodEnd.setHours(23,59,59,999);
+      this.periodStart = new Date(this.getToday().getTime() - this.ONE_DAY);
+    } else if (value === Periods.DECADE) {
+      this.periodStart = new Date(this.getToday().getTime() - 10*this.ONE_DAY);
+      this.periodEnd = new Date(this.getToday().getTime());
+    } else if (value === Periods.WEEK) {
+      this.periodStart = new Date(this.getToday().getTime() - 7*this.ONE_DAY);
+      this.periodEnd = new Date(this.getToday().getTime());
+    } else if (value === Periods.MONTH) {
+      this.periodStart = new Date(this.getToday().getTime() - 30*this.ONE_DAY);
+      this.periodEnd = new Date(this.getToday().getTime());
+    }
 
-  };
+    this.timeoutFiltering(false);
+  }
+
+  private getToday(): Date {
+    return new Date(new Date().setHours(0, 0, 0, 0));
+  }
+
+  public periodApply() {
+    console.log(this.periodEnd)
+  }
 
   public checkFilters(newValue) {
     if (newValue.id === this.ALL_SITE_ID) {
@@ -177,8 +191,8 @@ export class RequestsComponent implements OnInit {
     }
   }
 
-  private getTomorrowCopyDate(date) {
-    let tomorrowDate = date;
+  private getTomorrowCopyDate(date: Date): Date {
+    let tomorrowDate = new Date(date.valueOf());
     tomorrowDate.setDate(tomorrowDate.getDate() + 1);
     return tomorrowDate;
   }

@@ -1,9 +1,10 @@
-import {Component, Injectable} from '@angular/core';
-import {NgbDatepickerI18n, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { Component, Injectable } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 const I18N_VALUES = {
   'ru': {
-    weekdays: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+    weekdays: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
     months: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
   }
   // other languages you would support
@@ -42,8 +43,41 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
 @Component({
   selector: 'ngbd-datepicker-i18n',
   templateUrl: './datepicker.component.html',
-  providers: [I18n, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}] // define custom NgbDatepickerI18n provider
+  styleUrls: ['./datepicker.component.scss'],
+  providers: [
+    I18n,
+    { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: NgbdDatepickerI18n,
+      multi: true
+    }
+    ]
 })
-export class NgbdDatepickerI18n {
-  model: NgbDateStruct;
+export class NgbdDatepickerI18n implements ControlValueAccessor {
+  selectedDate;
+  onChange = (date?: Date) => {};
+  onTouched = () => {};
+
+  writeValue(value: Date) {
+    this.selectedDate = value;
+    if (!value) return;
+    this.selectedDate = {
+      year: value.getFullYear(),
+      month: value.getMonth() + 1,
+      day: value.getDate()
+    }
+  }
+
+  registerOnChange(fn: (date: Date) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  onDateChange(value: any) {
+    this.onChange(new Date(value.year, value.month - 1, value.day));
+  }
 }

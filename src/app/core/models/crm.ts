@@ -16,3 +16,11 @@ export interface Lead {
   date: string;
   comment: string;
 }
+
+export enum Periods {
+  TODAY = 'TODAY',
+  YESTERDAY = 'YESTERDAY',
+  DECADE = 'DECADE',
+  WEEK = 'WEEK',
+  MONTH = 'MONTH'
+}

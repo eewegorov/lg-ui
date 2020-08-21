@@ -1,1 +1,15 @@
-<ngb-datepicker [(ngModel)]="model"></ngb-datepicker>
+<div class='input-group date'>
+  <input
+    class="form-control"
+    placeholder="DD.MM.YYYY"
+    name="dp"
+    [(ngModel)]="selectedDate"
+    (change)="onDateChange($event)"
+    (dateSelect)="onDateChange($event)"
+    ngbDatepicker
+    #d2="ngbDatepicker"
+  >
+  <div class="input-group-append">
+    <button class="btn btn-default fa fa-calendar-alt" (click)="d2.toggle()" type="button"></button>
+  </div>
+</div>
