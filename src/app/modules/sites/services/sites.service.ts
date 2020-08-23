@@ -18,7 +18,7 @@ import { SitesApiService } from './sites-api.service';
   providedIn: 'root'
 })
 export class SitesService {
-  public shortSiteList = [];
+  public sites = [];
   private currentSiteId: string;
 
   constructor(
@@ -59,10 +59,6 @@ export class SitesService {
 
   public getCurrentSiteId(): string {
     return this.currentSiteId;
-  }
-
-  public setSiteList(sites) {
-    this.shortSiteList = sites;
   }
 
   public isSiteHasExpTariff(site): boolean {

@@ -1,15 +1,15 @@
 import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { SubscriptionLike } from 'rxjs';
 import { timeout } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
-import { CrmService } from '../services/crm.service';
-import { Lead, Periods } from '../../../core/models/crm';
-import { UserService } from '../../user/services/user.service';
-import { SubscriptionLike } from 'rxjs';
-import { User } from '../../../core/models/user';
-import { SiteShort } from '../../../core/models/sites';
 import { CookieService } from 'ngx-cookie-service';
+import * as moment from 'moment';
+import { SiteShort } from '../../../core/models/sites';
+import { Lead, LeadById, Periods } from '../../../core/models/crm';
+import { UserService } from '../../user/services/user.service';
+import { SitesService } from '../../sites/services/sites.service';
+import { CrmService } from '../services/crm.service';
 
 
 @Component({
@@ -20,12 +20,6 @@ import { CookieService } from 'ngx-cookie-service';
 export class RequestsComponent implements OnInit, OnDestroy {
   @ViewChild('p') popover: NgbPopover;
   public innerWidth: number;
-  public item = {
-    widgetName: 'fsdf',
-    date: '1231231',
-    state: 'sdfsf',
-    status: 'asdasda'
-  };
   public periodStart: Date;
   public periodEnd: Date;
   public periodType = 'WEEK';
@@ -34,6 +28,18 @@ export class RequestsComponent implements OnInit, OnDestroy {
   public states = [];
   public sitesIds = [];
   public statesIds = [];
+  public leads: Lead[] = [{
+    id: '4b7e89b0b224669bcb5f1bf53d2bf71a',
+    title: 'Test lead 1',
+    widgetName: 'This is my custom widget',
+    siteId: '27b7f32bd10521503acc2b38d3e5b640',
+    siteName: 'U1 site 1',
+    siteUrl: 'http://u1s1.com',
+    pageUrl: 'http://u1s1.com/test',
+    state: 'NEW',
+    date: 1263161699000,
+    comment: 'Comment is missing'
+  }];
   private ALL_SITE_ID = '0000000000000000';
   private ONE_DAY = 86400000;
   private filterTimeout: ReturnType<typeof setTimeout>;
@@ -42,30 +48,66 @@ export class RequestsComponent implements OnInit, OnDestroy {
     offset: 0,
     limit: this.limitOptions[1]
   };
-  private initTables = false;
-  private sortingDesc = true;
-  private leads = [];
+  public initTables = false;
+  public sortingDesc = true;
+
   private defaultName;
   private defaultExtraName;
   private userId;
-  private isNotificationEnable = false;
+  public isNotificationEnable = false;
+  public currentOpenedRow = null;
   private meInfoSub: SubscriptionLike;
 
   constructor(
     private translate: TranslateService,
     private cookieService: CookieService,
     private userService: UserService,
-    private siteService,
+    private sitesService: SitesService,
     private crmService: CrmService
   ) {
   }
 
   ngOnInit(): void {
+    this.initStats();
+    this.changePeriod(this.periodType);
+    this.translate.get('crm.page.filter.states.all').subscribe((translation: string) => {
+      this.states = [{
+        id: this.ALL_SITE_ID,
+        name: translation
+      }];
+      this.statesIds = [this.ALL_SITE_ID];
+      this.states = this.states.concat(this.crmService.getStates());
+    });
+    this.translate.get('crm.page.table.extra.default').subscribe((translation: string) => {
+      this.defaultName = translation;
+    });
+    this.translate.get('crm.page.table.extra.widget').subscribe((translation: string) => {
+      this.defaultExtraName = translation;
+    });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  private onResize(event) {
+    this.innerWidth = event.target.innerWidth;
+  }
+
+  private initStats() {
+    /*this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
+      this.userId = response.id;*/
+      this.getSites();
+    /*});*/
+  }
+
+  private getSites() {
+    const notificationOffCookie = this.cookieService.get('lgwg-notification-off');
     this.translate.get('crm.page.filter.sites.all').subscribe((translation: string) => {
       this.allSites = [{
         id: this.ALL_SITE_ID,
         name: translation
-      }, {
+      }];
+      this.sitesIds = [this.ALL_SITE_ID];
+      /*this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {*/
+      const response = [{
         "id": "5f120a7646e0fb00012c2632",
         "name": "mysecondsite",
         "url": "secondsecond.ru",
@@ -79,43 +121,13 @@ export class RequestsComponent implements OnInit, OnDestroy {
         "tariffName": "Пробный",
         "tariffExp": 1595881811225,
         "trial": true
-      }];
-      this.sitesIds = [this.ALL_SITE_ID];
-      this.states = this.crmService.getStates();
-      this.initStats();
-    });
-    this.translate.get('crm.page.table.extra.default').subscribe((translation: string) => {
-      this.defaultName = translation;
-    });
-
-    this.translate.get('crm.page.table.extra.widget').subscribe((translation: string) => {
-      this.defaultExtraName = translation;
-    });
-    this.changePeriod(this.periodType);
-  }
-
-  @HostListener('window:resize', ['$event'])
-  private onResize(event) {
-    this.innerWidth = event.target.innerWidth;
-  }
-
-  private initStats() {
-    this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
-      this.userId = response.id;
-      this.getSites();
-    });
-  }
-
-  private getSites() {
-    const notificationOffCookie = this.cookieService.get('lgwg-notification-off');
-    this.allSites = [];
-    this.siteService.getSitesShort().then((response: SiteShort[]) => {
-      this.allSites = response;
-      this.siteService.setSiteList(response);
-
-      if (notificationOffCookie !== this.userId && this.isTrialSites(response)) {
-        this.isNotificationEnable = true;
-      }
+      }]; // удалить статику и раскомментировать подписку
+        this.sitesService.sites = response;
+        this.allSites = this.allSites.concat(response);
+        if (notificationOffCookie !== this.userId && this.isTrialSites(response)) {
+          this.isNotificationEnable = true;
+        }
+      /*});*/
     });
   }
 
@@ -166,11 +178,19 @@ export class RequestsComponent implements OnInit, OnDestroy {
     }
   }
 
-  public checkFilters(newValue) {
+  public checkFilters(newValue, isSites: boolean) {
     if (newValue.id === this.ALL_SITE_ID) {
-      this.sitesIds = [this.ALL_SITE_ID];
+      if (isSites) {
+        this.sitesIds = [this.ALL_SITE_ID];
+      } else {
+        this.statesIds = [this.ALL_SITE_ID];
+      }
     } else {
-      this.sitesIds = this.sitesIds.filter(item => item !== this.ALL_SITE_ID);
+      if (isSites) {
+        this.sitesIds = this.sitesIds.filter(item => item !== this.ALL_SITE_ID);
+      } else {
+        this.statesIds = this.statesIds.filter(item => item !== this.ALL_SITE_ID);
+      }
     }
   }
 
@@ -184,8 +204,27 @@ export class RequestsComponent implements OnInit, OnDestroy {
     }, 50);
   }
 
+  public notificationCookieSet() {
+    this.cookieService.set('lgwg-notification-off', this.userId, 5200);
+    this.isNotificationEnable = false;
+  }
+
+  public changeDateSorting() {
+    this.sortingDesc = !this.sortingDesc;
+    this.timeoutFiltering(true);
+  }
+
+  public openLeadInfo(lead: Lead, index: number) {
+    this.crmService.getLeadById(lead.id).subscribe((response: LeadById) => {
+      if (response) {
+        this.currentOpenedRow = index;
+        this.crmService.openLeadInfoSidebar.next({ data: response, index: index });
+      }
+    });
+  };
+
   private getLeads() {
-    this.initTables = false;
+    this.initTables = true;
     const params = {
       orders: this.sortingDesc ? '-date' : 'date',
       limit: this.searchParams.limit.value,

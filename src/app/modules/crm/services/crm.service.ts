@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { Lead, LeadsResponse } from '../../../core/models/crm';
+import { Lead, LeadById, LeadByIdResponse, LeadByIdWithIndex, LeadsResponse } from '../../../core/models/crm';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { CrmApiService } from './crm-api.service';
 
@@ -12,6 +12,7 @@ import { CrmApiService } from './crm-api.service';
   providedIn: 'root'
 })
 export class CrmService {
+  public openLeadInfoSidebar: BehaviorSubject<LeadByIdWithIndex> = new BehaviorSubject(null);
 
   constructor(
     private translate: TranslateService,
@@ -26,23 +27,30 @@ export class CrmService {
     );
   }
 
+  public getLeadById(leadId: string): Observable<LeadById> {
+    return this.crmApiService.getLeadById(leadId).pipe(
+      map((response: LeadByIdResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
   public getStates() {
     return [
       {
-        type: 'NEW',
-        label: this.translate.instant('сrm.page.card.status.new')
+        id: 'NEW',
+        name: this.translate.instant('crm.page.card.status.new')
       },
       {
-        type: 'INWORK',
-        label: this.translate.instant('сrm.page.card.status.onWork')
+        id: 'INWORK',
+        name: this.translate.instant('crm.page.card.status.onWork')
       },
       {
-        type: 'INVALID',
-        label: this.translate.instant('сrm.page.card.status.bad')
+        id: 'INVALID',
+        name: this.translate.instant('crm.page.card.status.bad')
       },
       {
-        type: 'SUCCESS',
-        label: this.translate.instant('сrm.page.card.status.success')
+        id: 'SUCCESS',
+        name: this.translate.instant('crm.page.card.status.success')
       }
     ];
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { LeadsResponse } from '../../../core/models/crm';
+import { LeadByIdResponse, LeadsResponse } from '../../../core/models/crm';
 
 
 @Injectable({
@@ -16,5 +16,9 @@ export class CrmApiService {
     return this.http.get<LeadsResponse>(`${ environment.url }/leads`, {
       params: filterParams
     });
+  }
+
+  public getLeadById(leadId: string): Observable<LeadByIdResponse> {
+    return this.http.get<LeadByIdResponse>(`${ environment.url }/leads/${leadId}`);
   }
 }

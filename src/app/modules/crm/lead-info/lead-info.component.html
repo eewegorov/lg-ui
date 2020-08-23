@@ -1,0 +1,116 @@
+<!-- SIDE MENU -->
+<div id="right-sidebar" class="lead-info-sidebar animated fadeInRight" [ngClass]="{'sidebar-open': isOpen}">
+  <div class="sidebar-body">
+    <button ng-click="closeLeadInfo()" class="lead-info-sidebar__close btn btn-default m-b-md"><i class="pe pe-7s-close"></i></button>
+    <div class="row sidebar-title">
+      <h5 id="crm-details-title">{{ leadInfo.title }} {{ 'global.from' | translate }} {{ leadInfo.createDate | date : "dd.MM.y, hh:mm a" }}</h5>
+    </div>
+    <div id="detailsContent" class="lead-info-card-wrapper">
+      <div id="detailsInfo" class="lead-info-card padding-top-20 padding-bottom-20 no-animate">
+        <div class="lead-info-card__status">
+          <div>{{ 'сrm.page.table.th4' | translate }}</div>
+          <div class="btn-group btn-group__status-selector">
+            <label class="btn btn-default btn-status-new" ng-model="status" uib-btn-radio="'NEW'">{{ 'сrm.page.card.status.new' | translate }}</label>
+            <label class="btn btn-default btn-status-inwork" ng-model="status" uib-btn-radio="'INWORK'">{{ 'сrm.page.card.status.onWork' | translate }}</label>
+            <label class="btn btn-default btn-status-invalid" ng-model="status" uib-btn-radio="'INVALID'">{{ 'сrm.page.card.status.bad' | translate }}</label>
+            <label class="btn btn-default btn-status-success" ng-model="status" uib-btn-radio="'SUCCESS'">{{ 'сrm.page.card.status.success' | translate }}</label>
+          </div>
+        </div>
+
+        <div class="lead-info-card__data lead-info-card__data-notes">
+          <label>{{ 'сrm.page.card.status.notes' | translate }} <span ng-if="isUserCommentUpdated"><i class="fa fa-check"></i></span></label>
+          <div>
+                        <textarea
+                          type="text"
+                          row="3"
+                          ng-model="leadInfo.userComment"
+                          ng-blur="updateComment()"
+                          ng-focus="onFocusCommentField()"
+                          ng-class="{'on-focused': focused}"
+                          class="form-control"></textarea>
+          </div>
+        </div>
+
+        <div class="stats-title" style="margin-top: 20px">
+          <h4 class="colored-dark-blue">{{ 'сrm.page.card.details' | translate }}</h4>
+        </div>
+
+        <div class="lead-info-card__data lead-info-card__data-colored" ng-if="leadInfo.firstName">
+          <label>{{ 'сrm.page.card.status.name' | translate }}</label>
+          <div>{{ leadInfo.firstName }}</div>
+        </div>
+
+        <div class="lead-info-card__data" ng-if="leadInfo.emails.length">
+          <label>{{ 'сrm.page.card.status.email' | translate }}</label>
+          <div><a href="mailto:{{ leadInfo.emails[0] }}">{{ leadInfo.emails[0] }}</a></div>
+        </div>
+
+        <div class="lead-info-card__data" ng-if="leadInfo.phones.length">
+          <label>{{ 'сrm.page.card.status.phone' | translate }}</label>
+          <div><a href="tel:{{ leadInfo.phones[0] }}">{{ leadInfo.phones[0] }}</a></div>
+        </div>
+
+        <div class="lead-info-card__data lead-info-card__data-colored" ng-repeat="field in leadInfo.fieldsValues">
+          <label>{{ field.name }}</label>
+          <div>{{ field.value }}</div>
+        </div>
+
+        <div class="lead-info-card__data lead-info-card__data-colored lead-info-card__data-commented" ng-if="leadInfo.comment">
+          <label>{{ 'сrm.page.card.status.message' | translate }}</label>
+          <div>{{ leadInfo.comment }}</div>
+        </div>
+      </div>
+
+      <div class="lead-info-card__external">
+        <div class="lead-info-card__external-item lead-info-card__external-item-marg">
+          <div class="panel-body">
+            <div class="stats-title">
+              <h4 class="colored-dark-blue">{{ 'сrm.page.card.visitNumber' | translate }}</h4>
+            </div>
+            <div class="stats-icon pull-right">
+              <i class="fa fa-street-view fa-3x" style="color: #3498db"></i></div>
+            <div class="lead-info-card__external-item__value">
+              <h1><span class="ppanel-pages">{{leadInfo.visitNo}}</span></h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="lead-info-card__external-item">
+          <div class="panel-body">
+            <div class="stats-title">
+              <h4 class="colored-dark-blue">{{ 'сrm.page.card.sawPages' | translate }}</h4>
+            </div>
+            <div class="stats-icon pull-right">
+              <i class="fa fa-eye fa-3x" style="color: #9b59b6"></i></div>
+            <div class="lead-info-card__external-item__value">
+              <h1><span class="ppanel-pages">{{leadInfo.history.length}}</span></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lead-info-card__history-wrapper">
+        <label class="colored-dark-blue">{{ 'сrm.page.card.visitHistory.title' | translate }}</label>
+        <div class="lead-info-card__history v-timeline2 vertical-container animate-panel">
+          <div class="vertical-timeline-block timeline-template" ng-repeat="history in leadInfo.history | orderBy:'-serverDate'">
+            <div class="vertical-timeline-icon navy-bg">
+              <i class="fa fa-eye"></i>
+            </div>
+            <div class="vertical-timeline-content no-corner-timeline" tooltiped>
+              <div class="vertical-timeline-content__padding">
+                                <span class="vertical-date pull-right">
+                                    <i ng-show="$index === 0"
+                                       class="fa fa-flag-checkered"
+                                       data-toggle="tooltip" data-placement="top" data-title="{{ 'сrm.page.card.source.linkDesc' | translate }}"></i>
+                                    <small>{{history.serverDate | date : "dd.MM.y, hh:mm a"}}</small>
+                                </span>
+                <h2 class="action-title">{{history.title}}</h2>
+                <p class="action-url">{{history.url}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

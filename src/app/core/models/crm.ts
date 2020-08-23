@@ -13,8 +13,52 @@ export interface Lead {
   siteUrl: string;
   pageUrl: string;
   state: string;
-  date: string;
+  date: number;
   comment: string;
+}
+
+export interface LeadByIdResponse extends ApiLimitResponse {
+  data: LeadById;
+}
+
+export interface LeadById {
+  id: string;
+  title: string;
+  firstName: string;
+  lastName: string;
+  phones: string[];
+  emails: string[];
+  comment: string;
+  userComment: string;
+  pageUrl: string;
+  pageTitle: string;
+  visitNo: number;
+  ip: string;
+  history: LeadHistory[];
+  state: string;
+  siteName: string;
+  siteUrl: string;
+  createDate: number;
+  widgetName: string;
+  fieldsValues: LeadCustomFields[];
+}
+
+export interface LeadHistory {
+  title: string;
+  url: string;
+  serverDate: number;
+  userDate: number;
+}
+
+export interface LeadCustomFields {
+  id: string;
+  name: string;
+  value: string;
+}
+
+export interface LeadByIdWithIndex {
+  data: LeadById;
+  index: number;
 }
 
 export enum Periods {

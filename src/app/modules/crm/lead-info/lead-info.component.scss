@@ -1,0 +1,21 @@
+#right-sidebar {
+  background-color: #fff;
+  border-left: 1px solid #e4e5e7;
+  position: fixed;
+  top: 0;
+  width: 500px;
+  z-index: 1040;
+  bottom: 0;
+  right: 0;
+  display: none;
+  overflow: hidden;
+}
+
+#right-sidebar.animated {
+  animation-duration: 0.5s;
+}
+
+
+#right-sidebar.sidebar-open {
+  display: block;
+}

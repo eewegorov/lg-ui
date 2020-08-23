@@ -9,13 +9,15 @@ import { RequestsListComponent } from './requests-list/requests-list.component';
 import { RequestsFilterComponent } from './requests-filter/requests-filter.component';
 import { RequestsComponent } from './requests/requests.component';
 import { SharedModule } from '../../shared/shared.module';
+import { LeadInfoComponent } from './lead-info/lead-info.component';
 
 
 @NgModule({
   declarations: [
     RequestsListComponent,
     RequestsFilterComponent,
-    RequestsComponent
+    RequestsComponent,
+    LeadInfoComponent
   ],
   imports: [
     CommonModule,
