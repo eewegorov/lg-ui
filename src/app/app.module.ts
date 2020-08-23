@@ -10,6 +10,7 @@ import { TokenInterceptor } from './core/services/token.interceptor';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -44,11 +45,13 @@ import { AppComponent } from './app.component';
     CoreModule,
     SharedModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  }],
+  providers: [
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

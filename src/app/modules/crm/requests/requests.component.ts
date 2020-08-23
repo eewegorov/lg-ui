@@ -1,10 +1,15 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { timeout } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { NgbDatepickerI18n, NgbDateStruct, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { CrmService } from '../services/crm.service';
 import { Lead, Periods } from '../../../core/models/crm';
+import { UserService } from '../../user/services/user.service';
+import { SubscriptionLike } from 'rxjs';
+import { User } from '../../../core/models/user';
+import { SiteShort } from '../../../core/models/sites';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -12,7 +17,7 @@ import { Lead, Periods } from '../../../core/models/crm';
   templateUrl: './requests.component.html',
   styleUrls: ['./requests.component.scss']
 })
-export class RequestsComponent implements OnInit {
+export class RequestsComponent implements OnInit, OnDestroy {
   @ViewChild('p') popover: NgbPopover;
   public innerWidth: number;
   public item = {
@@ -26,6 +31,7 @@ export class RequestsComponent implements OnInit {
   public periodType = 'WEEK';
 
   public allSites = [];
+  public states = [];
   public sitesIds = [];
   public statesIds = [];
   private ALL_SITE_ID = '0000000000000000';
@@ -41,9 +47,15 @@ export class RequestsComponent implements OnInit {
   private leads = [];
   private defaultName;
   private defaultExtraName;
+  private userId;
+  private isNotificationEnable = false;
+  private meInfoSub: SubscriptionLike;
 
   constructor(
     private translate: TranslateService,
+    private cookieService: CookieService,
+    private userService: UserService,
+    private siteService,
     private crmService: CrmService
   ) {
   }
@@ -69,6 +81,8 @@ export class RequestsComponent implements OnInit {
         "trial": true
       }];
       this.sitesIds = [this.ALL_SITE_ID];
+      this.states = this.crmService.getStates();
+      this.initStats();
     });
     this.translate.get('crm.page.table.extra.default').subscribe((translation: string) => {
       this.defaultName = translation;
@@ -85,12 +99,38 @@ export class RequestsComponent implements OnInit {
     this.innerWidth = event.target.innerWidth;
   }
 
+  private initStats() {
+    this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
+      this.userId = response.id;
+      this.getSites();
+    });
+  }
+
+  private getSites() {
+    const notificationOffCookie = this.cookieService.get('lgwg-notification-off');
+    this.allSites = [];
+    this.siteService.getSitesShort().then((response: SiteShort[]) => {
+      this.allSites = response;
+      this.siteService.setSiteList(response);
+
+      if (notificationOffCookie !== this.userId && this.isTrialSites(response)) {
+        this.isNotificationEnable = true;
+      }
+    });
+  }
+
+  private isTrialSites(sites: SiteShort[]): boolean {
+    return sites.some((item) => {
+      return item.trial;
+    });
+  }
+
   public showYesterdayDate() {
     const yesterday = new Date(this.getToday().getTime() - this.ONE_DAY)
     return this.periodType === "YESTERDAY" ? yesterday : this.periodEnd;
   }
 
-  private changePeriod(value: string) {
+  public changePeriod(value: string) {
     if (value === Periods.TODAY) {
       this.periodStart = new Date();
       this.periodStart.setHours(0,0,0,0);
@@ -118,7 +158,12 @@ export class RequestsComponent implements OnInit {
   }
 
   public periodApply() {
-    console.log(this.periodEnd)
+    const prevPeriodType = this.periodType;
+    this.periodType = "USER";
+    this.popover.close();
+    if (prevPeriodType === "USER") {
+      this.changePeriod("USER");
+    }
   }
 
   public checkFilters(newValue) {
@@ -199,6 +244,12 @@ export class RequestsComponent implements OnInit {
 
   private getUNIXTime(time) {
     return moment(time).unix() * 1000;
+  }
+
+  ngOnDestroy(): void {
+    if (this.meInfoSub) {
+      this.meInfoSub.unsubscribe();
+    }
   }
 
 }

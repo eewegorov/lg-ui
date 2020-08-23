@@ -30,6 +30,7 @@
               ngbRadioGroup
               name="radioBasic"
               [(ngModel)]="periodType"
+              (ngModelChange)="changePeriod($event)"
             >
               <label ngbButtonLabel class="btn btn-default">
                 <input ngbButton type="radio" [value]="'TODAY'"> {{ 'reports.emails.period.today' | translate }}
@@ -53,11 +54,6 @@
                       <label class="control-label m-0">{{ 'global.period.dateStart' | translate }}:</label>
                       <div id='req-period-start'>
                         <ngbd-datepicker-i18n [(ngModel)]="periodStart"></ngbd-datepicker-i18n>
-                        <!--<input class="form-control" placeholder="DD.MM.YYYY"
-                               name="dp" [(ngModel)]="periodStart" ngbDatepicker #d1="ngbDatepicker">
-                        <div class="input-group-append">
-                          <button class="btn btn-default fa fa-calendar-alt" (click)="d1.toggle()" type="button"></button>
-                        </div>-->
                       </div>
                     </div>
                     <div class="text-left mt-3">
@@ -69,7 +65,6 @@
                   </div>
                   <div class="text-right mt-3">
                       <button id="periodApply" (click)="periodApply()" type="button" class="btn w-xs btn-success">{{ 'global.period.start' | translate }}</button>
-
                   </div>
                 </div>
               </ng-template>
@@ -86,7 +81,6 @@
               >
                 {{ 'reports.emails.period.user' | translate }}
               </button>
-
             </div>
             <h1 class="request-period-name">
               <span>{{ 'reports.emails.filter.from' | translate }}</span>
@@ -98,10 +92,17 @@
 
           <div class="filter-flexed__item">
             <h5 class="font-normal">{{ 'crm.page.filter.states' | translate }}:</h5>
-            <!--<select id="statesSelector" ng-model="statesIds" ui-select2="{ multiple: true}" data-placeholder="{{ 'crm.page.filter.states.placeholder' | translate }}" multiple="true">
-              <option value="0000000000000000">{{ 'crm.page.filter.states.all' | translate }}</option>
-              <option ng-repeat="item in states" value="{{item.type}}">{{item.label}}</option>
-            </select>-->
+            <ng-select
+              id="statesSelector"
+              bindValue="type"
+              bindLabel="label"
+              [items]="states"
+              [placeholder]="'crm.page.filter.states.placeholder' | translate"
+              multiple="true"
+              [(ngModel)]="statesIds"
+              (add)="checkFilters($event)"
+              (change)="timeoutFiltering(false)"
+            ></ng-select>
           </div>
         </div>
       </div>

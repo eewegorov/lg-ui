@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { CreateSiteData, CreateSiteRequest, CreateSiteResponse, Site, SitesResponse } from '../../../core/models/sites';
+import {
+  CreateSiteData,
+  CreateSiteRequest,
+  CreateSiteResponse,
+  Site,
+  SiteShort,
+  SitesResponse,
+  SitesShortResponse
+} from '../../../core/models/sites';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { SitesApiService } from './sites-api.service';
 
@@ -10,7 +18,7 @@ import { SitesApiService } from './sites-api.service';
   providedIn: 'root'
 })
 export class SitesService {
-  public sites;
+  public shortSiteList = [];
   private currentSiteId: string;
 
   constructor(
@@ -21,6 +29,13 @@ export class SitesService {
   public getSites(): Observable<Site[]> {
     return this.sitesApiService.getSites().pipe(
       map((response: SitesResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getSitesShort(): Observable<SiteShort[]> {
+    return this.sitesApiService.getSitesShort().pipe(
+      map((response: SitesShortResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }
@@ -44,6 +59,10 @@ export class SitesService {
 
   public getCurrentSiteId(): string {
     return this.currentSiteId;
+  }
+
+  public setSiteList(sites) {
+    this.shortSiteList = sites;
   }
 
   public isSiteHasExpTariff(site): boolean {

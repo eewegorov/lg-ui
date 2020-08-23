@@ -3,13 +3,21 @@
     class="form-control"
     placeholder="DD.MM.YYYY"
     name="dp"
+    [dayTemplate]="customDay"
     [(ngModel)]="selectedDate"
     (change)="onDateChange($event)"
     (dateSelect)="onDateChange($event)"
     ngbDatepicker
-    #d2="ngbDatepicker"
+    #d="ngbDatepicker"
   >
   <div class="input-group-append">
-    <button class="btn btn-default fa fa-calendar-alt" (click)="d2.toggle()" type="button"></button>
+    <button class="btn btn-default fa fa-calendar-alt" (click)="d.toggle()" type="button"></button>
   </div>
 </div>
+
+<ng-template #customDay let-date let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
+  <span class="custom-day" [class.today]="isToday(date)" [class.focused]="focused"
+        [class.bg-primary]="selected" [class.text-muted]="disabled">
+    {{ date.day }}
+  </span>
+</ng-template>

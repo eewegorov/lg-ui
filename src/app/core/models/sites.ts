@@ -15,6 +15,19 @@ export interface Site {
   leads: DayStat[];
 }
 
+export interface SitesShortResponse extends ApiResponse {
+  data: SiteShort[];
+}
+
+export interface SiteShort {
+  id: string;
+  name: string;
+  url: string;
+  tariffName: string;
+  tariffExp: number;
+  trial: boolean;
+}
+
 export interface DayStat {
   date: number;
   value: number;

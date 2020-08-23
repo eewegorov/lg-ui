@@ -1,6 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDateParserFormatter, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 const I18N_VALUES = {
   'ru': {
@@ -40,12 +40,52 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
   }
 }
 
+@Injectable()
+export class NgbDateCustomParserFormatter extends NgbDateParserFormatter {
+  parse(value: string): NgbDateStruct {
+    if (value) {
+      const dateParts = value.trim().split('.');
+      if (dateParts.length === 1 && isNumber(dateParts[0])) {
+        return {day: toInteger(dateParts[0]), month: null, year: null};
+      } else if (dateParts.length === 2 && isNumber(dateParts[0]) && isNumber(dateParts[1])) {
+        return {day: toInteger(dateParts[0]), month: toInteger(dateParts[1]), year: null};
+      } else if (dateParts.length === 3 && isNumber(dateParts[0]) && isNumber(dateParts[1]) && isNumber(dateParts[2])) {
+        return {day: toInteger(dateParts[0]), month: toInteger(dateParts[1]), year: toInteger(dateParts[2])};
+      }
+    }
+    return null;
+  }
+
+  format(date: NgbDateStruct): string {
+    return date ?
+      `${isNumber(date.day) ? padNumber(date.day) : ''}.${isNumber(date.month) ? padNumber(date.month) : ''}.${date.year}` :
+      '';
+  }
+}
+
+export function toInteger(value: any): number {
+  return parseInt(`${value}`, 10);
+}
+
+export function isNumber(value: any): value is number {
+  return !isNaN(toInteger(value));
+}
+
+export function padNumber(value: number) {
+  if (isNumber(value)) {
+    return `0${value}`.slice(-2);
+  } else {
+    return "";
+  }
+}
+
 @Component({
   selector: 'ngbd-datepicker-i18n',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
   providers: [
     I18n,
+    { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter },
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
     {
       provide: NG_VALUE_ACCESSOR,
@@ -57,7 +97,7 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
 export class NgbdDatepickerI18n implements ControlValueAccessor {
   selectedDate;
   onChange = (date?: Date) => {};
-  onTouched = () => {};
+  private today = new Date();
 
   writeValue(value: Date) {
     this.selectedDate = value;
@@ -73,11 +113,15 @@ export class NgbdDatepickerI18n implements ControlValueAccessor {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
+  registerOnTouched(): void { }
 
   onDateChange(value: any) {
     this.onChange(new Date(value.year, value.month - 1, value.day));
+  }
+  
+  isToday = (date: NgbDateStruct) => {
+    return date.day == this.today.getDate() &&
+      date.month == this.today.getMonth()+1 &&
+      date.year == this.today.getFullYear();
   }
 }
