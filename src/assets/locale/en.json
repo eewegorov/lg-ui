@@ -89,12 +89,26 @@
 	"crm": {
 		"page": {
 			"card": {
+				"details": "",
+				"sawPages": "",
+				"source": {
+					"linkDesc": ""
+				},
 				"status": {
 					"bad": "",
+					"email": "",
+					"message": "",
+					"name": "",
 					"new": "",
+					"notes": "",
 					"onWork": "",
+					"phone": "",
 					"success": ""
-				}
+				},
+				"visitHistory": {
+					"title": ""
+				},
+				"visitNumber": ""
 			},
 			"filter": {
 				"period": "",
@@ -144,6 +158,7 @@
 		},
 		"done": "",
 		"error": "",
+		"from": "",
 		"period": {
 			"dateEnd": "",
 			"dateStart": "",

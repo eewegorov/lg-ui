@@ -81,7 +81,7 @@ h1.request-period-name {
   box-shadow: none;
 }
 
-.btn:active, .btn.active {
+.btn:active:not(:disabled), .btn.active:not(:disabled) {
   background-image: none;
   outline: 0;
   -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
@@ -128,6 +128,79 @@ table {
 .crm-table-wr table thead .sorting {
   position: relative;
   cursor: pointer;
+}
+
+.clickable-row-info {
+  cursor: pointer;
+}
+
+.clickable-row-info.active-row {
+  background-color: #edf0f5 ;}
+
+.crm-table-widget-name {
+  color: #3498db;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 350px;
+}
+
+.clickable-row-info:hover .crm-table-widget-name {
+  color: #2a6496;
+}
+
+.crm-table-site-url {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 350px;
+}
+
+.table .label.lead-state-container {
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.crm-table-state__NEW {
+  background-color: #9b59b6;
+}
+
+.crm-table-state__INWORK {
+  background-color: #3498db;
+}
+
+.crm-table-state__INVALID {
+  background-color: #c0392b;
+}
+
+.crm-table-state__SUCCESS {
+  background-color: #62cb31;
+}
+
+.site-list-table__bottom-settings {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.site-list-table__onpage select {
+
+}
+
+.site-list-table__onpage {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
+.site-list-table__onpage label {
+  line-height: 30px;
+  margin-right: 10px;
+}
+
+.site-list-table__onpage select {
+  max-width: 66px;
 }
 
 

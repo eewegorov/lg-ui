@@ -12,6 +12,7 @@ export class LeadInfoComponent implements OnInit, OnDestroy {
   public leadInfo: LeadById = null;
   public field;
   public history;
+  public status;
   public isOpen = false;
   private openLeadInfoSidebarSub: SubscriptionLike;
 

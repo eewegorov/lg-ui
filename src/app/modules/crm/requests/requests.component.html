@@ -125,7 +125,7 @@
         <span class="panelTitle">{{ 'sidebar.crm' | translate }}</span>
       </div>
 
-      <div class="panel-body">
+      <div class="panel-body table-container">
         <div *ngIf="!initTables" class="crm-table__loader"></div>
         <div *ngIf="initTables" class="crm-table-pos">
           <button
@@ -160,13 +160,13 @@
               >
                 <td
                   class="crm-table-widget-name"
-                  data-container=".table-container-test"
+                  data-container=".table-container"
                   data-toggle="tooltip"
                   data-placement="top"
                   data-title="{{ 'crm.page.table.tooltip' | translate }}">{{ item.widgetName }}</td>
                 <td><span>{{ item.siteName }}</span></td>
-                <td class="crm-table-site-url dtable-max-220"><span>{{item.pageUrl}}</span></td>
-                <td><span class="lead-state-container label font-normal-size crm-table-state__{{item.state}}">{{ item.state }}</span></td>
+                <td class="crm-table-site-url dtable-max-220"><span>{{ item.pageUrl }}</span></td>
+                <td><span class="lead-state-container label font-normal-size crm-table-state__{{ item.state }}">{{ item.status }}</span></td>
                 <td class="dtable-max-160">{{ item.date | date : "dd.MM.y, hh:mm a" }}</td>
               </tr>
             </tbody>
@@ -175,22 +175,27 @@
           <div class="site-list-table__bottom-settings">
             <div class="site-list-table__onpage">
               <label>{{ 'sitelist.table.onPage' | translate }}</label>
-              <select name="leads_length"
-                      ng-init="searchParams.limit = limitOptions[1]"
-                      ng-change="updateTable()"
-                      ng-model="searchParams.limit"
-                      ng-options="option.value for option in limitOptions"
-                      class="form-control input-sm">
-              </select>
+              <ng-select
+                id="limitSelector"
+                appendTo="body"
+                bindLabel="value"
+                [clearable]="false"
+                [items]="limitOptions"
+                [(ngModel)]="searchParams.limit"
+                (change)="timeoutFiltering(false)"
+              ></ng-select>
             </div>
-
             <div class="site-list-arrows btn-group">
-              <button ng-click="prevList()"
-                      ng-disabled="searchParams.offset === 0"
-                      class="btn btn-default"><i class="fa fa-chevron-left"></i></button>
-              <button ng-click="nextList()"
-                      ng-disabled="leads.length < searchParams.limit.value"
-                      class="btn btn-default"><i class="fa fa-chevron-right"></i></button>
+              <button
+                class="btn btn-default"
+                (click)="prevList()"
+                [disabled]="searchParams.offset === 0"
+              ><i class="fa fa-chevron-left"></i></button>
+              <button
+                class="btn btn-default"
+                (click)="nextList()"
+                [disabled]="leads.length < searchParams.limit.value"
+              ><i class="fa fa-chevron-right"></i></button>
             </div>
           </div>
         </div>

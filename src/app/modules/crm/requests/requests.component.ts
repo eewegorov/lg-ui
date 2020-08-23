@@ -43,8 +43,8 @@ export class RequestsComponent implements OnInit, OnDestroy {
   private ALL_SITE_ID = '0000000000000000';
   private ONE_DAY = 86400000;
   private filterTimeout: ReturnType<typeof setTimeout>;
-  private limitOptions = [{value: 10}, {value: 25}, {value: 50}, {value: 100}];
-  private searchParams = {
+  public limitOptions = [{value: 10}, {value: 25}, {value: 50}, {value: 100}];
+  public searchParams = {
     offset: 0,
     limit: this.limitOptions[1]
   };
@@ -223,6 +223,18 @@ export class RequestsComponent implements OnInit, OnDestroy {
     });
   };
 
+  public prevList() {
+    if (this.searchParams.offset === 0) return;
+    this.searchParams.offset -= this.searchParams.limit.value;
+    this.timeoutFiltering(true);
+  }
+
+  public nextList() {
+    if (this.leads.length < this.searchParams.limit.value) return;
+    this.searchParams.offset = this.searchParams.offset + this.searchParams.limit.value;
+    this.timeoutFiltering(true);
+  }
+
   private getLeads() {
     this.initTables = true;
     const params = {
@@ -245,7 +257,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
       timeout(500)
     ).subscribe((response: Lead[]) => {
       this.leads = response.map((item: Lead) => {
-        item.state = this.setStatusByState(item.state);
+        item.status = this.setStatusByState(item.state);
         item.widgetName = this.setExtraName(item.widgetName);
         return item;
       });
@@ -290,5 +302,4 @@ export class RequestsComponent implements OnInit, OnDestroy {
       this.meInfoSub.unsubscribe();
     }
   }
-
 }

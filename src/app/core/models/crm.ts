@@ -13,6 +13,7 @@ export interface Lead {
   siteUrl: string;
   pageUrl: string;
   state: string;
+  status?: string;
   date: number;
   comment: string;
 }

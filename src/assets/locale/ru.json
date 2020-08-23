@@ -89,12 +89,26 @@
 	"crm": {
 		"page": {
 			"card": {
+				"details": "Детали",
+				"sawPages": "просмотрено страниц",
+				"source": {
+					"linkDesc": "Страница отправки"
+				},
 				"status": {
 					"bad": "Невалидная",
+					"email": "Email",
+					"message": "Сообщение",
+					"name": "Имя",
 					"new": "Новая",
+					"notes": "Заметки",
 					"onWork": "В работе",
+					"phone": "Телефон",
 					"success": "Успешная"
-				}
+				},
+				"visitHistory": {
+					"title": "История визита"
+				},
+				"visitNumber": "номер визита"
 			},
 			"filter": {
 				"period": "Период",
@@ -144,6 +158,7 @@
 		},
 		"done": "Готово",
 		"error": "Ошибка!",
+		"from": "от",
 		"period": {
 			"dateEnd": "Конец периода",
 			"dateStart": "Начало периода",
