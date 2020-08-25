@@ -62,6 +62,10 @@ export interface LeadByIdWithIndex {
   index: number;
 }
 
+export interface UpdateComment {
+  comment: string;
+}
+
 export enum Periods {
   TODAY = 'TODAY',
   YESTERDAY = 'YESTERDAY',

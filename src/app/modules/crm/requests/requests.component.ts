@@ -215,12 +215,60 @@ export class RequestsComponent implements OnInit, OnDestroy {
   }
 
   public openLeadInfo(lead: Lead, index: number) {
-    this.crmService.getLeadById(lead.id).subscribe((response: LeadById) => {
-      if (response) {
+    /*this.crmService.getLeadById(lead.id).subscribe((response: LeadById) => {
+      if (response) {*/
+    const response = {
+      "id": "5cde635badbf9c72acf266a8",
+      "title": "Hat request",
+      "firstName": "Sergey",
+      "lastName": "Kolivanov","phones": [
+        "+7(985) 665-89-89"
+      ],
+      "emails": [
+        "sergey@kolivanov.ru"
+      ],
+      "comment": "Need call to client",
+      "userComment": "I want buy this shit",
+      "pageUrl": "http://site.com/shit",
+      "pageTitle": "Hat as Product",
+      "visitNo": 3,
+      "ip": "0.0.0.0",
+      "history": [
+        {
+          "title": "Hat as Product",
+          "url": "http://site.com/shit",
+          "serverDate": 1484032321000,
+          "userDate": 1484032321000
+        },
+        {
+          "title": "Hat store",
+          "url": "http://site.com",
+          "serverDate": 1484032320000,
+          "userDate": 1484032320000
+        }
+      ],
+      "state": "b73515bd1b78c4b545b1e9131e4509e4",
+      "siteName": "Hat store",
+      "siteUrl": "site.com",
+      "createDate": 1484032321000,
+      "widgetName": "Widget Hotpoint",
+      "fieldsValues": [
+        {
+          "id": "1b1dfbb46232c26cdf1172239ebedbe6",
+          "name": "Field1",
+          "value": "value1"
+        },
+        {
+          "id": "7f27c0dc041e2b0de33b6c63e4c2434e",
+          "name": "Field2",
+          "value": "value2"
+        }
+      ]
+    };
         this.currentOpenedRow = index;
         this.crmService.openLeadInfoSidebar.next({ data: response, index: index });
-      }
-    });
+    /*  }
+    });*/
   };
 
   public prevList() {

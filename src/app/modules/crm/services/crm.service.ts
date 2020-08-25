@@ -2,9 +2,17 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { Lead, LeadById, LeadByIdResponse, LeadByIdWithIndex, LeadsResponse } from '../../../core/models/crm';
+import {
+  Lead,
+  LeadById,
+  LeadByIdResponse,
+  LeadByIdWithIndex,
+  LeadsResponse,
+  UpdateComment
+} from '../../../core/models/crm';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { CrmApiService } from './crm-api.service';
+import { ApiResponse } from '../../../core/models/api';
 
 
 
@@ -32,6 +40,13 @@ export class CrmService {
       map((response: LeadByIdResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
+  }
+
+  public updateLeadComment(leadId: string, comment: UpdateComment): Observable<boolean> {
+    return this.crmApiService.updateLeadComment(leadId, comment).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    )
   }
 
   public getStates() {

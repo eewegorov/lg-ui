@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
-import { CrmService } from '../services/crm.service';
 import { LeadById, LeadByIdWithIndex } from '../../../core/models/crm';
+import { CrmService } from '../services/crm.service';
+
 
 @Component({
   selector: 'app-lead-info',
@@ -10,19 +11,44 @@ import { LeadById, LeadByIdWithIndex } from '../../../core/models/crm';
 })
 export class LeadInfoComponent implements OnInit, OnDestroy {
   public leadInfo: LeadById = null;
-  public field;
-  public history;
+  public index: number;
   public status;
+  public isUserCommentUpdated = false;
   public isOpen = false;
+  public focused = false;
   private openLeadInfoSidebarSub: SubscriptionLike;
 
   constructor(private crmService: CrmService) { }
 
   ngOnInit(): void {
+
     this.openLeadInfoSidebarSub = this.crmService.openLeadInfoSidebar.subscribe((response: LeadByIdWithIndex) => {
       this.leadInfo = response.data;
+      this.index = response.index;
+      this.isOpen = true;
     });
   }
+
+  public closeLeadInfo() {
+    this.isOpen = false;
+  }
+
+  public onFocusCommentField() {
+    this.focused = true;
+  };
+
+  public updateComment() {
+    this.focused = false;
+    this.crmService.updateLeadComment(this.leadInfo.id, { comment: this.leadInfo.userComment }).subscribe(
+      (response: boolean) => {
+        if (response) {
+          this.isUserCommentUpdated = true;
+          setTimeout(() => {
+            this.isUserCommentUpdated = false;
+            }, 1000);
+        }
+      });
+  };
 
   ngOnDestroy(): void {
     if (this.openLeadInfoSidebarSub) {

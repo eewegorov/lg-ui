@@ -183,24 +183,22 @@ table {
   justify-content: flex-end;
 }
 
-.site-list-table__onpage select {
-
-}
-
 .site-list-table__onpage {
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;
   margin-right: 10px;
+  align-items: center;
 }
 
 .site-list-table__onpage label {
   line-height: 30px;
   margin-right: 10px;
+  margin-bottom: 0;
 }
 
-.site-list-table__onpage select {
-  max-width: 66px;
+.site-list-table__onpage #limitSelector {
+  width: 60px;
 }
 
 
@@ -208,7 +206,7 @@ table {
 @media (max-width: 1310px) {
   .filter-flexed__item {
     flex-basis: 100%;
-    width: 100% !important;
+    width: 100%;
     margin-top: 5px;
   }
 
