@@ -8,7 +8,9 @@ import {
   LeadByIdResponse,
   LeadByIdWithIndex,
   LeadsResponse,
-  UpdateComment
+  StateWithIndex,
+  UpdateComment,
+  UpdateState
 } from '../../../core/models/crm';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { CrmApiService } from './crm-api.service';
@@ -21,6 +23,7 @@ import { ApiResponse } from '../../../core/models/api';
 })
 export class CrmService {
   public openLeadInfoSidebar: BehaviorSubject<LeadByIdWithIndex> = new BehaviorSubject(null);
+  public updateLeadInfo: BehaviorSubject<StateWithIndex> = new BehaviorSubject(null);
 
   constructor(
     private translate: TranslateService,
@@ -40,6 +43,13 @@ export class CrmService {
       map((response: LeadByIdResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
+  }
+
+  public updateLeadState(leadId: string, state: UpdateState): Observable<boolean> {
+    return this.crmApiService.updateLeadState(leadId, state).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    )
   }
 
   public updateLeadComment(leadId: string, comment: UpdateComment): Observable<boolean> {

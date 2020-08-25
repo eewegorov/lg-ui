@@ -1,16 +1,21 @@
-<div id="right-sidebar" class="lead-info-sidebar animated fadeInRight" [ngClass]="{'sidebar-open': isOpen}">
+<div
+  id="right-sidebar"
+  class="lead-info-sidebar animate__animated animate__fadeInRight"
+  [ngClass]="{ 'sidebar-open': isOpen }"
+  (clickOutside)="closeLeadInfo()"
+>
   <div class="sidebar-body">
     <button
-      class="lead-info-sidebar__close btn btn-default m-b-md"
+      class="lead-info-sidebar__close btn btn-default mb-2"
       (click)="closeLeadInfo()"
     ><i class="pe pe-7s-close"></i></button>
-    <div class="row sidebar-title">
+    <div class="sidebar-title">
       <h5 id="crm-details-title">
-        {{ leadInfo.title }} {{ 'global.from' | translate }} {{ leadInfo.createDate | date : "dd.MM.y, hh:mm a" }}
+        {{ leadInfo.title }} {{ 'global.from' | translate }} {{ leadInfo.createDate | date : "dd.MM.y, HH:mm" }}
       </h5>
     </div>
     <div id="detailsContent" class="lead-info-card-wrapper">
-      <div id="detailsInfo" class="lead-info-card padding-top-20 padding-bottom-20 no-animate">
+      <div id="detailsInfo" class="lead-info-card pt-3 pb-3">
         <div class="lead-info-card__status">
           <div>{{ 'crm.page.table.th4' | translate }}</div>
           <div
@@ -18,6 +23,7 @@
             ngbRadioGroup
             name="radioBasic"
             [(ngModel)]="status"
+            (ngModelChange)=updateState($event)
           >
             <label ngbButtonLabel class="btn btn-default btn-status-new">
               <input ngbButton type="radio" [value]="'NEW'"> {{ 'crm.page.card.status.new' | translate }}

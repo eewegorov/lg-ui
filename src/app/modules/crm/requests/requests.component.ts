@@ -6,7 +6,7 @@ import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import * as moment from 'moment';
 import { SiteShort } from '../../../core/models/sites';
-import { Lead, LeadById, Periods } from '../../../core/models/crm';
+import { Lead, Periods, StateWithIndex } from '../../../core/models/crm';
 import { UserService } from '../../user/services/user.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { CrmService } from '../services/crm.service';
@@ -57,6 +57,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
   public isNotificationEnable = false;
   public currentOpenedRow = null;
   private meInfoSub: SubscriptionLike;
+  private updateLeadInfo: SubscriptionLike;
 
   constructor(
     private translate: TranslateService,
@@ -83,6 +84,11 @@ export class RequestsComponent implements OnInit, OnDestroy {
     });
     this.translate.get('crm.page.table.extra.widget').subscribe((translation: string) => {
       this.defaultExtraName = translation;
+    });
+    this.updateLeadInfo = this.crmService.updateLeadInfo.subscribe((response: StateWithIndex) => {
+      if (!response) return;
+      this.leads[response.index].state = response.state;
+      this.leads[response.index].status = this.setStatusByState(response.state);
     });
   }
 
@@ -348,6 +354,9 @@ export class RequestsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.meInfoSub) {
       this.meInfoSub.unsubscribe();
+    }
+    if (this.updateLeadInfo) {
+      this.updateLeadInfo.unsubscribe();
     }
   }
 }

@@ -62,6 +62,15 @@ export interface LeadByIdWithIndex {
   index: number;
 }
 
+export interface UpdateState {
+  state: string;
+}
+
+export interface StateWithIndex {
+  index: number;
+  state: string;
+}
+
 export interface UpdateComment {
   comment: string;
 }

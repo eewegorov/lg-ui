@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { LeadById, LeadByIdWithIndex } from '../../../core/models/crm';
 import { CrmService } from '../services/crm.service';
@@ -21,21 +21,31 @@ export class LeadInfoComponent implements OnInit, OnDestroy {
   constructor(private crmService: CrmService) { }
 
   ngOnInit(): void {
-
     this.openLeadInfoSidebarSub = this.crmService.openLeadInfoSidebar.subscribe((response: LeadByIdWithIndex) => {
       this.leadInfo = response.data;
+      this.status = response.data.state;
       this.index = response.index;
-      this.isOpen = true;
+      setTimeout(() => {
+        this.isOpen = true;
+      }, 0);
     });
   }
 
   public closeLeadInfo() {
-    this.isOpen = false;
+    if (this.isOpen) {
+      this.isOpen = false;
+    }
   }
 
   public onFocusCommentField() {
     this.focused = true;
-  };
+  }
+
+  public updateState(event: string) {
+    this.crmService.updateLeadState(this.leadInfo.id, { state: event }).subscribe(() => {
+      this.crmService.updateLeadInfo.next({ index: this.index, state: event });
+    });
+  }
 
   public updateComment() {
     this.focused = false;
@@ -48,7 +58,7 @@ export class LeadInfoComponent implements OnInit, OnDestroy {
             }, 1000);
         }
       });
-  };
+  }
 
   ngOnDestroy(): void {
     if (this.openLeadInfoSidebarSub) {

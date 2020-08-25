@@ -5,12 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ClickOutsideModule } from 'ng-click-outside';
+import { CookieService } from 'ngx-cookie-service';
 import { MissingTranslationService } from './core/services/missingTranslation.service';
 import { TokenInterceptor } from './core/services/token.interceptor';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
-import { CookieService } from 'ngx-cookie-service';
+
 
 
 @NgModule({

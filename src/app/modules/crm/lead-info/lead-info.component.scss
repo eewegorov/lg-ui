@@ -11,11 +11,119 @@
   overflow: hidden;
 }
 
-#right-sidebar.animated {
+#right-sidebar.animate__animated {
   animation-duration: 0.5s;
 }
 
 
 #right-sidebar.sidebar-open {
   display: block;
+}
+
+.sidebar-body {
+  margin: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.lead-info-sidebar__close {
+  left: 10px;
+  position: absolute;
+  top: 10px;
+  font-size: 14px;
+}
+
+.lead-info-sidebar__close:hover {
+  background-color: #f00713;
+  border-color: #f00713;
+  color: #fff;
+}
+
+.sidebar-title {
+  border-bottom: 1px solid #ebebeb;
+  margin: 4px 0;
+  padding: 15px 0;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+#crm-details-title {
+  margin-left: 60px;
+  color: #34495e;
+}
+
+.lead-info-card-wrapper {
+  height: calc(100vh - 56px);
+  overflow: auto;
+}
+
+#detailsInfo {
+  background-color: #f7f9fa;
+}
+
+.lead-info-card {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.lead-info-card__data label {
+  font-weight: 400;
+  margin-bottom: 0;
+}
+.lead-info-card__data div {
+  font-weight: 700;
+  font-size: 15px;
+}
+.lead-info-card__data-colored div {
+  color: #34495e;
+}
+.lead-info-card__data {
+  margin-top: 10px;
+}
+.lead-info-card__data-commented div {
+  font-weight: 400!important;
+  font-size: 13px!important;
+}
+.lead-info-card__external {
+  display: flex;
+  padding: 15px;
+}
+.lead-info-card__external-item {
+  flex-basis: 100%;
+  background-color: #f7f9fa;
+}
+.lead-info-card__external-item.lead-info-card__external-item-marg {
+  margin-right: 15px;
+}
+.lead-info-card__external-item .stats-title h4 {
+  margin: 5px 0;
+}
+.lead-info-card__external-item .panel-body {
+  padding: 5px 15px;
+}
+.lead-info-card__external-item__value {
+  margin-top: -5px;
+  color: #35495e;
+}
+.lead-info-card__history {
+  margin: 0;
+  padding: 15px 0;
+}
+.lead-info-card__history .vertical-timeline-content .vertical-date {
+  padding-left: 5px;
+}
+.lead-info-card__history .vertical-timeline-content .vertical-date i {
+  margin-right: 4px;
+  color: #62cb31;
+}
+.lead-info-card__history .vertical-timeline-content h2 {
+  font-size: 16px!important;
+  color: #34495e;
+}
+.lead-info-card__history.v-timeline2::before {
+  top: 16px;
+  bottom: 107px;
+  height: auto!important;
+  left: 18px;
 }

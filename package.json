@@ -39,6 +39,7 @@
     "jquery": "^3.5.1",
     "metismenu": "^3.0.6",
     "moment": "^2.27.0",
+    "ng-click-outside": "^7.0.0",
     "ngx-cookie-service": "^10.0.1",
     "ngx-toastr": "^13.0.0",
     "ngx-ui-switch": "^9.0.2",

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
-import { LeadByIdResponse, LeadsResponse, UpdateComment } from '../../../core/models/crm';
+import { LeadByIdResponse, LeadsResponse, UpdateComment, UpdateState } from '../../../core/models/crm';
 
 
 @Injectable({
@@ -21,6 +21,10 @@ export class CrmApiService {
 
   public getLeadById(leadId: string): Observable<LeadByIdResponse> {
     return this.http.get<LeadByIdResponse>(`${ environment.url }/leads/${leadId}`);
+  }
+
+  public updateLeadState(leadId: string, state: UpdateState): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${ environment.url }/leads/${leadId}/state`, state);
   }
 
   public updateLeadComment(leadId: string, comment: UpdateComment): Observable<ApiResponse> {
