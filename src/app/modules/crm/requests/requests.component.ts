@@ -39,6 +39,17 @@ export class RequestsComponent implements OnInit, OnDestroy {
     state: 'NEW',
     date: 1263161699000,
     comment: 'Comment is missing'
+  }, {
+    id: '4b7e34535345669bcb5f1bf53d2bf71a',
+    title: 'Test lead 2',
+    widgetName: 'This is my better widget',
+    siteId: '27b7f3sdfsf521503acc2b38d3e5b640',
+    siteName: 'U1 site 2',
+    siteUrl: 'http://u2s2.com',
+    pageUrl: 'http://u2s2.com/test',
+    state: 'NEW',
+    date: 1263171799000,
+    comment: 'Comment is commented'
   }];
   private ALL_SITE_ID = '0000000000000000';
   private ONE_DAY = 86400000;
@@ -221,6 +232,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
   }
 
   public openLeadInfo(lead: Lead, index: number) {
+    console.log(lead)
     /*this.crmService.getLeadById(lead.id).subscribe((response: LeadById) => {
       if (response) {*/
     const response = {
