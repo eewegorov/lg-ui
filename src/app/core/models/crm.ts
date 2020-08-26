@@ -1,4 +1,4 @@
-import { ApiLimitResponse } from './api';
+import { ApiLimitResponse, ApiResponse } from './api';
 
 export interface LeadsResponse extends ApiLimitResponse {
   data: Lead[];
@@ -18,7 +18,7 @@ export interface Lead {
   comment: string;
 }
 
-export interface LeadByIdResponse extends ApiLimitResponse {
+export interface LeadByIdResponse extends ApiResponse {
   data: LeadById;
 }
 

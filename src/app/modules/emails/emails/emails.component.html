@@ -1,24 +1,12 @@
-<div class="reports-controller-main-bl"
-     ng-controller="ReportsEmailController"
-     ng-cloak
-     tooltiped>
+<div class="flex-column toolbar-content">
   <h1 class="widget-title-main">{{ 'sidebar.emails' | translate }}</h1>
   <div>
-    <!--<div class="row" ng-init="
-						localization.reports.emails.clear.title  = '<spring:message code="reports.emails.clear.title"/>';
-    localization.reports.emails.clear.text   = '<spring:message code="reports.emails.clear.text"/>';
-    localization.reports.emails.clear.yes    = '<spring:message code="reports.emails.clear.yes"/>';
-    localization.reports.emails.clear.cancel = '<spring:message code="reports.emails.clear.cancel"/>';
-    localization.reports.emails.clear.done.title = '<spring:message code="reports.emails.clear.done.title"/>';
-    localization.reports.emails.clear.done.desc  = '<spring:message code="reports.emails.clear.done.desc"/>';
-    ">-->
-
-    <div ng-if="!allSites.length" class="col-lg-12 margined-top-30">
+    <div *ngIf="!allSites.length" class="col-lg-12 margined-top-30">
       <h3 class="f-0 text-center">{{ 'reports.sitePlaceholder' | translate }}</h3>
-      <h4 class="f-2 text-center" ng-bind-html="'reports.sitePlaceholder2' | translate"></h4>
+      <h4 class="f-2 text-center" [innerHTML]="'reports.sitePlaceholder2' | translate"></h4>
     </div>
 
-    <div ng-show="allSites.length > 0" class="col-xs-12 toolbar">
+    <div *ngIf="allSites.length > 0" class="col-xs-12 toolbar">
       <div class="row">
         <div class="col-lg-12">
           <div class="hpanel">
@@ -30,10 +18,18 @@
               <div class="row">
                 <div class="reports-emails-toolbar-left">
                   <h5 class="font-normal">{{ 'sidebar.sites' | translate }}:</h5>
-                  <!--<select id="siteSelector" ng-model="sitesIds" ui-select2="{ multiple: true}" data-placeholder="{{ 'reports.emails.sitelist.placeholder' | translate }}" multiple="true">
-                    <option value="0000000000000000">{{ 'reports.emails.sitelist.all' | translate }}</option>
-                    <option ng-repeat="item in allSites" value="{{item.id}}">{{item.name}}</option>
-                  </select>-->
+                  <ng-select
+                    id="siteSelector"
+                    bindValue="id"
+                    bindLabel="name"
+                    multiple="true"
+                    appendTo="body"
+                    [items]="allSites"
+                    [placeholder]="'crm.page.filter.sites.placeholder' | translate"
+                    [(ngModel)]="sitesIds"
+                    (add)="checkFilters($event)"
+                    (change)="timeoutFiltering()"
+                  ></ng-select>
                 </div>
                 <div class="reports-emails-toolbar-right">
                   <h5 class="font-normal">{{ 'reports.emails.period.title' | translate }}:</h5>
