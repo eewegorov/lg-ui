@@ -1,69 +1,78 @@
-<div class="ab-test-controller-main-bl">
+<div class="flex-column toolbar-content">
 
-  <h1>Архив A/B тестов</h1>
+  <h1 class="title-main">{{ 'abtests.archive.title' | translate }}</h1>
 
   <div class="wrapper-test wrapper-test-archive">
-    <div ng-show="abTests.length" class="wrapper-test-header">
+    <div *ngIf="abTests.length" class="wrapper-test-header">
       <div class="wrapper-test-filter-item wrapper-test-filter-sites">
-        <div class="row margined-left-0"><h5>Показать тесты для сайта:</h5></div>
+        <div class="row margined-left-0"><h5>{{ 'abtests.show' | translate }}:</h5></div>
         <div class="dropdown site-selector">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <span ng-show="currSite.trim().length==0">{{ 'widgetsList.add.chooseSite' | translate }}</span>
-            {{getCroppedString(getSiteName(currSite), 30, '…')}}
+            <span *ngIf="currSite.trim().length==0">{{ 'widgetsList.add.chooseSite' | translate }}</span>
+            {{ getCroppedString(getSiteName(currSite), 30, '…') }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <li ng-repeat="site in sites" ng-click="setCurrSite(site)"><a href="#">{{site.name}}</a>
+            <li *ngFor="let site of sites" (click)="setCurrSite(site)"><a href="#">{{ site.name }}</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
 
-    <div class="main-content-container-ab-loader" ng-show="!isLoad"></div>
+    <div class="main-content-container-ab-loader" *ngIf="!isLoad"></div>
 
-    <div ng-show="!abTests.length" class="margined-top-30">
-      <h3 class="f-0 text-center">В этом разделе будут находиться завершенные A/B тесты</h3>
+    <div *ngIf="!abTests.length" class="margined-top-30">
+      <h3 class="f-0 text-center">{{ 'abtests.archive.completed' | translate }}</h3>
     </div>
-
-    <div ng-show="isLoad" class="test-item" ng-repeat="test in abTests" [id]="'testIdNum-' + test.id">
-      <div class="test-item-header">
-        <div class="test-item-left">
-          <div class="max-edit-text-bl">
-            <span class="test-item-name">{{ test.name || 'Нет названия' }}</span>
+    <ng-container *ngIf="isLoad">
+      <div class="test-item" *ngFor="let test of abTests" [id]="'testIdNum-' + test.id">
+        <div class="test-item-header">
+          <div class="test-item-left">
+            <div class="max-edit-text-bl">
+              <span class="test-item-name">{{ test.name || 'abtests.archive.noTitle' | translate }}</span>
+            </div>
+            <div class="max-edit-text-bl">
+              <span class="test-item-desc">{{ test.description || 'abtests.archive.noDescription' | translate }}</span>
+            </div>
           </div>
-          <div class="max-edit-text-bl">
-            <span class="test-item-desc">{{ test.description || 'Нет описания' }}</span>
+          <div class="test-item-right">
+            <div class="btn-group edit-btns">
+              <button
+                class="btn btn-xs btn-default"
+                (click)="removeArchTest(test.id, $index)"
+                data-container="body"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="{{ 'abtests.archive.noTitle' | translate }}"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
           </div>
         </div>
-        <div class="test-item-right">
-          <div class="btn-group edit-btns">
-            <button class="btn btn-xs btn-default" ng-click="removeArchTest(test.id, $index)" data-container="body"  data-toggle="tooltip" data-placement="top" title="Удалить тест из архива">
-              <i class="fa fa-trash"></i>
-            </button>
-          </div>
-        </div>
-      </div>
 
-      <div class="ab-content">
-        <div class="ab-grid">
-          <div class="ab-grid__header">
-            <div class="ab-grid__header--name">Вариант</div>
-            <div class="ab-grid__header--shows">Показов / Действий</div>
-            <div class="ab-grid__header--conv">Конверсия</div>
-            <div class="ab-grid__header--update">Улучшение</div>
-          </div>
-          <div class="ab-grid__body">
-            <div class="ab-grid__item" ng-repeat="item in test.variants" tooltiped>
-              <!--<div class="ab-grid__item&#45;&#45;name"><span long-text="{{item.name || 'empty'}}"
-                                                     max-total-characters="40"></span></div>-->
-              <div class="ab-grid__item--shows">{{item.shows}} / {{item.target}}</div>
-              <div class="ab-grid__item--conv">{{item.conversion}}</div>
-              <div class="ab-grid__item--update" ng-class="getClassForBetterTo(item)" ng-bind="showBetterToValue(item)"></div>
+        <div class="ab-content">
+          <div class="ab-grid">
+            <div class="ab-grid__header">
+              <div class="ab-grid__header--name">{{ 'abtests.variant' | translate }}</div>
+              <div class="ab-grid__header--shows">{{ 'abtests.actions' | translate }}</div>
+              <div class="ab-grid__header--conv">{{ 'abtests.conversion' | translate }}</div>
+              <div class="ab-grid__header--update">{{ 'abtests.improvement' | translate }}</div>
+            </div>
+            <div class="ab-grid__body">
+              <div class="ab-grid__item" *ngFor="let item of test.variants">
+                <!--<div class="ab-grid__item&#45;&#45;name"><span long-text="{{item.name || 'empty'}}"
+                                                       max-total-characters="40"></span></div>-->
+                <div class="ab-grid__item--shows">{{ item.shows }} / {{ item.target }}</div>
+                <div class="ab-grid__item--conv">{{ item.conversion }}</div>
+                <div class="ab-grid__item--update" [ngClass]="getClassForBetterTo(item)" [innerHTML]="showBetterToValue(item)"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
+
   </div>
 </div>

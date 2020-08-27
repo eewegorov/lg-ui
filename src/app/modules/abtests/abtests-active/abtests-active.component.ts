@@ -52,4 +52,8 @@ export class AbtestsActiveComponent implements OnInit {
 
   }
 
+  public trackById(index, item) {
+    return item.id;
+  }
+
 }

@@ -1,4 +1,57 @@
 {
+	"abtests": {
+		"actions": "",
+		"active": {
+			"active": "",
+			"all": "",
+			"instruction": "",
+			"management": "",
+			"noActive": "",
+			"noCreated": {
+				"desc": "",
+				"title": ""
+			},
+			"noData": "",
+			"noPaused": "",
+			"pauseTest": "",
+			"paused": "",
+			"reset": "",
+			"runTest": "",
+			"stopTest": "",
+			"toggle": "",
+			"variant": {
+				"add": "",
+				"copy": "",
+				"delete": "",
+				"edit": "",
+				"winner": ""
+			}
+		},
+		"archive": {
+			"completed": "",
+			"noTitle": "",
+			"title": ""
+		},
+		"conversion": "",
+		"improvement": "",
+		"modal": {
+			"noWidgets": "",
+			"template": {
+				"categories": "",
+				"choose": "",
+				"subtext": ""
+			},
+			"variant": {
+				"add": "",
+				"comment": "",
+				"create": "",
+				"description": "",
+				"title": ""
+			}
+		},
+		"show": "",
+		"variant": ""
+	},
 	"billing": {
 		"modal": {
 			"paysum": {
@@ -275,7 +328,8 @@
 			},
 			"statistics": ""
 		},
-		"sitePlaceholder": ""
+		"sitePlaceholder": "",
+		"sitePlaceholder2": ""
 	},
 	"settings": {
 		"script": {
