@@ -1,5 +1,5 @@
 <div class="flex-column toolbar-content">
-  <h1 class="widget-title-main">{{ 'sidebar.emails' | translate }}</h1>
+  <h1 class="title-main">{{ 'sidebar.emails' | translate }}</h1>
   <div>
     <div *ngIf="!allSites.length" class="col-lg-12 margined-top-30">
       <h3 class="f-0 text-center">{{ 'reports.sitePlaceholder' | translate }}</h3>
@@ -33,60 +33,68 @@
                 </div>
                 <div class="reports-emails-toolbar-right">
                   <h5 class="font-normal">{{ 'reports.emails.period.title' | translate }}:</h5>
-                  <div class="btn-group">
-                    <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'TODAY'">{{ 'reports.emails.period.today' | translate }}</label>
-                    <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'YESTERDAY'">{{ 'reports.emails.period.yesterday' | translate }}</label>
-                    <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'WEEK'">{{ 'reports.emails.period.week' | translate }}</label>
-                    <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'DECADE'">{{ 'reports.emails.period.decade' | translate }}</label>
-                    <label class="btn btn-default" ng-model="periodType" uib-btn-radio="'MONTH'">{{ 'reports.emails.period.month' | translate }}</label>
-                    <button id="periods-custom"
-                            uib-popover-template="popoverTemplate"
-                            append-to-body="true"
-                            popover-placement="left"
-                            popover-trigger="'outsideClick'"
-                            popover-is-open="periodPopoverIsOpen"
-                            type="button"
-                            class="btn btn-default"
-                            ng-class="(periodType == 'USER')?'active':''"
-                            ng-click="initDateSelector()">{{ 'reports.emails.period.user' | translate }}</button>
-                    <script type="text/ng-template" id="periodSelector.html">
+                  <div
+                    class="btn-group btn-group-toggle btn-group__period-selector"
+                    ngbRadioGroup
+                    name="radioBasic"
+                    [(ngModel)]="periodType"
+                    (ngModelChange)="changePeriod($event)"
+                  >
+                    <label ngbButtonLabel class="btn btn-default">
+                      <input ngbButton type="radio" [value]="'TODAY'"> {{ 'reports.emails.period.today' | translate }}
+                    </label>
+                    <label ngbButtonLabel class="btn btn-default">
+                      <input ngbButton type="radio" [value]="'YESTERDAY'"> {{ 'reports.emails.period.yesterday' | translate }}
+                    </label>
+                    <label ngbButtonLabel class="btn btn-default">
+                      <input ngbButton type="radio" [value]="'WEEK'"> {{ 'reports.emails.period.week' | translate }}
+                    </label>
+                    <label ngbButtonLabel class="btn btn-default">
+                      <input ngbButton type="radio" [value]="'DECADE'"> {{ 'reports.emails.period.decade' | translate }}
+                    </label>
+                    <label ngbButtonLabel class="btn btn-default">
+                      <input ngbButton type="radio" [value]="'MONTH'"> {{ 'reports.emails.period.month' | translate }}
+                    </label>
+                    <ng-template #popContent>
                       <div id="custom-period-container-template">
-                        <div class="custom-period-container">
-                          <div class="row">
-                            <div class="col-lg-6 text-left">
-                              <label class="control-label">{{ 'vkprofiles.period.dateStart' | translate }}:</label>
-                              <div class='input-group date' id='req-period-start'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-																				<span class="glyphicon glyphicon-calendar"></span>
-																			</span>
-                              </div>
-                            </div>
-                            <div class="col-lg-6 text-left">
-                              <label class="control-label">{{ 'vkprofiles.period.dateEnd' | translate }}:</label>
-                              <div class='input-group date' id='req-period-end'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-																				<span class="glyphicon glyphicon-calendar"></span>
-																			</span>
-                              </div>
+                        <div class="d-flex flex-column">
+                          <div class="text-left">
+                            <label class="control-label m-0">{{ 'global.period.dateStart' | translate }}:</label>
+                            <div id='req-period-start'>
+                              <ngbd-datepicker-i18n [(ngModel)]="periodStart"></ngbd-datepicker-i18n>
                             </div>
                           </div>
-                          <div class="row popover-btns-container">
-                            <div class="col-lg-11 col-lg-offset-1 text-right">
-                              <button id="periodApply" ng-click="periodApply()" type="button" class="btn w-xs btn-success">{{ 'vkprofiles.period.start' | translate }}</button>
+                          <div class="text-left mt-3">
+                            <label class="control-label m-0">{{ 'global.period.dateEnd' | translate }}:</label>
+                            <div id='req-period-end'>
+                              <ngbd-datepicker-i18n [(ngModel)]="periodEnd"></ngbd-datepicker-i18n>
                             </div>
                           </div>
                         </div>
+                        <div class="text-right mt-3">
+                          <button id="periodApply" (click)="periodApply()" type="button" class="btn w-xs btn-success">{{ 'global.period.start' | translate }}</button>
+                        </div>
                       </div>
-                    </script>
-
+                    </ng-template>
+                    <button
+                      type="button"
+                      id="periods-custom"
+                      class="btn btn-default"
+                      [ngClass]="(periodType === 'USER') ? 'active' : ''"
+                      [ngbPopover]="popContent"
+                      [autoClose]="'outside'"
+                      container="body"
+                      placement="{{ innerWidth < 850 ? 'bottom' : 'left' }}"
+                      #p="ngbPopover"
+                    >
+                      {{ 'reports.emails.period.user' | translate }}
+                    </button>
                   </div>
                   <h1 class="request-period-name">
                     <span>{{ 'reports.emails.filter.from' | translate }}</span>
-                    <span> {{periodStart | date : 'd.MM.yyyy' }}</span>
+                    <span> {{ periodStart | date : 'd.MM.yyyy' }}</span>
                     <span> {{ 'reports.emails.filter.to' | translate }}</span>
-                    <span> {{periodEnd | date : 'd.MM.yyyy'}}</span>
+                    <span> {{ periodEnd | date : 'd.MM.yyyy' }}</span>
                   </h1>
                 </div>
               </div>
@@ -96,7 +104,7 @@
       </div>
     </div>
 
-    <div ng-show="allSites.length > 0" class="col-xs-12">
+    <div *ngIf="allSites.length > 0" class="col-xs-12">
       <div class="row report-email-stat-panel">
         <div class="col-lg-12">
           <div class="hpanel">
@@ -114,7 +122,7 @@
                 <div class="list reports-emails-stats-list">
                   <div class="list-item-container">
                     <div class="list-item">
-                      <h3 class="no-margins font-extra-bold">{{overallStats.allCount}}</h3>
+                      <h3 class="no-margins font-extra-bold">{{ overallStats.allCount }}</h3>
                       <small>{{ 'reports.emails.stat.overall' | translate }}</small>
                       <div class="download-btn"><a class="btn btn-default hovered-btn-blue tooltiped" ng-click="downloadAll()"
                                                    data-toggle="tooltip" data-placement="top" data-container="body"
@@ -122,7 +130,7 @@
                       ><i class="fa fa-download"></i> {{ 'reports.emails.stat.download.btn' | translate }}</a></div>
                     </div>
                     <div class="list-item">
-                      <h3 class="no-margins font-extra-bold">{{overallStats.periodCount | number:'0.0'}}</h3>
+                      <h3 class="no-margins font-extra-bold">{{ overallStats.periodCount | number:'0.0' }}</h3>
                       <small>{{ 'reports.emails.stat.period' | translate }}</small>
                       <div class="download-btn"><a class="btn btn-default hovered-btn-blue tooltiped" ng-click="downloadByPeriod()"
                                                    data-toggle="tooltip" data-placement="top" data-container="body"
@@ -143,7 +151,7 @@
       </div>
     </div>
 
-    <div ng-show="allSites.length > 0" class="col-lg-4">
+    <div *ngIf="allSites.length > 0" class="col-lg-4">
       <div class="row">
         <div class="col-lg-12">
           <div class="hpanel">
@@ -158,11 +166,11 @@
               <div class="list">
                 <div class="list-item-container report-email-last-container">
                   <div class="list-item">
-                    <div class="list-item" ng-repeat="item in lastEmails | orderBy:'date':true track by $index">
+                    <div class="list-item" *ngFor="let item of lastEmails | orderBy:['-date']; trackBy: trackById">
                       <div class="report-email-last-logo report-email-user-icon" ng-style="{'background-image': 'url(' + item.gravatarUrl + ')'}"></div>
                       <div class="report-email-last-name">
-                        <h5 class="no-margins font-extra-bold">{{item.name}}</h5>
-                        <h5 class="no-margins">{{item.email}}</h5>
+                        <h5 class="no-margins font-extra-bold">{{ item.name }}</h5>
+                        <h5 class="no-margins">{{ item.email }}</h5>
                       </div>
                     </div>
                   </div>

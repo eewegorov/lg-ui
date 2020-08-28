@@ -12,6 +12,7 @@ import { TokenInterceptor } from './core/services/token.interceptor';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
+import { OrderByPipe } from './shared/pipes/order-by.pipe';
 
 
 
@@ -49,6 +50,7 @@ import { AppComponent } from './app.component';
   ],
   providers: [
     CookieService,
+    OrderByPipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

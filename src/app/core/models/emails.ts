@@ -9,6 +9,7 @@ export interface Email {
   email: string;
   siteId: string;
   date: number;
+  gravatarUrl?: string;
 }
 
 export interface EmailsStatisticsResponse extends ApiResponse {
@@ -20,4 +21,9 @@ export interface EmailsStatistics {
   items: {
     [siteId: string]: number;
   }
+}
+
+export interface EmailsStatisticsView {
+  date: number;
+  value: number;
 }
