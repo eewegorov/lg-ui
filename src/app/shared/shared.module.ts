@@ -8,6 +8,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { ModalComponent } from './components/modal/modal.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { ColorLineComponent } from './components/color-line/color-line.component';
+import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ColorLineComponent } from './components/color-line/color-line.component
     NgbdDatepickerI18n,
     ModalComponent,
     DropdownComponent,
-    ColorLineComponent
+    ColorLineComponent,
+    PaymentModalComponent
   ],
   imports: [
     CommonModule,

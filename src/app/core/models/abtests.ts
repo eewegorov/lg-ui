@@ -12,3 +12,8 @@ export interface Abtest {
   type: string;
   siteId: string;
 }
+
+export interface UpdateAbtest {
+  name: string;
+  description: string;
+}

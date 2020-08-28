@@ -53,23 +53,23 @@
         <div class="test-item-left">
           <div class="max-edit-text-bl">
             <cool-inline-edit-field
+              class="test-item-name"
               name="name"
-              [(ngModel)]="coupon.name"
-              (editStarted)="fixOldCoupon($event)"
-              (saved)="updateCoupon($event)"
+              [(ngModel)]="test.name"
+              [emptyText]="'abtests.active.addTitle' | translate"
+              (saved)="updateTest(test)"
             >
             </cool-inline-edit-field>
-            <a class="test-item-name" href="#" editable-text="test.name" onaftersave="updateTest(test)">{{ test.name || 'abtests.active.addTitle' | translate }} <i class="fa fa-pencil"></i></a>
           </div>
           <div class="max-edit-text-bl">
             <cool-inline-edit-field
-              name="name"
-              [(ngModel)]="coupon.name"
-              (editStarted)="fixOldCoupon($event)"
-              (saved)="updateCoupon($event)"
+              class="test-item-desc"
+              name="desc"
+              [(ngModel)]="test.description"
+              [emptyText]="'abtests.active.addDescription' | translate"
+              (saved)="updateTest(test)"
             >
             </cool-inline-edit-field>
-            <a class="test-item-desc" href="#" editable-text="test.description" onaftersave="updateTest(test)">{{ test.description || 'abtests.active.addDescription' | translate }} <i class="fa fa-pencil"></i></a>
           </div>
         </div>
         <div class="test-item-right">
@@ -83,7 +83,7 @@
           </div>
 
           <div class="btn-group edit-btns">
-            <button class="btn btn-xs btn-default" (click)="removeTest(test.id, $index)" data-container="body"  data-toggle="tooltip" data-placement="top" title="{{ 'abtests.active.stopTest' | translate }}">
+            <button class="btn btn-xs btn-default" (click)="deleteTest(test.id, outerIndex)" data-container="body"  data-toggle="tooltip" data-placement="top" title="{{ 'abtests.active.stopTest' | translate }}">
               <i class="fa fa-stop"></i>
             </button>
           </div>

@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/cor
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import { CouponById } from '../../../core/models/coupons';
 import { CouponService } from '../services/coupon.service';
 import { CouponModalService } from '../services/coupon-modal.service';
