@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Entities, WidgetsResponse } from '../../../core/models/widgets';
+import { Entities, WidgetRename, WidgetsResponse } from '../../../core/models/widgets';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { WidgetApiService } from './widget-api.service';
+import { ApiResponse } from '../../../core/models/api';
 
 
 @Injectable({
@@ -21,6 +22,22 @@ export class WidgetService {
   public getWidgetsList(siteId: string): Observable<Entities> {
     return this.widgetApiService.getWidgetsList(siteId).pipe(
       map((response: WidgetsResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public rename(siteId: string, widgetId: string, name: string): Observable<boolean> {
+    const renamedCWidget: WidgetRename = { name: name };
+    return this.widgetApiService.rename(siteId, widgetId, renamedCWidget).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public switch(siteId: string, widgetId: string, active: boolean): Observable<boolean> {
+    const action = active ? 'start' : 'stop';
+    return this.widgetApiService.switch(siteId, widgetId, action).pipe(
+      map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
     );
   }

@@ -114,11 +114,16 @@
 
               <div class="ab-grid__item--name">
                 <div class="colored-item-circle" [ngStyle]="{'background-color': item.color}"></div>
-                <!--<a href="#" editable-text="item.name" onaftersave="updateVariantName(test, item)">
-                                              <span long-text="{{item.name || 'empty'}}"
-                                                    max-total-characters="40"></span> <i class="fa fa-pencil"></i></a>-->
+                <cool-inline-edit-field
+                  class="test-item-desc"
+                  name="desc"
+                  [(ngModel)]="item.name"
+                  [emptyText]="'empty'"
+                  (saved)="updateVariantName(test, item)"
+                >
+                </cool-inline-edit-field>
               </div>
-              <!--<div class="ab-grid__item&#45;&#45;shows">{{item.convInfo.n | thousandSuffix:2}} / {{item.convInfo.s | thousandSuffix:2}}</div>-->
+              <div class="ab-grid__item--shows">{{item.convInfo.n | thousandSuffix:2}} / {{item.convInfo.s | thousandSuffix:2}}</div>
               <div class="ab-grid__item--conv">{{ item.convInfo.conversion }}</div>
               <div class="ab-grid__item--update" [ngClass]="getClassForBetterTo(item)" [innerHTML]="showBetterToValue(item)"></div>
               <div class="ab-grid__item--onoff"><ui-switch class="switch-xs" [checked]="item.active" (change)="changeVariantState(item, test)"></ui-switch></div>

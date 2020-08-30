@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
-import { AbtestsResponse, UpdateAbtest } from '../../../core/models/abtests';
+import { AbtestsResponse, UpdateAbtest, CloneVariantResponse } from '../../../core/models/abtests';
 
 
 @Injectable({
@@ -31,5 +31,9 @@ export class AbtestsApiService {
 
   public update(id: string, test: UpdateAbtest): Observable<ApiResponse> {
     return this.http.put<ApiResponse>(`${ environment.url }/abtests/${id}`, test);
+  }
+
+  public cloneVariant(testId: string, variantId: string): Observable<CloneVariantResponse> {
+    return this.http.post<CloneVariantResponse>(`${ environment.url }/abtests/${testId}/variants/${variantId}/clone`, null);
   }
 }

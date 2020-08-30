@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Abtest, AbtestsResponse, UpdateAbtest } from '../../../core/models/abtests';
+import { Abtest, AbtestsResponse, CloneVariantResponse, UpdateAbtest, Variant } from '../../../core/models/abtests';
 import { ApiResponse } from '../../../core/models/api';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { AbtestsApiService } from './abtests-api.service';
@@ -49,6 +49,13 @@ export class AbtestsService {
   public update(id: string, test: UpdateAbtest): Observable<boolean> {
     return this.abtestsApiService.update(id, test).pipe(
       map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public cloneVariant(testId: string, variantId: string): Observable<Variant> {
+    return this.abtestsApiService.cloneVariant(testId, variantId).pipe(
+      map((response: CloneVariantResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }

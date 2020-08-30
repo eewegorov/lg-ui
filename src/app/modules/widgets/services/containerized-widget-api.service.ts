@@ -2,26 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { WidgetRename, WidgetsResponse } from '../../../core/models/widgets';
 import { ApiResponse } from '../../../core/models/api';
+import { WidgetRename } from '../../../core/models/widgets';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class WidgetApiService {
+export class ContainerizedWidgetApiService {
 
   constructor(private http: HttpClient) { }
 
-  public getWidgetsList(siteId: string): Observable<WidgetsResponse> {
-    return this.http.get<WidgetsResponse>(`${ environment.url }/sites/${siteId}/widgets`);
-  }
-
   public rename(siteId: string, widgetId: string, name: WidgetRename): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/sitewidgets/${widgetId}/rename`, name);
+    return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/containerwidgets/${widgetId}/rename`, name);
   }
 
   public switch(siteId: string, widgetId: string, action: 'start' | 'stop') {
-    return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/sitewidgets/${widgetId}/${action}`, null);
+    return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/containerwidgets/${widgetId}/${action}`, null);
   }
 }

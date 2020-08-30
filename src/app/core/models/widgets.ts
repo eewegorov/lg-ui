@@ -54,3 +54,7 @@ export interface AbtestInfo {
   id: string;
   type: string;
 }
+
+export interface WidgetRename {
+  name: string;
+}
