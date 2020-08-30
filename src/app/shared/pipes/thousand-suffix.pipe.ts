@@ -11,7 +11,7 @@ export class ThousandSuffixPipe implements PipeTransform {
     if (isNaN(input)) {
       return null;
     }
-  
+
     if (input < 1000) {
       return input;
     }
