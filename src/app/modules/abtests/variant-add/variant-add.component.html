@@ -1,7 +1,7 @@
 <div id="NewABTestModal" isBig="true">
   <div name="title">{{ 'abtests.modal.variant.add' | translate }}</div>
   <div class="tab-content" id="newABTabs">
-    <div id="step3" class="p-m" ng-show="newABTest.step == 3">
+    <div id="step3" class="p-m" ng-show="step == 3">
       <div class="row">
         <div class="col-lg-12">
           <div class="row margined-bottom-15 margined-left-0 select-site-title"><h5>{{ 'abtests.modal.variant.title' | translate }}</h5></div>
@@ -20,15 +20,15 @@
         </div>
       </div>
     </div>
-    <div id="step1" class="p-m" ng-show="newABTest.step == 0">
+    <div id="step1" class="p-m" ng-show="step == 0">
       <div class="row">
         <div class="col-lg-4 widget-type-view" ng-repeat="type in ABTypes" ng-click="setABType(type)">
-          <div class="ab-type-icon-{{type.type}}"></div>
-          <div class="view-name">{{type.title}}</div>
+          <div class="ab-type-icon-{{ type.type }}"></div>
+          <div class="view-name">{{ type.title }}</div>
         </div>
       </div>
     </div>
-    <div id="step2" class="active" ng-show="newABTest.step == 1">
+    <div id="step2" class="active" ng-show="step == 1">
       <div class="create-widget-m" style="padding-top: 0" ng-class="{'main-content-container-loader': isLoaderActive}">
         <div class="filters-loader"></div>
         <div class="container-for-loader">
@@ -44,13 +44,13 @@
                 <div class="left-panel-filter-categories-container">
                   <div ng-repeat="grp in groups">
                     <h5 ng-class="($index != 0)?'margined-top-20':''">
-                      {{grp.name}}
+                      {{ grp.name }}
                     </h5>
                     <div class="left-category-item" ng-repeat="cat in grp.categories">
                       <div class="left-panel-filter-categories-category">
                         <label class="non-bold">
                           <!--<checkbox ng-model="cat.checked" ng-change="filterByCat(cat.checked, cat.id)" class="checkbox-green-btn"></checkbox>-->
-                          {{cat.name}}
+                          {{ cat.name }}
                         </label>
                       </div>
                     </div>
@@ -75,12 +75,12 @@
                       <img [src]="mckp.preview" alt="">
                       <div class="mockup-selector-categories-mockups-item-title">
                         <div>
-                          <div>{{mckp.name}}</div>
+                          <div>{{ mckp.name }}</div>
                         </div>
                       </div>
                       <div class="mockup-selector-categories-mockups-item-desc">
                         <div>
-                          <div>{{mckp.description}}</div>
+                          <div>{{ mckp.description }}</div>
                         </div>
                       </div>
                     </div>

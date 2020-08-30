@@ -25,8 +25,8 @@ export interface Container {
 }
 
 export interface SmartPoints {
-  "enabled": true;
-  "list": SmartPoint[];
+  enabled: true;
+  list: SmartPoint[];
 }
 
 export interface SmartPoint {
@@ -57,4 +57,16 @@ export interface AbtestInfo {
 
 export interface WidgetRename {
   name: string;
+}
+
+export interface WidgetTemplatesResponse extends ApiResponse {
+  data: WidgetTemplate[];
+}
+
+export interface WidgetTemplate {
+  id: string;
+  name: string;
+  preview: string;
+  type: string;
+  active: boolean;
 }

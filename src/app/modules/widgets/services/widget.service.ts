@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Entities, WidgetRename, WidgetsResponse } from '../../../core/models/widgets';
+import {
+  Entities,
+  WidgetRename,
+  WidgetsResponse,
+  WidgetTemplate,
+  WidgetTemplatesResponse
+} from '../../../core/models/widgets';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { WidgetApiService } from './widget-api.service';
 import { ApiResponse } from '../../../core/models/api';
@@ -22,6 +28,13 @@ export class WidgetService {
   public getWidgetsList(siteId: string): Observable<Entities> {
     return this.widgetApiService.getWidgetsList(siteId).pipe(
       map((response: WidgetsResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getWidgetsTemplates(): Observable<WidgetTemplate[]> {
+    return this.widgetApiService.getWidgetsTemplates().pipe(
+      map((response: WidgetTemplatesResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }

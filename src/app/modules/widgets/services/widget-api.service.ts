@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { WidgetRename, WidgetsResponse } from '../../../core/models/widgets';
 import { ApiResponse } from '../../../core/models/api';
+import { WidgetRename, WidgetsResponse, WidgetTemplatesResponse } from '../../../core/models/widgets';
 
 
 @Injectable({
@@ -15,6 +15,10 @@ export class WidgetApiService {
 
   public getWidgetsList(siteId: string): Observable<WidgetsResponse> {
     return this.http.get<WidgetsResponse>(`${ environment.url }/sites/${siteId}/widgets`);
+  }
+
+  public getWidgetsTemplates(): Observable<WidgetTemplatesResponse> {
+    return this.http.get<WidgetTemplatesResponse>(`${ environment.url }/widgets/templates`);
   }
 
   public rename(siteId: string, widgetId: string, name: WidgetRename): Observable<ApiResponse> {

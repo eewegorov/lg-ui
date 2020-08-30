@@ -17,7 +17,7 @@ import { SitesService } from '../services/sites.service';
 export class SiteAddComponent implements OnInit {
   @Input() public hidePhone: boolean;
   public newSiteForm: FormGroup;
-  private createdSite: CreateSiteData;
+  public createdSite: CreateSiteData;
   public tab = 1;
   public isUrlInvalid = false;
   private createSiteSub: SubscriptionLike;

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { VariantAddComponent } from '../variant-add/variant-add.component';
 import Swal from 'sweetalert2';
 import { sortBy } from 'lodash';
 import { Abtest, NewVariant, Variant } from '../../../core/models/abtests';
@@ -8,6 +10,7 @@ import { WidgetService } from '../../widgets/services/widget.service';
 import { ContainerizedWidgetService } from '../../widgets/services/containerized-widget.service';
 import { AbtestsService } from '../services/abtests.service';
 import { BinsDataService } from '../services/bins-data.service';
+import { WidgetTemplate } from '../../../core/models/widgets';
 
 
 @Component({
@@ -54,10 +57,12 @@ export class AbtestsActiveComponent implements OnInit {
   private colorsArray = ['#34495e', '#9b59b6', '#3498db', '#62cb31', '#ffb606', '#e67e22', '#e74c3c',
     '#c0392b', '#58b62c', '#e43725', '#2a7aaf', '#7c4792', '#4ea227', '#b8651b',
     '#9a2e22', '#2a3a4b', '#ffeb3b'];
+  private templates: WidgetTemplate[] = [];
 
   constructor(
     private router: Router,
     private translate: TranslateService,
+    private modalService: NgbModal,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private binsDataService: BinsDataService,
@@ -65,14 +70,25 @@ export class AbtestsActiveComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.widgetService.getWidgetsTemplates().subscribe((response: WidgetTemplate[]) => {
+      this.templates = response;
+    });
   }
 
-  public getSiteName(site) {
-
+  public getSiteName(siteId) {
+    const site = this.getSiteById(siteId);
+    if (site != null) {
+      return site.name;
+    } else {
+      return ''
+    }
   }
 
-  public getCroppedString(siteName, count, end) {
-
+  public getCroppedString(str, count, addedSymbol) {
+    if (str.length > count) {
+      return str.substring(0, count) + addedSymbol;
+    }
+    return str;
   }
 
   public trackById(index, item) {
@@ -216,19 +232,23 @@ export class AbtestsActiveComponent implements OnInit {
     });
   }
 
-  public addVariant = function (widget, index) {
-    $("#NewABTestModal").removeClass("mockup-select-mode");
-    $scope.newABTest.step = 0;
-    $scope.currentVariantsLength = widget.variants.length;
-    $scope.currentSiteId = widget.siteId;
-    $scope.currentTestId = widget.id;
-    $scope.currentTestIndex = index;
-    $scope.abtTypeWidget = widget.type;
-    $scope.editableAB = getEmptyABTest();
-    $scope.editableAB.containerized = widget.containerized;
-    $scope.editableAB.templateId = getTemplateIdByType(widget.type);
-    $scope.controls.newABTestModal.modal("show");
-    //}
+  public addVariant(widget, index) {
+    const modalRef = this.modalService.open(VariantAddComponent, {
+      size: 'lg',
+      windowClass: 'animate__animated animate__slideInDown animate__faster'
+    });
+    modalRef.componentInstance.step = 0;
+    modalRef.componentInstance.currentVariantsLength = widget.variants.length;
+    modalRef.componentInstance.currentSiteId = widget.siteId;
+    modalRef.componentInstance.currentTestId = widget.id;
+    modalRef.componentInstance.currentTestIndex = index;
+    modalRef.componentInstance.abtTypeWidget = widget.type;
+    modalRef.componentInstance.abtTypeWidget = widget.type;
+    modalRef.componentInstance.editableAB = {
+      ...this.getEmptyABTest(),
+      containerized: widget.containerized,
+      templateId: this.getTemplateIdByType(widget.type)
+    };
   }
 
   public startTest(test) {
@@ -395,6 +415,30 @@ export class AbtestsActiveComponent implements OnInit {
     } else {
       return 0;
     }
+  }
+
+  private getEmptyABTest() {
+    return {
+      mode: '',
+      templateId: '',
+      mockupId: ''
+    };
+  }
+
+  private getSiteById(siteId) {
+    for (let i = 0; i < this.sites.length; i++) {
+      if (this.sites[i].id == siteId) {
+        return this.sites[i];
+      }
+    }
+    return null;
+  }
+
+  private getTemplateIdByType(type): string {
+    let filteredArray = this.templates.filter((item: WidgetTemplate) => {
+      return item.type === type;
+    });
+    return filteredArray[0].id;
   }
 
 }
