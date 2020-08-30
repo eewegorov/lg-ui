@@ -1,0 +1,96 @@
+<div id="NewABTestModal" isBig="true">
+  <div name="title">{{ 'abtests.modal.variant.add' | translate }}</div>
+  <div class="tab-content" id="newABTabs">
+    <div id="step3" class="p-m" ng-show="newABTest.step == 3">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row margined-bottom-15 margined-left-0 select-site-title"><h5>{{ 'abtests.modal.variant.title' | translate }}</h5></div>
+          <input type="text" class="form-control" ng-model="editableAB.name">
+          <span class="underow-comment">{{ 'abtests.modal.variant.comment' | translate }}</span>
+        </div>
+
+        <div class="col-lg-12">
+          <div class="row margined-bottom-15 margined-left-0 select-site-title"><h5>{{ 'abtests.modal.variant.description' | translate }}</h5></div>
+          <textarea class="form-control" ng-model="editableAB.description" rows="3"></textarea>
+        </div>
+
+        <div class="col-lg-12 margined-top-30">
+          <button data-target="#NewABTestModal" data-toggle="modal" type="button" class="btn btn-lg w-xs btn-default floated-left">{{ 'widgetsList.widget.delete.cancel' | translate }}</button>
+          <button ng-disabled="editableAB.name.trim().length == 0" ng-click="goToABType()" type="button" class="btn btn-lg w-xs btn-success floated-right">{{ 'abtests.modal.variant.create' | translate }}</button>
+        </div>
+      </div>
+    </div>
+    <div id="step1" class="p-m" ng-show="newABTest.step == 0">
+      <div class="row">
+        <div class="col-lg-4 widget-type-view" ng-repeat="type in ABTypes" ng-click="setABType(type)">
+          <div class="ab-type-icon-{{type.type}}"></div>
+          <div class="view-name">{{type.title}}</div>
+        </div>
+      </div>
+    </div>
+    <div id="step2" class="active" ng-show="newABTest.step == 1">
+      <div class="create-widget-m" style="padding-top: 0" ng-class="{'main-content-container-loader': isLoaderActive}">
+        <div class="filters-loader"></div>
+        <div class="container-for-loader">
+          <div class="header-modal">
+            <span>{{ 'abtests.modal.template.choose' | translate }}</span>
+          </div>
+          <span class="sub-text">{{ 'abtests.modal.template.subtext' | translate }}</span>
+          <div class="just-blue-line"></div>
+          <div class="main-content-container">
+            <div class="left-panel-filter">
+              <span class="left-panel-filter-title">{{ 'abtests.modal.template.categories' | translate }}</span>
+              <div class="left-panel-filter-categories">
+                <div class="left-panel-filter-categories-container">
+                  <div ng-repeat="grp in groups">
+                    <h5 ng-class="($index != 0)?'margined-top-20':''">
+                      {{grp.name}}
+                    </h5>
+                    <div class="left-category-item" ng-repeat="cat in grp.categories">
+                      <div class="left-panel-filter-categories-category">
+                        <label class="non-bold">
+                          <!--<checkbox ng-model="cat.checked" ng-change="filterByCat(cat.checked, cat.id)" class="checkbox-green-btn"></checkbox>-->
+                          {{cat.name}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-widgets-list">
+              <div class="alert-if-empty" ng-show="mockups.length==0">
+                <h3>{{ 'abtests.modal.noWidgets' | translate }}</h3>
+              </div>
+              <div class="test-scroll-inf" infinite-scroll="loadMore()" infinite-scroll-immediate-check="false" infinite-scroll-parent>
+                <div class="mockup-selector-categories-mockups-item-container" ng-repeat="mckp in mockups">
+                  <div class="mockup-selector-categories-mockups-item">
+                    <div class="mockup-selector-categories-mockups-item-hover">
+                      <button ng-click="setMockupABT(mckp)" type="button" class="btn btn-success"><i class="fa fa-check"></i> {{ 'widgetsList.add.params.select' | translate }}</button>
+                    </div>
+                    <div class="mockup-selector-categories-mockups-item-content">
+                      <div id="mockup-selector-categories-mockups-item-tariff-container">
+
+                      </div>
+                      <img [src]="mckp.preview" alt="">
+                      <div class="mockup-selector-categories-mockups-item-title">
+                        <div>
+                          <div>{{mckp.name}}</div>
+                        </div>
+                      </div>
+                      <div class="mockup-selector-categories-mockups-item-desc">
+                        <div>
+                          <div>{{mckp.description}}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

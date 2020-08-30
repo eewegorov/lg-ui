@@ -60,6 +60,27 @@ export class AbtestsService {
     );
   }
 
+  public deleteVariant(testId: string, variantId: string): Observable<boolean> {
+    return this.abtestsApiService.deleteVariant(testId, variantId).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public chooseWinner(testId: string, variantId: string): Observable<boolean> {
+    return this.abtestsApiService.chooseWinner(testId, variantId).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public resetStats(id: string): Observable<boolean> {
+    return this.abtestsApiService.resetStats(id).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
   public setListOfABTests(tests: Abtest[]): void {
     this.tests = tests;
   }

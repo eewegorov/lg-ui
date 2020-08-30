@@ -36,4 +36,16 @@ export class AbtestsApiService {
   public cloneVariant(testId: string, variantId: string): Observable<CloneVariantResponse> {
     return this.http.post<CloneVariantResponse>(`${ environment.url }/abtests/${testId}/variants/${variantId}/clone`, null);
   }
+
+  public deleteVariant(testId: string, variantId: string): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(`${ environment.url }/abtests/${testId}/variants/${variantId}`);
+  }
+
+  public chooseWinner(testId: string, variantId: string): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${ environment.url }/abtests/${testId}/variants/${variantId}/winner`, null);
+  }
+
+  public resetStats(id: string): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${ environment.url }/abtests/${id}`, 'clear');
+  }
 }
