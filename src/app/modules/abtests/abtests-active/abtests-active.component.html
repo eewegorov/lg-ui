@@ -3,8 +3,8 @@
   <h1 class="title-main">{{ 'sidebar.abtests' | translate }}</h1>
   <div class="wrapper-test">
     <div class="wrapper-test-header">
-      <div class="wrapper-test-filter-item wrapper-test-filter-sites">
-        <div class="row margined-left-0"><h5>{{ 'abtests.show' | translate }}:</h5></div>
+      <div class="wrapper-test-filter-sites">
+        <div class="row ml-0"><h5>{{ 'abtests.show' | translate }}:</h5></div>
         <div class="dropdown site-selector">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <span *ngIf="currSite.trim().length === 0">{{ 'widgetsList.add.chooseSite' | translate }}</span>
@@ -17,8 +17,8 @@
           </ul>
         </div>
       </div>
-      <div class="wrapper-test-filter-item wrapper-test-filter-states">
-        <div class="btn-group test-filter-btns">
+      <div class="wrapper-test-filter-states">
+        <div class="btn-group">
           <button class="btn btn-default" (click)="getTestsByState('ALL')" [ngClass]="(showWhat === 'ALL') ? 'active' : ''">{{ 'abtests.active.all' | translate }}</button>
           <button class="btn btn-default" (click)="getTestsByState('ACTIVE')" [ngClass]="(showWhat === 'ACTIVE') ? 'active' : ''">{{ 'abtests.active.active' | translate }}</button>
           <button class="btn btn-default" (click)="getTestsByState('PAUSED')" [ngClass]="(showWhat === 'PAUSED') ? 'active' : ''">{{ 'abtests.active.paused' | translate }}</button>
@@ -28,7 +28,7 @@
 
     <div class="main-content-container-ab-loader" *ngIf="!isLoad"></div>
 
-    <div *ngIf="!allABTests.length || showOnlyIfNoTestsForCurrentSite" class="margined-top-30">
+    <div *ngIf="!allABTests.length || showOnlyIfNoTestsForCurrentSite" class="mt-5">
       <h3 class="f-0 text-center">{{ 'abtests.active.noCreated.title' | translate }}</h3>
       <h4 class="f-2 text-center">{{ 'abtests.active.noCreated.desc' | translate }}</h4>
       <div class="how-to-add-test-bg"></div>
@@ -43,10 +43,12 @@
     </div>
 
     <ng-container *ngIf="isLoad">
-      <div  class="test-item"
-            *ngFor="let test of abTests; index as outerIndex"
-            [ngClass]="(test.state === 'ACTIVE') ? 'border-t-green' : 'border-t-red'"
-            [id]="'testIdNum-' + test.id">
+      <div
+        *ngFor="let test of abTests; index as outerIndex"
+        class="test-item"
+        [ngClass]="(test.state === 'ACTIVE') ? 'border-t-green' : 'border-t-red'"
+        [id]="'testIdNum-' + test.id"
+      >
         <div class="test-item-header">
           <div class="test-item-left">
             <div class="max-edit-text-bl">
@@ -71,11 +73,11 @@
             </div>
           </div>
           <div class="test-item-right">
-            <div class="btn-group play-btns margined-right-10">
-              <button class="btn btn-xs btn-default start-widget-btn" (click)="startTest(test)" [ngClass]="(test.state === 'ACTIVE')? 'active':''" data-container="body" data-toggle="tooltip" data-placement="top" title="{{ 'abtests.active.runTest' | translate }}">
+            <div class="btn-group mr-2">
+              <button class="btn btn-sm btn-default start-widget-btn" (click)="startTest(test)" [ngClass]="(test.state === 'ACTIVE')? 'active':''" data-container="body" data-toggle="tooltip" data-placement="top" title="{{ 'abtests.active.runTest' | translate }}">
                 <i class="fa fa-play"></i>
               </button>
-              <button class="btn btn-xs btn-default stop-widget-btn" (click)="pauseTest(test)" [ngClass]="(test.state === 'ACTIVE')?'':'active'" data-container="body"  data-toggle="tooltip" data-placement="top" title="{{ 'abtests.active.pauseTest' | translate }}">
+              <button class="btn btn-sm btn-default stop-widget-btn" (click)="pauseTest(test)" [ngClass]="(test.state === 'ACTIVE')?'':'active'" data-container="body"  data-toggle="tooltip" data-placement="top" title="{{ 'abtests.active.pauseTest' | translate }}">
                 <i class="fa fa-pause"></i>
               </button>
             </div>
