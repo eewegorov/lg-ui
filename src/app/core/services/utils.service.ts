@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EMPTY, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-const md5 = require('md5');
+import { Md5 } from 'ts-md5/dist/md5';
 
 @Injectable({
   providedIn: 'root'
@@ -39,20 +39,21 @@ export class UtilsService {
   }
 
   private buildGravatarUrl(email) {
-    if (!email) return;
+    if (!email) { return; }
     const gravatarAvatarUrl = 'https://www.gravatar.com/avatar/';
     const url = gravatarAvatarUrl + this.getEmailHash(email) + '?s=256&d=mm';
     return url;
   }
 
   private getEmailHash(email) {
+    const md5 = new Md5();
     let emailHash;
     // check if md5 for passed email is already calculated
     if (this.md5Cache.hasOwnProperty(email)) {
       emailHash = this.md5Cache[email];
     } else {
       // if not, calculate md5 and put in cache
-      emailHash = md5(email);
+      emailHash = Md5.hashStr(email);
       this.md5Cache[email] = emailHash;
     }
     return emailHash;

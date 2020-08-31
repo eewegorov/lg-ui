@@ -26,7 +26,7 @@
       <h3 class="f-0 text-center">{{ 'abtests.archive.completed' | translate }}</h3>
     </div>
     <ng-container *ngIf="isLoad">
-      <div class="test-item" *ngFor="let test of abTests" [id]="'testIdNum-' + test.id">
+      <div class="test-item" *ngFor="let test of abTests; index as i" [id]="'testIdNum-' + test.id">
         <div class="test-item-header">
           <div class="test-item-left">
             <div class="max-edit-text-bl">
@@ -40,7 +40,7 @@
             <div class="btn-group edit-btns">
               <button
                 class="btn btn-xs btn-default"
-                (click)="removeArchTest(test.id, $index)"
+                (click)="deleteArchTest(test.id, i)"
                 data-container="body"
                 data-toggle="tooltip"
                 data-placement="top"

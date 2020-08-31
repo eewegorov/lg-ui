@@ -81,6 +81,20 @@ export class AbtestsService {
     );
   }
 
+  public getArchTests(): Observable<Abtest[]> {
+    return this.abtestsApiService.getArchTests().pipe(
+      map((response: AbtestsResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public deleteArchTest(id: string): Observable<boolean> {
+    return this.abtestsApiService.deleteArchTest(id).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
   public setListOfABTests(tests: Abtest[]): void {
     this.tests = tests;
   }
