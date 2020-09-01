@@ -5,7 +5,7 @@ import { Abtest } from '../../../core/models/abtests';
 @Component({
   selector: 'app-abtests-archive',
   templateUrl: './abtests-archive.component.html',
-  styleUrls: ['./abtests-archive.component.scss']
+  styleUrls: ['../shared/shared.scss', './abtests-archive.component.scss']
 })
 export class AbtestsArchiveComponent implements OnInit {
   public abTests = [];

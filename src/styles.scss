@@ -119,6 +119,14 @@ h6 {
   font-size: 22px;
 }
 
+.long-text {
+  display: block;
+  max-width: 350px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .nav {
   flex-direction: column;
 }
@@ -321,4 +329,11 @@ label.control-label {
 
 .hover-links a:hover {
   text-decoration: none !important;
+}
+
+.ab-grid__header {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  background-color: #f7f7f7;
 }

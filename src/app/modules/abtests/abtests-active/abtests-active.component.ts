@@ -16,7 +16,7 @@ import { WidgetTemplate } from '../../../core/models/widgets';
 @Component({
   selector: 'app-abtests-active',
   templateUrl: './abtests-active.component.html',
-  styleUrls: ['./abtests-active.component.scss']
+  styleUrls: ['../shared/shared.scss', './abtests-active.component.scss']
 })
 export class AbtestsActiveComponent implements OnInit {
   public currSite = '';

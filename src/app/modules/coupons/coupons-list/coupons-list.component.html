@@ -2,6 +2,7 @@
   <div class="ab-grid__item--name-coupon font-weight-bold">
     <cool-inline-edit-field
       name="name"
+      class="long-text"
       [(ngModel)]="coupon.name"
       (editStarted)="fixOldCoupon($event)"
       (saved)="updateCoupon($event)"

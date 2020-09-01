@@ -28,7 +28,7 @@
 
     <div class="main-content-container-ab-loader" *ngIf="!isLoad"></div>
 
-    <div *ngIf="!allABTests.length || showOnlyIfNoTestsForCurrentSite" class="mt-5">
+    <div *ngIf="!allABTests.length || showOnlyIfNoTestsForCurrentSite" class="mt-4">
       <h3 class="f-0 text-center">{{ 'abtests.active.noCreated.title' | translate }}</h3>
       <h4 class="f-2 text-center">{{ 'abtests.active.noCreated.desc' | translate }}</h4>
       <div class="how-to-add-test-bg"></div>
@@ -96,6 +96,7 @@
                   chart-labels="test.chartLabels" chart-colors="test.chartColors" chart-options="chartOptions">
           </canvas>
         </div>
+
         <div class="ab-content">
           <div class="ab-grid">
             <div class="ab-grid__header">
@@ -107,15 +108,16 @@
               <div class="ab-grid__header--actions">{{ 'abtests.active.management' | translate }}</div>
             </div>
             <div class="ab-grid__body">
-              <div class="ab-grid__item"
-                   *ngFor="let item of test.variants; index as innerIndex; trackBy: trackById"
-                   ng-class-even="'bg-for-line-grid'"
-                   [ngClass]="!item.active ? 'ab-grid__item--non-active' : ''">
-
+              <div
+                *ngFor="let item of test.variants; index as innerIndex; trackBy: trackById"
+                class="ab-grid__item"
+                ng-class-even="'bg-for-line-grid'"
+                [ngClass]="!item.active ? 'ab-grid__item--non-active' : ''"
+              >
                 <div class="ab-grid__item--name">
                   <div class="colored-item-circle" [ngStyle]="{'background-color': item.color}"></div>
                   <cool-inline-edit-field
-                    class="test-item-desc"
+                    class="test-item-desc long-text"
                     name="desc"
                     [(ngModel)]="item.name"
                     [emptyText]="'empty'"

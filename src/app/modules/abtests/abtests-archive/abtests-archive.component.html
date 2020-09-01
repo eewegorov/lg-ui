@@ -1,11 +1,9 @@
 <div class="flex-column toolbar-content">
-
   <h1 class="title-main">{{ 'abtests.archive.title' | translate }}</h1>
-
   <div class="wrapper-test wrapper-test-archive">
     <div *ngIf="abTests.length" class="wrapper-test-header">
-      <div class="wrapper-test-filter-item wrapper-test-filter-sites">
-        <div class="row margined-left-0"><h5>{{ 'abtests.show' | translate }}:</h5></div>
+      <div class="wrapper-test-filter-sites">
+        <div class="row ml-0"><h5>{{ 'abtests.show' | translate }}:</h5></div>
         <div class="dropdown site-selector">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <span *ngIf="currSite.trim().length==0">{{ 'widgetsList.add.chooseSite' | translate }}</span>
@@ -22,7 +20,7 @@
 
     <div class="main-content-container-ab-loader" *ngIf="!isLoad"></div>
 
-    <div *ngIf="!abTests.length" class="margined-top-30">
+    <div *ngIf="!abTests.length" class="mt-4">
       <h3 class="f-0 text-center">{{ 'abtests.archive.completed' | translate }}</h3>
     </div>
     <ng-container *ngIf="isLoad">
@@ -37,7 +35,7 @@
             </div>
           </div>
           <div class="test-item-right">
-            <div class="btn-group edit-btns">
+            <div class="btn-group">
               <button
                 class="btn btn-xs btn-default"
                 (click)="deleteArchTest(test.id, i)"
@@ -62,8 +60,7 @@
             </div>
             <div class="ab-grid__body">
               <div class="ab-grid__item" *ngFor="let item of test.variants">
-                <!--<div class="ab-grid__item&#45;&#45;name"><span long-text="{{item.name || 'empty'}}"
-                                                       max-total-characters="40"></span></div>-->
+                <div class="ab-grid__item--name"><span class="long-text">{{item.name || 'empty'}}</span></div>
                 <div class="ab-grid__item--shows">{{ item.shows }} / {{ item.target }}</div>
                 <div class="ab-grid__item--conv">{{ item.conversion }}</div>
                 <div class="ab-grid__item--update" [ngClass]="getClassForBetterTo(item)" [innerHTML]="showBetterToValue(item)"></div>
@@ -73,6 +70,5 @@
         </div>
       </div>
     </ng-container>
-
   </div>
 </div>

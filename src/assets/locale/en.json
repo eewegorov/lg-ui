@@ -3,6 +3,8 @@
 		"actions": "",
 		"active": {
 			"active": "",
+			"addDescription": "",
+			"addTitle": "",
 			"all": "",
 			"instruction": "",
 			"management": "",
@@ -35,6 +37,22 @@
 		"conversion": "",
 		"improvement": "",
 		"modal": {
+			"newAB": {
+				"chooseVariant": "",
+				"step0": {
+					"desc": {
+						"title": ""
+					},
+					"name": {
+						"example": "",
+						"title": ""
+					}
+				},
+				"step1": {
+					"chooseVariant": ""
+				},
+				"title": ""
+			},
 			"noWidgets": "",
 			"template": {
 				"categories": "",
@@ -496,6 +514,7 @@
 		"listPlaceholder3": "",
 		"listTitle": "",
 		"payment": {
+			"abtest": "",
 			"limit": "",
 			"options": ""
 		},

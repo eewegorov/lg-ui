@@ -164,8 +164,8 @@
                   data-toggle="tooltip"
                   data-placement="top"
                   data-title="{{ 'crm.page.table.tooltip' | translate }}">{{ item.widgetName }}</td>
-                <td><span>{{ item.siteName }}</span></td>
-                <td class="crm-table-site-url dtable-max-220"><span>{{ item.pageUrl }}</span></td>
+                <td><span class="long-text" style="max-width: 200px">{{ item.siteName }}</span></td>
+                <td class="crm-table-site-url dtable-max-220"><span class="long-text">{{ item.pageUrl }}</span></td>
                 <td><span class="lead-state-container label font-normal-size crm-table-state__{{ item.state }}">{{ item.status }}</span></td>
                 <td class="dtable-max-160">{{ item.date | date : "dd.MM.y, HH:mm" }}</td>
               </tr>
