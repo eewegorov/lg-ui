@@ -4,13 +4,16 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VariantAddComponent } from '../variant-add/variant-add.component';
 import Swal from 'sweetalert2';
-import { sortBy } from 'lodash';
-import { Abtest, NewVariant, Variant } from '../../../core/models/abtests';
+import { sortBy, unzip } from 'lodash';
+import { WidgetTemplate, WidgetType } from '../../../core/models/widgets';
+import { Abtest, AbtestStatistics, NewVariant, Variant } from '../../../core/models/abtests';
+import { BinsDataService } from '../services/bins-data.service';
+import { SitesService } from '../../sites/services/sites.service';
 import { WidgetService } from '../../widgets/services/widget.service';
 import { ContainerizedWidgetService } from '../../widgets/services/containerized-widget.service';
 import { AbtestsService } from '../services/abtests.service';
-import { BinsDataService } from '../services/bins-data.service';
-import { WidgetTemplate } from '../../../core/models/widgets';
+import { Location } from '@angular/common';
+
 
 
 @Component({
@@ -26,34 +29,7 @@ export class AbtestsActiveComponent implements OnInit {
   public abTests = [];
   public isLoad = false;
   public showOnlyIfNoTestsForCurrentSite = false;
-  public test = {
-    id: 'dfsdfds12',
-    name: 'dsfsfsf',
-    description: 'dsfsfdsf'
-  };
-  public item = {
-    name: 'dfdsfds',
-    convInfo: {
-      n: 2,
-      s: 3,
-      conversion: 23
-    }
-  };
-  public type = {
-    type: 'asddad',
-    title: 'dsfdsfds'
-  };
-  public mckp = {
-    preview: 'dfdsfsfs',
-    name: 'dfdsfsf',
-    description: 'dsfsffds'
-  };
-  public grp = {
-    name: 'sdfsf'
-  };
-  public cat = {
-    name: 'dsfsdf'
-  };
+  private widgetTypes = [];
   private colorsArray = ['#34495e', '#9b59b6', '#3498db', '#62cb31', '#ffb606', '#e67e22', '#e74c3c',
     '#c0392b', '#58b62c', '#e43725', '#2a7aaf', '#7c4792', '#4ea227', '#b8651b',
     '#9a2e22', '#2a3a4b', '#ffeb3b'];
@@ -61,18 +37,321 @@ export class AbtestsActiveComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private location: Location,
     private translate: TranslateService,
     private modalService: NgbModal,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private binsDataService: BinsDataService,
+    private sitesService: SitesService,
     private abTestsService: AbtestsService
   ) { }
 
   ngOnInit(): void {
-    this.widgetService.getWidgetsTemplates().subscribe((response: WidgetTemplate[]) => {
+    /*this.widgetService.getWidgetsTemplates().subscribe((response: WidgetTemplate[]) => {*/
+    const response =  [
+      {
+        "id": "11a2839e8952f5ad9d0455129bd0815c",
+        "name": "Exit-intent",
+        "preview":
+          "http://static.leadgenic.com/images/asduaoidu21831.jpg",
+        "type": "81f24bd19c6517ac723dbfe43a9614f9",
+        "active": true
+      },
+      {
+        "id": "836439eee8559825dcebbc1e2b7672e7",
+        "name": "Popup",
+        "preview": "http://static.leadgenic.com/images/22.jpg",
+        "type": "c74e95e279ab6674838a11fac182ccce",
+        "active": true
+      },
+      {
+        "id": "5974c4b200f2060a8c3acc67ed17a6bb",
+        "name": "Template 1",
+        "preview": "http://static.leadgenic.com/images/31.jpg",
+        "type": "c74e95e279ab6674838a11fac182ccce",
+        "active": true
+      }
+    ];
       this.templates = response;
+    /*});*/
+    /*this.widgetService.getWidgetsTypes().subscribe((responseTypes: WidgetType[]) => {*/
+    const responseTypes =  [
+      {
+        "id": "41546171c1119ffa9b64fa1bb81d5020",
+        "name": "Another type",
+        "description": "",
+        "previewLink":
+          "http://static.leadgenic.com/img/31spadx88210.jpg",
+        "code": "anotherType",
+        "static": false,
+        "containerized": true
+      },
+      {
+        "id": "24df1be21857f12573487da968c2fc3f",
+        "name": "Other",
+        "description": "",
+        "previewLink":
+          "http://static.leadgenic.com/img/dasdcz781313xc9z.jpg",
+        "code": "other",
+        "static": true,
+        "containerized": false
+      },
+      {
+        "id": "0bf813e40c9823e90f286775eb6b801c",
+        "name": "Type 1",
+        "description": "Type description",
+        "previewLink":
+          "http://static.leadgenic.com/img/ztyappqmyuv.jpg",
+        "code": "type1",
+        "static": true,
+        "containerized": false
+      }
+    ];
+      this.widgetTypes = responseTypes;
+      this.initTests();
+    /*});*/
+    this.initSites();
+  }
+
+  private initSites() {
+    /*this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {*/
+      const response = [{
+        id: '5f120a7646e0fb00012c2632',
+        name: 'mysecondsite',
+        url: 'secondsecond.ru',
+        tariffName: 'Пробный',
+        tariffExp: 1595881841107,
+        trial: false
+      }, {
+        id: '5f120a5446e0fb0001d8c981',
+        name: 'mysupermegasite',
+        url: 'mysupermegasite.com',
+        tariffName: 'Пробный',
+        tariffExp: 1595881811225,
+        trial: true
+      }]; // удалить статику и раскомментировать подписку
+      this.sitesService.sites = response;
+      this.sites = this.sites.concat(response);
+      this.currSite = this.sites[0].id;
+    /*});*/
+  }
+
+  private initTests() {
+    /*this.abTestsService.getTests().subscribe((response: Abtest[]) => {*/
+    const response = [{
+        "id": "7f7f888d41b6c33ef1884db7c48a2d32",
+        "name": "Another test",
+        "description": "test description",
+        "state": "ACTIVE",
+        "type": "0bf813e40c9823e90f286775eb6b801c",
+        "siteId": "9aafd4f7bd05ca810dea91985b7ace93"
+      },
+    {
+      "id": "acd0411f5e83a8f476db619c87e85fe8",
+      "name": "TEST2",
+      "description": "",
+      "state": "PAUSED",
+      "type": "41546171c1119ffa9b64fa1bb81d5020",
+      "siteId": "9aafd4f7bd05ca810dea91985b7ace93"
+    }];
+      this.allABTests = this.mapABTests(response);
+      this.abTests = this.allABTests;
+      const testsLength = this.abTests.length;
+      this.getConversions(0, testsLength);
+    /*});*/
+  }
+
+  private mapABTests(tests) {
+    return tests.map((test) => {
+      test.containerized = this.getCurrentType(test.type).containerized;
+      return test;
     });
+  }
+
+  private getCurrentType(typeId) {
+    return this.widgetTypes.find((type) => {
+      return type.id === typeId;
+    });
+  }
+
+  private getConversions(itemNumber: number, testsLength: number) {
+    if (itemNumber < testsLength) {
+     /* this.abTestsService.getConversion(this.abTests[itemNumber].id).subscribe((response: AbtestStatistics[]) => {*/
+      const response =  [
+        {
+          "id": "1653271de635b9266ada2119bbdda452",
+          "name": "ETALON",
+          "conversions": [
+            {
+              "date": 1263081600000,
+              "shows": 2,
+              "target": 2
+            }
+          ],
+          "active": true,
+          "etalon": true
+        },
+        {
+          "id": "949e75c2d25412efaadaab3fd42aec33",
+          "name": "VARIANT",
+          "conversions": [
+            {
+              "date": 1263254400000,
+              "shows": 2,
+              "target": 1
+            }
+          ],
+          "active": false,
+          "etalon": false
+        }
+      ];
+        if (response) {
+          this.abTests[itemNumber].variants = response;
+          this.abTests[itemNumber].chartData = [];
+          this.abTests[itemNumber].chartLabels = [];
+          this.abTests[itemNumber].chartSeries = [];
+          this.abTests[itemNumber].chartColors = [];
+          this.abTests[itemNumber].variants.forEach((variant, i) => {
+            this.addMoreDataToVariant(variant, i, this.abTests[itemNumber]);
+          });
+          this.getConversions(itemNumber + 1, testsLength);
+
+          const dateArr = this.chartGetLegend(this.abTests[itemNumber].variants);
+
+          if (dateArr) {
+            const chartDataBuild = this.getChartDataArray(this.chartGetLegend(this.abTests[itemNumber].variants));
+            const chartLabelBuild = Object.keys(this.chartGetLegend(this.abTests[itemNumber].variants));
+            if (chartDataBuild[0].length === 1) {
+              chartLabelBuild.push('');
+            }
+
+            this.abTests[itemNumber].chartData = chartDataBuild;
+            this.abTests[itemNumber].chartLabels = chartLabelBuild;
+          }
+        } else {
+          this.getConversions(itemNumber + 1, testsLength);
+        }
+      /*});*/
+    } else {
+      this.isLoad = true;
+      this.startScrollToTest();
+    }
+  }
+
+  private chartGetLegend(incoming) {
+    let chart = {};
+    let data = this.prepareData(incoming);
+
+    let prevKey = null;
+
+    if (data.range.min === null) {
+      return null;
+    }
+    if (data.range.min === data.range.max) {
+      const dayOne = data.range.min;
+      const keyOne = `${dayOne.getDate()}.${dayOne.getMonth() + 1}.${dayOne.getFullYear()}`;
+      this.fillCharts(data, chart, prevKey, keyOne);
+      return chart;
+    }
+
+    for (let day = data.range.min; day <= data.range.max; day.setDate(day.getDate() + 1)) {
+      let key = `${day.getDate()}.${day.getMonth() + 1}.${day.getFullYear()}`;
+      this.fillCharts(data, chart, prevKey, key);
+      prevKey = key;
+    }
+    return chart;
+  }
+
+  private getChartDataArray(chartObj) {
+    if (!chartObj) {
+      return [];
+    }
+    let chartAr = [];
+    for (const key in chartObj) {
+      if (chartObj[key]) {
+        const dayData = chartObj[key];
+        chartAr.push(dayData);
+      }
+    }
+    return unzip(chartAr);
+  }
+
+  private startScrollToTest() {
+    const getUrlStr = this.location.path();
+    const getPosOfId = getUrlStr.indexOf('testIdNum-');
+    if (getPosOfId > -1) {
+      const newStrGet = getUrlStr.substring(getPosOfId);
+      const body = $('html, body');
+      setTimeout(() => {
+        const target = $('#' + newStrGet).offset().top - 80;
+        body.animate({ scrollTop: target }, 500, 'swing');
+      }, 100);
+    }
+  }
+
+  private prepareData(incoming) {
+    let range = {
+      min: null,
+      max: null
+    };
+    let widgetsMap = [];
+    for (let i = 0; i < incoming.length; i++) {
+      widgetsMap[i] = {
+        id: incoming[i].id,
+        name: incoming[i].name,
+        conversionMap: {},
+        totals: {
+          shows: null,
+          target: null
+        }
+      };
+      for (let j = 0; j < incoming[i].conversions.length; j++) {
+        let item = incoming[i].conversions[j];
+        item.day = this.timeConverter(item.date).day;
+        item.month = this.timeConverter(item.date).month;
+        item.year = this.timeConverter(item.date).year;
+        let date = new Date(item.year, (item.month - 1), item.day);
+
+        if (range.min == null || date < range.min) {
+          range.min = date;
+        }
+        if (range.max == null || date > range.max) {
+          range.max = date;
+        }
+        widgetsMap[i].totals.shows = (widgetsMap[i].totals.shows == null) ? item.shows : widgetsMap[i].totals.shows + item.shows;
+        widgetsMap[i].totals.target = (widgetsMap[i].totals.target == null) ? item.target : widgetsMap[i].totals.target + item.target;
+        widgetsMap[i].conversionMap[`${item.day}.${item.month}.${item.year}`] =
+          (widgetsMap[i].totals.target * 100 / widgetsMap[i].totals.shows).toFixed(2);
+      }
+    }
+
+    return {
+      range,
+      widgetsMap
+    };
+  }
+
+  private timeConverter(unixTimestamp) {
+    const a = new Date(unixTimestamp);
+    const year = a.getFullYear();
+    const month = a.getMonth() + 1;
+    const day = a.getDate();
+
+    return { year, month, day };
+  }
+
+  private fillCharts(data, chart, prevKey, key) {
+    chart[key] = [];
+    for (let i = 0; i < data.widgetsMap.length; i++) {
+      if (key in data.widgetsMap[i].conversionMap) {
+        chart[key].push(data.widgetsMap[i].conversionMap[key]);
+      } else if (prevKey != null) {
+        chart[key].push(chart[prevKey][i]);
+      } else {
+        chart[key].push(null);
+      }
+    }
   }
 
   public getSiteName(siteId) {
@@ -80,7 +359,7 @@ export class AbtestsActiveComponent implements OnInit {
     if (site != null) {
       return site.name;
     } else {
-      return ''
+      return '';
     }
   }
 
@@ -129,20 +408,20 @@ export class AbtestsActiveComponent implements OnInit {
 
   public showBetterToValue(item): string {
     if (item.etalon) {
-      return "Эталон";
+      return 'Эталон';
     }
     if (item.convInfo.n === 0) {
-      return "-";
+      return '-';
     }
     if (item.convInfo.betterTo > 0) {
-      return "+" + item.convInfo.betterTo + '%';
+      return '+' + item.convInfo.betterTo + '%';
     }
     return item.convInfo.betterTo + '%';
   }
 
   public cloneVariant(test, variant, index, parentIndex) {
     this.abTestsService.cloneVariant(test.id, variant.id).subscribe((response: Variant) => {
-      let newVariant: NewVariant = {
+      const newVariant: NewVariant = {
         ...response,
         conversions: [],
         etalon: false
@@ -198,8 +477,8 @@ export class AbtestsActiveComponent implements OnInit {
           this.abTestsService.chooseWinner(testId, variantId).subscribe((response: boolean) => {
             if (response) {
               this.abTests.splice(parentIndex, 1);
-              this.abTestsService.getTests().subscribe((response: Abtest[]) => {
-                this.allABTests = response;
+              this.abTestsService.getTests().subscribe((responseTests: Abtest[]) => {
+                this.allABTests = responseTests;
               });
               Swal.close();
             }
@@ -256,7 +535,7 @@ export class AbtestsActiveComponent implements OnInit {
       this.abTestsService.start(test.id).subscribe((response: number) => {
         if (response === 200) {
           test.state = 'ACTIVE';
-        } else if(response === 402) {
+        } else if (response === 402) {
           this.showPaymentDialog(
             test.siteId,
             this.translate.instant('widgetsList.payment.abtest', { 0: this.getSiteName(test.siteId)})
@@ -267,9 +546,9 @@ export class AbtestsActiveComponent implements OnInit {
   }
 
   public pauseTest(test) {
-    if(test.state === 'ACTIVE') {
+    if (test.state === 'ACTIVE') {
       this.abTestsService.pause(test.id).subscribe((response: number) => {
-        if(response === 200) {
+        if (response === 200) {
           test.state = 'PAUSED';
         }
       });
@@ -349,7 +628,7 @@ export class AbtestsActiveComponent implements OnInit {
     window.siteTariffModal.find("span.site-name").html(this.getSiteName(siteId));
     window.siteTariffModal.attr("data-id", siteId);
     this.loadPlans();*/
-  };
+  }
 
   private addMoreDataToVariant(variant, index, test) {
     variant.conversions = sortBy(variant.conversions, 'date');
@@ -366,7 +645,7 @@ export class AbtestsActiveComponent implements OnInit {
       test.etalonConversion = variant.convInfo.convNumber;
     }
 
-    if (test && typeof test.etalonConversion !== "undefined") {
+    if (test && typeof test.etalonConversion !== 'undefined') {
       variant.convInfo.betterTo = test.etalonConversion !== 0 ? (((variant.convInfo.convNumber - test.etalonConversion) / test.etalonConversion) * 100) : 0;
       variant.convInfo.betterTo = Math.round(variant.convInfo.betterTo * 100) / 100;
     }
@@ -406,7 +685,7 @@ export class AbtestsActiveComponent implements OnInit {
 
   private getConvItem(item) {
     const conv = this.binsDataService.distRound(item.s / item.n);
-    return item.n !== 0 ? conv : "0%";
+    return item.n !== 0 ? conv : '0%';
   }
 
   private getConvNumber(item) {
@@ -427,7 +706,7 @@ export class AbtestsActiveComponent implements OnInit {
 
   private getSiteById(siteId) {
     for (let i = 0; i < this.sites.length; i++) {
-      if (this.sites[i].id == siteId) {
+      if (this.sites[i].id === siteId) {
         return this.sites[i];
       }
     }
@@ -435,7 +714,7 @@ export class AbtestsActiveComponent implements OnInit {
   }
 
   private getTemplateIdByType(type): string {
-    let filteredArray = this.templates.filter((item: WidgetTemplate) => {
+    const filteredArray = this.templates.filter((item: WidgetTemplate) => {
       return item.type === type;
     });
     return filteredArray[0].id;

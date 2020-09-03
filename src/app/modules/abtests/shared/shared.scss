@@ -1,4 +1,10 @@
+h5 {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
 .wrapper-test {
+  margin-top: 10px;
   padding-bottom: 25px;
 }
 
@@ -20,10 +26,19 @@
   width: 100%;
 }
 
-.site-selector .caret {
+.dropdown-toggle::after {
   float: right;
   position: relative;
   top: 8px;
+}
+
+.dropdown-item {
+  font-size: 12px;
+  color: #262626;
+}
+
+.dropdown-item:active {
+  background-color: #ddd;
 }
 
 .btn {

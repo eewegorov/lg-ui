@@ -3,7 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
-import { AbtestsResponse, UpdateAbtest, CloneVariantResponse } from '../../../core/models/abtests';
+import {
+  AbtestsResponse,
+  UpdateAbtest,
+  CloneVariantResponse,
+  AbtestStatisticsResponse
+} from '../../../core/models/abtests';
 
 
 @Injectable({
@@ -15,6 +20,10 @@ export class AbtestsApiService {
 
   public getTests(): Observable<AbtestsResponse> {
     return this.http.get<AbtestsResponse>(`${ environment.url }/abtests`);
+  }
+
+  public getConversion(id: string): Observable<AbtestStatisticsResponse> {
+    return this.http.get<AbtestStatisticsResponse>(`${ environment.url }/abtests/${id}/statistics`);
   }
 
   public start(id: string): Observable<ApiResponse> {

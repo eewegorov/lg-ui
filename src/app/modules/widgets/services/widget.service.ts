@@ -6,7 +6,7 @@ import {
   WidgetRename,
   WidgetsResponse,
   WidgetTemplate,
-  WidgetTemplatesResponse
+  WidgetTemplatesResponse, WidgetType, WidgetTypesResponse
 } from '../../../core/models/widgets';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { WidgetApiService } from './widget-api.service';
@@ -28,6 +28,13 @@ export class WidgetService {
   public getWidgetsList(siteId: string): Observable<Entities> {
     return this.widgetApiService.getWidgetsList(siteId).pipe(
       map((response: WidgetsResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getWidgetsTypes(): Observable<WidgetType[]> {
+    return this.widgetApiService.getWidgetsTypes().pipe(
+      map((response: WidgetTypesResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }

@@ -21,7 +21,7 @@ export interface Container {
   id: string;
   description: string;
   name: string;
-  widgets: WidgetType[];
+  widgets: WidgetInfo[];
 }
 
 export interface SmartPoints {
@@ -37,10 +37,10 @@ export interface SmartPoint {
 }
 
 export interface Widget {
-  type: WidgetType[];
+  [key: string]: WidgetInfo[];
 }
 
-export interface WidgetType {
+export interface WidgetInfo {
   id: string;
   name: string;
   type: string;
@@ -59,9 +59,25 @@ export interface WidgetRename {
   name: string;
 }
 
+export interface WidgetTypesResponse extends ApiResponse {
+  data: WidgetType[];
+}
+
+export interface WidgetType {
+  id: string;
+  name: string;
+  description: string;
+  previewLink: string;
+  code: string;
+  static: boolean;
+  containerized: boolean;
+}
+
 export interface WidgetTemplatesResponse extends ApiResponse {
   data: WidgetTemplate[];
 }
+
+
 
 export interface WidgetTemplate {
   id: string;

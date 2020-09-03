@@ -13,6 +13,24 @@ export interface Abtest {
   siteId: string;
 }
 
+export interface AbtestStatisticsResponse extends ApiResponse {
+  data: AbtestStatistics[];
+}
+
+export interface AbtestStatistics {
+  id: string;
+  name: string;
+  conversions: AbtestConversion[];
+  active: boolean;
+  etalon: boolean;
+}
+
+export interface AbtestConversion {
+  date: number;
+  shows: number;
+  target: number;
+}
+
 export interface UpdateAbtest {
   name: string;
   description: string;

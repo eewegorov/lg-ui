@@ -1,18 +1,20 @@
 <div class="flex-column toolbar-content">
-  <a href="http://leadgenic.userecho.com/topics/355-instruktsiya-po-rabote-s-sistemoj-ab-testirovaniya-vidzhetov/" class="how-to-test-link" target="_blank">{{ 'abtests.active.instruction' | translate }}</a>
-  <h1 class="title-main">{{ 'sidebar.abtests' | translate }}</h1>
+  <div class="d-flex justify-content-between">
+    <h1 class="title-main pl-1">{{ 'sidebar.abtests' | translate }}</h1>
+    <a href="http://leadgenic.userecho.com/topics/355-instruktsiya-po-rabote-s-sistemoj-ab-testirovaniya-vidzhetov/" class="how-to-test-link" target="_blank">{{ 'abtests.active.instruction' | translate }}</a>
+  </div>
   <div class="wrapper-test">
     <div class="wrapper-test-header">
       <div class="wrapper-test-filter-sites">
-        <div class="row ml-0"><h5>{{ 'abtests.show' | translate }}:</h5></div>
+        <div class="row m-0"><h5>{{ 'abtests.show' | translate }}:</h5></div>
         <div class="dropdown site-selector">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <span *ngIf="currSite.trim().length === 0">{{ 'widgetsList.add.chooseSite' | translate }}</span>
             {{ getCroppedString(getSiteName(currSite), 30, '…') }}
-            <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <li *ngFor="let site of sites" (click)="setCurrSite(site)"><a href="#">{{ site.name }}</a>
+            <li *ngFor="let site of sites" (click)="setCurrSite(site)">
+              <a class="dropdown-item">{{ site.name }}</a>
             </li>
           </ul>
         </div>

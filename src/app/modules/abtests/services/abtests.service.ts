@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Abtest, AbtestsResponse, CloneVariantResponse, UpdateAbtest, Variant } from '../../../core/models/abtests';
+import {
+  Abtest,
+  AbtestsResponse, AbtestStatistics,
+  AbtestStatisticsResponse,
+  CloneVariantResponse,
+  UpdateAbtest,
+  Variant
+} from '../../../core/models/abtests';
 import { ApiResponse } from '../../../core/models/api';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { AbtestsApiService } from './abtests-api.service';
@@ -21,6 +28,13 @@ export class AbtestsService {
   public getTests(): Observable<Abtest[]> {
     return this.abtestsApiService.getTests().pipe(
       map((response: AbtestsResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getConversion(id: string): Observable<AbtestStatistics[]> {
+    return this.abtestsApiService.getConversion(id).pipe(
+      map((response: AbtestStatisticsResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }
