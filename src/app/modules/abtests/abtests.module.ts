@@ -9,6 +9,7 @@ import { AbtestsActiveComponent } from './abtests-active/abtests-active.componen
 import { AbtestsArchiveComponent } from './abtests-archive/abtests-archive.component';
 import { VariantAddComponent } from './variant-add/variant-add.component';
 import { AbtestAddComponent } from './abtest-add/abtest-add.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -25,7 +26,8 @@ import { AbtestAddComponent } from './abtest-add/abtest-add.component';
     CoolInlineEditFieldModule,
     UiSwitchModule,
     SharedModule,
-    AbtestsRoutingModule
+    AbtestsRoutingModule,
+    ChartsModule
   ]
 })
 export class AbtestsModule { }

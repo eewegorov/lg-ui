@@ -60,3 +60,40 @@ a.how-to-test-link:hover {
   height: 11px;
   border-radius: 50%;
 }
+
+.bg-for-line-grid {
+  background-color: #fcfcfc;
+}
+
+.ab-grid__item--non-active {
+  background-color: #fdebeb;
+}
+
+.btn-winner-st:hover {
+  background: rgb(100, 189, 99);
+  border-color: rgb(100, 189, 99);
+  color: #fff;
+}
+
+@media (max-width: 1280px) {
+  .ab-grid__header--name,
+  .ab-grid__item--name {
+    flex-basis: 30%;
+    max-width: 30%;
+  }
+
+  .ab-grid__header--actions,
+  .ab-grid__item--actions {
+    flex-basis: 20%;
+    max-width: 20%;
+  }
+
+  .edit-btns.margined-right-14,
+  .edit-btns.margined-right-44 {
+    margin-right: 5px;
+  }
+
+  .edit-btns.margined-right-76 {
+    margin-right: 0;
+  }
+}

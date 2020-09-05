@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VariantAddComponent } from '../variant-add/variant-add.component';
 import Swal from 'sweetalert2';
 import { sortBy, unzip } from 'lodash';
-import { WidgetTemplate, WidgetType } from '../../../core/models/widgets';
-import { Abtest, AbtestStatistics, NewVariant, Variant } from '../../../core/models/abtests';
+import { WidgetTemplate } from '../../../core/models/widgets';
+import { Abtest, NewVariant, Variant } from '../../../core/models/abtests';
 import { BinsDataService } from '../services/bins-data.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { WidgetService } from '../../widgets/services/widget.service';
@@ -21,7 +21,7 @@ import { Location } from '@angular/common';
   templateUrl: './abtests-active.component.html',
   styleUrls: ['../shared/shared.scss', './abtests-active.component.scss']
 })
-export class AbtestsActiveComponent implements OnInit {
+export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
   public currSite = '';
   public sites =  [{ id: 'allsitesid', name: 'Все сайты' }];
   public showWhat = 'ALL';
@@ -29,6 +29,21 @@ export class AbtestsActiveComponent implements OnInit {
   public abTests = [];
   public isLoad = false;
   public showOnlyIfNoTestsForCurrentSite = false;
+  public chartOptions = {
+    tooltipCaretSize: 0,
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          callback: (value) => { if (value % 1 === 0) { return value; } }
+        }
+      }]
+    }
+  };
+  private fixedTest;
+  private updatedEarlier = false;
   private widgetTypes = [];
   private colorsArray = ['#34495e', '#9b59b6', '#3498db', '#62cb31', '#ffb606', '#e67e22', '#e74c3c',
     '#c0392b', '#58b62c', '#e43725', '#2a7aaf', '#7c4792', '#4ea227', '#b8651b',
@@ -112,6 +127,10 @@ export class AbtestsActiveComponent implements OnInit {
       this.initTests();
     /*});*/
     this.initSites();
+  }
+
+  ngAfterViewChecked(): void {
+    (<any>$('[data-toggle="tooltip"]')).tooltip();
   }
 
   private initSites() {
@@ -354,6 +373,10 @@ export class AbtestsActiveComponent implements OnInit {
     }
   }
 
+  public fixOldTest(test) {
+    this.fixedTest = test;
+  }
+
   public getSiteName(siteId) {
     const site = this.getSiteById(siteId);
     if (site != null) {
@@ -376,17 +399,17 @@ export class AbtestsActiveComponent implements OnInit {
 
   public updateVariantName(test, variant) {
     if (test.containerized) {
-      this.containerizedWidgetService.rename(test.siteId, variant.id, variant.name);
+      this.containerizedWidgetService.rename(test.siteId, variant.id, variant.name).subscribe();
     } else {
-      this.widgetService.rename(test.siteId, variant.id, variant.name);
+      this.widgetService.rename(test.siteId, variant.id, variant.name).subscribe();
     }
   }
 
   public changeVariantState(variant, test) {
     if (test.containerized) {
-      this.containerizedWidgetService.switch(test.siteId, variant.id, variant.active);
+      this.containerizedWidgetService.switch(test.siteId, variant.id, variant.active).subscribe();
     } else {
-      this.widgetService.switch(test.siteId, variant.id, variant.active);
+      this.widgetService.switch(test.siteId, variant.id, variant.active).subscribe();
     }
   }
 
@@ -571,8 +594,8 @@ export class AbtestsActiveComponent implements OnInit {
           this.abTestsService.deleteTest(id).subscribe((response: boolean) => {
             if (response) {
               this.abTests.splice(index, 1);
-              this.abTestsService.getTests().subscribe((response: Abtest[]) => {
-                this.allABTests = response;
+              this.abTestsService.getTests().subscribe((responseTests: Abtest[]) => {
+                this.allABTests = responseTests;
               });
             }
           });
@@ -582,11 +605,23 @@ export class AbtestsActiveComponent implements OnInit {
   }
 
   public updateTest(test) {
+    if (this.updatedEarlier) {
+      this.updatedEarlier = false;
+      return;
+    }
+    if (!test || test.name.length > 60 || test.description.length > 60) {
+      setTimeout(() => {
+        test.name = this.fixedTest.name;
+        test.description = this.fixedTest.description;
+      }, 0);
+      return;
+    }
     const testForUpdate = {
       name: test.name,
       description: test.description
     };
-    this.abTestsService.update(test.id, testForUpdate);
+    this.updatedEarlier = true;
+    this.abTestsService.update(test.id, testForUpdate).subscribe();
   }
 
   public setCurrSite(site) {

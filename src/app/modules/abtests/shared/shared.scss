@@ -73,6 +73,7 @@ h5 {
 }
 
 .test-item {
+  min-width: 800px;
   margin-top: 25px;
   background-color: #fff;
   padding: 15px 10px;
@@ -90,14 +91,13 @@ h5 {
   position: relative;
   border: none;
   padding-right: 20px;
-  line-height: 34px;
+  line-height: 30px;
   max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .test-item-name {
+  margin-bottom: 2px;
   padding-right: 25px;
 }
 
@@ -118,9 +118,20 @@ h5 {
   width: 85%;
 }
 
+.test-item-right {
+  display: flex;
+  height: fit-content;
+}
+
 .test-item-right i {
   font-size: 13px;
   padding: 5px;
+}
+
+.ab-grid__header,
+.ab-grid__item {
+  display: flex;
+  justify-content: space-between;
 }
 
 .ab-grid__header--name,
@@ -132,6 +143,7 @@ h5 {
   padding: 7px 10px;
 
 }
+
 .ab-grid__item--name,
 .ab-grid__item--shows,
 .ab-grid__item--conv,
@@ -143,46 +155,56 @@ h5 {
   font-size: 14px;
   line-height: 28px;
 }
+
 .ab-grid__header--name,
 .ab-grid__item--name {
   flex-basis: 35%;
   max-width: 35%;
 }
+
 .ab-grid__header--shows,
 .ab-grid__item--shows {
   flex-basis: 14%;
   max-width: 14%;
 }
+
 .ab-grid__header--conv,
 .ab-grid__item--conv {
   flex-basis: 8%;
   max-width: 8%;
 }
+
 .ab-grid__header--update,
 .ab-grid__item--update {
   flex-basis: 8%;
   max-width: 8%;
 }
+
 .ab-grid__header--onoff,
 .ab-grid__item--onoff {
   flex-basis: 8%;
   max-width: 8%;
 }
+
 .ab-grid__header--actions,
 .ab-grid__item--actions {
   flex-basis: 15%;
   max-width: 15%;
 }
+
 .ab-grid__item--onoff,
 .ab-grid__item--actions {
   display: flex;
   align-items: center;
+  line-height: 14px;
 }
+
 .ab-grid__item--actions .btn {
-  line-height: 30px;
+  line-height: 20px;
   padding-left: 10px;
   padding-right: 10px;
 }
+
 .ab-grid__item--name {
   position: relative;
   padding-left: 22px;
@@ -190,10 +212,10 @@ h5 {
 
 .ab-grid__item--actions {
   padding-right: 24px;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
+
 .ab-grid__header--actions {
   padding-right: 24px;
   text-align: right;
 }
-
