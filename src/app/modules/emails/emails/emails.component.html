@@ -1,12 +1,12 @@
 <div class="flex-column toolbar-content">
   <h1 class="title-main">{{ 'sidebar.emails' | translate }}</h1>
   <div>
-    <div *ngIf="!allSites.length" class="col-lg-12 margined-top-30">
+    <div *ngIf="!allSites.length" class="col-lg-12 mt-5">
       <h3 class="f-0 text-center">{{ 'reports.sitePlaceholder' | translate }}</h3>
-      <h4 class="f-2 text-center" [innerHTML]="'reports.sitePlaceholder2' | translate"></h4>
+      <h4 class="f-2 text-center underline-links blue-links hover-links" [innerHTML]="'reports.sitePlaceholder2' | translate"></h4>
     </div>
 
-    <div *ngIf="allSites.length > 0" class="col-xs-12 toolbar">
+    <div *ngIf="allSites.length > 0" class="col-sm-12 toolbar">
       <div class="row">
         <div class="col-lg-12">
           <div class="hpanel">
@@ -142,7 +142,7 @@
                       <small>{{ 'reports.emails.stat.period.avg' | translate }}</small>
                     </div>
                   </div>
-                  <button class="btn btn-default margined-top-30 pull-right hovered-btn-red" ng-click="clearStats()"><i class="pe-7s-trash margined-right-5"></i> {{ 'reports.emails.remove.btn' | translate }}</button>
+                  <button class="btn btn-default margined-top-30 pull-right hovered-btn-red" (click)="clearStats()"><i class="pe-7s-trash margined-right-5"></i> {{ 'reports.emails.remove.btn' | translate }}</button>
                 </div>
               </div>
             </div>
@@ -159,7 +159,7 @@
               <span class="panelTitle">{{ 'reports.emails.last' | translate }}</span>
             </div>
             <div class="panel-body">
-              <div ng-show="lastEmails.length === 0">
+              <div *ngIf="lastEmails.length === 0">
                 <h5 class="no-margins text-center">{{ 'reports.emails.last.placeholder' | translate }}</h5>
               </div>
 
@@ -182,7 +182,7 @@
       </div>
     </div>
 
-    <div ng-show="allSites.length > 0" class="col-lg-8">
+    <div *ngIf="allSites.length > 0" class="col-lg-8">
       <div class="row">
         <div class="col-lg-12">
           <div class="hpanel">
@@ -201,12 +201,12 @@
               </div>
               <div class="list">
                 <div class="report-email-sites-sites-rows list-item-container">
-                  <div class="row report-email-sites-sites-row list-item" ng-repeat="site in allSitesStats | orderBy:'count':true | limitTo : 5 track by $index">
+                  <div class="row report-email-sites-sites-row list-item" *ngFor="let site of allSitesStats | orderBy:['-count'] | slice:0:5; trackBy: trackById">
                     <div class="col-xs-5 report-email-sites-sites">
-                      {{site.name}}
+                      {{ site.name }}
                     </div>
                     <div class="col-xs-7 report-email-sites-values">
-                      {{site.count}}
+                      {{ site.count }}
                     </div>
                   </div>
                 </div>

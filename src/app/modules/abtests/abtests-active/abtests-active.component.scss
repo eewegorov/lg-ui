@@ -75,6 +75,37 @@ a.how-to-test-link:hover {
   color: #fff;
 }
 
+.ab-test-footer {
+  padding: 15px 0 0;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.ab-test-footer button {
+  color: #6a6c6f;
+}
+
+.ab-test-footer button.btn {
+  background-color: #fff;
+  border: 1px solid #e4e5e7;
+}
+
+.ab-test-footer button.btn i.fa-plus {
+  color: #62cb31;
+}
+
+.ab-test-footer button.btn-test-reset-stats:hover {
+  background-color: #e74c3c;
+  border-color: #e74c3c;
+  color: #FFFFFF;
+}
+
+.ab-test-footer button.btn-test-var:hover {
+  border-color: #c7c7c7;
+  color: #444444;
+}
+
 @media (max-width: 1280px) {
   .ab-grid__header--name,
   .ab-grid__item--name {

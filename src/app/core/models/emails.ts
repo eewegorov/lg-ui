@@ -20,10 +20,16 @@ export interface EmailsStatistics {
   date: number;
   items: {
     [siteId: string]: number;
-  }
+  };
 }
 
 export interface EmailsStatisticsView {
   date: number;
   value: number;
+}
+
+export interface ClearEmailsRequest {
+  siteIds: string;
+  start: string;
+  end: string;
 }

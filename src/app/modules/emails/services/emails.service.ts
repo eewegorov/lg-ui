@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Email, EmailsResponse, EmailsStatistics, EmailsStatisticsResponse } from '../../../core/models/emails';
+import {
+  ClearEmailsRequest,
+  Email,
+  EmailsResponse,
+  EmailsStatistics,
+  EmailsStatisticsResponse
+} from '../../../core/models/emails';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { EmailsApiService } from './emails-api.service';
+import { ApiResponse } from '../../../core/models/api';
 
 
 @Injectable({
@@ -33,6 +40,13 @@ export class EmailsService {
   public getEmailStatistic(filterParams): Observable<EmailsStatistics[]> {
     return this.emailsApiService.getEmailStatistic(filterParams).pipe(
       map((response: EmailsStatisticsResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public clearEmail(filterParams: ClearEmailsRequest): Observable<boolean> {
+    return this.emailsApiService.clearEmail(filterParams).pipe(
+      map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
     );
   }

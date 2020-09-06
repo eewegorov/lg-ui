@@ -1,14 +1,16 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
-import { OrderByPipe } from '../../../shared/pipes/order-by.pipe';
-import { EmailsService } from '../services/emails.service';
-import { Email, EmailsStatistics, EmailsStatisticsView } from '../../../core/models/emails';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
+import Swal from 'sweetalert2';
 import { Periods } from '../../../core/models/crm';
-import { SitesService } from '../../sites/services/sites.service';
 import { SiteShort } from '../../../core/models/sites';
+import { Email, EmailsStatistics, EmailsStatisticsView } from '../../../core/models/emails';
+import { OrderByPipe } from '../../../shared/pipes/order-by.pipe';
 import { UtilsService } from '../../../core/services/utils.service';
+import { SitesService } from '../../sites/services/sites.service';
+import { EmailsService } from '../services/emails.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -34,7 +36,7 @@ export class EmailsComponent implements OnInit {
   public site = {
     name: 'asdad',
     count: 2
-  }
+  };
   public colors;
   public labels;
   public data;
@@ -45,6 +47,7 @@ export class EmailsComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
+    private toastr: ToastrService,
     private orderBy: OrderByPipe,
     private utilsService: UtilsService,
     private sitesService: SitesService,
@@ -68,10 +71,10 @@ export class EmailsComponent implements OnInit {
 
   public periodApply() {
     const prevPeriodType = this.periodType;
-    this.periodType = "USER";
+    this.periodType = 'USER';
     this.popover.close();
-    if (prevPeriodType === "USER") {
-      this.changePeriod("USER");
+    if (prevPeriodType === 'USER') {
+      this.changePeriod('USER');
     }
   }
 
@@ -116,6 +119,37 @@ export class EmailsComponent implements OnInit {
     }, 50);
   }
 
+  public clearStats() {
+    Swal.fire({
+      title: this.translate.instant('reports.emails.clear.title'),
+      text: this.translate.instant('reports.emails.clear.text'),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: this.translate.instant('reports.emails.clear.yes'),
+      cancelButtonText: this.translate.instant('reports.emails.clear.cancel'),
+    }).then((isConfirm) => {
+      if (isConfirm) {
+        let params = {
+          start: this.getISOTime(this.periodStart),
+          end: this.getISOTime(this.getTomorrowCopyDate(this.periodEnd)),
+          siteIds: ''
+        };
+        if (this.sitesIds.length && this.sitesIds[0] !== this.ALL_SITE_ID) {
+          params.siteIds = this.sitesIds.join(',');
+        }
+        this.emailsService.clearEmail(params).subscribe((response: boolean) => {
+          if (response) {
+            this.timeoutFiltering();
+            this.getEmails();
+            this.getBestSites();
+            this.toastr.success(this.translate.instant('reports.emails.clear.done.desc'), this.translate.instant('global.done'));
+          }
+        });
+      }
+    });
+  }
+
   public trackById(index, item) {
     return item.id;
   }
@@ -128,26 +162,53 @@ export class EmailsComponent implements OnInit {
 
   private getSites() {
     this.allSites = [];
-    this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
+    /*this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {*/
+    const response = [{
+      "id": "5f120a7646e0fb00012c2632",
+      "name": "mysecondsite",
+      "url": "secondsecond.ru",
+      "tariffName": "Пробный",
+      "tariffExp": 1595881841107,
+      "trial": false
+    }, {
+      "id": "5f120a5446e0fb0001d8c981",
+      "name": "mysupermegasite",
+      "url": "mysupermegasite.com",
+      "tariffName": "Пробный",
+      "tariffExp": 1595881811225,
+      "trial": true
+    }];
       this.allSites = response;
       this.getBestSites();
-    });
+    /*});*/
   }
 
   private getEmails() {
     this.lastEmails = [];
-    this.emailsService.getEmailList({ limit: 5, orders: '-date' }).subscribe((response: Email[]) => {
+    /*this.emailsService.getEmailList({ limit: 5, orders: '-date' }).subscribe((response: Email[]) => {*/
+    const response = [{
+      "id": "6cc7eaafd67cf4c5245c42cbb8699c06",
+      "email": "valera@gmail.com",
+      "siteId": "c658c5afd692ba4f3ee38852c269928e",
+      "date": 1510718671000
+    },
+      {
+        "id": "7ac92486435bfaf5e0832271dc641061",
+        "email": "hohoho@coco.ru",
+        "siteId": "4f3b3a3a295fe42341036afab0fbe3da",
+        "date": 1510787530000
+      }];
       if (response.length) {
         response.forEach((item: Email) => {
-          this.utilsService.useGravatarIfExists(item.email).subscribe((response) => {
-            if (response) {
-              item.gravatarUrl = response;
-            }
+          /*this.utilsService.useGravatarIfExists(item.email).subscribe((responseGravatar) => {
+            if (responseGravatar) {
+              item.gravatarUrl = responseGravatar;
+            }*/
             this.lastEmails.push(item);
-          });
+          /*});*/
         });
       }
-    });
+    /*});*/
   }
 
   private getToday(): Date {
@@ -161,7 +222,23 @@ export class EmailsComponent implements OnInit {
       end: this.getISOTime(this.getTomorrowCopyDate(this.periodEnd))
     };
 
-    this.emailsService.getEmailStatistic(params).subscribe((response: EmailsStatistics[]) => {
+   /* this.emailsService.getEmailStatistic(params).subscribe((response: EmailsStatistics[]) => {*/
+    const response = [
+      {
+        "date": 1510693200000,
+        "items": {
+          "eb2e55025bd4b56f2a5bc90703f32411": 1,
+          "1c00e8fc3fbf11f01f8d2901ae1fa68f": 0
+        }
+      },
+      {
+        "date": 1510866000000,
+        "items": {
+          "eb2e55025bd4b56f2a5bc90703f32411": 0,
+          "1c00e8fc3fbf11f01f8d2901ae1fa68f": 0
+        }
+      }
+    ];
       this.allSitesStats = this.allSites.map((site) => {
         return { id: site.id, count: 0, name: site.name };
       });
@@ -173,7 +250,7 @@ export class EmailsComponent implements OnInit {
             }
           });
         }
-      });
+      /*});*/
       $('.reports-emails-preloader-best').hide();
     });
   }

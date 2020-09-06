@@ -27,16 +27,21 @@
 }
 
 .lead-info-sidebar__close {
-  left: 10px;
+  left: 12px;
   position: absolute;
-  top: 10px;
-  font-size: 14px;
+  top: 12px;
 }
 
 .lead-info-sidebar__close:hover {
   background-color: #f00713;
   border-color: #f00713;
   color: #fff;
+}
+
+button.lead-info-sidebar__close {
+  padding: 2px;
+  font-size: 30px;
+  line-height: 1;
 }
 
 .sidebar-title {
