@@ -179,6 +179,10 @@ label.control-label {
   font-size: 15px;
 }
 
+.font-normal {
+  font-size: 14px;
+}
+
 .icheckbox_square-green.checked {
   background-position: -48px 0;
 }
@@ -336,4 +340,48 @@ label.control-label {
   justify-content: space-between;
   text-transform: uppercase;
   background-color: #f7f7f7;
+}
+
+.panel-heading {
+  font-size: 15px;
+  font-weight: 300;
+  padding: 10px -0px;
+}
+
+.filters-flexed {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.filter-flexed__item {
+  flex-basis: 48%;
+  width: 48%;
+  margin-bottom: 10px;
+}
+
+.filter-flexed__item .btn-group__period-selector {
+  display: flex;
+}
+
+.filter-flexed__item .btn-group__period-selector .btn {
+  float: none;
+  flex-grow: 1;
+}
+
+h1.request-period-name {
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+@media (max-width: 1310px) {
+  .filter-flexed__item {
+    flex-basis: 100%;
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .filter-flexed__item .btn-group__period-selector {
+    flex-wrap: wrap;
+  }
 }

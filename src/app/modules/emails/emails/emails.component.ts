@@ -25,8 +25,8 @@ export class EmailsComponent implements OnInit {
   public allSitesStats = [];
   public lastEmails = [];
   public sitesIds = [];
-  public periodStart;
-  public periodEnd;
+  public periodStart: Date;
+  public periodEnd: Date;
   public periodType = 'WEEK';
   public overallStats = {
     allCount: 2131,
@@ -55,13 +55,8 @@ export class EmailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.translate.get('crm.page.filter.sites.all').subscribe((translation: string) => {
-      this.allSites = [{
-        id: this.ALL_SITE_ID,
-        name: translation
-      }];
-      this.initStats();
-    });
+    this.getSites();
+    this.getEmails();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -81,20 +76,20 @@ export class EmailsComponent implements OnInit {
   public changePeriod(value: string) {
     if (value === Periods.TODAY) {
       this.periodStart = new Date();
-      this.periodStart.setHours(0,0,0,0);
+      this.periodStart.setHours(0, 0, 0, 0);
       this.periodEnd = new Date(this.getToday().getTime());
     } else if (value === Periods.YESTERDAY) {
-      this.periodEnd = new Date(this.getToday().getTime() - 2*this.ONE_DAY);
-      this.periodEnd.setHours(23,59,59,999);
+      this.periodEnd = new Date(this.getToday().getTime() - 2 * this.ONE_DAY);
+      this.periodEnd.setHours(23, 59, 59, 999);
       this.periodStart = new Date(this.getToday().getTime() - this.ONE_DAY);
     } else if (value === Periods.DECADE) {
-      this.periodStart = new Date(this.getToday().getTime() - 10*this.ONE_DAY);
+      this.periodStart = new Date(this.getToday().getTime() - 10 * this.ONE_DAY);
       this.periodEnd = new Date(this.getToday().getTime());
     } else if (value === Periods.WEEK) {
-      this.periodStart = new Date(this.getToday().getTime() - 7*this.ONE_DAY);
+      this.periodStart = new Date(this.getToday().getTime() - 7 * this.ONE_DAY);
       this.periodEnd = new Date(this.getToday().getTime());
     } else if (value === Periods.MONTH) {
-      this.periodStart = new Date(this.getToday().getTime() - 30*this.ONE_DAY);
+      this.periodStart = new Date(this.getToday().getTime() - 30 * this.ONE_DAY);
       this.periodEnd = new Date(this.getToday().getTime());
     }
     if (this.allSites && this.allSites.length) {
@@ -127,7 +122,7 @@ export class EmailsComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
       confirmButtonText: this.translate.instant('reports.emails.clear.yes'),
-      cancelButtonText: this.translate.instant('reports.emails.clear.cancel'),
+      cancelButtonText: this.translate.instant('global.no'),
     }).then((isConfirm) => {
       if (isConfirm) {
         let params = {
@@ -154,33 +149,33 @@ export class EmailsComponent implements OnInit {
     return item.id;
   }
 
-  private initStats() {
-    this.sitesIds = [this.ALL_SITE_ID];
-    this.getSites();
-    this.getEmails();
-  }
-
   private getSites() {
-    this.allSites = [];
-    /*this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {*/
-    const response = [{
-      "id": "5f120a7646e0fb00012c2632",
-      "name": "mysecondsite",
-      "url": "secondsecond.ru",
-      "tariffName": "Пробный",
-      "tariffExp": 1595881841107,
-      "trial": false
-    }, {
-      "id": "5f120a5446e0fb0001d8c981",
-      "name": "mysupermegasite",
-      "url": "mysupermegasite.com",
-      "tariffName": "Пробный",
-      "tariffExp": 1595881811225,
-      "trial": true
-    }];
-      this.allSites = response;
+    this.translate.get('crm.page.filter.sites.all').subscribe((translation: string) => {
+      this.allSites = [{
+        id: this.ALL_SITE_ID,
+        name: translation
+      }];
+      this.sitesIds = [this.ALL_SITE_ID];
+      /*this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {*/
+      const response = [{
+        "id": "5f120a7646e0fb00012c2632",
+        "name": "mysecondsite",
+        "url": "secondsecond.ru",
+        "tariffName": "Пробный",
+        "tariffExp": 1595881841107,
+        "trial": false
+      }, {
+        "id": "5f120a5446e0fb0001d8c981",
+        "name": "mysupermegasite",
+        "url": "mysupermegasite.com",
+        "tariffName": "Пробный",
+        "tariffExp": 1595881811225,
+        "trial": true
+      }];
+      this.allSites = this.allSites.concat(response);
       this.getBestSites();
-    /*});*/
+      /*});*/
+    });
   }
 
   private getEmails() {

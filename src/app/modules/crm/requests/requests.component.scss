@@ -1,47 +1,11 @@
-.panel-heading {
-  font-size: 15px;
-  font-weight: 300;
-  padding: 10px -0px;
-}
-
-.filters-flexed {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.filter-flexed__item {
-  flex-basis: 48%;
-  width: 48%;
-  margin-bottom: 10px;
-}
-
-.filter-flexed__item .btn-group__period-selector {
-  display: flex;
-}
-
-.filter-flexed__item .btn-group__period-selector .btn {
-  float: none!important;
-  flex-grow: 1;
-}
-
 .filter-flexed__item .request-period-name {
   padding-top: 5px;
   text-align: right;
   margin-bottom: 5px;
 }
 
-h1.request-period-name {
-  font-size: 12px;
-  margin-top: 3px;
-}
-
 .site-list-table__onpage select {
   max-width: 66px;
-}
-
-.font-normal {
-  font-size: 14px;
 }
 
 .crm-notification-block {
@@ -204,16 +168,6 @@ table {
 
 
 @media (max-width: 1310px) {
-  .filter-flexed__item {
-    flex-basis: 100%;
-    width: 100%;
-    margin-top: 5px;
-  }
-
-  .filter-flexed__item .btn-group__period-selector {
-    flex-wrap: wrap;
-  }
-
   .filter-flexed__item .popover.left {
     top: 120px;
     left: 10px;

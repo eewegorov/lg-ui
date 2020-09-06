@@ -39,18 +39,6 @@
 		"modal": {
 			"newAB": {
 				"chooseVariant": "",
-				"step0": {
-					"desc": {
-						"title": ""
-					},
-					"name": {
-						"example": "",
-						"title": ""
-					}
-				},
-				"step1": {
-					"chooseVariant": ""
-				},
 				"title": ""
 			},
 			"noWidgets": "",
@@ -230,6 +218,7 @@
 		"done": "",
 		"error": "",
 		"from": "",
+		"no": "",
 		"period": {
 			"dateEnd": "",
 			"dateStart": "",
@@ -314,6 +303,14 @@
 	"reports": {
 		"emails": {
 			"best": "",
+			"clear": {
+				"done": {
+					"desc": ""
+				},
+				"text": "",
+				"title": "",
+				"yes": ""
+			},
 			"config": "",
 			"filter": {
 				"from": "",
@@ -323,7 +320,6 @@
 			"period": {
 				"decade": "",
 				"month": "",
-				"title": "",
 				"today": "",
 				"user": "",
 				"week": "",
