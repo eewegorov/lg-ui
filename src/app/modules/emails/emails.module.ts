@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ChartsModule } from 'ng2-charts';
 import { SharedModule } from '../../shared/shared.module';
 import { EmailsRoutingModule } from './emails-routing.module';
 import { EmailsBestComponent } from './emails-best/emails-best.component';
@@ -27,6 +28,7 @@ import { EmailsComponent } from './emails/emails.component';
     TranslateModule,
     NgbModule,
     NgSelectModule,
+    ChartsModule,
     SharedModule,
     EmailsRoutingModule
   ]

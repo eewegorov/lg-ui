@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { Periods } from '../../../core/models/crm';
@@ -10,7 +11,6 @@ import { OrderByPipe } from '../../../shared/pipes/order-by.pipe';
 import { UtilsService } from '../../../core/services/utils.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { EmailsService } from '../services/emails.service';
-import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -29,9 +29,9 @@ export class EmailsComponent implements OnInit {
   public periodEnd: Date;
   public periodType = 'WEEK';
   public overallStats = {
-    allCount: 2131,
-    periodCount: 112,
-    periodAvg: 110
+    allCount: 0,
+    periodCount: 0,
+    periodAvg: 0
   };
   public site = {
     name: 'asdad',
@@ -39,8 +39,20 @@ export class EmailsComponent implements OnInit {
   };
   public colors;
   public labels;
-  public data;
-  public options;
+  public data = [];
+  public options = {
+    tooltipCaretSize: 0,
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          callback: (value) => { if (value % 1 === 0) { return value; } }
+        }
+      }]
+    }
+  };
   private ALL_SITE_ID = '0000000000000000';
   private ONE_DAY = 86400000;
   private filterTimeout: ReturnType<typeof setTimeout>;
@@ -55,6 +67,7 @@ export class EmailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.changePeriod(this.periodType);
     this.getSites();
     this.getEmails();
   }
@@ -79,7 +92,7 @@ export class EmailsComponent implements OnInit {
       this.periodStart.setHours(0, 0, 0, 0);
       this.periodEnd = new Date(this.getToday().getTime());
     } else if (value === Periods.YESTERDAY) {
-      this.periodEnd = new Date(this.getToday().getTime() - 2 * this.ONE_DAY);
+      this.periodEnd = new Date(this.getToday().getTime() - this.ONE_DAY);
       this.periodEnd.setHours(23, 59, 59, 999);
       this.periodStart = new Date(this.getToday().getTime() - this.ONE_DAY);
     } else if (value === Periods.DECADE) {
@@ -238,27 +251,31 @@ export class EmailsComponent implements OnInit {
         return { id: site.id, count: 0, name: site.name };
       });
       response.forEach((stat: EmailsStatistics) => {
-        for(let key in stat.items) {
+        for (let key in stat.items) {
           this.allSitesStats.forEach((item) => {
             if (item.id === key) {
               item.count += stat.items[key];
             }
           });
         }
-      /*});*/
-      $('.reports-emails-preloader-best').hide();
-    });
+      });
+      setTimeout(() => {
+        $('.reports-emails-preloader-best').hide();
+      }, 0);
+    /*});*/
   }
 
   private doReloadData(requestSites) {
-    $('.reports-emails-preloader-main').show();
+    setTimeout(() => {
+      $('.reports-emails-preloader-main').show();
+    }, 0);
     var params = {
       start: this.getISOTime(this.periodStart),
       end: this.getISOTime(this.getTomorrowCopyDate(this.periodEnd)),
       siteIds: ''
     };
     if (requestSites.length && requestSites[0] !== this.ALL_SITE_ID) {
-      params.siteIds = requestSites.join(",");
+      params.siteIds = requestSites.join(',');
     }
 
     this.getSiteEmailsCount(params.siteIds);
@@ -270,25 +287,44 @@ export class EmailsComponent implements OnInit {
     if (sites) {
       params.siteId = sites;
     }
-    this.emailsService.getEmailListCount(params).subscribe((response: number) => {
+    /*this.emailsService.getEmailListCount(params).subscribe((response: number) => {*/
+    const response = 2523;
       this.overallStats.allCount = response;
-    });
+    /*});*/
   }
 
   private getEmailStatistics(params) {
-    this.emailsService.getEmailStatistic(params).subscribe((response: EmailsStatistics[]) => {
+    /*this.emailsService.getEmailStatistic(params).subscribe((response: EmailsStatistics[]) => {*/
+    const response = [
+      {
+        "date": 1510693200000,
+        "items": {
+          "eb2e55025bd4b56f2a5bc90703f32411": 1,
+          "1c00e8fc3fbf11f01f8d2901ae1fa68f": 0
+        }
+      },
+      {
+        "date": 1510866000000,
+        "items": {
+          "eb2e55025bd4b56f2a5bc90703f32411": 0,
+          "1c00e8fc3fbf11f01f8d2901ae1fa68f": 0
+        }
+      }
+    ];
       let mailStatistics: EmailsStatisticsView[] = [];
       response.forEach((stat: EmailsStatistics) => {
         let count = 0;
-        for(let key in stat.items) {
+        for (let key in stat.items) {
           count += stat.items[key];
         }
         mailStatistics.push({ date: stat.date, value: count });
       });
       mailStatistics = this.orderBy.transform(mailStatistics, ['date']);
       this.reloadChart(mailStatistics);
-      $('.reports-emails-preloader-main').hide();
-    });
+      setTimeout(() => {
+        $('.reports-emails-preloader-main').hide();
+      }, 0);
+    /*});*/
   }
 
   private reloadChart(statistics: EmailsStatisticsView[]) {
@@ -315,8 +351,8 @@ export class EmailsComponent implements OnInit {
 
     if (days > 40) {
       let mData = {};
-      for (var i = 0; i < days; i++) {
-        var monthLabel = labels[i].substring(labels[i].indexOf('.') + 1);
+      for (let i = 0; i < days; i++) {
+        const monthLabel = labels[i].substring(labels[i].indexOf('.') + 1);
         if (mData[monthLabel] === undefined) {
           mData[monthLabel] = 0;
         }
@@ -330,8 +366,8 @@ export class EmailsComponent implements OnInit {
       }
     } else if (labels.length < 7) {
       while (labels.length < 7) {
-        labels.unshift("");
-        labels.push("");
+        labels.unshift('');
+        labels.push('');
         data.unshift(0);
         data.push(0);
       }
@@ -340,19 +376,6 @@ export class EmailsComponent implements OnInit {
     this.colors = [this.setChartSettings('rgba(52,152,219, 1)')];
     this.labels = labels;
     this.data = [data];
-    this.options = {
-      tooltipCaretSize: 0,
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true,
-            callback: function(value) {if (value % 1 === 0) {return value;}}
-          }
-        }]
-      }
-    };
   }
 
   private getByDate(list: EmailsStatisticsView[], search: string): EmailsStatisticsView {

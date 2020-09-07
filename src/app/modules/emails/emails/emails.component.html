@@ -1,12 +1,12 @@
 <div class="flex-column toolbar-content">
   <h1 class="title-main">{{ 'sidebar.emails' | translate }}</h1>
   <div>
-    <div *ngIf="!allSites.length" class="col-lg-12 mt-5">
+    <div *ngIf="allSites.length <= 1" class="col-lg-12 mt-5">
       <h3 class="f-0 text-center">{{ 'reports.sitePlaceholder' | translate }}</h3>
       <h4 class="f-2 text-center underline-links blue-links hover-links" [innerHTML]="'reports.sitePlaceholder2' | translate"></h4>
     </div>
 
-    <div *ngIf="allSites.length > 0" class="hpanel">
+    <div *ngIf="allSites.length > 1" class="hpanel">
       <div class="panel-heading">
         <span>{{ 'reports.emails.config' | translate }}</span>
       </div>
@@ -98,7 +98,7 @@
       </div>
     </div>
 
-    <div *ngIf="allSites.length > 0" class="col-xs-12">
+    <div *ngIf="allSites.length > 1" class="col-xs-12">
       <div class="row report-email-stat-panel">
         <div class="col-lg-12">
           <div class="hpanel">
@@ -109,8 +109,16 @@
               <div class="reports-emails-preloader reports-emails-preloader-main"></div>
               <div class="row">
                 <div class="reports-emails-chart">
-                  <canvas id="line" class="chart chart-line" chart-data="data"
-                          chart-labels="labels" chart-colors="colors" chart-options="options">
+                  <canvas
+                    id="line"
+                    baseChart
+                    chartType="line"
+                    [data]="data"
+                    [labels]="labels"
+                    [colors]="colors"
+                    [options]="options"
+                    [legend]="false"
+                  >
                   </canvas>
                 </div>
                 <div class="list reports-emails-stats-list">
@@ -145,7 +153,7 @@
       </div>
     </div>
 
-    <div *ngIf="allSites.length > 0" class="col-lg-4">
+    <div *ngIf="allSites.length > 1" class="col-lg-4">
       <div class="row">
         <div class="col-lg-12">
           <div class="hpanel">
@@ -176,7 +184,7 @@
       </div>
     </div>
 
-    <div *ngIf="allSites.length > 0" class="col-lg-8">
+    <div *ngIf="allSites.length > 1" class="col-lg-8">
       <div class="row">
         <div class="col-lg-12">
           <div class="hpanel">

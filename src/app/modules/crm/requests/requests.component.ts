@@ -154,28 +154,23 @@ export class RequestsComponent implements OnInit, OnDestroy {
     });
   }
 
-  public showYesterdayDate() {
-    const yesterday = new Date(this.getToday().getTime() - this.ONE_DAY)
-    return this.periodType === "YESTERDAY" ? yesterday : this.periodEnd;
-  }
-
   public changePeriod(value: string) {
     if (value === Periods.TODAY) {
       this.periodStart = new Date();
-      this.periodStart.setHours(0,0,0,0);
+      this.periodStart.setHours(0, 0, 0, 0);
       this.periodEnd = new Date(this.getToday().getTime());
     } else if (value === Periods.YESTERDAY) {
-      this.periodEnd = new Date(this.getToday().getTime() - 2*this.ONE_DAY);
-      this.periodEnd.setHours(23,59,59,999);
+      this.periodEnd = new Date(this.getToday().getTime() - this.ONE_DAY);
+      this.periodEnd.setHours(23, 59, 59, 999);
       this.periodStart = new Date(this.getToday().getTime() - this.ONE_DAY);
     } else if (value === Periods.DECADE) {
-      this.periodStart = new Date(this.getToday().getTime() - 10*this.ONE_DAY);
+      this.periodStart = new Date(this.getToday().getTime() - 10 * this.ONE_DAY);
       this.periodEnd = new Date(this.getToday().getTime());
     } else if (value === Periods.WEEK) {
-      this.periodStart = new Date(this.getToday().getTime() - 7*this.ONE_DAY);
+      this.periodStart = new Date(this.getToday().getTime() - 7 * this.ONE_DAY);
       this.periodEnd = new Date(this.getToday().getTime());
     } else if (value === Periods.MONTH) {
-      this.periodStart = new Date(this.getToday().getTime() - 30*this.ONE_DAY);
+      this.periodStart = new Date(this.getToday().getTime() - 30 * this.ONE_DAY);
       this.periodEnd = new Date(this.getToday().getTime());
     }
 

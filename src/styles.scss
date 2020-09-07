@@ -369,10 +369,14 @@ label.control-label {
   flex-grow: 1;
 }
 
-h1.request-period-name {
+.request-period-name {
+  margin-top: 8px;
+  margin-bottom: 5px;
   font-size: 12px;
-  margin-top: 3px;
+  text-align: right;
 }
+
+
 
 @media (max-width: 1310px) {
   .filter-flexed__item {
