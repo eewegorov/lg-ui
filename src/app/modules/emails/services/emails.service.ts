@@ -44,6 +44,12 @@ export class EmailsService {
     );
   }
 
+  public downloadEmailList(filterParams): Observable<any> {
+    return this.emailsApiService.downloadEmailList(filterParams).pipe(
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
   public clearEmail(filterParams: ClearEmailsRequest): Observable<boolean> {
     return this.emailsApiService.clearEmail(filterParams).pipe(
       map((response: ApiResponse) => response.success),

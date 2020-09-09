@@ -25,6 +25,12 @@ export class EmailsApiService {
     });
   }
 
+  public downloadEmailList(filterParams) {
+    return this.http.get<EmailsStatisticsResponse>(`${ environment.url }/emails/export`, {
+      params: filterParams
+    });
+  }
+
   public clearEmail(filterParams: ClearEmailsRequest): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${ environment.url }/emails/clear`, filterParams);
   }

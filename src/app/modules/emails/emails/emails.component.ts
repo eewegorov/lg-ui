@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -18,7 +18,7 @@ import { EmailsService } from '../services/emails.service';
   templateUrl: './emails.component.html',
   styleUrls: ['./emails.component.scss']
 })
-export class EmailsComponent implements OnInit {
+export class EmailsComponent implements OnInit, AfterViewChecked {
   @ViewChild('p') popover: NgbPopover;
   public innerWidth: number;
   public allSites = [];
@@ -32,10 +32,6 @@ export class EmailsComponent implements OnInit {
     allCount: 0,
     periodCount: 0,
     periodAvg: 0
-  };
-  public site = {
-    name: 'asdad',
-    count: 2
   };
   public colors;
   public labels;
@@ -70,6 +66,10 @@ export class EmailsComponent implements OnInit {
     this.changePeriod(this.periodType);
     this.getSites();
     this.getEmails();
+  }
+
+  ngAfterViewChecked(): void {
+    (<any>$('[data-toggle="tooltip"]')).tooltip();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -162,6 +162,34 @@ export class EmailsComponent implements OnInit {
     return item.id;
   }
 
+  public downloadCsv(startPeriod?, endPeriod?, sites = this.sitesIds) {
+    let params = {siteIds: '', dateFrom: '', dateTo: ''};
+    if (sites.length && sites[0] !== this.ALL_SITE_ID) {
+      params.siteIds = sites.join(',');
+    }
+    if (startPeriod && endPeriod) {
+      params.dateFrom = startPeriod.getTime();
+      params.dateTo = endPeriod.getTime();
+    }
+    this.emailsService.downloadEmailList(params).subscribe((response) => {
+      if (response) {
+        const blob = new Blob([response], { type: 'text/csv;charset=UTF-8' });
+        let link = document.createElement('a');
+        link.style.display = 'none';
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'email_subscribers.csv';
+        document.body.appendChild(link);
+        link.click();
+      }
+    });
+  }
+
+  public getTomorrowCopyDate(date: Date): Date {
+    let tomorrowDate = new Date(date.valueOf());
+    tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+    return tomorrowDate;
+  }
+
   private getSites() {
     this.translate.get('crm.page.filter.sites.all').subscribe((translation: string) => {
       this.allSites = [{
@@ -247,7 +275,7 @@ export class EmailsComponent implements OnInit {
         }
       }
     ];
-      this.allSitesStats = this.allSites.map((site) => {
+      this.allSitesStats = this.allSites.slice(1).map((site) => {
         return { id: site.id, count: 0, name: site.name };
       });
       response.forEach((stat: EmailsStatistics) => {
@@ -379,7 +407,7 @@ export class EmailsComponent implements OnInit {
   }
 
   private getByDate(list: EmailsStatisticsView[], search: string): EmailsStatisticsView {
-    for (var i = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
       if (this.getDDMMYYTime(list[i].date) === search) {
         return list[i];
       }
@@ -388,17 +416,11 @@ export class EmailsComponent implements OnInit {
   }
 
   private getISOTime(time: Date): string {
-    return moment(time).format("YYYY-MM-DD");
+    return moment(time).format('YYYY-MM-DD');
   }
 
   private getDDMMYYTime(time: Date | number): string {
-    return moment(time).format("DD.MM.YY");
-  }
-
-  private getTomorrowCopyDate(date: Date): Date {
-    let tomorrowDate = new Date(date.valueOf());
-    tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-    return tomorrowDate;
+    return moment(time).format('DD.MM.YY');
   }
 
   private setChartSettings(color: string) {

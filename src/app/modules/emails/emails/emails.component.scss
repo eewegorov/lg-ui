@@ -19,7 +19,8 @@
 .reports-emails-chart {
   float: left;
   margin-top: 15px;
-  width: calc(100% - 335px) !important;
+  width: calc(100% - 335px);
+  height: 240px;
 }
 
 .reports-emails-stats-list {
@@ -34,7 +35,7 @@
 
 .report-email-stat-panel .download-btn {
   position: absolute;
-  right: 0px;
+  right: 0;
   top: 15px;
 }
 
@@ -99,4 +100,23 @@
   position: absolute;
   width: 100%;
   z-index: 999;
+}
+
+.list .list-item-container {
+  float: left;
+  width: 100%;
+}
+
+.list-item-container div:first-child {
+  border-top: none;
+}
+
+.list .list-item {
+  float: left;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid #e4e5e7
 }
