@@ -33,9 +33,9 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
     periodCount: 0,
     periodAvg: 0
   };
+  public data = [];
   public colors;
   public labels;
-  public data = [];
   public options = {
     tooltipCaretSize: 0,
     responsive: true,

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core'
+import { ChartsModule } from 'ng2-charts';;
 import { SharedModule } from '../../shared/shared.module';
 import { SitesRoutingModule } from './sites-routing.module';
 import { SiteAddComponent } from './site-add/site-add.component';
@@ -22,6 +23,7 @@ import { SitesComponent } from './sites/sites.component';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
+    ChartsModule,
     SharedModule,
     SitesRoutingModule
   ]

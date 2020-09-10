@@ -1,4 +1,4 @@
-<div class="flex-column toolbar-content sites-list-page">
+<div class="flex-column toolbar-content">
   <div class="row col-lg-12 pr-0 justify-content-between">
     <h1 class="title-main">{{ 'sidebar.sites' | translate }}</h1>
     <button
@@ -12,11 +12,15 @@
   <div *ngIf="!isSitesListLoaded" class="widget-page-preloader-all-inner"></div>
 
   <div *ngIf="isSitesListLoaded" class="content animate-panel">
-    <div *ngIf="!sites.length" class="col-lg-12">
+    <div *ngIf="!sites.length" class="col-lg-12 mt-5">
       <h3 class="f-0 text-center">{{ 'sitelist.empty.title' | translate }}</h3>
       <h4 class="f-2 text-center">{{ 'sitelist.empty.subtitle' | translate }}</h4>
     </div>
-    <!--<site-item-directive item="site" timezone="timezone" ng-repeat="site in sites"></site-item-directive>-->
+    <app-sites-list
+      *ngFor="let site of sites"
+      [item]="site"
+      [timezone]="timezone"
+    ></app-sites-list>
   </div>
 
 </div>

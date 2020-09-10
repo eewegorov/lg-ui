@@ -20,7 +20,7 @@ export class ErrorHandlerService {
 
   public handleError(error: ApiResponse) {
     if (error.message) {
-      let errors = error.message.split(":");
+      const errors = error.message.split(':');
       if (errors[0] === Payment.WIDGETS_LIMIT && errors[1]) {
         this.prepareResponseForPaymentService(errors[0], errors[1]);
       }
