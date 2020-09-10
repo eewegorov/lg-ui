@@ -26,11 +26,11 @@ export class BillingService {
       if (response.length) {
         const inputs = {
           plans: response,
-          siteId: siteId,
-          siteName: siteName,
-          title: title,
-          subscription: subscription,
-          expTime: expTime
+          siteId,
+          siteName,
+          title,
+          subscription,
+          expTime
         };
         this.showTariffPlansModal(inputs);
       } else {

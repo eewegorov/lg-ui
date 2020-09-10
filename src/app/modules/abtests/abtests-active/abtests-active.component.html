@@ -95,7 +95,7 @@
         </div>
 
         <div class="test-item-graph">
-          <h4 *ngIf="!test.chartData.length" class="f-chart-no-data text-center">{{ 'abtests.active.noData' | translate }}</h4>
+          <h4 *ngIf="!test.chartData.length" class="f-chart-no-data text-center">{{ 'global.noData' | translate }}</h4>
           <canvas
             *ngIf="test.chartData.length"
             id="line"

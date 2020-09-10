@@ -13,7 +13,6 @@
 				"desc": "",
 				"title": ""
 			},
-			"noData": "",
 			"noPaused": "",
 			"pauseTest": "",
 			"paused": "",
@@ -219,12 +218,14 @@
 		"error": "",
 		"from": "",
 		"no": "",
+		"noData": "",
 		"period": {
 			"dateEnd": "",
 			"dateStart": "",
 			"start": ""
 		},
-		"save": ""
+		"save": "",
+		"until": ""
 	},
 	"header": {
 		"cabinet": "",
@@ -338,7 +339,10 @@
 					"tooltip": ""
 				},
 				"overall": "",
-				"period": ""
+				"period": {
+					"avg": "",
+					"title": ""
+				}
 			},
 			"statistics": ""
 		},
@@ -380,6 +384,11 @@
 	},
 	"sitelist": {
 		"addSite": "",
+		"chartLegend": {
+			"emails": "",
+			"leads": "",
+			"widgets": ""
+		},
 		"edit": {
 			"code": "",
 			"targets": ""
@@ -388,6 +397,7 @@
 			"subtitle": "",
 			"title": ""
 		},
+		"extend": "",
 		"form": {
 			"code": {
 				"desc1": ""
@@ -422,6 +432,12 @@
 			"title": "",
 			"url": ""
 		},
+		"improve": "",
+		"notification": {
+			"crm": "",
+			"mail": "",
+			"payment": ""
+		},
 		"save": {
 			"done": "",
 			"title": ""
@@ -430,10 +446,18 @@
 			"onPage": ""
 		},
 		"tariff": {
+			"free": "",
+			"improvement": "",
 			"length": "",
 			"title": ""
 		},
-		"vkEnable": ""
+		"vkEnable": "",
+		"weekinfo": {
+			"actions": "",
+			"leads": "",
+			"mails": "",
+			"title": ""
+		}
 	},
 	"userInfo": {
 		"email": "",

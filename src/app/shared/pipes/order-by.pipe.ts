@@ -21,7 +21,7 @@ export class OrderByPipe implements PipeTransform {
   }
 
   transform<T>(input: T[], config?: string | string[]): T[] {
-    if(!input) {
+    if (!input) {
       return input;
     }
 
