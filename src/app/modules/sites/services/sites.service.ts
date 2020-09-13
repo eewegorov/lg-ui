@@ -5,13 +5,14 @@ import {
   CreateSiteData,
   CreateSiteRequest,
   CreateSiteResponse,
-  Site,
-  SiteShort,
+  Site, SiteSettings, SiteSettingsResponse,
+  SiteShort, SiteShortResponse,
   SitesResponse,
   SitesShortResponse
 } from '../../../core/models/sites';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { SitesApiService } from './sites-api.service';
+import { ApiResponse } from '../../../core/models/api';
 
 
 @Injectable({
@@ -47,11 +48,32 @@ export class SitesService {
     );
   }
 
+  public deleteSite(id: string): Observable<boolean> {
+    return this.sitesApiService.deleteSite(id).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getSiteSettings(id: string): Observable<SiteSettings> {
+    return this.sitesApiService.getSiteSettings(id).pipe(
+      map((response: SiteSettingsResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getSiteShortInfo(id: string): Observable<SiteShort> {
+    return this.sitesApiService.getSiteShortInfo(id).pipe(
+      map((response: SiteShortResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
   public generatePath(path: string, needUrl: boolean = false): string {
-    let scriptPath = "<!-- BEGIN LEADGENIC CODE {literal} -->\r\n";
-    scriptPath +=  "<!-- Put this script tag before the </body> tag of your page -->";
+    let scriptPath = '<!-- BEGIN LEADGENIC CODE {literal} -->\r\n';
+    scriptPath +=  '<!-- Put this script tag before the </body> tag of your page -->';
     scriptPath += '\r\n<script type="text/javascript" charset="UTF-8" async src="';
-    scriptPath += needUrl ? ("https://gate.leadgenic.ru/getscript?site=" + path) : path;
+    scriptPath += needUrl ? ('https://gate.leadgenic.ru/getscript?site=' + path) : path;
     scriptPath += '"></script>\r\n';
     scriptPath += '<!-- {/literal} END LEADGENIC CODE -->';
     return scriptPath;

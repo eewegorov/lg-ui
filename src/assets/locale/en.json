@@ -200,14 +200,6 @@
 			}
 		}
 	},
-	"filters": {
-		"compare": {
-			"contain": "",
-			"end": "",
-			"equal": "",
-			"start": ""
-		}
-	},
 	"global": {
 		"cancel": "",
 		"close": "",
@@ -389,10 +381,6 @@
 			"leads": "",
 			"widgets": ""
 		},
-		"edit": {
-			"code": "",
-			"targets": ""
-		},
 		"empty": {
 			"subtitle": "",
 			"title": ""
@@ -420,15 +408,6 @@
 				"desc1": "",
 				"desc2": ""
 			},
-			"targets": {
-				"add": "",
-				"col1": "",
-				"col2": "",
-				"com1": "",
-				"com2": "",
-				"desc1": "",
-				"desc2": ""
-			},
 			"title": "",
 			"url": ""
 		},
@@ -439,19 +418,18 @@
 			"payment": ""
 		},
 		"save": {
-			"done": "",
-			"title": ""
+			"done": ""
 		},
 		"table": {
 			"onPage": ""
 		},
 		"tariff": {
 			"free": "",
+			"improve": "",
 			"improvement": "",
 			"length": "",
 			"title": ""
 		},
-		"vkEnable": "",
 		"weekinfo": {
 			"actions": "",
 			"leads": "",

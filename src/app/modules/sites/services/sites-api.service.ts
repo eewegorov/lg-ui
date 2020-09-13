@@ -2,7 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { CreateSiteRequest, CreateSiteResponse, SitesResponse, SitesShortResponse } from '../../../core/models/sites';
+import { ApiResponse } from '../../../core/models/api';
+import {
+  CreateSiteRequest,
+  CreateSiteResponse,
+  SiteSettingsResponse, SiteShortResponse,
+  SitesResponse,
+  SitesShortResponse
+} from '../../../core/models/sites';
+
 
 
 @Injectable({
@@ -22,5 +30,17 @@ export class SitesApiService {
 
   public createSite(data: CreateSiteRequest): Observable<CreateSiteResponse> {
     return this.http.post<CreateSiteResponse>(`${ environment.url }/sites/statistics`, data);
+  }
+
+  public deleteSite(id: string): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(`${ environment.url }/sites/${id}`);
+  }
+
+  public getSiteSettings(id: string): Observable<SiteSettingsResponse> {
+    return this.http.get<SiteSettingsResponse>(`${ environment.url }/sites/${id}/settings`);
+  }
+
+  public getSiteShortInfo(id: string): Observable<SiteShortResponse> {
+    return this.http.get<SiteShortResponse>(`${ environment.url }/sites/${id}/short`);
   }
 }

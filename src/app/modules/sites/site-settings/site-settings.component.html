@@ -1,1 +1,254 @@
-<p>site-settings works!</p>
+<div class="sites-settings-page">
+  <h1 class="widget-title-main">{{ 'settings.title' | translate }} &laquo;{{site.name}}&raquo;</h1>
+  <div class="content">
+    <div class="row no-animate">
+      <div class="col-lg-12 site-settings-tab-wrapper">
+        <div class="hpanel">
+          <div class="panel-body">
+            <div class="tabs-left">
+              <ul class="nav nav-tabs">
+                <li [ngClass]="{'active' : tab === 0}"><a (click)="setTab(0)">{{ 'settings.site.tabs.general' | translate }}</a></li>
+                <li [ngClass]="{'active' : tab === 1}"><a (click)="setTab(1)">{{ 'settings.site.tabs.integrations' | translate }}</a></li>
+                <li [ngClass]="{'active' : tab === 2}"><a (click)="setTab(2)">{{ 'settings.site.tabs.analytics' | translate }}</a></li>
+                <li [ngClass]="{'active' : tab === 3}"><a (click)="setTab(3)">{{ 'settings.site.tabs.code' | translate }}</a></li>
+              </ul>
+
+              <div class="tab-content no-animate">
+                <div *ngIf="tab === 0" class="tab-pane active">
+                  <div class="panel-body" tooltiped>
+                    <h3>{{ 'settings.site.tabs.general' | translate }}</h3>
+                    <div class="padding-top-10">
+                      <h4 class="no-bold site-settings-h4-text">{{ 'settings.site.settings.general' | translate }}:</h4>
+                    </div>
+                    <div class="site-settings__general-item">
+                      <div class="validable form-group" data-context="name">
+                        <label for="sitename" class="control-label">{{ 'settings.site.settings.sitename.title' | translate }}</label>
+                        <input id="sitename" type="text" name="name" class="form-control" [ngModel]="site.name">
+                        <span class="validate">Validate info</span>
+                      </div>
+                    </div>
+                    <div class="site-settings__general-item">
+                      <div class="validable form-group" data-context="url">
+                        <label for="domain" class="control-label">{{ 'settings.site.settings.domain.title' | translate }}</label>
+                        <input id="domain" type="text" name="name" class="form-control" [ngModel]="site.url">
+                        <span class="validate">Validate info</span>
+                      </div>
+                    </div>
+                    <div class="site-settings__general-item">
+                      <button type="button" (click)="removeSite()" class="btn w-xs btn-danger deleteItem"><i class="fa fa-trash-o"></i> {{ 'settings.site.settings.removeSite' | translate }}</button>
+                    </div>
+
+                    <div class="padding-top-10">
+                      <h4 class="no-bold site-settings-h4-text">{{ 'settings.site.settings.notification.title' | translate }}:</h4>
+                    </div>
+                    <div class="form-group site-settings-switcher">
+                      <ui-switch size="small" [checked]="site.needLeadNotification"></ui-switch>
+                      <label class="control-label">
+                        {{ 'settings.site.settings.notification.send' | translate }}
+                      </label>
+                    </div>
+
+                    <div class="padding-top-10">
+                      <h4 class="no-bold site-settings-h4-text">{{ 'settings.site.settings.stats.title' | translate }}:</h4>
+                    </div>
+                    <div class="form-group site-settings-switcher">
+                      <ui-switch size="small" [checked]="site.needEmailSubscriptions"></ui-switch>
+                      <label class="control-label">
+                        {{ 'settings.site.settings.stats.email' | translate }}
+                        <a data-toggle="tooltip"
+                           data-placement="top"
+                           title="{{ 'settings.site.settings.stats.tooltip' | translate }}"
+                           class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+                      </label>
+                    </div>
+
+                    <div class="padding-top-10">
+                      <h4 class="no-bold site-settings-h4-text">{{ 'settings.site.settings.lglinks.title' | translate }}:</h4>
+                    </div>
+                    <div class="form-group site-settings-switcher">
+                      <ui-switch size="small" [checked]="site.needHideLogo" (change)="onChangePaymentLogo()"></ui-switch>
+                      <label class="control-label">
+                        {{ 'settings.site.settings.lglinks.link1' | translate }}<span class="label label-warning tariff-info" style="background-color: red !important;">{{ 'global.payment.label' | translate }}</span>
+                      </label>
+                    </div>
+                    <div class="form-group site-settings-switcher">
+                      <ui-switch size="small" [checked]="site.logoRefLink" (change)="onChangePaymentLogo()"y></ui-switch>
+                      <label class="control-label">
+                        {{ 'settings.site.settings.lglinks.link2' | translate }}
+                        <a data-toggle="tooltip"
+                           data-placement="top"
+                           title="{{ 'settings.site.settings.lglinks.tooltip' | translate }}"
+                           class="info-link" href="#"><i class="fa fa-info-circle"></i></a><span class="label label-warning tariff-info" style="background-color: red !important;">{{ 'global.payment.label' | translate }}</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="tab === 1" class="tab-pane active">
+                  <div class="panel-body integration-tab">
+                    <div class="integration-tab-flex">
+                      <h3>{{ 'settings.site.tabs.integrations' | translate }}</h3>
+                      <button (click)="openModalForCreatingNewIntegration()" type="button" class="btn w-xs m-t-sm btn-success btn-add-new-integration"><i class="fa fa-plus-circle"></i> {{ 'settings.site.tabs.integrations.addIntegration' | translate }} </button>
+                    </div>
+
+                    <div class="tab-wrap">
+                      <div class="col-lg-12 margined-top-60 margined-bottom-50" *ngIf="!integrations.length">
+                        <h3 class="f-0 text-center">{{ 'settings.site.settings.integrations.not.title' | translate }}</h3>
+                        <h4 class="f-2 text-center">{{ 'settings.site.settings.integrations.not.desc' | translate }}</h4>
+                      </div>
+
+                      <div class="tab-wrap__crm" *ngIf="integrationsCRM.length">
+                        <h4 class="f-1 no-bold margined-top-30">{{ 'settings.site.tabs.group.crm' | translate }}</h4>
+                        <div class="integration-rowed">
+                          <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsCRM">
+                           <!-- <integration-item-directive class="integration-item__100" widget="item" site-id="siteId"></integration-item-directive>-->
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="tab-wrap__crm" *ngIf="integrationsMailing.length">
+                        <h4 class="f-1 no-bold margined-top-30">{{ 'settings.site.tabs.group.email' | translate }}</h4>
+                        <div class="integration-rowed">
+                          <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsMailing">
+                            <!--<integration-item-directive class="integration-item__100" widget="item" site-id="siteId"></integration-item-directive>-->
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="tab-wrap__crm" *ngIf="integrationsNotifications.length">
+                        <h4 class="f-1 no-bold margined-top-30">{{ 'settings.site.tabs.group.notification' | translate }}</h4>
+                        <div class="integration-rowed">
+                          <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsNotifications">
+                            <!--<integration-item-directive class="integration-item__100" widget="item" site-id="siteId"></integration-item-directive>-->
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="tab-wrap__crm" *ngIf="integrationsOthers.length">
+                        <h4 class="f-1 no-bold margined-top-30">{{ 'settings.site.tabs.group.other' | translate }}</h4>
+                        <div class="integration-rowed">
+                          <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsOthers">
+                            <!--<integration-item-directive class="integration-item__100" widget="item" site-id="siteId"></integration-item-directive>-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="tab === 2" class="tab-pane active">
+                  <div class="panel-body">
+                    <h3 class="m-b-lg">{{ 'settings.site.tabs.analytics' | translate }}</h3>
+
+                    <div class="integration-rowed">
+                      <!-- YMetrika -->
+                      <div class="col-lg-6 analyticssync-sync-panel-wrapper"
+                           id="crmsync-ymetrika">
+                        <div class="mail-sync-panel mail-sync-panel-height">
+                          <a class="mailsync-logo" href="https://metrika.yandex.ru/"
+                             target="_blank"><img
+                            src="https://static.leadgenic.com/crmimages/metrika.gif"
+                            alt=""/></a>
+                          <div class="row row-nomargined margined-bottom-15"
+                               style="max-height: 72px;">
+                            <div class="validable col-lg-12"
+                                 data-context="ymetrika-counter">
+                              <label class="control-label">{{ 'settings.site.settings.integrations.ymetrika.counter' | translate }}</label>
+                              <input type="text" name="name" class="form-control" [ngModel]="site.yandexAnalyticsCounter">
+                              <span style="display: block;margin-top: 20px;" [innerHTML]="'settings.site.settings.integrations.ymetrika.counter.span' | translate"></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Google analytics -->
+                      <div class="col-lg-6 analyticssync-sync-panel-wrapper"
+                           id="crmsync-ganalytics">
+                        <div class="mail-sync-panel mail-sync-panel-height">
+                          <a class="mailsync-logo" href="https://www.google.com/analytics/"
+                             target="_blank"><img
+                            src="https://static.leadgenic.com/crmimages/ga.jpg"
+                            alt=""/></a>
+                          <div class="row row-nomargined margined-bottom-15"
+                               style="max-height: 72px;">
+                            <div class="validable col-lg-12"
+                                 data-context="ganalytics-service">
+                              <label>{{ 'settings.site.settings.integrations.ganalytics.service' | translate }}</label>
+                              <div class="dropdown site-selector">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                  <span class="dropdown-selected-cropp" style="max-width:90%">{{site.googleAnalyticsService}}</span>
+                                  <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li *ngFor="let item of googleAnalyticsServices" (click)="changeAnalyticGService(item.value)"><a href="javascript:void(0);">{{item.name}}</a></li>
+                                </ul>
+                              </div>
+                              <span style="display: block;margin-top: 20px;" [innerHTML]="'settings.site.settings.integrations.ganalytics.service.span' | translate"></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="tab === 3" class="tab-pane active">
+                  <div class="panel-body" tooltiped>
+                    <h3>{{ 'settings.script.title' | translate }}</h3>
+                    <p class="small m-t-md">
+                      <strong [innerHTML]="'sitelist.form.code.desc1' | translate"></strong>
+                    </p>
+                    <div class="form-group m-b-none">
+                      <textarea
+                        [(ngModel)]="codeSiteScript"
+                        class="form-control not-readonly-hand"
+                        rows="5"
+                        appSelectOnClick
+                        readonly
+                      ></textarea>
+                    </div>
+                    <div class="form-group">
+                      <a href="" class="help-link-add-code-to-site ng-binding">{{ 'settings.script.helplinktext' | translate }}</a>
+                    </div>
+                    <br>
+                    <br>
+                    <strong>
+                      {{ 'settings.script.apicode' | translate }} <a
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="{{ 'settings.script.apicode.tooltip' | translate }}"
+                      class="info-link"><i class="fa fa-info-circle"></i></a>
+                    </strong>
+
+                    <div class="form-group m-b-none" data-context="url">
+                      <input
+                        type="text"
+                        class="form-control not-readonly-hand"
+                        name="name"
+                        [(ngModel)]="siteId"
+                        appSelectOnClick
+                        readonly
+                      />
+                    </div>
+                    <p class="small">{{ 'settings.script.apicode.desc' | translate }}</p>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="text-left floated-left" style="margin-left: 20%;">
+                <button type="button" (click)="goBack()" class="btn w-xs btn-default">{{ 'settings.site.global.backButton' | translate }}</button>
+              </div>
+              <div class="text-right">
+                <button
+                  type="button"
+                  class="btn w-xs btn-success"
+                  (click)="saveSite()"
+                  [disabled]="!site.name || !site.url"
+                ><i class="fa fa-save"></i> {{ 'settings.site.global.saveButton' | translate }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,6 +19,10 @@ export interface SitesShortResponse extends ApiResponse {
   data: SiteShort[];
 }
 
+export interface SiteShortResponse extends ApiResponse {
+  data: SiteShort;
+}
+
 export interface SiteShort {
   id: string;
   name: string;
@@ -45,4 +49,19 @@ export interface CreateSiteResponse extends ApiResponse{
 export interface CreateSiteData {
   id: string;
   link: string;
+}
+
+export interface SiteSettingsResponse extends ApiResponse {
+  data: SiteSettings;
+}
+
+export interface SiteSettings {
+  name: string;
+  url: string;
+  needLeadNotification: boolean;
+  logoRefLink: boolean;
+  needEmailSubscriptions: boolean;
+  needHideLogo: boolean;
+  yandexAnalyticsCounter: string;
+  googleAnalyticsService: string;
 }
