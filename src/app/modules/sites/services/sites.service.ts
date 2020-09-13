@@ -18,7 +18,7 @@ import { SitesApiService } from './sites-api.service';
   providedIn: 'root'
 })
 export class SitesService {
-  public sites = [];
+  public sites: Site[] | SiteShort[] = [];
   private currentSiteId: string;
 
   constructor(

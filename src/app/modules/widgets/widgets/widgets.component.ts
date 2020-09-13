@@ -118,8 +118,8 @@ export class WidgetsComponent implements OnInit {
     // TODO: Check tariffExp
     if (this.sitesService.isSiteHasExpTariff(this.currentSite) && this.getWidgetsCount() >= 3) {
       this.billingService.checkTariffPlans(this.currentSite.id,
-        this.translate.instant("sitelist.tariff.title"),
-        this.translate.instant("widgetsList.payment.limit", { siteName: this.currentSite.name }));
+        this.translate.instant('sitelist.tariff.improve'),
+        this.translate.instant('widgetsList.payment.limit', { siteName: this.currentSite.name }));
     } else {
       const modalRef = this.modalService.open(WidgetAddComponent, {
         size: 'xl',
@@ -136,11 +136,11 @@ export class WidgetsComponent implements OnInit {
 
   public changeCurrentSite(site): void {
     this.currentSite = site;
-  };
+  }
 
   public changeCurrentCompany(company): void {
     this.currentCompany = company;
-  };
+  }
 
   private getWidgetsCount(): number {
     const keys = Object.keys(this.widgets);

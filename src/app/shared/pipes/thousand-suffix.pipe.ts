@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ThousandSuffixPipe implements PipeTransform {
 
   transform(input: number, decimals: number): any {
-    const suffixes = ["k", "M", "G", "T", "P", "E"];
+    const suffixes = ['k', 'M', 'G', 'T', 'P', 'E'];
 
     if (isNaN(input)) {
       return null;

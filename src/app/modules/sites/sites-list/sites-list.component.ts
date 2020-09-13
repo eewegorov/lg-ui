@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import 'moment-timezone';
 import { BillingService } from '../../../core/services/billing.service';
+import { SitesService } from '../services/sites.service';
 
 @Component({
   selector: 'app-sites-list',
@@ -22,13 +23,13 @@ export class SitesListComponent implements OnInit {
   public colors;
   public labels;
   public options;
-  private exptime;
 
   constructor(
     private router: Router,
     private translate: TranslateService,
     private datePipe: DatePipe,
-    private billingService: BillingService
+    private billingService: BillingService,
+    private sitesService: SitesService
   ) {
     this.options = {
       elements: {
@@ -45,16 +46,19 @@ export class SitesListComponent implements OnInit {
         }]
       }
     };
-    this.exptime = this.item.tariffExp;
+  }
+
+  ngOnInit(): void {
     this.labels = this.getSiteDates(this.item.actions);
     this.colors = [this.setChartSettings('rgba(255,182,6, 1)'), this.setChartSettings('rgba(52,152,219, 1)'), this.setChartSettings('rgba(215, 96, 44, 1)')];
     this.data = [this.getStatsValues(this.item.actions), this.getStatsValues(this.item.leads), this.getStatsValues(this.item.emails)];
     this.actionsStatsWeekCount = this.getAmountStats(this.item.actions);
     this.leadsStatsWeekCount = this.getAmountStats(this.item.leads);
     this.mailStatsWeekCount = this.getAmountStats(this.item.emails);
-  }
+    this.item.isFree = this.sitesService.isSiteHasExpTariff(this.item);
+    this.item.tariffExpTime = this.datePipe.transform(this.item.tariffExp, 'dd.MM.yyyy');
+    this.item.tariffExpLeftMs = this.item.tariffExp - (new Date()).getTime();
 
-  ngOnInit(): void {
     if (this.actionsStatsWeekCount === 0) {
       this.removeGraphFromChart(0);
     }

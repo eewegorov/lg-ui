@@ -11,6 +11,7 @@ import { CoreApiService } from '../../../core/services/core-api.service';
   providedIn: 'root'
 })
 export class UserService {
+  public userPhone: string;
 
   constructor(
     private errorHandlerService: ErrorHandlerService,
