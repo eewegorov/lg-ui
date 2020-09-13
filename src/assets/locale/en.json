@@ -209,8 +209,10 @@
 		"done": "",
 		"error": "",
 		"from": "",
+		"general": "",
 		"no": "",
 		"noData": "",
+		"payment": "",
 		"period": {
 			"dateEnd": "",
 			"dateStart": "",
@@ -344,13 +346,71 @@
 	"settings": {
 		"script": {
 			"apicode": {
+				"desc": "",
 				"title": "",
 				"tooltip": ""
-			}
+			},
+			"helplinktext": "",
+			"title": ""
 		},
 		"site": {
+			"global": {
+				"backButton": "",
+				"saveButton": ""
+			},
 			"integration": {
 				"paymentLabel": ""
+			},
+			"settings": {
+				"domain": {
+					"title": ""
+				},
+				"integrations": {
+					"ganalytics": {
+						"service": {
+							"span": "",
+							"title": ""
+						}
+					},
+					"not": {
+						"desc": "",
+						"title": ""
+					},
+					"ymetrika": {
+						"counter": {
+							"span": "",
+							"title": ""
+						}
+					}
+				},
+				"lglinks": {
+					"link1": "",
+					"link2": "",
+					"title": "",
+					"tooltip": ""
+				},
+				"notification": {
+					"send": "",
+					"title": ""
+				},
+				"removeSite": "",
+				"stats": {
+					"email": "",
+					"title": "",
+					"tooltip": ""
+				}
+			},
+			"tabs": {
+				"analytics": "",
+				"group": {
+					"crm": "",
+					"email": "",
+					"other": ""
+				},
+				"integrations": {
+					"addIntegration": "",
+					"title": ""
+				}
 			},
 			"update": {
 				"crm": {
@@ -359,6 +419,7 @@
 				"paymentLabel": ""
 			}
 		},
+		"title": "",
 		"widgets": {
 			"select": ""
 		}
@@ -380,6 +441,11 @@
 			"emails": "",
 			"leads": "",
 			"widgets": ""
+		},
+		"delete": {
+			"confirm": "",
+			"text": "",
+			"title": ""
 		},
 		"empty": {
 			"subtitle": "",
@@ -439,7 +505,6 @@
 	},
 	"userInfo": {
 		"email": "",
-		"general": "",
 		"isNeedStatsNotificationss": "",
 		"notifications": "",
 		"passwordChange": "",

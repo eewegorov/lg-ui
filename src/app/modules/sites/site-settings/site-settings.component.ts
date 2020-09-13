@@ -61,7 +61,7 @@ export class SiteSettingsComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
       confirmButtonText: this.translate.instant('sitelist.delete.confirm'),
-      cancelButtonText: this.translate.instant('sitelist.delete.cancel'),
+      cancelButtonText: this.translate.instant('global.cancel'),
     }).then((isConfirm) => {
       /*if (isConfirm) {
         this.sitesService.deleteSite(this.siteId).subscribe(() => {
@@ -80,7 +80,7 @@ export class SiteSettingsComponent implements OnInit {
        this.site.needHideLogo = false;
        this.site.logoRefLink = false;
        this.billingService.checkTariffPlans(this.siteId,
-         this.translate.instant('sitelist.tarrif.title'),
+         this.translate.instant('sitelist.tariff.title'),
          this.translate.instant('settings.site.integration.paymentLabel', {siteName: this.site.name}));
       }, 500);
     }

@@ -1,0 +1,152 @@
+.content {
+  padding: 0 0 60px;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #e4e5e7;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  border: 1px solid #e4e5e7;
+  border-bottom-color: transparent;
+}
+
+.nav-tabs > li a:hover {
+  background: transparent;
+  border-color: transparent
+}
+
+.tabs-left .panel-body {
+  position: static;
+  width: 80%;
+  margin-left: 20%;
+  border-top: 1px solid #e4e5e7;
+}
+
+.tabs-left > .nav-tabs {
+  float: left;
+  margin-right: 19px;
+  width: 20%;
+  border-bottom: 0;
+}
+
+.tab-content > .tab-pane {
+  display: none;
+}
+
+.tab-content > .active {
+  display: block;
+}
+
+.tabs-left > .nav-tabs > li, .tabs-right > .nav-tabs > li {
+  float: none;
+}
+
+.tabs-left > .nav-tabs > li > a {
+  min-width: 74px;
+  margin-bottom: 3px;
+  margin-right: -1px;
+  border-radius: 4px 0 0 4px;
+}
+
+.tabs-left > .nav-tabs .active > a, .tabs-left > .nav-tabs .active > a:hover, .tabs-left > .nav-tabs .active > a:focus {
+  border-color: #e4e5e7 transparent #e4e5e7 #e4e5e7;
+  *border-right-color: #ffffff;
+}
+
+h4.site-settings-h4-text {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+span.validate {
+  color: #a94442;
+  font-size: 10px;
+  display: none;
+}
+
+.has-error span.validate {
+  display: block;
+}
+
+.site-settings-switcher {
+  margin-top: 5px;
+  margin-bottom: 0;
+  max-height: 40px;
+}
+
+.site-settings-switcher label {
+  position: relative;
+  top: -6px;
+}
+
+.label.label-warning.tariff-info {
+  font-size: 7px;
+  margin-left: 15px;
+  position: absolute;
+}
+
+
+
+@media (max-width: 900px) {
+  .tabs-left > .nav-tabs {
+    float: none;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .tabs-left > .nav-tabs .active > a,
+  .tabs-left > .nav-tabs .active > a:hover,
+  .tabs-left > .nav-tabs .active > a:focus {
+    border-color: #e4e5e7;
+    border-radius: 5px;
+  }
+
+  .tabs-left .panel-body {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .integration-tab-flex {
+    display: block;
+  }
+
+  .integration-item-wr {
+    width: 100%;
+  }
+
+  .floated-left {
+    margin-left: 0;
+    float: none;
+  }
+
+  .analyticssync-sync-panel-wrapper {
+    width: 100%;
+  }
+
+  .text-left .btn,
+  .text-right .btn {
+    width: 100%;
+  }
+}
+
+
+
+@media (max-width: 700px) {
+  .site-settings-switcher label {
+    width: 100%;
+  }
+
+  .btn-add-new-integration {
+    width: 100%;
+    white-space: inherit;
+  }
+
+  .analyticssync-sync-panel-wrapper .site-selector {
+    min-width: 100%;
+  }
+
+  .integration-new-modal-temp .integration-tab {
+    width: 100%;
+  }
+}
