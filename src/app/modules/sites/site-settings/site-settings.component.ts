@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
@@ -12,7 +12,7 @@ import { SiteSettings, SiteShort } from '../../../core/models/sites';
   templateUrl: './site-settings.component.html',
   styleUrls: ['./site-settings.component.scss']
 })
-export class SiteSettingsComponent implements OnInit {
+export class SiteSettingsComponent implements OnInit, AfterViewChecked {
   public siteId: string;
   public site: SiteSettings;
   public tab = 0;
@@ -47,6 +47,10 @@ export class SiteSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSiteSettings();
+  }
+
+  ngAfterViewChecked(): void {
+    (<any>$('[data-toggle="tooltip"]')).tooltip();
   }
 
   public setTab(newTab) {

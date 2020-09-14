@@ -14,13 +14,13 @@
         <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email">
         <span class="validate"></span>
       </div>
-      <div class="form-group row col-lg-12 align-items-center" data-item="ntEnabled">
+      <div class="form-group d-flex" data-item="ntEnabled">
         <ui-switch size="small" [checked]="user.notificated"></ui-switch>
-        <label class="control-label ml-2 pt-2">{{ 'userInfo.notifications' | translate }}</label>
+        <label class="control-label ml-2 pt-1">{{ 'userInfo.notifications' | translate }}</label>
       </div>
-      <div class="form-group row col-lg-12 align-items-center" data-item="ntEnabled">
+      <div class="form-group d-flex" data-item="ntEnabled">
         <ui-switch size="small" [checked]="user.needStatsNotifications"></ui-switch>
-        <label class="control-label ml-2 pt-2">{{ 'userInfo.isNeedStatsNotificationss' | translate }}</label>
+        <label class="control-label ml-2 pt-1">{{ 'userInfo.isNeedStatsNotificationss' | translate }}</label>
       </div>
       <div class="text-right">
         <button
