@@ -65,3 +65,36 @@ export interface SiteSettings {
   yandexAnalyticsCounter: string;
   googleAnalyticsService: string;
 }
+
+export interface IntegrationsResponse {
+  data: Integration[];
+}
+
+export interface IntegrationResponse {
+  data: IntegrationItem;
+}
+
+export interface Integration {
+  id: string;
+  name: string;
+  type: string;
+  default: boolean;
+  active: boolean;
+  serviceName: string;
+  isPayment: boolean;
+}
+
+export interface IntegrationItem {
+  id: string;
+  name: string;
+  type: string;
+  default: boolean;
+  active: boolean;
+  params: object;
+}
+
+export interface IntegrationRequest {
+  name: string;
+  default: boolean;
+  params: object;
+}

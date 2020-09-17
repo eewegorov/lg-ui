@@ -4,7 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 import {
   CreateSiteData,
   CreateSiteRequest,
-  CreateSiteResponse,
+  CreateSiteResponse, Integration, IntegrationItem, IntegrationRequest, IntegrationResponse, IntegrationsResponse,
   Site, SiteSettings, SiteSettingsResponse,
   SiteShort, SiteShortResponse,
   SitesResponse,
@@ -69,6 +69,66 @@ export class SitesService {
     );
   }
 
+  public updateSiteSettings(id: string, settings: SiteSettings): Observable<boolean> {
+    return this.sitesApiService.updateSiteSettings(id, settings).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getSiteIntegrations(id: string): Observable<Integration[]> {
+    return this.sitesApiService.getSiteIntegrations(id).pipe(
+      map((response: IntegrationsResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getSiteIntegration(siteId: string, integrationId: string): Observable<IntegrationItem> {
+    return this.sitesApiService.getSiteIntegration(siteId, integrationId).pipe(
+      map((response: IntegrationResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public updateSiteIntegration(siteId: string, integrationId: string, integration: IntegrationRequest): Observable<boolean> {
+    return this.sitesApiService.updateSiteIntegration(siteId, integrationId, integration).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public startStopSiteIntegration(siteId: string, integrationId: string, isStart: boolean): Observable<boolean> {
+    return this.sitesApiService.startStopSiteIntegration(siteId, integrationId, isStart).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public deleteSiteIntegration(siteId: string, integrationId: string): Observable<boolean> {
+    return this.sitesApiService.deleteSiteIntegration(siteId, integrationId).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getCorrectNameByType(type: string) {
+    const correctItem = this.getIntegrationServicesList().find((item) => {
+      return item.type === type;
+    });
+    if (correctItem) {
+      return correctItem.name;
+    }
+  }
+
+  public getPaymentByType(type) {
+    const correctItem = this.getIntegrationServicesList().find((item) => {
+      return item.type === type;
+    });
+    if (correctItem) {
+      return correctItem.isPayment;
+    }
+  }
+
   public generatePath(path: string, needUrl: boolean = false): string {
     let scriptPath = '<!-- BEGIN LEADGENIC CODE {literal} -->\r\n';
     scriptPath +=  '<!-- Put this script tag before the </body> tag of your page -->';
@@ -87,14 +147,105 @@ export class SitesService {
     if (this.isSiteHasFreeTariff(site)) {
       return true;
     } else {
-      var d = new Date();
-      var expTime = site.tariffExp - d.getTime();
+      const d = new Date();
+      const expTime = site.tariffExp - d.getTime();
       return expTime <= 0;
     }
   }
 
+  public isIntegrationCRM(type) {
+    return type === 'BITRIX' || type === 'AMOCRM';
+  }
+
+  public isIntegrationMailing(type) {
+    return type === 'MAILCHIMP' || type === 'GETRESPONSE' || type === 'SENDPULSE' || type === 'SENDBOX' || type === 'UNISENDER';
+  }
+
+  public isIntegrationNotification(type) {
+    return type === 'EMAIL';
+  }
+
+  public isIntegrationOthers(type) {
+    return type === 'ROISTAT' || type === 'WEBHOOK';
+  }
+
   private isSiteHasFreeTariff(site): boolean {
-    return (!site.tariffExp && !site.tariffName) || site.tariffName === "Бесплатный";
+    return (!site.tariffExp && !site.tariffName) || site.tariffName === 'Бесплатный';
+  }
+
+  private getIntegrationServicesList() {
+    return [
+      {
+        name: 'Mailchimp',
+        helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/523-mailchimp',
+        type: 'MAILCHIMP',
+        group: 'mailing',
+        isPayment: false
+      },
+      {
+        name: 'Getresponse',
+        helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/522-getresponce',
+        type: 'GETRESPONSE',
+        group: 'mailing',
+        isPayment: false
+      },
+      {
+        name: 'Sendpulse',
+        helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/524-sendpulse',
+        type: 'SENDPULSE',
+        group: 'mailing',
+        isPayment: false
+      },
+      {
+        name: 'Sendbox',
+        helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/525-sendbox',
+        type: 'SENDBOX',
+        group: 'mailing',
+        isPayment: false
+      },
+      {
+        name: 'Unisender',
+        helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/526-unisender',
+        type: 'UNISENDER',
+        group: 'mailing',
+        isPayment: false
+      },
+      {
+        name: 'Bitrix24',
+        helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/527-bitrix',
+        type: 'BITRIX',
+        group: 'CRM',
+        isPayment: true
+      },
+      {
+        name: 'Amo CRM',
+        helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/528-amocrm',
+        type: 'AMOCRM',
+        group: 'CRM',
+        isPayment: true
+      },
+      {
+        name: 'Отправка Email',
+        helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/529-email',
+        type: 'EMAIL',
+        group: 'notification',
+        isPayment: true
+      },
+      {
+        name: 'Roistat',
+        helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/335-nastrojka-integratsii-s-roistat',
+        type: 'ROISTAT',
+        group: 'others',
+        isPayment: true
+      },
+      {
+        name: 'Webhook',
+        helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/334-nastrojka-integratsii-webhook',
+        type: 'WEBHOOK',
+        group: 'others',
+        isPayment: true
+      }
+    ];
   }
 
 

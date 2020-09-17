@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
 import {
   CreateSiteRequest,
-  CreateSiteResponse,
+  CreateSiteResponse, IntegrationRequest, IntegrationResponse, IntegrationsResponse, SiteSettings,
   SiteSettingsResponse, SiteShortResponse,
   SitesResponse,
   SitesShortResponse
@@ -42,5 +42,30 @@ export class SitesApiService {
 
   public getSiteShortInfo(id: string): Observable<SiteShortResponse> {
     return this.http.get<SiteShortResponse>(`${ environment.url }/sites/${id}/short`);
+  }
+
+  public updateSiteSettings(id: string, settings: SiteSettings): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${ environment.url }/sites/${id}/settings`, settings);
+  }
+
+  public getSiteIntegrations(id: string): Observable<IntegrationsResponse> {
+    return this.http.get<IntegrationsResponse>(`${ environment.url }/sites/${id}/integrations`);
+  }
+
+  public getSiteIntegration(siteId: string, integrationId: string): Observable<IntegrationResponse> {
+    return this.http.get<IntegrationResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}`);
+  }
+
+  public updateSiteIntegration(siteId: string, integrationId: string, integration: IntegrationRequest): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}`, integration);
+  }
+
+  public startStopSiteIntegration(siteId: string, integrationId: string, isStart: boolean): Observable<ApiResponse> {
+    const type = isStart ? 'start' : 'pause';
+    return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}/${type}`, null);
+  }
+
+  public deleteSiteIntegration(siteId: string, integrationId: string): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}`);
   }
 }

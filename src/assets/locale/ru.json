@@ -71,6 +71,11 @@
 		}
 	},
 	"containerized": {
+		"container": {
+			"add": {
+				"name": "Добавить имя"
+			}
+		},
 		"title": "Статичные виджеты"
 	},
 	"coupons": {
@@ -322,9 +327,6 @@
 				"to": "по"
 			},
 			"last": "Последние добавленные",
-			"page": {
-				"title": "Email адреса"
-			},
 			"period": {
 				"decade": "10 дней",
 				"month": "30 дней",
@@ -372,7 +374,42 @@
 				"saveButton": "Сохранить настройки"
 			},
 			"integration": {
+				"delete": {
+					"text": "Вы действительно хотите удалить эту интеграцию?",
+					"title": "Вы уверены?"
+				},
+				"deleted": "Интеграция удалена",
 				"paymentLabel": "Данная функция доступна только в платном тарифе"
+			},
+			"newIntegration": {
+				"add": "Добавить",
+				"apikey": "API ключ",
+				"create": {
+					"book": "Id адресной книги",
+					"campaignId": "TOKEN кампании",
+					"copy": {
+						"noSites": "Вы не можете скопировать интеграцию с другого сайта, так как создали только один сайт"
+					},
+					"email": "Email адрес",
+					"host": "Домен портала",
+					"id": "ID",
+					"listId": "Id листа рассылки",
+					"login": "Логин",
+					"secret": "Секрет",
+					"url": "Url",
+					"urlExtra": "Поддомен портала"
+				},
+				"description": "Вы можете копировать интеграцию с другого сайта или добавить новую",
+				"donorSite": "С какого сайта скопировать",
+				"edit": "Редактирование интеграции",
+				"name": "Название интеграции",
+				"others": "Другие",
+				"service": "Сервис",
+				"tabs": {
+					"copy": "Скопировать с другого сайта",
+					"new": "Добавить новую интеграцию"
+				},
+				"title": "Добавление интеграции"
 			},
 			"settings": {
 				"domain": {
@@ -380,10 +417,7 @@
 				},
 				"integrations": {
 					"ganalytics": {
-						"service": {
-							"span": "Узнать больше о интеграции с Google Analytics вы сможете в <a class=\"text-decoration-underline\" target=\"_blank\" href=\"http://leadgenic.userecho.com/topics/291-nastrojka-integratsii-s-google-analytics-i-otslezhivanie-dostizheniya-tselej/\">этой статье</a>.",
-							"title": "Сервис"
-						}
+						"service": "Узнать больше о интеграции с Google Analytics вы сможете в <a class=\"text-decoration-underline\" target=\"_blank\" href=\"http://leadgenic.userecho.com/topics/291-nastrojka-integratsii-s-google-analytics-i-otslezhivanie-dostizheniya-tselej/\">этой статье</a>."
 					},
 					"not": {
 						"desc": "Вы можете добавить новую интеграцию или настроить отправку уведомлений о заявках на определенные email адреса нажав на зеленую кнопку в правом верхнем углу.",
@@ -419,6 +453,19 @@
 					"crm": "CRM системы",
 					"email": "Сервисы email рассылок",
 					"other": "Другие интеграции"
+				},
+				"integration": {
+					"defaultUse": "используется по умолчанию",
+					"tooltip": {
+						"remove": "Удалить",
+						"settings": "Редактировать настройки",
+						"start": "Активировать",
+						"stop": "Деактивировать"
+					},
+					"useDefault": {
+						"title": "Использовать по умолчанию",
+						"tooltip": "При включении, интеграция или уведомление будет использована по умолчанию для всех виджетов, для которых не создан уникальный набор интеграций и уведомлений."
+					}
 				},
 				"integrations": {
 					"addIntegration": "Добавить интеграцию или уведомление",
@@ -457,6 +504,7 @@
 		},
 		"delete": {
 			"confirm": "Да, удалить сайт",
+			"deleted": "Сайт был полностью удален",
 			"text": "Будут удалены все связанные с этим сайтом виджеты, заявки и задачи. Данное действие нельзя будет отменить.",
 			"title": "Вы уверены что хотите удалить сайт?"
 		},
@@ -622,7 +670,8 @@
 		"sitePlaceholder2": "Нажмите на <a href=\"/site/list\" target=\"_self\">эту ссылку</a>, чтобы добавить первый сайт.",
 		"widget": {
 			"delete": {
-				"cancel": "Отмена"
+				"cancel": "Отмена",
+				"confirm": "Да, удалить"
 			}
 		}
 	}

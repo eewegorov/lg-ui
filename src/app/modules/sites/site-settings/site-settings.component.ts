@@ -1,10 +1,13 @@
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IntegrationAddComponent } from '../integration-add/integration-add.component';
+import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { BillingService } from '../../../core/services/billing.service';
 import { SitesService } from '../services/sites.service';
-import { SiteSettings, SiteShort } from '../../../core/models/sites';
+import { Integration, SiteSettings, SiteShort } from '../../../core/models/sites';
 
 
 @Component({
@@ -38,6 +41,8 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
     private route: ActivatedRoute,
     private router: Router,
     private translate: TranslateService,
+    private modalService: NgbModal,
+    private toastr: ToastrService,
     private billingService: BillingService,
     private sitesService: SitesService
   ) {
@@ -47,6 +52,7 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     this.getSiteSettings();
+    this.getSiteIntegrations();
   }
 
   ngAfterViewChecked(): void {
@@ -57,7 +63,7 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
     this.tab = newTab;
   }
 
-  public removeSite() {
+  public deleteSite() {
     Swal.fire({
       title: this.translate.instant('sitelist.delete.title'),
       text: this.translate.instant('sitelist.delete.text'),
@@ -67,14 +73,18 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
       confirmButtonText: this.translate.instant('sitelist.delete.confirm'),
       cancelButtonText: this.translate.instant('global.cancel'),
     }).then((isConfirm) => {
-      /*if (isConfirm) {
+      if (isConfirm) {
         this.sitesService.deleteSite(this.siteId).subscribe(() => {
-          swal($translate.instant("sitelist.delete.done"), $translate.instant("sitelist.delete.deleted"), "success");
-          $timeout(function() {
-            $scope.goBack();
+          Swal.fire(
+            this.translate.instant('global.done'),
+            this.translate.instant('sitelist.delete.deleted'),
+            'success'
+          );
+          setTimeout(() => {
+            this.goBack();
           }, 1000);
         });
-      }*/
+      }
     });
   }
 
@@ -85,13 +95,23 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
        this.site.logoRefLink = false;
        this.billingService.checkTariffPlans(this.siteId,
          this.translate.instant('sitelist.tariff.title'),
-         this.translate.instant('settings.site.integration.paymentLabel', {siteName: this.site.name}));
+         this.translate.instant('settings.site.integration.paymentLabel', { siteName: this.site.name }));
       }, 500);
     }
   }
 
   public openModalForCreatingNewIntegration() {
+    const modalRef = this.modalService.open(IntegrationAddComponent, {
+      windowClass: 'animate__animated animate__slideInDown animate__faster'
+    });
+    modalRef.componentInstance.siteId = this.siteId;
+    modalRef.componentInstance.integrationId = null;
 
+    modalRef.result.then((result) => {
+      if (result && result.success) {
+        this.getSiteIntegrations();
+      }
+    });
   }
 
   public changeAnalyticGService(value) {
@@ -103,7 +123,56 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
   }
 
   public saveSite() {
+    this.sitesService.updateSiteSettings(this.siteId, this.site).subscribe((response: boolean) => {
+      if (response) {
+        this.toastr.success(this.translate.instant('userInfo.settingsChanged'), this.translate.instant('global.done'));
+      }
+    });
+  }
 
+  public getSiteIntegrations() {
+    /*this.sitesService.getSiteIntegrations(this.siteId).subscribe((response: Integration[]) => {*/
+    const response = [
+      {
+        "id": "a97e831035277bdb2d580cce4de0e399",
+        "name": "Amo integration",
+        "type": "AMOCRM",
+        "default": true,
+        "active": false
+      },
+      {
+        "id": "3d2591d2fe9af9c2e126168865719e22",
+        "name": "Another bitrix integration",
+        "type": "BITRIX",
+        "default": false,
+        "active": true
+      },
+      {
+        "id": "ff8b3189fea5aab92ecb6fad14b2ed0d",
+        "name": "Bitrix integrations",
+        "type": "BITRIX",
+        "default": true,
+        "active": false
+      }
+    ];
+    this.integrations = response.map((item: Integration) => {
+      item.serviceName =  this.sitesService.getCorrectNameByType(item.type);
+      item.isPayment =  this.sitesService.getPaymentByType(item.type);
+      return item;
+    });
+    this.integrationsCRM = this.integrations.filter((item) => {
+      return this.sitesService.isIntegrationCRM(item.type);
+    });
+    this.integrationsMailing = this.integrations.filter((item) => {
+      return this.sitesService.isIntegrationMailing(item.type);
+    });
+    this.integrationsNotifications = this.integrations.filter((item) => {
+      return this.sitesService.isIntegrationNotification(item.type);
+    });
+    this.integrationsOthers = this.integrations.filter((item) => {
+      return this.sitesService.isIntegrationOthers(item.type);
+    });
+    /*});*/
   }
 
   private getSiteSettings() {

@@ -21,7 +21,6 @@ export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
 
   constructor(
     private translate: TranslateService,
-    private modalService: NgbModal,
     private toastr: ToastrService,
     private couponModalService: CouponModalService,
     private couponService: CouponService

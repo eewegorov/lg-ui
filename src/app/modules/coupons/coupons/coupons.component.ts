@@ -28,7 +28,6 @@ export class CouponsComponent implements OnInit, OnDestroy {
 
   constructor(
     private location: Location,
-    private modalService: NgbModal,
     private couponModalService: CouponModalService,
     private couponService: CouponService
   ) {

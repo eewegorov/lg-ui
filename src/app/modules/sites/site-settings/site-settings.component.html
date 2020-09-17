@@ -30,7 +30,7 @@
                       <input id="domain" type="text" name="name" class="form-control" [ngModel]="site.url">
                       <span class="validate">Validate info</span>
                     </div>
-                    <button type="button" (click)="removeSite()" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> {{ 'settings.site.settings.removeSite' | translate }}</button>
+                    <button type="button" (click)="deleteSite()" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> {{ 'settings.site.settings.removeSite' | translate }}</button>
 
                     <div class="pt-1">
                       <h4 class="site-settings-h4-text">{{ 'settings.site.settings.notification.title' | translate }}:</h4>
@@ -90,20 +90,30 @@
                   <div class="panel-body integration-tab">
                     <div class="integration-tab-flex">
                       <h3>{{ 'settings.site.tabs.integrations.title' | translate }}</h3>
-                      <button (click)="openModalForCreatingNewIntegration()" type="button" class="btn w-xs m-t-sm btn-success btn-add-new-integration"><i class="fa fa-plus-circle"></i> {{ 'settings.site.tabs.integrations.addIntegration' | translate }} </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-success"
+                        (click)="openModalForCreatingNewIntegration()"
+                      ><i class="fa fa-plus-circle"></i> {{ 'settings.site.tabs.integrations.addIntegration' | translate }} </button>
                     </div>
 
                     <div class="tab-wrap">
-                      <div class="col-lg-12 margined-top-60 margined-bottom-50" *ngIf="!integrations.length">
+                      <div class="col-lg-12 mt-5 mb-5" *ngIf="!integrations.length">
                         <h3 class="f-0 text-center">{{ 'settings.site.settings.integrations.not.title' | translate }}</h3>
                         <h4 class="f-2 text-center">{{ 'settings.site.settings.integrations.not.desc' | translate }}</h4>
                       </div>
 
                       <div class="tab-wrap__crm" *ngIf="integrationsCRM.length">
-                        <h4 class="f-1 no-bold margined-top-30">{{ 'settings.site.tabs.group.crm' | translate }}</h4>
+                        <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.crm' | translate }}</h4>
                         <div class="integration-rowed">
                           <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsCRM">
-                           <!-- <integration-item-directive class="integration-item__100" widget="item" site-id="siteId"></integration-item-directive>-->
+                            <app-integration-item
+                              class="integration-item__100"
+                              [widget]="item"
+                              [siteId]="siteId"
+                              (updateIntegrations)="getSiteIntegrations()"
+                            >
+                            </app-integration-item>
                           </div>
                         </div>
                       </div>
@@ -112,7 +122,13 @@
                         <h4 class="f-1 no-bold margined-top-30">{{ 'settings.site.tabs.group.email' | translate }}</h4>
                         <div class="integration-rowed">
                           <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsMailing">
-                            <!--<integration-item-directive class="integration-item__100" widget="item" site-id="siteId"></integration-item-directive>-->
+                            <app-integration-item
+                              class="integration-item__100"
+                              [widget]="item"
+                              [siteId]="siteId"
+                              (updateIntegrations)="getSiteIntegrations()"
+                            >
+                            </app-integration-item>
                           </div>
                         </div>
                       </div>
@@ -121,7 +137,13 @@
                         <h4 class="f-1 no-bold margined-top-30">{{ 'settings.site.settings.notification.title' | translate }}</h4>
                         <div class="integration-rowed">
                           <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsNotifications">
-                            <!--<integration-item-directive class="integration-item__100" widget="item" site-id="siteId"></integration-item-directive>-->
+                            <app-integration-item
+                              class="integration-item__100"
+                              [widget]="item"
+                              [siteId]="siteId"
+                              (updateIntegrations)="getSiteIntegrations()"
+                            >
+                            </app-integration-item>
                           </div>
                         </div>
                       </div>
@@ -130,7 +152,13 @@
                         <h4 class="f-1 no-bold margined-top-30">{{ 'settings.site.tabs.group.other' | translate }}</h4>
                         <div class="integration-rowed">
                           <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsOthers">
-                            <!--<integration-item-directive class="integration-item__100" widget="item" site-id="siteId"></integration-item-directive>-->
+                            <app-integration-item
+                              class="integration-item__100"
+                              [widget]="item"
+                              [siteId]="siteId"
+                              (updateIntegrations)="getSiteIntegrations()"
+                            >
+                            </app-integration-item>
                           </div>
                         </div>
                       </div>
@@ -174,7 +202,7 @@
                                style="max-height: 72px;">
                             <div class="validable col-lg-12"
                                  data-context="ganalytics-service">
-                              <label>{{ 'settings.site.settings.integrations.ganalytics.service.title' | translate }}</label>
+                              <label>{{ 'settings.site.newIntegration.service' | translate }}</label>
                               <div class="dropdown site-selector">
                                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                   <span class="dropdown-selected-cropp" style="max-width:90%">{{site.googleAnalyticsService}}</span>
@@ -184,7 +212,7 @@
                                   <li *ngFor="let item of googleAnalyticsServices" (click)="changeAnalyticGService(item.value)"><a href="javascript:void(0);">{{item.name}}</a></li>
                                 </ul>
                               </div>
-                              <span style="display: block;margin-top: 20px;" [innerHTML]="'settings.site.settings.integrations.ganalytics.service.span' | translate"></span>
+                              <span style="display: block;margin-top: 20px;" [innerHTML]="'settings.site.settings.integrations.ganalytics.service' | translate"></span>
                             </div>
                           </div>
                         </div>

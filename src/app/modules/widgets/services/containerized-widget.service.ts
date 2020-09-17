@@ -18,7 +18,7 @@ export class ContainerizedWidgetService {
   ) { }
 
   public rename(siteId: string, widgetId: string, name: string): Observable<boolean> {
-    const renamedCWidget: WidgetRename = { name: name };
+    const renamedCWidget: WidgetRename = { name };
     return this.containerizedWidgetApiService.rename(siteId, widgetId, renamedCWidget).pipe(
       map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)

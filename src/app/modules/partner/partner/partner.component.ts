@@ -52,7 +52,7 @@ export class PartnerComponent implements OnInit, OnDestroy {
     this.uiService.toggleSidebar(true);
 
     this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
-        this.partnerUrl = MAIN_URL + "?refid=" + response.id;
+        this.partnerUrl = MAIN_URL + '?refid=' + response.id;
         this.walletId = response.wallet;
     });
 

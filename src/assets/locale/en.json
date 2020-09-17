@@ -69,6 +69,11 @@
 		}
 	},
 	"containerized": {
+		"container": {
+			"add": {
+				"name": ""
+			}
+		},
 		"title": ""
 	},
 	"coupons": {
@@ -359,7 +364,42 @@
 				"saveButton": ""
 			},
 			"integration": {
+				"delete": {
+					"text": "",
+					"title": ""
+				},
+				"deleted": "",
 				"paymentLabel": ""
+			},
+			"newIntegration": {
+				"add": "",
+				"apikey": "",
+				"create": {
+					"book": "",
+					"campaignId": "",
+					"copy": {
+						"noSites": ""
+					},
+					"email": "",
+					"host": "",
+					"id": "",
+					"listId": "",
+					"login": "",
+					"secret": "",
+					"url": "",
+					"urlExtra": ""
+				},
+				"description": "",
+				"donorSite": "",
+				"edit": "",
+				"name": "",
+				"others": "",
+				"service": "",
+				"tabs": {
+					"copy": "",
+					"new": ""
+				},
+				"title": ""
 			},
 			"settings": {
 				"domain": {
@@ -367,10 +407,7 @@
 				},
 				"integrations": {
 					"ganalytics": {
-						"service": {
-							"span": "",
-							"title": ""
-						}
+						"service": ""
 					},
 					"not": {
 						"desc": "",
@@ -406,6 +443,19 @@
 					"crm": "",
 					"email": "",
 					"other": ""
+				},
+				"integration": {
+					"defaultUse": "",
+					"tooltip": {
+						"remove": "",
+						"settings": "",
+						"start": "",
+						"stop": ""
+					},
+					"useDefault": {
+						"title": "",
+						"tooltip": ""
+					}
 				},
 				"integrations": {
 					"addIntegration": "",
@@ -444,6 +494,7 @@
 		},
 		"delete": {
 			"confirm": "",
+			"deleted": "",
 			"text": "",
 			"title": ""
 		},
@@ -593,7 +644,8 @@
 		"sitePlaceholder2": "",
 		"widget": {
 			"delete": {
-				"cancel": ""
+				"cancel": "",
+				"confirm": ""
 			}
 		}
 	}
