@@ -119,7 +119,7 @@
                       </div>
 
                       <div class="tab-wrap__crm" *ngIf="integrationsMailing.length">
-                        <h4 class="f-1 no-bold margined-top-30">{{ 'settings.site.tabs.group.email' | translate }}</h4>
+                        <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.email' | translate }}</h4>
                         <div class="integration-rowed">
                           <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsMailing">
                             <app-integration-item
@@ -134,7 +134,7 @@
                       </div>
 
                       <div class="tab-wrap__crm" *ngIf="integrationsNotifications.length">
-                        <h4 class="f-1 no-bold margined-top-30">{{ 'settings.site.settings.notification.title' | translate }}</h4>
+                        <h4 class="f-1 mt-3">{{ 'settings.site.settings.notification.title' | translate }}</h4>
                         <div class="integration-rowed">
                           <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsNotifications">
                             <app-integration-item
@@ -149,7 +149,7 @@
                       </div>
 
                       <div class="tab-wrap__crm" *ngIf="integrationsOthers.length">
-                        <h4 class="f-1 no-bold margined-top-30">{{ 'settings.site.tabs.group.other' | translate }}</h4>
+                        <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.other' | translate }}</h4>
                         <div class="integration-rowed">
                           <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsOthers">
                             <app-integration-item
@@ -222,12 +222,12 @@
                 </div>
 
                 <div *ngIf="tab === 3" class="tab-pane active">
-                  <div class="panel-body" tooltiped>
+                  <div class="panel-body">
                     <h3>{{ 'settings.script.title' | translate }}</h3>
-                    <p class="small m-t-md">
+                    <p class="small mt-3 mb-1">
                       <strong [innerHTML]="'sitelist.form.code.desc1' | translate"></strong>
                     </p>
-                    <div class="form-group m-b-none">
+                    <div class="form-group mb-0">
                       <textarea
                         [(ngModel)]="codeSiteScript"
                         class="form-control not-readonly-hand"
@@ -237,10 +237,10 @@
                       ></textarea>
                     </div>
                     <div class="form-group">
-                      <a href="" class="help-link-add-code-to-site ng-binding">{{ 'settings.script.helplinktext' | translate }}</a>
+                      <a href="" class="help-link-add-code-to-site">{{ 'settings.script.helplinktext' | translate }}</a>
                     </div>
-                    <br>
-                    <br>
+                    <br />
+                    <br />
                     <strong>
                       {{ 'settings.script.apicode.title' | translate }} <a
                       data-toggle="tooltip"
@@ -249,7 +249,7 @@
                       class="info-link"><i class="fa fa-info-circle"></i></a>
                     </strong>
 
-                    <div class="form-group m-b-none" data-context="url">
+                    <div class="form-group mb-0" data-context="url">
                       <input
                         type="text"
                         class="form-control not-readonly-hand"

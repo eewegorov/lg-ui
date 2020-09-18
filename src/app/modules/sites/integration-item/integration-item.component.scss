@@ -1,0 +1,165 @@
+.hpanel.hgreen .integration-item__body {
+  border-top: 2px solid #62cb31;
+}
+
+.hpanel.hred .integration-item__body {
+  border-top: 2px solid #e74c3c;
+}
+
+.integration-item__body {
+  background: #fff;
+  border: 1px solid #e4e5e7;
+  border-radius: 2px;
+  padding: 15px;
+  position: relative;
+}
+
+.integration-item__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.integration-item__icon_wr {
+  min-width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.integration-item__icon {
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.integration-item__icon--MAILCHIMP {
+  background-image: url('~src/assets/images/sites/mailchimp.jpg');
+}
+
+.integration-item__icon--GETRESPONSE {
+  background-image: url('~src/assets/images/sites/getresponse.jpg');
+}
+
+.integration-item__icon--SENDPULSE {
+  background-image: url('~src/assets/images/sites/sendpulse.jpg');
+}
+
+.integration-item__icon--SENDBOX {
+  background-image: url('~src/assets/images/sites/sendbox.jpg');
+}
+
+.integration-item__icon--UNISENDER {
+  background-image: url('~src/assets/images/sites/unisender.jpg');
+}
+
+.integration-item__icon--BITRIX {
+  background-image: url('~src/assets/images/sites/bitrix.jpg');
+}
+
+.integration-item__icon--AMOCRM {
+  background-image: url('~src/assets/images/sites/amo.jpg');
+}
+
+.integration-item__icon--EMAIL {
+  background-image: url('~src/assets/images/sites/email.jpg');
+}
+
+.integration-item__icon--ROISTAT {
+  background-image: url('~src/assets/images/sites/roistat.jpg');
+}
+
+.integration-item__icon--WEBHOOK {
+  background-image: url('~src/assets/images/sites/webhook.jpg');
+}
+
+.integration-item__type {
+  display: flex;
+  position: relative;
+}
+
+.label.label-warning.tariff-info {
+  font-size: 7px;
+  font-weight: bold;
+  padding: 0 0.2rem;
+  position: absolute;
+  right: -55px;
+  top: 4px;
+  color: #fff;
+  background-color: #f0ad4e;
+}
+
+.integration-item__type-name {
+  color: #34495e;
+  line-height: 30px;
+  font-size: 14px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+.widget-item-view-btns {
+  float: right;
+  width: 300px;
+}
+
+.widget-item-view-btns i {
+  font-size: 13px;
+  padding: 5px;
+}
+
+button.widget-item-view-btns .btn {
+  color: #8c8c8c;
+}
+
+button.widget-item-view-btns .btn:hover {
+  color: #5d5d5d;
+}
+
+button.start-widget-btn.active {
+  color: #62cb31;
+}
+
+button.stop-widget-btn.active {
+  color: #e74c3c;
+}
+
+.widget-item-view-header {
+  margin: 7px 0;
+}
+
+.long-text {
+  padding: 1px;
+}
+
+.integration-item__switcher label {
+  position: relative;
+  top: -6px;
+}
+
+.integration-item__switcher {
+  height: 23px;
+}
+
+.icons-for-sidemenu {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.btn {
+  border-radius: 3px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.btn:hover, .btn:focus, .btn.focus {
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.btn:active:not(:disabled), .btn.active:not(:disabled) {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+  box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+}

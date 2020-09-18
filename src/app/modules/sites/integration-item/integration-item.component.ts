@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IntegrationAddComponent } from '../integration-add/integration-add.component';
@@ -13,10 +13,12 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './integration-item.component.html',
   styleUrls: ['./integration-item.component.scss']
 })
-export class IntegrationItemComponent implements OnInit {
+export class IntegrationItemComponent implements OnInit, AfterViewChecked {
   @Input() public widget;
   @Input() private siteId: string;
   @Output() private updateIntegrations = new EventEmitter<boolean>();
+  private fixedWidget;
+  private updatedEarlier = false;
 
   constructor(
     private translate: TranslateService,
@@ -28,14 +30,30 @@ export class IntegrationItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public updateWidgetName(data) {
-    if (!data) {
-      return false;
+  ngAfterViewChecked(): void {
+    (<any>$('[data-toggle="tooltip"]')).tooltip();
+  }
+
+  public fixOldWidgetName(data: string) {
+    this.fixedWidget = this.widget.name;
+  }
+
+  public updateWidgetName(data: string) {
+    if (this.updatedEarlier) {
+      this.updatedEarlier = false;
+      return;
     }
+    if (!data || data.length > 44) {
+      setTimeout(() => {
+        this.widget.name = this.fixedWidget;
+      }, 0);
+      return;
+    }
+    this.updatedEarlier = true;
     this.sitesService.getSiteIntegration(this.siteId, this.widget.id).subscribe((response: IntegrationItem) => {
       this.widget = response;
       this.widget.name = data;
-      this.sitesService.updateSiteIntegration(this.siteId, this.widget.id, this.widget);
+      this.sitesService.updateSiteIntegration(this.siteId, this.widget.id, this.widget).subscribe();
     });
   }
 
@@ -52,7 +70,7 @@ export class IntegrationItemComponent implements OnInit {
       windowClass: 'animate__animated animate__slideInDown animate__faster',
     });
     modalRef.componentInstance.siteId = this.siteId;
-    modalRef.componentInstance.integrationId = null;
+    modalRef.componentInstance.integrationId = this.widget.id;
 
     modalRef.result.then((result) => {
       if (result && result.success) {

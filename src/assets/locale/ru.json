@@ -71,11 +71,6 @@
 		}
 	},
 	"containerized": {
-		"container": {
-			"add": {
-				"name": "Добавить имя"
-			}
-		},
 		"title": "Статичные виджеты"
 	},
 	"coupons": {

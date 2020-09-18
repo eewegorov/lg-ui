@@ -8,58 +8,66 @@
               <div class="integration-item__icon integration-item__icon--{{widget.type}}"></div>
             </div>
             <div class="integration-item__type-name">{{widget.serviceName}}</div>
-            <span *ngIf="widget.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+            <span *ngIf="widget.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
           </div>
           <div class="widget-item-view-btns text-right">
-            <div class="btn-group play-btns margined-right-10">
+            <div class="btn-group">
               <button
                 (click)="startStopItem(true)"
-                [ngClass]="widget.active ? 'active' : ''"
-                class="btn btn-xs btn-default start-widget-btn"
+                [class.active]="widget.active"
+                class="btn btn-sm btn-default start-widget-btn"
                 data-container="body" data-toggle="tooltip" data-placement="top"
                 title="{{ 'settings.site.tabs.integration.tooltip.start' | translate }}"
               ><i class="fa fa-play"></i></button>
 
               <button
                 (click)="startStopItem(false)"
-                [ngClass]="widget.active ? '' : 'active'"
-                class="btn btn-xs btn-default stop-widget-btn"
+                [class.active]="!widget.active"
+                class="btn btn-sm btn-default stop-widget-btn"
                 data-container="body" data-toggle="tooltip" data-placement="top"
                 title="{{ 'settings.site.tabs.integration.tooltip.stop' | translate }}"
               ><i class="fa fa-pause"></i></button>
             </div>
 
-            <div class="btn-group edit-btns">
+            <div class="btn-group ml-2">
               <button
                 (click)="setupItem()"
-                class="btn btn-xs btn-default"
+                class="btn btn-sm btn-default"
                 data-container="body" data-toggle="tooltip" data-placement="top"
                 title="{{ 'settings.site.tabs.integration.tooltip.settings' | translate }}"
-              ><i class="fa fa-gears"></i></button>
+              ><i class="fa fa-cogs"></i></button>
 
               <button
                 (click)="removeItem()"
-                class="btn btn-xs btn-default"
+                class="btn btn-sm btn-default"
                 data-container="body"  data-toggle="tooltip" data-placement="top"
                 title="{{ 'settings.site.tabs.integration.tooltip.remove' | translate }}"
               ><i class="fa fa-trash"></i></button>
             </div>
           </div>
         </div>
-        <div class="widget-item-view-header widget-item-view-header__name">
+        <div class="widget-item-view-header">
           <cool-inline-edit-field
-            class="test-item-name"
+            class="long-text"
             name="name"
-            [emptyText]="'containerized.container.add.name' | translate"
             [(ngModel)]="widget.name"
+            (editStarted)="fixOldWidgetName($event)"
             (saved)="updateWidgetName($event)"
           >
           </cool-inline-edit-field>
         </div>
         <div class="integration-item__switcher">
           <div *ngIf="widget.default" class="pull-right">
-            <i class="fa fa-check-circle pull-left icons-for-sidemenu" style="margin-right: 3px;color: #62cb31;margin-top: 5px;"></i>
-            <label class="control-label control-label-des" style="font-size: 12px; font-weight: 400; top: 3px;">{{ 'settings.site.tabs.integration.defaultUse' | translate }}</label>
+            <i
+              class="fa fa-check-circle pull-left icons-for-sidemenu"
+              style="margin-right: 4px; color: #62cb31; margin-top: 3px;"
+            ></i>
+            <label
+              class="control-label"
+              style="font-size: 12px; font-weight: 400; top: -2px"
+            >
+              {{ 'settings.site.tabs.integration.defaultUse' | translate }}
+            </label>
           </div>
         </div>
       </div>

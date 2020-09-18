@@ -46,8 +46,8 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
     private billingService: BillingService,
     private sitesService: SitesService
   ) {
-    this.codeSiteScript = this.sitesService.generatePath(this.siteId, true);
     this.siteId = this.route.snapshot.params.id;
+    this.codeSiteScript = this.sitesService.generatePath(this.siteId, true);
   }
 
   ngOnInit(): void {
