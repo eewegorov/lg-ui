@@ -25,6 +25,7 @@
   margin-right: -2px;
   border-radius: 4px 0 0 4px;
   border: 1px solid transparent;
+  color: #34495e;
 }
 
 .tabs-left .panel-body {
@@ -55,6 +56,7 @@
 .tabs-left > .nav-tabs .active > a, .tabs-left > .nav-tabs .active > a:hover, .tabs-left > .nav-tabs .active > a:focus {
   border-color: #e4e5e7 transparent #e4e5e7 #e4e5e7;
   *border-right-color: #ffffff;
+  color: #555;
 }
 
 h4.site-settings-h4-text {
@@ -121,6 +123,32 @@ p.small {
   float: right;
 }
 
+.mail-sync-panel {
+  border: 1px solid #e4e5e7;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  min-height: 260px;
+}
+
+.mailsync-logo {
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.mailsync-logo img {
+  height: 50px;
+}
+
+.dropdown .dropdown-selected-cropp {
+  float: left;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 260px;
+}
+
 
 
 @media (max-width: 900px) {
@@ -167,6 +195,10 @@ p.small {
   .buttons {
     margin-left: 0;
   }
+
+  .analyticssync-sync-panel-wrapper {
+    width: 100%;
+  }
 }
 
 
@@ -185,7 +217,7 @@ p.small {
     min-width: 100%;
   }
 
-  .integration-new-modal-temp .integration-tab {
-    width: 100%;
+  .analyticssync-sync-panel-wrapper .site-selector {
+    min-width: 100%;
   }
 }

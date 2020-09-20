@@ -1,344 +1,338 @@
-<div class="modal modal-flex fade integration-new-modal-temp" tabindex="-1" role="dialog" aria-hidden="true" data-exptime="0">
-  <div class="modal-dialog">
-    <div class="modal-content" tooltiped>
-      <div class="color-line"></div>
-      <div class="modal-header text-center">
-        <h3 ng-if="!isEditIntegration">{{ 'settings.site.newIntegration.title' | translate }}</h3>
-        <h3 ng-if="isEditIntegration">{{ 'settings.site.newIntegration.edit' | translate }}</h3>
-      </div>
-      <div class="modal-body">
-        <div class="integration-switcher-wr" ng-if="!isEditIntegration">
-          <h5>{{ 'settings.site.newIntegration.description' | translate }}</h5>
-          <div class="integration-select-mode btn-group">
-            <span class="btn btn-default" ng-click="setIntegrationType($event, 'NEW')" ng-class="{active: isCurrentActiveIntegrationType('NEW')}">{{ 'settings.site.newIntegration.tabs.new' | translate }}</span>
-            <span class="btn btn-default" ng-click="setIntegrationType($event, 'COPY')" ng-class="{active: isCurrentActiveIntegrationType('COPY')}">{{ 'settings.site.newIntegration.tabs.copy' | translate }}</span>
+<app-color-line type="modals"></app-color-line>
+<div class="modal-header text-center justify-content-center">
+  <h3 ng-if="!isEditIntegration">{{ 'settings.site.newIntegration.title' | translate }}</h3>
+  <h3 ng-if="isEditIntegration">{{ 'settings.site.newIntegration.edit' | translate }}</h3>
+</div>
+<div class="modal-body">
+  <div class="integration-switcher-wr" ng-if="!isEditIntegration">
+    <h5>{{ 'settings.site.newIntegration.description' | translate }}</h5>
+    <div class="integration-select-mode btn-group">
+      <span class="btn btn-default" ng-click="setIntegrationType($event, 'NEW')" ng-class="{active: isCurrentActiveIntegrationType('NEW')}">{{ 'settings.site.newIntegration.tabs.new' | translate }}</span>
+      <span class="btn btn-default" ng-click="setIntegrationType($event, 'COPY')" ng-class="{active: isCurrentActiveIntegrationType('COPY')}">{{ 'settings.site.newIntegration.tabs.copy' | translate }}</span>
+    </div>
+  </div>
+  <div class="integration-tab">
+    <div ng-if="integrationIsOnProgress" class="integration-tab-inner-loading-state"></div>
+    <div class="integration-tab-inner">
+      <div ng-show="isCurrentActiveIntegrationType('NEW')">
+        <div class="integration-tab-item">
+          <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
+          <div class="dropdown integration-selector">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <span ng-if="!currentIntegrationService.type" class="dropdown-selected-cropp">{{defIntegrationServiceName}}</span>
+              <span ng-if="currentIntegrationService.type" class="dropdown-selected-cropp integration-selector-item {{currentIntegrationService.type}}">{{currentIntegrationService.name}}</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
+              <span class="integration-selector-group">{{ 'settings.site.tabs.group.email' | translate }}</span>
+              <li ng-repeat="item in integrationServices | filter: { group: 'mailing' }" ng-click="changeCurrentIntegrationService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
+              <span class="integration-selector-group">{{ 'settings.site.tabs.group.crm' | translate }}</span>
+              <li ng-repeat="item in integrationServices | filter: { group: 'CRM' }" ng-click="changeCurrentIntegrationService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
+              <span class="integration-selector-group">{{ 'settings.site.settings.notification.title' | translate }}</span>
+              <li ng-repeat="item in integrationServices | filter: { group: 'notification' }" ng-click="changeCurrentIntegrationService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
+              <span class="integration-selector-group">{{ 'settings.site.newIntegration.others' | translate }}</span>
+              <li ng-repeat="item in integrationServices | filter: { group: 'others' }" ng-click="changeCurrentIntegrationService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
+            </ul>
           </div>
         </div>
-        <div class="integration-tab">
-          <div ng-if="integrationIsOnProgress" class="integration-tab-inner-loading-state"></div>
-          <div class="integration-tab-inner">
-            <div ng-show="isCurrentActiveIntegrationType('NEW')">
-              <div class="integration-tab-item">
-                <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
-                <div class="dropdown integration-selector">
-                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span ng-if="!currentIntegrationService.type" class="dropdown-selected-cropp">{{defIntegrationServiceName}}</span>
-                    <span ng-if="currentIntegrationService.type" class="dropdown-selected-cropp integration-selector-item {{currentIntegrationService.type}}">{{currentIntegrationService.name}}</span>
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
-                    <span class="integration-selector-group">{{ 'settings.site.tabs.group.email' | translate }}</span>
-                    <li ng-repeat="item in integrationServices | filter: { group: 'mailing' }" ng-click="changeCurrentIntegrationService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
-                    <span class="integration-selector-group">{{ 'settings.site.tabs.group.crm' | translate }}</span>
-                    <li ng-repeat="item in integrationServices | filter: { group: 'CRM' }" ng-click="changeCurrentIntegrationService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
-                    <span class="integration-selector-group">{{ 'settings.site.settings.notification.title' | translate }}</span>
-                    <li ng-repeat="item in integrationServices | filter: { group: 'notification' }" ng-click="changeCurrentIntegrationService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
-                    <span class="integration-selector-group">{{ 'settings.site.newIntegration.others' | translate }}</span>
-                    <li ng-repeat="item in integrationServices | filter: { group: 'others' }" ng-click="changeCurrentIntegrationService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
-                  </ul>
-                </div>
-              </div>
-              <a ng-if="currentIntegrationService.type" [href]="currentIntegrationService.helpUrl" target="_blank" class="integration-help-link help-link-add-code-to-site">Инструкция по настройке интеграции</a>
-              <div class="integration-tab-item">
-                <label class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>
-                <input type="text" ng-model="newCurrentIntegration.name" class="form-control">
-              </div>
+        <a ng-if="currentIntegrationService.type" [href]="currentIntegrationService.helpUrl" target="_blank" class="integration-help-link help-link-add-code-to-site">Инструкция по настройке интеграции</a>
+        <div class="integration-tab-item">
+          <label class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>
+          <input type="text" ng-model="newCurrentIntegration.name" class="form-control">
+        </div>
 
-              <!-- GETRESPONSE PARAMS -->
-              <div ng-show="currentIntegrationService.type === 'GETRESPONSE'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
-                  <input type="text" ng-model="getResponseParams.code" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.campaignId' | translate }}</label>
-                  <input type="text" ng-model="getResponseParams.campaignId" class="form-control" name="name">
-                </div>
-              </div>
+        <!-- GETRESPONSE PARAMS -->
+        <div ng-show="currentIntegrationService.type === 'GETRESPONSE'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+            <input type="text" ng-model="getResponseParams.code" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.campaignId' | translate }}</label>
+            <input type="text" ng-model="getResponseParams.campaignId" class="form-control" name="name">
+          </div>
+        </div>
 
-              <!-- MAILCHIMP PARAMS and UNISENDER -->
-              <div ng-show="currentIntegrationService.type === 'MAILCHIMP' || currentIntegrationService.type === 'UNISENDER'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
-                  <input type="text" ng-model="mailchimpUniParams.code" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.listId' | translate }}</label>
-                  <input type="text" ng-model="mailchimpUniParams.listId" class="form-control" name="name">
-                </div>
-              </div>
+        <!-- MAILCHIMP PARAMS and UNISENDER -->
+        <div ng-show="currentIntegrationService.type === 'MAILCHIMP' || currentIntegrationService.type === 'UNISENDER'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+            <input type="text" ng-model="mailchimpUniParams.code" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.listId' | translate }}</label>
+            <input type="text" ng-model="mailchimpUniParams.listId" class="form-control" name="name">
+          </div>
+        </div>
 
-              <!-- SENDPULSE and SENDBOX PARAMS -->
-              <div ng-show="currentIntegrationService.type === 'SENDPULSE' || currentIntegrationService.type === 'SENDBOX'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.id' | translate }}</label>
-                  <input type="text" ng-model="sendPBParams.id" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.secret' | translate }}</label>
-                  <input type="text" ng-model="sendPBParams.secret" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.book' | translate }}</label>
-                  <input type="text" ng-model="sendPBParams.book" class="form-control" name="name">
-                </div>
-              </div>
+        <!-- SENDPULSE and SENDBOX PARAMS -->
+        <div ng-show="currentIntegrationService.type === 'SENDPULSE' || currentIntegrationService.type === 'SENDBOX'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.id' | translate }}</label>
+            <input type="text" ng-model="sendPBParams.id" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.secret' | translate }}</label>
+            <input type="text" ng-model="sendPBParams.secret" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.book' | translate }}</label>
+            <input type="text" ng-model="sendPBParams.book" class="form-control" name="name">
+          </div>
+        </div>
 
-              <!-- BITRIX PARAMS -->
-              <div ng-show="currentIntegrationService.type === 'BITRIX'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
-                  <input type="text" ng-model="bitrixParams.host" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
-                  <input type="text" ng-model="bitrixParams.login" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'login.password' | translate }}</label>
-                  <input type="password" ng-model="bitrixParams.password" class="form-control" name="name">
-                </div>
-              </div>
+        <!-- BITRIX PARAMS -->
+        <div ng-show="currentIntegrationService.type === 'BITRIX'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
+            <input type="text" ng-model="bitrixParams.host" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
+            <input type="text" ng-model="bitrixParams.login" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'login.password' | translate }}</label>
+            <input type="password" ng-model="bitrixParams.password" class="form-control" name="name">
+          </div>
+        </div>
 
-              <!-- AMOCRM PARAMS -->
-              <div ng-show="currentIntegrationService.type === 'AMOCRM'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.urlExtra' | translate }}</label>
-                  <input type="text" ng-model="amoParams.subdomain" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
-                  <input type="text" ng-model="amoParams.login" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
-                  <input type="text" ng-model="amoParams.hash" class="form-control" name="name">
-                </div>
-              </div>
+        <!-- AMOCRM PARAMS -->
+        <div ng-show="currentIntegrationService.type === 'AMOCRM'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.urlExtra' | translate }}</label>
+            <input type="text" ng-model="amoParams.subdomain" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
+            <input type="text" ng-model="amoParams.login" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+            <input type="text" ng-model="amoParams.hash" class="form-control" name="name">
+          </div>
+        </div>
 
-              <!-- EMAIL PARAMS -->
-              <div ng-show="currentIntegrationService.type === 'EMAIL'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.email' | translate }}</label>
-                  <input type="text" ng-model="emailParams.email" class="form-control" name="name">
-                </div>
-              </div>
+        <!-- EMAIL PARAMS -->
+        <div ng-show="currentIntegrationService.type === 'EMAIL'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.email' | translate }}</label>
+            <input type="text" ng-model="emailParams.email" class="form-control" name="name">
+          </div>
+        </div>
 
-              <!-- ROISTAT PARAMS -->
-              <div ng-show="currentIntegrationService.type === 'ROISTAT' || currentIntegrationService.type === 'WEBHOOK'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.url' | translate }}</label>
-                  <input type="text" ng-model="roistatParams.url" class="form-control" name="name">
-                </div>
-              </div>
+        <!-- ROISTAT PARAMS -->
+        <div ng-show="currentIntegrationService.type === 'ROISTAT' || currentIntegrationService.type === 'WEBHOOK'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.url' | translate }}</label>
+            <input type="text" ng-model="roistatParams.url" class="form-control" name="name">
+          </div>
+        </div>
 
-              <div class="integration-tab-item m-b-none">
-                <div class="integration-item__switcher">
-                  <ui-switch size="small" [checked]="newCurrentIntegration.default"></ui-switch>
-                  <label class="control-label">
-                    {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
-                    <a data-toggle="tooltip"
-                       data-placement="top"
-                       data-container="body"
-                       title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
-                       class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div ng-show="isCurrentActiveIntegrationType('COPY')">
-              <div class="integration-tab-item margined-top-30" ng-if="!sites.length">
-                <h4 class="f-2 text-center">{{ 'settings.site.newIntegration.create.copy.noSites' | translate }}</h4>
-              </div>
-
-              <div ng-if="sites.length" class="integration-tab-item">
-                <label class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>
-                <input type="text" ng-model="currentIntegrationSiteServiceClone.name" class="form-control" name="name">
-              </div>
-
-              <div ng-if="sites.length" class="integration-tab-item">
-                <label class="control-label">{{ 'settings.site.newIntegration.donorSite' | translate }}</label>
-                <div class="dropdown site-selector">
-                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span class="dropdown-selected-cropp" style="max-width:90%">{{currentIntegrationSite.name || defIntegrationSiteName}}</span>
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu dropdown-integration-max-240h">
-                    <li ng-repeat="site in sites" ng-click="changeCurrentIntegrationSite(site)"><a href="javascript:void(0);">{{site.name}}</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div ng-if="integrationSitesLoading" class="integration-site-loading-inner"></div>
-              <div ng-hide="integrationSitesLoading || !currentIntegrationSite.id" class="integration-tab-item">
-                <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
-                <div class="dropdown integration-selector">
-                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span ng-if="!currentIntegrationSiteService.type" class="dropdown-selected-cropp">{{defIntegrationServiceName}}</span>
-                    <span ng-if="currentIntegrationSiteService.type" class="dropdown-selected-cropp integration-selector-item {{currentIntegrationSiteService.type}}">{{currentIntegrationSiteService.name}}</span>
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu dropdown-integration-max-240h">
-                    <span ng-if="integrationSiteServicesMailing.length" class="integration-selector-group">{{ 'settings.site.tabs.group.email' | translate }}</span>
-                    <li ng-repeat="item in integrationSiteServicesMailing" ng-click="changeCurrentIntegrationSiteService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
-                    <span ng-if="integrationSiteServicesCRM.length" class="integration-selector-group">{{ 'settings.site.tabs.group.crm' | translate }}</span>
-                    <li ng-repeat="item in integrationSiteServicesCRM" ng-click="changeCurrentIntegrationSiteService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
-                    <span ng-if="integrationSiteServicesNotifications.length" class="integration-selector-group">{{ 'settings.site.settings.notification.title' | translate }}</span>
-                    <li ng-repeat="item in integrationSiteServicesNotifications" ng-click="changeCurrentIntegrationSiteService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
-                    <span ng-if="integrationSiteServicesOthers.length" class="integration-selector-group">{{ 'settings.site.newIntegration.others' | translate }}</span>
-                    <li ng-repeat="item in integrationSiteServicesOthers" ng-click="changeCurrentIntegrationSiteService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
-                  </ul>
-                </div>
-              </div>
-              <div ng-if="currentIntegrationSiteService.type" class="integration-tab-item m-b-none" tooltiped>
-                <div class="integration-item__switcher">
-                  <ui-switch size="small" [checked]="currentIntegrationSiteService.default"></ui-switch>
-                  <label class="control-label">
-                    {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
-                    <a data-toggle="tooltip"
-                       data-placement="top"
-                       data-container="body"
-                       title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
-                       class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div ng-show="isCurrentActiveIntegrationType('EDIT')">
-              <div class="integration-tab-item integration-tab-item-flex" style="margin-top: 15px">
-                <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
-                <div class="integration-edit-service {{editableIntegration.type}}">{{editableIntegrationServiceName}}</div>
-              </div>
-              <div class="integration-tab-item">
-                <label class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>
-                <input type="text" ng-model="editableIntegration.name" class="form-control" name="name">
-              </div>
-
-              <!-- GETRESPONSE PARAMS -->
-              <div ng-show="editableIntegration.type === 'GETRESPONSE'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.code" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.campaignId' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.campaignId" class="form-control" name="name">
-                </div>
-              </div>
-
-              <!-- MAILCHIMP PARAMS and UNISENDER -->
-              <div ng-show="editableIntegration.type === 'MAILCHIMP' || editableIntegration.type === 'UNISENDER'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.code" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.listId' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.listId" class="form-control" name="name">
-                </div>
-              </div>
-
-              <!-- SENDPULSE and SENDBOX PARAMS -->
-              <div ng-show="editableIntegration.type === 'SENDPULSE' || editableIntegration.type === 'SENDBOX'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.id' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.id" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.secret' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.secret" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.book' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.book" class="form-control" name="name">
-                </div>
-              </div>
-
-              <!-- BITRIX PARAMS -->
-              <div ng-show="editableIntegration.type === 'BITRIX'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.host" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.login" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'login.password' | translate }}</label>
-                  <input type="password" ng-model="editableIntegration.params.password" class="form-control" name="name">
-                </div>
-              </div>
-
-              <!-- AMOCRM PARAMS -->
-              <div ng-show="editableIntegration.type === 'AMOCRM'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.url' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.subdomain" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.login" class="form-control" name="name">
-                </div>
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.hash" class="form-control" name="name">
-                </div>
-              </div>
-
-              <!-- EMAIL PARAMS -->
-              <div ng-show="editableIntegration.type === 'EMAIL'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.email' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.email" class="form-control" name="name">
-                </div>
-              </div>
-
-              <!-- ROISTAT PARAMS -->
-              <div ng-show="editableIntegration.type === 'ROISTAT' || editableIntegration.type === 'WEBHOOK'">
-                <div class="integration-tab-item">
-                  <label class="control-label">{{ 'settings.site.newIntegration.create.url' | translate }}</label>
-                  <input type="text" ng-model="editableIntegration.params.url" class="form-control" name="name">
-                </div>
-              </div>
-
-              <div class="integration-tab-item m-b-none">
-                <div class="integration-item__switcher">
-                  <ui-switch size="small" [checked]="editableIntegration.default"></ui-switch>
-                  <label class="control-label">
-                    {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
-                    <a data-toggle="tooltip"
-                       data-placement="top"
-                       data-container="body"
-                       title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
-                       class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
-                  </label>
-                </div>
-              </div>
-            </div>
+        <div class="integration-tab-item m-b-none">
+          <div class="integration-item__switcher">
+            <ui-switch size="small" [checked]="newCurrentIntegration.default"></ui-switch>
+            <label class="control-label">
+              {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
+              <a data-toggle="tooltip"
+                 data-placement="top"
+                 data-container="body"
+                 title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
+                 class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+            </label>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <div class="text-right m-t-xs">
-          <a class="btn btn-default floated-left"
-             ng-click="closeModal(false)"
-             href="javascript:void(0);">{{ 'global.cancel' | translate }}</a>
 
-          <a class="btn btn-success"
-             href="javascript:void(0);"
-             ng-if="!editableIntegration"
-             ng-click="createIntegration()"
-             ng-disabled="disableCreation()">{{ 'settings.site.newIntegration.add' | translate }}</a>
+      <div ng-show="isCurrentActiveIntegrationType('COPY')">
+        <div class="integration-tab-item margined-top-30" ng-if="!sites.length">
+          <h4 class="f-2 text-center">{{ 'settings.site.newIntegration.create.copy.noSites' | translate }}</h4>
+        </div>
 
-          <a class="btn btn-success"
-             href="javascript:void(0);"
-             ng-if="editableIntegration"
-             ng-click="updateIntegration()"
-             ng-disabled="disableUpdation()">{{ 'global.save' | translate }}</a>
+        <div ng-if="sites.length" class="integration-tab-item">
+          <label class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>
+          <input type="text" ng-model="currentIntegrationSiteServiceClone.name" class="form-control" name="name">
+        </div>
+
+        <div ng-if="sites.length" class="integration-tab-item">
+          <label class="control-label">{{ 'settings.site.newIntegration.donorSite' | translate }}</label>
+          <div class="dropdown site-selector">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <span class="dropdown-selected-cropp" style="max-width:90%">{{currentIntegrationSite.name || defIntegrationSiteName}}</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-integration-max-240h">
+              <li ng-repeat="site in sites" ng-click="changeCurrentIntegrationSite(site)"><a href="javascript:void(0);">{{site.name}}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div ng-if="integrationSitesLoading" class="integration-site-loading-inner"></div>
+        <div ng-hide="integrationSitesLoading || !currentIntegrationSite.id" class="integration-tab-item">
+          <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
+          <div class="dropdown integration-selector">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <span ng-if="!currentIntegrationSiteService.type" class="dropdown-selected-cropp">{{defIntegrationServiceName}}</span>
+              <span ng-if="currentIntegrationSiteService.type" class="dropdown-selected-cropp integration-selector-item {{currentIntegrationSiteService.type}}">{{currentIntegrationSiteService.name}}</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-integration-max-240h">
+              <span ng-if="integrationSiteServicesMailing.length" class="integration-selector-group">{{ 'settings.site.tabs.group.email' | translate }}</span>
+              <li ng-repeat="item in integrationSiteServicesMailing" ng-click="changeCurrentIntegrationSiteService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
+              <span ng-if="integrationSiteServicesCRM.length" class="integration-selector-group">{{ 'settings.site.tabs.group.crm' | translate }}</span>
+              <li ng-repeat="item in integrationSiteServicesCRM" ng-click="changeCurrentIntegrationSiteService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
+              <span ng-if="integrationSiteServicesNotifications.length" class="integration-selector-group">{{ 'settings.site.settings.notification.title' | translate }}</span>
+              <li ng-repeat="item in integrationSiteServicesNotifications" ng-click="changeCurrentIntegrationSiteService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
+              <span ng-if="integrationSiteServicesOthers.length" class="integration-selector-group">{{ 'settings.site.newIntegration.others' | translate }}</span>
+              <li ng-repeat="item in integrationSiteServicesOthers" ng-click="changeCurrentIntegrationSiteService(item)"><a class="integration-selector-item {{item.type}}" href="javascript:void(0);">{{item.name || defIntegrationServiceName}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div ng-if="currentIntegrationSiteService.type" class="integration-tab-item m-b-none" tooltiped>
+          <div class="integration-item__switcher">
+            <ui-switch size="small" [checked]="currentIntegrationSiteService.default"></ui-switch>
+            <label class="control-label">
+              {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
+              <a data-toggle="tooltip"
+                 data-placement="top"
+                 data-container="body"
+                 title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
+                 class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div ng-show="isCurrentActiveIntegrationType('EDIT')">
+        <div class="integration-tab-item integration-tab-item-flex" style="margin-top: 15px">
+          <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
+          <div class="integration-edit-service {{editableIntegration.type}}">{{editableIntegrationServiceName}}</div>
+        </div>
+        <div class="integration-tab-item">
+          <label class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>
+          <input type="text" ng-model="editableIntegration.name" class="form-control" name="name">
+        </div>
+
+        <!-- GETRESPONSE PARAMS -->
+        <div ng-show="editableIntegration.type === 'GETRESPONSE'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.code" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.campaignId' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.campaignId" class="form-control" name="name">
+          </div>
+        </div>
+
+        <!-- MAILCHIMP PARAMS and UNISENDER -->
+        <div ng-show="editableIntegration.type === 'MAILCHIMP' || editableIntegration.type === 'UNISENDER'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.code" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.listId' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.listId" class="form-control" name="name">
+          </div>
+        </div>
+
+        <!-- SENDPULSE and SENDBOX PARAMS -->
+        <div ng-show="editableIntegration.type === 'SENDPULSE' || editableIntegration.type === 'SENDBOX'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.id' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.id" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.secret' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.secret" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.book' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.book" class="form-control" name="name">
+          </div>
+        </div>
+
+        <!-- BITRIX PARAMS -->
+        <div ng-show="editableIntegration.type === 'BITRIX'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.host" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.login" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'login.password' | translate }}</label>
+            <input type="password" ng-model="editableIntegration.params.password" class="form-control" name="name">
+          </div>
+        </div>
+
+        <!-- AMOCRM PARAMS -->
+        <div ng-show="editableIntegration.type === 'AMOCRM'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.url' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.subdomain" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.login" class="form-control" name="name">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.hash" class="form-control" name="name">
+          </div>
+        </div>
+
+        <!-- EMAIL PARAMS -->
+        <div ng-show="editableIntegration.type === 'EMAIL'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.email' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.email" class="form-control" name="name">
+          </div>
+        </div>
+
+        <!-- ROISTAT PARAMS -->
+        <div ng-show="editableIntegration.type === 'ROISTAT' || editableIntegration.type === 'WEBHOOK'">
+          <div class="integration-tab-item">
+            <label class="control-label">{{ 'settings.site.newIntegration.create.url' | translate }}</label>
+            <input type="text" ng-model="editableIntegration.params.url" class="form-control" name="name">
+          </div>
+        </div>
+
+        <div class="integration-tab-item m-b-none">
+          <div class="integration-item__switcher">
+            <ui-switch size="small" [checked]="editableIntegration.default"></ui-switch>
+            <label class="control-label">
+              {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
+              <a data-toggle="tooltip"
+                 data-placement="top"
+                 data-container="body"
+                 title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
+                 class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+            </label>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="text-right m-t-xs">
+    <a class="btn btn-default floated-left"
+       ng-click="closeModal(false)"
+       href="javascript:void(0);">{{ 'global.cancel' | translate }}</a>
+
+    <a class="btn btn-success"
+       href="javascript:void(0);"
+       ng-if="!editableIntegration"
+       ng-click="createIntegration()"
+       ng-disabled="disableCreation()">{{ 'settings.site.newIntegration.add' | translate }}</a>
+
+    <a class="btn btn-success"
+       href="javascript:void(0);"
+       ng-if="editableIntegration"
+       ng-click="updateIntegration()"
+       ng-disabled="disableUpdation()">{{ 'global.save' | translate }}</a>
   </div>
 </div>
