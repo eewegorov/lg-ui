@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
 import { ChartsModule } from 'ng2-charts';
 import { UiSwitchModule } from 'ngx-ui-switch';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 import { SharedModule } from '../../shared/shared.module';
 import { SitesRoutingModule } from './sites-routing.module';
 import { SiteAddComponent } from './site-add/site-add.component';
@@ -13,6 +14,7 @@ import { SitesListComponent } from './sites-list/sites-list.component';
 import { SitesComponent } from './sites/sites.component';
 import { IntegrationAddComponent } from './integration-add/integration-add.component';
 import { IntegrationItemComponent } from './integration-item/integration-item.component';
+
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import { IntegrationItemComponent } from './integration-item/integration-item.co
     CoolInlineEditFieldModule,
     ChartsModule,
     UiSwitchModule,
+    FilterPipeModule,
     SharedModule,
     SitesRoutingModule
   ]

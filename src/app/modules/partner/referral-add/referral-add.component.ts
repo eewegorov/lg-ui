@@ -24,7 +24,9 @@ export class ReferralAddComponent implements OnInit {
 
   public createRef(): void {
     this.partnerService.addNewRef(this.refMail).subscribe((response: string) => {
-      if (!response) return;
+      if (!response) {
+        return;
+      }
       this.closeModal();
     });
 

@@ -76,7 +76,8 @@ export class IntegrationItemComponent implements OnInit, AfterViewChecked {
       if (result && result.success) {
         this.updateIntegrations.emit(true);
       }
-    });
+    })
+      .catch(() => {});
   }
 
   public removeItem() {

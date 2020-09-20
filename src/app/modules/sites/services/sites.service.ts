@@ -2,13 +2,23 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
+  CreateIntegrationRequest,
   CreateSiteData,
   CreateSiteRequest,
-  CreateSiteResponse, Integration, IntegrationItem, IntegrationRequest, IntegrationResponse, IntegrationsResponse,
-  Site, SiteSettings, SiteSettingsResponse,
-  SiteShort, SiteShortResponse,
+  CreateSiteResponse,
+  Integration,
+  IntegrationItem,
+  IntegrationResponse, IntegrationService,
+  IntegrationsResponse,
+  IntegrationTypes,
+  Site,
+  SiteSettings,
+  SiteSettingsResponse,
+  SiteShort,
+  SiteShortResponse,
   SitesResponse,
-  SitesShortResponse
+  SitesShortResponse,
+  UpdateIntegrationRequest
 } from '../../../core/models/sites';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { SitesApiService } from './sites-api.service';
@@ -90,7 +100,28 @@ export class SitesService {
     );
   }
 
-  public updateSiteIntegration(siteId: string, integrationId: string, integration: IntegrationRequest): Observable<boolean> {
+  public createSiteIntegration(siteId: string, integration: CreateIntegrationRequest): Observable<IntegrationItem> {
+    return this.sitesApiService.createSiteIntegration(siteId, integration).pipe(
+      map((response: IntegrationResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public cloneSiteIntegration(
+    siteId: string, integrationId: string, newIntegrationName: string, recipientSiteId: string, isDefault: boolean
+  ): Observable<IntegrationItem> {
+    const data = {
+      name: newIntegrationName,
+      siteId,
+      default: isDefault
+    };
+    return this.sitesApiService.cloneSiteIntegration(recipientSiteId, integrationId, data).pipe(
+      map((response: IntegrationResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public updateSiteIntegration(siteId: string, integrationId: string, integration: UpdateIntegrationRequest): Observable<boolean> {
     return this.sitesApiService.updateSiteIntegration(siteId, integrationId, integration).pipe(
       map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
@@ -173,75 +204,75 @@ export class SitesService {
     return (!site.tariffExp && !site.tariffName) || site.tariffName === 'Бесплатный';
   }
 
-  private getIntegrationServicesList() {
+  public getIntegrationServicesList(): IntegrationService[] {
     return [
       {
         name: 'Mailchimp',
         helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/523-mailchimp',
-        type: 'MAILCHIMP',
+        type: IntegrationTypes.MAILCHIMP,
         group: 'mailing',
         isPayment: false
       },
       {
         name: 'Getresponse',
         helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/522-getresponce',
-        type: 'GETRESPONSE',
+        type: IntegrationTypes.GETRESPONSE,
         group: 'mailing',
         isPayment: false
       },
       {
         name: 'Sendpulse',
         helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/524-sendpulse',
-        type: 'SENDPULSE',
+        type: IntegrationTypes.SENDPULSE,
         group: 'mailing',
         isPayment: false
       },
       {
         name: 'Sendbox',
         helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/525-sendbox',
-        type: 'SENDBOX',
+        type: IntegrationTypes.SENDBOX,
         group: 'mailing',
         isPayment: false
       },
       {
         name: 'Unisender',
         helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/526-unisender',
-        type: 'UNISENDER',
+        type: IntegrationTypes.UNISENDER,
         group: 'mailing',
         isPayment: false
       },
       {
         name: 'Bitrix24',
         helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/527-bitrix',
-        type: 'BITRIX',
+        type: IntegrationTypes.BITRIX,
         group: 'CRM',
         isPayment: true
       },
       {
         name: 'Amo CRM',
         helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/528-amocrm',
-        type: 'AMOCRM',
+        type: IntegrationTypes.AMOCRM,
         group: 'CRM',
         isPayment: true
       },
       {
         name: 'Отправка Email',
         helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/529-email',
-        type: 'EMAIL',
+        type: IntegrationTypes.EMAIL,
         group: 'notification',
         isPayment: true
       },
       {
         name: 'Roistat',
         helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/335-nastrojka-integratsii-s-roistat',
-        type: 'ROISTAT',
+        type: IntegrationTypes.ROISTAT,
         group: 'others',
         isPayment: true
       },
       {
         name: 'Webhook',
         helpUrl: 'https://leadgenic.userecho.com/knowledge-bases/2/articles/334-nastrojka-integratsii-webhook',
-        type: 'WEBHOOK',
+        type: IntegrationTypes.WEBHOOK,
         group: 'others',
         isPayment: true
       }

@@ -43,8 +43,8 @@ export class SiteAddComponent implements OnInit {
             id: response.id,
             link: this.sitesService.generatePath(response.link),
           };
-          if (this.newSiteForm.controls['phone'].value) {
-            return this.userService.savePhone({ phone: this.newSiteForm.controls['phone'].value });
+          if (this.newSiteForm.controls.phone.value) {
+            return this.userService.savePhone({ phone: this.newSiteForm.controls.phone.value });
           }
         })
     ).subscribe(

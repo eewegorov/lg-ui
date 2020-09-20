@@ -54,7 +54,7 @@ export class WidgetsComponent implements OnInit {
 
   public getTypeItem(typeId: string): { id: string; name: string; } {
     return this.types.find((item) => {
-      return item.id === typeId
+      return item.id === typeId;
     });
   }
 
@@ -66,9 +66,12 @@ export class WidgetsComponent implements OnInit {
     modalRef.componentInstance.companies = this.companies;
     modalRef.componentInstance.deletedCompany = this.currentCompany;
     modalRef.result.then((deletedId: boolean) => {
-      if (!deletedId) return false;
+      if (!deletedId) {
+        return false;
+      }
       this.getAllWidgetsForSite(this.sitesService.getCurrentSiteId());
-    });
+    })
+      .catch(() => {});
   }
 
   public getTypesWithCompanyFilter() {
@@ -79,7 +82,7 @@ export class WidgetsComponent implements OnInit {
     return keys.filter((item) => {
       return this.getFilteredWidgets(item).length > 0;
     });
-  };
+  }
 
   private getFilteredWidgets(type) {
     if (this.currentCompany.id === this.widgetService.getDefaultCompany(this.companies).id) {
@@ -130,7 +133,8 @@ export class WidgetsComponent implements OnInit {
       modalRef.componentInstance.currentCompany = this.currentCompany;
       modalRef.result.then((result) => {
         // TODO: Implement logic when close modal. Don't forget "result"
-      });
+      })
+        .catch(() => {});
     }
   }
 

@@ -5,10 +5,10 @@ import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
 import {
   CreateSiteRequest,
-  CreateSiteResponse, IntegrationRequest, IntegrationResponse, IntegrationsResponse, SiteSettings,
+  CreateSiteResponse, UpdateIntegrationRequest, IntegrationResponse, IntegrationsResponse, SiteSettings,
   SiteSettingsResponse, SiteShortResponse,
   SitesResponse,
-  SitesShortResponse
+  SitesShortResponse, CloneIntegrationRequest, CreateIntegrationRequest
 } from '../../../core/models/sites';
 
 
@@ -56,7 +56,15 @@ export class SitesApiService {
     return this.http.get<IntegrationResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}`);
   }
 
-  public updateSiteIntegration(siteId: string, integrationId: string, integration: IntegrationRequest): Observable<ApiResponse> {
+  public createSiteIntegration(siteId: string, integration: CreateIntegrationRequest) {
+    return this.http.post<IntegrationResponse>(`${ environment.url }/sites/${siteId}/integrations`, integration);
+  }
+
+  public cloneSiteIntegration(siteId: string, integrationId: string, data: CloneIntegrationRequest): Observable<IntegrationResponse> {
+    return this.http.post<IntegrationResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}/clone`, data);
+  }
+
+  public updateSiteIntegration(siteId: string, integrationId: string, integration: UpdateIntegrationRequest): Observable<ApiResponse> {
     return this.http.put<ApiResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}`, integration);
   }
 
@@ -68,4 +76,5 @@ export class SitesApiService {
   public deleteSiteIntegration(siteId: string, integrationId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}`);
   }
+
 }

@@ -28,7 +28,7 @@ export class CouponAddComponent implements OnInit, AfterViewChecked {
     if (this.currentCoupon) {
       this.currentActiveCouponType = this.currentCoupon.type;
 
-      this.couponTypeLabel = this.currentCoupon.type === "REUSABLE" ?
+      this.couponTypeLabel = this.currentCoupon.type === 'REUSABLE' ?
         this.translate.instant('coupons.modal.newCoupon.tab2.title') :
         this.translate.instant('coupons.modal.newCoupon.tab1.title');
 
@@ -49,17 +49,17 @@ export class CouponAddComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    (<any>$('[data-toggle="tooltip"]')).tooltip();
+    ($('[data-toggle="tooltip"]') as any).tooltip();
   }
 
   public setCouponType(newTab) {
     this.currentActiveCouponType = newTab;
     this.editableCoupon.type = newTab;
-  };
+  }
 
   public isCurrentActiveCouponType(tab: string): boolean {
     return this.currentActiveCouponType === tab;
-  };
+  }
 
   public closeModal(result?): void {
     this.activeModal.close(result);
@@ -96,7 +96,7 @@ export class CouponAddComponent implements OnInit, AfterViewChecked {
         }
       });
     }
-  };
+  }
 
   private unmappedCoupons(list: string): string[] {
     return list.split('\n');

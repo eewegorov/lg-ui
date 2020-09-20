@@ -10,13 +10,18 @@
   </div>
 </div>
 <div class="modal-footer justify-content-between">
-    <a class="btn btn-default floated-left"
-       (click)="closeModal()"
-       href="">{{ 'global.cancel' | translate }}</a>
+    <button
+      class="btn btn-default floated-left"
+      (click)="closeModal()"
+    >
+      {{ 'global.cancel' | translate }}
+    </button>
     <button
       class="btn btn-success"
       href=""
       (click)="createRef()"
-      [disabled]="!refMail">{{ 'partner.add.modal.button' | translate }}
+      [disabled]="!refMail"
+    >
+      {{ 'partner.add.modal.button' | translate }}
     </button>
 </div>

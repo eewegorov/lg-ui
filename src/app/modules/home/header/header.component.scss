@@ -194,8 +194,10 @@ span.userinfo {
   vertical-align: middle;
 }
 
-.dropdown-toggle::after {
+.label-menu-corner.dropdown-toggle::after {
   display: inline-block;
+  float: none;
+  top: 0;
   width: 0;
   height: 0;
   margin: -10px 0 0 6px;

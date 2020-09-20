@@ -23,6 +23,7 @@ export class CouponModalService {
       if (result) {
         this.couponService.getCouponsList();
       }
-    });
+    })
+      .catch(() => {});
   }
 }

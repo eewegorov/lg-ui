@@ -5,9 +5,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IntegrationAddComponent } from '../integration-add/integration-add.component';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { Integration, SiteSettings, SiteShort } from '../../../core/models/sites';
 import { BillingService } from '../../../core/services/billing.service';
 import { SitesService } from '../services/sites.service';
-import { Integration, SiteSettings, SiteShort } from '../../../core/models/sites';
 
 
 @Component({
@@ -56,7 +56,7 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    (<any>$('[data-toggle="tooltip"]')).tooltip();
+    ($('[data-toggle="tooltip"]') as any).tooltip();
   }
 
   public setTab(newTab) {
@@ -90,28 +90,30 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
 
   public onChangePaymentLogo() {
     if (this.siteInfo.isFree) {
-     setTimeout(() => {
-       this.site.needHideLogo = false;
-       this.site.logoRefLink = false;
-       this.billingService.checkTariffPlans(this.siteId,
-         this.translate.instant('sitelist.tariff.title'),
-         this.translate.instant('settings.site.integration.paymentLabel', { siteName: this.site.name }));
+      setTimeout(() => {
+        this.site.needHideLogo = false;
+        this.site.logoRefLink = false;
+        this.billingService.checkTariffPlans(this.siteId,
+          this.translate.instant('sitelist.tariff.title'),
+          this.translate.instant('settings.site.integration.paymentLabel', { siteName: this.site.name }));
       }, 500);
     }
   }
 
   public openModalForCreatingNewIntegration() {
     const modalRef = this.modalService.open(IntegrationAddComponent, {
-      windowClass: 'animate__animated animate__slideInDown animate__faster'
+      windowClass: 'animate__animated animate__slideInDown animate__faster',
+      size: 'lg'
     });
     modalRef.componentInstance.siteId = this.siteId;
     modalRef.componentInstance.integrationId = null;
 
     modalRef.result.then((result) => {
-      if (result && result.success) {
+      if (result) {
         this.getSiteIntegrations();
       }
-    });
+    })
+      .catch(() => {});
   }
 
   public changeAnalyticGService(value) {
@@ -156,8 +158,8 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
       }
     ];
     this.integrations = response.map((item: Integration) => {
-      item.serviceName =  this.sitesService.getCorrectNameByType(item.type);
-      item.isPayment =  this.sitesService.getPaymentByType(item.type);
+      item.serviceName = this.sitesService.getCorrectNameByType(item.type);
+      item.isPayment = this.sitesService.getPaymentByType(item.type);
       return item;
     });
     this.integrationsCRM = this.integrations.filter((item) => {
@@ -187,15 +189,15 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
       yandexAnalyticsCounter: "31aasdfsdfs",
       googleAnalyticsService: "GTAG"
     };
-      this.site = response;
-      this.sitesService.getSiteShortInfo(this.siteId).subscribe((info: SiteShort) => {
-        this.siteInfo = info;
-        this.siteInfo.isFree = this.sitesService.isSiteHasExpTariff(this.siteInfo) || this.siteInfo.trial;
-        this.siteInfo.isNotPayment = this.sitesService.isSiteHasExpTariff(this.siteInfo) && !this.siteInfo.trial;
-      });
-      this.sitesService.getSitesShort().subscribe((responseSites: SiteShort[]) => {
-        this.sitesService.sites = responseSites;
-      });
+    this.site = response;
+    this.sitesService.getSiteShortInfo(this.siteId).subscribe((info: SiteShort) => {
+      this.siteInfo = info;
+      this.siteInfo.isFree = this.sitesService.isSiteHasExpTariff(this.siteInfo) || this.siteInfo.trial;
+      this.siteInfo.isNotPayment = this.sitesService.isSiteHasExpTariff(this.siteInfo) && !this.siteInfo.trial;
+    });
+    this.sitesService.getSitesShort().subscribe((responseSites: SiteShort[]) => {
+      this.sitesService.sites = responseSites;
+    });
     /*});*/
   }
 

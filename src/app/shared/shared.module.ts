@@ -37,6 +37,9 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     ModalComponent,
     DropdownComponent,
     ColorLineComponent
+  ],
+  providers: [
+    OrderByPipe
   ]
 })
 export class SharedModule { }

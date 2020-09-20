@@ -90,11 +90,47 @@ export interface IntegrationItem {
   type: string;
   default: boolean;
   active: boolean;
+  params: any;
+}
+
+export interface CreateIntegrationRequest {
+  name: string;
+  type: IntegrationTypes;
+  default: boolean;
   params: object;
 }
 
-export interface IntegrationRequest {
+export interface UpdateIntegrationRequest {
   name: string;
   default: boolean;
   params: object;
 }
+
+export interface CloneIntegrationRequest {
+  name: string;
+  default: boolean;
+  siteId: string;
+}
+
+export enum IntegrationTypes {
+  CAMPAIGNMONITOR = 'CAMPAIGNMONITOR',
+  GETRESPONSE = 'GETRESPONSE',
+  MAILCHIMP = 'MAILCHIMP',
+  SENDPULSE = 'SENDPULSE',
+  UNISENDER = 'UNISENDER',
+  BITRIX = 'BITRIX',
+  AMOCRM = 'AMOCRM',
+  WEBHOOK = 'WEBHOOK',
+  SENDBOX = 'SENDBOX',
+  EMAIL = 'EMAIL',
+  ROISTAT = 'ROISTAT'
+}
+
+export interface IntegrationService {
+  name: string;
+  helpUrl: string;
+  type: IntegrationTypes;
+  group: string;
+  isPayment: boolean;
+}
+

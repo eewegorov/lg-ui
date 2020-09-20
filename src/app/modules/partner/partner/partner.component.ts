@@ -82,17 +82,31 @@ export class PartnerComponent implements OnInit, OnDestroy {
   }
 
   public fbLink(): void {
-    const newWin = window.open("https://www.facebook.com/sharer.php?u=" + this.partnerUrl, "Facebook", "width=420,height=230,resizable=yes,scrollbars=yes,status=yes");
+    const newWin =
+      window.open(
+        'https://www.facebook.com/sharer.php?u=' + this.partnerUrl,
+        'Facebook',
+        'width=420,height=230,resizable=yes,scrollbars=yes,status=yes'
+      );
     newWin.focus();
   }
 
   public vkLink(): void {
-    const newWin = window.open("https://vk.com/share.php?url=" + this.partnerUrl + "&image=https://static.leadgenic.com/ads/200.jpg", "VK", "width=420,height=230,resizable=yes,scrollbars=yes,status=yes");
+    const newWin =
+      window.open(
+        'https://vk.com/share.php?url=' + this.partnerUrl + '&image=https://static.leadgenic.com/ads/200.jpg',
+        'VK',
+        'width=420,height=230,resizable=yes,scrollbars=yes,status=yes'
+      );
     newWin.focus();
   }
 
   public twLink(): void {
-    const newWin = window.open("http://twitter.com/share?url=" + this.partnerUrl, "VK", "width=420,height=300,resizable=yes,scrollbars=yes,status=yes");
+    const newWin = window.open(
+      'http://twitter.com/share?url=' + this.partnerUrl,
+      'VK',
+      'width=420,height=300,resizable=yes,scrollbars=yes,status=yes'
+    );
     newWin.focus();
   }
 
@@ -108,7 +122,8 @@ export class PartnerComponent implements OnInit, OnDestroy {
           this.toastr.success(this.translate.instant('partner.add.done'), this.translate.instant('global.done'));
         }
       }, 100);
-    });
+    })
+      .catch(() => {});
   }
 
   public setWallet() {
