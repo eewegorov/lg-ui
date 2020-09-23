@@ -1,27 +1,31 @@
 <app-color-line type="modals"></app-color-line>
 <div class="modal-header text-center justify-content-center">
-  <h3 *ngIf="!isEditIntegration">{{ 'settings.site.newIntegration.title' | translate }}</h3>
-  <h3 *ngIf="isEditIntegration">{{ 'settings.site.newIntegration.edit' | translate }}</h3>
+  <h3 *ngIf="!isEditIntegration" class="modal-title">{{ 'settings.site.newIntegration.title' | translate }}</h3>
+  <h3 *ngIf="isEditIntegration" class="modal-title">{{ 'settings.site.newIntegration.edit' | translate }}</h3>
 </div>
 <div class="modal-body">
   <div class="integration-switcher-wr" *ngIf="!isEditIntegration">
     <h5>{{ 'settings.site.newIntegration.description' | translate }}</h5>
-    <div class="integration-select-mode btn-group">
+    <div class="btn-group">
       <span
         class="btn btn-default"
         [class.active]="tab ==='NEW'"
         (click)="setIntegrationType('NEW')"
-      >{{ 'settings.site.newIntegration.tabs.new' | translate }}</span>
+      >
+        {{ 'settings.site.newIntegration.tabs.new' | translate }}
+      </span>
       <span
         class="btn btn-default"
         [class.active]="tab ==='COPY'"
         (click)="setIntegrationType('COPY')"
-      >{{ 'settings.site.newIntegration.tabs.copy' | translate }}</span>
+      >
+        {{ 'settings.site.newIntegration.tabs.copy' | translate }}
+      </span>
     </div>
   </div>
   <div class="integration-tab">
     <div *ngIf="integrationIsOnProgress" class="integration-tab-inner-loading-state"></div>
-    <div class="integration-tab-inner">
+    <div>
       <div *ngIf="tab ==='NEW'">
         <div class="integration-tab-item">
           <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
@@ -36,11 +40,11 @@
               <span
                 *ngIf="!currentIntegrationService.type"
                 class="dropdown-selected-cropp"
-              >{{defIntegrationServiceName}}</span>
+              >{{ defIntegrationServiceName }}</span>
               <span
                 *ngIf="currentIntegrationService.type"
                 class="dropdown-selected-cropp integration-selector-item {{currentIntegrationService.type}}"
-              >{{currentIntegrationService.name}}</span>
+              >{{ currentIntegrationService.name }}</span>
             </button>
             <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
               <span class="integration-selector-group">{{ 'settings.site.tabs.group.email' | translate }}</span>
@@ -48,7 +52,7 @@
                 *ngFor="let item of integrationServices | filterBy: { group: 'mailing' }"
                 (click)="changeCurrentIntegrationService(item)"
               >
-                <a class="integration-selector-item {{item.type}}">
+                <a class="dropdown-item integration-selector-item {{item.type}}">
                   {{item.name || defIntegrationServiceName}} <span
                   *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
                 </a>
@@ -58,7 +62,7 @@
                 *ngFor="let item of integrationServices | filterBy: { group: 'CRM' }"
                 (click)="changeCurrentIntegrationService(item)"
               >
-                <a class="integration-selector-item {{item.type}}">
+                <a class="dropdown-item integration-selector-item {{item.type}}">
                   {{item.name || defIntegrationServiceName}} <span
                   *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
                 </a>
@@ -68,7 +72,7 @@
                 *ngFor="let item of integrationServices | filterBy: { group: 'notification' }"
                 (click)="changeCurrentIntegrationService(item)"
               >
-                <a class="integration-selector-item {{item.type}}">
+                <a class="dropdown-item integration-selector-item {{item.type}}">
                   {{item.name || defIntegrationServiceName}} <span
                   *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
                 </a>
@@ -78,7 +82,7 @@
                 *ngFor="let item of integrationServices | filterBy: { group: 'others' }"
                 (click)="changeCurrentIntegrationService(item)"
               >
-                <a class="integration-selector-item {{item.type}}">
+                <a class="dropdown-item integration-selector-item {{item.type}}">
                   {{item.name || defIntegrationServiceName}} <span
                   *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
                 </a>
@@ -90,7 +94,7 @@
           *ngIf="currentIntegrationService.type"
           [href]="currentIntegrationService.helpUrl"
           target="_blank"
-          class="integration-help-link help-link-add-code-to-site"
+          class="integration-help-link"
         >{{ 'settings.site.newIntegration.instruction' | translate }}</a>
         <div class="integration-tab-item">
           <label for="getResponseName" class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>
@@ -185,10 +189,10 @@
           </div>
         </div>
 
-        <div class="integration-tab-item m-b-none">
-          <div class="integration-item__switcher">
+        <div class="integration-tab-item mb-0">
+          <div class="d-flex">
             <ui-switch size="small" [checked]="newCurrentIntegration.default"></ui-switch>
-            <label class="control-label">
+            <label class="control-label ml-2">
               {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
               <a data-toggle="tooltip"
                  data-placement="top"
@@ -202,7 +206,7 @@
       </div>
 
       <div *ngIf="tab ==='COPY'">
-        <div class="integration-tab-item margined-top-30" *ngIf="!sites.length">
+        <div class="integration-tab-item p-5" *ngIf="!sites.length">
           <h4 class="f-2 text-center">{{ 'settings.site.newIntegration.create.copy.noSites' | translate }}</h4>
         </div>
 
@@ -223,7 +227,7 @@
           <label class="control-label">{{ 'settings.site.newIntegration.donorSite' | translate }}</label>
           <div class="dropdown site-selector">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              <span class="dropdown-selected-cropp" style="max-width:90%">{{currentIntegrationSite.name || defIntegrationSiteName}}</span>
+              <span class="dropdown-selected-cropp" style="max-width:90%">{{ currentIntegrationSite.name || defIntegrationSiteName }}</span>
             </button>
             <ul class="dropdown-menu dropdown-integration-max-240h">
               <li *ngFor="let site of sites" (click)="changeCurrentIntegrationSite(site)">
@@ -320,17 +324,17 @@
             </ul>
           </div>
         </div>
-        <div *ngIf="currentIntegrationSiteService.type" class="integration-tab-item m-b-none">
-          <div class="integration-item__switcher">
+        <div *ngIf="currentIntegrationSiteService.type" class="integration-tab-item mb-0">
+          <div class="d-flex">
             <ui-switch size="small" [checked]="currentIntegrationSiteService.default"></ui-switch>
-            <label class="control-label">
+            <label class="control-label ml-2">
               {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
               <a data-toggle="tooltip"
                  data-placement="top"
                  data-container="body"
                  title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
-                 class="info-link"
-              ><i class="fa fa-info-circle"></i></a>
+                 class="info-link"><i class="fa fa-info-circle"></i>
+              </a>
             </label>
           </div>
         </div>
@@ -561,16 +565,16 @@
         </div>
 
         <div class="integration-tab-item m-b-none">
-          <div class="integration-item__switcher">
+          <div class="d-flex">
             <ui-switch size="small" [checked]="editableIntegration.default"></ui-switch>
-            <label class="control-label">
+            <label class="control-label ml-2">
               {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
               <a data-toggle="tooltip"
                  data-placement="top"
                  data-container="body"
                  title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
-                 class="info-link"
-              ><i class="fa fa-info-circle"></i></a>
+                 class="info-link"><i class="fa fa-info-circle"></i>
+              </a>
             </label>
           </div>
         </div>
@@ -578,10 +582,9 @@
     </div>
   </div>
 </div>
-<div class="modal-footer">
-  <div class="text-right m-t-xs">
+<div class="modal-footer d-flex justify-content-between mt-1">
     <button
-      class="btn btn-default floated-left"
+      class="btn btn-default"
       (click)="closeModal()"
     >
       {{ 'global.cancel' | translate }}
@@ -604,5 +607,4 @@
     >
       {{ 'global.save' | translate }}
     </button>
-  </div>
 </div>

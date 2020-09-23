@@ -23,6 +23,17 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     $(this.menu.nativeElement).metisMenu();
+    this.loadScript('https://cdn.leadgenic.ru/production/lg_widgets_l11/popup/lgwg_popup_frame.js');
+  }
+
+  private loadScript(url: string): void {
+    const body = document.body as HTMLDivElement;
+    const script = document.createElement('script');
+    script.innerHTML = '';
+    script.src = url;
+    script.async = false;
+    script.defer = true;
+    body.appendChild(script);
   }
 
 }

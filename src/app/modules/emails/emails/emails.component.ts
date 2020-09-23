@@ -191,7 +191,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
   }
 
   private getSites() {
-    this.translate.get('crm.page.filter.sites.all').subscribe((translation: string) => {
+    this.translate.get('crm.page.filter.sites').subscribe((translation: string) => {
       this.allSites = [{
         id: this.ALL_SITE_ID,
         name: translation

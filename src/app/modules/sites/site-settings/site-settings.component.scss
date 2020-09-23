@@ -66,12 +66,6 @@ h4.site-settings-h4-text {
   font-weight: normal;
 }
 
-span.validate {
-  color: #a94442;
-  font-size: 10px;
-  display: none;
-}
-
 .has-error span.validate {
   display: block;
 }
@@ -82,11 +76,6 @@ span.validate {
   padding: 0 0.2rem;
   position: absolute;
   color: #fff;
-}
-
-a.info-link {
-  color: #34495e;
-  font-size: 16px;
 }
 
 .buttons {
@@ -115,12 +104,6 @@ p.small {
 .form-control.not-readonly-hand[readonly] {
   font-size: 14px;
   cursor: pointer;
-}
-
-.help-link-add-code-to-site {
-  color: #6a6c6f;
-  font-size: 85%;
-  float: right;
 }
 
 .mail-sync-panel {

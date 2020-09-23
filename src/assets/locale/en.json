@@ -69,11 +69,6 @@
 		}
 	},
 	"containerized": {
-		"container": {
-			"add": {
-				"name": ""
-			}
-		},
 		"title": ""
 	},
 	"coupons": {
@@ -175,10 +170,7 @@
 			},
 			"filter": {
 				"period": "",
-				"sites": {
-					"all": "",
-					"placeholder": ""
-				},
+				"sites": "",
 				"states": {
 					"all": "",
 					"placeholder": "",
@@ -355,7 +347,6 @@
 				"title": "",
 				"tooltip": ""
 			},
-			"helplinktext": "",
 			"title": ""
 		},
 		"site": {
@@ -374,13 +365,16 @@
 			"newIntegration": {
 				"add": "",
 				"apikey": "",
+				"choseIntegrationService": "",
 				"create": {
 					"book": "",
 					"campaignId": "",
 					"copy": {
 						"noSites": ""
 					},
+					"created": "",
 					"email": "",
+					"error": "",
 					"host": "",
 					"id": "",
 					"listId": "",
@@ -400,7 +394,8 @@
 					"copy": "",
 					"new": ""
 				},
-				"title": ""
+				"title": "",
+				"updated": ""
 			},
 			"settings": {
 				"domain": {

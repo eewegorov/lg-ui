@@ -23,26 +23,26 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public IntegrationTypes = IntegrationTypes;
   public item;
   public sites = [];
-  public defIntegrationServiceName;
+  public defIntegrationServiceName = '';
+  public defIntegrationSiteName = '';
   public currentIntegrationService = {} as IntegrationService;
   public newCurrentIntegration = { default: true } as IntegrationItem;
   public currentIntegrationSite = {} as IntegrationItem;
-  public defIntegrationSiteName;
   public currentIntegrationSiteService = { default: true } as IntegrationItem;
-  public editableIntegration = {} as IntegrationItem;
+  public editableIntegration;
   public editableIntegrationServiceName;
   public isEditIntegration;
   public tab = 'NEW';
   public integrationIsOnProgress = false;
   public integrationServices;
-  public getResponseParams;
-  public mailchimpUniParams;
-  public sendPBParams;
-  public bitrixParams;
-  public amoParams;
-  public emailParams;
-  public roistatParams;
-  public currentIntegrationSiteServiceClone;
+  public getResponseParams = { code: '', campaignId: '' };
+  public mailchimpUniParams = { code: '', listId: '' };
+  public sendPBParams = { id: '', secret: '', book: '' };
+  public bitrixParams = { host: '', login: '', password: '' };
+  public amoParams = { subdomain: '', login: '', hash: '' };
+  public emailParams = { email: '' };
+  public roistatParams = { url: '' };
+  public currentIntegrationSiteServiceClone = {} as IntegrationItem;
   public integrationSitesLoading = false;
   public integrationSiteServicesCRM;
   public integrationSiteServicesMailing;
@@ -60,9 +60,13 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     this.isEditIntegration = !!this.integrationId;
+    this.defIntegrationServiceName = this.translate.instant('settings.site.newIntegration.choseIntegrationService');
+    this.defIntegrationSiteName = this.translate.instant('widgetsList.add.chooseSite');
+
     this.integrationServices = this.sitesService.getIntegrationServicesList();
     if (this.isEditIntegration) {
       this.tab = 'EDIT';
+      this.editableIntegration = {};
       this.sitesService.getSiteIntegration(this.siteId, this.integrationId).subscribe((response: IntegrationItem) => {
         this.editableIntegration = response;
         this.editableIntegrationServiceName = this.sitesService.getCorrectNameByType(response.type);
@@ -134,7 +138,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
           this.toastr.success(this.translate.instant('settings.site.newIntegration.create.created'), this.translate.instant('global.done'));
           this.finishResponseProcess(true, response);
         } else {
-          this.toastr.error(this.translate.instant('settings.site.newIntegration.create.error.notvalid'), this.translate.instant('global.error'));
+          this.toastr.error(this.translate.instant('settings.site.newIntegration.create.error'), this.translate.instant('global.error'));
           this.finishResponseProcess(false);
         }
       });
@@ -198,7 +202,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
           this.toastr.success(this.translate.instant('settings.site.newIntegration.create.created'), this.translate.instant('global.done'));
           this.finishResponseProcess(true, response);
         } else {
-          this.toastr.error(this.translate.instant('settings.site.newIntegration.create.error.notvalid'), this.translate.instant('global.error'));
+          this.toastr.error(this.translate.instant('settings.site.newIntegration.create.error'), this.translate.instant('global.error'));
           this.finishResponseProcess(false);
         }
       });
@@ -244,10 +248,10 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
       this.siteId, this.editableIntegration.id, this.editableIntegration
     ).subscribe((response: boolean) => {
       if (response) {
-        this.toastr.success(this.translate.instant('settings.site.newIntegration.update.updated'), this.translate.instant('global.done'));
+        this.toastr.success(this.translate.instant('settings.site.newIntegration.updated'), this.translate.instant('global.done'));
         this.finishResponseProcess(true);
       } else {
-        this.toastr.error(this.translate.instant('settings.site.newIntegration.create.error.notvalid'), this.translate.instant('global.error'));
+        this.toastr.error(this.translate.instant('settings.site.newIntegration.create.error'), this.translate.instant('global.error'));
         this.finishResponseProcess(false);
       }
     });

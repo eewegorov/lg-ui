@@ -22,7 +22,7 @@
               multiple="true"
               appendTo="body"
               [items]="allSites"
-              [placeholder]="'crm.page.filter.sites.placeholder' | translate"
+              [placeholder]="'widgetsList.add.chooseSite' | translate"
               [(ngModel)]="sitesIds"
               (add)="checkFilters($event)"
               (change)="timeoutFiltering()"

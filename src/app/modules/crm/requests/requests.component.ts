@@ -117,7 +117,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
 
   private getSites() {
     const notificationOffCookie = this.cookieService.get('lgwg-notification-off');
-    this.translate.get('crm.page.filter.sites.all').subscribe((translation: string) => {
+    this.translate.get('crm.page.filter.sites').subscribe((translation: string) => {
       this.allSites = [{
         id: this.ALL_SITE_ID,
         name: translation
