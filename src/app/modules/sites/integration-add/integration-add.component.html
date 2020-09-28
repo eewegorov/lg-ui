@@ -231,7 +231,7 @@
             </button>
             <ul class="dropdown-menu dropdown-integration-max-240h">
               <li *ngFor="let site of sites" (click)="changeCurrentIntegrationSite(site)">
-                <a>{{site.name}}</a>
+                <a class="dropdown-item">{{site.name}}</a>
               </li>
             </ul>
           </div>
@@ -251,13 +251,13 @@
                 *ngIf="!currentIntegrationSiteService.type"
                 class="dropdown-selected-cropp"
               >
-                {{defIntegrationServiceName}}
+                {{ defIntegrationServiceName }}
               </span>
               <span
                 *ngIf="currentIntegrationSiteService.type"
-                class="dropdown-selected-cropp integration-selector-item {{currentIntegrationSiteService.type}}"
+                class="dropdown-selected-cropp integration-selector-item {{ currentIntegrationSiteService.type }}"
               >
-                {{currentIntegrationSiteService.name}}
+                {{ currentIntegrationSiteService.name }}
               </span>
             </button>
             <ul class="dropdown-menu dropdown-integration-max-240h">
@@ -271,8 +271,8 @@
                 *ngFor="let item of integrationSiteServicesCRM"
                 (click)="changeCurrentIntegrationSiteService(item)"
               >
-                <a class="integration-selector-item {{item.type}}">
-                  {{item.name || defIntegrationServiceName}} <span
+                <a class="dropdown-item integration-selector-item {{ item.type }}">
+                  {{ item.name || defIntegrationServiceName }} <span
                   *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
                 </a>
               </li>
@@ -286,8 +286,8 @@
                 *ngFor="let item of integrationSiteServicesMailing"
                 (click)="changeCurrentIntegrationSiteService(item)"
               >
-                <a class="integration-selector-item {{item.type}}">
-                  {{item.name || defIntegrationServiceName}} <span
+                <a class="dropdown-item integration-selector-item {{ item.type }}">
+                  {{ item.name || defIntegrationServiceName }} <span
                   *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
                 </a>
               </li>
@@ -301,8 +301,8 @@
                 *ngFor="let item of integrationSiteServicesNotifications"
                 (click)="changeCurrentIntegrationSiteService(item)"
               >
-                <a class="integration-selector-item {{item.type}}">
-                  {{item.name || defIntegrationServiceName}} <span
+                <a class="dropdown-item integration-selector-item {{ item.type }}">
+                  {{ item.name || defIntegrationServiceName }} <span
                   *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
                 </a>
               </li>
@@ -316,8 +316,8 @@
                 *ngFor="let item of integrationSiteServicesOthers"
                 (click)="changeCurrentIntegrationSiteService(item)"
               >
-                <a class="integration-selector-item {{item.type}}">
-                  {{item.name || defIntegrationServiceName}} <span
+                <a class="dropdown-item integration-selector-item {{ item.type }}">
+                  {{ item.name || defIntegrationServiceName }} <span
                   *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
                 </a>
               </li>
@@ -341,9 +341,9 @@
       </div>
 
       <div *ngIf="tab === 'EDIT'">
-        <div class="integration-tab-item integration-tab-item-flex" style="margin-top: 15px">
+        <div class="integration-tab-item d-flex" style="margin-top: 15px">
           <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
-          <div class="integration-edit-service {{editableIntegration.type}}">{{editableIntegrationServiceName}}</div>
+          <div class="integration-edit-service {{ editableIntegration.type }}">{{ editableIntegrationServiceName }}</div>
         </div>
         <div class="integration-tab-item">
           <label for="editableIntegrationName" class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>

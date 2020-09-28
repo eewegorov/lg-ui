@@ -130,8 +130,12 @@ h6 {
   color: #262626;
 }
 
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
 .dropdown-item:active {
-  background-color: #ddd;
+  background-color: #ccc;
 }
 
 .title-main {
