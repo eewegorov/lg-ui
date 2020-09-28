@@ -55,9 +55,9 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
     private location: Location,
     private translate: TranslateService,
     private modalService: NgbModal,
+    private binsDataService: BinsDataService,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService,
-    private binsDataService: BinsDataService,
     private sitesService: SitesService,
     private abTestsService: AbtestsService
   ) { }
@@ -130,7 +130,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    (<any>$('[data-toggle="tooltip"]')).tooltip();
+    ($('[data-toggle="tooltip"]') as any).tooltip();
   }
 
   private initSites() {
@@ -377,7 +377,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
     this.fixedTest = test;
   }
 
-  public getSiteName(siteId) {
+  public getSiteName(siteId: string): string {
     const site = this.getSiteById(siteId);
     if (site != null) {
       return site.name;
@@ -386,7 +386,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  public getCroppedString(str, count, addedSymbol) {
+  public getCroppedString(str: string, count: number, addedSymbol: string): string {
     if (str.length > count) {
       return str.substring(0, count) + addedSymbol;
     }
@@ -681,7 +681,8 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
     }
 
     if (test && typeof test.etalonConversion !== 'undefined') {
-      variant.convInfo.betterTo = test.etalonConversion !== 0 ? (((variant.convInfo.convNumber - test.etalonConversion) / test.etalonConversion) * 100) : 0;
+      variant.convInfo.betterTo =
+        test.etalonConversion !== 0 ? (((variant.convInfo.convNumber - test.etalonConversion) / test.etalonConversion) * 100) : 0;
       variant.convInfo.betterTo = Math.round(variant.convInfo.betterTo * 100) / 100;
     }
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
-  Abtest,
+  Abtest, AbtestArchive, AbtestsArchiveResponse,
   AbtestsResponse, AbtestStatistics,
   AbtestStatisticsResponse,
   CloneVariantResponse,
@@ -95,9 +95,9 @@ export class AbtestsService {
     );
   }
 
-  public getArchTests(): Observable<Abtest[]> {
+  public getArchTests(): Observable<AbtestArchive[]> {
     return this.abtestsApiService.getArchTests().pipe(
-      map((response: AbtestsResponse) => response.data),
+      map((response: AbtestsArchiveResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }

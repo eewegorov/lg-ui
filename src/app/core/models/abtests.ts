@@ -56,3 +56,34 @@ export interface NewVariant extends Variant {
   conversions: string[];
   etalon: boolean;
 }
+
+export interface AbtestsArchiveResponse extends ApiResponse {
+  data: AbtestArchive[];
+}
+
+export interface AbtestArchive {
+  id: string;
+  name: string;
+  description: string;
+  siteId: string;
+  variants: VariantArchiveExtended[];
+}
+
+export interface AbtestArchiveExtended extends AbtestArchive{
+  etalonConversion: number;
+}
+
+export interface VariantArchive {
+  widgetId: string;
+  name: string;
+  shows: number;
+  target: number;
+  winner: boolean;
+  etalon: boolean;
+}
+
+export interface VariantArchiveExtended extends VariantArchive {
+  conversion: string;
+  convNumber: number;
+  betterTo: number;
+}

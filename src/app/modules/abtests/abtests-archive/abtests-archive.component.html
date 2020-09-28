@@ -1,6 +1,6 @@
 <div class="flex-column toolbar-content">
-  <h1 class="title-main">{{ 'abtests.archive.title' | translate }}</h1>
-  <div class="wrapper-test wrapper-test-archive">
+  <h1 class="title-main pl-1">{{ 'abtests.archive.title' | translate }}</h1>
+  <div class="wrapper-test">
     <div *ngIf="abTests.length" class="wrapper-test-header">
       <div class="wrapper-test-filter-sites">
         <div class="row ml-0"><h5>{{ 'abtests.show' | translate }}:</h5></div>
@@ -8,10 +8,10 @@
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <span *ngIf="currSite.trim().length==0">{{ 'widgetsList.add.chooseSite' | translate }}</span>
             {{ getCroppedString(getSiteName(currSite), 30, '…') }}
-            <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <li *ngFor="let site of sites" (click)="setCurrSite(site)"><a href="#">{{ site.name }}</a>
+            <li *ngFor="let site of sites" (click)="setCurrSite(site)">
+              <a class="dropdown-item">{{ site.name }}</a>
             </li>
           </ul>
         </div>
@@ -20,7 +20,7 @@
 
     <div class="main-content-container-ab-loader" *ngIf="!isLoad"></div>
 
-    <div *ngIf="!abTests.length" class="mt-4">
+    <div *ngIf="!abTests.length && isLoad" class="mt-4">
       <h3 class="f-0 text-center">{{ 'abtests.archive.completed' | translate }}</h3>
     </div>
     <ng-container *ngIf="isLoad">
@@ -28,21 +28,21 @@
         <div class="test-item-header">
           <div class="test-item-left">
             <div class="max-edit-text-bl">
-              <span class="test-item-name">{{ test.name || 'abtests.archive.noTitle' | translate }}</span>
+              <span class="test-item-name">{{ test.name || ('abtests.archive.noTitle' | translate) }}</span>
             </div>
             <div class="max-edit-text-bl">
-              <span class="test-item-desc">{{ test.description || 'abtests.archive.noDescription' | translate }}</span>
+              <span class="test-item-desc">{{ test.description || ('abtests.archive.noDescription' | translate) }}</span>
             </div>
           </div>
           <div class="test-item-right">
             <div class="btn-group">
               <button
-                class="btn btn-xs btn-default"
+                class="btn btn-sm btn-default"
                 (click)="deleteArchTest(test.id, i)"
                 data-container="body"
                 data-toggle="tooltip"
                 data-placement="top"
-                title="{{ 'abtests.archive.noTitle' | translate }}"
+                title="{{ 'abtests.archive.delete' | translate }}"
               >
                 <i class="fa fa-trash"></i>
               </button>

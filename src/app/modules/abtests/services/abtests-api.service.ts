@@ -7,7 +7,7 @@ import {
   AbtestsResponse,
   UpdateAbtest,
   CloneVariantResponse,
-  AbtestStatisticsResponse
+  AbtestStatisticsResponse, AbtestsArchiveResponse
 } from '../../../core/models/abtests';
 
 
@@ -58,11 +58,11 @@ export class AbtestsApiService {
     return this.http.post<ApiResponse>(`${ environment.url }/abtests/${id}/clear`, null);
   }
 
-  public getArchTests(): Observable<AbtestsResponse> {
-    return this.http.get<AbtestsResponse>(`${ environment.url }/abtests/archives`);
+  public getArchTests(): Observable<AbtestsArchiveResponse> {
+    return this.http.get<AbtestsArchiveResponse>(`${ environment.url }/abtestsarchives`);
   }
 
   public deleteArchTest(id: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${ environment.url }/abtests/archives/${id}`);
+    return this.http.delete<ApiResponse>(`${ environment.url }/abtestsarchives/${id}`);
   }
 }
