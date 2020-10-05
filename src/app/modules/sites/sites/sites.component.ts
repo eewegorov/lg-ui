@@ -35,6 +35,9 @@ export class SitesComponent implements OnInit, OnDestroy {
         windowClass: 'animate__animated animate__slideInDown animate__faster'
       });
     modalRef.componentInstance.hidePhone = this.hidePhoneFieldInModal;
+    modalRef.componentInstance.updateSites.subscribe(() => {
+      this.getSites();
+    });
   }
 
   private getMeInfo() {

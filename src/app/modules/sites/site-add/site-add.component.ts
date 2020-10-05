@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SubscriptionLike } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ApiResponse } from '../../../core/models/api';
-import { CreateSiteData } from '../../../core/models/sites';
+import { CreateSiteData, Smartpoints } from '../../../core/models/sites';
 import { UserService } from '../../user/services/user.service';
 import { SitesService } from '../services/sites.service';
+import { WidgetService } from '../../widgets/services/widget.service';
 
 
 @Component({
@@ -16,10 +16,12 @@ import { SitesService } from '../services/sites.service';
 })
 export class SiteAddComponent implements OnInit {
   @Input() public hidePhone: boolean;
+  @Output() public updateSites = new EventEmitter<boolean>();
   public newSiteForm: FormGroup;
-  public createdSite: CreateSiteData;
-  public tab = 1;
+  public createdSite = {} as CreateSiteData;
+  public tab = 2;
   public isUrlInvalid = false;
+  public smartPoints = {} as Smartpoints;
   private createSiteSub: SubscriptionLike;
 
 
@@ -36,26 +38,30 @@ export class SiteAddComponent implements OnInit {
   public createSite() {
     const newSiteData = Object.assign({}, this.newSiteForm.getRawValue());
     delete newSiteData.phone;
-    this.createSiteSub = this.sitesService.createSite(newSiteData).pipe(
+    console.log('aaa')
+    /*this.createSiteSub = this.sitesService.createSite(newSiteData).pipe(
       switchMap(
-        (response: CreateSiteData) => {
+        (response: CreateSiteData) => {*/
+          const response = {"id":"5a60c3891185132fa781",
+            "link":"https://gate.leadgenic.ru/getscript?site=5a60c3891185132fa781"};
           this.createdSite = {
             id: response.id,
             link: this.sitesService.generatePath(response.link),
           };
-          if (this.newSiteForm.controls.phone.value) {
+          /*if (this.newSiteForm.controls.phone.value) {
             return this.userService.savePhone({ phone: this.newSiteForm.controls.phone.value });
-          }
-        })
+          }*/
+        /*})
     ).subscribe(
-      (response: ApiResponse) => {
+      () => {*/
         this.tab = 2;
-      },
+        this.updateSites.emit(true);
+      /*},
       error => {
         console.log(error);
         this.isUrlInvalid = true;
       }
-    );
+    );*/
   }
 
   public enableTyping(): void {
@@ -64,6 +70,17 @@ export class SiteAddComponent implements OnInit {
 
   public closeModal(): void {
     this.activeModal.close();
+  }
+
+  public setTab(newTab) {
+    if (newTab === 3) {
+      this.sitesService.getSiteSmartpointsList(this.createdSite.id).subscribe((response: Smartpoints) => {
+        this.smartPoints = response;
+        this.tab = newTab;
+      });
+    } else {
+      this.tab = newTab;
+    }
   }
 
   private resetForm() {

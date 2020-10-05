@@ -134,3 +134,19 @@ export interface IntegrationService {
   isPayment: boolean;
 }
 
+export interface SmartpointsResponse extends ApiResponse {
+  data: Smartpoints;
+}
+
+export interface Smartpoints {
+  enabled: boolean;
+  list: Smartpoint[];
+}
+
+export interface Smartpoint {
+  enabled: boolean;
+  autoinvite: boolean;
+  pos: string;
+  type: string;
+}
+

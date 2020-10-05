@@ -8,7 +8,7 @@ import {
   CreateSiteResponse, UpdateIntegrationRequest, IntegrationResponse, IntegrationsResponse, SiteSettings,
   SiteSettingsResponse, SiteShortResponse,
   SitesResponse,
-  SitesShortResponse, CloneIntegrationRequest, CreateIntegrationRequest
+  SitesShortResponse, CloneIntegrationRequest, CreateIntegrationRequest, SmartpointsResponse
 } from '../../../core/models/sites';
 
 
@@ -75,6 +75,10 @@ export class SitesApiService {
 
   public deleteSiteIntegration(siteId: string, integrationId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}`);
+  }
+
+  public getSiteSmartpointsList(siteId: string): Observable<SmartpointsResponse> {
+    return this.http.get<SmartpointsResponse>(`${ environment.url }/sites/${siteId}/smartpoints`);
   }
 
 }

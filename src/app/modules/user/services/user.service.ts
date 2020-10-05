@@ -25,8 +25,9 @@ export class UserService {
     );
   }
 
-  public savePhone(data: Phone): Observable<ApiResponse> {
+  public savePhone(data: Phone): Observable<boolean> {
     return this.coreApiService.savePhone(data).pipe(
+      map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
     );
   }

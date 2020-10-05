@@ -17,7 +17,7 @@ import {
   SiteShort,
   SiteShortResponse,
   SitesResponse,
-  SitesShortResponse,
+  SitesShortResponse, Smartpoints, SmartpointsResponse,
   UpdateIntegrationRequest
 } from '../../../core/models/sites';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
@@ -138,6 +138,13 @@ export class SitesService {
   public deleteSiteIntegration(siteId: string, integrationId: string): Observable<boolean> {
     return this.sitesApiService.deleteSiteIntegration(siteId, integrationId).pipe(
       map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getSiteSmartpointsList(siteId: string): Observable<Smartpoints> {
+    return this.sitesApiService.getSiteSmartpointsList(siteId).pipe(
+      map((response: SmartpointsResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }
