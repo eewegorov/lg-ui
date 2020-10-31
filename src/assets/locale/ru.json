@@ -178,7 +178,11 @@
 					"placeholder": "Выберите статус",
 					"title": "Статусы"
 				},
-				"title": "Фильтр заявок"
+				"title": "Фильтр лидов",
+				"widgets": {
+					"all": "Все виджеты",
+					"placeholder": "Выберите виджет"
+				}
 			},
 			"notification": {
 				"btn": "Понятно",
@@ -485,7 +489,7 @@
 		"abtests-active": "Активные тесты",
 		"abtests-archive": "Архив тестов",
 		"coupons": "Купоны",
-		"crm": "Заявки",
+		"crm": "Лиды",
 		"emails": "Email адреса",
 		"help": "Поддержка",
 		"sites": "Сайты",

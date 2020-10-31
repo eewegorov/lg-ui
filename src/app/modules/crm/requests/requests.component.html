@@ -19,7 +19,7 @@
               [items]="allSites"
               [placeholder]="'widgetsList.add.chooseSite' | translate"
               [(ngModel)]="sitesIds"
-              (add)="checkFilters($event, true)"
+              (add)="checkFilters($event, 'sites')"
               (change)="timeoutFiltering(false)"
             ></ng-select>
           </div>
@@ -92,6 +92,22 @@
           </div>
 
           <div class="filter-flexed__item">
+            <h5 class="font-normal">{{ 'sidebar.widgets' | translate }}:</h5>
+            <ng-select
+              id="widgetsSelector"
+              bindValue="id"
+              bindLabel="name"
+              appendTo="body"
+              multiple="true"
+              [items]="allWidgets"
+              [placeholder]="'crm.page.filter.widgets.placeholder' | translate"
+              [(ngModel)]="widgetsIds"
+              (add)="checkFilters($event, 'widgets')"
+              (change)="timeoutFiltering(false)"
+            ></ng-select>
+          </div>
+
+          <div class="filter-flexed__item">
             <h5 class="font-normal">{{ 'crm.page.filter.states.title' | translate }}:</h5>
             <ng-select
               id="statesSelector"
@@ -102,7 +118,7 @@
               [items]="states"
               [placeholder]="'crm.page.filter.states.placeholder' | translate"
               [(ngModel)]="statesIds"
-              (add)="checkFilters($event, false)"
+              (add)="checkFilters($event, 'states')"
               (change)="timeoutFiltering(false)"
             ></ng-select>
           </div>

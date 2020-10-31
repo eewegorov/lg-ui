@@ -30,6 +30,8 @@
 		},
 		"archive": {
 			"completed": "",
+			"delete": "",
+			"noDescription": "",
 			"noTitle": "",
 			"title": ""
 		},
@@ -176,7 +178,11 @@
 					"placeholder": "",
 					"title": ""
 				},
-				"title": ""
+				"title": "",
+				"widgets": {
+					"all": "",
+					"placeholder": ""
+				}
 			},
 			"notification": {
 				"btn": "",

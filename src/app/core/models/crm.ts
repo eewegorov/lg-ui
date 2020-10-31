@@ -18,6 +18,17 @@ export interface Lead {
   comment: string;
 }
 
+export interface LeadRequest {
+  orders: string;
+  limit: number;
+  offset: number;
+  dateFrom: number;
+  dateTo: number;
+  siteId?: string;
+  widgetName?: string;
+  state?: string;
+}
+
 export interface LeadByIdResponse extends ApiResponse {
   data: LeadById;
 }
@@ -73,6 +84,21 @@ export interface StateWithIndex {
 
 export interface UpdateComment {
   comment: string;
+}
+
+export interface LeadsWidgetsResponse extends ApiResponse {
+  data: LeadWidgets[];
+}
+
+export interface LeadWidgets {
+  id: string;
+  name: string;
+  widgets: LeadWidget[];
+}
+
+export interface LeadWidget {
+  id: string;
+  name: string;
 }
 
 export enum Periods {

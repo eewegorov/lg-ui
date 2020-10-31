@@ -7,7 +7,7 @@ import {
   LeadById,
   LeadByIdResponse,
   LeadByIdWithIndex,
-  LeadsResponse,
+  LeadsResponse, LeadsWidgetsResponse, LeadWidgets,
   StateWithIndex,
   UpdateComment,
   UpdateState
@@ -55,6 +55,13 @@ export class CrmService {
   public updateLeadComment(leadId: string, comment: UpdateComment): Observable<boolean> {
     return this.crmApiService.updateLeadComment(leadId, comment).pipe(
       map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    )
+  }
+
+  public getLeadFilters(): Observable<LeadWidgets[]> {
+    return this.crmApiService.getLeadsFilters().pipe(
+      map((response: LeadsWidgetsResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     )
   }

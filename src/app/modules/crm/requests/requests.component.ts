@@ -6,7 +6,7 @@ import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import * as moment from 'moment';
 import { SiteShort } from '../../../core/models/sites';
-import { Lead, Periods, StateWithIndex } from '../../../core/models/crm';
+import { Lead, LeadRequest, Periods, StateWithIndex } from '../../../core/models/crm';
 import { UserService } from '../../user/services/user.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { CrmService } from '../services/crm.service';
@@ -23,10 +23,11 @@ export class RequestsComponent implements OnInit, OnDestroy {
   public periodStart: Date;
   public periodEnd: Date;
   public periodType = 'WEEK';
-
   public allSites = [];
+  public allWidgets = [];
   public states = [];
   public sitesIds = [];
+  public widgetsIds = [];
   public statesIds = [];
   public leads: Lead[] = [{
     id: '4b7e89b0b224669bcb5f1bf53d2bf71a',
@@ -112,6 +113,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
     /*this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
       this.userId = response.id;*/
       this.getSites();
+      this.getFilters();
     /*});*/
   }
 
@@ -140,10 +142,50 @@ export class RequestsComponent implements OnInit, OnDestroy {
         "trial": true
       }]; // удалить статику и раскомментировать подписку
         this.sitesService.sites = response;
-        this.allSites = this.allSites.concat(response);
         if (notificationOffCookie !== this.userId && this.isTrialSites(response)) {
           this.isNotificationEnable = true;
         }
+      /*});*/
+    });
+  }
+
+  private getFilters() {
+    this.translate.get('crm.page.filter.widgets.all').subscribe((translation: string) => {
+      this.allWidgets = [{
+        id: this.ALL_SITE_ID,
+        name: translation
+      }];
+      this.widgetsIds = [this.ALL_SITE_ID];
+      /*this.crmService.getSitesFilters().subscribe((response: LeadWidgets[]) => {*/
+      const response = [{
+        "id": "8424d5434e646da8bea2af85cd425d37",
+        "name": "This is another site",
+        "widgets": [
+          {
+            "id": "ec51425b57722d47d4d086c07ca2bea4",
+            "name": "Site 2 Widget 2"
+          }
+        ]
+      },
+        {
+          "id": "cd5a8465ca12cc69d603317fe463e377",
+          "name": "Yet another site",
+          "widgets": [
+            {
+              "id": "68aae9e38a885a9f9023e5f16affe05b",
+              "name": "Ambulance widget"
+            },
+            {
+              "id": "cc98a926cbf246b375d2bb508e396492",
+              "name": "This is widget 1"
+            }
+          ]
+        }]; // удалить статику и раскомментировать подписку
+
+      this.allSites = this.allSites.concat(response);
+      response.forEach(site =>
+        site.widgets.forEach(widget => this.allWidgets.push(widget))
+      );
       /*});*/
     });
   }
@@ -190,17 +232,21 @@ export class RequestsComponent implements OnInit, OnDestroy {
     }
   }
 
-  public checkFilters(newValue, isSites: boolean) {
+  public checkFilters(newValue, type: 'sites' | 'widgets' | 'states'): void {
     if (newValue.id === this.ALL_SITE_ID) {
-      if (isSites) {
+      if (type === 'sites') {
         this.sitesIds = [this.ALL_SITE_ID];
-      } else {
+      } else if (type === 'widgets') {
+        this.widgetsIds = [this.ALL_SITE_ID];
+      } else if (type === 'states') {
         this.statesIds = [this.ALL_SITE_ID];
       }
     } else {
-      if (isSites) {
+      if (type === 'sites') {
         this.sitesIds = this.sitesIds.filter(item => item !== this.ALL_SITE_ID);
-      } else {
+      } else if (type === 'widgets') {
+        this.widgetsIds = this.widgetsIds.filter(item => item !== this.ALL_SITE_ID);
+      } else if (type === 'states') {
         this.statesIds = this.statesIds.filter(item => item !== this.ALL_SITE_ID);
       }
     }
@@ -227,7 +273,6 @@ export class RequestsComponent implements OnInit, OnDestroy {
   }
 
   public openLeadInfo(lead: Lead, index: number) {
-    console.log(lead)
     /*this.crmService.getLeadById(lead.id).subscribe((response: LeadById) => {
       if (response) {*/
     const response = {
@@ -298,20 +343,35 @@ export class RequestsComponent implements OnInit, OnDestroy {
 
   private getLeads() {
     this.initTables = true;
-    const params = {
+    const params: LeadRequest = {
       orders: this.sortingDesc ? '-date' : 'date',
       limit: this.searchParams.limit.value,
       offset: this.searchParams.offset,
       dateFrom: this.getUNIXTime(this.periodStart),
-      dateTo: this.getUNIXTime(this.getTomorrowCopyDate(this.periodEnd)),
-      siteId: '',
-      state: ''
+      dateTo: this.getUNIXTime(this.getTomorrowCopyDate(this.periodEnd))
     };
+
     if (this.sitesIds.length && this.sitesIds[0] !== this.ALL_SITE_ID) {
       params.siteId = this.sitesIds.join(',');
+
+      this.allWidgets = this.allWidgets.slice(0, 1);
+      this.sitesIds.forEach(site => {
+        const selectedSite = this.allSites.filter(siteWithWidget => siteWithWidget.id === site);
+        selectedSite[0].widgets.forEach(widget => this.allWidgets.push(widget));
+      });
+    } else {
+      this.allWidgets = this.allWidgets.slice(0, 1);
+      this.allSites.slice(1).forEach(site =>
+        site.widgets.forEach(widget => this.allWidgets.push(widget))
+      );
     }
+
     if (this.statesIds.length && this.statesIds[0] !== this.ALL_SITE_ID) {
       params.state = this.statesIds.join(',');
+    }
+
+    if (this.widgetsIds.length && this.widgetsIds[0] !== this.ALL_SITE_ID) {
+      params.widgetName = this.widgetsIds.join(",");
     }
 
     this.crmService.getLeadList(params).pipe(
