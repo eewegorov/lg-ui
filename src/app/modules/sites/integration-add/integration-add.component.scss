@@ -1,3 +1,8 @@
+:host {
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
 .integration-switcher-wr {
   text-align: center;
   margin-bottom: 20px;
@@ -194,4 +199,24 @@ a.integration-help-link:hover, a.integration-help-link:focus {
   position: absolute;
   color: #fff;
   background-color: #f0ad4e;
+}
+
+.integration-settings {
+  overflow-y: auto;
+  max-height: 42vh;
+}
+
+.integration-field-delete {
+  margin-top: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.integration-field-add {
+  font-size: 0.9rem;
+}
+
+.integration-field-add-icon {
+  margin-left: 0.1rem;
+  margin-right: 0.3rem;
+  color: green;
 }

@@ -96,111 +96,161 @@
           target="_blank"
           class="integration-help-link"
         >{{ 'settings.site.newIntegration.instruction' | translate }}</a>
-        <div class="integration-tab-item">
-          <label for="getResponseName" class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>
-          <input type="text" id="getResponseName" [(ngModel)]="newCurrentIntegration.name" class="form-control" name="getResponseName">
-        </div>
 
-        <!-- GETRESPONSE PARAMS -->
-        <div *ngIf="currentIntegrationService.type === IntegrationTypes.GETRESPONSE">
-          <div class="integration-tab-item">
-            <label for="getResponseCode" class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
-            <input type="text" id="getResponseCode" [(ngModel)]="getResponseParams.code" class="form-control" name="getResponseCode">
-          </div>
-          <div class="integration-tab-item">
-            <label for="getResponseCampaignId" class="control-label">{{ 'settings.site.newIntegration.create.campaignId' | translate }}</label>
-            <input type="text" id="getResponseCampaignId" [(ngModel)]="getResponseParams.campaignId" class="form-control" name="getResponseCampaignId">
-          </div>
-        </div>
+        <div *ngIf="currentIntegrationService.type" class="integration-settings mt-2 w-100">
+          <h5>
+            <strong>{{ 'settings.site.tabs.integration.fields.title' | translate }}</strong>
+          </h5>
 
-        <!-- MAILCHIMP PARAMS and UNISENDER -->
-        <div *ngIf="currentIntegrationService.type === IntegrationTypes.MAILCHIMP|| currentIntegrationService.type === IntegrationTypes.UNISENDER">
           <div class="integration-tab-item">
-            <label for="mailchimpCode" class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
-            <input type="text" id="mailchimpCode" [(ngModel)]="mailchimpUniParams.code" class="form-control" name="mailchimpCode">
+            <label for="getResponseName" class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>
+            <input type="text" id="getResponseName" [(ngModel)]="newCurrentIntegration.name" class="form-control" name="getResponseName">
           </div>
-          <div class="integration-tab-item">
-            <label for="mailchimpListId" class="control-label">{{ 'settings.site.newIntegration.create.listId' | translate }}</label>
-            <input type="text" id="mailchimpListId" [(ngModel)]="mailchimpUniParams.listId" class="form-control" name="mailchimpListId">
-          </div>
-        </div>
 
-        <!-- SENDPULSE and SENDBOX PARAMS -->
-        <div *ngIf="currentIntegrationService.type === IntegrationTypes.SENDPULSE || currentIntegrationService.type === IntegrationTypes.SENDBOX">
-          <div class="integration-tab-item">
-            <label for="sendPBParamsId" class="control-label">{{ 'settings.site.newIntegration.create.id' | translate }}</label>
-            <input type="text" id="sendPBParamsId" [(ngModel)]="sendPBParams.id" class="form-control" name="sendPBParamsId">
+          <!-- GETRESPONSE PARAMS -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.GETRESPONSE">
+            <div class="integration-tab-item">
+              <label for="getResponseCode" class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+              <input type="text" id="getResponseCode" [(ngModel)]="getResponseParams.code" class="form-control" name="getResponseCode">
+            </div>
+            <div class="integration-tab-item">
+              <label for="getResponseCampaignId" class="control-label">{{ 'settings.site.newIntegration.create.campaignId' | translate }}</label>
+              <input type="text" id="getResponseCampaignId" [(ngModel)]="getResponseParams.campaignId" class="form-control" name="getResponseCampaignId">
+            </div>
           </div>
-          <div class="integration-tab-item">
-            <label for="sendPBParamsSecret" class="control-label">{{ 'settings.site.newIntegration.create.secret' | translate }}</label>
-            <input type="text" id="sendPBParamsSecret" [(ngModel)]="sendPBParams.secret" class="form-control" name="sendPBParamsSecret">
-          </div>
-          <div class="integration-tab-item">
-            <label for="sendPBParamsBook" class="control-label">{{ 'settings.site.newIntegration.create.book' | translate }}</label>
-            <input type="text" id="sendPBParamsBook" [(ngModel)]="sendPBParams.book" class="form-control" name="sendPBParamsBook">
-          </div>
-        </div>
 
-        <!-- BITRIX PARAMS -->
-        <div *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX">
-          <div class="integration-tab-item">
-            <label for="bitrixParamsHost" class="control-label">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
-            <input type="text" id="bitrixParamsHost" [(ngModel)]="bitrixParams.host" class="form-control" name="bitrixParamsHost">
+          <!-- MAILCHIMP PARAMS and UNISENDER -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.MAILCHIMP|| currentIntegrationService.type === IntegrationTypes.UNISENDER">
+            <div class="integration-tab-item">
+              <label for="mailchimpCode" class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+              <input type="text" id="mailchimpCode" [(ngModel)]="mailchimpUniParams.code" class="form-control" name="mailchimpCode">
+            </div>
+            <div class="integration-tab-item">
+              <label for="mailchimpListId" class="control-label">{{ 'settings.site.newIntegration.create.listId' | translate }}</label>
+              <input type="text" id="mailchimpListId" [(ngModel)]="mailchimpUniParams.listId" class="form-control" name="mailchimpListId">
+            </div>
           </div>
-          <div class="integration-tab-item">
-            <label for="bitrixParamsLogin" class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
-            <input type="text" id="bitrixParamsLogin" [(ngModel)]="bitrixParams.login" class="form-control" name="bitrixParamsLogin">
-          </div>
-          <div class="integration-tab-item">
-            <label for="bitrixParamsPassword" class="control-label">{{ 'login.password' | translate }}</label>
-            <input type="password" id="bitrixParamsPassword" [(ngModel)]="bitrixParams.password" class="form-control" name="bitrixParamsPassword">
-          </div>
-        </div>
 
-        <!-- AMOCRM PARAMS -->
-        <div *ngIf="currentIntegrationService.type === IntegrationTypes.AMOCRM">
-          <div class="integration-tab-item">
-            <label for="amoParamsSubdomain" class="control-label">{{ 'settings.site.newIntegration.create.urlExtra' | translate }}</label>
-            <input type="text" id="amoParamsSubdomain" [(ngModel)]="amoParams.subdomain" class="form-control" name="amoParamsSubdomain">
+          <!-- SENDPULSE and SENDBOX PARAMS -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.SENDPULSE || currentIntegrationService.type === IntegrationTypes.SENDBOX">
+            <div class="integration-tab-item">
+              <label for="sendPBParamsId" class="control-label">{{ 'settings.site.newIntegration.create.id' | translate }}</label>
+              <input type="text" id="sendPBParamsId" [(ngModel)]="sendPBParams.id" class="form-control" name="sendPBParamsId">
+            </div>
+            <div class="integration-tab-item">
+              <label for="sendPBParamsSecret" class="control-label">{{ 'settings.site.newIntegration.create.secret' | translate }}</label>
+              <input type="text" id="sendPBParamsSecret" [(ngModel)]="sendPBParams.secret" class="form-control" name="sendPBParamsSecret">
+            </div>
+            <div class="integration-tab-item">
+              <label for="sendPBParamsBook" class="control-label">{{ 'settings.site.newIntegration.create.book' | translate }}</label>
+              <input type="text" id="sendPBParamsBook" [(ngModel)]="sendPBParams.book" class="form-control" name="sendPBParamsBook">
+            </div>
           </div>
-          <div class="integration-tab-item">
-            <label for="amoParamsLogin" class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
-            <input type="text" id="amoParamsLogin" [(ngModel)]="amoParams.login" class="form-control" name="amoParamsLogin">
-          </div>
-          <div class="integration-tab-item">
-            <label for="amoParamsHash" class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
-            <input type="text" id="amoParamsHash" [(ngModel)]="amoParams.hash" class="form-control" name="amoParamsHash">
-          </div>
-        </div>
 
-        <!-- EMAIL PARAMS -->
-        <div *ngIf="currentIntegrationService.type === IntegrationTypes.EMAIL">
-          <div class="integration-tab-item">
-            <label for="emailParamsEmail" class="control-label">{{ 'settings.site.newIntegration.create.email' | translate }}</label>
-            <input type="text" id="emailParamsEmail" [(ngModel)]="emailParams.email" class="form-control" name="emailParamsEmail">
+          <!-- BITRIX PARAMS -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX">
+            <div class="integration-tab-item">
+              <label for="bitrixParamsHost" class="control-label">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
+              <input type="text" id="bitrixParamsHost" [(ngModel)]="bitrixParams.host" class="form-control" name="bitrixParamsHost">
+            </div>
+            <div class="integration-tab-item">
+              <label for="bitrixParamsLogin" class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
+              <input type="text" id="bitrixParamsLogin" [(ngModel)]="bitrixParams.login" class="form-control" name="bitrixParamsLogin">
+            </div>
+            <div class="integration-tab-item">
+              <label for="bitrixParamsPassword" class="control-label">{{ 'login.password' | translate }}</label>
+              <input type="password" id="bitrixParamsPassword" [(ngModel)]="bitrixParams.password" class="form-control" name="bitrixParamsPassword">
+            </div>
           </div>
-        </div>
 
-        <!-- ROISTAT PARAMS -->
-        <div *ngIf="currentIntegrationService.type === IntegrationTypes.ROISTAT || currentIntegrationService.type === IntegrationTypes.WEBHOOK">
-          <div class="integration-tab-item">
-            <label for="roistatParamsUrl" class="control-label">{{ 'settings.site.newIntegration.create.url' | translate }}</label>
-            <input type="text" id="roistatParamsUrl" [(ngModel)]="roistatParams.url" class="form-control" name="roistatParamsUrl">
+          <!-- AMOCRM PARAMS -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.AMOCRM">
+            <div class="integration-tab-item">
+              <label for="amoParamsSubdomain" class="control-label">{{ 'settings.site.newIntegration.create.urlExtra' | translate }}</label>
+              <input type="text" id="amoParamsSubdomain" [(ngModel)]="amoParams.subdomain" class="form-control" name="amoParamsSubdomain">
+            </div>
+            <div class="integration-tab-item">
+              <label for="amoParamsLogin" class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
+              <input type="text" id="amoParamsLogin" [(ngModel)]="amoParams.login" class="form-control" name="amoParamsLogin">
+            </div>
+            <div class="integration-tab-item">
+              <label for="amoParamsHash" class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+              <input type="text" id="amoParamsHash" [(ngModel)]="amoParams.hash" class="form-control" name="amoParamsHash">
+            </div>
           </div>
-        </div>
 
-        <div class="integration-tab-item mb-0">
-          <div class="d-flex">
-            <ui-switch size="small" [checked]="newCurrentIntegration.default"></ui-switch>
-            <label class="control-label ml-2">
-              {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
+          <!-- EMAIL PARAMS -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.EMAIL">
+            <div class="integration-tab-item">
+              <label for="emailParamsEmail" class="control-label">{{ 'settings.site.newIntegration.create.email' | translate }}</label>
+              <input type="text" id="emailParamsEmail" [(ngModel)]="emailParams.email" class="form-control" name="emailParamsEmail">
+            </div>
+          </div>
+
+          <!-- ROISTAT PARAMS -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.ROISTAT || currentIntegrationService.type === IntegrationTypes.WEBHOOK">
+            <div class="integration-tab-item">
+              <label for="roistatParamsUrl" class="control-label">{{ 'settings.site.newIntegration.create.url' | translate }}</label>
+              <input type="text" id="roistatParamsUrl" [(ngModel)]="roistatParams.url" class="form-control" name="roistatParamsUrl">
+            </div>
+          </div>
+
+          <div class="integration-tab-item mb-0">
+            <div class="d-flex">
+              <ui-switch size="small" [checked]="newCurrentIntegration.default"></ui-switch>
+              <label class="control-label ml-2">
+                {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
+                <a data-toggle="tooltip"
+                   data-placement="top"
+                   data-container="body"
+                   title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
+                   class="info-link"><i class="fa fa-info-circle"></i>
+                </a>
+              </label>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column mt-4">
+            <div class="d-flex">
+              <h5 class="mt-2">
+                <strong>{{ 'settings.site.tabs.integration.fields.title' | translate }}</strong>
+              </h5>
               <a data-toggle="tooltip"
                  data-placement="top"
                  data-container="body"
-                 title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
-                 class="info-link"><i class="fa fa-info-circle"></i>
+                 title="{{ 'settings.site.tabs.integration.fields.tooltip' | translate }}"
+                 class="info-link ml-1 mt-1"><i class="fa fa-info-circle"></i>
               </a>
-            </label>
+            </div>
+            <div class="d-flex flex-column mt-2">
+              <div class="d-flex">
+                <div class="w-50">
+                  <label for="roistatParamsUrl" class="control-label">
+                    {{ 'settings.site.tabs.integration.fields.leadgenic' | translate }}
+                  </label>
+                </div>
+                <div class="w-50">
+                  <label for="roistatParamsUrl" class="control-label">
+                    {{ 'settings.site.tabs.integration.fields.crm' | translate }}
+                  </label>
+                </div>
+              </div>
+              <ng-container *ngFor="let i of [1]">
+                <div class="d-flex mb-2">
+                  <div class="w-50 mr-3">
+                    <input type="text" id="leadgenicFieldId" [(ngModel)]="roistatParams.url" class="form-control" name="leadgenicFieldId">
+                  </div>
+                  <div class="w-50 ml-3 mr-3">
+                    <input type="text" id="crmFieldId" [(ngModel)]="roistatParams.url" class="form-control" name="crmFieldId">
+                  </div>
+                  <i class="fa fa-trash integration-field-delete"></i>
+                </div>
+              </ng-container>
+            </div>
+            <div class="integration-field-add">
+              <i class="fa fa-plus integration-field-add-icon"></i><label>
+              {{ 'settings.site.tabs.integration.fields.add' | translate }}</label>
+            </div>
           </div>
         </div>
       </div>

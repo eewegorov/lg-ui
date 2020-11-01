@@ -448,6 +448,13 @@
 				},
 				"integration": {
 					"defaultUse": "",
+					"fields": {
+						"add": "",
+						"crm": "",
+						"leadgenic": "",
+						"title": "",
+						"tooltip": ""
+					},
 					"tooltip": {
 						"remove": "",
 						"settings": "",
