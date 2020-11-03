@@ -27,13 +27,14 @@
     <div *ngIf="integrationIsOnProgress" class="integration-tab-inner-loading-state"></div>
     <div>
       <div *ngIf="tab ==='NEW'">
-        <div class="integration-tab-item">
+        <div class="integration-tab-item" style="overflow: visible;">
           <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
-          <div class="dropdown integration-selector">
+          <div class="dropdown integration-selector" style="position: static;">
             <button
               type="button"
               class="btn btn-default dropdown-toggle"
               data-toggle="dropdown"
+              data-display="static"
               aria-haspopup="true"
               aria-expanded="true"
             >
@@ -216,7 +217,7 @@
                 <strong>{{ 'settings.site.tabs.integration.fields.title' | translate }}</strong>
               </h5>
               <a data-toggle="tooltip"
-                 data-placement="top"
+                 data-placement="bottom"
                  data-container="body"
                  title="{{ 'settings.site.tabs.integration.fields.tooltip' | translate }}"
                  class="info-link ml-1 mt-1"><i class="fa fa-info-circle"></i>
@@ -225,32 +226,32 @@
             <div class="d-flex flex-column mt-2">
               <div class="d-flex">
                 <div class="w-50">
-                  <label for="roistatParamsUrl" class="control-label">
+                  <label class="control-label leadgenic-field">
                     {{ 'settings.site.tabs.integration.fields.leadgenic' | translate }}
                   </label>
                 </div>
                 <div class="w-50">
-                  <label for="roistatParamsUrl" class="control-label">
+                  <label class="control-label">
                     {{ 'settings.site.tabs.integration.fields.crm' | translate }}
                   </label>
                 </div>
               </div>
-              <ng-container *ngFor="let i of [1]">
+              <ng-container *ngFor="let integrationField of integrationFieldsIds; index as i">
                 <div class="d-flex mb-2">
                   <div class="w-50 mr-3">
-                    <input type="text" id="leadgenicFieldId" [(ngModel)]="roistatParams.url" class="form-control" name="leadgenicFieldId">
+                    <input type="text" [id]="'leadgenicFieldId' + i" [(ngModel)]="integrationField.leadGenicId" class="form-control leadgenic-field" name="'leadgenicFieldId' + i">
                   </div>
                   <div class="w-50 ml-3 mr-3">
-                    <input type="text" id="crmFieldId" [(ngModel)]="roistatParams.url" class="form-control" name="crmFieldId">
+                    <input type="text" [id]="'crmFieldId' + i" [(ngModel)]="integrationField.crmId" class="form-control" name="'crmFieldId' + i">
                   </div>
-                  <i class="fa fa-trash integration-field-delete"></i>
+                  <a (click)="deleteIntegrationField(i)"><i class="fa fa-trash integration-field-delete"></i></a>
                 </div>
               </ng-container>
             </div>
-            <div class="integration-field-add">
-              <i class="fa fa-plus integration-field-add-icon"></i><label>
-              {{ 'settings.site.tabs.integration.fields.add' | translate }}</label>
-            </div>
+            <a class="integration-field-add" (click)="addIntegrationField()">
+              <i class="fa fa-plus integration-field-add-icon"></i>
+              {{ 'settings.site.tabs.integration.fields.add' | translate }}
+            </a>
           </div>
         </div>
       </div>

@@ -48,6 +48,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public integrationSiteServicesMailing;
   public integrationSiteServicesNotifications;
   public integrationSiteServicesOthers;
+  public integrationFieldsIds = [{ leadGenicId: '', crmId: '' }];
 
 
   constructor(
@@ -331,6 +332,16 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
       case IntegrationTypes.ROISTAT:
       case IntegrationTypes.WEBHOOK:
         return !this.editableIntegration.params.url;
+    }
+  }
+
+  public addIntegrationField() {
+    this.integrationFieldsIds.push({ leadGenicId: '', crmId: '' });
+  }
+
+  public deleteIntegrationField(index: number) {
+    if (this.integrationFieldsIds.length > 1) {
+      this.integrationFieldsIds.splice(index, 1);
     }
   }
 

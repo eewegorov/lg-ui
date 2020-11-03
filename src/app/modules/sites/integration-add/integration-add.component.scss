@@ -1,6 +1,5 @@
 :host {
   max-height: 92vh;
-  overflow-y: auto;
 }
 
 .integration-switcher-wr {
@@ -202,8 +201,19 @@ a.integration-help-link:hover, a.integration-help-link:focus {
 }
 
 .integration-settings {
-  overflow-y: auto;
-  max-height: 42vh;
+  overflow-y: scroll;
+  max-height: 41vh;
+
+}
+
+@media (max-width: 992px) {
+  .integration-settings {
+    max-height: 35vh;
+  }
+}
+
+.leadgenic-field {
+  margin-left: 2px;
 }
 
 .integration-field-delete {
@@ -213,6 +223,11 @@ a.integration-help-link:hover, a.integration-help-link:focus {
 
 .integration-field-add {
   font-size: 0.9rem;
+  color: #666;
+}
+
+.integration-field-add:hover {
+  color: #444;
 }
 
 .integration-field-add-icon {
