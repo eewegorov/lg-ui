@@ -201,7 +201,7 @@ a.integration-help-link:hover, a.integration-help-link:focus {
 }
 
 .integration-settings {
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 41vh;
 
 }
@@ -214,6 +214,10 @@ a.integration-help-link:hover, a.integration-help-link:focus {
 
 .leadgenic-field {
   margin-left: 2px;
+}
+
+.field-error {
+  border: 1px solid red;
 }
 
 .integration-field-delete {

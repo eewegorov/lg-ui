@@ -3,9 +3,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import {
+  BitrixConnectionTypes,
   CreateIntegrationRequest,
   Integration,
-  IntegrationItem, IntegrationService,
+  IntegrationItem,
+  IntegrationService,
   IntegrationTypes,
   SiteShort
 } from '../../../core/models/sites';
@@ -49,6 +51,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public integrationSiteServicesNotifications;
   public integrationSiteServicesOthers;
   public integrationFieldsIds = [{ leadGenicId: '', crmId: '' }];
+  public bitrixConnectionType: BitrixConnectionTypes = BitrixConnectionTypes.Webhook;
 
 
   constructor(

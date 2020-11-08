@@ -150,3 +150,8 @@ export interface Smartpoint {
   type: string;
 }
 
+export enum BitrixConnectionTypes {
+  Webhook = 'webhook',
+  Api = 'api'
+}
+

@@ -27,9 +27,9 @@
     <div *ngIf="integrationIsOnProgress" class="integration-tab-inner-loading-state"></div>
     <div>
       <div *ngIf="tab ==='NEW'">
-        <div class="integration-tab-item" style="overflow: visible;">
+        <div class="integration-tab-item">
           <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
-          <div class="dropdown integration-selector" style="position: static;">
+          <div class="dropdown integration-selector">
             <button
               type="button"
               class="btn btn-default dropdown-toggle"
@@ -100,8 +100,45 @@
 
         <div *ngIf="currentIntegrationService.type" class="integration-settings mt-2 w-100">
           <h5>
-            <strong>{{ 'settings.site.tabs.integration.fields.title' | translate }}</strong>
+            <strong>{{ 'settings.site.newIntegration.settings' | translate }}</strong>
           </h5>
+
+          <!-- BITRIX SWITCH -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX">
+            <p class="control-label">{{ 'settings.site.newIntegration.create.host' | translate }}</p>
+            <div>
+              <input
+                type="radio"
+                id="bitrix-webhook"
+                name="bitrix"
+                value="webhook"
+                [(ngModel)]="bitrixConnectionType"
+              /><label for="bitrix-webhook"></label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="bitrix-api"
+                name="bitrix"
+                value="api"
+                [(ngModel)]="bitrixConnectionType"
+              /><label for="bitrix-api"></label>
+            </div>
+
+
+            <div class="integration-tab-item">
+              <label for="bitrixParamsHost" class="control-label">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
+              <input type="text" id="bitrixParamsHost" [(ngModel)]="bitrixParams.host" class="form-control" name="bitrixParamsHost">
+            </div>
+            <div class="integration-tab-item">
+              <label for="bitrixParamsLogin" class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
+              <input type="text" id="bitrixParamsLogin" [(ngModel)]="bitrixParams.login" class="form-control" name="bitrixParamsLogin">
+            </div>
+            <div class="integration-tab-item">
+              <label for="bitrixParamsPassword" class="control-label">{{ 'login.password' | translate }}</label>
+              <input type="password" id="bitrixParamsPassword" [(ngModel)]="bitrixParams.password" class="form-control" name="bitrixParamsPassword">
+            </div>
+          </div>
 
           <div class="integration-tab-item">
             <label for="getResponseName" class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>
@@ -214,12 +251,12 @@
           <div class="d-flex flex-column mt-4">
             <div class="d-flex">
               <h5 class="mt-2">
-                <strong>{{ 'settings.site.tabs.integration.fields.title' | translate }}</strong>
+                <strong>{{ 'settings.site.newIntegration.fields.title' | translate }}</strong>
               </h5>
               <a data-toggle="tooltip"
                  data-placement="bottom"
                  data-container="body"
-                 title="{{ 'settings.site.tabs.integration.fields.tooltip' | translate }}"
+                 title="{{ 'settings.site.newIntegration.fields.tooltip' | translate }}"
                  class="info-link ml-1 mt-1"><i class="fa fa-info-circle"></i>
               </a>
             </div>
@@ -227,30 +264,51 @@
               <div class="d-flex">
                 <div class="w-50">
                   <label class="control-label leadgenic-field">
-                    {{ 'settings.site.tabs.integration.fields.leadgenic' | translate }}
+                    {{ 'settings.site.newIntegration.fields.leadgenic' | translate }}
                   </label>
                 </div>
                 <div class="w-50">
                   <label class="control-label">
-                    {{ 'settings.site.tabs.integration.fields.crm' | translate }}
+                    {{ 'settings.site.newIntegration.fields.crm' | translate }}
                   </label>
                 </div>
               </div>
               <ng-container *ngFor="let integrationField of integrationFieldsIds; index as i">
                 <div class="d-flex mb-2">
                   <div class="w-50 mr-3">
-                    <input type="text" [id]="'leadgenicFieldId' + i" [(ngModel)]="integrationField.leadGenicId" class="form-control leadgenic-field" name="'leadgenicFieldId' + i">
+                    <input
+                      type="text"
+                      [id]="'leadgenicFieldId' + i"
+                      [(ngModel)]="integrationField.leadGenicId"
+                      class="form-control leadgenic-field"
+                      [class.field-error]=
+                        "integrationField.leadGenicId === 'email' ||
+                        integrationField.leadGenicId === 'phone' ||
+                        integrationField.leadGenicId === 'message' ||
+                        integrationField.leadGenicId === 'name'"
+                      name="'leadgenicFieldId' + i"
+                    >
                   </div>
                   <div class="w-50 ml-3 mr-3">
                     <input type="text" [id]="'crmFieldId' + i" [(ngModel)]="integrationField.crmId" class="form-control" name="'crmFieldId' + i">
                   </div>
-                  <a (click)="deleteIntegrationField(i)"><i class="fa fa-trash integration-field-delete"></i></a>
+                  <a (click)="deleteIntegrationField(i)"><i class="fa fa-trash integration-field-delete mr-2"></i></a>
+                </div>
+                <div
+                  *ngIf="integrationField.leadGenicId === 'email' ||
+                  integrationField.leadGenicId === 'phone' ||
+                  integrationField.leadGenicId === 'message' ||
+                  integrationField.leadGenicId === 'name'"
+                  class="small mb-2"
+                >
+                  {{ 'settings.site.newIntegration.fields.error' | translate }}
                 </div>
               </ng-container>
+
             </div>
             <a class="integration-field-add" (click)="addIntegrationField()">
               <i class="fa fa-plus integration-field-add-icon"></i>
-              {{ 'settings.site.tabs.integration.fields.add' | translate }}
+              {{ 'settings.site.newIntegration.fields.add' | translate }}
             </a>
           </div>
         </div>

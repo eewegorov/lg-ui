@@ -392,10 +392,19 @@
 				"description": "",
 				"donorSite": "",
 				"edit": "",
+				"fields": {
+					"add": "",
+					"crm": "",
+					"error": "",
+					"leadgenic": "",
+					"title": "",
+					"tooltip": ""
+				},
 				"instruction": "",
 				"name": "",
 				"others": "",
 				"service": "",
+				"settings": "",
 				"tabs": {
 					"copy": "",
 					"new": ""
@@ -451,6 +460,7 @@
 					"fields": {
 						"add": "",
 						"crm": "",
+						"error": "",
 						"leadgenic": "",
 						"title": "",
 						"tooltip": ""
