@@ -372,7 +372,16 @@
 				"add": "",
 				"apikey": "",
 				"choseIntegrationService": "",
+				"connection": {
+					"api": "",
+					"title": "",
+					"webhook": ""
+				},
 				"create": {
+					"address": {
+						"desc": "",
+						"title": ""
+					},
 					"book": "",
 					"campaignId": "",
 					"copy": {
@@ -387,7 +396,11 @@
 					"login": "",
 					"secret": "",
 					"url": "",
-					"urlExtra": ""
+					"urlExtra": "",
+					"webhook": {
+						"desc": "",
+						"title": ""
+					}
 				},
 				"description": "",
 				"donorSite": "",
@@ -457,14 +470,6 @@
 				},
 				"integration": {
 					"defaultUse": "",
-					"fields": {
-						"add": "",
-						"crm": "",
-						"error": "",
-						"leadgenic": "",
-						"title": "",
-						"tooltip": ""
-					},
 					"tooltip": {
 						"remove": "",
 						"settings": "",

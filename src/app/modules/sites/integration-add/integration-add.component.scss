@@ -203,7 +203,8 @@ a.integration-help-link:hover, a.integration-help-link:focus {
 .integration-settings {
   overflow-y: auto;
   max-height: 41vh;
-
+  padding-left: 0.1rem;
+  padding-right: 0.3rem;
 }
 
 @media (max-width: 992px) {
@@ -213,7 +214,11 @@ a.integration-help-link:hover, a.integration-help-link:focus {
 }
 
 .leadgenic-field {
-  margin-left: 2px;
+  margin-left: 1px;
+}
+
+.crm-field {
+  margin-left: -4px;
 }
 
 .field-error {
@@ -236,6 +241,6 @@ a.integration-help-link:hover, a.integration-help-link:focus {
 
 .integration-field-add-icon {
   margin-left: 0.1rem;
-  margin-right: 0.3rem;
+  margin-right: 0;
   color: green;
 }

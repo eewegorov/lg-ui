@@ -23,6 +23,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   @Input() private siteId: string;
   @Input() private integrationId: string;
   public IntegrationTypes = IntegrationTypes;
+  public BitrixTypes = BitrixConnectionTypes;
   public item;
   public sites = [];
   public defIntegrationServiceName = '';
@@ -40,7 +41,8 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public getResponseParams = { code: '', campaignId: '' };
   public mailchimpUniParams = { code: '', listId: '' };
   public sendPBParams = { id: '', secret: '', book: '' };
-  public bitrixParams = { host: '', login: '', password: '' };
+  public bitrixWebhookParams = { address: '', webhook: '' };
+  public bitrixApiParams = { host: '', login: '', password: '' };
   public amoParams = { subdomain: '', login: '', hash: '' };
   public emailParams = { email: '' };
   public roistatParams = { url: '' };
@@ -225,11 +227,18 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
           };
           break;
         case IntegrationTypes.BITRIX:
-          integration.params = {
-            host: this.bitrixParams.host,
-            login: this.bitrixParams.login,
-            password: this.bitrixParams.password
-          };
+          if (this.bitrixConnectionType === BitrixConnectionTypes.Api) {
+            integration.params = {
+              host: this.bitrixApiParams.host,
+              login: this.bitrixApiParams.login,
+              password: this.bitrixApiParams.password
+            };
+          } else {
+            integration.params = {
+              url: this.bitrixWebhookParams.address,
+              hash: this.bitrixWebhookParams.webhook
+            };
+          }
           break;
         case IntegrationTypes.AMOCRM:
           integration.params = {
@@ -278,7 +287,11 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
         case IntegrationTypes.SENDBOX:
           return !this.sendPBParams.id || !this.sendPBParams.secret || !this.sendPBParams.book;
         case IntegrationTypes.BITRIX:
-          return !this.bitrixParams.host || !this.bitrixParams.login || !this.bitrixParams.password;
+          if (this.bitrixConnectionType === BitrixConnectionTypes.Api) {
+            return !this.bitrixApiParams.host || !this.bitrixApiParams.login || !this.bitrixApiParams.password;
+          } else {
+            return !this.bitrixWebhookParams.address || !this.bitrixWebhookParams.webhook;
+          }
         case IntegrationTypes.AMOCRM:
           return !this.amoParams.subdomain || !this.amoParams.login || !this.amoParams.hash;
         case IntegrationTypes.EMAIL:
@@ -325,7 +338,11 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
       case IntegrationTypes.SENDBOX:
         return !this.editableIntegration.params.id || !this.editableIntegration.params.secret || !this.editableIntegration.params.book;
       case IntegrationTypes.BITRIX:
-        return !this.editableIntegration.params.host || !this.editableIntegration.params.login || !this.editableIntegration.params.password;
+        if (this.bitrixConnectionType === BitrixConnectionTypes.Api) {
+          return !this.editableIntegration.params.host || !this.editableIntegration.params.login || !this.editableIntegration.params.password;
+        } else {
+          return !this.editableIntegration.params.url || !this.editableIntegration.params.hash;
+        }
       case IntegrationTypes.AMOCRM:
         return !this.editableIntegration.params.subdomain ||
           !this.editableIntegration.params.login ||
