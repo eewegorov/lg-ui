@@ -105,6 +105,12 @@
           <h5>
             <strong>{{ 'settings.site.newIntegration.settings' | translate }}</strong>
           </h5>
+          <div
+            *ngIf="currentIntegrationService.type === IntegrationTypes.AMOCRM"
+            class="small"
+          >
+            {{ 'settings.site.newIntegration.fields.error' | translate }}
+          </div>
 
           <!-- BITRIX SWITCH -->
           <div *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX" class="mt-3">
@@ -213,18 +219,45 @@
 
           <!-- AMOCRM PARAMS -->
           <div *ngIf="currentIntegrationService.type === IntegrationTypes.AMOCRM">
-            <div class="integration-tab-item">
-              <label for="amoParamsSubdomain" class="control-label">{{ 'settings.site.newIntegration.create.urlExtra' | translate }}</label>
-              <input type="text" id="amoParamsSubdomain" [(ngModel)]="amoParams.subdomain" class="form-control" name="amoParamsSubdomain">
+            <div class="d-flex">
+              <div class="w-50 pr-4 mr-1 integration-tab-item">
+                <div class="integration-tab-item">
+                  <label for="amoParamsSubdomain" class="control-label">{{ 'settings.site.newIntegration.create.urlExtra.title' | translate }}</label>
+                  <input type="text" id="amoParamsSubdomain" [(ngModel)]="amoParams.subdomain" class="form-control" name="amoParamsSubdomain">
+                  <div class="small">{{ 'settings.site.newIntegration.create.urlExtra.desc' | translate }}</div>
+                </div>
+                <div>
+                  <label for="amoParamsHash" class="control-label">{{ 'settings.site.newIntegration.create.secretKey' | translate }}</label>
+                  <input type="text" id="amoParamsHash" [(ngModel)]="amoParams.hash" class="form-control" name="amoParamsHash">
+                </div>
+              </div>
+              <div class="w-50 ml-1 mr-3 integration-tab-item">
+                <div class="integration-tab-item">
+                  <label for="amoParamsLogin" class="control-label">{{ 'settings.site.newIntegration.create.integrationId' | translate }}</label>
+                  <input type="text" id="amoParamsLogin" [(ngModel)]="amoParams.login" class="form-control" name="amoParamsLogin">
+                </div>
+                <div>
+                  <label for="amoParamsCode" class="control-label">{{ 'settings.site.newIntegration.create.code' | translate }}</label>
+                  <input type="text" id="amoParamsCode" [(ngModel)]="amoParams.code" class="form-control" name="amoParamsCode">
+                </div>
+              </div>
             </div>
-            <div class="integration-tab-item">
-              <label for="amoParamsLogin" class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
-              <input type="text" id="amoParamsLogin" [(ngModel)]="amoParams.login" class="form-control" name="amoParamsLogin">
-            </div>
-            <div class="integration-tab-item">
-              <label for="amoParamsHash" class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
-              <input type="text" id="amoParamsHash" [(ngModel)]="amoParams.hash" class="form-control" name="amoParamsHash">
-            </div>
+
+            <button
+              *ngIf="!currentIntegrationSite.active"
+              class="btn btn-default"
+              (click)="createIntegration()"
+              [disabled]="disableCreation()"
+            >
+              {{ 'settings.site.newIntegration.activate' | translate }}
+            </button>
+            <button
+              *ngIf="currentIntegrationSite.active"
+              class="btn btn-default"
+              disabled
+            >
+              {{ 'settings.site.newIntegration.activated' | translate }}
+            </button>
           </div>
 
           <!-- EMAIL PARAMS -->
@@ -258,8 +291,45 @@
             </div>
           </div>
 
+          <!-- AMOCRM FUNNEL PARAMS -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.AMOCRM">
+            <h5 class="mt-2">
+              <strong>{{ 'settings.site.newIntegration.funnel.title' | translate }}</strong>
+            </h5>
+            <button
+              *ngIf="!currentIntegrationSite.active"
+              class="btn btn-default"
+              (click)="createIntegration()"
+              [disabled]="disableCreation()"
+            >
+              {{ 'settings.site.newIntegration.funnel.button' | translate }}
+            </button>
+            <div class="d-flex">
+              <div class="w-50 pr-4 mr-1 integration-tab-item">
+                <label for="amoParamsFunnelId" class="control-label">{{ 'settings.site.newIntegration.funnel.name' | translate }}</label>
+                <input type="text" id="amoParamsFunnelId" [(ngModel)]="amoParams.funnelId" class="form-control" name="amoParamsFunnelId">
+              </div>
+              <div class="w-50 ml-1 mr-3 integration-tab-item">
+                <label for="amoParamsLeadStateId" class="control-label">{{ 'settings.site.newIntegration.funnel.status' | translate }}</label>
+                <input type="text" id="amoParamsLeadStateId" [(ngModel)]="amoParams.leadStateId" class="form-control" name="amoParamsLeadStateId">
+              </div>
+            </div>
+            <div class="integration-tab-item">
+              <label for="amoParamsCheckDuplicate" class="control-label">{{ 'settings.site.newIntegration.funnel.check.title' | translate }}</label>
+              <a data-toggle="tooltip"
+                 data-placement="bottom"
+                 data-container="body"
+                 title="{{ 'settings.site.newIntegration.funnel.check.tooltip' | translate }}"
+                 class="info-link ml-1 mt-1"><i class="fa fa-info-circle"></i>
+              </a>
+              <input type="text" id="amoParamsCheckDuplicate" [(ngModel)]="amoParams.checkDuplicate" class="form-control" name="amoParamsCheckDuplicate">
+            </div>
+          </div>
+
           <div
-            *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Webhook"
+            *ngIf="(currentIntegrationService.type === IntegrationTypes.BITRIX
+            && bitrixConnectionType === BitrixTypes.Webhook)
+            || currentIntegrationService.type === IntegrationTypes.AMOCRM"
             class="d-flex flex-column mt-4"
           >
             <div class="d-flex">

@@ -369,8 +369,13 @@
 				"paymentLabel": ""
 			},
 			"newIntegration": {
+				"activate": "",
+				"activated": "",
 				"add": "",
 				"apikey": "",
+				"check": {
+					"tooltip": ""
+				},
 				"choseIntegrationService": "",
 				"connection": {
 					"api": "",
@@ -384,6 +389,7 @@
 					},
 					"book": "",
 					"campaignId": "",
+					"code": "",
 					"copy": {
 						"noSites": ""
 					},
@@ -392,9 +398,11 @@
 					"error": "",
 					"host": "",
 					"id": "",
+					"integrationId": "",
 					"listId": "",
 					"login": "",
 					"secret": "",
+					"secretKey": "",
 					"url": "",
 					"urlExtra": "",
 					"webhook": {
@@ -402,6 +410,7 @@
 						"title": ""
 					}
 				},
+				"deactivate": "",
 				"description": "",
 				"donorSite": "",
 				"edit": "",
@@ -412,6 +421,16 @@
 					"leadgenic": "",
 					"title": "",
 					"tooltip": ""
+				},
+				"funnel": {
+					"button": "",
+					"check": {
+						"title": "",
+						"tooltip": ""
+					},
+					"name": "",
+					"status": "",
+					"title": ""
 				},
 				"instruction": "",
 				"name": "",

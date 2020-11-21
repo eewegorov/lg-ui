@@ -43,7 +43,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public sendPBParams = { id: '', secret: '', book: '' };
   public bitrixWebhookParams = { address: '', webhook: '' };
   public bitrixApiParams = { host: '', login: '', password: '' };
-  public amoParams = { subdomain: '', login: '', hash: '' };
+  public amoParams = { subdomain: '', login: '', hash: '', code: '', funnelId: '', leadStateId: '', checkDuplicate: '' };
   public emailParams = { email: '' };
   public roistatParams = { url: '' };
   public currentIntegrationSiteServiceClone = {} as IntegrationItem;
