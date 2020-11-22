@@ -155,3 +155,21 @@ export enum BitrixConnectionTypes {
   Api = 'api'
 }
 
+export enum FunnelCheckDuplicate {
+  NONE = 'NONE',
+  PHONE = 'PHONE',
+  EMAIL = 'EMAIL'
+}
+
+export const FunnelCheckDuplicateValues = {
+  NONE: 'Не проверять',
+  PHONE: 'Проверять по номеру телефона',
+  EMAIL: 'Проверять по email'
+};
+
+export interface IntegrationFunnel {
+  funnelId: string;
+  leadStateId: string;
+  checkDuplicate: FunnelCheckDuplicate;
+}
+

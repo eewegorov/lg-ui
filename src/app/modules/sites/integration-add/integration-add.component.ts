@@ -6,6 +6,9 @@ import {
   BitrixConnectionTypes,
   CreateIntegrationRequest,
   Integration,
+  FunnelCheckDuplicate,
+  FunnelCheckDuplicateValues,
+  IntegrationFunnel,
   IntegrationItem,
   IntegrationService,
   IntegrationTypes,
@@ -35,7 +38,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public editableIntegration;
   public editableIntegrationServiceName;
   public isEditIntegration;
-  public tab = 'NEW';
+  public tab: 'NEW' | 'EDIT' | 'COPY' = 'NEW';
   public integrationIsOnProgress = false;
   public integrationServices;
   public getResponseParams = { code: '', campaignId: '' };
@@ -54,6 +57,10 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public integrationSiteServicesOthers;
   public integrationFieldsIds = [{ leadGenicId: '', crmId: '' }];
   public bitrixConnectionType: BitrixConnectionTypes = BitrixConnectionTypes.Webhook;
+  public funnelIds = {};
+  public funnelLeadStateIds = {};
+  public funnelCheckDuplicates = FunnelCheckDuplicateValues;
+  public currentFunnel: IntegrationFunnel = { funnelId: '', leadStateId: '', checkDuplicate: FunnelCheckDuplicate.NONE  }
 
 
   constructor(
@@ -124,6 +131,22 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
 
   public changeCurrentIntegrationService(service) {
     this.currentIntegrationService = service;
+  }
+
+  public changeCurrentFunnelId(funnelId: string) {
+    this.currentFunnel.funnelId = funnelId;
+  }
+
+  public changeCurrentFunnelLeadStateId(leadStateId: string) {
+    this.currentFunnel.leadStateId = leadStateId;
+  }
+
+  public changeCurrentFunnelCheckDuplicates(checkDuplicate: string) {
+    this.currentFunnel.checkDuplicate = checkDuplicate as FunnelCheckDuplicate;
+  }
+
+  public returnZero() {
+    return 0;
   }
 
   public changeCurrentIntegrationSite(site) {
