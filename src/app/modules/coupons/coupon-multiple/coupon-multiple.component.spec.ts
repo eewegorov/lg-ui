@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CouponMultipleComponent } from './coupon-multiple.component';
 
@@ -6,7 +6,7 @@ describe('CouponMultipleComponent', () => {
   let component: CouponMultipleComponent;
   let fixture: ComponentFixture<CouponMultipleComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CouponMultipleComponent ]
     })

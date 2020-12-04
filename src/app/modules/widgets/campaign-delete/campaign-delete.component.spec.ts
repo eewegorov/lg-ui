@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CampaignDeleteComponent } from './campaign-delete.component';
 
@@ -6,7 +6,7 @@ describe('CompanyDeleteComponent', () => {
   let component: CampaignDeleteComponent;
   let fixture: ComponentFixture<CampaignDeleteComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CampaignDeleteComponent ]
     })

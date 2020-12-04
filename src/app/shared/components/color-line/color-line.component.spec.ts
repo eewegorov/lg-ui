@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ColorLineComponent } from './color-line.component';
 
@@ -6,7 +6,7 @@ describe('HeaderLineComponent', () => {
   let component: ColorLineComponent;
   let fixture: ComponentFixture<ColorLineComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ColorLineComponent ]
     })
