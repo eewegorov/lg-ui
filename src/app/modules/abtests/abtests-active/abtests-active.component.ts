@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VariantAddComponent } from '../variant-add/variant-add.component';
 import Swal from 'sweetalert2';
-import { sortBy, unzip } from 'lodash';
+import { sortBy, unzip } from 'lodash-es';
 import { WidgetTemplate } from '../../../core/models/widgets';
 import { Abtest, NewVariant, Variant } from '../../../core/models/abtests';
 import { BinsDataService } from '../services/bins-data.service';

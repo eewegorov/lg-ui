@@ -46,7 +46,10 @@
             ],
             "allowedCommonJsDependencies": [
               "metismenu",
-              "jquery"
+              "jquery",
+              "moment-timezone",
+              "chart.js",
+              "rxjs/internal/Subject"
             ]
           },
           "configurations": {

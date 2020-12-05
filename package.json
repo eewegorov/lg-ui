@@ -38,7 +38,7 @@
     "classlist.js": "^1.1.20150312",
     "icheck": "^1.0.2",
     "jquery": "^3.5.1",
-    "lodash": "^4.17.20",
+    "lodash-es": "^4.17.15",
     "metismenu": "^3.0.6",
     "moment": "^2.29.1",
     "ng-click-outside": "^7.0.1",
