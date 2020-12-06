@@ -297,7 +297,7 @@
             <button
               *ngIf="!currentIntegrationSite.active"
               class="btn btn-default mt-2 mb-4"
-              (click)="createIntegration()"
+              (click)="activateIntegration()"
               [disabled]="disableCreation()"
             >
               <i class="fas fa-power-off mr-2"></i> {{ 'settings.site.newIntegration.activate' | translate }}

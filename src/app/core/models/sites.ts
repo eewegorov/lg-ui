@@ -173,3 +173,39 @@ export interface IntegrationFunnel {
   checkDuplicate: FunnelCheckDuplicate;
 }
 
+export interface AmoAuthRequest {
+  client_id: string;
+  client_secret: string;
+  grant_type: string;
+  code: string;
+  redirect_uri: string;
+}
+
+export interface AmoAuthResponse {
+  token_type: string;
+  expires_in: number;
+  access_token: string;
+  refresh_token: string;
+}
+
+export interface AmoFunnelResponse {
+  _total_items: number;
+  _links: AmoFunnelLink;
+  _embedded: { pipelines: AmoFunnel };
+}
+
+interface AmoFunnelLink {
+  self: { href: string };
+}
+
+export interface AmoFunnel {
+  id: number;
+  name: string;
+  sort: number;
+  is_main: boolean;
+  is_unsorted_on: boolean;
+  is_archive: boolean;
+  account_id: number;
+  _links: AmoFunnelLink;
+}
+

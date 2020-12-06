@@ -5,10 +5,20 @@ import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
 import {
   CreateSiteRequest,
-  CreateSiteResponse, UpdateIntegrationRequest, IntegrationResponse, IntegrationsResponse, SiteSettings,
-  SiteSettingsResponse, SiteShortResponse,
+  CreateSiteResponse,
+  UpdateIntegrationRequest,
+  IntegrationResponse,
+  IntegrationsResponse,
+  SiteSettings,
+  SiteSettingsResponse,
+  SiteShortResponse,
   SitesResponse,
-  SitesShortResponse, CloneIntegrationRequest, CreateIntegrationRequest, SmartpointsResponse
+  SitesShortResponse,
+  CloneIntegrationRequest,
+  CreateIntegrationRequest,
+  SmartpointsResponse,
+  AmoAuthRequest,
+  AmoAuthResponse, AmoFunnelResponse
 } from '../../../core/models/sites';
 
 
@@ -79,6 +89,14 @@ export class SitesApiService {
 
   public getSiteSmartpointsList(siteId: string): Observable<SmartpointsResponse> {
     return this.http.get<SmartpointsResponse>(`${ environment.url }/sites/${siteId}/smartpoints`);
+  }
+
+  public getAmoTokens(subdomain: string, amoCredentials: AmoAuthRequest): Observable<AmoAuthResponse> {
+    return this.http.post<AmoAuthResponse>(`${subdomain}/oauth2/access_token`, amoCredentials);
+  }
+
+  public getAmoFunnels(subdomain: string): Observable<AmoFunnelResponse> {
+    return this.http.get<AmoFunnelResponse>(`${subdomain}/api/v4/leads/pipelines`);
   }
 
 }

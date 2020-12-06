@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
+  AmoAuthRequest,
   CreateIntegrationRequest,
   CreateSiteData,
   CreateSiteRequest,
@@ -147,6 +148,22 @@ export class SitesService {
       map((response: SmartpointsResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
+  }
+
+  public getAmoTokens(subdomain: string, clientId: string, clientSecret: string, authorizationCode: string) {
+    const amoCredentials: AmoAuthRequest = {
+      client_id: clientId,
+      client_secret: clientSecret,
+      grant_type: 'authorization_code',
+      code: authorizationCode,
+      redirect_uri: 'https://leadgenic.ru/amo/auth'
+    };
+
+    return this.sitesApiService.getAmoTokens(subdomain, amoCredentials);
+  }
+
+  public getAmoFunnels(subdomain: string) {
+    return this.sitesApiService.getAmoFunnels(subdomain);
   }
 
   public getCorrectNameByType(type: string) {

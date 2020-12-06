@@ -12,7 +12,7 @@ import {
   IntegrationItem,
   IntegrationService,
   IntegrationTypes,
-  SiteShort
+  SiteShort, AmoAuthResponse
 } from '../../../core/models/sites';
 import { SitesService } from '../services/sites.service';
 
@@ -200,6 +200,13 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
 
   public closeModal(result?): void {
     this.activeModal.close(result);
+  }
+
+  public activateIntegration() {
+    this.sitesService.getAmoTokens(this.amoParams.subdomain, this.amoParams.login, this.amoParams.hash, this.amoParams.code)
+      .subscribe((amoTokens: AmoAuthResponse) => {
+
+      });
   }
 
   public createIntegration() {
