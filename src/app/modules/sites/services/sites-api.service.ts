@@ -92,11 +92,15 @@ export class SitesApiService {
   }
 
   public getAmoTokens(subdomain: string, amoCredentials: AmoAuthRequest): Observable<AmoAuthResponse> {
-    return this.http.post<AmoAuthResponse>(`${subdomain}/oauth2/access_token`, amoCredentials);
+    return this.http.post<AmoAuthResponse>(`http://${subdomain}/oauth2/access_token`, amoCredentials);
   }
 
-  public getAmoFunnels(subdomain: string): Observable<AmoFunnelResponse> {
-    return this.http.get<AmoFunnelResponse>(`${subdomain}/api/v4/leads/pipelines`);
+  public getAmoFunnels(subdomain: string, accessToken: string): Observable<AmoFunnelResponse> {
+    return this.http.get<AmoFunnelResponse>(`http://${subdomain}/api/v4/leads/pipelines`, {
+      headers: {
+        Authorization: accessToken
+      }
+    });
   }
 
 }

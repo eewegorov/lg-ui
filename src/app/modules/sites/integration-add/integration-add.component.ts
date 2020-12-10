@@ -12,9 +12,10 @@ import {
   IntegrationItem,
   IntegrationService,
   IntegrationTypes,
-  SiteShort, AmoAuthResponse
+  SiteShort, AmoAuthResponse, AmoFunnelResponse, AmoFunnel
 } from '../../../core/models/sites';
 import { SitesService } from '../services/sites.service';
+import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -60,7 +61,8 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public funnelIds = {};
   public funnelLeadStateIds = {};
   public funnelCheckDuplicates = FunnelCheckDuplicateValues;
-  public currentFunnel: IntegrationFunnel = { funnelId: '', leadStateId: '', checkDuplicate: FunnelCheckDuplicate.NONE  }
+  public currentFunnel: IntegrationFunnel = { funnelId: '', leadStateId: '', checkDuplicate: FunnelCheckDuplicate.NONE };
+  public pipelines: AmoFunnel = {} as AmoFunnel;
 
 
   constructor(
@@ -203,10 +205,14 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   }
 
   public activateIntegration() {
-    this.sitesService.getAmoTokens(this.amoParams.subdomain, this.amoParams.login, this.amoParams.hash, this.amoParams.code)
-      .subscribe((amoTokens: AmoAuthResponse) => {
-
-      });
+    this.sitesService.getAmoTokens(this.amoParams.subdomain, this.amoParams.login, this.amoParams.hash, this.amoParams.code).pipe(
+      switchMap((amoTokens: AmoAuthResponse) => {
+        const authHeader = `Bearer ${amoTokens.access_token}`;
+        return this.sitesService.getAmoFunnels(this.amoParams.subdomain, authHeader);
+      })
+    ).subscribe((funnel: AmoFunnelResponse) => {
+      this.pipelines = funnel._embedded.pipelines;
+    });
   }
 
   public createIntegration() {

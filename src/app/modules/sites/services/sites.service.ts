@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
-  AmoAuthRequest,
+  AmoAuthRequest, AmoAuthResponse, AmoFunnelResponse,
   CreateIntegrationRequest,
   CreateSiteData,
   CreateSiteRequest,
@@ -150,7 +150,7 @@ export class SitesService {
     );
   }
 
-  public getAmoTokens(subdomain: string, clientId: string, clientSecret: string, authorizationCode: string) {
+  public getAmoTokens(subdomain: string, clientId: string, clientSecret: string, authorizationCode: string): Observable<AmoAuthResponse> {
     const amoCredentials: AmoAuthRequest = {
       client_id: clientId,
       client_secret: clientSecret,
@@ -162,8 +162,8 @@ export class SitesService {
     return this.sitesApiService.getAmoTokens(subdomain, amoCredentials);
   }
 
-  public getAmoFunnels(subdomain: string) {
-    return this.sitesApiService.getAmoFunnels(subdomain);
+  public getAmoFunnels(subdomain: string, accessToken: string): Observable<AmoFunnelResponse> {
+    return this.sitesApiService.getAmoFunnels(subdomain, accessToken);
   }
 
   public getCorrectNameByType(type: string) {
