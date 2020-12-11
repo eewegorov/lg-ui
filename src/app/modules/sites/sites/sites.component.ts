@@ -43,7 +43,7 @@ export class SitesComponent implements OnInit, OnDestroy {
   private getMeInfo() {
     /*this.userService.getMeInfo().subscribe((response: User) => {*/
     const response = {
-      "login": "user@example.com",
+      "clientId": "user@example.com",
       "id": "5a6e4fefc9f6afaff395fdff",
       "timeZone": "Asia/Vladivostok",
       "phone": "+15968977523598",

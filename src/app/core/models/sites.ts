@@ -173,6 +173,14 @@ export interface IntegrationFunnel {
   checkDuplicate: FunnelCheckDuplicate;
 }
 
+export interface IntegrationExtendedFunnel {
+  funnelId: number;
+  funnelName: string;
+  leadStateId: number;
+  leadStateName: string;
+  checkDuplicate: FunnelCheckDuplicate;
+}
+
 export interface AmoAuthRequest {
   client_id: string;
   client_secret: string;
@@ -191,7 +199,7 @@ export interface AmoAuthResponse {
 export interface AmoFunnelResponse {
   _total_items: number;
   _links: AmoFunnelLink;
-  _embedded: { pipelines: AmoFunnel };
+  _embedded: { pipelines: AmoFunnel[] };
 }
 
 interface AmoFunnelLink {
@@ -207,5 +215,17 @@ export interface AmoFunnel {
   is_archive: boolean;
   account_id: number;
   _links: AmoFunnelLink;
+  _embedded: { statuses: AmoStatus[] };
 }
 
+export interface AmoStatus {
+  id: number;
+  name: string;
+  sort: number;
+  is_editable: boolean;
+  pipeline_id: number;
+  color: string;
+  type: number;
+  account_id: number;
+  _links: AmoFunnelLink;
+}

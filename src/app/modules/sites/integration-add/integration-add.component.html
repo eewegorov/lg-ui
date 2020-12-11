@@ -270,7 +270,7 @@
                 <div>
                   <label for="amoParamsLogin"
                          class="control-label">{{ 'settings.site.newIntegration.create.integrationId' | translate }}</label>
-                  <input type="text" id="amoParamsLogin" [(ngModel)]="amoParams.login" class="form-control"
+                  <input type="text" id="amoParamsLogin" [(ngModel)]="amoParams.clientId" class="form-control"
                          name="amoParamsLogin">
                 </div>
               </div>
@@ -280,7 +280,7 @@
                 <div>
                   <label for="amoParamsHash"
                          class="control-label">{{ 'settings.site.newIntegration.create.secretKey' | translate }}</label>
-                  <input type="text" id="amoParamsHash" [(ngModel)]="amoParams.hash" class="form-control"
+                  <input type="text" id="amoParamsHash" [(ngModel)]="amoParams.clientSecret" class="form-control"
                          name="amoParamsHash">
                 </div>
               </div>
@@ -298,7 +298,7 @@
               *ngIf="!currentIntegrationSite.active"
               class="btn btn-default mt-2 mb-4"
               (click)="activateIntegration()"
-              [disabled]="disableCreation()"
+              [disabled]="disableActivation()"
             >
               <i class="fas fa-power-off mr-2"></i> {{ 'settings.site.newIntegration.activate' | translate }}
             </button>
@@ -355,8 +355,8 @@
             <button
               *ngIf="!currentIntegrationSite.active"
               class="btn btn-default mt-2 mb-3"
-              (click)="createIntegration()"
-              [disabled]="disableCreation()"
+              (click)="loadIntegration()"
+              [disabled]="disableActivation() || !this.amoParams.accessToken"
             >
               <i class="fas fa-sync mr-2"></i> {{ 'settings.site.newIntegration.funnel.button' | translate }}
             </button>
@@ -371,21 +371,23 @@
                     data-display="static"
                     aria-haspopup="true"
                     aria-expanded="true"
+                    [disabled]="!pipelines.length"
                   >
-                  <span
-                    class="dropdown-selected-cropp"
-                  >{{ funnelIds[currentFunnel.funnelId] }}</span>
+                    <span
+                      class="dropdown-selected-cropp"
+                    >{{ currentFunnel.funnelName }}</span>
                   </button>
                   <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                     <li
-                      *ngFor="let item of funnelIds | keyvalue : returnZero"
-                      (click)="changeCurrentFunnelId(item.key)"
+                      *ngFor="let item of pipelines"
+                      (click)="changeCurrentFunnelId(item.id, item.name)"
                     >
-                      <a class="dropdown-item">{{ item.value }}</a>
+                      <a class="dropdown-item">{{ item.name }}</a>
                     </li>
                   </ul>
                 </div>
               </div>
+
               <div class="w-50 ml-1 mr-3 integration-tab-item">
                 <label class="control-label">{{ 'settings.site.newIntegration.funnel.status' | translate }}</label>
                 <div class="dropdown integration-selector">
@@ -396,17 +398,18 @@
                     data-display="static"
                     aria-haspopup="true"
                     aria-expanded="true"
+                    [disabled]="!pipelines.length"
                   >
                   <span
                     class="dropdown-selected-cropp"
-                  >{{ funnelCheckDuplicates[currentFunnel.checkDuplicate] }}</span>
+                  >{{ currentFunnel.leadStateName }}</span>
                   </button>
                   <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                     <li
-                      *ngFor="let item of funnelLeadStateIds | keyvalue : returnZero"
-                      (click)="changeCurrentFunnelLeadStateId(item.key)"
+                      *ngFor="let item of leadStates"
+                      (click)="changeCurrentFunnelLeadStateId(item.id, item.name)"
                     >
-                      <a class="dropdown-item">{{ item.value }}</a>
+                      <a class="dropdown-item">{{ item.name }}</a>
                     </li>
                   </ul>
                 </div>
@@ -420,30 +423,29 @@
                  title="{{ 'settings.site.newIntegration.funnel.check.tooltip' | translate }}"
                  class="info-link ml-1 mt-1"><i class="fa fa-info-circle"></i>
               </a>
-              <div class="w-50 ml-1 mr-3 integration-tab-item">
-                <label class="control-label">{{ 'settings.site.newIntegration.funnel.status' | translate }}</label>
-                <div class="dropdown integration-selector">
-                  <button
-                    type="button"
-                    class="btn btn-default dropdown-toggle"
-                    data-toggle="dropdown"
-                    data-display="static"
-                    aria-haspopup="true"
-                    aria-expanded="true"
+
+              <div class="dropdown integration-selector">
+                <button
+                  type="button"
+                  class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown"
+                  data-display="static"
+                  aria-haspopup="true"
+                  aria-expanded="true"
+                  [disabled]="!pipelines.length"
+                >
+                <span
+                  class="dropdown-selected-cropp"
+                >{{ funnelCheckDuplicates[currentFunnel.checkDuplicate] }}</span>
+                </button>
+                <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
+                  <li
+                    *ngFor="let item of funnelCheckDuplicates | keyvalue : returnZero"
+                    (click)="changeCurrentFunnelCheckDuplicates(item.key)"
                   >
-                  <span
-                    class="dropdown-selected-cropp"
-                  >{{ funnelCheckDuplicates[currentFunnel.checkDuplicate] }}</span>
-                  </button>
-                  <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
-                    <li
-                      *ngFor="let item of funnelCheckDuplicates | keyvalue : returnZero"
-                      (click)="changeCurrentFunnelCheckDuplicates(item.key)"
-                    >
-                      <a class="dropdown-item">{{ item.value }}</a>
-                    </li>
-                  </ul>
-                </div>
+                    <a class="dropdown-item">{{ item.value }}</a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

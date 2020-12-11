@@ -12,7 +12,7 @@ import {
   IntegrationItem,
   IntegrationService,
   IntegrationTypes,
-  SiteShort, AmoAuthResponse, AmoFunnelResponse, AmoFunnel
+  SiteShort, AmoAuthResponse, AmoFunnelResponse, AmoFunnel, IntegrationExtendedFunnel, AmoStatus
 } from '../../../core/models/sites';
 import { SitesService } from '../services/sites.service';
 import { switchMap } from 'rxjs/operators';
@@ -47,7 +47,8 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public sendPBParams = { id: '', secret: '', book: '' };
   public bitrixWebhookParams = { address: '', webhook: '' };
   public bitrixApiParams = { host: '', login: '', password: '' };
-  public amoParams = { subdomain: '', login: '', hash: '', code: '', funnelId: '', leadStateId: '', checkDuplicate: '' };
+  public amoParams = { subdomain: '', clientId: '', clientSecret: '', code: '', accessToken: '', refreshToken: '',
+    funnelId: '', leadStateId: '', checkDuplicate: '' };
   public emailParams = { email: '' };
   public roistatParams = { url: '' };
   public currentIntegrationSiteServiceClone = {} as IntegrationItem;
@@ -58,11 +59,11 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public integrationSiteServicesOthers;
   public integrationFieldsIds = [{ leadGenicId: '', crmId: '' }];
   public bitrixConnectionType: BitrixConnectionTypes = BitrixConnectionTypes.Webhook;
-  public funnelIds = {};
-  public funnelLeadStateIds = {};
   public funnelCheckDuplicates = FunnelCheckDuplicateValues;
-  public currentFunnel: IntegrationFunnel = { funnelId: '', leadStateId: '', checkDuplicate: FunnelCheckDuplicate.NONE };
-  public pipelines: AmoFunnel = {} as AmoFunnel;
+  public currentFunnel: IntegrationExtendedFunnel =
+    { funnelId: null, funnelName: '', leadStateId: null, leadStateName: '', checkDuplicate: FunnelCheckDuplicate.NONE };
+  public pipelines: AmoFunnel[] = [];
+  public leadStates: AmoStatus[] = [];
 
 
   constructor(
@@ -135,12 +136,17 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
     this.currentIntegrationService = service;
   }
 
-  public changeCurrentFunnelId(funnelId: string) {
+  public changeCurrentFunnelId(funnelId: number, funnelName: string) {
     this.currentFunnel.funnelId = funnelId;
+    this.currentFunnel.funnelName = funnelName;
+
+    this.leadStates = this.pipelines
+      .filter((pipeline: AmoFunnel) => pipeline.id = this.currentFunnel.funnelId)[0]._embedded.statuses;
   }
 
-  public changeCurrentFunnelLeadStateId(leadStateId: string) {
+  public changeCurrentFunnelLeadStateId(leadStateId: number, leadStateName: string) {
     this.currentFunnel.leadStateId = leadStateId;
+    this.currentFunnel.leadStateName = leadStateName;
   }
 
   public changeCurrentFunnelCheckDuplicates(checkDuplicate: string) {
@@ -205,13 +211,39 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   }
 
   public activateIntegration() {
-    this.sitesService.getAmoTokens(this.amoParams.subdomain, this.amoParams.login, this.amoParams.hash, this.amoParams.code).pipe(
-      switchMap((amoTokens: AmoAuthResponse) => {
-        const authHeader = `Bearer ${amoTokens.access_token}`;
-        return this.sitesService.getAmoFunnels(this.amoParams.subdomain, authHeader);
-      })
-    ).subscribe((funnel: AmoFunnelResponse) => {
-      this.pipelines = funnel._embedded.pipelines;
+    this.sitesService
+      .getAmoTokens(this.amoParams.subdomain, this.amoParams.clientId, this.amoParams.clientSecret, this.amoParams.code)
+      .pipe(
+        switchMap((amoTokens: AmoAuthResponse) => {
+          this.amoParams.accessToken = amoTokens.access_token;
+          this.amoParams.refreshToken = amoTokens.refresh_token;
+          const authHeader = `Bearer ${amoTokens.access_token}`;
+          return this.sitesService.getAmoFunnels(this.amoParams.subdomain, authHeader);
+        })
+      )
+      .subscribe((funnel: AmoFunnelResponse) => {
+        this.pipelines = funnel._embedded.pipelines;
+        this.leadStates = this.pipelines[0]._embedded.statuses;
+
+        this.currentFunnel = {
+          ...this.currentFunnel,
+          funnelId: this.pipelines[0].id,
+          funnelName: this.pipelines[0].name,
+          leadStateId: this.pipelines[0]._embedded.statuses[0].id,
+          leadStateName: this.pipelines[0]._embedded.statuses[0].name
+        };
+    });
+  }
+
+  public loadIntegration() {
+    const authHeader = `Bearer ${this.amoParams.accessToken}`;
+
+    this.sitesService.getAmoFunnels(this.amoParams.subdomain, authHeader)
+      .subscribe((funnel: AmoFunnelResponse) => {
+        this.pipelines = funnel._embedded.pipelines;
+        this.leadStates = this.pipelines
+          .filter((pipeline: AmoFunnel) => pipeline.id = this.currentFunnel.funnelId)[0]._embedded.statuses;
+        this.leadStates = this.pipelines[0]._embedded.statuses;
     });
   }
 
@@ -279,8 +311,8 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
         case IntegrationTypes.AMOCRM:
           integration.params = {
             subdomain: this.amoParams.subdomain,
-            login: this.amoParams.login,
-            hash: this.amoParams.hash
+            login: this.amoParams.clientId,
+            hash: this.amoParams.clientSecret
           };
           break;
         case IntegrationTypes.EMAIL:
@@ -329,7 +361,9 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
             return !this.bitrixWebhookParams.address || !this.bitrixWebhookParams.webhook;
           }
         case IntegrationTypes.AMOCRM:
-          return !this.amoParams.subdomain || !this.amoParams.login || !this.amoParams.hash;
+          return !this.amoParams.subdomain || !this.amoParams.clientId || !this.amoParams.clientSecret
+            || !this.amoParams.accessToken || !this.amoParams.refreshToken || !this.amoParams.funnelId
+            || !this.amoParams.leadStateId || !this.amoParams.checkDuplicate;
         case IntegrationTypes.EMAIL:
           return !this.emailParams.email;
         case IntegrationTypes.ROISTAT:
@@ -342,6 +376,10 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
         !this.currentIntegrationSite.id ||
         this.integrationIsOnProgress;
     }
+  }
+
+  public disableActivation() {
+    return !this.amoParams.subdomain || !this.amoParams.clientId || !this.amoParams.clientSecret || !this.amoParams.code;
   }
 
   public updateIntegration() {
@@ -372,10 +410,12 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
         return !this.editableIntegration.params.code || !this.editableIntegration.params.listId;
       case IntegrationTypes.SENDPULSE:
       case IntegrationTypes.SENDBOX:
-        return !this.editableIntegration.params.id || !this.editableIntegration.params.secret || !this.editableIntegration.params.book;
+        return !this.editableIntegration.params.id || !this.editableIntegration.params.secret
+          || !this.editableIntegration.params.book;
       case IntegrationTypes.BITRIX:
         if (this.bitrixConnectionType === BitrixConnectionTypes.Api) {
-          return !this.editableIntegration.params.host || !this.editableIntegration.params.login || !this.editableIntegration.params.password;
+          return !this.editableIntegration.params.host || !this.editableIntegration.params.login
+            || !this.editableIntegration.params.password;
         } else {
           return !this.editableIntegration.params.url || !this.editableIntegration.params.hash;
         }
