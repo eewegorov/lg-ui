@@ -1,21 +1,25 @@
-import { AfterViewChecked, Component, Input, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
+import {AfterViewChecked, Component, Input, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {ToastrService} from 'ngx-toastr';
 import {
+  AmoAuthResponse,
+  AmoFunnel,
+  AmoFunnelResponse,
+  AmoStatus,
   BitrixConnectionTypes,
   CreateIntegrationRequest,
-  Integration,
   FunnelCheckDuplicate,
   FunnelCheckDuplicateValues,
-  IntegrationFunnel,
+  Integration,
+  IntegrationExtendedFunnel,
   IntegrationItem,
   IntegrationService,
   IntegrationTypes,
-  SiteShort, AmoAuthResponse, AmoFunnelResponse, AmoFunnel, IntegrationExtendedFunnel, AmoStatus
+  SiteShort
 } from '../../../core/models/sites';
-import { SitesService } from '../services/sites.service';
-import { switchMap } from 'rxjs/operators';
+import {SitesService} from '../services/sites.service';
+import {switchMap} from 'rxjs/operators';
 
 
 @Component({
@@ -45,7 +49,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public getResponseParams = { code: '', campaignId: '' };
   public mailchimpUniParams = { code: '', listId: '' };
   public sendPBParams = { id: '', secret: '', book: '' };
-  public bitrixWebhookParams = { address: '', webhook: '' };
+  public bitrixWebhookParams = { url: '', hash: '' };
   public bitrixApiParams = { host: '', login: '', password: '' };
   public amoParams = { subdomain: '', clientId: '', clientSecret: '', code: '', accessToken: '', refreshToken: '',
     funnelId: '', leadStateId: '', checkDuplicate: '' };
@@ -64,6 +68,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
     { funnelId: null, funnelName: '', leadStateId: null, leadStateName: '', checkDuplicate: FunnelCheckDuplicate.NONE };
   public pipelines: AmoFunnel[] = [];
   public leadStates: AmoStatus[] = [];
+  public isAmoActivated = false;
 
 
   constructor(
@@ -84,14 +89,18 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
       this.tab = 'EDIT';
       this.editableIntegration = {};
       /*this.sitesService.getSiteIntegration(this.siteId, this.integrationId).subscribe((response: IntegrationItem) => {*/
-      const response = {
+      const response: IntegrationItem = {
         "id": "8330be13431534c0f3808286ea145a9e",
         "name": "Bitrix integrations",
         "active": false,
         "type": "BITRIX",
         "params": {},
+        "customFieldsMapping": {},
         "default": false
       };
+      if (response.type === IntegrationTypes.BITRIX) {
+        this.bitrixConnectionType = response.params.login ? BitrixConnectionTypes.Api : BitrixConnectionTypes.Webhook;
+      }
         this.editableIntegration = response;
         this.editableIntegrationServiceName = this.sitesService.getCorrectNameByType(response.type);
       /*});*/
@@ -232,6 +241,8 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
           leadStateId: this.pipelines[0]._embedded.statuses[0].id,
           leadStateName: this.pipelines[0]._embedded.statuses[0].name
         };
+
+        this.isAmoActivated = true;
     });
   }
 
@@ -303,16 +314,21 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
             };
           } else {
             integration.params = {
-              url: this.bitrixWebhookParams.address,
-              hash: this.bitrixWebhookParams.webhook
+              url: this.bitrixWebhookParams.url,
+              hash: this.bitrixWebhookParams.hash
             };
           }
           break;
         case IntegrationTypes.AMOCRM:
           integration.params = {
             subdomain: this.amoParams.subdomain,
-            login: this.amoParams.clientId,
-            hash: this.amoParams.clientSecret
+            clientId: this.amoParams.clientId,
+            clientSecret: this.amoParams.clientSecret,
+            accessToken: this.amoParams.accessToken,
+            refreshToken: this.amoParams.refreshToken,
+            funnelId: this.amoParams.funnelId,
+            leadStateId: this.amoParams.leadStateId,
+            checkDuplicate: this.amoParams.checkDuplicate
           };
           break;
         case IntegrationTypes.EMAIL:
@@ -358,7 +374,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
           if (this.bitrixConnectionType === BitrixConnectionTypes.Api) {
             return !this.bitrixApiParams.host || !this.bitrixApiParams.login || !this.bitrixApiParams.password;
           } else {
-            return !this.bitrixWebhookParams.address || !this.bitrixWebhookParams.webhook;
+            return !this.bitrixWebhookParams.url || !this.bitrixWebhookParams.hash;
           }
         case IntegrationTypes.AMOCRM:
           return !this.amoParams.subdomain || !this.amoParams.clientId || !this.amoParams.clientSecret

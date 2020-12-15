@@ -68,6 +68,7 @@ export class IntegrationItemComponent implements OnInit, AfterViewChecked {
   public setupItem() {
     const modalRef = this.modalService.open(IntegrationAddComponent, {
       windowClass: 'animate__animated animate__slideInDown animate__faster',
+      size: 'lg'
     });
     modalRef.componentInstance.siteId = this.siteId;
     modalRef.componentInstance.integrationId = this.widget.id;

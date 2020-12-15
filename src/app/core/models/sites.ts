@@ -91,6 +91,7 @@ export interface IntegrationItem {
   default: boolean;
   active: boolean;
   params: any;
+  customFieldsMapping: any;
 }
 
 export interface CreateIntegrationRequest {
