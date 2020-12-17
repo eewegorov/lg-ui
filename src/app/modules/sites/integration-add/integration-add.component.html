@@ -872,7 +872,7 @@
             *ngIf="!isAmoActivated"
             class="btn btn-default mt-2 mb-4"
             (click)="activateIntegration()"
-            [disabled]="disableActivation()"
+            [disabled]="disableEditingActivation()"
           >
             <i class="fas fa-power-off mr-2"></i> {{ 'settings.site.newIntegration.activate' | translate }}
           </button>
@@ -934,14 +934,14 @@
         </div>
 
         <!-- AMOCRM FUNNEL PARAMS -->
-        <div *ngIf="currentIntegrationService.type === IntegrationTypes.AMOCRM">
+        <div *ngIf="editableIntegration.type === IntegrationTypes.AMOCRM">
           <h5 class="mt-4">
             <strong>{{ 'settings.site.newIntegration.funnel.title' | translate }}</strong>
           </h5>
           <button
             class="btn btn-default mt-2 mb-3"
             (click)="loadIntegration()"
-            [disabled]="disableActivation() || !this.amoParams.accessToken"
+            [disabled]="disableEditingActivation() || !this.editableIntegration.params.accessToken"
           >
             <i class="fas fa-sync mr-2"></i> {{ 'settings.site.newIntegration.funnel.button' | translate }}
           </button>

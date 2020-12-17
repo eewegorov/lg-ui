@@ -93,7 +93,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
         "id": "8330be13431534c0f3808286ea145a9e",
         "name": "Bitrix integrations",
         "active": false,
-        "type": "BITRIX",
+        "type": "AMOCRM",
         "params": {},
         "customFieldsMapping": {},
         "default": false
@@ -220,36 +220,71 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   }
 
   public activateIntegration() {
+    let subdomain = '';
+    let clientId = '';
+    let clientSecret = '';
+    let code = '';
+
+    if (this.tab === 'EDIT') {
+      subdomain = this.editableIntegration.params.subdomain;
+      clientId = this.editableIntegration.params.clientId;
+      clientSecret = this.editableIntegration.params.clientSecret;
+      code = this.editableIntegration.params.code;
+    } else {
+      subdomain = this.amoParams.subdomain;
+      clientId = this.amoParams.clientId;
+      clientSecret = this.amoParams.clientSecret;
+      code = this.amoParams.code;
+    }
+
     this.sitesService
-      .getAmoTokens(this.amoParams.subdomain, this.amoParams.clientId, this.amoParams.clientSecret, this.amoParams.code)
+      .getAmoTokens(subdomain, clientId, clientSecret, code)
       .pipe(
         switchMap((amoTokens: AmoAuthResponse) => {
-          this.amoParams.accessToken = amoTokens.access_token;
-          this.amoParams.refreshToken = amoTokens.refresh_token;
+          if (this.tab === 'EDIT') {
+            this.editableIntegration.params.accessToken = amoTokens.access_token;
+            this.editableIntegration.params.refreshToken = amoTokens.refresh_token;
+          } else {
+            this.amoParams.accessToken = amoTokens.access_token;
+            this.amoParams.refreshToken = amoTokens.refresh_token;
+          }
           const authHeader = `Bearer ${amoTokens.access_token}`;
-          return this.sitesService.getAmoFunnels(this.amoParams.subdomain, authHeader);
+          return this.sitesService.getAmoFunnels(subdomain, authHeader);
         })
       )
       .subscribe((funnel: AmoFunnelResponse) => {
         this.pipelines = funnel._embedded.pipelines;
         this.leadStates = this.pipelines[0]._embedded.statuses;
 
-        this.currentFunnel = {
-          ...this.currentFunnel,
-          funnelId: this.pipelines[0].id,
-          funnelName: this.pipelines[0].name,
-          leadStateId: this.pipelines[0]._embedded.statuses[0].id,
-          leadStateName: this.pipelines[0]._embedded.statuses[0].name
-        };
+        if (this.tab !== 'EDIT') {
+          this.currentFunnel = {
+            ...this.currentFunnel,
+            funnelId: this.pipelines[0].id,
+            funnelName: this.pipelines[0].name,
+            leadStateId: this.pipelines[0]._embedded.statuses[0].id,
+            leadStateName: this.pipelines[0]._embedded.statuses[0].name
+          };
+        }
 
         this.isAmoActivated = true;
     });
   }
 
   public loadIntegration() {
-    const authHeader = `Bearer ${this.amoParams.accessToken}`;
+    let accessToken = '';
+    let subdomain = '';
 
-    this.sitesService.getAmoFunnels(this.amoParams.subdomain, authHeader)
+    if (this.tab === 'EDIT') {
+      accessToken = this.editableIntegration.params.accessToken;
+      subdomain = this.editableIntegration.params.subdomain;
+    } else {
+      accessToken = this.amoParams.accessToken;
+      subdomain = this.amoParams.subdomain;
+    }
+
+    const authHeader = `Bearer ${accessToken}`;
+
+    this.sitesService.getAmoFunnels(subdomain, authHeader)
       .subscribe((funnel: AmoFunnelResponse) => {
         this.pipelines = funnel._embedded.pipelines;
         this.leadStates = this.pipelines
@@ -396,6 +431,11 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
 
   public disableActivation() {
     return !this.amoParams.subdomain || !this.amoParams.clientId || !this.amoParams.clientSecret || !this.amoParams.code;
+  }
+
+  public disableEditingActivation() {
+    return !this.editableIntegration.params.subdomain || !this.editableIntegration.params.clientId
+      || !this.editableIntegration.params.clientSecret || !this.editableIntegration.params.code;
   }
 
   public updateIntegration() {
