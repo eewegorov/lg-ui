@@ -216,14 +216,14 @@
             *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Webhook">
             <div class="d-flex">
               <div class="w-50 pr-4 mr-1 integration-tab-item">
-                <label for="bitrixParamsAddress"
+                <label for="bitrixParamsUrl"
                        class="control-label">{{ 'settings.site.newIntegration.create.address.title' | translate }}</label>
                 <input type="text" id="bitrixParamsUrl" [(ngModel)]="bitrixWebhookParams.url"
                        class="form-control" name="bitrixParamsAddress">
                 <div class="small">{{ 'settings.site.newIntegration.create.address.desc' | translate }}</div>
               </div>
               <div class="w-50 ml-1 mr-3 integration-tab-item">
-                <label for="bitrixParamsWebhook"
+                <label for="bitrixParamsHash"
                        class="control-label">{{ 'settings.site.newIntegration.create.webhook.title' | translate }}</label>
                 <input type="text" id="bitrixParamsHash" [(ngModel)]="bitrixWebhookParams.hash"
                        class="form-control" name="bitrixParamsWebhook">
@@ -374,12 +374,12 @@
                   >
                     <span
                       class="dropdown-selected-cropp"
-                    >{{ currentFunnel.funnelName }}</span>
+                    >{{ amoParams.funnelName }}</span>
                   </button>
                   <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                     <li
                       *ngFor="let item of pipelines"
-                      (click)="changeCurrentFunnelId(item.id, item.name)"
+                      (click)="changeCurrentFunnelId(item.id.toString(), item.name)"
                     >
                       <a class="dropdown-item">{{ item.name }}</a>
                     </li>
@@ -401,12 +401,12 @@
                   >
                   <span
                     class="dropdown-selected-cropp"
-                  >{{ currentFunnel.leadStateName }}</span>
+                  >{{ amoParams.leadStateName }}</span>
                   </button>
                   <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                     <li
                       *ngFor="let item of leadStates"
-                      (click)="changeCurrentFunnelLeadStateId(item.id, item.name)"
+                      (click)="changeCurrentFunnelLeadStateId(item.id.toString(), item.name)"
                     >
                       <a class="dropdown-item">{{ item.name }}</a>
                     </li>
@@ -435,7 +435,7 @@
                 >
                 <span
                   class="dropdown-selected-cropp"
-                >{{ funnelCheckDuplicates[currentFunnel.checkDuplicate] }}</span>
+                >{{ funnelCheckDuplicates[amoParams.checkDuplicate] }}</span>
                 </button>
                 <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                   <li
@@ -669,7 +669,7 @@
         </div>
       </div>
 
-      <div *ngIf="tab === 'EDIT'">
+      <div *ngIf="tab === 'EDIT'" class="integration-settings-edit">
         <div class="integration-tab-item d-flex" style="margin-top: 15px">
           <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
           <div
@@ -808,7 +808,8 @@
 
         <!-- BITRIX API PARAMS -->
         <div
-          *ngIf="editableIntegration.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Api">
+          *ngIf="editableIntegration.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Api"
+        >
           <div class="integration-tab-item">
             <label for="editBitrixParamsHost"
                    class="control-label">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
@@ -958,14 +959,14 @@
                   aria-expanded="true"
                   [disabled]="!pipelines.length"
                 >
-                    <span
-                      class="dropdown-selected-cropp"
-                    >{{ currentFunnel.funnelName }}</span>
+                  <span
+                    class="dropdown-selected-cropp"
+                  >{{ editableIntegration.params.funnelName }}</span>
                 </button>
                 <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                   <li
                     *ngFor="let item of pipelines"
-                    (click)="changeCurrentFunnelId(item.id, item.name)"
+                    (click)="changeCurrentFunnelId(item.id.toString(), item.name)"
                   >
                     <a class="dropdown-item">{{ item.name }}</a>
                   </li>
@@ -987,12 +988,12 @@
                 >
                   <span
                     class="dropdown-selected-cropp"
-                  >{{ currentFunnel.leadStateName }}</span>
+                  >{{ editableIntegration.params.leadStateName }}</span>
                 </button>
                 <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                   <li
                     *ngFor="let item of leadStates"
-                    (click)="changeCurrentFunnelLeadStateId(item.id, item.name)"
+                    (click)="changeCurrentFunnelLeadStateId(item.id.toString(), item.name)"
                   >
                     <a class="dropdown-item">{{ item.name }}</a>
                   </li>
@@ -1021,7 +1022,7 @@
               >
                 <span
                   class="dropdown-selected-cropp"
-                >{{ funnelCheckDuplicates[currentFunnel.checkDuplicate] }}</span>
+                >{{ funnelCheckDuplicates[editableIntegration.params.checkDuplicate] }}</span>
               </button>
               <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                 <li
@@ -1037,8 +1038,8 @@
 
         <!-- CUSTOM FIELDS MAPPING -->
         <div
-          *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Webhook
-            || currentIntegrationService.type === IntegrationTypes.AMOCRM"
+          *ngIf="editableIntegration.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Webhook
+            || editableIntegration.type === IntegrationTypes.AMOCRM"
           class="d-flex flex-column mt-4"
         >
           <div class="d-flex">

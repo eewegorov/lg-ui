@@ -99,6 +99,7 @@ export interface CreateIntegrationRequest {
   type: IntegrationTypes;
   default: boolean;
   params: object;
+  customFieldsMapping: object;
 }
 
 export interface UpdateIntegrationRequest {
@@ -168,16 +169,16 @@ export const FunnelCheckDuplicateValues = {
   EMAIL: 'Проверять по email'
 };
 
-export interface IntegrationFunnel {
+export interface AmoParams {
+  subdomain: string;
+  clientId: string;
+  clientSecret: string;
+  code: string;
+  accessToken: string;
+  refreshToken: string;
   funnelId: string;
-  leadStateId: string;
-  checkDuplicate: FunnelCheckDuplicate;
-}
-
-export interface IntegrationExtendedFunnel {
-  funnelId: number;
   funnelName: string;
-  leadStateId: number;
+  leadStateId: string;
   leadStateName: string;
   checkDuplicate: FunnelCheckDuplicate;
 }

@@ -208,6 +208,11 @@ a.integration-help-link:hover, a.integration-help-link:focus {
   padding-right: 0.3rem;
 }
 
+.integration-settings-edit {
+  overflow-y: auto;
+  max-height: calc(100vh - 280px);
+}
+
 @media (max-width: 992px) {
   .integration-settings {
     max-height: calc(100vh - 500px);
