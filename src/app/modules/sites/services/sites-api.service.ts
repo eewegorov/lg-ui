@@ -17,8 +17,7 @@ import {
   CloneIntegrationRequest,
   CreateIntegrationRequest,
   SmartpointsResponse,
-  AmoAuthRequest,
-  AmoAuthResponse, AmoFunnelResponse
+  AmoAuthResponse, AmoFunnelResponse, AmoAuthByCodeRequest, AmoAuthByRefreshTokenRequest
 } from '../../../core/models/sites';
 
 
@@ -91,7 +90,7 @@ export class SitesApiService {
     return this.http.get<SmartpointsResponse>(`${ environment.url }/sites/${siteId}/smartpoints`);
   }
 
-  public getAmoTokens(subdomain: string, amoCredentials: AmoAuthRequest): Observable<AmoAuthResponse> {
+  public getAmoTokens(subdomain: string, amoCredentials: AmoAuthByCodeRequest | AmoAuthByRefreshTokenRequest): Observable<AmoAuthResponse> {
     return this.http.post<AmoAuthResponse>(`http://${subdomain}/oauth2/access_token`, amoCredentials);
   }
 

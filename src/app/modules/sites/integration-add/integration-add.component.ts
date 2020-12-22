@@ -5,7 +5,9 @@ import {ToastrService} from 'ngx-toastr';
 import {
   AmoAuthResponse,
   AmoFunnel,
-  AmoFunnelResponse, AmoParams,
+  AmoFunnelResponse,
+  AmoGrantTypes,
+  AmoParams,
   AmoStatus,
   BitrixConnectionTypes,
   CreateIntegrationRequest,
@@ -31,6 +33,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   @Input() private integrationId: string;
   public IntegrationTypes = IntegrationTypes;
   public BitrixTypes = BitrixConnectionTypes;
+  public AmoGrantTypes = AmoGrantTypes;
   public item;
   public sites = [];
   public defIntegrationServiceName = '';
@@ -91,25 +94,50 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
         name: 'Bitrix integrations',
         active: false,
         type: 'AMOCRM',
-        params: {},
+        params: {
+          subdomain: 'dfggdgd',
+            clientId: 'ytitit',
+        clientSecret: 'yututyut',
+        accessToken: 'rthrtyrty',
+        refreshToken: 'rghgfhgfh',
+        funnelId: 'ryrtyrty',
+        leadStateId: 'ttyutu',
+        checkDuplicate: 'EMAIL'
+    },
         customFieldsMapping: {},
         default: false
       };
+
+      this.editableIntegration = response;
+
       if (response.type === IntegrationTypes.BITRIX) {
         this.bitrixConnectionType = response.params.login ? BitrixConnectionTypes.Api : BitrixConnectionTypes.Webhook;
       }
 
       if (response.type === IntegrationTypes.AMOCRM) {
         if (response.params.funnelId) {
-          this.pipelines.push(response.params.funnelId);
+          this.pipelines.push({ id: response.params.funnelId, name: response.params.funnelId } as AmoFunnel);
+
+          this.editableIntegration.params = {...this.editableIntegration.params, funnelName: response.params.funnelId};
         }
 
         if (response.params.leadStateId) {
-          this.leadStates.push(response.params.leadStateId);
+          this.leadStates.push({ id: response.params.leadStateId, name: response.params.leadStateId } as AmoStatus);
+
+          this.editableIntegration.params = {...this.editableIntegration.params, leadStateName: response.params.leadStateId};
         }
+
+        Object.entries(response.customFieldsMapping).forEach((value) => {
+          this.integrationFieldsIds.push({ leadGenicId: value[0], crmId: value[1] as string });
+        });
+
+        if (this.integrationFieldsIds.length > 1) {
+          this.integrationFieldsIds.shift();
+        }
+
+        this.activateIntegration(AmoGrantTypes.RefreshToken);
       }
 
-      this.editableIntegration = response;
       this.editableIntegrationServiceName = this.sitesService.getCorrectNameByType(response.type);
       /*});*/
     }
@@ -212,7 +240,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
     }
 
     this.leadStates = this.pipelines
-      .filter((pipeline: AmoFunnel) => pipeline.id.toString() === funnelId)[0]._embedded.statuses;
+      .filter((pipeline: AmoFunnel) => pipeline.id.toString() === funnelId)[0]?._embedded?.statuses;
   }
 
   public changeCurrentFunnelLeadStateId(leadStateId: string, leadStateName: string) {
@@ -241,17 +269,19 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
     this.activeModal.close(result);
   }
 
-  public activateIntegration() {
+  public activateIntegration(grantType: AmoGrantTypes) {
     let subdomain = '';
     let clientId = '';
     let clientSecret = '';
     let code = '';
+    let refreshToken = '';
 
     if (this.tab === 'EDIT') {
       subdomain = this.editableIntegration.params.subdomain;
       clientId = this.editableIntegration.params.clientId;
       clientSecret = this.editableIntegration.params.clientSecret;
       code = this.editableIntegration.params.code;
+      refreshToken = this.editableIntegration.params.refreshToken;
     } else {
       subdomain = this.amoParams.subdomain;
       clientId = this.amoParams.clientId;
@@ -259,8 +289,10 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
       code = this.amoParams.code;
     }
 
+    const credentials = grantType === AmoGrantTypes.AuthCode ? code : refreshToken;
+
     this.sitesService
-      .getAmoTokens(subdomain, clientId, clientSecret, code)
+      .getAmoTokens(subdomain, clientId, clientSecret, grantType, credentials)
       .pipe(
         switchMap((amoTokens: AmoAuthResponse) => {
           if (this.tab === 'EDIT') {
@@ -285,6 +317,19 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
             funnelName: this.pipelines[0].name,
             leadStateId: this.pipelines[0]._embedded.statuses[0].id.toString(),
             leadStateName: this.pipelines[0]._embedded.statuses[0].name
+          };
+        } else {
+          const existedFunnel = this.pipelines.filter(
+            (amoFunnel: AmoFunnel) => amoFunnel.id === this.editableIntegration.params.funnelId)[0];
+          const existedLeadState = existedFunnel._embedded.statuses.filter(
+            (amoLeadState: AmoStatus) => amoLeadState.id === this.editableIntegration.params.leadStateId)[0];
+
+          this.editableIntegration.params = {
+            ...this.editableIntegration.params,
+            funnelId: existedFunnel.id ? existedFunnel.id : this.pipelines[0].id.toString(),
+            funnelName: existedFunnel.id ? existedFunnel.name : this.pipelines[0].name,
+            leadStateId: existedLeadState.id ? existedLeadState.id : this.pipelines[0]._embedded.statuses[0].id.toString(),
+            leadStateName: existedLeadState.id ? existedLeadState.name : this.pipelines[0]._embedded.statuses[0].name
           };
         }
 

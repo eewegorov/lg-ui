@@ -297,7 +297,7 @@
             <button
               *ngIf="!isAmoActivated"
               class="btn btn-default mt-2 mb-4"
-              (click)="activateIntegration()"
+              (click)="activateIntegration(AmoGrantTypes.AuthCode)"
               [disabled]="disableActivation()"
             >
               <i class="fas fa-power-off mr-2"></i> {{ 'settings.site.newIntegration.activate' | translate }}
@@ -872,7 +872,7 @@
           <button
             *ngIf="!isAmoActivated"
             class="btn btn-default mt-2 mb-4"
-            (click)="activateIntegration()"
+            (click)="activateIntegration(AmoGrantTypes.AuthCode)"
             [disabled]="disableEditingActivation()"
           >
             <i class="fas fa-power-off mr-2"></i> {{ 'settings.site.newIntegration.activate' | translate }}

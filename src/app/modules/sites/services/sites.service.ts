@@ -1,15 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 import {
-  AmoAuthRequest, AmoAuthResponse, AmoFunnelResponse,
+  AmoAuthByCodeRequest, AmoAuthByRefreshTokenRequest,
+  AmoAuthRequest,
+  AmoAuthResponse,
+  AmoFunnelResponse,
+  AmoGrantTypes,
   CreateIntegrationRequest,
   CreateSiteData,
   CreateSiteRequest,
   CreateSiteResponse,
   Integration,
   IntegrationItem,
-  IntegrationResponse, IntegrationService,
+  IntegrationResponse,
+  IntegrationService,
   IntegrationsResponse,
   IntegrationTypes,
   Site,
@@ -18,12 +23,14 @@ import {
   SiteShort,
   SiteShortResponse,
   SitesResponse,
-  SitesShortResponse, Smartpoints, SmartpointsResponse,
+  SitesShortResponse,
+  Smartpoints,
+  SmartpointsResponse,
   UpdateIntegrationRequest
 } from '../../../core/models/sites';
-import { ErrorHandlerService } from '../../../core/services/error-handler.service';
-import { SitesApiService } from './sites-api.service';
-import { ApiResponse } from '../../../core/models/api';
+import {ErrorHandlerService} from '../../../core/services/error-handler.service';
+import {SitesApiService} from './sites-api.service';
+import {ApiResponse} from '../../../core/models/api';
 
 
 @Injectable({
@@ -150,16 +157,31 @@ export class SitesService {
     );
   }
 
-  public getAmoTokens(subdomain: string, clientId: string, clientSecret: string, authorizationCode: string): Observable<AmoAuthResponse> {
+  public getAmoTokens(
+    subdomain: string, clientId: string, clientSecret: string, grantType: AmoGrantTypes, credentials: string
+  ): Observable<AmoAuthResponse> {
     const amoCredentials: AmoAuthRequest = {
       client_id: clientId,
       client_secret: clientSecret,
-      grant_type: 'authorization_code',
-      code: authorizationCode,
+      grant_type: grantType,
       redirect_uri: 'https://leadgenic.ru/amo/auth'
     };
 
-    return this.sitesApiService.getAmoTokens(subdomain, amoCredentials);
+    let amoRequest: AmoAuthByCodeRequest | AmoAuthByRefreshTokenRequest;
+
+    if (grantType === AmoGrantTypes.AuthCode) {
+      amoRequest = {
+        ...amoCredentials,
+        code: credentials
+      };
+    } else {
+      amoRequest = {
+        ...amoCredentials,
+        refresh_token: credentials
+      };
+    }
+
+    return this.sitesApiService.getAmoTokens(subdomain, amoRequest);
   }
 
   public getAmoFunnels(subdomain: string, accessToken: string): Observable<AmoFunnelResponse> {

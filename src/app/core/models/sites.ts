@@ -186,9 +186,21 @@ export interface AmoParams {
 export interface AmoAuthRequest {
   client_id: string;
   client_secret: string;
-  grant_type: string;
-  code: string;
+  grant_type: AmoGrantTypes;
   redirect_uri: string;
+}
+
+export interface AmoAuthByCodeRequest extends AmoAuthRequest {
+  code: string;
+}
+
+export interface AmoAuthByRefreshTokenRequest extends AmoAuthRequest {
+  refresh_token: string;
+}
+
+export enum AmoGrantTypes {
+  AuthCode = 'authorization_code',
+  RefreshToken = 'refresh_token'
 }
 
 export interface AmoAuthResponse {
