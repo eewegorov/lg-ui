@@ -90,8 +90,8 @@ export class SitesApiService {
     return this.http.get<SmartpointsResponse>(`${ environment.url }/sites/${siteId}/smartpoints`);
   }
 
-  public getAmoTokens(subdomain: string, amoCredentials: AmoAuthByCodeRequest | AmoAuthByRefreshTokenRequest): Observable<AmoAuthResponse> {
-    return this.http.post<AmoAuthResponse>(`http://${subdomain}/oauth2/access_token`, amoCredentials);
+  public getAmoTokens(subdomain: string, amoRequest: AmoAuthByCodeRequest | AmoAuthByRefreshTokenRequest): Observable<AmoAuthResponse> {
+    return this.http.post<AmoAuthResponse>(`http://${subdomain}/oauth2/access_token`, amoRequest);
   }
 
   public getAmoFunnels(subdomain: string, accessToken: string): Observable<AmoFunnelResponse> {

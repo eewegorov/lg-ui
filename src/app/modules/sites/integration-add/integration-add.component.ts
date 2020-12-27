@@ -557,9 +557,10 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
           return !this.editableIntegration.params.url || !this.editableIntegration.params.hash;
         }
       case IntegrationTypes.AMOCRM:
-        return !this.editableIntegration.params.subdomain ||
-          !this.editableIntegration.params.login ||
-          !this.editableIntegration.params.hash;
+        return !this.editableIntegration.params.subdomain || !this.editableIntegration.params.clientId
+          || !this.editableIntegration.params.clientSecret || !this.editableIntegration.params.accessToken
+          || !this.editableIntegration.params.refreshToken || !this.editableIntegration.params.funnelId
+          || !this.editableIntegration.params.leadStateId || !this.editableIntegration.params.checkDuplicate;
       case IntegrationTypes.EMAIL:
         return !this.editableIntegration.params.email;
       case IntegrationTypes.ROISTAT:
