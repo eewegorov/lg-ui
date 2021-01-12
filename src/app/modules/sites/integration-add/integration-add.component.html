@@ -1071,7 +1071,7 @@
                 <div class="w-50 mr-3">
                   <input
                     type="text"
-                    [id]="'leadgenicFieldId' + i"
+                    [id]="'editLeadgenicFieldId' + i"
                     [(ngModel)]="integrationField.leadGenicId"
                     pattern="[0-9a-zA-Z_\-]{1,50}"
                     class="form-control leadgenic-field"
@@ -1086,7 +1086,7 @@
                 <div class="w-50 ml-3 mr-3">
                   <input
                     type="text"
-                    [id]="'crmFieldId' + i"
+                    [id]="'editCrmFieldId' + i"
                     [(ngModel)]="integrationField.crmId"
                     pattern="^.{1,50}$"
                     class="form-control"
@@ -1116,6 +1116,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal-footer d-flex justify-content-between mt-1">
   <button
     class="btn btn-default"
