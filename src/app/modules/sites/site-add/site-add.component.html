@@ -38,7 +38,7 @@
       <div class="text-center mb-4 pl-3 pr-3">
         <h4 class="mb-3">{{ 'sitelist.save.done' | translate }}</h4>
         <div class="text-left"><strong>{{ 'sitelist.form.code.desc1' | translate }}</strong></div>
-        <div class="mt-2">
+        <div class="mt-1">
           <div class="form-group">
             <textarea
               id="siteLink"
@@ -50,15 +50,18 @@
             ></textarea>
           </div>
         </div>
-        <div class="row">
+        <div>
           <div class="text-left">
             <strong>
-              {{ 'settings.script.apicode.title' | translate }} <a data-container="body" data-toggle="tooltip" data-placement="top" data-title="{{ 'settings.script.apicode.tooltip' | translate }}" class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+              {{ 'settings.script.apicode.title' | translate }} <a
+              data-container="body" data-toggle="tooltip" data-placement="top"
+              data-title="{{ 'settings.script.apicode.tooltip' | translate }}"
+              class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
             </strong>
           </div>
         </div>
-        <div class="row mt-2">
-          <div class="form-group " data-context="url">
+        <div class="mt-1">
+          <div class="form-group" data-context="url">
             <input
               type="text"
               id="siteId"
@@ -71,12 +74,12 @@
           </div>
         </div>
       </div>
-      <div class="text-center">
-        <h3>{{ 'sitelist.form.goto' | translate }}</h3>
+      <div class="text-center mb-3 pt-3">
+        <h4>{{ 'sitelist.form.goto' | translate }}</h4>
       </div>
       <div class="text-center mt-2">
         <button
-          class="btn btn-lg btn-success next"
+          class="btn btn-lg btn-success"
           (click)="setTab(3)"
           style="width: 310px;"
         >

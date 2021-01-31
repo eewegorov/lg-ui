@@ -1,3 +1,10 @@
 .form-control.not-readonly-hand[readonly] {
   cursor: pointer;
+  font-size: 14px;
+}
+
+.simple-link {
+  display: block;
+  margin-top: 15px;
+  color: #8c8b8b;
 }

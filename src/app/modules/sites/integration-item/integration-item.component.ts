@@ -31,7 +31,7 @@ export class IntegrationItemComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    (<any>$('[data-toggle="tooltip"]')).tooltip();
+    ($('[data-toggle="tooltip"]') as any).tooltip();
   }
 
   public fixOldWidgetName(data: string) {

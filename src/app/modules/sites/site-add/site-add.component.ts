@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {AfterViewChecked, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SubscriptionLike } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -14,12 +14,12 @@ import { WidgetService } from '../../widgets/services/widget.service';
   templateUrl: './site-add.component.html',
   styleUrls: ['./site-add.component.scss']
 })
-export class SiteAddComponent implements OnInit {
+export class SiteAddComponent implements OnInit, AfterViewChecked {
   @Input() public hidePhone: boolean;
   @Output() public updateSites = new EventEmitter<boolean>();
   public newSiteForm: FormGroup;
   public createdSite = {} as CreateSiteData;
-  public tab = 2;
+  public tab = 1;
   public isUrlInvalid = false;
   public smartPoints = {} as Smartpoints;
   private createSiteSub: SubscriptionLike;
@@ -35,10 +35,13 @@ export class SiteAddComponent implements OnInit {
     this.resetForm();
   }
 
+  ngAfterViewChecked(): void {
+    ($('[data-toggle="tooltip"]') as any).tooltip();
+  }
+
   public createSite() {
     const newSiteData = Object.assign({}, this.newSiteForm.getRawValue());
     delete newSiteData.phone;
-    console.log('aaa')
     /*this.createSiteSub = this.sitesService.createSite(newSiteData).pipe(
       switchMap(
         (response: CreateSiteData) => {*/
@@ -74,10 +77,24 @@ export class SiteAddComponent implements OnInit {
 
   public setTab(newTab) {
     if (newTab === 3) {
-      this.sitesService.getSiteSmartpointsList(this.createdSite.id).subscribe((response: Smartpoints) => {
+      /*this.sitesService.getSiteSmartpointsList(this.createdSite.id).subscribe((response: Smartpoints) => {*/
+      const response = {
+        "enabled": true,
+        "list": [{
+          "enabled": true,
+          "autoinvite": true,
+          "pos": "LEFT_DOWN",
+          "type": "CALLBACK"
+        }, {
+          "enabled": false,
+          "autoinvite": false,
+          "pos": "LEFT_EDGE",
+          "type": "POPUP"
+        }]
+      };
         this.smartPoints = response;
         this.tab = newTab;
-      });
+      /*});*/
     } else {
       this.tab = newTab;
     }
@@ -90,6 +107,5 @@ export class SiteAddComponent implements OnInit {
       phone: new FormControl('')
     });
   }
-
 
 }
