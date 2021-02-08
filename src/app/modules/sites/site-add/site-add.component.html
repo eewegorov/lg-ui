@@ -90,28 +90,30 @@
     </div>
 
     <div *ngIf="tab === 3">
-      <div class="row text-center m-b-lg">
-        <div class="col-lg-12 margined-bottom-10">
-          <h3>{{ 'sitelist.form.smartpoints.settings' | translate }}</h3>
+      <div class="row text-center mb-3">
+        <div class="col-lg-12 mb-3">
+          <h4>{{ 'sitelist.form.smartpoints.settings' | translate }}</h4>
         </div>
         <div class="row">
           <div class="col-lg-1"></div>
-          <div class="col-lg-10 text-left f-9">{{ 'sitelist.form.smartpoints.desc1' | translate }}</div>
+          <div class="col-lg-10 text-left">{{ 'sitelist.form.smartpoints.desc1' | translate }}</div>
           <div class="col-lg-1"></div>
         </div>
       </div>
 
-      <div class="row widgets-options-container2">
-        <!--<smartpoints-control-directive smart-points="smartPoints" site-id="createdSite.id"></smartpoints-control-directive>-->
+      <div class="row widgets-options-container">
+        <app-smartpoints-control [smartPoints]="smartPoints" [siteId]="createdSite.id"></app-smartpoints-control>
       </div>
 
-      <div class="row margined-top-20">
+      <div class="row mt-3">
         <div class="col-lg-12 text-center">
-          <h3>{{ 'sitelist.form.goto' | translate }}</h3>
+          <h4>{{ 'sitelist.form.goto' | translate }}</h4>
         </div>
       </div>
-      <div class="text-center m-t-xs margined-top-20 margined-bottom-20">
-        <a class="btn btn-lg btn-success next" ng-click="goToCreateOwnWidgets()" style="width: 425px;"> {{ 'sitelist.form.gotowidgets' | translate }}</a>
+      <div class="text-center mt-3 mb-3">
+        <a class="btn btn-lg btn-success next" (click)="goToCreateOwnWidgets()" style="width: 425px;">
+          {{ 'sitelist.form.gotowidgets' | translate }}
+        </a>
       </div>
     </div>
   </div>

@@ -14,6 +14,7 @@ import { SitesListComponent } from './sites-list/sites-list.component';
 import { SitesComponent } from './sites/sites.component';
 import { IntegrationAddComponent } from './integration-add/integration-add.component';
 import { IntegrationItemComponent } from './integration-item/integration-item.component';
+import { WidgetsModule } from '../widgets/widgets.module';
 
 
 
@@ -36,7 +37,8 @@ import { IntegrationItemComponent } from './integration-item/integration-item.co
     UiSwitchModule,
     FilterPipeModule,
     SharedModule,
-    SitesRoutingModule
+    SitesRoutingModule,
+    WidgetsModule
   ]
 })
 export class SitesModule { }

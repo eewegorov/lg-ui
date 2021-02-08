@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
-  Entities,
+  Entities, SmartPoint, SmartPointUpdateRequest,
   WidgetRename,
   WidgetsResponse,
   WidgetTemplate,
@@ -47,7 +47,7 @@ export class WidgetService {
   }
 
   public rename(siteId: string, widgetId: string, name: string): Observable<boolean> {
-    const renamedCWidget: WidgetRename = { name: name };
+    const renamedCWidget: WidgetRename = { name };
     return this.widgetApiService.rename(siteId, widgetId, renamedCWidget).pipe(
       map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
@@ -62,15 +62,27 @@ export class WidgetService {
     );
   }
 
+  public saveSmartpointType(siteId, smartpoint: SmartPoint) {
+    const updatedSmartpoint: SmartPointUpdateRequest = {
+      enabled: smartpoint.enabled,
+      autoinvite: smartpoint.autoinvite,
+      pos: smartpoint.pos
+    };
+    return this.widgetApiService.putSmartpointType(siteId, smartpoint.type, updatedSmartpoint).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
   public getDefaultCompany(companies) {
     const currentC = companies || this.currentCompanies;
-    return currentC.find(function(item) {
+    return currentC.find((item) => {
       return item.default;
     });
   }
 
   public getUndefaultCompanies(companies) {
-    return companies.filter(function (item) {
+    return companies.filter((item) => {
       return !item.default;
     });
   }

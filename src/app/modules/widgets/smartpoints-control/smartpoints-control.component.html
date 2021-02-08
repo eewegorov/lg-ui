@@ -1,0 +1,107 @@
+<div class="smartpoints-widgets-row">
+  <div class="smartpoint-item-column padding-sides-5">
+    <div class="form-group widget-selector callbackWdgControl">
+      <label class="non-bold">
+        <!-- Default unchecked -->
+        <div class="form-check icheckbox_square-green">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [ngModel]="smWidgets.CALLBACK.enabled"
+              (ngModelChange)="prepareSmartpointForSave(smWidgets.CALLBACK)"
+            />
+          </label>
+        </div>
+        {{ 'settings.widgets.callback' | translate }} <span data-toggle="tooltip" data-placement="top" data-title="{{ 'settings.widgets.callback.tooltip' | translate }}" class="info-link"><i class="fa fa-info-circle"></i></span>
+      </label>
+    </div>
+    <div *ngIf="smWidgets.CALLBACK.enabled">
+      <div class="form-group">
+        <label>{{ 'settings.widgets.invite.positions' | translate }}:</label>
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{ getPositionText(smWidgets.CALLBACK.pos) | translate }}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <ng-container *ngFor="let item of positions; let isEven = even">
+              <li *ngIf="isEven" (click)="setPosition(smWidgets.CALLBACK, item.pos)" >
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item.text | translate }}</a>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+      <div class="form-group switch-case-container">
+        <switch class="switch-xs" ng-model="sm_widgets.CALLBACK.autoinvite" ng-change="prepareSmartpointForSave(sm_widgets.CALLBACK)"></switch>
+        <label class="control-label switcher-label-xs control-label-des">
+          {{ 'settings.widgets.autoinvite' | translate }}
+          <span data-toggle="tooltip"
+                data-container="body"
+                data-placement="top"
+                data-title="{{ 'settings.widgets.autoinvite.tooltip' | translate }}"
+                class="info-link"><i class="fa fa-info-circle"></i></span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="smartpoint-item-column padding-sides-5">
+    <div class="form-group widget-selector inviteWdgControl">
+      <label class="non-bold">
+        <checkbox ng-model="sm_widgets.INVITE.enabled" ng-change="prepareSmartpointForSave(sm_widgets.INVITE)" class="checkbox-cool checkbox-green-btn"></checkbox>
+        {{ 'settings.widgets.invite' | translate }} <span data-toggle="tooltip" data-placement="top" data-title="{{ 'settings.widgets.invite.tooltip' | translate }}" class="info-link"><i class="fa fa-info-circle"></i></span>
+      </label>
+    </div>
+    <div ng-show="sm_widgets.INVITE.enabled">
+      <div class="form-group" data-position-for="wdgInvite" data-sm-type="1">
+        <label>{{ 'settings.widgets.invite.positions' | translate }}:</label>
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{ getPositionText(smWidgets.INVITE.pos) | translate }}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li ng-click="setPosition(sm_widgets.INVITE, item.pos)" ng-repeat="item in positions"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item.text | translate }}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="form-group switch-case-container">
+        <switch class="switch-xs" ng-model="sm_widgets.INVITE.autoinvite" ng-change="prepareSmartpointForSave(sm_widgets.INVITE)"></switch>
+        <label class="control-label switcher-label-xs control-label-des">
+          {{ 'settings.widgets.autoinvite' | translate }}
+          <span data-toggle="tooltip"
+                data-container="body"
+                data-placement="top"
+                data-title="{{ 'settings.widgets.autoinvite.tooltip' | translate }}"
+                class="info-link"><i class="fa fa-info-circle"></i></span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="smartpoint-item-column padding-sides-5">
+    <div class="form-group widget-selector">
+      <label class="non-bold">
+        <checkbox ng-model="sm_widgets.INSTANT_POPUP.enabled" ng-change="prepareSmartpointForSave(sm_widgets.INSTANT_POPUP)" class="checkbox-cool checkbox-green-btn"></checkbox>
+        {{ 'settings.widgets.instant' | translate }} <span data-toggle="tooltip" data-placement="top" data-title="{{ 'settings.widgets.instant.tooltip' | translate }}" class="info-link"><i class="fa fa-info-circle"></i></span>
+      </label>
+    </div>
+    <div class="form-group widget-selector">
+      <label class="non-bold">
+        <checkbox ng-model="sm_widgets.POPUP.enabled" ng-change="prepareSmartpointForSave(sm_widgets.POPUP)" class="checkbox-cool checkbox-green-btn"></checkbox>
+        {{ 'settings.widgets.smart' | translate }} <span data-toggle="tooltip" data-placement="top" data-title="{{ 'settings.widgets.smart.tooltip' | translate }}" class="info-link"><i class="fa fa-info-circle"></i></span>
+      </label>
+    </div>
+    <div class="form-group widget-selector">
+      <label class="non-bold">
+        <checkbox ng-model="sm_widgets.MOBILE.enabled" ng-change="prepareSmartpointForSave(sm_widgets.MOBILE)" class="checkbox-cool checkbox-green-btn"></checkbox>
+        {{ 'settings.widgets.mobile' | translate }} <span data-toggle="tooltip" data-placement="top" data-title="{{ 'settings.widgets.mobile.tooltip' | translate }}" class="info-link"><i class="fa fa-info-circle"></i></span>
+      </label>
+    </div>
+    <div class="form-group widget-selector">
+      <label class="non-bold">
+        <checkbox ng-model="sm_widgets.EXIT_INTENT.enabled" ng-change="prepareSmartpointForSave(sm_widgets.EXIT_INTENT)" class="checkbox-cool checkbox-green-btn"></checkbox>
+        {{ 'settings.widgets.exitintent' | translate }} <span data-toggle="tooltip" data-placement="top" data-title="{{ 'settings.widgets.exitintent.tooltip' | translate }}" class="info-link"><i class="fa fa-info-circle"></i></span>
+      </label>
+    </div>
+  </div>
+</div>

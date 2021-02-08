@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
 import {
+  SmartPointTypes,
+  SmartPointUpdateRequest,
   WidgetRename,
   WidgetsResponse,
   WidgetTemplatesResponse,
@@ -36,5 +38,9 @@ export class WidgetApiService {
 
   public switch(siteId: string, widgetId: string, action: 'start' | 'stop') {
     return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/sitewidgets/${widgetId}/${action}`, null);
+  }
+
+  public putSmartpointType(siteId: string, smartpointType: SmartPointTypes, smartpoint: SmartPointUpdateRequest) {
+    return this.http.put(`${ environment.url }/sites/${siteId}/smartpoints/${smartpointType}`, smartpoint);
   }
 }

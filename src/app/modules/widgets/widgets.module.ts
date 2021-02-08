@@ -10,6 +10,7 @@ import { WidgetAddComponent } from './widget-add/widget-add.component';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetEditComponent } from './widget-edit/widget-edit.component';
 import { CampaignDeleteComponent } from './campaign-delete/campaign-delete.component';
+import { SmartpointsControlComponent } from './smartpoints-control/smartpoints-control.component';
 
 
 @NgModule({
@@ -19,7 +20,11 @@ import { CampaignDeleteComponent } from './campaign-delete/campaign-delete.compo
     WidgetAddComponent,
     WidgetsComponent,
     WidgetEditComponent,
-    CampaignDeleteComponent
+    CampaignDeleteComponent,
+    SmartpointsControlComponent
+  ],
+  exports: [
+    SmartpointsControlComponent
   ],
   imports: [
     CommonModule,

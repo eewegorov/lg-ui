@@ -1,4 +1,5 @@
-import {AfterViewChecked, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SubscriptionLike } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -19,13 +20,14 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
   @Output() public updateSites = new EventEmitter<boolean>();
   public newSiteForm: FormGroup;
   public createdSite = {} as CreateSiteData;
-  public tab = 1;
+  public tab = 3;
   public isUrlInvalid = false;
   public smartPoints = {} as Smartpoints;
   private createSiteSub: SubscriptionLike;
 
 
   constructor(
+    private router: Router,
     private activeModal: NgbActiveModal,
     private userService: UserService,
     private sitesService: SitesService
@@ -73,6 +75,10 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
 
   public closeModal(): void {
     this.activeModal.close();
+  }
+
+  public goToCreateOwnWidgets() {
+    this.router.navigateByUrl(`/widgets/?enableModal=true&selected=${this.createdSite.id}`);
   }
 
   public setTab(newTab) {

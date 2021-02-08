@@ -33,7 +33,22 @@ export interface SmartPoint {
   enabled: boolean;
   autoinvite: boolean;
   pos: string;
-  type: string;
+  type: SmartPointTypes;
+}
+
+export interface SmartPointUpdateRequest {
+  enabled: boolean;
+  autoinvite: boolean;
+  pos: string;
+}
+
+export enum SmartPointTypes {
+  CALLBACK = 'CALLBACK',
+  INVITE = 'INVITE',
+  INSTANT_POPUP = 'INSTANT_POPUP',
+  POPUP = 'POPUP',
+  EXIT_INTENT = 'EXIT_INTENT',
+  MOBILE = 'MOBILE'
 }
 
 export interface Widget {
@@ -76,8 +91,6 @@ export interface WidgetType {
 export interface WidgetTemplatesResponse extends ApiResponse {
   data: WidgetTemplate[];
 }
-
-
 
 export interface WidgetTemplate {
   id: string;
