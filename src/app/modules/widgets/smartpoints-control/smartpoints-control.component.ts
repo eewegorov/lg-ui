@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SmartPoint } from '../../../core/models/widgets';
 import { Smartpoints } from '../../../core/models/sites';
 import { WidgetService } from '../services/widget.service';
 

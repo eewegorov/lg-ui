@@ -373,9 +373,6 @@
 				"activated": "",
 				"add": "",
 				"apikey": "",
-				"check": {
-					"tooltip": ""
-				},
 				"choseIntegrationService": "",
 				"connection": {
 					"api": "",
@@ -404,13 +401,15 @@
 					"secret": "",
 					"secretKey": "",
 					"url": "",
-					"urlExtra": "",
+					"urlExtra": {
+						"desc": "",
+						"title": ""
+					},
 					"webhook": {
 						"desc": "",
 						"title": ""
 					}
 				},
-				"deactivate": "",
 				"description": "",
 				"donorSite": "",
 				"edit": "",
@@ -432,6 +431,7 @@
 					"status": "",
 					"title": ""
 				},
+				"help": "",
 				"instruction": "",
 				"name": "",
 				"others": "",
@@ -514,7 +514,36 @@
 		},
 		"title": "",
 		"widgets": {
-			"select": ""
+			"autoinvite": {
+				"title": "",
+				"tooltip": ""
+			},
+			"callback": {
+				"title": "",
+				"tooltip": ""
+			},
+			"exitintent": {
+				"title": "",
+				"tooltip": ""
+			},
+			"instant": {
+				"title": "",
+				"tooltip": ""
+			},
+			"invite": {
+				"positions": "",
+				"title": "",
+				"tooltip": ""
+			},
+			"mobile": {
+				"title": "",
+				"tooltip": ""
+			},
+			"select": "",
+			"smart": {
+				"title": "",
+				"tooltip": ""
+			}
 		}
 	},
 	"sidebar": {
