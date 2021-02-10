@@ -56,15 +56,29 @@
               <i class="fa fa-trash"></i>
             </button>
           </div>
-          <div class="no-padding margined-top-10" ng-show="newCompany.on">
-            <div class="floated-left" ng-class="(newCompany.name.trim().length === 0) ? 'has-error':''">
-              <input type="text" class="form-control" ng-model="newCompany.name" style="width: 245px;" placeholder="{{'widgetsList.clone.company.add.label' | translate}}">
+          <div class="no-padding margined-top-10" *ngIf="newCompany.on">
+            <div class="floated-left" [ngClass]="(newCompany.name.trim().length === 0) ? 'has-error' : ''">
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="newCompany.name"
+                style="width: 245px;"
+                placeholder="{{'widgetsList.clone.company.add.label' | translate}}"
+              >
             </div>
             <div class="floated-right margined-right-15">
               <button class="btn btn-default floated-left" data-container="body"  data-toggle="tooltip" data-placement="top" title="{{ 'global.cancel' | translate }}" ng-click="resetNewCompany()">
                 <i class="fa fa-times"></i>
               </button>
-              <button ng-disabled="newCompany.name.trim().length === 0" class="btn btn-success margined-left-5 floated-left" data-container="body"  data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.company.add.tooltip' | translate }}" ng-click="saveNewCompany()">
+              <button
+                [disabled]="newCompany.name.trim().length === 0"
+                class="btn btn-success margined-left-5 floated-left"
+                data-container="body"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="{{ 'widgetsList.company.add.tooltip' | translate }}"
+                (click)="saveNewCompany()"
+              >
                 <i class="fa fa-check"></i>
               </button>
             </div>
@@ -74,63 +88,75 @@
     </div>
   </div>
   <div class="btnpanel padding-top-75">
-    <div><button (click)="createNewWidget()" type="button" class="btn btn-lg w-xs btn-success"><i class="fa fa-plus-circle"></i> {{ 'widgetsList.add.title' | translate }}</button></div>
+    <div>
+      <button
+        (click)="createNewWidget()"
+        type="button"
+        class="btn btn-lg w-xs btn-success"
+      ><i class="fa fa-plus-circle"></i> {{ 'widgetsList.add.title' | translate }}
+      </button>
+    </div>
     <div id="buyWidgetDevelopmentContainer"><a href="#" id="buyWidgetDevelopment">{{ 'widgetsList.add.alt' | translate }}</a></div>
   </div>
 </div>
 
 
 <!-- smart points settings -->
-<div class="widgets-site-settings no-animate" ng-show="sites.length > 0" tooltiped>
+<div class="widgets-site-settings no-animate" *ngIf="sites.length > 0">
   <div class="row">
     <div class="col-lg-12">
-      <ui-switch ng-model="smartPoints.enabled" ng-change="enableDisableSP()" class="margined-top-5 margined-right-10 floated-left"></ui-switch>
-      <h3 class="f-0">{{ 'widgetsList.site.default.title' | translate }} <a data-toggle="tooltip"
-                                                                      data-placement="bottom"
-                                                                      title="{{ 'widgetsList.site.default.tooltip' | translate }}"
-                                                                      class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+      <ui-switch
+        [checked]="smartPoints.enabled"
+        (change)="enableDisableSP()"
+        class="margined-top-5 margined-right-10 floated-left"
+      ></ui-switch>
+      <h3 class="f-0">
+        {{ 'widgetsList.site.default.title' | translate }} <a
+        data-toggle="tooltip" data-placement="bottom"
+        title="{{ 'widgetsList.site.default.tooltip' | translate }}"
+        class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h3>
     </div>
   </div>
-  <div ng-show="smartPoints.enabled" class="row margined-left-40 widget-page__smaptpoint-container">
+  <div *ngIf="smartPoints.enabled" class="row margined-left-40 widget-page__smaptpoint-container">
     <span class="widget-page__smaptpoint-container-title">{{ 'settings.widgets.select' | translate }}:</span>
-    <!--<smartpoints-control-directive smart-points="smartPoints" site-id="currentSite.id"></smartpoints-control-directive>-->
+    <app-smartpoints-control [smartPoints]="smartPoints" [siteId]="currentSite.id"></app-smartpoints-control>
   </div>
 </div>
 <!-- End smart points settings -->
 
 
 <div class="row no-animate">
-  <div class="col-lg-12 margined-top-30" ng-hide="!isHasWidgets() && !filteredContainers().length">
+  <div class="col-lg-12 margined-top-30" *ngIf="isHasWidgets() || filteredContainers().length">
     <h3 class="f-0">{{ 'widgetsList.listTitle' | translate }}</h3>
   </div>
-  <div class="col-lg-12 margined-top-30" ng-show="!sites.length">
+  <div class="col-lg-12 margined-top-30" *ngIf="!sites.length">
     <h3 class="f-0 text-center">{{ 'widgetsList.sitePlaceholder' | translate }}</h3>
     <h4 class="f-2 text-center underline-links blue-links hover-links" [innerHTML]="'widgetsList.sitePlaceholder2' | translate"></h4>
   </div>
 
   <!-- Static widgets -->
-  <div class="col-lg-12 margined-top-30" ng-hide="!containers.length || !filteredContainers().length">
+  <div class="col-lg-12 margined-top-30" *ngIf="containers.length && filteredContainers().length">
     <h4 class="f-1 no-bold">{{ 'containerized.title' | translate }}:</h4>
   </div>
-  <div ng-if="containers.length">
+  <div *ngIf="containers.length">
     <!--<containerized-container container="container" site="currentSite" current-company="currentCompany" ng-repeat="container in filteredContainers()"></containerized-container>-->
   </div>
   <!-- End Static widgets -->
 
-  <div class="col-lg-12 margined-top-30" ng-show="!isHasWidgets() && !filteredContainers().length && sites.length">
-    <div ng-if="currentCompany.default">
+  <div class="col-lg-12 margined-top-30" *ngIf="!isHasWidgets() && !filteredContainers().length && sites.length">
+    <div *ngIf="currentCompany.default">
       <h3 class="f-0 text-center">{{ 'widgetsList.listPlaceholder' | translate }}</h3>
       <h4 class="f-2 text-center">{{ 'widgetsList.listPlaceholder2' | translate }}</h4>
     </div>
-    <div ng-if="!currentCompany.default">
+    <div *ngIf="!currentCompany.default">
       <h3 class="f-0 text-center">{{ 'widgetsList.listPlaceholder3' | translate }}</h3>
     </div>
   </div>
 
   <div class="margined-top-10 col-lg-4" *ngFor="let wdgTypes of getTypesWithCompanyFilter()">
     <h4 class="f-1 no-bold margined-top-30">{{ getTypeItem(wdgTypes).name }}:</h4>
-    <div class="row" ng-repeat="widget in getFilteredWidgets(wdgTypes)">
+    <div class="row" *ngFor="let widget of getFilteredWidgets(wdgTypes)">
       <!--<widget-item-directive widget="widget"
                              first="$first"
                              last="$last"

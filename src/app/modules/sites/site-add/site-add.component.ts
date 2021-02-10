@@ -20,11 +20,10 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
   @Output() public updateSites = new EventEmitter<boolean>();
   public newSiteForm: FormGroup;
   public createdSite = {} as CreateSiteData;
-  public tab = 3;
+  public tab = 1;
   public isUrlInvalid = false;
   public smartPoints = {} as Smartpoints;
   private createSiteSub: SubscriptionLike;
-
 
   constructor(
     private router: Router,
@@ -78,7 +77,9 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
   }
 
   public goToCreateOwnWidgets() {
-    this.router.navigateByUrl(`/widgets/?enableModal=true&selected=${this.createdSite.id}`);
+    this.router.navigate(['widgets'], { queryParams: {enableModal: true, selected: this.createdSite.id}}).then(
+      () => this.closeModal()
+    );
   }
 
   public setTab(newTab) {

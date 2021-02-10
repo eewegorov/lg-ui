@@ -32,7 +32,7 @@ export class WidgetsComponent implements OnInit {
   types: { id: string; name: string; }[];
   newCompany = {
     on: false,
-    name: ""
+    name: ''
   };
   enableWidgetsModal = false;
 
@@ -146,12 +146,50 @@ export class WidgetsComponent implements OnInit {
     this.currentCompany = company;
   }
 
+  public saveNewCompany() {
+    this.widgetService.createCompany(this.sitesService.getCurrentSiteId(), this.newCompany.name).then(function (response) {
+      if (response.code === 200) {
+        $scope.companies.push(response.data);
+        $scope.currentCompany = response.data;
+        toastr["success"](notifyMessages.addDesc, notifyMessages.addDone + "!");
+      } else {
+        SiteService.parseError(response);
+      }
+      $scope.resetNewCompany();
+    });
+  }
+
+  public enableDisableSP() {
+    this.widgetService.startStopSmartpoint(SiteService.getCurrentSiteId(), this.smartPoints.enabled);
+  }
+
+  public isHasWidgets() {
+    const types = Object.keys(this.widgets);
+    for (let i = 0; i < types.length; i++) {
+      for (let j = 0; j < this.widgets[types[i]].length; j++) {
+        if (this.currentCompany.id === this.widgetService.getDefaultCompany(this.companies).id ||
+          this.widgets[types[i]][j].companyId === this.currentCompany.id) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  public filteredContainers() {
+    if (!this.currentCompany || this.currentCompany.default) { return this.containers; }
+
+    return this.containers.filter((item) => {
+      return item.widgets.some((widget) => widget.companyId === this.currentCompany.id);
+    });
+  }
+
   private getWidgetsCount(): number {
     const keys = Object.keys(this.widgets);
     let count = 0;
-    for (let i = 0; i < keys.length; i++) {
-      count += this.widgets[keys[i]].length;
-    }
+    keys.forEach((item: string) => {
+      count += this.widgets[item].length;
+    });
     return count + this.getContainerizedWidgetLength();
   }
 

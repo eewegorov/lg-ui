@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Smartpoints } from '../../../core/models/sites';
+import { Smartpoint, Smartpoints } from '../../../core/models/sites';
 import { WidgetService } from '../services/widget.service';
 
 @Component({
@@ -9,7 +9,6 @@ import { WidgetService } from '../services/widget.service';
 })
 export class SmartpointsControlComponent implements OnInit {
   @Input() public siteId: string;
-  @Input() public smartPoints: Smartpoints;
 
   public smWidgets = {
     CALLBACK: {enabled: true, autoinvite: true, pos: 'RIGHT_DOWN', type: 'CALLBACK'},
@@ -58,7 +57,7 @@ export class SmartpointsControlComponent implements OnInit {
 
   public prepareSmartpointForSave(smartpoint) {
     if (smartpoint.type) {
-      this.widgetService.saveSmartpointType(this.siteId, smartpoint);
+      this.widgetService.saveSmartpointType(this.siteId, smartpoint).subscribe();
     }
   }
 
@@ -66,5 +65,14 @@ export class SmartpointsControlComponent implements OnInit {
     smartpoint.pos = position;
     this.prepareSmartpointForSave(smartpoint);
   }
+
+  @Input() set smartPoints(smartPoints: Smartpoints) {
+    if (smartPoints && smartPoints.list.length) {
+      smartPoints.list.forEach((item: Smartpoint) => {
+        this.smWidgets[item.type] = item;
+      });
+    }
+  }
+
 
 }
