@@ -93,16 +93,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
           let newUserName: string;
           let newUserPwd: string;
           this.autoRegisterLoadingPanel = false;
-          for (let i = 0; i < response.rows.length; i++) {
-            if (response.rows[i].code === 400) {
+          for (const item of response.rows) {
+            if (item.code === 400) {
               this.autoRegisterError = true;
-              this.autoRegisterErrorMessage = response.rows[i].message;
-            } else if (response.rows[i].code === 201) {
-              if (response.rows[i].message === "user created") {
-                newUserName = (response.rows[i].object as RegistrationObject).login ;
+              this.autoRegisterErrorMessage = item.message;
+            } else if (item.code === 201) {
+              if (item.message === 'created') {
+                newUserName = (item.object as RegistrationObject).login ;
               }
-              if (response.rows[i].message === "password") {
-                newUserPwd = response.rows[i].object as string;
+              if (item.message === 'password') {
+                newUserPwd = item.object as string;
               }
               if (newUserName && newUserPwd) {
                 this.autoRegisterError = false;
