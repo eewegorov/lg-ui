@@ -12,6 +12,7 @@ import { WidgetEditComponent } from './widget-edit/widget-edit.component';
 import { CampaignDeleteComponent } from './campaign-delete/campaign-delete.component';
 import { SmartpointsControlComponent } from './smartpoints-control/smartpoints-control.component';
 import { ContainerizedContainerComponent } from './containerized-container/containerized-container.component';
+import { ContainerizedItemComponent } from './containerized-container/containerized-item/containerized-item.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ContainerizedContainerComponent } from './containerized-container/conta
     WidgetEditComponent,
     CampaignDeleteComponent,
     SmartpointsControlComponent,
-    ContainerizedContainerComponent
+    ContainerizedContainerComponent,
+    ContainerizedItemComponent
   ],
   exports: [
     SmartpointsControlComponent

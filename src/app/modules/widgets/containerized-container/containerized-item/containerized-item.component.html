@@ -1,0 +1,119 @@
+<div class="ab-grid__item">
+  <div class="ab-grid__item--name">
+    <a href="#"
+       editable-text="item.name"
+       onbeforesave="updateCWidget($data)">
+      <span long-text="{{item.name}}" max-total-characters="30"></span> <i class="fa fa-pencil"></i></a>
+  </div>
+  <div class="ab-grid__item--company">
+    <a href="javascript:void(0);"
+       ng-show="changeCompanyWidget.id !== item.id"
+       ng-click="startChangeCompany()"
+       class="widget-company-editable penciled">
+            <span long-text="{{widgetCurrentCompany.name}}"
+                  max-total-characters="25"></span><i class="fa fa-pencil margined-left-6"></i></a>
+
+    <div class="changeable-company-widget" ng-if="changeCompanyWidget.id === item.id">
+      <div class="floated-left" style="width: calc(100% - 80px)">
+        <div class="dropdown widget-company-selector">
+          <button class="btn btn-default dropdown-toggle" type="button"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <span class="value">{{changeCompanyWidget.name}}</span>
+            <span class="caret" ></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li ng-repeat="company in getFilteredCompanies()" ng-click="changeCurrentCompany(company)"><a href="javascript:void(0);">{{company.name}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="floated-right">
+        <button ng-click="changeCWidgetCompany()"
+                class="btn btn-success margined-left-5 floated-right"
+                data-container="body"  data-toggle="tooltip" data-placement="top"
+                title="{{ 'widgetsList.widget.changecompany.tooltip' | translate }}"><i class="fa fa-check"></i></button>
+
+        <button ng-click="resetChangeCompany()"
+                class="btn btn-default floated-right"
+                data-container="body"  data-toggle="tooltip" data-placement="top"
+                title="{{ 'global.cancel' | translate }}"><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+  </div>
+  <div ng-if="item.widgetConversion" class="ab-grid__item--shows">{{item.widgetConversion.shows | thousandSuffix:2}}</div>
+  <div ng-if="item.widgetConversion" class="ab-grid__item--targets">{{item.widgetConversion.target | thousandSuffix:2}}</div>
+  <div ng-if="item.widgetConversion" class="ab-grid__item--conv" ng-bind="(item.widgetConversion.shows !== 0) ? getCConversion() : '0.00%'"></div>
+
+  <div ng-if="!item.widgetConversion" class="ab-grid__item--shows reports-emails-preloader"></div>
+  <div ng-if="!item.widgetConversion" class="ab-grid__item--targets reports-emails-preloader"></div>
+  <div ng-if="!item.widgetConversion" class="ab-grid__item--conv reports-emails-preloader"></div>
+
+  <div class="ab-grid__item--priority">
+    <div class="btn-group priority-btns">
+      <button class="btn btn-xs btn-default priority-up-widget-btn"
+              ng-disabled="first"
+              ng-click="swapCWidgets(true)">
+        <i class="fa fa-angle-up"></i></button>
+
+      <button class="btn btn-xs btn-default priority-down-widget-btn"
+              ng-disabled="last"
+              ng-click="swapCWidgets()">
+        <i class="fa fa-angle-down"></i></button>
+    </div>
+  </div>
+  <div class="ab-grid__item--actions-static">
+    <div class="btn-group play-btns margined-right-10">
+      <button ng-click="switchCWidget(true)"
+              ng-class="item.active ? 'active' : ''"
+              class="btn btn-xs btn-default start-widget-btn"
+              data-container="body" data-toggle="tooltip" data-placement="top"
+              title="{{ 'widgetsList.widget.start' | translate }}"><i class="fa fa-play"></i></button>
+
+      <button ng-click="switchCWidget(false)"
+              ng-class="item.active ? '' : 'active'"
+              class="btn btn-xs btn-default stop-widget-btn"
+              data-container="body"  data-toggle="tooltip" data-placement="top"
+              title="{{ 'widgetsList.widget.stop' | translate }}"><i class="fa fa-pause"></i></button>
+    </div>
+
+    <div class="btn-group ab-btns margined-right-10">
+      <button ng-click="abCAction()"
+              ng-show="abIfNoTest()"
+              class="btn btn-xs btn-default ab-widget-btn"
+              data-container="body" data-toggle="tooltip" data-placement="top"
+              title="{{ 'widgetsList.widget.ab.start.desc' | translate }}">{{ 'abtest.ab.label' | translate }}</button>
+
+      <button ng-click="goToTest()"
+              ng-show="abIfTestOnWork()"
+              class="btn btn-xs btn-default ab-widget-btn in-work"
+              data-container="body" data-toggle="tooltip" data-placement="top"
+              title="{{ 'widgetsList.widget.ab.state.desc' | translate }}">{{ 'abtest.ab.label' | translate }}</button>
+
+      <button ng-click="goToTest()"
+              ng-show="abIfTestOnPause()"
+              class="btn btn-xs btn-default ab-widget-btn in-pause"
+              data-container="body" data-toggle="tooltip" data-placement="top"
+              title="{{ 'widgetsList.widget.ab.stop.desc' | translate }}">{{ 'abtest.ab.label' | translate }}</button>
+    </div>
+
+    <div class="btn-group edit-btns">
+      <button class="btn btn-xs btn-default"
+              ng-click="duplicateCWidget(item)"
+              data-container="body"  data-toggle="tooltip" data-placement="top"
+              title="{{ 'widgetsList.widget.duplicate' | translate }}">
+        <i class="fa fa-copy"></i>
+      </button>
+
+      <button ng-click="goToConstructor()"
+              class="btn btn-xs btn-default"
+              data-container="body" data-toggle="tooltip" data-placement="top"
+              title="{{ 'widgetsList.widget.settings' | translate }}"><i class="fa fa-gears"></i></button>
+
+      <button class="btn btn-xs btn-default"
+              ng-click="removeCWidget()"
+              data-container="body"  data-toggle="tooltip" data-placement="top"
+              title="{{ 'widgetsList.widget.trash' | translate }}">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>
+  </div>
+</div>

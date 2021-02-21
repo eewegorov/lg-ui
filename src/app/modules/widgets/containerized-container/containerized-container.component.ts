@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./containerized-container.component.scss']
 })
 export class ContainerizedContainerComponent implements OnInit {
+  public container = '';
+  currentCompany = '';
+  site = '';
 
   constructor() { }
 
