@@ -5,28 +5,28 @@
         <div class="max-edit-text-bl">
           <a class="test-item-name"
              href="#" editable-text="container.name"
-             onbeforesave="updateContainer($data)">{{container.name || emptyName}} <i class="fa fa-pencil"></i></a>
+             onbeforesave="updateContainer($data)">{{ container.name || emptyName }} <i class="fa fa-pencil"></i></a>
         </div>
         <div class="max-edit-text-bl m-b-sm">
           <a class="test-item-desc"
              href="#" editable-text="container.description"
-             onaftersave="updateDescription()">{{container.description || emptyDescription}} <i class="fa fa-pencil"></i></a>
+             onaftersave="updateDescription()">{{ container.description || emptyDescription }} <i class="fa fa-pencil"></i></a>
         </div>
       </div>
       <div class="test-item-right">
         <div class="btn-group play-btns margined-right-10">
           <button class="btn btn-xs btn-default btn-show-dialog-code"
-                  ng-click="openContainerCodeModal()"
+                  (click)="openContainerCodeModal()"
                   data-toggle="tooltip"
                   data-placement="top"
-                  title="{{:: 'containerized.container.code.tooltip' | translate }}">
+                  title="{{ 'containerized.container.code.tooltip' | translate }}">
             <b>&lt;/&gt;</b> {{ 'settings.script.title' | translate }}
           </button>
         </div>
 
         <div class="btn-group edit-btns">
           <button class="btn btn-xs btn-default btn-remove-container"
-                  ng-click="removeContainer()"
+                  (click)="removeContainer()"
                   data-container="body"  data-toggle="tooltip" data-placement="top"
                   title="{{ 'containerized.container.remove' | translate }}">
             <i class="fa fa-trash"></i>
@@ -42,37 +42,40 @@
           <div class="ab-grid__header--shows">{{ 'widgetsList.widget.show.all' | translate }}</div>
           <div class="ab-grid__header--targets">{{ 'widgetsList.widget.show.actions' | translate }}</div>
           <div class="ab-grid__header--conv">{{ 'widgetsList.widget.show.conversion' | translate }}</div>
-          <div class="ab-grid__header--priority">{{ 'widgetsList.widget.priority' | translate }} <a class="info-link" href="#"
-                                                                                                    data-toggle="tooltip" data-placement="top"
-                                                                                                    title="{{ 'widgetsList.widget.priority.tooltip' | translate }}"><i class="fa fa-info-circle"></i></a></div>
+          <div class="ab-grid__header--priority">{{ 'widgetsList.widget.priority' | translate }} <a
+            class="info-link" href="#" data-toggle="tooltip" data-placement="top"
+            title="{{ 'widgetsList.widget.priority.tooltip' | translate }}"><i class="fa fa-info-circle"></i></a>
+          </div>
           <div class="ab-grid__header--actions-static">{{ 'containerized.container.header.control' | translate }}</div>
         </div>
         <div class="ab-grid__body">
-          <containerized-item ng-repeat="widget in container.widgets"
-                              class="grid-containerized-item"
-                              ng-class-even="'bg-for-line-grid'"
-                              ng-class="!widget.active ? 'ab-grid__item--non-active' : ''"
-                              item="widget"
-                              container-id="container.id"
-                              site-id="site.id"
-                              first="$first"
-                              last="$last"
-                              prev="container.widgets[$index - 1]"
-                              next="container.widgets[$index + 1]"></containerized-item>
+          <app-containerized-item
+            *ngFor="let widget of container.widgets"
+            class="grid-containerized-item"
+            ng-class-even="'bg-for-line-grid'"
+            ng-class="!widget.active ? 'ab-grid__item--non-active' : ''"
+            item="widget"
+            container-id="container.id"
+            site-id="site.id"
+            first="$first"
+            last="$last"
+            prev="container.widgets[$index - 1]"
+            next="container.widgets[$index + 1]"
+          ></app-containerized-item>
         </div>
-        <div class="ab-grid__footer" ng-show="container.widgets.length && container.widgets.length > 1">
+        <div class="ab-grid__footer" *ngIf="container.widgets.length && container.widgets.length > 1">
           <div class="ab-grid__header--name"></div>
           <div class="ab-grid__header--company"></div>
           <div class="ab-grid__header--shows">{{getAllCount('shows') | thousandSuffix:2}}</div>
           <div class="ab-grid__header--targets">{{getAllCount('target') | thousandSuffix:2}}</div>
-          <div class="ab-grid__header--conv" ng-bind="(getAllCount('shows') !== 0) ? getAllCConversion() : '0.00%'"></div>
+          <div class="ab-grid__header--conv" [innerHTML]="(getAllCount('shows') !== 0) ? getAllCConversion() : '0.00%'"></div>
           <div class="ab-grid__header--priority"></div>
           <div class="ab-grid__header--actions-static"></div>
         </div>
       </div>
     </div>
     <div class="ab-test-footer">
-      <button ng-click="addVariant()" type="button" class="btn btn-test-var"><i class="fa fa-plus"></i> {{ 'containerized.container.widget.add' | translate }}</button>
+      <button (click)="addVariant()" type="button" class="btn btn-test-var"><i class="fa fa-plus"></i> {{ 'containerized.container.widget.add' | translate }}</button>
       <a class="static-help-link" href="https://leadgenic.userecho.com/knowledge-bases/2/articles/456-statichnyie-vidzhetyi-opisanie-vozmozhnostej-i-instruktsiya" target="_blank">{{ 'containerized.container.help.btn' | translate }}</a>
     </div>
   </div>
