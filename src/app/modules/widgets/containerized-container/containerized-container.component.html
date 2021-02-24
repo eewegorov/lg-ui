@@ -54,13 +54,13 @@
             class="grid-containerized-item"
             ng-class-even="'bg-for-line-grid'"
             ng-class="!widget.active ? 'ab-grid__item--non-active' : ''"
-            item="widget"
-            container-id="container.id"
-            site-id="site.id"
-            first="$first"
-            last="$last"
-            prev="container.widgets[$index - 1]"
-            next="container.widgets[$index + 1]"
+            [item]="widget"
+            [containerId]="container.id"
+            [siteId]="site.id"
+            [first]="$first"
+            [last]="$last"
+            [prev]="container.widgets[$index - 1]"
+            [next]="container.widgets[$index + 1]"
           ></app-containerized-item>
         </div>
         <div class="ab-grid__footer" *ngIf="container.widgets.length && container.widgets.length > 1">

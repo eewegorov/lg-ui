@@ -13,6 +13,7 @@ import { CampaignDeleteComponent } from './campaign-delete/campaign-delete.compo
 import { SmartpointsControlComponent } from './smartpoints-control/smartpoints-control.component';
 import { ContainerizedContainerComponent } from './containerized-container/containerized-container.component';
 import { ContainerizedItemComponent } from './containerized-container/containerized-item/containerized-item.component';
+import { WidgetItemComponent } from './widget-item/widget-item.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ContainerizedItemComponent } from './containerized-container/containeri
     CampaignDeleteComponent,
     SmartpointsControlComponent,
     ContainerizedContainerComponent,
-    ContainerizedItemComponent
+    ContainerizedItemComponent,
+    WidgetItemComponent
   ],
   exports: [
     SmartpointsControlComponent
