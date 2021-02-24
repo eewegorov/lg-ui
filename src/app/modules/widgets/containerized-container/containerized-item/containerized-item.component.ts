@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-containerized-item',
@@ -6,10 +6,178 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./containerized-item.component.scss']
 })
 export class ContainerizedItemComponent implements OnInit {
+  @Input() public item = {};
+  @Input() public first = '';
+  @Input() public last = '';
+  @Input() private containerId = '';
+  @Input() private siteId = '';
+  @Input() private prev = '';
+  @Input() private next = '';
+
+  public changeCompanyWidget = {
+    id: '',
+    name: '',
+    companyId: ''
+  };
+
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public getCConversion() {
+    return $filter("number")(((100 * scope.item.widgetConversion.target) / scope.item.widgetConversion.shows), 2) + "%";
+  }
+
+  public updateCWidget(data) {
+    if (!data) {
+      return false;
+    }
+    CWidgetService.changeCWidgetName(scope.siteId, scope.item.id, data);
+  }
+
+  public swapCWidgets(isUp) {
+    CWidgetService.swapCWidgets(scope.siteId, scope.item.id, isUp ? scope.prev.id : scope.next.id).then(function (response) {
+      EventsService.publish(EVENTS.updateCurrentContainer, scope.containerId);
+    });
+  }
+
+  public switchCWidget(newValue) {
+    if (scope.item.active === newValue) return false;
+    CWidgetService.switchCWidget(scope.siteId, scope.item.id, newValue).then(function(response) {
+      if (!response) return false;
+      scope.item.active = newValue;
+    });
+  }
+
+  public startChangeCompany() {
+    scope.changeCompanyWidget = {
+      id: scope.item.id,
+      name: scope.widgetCurrentCompany.name,
+      companyId: scope.item.companyId
+    };
+  };
+
+  public changeCurrentCompany(company) {
+    scope.changeCompanyWidget.companyId = company.id;
+    scope.changeCompanyWidget.name = company.name;
+    scope.changeCompanyWidget.id = scope.item.id;
+  };
+
+  public changeCWidgetCompany() {
+    CWidgetService.changeCWidgetCompany(scope.siteId, scope.item.id, scope.changeCompanyWidget.companyId).then(function (response) {
+      scope.item.companyId = scope.changeCompanyWidget.companyId;
+      scope.widgetCurrentCompany = WidgetService.getCompanyById(scope.item.companyId, WidgetService.getCurrentCompanies());
+      scope.resetChangeCompany();
+      EventsService.publish(EVENTS.updateCurrentContainer, scope.containerId);
+    });
+  }
+
+  public getFilteredCompanies() {
+    return WidgetService.getCurrentCompanies().filter(function (item) {
+      return (item.id !== scope.changeCompanyWidget.companyId) && !item.default;
+    });
+  }
+
+  public resetChangeCompany() {
+    this.changeCompanyWidget = {
+      id: '',
+      name: '',
+      companyId: ''
+    };
+  }
+
+  public removeCWidget() {
+    if (scope.item.abtestInfo && scope.item.abtestInfo.state) {
+      toastr["error"]($translate.instant("abtest.toastr.widget.deleteiftest"), $translate.instant("abtest.toastr.widget.error"));
+      return false;
+    }
+    CWidgetService.getWContainerInfo(scope.siteId, scope.containerId).then(function(response) {
+      if (response.data.widgets.length === 1) {
+        swal($translate.instant("containerized.container.widget.remove.ifone"), "", "error");
+      } else {
+        swal({
+            title: $translate.instant("widgetsList.widget.delete.title"),
+            text: $translate.instant("widgetsList.widget.delete.text"),
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: $translate.instant("widgetsList.widget.delete.confirm"),
+            cancelButtonText: $translate.instant("widgetsList.widget.delete.cancel"),
+            closeOnConfirm: true,
+            closeOnCancel: true },
+          function(isConfirm){
+            if (isConfirm) {
+              WidgetService.deleteWidget(scope.siteId, scope.item.id).then(function (response) {
+                if (response.code === 200) {
+                  toastr["success"]($translate.instant("widgetsList.widget.delete.desc"), $translate.instant("widgetsList.widget.delete.done"));
+                  SiteService.parseError(response);
+                } else {
+                  SiteService.parseError(response);
+                }
+                EventsService.publish(EVENTS.updateWidgetsList, scope.siteId);
+              });
+            }
+          });
+      }
+    });
+  }
+
+  public duplicateCWidget() {
+    EventsService.publish(EVENTS.openCloneWidgetModal, scope.item, scope.containerId);
+  }
+
+  public abCAction() {
+    var currentSite = SiteService.getSiteById(scope.siteId);
+
+    // TODO: Check if it's payment query
+    if (SiteService.isSiteHasExpTariff(currentSite)) {
+      BillingService.checkTariffPlans(scope.siteId,
+        $translate.instant("sitelist.tarrif.title"),
+        $translate.instant("widgetsList.payment.abtest", {siteName: currentSite.name}));
+    } else {
+      ModalService.showModal({
+        templateUrl: "../js/abtests/create-abtest-modal/create-abtest-modal-template.html",
+        controller: "CreateABTestModalController",
+        inputs: {
+          currentSite: currentSite,
+          widget: scope.item,
+          isContainerized: true
+        }
+      }).then(function (modal) {
+        modal.element.modal();
+        modal.close.then(function (result) {
+          $("body").removeClass("modal-open");
+        });
+      });
+    }
+  }
+
+  public abIfNoTest() {
+    if (!scope.item.abtestInfo || !scope.item.abtestInfo.state) {
+      return true;
+    }
+  }
+
+  public abIfTestOnWork() {
+    if (scope.item.abtestInfo && scope.item.abtestInfo.state && (scope.item.abtestInfo.state === "ACTIVE")) {
+      return true;
+    }
+  }
+
+  public abIfTestOnPause() {
+    if (scope.item.abtestInfo && scope.item.abtestInfo.state && (scope.item.abtestInfo.state === "PAUSED")) {
+      return true;
+    }
+  }
+
+  public goToTest() {
+    window.location.href = "/abtests/active?testIdNum-" + scope.item.abtestInfo.id;
+  }
+
+  public goToConstructor() {
+    window.location.href = "/widgets/edit/" + scope.siteId + "-" + scope.item.id + "/";
   }
 
 }

@@ -140,7 +140,12 @@
     <h4 class="f-1 no-bold">{{ 'containerized.title' | translate }}:</h4>
   </div>
   <div *ngIf="containers.length">
-    <!--<containerized-container container="container" site="currentSite" current-company="currentCompany" ng-repeat="container in filteredContainers()"></containerized-container>-->
+    <app-containerized-container
+      *ngFor="let container of filteredContainers()"
+      [container]="container"
+      [site]="currentSite"
+      [currentCompany]="currentCompany"
+    ></app-containerized-container>
   </div>
   <!-- End Static widgets -->
 
