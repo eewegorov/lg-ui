@@ -14,6 +14,7 @@ import { SmartpointsControlComponent } from './smartpoints-control/smartpoints-c
 import { ContainerizedContainerComponent } from './containerized-container/containerized-container.component';
 import { ContainerizedItemComponent } from './containerized-container/containerized-item/containerized-item.component';
 import { WidgetItemComponent } from './widget-item/widget-item.component';
+import { ContainerizedAddComponent } from './containerized-add/containerized-add.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { WidgetItemComponent } from './widget-item/widget-item.component';
     SmartpointsControlComponent,
     ContainerizedContainerComponent,
     ContainerizedItemComponent,
-    WidgetItemComponent
+    WidgetItemComponent,
+    ContainerizedAddComponent
   ],
   exports: [
     SmartpointsControlComponent
