@@ -26,7 +26,7 @@
                 <span class="sub-text">{{ 'widgetsList.add.modal.gallery.desc' | translate }}</span>
               </div>
 
-              <app-templates-gallery type-id="newCWidgetInfo.containerizedType" callback="chooseTemplateWidget"></app-templates-gallery>
+              <app-templates-gallery [typeId]="newCWidgetInfo.containerizedType" [callback]="chooseTemplateWidget"></app-templates-gallery>
             </div>
           </div>
         </div>
