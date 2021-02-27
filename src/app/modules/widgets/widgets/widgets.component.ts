@@ -84,7 +84,7 @@ export class WidgetsComponent implements OnInit {
     });
   }
 
-  private getFilteredWidgets(type) {
+  public getFilteredWidgets(type) {
     if (this.currentCompany.id === this.widgetService.getDefaultCompany(this.companies).id) {
       return this.widgets[type];
     }
@@ -147,10 +147,10 @@ export class WidgetsComponent implements OnInit {
   }
 
   public saveNewCompany() {
-    this.widgetService.createCompany(this.sitesService.getCurrentSiteId(), this.newCompany.name).then(function (response) {
+    this.widgetService.createCompany(this.sitesService.getCurrentSiteId(), this.newCompany.name).then((response) => {
       if (response.code === 200) {
-        $scope.companies.push(response.data);
-        $scope.currentCompany = response.data;
+        this.companies.push(response.data);
+        this.currentCompany = response.data;
         toastr["success"](notifyMessages.addDesc, notifyMessages.addDone + "!");
       } else {
         SiteService.parseError(response);

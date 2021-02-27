@@ -11,7 +11,7 @@ export class ContainerizedAddComponent implements OnInit {
     step: 1,
     containerizedType: type,
     siteId: currentSiteId,
-    companyMode: $scope.companies.length === 0 ? 1 : 0,
+    companyMode: this.companies.length === 0 ? 1 : 0,
     company: currentCompany.default ? $translate.instant("widgetsList.clone.company.chose") : currentCompany.name,
     companyId: currentCompany.default ? null : currentCompany.id,
     types: [
