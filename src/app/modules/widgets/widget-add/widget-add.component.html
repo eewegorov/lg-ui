@@ -1,30 +1,30 @@
 <app-color-line type="modals"></app-color-line>
-<div class="modal-header text-center" ng-if="newWidgetStep === 2 || newWidgetStep === 3 || newWidgetStep === 4">
+<div class="modal-header text-center" *ngIf="newWidgetStep === 2 || newWidgetStep === 3 || newWidgetStep === 4">
   <h4 class="modal-title">{{ 'widgetsList.add.modal.title' | translate }}</h4>
 </div>
 <div class="modal-body">
-  <div id="step1" class="active" ng-show="newWidgetStep === 1">
-    <div class="create-widget-m" ng-class="{'main-content-container-loader': isLoaderActive}">
+  <div id="step1" class="active" *ngIf="newWidgetStep === 1">
+    <div class="create-widget-m" [ngClass]="{'main-content-container-loader': isLoaderActive}">
       <div class="filters-loader"></div>
       <div class="container-for-loader">
         <div class="templates-gallery-header">
           <div class="header-modal">
             <span>{{ 'widgetsList.add.params.mockup.title' | translate }}</span>
             <button class="btn w-xs btn-success"
-                    ng-click="createNullWidget()">{{ 'widgetsList.add.params.mockup.notselect' | translate }}</button>
+                    (click)="createNullWidget()">{{ 'widgetsList.add.params.mockup.notselect' | translate }}</button>
           </div>
           <span class="sub-text">{{ 'widgetsList.add.modal.gallery.desc' | translate }}</span>
         </div>
 
-        <!--<templates-gallery-directive types="typesForGallery" callback="chooseTemplateWidget"></templates-gallery-directive>-->
+        <app-templates-gallery [types]="typesForGallery" [callback]="chooseTemplateWidget"></app-templates-gallery>
       </div>
     </div>
   </div>
 
-  <div id="step2" class="p-m max-w-868" ng-show="newWidgetStep === 2">
+  <div id="step2" class="p-m max-w-868" *ngIf="newWidgetStep === 2">
     <label class="big-label">{{ 'widgetsList.add.chooseType.label' | translate }}:</label>
     <div class="row">
-      <div class="col-lg-3 widget-type-view" ng-repeat="type in widgetTypes" ng-click="setType(type)">
+      <div class="col-lg-3 widget-type-view" *ngFor="let type of widgetTypes" (click)="setType(type)">
         <img src="{{ type.previewLink }}" alt="preview">
         <div class="view-name">{{ type.name }}</div>
         <div class="view-desc">{{ type.description }}</div>
@@ -32,10 +32,10 @@
     </div>
   </div>
 
-  <div id="step3" class="p-m max-w-868" ng-show="newWidgetStep === 3">
+  <div id="step3" class="p-m max-w-868" *ngIf="newWidgetStep === 3">
     <label class="big-label">{{ 'widgetsList.add.chooseTemplate.label' | translate }}:</label>
     <div class="row">
-      <div class="col-lg-4 widget-type-view" ng-repeat="template in templates | filter:editableWidget.typeId" ng-click="setTemplate(template)">
+      <div class="col-lg-4 widget-type-view" *ngFor="let template of templates | filter:editableWidget.typeId" (click)="setTemplate(template)">
         <img src="{{ template.previewLink }}" alt="preview">
         <div class="view-name">{{ template.name }}</div>
         <div class="view-desc">{{ template.description }}</div>
@@ -43,60 +43,60 @@
     </div>
   </div>
 
-  <div id="step4" class="p-m max-w-868" ng-show="newWidgetStep === 4">
+  <div id="step4" class="p-m max-w-868" *ngIf="newWidgetStep === 4">
     <label class="big-label">{{ 'widgetsList.add.params.label' | translate }}:</label>
     <div class="row margined-top-20">
       <div class="col-lg-12">
         <div class="row margined-bottom-15 margined-left-0 select-site-title">
           <h5>{{ 'widgetsList.add.params.name' | translate }}:</h5>
         </div>
-        <input type="text" class="form-control" ng-model="editableWidget.name">
+        <input type="text" class="form-control" [(ngModel)]="editableWidget.name">
         <span class="underow-comment">{{ 'widgetsList.add.params.name.tooltip' | translate }}</span>
       </div>
-      <div class="col-lg-12" ng-show="editableWidget.companyMode === 0">
+      <div class="col-lg-12" *ngIf="editableWidget.companyMode === 0">
         <div class="row margined-bottom-15 margined-left-0 select-site-title">
           <h5>{{ 'widgetsList.selectCompany' | translate }}: <a data-toggle="tooltip"
                                                                   data-placement="top"
                                                                   title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
                                                                   class="info-link" href="#"><i class="fa fa-info-circle"></i></a></h5>
         </div>
-        <div class="dropdown widget-company-selector" style="float: left; width: calc(100% - 50px)" ng-class="!editableWidget.companyId ? 'has-error' : ''">
+        <div class="dropdown widget-company-selector" style="float: left; width: calc(100% - 50px)" [ngClass]="!editableWidget.companyId ? 'has-error' : ''">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <span class="dropdown-selected-cropp" style="max-width:90%">{{editableWidget.company}}</span>
             <span class="caret"></span>
           </button>
-          <ul class="dropdown-menu" ng-show="companies.length">
-            <li ng-repeat="company in getFilteredCompanies()" ng-click="changeCompany(company)"><a href="javascript:void(0);">{{company.name}}</a></li>
+          <ul class="dropdown-menu" *ngIf="companies.length">
+            <li *ngFor="let company of getFilteredCompanies()" (click)="changeCompany(company)"><a href="javascript:void(0);">{{company.name}}</a></li>
           </ul>
         </div>
 
         <div class="remove-sub-item">
-          <a ng-click="openAddCompanyMode()" href="javascript:void(0);" >
+          <a (click)="openAddCompanyMode()" href="javascript:void(0);" >
             <i class="remove-sub-item colored-blue pe-7s-plus"
                data-toggle="tooltip" data-placement="top" data-container="body"
                title="{{ 'widgetsList.company.add.tooltip' | translate }}"></i>
           </a>
         </div>
       </div>
-      <div class="col-lg-12" ng-class="(editableWidget.company.trim().length == 0)?'has-error':''" ng-show="editableWidget.companyMode === 1">
+      <div class="col-lg-12" [ngClass]="(editableWidget.company.trim().length == 0)?'has-error':''" *ngIf="editableWidget.companyMode === 1">
         <div class="row margined-bottom-15 margined-left-0 select-site-title">
           <h5>{{ 'widgetsList.add.params.company.add.name' | translate }}: <a data-toggle="tooltip"
                                                                                 data-placement="top"
                                                                                 title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
                                                                                 class="info-link" href="#"><i class="fa fa-info-circle"></i></a></h5>
         </div>
-        <input type="text" class="form-control" ng-model="editableWidget.company">
+        <input type="text" class="form-control" [(ngModel)]="editableWidget.company">
         <span class="underow-comment">{{ 'widgetsList.add.params.company.under' | translate }}</span>
         <a href="#"
-           ng-show="companies.length"
-           ng-click="closeAddCompanyMode()"
+           *ngIf="companies.length"
+           (click)="closeAddCompanyMode()"
            class="companies-underline">{{ 'widgetsList.add.params.company.add.back' | translate }}</a>
       </div>
       <div class="col-lg-12 margined-top-30">
-        <button ng-click="closeNewWidgetModal(false)"
+        <button (click)="closeNewWidgetModal(false)"
                 class="btn btn-lg w-xs btn-default floated-left">{{ 'global.cancel' | translate }}</button>
-        <button ng-disabled="(editableWidget.companyMode == 0 && editableWidget.companyId == null) || (editableWidget.companyMode == 1 && editableWidget.company.trim().length == 0)"
-                ng-click="addWidget()" type="button"
+        <button [disabled]="(editableWidget.companyMode == 0 && editableWidget.companyId == null) || (editableWidget.companyMode == 1 && editableWidget.company.trim().length == 0)"
+                (click)="addWidget()" type="button"
                 class="btn btn-lg w-xs btn-success floated-right">{{ 'widgetsList.add.modal.gallery.gotosettings' | translate }}</button>
       </div>
     </div>
