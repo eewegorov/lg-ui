@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
-  Entities, SmartPoint, SmartPointUpdateRequest,
+  CompanyRequest, CompanyResponse, CompanyShort,
+  Entities, SmartPoint, SmartPointEnableRequest, SmartPointUpdateRequest,
   WidgetRename,
   WidgetsResponse,
   WidgetTemplate,
@@ -62,7 +63,7 @@ export class WidgetService {
     );
   }
 
-  public saveSmartpointType(siteId, smartpoint: SmartPoint) {
+  public saveSmartpointType(siteId, smartpoint: SmartPoint): Observable<boolean> {
     const updatedSmartpoint: SmartPointUpdateRequest = {
       enabled: smartpoint.enabled,
       autoinvite: smartpoint.autoinvite,
@@ -70,6 +71,24 @@ export class WidgetService {
     };
     return this.widgetApiService.putSmartpointType(siteId, smartpoint.type, updatedSmartpoint).pipe(
       map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public startStopSmartpoint(siteId, enabled: boolean): Observable<boolean> {
+    const smartpoint: SmartPointEnableRequest = { enabled };
+    return this.widgetApiService.startStopSmartpoint(siteId, smartpoint).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public createCompany(siteId, companyName: string): Observable<CompanyShort> {
+    const company: CompanyRequest = {
+      name: companyName
+    };
+    return this.widgetApiService.createCompany(siteId, company).pipe(
+      map((response: CompanyResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }

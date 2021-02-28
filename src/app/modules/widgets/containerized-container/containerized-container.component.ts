@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Company } from '../../../core/models/widgets';
 
 @Component({
   selector: 'app-containerized-container',
@@ -7,8 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ContainerizedContainerComponent implements OnInit {
   @Input() public container = {};
-  @Input() private currentCompany = '';
-  @Input() private site = '';
+  @Input() public site;
+  @Input() private currentCompany: Company;
 
   public emptyName = '';
   public emptyDescription = '';

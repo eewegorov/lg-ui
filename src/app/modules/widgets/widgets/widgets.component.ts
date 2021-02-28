@@ -3,9 +3,10 @@ import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { CampaignDeleteComponent } from '../campaign-delete/campaign-delete.component';
 import { WidgetAddComponent } from '../widget-add/widget-add.component';
-import { Entities } from '../../../core/models/widgets';
+import { Company, CompanyShort, Entities, Widget } from '../../../core/models/widgets';
 import { Abtest } from '../../../core/models/abtests';
 import { BillingService } from '../../../core/services/billing.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
@@ -27,7 +28,7 @@ export class WidgetsComponent implements OnInit {
   company = { name: '' };
   currentSite = { id: '', name: '' };
   site = { name: '' };
-  currentCompany = { id: '', name: '', default: false };
+  currentCompany: Company;
   defCompanyName;
   types: { id: string; name: string; }[];
   newCompany = {
@@ -41,6 +42,7 @@ export class WidgetsComponent implements OnInit {
     private location: Location,
     private translate: TranslateService,
     private modalService: NgbModal,
+    private toastr: ToastrService,
     private billingService: BillingService,
     private sitesService: SitesService,
     private abtestsService: AbtestsService,
@@ -84,14 +86,14 @@ export class WidgetsComponent implements OnInit {
     });
   }
 
-  public getFilteredWidgets(type) {
+  public getFilteredWidgets(type): Widget[] {
     if (this.currentCompany.id === this.widgetService.getDefaultCompany(this.companies).id) {
       return this.widgets[type];
     }
     return this.widgets[type].filter((item) => {
       return item.companyId === this.currentCompany.id;
     });
-  };
+  }
 
   private getAllWidgetsForSite(siteId, stayCompany?) {
     this.abtestsService.getTests().pipe(
@@ -147,20 +149,18 @@ export class WidgetsComponent implements OnInit {
   }
 
   public saveNewCompany() {
-    this.widgetService.createCompany(this.sitesService.getCurrentSiteId(), this.newCompany.name).then((response) => {
-      if (response.code === 200) {
-        this.companies.push(response.data);
-        this.currentCompany = response.data;
-        toastr["success"](notifyMessages.addDesc, notifyMessages.addDone + "!");
-      } else {
-        SiteService.parseError(response);
+    this.widgetService.createCompany(this.sitesService.getCurrentSiteId(), this.newCompany.name).subscribe((response: CompanyShort) => {
+      if (response) {
+        this.companies.push(response);
+        this.currentCompany = response as Company;
+        this.toastr.success(this.translate.instant('widgetsList.company.add.desc'), this.translate.instant('global.done') + '!');
       }
-      $scope.resetNewCompany();
+      this.resetNewCompany();
     });
   }
 
   public enableDisableSP() {
-    this.widgetService.startStopSmartpoint(SiteService.getCurrentSiteId(), this.smartPoints.enabled);
+    this.widgetService.startStopSmartpoint(this.sitesService.getCurrentSiteId(), this.smartPoints.enabled);
   }
 
   public isHasWidgets() {
@@ -199,6 +199,13 @@ export class WidgetsComponent implements OnInit {
       count += container.widgets.length;
     });
     return count;
+  }
+
+  private resetNewCompany() {
+    this.newCompany = {
+      on: false,
+      name: ''
+    };
   }
 
 }

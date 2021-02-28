@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Widget } from '../../../core/models/widgets';
 
 @Component({
   selector: 'app-widget-item',
@@ -7,10 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class WidgetItemComponent implements OnInit {
   @Input() public widget = {};
-  @Input() public first = '';
-  @Input() public last = '';
-  @Input() private prev = '';
-  @Input() private next = '';
+  @Input() public first: boolean;
+  @Input() public last: boolean;
+  @Input() private prev: Widget;
+  @Input() private next: Widget;
   public widgetCurrentCompany = {};
 
   constructor() {

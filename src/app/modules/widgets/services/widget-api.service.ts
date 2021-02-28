@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
 import {
+  CompanyRequest, CompanyResponse, SmartPointEnableRequest,
   SmartPointTypes,
   SmartPointUpdateRequest,
   WidgetRename,
@@ -40,7 +41,15 @@ export class WidgetApiService {
     return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/sitewidgets/${widgetId}/${action}`, null);
   }
 
-  public putSmartpointType(siteId: string, smartpointType: SmartPointTypes, smartpoint: SmartPointUpdateRequest) {
-    return this.http.put(`${ environment.url }/sites/${siteId}/smartpoints/${smartpointType}`, smartpoint);
+  public putSmartpointType(siteId: string, smartpointType: SmartPointTypes, smartpoint: SmartPointUpdateRequest): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${ environment.url }/sites/${siteId}/smartpoints/${smartpointType}`, smartpoint);
+  }
+
+  public startStopSmartpoint(siteId: string, smartpoint: SmartPointEnableRequest): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${ environment.url }/sites/${siteId}/smartpoints/enable`, smartpoint);
+  }
+
+  public createCompany(siteId: string, company: CompanyRequest): Observable<CompanyResponse> {
+    return this.http.post<CompanyResponse>(`${ environment.url }/sites/${siteId}/companies`, company);
   }
 }

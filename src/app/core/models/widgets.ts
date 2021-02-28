@@ -17,6 +17,19 @@ export interface Company {
   default: boolean;
 }
 
+export interface CompanyRequest {
+  name: string;
+}
+
+export interface CompanyResponse extends ApiResponse {
+  data: CompanyShort;
+}
+
+export interface CompanyShort {
+  id: string;
+  name: string;
+}
+
 export interface Container {
   id: string;
   description: string;
@@ -25,7 +38,7 @@ export interface Container {
 }
 
 export interface SmartPoints {
-  enabled: true;
+  enabled: boolean;
   list: SmartPoint[];
 }
 
@@ -40,6 +53,10 @@ export interface SmartPointUpdateRequest {
   enabled: boolean;
   autoinvite: boolean;
   pos: string;
+}
+
+export interface SmartPointEnableRequest {
+  enabled: boolean;
 }
 
 export enum SmartPointTypes {

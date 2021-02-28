@@ -161,13 +161,13 @@
 
   <div class="margined-top-10 col-lg-4" *ngFor="let wdgTypes of getTypesWithCompanyFilter()">
     <h4 class="f-1 no-bold margined-top-30">{{ getTypeItem(wdgTypes).name }}:</h4>
-    <div class="row" *ngFor="let widget of getFilteredWidgets(wdgTypes)">
+    <div class="row" *ngFor="let widget of getFilteredWidgets(wdgTypes); index as i">
       <app-widget-item
         [widget]="widget"
-        [first]="$first"
-        [last]="$last"
-        [prev]="getFilteredWidgets(wdgTypes)[$index - 1]"
-        [next]="getFilteredWidgets(wdgTypes)[$index + 1]">
+        [first]="i === 0"
+        [last]="i === getFilteredWidgets(wdgTypes).length - 1"
+        [prev]="getFilteredWidgets(wdgTypes)[i - 1]"
+        [next]="getFilteredWidgets(wdgTypes)[i + 1]">
       </app-widget-item>
     </div>
   </div>
