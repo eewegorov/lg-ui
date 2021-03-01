@@ -6,7 +6,7 @@ import { ApiResponse } from '../../../core/models/api';
 import {
   CompanyRequest, CompanyResponse, SmartPointEnableRequest,
   SmartPointTypes,
-  SmartPointUpdateRequest,
+  SmartPointUpdateRequest, WidgetConversionResponse,
   WidgetRename,
   WidgetsResponse,
   WidgetTemplatesResponse,
@@ -31,6 +31,10 @@ export class WidgetApiService {
 
   public getWidgetsTemplates(): Observable<WidgetTemplatesResponse> {
     return this.http.get<WidgetTemplatesResponse>(`${ environment.url }/widgets/templates`);
+  }
+
+  public getWidgetConversion(siteId: string, widgetId: string): Observable<WidgetConversionResponse> {
+    return this.http.get<WidgetConversionResponse>(`${ environment.url }/sites/${siteId}/widgets/${widgetId}/conversion`);
   }
 
   public rename(siteId: string, widgetId: string, name: WidgetRename): Observable<ApiResponse> {

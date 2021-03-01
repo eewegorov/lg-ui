@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
   CompanyRequest, CompanyResponse, CompanyShort,
-  Entities, SmartPoint, SmartPointEnableRequest, SmartPointUpdateRequest,
+  Entities, SmartPoint, SmartPointEnableRequest, SmartPointUpdateRequest, WidgetConversion, WidgetConversionResponse,
   WidgetRename,
   WidgetsResponse,
   WidgetTemplate,
@@ -43,6 +43,13 @@ export class WidgetService {
   public getWidgetsTemplates(): Observable<WidgetTemplate[]> {
     return this.widgetApiService.getWidgetsTemplates().pipe(
       map((response: WidgetTemplatesResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getWidgetConversion(siteId: string, widgetId: string): Observable<WidgetConversion> {
+    return this.widgetApiService.getWidgetConversion(siteId, widgetId).pipe(
+      map((response: WidgetConversionResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }
@@ -108,5 +115,19 @@ export class WidgetService {
 
   public setContainers(containers) {
     this.currentContainers = containers;
+  }
+
+  public setCurrentCompanies(companies) {
+    this.currentCompanies = companies;
+  }
+
+  public getCurrentCompanies() {
+    return this.currentCompanies;
+  }
+
+  public getCompanyById(companyId, companies) {
+    return companies.find((item) => {
+      return item.id === companyId;
+    });
   }
 }

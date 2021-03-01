@@ -103,6 +103,8 @@ export class WidgetsComponent implements OnInit {
       })
     ).subscribe((response: Entities) => {
       this.companies = response.companies;
+      this.widgetService.setCurrentCompanies(response.companies);
+
       if (!stayCompany) {
         this.currentCompany = this.widgetService.getDefaultCompany(this.companies);
       }
@@ -152,6 +154,8 @@ export class WidgetsComponent implements OnInit {
     this.widgetService.createCompany(this.sitesService.getCurrentSiteId(), this.newCompany.name).subscribe((response: CompanyShort) => {
       if (response) {
         this.companies.push(response);
+        this.widgetService.setCurrentCompanies(this.companies);
+
         this.currentCompany = response as Company;
         this.toastr.success(this.translate.instant('widgetsList.company.add.desc'), this.translate.instant('global.done') + '!');
       }

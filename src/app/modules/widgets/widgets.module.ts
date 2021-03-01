@@ -16,6 +16,7 @@ import { ContainerizedItemComponent } from './containerized-container/containeri
 import { WidgetItemComponent } from './widget-item/widget-item.component';
 import { ContainerizedAddComponent } from './containerized-add/containerized-add.component';
 import { TemplatesGalleryComponent } from './templates-gallery/templates-gallery.component';
+import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { TemplatesGalleryComponent } from './templates-gallery/templates-gallery
     TranslateModule,
     UiSwitchModule,
     SharedModule,
-    WidgetsRoutingModule
+    WidgetsRoutingModule,
+    CoolInlineEditFieldModule
   ]
 })
 export class WidgetsModule { }

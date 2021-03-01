@@ -56,10 +56,13 @@
             </div>
           </div>
           <div class="widget-item-view-header widget-item-view-header__name">
-            <a href="#"
-               editable-text="widget.name"
-               onbeforesave="updateWidgetName($data)"><span long-text="{{widget.name}}"
-                                                            max-total-characters="40"></span> <i class="fa fa-pencil"></i></a>
+            <cool-inline-edit-field
+              class="test-item-name"
+              name="name"
+              [(ngModel)]="widget.name"
+              (saved)="updateWidgetName($event)"
+            >
+            </cool-inline-edit-field>
           </div>
         </div>
       </div>

@@ -116,3 +116,12 @@ export interface WidgetTemplate {
   type: string;
   active: boolean;
 }
+
+export interface WidgetConversionResponse extends ApiResponse {
+  data: WidgetConversion;
+}
+
+export interface WidgetConversion {
+  shows: number;
+  target: number;
+}

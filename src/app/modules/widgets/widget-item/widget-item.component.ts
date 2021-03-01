@@ -1,43 +1,64 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Widget } from '../../../core/models/widgets';
+import { DecimalPipe } from '@angular/common';
+import { Widget, WidgetConversion, WidgetInfo } from '../../../core/models/widgets';
+import { SitesService } from '../../sites/services/sites.service';
+import { WidgetService } from '../services/widget.service';
 
 @Component({
   selector: 'app-widget-item',
   templateUrl: './widget-item.component.html',
-  styleUrls: ['./widget-item.component.scss']
+  styleUrls: ['./widget-item.component.scss'],
+  providers: [DecimalPipe]
 })
 export class WidgetItemComponent implements OnInit {
-  @Input() public widget = {};
+  @Input() public widget: WidgetInfo;
   @Input() public first: boolean;
   @Input() public last: boolean;
   @Input() private prev: Widget;
   @Input() private next: Widget;
   public widgetCurrentCompany = {};
+  public widgetConversion: WidgetConversion;
+  public isConversionLoaded = false;
+  private currentSiteId;
 
-  constructor() {
-    this.widgetCurrentCompany = WidgetService.getCompanyById(scope.widget.companyId, WidgetService.getCurrentCompanies());
+  constructor(
+    private decimalPipe: DecimalPipe,
+    private sitesService: SitesService,
+    private widgetService: WidgetService
+  ) {
+    this.widgetCurrentCompany = this.widgetService.getCompanyById(this.widget.companyId, this.widgetService.getCurrentCompanies());
+    this.currentSiteId = this.sitesService.getCurrentSiteId();
   }
 
   ngOnInit(): void {
+    if (!this.isConversionLoaded) {
+      this.loadConversion();
+    }
   }
 
   public switchWidget(newValue) {
-    if (scope.widget.active === newValue) return false;
-    WidgetService.switchWidget(scope.currentSiteId, scope.widget.id, newValue).then(function(response) {
-      if (!response) return false;
-      scope.widget.active = newValue;
+    if (this.widget.active === newValue) {
+      return false;
+    }
+
+    this.widgetService.switch(this.currentSiteId, this.widget.id, newValue).subscribe((response: boolean) => {
+      if (!response) {
+        return false;
+      }
+
+      this.widget.active = newValue;
     });
   }
 
   public getConversion() {
-    return $filter("number")(((100 * scope.widgetConversion.target) / scope.widgetConversion.shows), 2) + "%";
+    return (this.decimalPipe.transform(((100 * this.widgetConversion.target) / this.widgetConversion.shows), '1.0-2')) + '%';
   }
 
   public updateWidgetName(data) {
     if (!data) {
       return false;
     }
-    WidgetService.changeWidgetName(scope.currentSiteId, scope.widget.id, data);
+    this.widgetService.changeWidgetName(scope.currentSiteId, scope.widget.id, data);
   }
 
   public swapWidgets(isUp) {
@@ -50,17 +71,17 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public startChangeCompany() {
-    scope.changeCompanyWidget = {
-      id: scope.widget.id,
-      name: scope.widgetCurrentCompany.name,
-      companyId: scope.widget.companyId
+    this.changeCompanyWidget = {
+      id: this.widget.id,
+      name: this.widgetCurrentCompany.name,
+      companyId: this.widget.companyId
     };
   }
 
   public changeCurrentCompany(company) {
-    scope.changeCompanyWidget.companyId = company.id;
-    scope.changeCompanyWidget.name = company.name;
-    scope.changeCompanyWidget.id = scope.widget.id;
+    this.changeCompanyWidget.companyId = company.id;
+    this.changeCompanyWidget.name = company.name;
+    this.changeCompanyWidget.id = this.widget.id;
   }
 
   public changeWidgetCompany() {
@@ -79,10 +100,10 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public resetChangeCompany() {
-    scope.changeCompanyWidget = {
-      id: "",
-      name: "",
-      companyId: ""
+    this.changeCompanyWidget = {
+      id: '',
+      name: '',
+      companyId: ''
     };
   }
 
@@ -170,6 +191,16 @@ export class WidgetItemComponent implements OnInit {
 
   public goToConstructor() {
     window.location.href = "/widgets/edit/" + scope.currentSiteId + "-" + scope.widget.id + "/";
+  }
+
+  private loadConversion() {
+    this.isConversionLoaded = true;
+
+    this.widgetService.getWidgetConversion(this.currentSiteId, this.widget.id).subscribe((response: WidgetConversion) => {
+      if (response) {
+        this.widgetConversion = response;
+      }
+    });
   }
 
 }
