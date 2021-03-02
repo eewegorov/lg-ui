@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { Widget, WidgetConversion, WidgetInfo } from '../../../core/models/widgets';
+import { WidgetConversion, WidgetInfo, WidgetInfoShort } from '../../../core/models/widgets';
 import { SitesService } from '../../sites/services/sites.service';
 import { WidgetService } from '../services/widget.service';
 
@@ -14,11 +14,12 @@ export class WidgetItemComponent implements OnInit {
   @Input() public widget: WidgetInfo;
   @Input() public first: boolean;
   @Input() public last: boolean;
-  @Input() private prev: Widget;
-  @Input() private next: Widget;
-  public widgetCurrentCompany = {};
+  @Input() private prev: WidgetInfo;
+  @Input() private next: WidgetInfo;
+  public widgetCurrentCompany: WidgetInfoShort;
   public widgetConversion: WidgetConversion;
   public isConversionLoaded = false;
+  public changeCompanyWidget: WidgetInfoShort;
   private currentSiteId;
 
   constructor(
@@ -58,15 +59,12 @@ export class WidgetItemComponent implements OnInit {
     if (!data) {
       return false;
     }
-    this.widgetService.changeWidgetName(scope.currentSiteId, scope.widget.id, data);
+    this.widgetService.rename(this.currentSiteId, this.widget.id, data);
   }
 
   public swapWidgets(isUp) {
-    WidgetService.swapWidgets(scope.currentSiteId, scope.widget.id, isUp ? scope.prev.id : scope.next.id).then(function (response) {
-      if (response.code !== 200) {
-        SiteService.parseError(response);
-      }
-      EventsService.publish(EVENTS.updateWidgetsList, scope.currentSiteId);
+    this.widgetService.swap(this.currentSiteId, this.widget.id, isUp ? this.prev.id : this.next.id).subscribe((response: boolean) => {
+      this.widgetService.updateWidgetsList.next(this.currentSiteId);
     });
   }
 
@@ -85,17 +83,15 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public changeWidgetCompany() {
-    WidgetService.changeWidgetCompany(scope.currentSiteId, scope.widget.id, scope.changeCompanyWidget.companyId).then(function (response) {
-      if (response.code !== 200) {
-        SiteService.parseError(response);
-      }
-      EventsService.publish(EVENTS.updateWidgetsList, scope.currentSiteId);
-    });
+    this.widgetService.changeWidgetCompany(this.currentSiteId, this.widget.id, this.changeCompanyWidget.companyId).subscribe(
+      (response: boolean) => {
+        this.widgetService.updateWidgetsList.next(this.currentSiteId);
+      });
   }
 
   public getFilteredCompanies() {
-    return WidgetService.getCurrentCompanies().filter(function (item) {
-      return (item.id !== scope.changeCompanyWidget.companyId) && !item.default;
+    return this.widgetService.getCurrentCompanies().filter((item) => {
+      return (item.id !== this.changeCompanyWidget.companyId) && !item.default;
     });
   }
 
@@ -108,7 +104,7 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public duplicateItem() {
-    EventsService.publish(EVENTS.openCloneWidgetModal, scope.widget);
+    this.widgetService.openCloneWidgetModal.next({data: this.widget, containerId: null});
   }
 
   public removeItem() {

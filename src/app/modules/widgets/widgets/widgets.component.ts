@@ -6,12 +6,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CampaignDeleteComponent } from '../campaign-delete/campaign-delete.component';
 import { WidgetAddComponent } from '../widget-add/widget-add.component';
-import { Company, CompanyShort, Entities, Widget } from '../../../core/models/widgets';
+import { Company, CompanyShort, Entities, Widget, WidgetInfo } from '../../../core/models/widgets';
 import { Abtest } from '../../../core/models/abtests';
 import { BillingService } from '../../../core/services/billing.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { WidgetService } from '../services/widget.service';
+import { CloneWidgetComponent } from '../clone-widget/clone-widget.component';
 
 
 @Component({
@@ -52,6 +53,21 @@ export class WidgetsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.widgetService.updateWidgetsList.subscribe((data: string) => {
+      this.getAllWidgetsForSite(data, true);
+    });
+
+    this.widgetService.openCloneWidgetModal.subscribe(({ data, containerId }) => {
+      const modalRef = this.modalService.open(CloneWidgetComponent, {
+        size: 'lg',
+        windowClass: 'animate__animated animate__slideInDown animate__faster'
+      });
+      modalRef.componentInstance.sites = this.sites;
+      modalRef.componentInstance.currentSite = this.currentSite;
+      modalRef.componentInstance.companies = this.companies;
+      modalRef.componentInstance.widget = data;
+      modalRef.componentInstance.containerId = containerId;
+    });
   }
 
   public getTypeItem(typeId: string): { id: string; name: string; } {

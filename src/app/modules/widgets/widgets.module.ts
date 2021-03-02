@@ -17,6 +17,7 @@ import { WidgetItemComponent } from './widget-item/widget-item.component';
 import { ContainerizedAddComponent } from './containerized-add/containerized-add.component';
 import { TemplatesGalleryComponent } from './templates-gallery/templates-gallery.component';
 import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
+import { CloneWidgetComponent } from './clone-widget/clone-widget.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
     ContainerizedItemComponent,
     WidgetItemComponent,
     ContainerizedAddComponent,
-    TemplatesGalleryComponent
+    TemplatesGalleryComponent,
+    CloneWidgetComponent
   ],
   exports: [
     SmartpointsControlComponent

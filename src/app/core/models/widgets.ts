@@ -72,12 +72,15 @@ export interface Widget {
   [key: string]: WidgetInfo[];
 }
 
-export interface WidgetInfo {
+export interface WidgetInfoShort {
   id: string;
   name: string;
+  companyId: string;
+}
+
+export interface WidgetInfo extends WidgetInfoShort {
   type: string;
   template: string;
-  companyId: string;
   active: boolean;
   abtestInfo: AbtestInfo;
 }
@@ -124,4 +127,13 @@ export interface WidgetConversionResponse extends ApiResponse {
 export interface WidgetConversion {
   shows: number;
   target: number;
+}
+
+export interface WidgetSwapRequest {
+  widgetId1: string;
+  widgetId2: string;
+}
+
+export interface WidgetChangeCompanyRequest {
+  companyId: string;
 }
