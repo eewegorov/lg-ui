@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { CouponById } from '../../../core/models/coupons';
@@ -31,7 +30,7 @@ export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      (<any>$('[data-toggle="tooltip"]')).tooltip();
+      ($('[data-toggle="tooltip"]') as any).tooltip();
     }, 1000);
   }
 

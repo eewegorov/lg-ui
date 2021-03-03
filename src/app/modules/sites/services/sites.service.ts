@@ -325,5 +325,14 @@ export class SitesService {
     ];
   }
 
+  public getSiteById(siteId) {
+    for (const item of this.sites) {
+      if (item.id === siteId) {
+        return item;
+      }
+    }
+
+    return null;
+  }
 
 }

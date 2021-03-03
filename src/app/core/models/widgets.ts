@@ -88,6 +88,7 @@ export interface WidgetInfo extends WidgetInfoShort {
 export interface AbtestInfo {
   id: string;
   type: string;
+  state?: string;
 }
 
 export interface WidgetRename {

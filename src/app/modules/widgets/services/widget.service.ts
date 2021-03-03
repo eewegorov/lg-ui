@@ -68,6 +68,13 @@ export class WidgetService {
     );
   }
 
+  public deleteWidget(siteId: string, widgetId: string): Observable<boolean> {
+    return this.widgetApiService.deleteWidget(siteId, widgetId).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
   public switch(siteId: string, widgetId: string, active: boolean): Observable<boolean> {
     const action = active ? 'start' : 'stop';
     return this.widgetApiService.switch(siteId, widgetId, action).pipe(

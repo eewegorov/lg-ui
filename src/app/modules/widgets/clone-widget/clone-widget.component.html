@@ -1,10 +1,10 @@
 <!-- Clone Widget Modal Window -->
 <div class="modal fade" id="cloneWidgetModal" tabindex="-1" role="dialog" aria-hidden="true" data-exptime="0">
-  <div class="modal-dialog" tooltiped>
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="color-line"></div>
       <div class="modal-header text-center">
-        <h3>{{:: 'widgetsList.clone.title' | translate }}</h3>
+        <h3>{{ 'widgetsList.clone.title' | translate }}</h3>
         <h5>({{clonable.widget.name}})</h5>
       </div>
       <div class="modal-body">
@@ -12,7 +12,7 @@
           <!-- Step 1 -->
           <div class="col-lg-12" ng-show="clonable.step === 0">
             <div class="row margined-left-0 select-site-title margined-bottom-10">
-              <h5>{{:: 'widgetsList.clone.site' | translate }}:</h5>
+              <h5>{{ 'widgetsList.clone.site' | translate }}:</h5>
             </div>
             <div class="dropdown site-selector">
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -20,7 +20,7 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li ng-repeat="site in sites" ng-click="changeCurrentSite(site)"><a href="javascript:void(0);">{{site.name}}</a></li>
+                <li *ngFor="let site of sites" ng-click="changeCurrentSite(site)"><a href="javascript:void(0);">{{site.name}}</a></li>
               </ul>
             </div>
 

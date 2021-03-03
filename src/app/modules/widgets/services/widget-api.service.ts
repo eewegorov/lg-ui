@@ -37,6 +37,10 @@ export class WidgetApiService {
     return this.http.get<WidgetConversionResponse>(`${ environment.url }/sites/${siteId}/widgets/${widgetId}/conversion`);
   }
 
+  public deleteWidget(siteId: string, widgetId: string): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(`${ environment.url }/sites/${siteId}/widgets/${widgetId}`);
+  }
+
   public switch(siteId: string, widgetId: string, action: 'start' | 'stop') {
     return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/sitewidgets/${widgetId}/${action}`, null);
   }

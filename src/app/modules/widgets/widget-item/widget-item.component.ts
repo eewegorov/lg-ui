@@ -1,8 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 import { WidgetConversion, WidgetInfo, WidgetInfoShort } from '../../../core/models/widgets';
 import { SitesService } from '../../sites/services/sites.service';
 import { WidgetService } from '../services/widget.service';
+import { AbtestsService } from '../../abtests/services/abtests.service';
+import { Abtest } from '../../../core/models/abtests';
+import { BillingService } from '../../../core/services/billing.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CloneWidgetComponent } from '../clone-widget/clone-widget.component';
+import { AbtestAddComponent } from '../../abtests/abtest-add/abtest-add.component';
 
 @Component({
   selector: 'app-widget-item',
@@ -23,8 +33,14 @@ export class WidgetItemComponent implements OnInit {
   private currentSiteId;
 
   constructor(
+    private router: Router,
+    private translate: TranslateService,
+    private toastr: ToastrService,
+    private modalService: NgbModal,
     private decimalPipe: DecimalPipe,
+    private billingService: BillingService,
     private sitesService: SitesService,
+    private abtestsService: AbtestsService,
     private widgetService: WidgetService
   ) {
     this.widgetCurrentCompany = this.widgetService.getCompanyById(this.widget.companyId, this.widgetService.getCurrentCompanies());
@@ -34,6 +50,16 @@ export class WidgetItemComponent implements OnInit {
   ngOnInit(): void {
     if (!this.isConversionLoaded) {
       this.loadConversion();
+    }
+
+    const abTests = this.abtestsService.getListOfABTests();
+
+    if (this.widget.abtestInfo) {
+      abTests.forEach((test: Abtest) => {
+        if (this.widget.abtestInfo.id === test.id) {
+          this.widget.abtestInfo.state = test.state;
+        }
+      });
     }
   }
 
@@ -84,7 +110,7 @@ export class WidgetItemComponent implements OnInit {
 
   public changeWidgetCompany() {
     this.widgetService.changeWidgetCompany(this.currentSiteId, this.widget.id, this.changeCompanyWidget.companyId).subscribe(
-      (response: boolean) => {
+      () => {
         this.widgetService.updateWidgetsList.next(this.currentSiteId);
       });
   }
@@ -108,85 +134,76 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public removeItem() {
-    if (scope.widget.abtestInfo && scope.widget.abtestInfo.state) {
-      toastr["error"]($translate.instant("abtest.toastr.widget.deleteiftest"), $translate.instant("abtest.toastr.widget.error"));
+    if (this.widget.abtestInfo && this.widget.abtestInfo.state) {
+      this.toastr.error(this.translate.instant('abtest.toastr.widget.deleteiftest'), this.translate.instant('global.error'));
       return false;
     }
-    swal({
-        title: $translate.instant("widgetsList.widget.delete.title"),
-        text: $translate.instant("widgetsList.widget.delete.text"),
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: $translate.instant("widgetsList.widget.delete.confirm"),
-        cancelButtonText: $translate.instant("widgetsList.widget.delete.cancel"),
-        closeOnConfirm: true,
-        closeOnCancel: true },
-      function(isConfirm){
-        if (isConfirm) {
-          WidgetService.deleteWidget(scope.currentSiteId, scope.widget.id).then(function (response) {
-            if (response.code === 200) {
-              toastr["success"]($translate.instant("widgetsList.widget.delete.desc"), $translate.instant("widgetsList.widget.delete.done"));
-              SiteService.parseError(response);
-            } else {
-              SiteService.parseError(response);
-            }
-            EventsService.publish(EVENTS.updateWidgetsList, scope.currentSiteId);
-          });
-        }
-      });
+
+    Swal.fire({
+      title: this.translate.instant('widgetsList.widget.delete.title'),
+      text: this.translate.instant('widgetsList.widget.delete.text'),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: this.translate.instant('widgetsList.widget.delete.confirm'),
+      cancelButtonText: this.translate.instant('widgetsList.widget.delete.cancel'),
+
+    }).then((isConfirm) => {
+      if (isConfirm) {
+        this.widgetService.deleteWidget(this.currentSiteId, this.widget.id).subscribe((response: boolean) => {
+          if (response) {
+            this.toastr.success(this.translate.instant('widgetsList.widget.delete.desc'), this.translate.instant('global.done'));
+          }
+
+          this.widgetService.updateWidgetsList.next(this.currentSiteId);
+        });
+      }
+    });
   }
 
   public abAction() {
-    var currentSite = SiteService.getSiteById(scope.currentSiteId);
+    const currentSite = this.sitesService.getSiteById(this.currentSiteId);
 
     // TODO: Check if it's payment query
-    if (SiteService.isSiteHasExpTariff(currentSite)) {
-      BillingService.checkTariffPlans(scope.currentSiteId,
-        $translate.instant("sitelist.tarrif.title"),
-        $translate.instant("widgetsList.payment.abtest", {siteName: currentSite.name}));
+    if (this.sitesService.isSiteHasExpTariff(currentSite)) {
+      this.billingService.checkTariffPlans(this.currentSiteId,
+        this.translate.instant('sitelist.tarrif.title'),
+        this.translate.instant('widgetsList.payment.abtest', {siteName: currentSite.name}));
     } else {
-      ModalService.showModal({
-        templateUrl: "../js/abtests/create-abtest-modal/create-abtest-modal-template.html",
-        controller: "CreateABTestModalController",
-        inputs: {
-          currentSite: currentSite,
-          widget: scope.widget,
-          isContainerized: false
-        }
-      }).then(function (modal) {
-        modal.element.modal();
-        modal.close.then(function (result) {
-          $("body").removeClass("modal-open");
-        });
+      const modalRef = this.modalService.open(AbtestAddComponent, {
+        size: 'lg',
+        windowClass: 'animate__animated animate__slideInDown animate__faster'
       });
+      modalRef.componentInstance.currentSite = currentSite;
+      modalRef.componentInstance.widget = this.widget;
+      modalRef.componentInstance.isContainerized = false;
     }
   }
 
   public abIfNoTest() {
-    if (!scope.widget.abtestInfo || !scope.widget.abtestInfo.state) {
+    if (!this.widget.abtestInfo || !this.widget.abtestInfo.state) {
       return true;
     }
   }
 
   public abIfTestOnWork() {
-    if (scope.widget.abtestInfo && scope.widget.abtestInfo.state && (scope.widget.abtestInfo.state === "ACTIVE")) {
+    if (this.widget.abtestInfo && this.widget.abtestInfo.state && (this.widget.abtestInfo.state === 'ACTIVE')) {
       return true;
     }
   }
 
   public abIfTestOnPause() {
-    if (scope.widget.abtestInfo && scope.widget.abtestInfo.state && (scope.widget.abtestInfo.state === "PAUSED")) {
+    if (this.widget.abtestInfo && this.widget.abtestInfo.state && (this.widget.abtestInfo.state === 'PAUSED')) {
       return true;
     }
   }
 
   public goToTest() {
-    window.location.href = "/abtests/active?testIdNum-" + scope.widget.abtestInfo.id;
+    this.router.navigate([`/abtests/active?testIdNum-${this.widget.abtestInfo.id}`]).then();
   }
 
   public goToConstructor() {
-    window.location.href = "/widgets/edit/" + scope.currentSiteId + "-" + scope.widget.id + "/";
+    this.router.navigate([`/widgets/edit/${this.currentSiteId}-${this.widget.id}/`]).then();
   }
 
   private loadConversion() {

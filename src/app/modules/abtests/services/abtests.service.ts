@@ -112,4 +112,8 @@ export class AbtestsService {
   public setListOfABTests(tests: Abtest[]): void {
     this.tests = tests;
   }
+
+  public getListOfABTests() {
+    return this.tests;
+  }
 }
