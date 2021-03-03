@@ -2,17 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { WidgetConversion, WidgetInfo, WidgetInfoShort } from '../../../core/models/widgets';
-import { SitesService } from '../../sites/services/sites.service';
-import { WidgetService } from '../services/widget.service';
-import { AbtestsService } from '../../abtests/services/abtests.service';
 import { Abtest } from '../../../core/models/abtests';
+import { WidgetConversion, WidgetInfo, WidgetInfoShort } from '../../../core/models/widgets';
 import { BillingService } from '../../../core/services/billing.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CloneWidgetComponent } from '../clone-widget/clone-widget.component';
+import { SitesService } from '../../sites/services/sites.service';
+import { AbtestsService } from '../../abtests/services/abtests.service';
 import { AbtestAddComponent } from '../../abtests/abtest-add/abtest-add.component';
+import { WidgetService } from '../services/widget.service';
 
 @Component({
   selector: 'app-widget-item',

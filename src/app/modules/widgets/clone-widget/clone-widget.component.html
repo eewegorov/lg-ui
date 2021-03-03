@@ -5,12 +5,12 @@
       <div class="color-line"></div>
       <div class="modal-header text-center">
         <h3>{{ 'widgetsList.clone.title' | translate }}</h3>
-        <h5>({{clonable.widget.name}})</h5>
+        <h5>({{ clonable.widget.name }})</h5>
       </div>
       <div class="modal-body">
         <div class="row">
           <!-- Step 1 -->
-          <div class="col-lg-12" ng-show="clonable.step === 0">
+          <div class="col-lg-12" *ngIf="clonable.step === 0">
             <div class="row margined-left-0 select-site-title margined-bottom-10">
               <h5>{{ 'widgetsList.clone.site' | translate }}:</h5>
             </div>
@@ -20,13 +20,13 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li *ngFor="let site of sites" ng-click="changeCurrentSite(site)"><a href="javascript:void(0);">{{site.name}}</a></li>
+                <li *ngFor="let site of sites" (click)="changeCurrentSite(site)"><a href="javascript:void(0);">{{site.name}}</a></li>
               </ul>
             </div>
 
-            <div ng-show="allContainers.length">
+            <div *ngIf="allContainers.length">
               <div class="row margined-left-0 select-site-title margined-bottom-10">
-                <h5>{{:: 'widgetsList.clone.container' | translate }}:</h5>
+                <h5>{{ 'widgetsList.clone.container' | translate }}:</h5>
               </div>
               <div class="dropdown site-selector">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -34,69 +34,73 @@
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li ng-repeat="container in allContainers" ng-click="changeCurrentContainer(container)"><a href="javascript:void(0);">{{container.name}}</a></li>
+                  <li *ngFor="let container of allContainers" (click)="changeCurrentContainer(container)"><a href="javascript:void(0);">{{container.name}}</a></li>
                 </ul>
               </div>
             </div>
 
-            <div ng-show="clonable.companyMode === 0">
+            <div *ngIf="clonable.companyMode === 0">
               <div class="row margined-left-0 select-site-title margined-bottom-10">
-                <h5>{{:: 'widgetsList.clone.company' | translate }}:</h5>
+                <h5>{{ 'widgetsList.clone.company' | translate }}:</h5>
               </div>
-              <div class="dropdown widget-company-selector" style="float: left; width: calc(100% - 50px)" ng-class="!clonable.companyId ? 'has-error' : ''">
+              <div class="dropdown widget-company-selector" style="float: left; width: calc(100% - 50px)" [ngClass]="!clonable.companyId ? 'has-error' : ''">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                   <span class="dropdown-selected-cropp" style="max-width:90%">{{clonable.companyName}}</span>
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" ng-show="companies.length">
-                  <li ng-repeat="company in getFilteredCompanies()" ng-click="changeClonableCompany(company)"><a href="javascript:void(0);">{{company.name}}</a></li>
+                <ul class="dropdown-menu" *ngIf="companies.length">
+                  <li *ngFor="let company of getFilteredCompanies()" (click)="changeClonableCompany(company)"><a href="javascript:void(0);">{{company.name}}</a></li>
                 </ul>
               </div>
               <div class="remove-sub-item">
-                <a ng-click="openAddCompanyMode()" href="javascript:void(0);" >
+                <a (click)="openAddCompanyMode()" href="javascript:void(0);" >
                   <i class="remove-sub-item colored-blue pe-7s-plus" data-toggle="tooltip" data-placement="top" data-container="body" title="{{:: 'widgetsList.add.params.company.add.tooltip' | translate }}"></i>
                 </a>
               </div>
               <div class="clearfix"></div>
             </div>
-            <div ng-class="(clonable.companyName.trim().length == 0)?'has-error':''" ng-show="clonable.companyMode === 1">
+            <div
+              *ngIf="clonable.companyMode === 1"
+              [ngClass]="(clonable.companyName.trim().length == 0) ? 'has-error' : ''"
+            >
               <div class="row margined-bottom-15 margined-left-0 select-site-title">
-                <h5>{{:: 'widgetsList.add.params.company.add.name' | translate }}: <a data-toggle="tooltip"
+                <h5>{{ 'widgetsList.add.params.company.add.name' | translate }}: <a data-toggle="tooltip"
                                                                                       data-placement="top"
-                                                                                      title="{{:: 'widgetsList.add.params.company.tooltip' | translate }}"
+                                                                                      title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
                                                                                       class="info-link" href="#"><i class="fa fa-info-circle"></i></a></h5></div>
-              <input type="text" class="form-control" ng-model="clonable.companyName" placeholder="{{'widgetsList.clone.company.add.label' | translate}}">
-              <span class="underow-comment">{{:: 'widgetsList.add.params.company.under' | translate }}</span>
+              <input type="text" class="form-control" [(ngModel)]="clonable.companyName" placeholder="{{'widgetsList.clone.company.add.label' | translate}}">
+              <span class="underow-comment">{{ 'widgetsList.add.params.company.under' | translate }}</span>
               <a href=""
-                 ng-show="companies.length"
-                 ng-click="closeAddCompanyMode()"
-                 class="companies-underline">{{:: 'widgetsList.add.params.company.add.back' | translate }}</a>
+                 *ngIf="companies.length"
+                 (click)="closeAddCompanyMode()"
+                 class="companies-underline">{{ 'widgetsList.add.params.company.add.back' | translate }}</a>
             </div>
           </div>
           <!-- Step 2 -->
-          <div class="col-lg-12" ng-show="clonable.step === 1">
-            <h2 class="text-center">{{:: 'widgetsList.clone.done.title' | translate }}</h2>
-            <h3 class="text-center">{{:: 'widgetsList.clone.done.desc' | translate }}</h3>
-            <h3 class="text-center margined-top-75 margined-bottom-20">{{:: 'widgetsList.clone.done.question' | translate }}</h3>
+          <div class="col-lg-12" *ngIf="clonable.step === 1">
+            <h2 class="text-center">{{ 'widgetsList.clone.done.title' | translate }}</h2>
+            <h3 class="text-center">{{ 'widgetsList.clone.done.desc' | translate }}</h3>
+            <h3 class="text-center margined-top-75 margined-bottom-20">{{ 'widgetsList.clone.done.question' | translate }}</h3>
             <div class="text-center m-t-xs">
               <a class="btn btn-primary next"
-                 ng-click="closeCloneWidgetModal(false)"
-                 href="" style="width: 250px;margin-right: 10px"> {{:: 'widgetsList.clone.done.return' | translate }}</a>
+                 (click)="closeCloneWidgetModal(false)"
+                 href="" style="width: 250px;margin-right: 10px"> {{ 'widgetsList.clone.done.return' | translate }}</a>
               <a class="btn btn-success next"
-                 href="/widgets/edit/{{clonabledSiteId}}-{{clonable.newWidgetId}}/" style="width: 250px;"> {{:: 'widgetsList.clone.done.edit' | translate }}</a>
+                 href="/widgets/edit/{{clonabledSiteId}}-{{clonable.newWidgetId}}/" style="width: 250px;"> {{ 'widgetsList.clone.done.edit' | translate }}</a>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal-footer" ng-show="clonable.step === 0">
+      <div class="modal-footer" *ngIf="clonable.step === 0">
         <!-- Step 1 -->
         <div class="text-right m-t-xs">
-          <a class="btn btn-default floated-left"
-             ng-click="closeCloneWidgetModal(false)"
-             href="">{{:: 'global.cancel' | translate }}</a>
-          <a class="btn btn-success" href=""
-             ng-click="cloneWidget()"
-             ng-disabled="(clonable.companyMode == 0 && clonable.companyId == null) || (clonable.companyMode == 1 && clonable.companyName.trim().length == 0)">{{:: 'widgetsList.clone.next' | translate }}</a>
+          <button class="btn btn-default floated-left"
+             (click)="closeCloneWidgetModal(false)"
+          >{{ 'global.cancel' | translate }}</button>
+          <button class="btn btn-success"
+             (click)="cloneWidget()"
+             [disabled]="(clonable.companyMode == 0 && clonable.companyId == null) || (clonable.companyMode == 1 && clonable.companyName.trim().length == 0)"
+          >{{ 'widgetsList.clone.next' | translate }}</button>
         </div>
       </div>
     </div>
