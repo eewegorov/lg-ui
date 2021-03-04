@@ -5,7 +5,7 @@ import {
   CompaniesResponse,
   CompanyRequest,
   CompanyResponse,
-  CompanyShort,
+  CompanyShort, DeleteCompanyRequest,
   Entities,
   SmartPoint,
   SmartPointEnableRequest,
@@ -123,7 +123,7 @@ export class WidgetService {
     );
   }
 
-  public saveSmartpointType(siteId, smartpoint: SmartPoint): Observable<boolean> {
+  public saveSmartpointType(siteId: string, smartpoint: SmartPoint): Observable<boolean> {
     const updatedSmartpoint: SmartPointUpdateRequest = {
       enabled: smartpoint.enabled,
       autoinvite: smartpoint.autoinvite,
@@ -135,7 +135,7 @@ export class WidgetService {
     );
   }
 
-  public startStopSmartpoint(siteId, enabled: boolean): Observable<boolean> {
+  public startStopSmartpoint(siteId: string, enabled: boolean): Observable<boolean> {
     const smartpoint: SmartPointEnableRequest = { enabled };
     return this.widgetApiService.startStopSmartpoint(siteId, smartpoint).pipe(
       map((response: ApiResponse) => response.success),
@@ -143,11 +143,18 @@ export class WidgetService {
     );
   }
 
-  public createCompany(siteId, companyName: string): Observable<CompanyShort> {
+  public createCompany(siteId: string, companyName: string): Observable<CompanyShort> {
     const company: CompanyRequest = {
       name: companyName
     };
     return this.widgetApiService.createCompany(siteId, company).pipe(
+      map((response: CompanyResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public deleteCompany(siteId: string, companyId: string, company: DeleteCompanyRequest): Observable<CompanyShort> {
+    return this.widgetApiService.deleteCompany(siteId, companyId, company).pipe(
       map((response: CompanyResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );

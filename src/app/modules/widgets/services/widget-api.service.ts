@@ -6,7 +6,7 @@ import { ApiResponse } from '../../../core/models/api';
 import {
   CompaniesResponse,
   CompanyRequest,
-  CompanyResponse,
+  CompanyResponse, DeleteCompanyRequest,
   SmartPointEnableRequest,
   SmartPointTypes,
   SmartPointUpdateRequest,
@@ -83,5 +83,9 @@ export class WidgetApiService {
 
   public createCompany(siteId: string, company: CompanyRequest): Observable<CompanyResponse> {
     return this.http.post<CompanyResponse>(`${ environment.url }/sites/${siteId}/companies`, company);
+  }
+
+  public deleteCompany(siteId: string, companyId: string, company: DeleteCompanyRequest): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/companies`, company);
   }
 }

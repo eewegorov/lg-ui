@@ -29,6 +29,11 @@ export interface CompanyResponse extends ApiResponse {
   data: CompanyShort;
 }
 
+export interface DeleteCompanyRequest {
+  recipientCompanyId: string;
+  mode: 'MOVE_WIDGETS' | 'DELETE_WIDGETS';
+}
+
 export interface CompanyShort {
   id: string;
   name: string;

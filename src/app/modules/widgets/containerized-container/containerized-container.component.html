@@ -3,14 +3,24 @@
     <div class="test-item-header">
       <div class="test-item-left">
         <div class="max-edit-text-bl">
-          <a class="test-item-name"
-             href="#" editable-text="container.name"
-             onbeforesave="updateContainer($data)">{{ container.name || emptyName }} <i class="fa fa-pencil"></i></a>
+          <cool-inline-edit-field
+            class="test-item-name"
+            name="name"
+            [(ngModel)]="container.name"
+            (saved)="updateContainer($event)"
+            [emptyText]="'containerized.container.add.name' | translate"
+          >
+          </cool-inline-edit-field>
         </div>
         <div class="max-edit-text-bl m-b-sm">
-          <a class="test-item-desc"
-             href="#" editable-text="container.description"
-             onaftersave="updateDescription()">{{ container.description || emptyDescription }} <i class="fa fa-pencil"></i></a>
+          <cool-inline-edit-field
+            class="test-item-name"
+            name="name"
+            [(ngModel)]="container.description"
+            (saved)="updateDescription()"
+            [emptyText]="'containerized.container.add.description' | translate"
+          >
+          </cool-inline-edit-field>
         </div>
       </div>
       <div class="test-item-right">

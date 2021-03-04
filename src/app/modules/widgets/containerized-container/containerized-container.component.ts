@@ -1,5 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 import { Company } from '../../../core/models/widgets';
+import { ContainerCodeComponent } from '../container-code/container-code.component';
+import { ContainerizedAddComponent } from '../containerized-add/containerized-add.component';
+import { ContainerizedWidgetService } from '../services/containerized-widget.service';
 
 @Component({
   selector: 'app-containerized-container',
@@ -11,86 +17,78 @@ export class ContainerizedContainerComponent implements OnInit {
   @Input() public site;
   @Input() private currentCompany: Company;
 
-  public emptyName = '';
-  public emptyDescription = '';
-
-  constructor() {
-    this.emptyName = $translate.instant("containerized.container.add.name");
-    this.emptyDescription = $translate.instant("containerized.container.add.description");
+  constructor(
+    private translate: TranslateService,
+    private modalService: NgbModal,
+    private containerizedWidgetService: ContainerizedWidgetService
+  ) {
   }
 
   ngOnInit(): void {
   }
 
+  public updateContainer(data) {
+    if (!data) {
+      return false;
+    }
+    this.containerizedWidgetService.updateWContainer(this.site.id, this.container.id, data, this.container.description);
+  }
+
+  public updateDescription() {
+    this.containerizedWidgetService.updateWContainer(this.site.id, this.container.id, this.container.name, this.container.description);
+  }
+
   public openContainerCodeModal() {
-    ModalService.showModal({
-      templateUrl: "../js/widgets/containerized/container-code-modal/container-code-modal-template.html",
-      controller: "ContainerCodeModalController",
-      inputs: {
-        currentSiteId: scope.site.id,
-        containerId: scope.container.id
-      }
-    }).then(function (modal) {
-      modal.element.modal();
-      modal.close.then(function (result) {
-        $("body").removeClass("modal-open");
-        // TODO: Implement logic when close modal. Don't forget "result"
-      });
+    const modalRef = this.modalService.open(ContainerCodeComponent, {
+      size: 'lg',
+      windowClass: 'animate__animated animate__slideInDown animate__faster'
     });
+    modalRef.componentInstance.currentSiteId = this.site.id;
+    modalRef.componentInstance.containerId = this.container.id;
   }
 
   public removeContainer() {
-    swal({
-        title: $translate.instant("widgetsList.widget.delete.title"),
-        text: $translate.instant("containerized.container.delete.text"),
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: $translate.instant("widgetsList.widget.delete.confirm"),
-        cancelButtonText: $translate.instant("widgetsList.widget.delete.cancel"),
-        closeOnConfirm: true,
-        closeOnCancel: true },
-      function(isConfirm){
-        if (isConfirm) {
-          CWidgetService.deleteWContainer(scope.site.id, scope.container.id).then(function() {
-            EventsService.publish(EVENTS.updateWidgetsList, scope.site.id);
-            toastr["success"]($translate.instant("containerized.container.delete.desc"), $translate.instant("widgetsList.widget.delete.done"));
-          });
-        }
-      });
+    Swal.fire({
+      title: this.translate.instant('widgetsList.widget.delete.title'),
+      text: this.translate.instant('containerized.container.delete.text'),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: this.translate.instant('widgetsList.widget.delete.confirm'),
+      cancelButtonText: this.translate.instant('widgetsList.widget.delete.cancel')
+    }).then((isConfirm) => {
+      if (isConfirm) {
+        this.containerizedWidgetService.deleteWContainer(this.site.id, this.container.id).then(function() {
+          EventsService.publish(EVENTS.updateWidgetsList, scope.site.id);
+          toastr["success"]($translate.instant("containerized.container.delete.desc"), $translate.instant("widgetsList.widget.delete.done"));
+        });
+      }
+    });
   }
 
   public getAllCount(type) {
-    var allValue = 0;
-    scope.container.widgets.forEach(function(item) {
-      if (!item.widgetConversion) return;
+    let allValue = 0;
+    this.container.widgets.forEach((item) => {
+      if (!item.widgetConversion) { return };
       allValue = allValue + item.widgetConversion[type];
     });
     return allValue;
   }
 
-  public getAllCConversion = function() {
+  public getAllCConversion() {
     return $filter("number")(((100 * scope.getAllCount('target')) / scope.getAllCount('shows')), 2) + "%";
   }
 
   public addVariant() {
-    ModalService.showModal({
-      templateUrl: "../js/widgets/containerized/add-containerized-modal/add-containerized-modal-template.html",
-      controller: "AddCWModalController",
-      inputs: {
-        currentSiteId: scope.site.id,
-        containerId: scope.container.id,
-        currentCompany: scope.currentCompany,
-        template: containerizedTemplate,
-        type: containerizedType
-      }
-    }).then(function (modal) {
-      modal.element.modal();
-      modal.close.then(function (result) {
-        $("body").removeClass("modal-open");
-        // TODO: Implement logic when close modal. Don't forget "result"
-      });
+    const modalRef = this.modalService.open(ContainerizedAddComponent, {
+      size: 'lg',
+      windowClass: 'animate__animated animate__slideInDown animate__faster'
     });
+    modalRef.componentInstance.currentSiteId = this.site.id;
+    modalRef.componentInstance.containerId = this.container.id;
+    modalRef.componentInstance.currentCompany = this.currentCompany;
+    modalRef.componentInstance.template = this.container.widgets[0].template;
+    modalRef.componentInstance.type = this.container.widgets[0].type;
   }
 
 }

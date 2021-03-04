@@ -1,6 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { SitesService } from '../../sites/services/sites.service';
 import { WidgetService } from '../services/widget.service';
+import { CompanyShort } from '../../../core/models/widgets';
 
 @Component({
   selector: 'app-company-delete',
@@ -14,6 +18,9 @@ export class CampaignDeleteComponent implements OnInit {
   public company;
 
   constructor(
+    private translate: TranslateService,
+    private toastr: ToastrService,
+    private activeModal: NgbActiveModal,
     private sitesService: SitesService,
     private widgetService: WidgetService
   ) {
@@ -32,19 +39,20 @@ export class CampaignDeleteComponent implements OnInit {
   }
 
   public performDeleteCompany(mode) {
-    const deleted = {
+    const deletedCompany = {
       mode,
       recipientCompanyId: (mode === 'MOVE_WIDGETS') ? this.currentCompany.id : ''
     };
-    this.widgetService.deleteCompany(this.sitesService.getCurrentSiteId(), this.deletedCompany.id, deleted).then((response) => {
-      if (response.code === 200) {
-        toastr["success"](notifyMessages.deleteDesc, notifyMessages.deleteDone);
-        close($scope.deletedCompany.id, 500); // close, but give 500ms for bootstrap to animate
-      } else {
-        this.sitesService.parseError(response);
-        toastr["error"]("Internal server error", "");
-      }
-    });
+
+    this.widgetService.deleteCompany(this.sitesService.getCurrentSiteId(), this.deletedCompany.id, deletedCompany)
+      .subscribe((response: CompanyShort) => {
+        if (response) {
+          this.toastr.success(this.translate.instant('widgetsList.company.add.desc'), this.translate.instant('global.done'));
+          this.activeModal.close(this.deletedCompany.id);
+        } else {
+          this.toastr.error(this.translate.instant('widgetsList.company.delete.error'), '');
+        }
+      });
   }
 
 }
