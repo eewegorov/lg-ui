@@ -98,7 +98,7 @@
              (click)="closeCloneWidgetModal(false)"
           >{{ 'global.cancel' | translate }}</button>
           <button class="btn btn-success"
-             (click)="cloneWidget()"
+             (click)="handleCloneWidget()"
              [disabled]="(clonable.companyMode == 0 && clonable.companyId == null) || (clonable.companyMode == 1 && clonable.companyName.trim().length == 0)"
           >{{ 'widgetsList.clone.next' | translate }}</button>
         </div>

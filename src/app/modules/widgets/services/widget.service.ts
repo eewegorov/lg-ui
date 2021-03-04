@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
+  CompaniesResponse,
   CompanyRequest,
   CompanyResponse,
   CompanyShort,
@@ -9,7 +10,7 @@ import {
   SmartPoint,
   SmartPointEnableRequest,
   SmartPointUpdateRequest,
-  WidgetChangeCompanyRequest,
+  WidgetChangeCompanyRequest, WidgetCloned, WidgetCloneRequest, WidgetCloneResponse,
   WidgetConversion,
   WidgetConversionResponse, WidgetInfo,
   WidgetRename,
@@ -54,6 +55,13 @@ export class WidgetService {
     );
   }
 
+  public getCompanies(siteId: string): Observable<CompanyShort[]> {
+    return this.widgetApiService.getCompanies(siteId).pipe(
+      map((response: CompaniesResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
   public getWidgetsTemplates(): Observable<WidgetTemplate[]> {
     return this.widgetApiService.getWidgetsTemplates().pipe(
       map((response: WidgetTemplatesResponse) => response.data),
@@ -87,6 +95,14 @@ export class WidgetService {
     const renamedCWidget: WidgetRename = { name };
     return this.widgetApiService.rename(siteId, widgetId, renamedCWidget).pipe(
       map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public clone(siteId: string, widgetId: string, targetSiteId: string, companyId: string): Observable<WidgetCloned> {
+    const cloneWidget: WidgetCloneRequest = { siteId: targetSiteId, companyId };
+    return this.widgetApiService.clone(siteId, widgetId, cloneWidget).pipe(
+      map((response: WidgetCloneResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }

@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WidgetService } from '../services/widget.service';
+import { switchMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CompanyShort, ContainerShort, WidgetCloned } from '../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../services/containerized-widget.service';
+import { WidgetService } from '../services/widget.service';
 
 @Component({
   selector: 'app-clone-widget',
@@ -17,9 +20,11 @@ export class CloneWidgetComponent implements OnInit {
   public clonable;
   public allContainers;
   public currentContainer;
+  public clonabledSiteId;
 
   constructor(
     private translate: TranslateService,
+    private activeModal: NgbActiveModal,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
   ) {
@@ -60,7 +65,7 @@ export class CloneWidgetComponent implements OnInit {
     this.currentSite = site;
     this.clonable.targetSiteId = site.id;
     this.getCompaniesForCurrentSite(site.id);
-    if (containerId) {
+    if (this.containerId) {
       this.getContainersForCurrentSite(site.id);
     }
   }
@@ -80,74 +85,80 @@ export class CloneWidgetComponent implements OnInit {
   }
 
   public handleCloneWidget() {
-    if ($scope.clonable.companyMode === 1) {
-      WidgetService.createCompany($scope.clonable.targetSiteId || $scope.clonable.recipientSiteId, $scope.clonable.companyName).then(function (response) {
-        if (response.code === 200) {
-          cloneWidget(response.data.id);
-        } else {
-          SiteService.parseError(response);
+    if (this.clonable.companyMode === 1) {
+      this.widgetService.createCompany(this.clonable.targetSiteId || this.clonable.recipientSiteId, this.clonable.companyName)
+        .subscribe((response: CompanyShort) => {
+        if (response) {
+          this.cloneWidget(response.id);
         }
       });
     } else {
-      this.cloneWidget($scope.clonable.companyId);
+      this.cloneWidget(this.clonable.companyId);
     }
   }
 
   public closeCloneWidgetModal(result) {
-    close(result, 200);
+    this.activeModal.close(result);
   }
 
   private getContainersForCurrentSite(id) {
-    this.containerizedWidgetService.getWContainers(id).then(function(response) {
-      $scope.allContainers = [defaultContainer].concat(response.data);
-      $scope.currentContainer = $scope.allContainers[0];
+    const defaultContainer = {
+      id: null,
+      name: this.translate.instant('widgetsList.clone.container.default')
+    };
+
+    this.containerizedWidgetService.getWContainers(id).subscribe((response: ContainerShort[]) => {
+      this.allContainers = [defaultContainer].concat(response);
+      this.currentContainer = this.allContainers[0];
     });
   }
 
   private getCompaniesForCurrentSite(siteId) {
-    this.widgetService.getCompanyList(siteId).then(function (response) {
-      if (response.code === 200) {
-        $scope.companies = WidgetService.getUndefaultCompanies(response.data);
-        $scope.changeClonableCompany($scope.companies[0]);
-        if (!$scope.companies.length) {
-          $scope.openAddCompanyMode();
+    this.widgetService.getCompanies(siteId).subscribe((response: CompanyShort[]) => {
+      if (response) {
+        this.companies = this.widgetService.getUndefaultCompanies(response);
+        this.changeClonableCompany(this.companies[0]);
+        if (!this.companies.length) {
+          this.openAddCompanyMode();
         } else {
-          $scope.clonable.companyMode = 0;
+          this.clonable.companyMode = 0;
         }
-      } else {
-        SiteService.parseError(response);
       }
     });
   }
 
   private cloneWidget(companyId) {
-    if (containerId) {
-      if ($scope.currentContainer.id) {
-        cloneCWidget(companyId, $scope.currentContainer.id);
+    if (this.containerId) {
+      if (this.currentContainer.id) {
+        this.cloneCWidget(companyId, this.currentContainer.id);
       } else {
-        CWidgetService.getWContainerName($scope.currentSite.id).then(function(name) {
-          CWidgetService.createWContainer($scope.currentSite.id, name).then(function(response1) {
-            cloneCWidget(companyId, response1.data.id);
-          });
+        this.containerizedWidgetService.getWContainerName(this.currentSite.id).pipe(
+          switchMap((name: string) => this.containerizedWidgetService.createWContainer(this.currentSite.id, name))
+        ).subscribe((container: ContainerShort) => {
+          this.cloneCWidget(companyId, container.id);
         });
       }
     } else {
-      WidgetService.cloneWidget($scope.clonable.recipientSiteId, $scope.clonable.targetSiteId || $scope.clonable.recipientSiteId, $scope.clonable.widget.id, companyId).then(function(response) {
-        $scope.clonable.newWidgetId = response.data.widgetId;
-        $scope.clonabledSiteId = response.data.siteId || $scope.clonable.recipientSiteId;
-        EventsService.publish(EVENTS.updateWidgetsList, $scope.clonable.recipientSiteId);
-        $scope.clonable.step++;
-      });
+      const targetSiteId = this.clonable.targetSiteId || this.clonable.recipientSiteId;
+      this.widgetService.clone(this.clonable.recipientSiteId, this.clonable.widget.id, targetSiteId, companyId)
+        .subscribe((response: WidgetCloned) => {
+          this.clonable.newWidgetId = response.widgetId;
+          this.clonabledSiteId = response.siteId || this.clonable.recipientSiteId;
+          this.widgetService.updateWidgetsList.next(this.clonable.recipientSiteId);
+          this.clonable.step++;
+        });
     }
   }
 
-  function cloneCWidget(companyId, contId) {
-    CWidgetService.cloneCWidget($scope.clonable.recipientSiteId, $scope.clonable.targetSiteId || $scope.clonable.recipientSiteId, $scope.clonable.widget.id, companyId, contId).then(function(response) {
-      $scope.clonable.newWidgetId = response.data.widgetId;
-      $scope.clonabledSiteId = response.data.siteId || $scope.clonable.recipientSiteId;
-      EventsService.publish(EVENTS.updateWidgetsList, $scope.clonable.recipientSiteId);
-      $scope.clonable.step++;
-    });
+  private cloneCWidget(companyId, containerId) {
+    const targetSiteId = this.clonable.targetSiteId || this.clonable.recipientSiteId;
+    this.containerizedWidgetService.clone(this.clonable.recipientSiteId, this.clonable.widget.id, targetSiteId, companyId, containerId)
+      .subscribe((response: WidgetCloned) => {
+        this.clonable.newWidgetId = response.widgetId;
+        this.clonabledSiteId = response.siteId || this.clonable.recipientSiteId;
+        this.widgetService.updateWidgetsList.next(this.clonable.recipientSiteId);
+        this.clonable.step++;
+      });
   }
 
 }

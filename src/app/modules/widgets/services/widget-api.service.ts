@@ -4,11 +4,19 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
 import {
-  CompanyRequest, CompanyResponse, SmartPointEnableRequest,
+  CompaniesResponse,
+  CompanyRequest,
+  CompanyResponse,
+  SmartPointEnableRequest,
   SmartPointTypes,
-  SmartPointUpdateRequest, WidgetChangeCompanyRequest, WidgetConversionResponse,
+  SmartPointUpdateRequest,
+  WidgetChangeCompanyRequest,
+  WidgetCloneRequest,
+  WidgetCloneResponse,
+  WidgetConversionResponse,
   WidgetRename,
-  WidgetsResponse, WidgetSwapRequest,
+  WidgetsResponse,
+  WidgetSwapRequest,
   WidgetTemplatesResponse,
   WidgetTypesResponse
 } from '../../../core/models/widgets';
@@ -33,6 +41,10 @@ export class WidgetApiService {
     return this.http.get<WidgetTemplatesResponse>(`${ environment.url }/widgets/templates`);
   }
 
+  public getCompanies(siteId: string): Observable<CompaniesResponse> {
+    return this.http.get<CompaniesResponse>(`${ environment.url }/sites/${siteId}/companies`);
+  }
+
   public getWidgetConversion(siteId: string, widgetId: string): Observable<WidgetConversionResponse> {
     return this.http.get<WidgetConversionResponse>(`${ environment.url }/sites/${siteId}/widgets/${widgetId}/conversion`);
   }
@@ -47,6 +59,10 @@ export class WidgetApiService {
 
   public rename(siteId: string, widgetId: string, name: WidgetRename): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/sitewidgets/${widgetId}/rename`, name);
+  }
+
+  public clone(siteId: string, widgetId: string, widget: WidgetCloneRequest): Observable<WidgetCloneResponse> {
+    return this.http.post<WidgetCloneResponse>(`${ environment.url }/sites/${siteId}/sitewidgets/${widgetId}/clone`, widget);
   }
 
   public changeWidgetCompany(siteId: string, widgetId: string, company: WidgetChangeCompanyRequest): Observable<ApiResponse> {

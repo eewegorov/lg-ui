@@ -17,6 +17,10 @@ export interface Company {
   default: boolean;
 }
 
+export interface CompaniesResponse extends ApiResponse {
+  data: CompanyShort[];
+}
+
 export interface CompanyRequest {
   name: string;
 }
@@ -32,8 +36,8 @@ export interface CompanyShort {
 
 export interface Container {
   id: string;
-  description: string;
   name: string;
+  description: string;
   widgets: WidgetInfo[];
 }
 
@@ -95,6 +99,24 @@ export interface WidgetRename {
   name: string;
 }
 
+export interface WidgetCloneRequest {
+  siteId: string;
+  companyId: string;
+}
+
+export interface ContainerizedWidgetCloneRequest extends WidgetCloneRequest {
+  containerId: string;
+}
+
+export interface WidgetCloneResponse {
+  data: WidgetCloned;
+}
+
+export interface WidgetCloned {
+  siteId: string;
+  widgetId: string;
+}
+
 export interface WidgetTypesResponse extends ApiResponse {
   data: WidgetType[];
 }
@@ -137,4 +159,22 @@ export interface WidgetSwapRequest {
 
 export interface WidgetChangeCompanyRequest {
   companyId: string;
+}
+
+export interface ContainersResponse extends ApiResponse {
+  data: ContainerShort[];
+}
+
+export interface ContainerResponse extends ApiResponse {
+  data: ContainerShort;
+}
+
+export interface ContainerShort {
+  id: string;
+  description: string;
+  name: string;
+}
+
+export interface ContainerCreateRequest {
+  name: string;
 }
