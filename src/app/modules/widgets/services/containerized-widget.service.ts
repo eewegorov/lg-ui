@@ -4,7 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiResponse } from '../../../core/models/api';
 import {
-  ContainerizedWidgetCloneRequest,
+  ContainerizedWidgetCloneRequest, ContainerRequest,
   ContainerResponse,
   ContainerShort,
   ContainersResponse, WidgetCloned, WidgetCloneRequest,
@@ -36,9 +36,24 @@ export class ContainerizedWidgetService {
   }
 
   public createWContainer(siteId: string, containerName: string): Observable<ContainerShort> {
-    const container = { name: containerName };
+    const container: ContainerRequest = { name: containerName };
     return this.containerizedWidgetApiService.createWContainer(siteId, container).pipe(
       map((response: ContainerResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public updateWContainer(siteId: string, containerId: string, name: string, description: string): Observable<ContainerShort> {
+    const container: ContainerRequest = { name, description };
+    return this.containerizedWidgetApiService.updateWContainer(siteId, containerId, container).pipe(
+      map((response: ContainerResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public deleteWContainer(siteId: string, containerId: string): Observable<boolean> {
+    return this.containerizedWidgetApiService.deleteWContainer(siteId, containerId).pipe(
+      map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
     );
   }

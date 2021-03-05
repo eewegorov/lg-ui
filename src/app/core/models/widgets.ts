@@ -92,6 +92,7 @@ export interface WidgetInfo extends WidgetInfoShort {
   template: string;
   active: boolean;
   abtestInfo: AbtestInfo;
+  widgetConversion?: WidgetConversion;
 }
 
 export interface AbtestInfo {
@@ -180,6 +181,7 @@ export interface ContainerShort {
   name: string;
 }
 
-export interface ContainerCreateRequest {
+export interface ContainerRequest {
   name: string;
+  description?: string;
 }

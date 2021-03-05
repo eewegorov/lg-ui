@@ -4,9 +4,11 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
 import {
-  ContainerCreateRequest, ContainerizedWidgetCloneRequest,
+  ContainerRequest,
+  ContainerizedWidgetCloneRequest,
   ContainerResponse,
-  ContainersResponse, WidgetCloneRequest, WidgetCloneResponse,
+  ContainersResponse,
+  WidgetCloneResponse,
   WidgetRename
 } from '../../../core/models/widgets';
 
@@ -22,8 +24,16 @@ export class ContainerizedWidgetApiService {
     return this.http.get<ContainersResponse>(`${ environment.url }/sites/${siteId}/containers`);
   }
 
-  public createWContainer(siteId: string, container: ContainerCreateRequest): Observable<ContainerResponse> {
+  public createWContainer(siteId: string, container: ContainerRequest): Observable<ContainerResponse> {
     return this.http.post<ContainerResponse>(`${ environment.url }/sites/${siteId}/containers`, container);
+  }
+
+  public updateWContainer(siteId: string, containerId: string, container: ContainerRequest): Observable<ContainerResponse> {
+    return this.http.put<ContainerResponse>(`${ environment.url }/sites/${siteId}/containers/${containerId}`, container);
+  }
+
+  public deleteWContainer(siteId: string, containerId: string): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(`${ environment.url }/sites/${siteId}/containers/${containerId}`);
   }
 
   public switch(siteId: string, widgetId: string, action: 'start' | 'stop') {

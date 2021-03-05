@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { WidgetInfo } from '../../../../core/models/widgets';
+import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
+import { WidgetService } from '../../services/widget.service';
 
 @Component({
   selector: 'app-containerized-item',
@@ -7,12 +10,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ContainerizedItemComponent implements OnInit {
   @Input() public item = {};
-  @Input() public first = '';
-  @Input() public last = '';
+  @Input() public first: boolean;
+  @Input() public last: boolean;
   @Input() private containerId = '';
   @Input() private siteId = '';
-  @Input() private prev = '';
-  @Input() private next = '';
+  @Input() private prev: WidgetInfo;
+  @Input() private next: WidgetInfo;
 
   public changeCompanyWidget = {
     id: '',
@@ -21,7 +24,10 @@ export class ContainerizedItemComponent implements OnInit {
   };
 
 
-  constructor() { }
+  constructor(
+    private widgetService: WidgetService,
+    private containerizedWidgetService: ContainerizedWidgetService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -34,11 +40,11 @@ export class ContainerizedItemComponent implements OnInit {
     if (!data) {
       return false;
     }
-    CWidgetService.changeCWidgetName(scope.siteId, scope.item.id, data);
+    this.containerizedWidgetService.changeCWidgetName(scope.siteId, scope.item.id, data);
   }
 
   public swapCWidgets(isUp) {
-    CWidgetService.swapCWidgets(scope.siteId, scope.item.id, isUp ? scope.prev.id : scope.next.id).then(function (response) {
+    this.containerizedWidgetService.swapCWidgets(scope.siteId, scope.item.id, isUp ? scope.prev.id : scope.next.id).then(function (response) {
       EventsService.publish(EVENTS.updateCurrentContainer, scope.containerId);
     });
   }
@@ -52,21 +58,21 @@ export class ContainerizedItemComponent implements OnInit {
   }
 
   public startChangeCompany() {
-    scope.changeCompanyWidget = {
-      id: scope.item.id,
-      name: scope.widgetCurrentCompany.name,
-      companyId: scope.item.companyId
+    this.changeCompanyWidget = {
+      id: this.item.id,
+      name: this.widgetCurrentCompany.name,
+      companyId: this.item.companyId
     };
-  };
+  }
 
   public changeCurrentCompany(company) {
-    scope.changeCompanyWidget.companyId = company.id;
-    scope.changeCompanyWidget.name = company.name;
-    scope.changeCompanyWidget.id = scope.item.id;
-  };
+    this.changeCompanyWidget.companyId = company.id;
+    this.changeCompanyWidget.name = company.name;
+    this.changeCompanyWidget.id = this.item.id;
+  }
 
   public changeCWidgetCompany() {
-    CWidgetService.changeCWidgetCompany(scope.siteId, scope.item.id, scope.changeCompanyWidget.companyId).then(function (response) {
+    this.containerizedWidgetService.changeCWidgetCompany(scope.siteId, scope.item.id, scope.changeCompanyWidget.companyId).then(function (response) {
       scope.item.companyId = scope.changeCompanyWidget.companyId;
       scope.widgetCurrentCompany = WidgetService.getCompanyById(scope.item.companyId, WidgetService.getCurrentCompanies());
       scope.resetChangeCompany();

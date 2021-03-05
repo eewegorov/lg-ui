@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CampaignDeleteComponent } from '../campaign-delete/campaign-delete.component';
 import { WidgetAddComponent } from '../widget-add/widget-add.component';
-import { Company, CompanyShort, Entities, Widget, WidgetInfo } from '../../../core/models/widgets';
+import { Company, CompanyShort, Entities, WidgetInfo } from '../../../core/models/widgets';
 import { Abtest } from '../../../core/models/abtests';
 import { BillingService } from '../../../core/services/billing.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
@@ -102,7 +102,7 @@ export class WidgetsComponent implements OnInit {
     });
   }
 
-  public getFilteredWidgets(type): Widget[] {
+  public getFilteredWidgets(type): WidgetInfo[] {
     if (this.currentCompany.id === this.widgetService.getDefaultCompany(this.companies).id) {
       return this.widgets[type];
     }

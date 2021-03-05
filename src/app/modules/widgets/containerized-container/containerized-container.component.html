@@ -60,17 +60,17 @@
         </div>
         <div class="ab-grid__body">
           <app-containerized-item
-            *ngFor="let widget of container.widgets"
+            *ngFor="let widget of container.widgets; let isOdd = odd; index as i"
             class="grid-containerized-item"
-            ng-class-even="'bg-for-line-grid'"
-            ng-class="!widget.active ? 'ab-grid__item--non-active' : ''"
+            [class.bg-for-line-grid]="isOdd"
+            [ngClass]="!widget.active ? 'ab-grid__item--non-active' : ''"
             [item]="widget"
             [containerId]="container.id"
             [siteId]="site.id"
-            [first]="$first"
-            [last]="$last"
-            [prev]="container.widgets[$index - 1]"
-            [next]="container.widgets[$index + 1]"
+            [first]="i === 0"
+            [last]="i === container.widgets.length - 1"
+            [prev]="container.widgets[i - 1]"
+            [next]="container.widgets[i + 1]"
           ></app-containerized-item>
         </div>
         <div class="ab-grid__footer" *ngIf="container.widgets.length && container.widgets.length > 1">

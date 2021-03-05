@@ -1,11 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { Company } from '../../../core/models/widgets';
+import { Company, Container, WidgetInfo } from '../../../core/models/widgets';
+import { WidgetService } from '../services/widget.service';
+import { ContainerizedWidgetService } from '../services/containerized-widget.service';
 import { ContainerCodeComponent } from '../container-code/container-code.component';
 import { ContainerizedAddComponent } from '../containerized-add/containerized-add.component';
-import { ContainerizedWidgetService } from '../services/containerized-widget.service';
 
 @Component({
   selector: 'app-containerized-container',
@@ -13,13 +16,16 @@ import { ContainerizedWidgetService } from '../services/containerized-widget.ser
   styleUrls: ['./containerized-container.component.scss']
 })
 export class ContainerizedContainerComponent implements OnInit {
-  @Input() public container = {};
+  @Input() public container: Container;
   @Input() public site;
   @Input() private currentCompany: Company;
 
   constructor(
     private translate: TranslateService,
     private modalService: NgbModal,
+    private toastr: ToastrService,
+    private decimalPipe: DecimalPipe,
+    private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
   ) {
   }
@@ -58,9 +64,11 @@ export class ContainerizedContainerComponent implements OnInit {
       cancelButtonText: this.translate.instant('widgetsList.widget.delete.cancel')
     }).then((isConfirm) => {
       if (isConfirm) {
-        this.containerizedWidgetService.deleteWContainer(this.site.id, this.container.id).then(function() {
-          EventsService.publish(EVENTS.updateWidgetsList, scope.site.id);
-          toastr["success"]($translate.instant("containerized.container.delete.desc"), $translate.instant("widgetsList.widget.delete.done"));
+        this.containerizedWidgetService.deleteWContainer(this.site.id, this.container.id).subscribe((response: boolean) => {
+          if (response) {
+            this.widgetService.updateWidgetsList.next(this.site.id);
+            this.toastr.success(this.translate.instant('containerized.container.delete.desc'), this.translate.instant('global.done'));
+          }
         });
       }
     });
@@ -68,15 +76,15 @@ export class ContainerizedContainerComponent implements OnInit {
 
   public getAllCount(type) {
     let allValue = 0;
-    this.container.widgets.forEach((item) => {
-      if (!item.widgetConversion) { return };
+    this.container.widgets.forEach((item: WidgetInfo) => {
+      if (!item.widgetConversion) { return; }
       allValue = allValue + item.widgetConversion[type];
     });
     return allValue;
   }
 
   public getAllCConversion() {
-    return $filter("number")(((100 * scope.getAllCount('target')) / scope.getAllCount('shows')), 2) + "%";
+    return (this.decimalPipe.transform(((100 * this.getAllCount('target')) / this.getAllCount('shows')), '1.0-2')) + '%';
   }
 
   public addVariant() {
