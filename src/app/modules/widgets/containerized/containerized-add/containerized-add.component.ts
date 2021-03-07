@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Company, CompanyShort } from '../../../../core/models/widgets';
+import { WidgetService } from '../../services/widget.service';
+import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 
 @Component({
   selector: 'app-containerized-add',
@@ -6,106 +11,117 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./containerized-add.component.scss']
 })
 export class ContainerizedAddComponent implements OnInit {
-  public companies = [];
-  public newCWidgetInfo = {
-    step: 1,
-    containerizedType: type,
-    siteId: currentSiteId,
-    companyMode: this.companies.length === 0 ? 1 : 0,
-    company: currentCompany.default ? $translate.instant("widgetsList.clone.company.chose") : currentCompany.name,
-    companyId: currentCompany.default ? null : currentCompany.id,
-    types: [
-      {
-        type: "NEW",
-        title: $translate.instant("abtest.abtypes.title.new")
-      },
-      {
-        type: "MOCKUP",
-        title: $translate.instant("abtest.abtypes.title.mockup")
-      }]
-  };
+  @Input() currentSiteId: string;
+  @Input() containerId: string;
+  @Input() currentCompany: Company;
+  @Input() template: string;
+  @Input() type: string;
 
+  public companies = [];
+  public newCWidgetInfo = {};
   public editableCW = {};
 
-  constructor() {
-    this.companies = WidgetService.getCurrentCompanies();
+  constructor(
+    private translate: TranslateService,
+    private activeModal: NgbActiveModal,
+    private widgetService: WidgetService,
+    private containerizedWidgetService: ContainerizedWidgetService
+  ) {
+    this.companies = this.widgetService.getCurrentCompanies();
     this.editableCW = this.getEmptyCWidget();
+
+    this.newCWidgetInfo = {
+      step: 1,
+      containerizedType: this.type,
+      siteId: this.currentSiteId,
+      companyMode: this.companies.length === 0 ? 1 : 0,
+      company: this.currentCompany.default ? this.translate.instant('widgetsList.clone.company.chose') : this.currentCompany.name,
+      companyId: this.currentCompany.default ? null : this.currentCompany.id,
+      types: [
+        {
+          type: 'NEW',
+          title: this.translate.instant('abtest.abtypes.title.new')
+        },
+        {
+          type: 'MOCKUP',
+          title: this.translate.instant('abtest.abtypes.title.mockup')
+        }]
+    };
   }
 
   ngOnInit(): void {
   }
 
   public setNewCWidgetType(type) {
-    $scope.newCWidgetInfo.createMode = type.type;
+    this.newCWidgetInfo.createMode = type.type;
 
-    if ($scope.newCWidgetInfo.createMode === "MOCKUP") {
-      $scope.newCWidgetInfo.step = 2;
-    } else if ($scope.newCWidgetInfo.createMode === "NEW") {
-      $scope.editableCW.templateId = template;
-      delete $scope.editableCW.mockupId;
-      $scope.newCWidgetInfo.step = 3;
+    if (this.newCWidgetInfo.createMode === 'MOCKUP') {
+      this.newCWidgetInfo.step = 2;
+    } else if (this.newCWidgetInfo.createMode === 'NEW') {
+      this.editableCW.templateId = this.template;
+      delete this.editableCW.mockupId;
+      this.newCWidgetInfo.step = 3;
     }
   }
 
   public chooseTemplateWidget(data) {
-    $scope.editableCW.mockupId = data.id;
-    delete $scope.editableCW.templateId;
-    $scope.newCWidgetInfo.step = 3;
+    this.editableCW.mockupId = data.id;
+    delete this.editableCW.templateId;
+    this.newCWidgetInfo.step = 3;
   }
 
   public changeCompany(company) {
-    $scope.newCWidgetInfo.companyId = company ? company.id : null;
-    $scope.newCWidgetInfo.company = company ? company.name : $translate.instant("widgetsList.clone.company.chose");
+    this.newCWidgetInfo.companyId = company ? company.id : null;
+    this.newCWidgetInfo.company = company ? company.name : this.translate.instant('');
   }
 
   public openAddCompanyMode() {
-    $scope.newCWidgetInfo.companyMode = 1;
-    $scope.newCWidgetInfo.company = "";
+    this.newCWidgetInfo.companyMode = 1;
+    this.newCWidgetInfo.company = '';
   }
 
   public closeAddCompanyMode() {
-    $scope.newCWidgetInfo.companyMode = 0;
-    $scope.newCWidgetInfo.company = $scope.companies[0].name;
+    this.newCWidgetInfo.companyMode = 0;
+    this.newCWidgetInfo.company = this.companies[0].name;
   }
 
   public getFilteredCompanies() {
-    return $scope.companies.filter(function (item) {
-      return (item.id !== $scope.newCWidgetInfo.companyId) && !item.default;
+    return this.companies.filter((item) => {
+      return (item.id !== this.newCWidgetInfo.companyId) && !item.default;
     });
   }
 
   public closeAddCWidgetModal(result) {
-    close(result, 200);
+    this.activeModal.close(result);
   }
 
   public addWidget() {
-    if (!$scope.editableCW.templateId && !$scope.editableCW.mockupId) return false;
-    console.log($scope.newCWidgetInfo, $scope.editableCW);
+    if (!this.editableCW.templateId && !this.editableCW.mockupId) { return false; }
 
-    if ($scope.newCWidgetInfo.companyMode === 0) {
-      $scope.editableCW.companyId = $scope.newCWidgetInfo.companyId;
+    if (this.newCWidgetInfo.companyMode === 0) {
+      this.editableCW.companyId = this.newCWidgetInfo.companyId;
       this.createCWidget();
     } else {
-      WidgetService.createCompany($scope.newCWidgetInfo.siteId, $scope.newCWidgetInfo.company).then(function(response) {
-        $scope.editableCW.companyId = response.data.id;
-        createCWidget();
+      this.widgetService.createCompany(this.newCWidgetInfo.siteId, this.newCWidgetInfo.company).subscribe((response: CompanyShort) => {
+        this.editableCW.companyId = response.id;
+        this.createCWidget();
       });
     }
   }
 
   private createCWidget() {
-    CWidgetService.createCWidget($scope.newCWidgetInfo.siteId, $scope.editableCW).then(function (response) {
-      window.location.href = "/widgets/edit/" + $scope.newCWidgetInfo.siteId + "-" + response.data.value + "/";
+    this.containerizedWidgetService.createCWidget(this.newCWidgetInfo.siteId, this.editableCW).then(function (response) {
+      window.location.href = "/widgets/edit/" + this.newCWidgetInfo.siteId + "-" + response.data.value + "/";
     });
   }
 
   private getEmptyCWidget() {
     return {
-      companyId: "",
-      containerId: containerId,
-      name: "",
-      templateId: "",
-      mockupId: ""
+      companyId: '',
+      containerId: this.containerId,
+      name: '',
+      templateId: '',
+      mockupId: ''
     };
   }
 

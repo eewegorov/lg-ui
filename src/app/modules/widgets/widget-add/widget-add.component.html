@@ -35,7 +35,7 @@
   <div id="step3" class="p-m max-w-868" *ngIf="newWidgetStep === 3">
     <label class="big-label">{{ 'widgetsList.add.chooseTemplate.label' | translate }}:</label>
     <div class="row">
-      <div class="col-lg-4 widget-type-view" *ngFor="let template of templates | filter:editableWidget.typeId" (click)="setTemplate(template)">
+      <div class="col-lg-4 widget-type-view" *ngFor="let template of templates | filterBy:editableWidget.typeId" (click)="setTemplate(template)">
         <img src="{{ template.previewLink }}" alt="preview">
         <div class="view-name">{{ template.name }}</div>
         <div class="view-desc">{{ template.description }}</div>

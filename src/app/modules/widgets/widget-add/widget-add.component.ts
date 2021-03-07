@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { FilterPipe } from 'ngx-filter-pipe';
+import { WidgetService } from '../services/widget.service';
+import { CompanyShort } from '../../../core/models/widgets';
 
 @Component({
   selector: 'app-widget-add',
@@ -16,7 +20,10 @@ export class WidgetAddComponent implements OnInit {
   company = { name: '' };
 
   constructor(
-    private activeModal: NgbActiveModal
+    private translate: TranslateService,
+    private activeModal: NgbActiveModal,
+    private filterPipe: FilterPipe,
+    private widgetService: WidgetService
   ) { }
 
   ngOnInit(): void {
@@ -32,22 +39,22 @@ export class WidgetAddComponent implements OnInit {
 
   public changeCompany(company) {
     this.editableWidget.companyId = company ? company.id : null;
-    this.editableWidget.company = company ? company.name : $translate.instant("widgetsList.clone.company.chose");
+    this.editableWidget.company = company ? company.name : this.translate.instant('widgetsList.clone.company.chose');
   }
 
   public openAddCompanyMode() {
     this.editableWidget.companyMode = 1;
-    this.editableWidget.company = "";
+    this.editableWidget.company = '';
   }
 
   public closeAddCompanyMode() {
     this.editableWidget.companyMode = 0;
-    this.editableWidget.company = currentCompany.default ? $translate.instant("widgetsList.clone.company.chose") : currentCompany.name;
+    this.editableWidget.company = currentCompany.default ? this.translate.instant('widgetsList.clone.company.chose') : currentCompany.name;
     this.editableWidget.companyId = currentCompany.default ? null : currentCompany.id;
   }
 
   public getFilteredCompanies() {
-    return this.companies.filter(function (item) {
+    return this.companies.filter((item) => {
       return (item.id !== this.editableWidget.companyId) && !item.default;
     });
   }
@@ -60,7 +67,7 @@ export class WidgetAddComponent implements OnInit {
     this.editableWidget.mockupId = null;
     this.newWidgetStep++;
     if (this.editableWidget.companyMode === 1) {
-      this.editableWidget.company = "";
+      this.editableWidget.company = '';
     }
   }
 
@@ -71,30 +78,32 @@ export class WidgetAddComponent implements OnInit {
     this.editableWidget.typeId = type.id;
     this.editableWidget.containerized = type.containerized;
     this.newWidgetStep = 3;
-    var templateItems = $filter('filter')($scope.templates, type.id);
+    var templateItems = this.filterPipe.transform(this.templates, type.id);
     if (templateItems.length === 1) {
       this.setTemplate(templateItems[0]);
     }
   }
 
   public addWidget() {
-    if (!$scope.editableWidget.templateId && !$scope.editableWidget.mockupId) return false;
-    var newWidget = {
-      name: $scope.editableWidget.name
+    if (!this.editableWidget.templateId && !this.editableWidget.mockupId) { return false; }
+
+    const newWidget = {
+      name: this.editableWidget.name
     };
-    if ($scope.editableWidget.templateId) {
-      newWidget.templateId = $scope.editableWidget.templateId;
+
+    if (this.editableWidget.templateId) {
+      newWidget.templateId = this.editableWidget.templateId;
     } else {
-      newWidget.mockupId = $scope.editableWidget.mockupId;
+      newWidget.mockupId = this.editableWidget.mockupId;
     }
 
-    if ($scope.editableWidget.companyMode === 0) {
-      newWidget.companyId = $scope.editableWidget.companyId;
-      createWidget(newWidget);
+    if (this.editableWidget.companyMode === 0) {
+      newWidget.companyId = this.editableWidget.companyId;
+      this.createWidget(newWidget);
     } else {
-      WidgetService.createCompany($scope.editableWidget.siteId, $scope.editableWidget.company).then(function(response) {
+      this.widgetService.createCompany(this.editableWidget.siteId, this.editableWidget.company).subscribe((response: CompanyShort) => {
         newWidget.companyId = response.data.id;
-        createWidget(newWidget);
+        this.createWidget(newWidget);
       });
     }
   }
@@ -110,7 +119,7 @@ export class WidgetAddComponent implements OnInit {
     }
 
     if (this.editableWidget.companyMode === 1) {
-      this.editableWidget.company = "";
+      this.editableWidget.company = '';
     }
 
     this.editableWidget.templateId = null;

@@ -1,11 +1,11 @@
 import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { IntegrationAddComponent } from '../integration-add/integration-add.component';
 import Swal from 'sweetalert2';
 import { IntegrationItem } from '../../../core/models/sites';
 import { SitesService } from '../services/sites.service';
-import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
