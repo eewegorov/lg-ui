@@ -11,14 +11,14 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetEditComponent } from './widget-edit/widget-edit.component';
 import { CampaignDeleteComponent } from './campaign-delete/campaign-delete.component';
 import { SmartpointsControlComponent } from './smartpoints-control/smartpoints-control.component';
-import { ContainerizedContainerComponent } from './containerized-container/containerized-container.component';
-import { ContainerizedItemComponent } from './containerized-container/containerized-item/containerized-item.component';
+import { ContainerizedContainerComponent } from './containerized/containerized-container/containerized-container.component';
+import { ContainerizedItemComponent } from './containerized/containerized-item/containerized-item.component';
 import { WidgetItemComponent } from './widget-item/widget-item.component';
-import { ContainerizedAddComponent } from './containerized-add/containerized-add.component';
+import { ContainerizedAddComponent } from './containerized/containerized-add/containerized-add.component';
 import { TemplatesGalleryComponent } from './templates-gallery/templates-gallery.component';
 import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
 import { CloneWidgetComponent } from './clone-widget/clone-widget.component';
-import { ContainerCodeComponent } from './container-code/container-code.component';
+import { ContainerCodeComponent } from './containerized/container-code/container-code.component';
 
 
 @NgModule({

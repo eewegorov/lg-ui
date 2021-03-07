@@ -4,16 +4,16 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { Company, Container, WidgetInfo } from '../../../core/models/widgets';
-import { WidgetService } from '../services/widget.service';
-import { ContainerizedWidgetService } from '../services/containerized-widget.service';
+import { Company, Container, WidgetInfo } from '../../../../core/models/widgets';
+import { WidgetService } from '../../services/widget.service';
+import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { ContainerCodeComponent } from '../container-code/container-code.component';
 import { ContainerizedAddComponent } from '../containerized-add/containerized-add.component';
 
 @Component({
   selector: 'app-containerized-container',
   templateUrl: './containerized-container.component.html',
-  styleUrls: ['../shared/shared.scss', './containerized-container.component.scss']
+  styleUrls: ['../../shared/shared.scss', './containerized-container.component.scss']
 })
 export class ContainerizedContainerComponent implements OnInit {
   @Input() public container: Container;

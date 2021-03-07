@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SitesService } from '../../sites/services/sites.service';
-import { ContainerizedWidgetService } from '../services/containerized-widget.service';
+import { SitesService } from '../../../sites/services/sites.service';
+import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 
 @Component({
   selector: 'app-container-code',
