@@ -9,7 +9,9 @@ import {
   ContainerResponse,
   ContainersResponse,
   WidgetCloneResponse,
-  WidgetRename
+  WidgetRename,
+  WidgetSwapRequest,
+  ContainerInfoResponse, WidgetChangeCompanyRequest
 } from '../../../core/models/widgets';
 
 
@@ -22,6 +24,10 @@ export class ContainerizedWidgetApiService {
 
   public getWContainers(siteId: string): Observable<ContainersResponse> {
     return this.http.get<ContainersResponse>(`${ environment.url }/sites/${siteId}/containers`);
+  }
+
+  public getWContainerInfo(siteId: string, containerId: string): Observable<ContainerInfoResponse> {
+    return this.http.get<ContainerInfoResponse>(`${ environment.url }/sites/${siteId}/containers/${containerId}`);
   }
 
   public createWContainer(siteId: string, container: ContainerRequest): Observable<ContainerResponse> {
@@ -46,5 +52,13 @@ export class ContainerizedWidgetApiService {
 
   public clone(siteId: string, widgetId: string, widget: ContainerizedWidgetCloneRequest): Observable<WidgetCloneResponse> {
     return this.http.post<WidgetCloneResponse>(`${ environment.url }/sites/${siteId}/containerwidgets/${widgetId}/clone`, widget);
+  }
+
+  public changeCWidgetCompany(siteId: string, widgetId: string, company: WidgetChangeCompanyRequest): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${ environment.url }/sites/${siteId}/containerwidgets//${widgetId}/company`, company);
+  }
+
+  public swap(siteId: string, widgetSwap: WidgetSwapRequest): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/containerwidgets/swap`, widgetSwap);
   }
 }

@@ -39,6 +39,10 @@ export interface CompanyShort {
   name: string;
 }
 
+export interface ContainerInfoResponse {
+  data: Container;
+}
+
 export interface Container {
   id: string;
   name: string;

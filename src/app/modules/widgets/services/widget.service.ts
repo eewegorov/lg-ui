@@ -30,6 +30,7 @@ import { ApiResponse } from '../../../core/models/api';
 })
 export class WidgetService {
   public updateWidgetsList = new Subject<string>();
+  public updateCurrentContainer = new Subject<string>();
   public openCloneWidgetModal = new Subject<{data: WidgetInfo; containerId: string}>();
 
   private currentCompanies;

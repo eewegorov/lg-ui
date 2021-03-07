@@ -4,10 +4,12 @@ import { catchError, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiResponse } from '../../../core/models/api';
 import {
+  Container,
+  ContainerInfoResponse,
   ContainerizedWidgetCloneRequest, ContainerRequest,
   ContainerResponse,
   ContainerShort,
-  ContainersResponse, WidgetCloned, WidgetCloneRequest,
+  ContainersResponse, WidgetChangeCompanyRequest, WidgetCloned, WidgetCloneRequest,
   WidgetCloneResponse,
   WidgetRename
 } from '../../../core/models/widgets';
@@ -31,6 +33,13 @@ export class ContainerizedWidgetService {
   public getWContainers(siteId: string): Observable<ContainerShort[]> {
     return this.containerizedWidgetApiService.getWContainers(siteId).pipe(
       map((response: ContainersResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getWContainerInfo(siteId: string, containerId: string): Observable<Container> {
+    return this.containerizedWidgetApiService.getWContainerInfo(siteId, containerId).pipe(
+      map((response: ContainerInfoResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }
@@ -78,6 +87,22 @@ export class ContainerizedWidgetService {
     const cloneWidget: ContainerizedWidgetCloneRequest = { siteId: targetSiteId, companyId, containerId };
     return this.containerizedWidgetApiService.clone(siteId, widgetId, cloneWidget).pipe(
       map((response: WidgetCloneResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public changeCWidgetCompany(siteId: string, widgetId: string, companyId: string): Observable<boolean> {
+    const changedCompanyWidget: WidgetChangeCompanyRequest = { companyId };
+    return this.containerizedWidgetApiService.changeCWidgetCompany(siteId, widgetId, changedCompanyWidget).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public swap(siteId: string, widgetId1: string, widgetId2: string): Observable<boolean> {
+    const widgetSwap = { widgetId1, widgetId2 };
+    return this.containerizedWidgetApiService.swap(siteId, widgetSwap).pipe(
+      map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
     );
   }

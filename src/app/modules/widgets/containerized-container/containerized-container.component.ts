@@ -31,6 +31,13 @@ export class ContainerizedContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.widgetService.updateCurrentContainer.subscribe((data: string) => {
+      if (data === this.container.id) {
+        this.containerizedWidgetService.getWContainerInfo(this.site.id, data).subscribe((response: Container) => {
+          this.container = response;
+        });
+      }
+    });
   }
 
   public updateContainer(data) {
