@@ -130,4 +130,9 @@ export class ContainerizedWidgetService {
       })
     );
   }
+
+  public getContainerInstallCode(containerId) {
+    const className = `lg-containerized-id-${containerId}`;
+    return `<div class="${className}"></div>`;
+  }
 }

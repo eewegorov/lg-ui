@@ -1,17 +1,21 @@
 <div class="ab-grid__item">
   <div class="ab-grid__item--name">
-    <a href="#"
-       editable-text="item.name"
-       onbeforesave="updateCWidget($data)">
-      <span long-text="{{item.name}}" max-total-characters="30"></span> <i class="fa fa-pencil"></i></a>
+    <cool-inline-edit-field
+      class="long-text-item"
+      name="name"
+      [(ngModel)]="item.name"
+      (saved)="updateCWidget($event)"
+      [emptyText]="'containerized.container.add.name' | translate"
+    >
+    </cool-inline-edit-field>
   </div>
   <div class="ab-grid__item--company">
     <a href="javascript:void(0);"
        *ngIf="changeCompanyWidget.id !== item.id"
        (click)="startChangeCompany()"
-       class="widget-company-editable penciled">
-            <span long-text="{{widgetCurrentCompany.name}}"
-                  max-total-characters="25"></span><i class="fa fa-pencil margined-left-6"></i></a>
+       class="widget-company-editable penciled"
+    ><span class="long-text-item">{{ widgetCurrentCompany.name }}</span><i class="fa fa-pencil margined-left-6"></i>
+    </a>
 
     <div class="changeable-company-widget" *ngIf="changeCompanyWidget.id === item.id">
       <div class="floated-left" style="width: calc(100% - 80px)">
@@ -58,7 +62,7 @@
 
       <button class="btn btn-xs btn-default priority-down-widget-btn"
               [disabled]="last"
-              (click)="swapCWidgets()">
+              (click)="swapCWidgets(false)">
         <i class="fa fa-angle-down"></i></button>
     </div>
   </div>
@@ -78,7 +82,7 @@
     </div>
 
     <div class="btn-group ab-btns margined-right-10">
-      <button (click)="abCAction()"
+      <button (click)="abAction()"
               *ngIf="abIfNoTest()"
               class="btn btn-xs btn-default ab-widget-btn"
               data-container="body" data-toggle="tooltip" data-placement="top"

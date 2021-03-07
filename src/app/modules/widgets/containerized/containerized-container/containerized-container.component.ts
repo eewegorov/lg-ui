@@ -13,7 +13,7 @@ import { ContainerizedAddComponent } from '../containerized-add/containerized-ad
 @Component({
   selector: 'app-containerized-container',
   templateUrl: './containerized-container.component.html',
-  styleUrls: ['./containerized-container.component.scss']
+  styleUrls: ['../shared/shared.scss', './containerized-container.component.scss']
 })
 export class ContainerizedContainerComponent implements OnInit {
   @Input() public container: Container;

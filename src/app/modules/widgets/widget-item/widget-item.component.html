@@ -57,7 +57,7 @@
           </div>
           <div class="widget-item-view-header widget-item-view-header__name">
             <cool-inline-edit-field
-              class="test-item-name"
+              class="long-text-item"
               name="name"
               [(ngModel)]="widget.name"
               (saved)="updateWidgetName($event)"
@@ -74,7 +74,7 @@
           <div class="widget-item-view-header" *ngIf="changeCompanyWidget.id !== widget.id">
             <h6><span class="font-bold">{{ 'widgetsList.widget.company' | translate }}</span>: <a
               href="javascript:void(0);" (click)="startChangeCompany()" class="widget-company-editable penciled">
-              <span long-text="{{widgetCurrentCompany.name}}" max-total-characters="35"></span> <i class="fa fa-pencil margined-left-6"></i></a>
+              <span class="long-text-item">{{ widgetCurrentCompany.name }}</span> <i class="fa fa-pencil margined-left-6"></i></a>
             </h6>
           </div>
           <div class="row" *ngIf="changeCompanyWidget.id === widget.id">

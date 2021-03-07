@@ -33,8 +33,9 @@ export class WidgetService {
   public updateCurrentContainer = new Subject<string>();
   public openCloneWidgetModal = new Subject<{data: WidgetInfo; containerId: string}>();
 
-  private currentCompanies;
-  private currentContainers;
+  private currentCompanies = [];
+  private currentContainers = [];
+  private currentWidgetTypes = [];
 
   constructor(
     private errorHandlerService: ErrorHandlerService,
@@ -185,6 +186,15 @@ export class WidgetService {
   public getCurrentCompanies() {
     return this.currentCompanies;
   }
+
+  public setCurrentWidgetsTypes(types) {
+    this.currentWidgetTypes = types;
+  }
+
+  public getCurrentWidgetsTypes() {
+    return this.currentWidgetTypes;
+  }
+
 
   public getCompanyById(companyId, companies) {
     return companies.find((item) => {

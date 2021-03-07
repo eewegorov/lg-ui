@@ -5,17 +5,19 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { Company, Container, WidgetInfo } from '../../../../core/models/widgets';
+import { Company, Container, WidgetConversion, WidgetInfo } from '../../../../core/models/widgets';
 import { BillingService } from '../../../../core/services/billing.service';
 import { SitesService } from '../../../sites/services/sites.service';
 import { WidgetService } from '../../services/widget.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { AbtestAddComponent } from '../../../abtests/abtest-add/abtest-add.component';
+import { AbtestsService } from '../../../abtests/services/abtests.service';
+import { Abtest } from '../../../../core/models/abtests';
 
 @Component({
   selector: 'app-containerized-item',
   templateUrl: './containerized-item.component.html',
-  styleUrls: ['./containerized-item.component.scss']
+  styleUrls: ['../../shared/shared.scss', './containerized-item.component.scss']
 })
 export class ContainerizedItemComponent implements OnInit {
   @Input() public item: WidgetInfo;
@@ -42,11 +44,26 @@ export class ContainerizedItemComponent implements OnInit {
     private decimalPipe: DecimalPipe,
     private billingService: BillingService,
     private sitesService: SitesService,
+    private abtestsService: AbtestsService,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
   ) { }
 
   ngOnInit(): void {
+    const abTests = this.abtestsService.getListOfABTests();
+    if (this.item.abtestInfo) {
+      abTests.forEach((test: Abtest) => {
+        if (this.item.abtestInfo.id === test.id) {
+          this.item.abtestInfo.state = test.state;
+        }
+      });
+    }
+
+    this.widgetService.getWidgetConversion(this.siteId, this.item.id).subscribe((response: WidgetConversion) => {
+      if (response) {
+        this.item.widgetConversion = response;
+      }
+    });
   }
 
   public getCConversion() {

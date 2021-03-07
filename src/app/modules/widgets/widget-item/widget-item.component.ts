@@ -16,7 +16,7 @@ import { WidgetService } from '../services/widget.service';
 @Component({
   selector: 'app-widget-item',
   templateUrl: './widget-item.component.html',
-  styleUrls: ['./widget-item.component.scss'],
+  styleUrls: ['../shared/shared.scss', './widget-item.component.scss'],
   providers: [DecimalPipe]
 })
 export class WidgetItemComponent implements OnInit {
@@ -29,6 +29,7 @@ export class WidgetItemComponent implements OnInit {
   public widgetConversion: WidgetConversion;
   public isConversionLoaded = false;
   public changeCompanyWidget: WidgetInfoShort;
+  public widgetType;
   private currentSiteId;
 
   constructor(
@@ -44,6 +45,10 @@ export class WidgetItemComponent implements OnInit {
   ) {
     this.widgetCurrentCompany = this.widgetService.getCompanyById(this.widget.companyId, this.widgetService.getCurrentCompanies());
     this.currentSiteId = this.sitesService.getCurrentSiteId();
+
+    this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item) => {
+      return item.id === this.widget.type;
+    });
   }
 
   ngOnInit(): void {
