@@ -12,7 +12,7 @@ import {
   SmartPointUpdateRequest,
   WidgetChangeCompanyRequest, WidgetCloned, WidgetCloneRequest, WidgetCloneResponse,
   WidgetConversion,
-  WidgetConversionResponse, WidgetInfo,
+  WidgetConversionResponse, WidgetCreated, WidgetCreateRequest, WidgetCreateResponse, WidgetInfo,
   WidgetRename,
   WidgetsResponse,
   WidgetTemplate,
@@ -36,6 +36,7 @@ export class WidgetService {
   private currentCompanies = [];
   private currentContainers = [];
   private currentWidgetTypes = [];
+  private currentWidgetTemplates = [];
 
   constructor(
     private errorHandlerService: ErrorHandlerService,
@@ -81,6 +82,13 @@ export class WidgetService {
   public deleteWidget(siteId: string, widgetId: string): Observable<boolean> {
     return this.widgetApiService.deleteWidget(siteId, widgetId).pipe(
       map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public create(siteId: string, widget: WidgetCreateRequest): Observable<WidgetCreated> {
+    return this.widgetApiService.create(siteId, widget).pipe(
+      map((response: WidgetCreateResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }
@@ -195,6 +203,13 @@ export class WidgetService {
     return this.currentWidgetTypes;
   }
 
+  public setCurrentWidgetsTemplates(templates) {
+    this.currentWidgetTemplates = templates;
+  }
+
+  public getCurrentWidgetsTemplates() {
+    return this.currentWidgetTemplates;
+  }
 
   public getCompanyById(companyId, companies) {
     return companies.find((item) => {

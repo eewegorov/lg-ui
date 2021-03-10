@@ -11,7 +11,10 @@ import {
   WidgetCloneResponse,
   WidgetRename,
   WidgetSwapRequest,
-  ContainerInfoResponse, WidgetChangeCompanyRequest
+  ContainerInfoResponse,
+  WidgetChangeCompanyRequest,
+  WidgetCreateRequest,
+  WidgetCreateResponse
 } from '../../../core/models/widgets';
 
 
@@ -42,7 +45,11 @@ export class ContainerizedWidgetApiService {
     return this.http.delete<ApiResponse>(`${ environment.url }/sites/${siteId}/containers/${containerId}`);
   }
 
-  public switch(siteId: string, widgetId: string, action: 'start' | 'stop') {
+  public create(siteId: string, widget: WidgetCreateRequest): Observable<WidgetCreateResponse> {
+    return this.http.post<WidgetCreateResponse>(`${ environment.url }/sites/${siteId}/containerwidgets`, widget);
+  }
+
+  public switch(siteId: string, widgetId: string, action: 'start' | 'stop'): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/containerwidgets/${widgetId}/${action}`, null);
   }
 

@@ -9,7 +9,7 @@ export class TemplatesGalleryComponent implements OnInit {
   @Input() public types = [];
 
   @Input() private typeId = '';
-  @Input() private callback = '';
+  @Input() private callback: (data) => void;
 
   public groups = [];
   public mockups = [];

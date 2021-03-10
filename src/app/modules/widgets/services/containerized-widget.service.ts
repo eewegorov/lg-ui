@@ -10,7 +10,7 @@ import {
   ContainerResponse,
   ContainerShort,
   ContainersResponse, WidgetChangeCompanyRequest, WidgetCloned, WidgetCloneRequest,
-  WidgetCloneResponse,
+  WidgetCloneResponse, WidgetCreated, WidgetCreateRequest, WidgetCreateResponse,
   WidgetRename
 } from '../../../core/models/widgets';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
@@ -67,6 +67,13 @@ export class ContainerizedWidgetService {
     );
   }
 
+  public create(siteId: string, widget: WidgetCreateRequest): Observable<WidgetCreated> {
+    return this.containerizedWidgetApiService.create(siteId, widget).pipe(
+      map((response: WidgetCreateResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
   public switch(siteId: string, widgetId: string, active: boolean): Observable<boolean> {
     const action = active ? 'start' : 'stop';
     return this.containerizedWidgetApiService.switch(siteId, widgetId, action).pipe(
@@ -107,7 +114,7 @@ export class ContainerizedWidgetService {
     );
   }
 
-  public getWContainerName(siteId: string) {
+  public getWContainerName(siteId?: string) {
     const searchText = this.translate.instant('containerized.container.label') + ' #';
     return this.getWContainers(siteId || this.sitesService.getCurrentSiteId()).pipe(
       map((response: ContainerShort[]) => {

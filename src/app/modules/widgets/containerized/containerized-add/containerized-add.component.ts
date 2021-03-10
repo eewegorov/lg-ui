@@ -1,7 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Company, CompanyShort } from '../../../../core/models/widgets';
+import {
+  Company,
+  CompanyShort,
+  NewContainerizedWidgetInfo,
+  WidgetCreated,
+  WidgetCreateRequest
+} from '../../../../core/models/widgets';
 import { WidgetService } from '../../services/widget.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 
@@ -18,17 +25,24 @@ export class ContainerizedAddComponent implements OnInit {
   @Input() type: string;
 
   public companies = [];
-  public newCWidgetInfo = {};
-  public editableCW = {};
+  public newCWidgetInfo: NewContainerizedWidgetInfo;
+  public editableCW: WidgetCreateRequest;
 
   constructor(
+    private router: Router,
     private translate: TranslateService,
     private activeModal: NgbActiveModal,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
   ) {
     this.companies = this.widgetService.getCurrentCompanies();
-    this.editableCW = this.getEmptyCWidget();
+    this.editableCW = {
+      companyId: '',
+      containerId: this.containerId,
+      name: '',
+      templateId: '',
+      mockupId: ''
+    };
 
     this.newCWidgetInfo = {
       step: 1,
@@ -110,19 +124,9 @@ export class ContainerizedAddComponent implements OnInit {
   }
 
   private createCWidget() {
-    this.containerizedWidgetService.createCWidget(this.newCWidgetInfo.siteId, this.editableCW).then(function (response) {
-      window.location.href = "/widgets/edit/" + this.newCWidgetInfo.siteId + "-" + response.data.value + "/";
+    this.containerizedWidgetService.create(this.newCWidgetInfo.siteId, this.editableCW).subscribe((response: WidgetCreated) => {
+      this.router.navigate([`/widgets/edit/${this.newCWidgetInfo.siteId}-${response.value}/`]).then();
     });
-  }
-
-  private getEmptyCWidget() {
-    return {
-      companyId: '',
-      containerId: this.containerId,
-      name: '',
-      templateId: '',
-      mockupId: ''
-    };
   }
 
 }

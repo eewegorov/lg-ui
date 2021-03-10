@@ -114,6 +114,51 @@ export interface WidgetCloneRequest {
   companyId: string;
 }
 
+export interface NewContainerizedWidgetInfo {
+  step: number;
+  containerizedType: string;
+  siteId: string;
+  companyMode: number;
+  company: string;
+  companyId: string;
+  types: NewWidgetType[];
+  createMode?: string;
+}
+
+export interface NewWidgetInfo {
+  siteId: string;
+  templateId: string;
+  mockupId: string;
+  typeId: string;
+  widgetName: string;
+  name: string;
+  companyMode: number;
+  company: string;
+  companyId: string;
+  containerized?: boolean;
+}
+
+export interface NewWidgetType {
+  type: string;
+  title: string;
+}
+
+export interface WidgetCreateRequest {
+  name: string;
+  templateId: string;
+  companyId: string;
+  mockupId: string;
+  containerId?: string;
+}
+
+export interface WidgetCreateResponse extends ApiResponse {
+  data: WidgetCreated;
+}
+
+export interface WidgetCreated {
+  value: string;
+}
+
 export interface ContainerizedWidgetCloneRequest extends WidgetCloneRequest {
   containerId: string;
 }
@@ -189,3 +234,5 @@ export interface ContainerRequest {
   name: string;
   description?: string;
 }
+
+

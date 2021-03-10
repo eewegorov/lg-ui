@@ -13,7 +13,7 @@ import {
   WidgetChangeCompanyRequest,
   WidgetCloneRequest,
   WidgetCloneResponse,
-  WidgetConversionResponse,
+  WidgetConversionResponse, WidgetCreateRequest, WidgetCreateResponse,
   WidgetRename,
   WidgetsResponse,
   WidgetSwapRequest,
@@ -51,6 +51,10 @@ export class WidgetApiService {
 
   public deleteWidget(siteId: string, widgetId: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(`${ environment.url }/sites/${siteId}/widgets/${widgetId}`);
+  }
+
+  public create(siteId: string, widget: WidgetCreateRequest): Observable<WidgetCreateResponse> {
+    return this.http.post<WidgetCreateResponse>(`${ environment.url }/sites/${siteId}/sitewidgets`, widget);
   }
 
   public switch(siteId: string, widgetId: string, action: 'start' | 'stop') {
