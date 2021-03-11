@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SharedModule } from '../../shared/shared.module';
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { WidgetsListComponent } from './widgets-list/widgets-list.component';
@@ -47,9 +48,10 @@ import { ContainerCodeComponent } from './containerized/container-code/container
     TranslateModule,
     UiSwitchModule,
     FilterPipeModule,
+    CoolInlineEditFieldModule,
+    InfiniteScrollModule,
     SharedModule,
-    WidgetsRoutingModule,
-    CoolInlineEditFieldModule
+    WidgetsRoutingModule
   ]
 })
 export class WidgetsModule { }

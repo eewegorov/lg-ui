@@ -132,7 +132,11 @@
   </div>
   <div class="col-lg-12 margined-top-30" *ngIf="!sites.length">
     <h3 class="f-0 text-center">{{ 'widgetsList.sitePlaceholder' | translate }}</h3>
-    <h4 class="f-2 text-center underline-links blue-links hover-links" [innerHTML]="'widgetsList.sitePlaceholder2' | translate"></h4>
+    <h4 class="f-2 text-center underline-links blue-links hover-links">
+      <span>{{ 'widgetsList.sitePlaceholder2' | translate }}</span>
+      <a routerLink="/site/list">{{ 'widgetsList.sitePlaceholder3' | translate }}</a>
+      <span>{{ 'widgetsList.sitePlaceholder4' | translate }}</span>
+    </h4>
   </div>
 
   <!-- Static widgets -->

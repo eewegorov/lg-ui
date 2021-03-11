@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { mergeMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { Mockup, MockupGroup } from '../../../core/models/widgets';
 import { WidgetService } from '../services/widget.service';
-import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-templates-gallery',
   templateUrl: './templates-gallery.component.html',
-  styleUrls: ['./templates-gallery.component.scss']
+  styleUrls: ['../shared/shared.scss', './templates-gallery.component.scss']
 })
 export class TemplatesGalleryComponent implements OnInit {
   @Input() public types = [];

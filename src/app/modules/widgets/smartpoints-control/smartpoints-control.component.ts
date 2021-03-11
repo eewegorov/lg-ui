@@ -5,7 +5,7 @@ import { WidgetService } from '../services/widget.service';
 @Component({
   selector: 'app-smartpoints-control',
   templateUrl: './smartpoints-control.component.html',
-  styleUrls: ['./smartpoints-control.component.scss']
+  styleUrls: ['../shared/shared.scss', './smartpoints-control.component.scss']
 })
 export class SmartpointsControlComponent implements OnInit {
   @Input() public siteId: string;
