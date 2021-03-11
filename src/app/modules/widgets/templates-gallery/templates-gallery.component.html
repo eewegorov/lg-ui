@@ -1,5 +1,10 @@
 <div class="filter-tabs" *ngIf="types && types.length">
-  <div *ngFor="let type of types; track by $index" class="{{type.class}}" (click)="filterByTab(type.code, type.id)" [ngClass]="{'active': isTabsActive(type.code)}">
+  <div
+    *ngFor="let type of types; trackBy: trackById"
+    (click)="filterByTab(type.code, type.id)"
+    [ngClass]="type.class"
+    [class.active]="isTabsActive(type.code)"
+  >
     <span class="filter-tab-title">{{type.name}}</span>
     <span class="filter-tab-sub">{{type.sub}}</span>
   </div>
@@ -13,15 +18,15 @@
     <span class="left-panel-filter-title">{{ 'widgetsList.add.modal.gallery.category.title' | translate }}</span>
     <div class="left-panel-filter-categories">
       <div class="left-panel-filter-categories-container">
-        <div *ngFor="let grp of groups">
-          <h5 [ngClass]="($index != 0)?'margined-top-20':''">
-            {{grp.name}}
+        <div *ngFor="let grp of groups; index as i">
+          <h5 [ngClass]="(i !== 0) ? 'margined-top-20': '' ">
+            {{ grp.name }}
           </h5>
-          <div class="left-category-item" *ngFor="cat in grp.categories">
+          <div class="left-category-item" *ngFor="let cat of grp.categories">
             <div class="left-panel-filter-categories-category">
               <label class="non-bold">
                 <checkbox ng-model="cat.checked" ng-change="filterByCat(cat.checked, cat.id)" class="checkbox-green-btn"></checkbox>
-                {{cat.name}}
+                {{ cat.name }}
               </label>
             </div>
           </div>
@@ -38,7 +43,9 @@
       <div class="mockup-selector-categories-mockups-item-container" *ngFor="let mckp of mockups">
         <div class="mockup-selector-categories-mockups-item">
           <div class="mockup-selector-categories-mockups-item-hover">
-            <button (click)="saveWidget(mckp)" type="button" class="btn btn-success"><i class="fa fa-check"></i> {{ 'widgetsList.add.params.select' | translate }}</button>
+            <button (click)="saveWidget(mckp)" type="button" class="btn btn-success">
+              <i class="fa fa-check"></i> {{ 'widgetsList.add.params.select' | translate }}
+            </button>
           </div>
           <div class="mockup-selector-categories-mockups-item-content">
             <div id="mockup-selector-categories-mockups-item-tariff-container">
@@ -47,12 +54,12 @@
             <img [src]="mckp.preview" alt="preview">
             <div class="mockup-selector-categories-mockups-item-title">
               <div>
-                <div>{{mckp.name}}</div>
+                <div>{{ mckp.name }}</div>
               </div>
             </div>
             <div class="mockup-selector-categories-mockups-item-desc">
               <div>
-                <div>{{mckp.description}}</div>
+                <div>{{ mckp.description }}</div>
               </div>
             </div>
           </div>

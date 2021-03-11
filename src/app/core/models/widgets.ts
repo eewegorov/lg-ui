@@ -235,4 +235,19 @@ export interface ContainerRequest {
   description?: string;
 }
 
+export interface MockupsResponse extends ApiResponse {
+  data: Mockup[];
+}
+
+export interface Mockup {
+  id: string;
+  name: string;
+  description: string;
+  preview: string;
+  template: string;
+  type: string;
+  categories: string[];
+  tariff: string;
+}
+
 

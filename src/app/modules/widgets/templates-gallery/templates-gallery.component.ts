@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Mockup } from '../../../core/models/widgets';
+import { WidgetService } from '../services/widget.service';
 
 @Component({
   selector: 'app-templates-gallery',
@@ -13,24 +16,37 @@ export class TemplatesGalleryComponent implements OnInit {
 
   public groups = [];
   public mockups = [];
+  public isLoaderActive = false;
 
-  private ALL_TYPES = {
-    type: null,
-    code: "all",
-    class: "filter-tab-on-all",
-    name: $translate.instant("widgetsList.add.modal.gallery.tab.all.title"),
-    sub: $translate.instant("widgetsList.add.modal.gallery.tab.all.desc"),
-    id: null
-  };
+  private ALL_TYPES;
+  private tab: number;
+  private startItem;
+  private newItem;
+  private ITEMS_TO_ADD = 6;
+  private checkboxOnArray = [];
+  private testArr = [];
+  private queryMockup = { type: '', categories: '' };
 
-  constructor() { }
+  constructor(
+    private translate: TranslateService,
+    private widgetService: WidgetService
+  ) {
+    this.ALL_TYPES = {
+      type: null,
+      code: 'all',
+      class: 'filter-tab-on-all',
+      name: this.translate.instant('widgetsList.add.modal.gallery.tab.all.title'),
+      sub: this.translate.instant('widgetsList.add.modal.gallery.tab.all.desc'),
+      id: null
+    };
+  }
 
   ngOnInit(): void {
-    if (scope.typeId) {
-      scope.filterByTab("all", scope.typeId);
+    if (this.typeId) {
+      this.filterByTab('all', this.typeId);
     } else {
-      scope.types = [ALL_TYPES].concat(mapTypes(scope.types));
-      scope.filterByTab("all");
+      this.types = [this.ALL_TYPES].concat(this.mapTypes(this.types));
+      this.filterByTab('all');
     }
   }
 
@@ -40,55 +56,61 @@ export class TemplatesGalleryComponent implements OnInit {
 
   public filterByCat(checked, catId) {
     if (!checked) {
-      for (var i = 0; i < checkboxOnArray.length; i++) {
-        if (checkboxOnArray[i] === catId) {
-          checkboxOnArray.splice(i, 1);
+      for (let i = 0; i < this.checkboxOnArray.length; i++) {
+        if (this.checkboxOnArray[i] === catId) {
+          this.checkboxOnArray.splice(i, 1);
         }
       }
     } else {
-      checkboxOnArray.push(catId);
+      this.checkboxOnArray.push(catId);
     }
-    scope.isLoaderActive = true;
-    testArr = [];
-    if(!queryMockups.type) {
-      delete queryMockups.type;
+
+    this.isLoaderActive = true;
+    this.testArr = [];
+
+    if (!this.queryMockup.type) {
+      delete this.queryMockup.type;
     }
-    queryMockups.categories = checkboxOnArray.join(",");
-    WidgetService.getMockups(queryMockups).then(function(response) {
-      actionAfterTabSwitch(response.data);
+    this.queryMockup.categories = this.checkboxOnArray.join(',');
+    this.widgetService.getMockups(this.queryMockup.categories).subscribe((response: Mockup[]) => {
+      this.actionAfterTabSwitch(response);
     });
   }
 
   public loadMore() {
-    for(var i = startItem; i < (startItem + ITEMS_TO_ADD); i++) {
-      if(newItem < testArr.length) {
-        scope.mockups.push(testArr[i]);
-        newItem++;
+    for (let i = this.startItem; i < (this.startItem + this.ITEMS_TO_ADD); i++) {
+      if (this.newItem < this.testArr.length) {
+        this.mockups.push(this.testArr[i]);
+        this.newItem++;
       } else {
-        startItem = newItem;
+        this.startItem = this.newItem;
         break;
       }
     }
-    startItem = newItem;
+    this.startItem = this.newItem;
   }
 
   public saveWidget(mockup) {
-    scope.callback(mockup);
+    this.callback(mockup);
   }
 
-  public filterByTab(newTab, typeId) {
-    scope.isLoaderActive = true;
-    testArr = [];
-    checkboxOnArray = [];
+  public trackById(index, item) {
+    return item.id;
+  }
+
+  public filterByTab(newTab, typeId?) {
+    this.isLoaderActive = true;
+    this.testArr = [];
+    this.checkboxOnArray = [];
     if (typeId) {
-      queryMockups.type = typeId;
-      queryGroups.type = typeId;
+      this.queryMockups.type = typeId;
+      this.queryGroups.type = typeId;
     } else {
-      delete queryMockups.type;
-      delete queryGroups.type;
+      delete this.queryMockups.type;
+      delete this.queryGroups.type;
     }
     delete queryMockups.categories;
-    WidgetService.getMockups(queryMockups).then(function(response) {
+    this.widgetService.getMockups(queryMockups).then(function(response) {
       WidgetService.getMockupGroups(queryGroups).then(function(groups) {
         //Parse groups and categories
         scope.groups = groups.data;
@@ -107,35 +129,38 @@ export class TemplatesGalleryComponent implements OnInit {
     });
   }
 
-  private actionAfterTabSwitch(data, newTab) {
-    $timeout(function () {
-      scope.mockups = [];
-      testArr = data;
-      fillArrayToShow();
+  private actionAfterTabSwitch(data, newTab?) {
+    setTimeout(() => {
+      this.mockups = [];
+      this.testArr = data;
+      this.fillArrayToShow();
     }, 200);
-    $timeout(function () {
-      if(newTab) {
-        scope.tab = newTab;
+
+    setTimeout(() => {
+      if (newTab) {
+        this.tab = newTab;
       }
-      scope.isLoaderActive = false;
+      this.isLoaderActive = false;
     }, 400);
   }
 
   // Add mockups to shown array firstly
   private fillArrayToShow() {
-    for(var i = 0; i < ITEMS_TO_ADD; i++) {
-      if(i < testArr.length) {
-        scope.mockups.push(testArr[i]);
-        startItem = (i + 1);
-        newItem = startItem;
-      } else break;
+    for (let i = 0; i < this.ITEMS_TO_ADD; i++) {
+      if (i < this.testArr.length) {
+        this.mockups.push(this.testArr[i]);
+        this.startItem = (i + 1);
+        this.newItem = this.startItem;
+      } else {
+        break;
+      }
     }
   }
 
   private mapTypes(types) {
-    return types.map(function(type) {
-      type.class = "filter-tab-on-" + type.code;
-      type.sub = $translate.instant("widgetsList.add.modal.gallery.tab." + type.code + ".desc");
+    return types.map((type) => {
+      type.class = `filter-tab-on-${type.code}`;
+      type.sub = this.translate.instant(`widgetsList.add.modal.gallery.tab.${type.code}.desc`);
       return type;
     });
   }

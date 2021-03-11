@@ -6,7 +6,7 @@ import {
   CompanyRequest,
   CompanyResponse,
   CompanyShort, DeleteCompanyRequest,
-  Entities,
+  Entities, Mockup, MockupsResponse,
   SmartPoint,
   SmartPointEnableRequest,
   SmartPointUpdateRequest,
@@ -61,6 +61,13 @@ export class WidgetService {
   public getCompanies(siteId: string): Observable<CompanyShort[]> {
     return this.widgetApiService.getCompanies(siteId).pipe(
       map((response: CompaniesResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getMockups(categories: string): Observable<Mockup[]> {
+    return this.widgetApiService.getMockups(categories).pipe(
+      map((response: MockupsResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
 import {
   CompaniesResponse,
   CompanyRequest,
-  CompanyResponse, DeleteCompanyRequest,
+  CompanyResponse, DeleteCompanyRequest, MockupsResponse,
   SmartPointEnableRequest,
   SmartPointTypes,
   SmartPointUpdateRequest,
@@ -43,6 +43,11 @@ export class WidgetApiService {
 
   public getCompanies(siteId: string): Observable<CompaniesResponse> {
     return this.http.get<CompaniesResponse>(`${ environment.url }/sites/${siteId}/companies`);
+  }
+
+  public getMockups(categories: string): Observable<MockupsResponse> {
+    const opts = { params: new HttpParams().append('categories', categories) };
+    return this.http.get<MockupsResponse>(`${ environment.url }/mockups`, opts);
   }
 
   public getWidgetConversion(siteId: string, widgetId: string): Observable<WidgetConversionResponse> {
