@@ -6,7 +6,7 @@ import { ApiResponse } from '../../../core/models/api';
 import {
   CompaniesResponse,
   CompanyRequest,
-  CompanyResponse, DeleteCompanyRequest, MockupsResponse,
+  CompanyResponse, DeleteCompanyRequest, MockupGroupsResponse, MockupsResponse,
   SmartPointEnableRequest,
   SmartPointTypes,
   SmartPointUpdateRequest,
@@ -45,8 +45,13 @@ export class WidgetApiService {
     return this.http.get<CompaniesResponse>(`${ environment.url }/sites/${siteId}/companies`);
   }
 
-  public getMockups(categories: string): Observable<MockupsResponse> {
-    const opts = { params: new HttpParams().append('categories', categories) };
+  public getMockupGroups(type: string): Observable<MockupGroupsResponse> {
+    const opts = { params: new HttpParams().append('type', type) };
+    return this.http.get<MockupGroupsResponse>(`${ environment.url }/mockupGroups`, opts);
+  }
+
+  public getMockups(type: string, categories: string): Observable<MockupsResponse> {
+    const opts = { params: new HttpParams().append('type', type).append('categories', categories) };
     return this.http.get<MockupsResponse>(`${ environment.url }/mockups`, opts);
   }
 

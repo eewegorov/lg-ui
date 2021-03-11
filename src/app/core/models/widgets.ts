@@ -235,6 +235,21 @@ export interface ContainerRequest {
   description?: string;
 }
 
+export interface MockupGroupsResponse extends ApiResponse {
+  data: MockupGroup[];
+}
+
+export interface MockupGroup {
+  id: string;
+  name: string;
+  categories: MockupCategory[];
+}
+
+export interface MockupCategory {
+  id: string;
+  name: string;
+}
+
 export interface MockupsResponse extends ApiResponse {
   data: Mockup[];
 }

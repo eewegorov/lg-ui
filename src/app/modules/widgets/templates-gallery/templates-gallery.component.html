@@ -5,8 +5,8 @@
     [ngClass]="type.class"
     [class.active]="isTabsActive(type.code)"
   >
-    <span class="filter-tab-title">{{type.name}}</span>
-    <span class="filter-tab-sub">{{type.sub}}</span>
+    <span class="filter-tab-title">{{ type.name }}</span>
+    <span class="filter-tab-sub">{{ type.sub }}</span>
   </div>
 </div>
 <div class="just-blue-line"></div>
@@ -24,10 +24,17 @@
           </h5>
           <div class="left-category-item" *ngFor="let cat of grp.categories">
             <div class="left-panel-filter-categories-category">
-              <label class="non-bold">
-                <checkbox ng-model="cat.checked" ng-change="filterByCat(cat.checked, cat.id)" class="checkbox-green-btn"></checkbox>
-                {{ cat.name }}
-              </label>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="cat.checked"
+                    (ngModelChange)="filterByCat(cat.checked, cat.id)"
+                    class="form-check-input checkbox-green-btn"
+                  />
+                  {{ cat.name }}
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -49,7 +56,6 @@
           </div>
           <div class="mockup-selector-categories-mockups-item-content">
             <div id="mockup-selector-categories-mockups-item-tariff-container">
-
             </div>
             <img [src]="mckp.preview" alt="preview">
             <div class="mockup-selector-categories-mockups-item-title">

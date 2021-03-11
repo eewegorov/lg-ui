@@ -6,7 +6,7 @@ import {
   CompanyRequest,
   CompanyResponse,
   CompanyShort, DeleteCompanyRequest,
-  Entities, Mockup, MockupsResponse,
+  Entities, Mockup, MockupCategory, MockupGroup, MockupGroupsResponse, MockupsResponse,
   SmartPoint,
   SmartPointEnableRequest,
   SmartPointUpdateRequest,
@@ -65,8 +65,15 @@ export class WidgetService {
     );
   }
 
-  public getMockups(categories: string): Observable<Mockup[]> {
-    return this.widgetApiService.getMockups(categories).pipe(
+  public getMockupGroups(type: string): Observable<MockupGroup[]> {
+    return this.widgetApiService.getMockupGroups(type).pipe(
+      map((response: MockupGroupsResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getMockups(type: string, categories: string): Observable<Mockup[]> {
+    return this.widgetApiService.getMockups(type, categories).pipe(
       map((response: MockupsResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Mockup } from '../../../core/models/widgets';
+import { Mockup, MockupGroup } from '../../../core/models/widgets';
 import { WidgetService } from '../services/widget.service';
+import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-templates-gallery',
@@ -25,7 +26,8 @@ export class TemplatesGalleryComponent implements OnInit {
   private ITEMS_TO_ADD = 6;
   private checkboxOnArray = [];
   private testArr = [];
-  private queryMockup = { type: '', categories: '' };
+  private queryForMockups = { type: '', categories: '' };
+  private queryForGroups = '';
 
   constructor(
     private translate: TranslateService,
@@ -68,11 +70,11 @@ export class TemplatesGalleryComponent implements OnInit {
     this.isLoaderActive = true;
     this.testArr = [];
 
-    if (!this.queryMockup.type) {
-      delete this.queryMockup.type;
+    if (!this.queryForMockups.type) {
+      delete this.queryForMockups.type;
     }
-    this.queryMockup.categories = this.checkboxOnArray.join(',');
-    this.widgetService.getMockups(this.queryMockup.categories).subscribe((response: Mockup[]) => {
+    this.queryForMockups.categories = this.checkboxOnArray.join(',');
+    this.widgetService.getMockups(this.queryForMockups.type, this.queryForMockups.categories).subscribe((response: Mockup[]) => {
       this.actionAfterTabSwitch(response);
     });
   }
@@ -103,29 +105,35 @@ export class TemplatesGalleryComponent implements OnInit {
     this.testArr = [];
     this.checkboxOnArray = [];
     if (typeId) {
-      this.queryMockups.type = typeId;
-      this.queryGroups.type = typeId;
+      this.queryForMockups.type = typeId;
+      this.queryForGroups = typeId;
     } else {
-      delete this.queryMockups.type;
-      delete this.queryGroups.type;
+      delete this.queryForMockups.type;
+      this.queryForGroups = '';
     }
-    delete queryMockups.categories;
-    this.widgetService.getMockups(queryMockups).then(function(response) {
-      WidgetService.getMockupGroups(queryGroups).then(function(groups) {
-        //Parse groups and categories
-        scope.groups = groups.data;
-        for (var i = 0; i < groups.data.length; i++) {
-          for (var j = 0; j < groups.data[i].categories.length; j++) {
-            scope.groups[i].categories[j] = {
-              checked: false,
-              id: groups.data[i].categories[j].id,
-              name: groups.data[i].categories[j].name
-            }
-          }
-        }
+    delete this.queryForMockups.categories;
 
-        this.actionAfterTabSwitch(response.data, newTab);
-      });
+    const mockups = [];
+
+    this.widgetService.getMockups(this.queryForMockups.type, this.queryForGroups).pipe(
+      mergeMap(((fetchedMockups: Mockup[]) => {
+        mockups.push(fetchedMockups);
+        return this.widgetService.getMockupGroups(this.queryForGroups);
+      }))
+    ).subscribe((groups: MockupGroup[]) => {
+      // Parse groups and categories
+      this.groups = groups;
+      for (let i = 0; i < groups.length; i++) {
+        for (let j = 0; j < groups[i].categories.length; j++) {
+          this.groups[i].categories[j] = {
+            checked: false,
+            id: groups[i].categories[j].id,
+            name: groups[i].categories[j].name
+          };
+        }
+      }
+
+      this.actionAfterTabSwitch(mockups, newTab);
     });
   }
 
