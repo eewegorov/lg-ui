@@ -78,7 +78,7 @@
       </div>
       <div class="col-lg-12 margined-top-30">
         <button (click)="closeAddCWidgetModal(false)"
-                class="btn btn-lg w-xs btn-default floated-left">{{ 'widgetsList.add.params.cancel' | translate }}</button>
+                class="btn btn-lg w-xs btn-default floated-left">{{ 'global.cancel' | translate }}</button>
         <button [disabled]="(newCWidgetInfo.companyMode == 0 && newCWidgetInfo.companyId == null) || (newCWidgetInfo.companyMode == 1 && newCWidgetInfo.company.trim().length == 0) || !editableCW.name"
                 (click)="addWidget()" type="button"
                 class="btn btn-lg w-xs btn-success floated-right">{{ 'widgetsList.add.modal.gallery.gotosettings' | translate }}</button>

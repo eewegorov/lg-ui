@@ -26,7 +26,7 @@
 
             <div *ngIf="allContainers.length">
               <div class="row margined-left-0 select-site-title margined-bottom-10">
-                <h5>{{ 'widgetsList.clone.container' | translate }}:</h5>
+                <h5>{{ 'widgetsList.clone.container.title' | translate }}:</h5>
               </div>
               <div class="dropdown site-selector">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -41,7 +41,7 @@
 
             <div *ngIf="clonable.companyMode === 0">
               <div class="row margined-left-0 select-site-title margined-bottom-10">
-                <h5>{{ 'widgetsList.clone.company' | translate }}:</h5>
+                <h5>{{ 'widgetsList.clone.company.title' | translate }}:</h5>
               </div>
               <div class="dropdown widget-company-selector" style="float: left; width: calc(100% - 50px)" [ngClass]="!clonable.companyId ? 'has-error' : ''">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

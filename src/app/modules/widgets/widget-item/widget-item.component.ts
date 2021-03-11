@@ -139,7 +139,7 @@ export class WidgetItemComponent implements OnInit {
 
   public removeItem() {
     if (this.widget.abtestInfo && this.widget.abtestInfo.state) {
-      this.toastr.error(this.translate.instant('abtest.toastr.widget.deleteiftest'), this.translate.instant('global.error'));
+      this.toastr.error(this.translate.instant('abtests.widget.deleteiftest'), this.translate.instant('global.error'));
       return false;
     }
 
@@ -171,7 +171,7 @@ export class WidgetItemComponent implements OnInit {
     // TODO: Check if it's payment query
     if (this.sitesService.isSiteHasExpTariff(currentSite)) {
       this.billingService.checkTariffPlans(this.currentSiteId,
-        this.translate.instant('sitelist.tarrif.title'),
+        this.translate.instant('sitelist.tariff.title'),
         this.translate.instant('widgetsList.payment.abtest', {siteName: currentSite.name}));
     } else {
       const modalRef = this.modalService.open(AbtestAddComponent, {

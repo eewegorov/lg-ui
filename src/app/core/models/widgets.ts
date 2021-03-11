@@ -246,7 +246,7 @@ export interface Mockup {
   preview: string;
   template: string;
   type: string;
-  categories: string[];
+  categories: string[] | string;
   tariff: string;
 }
 

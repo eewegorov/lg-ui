@@ -23,19 +23,19 @@
                       *ngIf="abIfNoTest()"
                       class="btn btn-xs btn-default ab-widget-btn"
                       data-container="body" data-toggle="tooltip" data-placement="top"
-                      title="{{ 'widgetsList.widget.ab.start.desc' | translate }}">{{ 'abtest.ab.label' | translate }}</button>
+                      title="{{ 'widgetsList.widget.ab.start.desc' | translate }}">{{ 'abtests.ab' | translate }}</button>
 
               <button (click)="goToTest()"
                       *ngIf="abIfTestOnWork()"
                       class="btn btn-xs btn-default ab-widget-btn in-work"
                       data-container="body" data-toggle="tooltip" data-placement="top"
-                      title="{{ 'widgetsList.widget.ab.state.desc' | translate }}">{{ 'abtest.ab.label' | translate }}</button>
+                      title="{{ 'widgetsList.widget.ab.state.desc' | translate }}">{{ 'abtests.ab' | translate }}</button>
 
               <button (click)="goToTest()"
                       *ngIf="abIfTestOnPause()"
                       class="btn btn-xs btn-default ab-widget-btn in-pause"
                       data-container="body" data-toggle="tooltip" data-placement="top"
-                      title="{{ 'widgetsList.widget.ab.stop.desc' | translate }}">{{ 'abtest.ab.label' | translate }}</button>
+                      title="{{ 'widgetsList.widget.ab.stop.desc' | translate }}">{{ 'abtests.ab' | translate }}</button>
             </div>
 
             <div class="btn-group edit-btns">
@@ -72,7 +72,7 @@
             <h6><span class="font-bold">{{ 'widgetsList.widget.widget' | translate }}</span>: {{widgetType.name}}</h6>
           </div>
           <div class="widget-item-view-header" *ngIf="changeCompanyWidget.id !== widget.id">
-            <h6><span class="font-bold">{{ 'widgetsList.widget.company' | translate }}</span>: <a
+            <h6><span class="font-bold">{{ 'widgetsList.selectCompany' | translate }}</span>: <a
               href="javascript:void(0);" (click)="startChangeCompany()" class="widget-company-editable penciled">
               <span class="long-text-item">{{ widgetCurrentCompany.name }}</span> <i class="fa fa-pencil margined-left-6"></i></a>
             </h6>
@@ -109,9 +109,9 @@
           </div>
           <div class="widget-item-view-priority-btns text-right" *ngIf="widgetType.static">
             <div class="f-3 margined-bottom-5 gray-tooltip floated-left padding-left-5">
-              {{ 'widgetsList.widget.priority' | translate }} <a class="info-link" href="#"
-                                                                 data-toggle="tooltip" data-placement="top"
-                                                                 title="{{ 'widgetsList.widget.priority.tooltip' | translate }}"><i class="fa fa-info-circle"></i></a>
+              {{ 'widgetsList.widget.priority.title' | translate }} <a
+              class="info-link" href="#" data-toggle="tooltip" data-placement="top"
+              title="{{ 'widgetsList.widget.priority.tooltip' | translate }}"><i class="fa fa-info-circle"></i></a>
             </div>
             <div class="btn-group priority-btns">
               <button class="btn btn-xs btn-default priority-up-widget-btn"

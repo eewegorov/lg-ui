@@ -1,5 +1,12 @@
 {
 	"abtests": {
+		"ab": "",
+		"abtypes": {
+			"title": {
+				"mockup": "",
+				"new": ""
+			}
+		},
 		"actions": "",
 		"active": {
 			"active": "",
@@ -57,7 +64,10 @@
 			}
 		},
 		"show": "",
-		"variant": ""
+		"variant": "",
+		"widget": {
+			"deleteiftest": ""
+		}
 	},
 	"billing": {
 		"modal": {
@@ -71,6 +81,38 @@
 		}
 	},
 	"containerized": {
+		"container": {
+			"add": {
+				"description": "",
+				"name": ""
+			},
+			"code": {
+				"tooltip": ""
+			},
+			"delete": {
+				"desc": "",
+				"text": ""
+			},
+			"header": {
+				"control": ""
+			},
+			"help": {
+				"btn": ""
+			},
+			"label": "",
+			"remove": "",
+			"widget": {
+				"add": "",
+				"remove": {
+					"ifone": ""
+				}
+			}
+		},
+		"modal": {
+			"addto": {
+				"title": ""
+			}
+		},
 		"title": ""
 	},
 	"coupons": {
@@ -353,6 +395,7 @@
 				"title": "",
 				"tooltip": ""
 			},
+			"header": "",
 			"title": ""
 		},
 		"site": {
@@ -638,6 +681,20 @@
 		"saveGeneral": "",
 		"settingsChanged": ""
 	},
+	"widgets": {
+		"types": {
+			"static": {
+				"step1": {
+					"desc": "",
+					"title": ""
+				},
+				"step2": {
+					"desc": "",
+					"title": ""
+				}
+			}
+		}
+	},
 	"widgetsList": {
 		"add": {
 			"alt": "",
@@ -650,8 +707,20 @@
 			},
 			"modal": {
 				"gallery": {
+					"category": {
+						"title": ""
+					},
 					"desc": "",
-					"gotosettings": ""
+					"filter": {
+						"notfound": ""
+					},
+					"gotosettings": "",
+					"tab": {
+						"all": {
+							"desc": "",
+							"title": ""
+						}
+					}
 				},
 				"title": ""
 			},
@@ -659,7 +728,8 @@
 				"company": {
 					"add": {
 						"back": "",
-						"name": ""
+						"name": "",
+						"tooltip": ""
 					},
 					"tooltip": "",
 					"under": ""
@@ -667,7 +737,8 @@
 				"label": "",
 				"mockup": {
 					"notselect": "",
-					"title": ""
+					"title": "",
+					"title2": ""
 				},
 				"name": "",
 				"select": ""
@@ -678,14 +749,32 @@
 			"company": {
 				"add": {
 					"label": ""
-				}
-			}
+				},
+				"chose": "",
+				"title": ""
+			},
+			"container": {
+				"default": "",
+				"title": ""
+			},
+			"done": {
+				"desc": "",
+				"edit": "",
+				"question": "",
+				"return": "",
+				"title": ""
+			},
+			"next": "",
+			"site": "",
+			"title": ""
 		},
 		"company": {
 			"add": {
+				"desc": "",
 				"tooltip": ""
 			},
 			"delete": {
+				"error": "",
 				"move": "",
 				"one": {
 					"company": ""
@@ -715,10 +804,44 @@
 		"sitePlaceholder": "",
 		"sitePlaceholder2": "",
 		"widget": {
+			"ab": {
+				"start": {
+					"desc": ""
+				},
+				"state": {
+					"desc": ""
+				},
+				"stop": {
+					"desc": ""
+				}
+			},
+			"changecompany": {
+				"tooltip": ""
+			},
 			"delete": {
 				"cancel": "",
-				"confirm": ""
-			}
+				"confirm": "",
+				"desc": "",
+				"text": "",
+				"title": ""
+			},
+			"duplicate": "",
+			"priority": {
+				"down": "",
+				"title": "",
+				"tooltip": "",
+				"up": ""
+			},
+			"settings": "",
+			"show": {
+				"actions": "",
+				"all": "",
+				"conversion": ""
+			},
+			"start": "",
+			"stop": "",
+			"trash": "",
+			"widget": ""
 		}
 	}
 }

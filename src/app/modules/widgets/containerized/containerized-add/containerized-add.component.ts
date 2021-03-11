@@ -54,11 +54,11 @@ export class ContainerizedAddComponent implements OnInit {
       types: [
         {
           type: 'NEW',
-          title: this.translate.instant('abtest.abtypes.title.new')
+          title: this.translate.instant('abtests.abtypes.title.new')
         },
         {
           type: 'MOCKUP',
-          title: this.translate.instant('abtest.abtypes.title.mockup')
+          title: this.translate.instant('abtests.abtypes.title.mockup')
         }]
     };
   }
@@ -86,7 +86,7 @@ export class ContainerizedAddComponent implements OnInit {
 
   public changeCompany(company) {
     this.newCWidgetInfo.companyId = company ? company.id : null;
-    this.newCWidgetInfo.company = company ? company.name : this.translate.instant('');
+    this.newCWidgetInfo.company = company ? company.name : this.translate.instant('widgetsList.clone.company.chose');
   }
 
   public openAddCompanyMode() {
