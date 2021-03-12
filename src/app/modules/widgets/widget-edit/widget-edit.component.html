@@ -1,1 +1,1205 @@
-<p>widget-edit works!</p>
+<div class="title-widget-container">
+  <h3 *ngIf="renamedWidget.id !== widget.id" class="widget-title-main">
+    {{ (widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Настройка варианта:' : 'Настройка виджета:' }}
+  </h3>
+  <a
+    id="renameWidgetBtn"
+    (click)="startRenameWidget(widget)"
+    *ngIf="renamedWidget.id !== widget.id"
+    href="javascript:void(0);"
+    data-toggle="tooltip"
+    data-placement="top"
+    title=""
+    class="f-2 no-bold title-widget-name-editable"
+  >
+    {{ getCroppedString(widget.name, 35, "…") }}<i class="fa fa-pencil margined-left-6"></i>
+  </a>
+
+  <div class="row" *ngIf="renamedWidget.id === widget.id">
+    <div class="col-lg-12 no-padding title-widget-rename">
+      <input type="text" class="form-control" [(ngModel)]="renamedWidget.name">
+      <button
+        class="btn btn-default"
+        data-container="body"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="{{ 'global.cancel' | translate }}"
+        (click)="resetRenaming()"
+      >
+        <i class="fa fa-times"></i>
+      </button>
+
+      <button
+        class="btn btn-success margined-left-5"
+        data-container="body"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="{{ 'widgetsList.widget.rename.tooltip' | translate }}"
+        (click)="renameWidget()"
+      >
+        <i class="fa fa-check"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs widget-editor-tabs" role="tablist">
+  <li role="presentation" class="widget-editor-tab" [ngClass]="{ active: isCurrentActiveTab('design') }">
+    <a
+      href=""
+      (click)="setActiveTab('design')"
+    ><i class="pe-7s-paint"></i> <span
+      class="tab-text">{{ 'widgetsList.editor.tab.design' | translate }}</span> <span
+      *ngIf="isTabHasErrorForFormExt() || isTabHasError('design')"
+      data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
+      class="info-link badge badge-danger" href="#">!</span>
+    </a>
+  </li>
+
+  <li
+    *ngIf="!isMockup"
+    role="presentation"
+    class="widget-editor-tab"
+    [ngClass]="{ active: isCurrentActiveTab('audience') }"
+  >
+    <a
+      href=""
+      (click)="setActiveTab('audience')"
+    >
+      <i class="pe-7s-users"></i> <span class="tab-text">{{ 'widgetsList.editor.tab.audience' | translate }}</span>
+    </a>
+  </li>
+
+  <li
+    role="presentation"
+    class="widget-editor-tab"
+    [ngClass]="{ active: isCurrentActiveTab('rules') }"
+  >
+    <a
+      href=""
+      (click)="setActiveTab('rules')"
+    >
+      <i class="pe-7s-config"></i> <span
+      class="tab-text">{{ 'widgetsList.editor.tab.rules' | translate }}</span> <span
+      *ngIf="isTabHasError('rules')" data-toggle="tooltip"
+      data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
+      class="info-link badge badge-danger" href="#">!</span>
+    </a>
+  </li>
+
+  <li
+    role="presentation"
+    class="widget-editor-tab"
+    [ngClass]="{ active: isCurrentActiveTab('integrations') }"
+  >
+    <a
+      href=""
+      (click)="setActiveTab('integrations')"
+    >
+      <i class="pe-7s-plug"></i> <span
+      class="tab-text">{{ 'widgetsList.editor.tab.integrations' | translate }}</span> <span
+      *ngIf="isTabHasError('integrations')" data-toggle="tooltip"
+      data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
+      class="info-link badge badge-danger" href="#">!</span>
+    </a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div
+    id="design"
+    class="design-tab-fixed"
+    *ngIf="isCurrentActiveTab('design')"
+    [ngClass]="{ active: isCurrentActiveTab('design') }"
+    ng-controller="DesignController"
+  >
+    <div class="widgets-settings-container" id="widgetStyle">
+      <!-- TEMPLATES -->
+      <script type="text/ng-template" id="videoElement.html">
+        <tm:videoElement modelName="item"></tm:videoElement>
+      </script>
+      <script type="text/ng-template" id="imageElement.html">
+        <tm:imageElement modelName="item"></tm:imageElement>
+      </script>
+      <script type="text/ng-template" id="iframeElement.html">
+        <tm:iframeElement modelName="item"></tm:iframeElement>
+      </script>
+      <script type="text/ng-template" id="paddingElement.html">
+        <tm:paddingElement modelName="item"></tm:paddingElement>
+      </script>
+      <script type="text/ng-template" id="splitElement.html">
+        <tm:splitElement modelName="item"></tm:splitElement>
+      </script>
+      <script type="text/ng-template" id="socialElement.html">
+        <tm:socialElement></tm:socialElement>
+      </script>
+      <script type="text/ng-template" id="visualElement.html">
+        <tm:visualElement></tm:visualElement>
+      </script>
+      <script type="text/ng-template" id="redirectElement.html">
+        <tm:redirectElement></tm:redirectElement>
+      </script>
+      <script type="text/ng-template" id="crmElement.html">
+        <tm:crmElement></tm:crmElement>
+      </script>
+      <script type="text/ng-template" id="contentElement.html">
+        <tm:contentElement></tm:contentElement>
+      </script>
+      <script type="text/ng-template" id="thankElement.html">
+        <tm:thankElement></tm:thankElement>
+      </script>
+
+      ${preview}
+
+      <div class="footer-group" tooltiped>
+        <div class="text-right padding10">
+          <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="goToTest(widget)" type="button" class="btn w-xs gototest-widget-btn"><i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту</button>
+          <a ng-show="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)" type="button" class="btn w-xs btn-primary buy-widget-btn"><i class="pe-7s-tools margined-right-10"></i><spring:message code="widgetsList.add.alt2"/></a>
+          <div class="btn-group play-btns" ng-show="!isMockup">
+            <p>Статус:</p>
+            <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет">
+              <i class="fa fa-play"></i>
+            </button>
+            <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет">
+              <i class="fa fa-pause"></i>
+            </button>
+
+            <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить вариант">
+              <i class="fa fa-play"></i>
+            </button>
+            <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант">
+              <i class="fa fa-pause"></i>
+            </button>
+          </div>
+
+          <sec:authorize access="hasRole('ROLE_DESIGNER')">
+            <button ng-click="saveAsMockup()" type="button" class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left" data-style="slide-down" ng-show="!isMockup"><span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт </span> </button>
+          </sec:authorize>
+
+          <button id="saveWidget" ng-click="saveWidget()" type="button" class="ladda-button btn w-xs btn-success" data-style="slide-down"><span class="ladda-label"><i class="fa fa-save"></i> <span ng-show="!isMockup" ng-bind="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span ng-show="isMockup">Сохранить темплейт</span></span> </button>
+        </div>
+      </div>
+
+      <div class="modal fade" id="addNewElementListModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header text-center">
+              <h4>Выберите элемент, который хотите добавить</h4>
+            </div>
+            <div ng-show="exForScrFunc()"></div>
+            <div class="modal-body">
+              <div class="row-panel-fl">
+                <div class="row-panel-item small-pdn">
+                  <div class="newElementItem" ng-click="addFormExtButtonElement(disElementOrNotBtn())" ng-class="(disElementOrNotBtn())?'disable-new-element-btn':''">
+                    <div class="element-form-new-icon"></div>
+                    <span>Форма+кнопки (новый)</span>
+                  </div>
+                </div>
+                <div class="row-panel-item small-pdn">
+                  <div class="newElementItem" ng-click="addFormButtonElement(disElementOrNotBtn())" ng-class="(disElementOrNotBtn())?'disable-new-element-btn':''">
+                    <div class="element-form-icon"></div>
+                    <span>Форма (устаревший)</span>
+                  </div>
+                </div>
+                <div class="row-panel-item small-pdn" ng-if="!isContainerized">
+                  <div class="newElementItem" ng-click="addCloseLinkElement(disElementOrNotBtnCloseLink())" ng-class="(disElementOrNotBtnCloseLink())?'disable-new-element-btn':''">
+                    <div class="element-dismiss-icon"></div>
+                    <span class="m-r-n m-l-n">Ссылка/Кнопка закрытия</span>
+                  </div>
+                </div>
+                <div class="row-panel-item small-pdn">
+                  <div class="newElementItem" ng-click="addButtonElement(disElementOrNotBtn())" ng-class="(disElementOrNotBtn())?'disable-new-element-btn':''">
+                    <div class="element-button-icon"></div>
+                    <span>Кнопка</span>
+                  </div>
+                </div>
+
+                <div class="row-panel-item small-pdn">
+                  <div class="newElementItem" ng-click="addTitleElement()">
+                    <div class="element-text-icon"></div>
+                    <span>Текст</span>
+                  </div>
+                </div>
+                <div class="row-panel-item small-pdn">
+                  <div class="newElementItem" ng-click="addSocialElement(disElementOrNotBtnSocial())" ng-class="(disElementOrNotBtnSocial())?'disable-new-element-btn':''">
+                    <div class="element-social-icon"></div>
+                    <span>Социальные кнопки</span>
+                  </div>
+                </div>
+                <div class="row-panel-item small-pdn">
+                  <div class="newElementItem" ng-click="addSplitElement()">
+                    <div class="element-divider-icon"></div>
+                    <span>Разделитель</span>
+                  </div>
+                </div>
+
+                <div class="row-panel-item small-pdn">
+                  <div class="newElementItem" ng-click="addVideoElement()">
+                    <div class="element-video-icon"></div>
+                    <span>Видео</span>
+                  </div>
+                </div>
+                <div class="row-panel-item small-pdn">
+                  <div class="newElementItem" ng-click="addImageElement()">
+                    <div class="element-image-icon"></div>
+                    <span>Изображение</span>
+                  </div>
+                </div>
+                <div class="row-panel-item small-pdn">
+                  <div class="newElementItem" ng-click="addPaddingElement()">
+                    <div class="element-padding-icon"></div>
+                    <span>Отступ</span>
+                  </div>
+                </div>
+
+                <div class="row-panel-item small-pdn">
+                  <div class="newElementItem" ng-click="addIframeElement()">
+                    <div class="element-iframe-icon"></div>
+                    <span>HTML / JS / Iframe</span>
+                  </div>
+                </div>
+
+                <div class="row-panel-item small-pdn">
+                  <div class="newElementItem" ng-click="addCouponElement()">
+                    <span class="payment-modal-icon label label-warning tariff-info">окупаемый</span>
+                    <div class="element-coupon-icon"></div>
+                    <span>Купон</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="addNewWidgetListModal" tabindex="-1" role="dialog" aria-hidden="true" flow-init flow-file-added="uploadAdded($file,$event,$flow )">
+        <div class="modal-dialog" flow-drop flow-drag-enter="class='alert-success'" flow-drag-leave="class=''"
+             ng-class="class">
+          <div class="dragAndDropFilter"></div>
+          <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header text-center">
+              <h4 class="modal-title">Мои изображения</h4>
+            </div>
+            <div class="modal-body">
+              <h4>Загруженные изображения</h4>
+              <div class="row row-nomargined">
+                <div id="listImagesBlock" class="col-lg-12 margined-top-10"></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="img-set-foot1">
+                <div class="dragDropBl">
+                  <div class="upload-drag-icon"><i class="fa fa-upload"></i></div>
+                  <button flow-btn flow-attrs="{accept:'image/*'}" class="load-img-gal btn btn-success ladda-button" data-style="slide-down"><span class="ladda-label">Загрузить изображение</span></button>
+                  <span class="dragOr">или перетащите изображение сюда</span>
+                </div>
+              </div>
+              <div>
+                <button data-dismiss="modal" ng-click="closeModalImg()" id="btnCloseImgM" class="btn btn-default pull-left" type="button">Отмена</button>
+                <!--<button class="del-img-gal btn btn-danger" ng-click="deleteFile()" data-style="slide-down"><span class="ladda-label">Удалить изображение</span></button>-->
+                <button class="btn btn-info set-img-gal" ng-click="updateFile()">Установить изображение</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- INTEGRATIONS CONTAINER -->
+
+  <div ng-show="isCurrentActiveTab('integrations')" ng-class="{ active: isCurrentActiveTab('integrations') }" id="integrations" ng-controller="WidgetConstructorIntegrationsController">
+    <div class="widgets-settings-container1 padding-bottom-40-imp">
+      <h1>{{ 'widgetsList.editor.integrations.title' | translate }}</h1>
+
+      <div class="integrations-switcher-component-item">
+        <div class="toolbar-content no-padding padding-top-30">
+          <div class="row btnpanel">
+            <div class="audience-tooolbar-switcher">
+              <switch ng-model="widget.sendCrm" class="margined-top-5 margined-right-10 floated-left"></switch><h3 class="f-5 margined-top-5">{{ 'widgetsList.editor.integrations.crmSwitcher' | translate }}</h3>
+            </div>
+          </div>
+        </div>
+        <div class="f-4 audience-tooolbar-desc integration-tooolbar-desc" ng-bind-html="'widgetsList.editor.integrations.crmSwitcher.desc' | translate"></div>
+      </div>
+
+      <div class="integrations-switcher-component-item">
+        <div class="toolbar-content no-padding padding-top-30">
+          <div class="row btnpanel">
+            <div class="audience-tooolbar-switcher">
+              <switch ng-model="widget.useCustomIntegrationsList" class="margined-top-5 margined-right-10 floated-left"></switch><h3 class="f-5 margined-top-5">{{ 'widgetsList.editor.integrations.mainSwitcher' | translate }}</h3>
+            </div>
+          </div>
+        </div>
+        <div class="f-4 audience-tooolbar-desc" ng-bind-html="'widgetsList.editor.integrations.description' | translate"></div>
+      </div>
+
+      <div class="padding-top-30 padding-bottom-20 intagrations-container" ng-show="widget.useCustomIntegrationsList">
+        <!-- Integration item -->
+        <div class="row row-subitem width-900 margined-top-10" ng-repeat="item in wIntegrations">
+          <div class="col-sm-9 row-subitem-padding padding-top-5 integration-item-wr" tooltiped>
+            <div class="integration-item__main integration-item__main-list">
+              <div class="integration-item__icon_wr">
+                <div class="integration-item__icon integration-item__icon--{{item.type}}"></div>
+              </div>
+              <div class="integration-item__name">{{item.name}}</div>
+            </div>
+            <div class="integration-item__extra">
+              <div class="remove-sub-item-integration">
+                <a ng-click="removeIntegrationItem($index)"
+                   href="javascript:void(0);"
+                   data-container="body"  data-toggle="tooltip" data-placement="top"
+                   title="{{ 'settings.site.tabs.integration.tooltip.remove' | translate }}"><i class="colored-red col-sm-1 pe-7s-close-circle"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row row-subitem width-900 margined-top-10">
+          <div class="col-sm-9 row-subitem-padding padding-top-5 integration-item-wr">
+            <div class="integration-item__main">
+              <div class="dropdown integration-selector dropup">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <span ng-if="!currentIntegrationToAdd.type" class="dropdown-selected-cropp">{{defIntegrationToAddTitle}}</span>
+                  <span ng-if="currentIntegrationToAdd.type" class="dropdown-selected-cropp integration-selector-item {{currentIntegrationToAdd.type}}">{{currentIntegrationToAdd.name}}</span>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-integration-max-240h">
+                  <span ng-if="integrationsAvailableMailing.length" class="integration-selector-group">{{'settings.site.newIntegration.group.mailing' | translate }}</span>
+                  <li ng-repeat="item in integrationsAvailableMailing" ng-click="changeIntegrationToAdd(item)"><a class="integration-selector-item {{item.type}}" href="#">{{item.name || defIntegrationToAddTitle}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span></a></li>
+                  <span ng-if="integrationsAvailableCRM.length" class="integration-selector-group">{{'settings.site.newIntegration.group.crm' | translate }}</span>
+                  <li ng-repeat="item in integrationsAvailableCRM" ng-click="changeIntegrationToAdd(item)"><a class="integration-selector-item {{item.type}}" href="#">{{item.name || defIntegrationToAddTitle}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span></a></li>
+                  <span ng-if="integrationsAvailableNotifications.length" class="integration-selector-group">{{'settings.site.newIntegration.group.notification' | translate }}</span>
+                  <li ng-repeat="item in integrationsAvailableNotifications" ng-click="changeIntegrationToAdd(item)"><a class="integration-selector-item {{item.type}}" href="#">{{item.name || defIntegrationToAddTitle}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span></a></li>
+                  <span ng-if="integrationsAvailableOthers.length" class="integration-selector-group">{{'settings.site.newIntegration.group.others' | translate }}</span>
+                  <li ng-repeat="item in integrationsAvailableOthers" ng-click="changeIntegrationToAdd(item)"><a class="integration-selector-item {{item.type}}" href="#">{{item.name || defIntegrationToAddTitle}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span></a></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row row-subitem width-900">
+          <div class="col-sm-9 row-subitem-padding integration-constructor-new-one-btn">
+            <a ng-click="openModalForCreatingNewIntegration()" href="javascript:void(0);"><i class="fa fa-plus colored-green"></i> {{ 'widgetsList.editor.integrations.createNewIntegration' | translate }}</a>
+          </div>
+        </div>
+        <!-- END Integration item -->
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer-group" id="save-widget-panel">
+        <div class="text-right padding10">
+          <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="goToTest(widget)" type="button" class="btn w-xs gototest-widget-btn"><i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту</button>
+          <a ng-show="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)" type="button" class="btn w-xs btn-primary buy-widget-btn"><i class="pe-7s-tools margined-right-10"></i><spring:message code="widgetsList.add.alt2"/></a>
+          <div class="btn-group play-btns widget-enabler-btns" ng-show="!isMockup">
+            <p><spring:message code="widgetsList.widget.state"/></p>
+            <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет">
+              <i class="fa fa-play"></i>
+            </button>
+            <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет">
+              <i class="fa fa-pause"></i>
+            </button>
+
+            <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить варинт">
+              <i class="fa fa-play"></i>
+            </button>
+            <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант">
+              <i class="fa fa-pause"></i>
+            </button>
+          </div>
+
+          <sec:authorize access="hasRole('ROLE_DESIGNER')">
+            <button ng-click="saveAsMockup()" type="button" class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left" data-style="slide-down" ng-show="!isMockup"><span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт </span> </button>
+          </sec:authorize>
+
+          <button id="saveWidget" ng-click="saveWidget()" type="button" class="ladda-button btn w-xs btn-success floated-left" data-style="slide-down"><span class="ladda-label"><i class="fa fa-save"></i> <span ng-show="!isMockup" ng-bind="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span ng-show="isMockup">Сохранить темплейт</span></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- END INTEGRATIONS CONTAINER -->
+
+  <!-- AUDIENCES CONTAINER -->
+
+  <div ng-show="isCurrentActiveTab('audience')" ng-class="{ active: isCurrentActiveTab('audience') }" id="audience" ng-controller="WidgetConstructorAudienceController">
+    <div class="widgets-settings-container">
+      <!-- Audiences list -->
+      <div id="audiences-list" ng-show="audienceMode == MODE_LIST">
+        <h1><spring:message code="widgetsList.editor.audiences.title"/></h1>
+        <div class="f-4 audience-tooolbar-desc" style="margin-top: 30px;"><spring:message code="widgetsList.editor.audiences.disc"/></div>
+        <div class="toolbar-content no-padding padding-top-30">
+          <div class="row btnpanel">
+            <div class="audience-tooolbar-switcher">
+              <switch ng-model="widget.audiencesEnabled" ng-change="onChangePayment" class="margined-top-5 margined-right-10 floated-left"></switch><h3 class="f-5 margined-top-5"><spring:message code="widgetsList.editor.audiences.enabled"/><span class="label label-warning tariff-info biggest">окупаемый</span></h3>
+            </div>
+            <button ng-show="widget.audiencesEnabled" id="addAudience" ng-click="addNewAudience()" type="button" class="btn btn-lg w-xs btn-success margined-right-20"><i class="fa fa-plus-circle"></i> <spring:message code="audience.addNew"/> </button>
+          </div>
+        </div>
+        <ui:panelsContent>
+          <div class="row no-animate padding-bottom-70" ng-show="widget.audiencesEnabled">
+            <div class="col-sm-4" ng-show="audiences.length == 0">
+              <ui:panel title="" extraClasses="audience-panel">
+                <jsp:attribute name="panelFooter"></jsp:attribute>
+                <jsp:body>
+                  <div class="audience-panel-content">
+                    <i class="fa fa-group audience-icon"></i>
+                    <h3 class="audience-title"><spring:message code="audience.allUser.name"/></h3>
+                    <p class="audience-desc-tilte"><spring:message code="audience.desc"/>:</p>
+                    <p><spring:message code="audience.allUser.desc"/></p>
+                  </div>
+                </jsp:body>
+              </ui:panel>
+            </div>
+
+            <div class="col-xs-6 col-sm-4" ng-repeat="audItem in audiences">
+              <ui:panel title="" extraClasses="audience-panel">
+													<jsp:attribute name="panelFooter">
+													  <div class="text-center m-t-xs row">
+														  <button class="btn btn-primary margined-right-5 audience-panel-btn text-left" ng-click="editAudience(audItem)"><i class="pe-7s-pen"></i> <spring:message code="audience.edit"/></button>
+														  <button class="btn btn-danger margined-left-5 audience-panel-btn text-left" ng-click="deleteAudience(audItem)"><i class="pe-7s-trash"></i> <spring:message code="global.delete"/></button>
+													  </div>
+													</jsp:attribute>
+                <jsp:body>
+                  <div class="audience-panel-content">
+                    <i class="fa fa-group audience-icon"></i>
+                    <h3 class="audience-title">{{getCroppedString(audItem.name, 60, "…")}}</h3>
+                    <p class="audience-desc-tilte"><spring:message code="audience.desc"/>:</p>
+                    <p class="audience-desc">{{getCroppedString(audItem.description, 60, "…")}}</p>
+                  </div>
+                </jsp:body>
+              </ui:panel>
+            </div>
+
+          </div>
+        </ui:panelsContent>
+        <!-- FOOTER -->
+        <div class="footer-group" id="save-widget-panel">
+          <div class="text-right padding10">
+            <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="goToTest(widget)" type="button" class="btn w-xs gototest-widget-btn"><i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту</button>
+            <a ng-show="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)" type="button" class="btn w-xs btn-primary buy-widget-btn"><i class="pe-7s-tools margined-right-10"></i><spring:message code="widgetsList.add.alt2"/></a>
+            <div class="btn-group play-btns widget-enabler-btns" ng-show="!isMockup">
+              <p><spring:message code="widgetsList.widget.state"/></p>
+              <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет">
+                <i class="fa fa-play"></i>
+              </button>
+              <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет">
+                <i class="fa fa-pause"></i>
+              </button>
+
+              <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить варинт">
+                <i class="fa fa-play"></i>
+              </button>
+              <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант">
+                <i class="fa fa-pause"></i>
+              </button>
+            </div>
+
+            <sec:authorize access="hasRole('ROLE_DESIGNER')">
+              <button ng-click="saveAsMockup()" type="button" class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left" data-style="slide-down" ng-show="!isMockup"><span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт </span> </button>
+            </sec:authorize>
+
+            <button id="saveWidget" ng-click="saveWidget()" type="button" class="ladda-button btn w-xs btn-success floated-left" data-style="slide-down"><span class="ladda-label"><i class="fa fa-save"></i> <span ng-show="!isMockup" ng-bind="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span ng-show="isMockup">Сохранить темплейт</span></span></button>
+          </div>
+        </div>
+      </div>
+      <!-- End Audiences list -->
+
+      <!-- Audience editor -->
+      <div id="audiences-item" ng-show="audienceMode == MODE_ITEM">
+        <!-- TEMPLATES -->
+        <script type="text/ng-template" id="ruleRefer.html">
+          <ad:ruleRefer modelName="item" groupName="group"></ad:ruleRefer>
+        </script>
+        <script type="text/ng-template" id="ruleType.html">
+          <ad:ruleType modelName="item" groupName="group"></ad:ruleType>
+        </script>
+        <script type="text/ng-template" id="ruleURL.html">
+          <ad:ruleURL modelName="item" groupName="group"></ad:ruleURL>
+        </script>
+        <script type="text/ng-template" id="ruleVisit.html">
+          <ad:ruleVisit modelName="item" groupName="group"></ad:ruleVisit>
+        </script>
+        <script type="text/ng-template" id="ruleVisitNo.html">
+          <ad:ruleVisitNo modelName="item" groupName="group"></ad:ruleVisitNo>
+        </script>
+        <script type="text/ng-template" id="ruleDevices.html">
+          <ad:ruleDevices modelName="item" groupName="group"></ad:ruleDevices>
+        </script>
+        <script type="text/ng-template" id="ruleSocial.html">
+          <ad:ruleSocial modelName="item" groupName="group"></ad:ruleSocial>
+        </script>
+
+        <!-- CONTENT -->
+        <div class="row row-nomargined margined-bottom-15" style="max-height: 72px;">
+          <div class="validable col-lg-6" data-context="name" ng-class="(audience.name.trim().length == 0)?'has-error':''">
+            <label class="control-label"><spring:message code="audience.name"/></label>
+            <input type="text" name="name" class="form-control" id="name" ng-model="audience.name" autocomplete="off">
+          </div>
+          <div class="validable col-lg-6" data-context="description">
+            <label class="control-label"><spring:message code="audience.description"/></label>
+            <input type="text" name="description" class="form-control" id="description" ng-model="audience.description" autocomplete="off">
+          </div>
+        </div>
+        <!-- Audience editor core -->
+        <div class="row row-nomargined margined-bottom-15">
+          <div class="col-lg-8" id="rules-containers">
+            <label class="control-label"><spring:message code="audience.settings"/></label>
+            <div class="rule-container rule-def" anddropcontainer ng-show="audience.groups.length == 0">
+              <div class="rule-droppable">
+                <h4><spring:message code="audience.rule.droppable"/></h4>
+              </div>
+            </div>
+            <div ng-repeat="group in audience.groups">
+              <!--
+                                        Group items
+                                    -->
+              <div class="rule-groups-text" ng-show="$index != 0"><spring:message code="audience.rule.logic.and"/></div>
+              <div ng-repeat="item in group.items">
+                <div class="rule-block">
+                  <div class="rule-header">
+                    {{item.name}}<i class="pe-7s-close-circle" ng-click="removeItem(group.$$hashKey, $index)"></i>
+                  </div>
+                  <div class="rule-body" ng-switch="item.type">
+                    <rule-refer     ng-switch-when="refer"   ng-model="item"></rule-refer>
+                    <rule-url       ng-switch-when="url"     ng-model="item"></rule-url>
+                    <rule-type      ng-switch-when="type"    ng-model="item"></rule-type>
+                    <rule-visit     ng-switch-when="visit"   ng-model="item"></rule-visit>
+                    <rule-visit-no  ng-switch-when="visitno" ng-model="item"></rule-visit-no>
+                    <rule-devices   ng-switch-when="devices" ng-model="item"></rule-devices>
+                    <rule-social    ng-switch-when="social"  ng-model="item"></rule-social>
+                    <h1 ng-switch-default>ERROR!</h1>
+                  </div>
+                </div>
+                <div class="rule-groups-text"><spring:message code="audience.rule.logic.or"/></div>
+              </div>
+              <!--
+                                        And / ors
+                                    -->
+
+              <div class="rule-container margined-bottom-15" ordropcontainer data-index="{{$index}}">
+                <div class="rule-droppable-or">
+                  <h4><spring:message code="audience.rule.ordroppable"/></h4>
+                </div>
+              </div>
+              <div ng-show="$index == audience.groups.length - 1">
+                <div class="rule-groups-text rule-groups-text-ok"><spring:message code="audience.rule.logic.and"/></div>
+                <div class="rule-container rule-container-ok" anddropcontainer>
+                  <div class="rule-droppable-and">
+                    <h4><spring:message code="audience.rule.anddroppable"/></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 rules-templates-list">
+            <label class="control-label"><spring:message code="audience.rules"/></label>
+            <ad:rule>
+              <jsp:attribute name="code">refer</jsp:attribute>
+              <jsp:attribute name="name"><spring:message code="audience.rule.refer"/> </jsp:attribute>
+              <jsp:attribute name="description"><spring:message code="audience.rule.refer.desc"/> </jsp:attribute>
+            </ad:rule>
+            <ad:rule>
+              <jsp:attribute name="code">type</jsp:attribute>
+              <jsp:attribute name="name"><spring:message code="audience.rule.type"/> </jsp:attribute>
+              <jsp:attribute name="description"><spring:message code="audience.rule.type.desc"/> </jsp:attribute>
+            </ad:rule>
+            <ad:rule>
+              <jsp:attribute name="code">url</jsp:attribute>
+              <jsp:attribute name="name"><spring:message code="audience.rule.url"/> </jsp:attribute>
+              <jsp:attribute name="description"><spring:message code="audience.rule.url.desc"/> </jsp:attribute>
+            </ad:rule>
+            <ad:rule>
+              <jsp:attribute name="code">visit</jsp:attribute>
+              <jsp:attribute name="name"><spring:message code="audience.rule.visit"/> </jsp:attribute>
+              <jsp:attribute name="description"><spring:message code="audience.rule.visit.desc"/> </jsp:attribute>
+            </ad:rule>
+            <ad:rule>
+              <jsp:attribute name="code">visitno</jsp:attribute>
+              <jsp:attribute name="name"><spring:message code="audience.rule.visitno"/> </jsp:attribute>
+              <jsp:attribute name="description"><spring:message code="audience.rule.visitno.desc"/> </jsp:attribute>
+            </ad:rule>
+            <ad:rule>
+              <jsp:attribute name="code">devices</jsp:attribute>
+              <jsp:attribute name="name"><spring:message code="audience.rule.devices"/> </jsp:attribute>
+              <jsp:attribute name="description"><spring:message code="audience.rule.devices.desc"/> </jsp:attribute>
+            </ad:rule>
+            <ad:rule>
+              <jsp:attribute name="code">social</jsp:attribute>
+              <jsp:attribute name="name"><spring:message code="audience.rule.social"/> </jsp:attribute>
+              <jsp:attribute name="description"><spring:message code="audience.rule.social.desc"/> </jsp:attribute>
+            </ad:rule>
+
+            <button id="saveAudience"   type="button" class="btn btn-lg w-xs btn-success margined-top-10" ng-click="saveAudience()"><i class="fa fa-save"></i> <spring:message code="audience.save"/> </button>
+            <button id="cancelAudience" type="button" class="btn btn-lg w-xs btn-default margined-top-10" ng-click="audienceMode = MODE_LIST"><i class="fa fa-undo"></i> <spring:message code="audience.return"/> </button>
+          </div>
+        </div>
+      </div>
+      <!-- End Audience editor -->
+    </div>
+  </div>
+
+  <!-- END AUDIENCES CONTAINER -->
+
+  <!-- RULES CONTAINER -->
+
+  <div ng-show="isCurrentActiveTab('rules')" ng-class="{ active: isCurrentActiveTab('rules') }" id="rules" ng-controller="WidgetConstructorRulesController" ng-init="
+					    localization.editor.rules.pages.hide = '<spring:message code="widgetsList.editor.rules.pageTargeting.hide"/>';
+  localization.editor.rules.pages.show = '<spring:message code="widgetsList.editor.rules.pageTargeting.show"/>';
+  localization.editor.rules.pages.contain    = '<spring:message code="widgetsList.editor.rules.pageTargeting.contain"/>';
+  localization.editor.rules.pages.notcontain = '<spring:message code="widgetsList.editor.rules.pageTargeting.notcontain"/>';
+  localization.editor.rules.pages.equals     = '<spring:message code="widgetsList.editor.rules.pageTargeting.equals"/>';
+  localization.editor.rules.pages.starts     = '<spring:message code="widgetsList.editor.rules.pageTargeting.starts"/>';
+  localization.editor.rules.pages.ends       = '<spring:message code="widgetsList.editor.rules.pageTargeting.ends"/>';
+  localization.editor.rules.pages.title      = '<spring:message code="widgetsList.editor.rules.pageTargeting.title"/>';
+  localization.editor.rules.pages.url        = '<spring:message code="widgetsList.editor.rules.pageTargeting.url"/>';
+  ">
+  <div class="widgets-settings-container">
+    <h1><spring:message code="widgetsList.editor.rules.title"/></h1>
+    <div class="row padding-bottom-70">
+      <div class="col-lg-12 margined-top-20">
+        <h3><spring:message code="widgetsList.editor.section.targeting"/> </h3>
+      </div>
+      <div class="col-lg-12 ">
+        <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.rules.pageTargeting"/> <a data-toggle="tooltip"
+                                                                                                                         data-placement="top"
+                                                                                                                         title="<spring:message code="widgetsList.editor.rules.pageTargeting.tooltip"/>"
+          class="info-link" href="#"><i class="fa fa-info-circle"></i></a></label></h4>
+      </div>
+      <div class="col-lg-12 margined-top-10" ng-class="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0)?'margined-bottom-10':''">
+        <switch ng-model="widget.rules['pages'].enable" class="switch-xs"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.rules.pageTargeting.enable"/></h5>
+      </div>
+      <!-- Page rule item -->
+      <div class="row row-subitem width-900 margined-top-10" ng-repeat="item in widget.rules['pages'].items" ng-show="widget.rules['pages'].enable == true">
+        <div class="col-sm-3 row-subitem-padding padding-top-5">
+          <label class="control-label"><spring:message code="widgetsList.editor.rules.widget"/>:</label>
+          <div class="dropdown" >
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{getPageStateName(item)}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li role="presentation" ng-click="item.state = 0"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.hide"/></a></li>
+              <li role="presentation" ng-click="item.state = 1"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.show"/></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-3 row-subitem-padding padding-top-5">
+          <label class="control-label"><spring:message code="widgetsList.editor.rules.pageTargeting.pageInfo"/>:</label>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{getPageCompareName(item)}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li role="presentation" ng-click="item.compare = 0"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.contain"/></a></li>
+              <li role="presentation" ng-click="item.compare = 1"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.notcontain"/></a></li>
+              <li role="presentation" ng-click="item.compare = 2"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.equals"/></a></li>
+              <li role="presentation" ng-click="item.compare = 3"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.starts"/></a></li>
+              <li role="presentation" ng-click="item.compare = 4"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.ends"/></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6 form-group row-subitem-padding padding-top-5">
+          <label class="control-label input-with-remove" style="display: block;"><spring:message code="widgetsList.editor.rules.pageTargeting.urlortitle"/>:</label>
+          <div class="input-group input-with-remove" ng-class="(item.value.length == 0)?'has-error':''">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getPageTypeName(item)}} <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li role="presentation" ng-click="item.type = 0"><a role="menuitem" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.url"/></a></li>
+                <li role="presentation" ng-click="item.type = 1"><a role="menuitem" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.title"/></a></li>
+              </ul>
+            </div>
+            <input type="text" class="form-control" ng-model="item.value">
+          </div>
+          <div class="remove-sub-item-rules margined-right-10"><a ng-click="addPageRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i></a></div>
+          <div class="remove-sub-item-rules margined-right-10" ng-show="widget.rules['pages'].items.length > 1"><a ng-click="removePageRuleItem($index)" href="javascript:void(0);"><i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i></a></div>
+          <span class="underow-comment combo-box-underow-comment-comment"><spring:message code="widgetsList.editor.rules.pageTargeting.url.tooltip"/></span>
+        </div>
+      </div>
+      <!-- END Page rule item -->
+
+      <div class="col-lg-12 margined-top-20">
+        <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.rules.pageVTargeting.title"/> <span class="label label-warning tariff-info ">окупаемый</span> <a data-toggle="tooltip"
+                                                                                                                                                                                                data-placement="top"
+                                                                                                                                                                                                title="<spring:message code="widgetsList.editor.rules.pageVTargeting.tooltip"/>"
+          class="info-link" href="#"><i class="fa fa-info-circle"></i></a></label></h4>
+      </div>
+      <div class="col-lg-12 margined-top-10" ng-class="(widget.rules['prevPages'].enable && widget.rules['prevPages'].items.length > 0)?'margined-bottom-10':''">
+        <switch ng-model="widget.rules['prevPages'].enable" м class="switch-xs"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.rules.pageVTargeting.enable"/></h5>
+      </div>
+      <!-- Target to viewed pages -->
+      <div class="row row-subitem width-900 margined-top-10" ng-repeat="item in widget.rules['prevPages'].items" ng-show="widget.rules['prevPages'].enable == true">
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label"><spring:message code="widgetsList.editor.rules.pageVTargeting.user"/>:</label>
+          <div class="dropdown" >
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{getPageCompareName(item)}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li role="presentation" ng-click="item.compare = 0"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.contain"/></a></li>
+              <li role="presentation" ng-click="item.compare = 1"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.notcontain"/></a></li>
+              <li role="presentation" ng-click="item.compare = 2"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.equals"/></a></li>
+              <li role="presentation" ng-click="item.compare = 3"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.starts"/></a></li>
+              <li role="presentation" ng-click="item.compare = 4"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.ends"/></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6 form-group row-subitem-padding padding-top-5">
+          <label class="control-label input-with-remove" style="display: block;"><spring:message code="widgetsList.editor.rules.pageTargeting.urlortitle"/>:</label>
+          <div class="input-group input-with-remove" ng-class="(item.value.length == 0)?'has-error':''">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getPageTypeName(item)}} <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li role="presentation" ng-click="item.type = 0"><a role="menuitem" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.url"/></a></li>
+                <li role="presentation" ng-click="item.type = 1"><a role="menuitem" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.title"/></a></li>
+              </ul>
+            </div>
+            <input type="text" class="form-control" ng-model="item.value">
+          </div>
+          <div class="remove-sub-item-rules margined-right-10"><a ng-click="addPrevPageRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i></a></div>
+          <div class="remove-sub-item-rules margined-right-10" ng-show="widget.rules['prevPages'].items.length > 1"><a ng-click="removePrevPageRuleItem($index)" href="javascript:void(0);"><i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i></a></div>
+          <span class="underow-comment combo-box-underow-comment-comment"><spring:message code="widgetsList.editor.rules.pageTargeting.url.tooltip"/></span>
+        </div>
+      </div>
+      <!-- END Target to viewed pages -->
+
+      <!-- Page no rule -->
+      <div class="col-lg-12 margined-top-20">
+        <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.rules.pageNo"/> <span class="label label-warning tariff-info ">окупаемый</span> <a data-toggle="tooltip"
+                                                                                                                                                                                  data-placement="top"
+                                                                                                                                                                                  title="<spring:message code="widgetsList.editor.rules.pageNo.tooltip"/>"
+          class="info-link" href="#"><i
+            class="fa fa-info-circle"></i></a></label></h4>
+      </div>
+      <div class="col-lg-12 margined-top-10">
+        <switch class="switch-xs" ng-model="widget.rules.pageNo.enable" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.rules.pageNo.enable"/></h5>
+      </div>
+      <div class="col-lg-12 margined-top-10 width-900" ng-show="widget.rules.pageNo.enable" ng-class="(widget.rules.pageNo.items.length > 0)?'':'has-error'">
+        <label class="control-label"><spring:message code="widgetsList.editor.rules.pageNo.select"/>:</label>
+        <select ng-model="widget.rules.pageNo.items" ui-select2="{ allowClear: true, multiple: true}" data-placeholder="<spring:message code="widgetsList.editor.rules.pageNo.select.placeholder"/>" multiple="true">
+        <c:forEach begin="1" end="20" varStatus="loop">
+          <option value="${loop.current}">${loop.current}</option>
+        </c:forEach>
+        </select>
+      </div>
+      <!-- End Page No rule -->
+      <!-- Time options start -->
+      <div class="col-lg-12 margined-top-20 margined-bottom-10">
+        <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.rules.dateTime.title"/> <span class="label label-warning tariff-info ">окупаемый</span> <a data-toggle="tooltip"
+                                                                                                                                                                                          data-placement="top"
+                                                                                                                                                                                          title="<spring:message code="widgetsList.editor.rules.dateTime.placeholder"/>"
+          class="info-link" href="#"><i
+            class="fa fa-info-circle"></i></a></label></h4>
+      </div>
+      <div class="col-lg-12" ng-class="(widget.rules.time.enable && widget.rules['time'].items.length > 0)?'margined-bottom-10':''">
+        <switch class="switch-xs" ng-model="widget.rules.time.enable" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.rules.time.enable"/></h5>
+      </div>
+      <div class="row row-subitem width-400 margined-top-10" ng-repeat="item in widget.rules['time'].items" ng-show="widget.rules['time'].enable == true">
+        <div class="col-lg-12">
+          <label class="control-label"><spring:message code="widgetsList.editor.rules.time.title"/>:</label>
+        </div>
+        <div class="col-sm-12 row-subitem-padding padding-top-5">
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.rules.time.from"/>:
+          </div>
+          <div class="dropdown" style="float: left;">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{getStringFromTime(item.startTime)}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
+              <li role="presentation" ng-click="item.startTime = timeItem.value" ng-repeat="timeItem in getTimeList()"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{timeItem.name}}</a></li>
+            </ul>
+          </div>
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.rules.time.to"/>:
+          </div>
+          <div class="dropdown" style="float: left;">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{getStringFromTime(item.endTime)}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
+              <li role="presentation" ng-click="item.endTime = timeItem.value" ng-repeat="timeItem in getTimeList()"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{timeItem.name}}</a></li>
+            </ul>
+          </div>
+          <div class="remove-sub-item-rules-time margined-right-10"><a ng-click="addTimeRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules-time colored-blue col-sm-1 pe-7s-plus"></i></a></div>
+          <div class="remove-sub-item-rules-time margined-right-10" ng-show="widget.rules['time'].items.length > 1"><a ng-click="removeTimeRuleItem($index)" href="javascript:void(0);"><i class="remove-sub-item-rules-time colored-red col-sm-1 pe-7s-close-circle"></i></a></div>
+        </div>
+      </div>
+      <!-- End Time options -->
+      <!-- Days options start -->
+      <div class="col-lg-12 margined-top-20">
+        <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.rules.days.header"/> <span class="label label-warning tariff-info ">окупаемый</span> <a data-toggle="tooltip"
+                                                                                                                                                                                       data-placement="top"
+                                                                                                                                                                                       title="<spring:message code="widgetsList.editor.rules.days.tooltip"/>"
+          class="info-link" href="#"><i
+            class="fa fa-info-circle"></i></a></label></h4>
+      </div>
+      <div class="col-lg-12 margined-top-10">
+        <switch class="switch-xs" ng-model="widget.rules.days.enable" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.rules.days.enable"/></h5>
+      </div>
+      <div class="col-lg-12 margined-top-10 width-900" ng-show="widget.rules.days.enable" ng-class="(widget.rules.days.items.length > 0)?'':'has-error'">
+        <label class="control-label"><spring:message code="widgetsList.editor.rules.days.title"/>:</label>
+        <select ng-model="widget.rules.days.items" ui-select2="{ allowClear: true, multiple: true}" data-placeholder="<spring:message code="widgetsList.editor.rules.days.select.placeholder"/>" multiple="true">
+        <option value="0"><spring:message code="global.week.monday"/></option>
+        <option value="1"><spring:message code="global.week.tuesday"/></option>
+        <option value="2"><spring:message code="global.week.wednesday"/></option>
+        <option value="3"><spring:message code="global.week.thursday"/></option>
+        <option value="4"><spring:message code="global.week.friday"/></option>
+        <option value="5"><spring:message code="global.week.saturday"/></option>
+        <option value="6"><spring:message code="global.week.sunday"/></option>
+        </select>
+      </div>
+      <!-- End days options-->
+      <!-- Autoinvite options: pages -->
+      <div ng-show="!isContainerized">
+        <div class="col-lg-12 margined-top-40">
+          <h3><spring:message code="widgetsList.editor.autoinvite.title"/> <a data-toggle="tooltip"
+                                                                              data-placement="top"
+                                                                              title="<spring:message code="widgetsList.editor.autoinvite.tooltip"/>"
+            class="info-link margined-left-5" href="#"><i
+              class="fa fa-info-circle"></i></a></h3>
+        </div>
+        <div class="col-lg-12 margined-top-10 margined-bottom-5">
+          <label class="control-label smal-subtitle"><spring:message code="widgetsList.editor.autoinvite.subtitle"/></label>
+        </div>
+        <div class="col-lg-12 margined-top-10">
+          <label class="control-label control-label-des"><spring:message code="widgetsList.editor.autoinvite.variants"/>:</label>
+          <div class="dropdown" >
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{widget.autoinvite.ruleLogic}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li role="presentation" ng-click="widget.autoinvite.ruleLogic = itemLogic" ng-repeat="itemLogic in autoinviteVariants"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemLogic}}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-12 margined-top-20 margined-bottom-10">
+          <label class="control-label smal-subtitle"><spring:message code="widgetsList.editor.autoinvite.subtitle2"/></label>
+        </div>
+        <div class="col-lg-12 margined-top-10">
+          <switch class="switch-xs" ng-model="widget.autoinvite.pages.enable" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.pages.enable"/><span class="label label-warning tariff-info ">окупаемый</span></h5>
+        </div>
+        <div class="col-lg-12 margined-top-10 width-400" ng-show="widget.autoinvite.pages.enable" ng-class="(widget.autoinvite.pages.value <= 0)?'has-error':''">
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.autoinvite.pages.prefix"/>
+          </div>
+          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" ng-model="widget.autoinvite.pages.value"/>
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.autoinvite.pages.suffix"/>
+          </div>
+        </div>
+        <!-- END Autoinvite options -->
+        <!-- Autoinvite: seconds -->
+        <div class="col-lg-12 margined-top-10">
+          <switch class="switch-xs" ng-model="widget.autoinvite.seconds.enable"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.seconds.enable"/></h5>
+        </div>
+        <div class="col-lg-12 margined-top-10 width-400" ng-show="widget.autoinvite.seconds.enable" ng-class="(widget.autoinvite.seconds.value <= 0)?'has-error':''">
+          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" ng-model="widget.autoinvite.seconds.value"/>
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.autoinvite.seconds.suffix"/>
+          </div>
+        </div>
+        <!-- End Autoinvite seconds -->
+        <!-- Autoinvite: anactive -->
+        <div class="col-lg-12 margined-top-10">
+          <switch class="switch-xs" ng-model="widget.autoinvite.inactive.enabled" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.inactive.enabled"/><span class="label label-warning tariff-info ">окупаемый</span></h5>
+        </div>
+        <div class="col-lg-12 margined-top-10 width-400" ng-show="widget.autoinvite.inactive.enabled" ng-class="(widget.autoinvite.inactive.value <= 0)?'has-error':''">
+          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" ng-model="widget.autoinvite.inactive.value"/>
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.autoinvite.inactive.suffix"/>
+          </div>
+        </div>
+        <!-- End Autoinvite: anactive -->
+        <!-- Autoinvite: percent -->
+        <div class="col-lg-12 margined-top-10">
+          <switch class="switch-xs" ng-model="widget.autoinvite.percent.enable" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.percent.enable"/><span class="label label-warning tariff-info ">окупаемый</span></h5>
+        </div>
+        <div class="col-lg-12 margined-top-10 width-400" ng-show="widget.autoinvite.percent.enable" ng-class="(widget.autoinvite.percent.value <= 0)?'has-error':''">
+          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" max="100" ng-model="widget.autoinvite.percent.value"/>
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.autoinvite.percent.suffix"/>
+          </div>
+        </div>
+        <!-- End Autoinvite: percent -->
+
+        <!-- Autoinvite: click -->
+        <div class="col-lg-12 margined-top-10">
+          <switch class="switch-xs" ng-model="widget.autoinvite.click.enable"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.click.enable"/></h5>
+        </div>
+        <div class="col-lg-12 margined-top-10 width-900" ng-show="widget.autoinvite.click.enable" ng-class="(widget.autoinvite.click.value.trim().length == 0)?'has-error':''">
+          <label class="control-label"><spring:message code="widgetsList.editor.autoinvite.click.title"/></label>
+          <input class="form-control" type="text" ng-model="widget.autoinvite.click.value"/>
+          <div class="row small m-t-md underline-comment">
+            <i><spring:message code="widgetsList.editor.autoinvite.click.comment"/></i>
+          </div>
+        </div>
+        <!-- End Autoinvite seconds -->
+
+        <!-- Autoinvite: exit-intent -->
+        <div class="col-lg-12 margined-top-10">
+          <switch class="switch-xs" ng-model="widget.autoinvite.exit.enable"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.exit.enable"/></h5>
+        </div>
+        <!-- End Autoinvite: exit-intent -->
+        <!-- Autoinvite: sound -->
+        <div class="col-lg-12 margined-top-40">
+          <switch class="switch-xs" ng-model="widget.autoinvite.sound.enable"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.sound.enable"/></h5>
+        </div>
+        <!-- End Autoinvite: sound -->
+
+        <!-- Restrictions -->
+        <div class="col-lg-12 margined-top-40">
+          <h3><spring:message code="widgetsList.editor.section.block"/> </h3>
+        </div>
+        <div class="col-lg-12">
+          <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.restrictions.title"/> <span class="label label-warning tariff-info ">окупаемый</span> </h4>
+        </div>
+        <div class="col-lg-12 margined-top-10">
+          <input class="radio-left" type="radio" name="restrictions" ng-model="widget.restrictions.target.mode" ng-value="1" ng-change="onRestrictionModeChange()">
+          <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold"><spring:message code="widgetsList.editor.restrictions.disable.title"/></label>
+        </div>
+        <div class="col-lg-12 margined-top-10">
+          <input class="radio-left" type="radio" name="restrictions" ng-model="widget.restrictions.target.mode" ng-value="2" ng-change="onRestrictionModeChange()">
+          <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold"><spring:message code="widgetsList.editor.restrictions.enable.title"/></label>
+        </div>
+        <div class="col-lg-12 margined-top-10">
+          <input class="radio-left" type="radio" name="restrictions" ng-model="widget.restrictions.target.mode" ng-value="0" ng-change="onRestrictionModeChange()">
+          <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold"><spring:message code="widgetsList.editor.restrictions.ontime.title"/></label>
+        </div>
+        <div class="col-lg-12 margined-top-20" ng-show="widget.restrictions.target.mode == 0">
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.restrictions.disable.label"/>:
+          </div>
+          <div class="dropdown" style="float: left;">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{widget.restrictions.target.gap}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
+              <li role="presentation" ng-click="widget.restrictions.target.gap = timeItem" ng-repeat="timeItem in getRestrictionsGaps()"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{timeItem}}</a></li>
+            </ul>
+          </div>
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.restrictions.hours"/>
+          </div>
+        </div>
+        <div class="col-lg-12 margined-top-20">
+          <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.restrictions.title2"/> <a data-toggle="tooltip"
+                                                                                                                           data-placement="top"
+                                                                                                                           title="<spring:message code="widgetsList.editor.restrictions.autoinvite.tooltip"/>"
+            class="info-link" href="#"><i
+              class="fa fa-info-circle"></i></a></label></h4>
+        </div>
+        <!-- Restrictions.autoinvite -->
+        <div class="col-lg-12 margined-top-10">
+          <checker ng-model="widget.restrictions.autoinvite.enable"></checker>
+          <h5 class="control-label switcher-label switcher-label-xs f-7">
+            <spring:message code="widgetsList.editor.restrictions.autoinvite.text"/><br>
+          </h5>
+        </div>
+        <div class="col-lg-12 margined-top-20 width-900" ng-show="widget.restrictions.autoinvite.enable">
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.restrictions.disable.label"/>:
+          </div>
+          <input class="form-control widgets-num-input" type="number" min="0" max="72" ng-model="widget.restrictions.autoinvite.gap"/>
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.restrictions.hours"/>
+          </div>
+        </div>
+        <!-- End restrictions.autoinvite -->
+
+        <!-- Restrictions.unique -->
+        <div class="col-lg-12 margined-top-10">
+          <checker ng-model="widget.restrictions.unique.enable"></checker>
+          <h5 class="control-label switcher-label switcher-label-xs f-7">
+            <spring:message code="widgetsList.editor.restrictions.unique.text"/><br>
+          </h5>
+        </div>
+        <div class="col-lg-12 margined-top-20 width-900" ng-show="widget.restrictions.unique.enable">
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.restrictions.disable.label"/>:
+          </div>
+          <input class="form-control widgets-num-input" type="number" min="0" ng-model="widget.restrictions.unique.gap"/>
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.restrictions.hours"/>
+          </div>
+        </div>
+        <!-- END Restrictions.unique -->
+
+        <!-- Restrictions.lockAfterAction -->
+        <div class="col-lg-12 margined-top-10">
+          <checker ng-model="widget.restrictions.action.enable" ng-change="onChangePayment"></checker>
+          <h5 class="control-label switcher-label switcher-label-xs f-7">
+            {{ 'widgets.constructor.settings.lockAfterAction.title' | translate }}<span class="label label-warning tariff-info ">окупаемый</span><br>
+          </h5>
+        </div>
+        <div class="col-lg-12 margined-top-20 width-900" ng-show="widget.restrictions.action.enable">
+          <div class="time-settings-fromto">
+            {{ 'widgets.constructor.settings.lockAfterAction.lock1' | translate }}:
+          </div>
+          <input class="form-control widgets-num-input" type="number" min="0" ng-model="widget.restrictions.action.gap"/>
+          <div class="time-settings-fromto">
+            {{ 'widgets.constructor.settings.lockAfterAction.lock2' | translate }}
+          </div>
+        </div>
+        <!-- END Restrictions.lockAfterAction -->
+
+        <!-- Restrictions.count -->
+        <div class="col-lg-12 margined-top-10">
+          <checker ng-model="widget.restrictions.count.enable" ng-change="onChangePayment"></checker>
+          <h5 class="control-label switcher-label switcher-label-xs f-7">
+            <spring:message code="widgetsList.editor.restrictions.count.text"/><span class="label label-warning tariff-info ">окупаемый</span><br>
+          </h5>
+        </div>
+        <div class="col-lg-12 margined-top-20" ng-show="widget.restrictions.count.enable">
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.restrictions.count.part1"/>
+          </div>
+          <input class="form-control widgets-num-input" type="number" min="0" ng-model="widget.restrictions.count.count"/>
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.restrictions.count.part2"/>
+          </div>
+          <div class="floated-left">
+            <input class="form-control widgets-num-input margined-right-5" type="number" min="0" ng-model="widget.restrictions.count.interval"/>
+            <div class="dropdown" style="display: inline;">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                {{units[widget.restrictions.count.unit]}}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li ng-repeat="key in getUnitsKeys()" role="presentation" ng-click="widget.restrictions.count.unit = key"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{units[key]}}</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="time-settings-fromto">
+            <spring:message code="widgetsList.editor.restrictions.count.part3"/>
+          </div>
+        </div>
+      </div>
+      <!-- END Restrictions.count -->
+
+      <!-- Date range -->
+      <div class="col-lg-12 margined-top-20">
+        <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.rules.period.header"/> <span class="label label-warning tariff-info ">окупаемый</span> <a data-toggle="tooltip"
+                                                                                                                                                                                         data-placement="top"
+                                                                                                                                                                                         title="<spring:message code="widgetsList.editor.rules.period.tooltip"/>"
+          class="info-link" href="#"><i
+            class="fa fa-info-circle"></i></a></label></h4>
+      </div>
+      <div class="col-lg-12 margined-top-10">
+        <switch class="switch-xs" ng-model="widget.rules.period.enable" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.rules.period.title"/></h5>
+      </div>
+      <div class="col-lg-12 margined-top-10 width-900" ng-show="widget.rules.period.enable">
+        <div class="time-settings-fromto">
+          <spring:message code="widgetsList.editor.rules.time.from"/>:
+        </div>
+        <input style="float: left;" id="period-rule-start-date-picker" class="form-control period-range" type="text" ng-class="(widget.rules.period.startDate == null)?'has-error':''">
+        <div class="time-settings-fromto">
+          <spring:message code="widgetsList.editor.rules.time.to"/>:
+        </div>
+        <input style="float: left;" id="period-rule-end-date-picker" class="form-control period-range" type="text" ng-class="(widget.rules.period.endDate == null)?'has-error':''">
+      </div>
+      <!-- End Date range -->
+
+
+      <!-- End Restrictions-->
+      <!-- Autoresponder -->
+      <div class="col-lg-12 margined-top-40">
+        <h3><spring:message code="widgetsList.editor.section.autoresponder"/> <a data-toggle="tooltip"
+                                                                                 data-placement="top"
+                                                                                 title="<spring:message code="widgetsList.editor.autoresponder.tooltip"/>"
+          class="info-link" href="#"><i
+            class="fa fa-info-circle"></i></a></label></h3>
+      </div>
+      <div class="col-lg-12 margined-top-10">
+        <switch class="switch-xs" ng-model="widget.autoresponder.enabled"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoresponder.enable"/></h5>
+      </div>
+      <div class="col-lg-12 m-t-xs m-b-xs" ng-show="widget.autoresponder.enabled">
+        <div class="f-4 audience-tooolbar-desc underline-links blue-links hover-links" ng-bind-html="'widgets.constructor.coupon.autoresponder' | translate"></div>
+      </div>
+      <div class="col-lg-12 margined-top-10" ng-show="widget.autoresponder.enabled" ng-class="(widget.autoresponder.subject.trim().length<1)?'has-error':''">
+        <label class="control-label"><spring:message code="widgetsList.editor.autoresponder.subject"/>:</label>
+        <input class="form-control width-900" ng-model="widget.autoresponder.subject">
+      </div>
+      <div class="col-lg-12 margined-top-10 width-930" ng-show="widget.autoresponder.enabled" ng-class="(widget.autoresponder.text.trim().length<1)?'has-error':''">
+        <label class="control-label"><spring:message code="widgetsList.editor.autoresponder.text"/>:</label>
+        <text-angular class="width-900" ng-model="widget.autoresponder.text"></text-angular>
+      </div>
+      <!-- End autoresponder -->
+
+      <!-- JS Code Actions -->
+      <div class="col-lg-12 margined-top-40">
+        <h3>{{ 'widgets.constructor.settings.jscode.title' | translate }}</h3>
+      </div>
+      <div class="col-lg-12 margined-top-10">
+        <div class="f-4 audience-tooolbar-desc" ng-bind-html="'widgets.constructor.settings.jscode.desc' | translate"></div>
+      </div>
+
+      <div class="col-lg-12 margined-top-20">
+        <switch class="switch-xs" ng-model="widget.jsInfo.onShowScript.enable"></switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgets.constructor.settings.jscode.onShowChecker' | translate }}</h5>
+      </div>
+      <div class="col-lg-12 margined-top-10" ng-show="widget.jsInfo.onShowScript.enable">
+        <textarea class="form-control textar-iframe cons-settings-js-textarea" ng-model="widget.jsInfo.onShowScript.script"></textarea>
+      </div>
+
+      <div class="col-lg-12 margined-top-20">
+        <switch class="switch-xs" ng-model="widget.jsInfo.onTargetScript.enable"></switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgets.constructor.settings.jscode.onActionChecker' | translate }}</h5>
+      </div>
+      <div ng-show="widget.jsInfo.onTargetScript.enable">
+        <div class="col-lg-12 margined-top-10">
+          <textarea class="form-control textar-iframe cons-settings-js-textarea" ng-model="widget.jsInfo.onTargetScript.script"></textarea>
+        </div>
+        <div class="col-lg-12 margined-top-10">
+          <checker ng-model="widget.jsInfo.enablePlaceholding" ng-change="onChangePayment"></checker>
+          <h5 class="control-label switcher-label switcher-label-xs f-7">
+            {{ 'widgets.constructor.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info ">окупаемый</span>
+          </h5>
+        </div>
+      </div>
+
+      <!-- END JS Code Actions -->
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-group" id="save-widget-panel">
+      <div class="text-right padding10">
+        <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="goToTest(widget)" type="button" class="btn w-xs gototest-widget-btn"><i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту</button>
+        <a ng-show="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)" type="button" class="btn w-xs btn-primary buy-widget-btn"><i class="pe-7s-tools margined-right-10"></i><spring:message code="widgetsList.add.alt2"/></a>
+        <div class="btn-group play-btns widget-enabler-btns" ng-show="!isMockup">
+          <p><spring:message code="widgetsList.widget.state"/></p>
+          <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет">
+            <i class="fa fa-play"></i>
+          </button>
+          <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет">
+            <i class="fa fa-pause"></i>
+          </button>
+
+          <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить вариант">
+            <i class="fa fa-play"></i>
+          </button>
+          <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант">
+            <i class="fa fa-pause"></i>
+          </button>
+        </div>
+
+        <sec:authorize access="hasRole('ROLE_DESIGNER')">
+          <button ng-click="saveAsMockup()" type="button" class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left" data-style="slide-down" ng-show="!isMockup"><span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт </span> </button>
+        </sec:authorize>
+
+        <button id="saveWidget" ng-click="saveWidget()" type="button" class="ladda-button btn w-xs btn-success" data-style="slide-down"><span class="ladda-label"><i class="fa fa-save"></i> <span ng-show="!isMockup" ng-bind="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span ng-show="isMockup">Сохранить темплейт</span></span></button>
+      </div>
+    </div>
+  </div>
+</div>
