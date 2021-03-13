@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^11.0.3",
     "@angular/router": "^11.0.3",
     "@biesbjerg/ngx-translate-extract": "^7.0.3",
+    "@flowjs/ngx-flow": "^0.4.6",
     "@fortawesome/angular-fontawesome": "^0.8.0",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
