@@ -175,9 +175,17 @@
             </button>
           </div>
 
-          <sec:authorize access="hasRole('ROLE_DESIGNER')">
-            <button ng-click="saveAsMockup()" type="button" class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left" data-style="slide-down" ng-show="!isMockup"><span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт </span> </button>
-          </sec:authorize>
+          <ng-container *ngIf="hasRole('ROLE_DESIGNER')">
+            <button
+              type="button"
+              *ngIf="!isMockup"
+              (click)="saveAsMockup()"
+              class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left"
+              data-style="slide-down"
+            >
+              <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
+            </button>
+          </ng-container>
 
           <button type="button" id="saveWidget" (click)="saveWidget()" class="ladda-button btn w-xs btn-success" data-style="slide-down">
             <span class="ladda-label">
@@ -303,22 +311,16 @@
         </div>
       </div>
 
+      <ng-container #flowBasic="flow" [flowConfig]="{target: '/'}"></ng-container>
+
       <div
         class="modal fade"
         id="addNewWidgetListModal"
         tabindex="-1"
         role="dialog"
         aria-hidden="true"
-        flow-init
-        flow-file-added="uploadAdded($file,$event,$flow )"
       >
-        <div
-          class="modal-dialog"
-          flow-drop
-          flow-drag-enter="class='alert-success'"
-          flow-drag-leave="class=''"
-          [ngClass]="class"
-        >
+        <div class="modal-dialog">
           <div class="dragAndDropFilter"></div>
           <div class="modal-content">
             <div class="color-line"></div>
@@ -335,13 +337,28 @@
               <div class="img-set-foot1">
                 <div class="dragDropBl">
                   <div class="upload-drag-icon"><i class="fa fa-upload"></i></div>
-                  <button flow-btn flow-attrs="{accept:'image/*'}" class="load-img-gal btn btn-success ladda-button" data-style="slide-down"><span class="ladda-label">Загрузить изображение</span></button>
-                  <span class="dragOr">или перетащите изображение сюда</span>
+                  <button
+                    flowButton
+                    [flow]="flowBasic.flowJs"
+                    [flowAttributes]="{accept: 'image/*'}"
+                    class="load-img-gal btn btn-success ladda-button"
+                    data-style="slide-down"
+                  >
+                    <span class="ladda-label">Загрузить изображение</span>
+                  </button>
+
+                  <div
+                    class="drop-area"
+                    flowDrop
+                    [flow]="flowBasic.flowJs"
+                  >
+                    <span class="dragOr">или перетащите изображение сюда</span>
+                  </div>
                 </div>
               </div>
               <div>
-                <button data-dismiss="modal" ng-click="closeModalImg()" id="btnCloseImgM" class="btn btn-default pull-left" type="button">Отмена</button>
-                <button class="btn btn-info set-img-gal" ng-click="updateFile()">Установить изображение</button>
+                <button data-dismiss="modal" (click)="closeModalImg()" id="btnCloseImgM" class="btn btn-default pull-left" type="button">Отмена</button>
+                <button class="btn btn-info set-img-gal" (click)="updateFile()">Установить изображение</button>
               </div>
             </div>
           </div>
@@ -351,9 +368,15 @@
     </div>
   </div>
 
+
+
   <!-- INTEGRATIONS CONTAINER -->
 
-  <div ng-show="isCurrentActiveTab('integrations')" ng-class="{ active: isCurrentActiveTab('integrations') }" id="integrations" ng-controller="WidgetConstructorIntegrationsController">
+  <div
+    *ngIf="isCurrentActiveTab('integrations')"
+    [ngClass]="{ active: isCurrentActiveTab('integrations') }"
+    id="integrations"
+  >
     <div class="widgets-settings-container1 padding-bottom-40-imp">
       <h1>{{ 'widgetsList.editor.integrations.title' | translate }}</h1>
 
@@ -361,40 +384,53 @@
         <div class="toolbar-content no-padding padding-top-30">
           <div class="row btnpanel">
             <div class="audience-tooolbar-switcher">
-              <switch ng-model="widget.sendCrm" class="margined-top-5 margined-right-10 floated-left"></switch><h3 class="f-5 margined-top-5">{{ 'widgetsList.editor.integrations.crmSwitcher' | translate }}</h3>
+              <ui-switch
+                [checked]="widget.sendCrm"
+                class="margined-top-5 margined-right-10 floated-left"
+              ></ui-switch><h3 class="f-5 margined-top-5">{{ 'widgetsList.editor.integrations.crmSwitcher' | translate }}</h3>
             </div>
           </div>
         </div>
-        <div class="f-4 audience-tooolbar-desc integration-tooolbar-desc" ng-bind-html="'widgetsList.editor.integrations.crmSwitcher.desc' | translate"></div>
+        <div
+          class="f-4 audience-tooolbar-desc integration-tooolbar-desc"
+          [innerHTML]="'widgetsList.editor.integrations.crmSwitcher.desc' | translate"
+        ></div>
       </div>
 
       <div class="integrations-switcher-component-item">
         <div class="toolbar-content no-padding padding-top-30">
           <div class="row btnpanel">
             <div class="audience-tooolbar-switcher">
-              <switch ng-model="widget.useCustomIntegrationsList" class="margined-top-5 margined-right-10 floated-left"></switch><h3 class="f-5 margined-top-5">{{ 'widgetsList.editor.integrations.mainSwitcher' | translate }}</h3>
+              <ui-switch
+                [checked]="widget.useCustomIntegrationsList"
+                class="margined-top-5 margined-right-10 floated-left"
+              ></ui-switch><h3 class="f-5 margined-top-5">{{ 'widgetsList.editor.integrations.mainSwitcher' | translate }}</h3>
             </div>
           </div>
         </div>
-        <div class="f-4 audience-tooolbar-desc" ng-bind-html="'widgetsList.editor.integrations.description' | translate"></div>
+        <div class="f-4 audience-tooolbar-desc" [innerHTML]="'widgetsList.editor.integrations.description' | translate"></div>
       </div>
 
-      <div class="padding-top-30 padding-bottom-20 intagrations-container" ng-show="widget.useCustomIntegrationsList">
+      <div class="padding-top-30 padding-bottom-20 intagrations-container" *ngIf="widget.useCustomIntegrationsList">
         <!-- Integration item -->
-        <div class="row row-subitem width-900 margined-top-10" ng-repeat="item in wIntegrations">
-          <div class="col-sm-9 row-subitem-padding padding-top-5 integration-item-wr" tooltiped>
+        <div class="row row-subitem width-900 margined-top-10" *ngFor="item in wIntegrations">
+          <div class="col-sm-9 row-subitem-padding padding-top-5 integration-item-wr">
             <div class="integration-item__main integration-item__main-list">
               <div class="integration-item__icon_wr">
-                <div class="integration-item__icon integration-item__icon--{{item.type}}"></div>
+                <div class="integration-item__icon integration-item__icon--{{ item.type }}"></div>
               </div>
-              <div class="integration-item__name">{{item.name}}</div>
+              <div class="integration-item__name">{{ item.name }}</div>
             </div>
             <div class="integration-item__extra">
               <div class="remove-sub-item-integration">
-                <a ng-click="removeIntegrationItem($index)"
-                   href="javascript:void(0);"
-                   data-container="body"  data-toggle="tooltip" data-placement="top"
-                   title="{{ 'settings.site.tabs.integration.tooltip.remove' | translate }}"><i class="colored-red col-sm-1 pe-7s-close-circle"></i></a>
+                <a
+                  (click)="removeIntegrationItem($index)"
+                  href="javascript:void(0);"
+                  data-container="body" data-toggle="tooltip" data-placement="top"
+                  title="{{ 'settings.site.tabs.integration.tooltip.remove' | translate }}"
+                >
+                  <i class="colored-red col-sm-1 pe-7s-close-circle"></i>
+                </a>
               </div>
             </div>
           </div>
@@ -404,20 +440,61 @@
           <div class="col-sm-9 row-subitem-padding padding-top-5 integration-item-wr">
             <div class="integration-item__main">
               <div class="dropdown integration-selector dropup">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  <span ng-if="!currentIntegrationToAdd.type" class="dropdown-selected-cropp">{{defIntegrationToAddTitle}}</span>
-                  <span ng-if="currentIntegrationToAdd.type" class="dropdown-selected-cropp integration-selector-item {{currentIntegrationToAdd.type}}">{{currentIntegrationToAdd.name}}</span>
+                <button
+                  type="button"
+                  class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="true"
+                >
+                  <span *ngIf="!currentIntegrationToAdd.type" class="dropdown-selected-cropp">
+                    {{ vdefIntegrationToAddTitle }}
+                  </span>
+                  <span
+                    *ngIf="currentIntegrationToAdd.type"
+                    class="dropdown-selected-cropp integration-selector-item {{ currentIntegrationToAdd.type }}"
+                  >
+                    {{ currentIntegrationToAdd.name }}
+                  </span>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-integration-max-240h">
-                  <span ng-if="integrationsAvailableMailing.length" class="integration-selector-group">{{'settings.site.newIntegration.group.mailing' | translate }}</span>
-                  <li ng-repeat="item in integrationsAvailableMailing" ng-click="changeIntegrationToAdd(item)"><a class="integration-selector-item {{item.type}}" href="#">{{item.name || defIntegrationToAddTitle}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span></a></li>
-                  <span ng-if="integrationsAvailableCRM.length" class="integration-selector-group">{{'settings.site.newIntegration.group.crm' | translate }}</span>
-                  <li ng-repeat="item in integrationsAvailableCRM" ng-click="changeIntegrationToAdd(item)"><a class="integration-selector-item {{item.type}}" href="#">{{item.name || defIntegrationToAddTitle}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span></a></li>
-                  <span ng-if="integrationsAvailableNotifications.length" class="integration-selector-group">{{'settings.site.newIntegration.group.notification' | translate }}</span>
-                  <li ng-repeat="item in integrationsAvailableNotifications" ng-click="changeIntegrationToAdd(item)"><a class="integration-selector-item {{item.type}}" href="#">{{item.name || defIntegrationToAddTitle}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span></a></li>
-                  <span ng-if="integrationsAvailableOthers.length" class="integration-selector-group">{{'settings.site.newIntegration.group.others' | translate }}</span>
-                  <li ng-repeat="item in integrationsAvailableOthers" ng-click="changeIntegrationToAdd(item)"><a class="integration-selector-item {{item.type}}" href="#">{{item.name || defIntegrationToAddTitle}} <span ng-if="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span></a></li>
+                  <span *ngIf="integrationsAvailableMailing.length" class="integration-selector-group">
+                    {{ 'settings.site.newIntegration.group.mailing' | translate }}
+                  </span>
+                  <li *ngFor="let item of integrationsAvailableMailing" (click)="changeIntegrationToAdd(item)">
+                    <a class="integration-selector-item {{ item.type }}" href="#"
+                    >{{ item.name || defIntegrationToAddTitle }} <span
+                      *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+                    </a>
+                  </li>
+                  <span *ngIf="integrationsAvailableCRM.length" class="integration-selector-group">
+                    {{ 'settings.site.newIntegration.group.crm' | translate }}
+                  </span>
+                  <li *ngFor="let item of integrationsAvailableCRM" (click)="changeIntegrationToAdd(item)">
+                    <a class="integration-selector-item {{ item.type }}" href="#"
+                    >{{ item.name || defIntegrationToAddTitle }} <span
+                      *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+                    </a>
+                  </li>
+                  <span *ngIf="integrationsAvailableNotifications.length" class="integration-selector-group">
+                    {{'settings.site.newIntegration.group.notification' | translate }}
+                  </span>
+                  <li *ngFor="let item of integrationsAvailableNotifications" (click)="changeIntegrationToAdd(item)">
+                    <a class="integration-selector-item {{ item.type }}" href="#"
+                    >{{ item.name || defIntegrationToAddTitle }} <span
+                      *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+                    </a>
+                  </li>
+                  <span *ngIf="integrationsAvailableOthers.length" class="integration-selector-group">
+                    {{ 'settings.site.newIntegration.group.others' | translate }}
+                  </span>
+                  <li *ngFor="let item of integrationsAvailableOthers" (click)="changeIntegrationToAdd(item)">
+                    <a class="integration-selector-item {{item.type}}" href="#"
+                    >{{ item.name || defIntegrationToAddTitle }} <span
+                      *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -426,7 +503,9 @@
         </div>
         <div class="row row-subitem width-900">
           <div class="col-sm-9 row-subitem-padding integration-constructor-new-one-btn">
-            <a ng-click="openModalForCreatingNewIntegration()" href="javascript:void(0);"><i class="fa fa-plus colored-green"></i> {{ 'widgetsList.editor.integrations.createNewIntegration' | translate }}</a>
+            <a (click)="openModalForCreatingNewIntegration()" href="javascript:void(0);">
+              <i class="fa fa-plus colored-green"></i> {{ 'widgetsList.editor.integrations.createNewIntegration' | translate }}
+            </a>
           </div>
         </div>
         <!-- END Integration item -->
@@ -435,30 +514,78 @@
       <!-- FOOTER -->
       <div class="footer-group" id="save-widget-panel">
         <div class="text-right padding10">
-          <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="goToTest(widget)" type="button" class="btn w-xs gototest-widget-btn"><i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту</button>
-          <a ng-show="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)" type="button" class="btn w-xs btn-primary buy-widget-btn"><i class="pe-7s-tools margined-right-10"></i><spring:message code="widgetsList.add.alt2"/></a>
-          <div class="btn-group play-btns widget-enabler-btns" ng-show="!isMockup">
-            <p><spring:message code="widgetsList.widget.state"/></p>
-            <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет">
+          <button
+            type="button"
+            *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+            (click)="goToTest(widget)"
+            class="btn w-xs gototest-widget-btn"
+          >
+            <i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту
+          </button>
+          <a
+            *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
+            type="button" class="btn w-xs btn-primary buy-widget-btn"
+          >
+            <i class="pe-7s-tools margined-right-10"></i> {{ 'widgetsList.add.alt2' | translate }}
+          </a>
+          <div class="btn-group play-btns widget-enabler-btns" *ngIf="!isMockup">
+            <p>{{ 'widgetsList.widget.state' | translate }}</p>
+            <button
+              *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+              (click)="startWidget(widget)"
+              [ngClass]="(widget.active)?'active':''"
+              class="btn btn-xs btn-default start-widget-btn"
+              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет">
               <i class="fa fa-play"></i>
             </button>
-            <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет">
+            <button *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет">
               <i class="fa fa-pause"></i>
             </button>
 
-            <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить варинт">
+            <button
+              *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+              (click)="startWidget(widget)"
+              [ngClass]="(widget.active)?'active':''"
+              class="btn btn-xs btn-default start-widget-btn"
+              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить варинт">
               <i class="fa fa-play"></i>
             </button>
-            <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант">
+            <button
+              *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+              (click)="stopWidget(widget)"
+              [ngClass]="(widget.active)?'':'active'"
+              class="btn btn-xs btn-default stop-widget-btn"
+              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант">
               <i class="fa fa-pause"></i>
             </button>
           </div>
 
-          <sec:authorize access="hasRole('ROLE_DESIGNER')">
-            <button ng-click="saveAsMockup()" type="button" class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left" data-style="slide-down" ng-show="!isMockup"><span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт </span> </button>
-          </sec:authorize>
+          <ng-container *ngIf="hasRole('ROLE_DESIGNER')">
+            <button
+              type="button"
+              *ngIf="!isMockup"
+              (click)="saveAsMockup()"
+              class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left"
+              data-style="slide-down"
+            >
+              <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
+            </button>
+          </ng-container>
 
-          <button id="saveWidget" ng-click="saveWidget()" type="button" class="ladda-button btn w-xs btn-success floated-left" data-style="slide-down"><span class="ladda-label"><i class="fa fa-save"></i> <span ng-show="!isMockup" ng-bind="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span ng-show="isMockup">Сохранить темплейт</span></span></button>
+          <button
+            type="button"
+            id="saveWidget"
+            (click)="saveWidget()"
+            class="ladda-button btn w-xs btn-success floated-left"
+            data-style="slide-down"
+          >
+            <span class="ladda-label">
+              <i class="fa fa-save"></i> <span
+              *ngIf="!isMockup">
+              {{ (widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет' }}</span>
+              <span *ngIf="isMockup">Сохранить темплейт</span>
+            </span>
+          </button>
         </div>
       </div>
     </div>
@@ -468,7 +595,11 @@
 
   <!-- AUDIENCES CONTAINER -->
 
-  <div ng-show="isCurrentActiveTab('audience')" ng-class="{ active: isCurrentActiveTab('audience') }" id="audience" ng-controller="WidgetConstructorAudienceController">
+  <div
+    id="audience"
+    *ngIf="isCurrentActiveTab('audience')"
+    [ngClass]="{ active: isCurrentActiveTab('audience') }"
+  >
     <div class="widgets-settings-container">
       <!-- Audiences list -->
       <div id="audiences-list" ng-show="audienceMode == MODE_LIST">

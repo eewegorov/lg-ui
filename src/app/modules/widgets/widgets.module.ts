@@ -21,6 +21,7 @@ import { TemplatesGalleryComponent } from './templates-gallery/templates-gallery
 import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
 import { CloneWidgetComponent } from './clone-widget/clone-widget.component';
 import { ContainerCodeComponent } from './containerized/container-code/container-code.component';
+import { NgxFlowModule } from '@flowjs/ngx-flow';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { ContainerCodeComponent } from './containerized/container-code/container
     CoolInlineEditFieldModule,
     InfiniteScrollModule,
     SharedModule,
-    WidgetsRoutingModule
+    WidgetsRoutingModule,
+    NgxFlowModule
   ]
 })
 export class WidgetsModule { }
