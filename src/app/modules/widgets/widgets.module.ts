@@ -22,6 +22,7 @@ import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
 import { CloneWidgetComponent } from './clone-widget/clone-widget.component';
 import { ContainerCodeComponent } from './containerized/container-code/container-code.component';
 import { NgxFlowModule } from '@flowjs/ngx-flow';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { NgxFlowModule } from '@flowjs/ngx-flow';
     InfiniteScrollModule,
     SharedModule,
     WidgetsRoutingModule,
-    NgxFlowModule
+    NgxFlowModule,
+    NgSelectModule
   ]
 })
 export class WidgetsModule { }

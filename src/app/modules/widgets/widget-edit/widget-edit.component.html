@@ -788,56 +788,70 @@
                   <h4>{{ 'audience.rule.ordroppable' | translate }}</h4>
                 </div>
               </div>
-              <div ng-show="$index == audience.groups.length - 1">
+              <div *ngIf="i === audience.groups.length - 1">
                 <div class="rule-groups-text rule-groups-text-ok">{{ 'audience.rule.logic.and' | translate }}</div>
                 <div class="rule-container rule-container-ok" anddropcontainer>
                   <div class="rule-droppable-and">
-                    <h4><spring:message code="audience.rule.anddroppable"/></h4>
+                    <h4>{{ 'audience.rule.anddroppable' | translate }}</h4>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-lg-4 rules-templates-list">
-            <label class="control-label"><spring:message code="audience.rules"/></label>
-            <ad:rule>
-              <jsp:attribute name="code">refer</jsp:attribute>
-              <jsp:attribute name="name"><spring:message code="audience.rule.refer"/> </jsp:attribute>
-              <jsp:attribute name="description"><spring:message code="audience.rule.refer.desc"/> </jsp:attribute>
-            </ad:rule>
-            <ad:rule>
-              <jsp:attribute name="code">type</jsp:attribute>
-              <jsp:attribute name="name"><spring:message code="audience.rule.type"/> </jsp:attribute>
-              <jsp:attribute name="description"><spring:message code="audience.rule.type.desc"/> </jsp:attribute>
-            </ad:rule>
-            <ad:rule>
-              <jsp:attribute name="code">url</jsp:attribute>
-              <jsp:attribute name="name"><spring:message code="audience.rule.url"/> </jsp:attribute>
-              <jsp:attribute name="description"><spring:message code="audience.rule.url.desc"/> </jsp:attribute>
-            </ad:rule>
-            <ad:rule>
-              <jsp:attribute name="code">visit</jsp:attribute>
-              <jsp:attribute name="name"><spring:message code="audience.rule.visit"/> </jsp:attribute>
-              <jsp:attribute name="description"><spring:message code="audience.rule.visit.desc"/> </jsp:attribute>
-            </ad:rule>
-            <ad:rule>
-              <jsp:attribute name="code">visitno</jsp:attribute>
-              <jsp:attribute name="name"><spring:message code="audience.rule.visitno"/> </jsp:attribute>
-              <jsp:attribute name="description"><spring:message code="audience.rule.visitno.desc"/> </jsp:attribute>
-            </ad:rule>
-            <ad:rule>
-              <jsp:attribute name="code">devices</jsp:attribute>
-              <jsp:attribute name="name"><spring:message code="audience.rule.devices"/> </jsp:attribute>
-              <jsp:attribute name="description"><spring:message code="audience.rule.devices.desc"/> </jsp:attribute>
-            </ad:rule>
-            <ad:rule>
-              <jsp:attribute name="code">social</jsp:attribute>
-              <jsp:attribute name="name"><spring:message code="audience.rule.social"/> </jsp:attribute>
-              <jsp:attribute name="description"><spring:message code="audience.rule.social.desc"/> </jsp:attribute>
-            </ad:rule>
+            <label class="control-label">{{ 'audience.rules' | translate }}</label>
+            <div>
+              <div name="code">refer</div>
+              <div name="name">{{ 'audience.rule.refer' | translate }}</div>
+              <div name="description">{{ 'audience.rule.refer.desc' | translate }}</div>
+            </div>
+            <div>
+              <div name="code">type</div>
+              <div name="name">{{ 'audience.rule.type' | translate }}</div>
+              <div name="description">{{ 'audience.rule.type.desc' | translate }}</div>
+            </div>
+            <div>
+              <div name="code">url</div>
+              <div name="name">{{ 'audience.rule.url' | translate }}</div>
+              <div name="description">{{ 'audience.rule.url.desc' | translate }}</div>
+            </div>
+            <div>
+              <div name="code">visit</div>
+              <div name="name">{{ 'audience.rule.visit' | translate }}</div>
+              <div name="description">{{ 'audience.rule.visit.desc' | translate }}</div>
+            </div>
+            <div>
+              <div name="code">visitno</div>
+              <div name="name">{{ 'audience.rule.visitno' | translate }}</div>
+              <div name="description">{{ 'audience.rule.visitno.desc' | translate }}</div>
+            </div>
+            <div>
+              <div name="code">devices</div>
+              <div name="name">{{ 'audience.rule.devices' | translate }}</div>
+              <div name="description">{{ 'audience.rule.devices.desc' | translate }}</div>
+            </div>
+            <div>
+              <div name="code">social</div>
+              <div name="name">{{ 'audience.rule.social' | translate }}</div>
+              <div name="description">{{ 'audience.rule.social.desc' | translate }}</div>
+            </div>
 
-            <button id="saveAudience"   type="button" class="btn btn-lg w-xs btn-success margined-top-10" ng-click="saveAudience()"><i class="fa fa-save"></i> <spring:message code="audience.save"/> </button>
-            <button id="cancelAudience" type="button" class="btn btn-lg w-xs btn-default margined-top-10" ng-click="audienceMode = MODE_LIST"><i class="fa fa-undo"></i> <spring:message code="audience.return"/> </button>
+            <button
+              type="button"
+              id="saveAudience"
+              class="btn btn-lg w-xs btn-success margined-top-10"
+              (click)="saveAudience()"
+            >
+              <i class="fa fa-save"></i> {{ 'audience.save' | translate }}
+            </button>
+            <button
+              type="button"
+              id="cancelAudience"
+              class="btn btn-lg w-xs btn-default margined-top-10"
+              (click)="audienceMode = MODE_LIST"
+            >
+              <i class="fa fa-undo"></i> {{ 'audience.return' | translate }}
+            </button>
           </div>
         </div>
       </div>
@@ -849,146 +863,218 @@
 
   <!-- RULES CONTAINER -->
 
-  <div ng-show="isCurrentActiveTab('rules')" ng-class="{ active: isCurrentActiveTab('rules') }" id="rules" ng-controller="WidgetConstructorRulesController" ng-init="
-					    localization.editor.rules.pages.hide = '<spring:message code="widgetsList.editor.rules.pageTargeting.hide"/>';
-  localization.editor.rules.pages.show = '<spring:message code="widgetsList.editor.rules.pageTargeting.show"/>';
-  localization.editor.rules.pages.contain    = '<spring:message code="widgetsList.editor.rules.pageTargeting.contain"/>';
-  localization.editor.rules.pages.notcontain = '<spring:message code="widgetsList.editor.rules.pageTargeting.notcontain"/>';
-  localization.editor.rules.pages.equals     = '<spring:message code="widgetsList.editor.rules.pageTargeting.equals"/>';
-  localization.editor.rules.pages.starts     = '<spring:message code="widgetsList.editor.rules.pageTargeting.starts"/>';
-  localization.editor.rules.pages.ends       = '<spring:message code="widgetsList.editor.rules.pageTargeting.ends"/>';
-  localization.editor.rules.pages.title      = '<spring:message code="widgetsList.editor.rules.pageTargeting.title"/>';
-  localization.editor.rules.pages.url        = '<spring:message code="widgetsList.editor.rules.pageTargeting.url"/>';
-  ">
+  <div
+    *ngIf="isCurrentActiveTab('rules')"
+    id="rules"
+    [ngClass]="{ active: isCurrentActiveTab('rules') }"
+  >
   <div class="widgets-settings-container">
-    <h1><spring:message code="widgetsList.editor.rules.title"/></h1>
+    <h1>{{ 'widgetsList.editor.rules.title' | translate }}</h1>
     <div class="row padding-bottom-70">
       <div class="col-lg-12 margined-top-20">
-        <h3><spring:message code="widgetsList.editor.section.targeting"/> </h3>
+        <h3>{{ 'widgetsList.editor.section.targeting' | translate }}</h3>
       </div>
       <div class="col-lg-12 ">
-        <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.rules.pageTargeting"/> <a data-toggle="tooltip"
-                                                                                                                         data-placement="top"
-                                                                                                                         title="<spring:message code="widgetsList.editor.rules.pageTargeting.tooltip"/>"
-          class="info-link" href="#"><i class="fa fa-info-circle"></i></a></label></h4>
+        <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.pageTargeting' | translate }} <a
+          data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageTargeting.tooltip' | translate }}"
+          class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+        </h4>
       </div>
-      <div class="col-lg-12 margined-top-10" ng-class="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0)?'margined-bottom-10':''">
-        <switch ng-model="widget.rules['pages'].enable" class="switch-xs"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.rules.pageTargeting.enable"/></h5>
+      <div class="col-lg-12 margined-top-10" [ngClass]="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0)?'margined-bottom-10':''">
+        <ui-switch size="small" [checked]="widget.rules['pages'].enable"></ui-switch><h5
+        class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageTargeting.enable' | translate }}</h5>
       </div>
       <!-- Page rule item -->
-      <div class="row row-subitem width-900 margined-top-10" ng-repeat="item in widget.rules['pages'].items" ng-show="widget.rules['pages'].enable == true">
-        <div class="col-sm-3 row-subitem-padding padding-top-5">
-          <label class="control-label"><spring:message code="widgetsList.editor.rules.widget"/>:</label>
-          <div class="dropdown" >
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{getPageStateName(item)}}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li role="presentation" ng-click="item.state = 0"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.hide"/></a></li>
-              <li role="presentation" ng-click="item.state = 1"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.show"/></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-sm-3 row-subitem-padding padding-top-5">
-          <label class="control-label"><spring:message code="widgetsList.editor.rules.pageTargeting.pageInfo"/>:</label>
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{getPageCompareName(item)}}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li role="presentation" ng-click="item.compare = 0"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.contain"/></a></li>
-              <li role="presentation" ng-click="item.compare = 1"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.notcontain"/></a></li>
-              <li role="presentation" ng-click="item.compare = 2"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.equals"/></a></li>
-              <li role="presentation" ng-click="item.compare = 3"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.starts"/></a></li>
-              <li role="presentation" ng-click="item.compare = 4"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.ends"/></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-sm-6 form-group row-subitem-padding padding-top-5">
-          <label class="control-label input-with-remove" style="display: block;"><spring:message code="widgetsList.editor.rules.pageTargeting.urlortitle"/>:</label>
-          <div class="input-group input-with-remove" ng-class="(item.value.length == 0)?'has-error':''">
-            <div class="input-group-btn">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getPageTypeName(item)}} <span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li role="presentation" ng-click="item.type = 0"><a role="menuitem" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.url"/></a></li>
-                <li role="presentation" ng-click="item.type = 1"><a role="menuitem" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.title"/></a></li>
+      <ng-container *ngIf="widget.rules['pages'].enable == true">
+        <div *ngFor="let item of widget.rules['pages'].items" class="row row-subitem width-900 margined-top-10">
+          <div class="col-sm-3 row-subitem-padding padding-top-5">
+            <label class="control-label">{{ 'widgetsList.editor.rules.widget' | translate }}:</label>
+            <div class="dropdown" >
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                {{ getPageStateName(item) }}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li role="presentation" (click)="item.state = 0">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.hide' | translate }}</a>
+                </li>
+                <li role="presentation" (click)="item.state = 1">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.show' | translate }}</a>
+                </li>
               </ul>
             </div>
-            <input type="text" class="form-control" ng-model="item.value">
           </div>
-          <div class="remove-sub-item-rules margined-right-10"><a ng-click="addPageRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i></a></div>
-          <div class="remove-sub-item-rules margined-right-10" ng-show="widget.rules['pages'].items.length > 1"><a ng-click="removePageRuleItem($index)" href="javascript:void(0);"><i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i></a></div>
-          <span class="underow-comment combo-box-underow-comment-comment"><spring:message code="widgetsList.editor.rules.pageTargeting.url.tooltip"/></span>
+          <div class="col-sm-3 row-subitem-padding padding-top-5">
+            <label class="control-label">{{ 'widgetsList.editor.rules.pageTargeting.pageInfo' | translate }}:</label>
+            <div class="dropdown">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                {{ getPageCompareName(item) }}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li role="presentation" (click)="item.compare = 0">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}</a>
+                </li>
+                <li role="presentation" (click)="item.compare = 1">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}</a>
+                </li>
+                <li role="presentation" (click)="item.compare = 2">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}</a>
+                </li>
+                <li role="presentation" (click)="item.compare = 3">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}</a>
+                </li>
+                <li role="presentation" (click)="item.compare = 4">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-6 form-group row-subitem-padding padding-top-5">
+            <label class="control-label input-with-remove" style="display: block;">{{ 'widgetsList.editor.rules.pageTargeting.urlortitle' | translate }}:</label>
+            <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0)?'has-error':''">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ getPageTypeName(item) }} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li role="presentation" (click)="item.type = 0">
+                    <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.url' | translate }}</a>
+                  </li>
+                  <li role="presentation" (click)="item.type = 1">
+                    <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }}</a>
+                  </li>
+                </ul>
+              </div>
+              <input type="text" class="form-control" [(ngModel)]="item.value">
+            </div>
+            <div class="remove-sub-item-rules margined-right-10">
+              <a (click)="addPageRuleItem()" href="javascript:void(0);">
+                <i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i>
+              </a>
+            </div>
+            <div *ngIf="widget.rules['pages'].items.length > 1" class="remove-sub-item-rules margined-right-10">
+              <a (click)="removePageRuleItem($index)" href="javascript:void(0);">
+                <i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
+              </a>
+            </div>
+            <span class="underow-comment combo-box-underow-comment-comment">
+              {{ 'widgetsList.editor.rules.pageTargeting.url.tooltip' | translate }}
+            </span>
+          </div>
         </div>
-      </div>
+      </ng-container>
       <!-- END Page rule item -->
 
       <div class="col-lg-12 margined-top-20">
-        <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.rules.pageVTargeting.title"/> <span class="label label-warning tariff-info ">окупаемый</span> <a data-toggle="tooltip"
-                                                                                                                                                                                                data-placement="top"
-                                                                                                                                                                                                title="<spring:message code="widgetsList.editor.rules.pageVTargeting.tooltip"/>"
-          class="info-link" href="#"><i class="fa fa-info-circle"></i></a></label></h4>
+        <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.pageVTargeting.title' | translate }} <span
+          class="label label-warning tariff-info ">окупаемый</span> <a
+          data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageVTargeting.tooltip' | translate }}"
+          class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+        </h4>
       </div>
-      <div class="col-lg-12 margined-top-10" ng-class="(widget.rules['prevPages'].enable && widget.rules['prevPages'].items.length > 0)?'margined-bottom-10':''">
-        <switch ng-model="widget.rules['prevPages'].enable" м class="switch-xs"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.rules.pageVTargeting.enable"/></h5>
+      <div
+        class="col-lg-12 margined-top-10"
+        [ngClass]="(widget.rules['prevPages'].enable && widget.rules['prevPages'].items.length > 0) ? 'margined-bottom-10' : ''"
+      >
+        <ui-switch
+          size="small"
+          [checked]="widget.rules['prevPages'].enable"
+        ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageVTargeting.enable' | translate }}</h5>
       </div>
       <!-- Target to viewed pages -->
-      <div class="row row-subitem width-900 margined-top-10" ng-repeat="item in widget.rules['prevPages'].items" ng-show="widget.rules['prevPages'].enable == true">
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
-          <label class="control-label"><spring:message code="widgetsList.editor.rules.pageVTargeting.user"/>:</label>
-          <div class="dropdown" >
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{getPageCompareName(item)}}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li role="presentation" ng-click="item.compare = 0"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.contain"/></a></li>
-              <li role="presentation" ng-click="item.compare = 1"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.notcontain"/></a></li>
-              <li role="presentation" ng-click="item.compare = 2"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.equals"/></a></li>
-              <li role="presentation" ng-click="item.compare = 3"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.starts"/></a></li>
-              <li role="presentation" ng-click="item.compare = 4"><a role="menuitem" tabindex="-1" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.ends"/></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-sm-6 form-group row-subitem-padding padding-top-5">
-          <label class="control-label input-with-remove" style="display: block;"><spring:message code="widgetsList.editor.rules.pageTargeting.urlortitle"/>:</label>
-          <div class="input-group input-with-remove" ng-class="(item.value.length == 0)?'has-error':''">
-            <div class="input-group-btn">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getPageTypeName(item)}} <span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li role="presentation" ng-click="item.type = 0"><a role="menuitem" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.url"/></a></li>
-                <li role="presentation" ng-click="item.type = 1"><a role="menuitem" href="javascript:void(0)"><spring:message code="widgetsList.editor.rules.pageTargeting.title"/></a></li>
+      <ng-container *ngIf="widget.rules['prevPages'].enable == true">
+        <div *ngFor="let item of widget.rules['prevPages'].items" class="row row-subitem width-900 margined-top-10">
+          <div class="col-sm-6 row-subitem-padding padding-top-5">
+            <label class="control-label">{{ 'widgetsList.editor.rules.pageVTargeting.user' | translate }}:</label>
+            <div class="dropdown" >
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                {{ getPageCompareName(item) }}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li role="presentation" (click)="item.compare = 0">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}</a>
+                </li>
+                <li role="presentation" (click)="item.compare = 1">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}</a>
+                </li>
+                <li role="presentation" (click)="item.compare = 2">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}</a>
+                </li>
+                <li role="presentation" (click)="item.compare = 3">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}</a>
+                </li>
+                <li role="presentation" (click)="item.compare = 4">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}</a>
+                </li>
               </ul>
             </div>
-            <input type="text" class="form-control" ng-model="item.value">
           </div>
-          <div class="remove-sub-item-rules margined-right-10"><a ng-click="addPrevPageRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i></a></div>
-          <div class="remove-sub-item-rules margined-right-10" ng-show="widget.rules['prevPages'].items.length > 1"><a ng-click="removePrevPageRuleItem($index)" href="javascript:void(0);"><i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i></a></div>
-          <span class="underow-comment combo-box-underow-comment-comment"><spring:message code="widgetsList.editor.rules.pageTargeting.url.tooltip"/></span>
+          <div class="col-sm-6 form-group row-subitem-padding padding-top-5">
+            <label class="control-label input-with-remove" style="display: block;">{{ 'widgetsList.editor.rules.pageTargeting.urlortitle' | translate }}:</label>
+            <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0) ? 'has-error' : ''">
+              <div class="input-group-btn">
+                <button
+                  type="button"
+                  class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                >
+                  {{ getPageTypeName(item) }} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li role="presentation" (click)="item.type = 0">
+                    <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.url' | translate }}</a>
+                  </li>
+                  <li role="presentation" (click)="item.type = 1">
+                    <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }}</a>
+                  </li>
+                </ul>
+              </div>
+              <input type="text" class="form-control" [(ngModel)]="item.value">
+            </div>
+            <div class="remove-sub-item-rules margined-right-10">
+              <a (click)="addPrevPageRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i>
+              </a>
+            </div>
+            <div *ngIf="widget.rules['prevPages'].items.length > 1" class="remove-sub-item-rules margined-right-10">
+              <a (click)="removePrevPageRuleItem($index)" href="javascript:void(0);"><i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
+              </a>
+            </div>
+            <span class="underow-comment combo-box-underow-comment-comment">{{ 'widgetsList.editor.rules.pageTargeting.url.tooltip' | translate }}</span>
+          </div>
         </div>
-      </div>
+      </ng-container>
       <!-- END Target to viewed pages -->
 
       <!-- Page no rule -->
       <div class="col-lg-12 margined-top-20">
-        <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.rules.pageNo"/> <span class="label label-warning tariff-info ">окупаемый</span> <a data-toggle="tooltip"
-                                                                                                                                                                                  data-placement="top"
-                                                                                                                                                                                  title="<spring:message code="widgetsList.editor.rules.pageNo.tooltip"/>"
-          class="info-link" href="#"><i
-            class="fa fa-info-circle"></i></a></label></h4>
+        <h4 class="widgets-settings-subtitle no-bold">
+          {{ 'widgetsList.editor.rules.pageNo' | translate }} <span class="label label-warning tariff-info ">окупаемый</span> <a
+          data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageNo.tooltip' | translate }}"
+          class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+        </h4>
       </div>
       <div class="col-lg-12 margined-top-10">
-        <switch class="switch-xs" ng-model="widget.rules.pageNo.enable" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.rules.pageNo.enable"/></h5>
+        <ui-switch size="small" [checked]="widget.rules.pageNo.enable" (change)="onChangePayment"
+        ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageNo.enable' | translate }}</h5>
       </div>
-      <div class="col-lg-12 margined-top-10 width-900" ng-show="widget.rules.pageNo.enable" ng-class="(widget.rules.pageNo.items.length > 0)?'':'has-error'">
-        <label class="control-label"><spring:message code="widgetsList.editor.rules.pageNo.select"/>:</label>
-        <select ng-model="widget.rules.pageNo.items" ui-select2="{ allowClear: true, multiple: true}" data-placeholder="<spring:message code="widgetsList.editor.rules.pageNo.select.placeholder"/>" multiple="true">
-        <c:forEach begin="1" end="20" varStatus="loop">
-          <option value="${loop.current}">${loop.current}</option>
-        </c:forEach>
-        </select>
+      <div
+        *ngIf="widget.rules.pageNo.enable"
+        class="col-lg-12 margined-top-10 width-900"
+        [ngClass]="(widget.rules.pageNo.items.length > 0) ? '' : 'has-error'"
+      >
+        <label class="control-label">{{ 'widgetsList.editor.rules.pageNo.select' | translate }}:</label>
+        <ng-select
+          id="widgetSelector"
+          bindValue="current"
+          bindLabel="current"
+          multiple="true"
+          appendTo="body"
+          [items]="loop"
+          [placeholder]="'widgetsList.editor.rules.pageNo.select.placeholder' | translate"
+          [(ngModel)]="widget.rules.pageNo.items"
+        ></ng-select>
       </div>
       <!-- End Page No rule -->
       <!-- Time options start -->
@@ -1012,7 +1098,7 @@
           </div>
           <div class="dropdown" style="float: left;">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{getStringFromTime(item.startTime)}}
+              {{ getStringFromTime(item.startTime) }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
@@ -1024,7 +1110,7 @@
           </div>
           <div class="dropdown" style="float: left;">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{getStringFromTime(item.endTime)}}
+              {{ getStringFromTime(item.endTime) }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
