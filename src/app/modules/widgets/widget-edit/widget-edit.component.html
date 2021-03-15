@@ -602,165 +602,194 @@
   >
     <div class="widgets-settings-container">
       <!-- Audiences list -->
-      <div id="audiences-list" ng-show="audienceMode == MODE_LIST">
-        <h1><spring:message code="widgetsList.editor.audiences.title"/></h1>
-        <div class="f-4 audience-tooolbar-desc" style="margin-top: 30px;"><spring:message code="widgetsList.editor.audiences.disc"/></div>
+      <div id="audiences-list" *ngIf="audienceMode == MODE_LIST">
+        <h1>{{ 'widgetsList.editor.audiences.title' | translate }}</h1>
+        <div class="f-4 audience-tooolbar-desc" style="margin-top: 30px;">{{ 'widgetsList.editor.audiences.disc' | translate }}</div>
         <div class="toolbar-content no-padding padding-top-30">
           <div class="row btnpanel">
             <div class="audience-tooolbar-switcher">
-              <switch ng-model="widget.audiencesEnabled" ng-change="onChangePayment" class="margined-top-5 margined-right-10 floated-left"></switch><h3 class="f-5 margined-top-5"><spring:message code="widgetsList.editor.audiences.enabled"/><span class="label label-warning tariff-info biggest">окупаемый</span></h3>
+              <ui-switch
+                [checked]="widget.audiencesEnabled"
+                (change)="onChangePayment"
+                class="margined-top-5 margined-right-10 floated-left"
+              ></ui-switch><h3 class="f-5 margined-top-5">{{ 'widgetsList.editor.audiences.enabled' | translate }}<span
+              class="label label-warning tariff-info biggest">окупаемый</span></h3>
             </div>
-            <button ng-show="widget.audiencesEnabled" id="addAudience" ng-click="addNewAudience()" type="button" class="btn btn-lg w-xs btn-success margined-right-20"><i class="fa fa-plus-circle"></i> <spring:message code="audience.addNew"/> </button>
+            <button
+              type="button"
+              id="addAudience"
+              *ngIf="widget.audiencesEnabled"
+              (click)="addNewAudience()"
+              class="btn btn-lg w-xs btn-success margined-right-20"
+            ><i class="fa fa-plus-circle"></i>{{ 'audience.addNew' | translate }}</button>
           </div>
         </div>
-        <ui:panelsContent>
-          <div class="row no-animate padding-bottom-70" ng-show="widget.audiencesEnabled">
-            <div class="col-sm-4" ng-show="audiences.length == 0">
-              <ui:panel title="" extraClasses="audience-panel">
-                <jsp:attribute name="panelFooter"></jsp:attribute>
-                <jsp:body>
-                  <div class="audience-panel-content">
-                    <i class="fa fa-group audience-icon"></i>
-                    <h3 class="audience-title"><spring:message code="audience.allUser.name"/></h3>
-                    <p class="audience-desc-tilte"><spring:message code="audience.desc"/>:</p>
-                    <p><spring:message code="audience.allUser.desc"/></p>
-                  </div>
-                </jsp:body>
-              </ui:panel>
-            </div>
 
-            <div class="col-xs-6 col-sm-4" ng-repeat="audItem in audiences">
-              <ui:panel title="" extraClasses="audience-panel">
-													<jsp:attribute name="panelFooter">
-													  <div class="text-center m-t-xs row">
-														  <button class="btn btn-primary margined-right-5 audience-panel-btn text-left" ng-click="editAudience(audItem)"><i class="pe-7s-pen"></i> <spring:message code="audience.edit"/></button>
-														  <button class="btn btn-danger margined-left-5 audience-panel-btn text-left" ng-click="deleteAudience(audItem)"><i class="pe-7s-trash"></i> <spring:message code="global.delete"/></button>
-													  </div>
-													</jsp:attribute>
-                <jsp:body>
-                  <div class="audience-panel-content">
-                    <i class="fa fa-group audience-icon"></i>
-                    <h3 class="audience-title">{{getCroppedString(audItem.name, 60, "…")}}</h3>
-                    <p class="audience-desc-tilte"><spring:message code="audience.desc"/>:</p>
-                    <p class="audience-desc">{{getCroppedString(audItem.description, 60, "…")}}</p>
-                  </div>
-                </jsp:body>
-              </ui:panel>
+        <div class="row no-animate padding-bottom-70" *ngIf="widget.audiencesEnabled">
+          <div class="col-sm-4" *ngIf="audiences.length == 0">
+            <div class="audience-panel-content">
+              <i class="fa fa-group audience-icon"></i>
+              <h3 class="audience-title">{{ 'audience.allUser.name' | translate }}</h3>
+              <p class="audience-desc-tilte">{{ 'audience.desc' | translate }}:</p>
+              <p>{{ 'audience.allUser.desc' | translate }}</p>
             </div>
-
           </div>
-        </ui:panelsContent>
+
+          <div class="col-xs-6 col-sm-4" *ngFor="let audItem of audiences">
+            <div class="text-center m-t-xs row">
+              <button class="btn btn-primary margined-right-5 audience-panel-btn text-left" (click)="editAudience(audItem)">
+                <i class="pe-7s-pen"></i> {{ 'audience.edit' | translate }}
+              </button>
+              <button class="btn btn-danger margined-left-5 audience-panel-btn text-left" (click)="deleteAudience(audItem)">
+                <i class="pe-7s-trash"></i> {{ 'global.delete' | translate }}
+              </button>
+            </div>
+
+            <div class="audience-panel-content">
+              <i class="fa fa-group audience-icon"></i>
+              <h3 class="audience-title">{{ getCroppedString(audItem.name, 60, "…") }}</h3>
+              <p class="audience-desc-tilte">{{ 'audience.desc' | translate }}:</p>
+              <p class="audience-desc">{{ getCroppedString(audItem.description, 60, "…") }}</p>
+            </div>
+          </div>
+        </div>
+
         <!-- FOOTER -->
         <div class="footer-group" id="save-widget-panel">
           <div class="text-right padding10">
-            <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="goToTest(widget)" type="button" class="btn w-xs gototest-widget-btn"><i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту</button>
-            <a ng-show="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)" type="button" class="btn w-xs btn-primary buy-widget-btn"><i class="pe-7s-tools margined-right-10"></i><spring:message code="widgetsList.add.alt2"/></a>
-            <div class="btn-group play-btns widget-enabler-btns" ng-show="!isMockup">
-              <p><spring:message code="widgetsList.widget.state"/></p>
-              <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет">
+            <button
+              type="button"
+              *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+              (click)="goToTest(widget)"
+              class="btn w-xs gototest-widget-btn"
+            >
+              <i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту
+            </button>
+            <a
+              type="button"
+              *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
+              class="btn w-xs btn-primary buy-widget-btn"
+            >
+              <i class="pe-7s-tools margined-right-10"></i>{{ 'widgetsList.add.alt2' | translate }}
+            </a>
+            <div class="btn-group play-btns widget-enabler-btns" *ngIf="!isMockup">
+              <p>{{ 'widgetsList.widget.state' | translate }}</p>
+              <button
+                *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+                (click)="startWidget(widget)"
+                [ngClass]="(widget.active) ? 'active' : ''"
+                class="btn btn-xs btn-default start-widget-btn"
+                data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
+              >
                 <i class="fa fa-play"></i>
               </button>
-              <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет">
+              <button
+                *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+                (click)="stopWidget(widget)"
+                [ngClass]="(widget.active) ? '' : 'active'"
+                class="btn btn-xs btn-default stop-widget-btn"
+                data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
+              >
                 <i class="fa fa-pause"></i>
               </button>
 
-              <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить варинт">
+              <button
+                *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+                (click)="startWidget(widget)"
+                [ngClass]="(widget.active) ? 'active' : ''"
+                class="btn btn-xs btn-default start-widget-btn"
+                data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить варинт"
+              >
                 <i class="fa fa-play"></i>
               </button>
-              <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант">
+              <button
+                *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+                (click)="stopWidget(widget)"
+                [ngClass]="(widget.active) ? '' : 'active'"
+                class="btn btn-xs btn-default stop-widget-btn"
+                data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
+              >
                 <i class="fa fa-pause"></i>
               </button>
             </div>
 
-            <sec:authorize access="hasRole('ROLE_DESIGNER')">
-              <button ng-click="saveAsMockup()" type="button" class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left" data-style="slide-down" ng-show="!isMockup"><span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт </span> </button>
-            </sec:authorize>
+            <ng-container *ngIf="hasRole('ROLE_DESIGNER')">
+              <button
+                type="button"
+                (click)="saveAsMockup()"
+                class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left"
+                data-style="slide-down" ng-show="!isMockup"><span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт </span> </button>
+            </ng-container>
 
-            <button id="saveWidget" ng-click="saveWidget()" type="button" class="ladda-button btn w-xs btn-success floated-left" data-style="slide-down"><span class="ladda-label"><i class="fa fa-save"></i> <span ng-show="!isMockup" ng-bind="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span ng-show="isMockup">Сохранить темплейт</span></span></button>
+            <button
+              type="button"
+              id="saveWidget"
+              (click)="saveWidget()"
+              class="ladda-button btn w-xs btn-success floated-left"
+              data-style="slide-down"
+            >
+              <span class="ladda-label"><i class="fa fa-save"></i> <span
+                *ngIf="!isMockup">{{ (widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет' }}</span><span
+                *ngIf="isMockup">Сохранить темплейт</span>
+              </span>
+            </button>
           </div>
         </div>
       </div>
       <!-- End Audiences list -->
 
       <!-- Audience editor -->
-      <div id="audiences-item" ng-show="audienceMode == MODE_ITEM">
+      <div id="audiences-item" *ngIf="audienceMode == MODE_ITEM">
         <!-- TEMPLATES -->
-        <script type="text/ng-template" id="ruleRefer.html">
-          <ad:ruleRefer modelName="item" groupName="group"></ad:ruleRefer>
-        </script>
-        <script type="text/ng-template" id="ruleType.html">
-          <ad:ruleType modelName="item" groupName="group"></ad:ruleType>
-        </script>
-        <script type="text/ng-template" id="ruleURL.html">
-          <ad:ruleURL modelName="item" groupName="group"></ad:ruleURL>
-        </script>
-        <script type="text/ng-template" id="ruleVisit.html">
-          <ad:ruleVisit modelName="item" groupName="group"></ad:ruleVisit>
-        </script>
-        <script type="text/ng-template" id="ruleVisitNo.html">
-          <ad:ruleVisitNo modelName="item" groupName="group"></ad:ruleVisitNo>
-        </script>
-        <script type="text/ng-template" id="ruleDevices.html">
-          <ad:ruleDevices modelName="item" groupName="group"></ad:ruleDevices>
-        </script>
-        <script type="text/ng-template" id="ruleSocial.html">
-          <ad:ruleSocial modelName="item" groupName="group"></ad:ruleSocial>
-        </script>
 
         <!-- CONTENT -->
         <div class="row row-nomargined margined-bottom-15" style="max-height: 72px;">
-          <div class="validable col-lg-6" data-context="name" ng-class="(audience.name.trim().length == 0)?'has-error':''">
-            <label class="control-label"><spring:message code="audience.name"/></label>
-            <input type="text" name="name" class="form-control" id="name" ng-model="audience.name" autocomplete="off">
+          <div class="validable col-lg-6" data-context="name" [ngClass]="(audience.name.trim().length == 0) ? 'has-error' : ''">
+            <label class="control-label">{{ 'audience.name' | translate }}</label>
+            <input type="text" name="name" class="form-control" id="name" [(ngModel)]="audience.name" autocomplete="off">
           </div>
           <div class="validable col-lg-6" data-context="description">
-            <label class="control-label"><spring:message code="audience.description"/></label>
-            <input type="text" name="description" class="form-control" id="description" ng-model="audience.description" autocomplete="off">
+            <label class="control-label">{{ 'audience.description' | translate }}</label>
+            <input type="text" name="description" class="form-control" id="description" [(ngModel)]="audience.description" autocomplete="off">
           </div>
         </div>
         <!-- Audience editor core -->
         <div class="row row-nomargined margined-bottom-15">
           <div class="col-lg-8" id="rules-containers">
-            <label class="control-label"><spring:message code="audience.settings"/></label>
-            <div class="rule-container rule-def" anddropcontainer ng-show="audience.groups.length == 0">
+            <label class="control-label">{{ 'audience.settings' | translate }}</label>
+            <div class="rule-container rule-def" anddropcontainer *ngIf="audience.groups.length == 0">
               <div class="rule-droppable">
-                <h4><spring:message code="audience.rule.droppable"/></h4>
+                <h4>{{ 'audience.rule.droppable' | translate }}</h4>
               </div>
             </div>
-            <div ng-repeat="group in audience.groups">
-              <!--
-                                        Group items
-                                    -->
-              <div class="rule-groups-text" ng-show="$index != 0"><spring:message code="audience.rule.logic.and"/></div>
-              <div ng-repeat="item in group.items">
+            <div *ngFor="let group of audience.groups; index as i">
+              <div class="rule-groups-text" *ngIf="$index != 0">{{ 'audience.rule.logic.and' | translate }}</div>
+              <div *ngFor="let item of group.items">
                 <div class="rule-block">
                   <div class="rule-header">
-                    {{item.name}}<i class="pe-7s-close-circle" ng-click="removeItem(group.$$hashKey, $index)"></i>
+                    {{ item.name }}<i class="pe-7s-close-circle" (click)="removeItem(group.$$hashKey, $index)"></i>
                   </div>
-                  <div class="rule-body" ng-switch="item.type">
-                    <rule-refer     ng-switch-when="refer"   ng-model="item"></rule-refer>
-                    <rule-url       ng-switch-when="url"     ng-model="item"></rule-url>
-                    <rule-type      ng-switch-when="type"    ng-model="item"></rule-type>
-                    <rule-visit     ng-switch-when="visit"   ng-model="item"></rule-visit>
-                    <rule-visit-no  ng-switch-when="visitno" ng-model="item"></rule-visit-no>
-                    <rule-devices   ng-switch-when="devices" ng-model="item"></rule-devices>
-                    <rule-social    ng-switch-when="social"  ng-model="item"></rule-social>
-                    <h1 ng-switch-default>ERROR!</h1>
+                  <div class="rule-body" [ngSwitch]="item.type">
+                    <rule-refer     *ngSwitchCase="refer"   ng-model="item"></rule-refer>
+                    <rule-url       *ngSwitchCase="url"     ng-model="item"></rule-url>
+                    <rule-type      *ngSwitchCase="type"    ng-model="item"></rule-type>
+                    <rule-visit     *ngSwitchCase="visit"   ng-model="item"></rule-visit>
+                    <rule-visit-no  *ngSwitchCase="visitno" ng-model="item"></rule-visit-no>
+                    <rule-devices   *ngSwitchCase="devices" ng-model="item"></rule-devices>
+                    <rule-social    *ngSwitchCase="social"  ng-model="item"></rule-social>
+                    <h1 *ngSwitchDefault>ERROR!</h1>
                   </div>
                 </div>
-                <div class="rule-groups-text"><spring:message code="audience.rule.logic.or"/></div>
+                <div class="rule-groups-text">{{ 'audience.rule.logic.or' | translate }}</div>
               </div>
-              <!--
-                                        And / ors
-                                    -->
 
-              <div class="rule-container margined-bottom-15" ordropcontainer data-index="{{$index}}">
+              <div class="rule-container margined-bottom-15" ordropcontainer data-index="{{ i }}">
                 <div class="rule-droppable-or">
-                  <h4><spring:message code="audience.rule.ordroppable"/></h4>
+                  <h4>{{ 'audience.rule.ordroppable' | translate }}</h4>
                 </div>
               </div>
               <div ng-show="$index == audience.groups.length - 1">
-                <div class="rule-groups-text rule-groups-text-ok"><spring:message code="audience.rule.logic.and"/></div>
+                <div class="rule-groups-text rule-groups-text-ok">{{ 'audience.rule.logic.and' | translate }}</div>
                 <div class="rule-container rule-container-ok" anddropcontainer>
                   <div class="rule-droppable-and">
                     <h4><spring:message code="audience.rule.anddroppable"/></h4>
