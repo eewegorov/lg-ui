@@ -984,7 +984,7 @@
       </div>
       <!-- Target to viewed pages -->
       <ng-container *ngIf="widget.rules['prevPages'].enable == true">
-        <div *ngFor="let item of widget.rules['prevPages'].items" class="row row-subitem width-900 margined-top-10">
+        <div *ngFor="let item of widget.rules['prevPages'].items; index as i" class="row row-subitem width-900 margined-top-10">
           <div class="col-sm-6 row-subitem-padding padding-top-5">
             <label class="control-label">{{ 'widgetsList.editor.rules.pageVTargeting.user' | translate }}:</label>
             <div class="dropdown" >
@@ -1038,7 +1038,7 @@
               </a>
             </div>
             <div *ngIf="widget.rules['prevPages'].items.length > 1" class="remove-sub-item-rules margined-right-10">
-              <a (click)="removePrevPageRuleItem($index)" href="javascript:void(0);"><i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
+              <a (click)="removePrevPageRuleItem(i)" href="javascript:void(0);"><i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
               </a>
             </div>
             <span class="underow-comment combo-box-underow-comment-comment">{{ 'widgetsList.editor.rules.pageTargeting.url.tooltip' | translate }}</span>
@@ -1050,7 +1050,7 @@
       <!-- Page no rule -->
       <div class="col-lg-12 margined-top-20">
         <h4 class="widgets-settings-subtitle no-bold">
-          {{ 'widgetsList.editor.rules.pageNo' | translate }} <span class="label label-warning tariff-info ">окупаемый</span> <a
+          {{ 'widgetsList.editor.rules.pageNo' | translate }} <span class="label label-warning tariff-info">окупаемый</span> <a
           data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageNo.tooltip' | translate }}"
           class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
         </h4>
@@ -1079,228 +1079,322 @@
       <!-- End Page No rule -->
       <!-- Time options start -->
       <div class="col-lg-12 margined-top-20 margined-bottom-10">
-        <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.rules.dateTime.title"/> <span class="label label-warning tariff-info ">окупаемый</span> <a data-toggle="tooltip"
-                                                                                                                                                                                          data-placement="top"
-                                                                                                                                                                                          title="<spring:message code="widgetsList.editor.rules.dateTime.placeholder"/>"
-          class="info-link" href="#"><i
-            class="fa fa-info-circle"></i></a></label></h4>
+        <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.dateTime.title' | translate }} <span
+          class="label label-warning tariff-info ">окупаемый</span> <a
+          data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.dateTime.placeholder' | translate }}"
+          class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+        </h4>
       </div>
-      <div class="col-lg-12" ng-class="(widget.rules.time.enable && widget.rules['time'].items.length > 0)?'margined-bottom-10':''">
-        <switch class="switch-xs" ng-model="widget.rules.time.enable" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.rules.time.enable"/></h5>
+      <div class="col-lg-12" [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0)?'margined-bottom-10':''">
+        <ui-switch size="small" [checked]="widget.rules.time.enable" (change)="onChangePayment"
+        ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.time.enable' | translate }}</h5>
       </div>
-      <div class="row row-subitem width-400 margined-top-10" ng-repeat="item in widget.rules['time'].items" ng-show="widget.rules['time'].enable == true">
-        <div class="col-lg-12">
-          <label class="control-label"><spring:message code="widgetsList.editor.rules.time.title"/>:</label>
+      <ng-container *ngIf="widget.rules['time'].enable == true">
+        <div class="row row-subitem width-400 margined-top-10" *ngFor="let item of widget.rules['time'].items">
+          <div class="col-lg-12">
+            <label class="control-label">{{ 'widgetsList.editor.rules.time.title' | translate }}:</label>
+          </div>
+          <div class="col-sm-12 row-subitem-padding padding-top-5">
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.rules.time.from' | translate }}:
+            </div>
+            <div class="dropdown" style="float: left;">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                {{ getStringFromTime(item.startTime) }}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
+                <li role="presentation" *ngFor="let timeItem of getTimeList()" (click)="item.startTime = timeItem.value">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ timeItem.name }}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.rules.time.to' | translate }}:
+            </div>
+            <div class="dropdown" style="float: left;">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                {{ getStringFromTime(item.endTime) }}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
+                <li
+                  role="presentation"
+                  *ngFor="let timeItem of getTimeList()"
+                  (click)="item.endTime = timeItem.value"
+                >
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ timeItem.name }}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="remove-sub-item-rules-time margined-right-10">
+              <a (click)="addTimeRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules-time colored-blue col-sm-1 pe-7s-plus"></i></a>
+            </div>
+            <div *ngIf="widget.rules['time'].items.length > 1" class="remove-sub-item-rules-time margined-right-10">
+              <a (click)="removeTimeRuleItem(i)" href="javascript:void(0);">
+                <i class="remove-sub-item-rules-time colored-red col-sm-1 pe-7s-close-circle"></i>
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="col-sm-12 row-subitem-padding padding-top-5">
-          <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.rules.time.from"/>:
-          </div>
-          <div class="dropdown" style="float: left;">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{ getStringFromTime(item.startTime) }}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
-              <li role="presentation" ng-click="item.startTime = timeItem.value" ng-repeat="timeItem in getTimeList()"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{timeItem.name}}</a></li>
-            </ul>
-          </div>
-          <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.rules.time.to"/>:
-          </div>
-          <div class="dropdown" style="float: left;">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{ getStringFromTime(item.endTime) }}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
-              <li role="presentation" ng-click="item.endTime = timeItem.value" ng-repeat="timeItem in getTimeList()"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{timeItem.name}}</a></li>
-            </ul>
-          </div>
-          <div class="remove-sub-item-rules-time margined-right-10"><a ng-click="addTimeRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules-time colored-blue col-sm-1 pe-7s-plus"></i></a></div>
-          <div class="remove-sub-item-rules-time margined-right-10" ng-show="widget.rules['time'].items.length > 1"><a ng-click="removeTimeRuleItem($index)" href="javascript:void(0);"><i class="remove-sub-item-rules-time colored-red col-sm-1 pe-7s-close-circle"></i></a></div>
-        </div>
-      </div>
+      </ng-container>
       <!-- End Time options -->
       <!-- Days options start -->
       <div class="col-lg-12 margined-top-20">
-        <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.rules.days.header"/> <span class="label label-warning tariff-info ">окупаемый</span> <a data-toggle="tooltip"
-                                                                                                                                                                                       data-placement="top"
-                                                                                                                                                                                       title="<spring:message code="widgetsList.editor.rules.days.tooltip"/>"
-          class="info-link" href="#"><i
-            class="fa fa-info-circle"></i></a></label></h4>
+        <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.days.header' | translate }} <span
+          class="label label-warning tariff-info ">окупаемый</span> <a
+          data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.days.tooltip' | translate }}"
+          class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+        </h4>
       </div>
       <div class="col-lg-12 margined-top-10">
-        <switch class="switch-xs" ng-model="widget.rules.days.enable" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.rules.days.enable"/></h5>
+        <ui-switch
+          size="small"
+          [checked]="widget.rules.days.enable"
+          (change)="onChangePayment"
+        ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.days.enable' | translate }}</h5>
       </div>
-      <div class="col-lg-12 margined-top-10 width-900" ng-show="widget.rules.days.enable" ng-class="(widget.rules.days.items.length > 0)?'':'has-error'">
-        <label class="control-label"><spring:message code="widgetsList.editor.rules.days.title"/>:</label>
-        <select ng-model="widget.rules.days.items" ui-select2="{ allowClear: true, multiple: true}" data-placeholder="<spring:message code="widgetsList.editor.rules.days.select.placeholder"/>" multiple="true">
-        <option value="0"><spring:message code="global.week.monday"/></option>
-        <option value="1"><spring:message code="global.week.tuesday"/></option>
-        <option value="2"><spring:message code="global.week.wednesday"/></option>
-        <option value="3"><spring:message code="global.week.thursday"/></option>
-        <option value="4"><spring:message code="global.week.friday"/></option>
-        <option value="5"><spring:message code="global.week.saturday"/></option>
-        <option value="6"><spring:message code="global.week.sunday"/></option>
-        </select>
+      <div
+        *ngIf="widget.rules.days.enable"
+        class="col-lg-12 margined-top-10 width-900"
+        [ngClass]="(widget.rules.days.items.length > 0) ? '' : 'has-error'"
+      >
+        <label class="control-label">{{ 'widgetsList.editor.rules.days.title' | translate }}:</label>
+
+        <ng-select
+          id="daysSelector"
+          bindValue="id"
+          bindLabel="name"
+          multiple="true"
+          appendTo="body"
+          clearable="true"
+          [items]="weekDays"
+          [placeholder]="'widgetsList.editor.rules.days.select.placeholder' | translate"
+          [(ngModel)]="widget.rules.days.items"
+        ></ng-select>
       </div>
       <!-- End days options-->
       <!-- Autoinvite options: pages -->
-      <div ng-show="!isContainerized">
+      <div *ngIf="!isContainerized">
         <div class="col-lg-12 margined-top-40">
-          <h3><spring:message code="widgetsList.editor.autoinvite.title"/> <a data-toggle="tooltip"
-                                                                              data-placement="top"
-                                                                              title="<spring:message code="widgetsList.editor.autoinvite.tooltip"/>"
-            class="info-link margined-left-5" href="#"><i
-              class="fa fa-info-circle"></i></a></h3>
+          <h3>{{ 'widgetsList.editor.autoinvite.title' | translate }} <a
+            data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.autoinvite.tooltip' | translate }}"
+            class="info-link margined-left-5" href="#"><i class="fa fa-info-circle"></i></a>
+          </h3>
         </div>
         <div class="col-lg-12 margined-top-10 margined-bottom-5">
-          <label class="control-label smal-subtitle"><spring:message code="widgetsList.editor.autoinvite.subtitle"/></label>
+          <label class="control-label smal-subtitle">{{ 'widgetsList.editor.autoinvite.subtitle' | translate }}</label>
         </div>
         <div class="col-lg-12 margined-top-10">
-          <label class="control-label control-label-des"><spring:message code="widgetsList.editor.autoinvite.variants"/>:</label>
+          <label class="control-label control-label-des">{{ 'widgetsList.editor.autoinvite.variants' | translate }}:</label>
           <div class="dropdown" >
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{widget.autoinvite.ruleLogic}}
+              {{ widget.autoinvite.ruleLogic }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li role="presentation" ng-click="widget.autoinvite.ruleLogic = itemLogic" ng-repeat="itemLogic in autoinviteVariants"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemLogic}}</a></li>
+              <li
+                role="presentation"
+                *ngFor="let itemLogic of autoinviteVariants"
+                (click)="widget.autoinvite.ruleLogic = itemLogic"
+              >
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemLogic }}</a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="col-lg-12 margined-top-20 margined-bottom-10">
-          <label class="control-label smal-subtitle"><spring:message code="widgetsList.editor.autoinvite.subtitle2"/></label>
+          <label class="control-label smal-subtitle">{{ 'widgetsList.editor.autoinvite.subtitle2' | translate }}</label>
         </div>
         <div class="col-lg-12 margined-top-10">
-          <switch class="switch-xs" ng-model="widget.autoinvite.pages.enable" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.pages.enable"/><span class="label label-warning tariff-info ">окупаемый</span></h5>
+          <ui-switch
+            size="small"
+            [checked]="widget.autoinvite.pages.enable"
+            (change)="onChangePayment"
+          ></ui-switch><h5
+          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.pages.enable' | translate }}<span
+          class="label label-warning tariff-info ">окупаемый</span></h5>
         </div>
-        <div class="col-lg-12 margined-top-10 width-400" ng-show="widget.autoinvite.pages.enable" ng-class="(widget.autoinvite.pages.value <= 0)?'has-error':''">
+        <div
+          *ngIf="widget.autoinvite.pages.enable"
+          class="col-lg-12 margined-top-10 width-400"
+          [ngClass]="(widget.autoinvite.pages.value <= 0) ? 'has-error' : ''"
+        >
           <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.autoinvite.pages.prefix"/>
+            {{ 'widgetsList.editor.autoinvite.pages.prefix' | translate }}
           </div>
-          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" ng-model="widget.autoinvite.pages.value"/>
+          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.pages.value"/>
           <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.autoinvite.pages.suffix"/>
+            {{ 'widgetsList.editor.autoinvite.pages.suffix' | translate }}
           </div>
         </div>
         <!-- END Autoinvite options -->
         <!-- Autoinvite: seconds -->
         <div class="col-lg-12 margined-top-10">
-          <switch class="switch-xs" ng-model="widget.autoinvite.seconds.enable"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.seconds.enable"/></h5>
+          <ui-switch
+            class="switch-xs"
+            [checked]="widget.autoinvite.seconds.enable"
+          ></ui-switch><h5
+          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}</h5>
         </div>
-        <div class="col-lg-12 margined-top-10 width-400" ng-show="widget.autoinvite.seconds.enable" ng-class="(widget.autoinvite.seconds.value <= 0)?'has-error':''">
-          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" ng-model="widget.autoinvite.seconds.value"/>
+        <div
+          *ngIf="widget.autoinvite.seconds.enable"
+          class="col-lg-12 margined-top-10 width-400"
+          [ngClass]="(widget.autoinvite.seconds.value <= 0) ? 'has-error' : ''"
+        >
+          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.seconds.value" />
           <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.autoinvite.seconds.suffix"/>
+            {{ 'widgetsList.editor.autoinvite.seconds.suffix' | translate }}
           </div>
         </div>
         <!-- End Autoinvite seconds -->
         <!-- Autoinvite: anactive -->
         <div class="col-lg-12 margined-top-10">
-          <switch class="switch-xs" ng-model="widget.autoinvite.inactive.enabled" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.inactive.enabled"/><span class="label label-warning tariff-info ">окупаемый</span></h5>
+          <ui-switch
+            size="small"
+            [checked]="widget.autoinvite.inactive.enabled"
+            (change)="onChangePayment"
+          ></ui-switch><h5
+          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.inactive.enabled' | translate }}<span
+          class="label label-warning tariff-info ">окупаемый</span></h5>
         </div>
-        <div class="col-lg-12 margined-top-10 width-400" ng-show="widget.autoinvite.inactive.enabled" ng-class="(widget.autoinvite.inactive.value <= 0)?'has-error':''">
-          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" ng-model="widget.autoinvite.inactive.value"/>
+        <div
+          *ngIf="widget.autoinvite.inactive.enabled"
+          class="col-lg-12 margined-top-10 width-400"
+          [ngClass]="(widget.autoinvite.inactive.value <= 0) ? 'has-error' : ''"
+        >
+          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.inactive.value"/>
           <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.autoinvite.inactive.suffix"/>
+            {{ 'widgetsList.editor.autoinvite.inactive.suffix' | translate }}
           </div>
         </div>
         <!-- End Autoinvite: anactive -->
         <!-- Autoinvite: percent -->
         <div class="col-lg-12 margined-top-10">
-          <switch class="switch-xs" ng-model="widget.autoinvite.percent.enable" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.percent.enable"/><span class="label label-warning tariff-info ">окупаемый</span></h5>
+          <ui-switch
+            size="small"
+            [checked]="widget.autoinvite.percent.enable"
+            (change)="onChangePayment"
+          ></ui-switch><h5
+          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.percent.enable' | translate }}<span
+          class="label label-warning tariff-info ">окупаемый</span></h5>
         </div>
-        <div class="col-lg-12 margined-top-10 width-400" ng-show="widget.autoinvite.percent.enable" ng-class="(widget.autoinvite.percent.value <= 0)?'has-error':''">
-          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" max="100" ng-model="widget.autoinvite.percent.value"/>
+        <div
+          *ngIf="widget.autoinvite.percent.enable"
+          class="col-lg-12 margined-top-10 width-400"
+          [ngClass]="(widget.autoinvite.percent.value <= 0) ? 'has-error' : ''"
+        >
+          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" max="100" [(ngModel)]="widget.autoinvite.percent.value" />
           <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.autoinvite.percent.suffix"/>
+            {{ 'widgetsList.editor.autoinvite.percent.suffix' | translate }}
           </div>
         </div>
         <!-- End Autoinvite: percent -->
 
         <!-- Autoinvite: click -->
         <div class="col-lg-12 margined-top-10">
-          <switch class="switch-xs" ng-model="widget.autoinvite.click.enable"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.click.enable"/></h5>
+          <ui-switch
+            size="small"
+            [checked]="widget.autoinvite.click.enable"
+          ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.click.enable' | translate }}</h5>
         </div>
-        <div class="col-lg-12 margined-top-10 width-900" ng-show="widget.autoinvite.click.enable" ng-class="(widget.autoinvite.click.value.trim().length == 0)?'has-error':''">
-          <label class="control-label"><spring:message code="widgetsList.editor.autoinvite.click.title"/></label>
-          <input class="form-control" type="text" ng-model="widget.autoinvite.click.value"/>
+        <div
+          *ngIf="widget.autoinvite.click.enable"
+          class="col-lg-12 margined-top-10 width-900"
+          [ngClass]="(widget.autoinvite.click.value.trim().length == 0) ? 'has-error' : ''"
+        >
+          <label class="control-label">
+            {{ 'widgetsList.editor.autoinvite.click.title' | translate }}
+          </label>
+          <input class="form-control" type="text" [(ngModel)]="widget.autoinvite.click.value"/>
           <div class="row small m-t-md underline-comment">
-            <i><spring:message code="widgetsList.editor.autoinvite.click.comment"/></i>
+            <i>{{ 'widgetsList.editor.autoinvite.click.comment' | translate }}</i>
           </div>
         </div>
         <!-- End Autoinvite seconds -->
 
         <!-- Autoinvite: exit-intent -->
         <div class="col-lg-12 margined-top-10">
-          <switch class="switch-xs" ng-model="widget.autoinvite.exit.enable"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.exit.enable"/></h5>
+          <ui-switch size="small" [checked]="widget.autoinvite.exit.enable"></ui-switch><h5
+          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.exit.enable' | translate }}</h5>
         </div>
         <!-- End Autoinvite: exit-intent -->
         <!-- Autoinvite: sound -->
         <div class="col-lg-12 margined-top-40">
-          <switch class="switch-xs" ng-model="widget.autoinvite.sound.enable"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoinvite.sound.enable"/></h5>
+          <ui-switch size="small" [checked]="widget.autoinvite.sound.enable"></ui-switch><h5
+          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}</h5>
         </div>
         <!-- End Autoinvite: sound -->
 
         <!-- Restrictions -->
         <div class="col-lg-12 margined-top-40">
-          <h3><spring:message code="widgetsList.editor.section.block"/> </h3>
+          <h3>{{ 'widgetsList.editor.section.block' | translate }}</h3>
         </div>
         <div class="col-lg-12">
-          <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.restrictions.title"/> <span class="label label-warning tariff-info ">окупаемый</span> </h4>
+          <h4
+            class="widgets-settings-subtitle no-bold"
+          >
+            {{ 'widgetsList.editor.restrictions.title' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
+          </h4>
         </div>
         <div class="col-lg-12 margined-top-10">
-          <input class="radio-left" type="radio" name="restrictions" ng-model="widget.restrictions.target.mode" ng-value="1" ng-change="onRestrictionModeChange()">
-          <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold"><spring:message code="widgetsList.editor.restrictions.disable.title"/></label>
+          <input class="radio-left" type="radio" name="restrictions" [(ngModel)]="widget.restrictions.target.mode" value="1" (ngModelChange)="onRestrictionModeChange()">
+          <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
+            {{ 'widgetsList.editor.restrictions.disable.title' | translate }}
+          </label>
         </div>
         <div class="col-lg-12 margined-top-10">
-          <input class="radio-left" type="radio" name="restrictions" ng-model="widget.restrictions.target.mode" ng-value="2" ng-change="onRestrictionModeChange()">
-          <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold"><spring:message code="widgetsList.editor.restrictions.enable.title"/></label>
+          <input class="radio-left" type="radio" name="restrictions" [(ngModel)]="widget.restrictions.target.mode" value="2" (ngModelChange)="onRestrictionModeChange()">
+          <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
+            {{ 'widgetsList.editor.restrictions.enable.title' | translate }}
+          </label>
         </div>
         <div class="col-lg-12 margined-top-10">
-          <input class="radio-left" type="radio" name="restrictions" ng-model="widget.restrictions.target.mode" ng-value="0" ng-change="onRestrictionModeChange()">
-          <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold"><spring:message code="widgetsList.editor.restrictions.ontime.title"/></label>
+          <input class="radio-left" type="radio" name="restrictions" [(ngModel)]="widget.restrictions.target.mode" value="0" (ngModelChange)="onRestrictionModeChange()">
+          <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
+            {{ 'widgetsList.editor.restrictions.ontime.title' | translate }}
+          </label>
         </div>
-        <div class="col-lg-12 margined-top-20" ng-show="widget.restrictions.target.mode == 0">
+        <div class="col-lg-12 margined-top-20" *ngIf="widget.restrictions.target.mode == 0">
           <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.restrictions.disable.label"/>:
+            {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
           </div>
           <div class="dropdown" style="float: left;">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{widget.restrictions.target.gap}}
+              {{ widget.restrictions.target.gap }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
-              <li role="presentation" ng-click="widget.restrictions.target.gap = timeItem" ng-repeat="timeItem in getRestrictionsGaps()"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{timeItem}}</a></li>
+              <li
+                role="presentation"
+                *ngFor="let timeItem of getRestrictionsGaps()"
+                (click)="widget.restrictions.target.gap = timeItem"
+              ><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ timeItem }}</a></li>
             </ul>
           </div>
           <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.restrictions.hours"/>
+            {{ 'widgetsList.editor.restrictions.hours' | translate }}
           </div>
         </div>
         <div class="col-lg-12 margined-top-20">
-          <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.restrictions.title2"/> <a data-toggle="tooltip"
-                                                                                                                           data-placement="top"
-                                                                                                                           title="<spring:message code="widgetsList.editor.restrictions.autoinvite.tooltip"/>"
-            class="info-link" href="#"><i
-              class="fa fa-info-circle"></i></a></label></h4>
+          <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.restrictions.title2' | translate }} <a
+            data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.restrictions.autoinvite.tooltip' | translate }}"
+            class="info-link" href="#"><i class="fa fa-info-circle"></i></a></h4>
         </div>
         <!-- Restrictions.autoinvite -->
         <div class="col-lg-12 margined-top-10">
           <checker ng-model="widget.restrictions.autoinvite.enable"></checker>
           <h5 class="control-label switcher-label switcher-label-xs f-7">
-            <spring:message code="widgetsList.editor.restrictions.autoinvite.text"/><br>
+            {{ 'widgetsList.editor.restrictions.autoinvite.text' | translate }}<br />
           </h5>
         </div>
         <div class="col-lg-12 margined-top-20 width-900" ng-show="widget.restrictions.autoinvite.enable">
           <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.restrictions.disable.label"/>:
+            {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
           </div>
           <input class="form-control widgets-num-input" type="number" min="0" max="72" ng-model="widget.restrictions.autoinvite.gap"/>
           <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.restrictions.hours"/>
+            {{ 'widgetsList.editor.restrictions.hours' | translate }}
           </div>
         </div>
         <!-- End restrictions.autoinvite -->
@@ -1309,16 +1403,16 @@
         <div class="col-lg-12 margined-top-10">
           <checker ng-model="widget.restrictions.unique.enable"></checker>
           <h5 class="control-label switcher-label switcher-label-xs f-7">
-            <spring:message code="widgetsList.editor.restrictions.unique.text"/><br>
+            {{ 'widgetsList.editor.restrictions.unique.text' | translate }}<br />
           </h5>
         </div>
         <div class="col-lg-12 margined-top-20 width-900" ng-show="widget.restrictions.unique.enable">
           <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.restrictions.disable.label"/>:
+            {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
           </div>
           <input class="form-control widgets-num-input" type="number" min="0" ng-model="widget.restrictions.unique.gap"/>
           <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.restrictions.hours"/>
+            {{ 'widgetsList.editor.restrictions.hours' | translate }}
           </div>
         </div>
         <!-- END Restrictions.unique -->
