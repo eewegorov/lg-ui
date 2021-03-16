@@ -868,717 +868,812 @@
     id="rules"
     [ngClass]="{ active: isCurrentActiveTab('rules') }"
   >
-  <div class="widgets-settings-container">
-    <h1>{{ 'widgetsList.editor.rules.title' | translate }}</h1>
-    <div class="row padding-bottom-70">
-      <div class="col-lg-12 margined-top-20">
-        <h3>{{ 'widgetsList.editor.section.targeting' | translate }}</h3>
-      </div>
-      <div class="col-lg-12 ">
-        <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.pageTargeting' | translate }} <a
-          data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageTargeting.tooltip' | translate }}"
-          class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
-        </h4>
-      </div>
-      <div class="col-lg-12 margined-top-10" [ngClass]="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0)?'margined-bottom-10':''">
-        <ui-switch size="small" [checked]="widget.rules['pages'].enable"></ui-switch><h5
-        class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageTargeting.enable' | translate }}</h5>
-      </div>
-      <!-- Page rule item -->
-      <ng-container *ngIf="widget.rules['pages'].enable == true">
-        <div *ngFor="let item of widget.rules['pages'].items" class="row row-subitem width-900 margined-top-10">
-          <div class="col-sm-3 row-subitem-padding padding-top-5">
-            <label class="control-label">{{ 'widgetsList.editor.rules.widget' | translate }}:</label>
-            <div class="dropdown" >
-              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                {{ getPageStateName(item) }}
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <li role="presentation" (click)="item.state = 0">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.hide' | translate }}</a>
-                </li>
-                <li role="presentation" (click)="item.state = 1">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.show' | translate }}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-sm-3 row-subitem-padding padding-top-5">
-            <label class="control-label">{{ 'widgetsList.editor.rules.pageTargeting.pageInfo' | translate }}:</label>
-            <div class="dropdown">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                {{ getPageCompareName(item) }}
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <li role="presentation" (click)="item.compare = 0">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}</a>
-                </li>
-                <li role="presentation" (click)="item.compare = 1">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}</a>
-                </li>
-                <li role="presentation" (click)="item.compare = 2">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}</a>
-                </li>
-                <li role="presentation" (click)="item.compare = 3">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}</a>
-                </li>
-                <li role="presentation" (click)="item.compare = 4">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-sm-6 form-group row-subitem-padding padding-top-5">
-            <label class="control-label input-with-remove" style="display: block;">{{ 'widgetsList.editor.rules.pageTargeting.urlortitle' | translate }}:</label>
-            <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0)?'has-error':''">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{ getPageTypeName(item) }} <span class="caret"></span>
+    <div class="widgets-settings-container">
+      <h1>{{ 'widgetsList.editor.rules.title' | translate }}</h1>
+      <div class="row padding-bottom-70">
+        <div class="col-lg-12 margined-top-20">
+          <h3>{{ 'widgetsList.editor.section.targeting' | translate }}</h3>
+        </div>
+        <div class="col-lg-12 ">
+          <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.pageTargeting' | translate }} <a
+            data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageTargeting.tooltip' | translate }}"
+            class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+          </h4>
+        </div>
+        <div class="col-lg-12 margined-top-10" [ngClass]="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0)?'margined-bottom-10':''">
+          <ui-switch size="small" [checked]="widget.rules['pages'].enable"></ui-switch><h5
+          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageTargeting.enable' | translate }}</h5>
+        </div>
+        <!-- Page rule item -->
+        <ng-container *ngIf="widget.rules['pages'].enable == true">
+          <div *ngFor="let item of widget.rules['pages'].items" class="row row-subitem width-900 margined-top-10">
+            <div class="col-sm-3 row-subitem-padding padding-top-5">
+              <label class="control-label">{{ 'widgetsList.editor.rules.widget' | translate }}:</label>
+              <div class="dropdown" >
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                  {{ getPageStateName(item) }}
+                  <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu">
-                  <li role="presentation" (click)="item.type = 0">
-                    <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.url' | translate }}</a>
+                <ul class="dropdown-menu" role="menu">
+                  <li role="presentation" (click)="item.state = 0">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.hide' | translate }}</a>
                   </li>
-                  <li role="presentation" (click)="item.type = 1">
-                    <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }}</a>
+                  <li role="presentation" (click)="item.state = 1">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.show' | translate }}</a>
                   </li>
                 </ul>
               </div>
-              <input type="text" class="form-control" [(ngModel)]="item.value">
             </div>
-            <div class="remove-sub-item-rules margined-right-10">
-              <a (click)="addPageRuleItem()" href="javascript:void(0);">
-                <i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i>
-              </a>
+            <div class="col-sm-3 row-subitem-padding padding-top-5">
+              <label class="control-label">{{ 'widgetsList.editor.rules.pageTargeting.pageInfo' | translate }}:</label>
+              <div class="dropdown">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                  {{ getPageCompareName(item) }}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li role="presentation" (click)="item.compare = 0">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}</a>
+                  </li>
+                  <li role="presentation" (click)="item.compare = 1">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}</a>
+                  </li>
+                  <li role="presentation" (click)="item.compare = 2">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}</a>
+                  </li>
+                  <li role="presentation" (click)="item.compare = 3">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}</a>
+                  </li>
+                  <li role="presentation" (click)="item.compare = 4">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}</a>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div *ngIf="widget.rules['pages'].items.length > 1" class="remove-sub-item-rules margined-right-10">
-              <a (click)="removePageRuleItem($index)" href="javascript:void(0);">
-                <i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
-              </a>
-            </div>
-            <span class="underow-comment combo-box-underow-comment-comment">
+            <div class="col-sm-6 form-group row-subitem-padding padding-top-5">
+              <label class="control-label input-with-remove" style="display: block;">{{ 'widgetsList.editor.rules.pageTargeting.urlortitle' | translate }}:</label>
+              <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0)?'has-error':''">
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ getPageTypeName(item) }} <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li role="presentation" (click)="item.type = 0">
+                      <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.url' | translate }}</a>
+                    </li>
+                    <li role="presentation" (click)="item.type = 1">
+                      <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }}</a>
+                    </li>
+                  </ul>
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="item.value">
+              </div>
+              <div class="remove-sub-item-rules margined-right-10">
+                <a (click)="addPageRuleItem()" href="javascript:void(0);">
+                  <i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i>
+                </a>
+              </div>
+              <div *ngIf="widget.rules['pages'].items.length > 1" class="remove-sub-item-rules margined-right-10">
+                <a (click)="removePageRuleItem($index)" href="javascript:void(0);">
+                  <i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
+                </a>
+              </div>
+              <span class="underow-comment combo-box-underow-comment-comment">
               {{ 'widgetsList.editor.rules.pageTargeting.url.tooltip' | translate }}
             </span>
-          </div>
-        </div>
-      </ng-container>
-      <!-- END Page rule item -->
-
-      <div class="col-lg-12 margined-top-20">
-        <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.pageVTargeting.title' | translate }} <span
-          class="label label-warning tariff-info ">окупаемый</span> <a
-          data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageVTargeting.tooltip' | translate }}"
-          class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
-        </h4>
-      </div>
-      <div
-        class="col-lg-12 margined-top-10"
-        [ngClass]="(widget.rules['prevPages'].enable && widget.rules['prevPages'].items.length > 0) ? 'margined-bottom-10' : ''"
-      >
-        <ui-switch
-          size="small"
-          [checked]="widget.rules['prevPages'].enable"
-        ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageVTargeting.enable' | translate }}</h5>
-      </div>
-      <!-- Target to viewed pages -->
-      <ng-container *ngIf="widget.rules['prevPages'].enable == true">
-        <div *ngFor="let item of widget.rules['prevPages'].items; index as i" class="row row-subitem width-900 margined-top-10">
-          <div class="col-sm-6 row-subitem-padding padding-top-5">
-            <label class="control-label">{{ 'widgetsList.editor.rules.pageVTargeting.user' | translate }}:</label>
-            <div class="dropdown" >
-              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                {{ getPageCompareName(item) }}
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <li role="presentation" (click)="item.compare = 0">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}</a>
-                </li>
-                <li role="presentation" (click)="item.compare = 1">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}</a>
-                </li>
-                <li role="presentation" (click)="item.compare = 2">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}</a>
-                </li>
-                <li role="presentation" (click)="item.compare = 3">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}</a>
-                </li>
-                <li role="presentation" (click)="item.compare = 4">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}</a>
-                </li>
-              </ul>
             </div>
           </div>
-          <div class="col-sm-6 form-group row-subitem-padding padding-top-5">
-            <label class="control-label input-with-remove" style="display: block;">{{ 'widgetsList.editor.rules.pageTargeting.urlortitle' | translate }}:</label>
-            <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0) ? 'has-error' : ''">
-              <div class="input-group-btn">
-                <button
-                  type="button"
-                  class="btn btn-default dropdown-toggle"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                >
-                  {{ getPageTypeName(item) }} <span class="caret"></span>
+        </ng-container>
+        <!-- END Page rule item -->
+
+        <div class="col-lg-12 margined-top-20">
+          <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.pageVTargeting.title' | translate }} <span
+            class="label label-warning tariff-info ">окупаемый</span> <a
+            data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageVTargeting.tooltip' | translate }}"
+            class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+          </h4>
+        </div>
+        <div
+          class="col-lg-12 margined-top-10"
+          [ngClass]="(widget.rules['prevPages'].enable && widget.rules['prevPages'].items.length > 0) ? 'margined-bottom-10' : ''"
+        >
+          <ui-switch
+            size="small"
+            [checked]="widget.rules['prevPages'].enable"
+          ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageVTargeting.enable' | translate }}</h5>
+        </div>
+        <!-- Target to viewed pages -->
+        <ng-container *ngIf="widget.rules['prevPages'].enable == true">
+          <div *ngFor="let item of widget.rules['prevPages'].items; index as i" class="row row-subitem width-900 margined-top-10">
+            <div class="col-sm-6 row-subitem-padding padding-top-5">
+              <label class="control-label">{{ 'widgetsList.editor.rules.pageVTargeting.user' | translate }}:</label>
+              <div class="dropdown" >
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                  {{ getPageCompareName(item) }}
+                  <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu">
-                  <li role="presentation" (click)="item.type = 0">
-                    <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.url' | translate }}</a>
+                <ul class="dropdown-menu" role="menu">
+                  <li role="presentation" (click)="item.compare = 0">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}</a>
                   </li>
-                  <li role="presentation" (click)="item.type = 1">
-                    <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }}</a>
+                  <li role="presentation" (click)="item.compare = 1">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}</a>
+                  </li>
+                  <li role="presentation" (click)="item.compare = 2">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}</a>
+                  </li>
+                  <li role="presentation" (click)="item.compare = 3">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}</a>
+                  </li>
+                  <li role="presentation" (click)="item.compare = 4">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}</a>
                   </li>
                 </ul>
               </div>
-              <input type="text" class="form-control" [(ngModel)]="item.value">
             </div>
-            <div class="remove-sub-item-rules margined-right-10">
-              <a (click)="addPrevPageRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i>
-              </a>
+            <div class="col-sm-6 form-group row-subitem-padding padding-top-5">
+              <label class="control-label input-with-remove" style="display: block;">{{ 'widgetsList.editor.rules.pageTargeting.urlortitle' | translate }}:</label>
+              <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0) ? 'has-error' : ''">
+                <div class="input-group-btn">
+                  <button
+                    type="button"
+                    class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                  >
+                    {{ getPageTypeName(item) }} <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li role="presentation" (click)="item.type = 0">
+                      <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.url' | translate }}</a>
+                    </li>
+                    <li role="presentation" (click)="item.type = 1">
+                      <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }}</a>
+                    </li>
+                  </ul>
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="item.value">
+              </div>
+              <div class="remove-sub-item-rules margined-right-10">
+                <a (click)="addPrevPageRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i>
+                </a>
+              </div>
+              <div *ngIf="widget.rules['prevPages'].items.length > 1" class="remove-sub-item-rules margined-right-10">
+                <a (click)="removePrevPageRuleItem(i)" href="javascript:void(0);"><i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
+                </a>
+              </div>
+              <span class="underow-comment combo-box-underow-comment-comment">{{ 'widgetsList.editor.rules.pageTargeting.url.tooltip' | translate }}</span>
             </div>
-            <div *ngIf="widget.rules['prevPages'].items.length > 1" class="remove-sub-item-rules margined-right-10">
-              <a (click)="removePrevPageRuleItem(i)" href="javascript:void(0);"><i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
-              </a>
-            </div>
-            <span class="underow-comment combo-box-underow-comment-comment">{{ 'widgetsList.editor.rules.pageTargeting.url.tooltip' | translate }}</span>
           </div>
-        </div>
-      </ng-container>
-      <!-- END Target to viewed pages -->
+        </ng-container>
+        <!-- END Target to viewed pages -->
 
-      <!-- Page no rule -->
-      <div class="col-lg-12 margined-top-20">
-        <h4 class="widgets-settings-subtitle no-bold">
-          {{ 'widgetsList.editor.rules.pageNo' | translate }} <span class="label label-warning tariff-info">окупаемый</span> <a
-          data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageNo.tooltip' | translate }}"
-          class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
-        </h4>
-      </div>
-      <div class="col-lg-12 margined-top-10">
-        <ui-switch size="small" [checked]="widget.rules.pageNo.enable" (change)="onChangePayment"
-        ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageNo.enable' | translate }}</h5>
-      </div>
-      <div
-        *ngIf="widget.rules.pageNo.enable"
-        class="col-lg-12 margined-top-10 width-900"
-        [ngClass]="(widget.rules.pageNo.items.length > 0) ? '' : 'has-error'"
-      >
-        <label class="control-label">{{ 'widgetsList.editor.rules.pageNo.select' | translate }}:</label>
-        <ng-select
-          id="widgetSelector"
-          bindValue="current"
-          bindLabel="current"
-          multiple="true"
-          appendTo="body"
-          [items]="loop"
-          [placeholder]="'widgetsList.editor.rules.pageNo.select.placeholder' | translate"
-          [(ngModel)]="widget.rules.pageNo.items"
-        ></ng-select>
-      </div>
-      <!-- End Page No rule -->
-      <!-- Time options start -->
-      <div class="col-lg-12 margined-top-20 margined-bottom-10">
-        <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.dateTime.title' | translate }} <span
-          class="label label-warning tariff-info ">окупаемый</span> <a
-          data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.dateTime.placeholder' | translate }}"
-          class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
-        </h4>
-      </div>
-      <div class="col-lg-12" [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0)?'margined-bottom-10':''">
-        <ui-switch size="small" [checked]="widget.rules.time.enable" (change)="onChangePayment"
-        ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.time.enable' | translate }}</h5>
-      </div>
-      <ng-container *ngIf="widget.rules['time'].enable == true">
-        <div class="row row-subitem width-400 margined-top-10" *ngFor="let item of widget.rules['time'].items">
-          <div class="col-lg-12">
-            <label class="control-label">{{ 'widgetsList.editor.rules.time.title' | translate }}:</label>
-          </div>
-          <div class="col-sm-12 row-subitem-padding padding-top-5">
-            <div class="time-settings-fromto">
-              {{ 'widgetsList.editor.rules.time.from' | translate }}:
+        <!-- Page no rule -->
+        <div class="col-lg-12 margined-top-20">
+          <h4 class="widgets-settings-subtitle no-bold">
+            {{ 'widgetsList.editor.rules.pageNo' | translate }} <span class="label label-warning tariff-info">окупаемый</span> <a
+            data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageNo.tooltip' | translate }}"
+            class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+          </h4>
+        </div>
+        <div class="col-lg-12 margined-top-10">
+          <ui-switch size="small" [checked]="widget.rules.pageNo.enable" (change)="onChangePayment"
+          ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageNo.enable' | translate }}</h5>
+        </div>
+        <div
+          *ngIf="widget.rules.pageNo.enable"
+          class="col-lg-12 margined-top-10 width-900"
+          [ngClass]="(widget.rules.pageNo.items.length > 0) ? '' : 'has-error'"
+        >
+          <label class="control-label">{{ 'widgetsList.editor.rules.pageNo.select' | translate }}:</label>
+          <ng-select
+            id="widgetSelector"
+            bindValue="current"
+            bindLabel="current"
+            multiple="true"
+            appendTo="body"
+            [items]="loop"
+            [placeholder]="'widgetsList.editor.rules.pageNo.select.placeholder' | translate"
+            [(ngModel)]="widget.rules.pageNo.items"
+          ></ng-select>
+        </div>
+        <!-- End Page No rule -->
+        <!-- Time options start -->
+        <div class="col-lg-12 margined-top-20 margined-bottom-10">
+          <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.dateTime.title' | translate }} <span
+            class="label label-warning tariff-info ">окупаемый</span> <a
+            data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.dateTime.placeholder' | translate }}"
+            class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+          </h4>
+        </div>
+        <div class="col-lg-12" [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0)?'margined-bottom-10':''">
+          <ui-switch size="small" [checked]="widget.rules.time.enable" (change)="onChangePayment"
+          ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.time.enable' | translate }}</h5>
+        </div>
+        <ng-container *ngIf="widget.rules['time'].enable == true">
+          <div class="row row-subitem width-400 margined-top-10" *ngFor="let item of widget.rules['time'].items">
+            <div class="col-lg-12">
+              <label class="control-label">{{ 'widgetsList.editor.rules.time.title' | translate }}:</label>
             </div>
-            <div class="dropdown" style="float: left;">
+            <div class="col-sm-12 row-subitem-padding padding-top-5">
+              <div class="time-settings-fromto">
+                {{ 'widgetsList.editor.rules.time.from' | translate }}:
+              </div>
+              <div class="dropdown" style="float: left;">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                  {{ getStringFromTime(item.startTime) }}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
+                  <li role="presentation" *ngFor="let timeItem of getTimeList()" (click)="item.startTime = timeItem.value">
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ timeItem.name }}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="time-settings-fromto">
+                {{ 'widgetsList.editor.rules.time.to' | translate }}:
+              </div>
+              <div class="dropdown" style="float: left;">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                  {{ getStringFromTime(item.endTime) }}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
+                  <li
+                    role="presentation"
+                    *ngFor="let timeItem of getTimeList()"
+                    (click)="item.endTime = timeItem.value"
+                  >
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ timeItem.name }}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="remove-sub-item-rules-time margined-right-10">
+                <a (click)="addTimeRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules-time colored-blue col-sm-1 pe-7s-plus"></i></a>
+              </div>
+              <div *ngIf="widget.rules['time'].items.length > 1" class="remove-sub-item-rules-time margined-right-10">
+                <a (click)="removeTimeRuleItem(i)" href="javascript:void(0);">
+                  <i class="remove-sub-item-rules-time colored-red col-sm-1 pe-7s-close-circle"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <!-- End Time options -->
+        <!-- Days options start -->
+        <div class="col-lg-12 margined-top-20">
+          <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.days.header' | translate }} <span
+            class="label label-warning tariff-info ">окупаемый</span> <a
+            data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.days.tooltip' | translate }}"
+            class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+          </h4>
+        </div>
+        <div class="col-lg-12 margined-top-10">
+          <ui-switch
+            size="small"
+            [checked]="widget.rules.days.enable"
+            (change)="onChangePayment"
+          ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.days.enable' | translate }}</h5>
+        </div>
+        <div
+          *ngIf="widget.rules.days.enable"
+          class="col-lg-12 margined-top-10 width-900"
+          [ngClass]="(widget.rules.days.items.length > 0) ? '' : 'has-error'"
+        >
+          <label class="control-label">{{ 'widgetsList.editor.rules.days.title' | translate }}:</label>
+
+          <ng-select
+            id="daysSelector"
+            bindValue="id"
+            bindLabel="name"
+            multiple="true"
+            appendTo="body"
+            clearable="true"
+            [items]="weekDays"
+            [placeholder]="'widgetsList.editor.rules.days.select.placeholder' | translate"
+            [(ngModel)]="widget.rules.days.items"
+          ></ng-select>
+        </div>
+        <!-- End days options-->
+        <!-- Autoinvite options: pages -->
+        <div *ngIf="!isContainerized">
+          <div class="col-lg-12 margined-top-40">
+            <h3>{{ 'widgetsList.editor.autoinvite.title' | translate }} <a
+              data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.autoinvite.tooltip' | translate }}"
+              class="info-link margined-left-5" href="#"><i class="fa fa-info-circle"></i></a>
+            </h3>
+          </div>
+          <div class="col-lg-12 margined-top-10 margined-bottom-5">
+            <label class="control-label smal-subtitle">{{ 'widgetsList.editor.autoinvite.subtitle' | translate }}</label>
+          </div>
+          <div class="col-lg-12 margined-top-10">
+            <label class="control-label control-label-des">{{ 'widgetsList.editor.autoinvite.variants' | translate }}:</label>
+            <div class="dropdown" >
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                {{ getStringFromTime(item.startTime) }}
+                {{ widget.autoinvite.ruleLogic }}
                 <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
-                <li role="presentation" *ngFor="let timeItem of getTimeList()" (click)="item.startTime = timeItem.value">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ timeItem.name }}</a>
+              <ul class="dropdown-menu" role="menu">
+                <li
+                  role="presentation"
+                  *ngFor="let itemLogic of autoinviteVariants"
+                  (click)="widget.autoinvite.ruleLogic = itemLogic"
+                >
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemLogic }}</a>
                 </li>
               </ul>
             </div>
+          </div>
+          <div class="col-lg-12 margined-top-20 margined-bottom-10">
+            <label class="control-label smal-subtitle">{{ 'widgetsList.editor.autoinvite.subtitle2' | translate }}</label>
+          </div>
+          <div class="col-lg-12 margined-top-10">
+            <ui-switch
+              size="small"
+              [checked]="widget.autoinvite.pages.enable"
+              (change)="onChangePayment"
+            ></ui-switch><h5
+            class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.pages.enable' | translate }}<span
+            class="label label-warning tariff-info ">окупаемый</span></h5>
+          </div>
+          <div
+            *ngIf="widget.autoinvite.pages.enable"
+            class="col-lg-12 margined-top-10 width-400"
+            [ngClass]="(widget.autoinvite.pages.value <= 0) ? 'has-error' : ''"
+          >
             <div class="time-settings-fromto">
-              {{ 'widgetsList.editor.rules.time.to' | translate }}:
+              {{ 'widgetsList.editor.autoinvite.pages.prefix' | translate }}
+            </div>
+            <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.pages.value"/>
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.autoinvite.pages.suffix' | translate }}
+            </div>
+          </div>
+          <!-- END Autoinvite options -->
+          <!-- Autoinvite: seconds -->
+          <div class="col-lg-12 margined-top-10">
+            <ui-switch
+              class="switch-xs"
+              [checked]="widget.autoinvite.seconds.enable"
+            ></ui-switch><h5
+            class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}</h5>
+          </div>
+          <div
+            *ngIf="widget.autoinvite.seconds.enable"
+            class="col-lg-12 margined-top-10 width-400"
+            [ngClass]="(widget.autoinvite.seconds.value <= 0) ? 'has-error' : ''"
+          >
+            <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.seconds.value" />
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.autoinvite.seconds.suffix' | translate }}
+            </div>
+          </div>
+          <!-- End Autoinvite seconds -->
+          <!-- Autoinvite: anactive -->
+          <div class="col-lg-12 margined-top-10">
+            <ui-switch
+              size="small"
+              [checked]="widget.autoinvite.inactive.enabled"
+              (change)="onChangePayment"
+            ></ui-switch><h5
+            class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.inactive.enabled' | translate }}<span
+            class="label label-warning tariff-info ">окупаемый</span></h5>
+          </div>
+          <div
+            *ngIf="widget.autoinvite.inactive.enabled"
+            class="col-lg-12 margined-top-10 width-400"
+            [ngClass]="(widget.autoinvite.inactive.value <= 0) ? 'has-error' : ''"
+          >
+            <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.inactive.value"/>
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.autoinvite.inactive.suffix' | translate }}
+            </div>
+          </div>
+          <!-- End Autoinvite: anactive -->
+          <!-- Autoinvite: percent -->
+          <div class="col-lg-12 margined-top-10">
+            <ui-switch
+              size="small"
+              [checked]="widget.autoinvite.percent.enable"
+              (change)="onChangePayment"
+            ></ui-switch><h5
+            class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.percent.enable' | translate }}<span
+            class="label label-warning tariff-info ">окупаемый</span></h5>
+          </div>
+          <div
+            *ngIf="widget.autoinvite.percent.enable"
+            class="col-lg-12 margined-top-10 width-400"
+            [ngClass]="(widget.autoinvite.percent.value <= 0) ? 'has-error' : ''"
+          >
+            <input style="float: left; width: 70px;" class="form-control" type="number" min="1" max="100" [(ngModel)]="widget.autoinvite.percent.value" />
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.autoinvite.percent.suffix' | translate }}
+            </div>
+          </div>
+          <!-- End Autoinvite: percent -->
+
+          <!-- Autoinvite: click -->
+          <div class="col-lg-12 margined-top-10">
+            <ui-switch
+              size="small"
+              [checked]="widget.autoinvite.click.enable"
+            ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.click.enable' | translate }}</h5>
+          </div>
+          <div
+            *ngIf="widget.autoinvite.click.enable"
+            class="col-lg-12 margined-top-10 width-900"
+            [ngClass]="(widget.autoinvite.click.value.trim().length == 0) ? 'has-error' : ''"
+          >
+            <label class="control-label">
+              {{ 'widgetsList.editor.autoinvite.click.title' | translate }}
+            </label>
+            <input class="form-control" type="text" [(ngModel)]="widget.autoinvite.click.value"/>
+            <div class="row small m-t-md underline-comment">
+              <i>{{ 'widgetsList.editor.autoinvite.click.comment' | translate }}</i>
+            </div>
+          </div>
+          <!-- End Autoinvite seconds -->
+
+          <!-- Autoinvite: exit-intent -->
+          <div class="col-lg-12 margined-top-10">
+            <ui-switch size="small" [checked]="widget.autoinvite.exit.enable"></ui-switch><h5
+            class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.exit.enable' | translate }}</h5>
+          </div>
+          <!-- End Autoinvite: exit-intent -->
+          <!-- Autoinvite: sound -->
+          <div class="col-lg-12 margined-top-40">
+            <ui-switch size="small" [checked]="widget.autoinvite.sound.enable"></ui-switch><h5
+            class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}</h5>
+          </div>
+          <!-- End Autoinvite: sound -->
+
+          <!-- Restrictions -->
+          <div class="col-lg-12 margined-top-40">
+            <h3>{{ 'widgetsList.editor.section.block' | translate }}</h3>
+          </div>
+          <div class="col-lg-12">
+            <h4
+              class="widgets-settings-subtitle no-bold"
+            >
+              {{ 'widgetsList.editor.restrictions.title' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
+            </h4>
+          </div>
+          <div class="col-lg-12 margined-top-10">
+            <input class="radio-left" type="radio" name="restrictions" [(ngModel)]="widget.restrictions.target.mode" value="1" (ngModelChange)="onRestrictionModeChange()">
+            <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
+              {{ 'widgetsList.editor.restrictions.disable.title' | translate }}
+            </label>
+          </div>
+          <div class="col-lg-12 margined-top-10">
+            <input class="radio-left" type="radio" name="restrictions" [(ngModel)]="widget.restrictions.target.mode" value="2" (ngModelChange)="onRestrictionModeChange()">
+            <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
+              {{ 'widgetsList.editor.restrictions.enable.title' | translate }}
+            </label>
+          </div>
+          <div class="col-lg-12 margined-top-10">
+            <input class="radio-left" type="radio" name="restrictions" [(ngModel)]="widget.restrictions.target.mode" value="0" (ngModelChange)="onRestrictionModeChange()">
+            <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
+              {{ 'widgetsList.editor.restrictions.ontime.title' | translate }}
+            </label>
+          </div>
+          <div class="col-lg-12 margined-top-20" *ngIf="widget.restrictions.target.mode == 0">
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
             </div>
             <div class="dropdown" style="float: left;">
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                {{ getStringFromTime(item.endTime) }}
+                {{ widget.restrictions.target.gap }}
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
                 <li
                   role="presentation"
-                  *ngFor="let timeItem of getTimeList()"
-                  (click)="item.endTime = timeItem.value"
-                >
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ timeItem.name }}</a>
-                </li>
+                  *ngFor="let timeItem of getRestrictionsGaps()"
+                  (click)="widget.restrictions.target.gap = timeItem"
+                ><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ timeItem }}</a></li>
               </ul>
             </div>
-            <div class="remove-sub-item-rules-time margined-right-10">
-              <a (click)="addTimeRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules-time colored-blue col-sm-1 pe-7s-plus"></i></a>
-            </div>
-            <div *ngIf="widget.rules['time'].items.length > 1" class="remove-sub-item-rules-time margined-right-10">
-              <a (click)="removeTimeRuleItem(i)" href="javascript:void(0);">
-                <i class="remove-sub-item-rules-time colored-red col-sm-1 pe-7s-close-circle"></i>
-              </a>
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.restrictions.hours' | translate }}
             </div>
           </div>
-        </div>
-      </ng-container>
-      <!-- End Time options -->
-      <!-- Days options start -->
-      <div class="col-lg-12 margined-top-20">
-        <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.days.header' | translate }} <span
-          class="label label-warning tariff-info ">окупаемый</span> <a
-          data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.days.tooltip' | translate }}"
-          class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
-        </h4>
-      </div>
-      <div class="col-lg-12 margined-top-10">
-        <ui-switch
-          size="small"
-          [checked]="widget.rules.days.enable"
-          (change)="onChangePayment"
-        ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.days.enable' | translate }}</h5>
-      </div>
-      <div
-        *ngIf="widget.rules.days.enable"
-        class="col-lg-12 margined-top-10 width-900"
-        [ngClass]="(widget.rules.days.items.length > 0) ? '' : 'has-error'"
-      >
-        <label class="control-label">{{ 'widgetsList.editor.rules.days.title' | translate }}:</label>
+          <div class="col-lg-12 margined-top-20">
+            <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.restrictions.title2' | translate }} <a
+              data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.restrictions.autoinvite.tooltip' | translate }}"
+              class="info-link" href="#"><i class="fa fa-info-circle"></i></a></h4>
+          </div>
+          <!-- Restrictions.autoinvite -->
+          <div class="col-lg-12 margined-top-10">
+            <checker ng-model="widget.restrictions.autoinvite.enable"></checker>
+            <h5 class="control-label switcher-label switcher-label-xs f-7">
+              {{ 'widgetsList.editor.restrictions.autoinvite.text' | translate }}<br />
+            </h5>
+          </div>
+          <div *ngIf="widget.restrictions.autoinvite.enable" class="col-lg-12 margined-top-20 width-900">
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
+            </div>
+            <input class="form-control widgets-num-input" type="number" min="0" max="72" [(ngModel)]="widget.restrictions.autoinvite.gap"/>
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.restrictions.hours' | translate }}
+            </div>
+          </div>
+          <!-- End restrictions.autoinvite -->
 
-        <ng-select
-          id="daysSelector"
-          bindValue="id"
-          bindLabel="name"
-          multiple="true"
-          appendTo="body"
-          clearable="true"
-          [items]="weekDays"
-          [placeholder]="'widgetsList.editor.rules.days.select.placeholder' | translate"
-          [(ngModel)]="widget.rules.days.items"
-        ></ng-select>
-      </div>
-      <!-- End days options-->
-      <!-- Autoinvite options: pages -->
-      <div *ngIf="!isContainerized">
-        <div class="col-lg-12 margined-top-40">
-          <h3>{{ 'widgetsList.editor.autoinvite.title' | translate }} <a
-            data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.autoinvite.tooltip' | translate }}"
-            class="info-link margined-left-5" href="#"><i class="fa fa-info-circle"></i></a>
-          </h3>
-        </div>
-        <div class="col-lg-12 margined-top-10 margined-bottom-5">
-          <label class="control-label smal-subtitle">{{ 'widgetsList.editor.autoinvite.subtitle' | translate }}</label>
-        </div>
-        <div class="col-lg-12 margined-top-10">
-          <label class="control-label control-label-des">{{ 'widgetsList.editor.autoinvite.variants' | translate }}:</label>
-          <div class="dropdown" >
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{ widget.autoinvite.ruleLogic }}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li
-                role="presentation"
-                *ngFor="let itemLogic of autoinviteVariants"
-                (click)="widget.autoinvite.ruleLogic = itemLogic"
-              >
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemLogic }}</a>
-              </li>
-            </ul>
+          <!-- Restrictions.unique -->
+          <div class="col-lg-12 margined-top-10">
+            <checker ng-model="widget.restrictions.unique.enable"></checker>
+            <h5 class="control-label switcher-label switcher-label-xs f-7">
+              {{ 'widgetsList.editor.restrictions.unique.text' | translate }}<br />
+            </h5>
           </div>
-        </div>
-        <div class="col-lg-12 margined-top-20 margined-bottom-10">
-          <label class="control-label smal-subtitle">{{ 'widgetsList.editor.autoinvite.subtitle2' | translate }}</label>
-        </div>
-        <div class="col-lg-12 margined-top-10">
-          <ui-switch
-            size="small"
-            [checked]="widget.autoinvite.pages.enable"
-            (change)="onChangePayment"
-          ></ui-switch><h5
-          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.pages.enable' | translate }}<span
-          class="label label-warning tariff-info ">окупаемый</span></h5>
-        </div>
-        <div
-          *ngIf="widget.autoinvite.pages.enable"
-          class="col-lg-12 margined-top-10 width-400"
-          [ngClass]="(widget.autoinvite.pages.value <= 0) ? 'has-error' : ''"
-        >
-          <div class="time-settings-fromto">
-            {{ 'widgetsList.editor.autoinvite.pages.prefix' | translate }}
+          <div *ngIf="widget.restrictions.unique.enable" class="col-lg-12 margined-top-20 width-900">
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
+            </div>
+            <input class="form-control widgets-num-input" type="number" min="0" [(ngModel)]="widget.restrictions.unique.gap"/>
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.restrictions.hours' | translate }}
+            </div>
           </div>
-          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.pages.value"/>
-          <div class="time-settings-fromto">
-            {{ 'widgetsList.editor.autoinvite.pages.suffix' | translate }}
-          </div>
-        </div>
-        <!-- END Autoinvite options -->
-        <!-- Autoinvite: seconds -->
-        <div class="col-lg-12 margined-top-10">
-          <ui-switch
-            class="switch-xs"
-            [checked]="widget.autoinvite.seconds.enable"
-          ></ui-switch><h5
-          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}</h5>
-        </div>
-        <div
-          *ngIf="widget.autoinvite.seconds.enable"
-          class="col-lg-12 margined-top-10 width-400"
-          [ngClass]="(widget.autoinvite.seconds.value <= 0) ? 'has-error' : ''"
-        >
-          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.seconds.value" />
-          <div class="time-settings-fromto">
-            {{ 'widgetsList.editor.autoinvite.seconds.suffix' | translate }}
-          </div>
-        </div>
-        <!-- End Autoinvite seconds -->
-        <!-- Autoinvite: anactive -->
-        <div class="col-lg-12 margined-top-10">
-          <ui-switch
-            size="small"
-            [checked]="widget.autoinvite.inactive.enabled"
-            (change)="onChangePayment"
-          ></ui-switch><h5
-          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.inactive.enabled' | translate }}<span
-          class="label label-warning tariff-info ">окупаемый</span></h5>
-        </div>
-        <div
-          *ngIf="widget.autoinvite.inactive.enabled"
-          class="col-lg-12 margined-top-10 width-400"
-          [ngClass]="(widget.autoinvite.inactive.value <= 0) ? 'has-error' : ''"
-        >
-          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.inactive.value"/>
-          <div class="time-settings-fromto">
-            {{ 'widgetsList.editor.autoinvite.inactive.suffix' | translate }}
-          </div>
-        </div>
-        <!-- End Autoinvite: anactive -->
-        <!-- Autoinvite: percent -->
-        <div class="col-lg-12 margined-top-10">
-          <ui-switch
-            size="small"
-            [checked]="widget.autoinvite.percent.enable"
-            (change)="onChangePayment"
-          ></ui-switch><h5
-          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.percent.enable' | translate }}<span
-          class="label label-warning tariff-info ">окупаемый</span></h5>
-        </div>
-        <div
-          *ngIf="widget.autoinvite.percent.enable"
-          class="col-lg-12 margined-top-10 width-400"
-          [ngClass]="(widget.autoinvite.percent.value <= 0) ? 'has-error' : ''"
-        >
-          <input style="float: left; width: 70px;" class="form-control" type="number" min="1" max="100" [(ngModel)]="widget.autoinvite.percent.value" />
-          <div class="time-settings-fromto">
-            {{ 'widgetsList.editor.autoinvite.percent.suffix' | translate }}
-          </div>
-        </div>
-        <!-- End Autoinvite: percent -->
+          <!-- END Restrictions.unique -->
 
-        <!-- Autoinvite: click -->
-        <div class="col-lg-12 margined-top-10">
-          <ui-switch
-            size="small"
-            [checked]="widget.autoinvite.click.enable"
-          ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.click.enable' | translate }}</h5>
-        </div>
-        <div
-          *ngIf="widget.autoinvite.click.enable"
-          class="col-lg-12 margined-top-10 width-900"
-          [ngClass]="(widget.autoinvite.click.value.trim().length == 0) ? 'has-error' : ''"
-        >
-          <label class="control-label">
-            {{ 'widgetsList.editor.autoinvite.click.title' | translate }}
-          </label>
-          <input class="form-control" type="text" [(ngModel)]="widget.autoinvite.click.value"/>
-          <div class="row small m-t-md underline-comment">
-            <i>{{ 'widgetsList.editor.autoinvite.click.comment' | translate }}</i>
+          <!-- Restrictions.lockAfterAction -->
+          <div class="col-lg-12 margined-top-10">
+            <checker ng-model="widget.restrictions.action.enable" ng-change="onChangePayment"></checker>
+            <h5 class="control-label switcher-label switcher-label-xs f-7">
+              {{ 'widgets.constructor.settings.lockAfterAction.title' | translate }}<span class="label label-warning tariff-info ">окупаемый</span><br />
+            </h5>
+          </div>
+          <div class="col-lg-12 margined-top-20 width-900" *ngIf="widget.restrictions.action.enable">
+            <div class="time-settings-fromto">
+              {{ 'widgets.constructor.settings.lockAfterAction.lock1' | translate }}:
+            </div>
+            <input class="form-control widgets-num-input" type="number" min="0" [(ngModel)]="widget.restrictions.action.gap"/>
+            <div class="time-settings-fromto">
+              {{ 'widgets.constructor.settings.lockAfterAction.lock2' | translate }}
+            </div>
+          </div>
+          <!-- END Restrictions.lockAfterAction -->
+
+          <!-- Restrictions.count -->
+          <div class="col-lg-12 margined-top-10">
+            <checker ng-model="widget.restrictions.count.enable" ng-change="onChangePayment"></checker>
+            <h5 class="control-label switcher-label switcher-label-xs f-7">
+              {{ 'widgetsList.editor.restrictions.count.text' | translate }}><span class="label label-warning tariff-info ">окупаемый</span><br />
+            </h5>
+          </div>
+          <div *ngIf="widget.restrictions.count.enable" class="col-lg-12 margined-top-20">
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.restrictions.count.part1' | translate }}
+            </div>
+            <input class="form-control widgets-num-input" type="number" min="0" [(ngModel)]="widget.restrictions.count.count"/>
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.restrictions.count.part2' | translate }}
+            </div>
+            <div class="floated-left">
+              <input class="form-control widgets-num-input margined-right-5" type="number" min="0" [(ngModel)]="widget.restrictions.count.interval"/>
+              <div class="dropdown" style="display: inline;">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                  {{ units[widget.restrictions.count.unit] }}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li
+                    role="presentation"
+                    *ngFor="let key of getUnitsKeys()"
+                    (click)="widget.restrictions.count.unit = key"
+                  >
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ units[key] }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="time-settings-fromto">
+              {{ 'widgetsList.editor.restrictions.count.part3' | translate }}
+            </div>
           </div>
         </div>
-        <!-- End Autoinvite seconds -->
+        <!-- END Restrictions.count -->
 
-        <!-- Autoinvite: exit-intent -->
-        <div class="col-lg-12 margined-top-10">
-          <ui-switch size="small" [checked]="widget.autoinvite.exit.enable"></ui-switch><h5
-          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.exit.enable' | translate }}</h5>
-        </div>
-        <!-- End Autoinvite: exit-intent -->
-        <!-- Autoinvite: sound -->
-        <div class="col-lg-12 margined-top-40">
-          <ui-switch size="small" [checked]="widget.autoinvite.sound.enable"></ui-switch><h5
-          class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}</h5>
-        </div>
-        <!-- End Autoinvite: sound -->
-
-        <!-- Restrictions -->
-        <div class="col-lg-12 margined-top-40">
-          <h3>{{ 'widgetsList.editor.section.block' | translate }}</h3>
-        </div>
-        <div class="col-lg-12">
-          <h4
-            class="widgets-settings-subtitle no-bold"
-          >
-            {{ 'widgetsList.editor.restrictions.title' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
+        <!-- Date range -->
+        <div class="col-lg-12 margined-top-20">
+          <h4 class="widgets-settings-subtitle no-bold">
+            {{ 'widgetsList.editor.rules.period.header' | translate }} <span
+            class="label label-warning tariff-info ">окупаемый</span> <a
+            data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.period.tooltip' | translate }}"
+            class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
           </h4>
         </div>
         <div class="col-lg-12 margined-top-10">
-          <input class="radio-left" type="radio" name="restrictions" [(ngModel)]="widget.restrictions.target.mode" value="1" (ngModelChange)="onRestrictionModeChange()">
-          <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
-            {{ 'widgetsList.editor.restrictions.disable.title' | translate }}
-          </label>
+          <ui-switch
+            size="small"
+            [(ngModel)]="widget.rules.period.enable"
+            (change)="onChangePayment"
+          ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.period.title' | translate }}</h5>
+        </div>
+        <div *ngIf="widget.rules.period.enable" class="col-lg-12 margined-top-10 width-900">
+          <div class="time-settings-fromto">
+            {{ 'widgetsList.editor.rules.time.from' | translate }}:
+          </div>
+          <input
+            style="float: left;"
+            id="period-rule-start-date-picker"
+            class="form-control period-range"
+            type="text"
+            [ngClass]="(widget.rules.period.startDate == null) ? 'has-error' : ''"
+          >
+          <div class="time-settings-fromto">
+            {{ 'widgetsList.editor.rules.time.to' | translate }}:
+          </div>
+          <input
+            style="float: left;"
+            id="period-rule-end-date-picker"
+            class="form-control period-range"
+            type="text"
+            [ngClass]="(widget.rules.period.endDate == null) ? 'has-error' : ''"
+          >
+        </div>
+        <!-- End Date range -->
+
+
+        <!-- End Restrictions-->
+        <!-- Autoresponder -->
+        <div class="col-lg-12 margined-top-40">
+          <h3>{{ 'widgetsList.editor.section.autoresponder' | translate }} <a
+            data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.autoresponder.tooltip' | translate }}"
+            class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+          </h3>
         </div>
         <div class="col-lg-12 margined-top-10">
-          <input class="radio-left" type="radio" name="restrictions" [(ngModel)]="widget.restrictions.target.mode" value="2" (ngModelChange)="onRestrictionModeChange()">
-          <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
-            {{ 'widgetsList.editor.restrictions.enable.title' | translate }}
-          </label>
+          <ui-switch size="small" [checked]="widget.autoresponder.enabled"
+          ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoresponder.enable' | translate }}</h5>
+        </div>
+        <div *ngIf="widget.autoresponder.enabled" class="col-lg-12 m-t-xs m-b-xs">
+          <div
+            class="f-4 audience-tooolbar-desc underline-links blue-links hover-links"
+            [innerHTML]="'widgets.constructor.coupon.autoresponder' | translate"
+          ></div>
+        </div>
+        <div
+          *ngIf="widget.autoresponder.enabled"
+          class="col-lg-12 margined-top-10"
+          [ngClass]="(widget.autoresponder.subject.trim().length < 1) ? 'has-error' : ''"
+        >
+          <label class="control-label">{{ 'widgetsList.editor.autoresponder.subject' | translate }}:</label>
+          <input class="form-control width-900" [(ngModel)]="widget.autoresponder.subject">
+        </div>
+        <div
+          *ngIf="widget.autoresponder.enabled"
+          class="col-lg-12 margined-top-10 width-930"
+          [ngClass]="(widget.autoresponder.text.trim().length < 1) ? 'has-error' : ''"
+        >
+          <label class="control-label">{{ 'widgetsList.editor.autoresponder.text' | translate }}:</label>
+          <text-angular class="width-900" ng-model="widget.autoresponder.text"></text-angular>
+        </div>
+        <!-- End autoresponder -->
+
+        <!-- JS Code Actions -->
+        <div class="col-lg-12 margined-top-40">
+          <h3>{{ 'widgets.constructor.settings.jscode.title' | translate }}</h3>
         </div>
         <div class="col-lg-12 margined-top-10">
-          <input class="radio-left" type="radio" name="restrictions" [(ngModel)]="widget.restrictions.target.mode" value="0" (ngModelChange)="onRestrictionModeChange()">
-          <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
-            {{ 'widgetsList.editor.restrictions.ontime.title' | translate }}
-          </label>
+          <div class="f-4 audience-tooolbar-desc" [innerHTML]="'widgets.constructor.settings.jscode.desc' | translate"></div>
         </div>
-        <div class="col-lg-12 margined-top-20" *ngIf="widget.restrictions.target.mode == 0">
-          <div class="time-settings-fromto">
-            {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
-          </div>
-          <div class="dropdown" style="float: left;">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{ widget.restrictions.target.gap }}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
-              <li
-                role="presentation"
-                *ngFor="let timeItem of getRestrictionsGaps()"
-                (click)="widget.restrictions.target.gap = timeItem"
-              ><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ timeItem }}</a></li>
-            </ul>
-          </div>
-          <div class="time-settings-fromto">
-            {{ 'widgetsList.editor.restrictions.hours' | translate }}
-          </div>
-        </div>
+
         <div class="col-lg-12 margined-top-20">
-          <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.restrictions.title2' | translate }} <a
-            data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.restrictions.autoinvite.tooltip' | translate }}"
-            class="info-link" href="#"><i class="fa fa-info-circle"></i></a></h4>
+          <ui-switch size="small" [(ngModel)]="widget.jsInfo.onShowScript.enable"
+          ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgets.constructor.settings.jscode.onShowChecker' | translate }}</h5>
         </div>
-        <!-- Restrictions.autoinvite -->
-        <div class="col-lg-12 margined-top-10">
-          <checker ng-model="widget.restrictions.autoinvite.enable"></checker>
-          <h5 class="control-label switcher-label switcher-label-xs f-7">
-            {{ 'widgetsList.editor.restrictions.autoinvite.text' | translate }}<br />
-          </h5>
+        <div class="col-lg-12 margined-top-10" *ngIf="widget.jsInfo.onShowScript.enable">
+          <textarea class="form-control textar-iframe cons-settings-js-textarea" [(ngModel)]="widget.jsInfo.onShowScript.script"></textarea>
         </div>
-        <div class="col-lg-12 margined-top-20 width-900" ng-show="widget.restrictions.autoinvite.enable">
-          <div class="time-settings-fromto">
-            {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
-          </div>
-          <input class="form-control widgets-num-input" type="number" min="0" max="72" ng-model="widget.restrictions.autoinvite.gap"/>
-          <div class="time-settings-fromto">
-            {{ 'widgetsList.editor.restrictions.hours' | translate }}
-          </div>
-        </div>
-        <!-- End restrictions.autoinvite -->
 
-        <!-- Restrictions.unique -->
-        <div class="col-lg-12 margined-top-10">
-          <checker ng-model="widget.restrictions.unique.enable"></checker>
-          <h5 class="control-label switcher-label switcher-label-xs f-7">
-            {{ 'widgetsList.editor.restrictions.unique.text' | translate }}<br />
-          </h5>
+        <div class="col-lg-12 margined-top-20">
+          <ui-switch
+            size="small"
+            [checked]="widget.jsInfo.onTargetScript.enable"
+          ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgets.constructor.settings.jscode.onActionChecker' | translate }}</h5>
         </div>
-        <div class="col-lg-12 margined-top-20 width-900" ng-show="widget.restrictions.unique.enable">
-          <div class="time-settings-fromto">
-            {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
+        <div *ngIf="widget.jsInfo.onTargetScript.enable">
+          <div class="col-lg-12 margined-top-10">
+          <textarea
+            class="form-control textar-iframe cons-settings-js-textarea"
+            [(ngModel)]="widget.jsInfo.onTargetScript.script"
+          ></textarea>
           </div>
-          <input class="form-control widgets-num-input" type="number" min="0" ng-model="widget.restrictions.unique.gap"/>
-          <div class="time-settings-fromto">
-            {{ 'widgetsList.editor.restrictions.hours' | translate }}
+          <div class="col-lg-12 margined-top-10">
+            <checker ng-model="widget.jsInfo.enablePlaceholding" ng-change="onChangePayment"></checker>
+            <h5 class="control-label switcher-label switcher-label-xs f-7">
+              {{ 'widgets.constructor.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info ">окупаемый</span>
+            </h5>
           </div>
         </div>
-        <!-- END Restrictions.unique -->
 
-        <!-- Restrictions.lockAfterAction -->
-        <div class="col-lg-12 margined-top-10">
-          <checker ng-model="widget.restrictions.action.enable" ng-change="onChangePayment"></checker>
-          <h5 class="control-label switcher-label switcher-label-xs f-7">
-            {{ 'widgets.constructor.settings.lockAfterAction.title' | translate }}<span class="label label-warning tariff-info ">окупаемый</span><br>
-          </h5>
-        </div>
-        <div class="col-lg-12 margined-top-20 width-900" ng-show="widget.restrictions.action.enable">
-          <div class="time-settings-fromto">
-            {{ 'widgets.constructor.settings.lockAfterAction.lock1' | translate }}:
-          </div>
-          <input class="form-control widgets-num-input" type="number" min="0" ng-model="widget.restrictions.action.gap"/>
-          <div class="time-settings-fromto">
-            {{ 'widgets.constructor.settings.lockAfterAction.lock2' | translate }}
-          </div>
-        </div>
-        <!-- END Restrictions.lockAfterAction -->
+        <!-- END JS Code Actions -->
 
-        <!-- Restrictions.count -->
-        <div class="col-lg-12 margined-top-10">
-          <checker ng-model="widget.restrictions.count.enable" ng-change="onChangePayment"></checker>
-          <h5 class="control-label switcher-label switcher-label-xs f-7">
-            <spring:message code="widgetsList.editor.restrictions.count.text"/><span class="label label-warning tariff-info ">окупаемый</span><br>
-          </h5>
-        </div>
-        <div class="col-lg-12 margined-top-20" ng-show="widget.restrictions.count.enable">
-          <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.restrictions.count.part1"/>
-          </div>
-          <input class="form-control widgets-num-input" type="number" min="0" ng-model="widget.restrictions.count.count"/>
-          <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.restrictions.count.part2"/>
-          </div>
-          <div class="floated-left">
-            <input class="form-control widgets-num-input margined-right-5" type="number" min="0" ng-model="widget.restrictions.count.interval"/>
-            <div class="dropdown" style="display: inline;">
-              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                {{units[widget.restrictions.count.unit]}}
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <li ng-repeat="key in getUnitsKeys()" role="presentation" ng-click="widget.restrictions.count.unit = key"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{units[key]}}</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="time-settings-fromto">
-            <spring:message code="widgetsList.editor.restrictions.count.part3"/>
-          </div>
-        </div>
-      </div>
-      <!-- END Restrictions.count -->
-
-      <!-- Date range -->
-      <div class="col-lg-12 margined-top-20">
-        <h4 class="widgets-settings-subtitle no-bold"><spring:message code="widgetsList.editor.rules.period.header"/> <span class="label label-warning tariff-info ">окупаемый</span> <a data-toggle="tooltip"
-                                                                                                                                                                                         data-placement="top"
-                                                                                                                                                                                         title="<spring:message code="widgetsList.editor.rules.period.tooltip"/>"
-          class="info-link" href="#"><i
-            class="fa fa-info-circle"></i></a></label></h4>
-      </div>
-      <div class="col-lg-12 margined-top-10">
-        <switch class="switch-xs" ng-model="widget.rules.period.enable" ng-change="onChangePayment"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.rules.period.title"/></h5>
-      </div>
-      <div class="col-lg-12 margined-top-10 width-900" ng-show="widget.rules.period.enable">
-        <div class="time-settings-fromto">
-          <spring:message code="widgetsList.editor.rules.time.from"/>:
-        </div>
-        <input style="float: left;" id="period-rule-start-date-picker" class="form-control period-range" type="text" ng-class="(widget.rules.period.startDate == null)?'has-error':''">
-        <div class="time-settings-fromto">
-          <spring:message code="widgetsList.editor.rules.time.to"/>:
-        </div>
-        <input style="float: left;" id="period-rule-end-date-picker" class="form-control period-range" type="text" ng-class="(widget.rules.period.endDate == null)?'has-error':''">
-      </div>
-      <!-- End Date range -->
-
-
-      <!-- End Restrictions-->
-      <!-- Autoresponder -->
-      <div class="col-lg-12 margined-top-40">
-        <h3><spring:message code="widgetsList.editor.section.autoresponder"/> <a data-toggle="tooltip"
-                                                                                 data-placement="top"
-                                                                                 title="<spring:message code="widgetsList.editor.autoresponder.tooltip"/>"
-          class="info-link" href="#"><i
-            class="fa fa-info-circle"></i></a></label></h3>
-      </div>
-      <div class="col-lg-12 margined-top-10">
-        <switch class="switch-xs" ng-model="widget.autoresponder.enabled"></switch><h5 class="control-label switcher-label switcher-label-xs f-6"><spring:message code="widgetsList.editor.autoresponder.enable"/></h5>
-      </div>
-      <div class="col-lg-12 m-t-xs m-b-xs" ng-show="widget.autoresponder.enabled">
-        <div class="f-4 audience-tooolbar-desc underline-links blue-links hover-links" ng-bind-html="'widgets.constructor.coupon.autoresponder' | translate"></div>
-      </div>
-      <div class="col-lg-12 margined-top-10" ng-show="widget.autoresponder.enabled" ng-class="(widget.autoresponder.subject.trim().length<1)?'has-error':''">
-        <label class="control-label"><spring:message code="widgetsList.editor.autoresponder.subject"/>:</label>
-        <input class="form-control width-900" ng-model="widget.autoresponder.subject">
-      </div>
-      <div class="col-lg-12 margined-top-10 width-930" ng-show="widget.autoresponder.enabled" ng-class="(widget.autoresponder.text.trim().length<1)?'has-error':''">
-        <label class="control-label"><spring:message code="widgetsList.editor.autoresponder.text"/>:</label>
-        <text-angular class="width-900" ng-model="widget.autoresponder.text"></text-angular>
-      </div>
-      <!-- End autoresponder -->
-
-      <!-- JS Code Actions -->
-      <div class="col-lg-12 margined-top-40">
-        <h3>{{ 'widgets.constructor.settings.jscode.title' | translate }}</h3>
-      </div>
-      <div class="col-lg-12 margined-top-10">
-        <div class="f-4 audience-tooolbar-desc" ng-bind-html="'widgets.constructor.settings.jscode.desc' | translate"></div>
       </div>
 
-      <div class="col-lg-12 margined-top-20">
-        <switch class="switch-xs" ng-model="widget.jsInfo.onShowScript.enable"></switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgets.constructor.settings.jscode.onShowChecker' | translate }}</h5>
-      </div>
-      <div class="col-lg-12 margined-top-10" ng-show="widget.jsInfo.onShowScript.enable">
-        <textarea class="form-control textar-iframe cons-settings-js-textarea" ng-model="widget.jsInfo.onShowScript.script"></textarea>
-      </div>
-
-      <div class="col-lg-12 margined-top-20">
-        <switch class="switch-xs" ng-model="widget.jsInfo.onTargetScript.enable"></switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgets.constructor.settings.jscode.onActionChecker' | translate }}</h5>
-      </div>
-      <div ng-show="widget.jsInfo.onTargetScript.enable">
-        <div class="col-lg-12 margined-top-10">
-          <textarea class="form-control textar-iframe cons-settings-js-textarea" ng-model="widget.jsInfo.onTargetScript.script"></textarea>
-        </div>
-        <div class="col-lg-12 margined-top-10">
-          <checker ng-model="widget.jsInfo.enablePlaceholding" ng-change="onChangePayment"></checker>
-          <h5 class="control-label switcher-label switcher-label-xs f-7">
-            {{ 'widgets.constructor.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info ">окупаемый</span>
-          </h5>
-        </div>
-      </div>
-
-      <!-- END JS Code Actions -->
-
-    </div>
-
-    <!-- FOOTER -->
-    <div class="footer-group" id="save-widget-panel">
-      <div class="text-right padding10">
-        <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="goToTest(widget)" type="button" class="btn w-xs gototest-widget-btn"><i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту</button>
-        <a ng-show="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)" type="button" class="btn w-xs btn-primary buy-widget-btn"><i class="pe-7s-tools margined-right-10"></i><spring:message code="widgetsList.add.alt2"/></a>
-        <div class="btn-group play-btns widget-enabler-btns" ng-show="!isMockup">
-          <p><spring:message code="widgetsList.widget.state"/></p>
-          <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет">
-            <i class="fa fa-play"></i>
+      <!-- FOOTER -->
+      <div class="footer-group" id="save-widget-panel">
+        <div class="text-right padding10">
+          <button
+            type="button"
+            *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+            (click)="goToTest(widget)"
+            class="btn w-xs gototest-widget-btn"
+          >
+            <i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту
           </button>
-          <button ng-show="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет">
-            <i class="fa fa-pause"></i>
-          </button>
+          <a
+            *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
+            type="button"
+            class="btn w-xs btn-primary buy-widget-btn"
+          ><i class="pe-7s-tools margined-right-10"></i>{{ 'widgetsList.add.alt2' | translate }}</a>
+          <div class="btn-group play-btns widget-enabler-btns" *ngIf="!isMockup">
+            <p>{{ 'widgetsList.widget.state' | translate }}</p>
+            <button
+              *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+              (click)="startWidget(widget)"
+              [ngClass]="(widget.active) ? 'active' : ''" class="btn btn-xs btn-default start-widget-btn"
+              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
+            >
+              <i class="fa fa-play"></i>
+            </button>
+            <button
+              *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+              (click)="stopWidget(widget)"
+              [ngClass]="(widget.active) ? '' : 'active'"
+              class="btn btn-xs btn-default stop-widget-btn"
+              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
+            >
+              <i class="fa fa-pause"></i>
+            </button>
 
-          <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="startWidget(widget)" ng-class="(widget.active)?'active':''" class="btn btn-xs btn-default start-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить вариант">
-            <i class="fa fa-play"></i>
-          </button>
-          <button ng-show="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант">
-            <i class="fa fa-pause"></i>
+            <button
+              *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+              (click)="startWidget(widget)"
+              [ngClass]="(widget.active) ? 'active' : ''"
+              class="btn btn-xs btn-default start-widget-btn"
+              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить вариант"
+            >
+              <i class="fa fa-play"></i>
+            </button>
+            <button
+              *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+              (click)="stopWidget(widget)"
+              [ngClass]="(widget.active)? '' : 'active'"
+              class="btn btn-xs btn-default stop-widget-btn"
+              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
+            >
+              <i class="fa fa-pause"></i>
+            </button>
+          </div>
+
+          <ng-container *ngIf="hasRole('ROLE_DESIGNER')">
+            <button
+              type="button"
+              *ngIf="!isMockup"
+              (click)="saveAsMockup()"
+              class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left"
+              data-style="slide-down"
+            >
+              <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
+            </button>
+          </ng-container>
+
+          <button
+            id="saveWidget"
+            (click)="saveWidget()"
+            type="button"
+            class="ladda-button btn w-xs btn-success"
+            data-style="slide-down"
+          >
+          <span class="ladda-label"><i class="fa fa-save"></i> <span
+            *ngIf="!isMockup">{{ (widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет' }}</span><span
+            *ngIf="isMockup">Сохранить темплейт</span>
+          </span>
           </button>
         </div>
-
-        <sec:authorize access="hasRole('ROLE_DESIGNER')">
-          <button ng-click="saveAsMockup()" type="button" class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left" data-style="slide-down" ng-show="!isMockup"><span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт </span> </button>
-        </sec:authorize>
-
-        <button id="saveWidget" ng-click="saveWidget()" type="button" class="ladda-button btn w-xs btn-success" data-style="slide-down"><span class="ladda-label"><i class="fa fa-save"></i> <span ng-show="!isMockup" ng-bind="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span ng-show="isMockup">Сохранить темплейт</span></span></button>
       </div>
     </div>
   </div>
