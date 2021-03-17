@@ -97,6 +97,7 @@ export interface WidgetInfo extends WidgetInfoShort {
   active: boolean;
   abtestInfo: AbtestInfo;
   widgetConversion?: WidgetConversion;
+  containerId?: string;
 }
 
 export interface AbtestInfo {
