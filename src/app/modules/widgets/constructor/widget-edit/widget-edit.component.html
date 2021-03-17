@@ -532,30 +532,39 @@
             <p>{{ 'widgetsList.widget.state' | translate }}</p>
             <button
               *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
-              (click)="startWidget(widget)"
-              [ngClass]="(widget.active)?'active':''"
               class="btn btn-xs btn-default start-widget-btn"
-              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет">
+              [ngClass]="(widget.active) ? 'active' : ''"
+              (click)="startWidget(widget)"
+              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
+            >
               <i class="fa fa-play"></i>
             </button>
-            <button *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)" ng-click="stopWidget(widget)" ng-class="(widget.active)?'':'active'" class="btn btn-xs btn-default stop-widget-btn" data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет">
+            <button
+              *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+              class="btn btn-xs btn-default stop-widget-btn"
+              [ngClass]="(widget.active) ? '' : 'active'"
+              (click)="stopWidget(widget)"
+              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
+            >
               <i class="fa fa-pause"></i>
             </button>
 
             <button
               *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-              (click)="startWidget(widget)"
-              [ngClass]="(widget.active)?'active':''"
               class="btn btn-xs btn-default start-widget-btn"
-              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить варинт">
+              [ngClass]="(widget.active)?'active':''"
+              (click)="startWidget(widget)"
+              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить варинт"
+            >
               <i class="fa fa-play"></i>
             </button>
             <button
               *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-              (click)="stopWidget(widget)"
-              [ngClass]="(widget.active)?'':'active'"
               class="btn btn-xs btn-default stop-widget-btn"
-              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант">
+              [ngClass]="(widget.active)?'':'active'"
+              (click)="stopWidget(widget)"
+              data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
+            >
               <i class="fa fa-pause"></i>
             </button>
           </div>
@@ -718,7 +727,10 @@
                 type="button"
                 (click)="saveAsMockup()"
                 class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left"
-                data-style="slide-down" ng-show="!isMockup"><span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт </span> </button>
+                data-style="slide-down" *ngIf="!isMockup"
+              >
+                <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
+              </button>
             </ng-container>
 
             <button
@@ -1383,7 +1395,7 @@
           </div>
           <!-- Restrictions.autoinvite -->
           <div class="col-lg-12 margined-top-10">
-            <checker ng-model="widget.restrictions.autoinvite.enable"></checker>
+            <input type="checkbox" id="autoinviteEnable" name="autoinviteEnable" [(ngModel)]="widget.restrictions.autoinvite.enable">
             <h5 class="control-label switcher-label switcher-label-xs f-7">
               {{ 'widgetsList.editor.restrictions.autoinvite.text' | translate }}<br />
             </h5>
@@ -1401,7 +1413,7 @@
 
           <!-- Restrictions.unique -->
           <div class="col-lg-12 margined-top-10">
-            <checker ng-model="widget.restrictions.unique.enable"></checker>
+            <input type="checkbox" id="uniqueEnable" name="uniqueEnable" [(ngModel)]="widget.restrictions.unique.enable">
             <h5 class="control-label switcher-label switcher-label-xs f-7">
               {{ 'widgetsList.editor.restrictions.unique.text' | translate }}<br />
             </h5>
@@ -1419,7 +1431,7 @@
 
           <!-- Restrictions.lockAfterAction -->
           <div class="col-lg-12 margined-top-10">
-            <checker ng-model="widget.restrictions.action.enable" ng-change="onChangePayment"></checker>
+            <input #actionEnable id="actionEnable" type="checkbox" [checked]="widget.restrictions.action.enable" (change)="onChangePayment(actionEnable.checked)" />
             <h5 class="control-label switcher-label switcher-label-xs f-7">
               {{ 'widgets.constructor.settings.lockAfterAction.title' | translate }}<span class="label label-warning tariff-info ">окупаемый</span><br />
             </h5>
@@ -1437,7 +1449,7 @@
 
           <!-- Restrictions.count -->
           <div class="col-lg-12 margined-top-10">
-            <checker ng-model="widget.restrictions.count.enable" ng-change="onChangePayment"></checker>
+            <input #countEnable id="countEnable" type="checkbox" [checked]="widget.restrictions.count.enable" (change)="onChangePayment(countEnable.checked)" />
             <h5 class="control-label switcher-label switcher-label-xs f-7">
               {{ 'widgetsList.editor.restrictions.count.text' | translate }}><span class="label label-warning tariff-info ">окупаемый</span><br />
             </h5>
@@ -1582,7 +1594,7 @@
           ></textarea>
           </div>
           <div class="col-lg-12 margined-top-10">
-            <checker ng-model="widget.jsInfo.enablePlaceholding" ng-change="onChangePayment"></checker>
+            <input #enablePlaceholding id="enablePlaceholding" type="checkbox" [checked]="widget.jsInfo.enablePlaceholding" (change)="onChangePayment(enablePlaceholding.checked)" />
             <h5 class="control-label switcher-label switcher-label-xs f-7">
               {{ 'widgets.constructor.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info ">окупаемый</span>
             </h5>

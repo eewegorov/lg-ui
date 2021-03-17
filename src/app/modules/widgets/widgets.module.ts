@@ -23,6 +23,10 @@ import { CloneWidgetComponent } from './clone-widget/clone-widget.component';
 import { ContainerCodeComponent } from './containerized/container-code/container-code.component';
 import { NgxFlowModule } from '@flowjs/ngx-flow';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ConstructorDesignComponent } from './constructor/constructor-design/constructor-design.component';
+import { ConstructorIntegrationsComponent } from './constructor/constructor-integrations/constructor-integrations.component';
+import { ConstructorAudiencesComponent } from './constructor/constructor-audiences/constructor-audiences.component';
+import { ConstructorRulesComponent } from './constructor/constructor-rules/constructor-rules.component';
 
 
 @NgModule({
@@ -40,7 +44,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ContainerizedAddComponent,
     TemplatesGalleryComponent,
     CloneWidgetComponent,
-    ContainerCodeComponent
+    ContainerCodeComponent,
+    ConstructorDesignComponent,
+    ConstructorIntegrationsComponent,
+    ConstructorAudiencesComponent,
+    ConstructorRulesComponent
   ],
   exports: [
     SmartpointsControlComponent
