@@ -1,1 +1,251 @@
-<p>constructor-design works!</p>
+<div class="widgets-settings-container" id="widgetStyle">
+
+  <div class="footer-group" >
+    <div class="text-right padding10">
+      <button
+        type="button"
+        *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+        (click)="goToTest(widget)"
+        class="btn w-xs gototest-widget-btn"
+      >
+        <i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту
+      </button>
+      <a
+        type="button"
+        *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
+        class="btn w-xs btn-primary buy-widget-btn"
+      >
+        <i class="pe-7s-tools margined-right-10"></i> {{ 'widgetsList.add.alt2' | translate }}
+      </a>
+      <div class="btn-group play-btns" *ngIf="!isMockup">
+        <p>Статус:</p>
+        <button
+          *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+          (click)="startWidget(widget)"
+          [ngClass]="(widget.active)?'active':''"
+          class="btn btn-xs btn-default start-widget-btn"
+          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
+        >
+          <i class="fa fa-play"></i>
+        </button>
+        <button
+          *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+          (click)="stopWidget(widget)"
+          [ngClass]="(widget.active)?'':'active'"
+          class="btn btn-xs btn-default stop-widget-btn"
+          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
+        >
+          <i class="fa fa-pause"></i>
+        </button>
+
+        <button
+          *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+          (click)="startWidget(widget)"
+          [ngClass]="(widget.active)?'active':''"
+          class="btn btn-xs btn-default start-widget-btn"
+          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить вариант"
+        >
+          <i class="fa fa-play"></i>
+        </button>
+        <button
+          *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+          (click)="stopWidget(widget)"
+          [ngClass]="(widget.active)?'':'active'"
+          class="btn btn-xs btn-default stop-widget-btn"
+          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
+        >
+          <i class="fa fa-pause"></i>
+        </button>
+      </div>
+
+      <ng-container *ngIf="hasRole('ROLE_DESIGNER')">
+        <button
+          type="button"
+          *ngIf="!isMockup"
+          (click)="saveAsMockup()"
+          class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left"
+          data-style="slide-down"
+        >
+          <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
+        </button>
+      </ng-container>
+
+      <button type="button" id="saveWidget" (click)="saveWidget()" class="ladda-button btn w-xs btn-success" data-style="slide-down">
+            <span class="ladda-label">
+              <i class="fa fa-save"></i> <span
+              *ngIf="!isMockup"
+              [innerHTML]="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span
+              *ngIf="isMockup">Сохранить темплейт</span>
+            </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addNewElementListModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="color-line"></div>
+        <div class="modal-header text-center">
+          <h4>Выберите элемент, который хотите добавить</h4>
+        </div>
+        <div *ngIf="exForScrFunc()"></div>
+        <div class="modal-body">
+          <div class="row-panel-fl">
+            <div class="row-panel-item small-pdn">
+              <div
+                class="newElementItem"
+                (click)="addFormExtButtonElement(disElementOrNotBtn())"
+                [ngClass]="(disElementOrNotBtn())?'disable-new-element-btn':''"
+              >
+                <div class="element-form-new-icon"></div>
+                <span>Форма+кнопки (новый)</span>
+              </div>
+            </div>
+            <div class="row-panel-item small-pdn">
+              <div
+                class="newElementItem"
+                (click)="addFormButtonElement(disElementOrNotBtn())"
+                [ngClass]="(disElementOrNotBtn())?'disable-new-element-btn':''"
+              >
+                <div class="element-form-icon"></div>
+                <span>Форма (устаревший)</span>
+              </div>
+            </div>
+            <div class="row-panel-item small-pdn" *ngIf="!isContainerized">
+              <div
+                class="newElementItem"
+                (click)="addCloseLinkElement(disElementOrNotBtnCloseLink())"
+                [ngClass]="(disElementOrNotBtnCloseLink())?'disable-new-element-btn':''"
+              >
+                <div class="element-dismiss-icon"></div>
+                <span class="m-r-n m-l-n">Ссылка/Кнопка закрытия</span>
+              </div>
+            </div>
+            <div class="row-panel-item small-pdn">
+              <div
+                class="newElementItem"
+                (click)="addButtonElement(disElementOrNotBtn())"
+                [ngClass]="(disElementOrNotBtn())?'disable-new-element-btn':''"
+              >
+                <div class="element-button-icon"></div>
+                <span>Кнопка</span>
+              </div>
+            </div>
+
+            <div class="row-panel-item small-pdn">
+              <div class="newElementItem" (click)="addTitleElement()">
+                <div class="element-text-icon"></div>
+                <span>Текст</span>
+              </div>
+            </div>
+            <div class="row-panel-item small-pdn">
+              <div
+                class="newElementItem"
+                (click)="addSocialElement(disElementOrNotBtnSocial())"
+                [ngClass]="(disElementOrNotBtnSocial())?'disable-new-element-btn':''"
+              >
+                <div class="element-social-icon"></div>
+                <span>Социальные кнопки</span>
+              </div>
+            </div>
+            <div class="row-panel-item small-pdn">
+              <div class="newElementItem" (click)="addSplitElement()">
+                <div class="element-divider-icon"></div>
+                <span>Разделитель</span>
+              </div>
+            </div>
+
+            <div class="row-panel-item small-pdn">
+              <div class="newElementItem" (click)="addVideoElement()">
+                <div class="element-video-icon"></div>
+                <span>Видео</span>
+              </div>
+            </div>
+            <div class="row-panel-item small-pdn">
+              <div class="newElementItem" (click)="addImageElement()">
+                <div class="element-image-icon"></div>
+                <span>Изображение</span>
+              </div>
+            </div>
+            <div class="row-panel-item small-pdn">
+              <div class="newElementItem" (click)="addPaddingElement()">
+                <div class="element-padding-icon"></div>
+                <span>Отступ</span>
+              </div>
+            </div>
+
+            <div class="row-panel-item small-pdn">
+              <div class="newElementItem" (click)="addIframeElement()">
+                <div class="element-iframe-icon"></div>
+                <span>HTML / JS / Iframe</span>
+              </div>
+            </div>
+
+            <div class="row-panel-item small-pdn">
+              <div class="newElementItem" (click)="addCouponElement()">
+                <span class="payment-modal-icon label label-warning tariff-info">окупаемый</span>
+                <div class="element-coupon-icon"></div>
+                <span>Купон</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container #flowBasic="flow" [flowConfig]="{target: '/'}"></ng-container>
+
+  <div
+    class="modal fade"
+    id="addNewWidgetListModal"
+    tabindex="-1"
+    role="dialog"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="dragAndDropFilter"></div>
+      <div class="modal-content">
+        <div class="color-line"></div>
+        <div class="modal-header text-center">
+          <h4 class="modal-title">Мои изображения</h4>
+        </div>
+        <div class="modal-body">
+          <h4>Загруженные изображения</h4>
+          <div class="row row-nomargined">
+            <div id="listImagesBlock" class="col-lg-12 margined-top-10"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="img-set-foot1">
+            <div class="dragDropBl">
+              <div class="upload-drag-icon"><i class="fa fa-upload"></i></div>
+              <button
+                flowButton
+                [flow]="flowBasic.flowJs"
+                [flowAttributes]="{accept: 'image/*'}"
+                class="load-img-gal btn btn-success ladda-button"
+                data-style="slide-down"
+              >
+                <span class="ladda-label">Загрузить изображение</span>
+              </button>
+
+              <div
+                class="drop-area"
+                flowDrop
+                [flow]="flowBasic.flowJs"
+              >
+                <span class="dragOr">или перетащите изображение сюда</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button data-dismiss="modal" (click)="closeModalImg()" id="btnCloseImgM" class="btn btn-default pull-left" type="button">Отмена</button>
+            <button class="btn btn-info set-img-gal" (click)="updateFile()">Установить изображение</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

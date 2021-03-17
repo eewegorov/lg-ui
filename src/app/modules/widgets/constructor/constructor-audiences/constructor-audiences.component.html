@@ -1,1 +1,260 @@
-<p>constructor-audiences works!</p>
+<div class="widgets-settings-container">
+  <!-- Audiences list -->
+  <div id="audiences-list" *ngIf="audienceMode == MODE_LIST">
+    <h1>{{ 'widgetsList.editor.audiences.title' | translate }}</h1>
+    <div class="f-4 audience-tooolbar-desc" style="margin-top: 30px;">{{ 'widgetsList.editor.audiences.disc' | translate }}</div>
+    <div class="toolbar-content no-padding padding-top-30">
+      <div class="row btnpanel">
+        <div class="audience-tooolbar-switcher">
+          <ui-switch
+            [checked]="widget.audiencesEnabled"
+            (change)="onChangePayment"
+            class="margined-top-5 margined-right-10 floated-left"
+          ></ui-switch><h3 class="f-5 margined-top-5">{{ 'widgetsList.editor.audiences.enabled' | translate }}<span
+          class="label label-warning tariff-info biggest">окупаемый</span></h3>
+        </div>
+        <button
+          type="button"
+          id="addAudience"
+          *ngIf="widget.audiencesEnabled"
+          (click)="addNewAudience()"
+          class="btn btn-lg w-xs btn-success margined-right-20"
+        ><i class="fa fa-plus-circle"></i>{{ 'audience.addNew' | translate }}</button>
+      </div>
+    </div>
+
+    <div class="row no-animate padding-bottom-70" *ngIf="widget.audiencesEnabled">
+      <div class="col-sm-4" *ngIf="audiences.length == 0">
+        <div class="audience-panel-content">
+          <i class="fa fa-group audience-icon"></i>
+          <h3 class="audience-title">{{ 'audience.allUser.name' | translate }}</h3>
+          <p class="audience-desc-tilte">{{ 'audience.desc' | translate }}:</p>
+          <p>{{ 'audience.allUser.desc' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-sm-4" *ngFor="let audItem of audiences">
+        <div class="text-center m-t-xs row">
+          <button class="btn btn-primary margined-right-5 audience-panel-btn text-left" (click)="editAudience(audItem)">
+            <i class="pe-7s-pen"></i> {{ 'audience.edit' | translate }}
+          </button>
+          <button class="btn btn-danger margined-left-5 audience-panel-btn text-left" (click)="deleteAudience(audItem)">
+            <i class="pe-7s-trash"></i> {{ 'global.delete' | translate }}
+          </button>
+        </div>
+
+        <div class="audience-panel-content">
+          <i class="fa fa-group audience-icon"></i>
+          <h3 class="audience-title">{{ getCroppedString(audItem.name, 60, "…") }}</h3>
+          <p class="audience-desc-tilte">{{ 'audience.desc' | translate }}:</p>
+          <p class="audience-desc">{{ getCroppedString(audItem.description, 60, "…") }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-group" id="save-widget-panel">
+      <div class="text-right padding10">
+        <button
+          type="button"
+          *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+          (click)="goToTest(widget)"
+          class="btn w-xs gototest-widget-btn"
+        >
+          <i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту
+        </button>
+        <a
+          type="button"
+          *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
+          class="btn w-xs btn-primary buy-widget-btn"
+        >
+          <i class="pe-7s-tools margined-right-10"></i>{{ 'widgetsList.add.alt2' | translate }}
+        </a>
+        <div class="btn-group play-btns widget-enabler-btns" *ngIf="!isMockup">
+          <p>{{ 'widgetsList.widget.state' | translate }}</p>
+          <button
+            *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+            (click)="startWidget(widget)"
+            [ngClass]="(widget.active) ? 'active' : ''"
+            class="btn btn-xs btn-default start-widget-btn"
+            data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
+          >
+            <i class="fa fa-play"></i>
+          </button>
+          <button
+            *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+            (click)="stopWidget(widget)"
+            [ngClass]="(widget.active) ? '' : 'active'"
+            class="btn btn-xs btn-default stop-widget-btn"
+            data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
+          >
+            <i class="fa fa-pause"></i>
+          </button>
+
+          <button
+            *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+            (click)="startWidget(widget)"
+            [ngClass]="(widget.active) ? 'active' : ''"
+            class="btn btn-xs btn-default start-widget-btn"
+            data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить варинт"
+          >
+            <i class="fa fa-play"></i>
+          </button>
+          <button
+            *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+            (click)="stopWidget(widget)"
+            [ngClass]="(widget.active) ? '' : 'active'"
+            class="btn btn-xs btn-default stop-widget-btn"
+            data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
+          >
+            <i class="fa fa-pause"></i>
+          </button>
+        </div>
+
+        <ng-container *ngIf="hasRole('ROLE_DESIGNER')">
+          <button
+            type="button"
+            (click)="saveAsMockup()"
+            class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left"
+            data-style="slide-down" *ngIf="!isMockup"
+          >
+            <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
+          </button>
+        </ng-container>
+
+        <button
+          type="button"
+          id="saveWidget"
+          (click)="saveWidget()"
+          class="ladda-button btn w-xs btn-success floated-left"
+          data-style="slide-down"
+        >
+              <span class="ladda-label"><i class="fa fa-save"></i> <span
+                *ngIf="!isMockup">{{ (widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет' }}</span><span
+                *ngIf="isMockup">Сохранить темплейт</span>
+              </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- End Audiences list -->
+
+  <!-- Audience editor -->
+  <div id="audiences-item" *ngIf="audienceMode == MODE_ITEM">
+    <!-- TEMPLATES -->
+
+    <!-- CONTENT -->
+    <div class="row row-nomargined margined-bottom-15" style="max-height: 72px;">
+      <div class="validable col-lg-6" data-context="name" [ngClass]="(audience.name.trim().length == 0) ? 'has-error' : ''">
+        <label class="control-label">{{ 'audience.name' | translate }}</label>
+        <input type="text" name="name" class="form-control" id="name" [(ngModel)]="audience.name" autocomplete="off">
+      </div>
+      <div class="validable col-lg-6" data-context="description">
+        <label class="control-label">{{ 'audience.description' | translate }}</label>
+        <input type="text" name="description" class="form-control" id="description" [(ngModel)]="audience.description" autocomplete="off">
+      </div>
+    </div>
+    <!-- Audience editor core -->
+    <div class="row row-nomargined margined-bottom-15">
+      <div class="col-lg-8" id="rules-containers">
+        <label class="control-label">{{ 'audience.settings' | translate }}</label>
+        <div class="rule-container rule-def" anddropcontainer *ngIf="audience.groups.length == 0">
+          <div class="rule-droppable">
+            <h4>{{ 'audience.rule.droppable' | translate }}</h4>
+          </div>
+        </div>
+        <div *ngFor="let group of audience.groups; index as i">
+          <div class="rule-groups-text" *ngIf="$index != 0">{{ 'audience.rule.logic.and' | translate }}</div>
+          <div *ngFor="let item of group.items">
+            <div class="rule-block">
+              <div class="rule-header">
+                {{ item.name }}<i class="pe-7s-close-circle" (click)="removeItem(group.$$hashKey, $index)"></i>
+              </div>
+              <div class="rule-body" [ngSwitch]="item.type">
+                <rule-refer     *ngSwitchCase="refer"   ng-model="item"></rule-refer>
+                <rule-url       *ngSwitchCase="url"     ng-model="item"></rule-url>
+                <rule-type      *ngSwitchCase="type"    ng-model="item"></rule-type>
+                <rule-visit     *ngSwitchCase="visit"   ng-model="item"></rule-visit>
+                <rule-visit-no  *ngSwitchCase="visitno" ng-model="item"></rule-visit-no>
+                <rule-devices   *ngSwitchCase="devices" ng-model="item"></rule-devices>
+                <rule-social    *ngSwitchCase="social"  ng-model="item"></rule-social>
+                <h1 *ngSwitchDefault>ERROR!</h1>
+              </div>
+            </div>
+            <div class="rule-groups-text">{{ 'audience.rule.logic.or' | translate }}</div>
+          </div>
+
+          <div class="rule-container margined-bottom-15" ordropcontainer data-index="{{ i }}">
+            <div class="rule-droppable-or">
+              <h4>{{ 'audience.rule.ordroppable' | translate }}</h4>
+            </div>
+          </div>
+          <div *ngIf="i === audience.groups.length - 1">
+            <div class="rule-groups-text rule-groups-text-ok">{{ 'audience.rule.logic.and' | translate }}</div>
+            <div class="rule-container rule-container-ok" anddropcontainer>
+              <div class="rule-droppable-and">
+                <h4>{{ 'audience.rule.anddroppable' | translate }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 rules-templates-list">
+        <label class="control-label">{{ 'audience.rules' | translate }}</label>
+        <div>
+          <div name="code">refer</div>
+          <div name="name">{{ 'audience.rule.refer' | translate }}</div>
+          <div name="description">{{ 'audience.rule.refer.desc' | translate }}</div>
+        </div>
+        <div>
+          <div name="code">type</div>
+          <div name="name">{{ 'audience.rule.type' | translate }}</div>
+          <div name="description">{{ 'audience.rule.type.desc' | translate }}</div>
+        </div>
+        <div>
+          <div name="code">url</div>
+          <div name="name">{{ 'audience.rule.url' | translate }}</div>
+          <div name="description">{{ 'audience.rule.url.desc' | translate }}</div>
+        </div>
+        <div>
+          <div name="code">visit</div>
+          <div name="name">{{ 'audience.rule.visit' | translate }}</div>
+          <div name="description">{{ 'audience.rule.visit.desc' | translate }}</div>
+        </div>
+        <div>
+          <div name="code">visitno</div>
+          <div name="name">{{ 'audience.rule.visitno' | translate }}</div>
+          <div name="description">{{ 'audience.rule.visitno.desc' | translate }}</div>
+        </div>
+        <div>
+          <div name="code">devices</div>
+          <div name="name">{{ 'audience.rule.devices' | translate }}</div>
+          <div name="description">{{ 'audience.rule.devices.desc' | translate }}</div>
+        </div>
+        <div>
+          <div name="code">social</div>
+          <div name="name">{{ 'audience.rule.social' | translate }}</div>
+          <div name="description">{{ 'audience.rule.social.desc' | translate }}</div>
+        </div>
+
+        <button
+          type="button"
+          id="saveAudience"
+          class="btn btn-lg w-xs btn-success margined-top-10"
+          (click)="saveAudience()"
+        >
+          <i class="fa fa-save"></i> {{ 'audience.save' | translate }}
+        </button>
+        <button
+          type="button"
+          id="cancelAudience"
+          class="btn btn-lg w-xs btn-default margined-top-10"
+          (click)="audienceMode = MODE_LIST"
+        >
+          <i class="fa fa-undo"></i> {{ 'audience.return' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- End Audience editor -->
+</div>
