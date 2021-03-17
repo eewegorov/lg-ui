@@ -1560,7 +1560,7 @@
           [ngClass]="(widget.autoresponder.text.trim().length < 1) ? 'has-error' : ''"
         >
           <label class="control-label">{{ 'widgetsList.editor.autoresponder.text' | translate }}:</label>
-          <text-angular class="width-900" ng-model="widget.autoresponder.text"></text-angular>
+          <angular-editor class="width-900" [(ngModel)]="widget.autoresponder.text"></angular-editor>
         </div>
         <!-- End autoresponder -->
 
