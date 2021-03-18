@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { WidgetInfo } from '../../../../core/models/widgets';
+import { WidgetInfo, WidgetType } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetService } from '../../services/widget.service';
+import { SitesService } from '../../../sites/services/sites.service';
+import { SiteShort } from '../../../../core/models/sites';
+import { CouponService } from '../../../coupons/services/coupon.service';
+import { Coupon } from '../../../../core/models/coupons';
 
 @Component({
   selector: 'app-widget-edit',
@@ -18,12 +22,17 @@ export class WidgetEditComponent implements OnInit {
   private readonly sid: string;
   private currentActiveTab = 'design';
   private validators = [];
+  private types = [];
+  private coupons = [];
   private formExtIdsErrorFlag = false;
   private formExtNeedButton = false;
   private formExtRedirectFieldEmpty = false;
+  private defaultCoupon = { id: null, name: 'Какой купон хотите использовать?' };
 
   constructor(
     private translate: TranslateService,
+    private couponService: CouponService,
+    private sitesService: SitesService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService
   ) {
@@ -43,6 +52,17 @@ export class WidgetEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initTypes();
+
+    if (this.isMockup) {
+      loadMockup();
+    } else {
+      loadWidget();
+      loadAudiences();
+    }
+    loadGroups();
+
+    ($('.start-widget-btn, .stop-widget-btn') as any).tooltip();
   }
 
   public startRenameWidget(widget) {
@@ -115,6 +135,60 @@ export class WidgetEditComponent implements OnInit {
     });
 
     return errorsList;
+  }
+
+  private initTypes() {
+    this.widgetService.getWidgetsTypes().subscribe((response: WidgetType[]) => {
+      this.initSites();
+      this.types = response;
+    });
+  }
+
+  private initSites() {
+    this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
+      this.getCoupons();
+      if (response) {
+        this.sitesService.sites = response;
+      }
+    });
+  }
+
+  private getCoupons() {
+    $('.widget-style-menu').addClass('loading-coupons');
+    this.couponService.getCouponsList().subscribe((response: Coupon[]) => {
+      if (response) {
+        this.coupons = response;
+
+        if (this.widget.guiprops.exit.couponCallback.coupon.coupon.id) {
+          this.checkCouponsCallback(this.widget.guiprops.exit.couponCallback.coupon);
+        }
+        if (this.widget.guiprops.social.couponCallback.coupon.coupon.id) {
+          this.checkCouponsCallback(this.widget.guiprops.social.couponCallback.coupon);
+        }
+        if (this.widget.guiprops.form.couponCallback.coupon.coupon.id) {
+          this.checkCouponsCallback(this.widget.guiprops.form.couponCallback.coupon);
+        }
+
+        this.widget.guiprops.elementsList.forEach((item) => {
+          if (item.name && item.name === 'coupon-element') {
+            if (item.coupon.id) {
+              this.checkCouponsCallback(item);
+            }
+          }
+        });
+
+        $('.widget-style-menu').removeClass('loading-coupons');
+      }
+    });
+  }
+
+  private checkCouponsCallback(callbackModel) {
+    const isItExist = this.coupons.find((coupon) => {
+      return coupon.id === callbackModel.coupon.id;
+    });
+    if (!isItExist) {
+      callbackModel.coupon = { ...this.defaultCoupon };
+    }
   }
 
 }
