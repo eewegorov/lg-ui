@@ -11,6 +11,48 @@ export interface Entities {
   widgets: Widget[];
 }
 
+export interface WidgetResponse extends ApiResponse {
+  data: FullWidget;
+}
+
+export interface FullWidget {
+  abtestInfo: AbtestInfo;
+  containerId: string;
+  name: string;
+  type: string;
+  active: boolean;
+  sendCrm: boolean;
+  template: string;
+  restrictions: Record<string, string>;
+  autoresponder: Record<string, string>;
+  audiencesEnabled: boolean;
+  audience: Record<string, string>[];
+  rules: Record<string, string>[];
+  guiProps: Record<string, string>;
+  coupons: string[];
+  integrations: string[];
+  useCustomIntegrationsList: boolean;
+  customFields: CustomField[];
+  jsInfo: WidgetJsInfo;
+}
+
+export interface CustomField {
+  id: string;
+  name: string;
+  type: string;
+}
+
+export interface WidgetJsInfo {
+  onShowScript: WidgetJsOnScript;
+  onTargetScript: WidgetJsOnScript;
+  enablePlaceholding: boolean;
+}
+
+export interface WidgetJsOnScript {
+  enable: boolean;
+  script: string;
+}
+
 export interface Company {
   id: string;
   name: string;
@@ -98,6 +140,7 @@ export interface WidgetInfo extends WidgetInfoShort {
   abtestInfo: AbtestInfo;
   widgetConversion?: WidgetConversion;
   containerId?: string;
+  guiprops: Record<string, any>;
 }
 
 export interface AbtestInfo {
@@ -255,15 +298,22 @@ export interface MockupsResponse extends ApiResponse {
   data: Mockup[];
 }
 
-export interface Mockup {
-  id: string;
+export interface MockupResponse extends ApiResponse {
+  data: MockupShort;
+}
+
+export interface MockupShort {
   name: string;
   description: string;
   preview: string;
+  tariff: string;
+  categories: string[] | string;
+}
+
+export interface Mockup extends MockupShort {
+  id: string;
   template: string;
   type: string;
-  categories: string[] | string;
-  tariff: string;
 }
 
 

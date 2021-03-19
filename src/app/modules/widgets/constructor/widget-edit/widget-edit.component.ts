@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { WidgetInfo, WidgetType } from '../../../../core/models/widgets';
+import { FullWidget, MockupShort, WidgetInfo, WidgetType } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetService } from '../../services/widget.service';
 import { SitesService } from '../../../sites/services/sites.service';
 import { SiteShort } from '../../../../core/models/sites';
 import { CouponService } from '../../../coupons/services/coupon.service';
 import { Coupon } from '../../../../core/models/coupons';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-widget-edit',
@@ -19,17 +20,22 @@ export class WidgetEditComponent implements OnInit {
   public widget: WidgetInfo;
   public isMockup = false;
 
-  private readonly sid: string;
+  private sid: string;
+  private wid: string;
   private currentActiveTab = 'design';
   private validators = [];
   private types = [];
   private coupons = [];
+  private audiences = [];
   private formExtIdsErrorFlag = false;
   private formExtNeedButton = false;
   private formExtRedirectFieldEmpty = false;
   private defaultCoupon = { id: null, name: 'Какой купон хотите использовать?' };
+  private isContainerized: boolean;
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private translate: TranslateService,
     private couponService: CouponService,
     private sitesService: SitesService,
@@ -46,21 +52,22 @@ export class WidgetEditComponent implements OnInit {
       { id: 6, name: this.translate.instant('global.week.sunday') }
     ];
 
-    this.sid = $('input#sid').val() as string;
+    this.sid = this.route.snapshot.paramMap.get('id').split('-')[0];
+    this.wid = this.route.snapshot.paramMap.get('id').split('-')[1];
 
-    this.isMockup = (($('#ismockup') as any).size() > 0);
+    this.isMockup = this.hasRole('ROLE_DESIGNER');
   }
 
   ngOnInit(): void {
     this.initTypes();
 
     if (this.isMockup) {
-      loadMockup();
+      this.loadMockup();
     } else {
-      loadWidget();
-      loadAudiences();
+      this.loadWidget();
+      this.loadAudiences();
     }
-    loadGroups();
+    this.loadGroups();
 
     ($('.start-widget-btn, .stop-widget-btn') as any).tooltip();
   }
@@ -189,6 +196,33 @@ export class WidgetEditComponent implements OnInit {
     if (!isItExist) {
       callbackModel.coupon = { ...this.defaultCoupon };
     }
+  }
+
+  private loadMockup() {
+    this.widgetService.getMockup(this.wid).subscribe((data: MockupShort) => {
+      this.widget = data as unknown as WidgetInfo;
+      this.widgetService.loadWidgetListeners.forEach(item => {
+        item.call(this);
+      });
+      this.checkWidgetRenameTitle();
+      this.widgetService.loadWidgetToController.next(data);
+    },
+      () => this.router.navigate(['/widgets/'])
+    );
+  }
+
+  private loadWidget() {
+    this.widgetService.getWidgetById(this.sid, this.wid).subscribe((response: FullWidget) => {
+      this.widget = response as unknown as WidgetInfo;
+      this.audiences = response.audience;
+      this.widget.id = this.wid;
+      this.widgetService.loadWidgetListeners.forEach(item => {
+        item.call(this);
+      });
+      this.isContainerized = !!this.widget.containerId;
+      this.checkWidgetRenameTitle();
+      this.widgetService.loadWidgetToController.next(response);
+    });
   }
 
 }

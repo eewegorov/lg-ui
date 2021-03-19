@@ -5,15 +5,31 @@ import {
   CompaniesResponse,
   CompanyRequest,
   CompanyResponse,
-  CompanyShort, DeleteCompanyRequest,
-  Entities, Mockup, MockupCategory, MockupGroup, MockupGroupsResponse, MockupsResponse,
+  CompanyShort,
+  DeleteCompanyRequest,
+  Entities,
+  FullWidget,
+  Mockup,
+  MockupCategory,
+  MockupGroup,
+  MockupGroupsResponse,
+  MockupResponse,
+  MockupShort,
+  MockupsResponse,
   SmartPoint,
   SmartPointEnableRequest,
   SmartPointUpdateRequest,
-  WidgetChangeCompanyRequest, WidgetCloned, WidgetCloneRequest, WidgetCloneResponse,
+  WidgetChangeCompanyRequest,
+  WidgetCloned,
+  WidgetCloneRequest,
+  WidgetCloneResponse,
   WidgetConversion,
-  WidgetConversionResponse, WidgetCreated, WidgetCreateRequest, WidgetCreateResponse, WidgetInfo,
-  WidgetRename,
+  WidgetConversionResponse,
+  WidgetCreated,
+  WidgetCreateRequest,
+  WidgetCreateResponse,
+  WidgetInfo,
+  WidgetRename, WidgetResponse,
   WidgetsResponse,
   WidgetTemplate,
   WidgetTemplatesResponse,
@@ -32,6 +48,9 @@ export class WidgetService {
   public updateWidgetsList = new Subject<string>();
   public updateCurrentContainer = new Subject<string>();
   public openCloneWidgetModal = new Subject<{data: WidgetInfo; containerId: string}>();
+  public loadWidgetToController = new Subject<MockupShort | FullWidget>();
+
+  public loadWidgetListeners = [];
 
   private currentCompanies = [];
   private currentContainers = [];
@@ -47,6 +66,13 @@ export class WidgetService {
   public getWidgetsList(siteId: string): Observable<Entities> {
     return this.widgetApiService.getWidgetsList(siteId).pipe(
       map((response: WidgetsResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getWidgetById(siteId: string, widgetId: string): Observable<FullWidget> {
+    return this.widgetApiService.getWidgetById(siteId, widgetId).pipe(
+      map((response: WidgetResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }
@@ -75,6 +101,13 @@ export class WidgetService {
   public getMockups(type: string, categories: string): Observable<Mockup[]> {
     return this.widgetApiService.getMockups(type, categories).pipe(
       map((response: MockupsResponse) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getMockup(id: string): Observable<MockupShort> {
+    return this.widgetApiService.getMockup(id).pipe(
+      map((response: MockupResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }
@@ -229,5 +262,9 @@ export class WidgetService {
     return companies.find((item) => {
       return item.id === companyId;
     });
+  }
+
+  public addOnWidgetLoadListener(listener) {
+    this.loadWidgetListeners.push(listener);
   }
 }

@@ -6,7 +6,7 @@ import { ApiResponse } from '../../../core/models/api';
 import {
   CompaniesResponse,
   CompanyRequest,
-  CompanyResponse, DeleteCompanyRequest, MockupGroupsResponse, MockupsResponse,
+  CompanyResponse, DeleteCompanyRequest, MockupGroupsResponse, MockupResponse, MockupsResponse,
   SmartPointEnableRequest,
   SmartPointTypes,
   SmartPointUpdateRequest,
@@ -14,7 +14,7 @@ import {
   WidgetCloneRequest,
   WidgetCloneResponse,
   WidgetConversionResponse, WidgetCreateRequest, WidgetCreateResponse,
-  WidgetRename,
+  WidgetRename, WidgetResponse,
   WidgetsResponse,
   WidgetSwapRequest,
   WidgetTemplatesResponse,
@@ -31,6 +31,10 @@ export class WidgetApiService {
 
   public getWidgetsList(siteId: string): Observable<WidgetsResponse> {
     return this.http.get<WidgetsResponse>(`${ environment.url }/sites/${siteId}/widgets`);
+  }
+
+  public getWidgetById(siteId: string, widgetId: string): Observable<WidgetResponse> {
+    return this.http.get<WidgetResponse>(`${ environment.url }/sites/${siteId}/widgets`);
   }
 
   public getWidgetsTypes(): Observable<WidgetTypesResponse> {
@@ -53,6 +57,10 @@ export class WidgetApiService {
   public getMockups(type: string, categories: string): Observable<MockupsResponse> {
     const opts = { params: new HttpParams().append('type', type).append('categories', categories) };
     return this.http.get<MockupsResponse>(`${ environment.url }/mockups`, opts);
+  }
+
+  public getMockup(id: string): Observable<MockupResponse> {
+    return this.http.get<MockupResponse>(`${ environment.url }/mockups/${id}`);
   }
 
   public getWidgetConversion(siteId: string, widgetId: string): Observable<WidgetConversionResponse> {
