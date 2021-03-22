@@ -1,1 +1,40 @@
-<p>rule-refer works!</p>
+<div class="form-group filter-section">
+  <div class="row section-audience-row filterow" *ngFor="let subitem of modelName.subitems; index as i">
+    <div class="rule-subitem-text margined-left-20" *ngIf="i > 0">{{ 'audience.rule.logic.or' | translate }}</div>
+    <div class="col-sm-12 margined-top-10 margined-bottom-10" [ngClass]="(subitem.value.trim().length == 0) ? 'has-error' : ''">
+      <div class="row row-nomargined">
+        <div class="input-group subitem-left">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              {{ vals.compareTypes[subitem.valueCompareType] }} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li
+                *ngFor="let val of vals.compareTypes"
+                (click)="subitem.valueCompareType = i"
+              >
+                <a href="javascript:void(0);">{{ val }}</a>
+              </li>
+            </ul>
+          </div>
+          <input type="text" class="form-control" aria-label="" [(ngModel)]="subitem.value">
+        </div>
+        <div class="remove-sub-item">
+          <a
+            (click)="removeSubItem(groupName.hashKey, modelName.hashKey, i)"
+            href="javascript:void(0);"
+          ><i class="remove-sub-item col-sm-1 pe-7s-close-circle"></i>
+          </a>
+        </div>
+      </div>
+      <div class="row small m-t-md underline-comment">
+        {{ 'audience.rule.devices.underline' | translate }}
+      </div>
+    </div>
+  </div>
+  <div class="text-center margined-top-20">
+    <a href="javascript:void(0);" (click)="addSubItem(modelName)">
+      {{ 'audience.variant.add' | translate }}
+    </a>
+  </div>
+</div>
