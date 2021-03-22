@@ -1,1 +1,38 @@
-<p>rule-visit works!</p>
+<div class="form-group filter-section">
+  <div *ngFor="let subitem of modelName.subitems; index as i" class="row section-audience-row filterow">
+    <div *ngIf="i > 0" class="rule-subitem-text margined-left-20">{{ 'audience.rule.logic.or' | translate }}</div>
+    <div class="col-sm-12 margined-top-10 margined-bottom-10">
+      <div class="row row-nomargined">
+        <div class="dropdown subitem-left">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{ vals.visitsType[subitem.value] }} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li
+              role="presentation"
+              *ngFor="let val of vals.visitsType"
+              (click)="subitem.value = i"
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ val }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="remove-sub-item">
+          <a
+            (click)="removeSubItem(groupName.hashKey, modelName.hashKey, i)"
+            href="javascript:void(0);"
+          ><i class="remove-sub-item col-sm-1 pe-7s-close-circle"></i>
+          </a>
+        </div>
+      </div>
+      <div class="row small m-t-md underline-comment">
+        {{ 'audience.rule.visit.underline' | translate }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="modelName.subitems.length < vals.visitsType.length" class="text-center margined-top-20">
+    <a href="javascript:void(0);" (click)="addSubItem(modelName)">
+      {{ 'audience.variant.add' | translate }}
+    </a>
+  </div>
+</div>
