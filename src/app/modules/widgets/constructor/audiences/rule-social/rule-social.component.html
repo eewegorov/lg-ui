@@ -1,6 +1,6 @@
 <div class="form-group filter-section">
-  <div class="row section-audience-row filterow" *ngFor="let subitem of modelName.subitems; index as i">
-    <div class="rule-subitem-text margined-left-20" *ngIf="i > 0">{{ 'audience.rule.logic.or' | translate }}</div>
+  <div *ngFor="let subitem of modelName.subitems; index as i" class="row section-audience-row filterow">
+    <div *ngIf="i > 0" class="rule-subitem-text margined-left-20">{{ 'audience.rule.logic.or' | translate }}</div>
     <div class="col-sm-12 margined-top-10 margined-bottom-10">
       <div class="row row-nomargined">
         <div class="dropdown subitem-left">
@@ -30,7 +30,7 @@
       </div>
     </div>
   </div>
-  <div class="text-center margined-top-20" *ngIf="modelName.subitems.length < vals.socialNets.length">
+  <div *ngIf="modelName.subitems.length < vals.socialNets.length" class="text-center margined-top-20">
     <a href="javascript:void(0);" (click)="addSubItem(modelName)">
       {{ 'audience.variant.add' | translate }}
     </a>
