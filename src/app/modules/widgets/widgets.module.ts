@@ -27,6 +27,13 @@ import { ConstructorDesignComponent } from './constructor/constructor-design/con
 import { ConstructorIntegrationsComponent } from './constructor/constructor-integrations/constructor-integrations.component';
 import { ConstructorAudiencesComponent } from './constructor/constructor-audiences/constructor-audiences.component';
 import { ConstructorRulesComponent } from './constructor/constructor-rules/constructor-rules.component';
+import { RuleReferComponent } from './constructor/audiences/rule-refer/rule-refer.component';
+import { RuleUrlComponent } from './constructor/audiences/rule-url/rule-url.component';
+import { RuleTypeComponent } from './constructor/audiences/rule-type/rule-type.component';
+import { RuleVisitComponent } from './constructor/audiences/rule-visit/rule-visit.component';
+import { RuleVisitNoComponent } from './constructor/audiences/rule-visit-no/rule-visit-no.component';
+import { RuleDevicesComponent } from './constructor/audiences/rule-devices/rule-devices.component';
+import { RuleSocialComponent } from './constructor/audiences/rule-social/rule-social.component';
 
 
 @NgModule({
@@ -48,7 +55,14 @@ import { ConstructorRulesComponent } from './constructor/constructor-rules/const
     ConstructorDesignComponent,
     ConstructorIntegrationsComponent,
     ConstructorAudiencesComponent,
-    ConstructorRulesComponent
+    ConstructorRulesComponent,
+    RuleReferComponent,
+    RuleUrlComponent,
+    RuleTypeComponent,
+    RuleVisitComponent,
+    RuleVisitNoComponent,
+    RuleDevicesComponent,
+    RuleSocialComponent,
   ],
   exports: [
     SmartpointsControlComponent
