@@ -1,1 +1,85 @@
-<p>rule-url works!</p>
+<div class="form-group filter-section">
+  <div *ngFor="let subitem of modelName.subitems; index as i" class="row section-audience-row filterow">
+    <div *ngIf="i > 0" class="rule-subitem-text margined-left-20">{{ 'audience.rule.logic.or' | translate }}</div>
+    <div class="row row-subitem margined-top-10">
+      <div class="col-sm-3 row-subitem-padding padding-top-22">
+        <div class="dropdown"  data-val="true" data-field="present">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{ vals.conditions[subitem.condition] }} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li
+              role="presentation"
+              *ngFor="let val of vals.conditions"
+              (click)="subitem.condition = i"
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ val }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-4 p-l-none">
+        <div class="row row-subitem-underline margined-left-5 margined-bottom-5">
+          <span class="underline-comment">{{ 'audience.rule.url.value.upline' | translate }}:</span>
+        </div>
+        <div class="input-group" [ngClass]="(subitem.param.trim().length == 0) ? 'has-error' : ''">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              {{ vals.compareTypes[subitem.paramCompareType] }} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li *ngFor="let val of vals.compareTypes" (click)="subitem.paramCompareType = $index">
+                <a href="javascript:void(0)">{{ val }}</a>
+              </li>
+            </ul>
+          </div>
+          <input type="text" class="form-control" aria-label="" [(ngModel)]="subitem.param">
+        </div>
+      </div>
+      <div class="col-sm-5 p-l-none">
+        <div class="row row-subitem-underline margined-left-5 margined-bottom-5">
+          <span class="underline-comment">{{ 'audience.rule.url.value.upline' | translate }}:</span>
+        </div>
+        <div class="input-group subitem-left" [ngClass]="(subitem.value.trim().length == 0) ? 'has-error' : ''">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              {{ vals.compareTypes[subitem.valueCompareType] }} <span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu">
+              <li
+                *ngFor="let val of vals.compareTypes; index as j"
+                (click)="subitem.valueCompareType = j"
+              >
+                <a href="javascript:void(0)">{{ val }}</a>
+              </li>
+            </ul>
+          </div>
+          <input type="text" class="form-control" aria-label="" [(ngModel)]="subitem.value">
+        </div>
+        <div class="remove-sub-item">
+          <a
+            (click)="removeSubItem(groupName.hashKey, modelName.hashKey, i)"
+            href="javascript:void(0);"
+          ><i class="remove-sub-item col-sm-1 pe-7s-close-circle"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row small row-subitem-underline">
+      <div class="col-sm-3">
+
+      </div>
+      <div class="col-sm-4" [ngClass]="(subitem.param.trim().length == 0) ? 'has-error' : ''">
+        <span class="underline-comment">{{ 'audience.rule.url.param.underline' | translate }}</span>
+      </div>
+      <div class="col-sm-5" [ngClass]="(subitem.value.trim().length == 0) ? 'has-error' : ''">
+        <span class="underline-comment">{{ 'audience.rule.url.value.underline' | translate }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="text-center margined-top-20">
+    <a href="javascript:void(0);" (click)="addSubItem(modelName)">
+      {{ 'audience.variant.add' | translate }}
+    </a>
+  </div>
+</div>

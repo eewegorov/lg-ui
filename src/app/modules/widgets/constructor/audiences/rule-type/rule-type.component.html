@@ -10,8 +10,8 @@
           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
             <li
               role="presentation"
-              (click)="subitem.value = i"
               *ngFor="let val of vals.trafficTypes"
+              (click)="subitem.value = i"
             >
               <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ val }}</a>
             </li>
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="row small m-t-md underline-comment">
-        {{ 'audience.rule.devices.underline' | translate }}
+        {{ 'audience.rule.type.underline' | translate }}
       </div>
     </div>
   </div>
