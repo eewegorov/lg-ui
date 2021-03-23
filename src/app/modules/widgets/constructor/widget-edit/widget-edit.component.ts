@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { FullWidget, MockupShort, WidgetInfo, WidgetType } from '../../../../core/models/widgets';
+import { FullWidget, MockupGroup, MockupShort, WidgetInfo, WidgetType } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetService } from '../../services/widget.service';
 import { SitesService } from '../../../sites/services/sites.service';
@@ -8,35 +9,42 @@ import { SiteShort } from '../../../../core/models/sites';
 import { CouponService } from '../../../coupons/services/coupon.service';
 import { Coupon } from '../../../../core/models/coupons';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../../../../core/models/user';
+import { UserService } from '../../../user/services/user.service';
 
 @Component({
   selector: 'app-widget-edit',
   templateUrl: './widget-edit.component.html',
   styleUrls: ['./widget-edit.component.scss']
 })
-export class WidgetEditComponent implements OnInit {
+export class WidgetEditComponent implements OnInit, OnDestroy {
   public weekDays = [];
   public renamedWidget = { id: '', name: '' };
   public widget: WidgetInfo;
+  public isDesigner = false;
   public isMockup = false;
+  public sid: string;
+  public wid: string;
+  public isContainerized: boolean;
 
-  private sid: string;
-  private wid: string;
   private currentActiveTab = 'design';
   private validators = [];
   private types = [];
   private coupons = [];
   private audiences = [];
+  private catsList = [];
   private formExtIdsErrorFlag = false;
   private formExtNeedButton = false;
   private formExtRedirectFieldEmpty = false;
   private defaultCoupon = { id: null, name: 'Какой купон хотите использовать?' };
-  private isContainerized: boolean;
+
+  private meInfoSub: SubscriptionLike;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private translate: TranslateService,
+    private userService: UserService,
     private couponService: CouponService,
     private sitesService: SitesService,
     private containerizedWidgetService: ContainerizedWidgetService,
@@ -54,19 +62,24 @@ export class WidgetEditComponent implements OnInit {
 
     this.sid = this.route.snapshot.paramMap.get('id').split('-')[0];
     this.wid = this.route.snapshot.paramMap.get('id').split('-')[1];
-
-    this.isMockup = this.hasRole('ROLE_DESIGNER');
   }
 
   ngOnInit(): void {
     this.initTypes();
 
-    if (this.isMockup) {
-      this.loadMockup();
-    } else {
-      this.loadWidget();
-      this.loadAudiences();
-    }
+    this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
+      if (response.roles.includes('ROLE_DESIGNER')) {
+        this.isDesigner = true;
+      }
+
+      if (response.roles.includes('ROLE_ADMIN')) {
+        this.isMockup = true;
+        this.loadMockup();
+      } else {
+        this.loadWidget();
+      }
+    });
+
     this.loadGroups();
 
     ($('.start-widget-btn, .stop-widget-btn') as any).tooltip();
@@ -222,7 +235,19 @@ export class WidgetEditComponent implements OnInit {
       this.isContainerized = !!this.widget.containerId;
       this.checkWidgetRenameTitle();
       this.widgetService.loadWidgetToController.next(response);
+    },
+      () => this.router.navigate(['/widgets/'])
+    );
+  }
+
+  private loadGroups() {
+    this.widgetService.getMockupGroups('').subscribe((response: MockupGroup[]) => {
+      this.catsList = response;
     });
+  }
+
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
   }
 
 }

@@ -1,7 +1,7 @@
 import { ApiResponse } from './api';
 
 export interface UserResponse extends ApiResponse{
-  data: User
+  data: User;
 }
 
 export interface User {
@@ -10,6 +10,7 @@ export interface User {
   timeZone: string;
   phone: string;
   wallet: string;
+  roles: string[];
 }
 
 export interface Phone {

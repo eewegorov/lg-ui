@@ -22,7 +22,7 @@
         <button
           *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
           (click)="startWidget(widget)"
-          [ngClass]="(widget.active)?'active':''"
+          [ngClass]="(widget.active) ? 'active' : ''"
           class="btn btn-xs btn-default start-widget-btn"
           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
         >
@@ -31,7 +31,7 @@
         <button
           *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
           (click)="stopWidget(widget)"
-          [ngClass]="(widget.active)?'':'active'"
+          [ngClass]="(widget.active) ? '' : 'active'"
           class="btn btn-xs btn-default stop-widget-btn"
           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
         >
@@ -41,7 +41,7 @@
         <button
           *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
           (click)="startWidget(widget)"
-          [ngClass]="(widget.active)?'active':''"
+          [ngClass]="(widget.active) ? 'active' : ''"
           class="btn btn-xs btn-default start-widget-btn"
           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить вариант"
         >
@@ -50,7 +50,7 @@
         <button
           *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
           (click)="stopWidget(widget)"
-          [ngClass]="(widget.active)?'':'active'"
+          [ngClass]="(widget.active) ? '' : 'active'"
           class="btn btn-xs btn-default stop-widget-btn"
           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
         >
@@ -58,7 +58,7 @@
         </button>
       </div>
 
-      <ng-container *ngIf="hasRole('ROLE_DESIGNER')">
+      <ng-container *ngIf="isDesigner">
         <button
           type="button"
           *ngIf="!isMockup"
@@ -194,7 +194,7 @@
     </div>
   </div>
 
-  <ng-container #flowBasic="flow" [flowConfig]="{target: '/'}"></ng-container>
+  <ng-container #flowBasic="flow" [flowConfig]="{target: 'imagestore/' + sid}"></ng-container>
 
   <div
     class="modal fade"

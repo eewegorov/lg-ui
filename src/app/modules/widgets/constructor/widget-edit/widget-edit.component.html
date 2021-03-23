@@ -114,7 +114,14 @@
     *ngIf="isCurrentActiveTab('design')"
     [ngClass]="{ active: isCurrentActiveTab('design') }"
   >
-    <app-constructor-design></app-constructor-design>
+    <app-constructor-design
+      [sid]="sid"
+      [wid]="wid"
+      [widget]="widget"
+      [isDesigner]="isDesigner"
+      [isMockup]="isMockup"
+      [isContainerized]="isContainerized"
+    ></app-constructor-design>
   </div>
 
   <div

@@ -1,7 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
-import { FlowDirective } from '@flowjs/ngx-flow';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { FlowDirective } from '@flowjs/ngx-flow';
+import { WidgetInfo } from '../../../../core/models/widgets';
+import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
+import { WidgetService } from '../../services/widget.service';
 
 @Component({
   selector: 'app-constructor-design',
@@ -10,10 +15,24 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('flow') public flow: FlowDirective;
+  @Input() public sid: string;
+  @Input() public wid: string;
+  @Input() public widget: WidgetInfo;
+  @Input() public isDesigner: boolean;
+  @Input() public isMockup: boolean;
+  @Input() public isContainerized: boolean;
+
+  private validators = [];
 
   private autoUploadSubscription: SubscriptionLike;
 
-  constructor(private toastr: ToastrService) {
+  constructor(
+    private router: Router,
+    private translate: TranslateService,
+    private toastr: ToastrService,
+    private containerizedWidgetService: ContainerizedWidgetService,
+    private widgetService: WidgetService
+  ) {
   }
 
   ngOnInit(): void {
@@ -22,38 +41,63 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   ngAfterViewInit(): void {
     this.autoUploadSubscription = this.flow.events$.subscribe(event => {
       if (event.type === 'filesSubmitted') {
-        this.uploadAdded(event.event);
         this.flow.upload();
       }
     });
   }
 
-  private uploadAdded(file) {
-    this.myFile = file.file;
-    if (file.file.type === 'image/jpeg' || file.file.type === 'image/png' || file.file.type === 'image/gif') {
-      setTimeout(() => {
-        this.uploadFile();
-      }, 500);
+  public goToTest(widget) {
+    this.router.navigate([`/abtests/active?testIdNum-${widget.abtestInfo.id}`]).then();
+  }
+
+  public saveAsMockup() {
+    let errorsList = this.runValidators();
+    this.validators.forEach(validator => {
+      errorsList = errorsList.concat(validator.call(this));
+    });
+
+    if (errorsList.length !== 0) {
+      this.toastr.error(this.translate.instant('widgetsList.editor.save.validation.desc'), this.translate.instant('widgetsList.editor.save.validation.title'));
     } else {
-      this.toastr.error('Формат изображения должен быть .png, .jpg  или .gif', 'Ошибка!');
+      ($('#saveAsMockupModal') as any).modal('show');
     }
   }
 
-  private uploadFile(){
-    ladLoad.start();
-    var file = $scope.myFile;
-    if (typeof file === "undefined") {
-      toastr["error"]('Пожалуйста, выберите изображение на своем компьютере и попробуйте еще раз.', 'Ошибка!');
-      ladLoad.stop();
-    } else {
-      if (file.size <= 2000000) {
-        var uploadUrl = openapi.getUrl("imagestore/"+$scope.sid);
-        fileUpload.uploadFileToUrl(file, uploadUrl, $scope);
-      } else {
-        toastr["error"]('Размер изображения превышает максимально допустимый. Пожалуйста, уменьшите размер изображения и попробуйте еще раз.', 'Ошибка!');
-        ladLoad.stop();
-      }
+  public startWidget(widget) {
+    if (!widget.active) {
+      this.switchWidget(widget, true);
     }
+  }
+
+  public stopWidget(widget) {
+    if (widget.active) {
+      this.switchWidget(widget, false);
+    }
+  }
+
+  private switchWidget(widget, newValue) {
+    $('[role="tooltip"]').remove();
+    if (widget.active === newValue) { return false; }
+    if (this.isContainerized) {
+      this.containerizedWidgetService.switch(this.sid, widget.id, newValue).subscribe((response: boolean) => {
+        if (!response) { return false; }
+        this.widget.active = newValue;
+      });
+    } else {
+      this.widgetService.switch(this.sid, widget.id, newValue).subscribe((response: boolean) => {
+        if (!response) { return false; }
+        this.widget.active = newValue;
+      });
+    }
+  }
+
+  private runValidators() {
+    let errorsList = [];
+    this.validators.forEach(validator => {
+      errorsList = errorsList.concat(validator.call(this));
+    });
+
+    return errorsList;
   }
 
   ngOnDestroy(): void {
