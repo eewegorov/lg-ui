@@ -71,12 +71,12 @@
       </ng-container>
 
       <button type="button" id="saveWidget" (click)="saveWidget()" class="ladda-button btn w-xs btn-success" data-style="slide-down">
-            <span class="ladda-label">
-              <i class="fa fa-save"></i> <span
-              *ngIf="!isMockup"
-              [innerHTML]="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span
-              *ngIf="isMockup">Сохранить темплейт</span>
-            </span>
+        <span class="ladda-label">
+          <i class="fa fa-save"></i> <span
+          *ngIf="!isMockup"
+          [innerHTML]="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span
+          *ngIf="isMockup">Сохранить темплейт</span>
+        </span>
       </button>
     </div>
   </div>
