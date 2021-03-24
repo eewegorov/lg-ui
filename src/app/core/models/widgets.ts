@@ -28,7 +28,7 @@ export interface FullWidget {
   audiencesEnabled: boolean;
   audience: Record<string, string>[];
   rules: Record<string, string>[];
-  guiprops: Record<string, string>;
+  guiprops: Record<string, any>;
   coupons: string[];
   integrations: string[];
   useCustomIntegrationsList: boolean;

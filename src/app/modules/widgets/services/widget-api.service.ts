@@ -75,6 +75,10 @@ export class WidgetApiService {
     return this.http.delete<ApiResponse>(`${ environment.url }/sites/${siteId}/widgets/${widgetId}`);
   }
 
+  public updateWidget(siteId: string, widgetId: string, widget: FullWidget): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${ environment.url }/sites/${siteId}/widgets/${widgetId}`, widget);
+  }
+
   public create(siteId: string, widget: WidgetCreateRequest): Observable<WidgetCreateResponse> {
     return this.http.post<WidgetCreateResponse>(`${ environment.url }/sites/${siteId}/sitewidgets`, widget);
   }

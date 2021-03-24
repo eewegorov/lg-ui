@@ -140,6 +140,13 @@ export class WidgetService {
     );
   }
 
+  public updateWidget(siteId: string, widgetId: string, widget: FullWidget): Observable<boolean> {
+    return this.widgetApiService.updateWidget(siteId, widgetId, widget).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
   public create(siteId: string, widget: WidgetCreateRequest): Observable<WidgetCreated> {
     return this.widgetApiService.create(siteId, widget).pipe(
       map((response: WidgetCreateResponse) => response.data),
