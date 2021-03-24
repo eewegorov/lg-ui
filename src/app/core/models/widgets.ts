@@ -28,12 +28,13 @@ export interface FullWidget {
   audiencesEnabled: boolean;
   audience: Record<string, string>[];
   rules: Record<string, string>[];
-  guiProps: Record<string, string>;
+  guiprops: Record<string, string>;
   coupons: string[];
   integrations: string[];
   useCustomIntegrationsList: boolean;
   customFields: CustomField[];
   jsInfo: WidgetJsInfo;
+  autoinvite?: Record<string, string>;
 }
 
 export interface CustomField {

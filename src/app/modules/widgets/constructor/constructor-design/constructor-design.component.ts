@@ -4,9 +4,10 @@ import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { FlowDirective } from '@flowjs/ngx-flow';
-import { WidgetInfo } from '../../../../core/models/widgets';
+import { FullWidget, WidgetInfo } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetService } from '../../services/widget.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-constructor-design',
@@ -17,10 +18,12 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   @ViewChild('flow') public flow: FlowDirective;
   @Input() public sid: string;
   @Input() public wid: string;
-  @Input() public widget: WidgetInfo;
+  @Input() public widget: FullWidget;
   @Input() public isDesigner: boolean;
   @Input() public isMockup: boolean;
   @Input() public isContainerized: boolean;
+
+  public isLoading = false;
 
   private validators = [];
 
@@ -101,65 +104,68 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
   private saveMockupItem() {
     let errorsList = this.runValidators();
-    l.start();
-    for (var i = 0; i < $scope.validators.length; i++) {
-      errorsList = errorsList.concat($scope.validators[i].call(this));
-    }
+    this.isLoading = true;
 
-    if (errorsList.length != 0) {
-      toastr["error"]($scope.localization.save.validation.desc, $scope.localization.save.validation.title);
-      l.stop();
+    this.validators.forEach(validator => {
+      errorsList = errorsList.concat(validator.call(this));
+    });
+
+    if (errorsList.length !== 0) {
+      this.toastr.error(this.translate.instant('widgetsList.editor.save.validation.desc'), this.translate.instant('widgetsList.editor.save.validation.title'));
+      this.isLoading = false;
     } else {
-      $scope.savedInstance = {
-        name: $scope.widget.name,
-        guiprops:  $scope.widget.guiprops,
-        autoinvite:  $scope.widget.autoinvite,
-        restrictions:  $scope.widget.restrictions,
-        autoresponder:  $scope.widget.autoresponder,
-        rules:  $scope.widget.rules
-      };
-      $http({
-        method: 'PUT',
-        url: "/api/v1/mockups/"+$scope.wid,
-        data: angular.toJson($scope.savedInstance),
-        headers: {'Content-Type': 'application/json; charset=utf-8'}
-      })
-        .success(function(response) {
-          if (response.rows.length > 0 && response.rows[0].code == 200) {
-            toastr["success"]($scope.localization.save.done.desc, $scope.localization.save.done.title);
-            setTimeout(function(){
-              l.stop();
-            },1000);
+      const savedInstance = {
+        name: this.widget.name,
+        guiprops:  this.widget.guiprops,
+        autoinvite:  this.widget.autoinvite,
+        restrictions:  this.widget.restrictions,
+        autoresponder:  this.widget.autoresponder,
+        rules:  this.widget.rules
+      } as FullWidget;
+
+      this.widgetService.updateMockup(this.wid, savedInstance).subscribe(
+        (response) => {
+          if (response) {
+            this.toastr.success(this.translate.instant('widgetsList.editor.save.done.desc', this.translate.instant('widgetsList.editor.save.done.title'));
+            setTimeout(() => {
+              this.isLoading = false;
+            }, 1000);
           }
-        }).error(function() {
-        toastr["error"]($scope.localization.save.error.desc, $scope.localization.save.error.title);
-        l.stop();
-        swal($scope.localization.save.error.title, $scope.localization.save.error.desc, "error");
-      });
+        },
+        () => {
+          this.toastr.error(this.translate.instant('widgetsList.editor.save.error.desc'), this.translate.instant('widgetsList.editor.save.error.title'));
+          this.isLoading = false;
+          Swal.fire(
+            this.translate.instant('widgetsList.editor.save.error.title'),
+            this.translate.instant('widgetsList.editor.save.error.desc'),
+            'error'
+          ).then();
+        }
+      );
     }
   }
 
   private saveWidgetItem() {
-    var currentDate = new Date();
-    $scope.widget.guiprops.dhVisual.lastModifiedDate = currentDate;
-    $scope.widget.guiprops.dhVisual.widget_width_all   = $scope.SP_widget.widget_width_all;
-    $scope.widget.guiprops.dhVisual.widget_height_all  = $scope.SP_widget.widget_height_all;
-    $scope.widget.guiprops.dhVisual.widget_width_nopx  = $scope.SP_widget.widget_width_nopx;
-    $scope.widget.guiprops.dhVisual.widget_height_nopx = $scope.SP_widget.widget_height_nopx;
-    $scope.widget.guiprops.dhVisual.widget_ul_width_nopx = $scope.SP_widget.widget_ul_width_nopx;
-    $scope.widget.guiprops.dhVisual.CP_width = $scope.SP_widget.widget_CP_width;
-    $scope.widget.guiprops.dhVisual.CP_offset_top = $scope.SP_widget.widget_CP_offset_top;
-    $scope.widget.guiprops.image.width = $scope.SP_widget.img_width;
-    $scope.widget.guiprops.image.height = $scope.SP_widget.img_height;
+    const currentDate = new Date();
+    this.widget.guiprops.dhVisual.lastModifiedDate = currentDate;
+    this.widget.guiprops.dhVisual.widget_width_all   = this.SP_widget.widget_width_all;
+    this.widget.guiprops.dhVisual.widget_height_all  = this.SP_widget.widget_height_all;
+    this.widget.guiprops.dhVisual.widget_width_nopx  = this.SP_widget.widget_width_nopx;
+    this.widget.guiprops.dhVisual.widget_height_nopx = this.SP_widget.widget_height_nopx;
+    this.widget.guiprops.dhVisual.widget_ul_width_nopx = this.SP_widget.widget_ul_width_nopx;
+    this.widget.guiprops.dhVisual.CP_width = this.SP_widget.widget_CP_width;
+    this.widget.guiprops.dhVisual.CP_offset_top = this.SP_widget.widget_CP_offset_top;
+    this.widget.guiprops.image.width = this.SP_widget.img_width;
+    this.widget.guiprops.image.height = this.SP_widget.img_height;
 
-    console.log("TWO ", $scope.widget.guiprops.dhVisual.widget_width_all);
-    addCouponsId();
-    mapFormExtFieldId();
-    var errorsList = runValidators();
-    l.start();
-    for (var i = 0; i < $scope.validators.length; i++) {
-      errorsList = errorsList.concat($scope.validators[i].call(this));
-    }
+    this.addCouponsId();
+    this.mapFormExtFieldId();
+
+    let errorsList = this.runValidators();
+    this.isLoading = true;
+    this.validators.forEach(validator => {
+      errorsList = errorsList.concat(validator.call(this));
+    });
 
     if (errorsList.length != 0) {
       toastr["error"]($scope.localization.save.validation.desc, $scope.localization.save.validation.title);

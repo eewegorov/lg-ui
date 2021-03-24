@@ -112,6 +112,13 @@ export class WidgetService {
     );
   }
 
+  public updateMockup(id: string, mockup: FullWidget): Observable<boolean> {
+    return this.widgetApiService.updateMockup(id, mockup).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
   public getWidgetsTemplates(): Observable<WidgetTemplate[]> {
     return this.widgetApiService.getWidgetsTemplates().pipe(
       map((response: WidgetTemplatesResponse) => response.data),

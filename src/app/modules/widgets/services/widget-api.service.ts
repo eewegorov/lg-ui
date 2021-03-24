@@ -6,7 +6,7 @@ import { ApiResponse } from '../../../core/models/api';
 import {
   CompaniesResponse,
   CompanyRequest,
-  CompanyResponse, DeleteCompanyRequest, MockupGroupsResponse, MockupResponse, MockupsResponse,
+  CompanyResponse, DeleteCompanyRequest, FullWidget, MockupGroupsResponse, MockupResponse, MockupsResponse,
   SmartPointEnableRequest,
   SmartPointTypes,
   SmartPointUpdateRequest,
@@ -61,6 +61,10 @@ export class WidgetApiService {
 
   public getMockup(id: string): Observable<MockupResponse> {
     return this.http.get<MockupResponse>(`${ environment.url }/mockups/${id}`);
+  }
+
+  public updateMockup(id: string, mockup: FullWidget): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${ environment.url }/mockups/${id}`, mockup);
   }
 
   public getWidgetConversion(siteId: string, widgetId: string): Observable<WidgetConversionResponse> {

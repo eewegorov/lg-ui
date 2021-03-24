@@ -6,6 +6,8 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxFlowModule } from '@flowjs/ngx-flow';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
+import { LaddaModule } from 'angular2-ladda';
 import { SharedModule } from '../../shared/shared.module';
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { WidgetsListComponent } from './widgets-list/widgets-list.component';
@@ -19,7 +21,6 @@ import { ContainerizedItemComponent } from './containerized/containerized-item/c
 import { WidgetItemComponent } from './widget-item/widget-item.component';
 import { ContainerizedAddComponent } from './containerized/containerized-add/containerized-add.component';
 import { TemplatesGalleryComponent } from './templates-gallery/templates-gallery.component';
-import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
 import { CloneWidgetComponent } from './clone-widget/clone-widget.component';
 import { ContainerCodeComponent } from './containerized/container-code/container-code.component';
 import { WidgetEditComponent } from './constructor/widget-edit/widget-edit.component';
@@ -77,7 +78,8 @@ import { RuleSocialComponent } from './constructor/audiences/rule-social/rule-so
     SharedModule,
     WidgetsRoutingModule,
     NgxFlowModule,
-    NgSelectModule
+    NgSelectModule,
+    LaddaModule
   ]
 })
 export class WidgetsModule { }

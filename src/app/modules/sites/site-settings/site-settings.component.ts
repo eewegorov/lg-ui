@@ -79,7 +79,8 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
             this.translate.instant('global.done'),
             this.translate.instant('sitelist.delete.deleted'),
             'success'
-          );
+          ).then();
+
           setTimeout(() => {
             this.goBack();
           }, 1000);
@@ -136,25 +137,25 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
     /*this.sitesService.getSiteIntegrations(this.siteId).subscribe((response: Integration[]) => {*/
     const response = [
       {
-        "id": "a97e831035277bdb2d580cce4de0e399",
-        "name": "Amo integration",
-        "type": "AMOCRM",
-        "default": true,
-        "active": false
+        id: 'a97e831035277bdb2d580cce4de0e399',
+        name: 'Amo integration',
+        type: 'AMOCRM',
+        default: true,
+        active: false
       },
       {
-        "id": "3d2591d2fe9af9c2e126168865719e22",
-        "name": "Another bitrix integration",
-        "type": "BITRIX",
-        "default": false,
-        "active": true
+        id: '3d2591d2fe9af9c2e126168865719e22',
+        name: 'Another bitrix integration',
+        type: 'BITRIX',
+        default: false,
+        active: true
       },
       {
-        "id": "ff8b3189fea5aab92ecb6fad14b2ed0d",
-        "name": "Bitrix integrations",
-        "type": "BITRIX",
-        "default": true,
-        "active": false
+        id: 'ff8b3189fea5aab92ecb6fad14b2ed0d',
+        name: 'Bitrix integrations',
+        type: 'BITRIX',
+        default: true,
+        active: false
       }
     ];
     this.integrations = response.map((item: Integration) => {
@@ -180,14 +181,14 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
   private getSiteSettings() {
     /*this.sitesService.getSiteSettings(this.siteId).subscribe((response: SiteSettings) => {*/
     const response = {
-      "name": "Some site name",
-      "url": "valera.petrarch.com",
-      "needLeadNotification": false,
-      "logoRefLink": false,
-      "needEmailSubscriptions": true,
-      "needHideLogo": true,
-      yandexAnalyticsCounter: "31aasdfsdfs",
-      googleAnalyticsService: "GTAG"
+      name: 'Some site name',
+      url: 'valera.petrarch.com',
+      needLeadNotification: false,
+      logoRefLink: false,
+      needEmailSubscriptions: true,
+      needHideLogo: true,
+      yandexAnalyticsCounter: '31aasdfsdfs',
+      googleAnalyticsService: 'GTAG'
     };
     this.site = response;
     this.sitesService.getSiteShortInfo(this.siteId).subscribe((info: SiteShort) => {
