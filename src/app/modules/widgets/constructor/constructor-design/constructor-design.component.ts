@@ -154,6 +154,329 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     }
   }
 
+  public changeModel() {
+    const mainBlockW = $('.widget-image');
+    const mainBl     = $('#mainBlockWidget');
+    const mainBlWr   = $('#widgetMainWr');
+    const maskTop = $('#widgetMaskTop');
+    const gap18  = '-18px';
+    const gap3   = '-3px';
+
+    mainBlockW.addClass('hide-image-bl-for-rebuild');
+    setTimeout(() => {
+      mainBlockW.removeClass('hide-image-bl-for-rebuild');
+    }, 300);
+
+    if (this.widget.guiprops.image.enable && this.widget.guiprops.image.typeBl && (this.widget.guiprops.image.typeBl === 'videoBl')) {
+      $('#idImageVideoFrame').attr('src', this.widget.guiprops.image.videoUrl);
+    }
+
+    if (((this.widget.guiprops.image.place === 'Слева') || (this.widget.guiprops.image.place === 'Справа'))) {
+      if (this.widget.guiprops.image.img_width === 'Собственная') {
+        const newWidth = (this.widget.guiprops.image.img_widthpx * 1).toString();
+        this.widthImageStyle = newWidth + 'px';
+      }
+      else {
+        this.widthImageStyle = '33%';
+      }
+    }
+
+    if (((this.widget.guiprops.image.place === 'Сверху') || (this.widget.guiprops.image.place === 'Снизу'))) {
+      if (this.widget.guiprops.image.img_height === 'Собственная') {
+        const newHeight = (this.widget.guiprops.image.img_heightpx * 1).toString();
+        this.heightImageStyle = newHeight + 'px';
+      }
+      else {
+        this.heightImageStyle = '150px';
+      }
+    }
+
+    if (this.isCurrentActiveTab('design')) {
+      setTimeout(() => {
+        if (!$('#thankWidget').hasClass('active')) {
+          if (this.widget.guiprops.image.enable) {
+            // Под контентом Слева или Справа
+            if (this.widgetConstructorDesignService.ruleLeftOrRightUnderContent(this.widget.guiprops.formExt, this.widget.guiprops.form.visual, $scope.widget.guiprops.image.place)) {
+              $('#colorFormPod').css({'z-index': '0'});
+              // Размер ЗАДАН
+              if (this.widget.guiprops.image.img_width === 'Собственная') {
+                let imageWidgetWidthPod;
+                setTimeout(() => {
+                  $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
+                  mainBlockW.css({width: this.widthImageStyle, height: '100%'});
+                }, 100);
+
+                if (this.widget.guiprops.image.place === 'Слева') {
+                  setTimeout(() => {
+                    $('.widget-main-img-left').css({'margin-left': mainBlockW.innerWidth() - 15 + 'px', 'margin-right': 0});
+                    $('#colorFormPod').css({width: (mainBl.innerWidth() - mainBlockW.innerWidth()) + 'px', left: 'auto', right: '0'});
+                    maskTop.css({left: gap3, right: gap18});
+                  }, 200);
+                }
+
+                if (this.widget.guiprops.image.place === 'Справа') {
+                  setTimeout(() => {
+                    imageWidgetWidthPod = (mainBlockW.innerWidth() - 10);
+                    $('.widget-main-img-right').css({'margin-right': mainBlockW.innerWidth() - 15 + 'px', 'margin-left': 0});
+                    $('#colorFormPod').css({width: (mainBl.innerWidth() - mainBlockW.innerWidth()) + 'px', left: '0'});
+                    maskTop.css({left: gap18, right: gap3});
+                  }, 200);
+                }
+              }
+              //// Размер АВТО
+              else {
+                let imageWidgetWidthPod;
+                setTimeout(() => {
+                  imageWidgetWidthPod = (mainBlWr.innerWidth() + 60) / 2;
+                  $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
+                  mainBlockW.css({width: imageWidgetWidthPod + 'px'});
+                  mainBlockW.css({height: '100%'});
+                }, 100);
+
+                if (this.widget.guiprops.image.place === 'Слева') {
+                  setTimeout(() => {
+                    $('.widget-main-img-left').css({'margin-left': mainBlockW.innerWidth() - 15 + 'px', 'margin-right': 0});
+                    $('#colorFormPod').css({width: (mainBl.innerWidth() - mainBlockW.innerWidth()) + 'px', left: 'auto', right: '0'});
+                    maskTop.css({left: gap3, right: gap18});
+                  }, 200);
+                }
+
+                if (this.widget.guiprops.image.place === 'Справа') {
+                  setTimeout(() => {
+                    $('.widget-main-img-right').css({'margin-right': mainBlockW.innerWidth() - 15 + 'px', 'margin-left': 0});
+                    $('#colorFormPod').css({width: (mainBl.innerWidth() - mainBlockW.innerWidth()) + 'px', left: '0', right: 'auto'});
+                    maskTop.css({left: gap18, right: gap3});
+                  }, 200);
+                }
+              }
+            }
+
+            // Картинка сверху или снизу
+            if (((this.widget.guiprops.image.place === 'Сверху') || (this.widget.guiprops.image.place === 'Снизу'))) {
+              $('#colorFormPod').css({'z-index': '0'});
+              $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
+              maskTop.css({left: gap18, right: gap18});
+              // Размер ЗАДАН
+              if (this.widget.guiprops.image.img_height === 'Собственная') {
+                setTimeout(() => {
+                  mainBlockW.css({height: this.heightImageStyle});
+                  $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
+                  mainBlockW.css({width: '100%'});
+                }, 100);
+
+                if (this.widget.guiprops.image.place === 'Сверху') {
+                  setTimeout(() => {
+                    $('.widget-main-img-top').css({'margin-left': 0, 'margin-right': 0, 'margin-top': mainBlockW.innerHeight() + 'px', 'margin-bottom': 0});
+                    $('.widget-main-img-bottom').css({'margin-left': 0, 'margin-right': 0});
+                  }, 200);
+                }
+
+                if (this.widget.guiprops.image.place === 'Снизу') {
+                  setTimeout(() => {
+                    $('.widget-main-img-top').css({'margin-left': 0, 'margin-right': 0});
+                    $('.widget-main-img-bottom').css({'margin-left': 0, 'margin-right': 0, 'margin-bottom': mainBlockW.innerHeight() - 1 + 'px', 'margin-top': 0});
+                  }, 200);
+                }
+              }
+              //// Размер АВТО
+              else {
+                let imageHeightWidthPod;
+                setTimeout(() => {
+                  imageHeightWidthPod = mainBlWr.innerHeight() / 3;
+                  $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
+                  mainBlockW.css({height: imageHeightWidthPod, width: '100%'});
+                }, 100);
+
+                if (this.widget.guiprops.image.place === 'Сверху') {
+                  setTimeout(() => {
+                    $('.widget-main-img-top').css({'margin-left': 0, 'margin-right': 0, 'margin-top': mainBlockW.innerHeight() + 'px', 'margin-bottom': 0});
+                    $('.widget-main-img-bottom').css({'margin-left': 0, 'margin-right': 0});
+                  }, 200);
+                }
+
+                if (this.widget.guiprops.image.place === 'Снизу') {
+                  setTimeout(() => {
+                    $('.widget-main-img-top').css({'margin-left': 0, 'margin-right': 0});
+                    $('.widget-main-img-bottom').css({'margin-left': 0, 'margin-right': 0, 'margin-bottom': mainBlockW.innerHeight() + 'px', 'margin-top': 0});
+                  }, 200);
+                }
+              }
+            }
+
+            // На ВСЮ ШИРИНУ СЛЕВА или СПРАВА
+            if (this.widgetConstructorDesignService.ruleLeftOrRightWholeWidth(
+              this.widget.guiprops.formExt, this.widget.guiprops.form.visual, this.widget.guiprops.image.place
+            )) {
+              setTimeout(() => {
+                $('#colorFormPod').css({'z-index': '2'});
+                $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
+              }, 220);
+              // Размер ЗАДАН
+              if (this.widget.guiprops.image.img_width === 'Собственная') {
+                console.log('FULL WIDTH LR 2', $('.color-pod'));
+                let mainBlHeight;
+                setTimeout(() => {
+                  mainBlockW.css({width: this.widthImageStyle});
+                  mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
+                  if (this.widget.guiprops.bg.border.enable) {
+                    mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
+                  }
+                  mainBlockW.css({height: mainBlHeight + 'px'});
+                }, 100);
+
+                if (this.widget.guiprops.image.place === 'Слева') {
+                  setTimeout(() => {
+                    $('#colorFormPod').innerWidth();
+                    $('.widget-main-img-left').css({'margin-left': mainBlockW.innerWidth() - 15 + 'px', 'margin-right': 0});
+                    $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
+                    $('.extraClassFullWidth')
+                      .css({'margin-left': - mainBlockW.innerWidth() + 'px', width: $('#colorFormPod').innerWidth() - 95 + 'px', 'margin-right': 0});
+
+                    maskTop.css({left: gap3, right: gap18});
+                  }, 200);
+                  setTimeout(() => {
+                    mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
+                    if (this.widget.guiprops.bg.border.enable) {
+                      mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
+                    }
+                    mainBlockW.css({height: mainBlHeight + 'px'});
+                  }, 210);
+                }
+
+                if (this.widget.guiprops.image.place === 'Справа') {
+                  setTimeout(() => {
+                    $('.widget-main-img-right').css({'margin-right': mainBlockW.innerWidth() - 15 + 'px', 'margin-left': 0});
+                    $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
+                    $('.extraClassFullWidth')
+                      .css({'margin-right': - mainBlockW.innerWidth() + 'px', width: $('#colorFormPod').innerWidth() - 95 + 'px', 'margin-left': 0});
+
+                    maskTop.css({left: gap18, right: gap3});
+                  }, 200);
+                  setTimeout(() => {
+                    mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
+                    if (this.widget.guiprops.bg.border.enable) {
+                      mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
+                    }
+                    mainBlockW.css({height: mainBlHeight + 'px'});
+                  }, 210);
+                }
+              }
+              //// Размер АВТО
+              else {
+
+                let imageWidgetWidthPod;
+                let mainBlHeightAll;
+                setTimeout(() => {
+                  imageWidgetWidthPod = (mainBlWr.innerWidth() + 60) / 2;
+                  mainBlockW.css({width: imageWidgetWidthPod + 'px'});
+                  mainBlHeightAll = $('#colorFormPod').offset().top - mainBl.offset().top;
+                  if (this.widget.guiprops.bg.border.enable) {
+                    mainBlHeightAll = mainBlHeightAll - this.widget.guiprops.bg.border.thickness;
+                  }
+                  mainBlockW.css({height: mainBlHeightAll + 'px'});
+                }, 100);
+
+                if (this.widget.guiprops.image.place === 'Слева') {
+                  setTimeout(() => {
+                    $('.widget-main-img-left').css({'margin-left': mainBlockW.innerWidth() - 15 + 'px', 'margin-right': 0});
+                    $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
+                    $('.extraClassFullWidth')
+                      .css({'margin-left': - mainBlockW.innerWidth() + 'px', width: $('#colorFormPod').innerWidth() - 95 + 'px', 'margin-right': 0});
+
+                    maskTop.css({left: gap3, right: gap18});
+                  }, 200);
+                  setTimeout(() => {
+                    mainBlHeightAll = $('#colorFormPod').offset().top - mainBl.offset().top;
+                    if (this.widget.guiprops.bg.border.enable) {
+                      mainBlHeightAll = mainBlHeightAll - this.widget.guiprops.bg.border.thickness;
+                    }
+                    mainBlockW.css({height: mainBlHeightAll + 'px'});
+                  }, 210);
+                }
+
+                if (this.widget.guiprops.image.place === 'Справа') {
+                  setTimeout(() => {
+                    $('.widget-main-img-right').css({'margin-right': mainBlockW.innerWidth() - 15 + 'px', 'margin-left': 0});
+                    $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
+                    $('.extraClassFullWidth')
+                      .css({'margin-right': - mainBlockW.innerWidth() + 'px', width: $('#colorFormPod').innerWidth() - 95 + 'px', 'margin-left': 0});
+
+                    maskTop.css({left: gap18, right: gap3});
+                  }, 200);
+                  setTimeout(() => {
+                    mainBlHeightAll = $('#colorFormPod').offset().top - mainBl.offset().top;
+                    if (this.widget.guiprops.bg.border.enable) {
+                      mainBlHeightAll = mainBlHeightAll - this.widget.guiprops.bg.border.thickness;
+                    }
+                    mainBlockW.css({height: mainBlHeightAll + 'px'});
+                  }, 210);
+                }
+              }
+            } else {
+              $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
+              $('.extraClassFullWidth').css({'margin-left': '0', 'margin-right': '0', width: '100%'});
+            }
+
+            if ((!this.widget.guiprops.button.enable && !this.widget.guiprops.form.enable && !this.widget.guiprops.formExt.enable)
+              && (this.widget.guiprops.image.place === 'Справа' || this.widget.guiprops.image.place === 'Слева')) {
+
+              setTimeout(() => {
+                mainBlockW.css({height: '100%'});
+              }, 220);
+            }
+
+          }
+          else {
+            $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
+            $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
+            $('.extraClassFullWidth').css({'margin-left': '0', 'margin-right': '0', width: '100%'});
+            maskTop.css({left: gap18, right: gap18});
+
+            setTimeout(() => {
+              $('#widgetMainWr').css({margin: 0});
+            }, 200);
+          }
+
+
+          setTimeout(() => {
+            $('span.img-size').text(mainBlockW.innerWidth() + 'x' + mainBlockW.innerHeight() + ' px');
+            $('span.img-size-form').text((mainBl.innerWidth()) + 'x' + mainBl.innerHeight() + ' px');
+
+            this.SP_widget.img_width = mainBlockW.innerWidth();
+            this.SP_widget.img_height = mainBlockW.innerHeight();
+            this.SP_widget.widget_width_all = mainBl.outerWidth() + 1 + 'px';
+            this.SP_widget.widget_height_all = mainBl.outerHeight() + 'px';
+            this.SP_widget.widget_width_nopx = mainBl.outerWidth() + 1;
+            this.SP_widget.widget_height_nopx = mainBl.outerHeight();
+            this.SP_widget.widget_CP_width = $('#colorFormPod').innerWidth();
+            this.SP_widget.widget_CP_offset_top = $('#colorFormPod').css('top');
+            this.SP_widget.widget_ul_width_nopx = $('#mainElListUl').innerWidth() + 1;
+            this.SP_widget.widget_plash_width = $('.widget2-plashka').innerWidth() + 'px';
+            this.SP_widget.widget_plash_width = $('.widget2-plashka').innerWidth() + 'px';
+
+            $('#thankWidget').css({width: mainBl.outerWidth() + 'px', height: mainBl.outerHeight() + 'px'});
+          }, 500);
+        }
+      }, 0);
+    }
+
+    $('#mainElListUl').removeClass('widget-flex-dis');
+    setTimeout(() => {
+      $('#mainElListUl').addClass('widget-flex-dis');
+    }, 0);
+
+
+    setTimeout(() => {
+      $('.text-input-class .form-widget-cntrl').change(function() {
+        if ($(this).val() != '') {
+          $(this).addClass('filled');
+        } else {
+          $(this).removeClass('filled');
+        }
+      });
+    }, 200);
+  }
+
   private saveWidgetItem() {
     this.widget.guiprops.dhVisual.lastModifiedDate = new Date().toString();
     this.widget.guiprops.dhVisual.widget_width_all   = this.SP_widget.widget_width_all;
