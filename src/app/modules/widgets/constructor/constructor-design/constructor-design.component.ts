@@ -8,6 +8,7 @@ import { FullWidget } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetService } from '../../services/widget.service';
 import Swal from 'sweetalert2';
+import { WidgetConstructorDesignService } from '../../services/widget-constructor-design.service';
 
 @Component({
   selector: 'app-constructor-design',
@@ -41,7 +42,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     private translate: TranslateService,
     private toastr: ToastrService,
     private containerizedWidgetService: ContainerizedWidgetService,
-    private widgetService: WidgetService
+    private widgetService: WidgetService,
+    private widgetConstructorDesignService: WidgetConstructorDesignService
   ) {
   }
 
@@ -283,8 +285,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
     this.widget.guiprops.formExt.model.list.forEach((item, index) => {
       // Map identifier of elements in form
-      if (WidgetConstructorDesignService.isItemMultiAndHasId(item.type)) {
-        if (isFieldIdUnique(item.idField)) {
+      if (this.widgetConstructorDesignService.isItemMultiAndHasId(item.type)) {
+        if (this.isFieldIdUnique(item.idField)) {
           const formExtEnumType = {
             text: 'TEXT',
             date: 'DATE',
@@ -307,32 +309,56 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       }
     });
 
-    formExtRedirectFieldEmpty = $scope.widget.guiprops.formExt.model.list.some(function(item) {
-      return isButtonRedirectAndEmpty(item);
+    this.formExtRedirectFieldEmpty = this.widget.guiprops.formExt.model.list.some((item) => {
+      return this.isButtonRedirectAndEmpty(item);
     });
 
     let isFormHasSendIfActionFLAG;
-    let isFormHasInputsFLAG = $scope.widget.guiprops.formExt.model.list.some(function(item) {
-      return WidgetConstructorDesignService.isFormHasInputs(item);
+    const isFormHasInputsFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
+      return this.widgetConstructorDesignService.isFormHasInputs(item);
     });
 
-    let isFormHasSpecElementsFLAG = $scope.widget.guiprops.formExt.model.list.some(function(item) {
-      return isFormHasSpecElements(item);
+    const isFormHasSpecElementsFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
+      return this.isFormHasSpecElements(item);
     });
 
     if (isFormHasSpecElementsFLAG) {
-      isFormHasSendIfActionFLAG = $scope.widget.guiprops.formExt.model.list.some(function(item) {
-        return isFormHasSendIfAction(item);
+      isFormHasSendIfActionFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
+        return this.isFormHasSendIfAction(item);
       });
     }
 
-    let isFormHasActionButtonFLAG = $scope.widget.guiprops.formExt.model.list.some(function(item) {
-      return isFormHasButtonWithAction(item);
+    const isFormHasActionButtonFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
+      return this.isFormHasButtonWithAction(item);
     });
 
-    let ifFormHasSpecWithoutActionORNot = (typeof isFormHasSendIfActionFLAG !== 'undefined' && !isFormHasSendIfActionFLAG) || typeof isFormHasSendIfActionFLAG === 'undefined';
-    formExtNeedButton = isFormHasInputsFLAG && ifFormHasSpecWithoutActionORNot && !isFormHasActionButtonFLAG;
+    const ifFormHasSpecWithoutActionORNot = (typeof isFormHasSendIfActionFLAG !== 'undefined' && !isFormHasSendIfActionFLAG)
+      || typeof isFormHasSendIfActionFLAG === 'undefined';
+    this.formExtNeedButton = isFormHasInputsFLAG && ifFormHasSpecWithoutActionORNot && !isFormHasActionButtonFLAG;
   }
+
+  private isButtonRedirectAndEmpty(item) {
+    return item.type === 'button' && (item.redirect.type.type === 1 || item.redirect.type.type === 3) && !item.redirect.url;
+  }
+
+  private isFormHasSpecElements(item) {
+    return item.type === 'rating' || item.type === 'dd' || item.type === 'variants';
+  }
+
+  private isFormHasSendIfAction(item) {
+    return (item.type === 'rating' && item.sendFormIfAction) ||
+      (item.type === 'dd' && item.sendFormIfAction) ||
+      (item.type === 'variants' && item.sendFormIfAction);
+  }
+
+  private isFormHasButtonWithAction(item) {
+    return item.type === 'button' && (item.redirect.type.type === 0 || item.redirect.type.type === 1);
+  }
+
+  private isFieldIdUnique(id) {
+    return id !== 'email' && id !== 'name' && id !== 'message' && id !== 'phone' && this.formExtIdsCached.indexOf(id) === -1;
+  }
+
 
   private runValidators() {
     let errorsList = [];
