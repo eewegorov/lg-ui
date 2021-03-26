@@ -22,4 +22,24 @@ export class WidgetConstructorDesignService {
       item.type === 'dd' ||
       item.type === 'variants';
   }
+
+  public ruleLeftOrRightUnderContent(formExtModel, formBasicVisual, imagePlace) {
+    if (formExtModel.enable) {
+      return formExtModel.model.mainSettings.visual.type === 0 && this.ruleImageLeftOrRight(imagePlace);
+    } else {
+      return formBasicVisual === 'Под контентом' && this.ruleImageLeftOrRight(imagePlace);
+    }
+  }
+
+  public ruleLeftOrRightWholeWidth(formExtModel, formBasicVisual, imagePlace) {
+    if (formExtModel.enable) {
+      return formExtModel.model.mainSettings.visual.type === 1 && this.ruleImageLeftOrRight(imagePlace);
+    } else {
+      return formBasicVisual === 'На всю ширину' && this.ruleImageLeftOrRight(imagePlace);
+    }
+  }
+
+  private ruleImageLeftOrRight(imagePlace) {
+    return imagePlace === 'Слева' || imagePlace === 'Справа';
+  }
 }

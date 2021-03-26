@@ -23,9 +23,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   @Input() public isDesigner: boolean;
   @Input() public isMockup: boolean;
   @Input() public isContainerized: boolean;
+  @Input() private currentActiveTab: string;
 
   public isLoading = false;
 
+  private SP_widget: any;
   private validators = [];
   private couponsId = [];
   private customFields = [];
@@ -162,6 +164,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     const gap18  = '-18px';
     const gap3   = '-3px';
 
+    let widthImageStyle = '';
+    let heightImageStyle = '';
+
     mainBlockW.addClass('hide-image-bl-for-rebuild');
     setTimeout(() => {
       mainBlockW.removeClass('hide-image-bl-for-rebuild');
@@ -174,36 +179,40 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     if (((this.widget.guiprops.image.place === 'Слева') || (this.widget.guiprops.image.place === 'Справа'))) {
       if (this.widget.guiprops.image.img_width === 'Собственная') {
         const newWidth = (this.widget.guiprops.image.img_widthpx * 1).toString();
-        this.widthImageStyle = newWidth + 'px';
+        widthImageStyle = newWidth + 'px';
       }
       else {
-        this.widthImageStyle = '33%';
+        widthImageStyle = '33%';
       }
     }
 
     if (((this.widget.guiprops.image.place === 'Сверху') || (this.widget.guiprops.image.place === 'Снизу'))) {
       if (this.widget.guiprops.image.img_height === 'Собственная') {
         const newHeight = (this.widget.guiprops.image.img_heightpx * 1).toString();
-        this.heightImageStyle = newHeight + 'px';
+        heightImageStyle = newHeight + 'px';
       }
       else {
-        this.heightImageStyle = '150px';
+        heightImageStyle = '150px';
       }
     }
 
-    if (this.isCurrentActiveTab('design')) {
+    if (this.currentActiveTab === 'design') {
       setTimeout(() => {
         if (!$('#thankWidget').hasClass('active')) {
           if (this.widget.guiprops.image.enable) {
             // Под контентом Слева или Справа
-            if (this.widgetConstructorDesignService.ruleLeftOrRightUnderContent(this.widget.guiprops.formExt, this.widget.guiprops.form.visual, $scope.widget.guiprops.image.place)) {
+            if (this.widgetConstructorDesignService.ruleLeftOrRightUnderContent(
+              this.widget.guiprops.formExt,
+              this.widget.guiprops.form.visual,
+              this.widget.guiprops.image.place
+            )) {
               $('#colorFormPod').css({'z-index': '0'});
               // Размер ЗАДАН
               if (this.widget.guiprops.image.img_width === 'Собственная') {
                 let imageWidgetWidthPod;
                 setTimeout(() => {
                   $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
-                  mainBlockW.css({width: this.widthImageStyle, height: '100%'});
+                  mainBlockW.css({width: widthImageStyle, height: '100%'});
                 }, 100);
 
                 if (this.widget.guiprops.image.place === 'Слева') {
@@ -259,7 +268,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
               // Размер ЗАДАН
               if (this.widget.guiprops.image.img_height === 'Собственная') {
                 setTimeout(() => {
-                  mainBlockW.css({height: this.heightImageStyle});
+                  mainBlockW.css({height: heightImageStyle});
                   $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
                   mainBlockW.css({width: '100%'});
                 }, 100);
@@ -316,7 +325,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
                 console.log('FULL WIDTH LR 2', $('.color-pod'));
                 let mainBlHeight;
                 setTimeout(() => {
-                  mainBlockW.css({width: this.widthImageStyle});
+                  mainBlockW.css({width: widthImageStyle});
                   mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
                   if (this.widget.guiprops.bg.border.enable) {
                     mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
@@ -475,6 +484,299 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         }
       });
     }, 200);
+  }
+
+  public addFormExtButtonElement(disOrNot) {
+    if (disOrNot) {
+      return false;
+    }
+
+    var formElementToAdd = {
+      name: "form-ext-element"
+    };
+
+
+    if (addElemFromWidget === false) {
+      $scope.widget.guiprops.elementsList.push(formElementToAdd);
+    } else {
+      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, formElementToAdd);
+    }
+    $scope.widget.guiprops.formExt.enable = true;
+
+    addElementModalHide();
+  }
+
+  public addFormButtonElement(disOrNot) {
+    if (disOrNot) {
+      return false;
+    }
+
+    var formElementToAdd = {
+      name: "form-element"
+    };
+
+    $scope.widget.guiprops.form.enable = true;
+
+    if (addElemFromWidget === false) {
+      $scope.widget.guiprops.elementsList.push(formElementToAdd);
+    } else {
+      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, formElementToAdd);
+    }
+
+    addElementModalHide();
+  }
+
+  public addCloseLinkElement(disOrNot) {
+    if (disOrNot) {
+      return false;
+    }
+
+    var closeLinkElementToAdd = {
+      name: "closelink-element"
+    };
+    if (addElemFromWidget === false) {
+      $scope.widget.guiprops.elementsList.push(closeLinkElementToAdd);
+    } else {
+      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, closeLinkElementToAdd);
+    }
+
+    addElementModalHide();
+  }
+
+  public disElementOrNotBtn() {
+    return this.widget.guiprops.form.enable || this.widget.guiprops.button.enable || this.widget.guiprops.formExt.enable;
+  }
+
+  public disElementOrNotBtnCloseLink() {
+    for (var i = 0; i < $scope.widget.guiprops.elementsList.length; i++) {
+      if ($scope.widget.guiprops.elementsList[i].name === "closelink-element" ||
+        ($scope.widget.guiprops.formExt && $scope.widget.guiprops.formExt.enable &&
+          this.widgetConstructorDesignService.isFormHasCurrentTypeButtons($scope.widget.guiprops.formExt.model.list, 2))) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public addButtonElement(disOrNot) {
+    if (disOrNot) {
+      return false;
+    }
+
+    var buttonElementToAdd = {
+      name: "button-element"
+    };
+    $scope.widget.guiprops.button.enable = true;
+
+    if (addElemFromWidget === false) {
+      $scope.widget.guiprops.elementsList.push(buttonElementToAdd);
+    } else {
+      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, buttonElementToAdd);
+    }
+
+    addElementModalHide();
+  }
+
+  public addTitleElement() {
+    var textElementToAdd = {
+      name: "title-element",
+      textSummer:"<p>Вы можете редактировать этот текст. Если вы хотите<br>изменить цвет, позиционирование или стиль текста,<br>то выделите фрагмент для появления окна редактора.<br>Размер и шрифт изменяются слева в блоке настроек элемента.</p>",
+      font: $scope.systemFonts[0],
+      fontType:'systemFont',
+      fontName:'',
+      fontSize:12,
+      counter: 0,
+      textShadow: {
+        enable: false,
+        color: "#000000",
+        opacity: "1",
+        rgbaColor: (hexToRgb("#FFFFFF", 1)).toString(),
+        horiz: 0,
+        vertical: 0,
+        blur: 0
+      }
+    };
+
+    if (addElemFromWidget === false) {
+      $scope.widget.guiprops.elementsList.push(textElementToAdd);
+    } else {
+      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, textElementToAdd);
+    }
+
+    addElementModalHide();
+  }
+
+  public addSocialElement(disOrNot) {
+    if (disOrNot) {
+      return false;
+    }
+
+    var socialElementToAdd = {
+      name: "social-element"
+    };
+    if (addElemFromWidget === false) {
+      $scope.widget.guiprops.elementsList.push(socialElementToAdd);
+    } else {
+      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, socialElementToAdd);
+    }
+
+    addElementModalHide();
+  }
+
+  public disElementOrNotBtnSocial() {
+    for (var i = 0; i < $scope.widget.guiprops.elementsList.length; i++) {
+      if ($scope.widget.guiprops.elementsList[i].name === "social-element") {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public addSplitElement() {
+    var splitElementToAdd = {
+      name: "split-element",
+      type: $scope.typeClass[0],
+      color: "#000000",
+      width_type: $scope.widthHrType[0],
+      widthpx: 200,
+      counter: 0,
+      position: $scope.floatBtn[0]
+    };
+
+    if (addElemFromWidget === false) {
+      $scope.widget.guiprops.elementsList.push(splitElementToAdd);
+    } else {
+      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, splitElementToAdd);
+    }
+
+    addElementModalHide();
+  }
+
+  public addVideoElement() {
+    var videoElementToAdd = {
+      name: "video-element",
+      videoUrl: 'https://',
+      videoId: '',
+      videoType:'youtube',
+      type: $scope.typeClass[0],
+      width_type: $scope.widthHrType[0],
+      widthpx: 100,
+      counter: 0,
+      position: $scope.floatBtn[0]
+    };
+
+    if (addElemFromWidget === false) {
+      $scope.widget.guiprops.elementsList.push(videoElementToAdd);
+    } else {
+      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, videoElementToAdd);
+    }
+
+    addElementModalHide();
+  }
+
+  public addImageElement() {
+    // if (!$scope.isPayment) {
+    //     $scope.showPaymentDialog($scope.sid, $scope.localization.paymentFeature);
+    //     return;
+    // }
+
+    var imageElementToAdd = {
+      name: "image-element",
+      imageUrl: 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg',
+      type: $scope.typeClass[0],
+      width_type: $scope.widthHrType[1],
+      widthpx: 100,
+      counter: 0,
+      position: $scope.floatBtn[1]
+    };
+
+    if (addElemFromWidget === false) {
+      $scope.widget.guiprops.elementsList.push(imageElementToAdd);
+    } else {
+      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, imageElementToAdd);
+    }
+
+    addElementModalHide();
+  }
+
+  public addPaddingElement() {
+    var paddingElementToAdd = {
+      name: "padding-element",
+      counter: 0,
+      padding: 20
+    };
+
+    if (addElemFromWidget === false) {
+      $scope.widget.guiprops.elementsList.push(paddingElementToAdd);
+    } else {
+      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, paddingElementToAdd);
+    }
+
+    addElementModalHide();
+  }
+
+  public addIframeElement() {
+    var iframeElementToAdd = {
+      name: "iframe-element",
+      type: $scope.typeClass[0],
+      width_type: $scope.widthHrType[0],
+      widthpx: 100,
+      height_type: $scope.widgwidthBtn[0],
+      heightpx: 100,
+      counter: 0,
+      position: $scope.floatBtn[0],
+      html_value: "",
+      css_value: "",
+      real_height: 100
+    };
+
+    if (addElemFromWidget === false) {
+      $scope.widget.guiprops.elementsList.push(iframeElementToAdd);
+    } else {
+      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, iframeElementToAdd);
+    }
+
+    addElementModalHide();
+  }
+
+  public addCouponElement() {
+    if (!$scope.isPayment) {
+      $scope.showPaymentDialog($scope.sid, $scope.localization.paymentFeature);
+      return;
+    }
+
+    if (addElemFromWidget === false) {
+      $scope.widget.guiprops.elementsList.push(angular.copy(globalCouponObject));
+    } else {
+      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, angular.copy(globalCouponObject));
+    }
+
+    addElementModalHide();
+  }
+
+  public closeModalImg() {
+    $('body').removeClass('modal-open-h100');
+  }
+
+  public updateFile() {
+    if ($scope.linkImage == '') {
+      toastr["error"]('Пожалуйста, выберите изображение.', 'Ошибка!');
+    } else {
+      $scope.controls.newModal.modal('hide');
+      $('body').removeClass('modal-open-h100');
+
+      if (imageCustom === 'imageSingle') {
+        $scope.widget.guiprops.image.url = $scope.linkImage;
+      } else if (imageCustom === 'dotIcon') {
+        $scope.widget.guiprops.dhVisual.url = $scope.linkImage;
+      } else if (imageCustom === 'labelIcon') {
+        $scope.widget.guiprops.labelMain.url = $scope.linkImage;
+      } else if (!imageCustom) {
+        $scope.widget.guiprops.bg.url = $scope.linkImage;
+      } else {
+        imageCustom.imageUrl = $scope.linkImage;
+      }
+    }
   }
 
   private saveWidgetItem() {

@@ -26,8 +26,8 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   public sid: string;
   public wid: string;
   public isContainerized: boolean;
-
-  private currentActiveTab = 'design';
+  public currentActiveTab = 'design';
+  
   private validators = [];
   private types = [];
   private coupons = [];
