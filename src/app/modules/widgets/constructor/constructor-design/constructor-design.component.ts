@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 import { FlowDirective } from '@flowjs/ngx-flow';
 import { FullWidget } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetService } from '../../services/widget.service';
-import Swal from 'sweetalert2';
 import { WidgetConstructorDesignService } from '../../services/widget-constructor-design.service';
 
 @Component({
@@ -37,6 +37,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   private formExtNeedButton = false;
   private formExtRedirectFieldEmpty = false;
   private addElemFromWidget = false;
+  private systemFonts = [];
   private controls = {
     newModal: $('#addNewWidgetListModal'),
     newElementModal: $('#addNewElementListModal')
@@ -589,19 +590,19 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public addTitleElement() {
-    var textElementToAdd = {
-      name: "title-element",
-      textSummer:"<p>Вы можете редактировать этот текст. Если вы хотите<br>изменить цвет, позиционирование или стиль текста,<br>то выделите фрагмент для появления окна редактора.<br>Размер и шрифт изменяются слева в блоке настроек элемента.</p>",
-      font: $scope.systemFonts[0],
-      fontType:'systemFont',
-      fontName:'',
-      fontSize:12,
+    const textElementToAdd = {
+      name: 'title-element',
+      textSummer: '<p>Вы можете редактировать этот текст. Если вы хотите<br>изменить цвет, позиционирование или стиль текста,<br>то выделите фрагмент для появления окна редактора.<br>Размер и шрифт изменяются слева в блоке настроек элемента.</p>',
+      font: this.systemFonts[0],
+      fontType: 'systemFont',
+      fontName: '',
+      fontSize: 12,
       counter: 0,
       textShadow: {
         enable: false,
-        color: "#000000",
-        opacity: "1",
-        rgbaColor: (hexToRgb("#FFFFFF", 1)).toString(),
+        color: '#000000',
+        opacity: '1',
+        rgbaColor: (hexToRgb('#FFFFFF', 1)).toString(),
         horiz: 0,
         vertical: 0,
         blur: 0
@@ -1029,17 +1030,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           ['insert', ['link']]
         ]
       }
-
-      // // link: [
-      // //   ['link', ['linkDialogShow', 'unlink']]
-      // // ],
-      // toolbar: [
-      //   ['color', ['color']],
-      //   ['font', ['bold', 'underline', 'italic', 'clear', 'fontsize', 'strikethrough']],
-      //   ['para', ['paragraph', 'height']],
-      //   ['insert', ['link']]
-      // ]
-
     };
 
     $scope.orientInputForm = ["Вертикальная", "Горизонтальная"];
@@ -1149,6 +1139,27 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       }
     };
   }
+
+  private hexToRgb(r, t) {
+    var n = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(r), a = function () {
+      return void 0 == this.alpha
+        ? "rgb(" + this.r + ", " + this.g + ", " + this.b + ")"
+        : (this.alpha > 1 ? this.alpha = 1 : this.alpha < 0 && (this.alpha = 0), "rgba(" + this.r + ", " + this.g + ", " + this.b + ", " + this.alpha + ")")
+    };
+    return void 0 == t ? n ? {
+      r: parseInt(n[1], 16),
+      g: parseInt(n[2], 16),
+      b: parseInt(n[3], 16),
+      toString: a
+    } : null : (t > 1 ? t = 1 : 0 > t && (t = 0), n ? {
+      r: parseInt(n[1], 16),
+      g: parseInt(n[2], 16),
+      b: parseInt(n[3], 16),
+      alpha: t,
+      toString: a
+    } : null)
+  }
+
 
   ngOnDestroy(): void {
     this.autoUploadSubscription.unsubscribe();
