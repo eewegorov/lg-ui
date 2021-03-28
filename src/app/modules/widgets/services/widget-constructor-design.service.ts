@@ -39,6 +39,12 @@ export class WidgetConstructorDesignService {
     }
   }
 
+  public isFormHasCurrentTypeButtons(list, currentType) {
+    return list.some((_) => {
+      return _.type === 'button' && _.redirect.type.type === currentType;
+    });
+  }
+
   private ruleImageLeftOrRight(imagePlace) {
     return imagePlace === 'Слева' || imagePlace === 'Справа';
   }

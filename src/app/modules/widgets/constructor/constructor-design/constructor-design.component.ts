@@ -36,6 +36,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   private formExtIdsErrorFlag = false;
   private formExtNeedButton = false;
   private formExtRedirectFieldEmpty = false;
+  private addElemFromWidget = false;
+  private controls = {
+    newModal: $('#addNewWidgetListModal'),
+    newElementModal: $('#addNewElementListModal')
+  };
 
   private autoUploadSubscription: SubscriptionLike;
 
@@ -50,6 +55,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngOnInit(): void {
+    this.init();
   }
 
   ngAfterViewInit(): void {
@@ -477,7 +483,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
     setTimeout(() => {
       $('.text-input-class .form-widget-cntrl').change(function() {
-        if ($(this).val() != '') {
+        if ($(this).val() !== '') {
           $(this).addClass('filled');
         } else {
           $(this).removeClass('filled');
@@ -491,19 +497,24 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       return false;
     }
 
-    var formElementToAdd = {
-      name: "form-ext-element"
+    const formElementToAdd = {
+      name: 'form-ext-element'
     };
 
 
-    if (addElemFromWidget === false) {
-      $scope.widget.guiprops.elementsList.push(formElementToAdd);
+    if (this.addElemFromWidget === false) {
+      this.widget.guiprops.elementsList.push(formElementToAdd);
     } else {
-      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, formElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, formElementToAdd);
     }
-    $scope.widget.guiprops.formExt.enable = true;
+    this.widget.guiprops.formExt.enable = true;
 
-    addElementModalHide();
+    this.addElementModalHide();
+  }
+
+  private addElementModalHide() {
+    (this.controls.newElementModal as any).modal('hide');
+    $('body').removeClass('modal-open-h100');
   }
 
   public addFormButtonElement(disOrNot) {
@@ -511,19 +522,19 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       return false;
     }
 
-    var formElementToAdd = {
-      name: "form-element"
+    const formElementToAdd = {
+      name: 'form-element'
     };
 
-    $scope.widget.guiprops.form.enable = true;
+    this.widget.guiprops.form.enable = true;
 
-    if (addElemFromWidget === false) {
-      $scope.widget.guiprops.elementsList.push(formElementToAdd);
+    if (this.addElemFromWidget === false) {
+      this.widget.guiprops.elementsList.push(formElementToAdd);
     } else {
-      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, formElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, formElementToAdd);
     }
 
-    addElementModalHide();
+    this.addElementModalHide();
   }
 
   public addCloseLinkElement(disOrNot) {
@@ -531,16 +542,16 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       return false;
     }
 
-    var closeLinkElementToAdd = {
-      name: "closelink-element"
+    const closeLinkElementToAdd = {
+      name: 'closelink-element'
     };
-    if (addElemFromWidget === false) {
-      $scope.widget.guiprops.elementsList.push(closeLinkElementToAdd);
+    if (this.addElemFromWidget === false) {
+      this.widget.guiprops.elementsList.push(closeLinkElementToAdd);
     } else {
-      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, closeLinkElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, closeLinkElementToAdd);
     }
 
-    addElementModalHide();
+    this.addElementModalHide();
   }
 
   public disElementOrNotBtn() {
@@ -548,10 +559,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public disElementOrNotBtnCloseLink() {
-    for (var i = 0; i < $scope.widget.guiprops.elementsList.length; i++) {
-      if ($scope.widget.guiprops.elementsList[i].name === "closelink-element" ||
-        ($scope.widget.guiprops.formExt && $scope.widget.guiprops.formExt.enable &&
-          this.widgetConstructorDesignService.isFormHasCurrentTypeButtons($scope.widget.guiprops.formExt.model.list, 2))) {
+    for (const item of this.widget.guiprops.elementsList) {
+      if (item.name === 'closelink-element' ||
+        (this.widget.guiprops.formExt && this.widget.guiprops.formExt.enable &&
+          this.widgetConstructorDesignService.isFormHasCurrentTypeButtons(this.widget.guiprops.formExt.model.list, 2))) {
         return true;
       }
     }
@@ -563,18 +574,18 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       return false;
     }
 
-    var buttonElementToAdd = {
-      name: "button-element"
+    const buttonElementToAdd = {
+      name: 'button-element'
     };
-    $scope.widget.guiprops.button.enable = true;
+    this.widget.guiprops.button.enable = true;
 
-    if (addElemFromWidget === false) {
-      $scope.widget.guiprops.elementsList.push(buttonElementToAdd);
+    if (this.addElemFromWidget === false) {
+      this.widget.guiprops.elementsList.push(buttonElementToAdd);
     } else {
-      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, buttonElementToAdd);
+      this.widget.guiprops.elementsList.splice(this.addElemFromWidget + 1, 0, buttonElementToAdd);
     }
 
-    addElementModalHide();
+    this.addElementModalHide();
   }
 
   public addTitleElement() {
@@ -675,10 +686,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public addImageElement() {
-    // if (!$scope.isPayment) {
-    //     $scope.showPaymentDialog($scope.sid, $scope.localization.paymentFeature);
-    //     return;
-    // }
 
     var imageElementToAdd = {
       name: "image-element",
@@ -992,6 +999,155 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     });
 
     return errorsList;
+  }
+
+  private init() {
+    $scope.controls = {
+      "newModal": $("#addNewWidgetListModal"),
+      "newElementModal":$("#addNewElementListModal")
+    };
+
+    $scope.nameImage = "";
+    $scope.linkImage = "";
+
+    /**
+     * Fonts
+     */
+    $scope.googleFonts = WidgetConstructorDesignService.getGoogleFontList();
+    $scope.systemFonts = WidgetConstructorDesignService.getSystemFontList();
+
+    $scope.optionsSummernote = {
+      dialogsInBody: true,
+      popover: {
+        link: [
+          ['link', ['linkDialogShow', 'unlink']]
+        ],
+        air: [
+          ['color', ['color']],
+          ['font', ['bold', 'underline', 'italic', 'clear', 'fontsize', 'strikethrough']],
+          ['para', ['paragraph', 'height']],
+          ['insert', ['link']]
+        ]
+      }
+
+      // // link: [
+      // //   ['link', ['linkDialogShow', 'unlink']]
+      // // ],
+      // toolbar: [
+      //   ['color', ['color']],
+      //   ['font', ['bold', 'underline', 'italic', 'clear', 'fontsize', 'strikethrough']],
+      //   ['para', ['paragraph', 'height']],
+      //   ['insert', ['link']]
+      // ]
+
+    };
+
+    $scope.orientInputForm = ["Вертикальная", "Горизонтальная"];
+    $scope.visualInputForm = ["Под контентом", "На всю ширину"];
+
+    $scope.typeImg = ["От края до края", "От другого края"];
+    $scope.typeForm = ["email", "name", "phone", "message"];
+    $scope.valueForm = ["email", "имя", "телефон", "сообщение"];
+    $scope.widthBtn = ["Авто", "От края до края", "Собственная"];
+    $scope.widgwidthBtn = ["Авто", "Собственная"];
+    $scope.widthHrType = ["От края до края", "Собственная"];
+    $scope.floatBtn = ["Слева", "По центру", "Справа"];
+    $scope.placeImg = ["Слева", "Сверху", "Справа", "Снизу"];
+
+    $scope.itemVariable = [{
+      type: 'email',
+      value: 'email',
+      inpPlace : 'Введите Ваш email'
+    },
+      {
+        type: 'name',
+        value: 'имя',
+        inpPlace : 'Введите Вашe имя'
+      },
+      {
+        type: 'phone',
+        value: 'телефон',
+        inpPlace : 'Введите Ваш телефон'
+      },
+      {
+        type: 'message',
+        value: 'сообщение',
+        inpPlace : 'Введите Ваше сообщение'
+      }];
+
+    $scope.placeDh = ["Левый нижний угол","Правый нижний угол"];
+
+    $scope.placeLabel = ["Нижний левый угол","Нижний правый угол","Правая сторона браузера","Левая сторона браузера"];
+
+    $scope.placePopup = ["По центру окна браузера","Верхний левый угол","Верхний правый угол","Сверху по центру","Нижний левый угол","Нижний правый угол","Снизу по центру","Справа по центру","Слева по центру"];
+
+    $scope.iconsArray = WidgetConstructorDesignService.getIconLabelList();
+
+    $scope.typeClass = ["1", "2", "3", "4", "5", "6"];
+
+    $scope.vertOrientDh = ["От верхней границы", "По центру виджета", "От нижней границы"];
+
+    $scope.sizeSocBtn = ["Большой","Средний", "Маленький"];
+
+    $scope.imageItemsType = ["Растянуть по ширине и высоте блока", "Установить произвольные габариты"];
+
+    $scope.imageItemsAlign = ["По центру", "По верхнему краю", "По нижнему краю"];
+
+    $scope.staticWidgetAlign = ["По центру", "По левому краю", "По правому краю"];
+
+    $scope.formAlign = ["По центру", "По левому краю", "По правому краю"];
+
+    $scope.bgPositionTypesList = ["Растянуть", "Замостить"];
+
+    $scope.tilesList = ["Замостить по X", "Замостить по Y", "Замостить по X+Y"];
+
+    $scope.maskTypeList = ["Вся площадь виджета", "Только под контентом"];
+
+    $scope.defaultInputFormValue = "";
+
+    $scope.addOnWidgetLoadListener(loadListener);
+
+    globalCouponObject = {
+      name: "coupon-element",
+      coupon: $scope.coupons.length ? $scope.coupons[0] : {id: null, name: "Какой купон хотите использовать?"},
+      font: angular.copy($scope.systemFonts[0]),
+      fontType: "systemFont",
+      fontName: "",
+      fontSize: 18,
+      colorText: "#262626",
+      color: "#BEBECC",
+      opacity: "1",
+      borderRadius: 5,
+      rgbaColor: (hexToRgb("#BEBECC", 1)).toString(),
+      hoverText: "Скопировать",
+      clickText: "Скопировано",
+      actionText: "Кликните, чтобы скопировать ваш купон на скидку",
+      manualText: "Вы можете использовать данный купон при оформлении заказа",
+      width_type: $scope.widthBtn[1],
+      widthpx: 100,
+      counter: 0,
+      position: $scope.floatBtn[1],
+      positionPopup: $scope.placePopup[0],
+      closeAfter: false,
+      isCopyAction: false,
+      title: {
+        enable: false,
+        textSummer: "<p>Вы можете редактировать этот текст. Если вы хотите<br>изменить цвет, позиционирование или стиль текста,<br>то выделите фрагмент для появления окна редактора.<br>Размер и шрифт изменяются слева в блоке настроек элемента.</p>",
+        font: angular.copy($scope.systemFonts[0]),
+        fontType: "systemFont",
+        fontName: "",
+        fontSize: 12,
+        textShadow: {
+          enable: false,
+          color: "#262626",
+          opacity: "1",
+          rgbaColor: (hexToRgb("#262626", 1)).toString(),
+          horiz: 0,
+          vertical: 0,
+          blur: 0
+        }
+      }
+    };
   }
 
   ngOnDestroy(): void {
