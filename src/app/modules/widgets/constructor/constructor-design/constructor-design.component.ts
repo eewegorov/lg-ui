@@ -42,6 +42,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     newModal: $('#addNewWidgetListModal'),
     newElementModal: $('#addNewElementListModal')
   };
+  private typeClass = ['1', '2', '3', '4', '5', '6'];
+  private widthHrType = ['От края до края', 'Собственная'];
+  private floatBtn = ['Слева', 'По центру', 'Справа'];
+  private widgwidthBtn = ['Авто', 'Собственная'];
+  private globalCouponObject;
+  private imageCustom = null;
+  private linkImage = '';
 
   private autoUploadSubscription: SubscriptionLike;
 
@@ -53,6 +60,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     private widgetService: WidgetService,
     private widgetConstructorDesignService: WidgetConstructorDesignService
   ) {
+    this.systemFonts = this.widgetConstructorDesignService.getSystemFontList();
   }
 
   ngOnInit(): void {
@@ -583,7 +591,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     if (this.addElemFromWidget === false) {
       this.widget.guiprops.elementsList.push(buttonElementToAdd);
     } else {
-      this.widget.guiprops.elementsList.splice(this.addElemFromWidget + 1, 0, buttonElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, buttonElementToAdd);
     }
 
     this.addElementModalHide();
@@ -602,20 +610,20 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         enable: false,
         color: '#000000',
         opacity: '1',
-        rgbaColor: (hexToRgb('#FFFFFF', 1)).toString(),
+        rgbaColor: (this.hexToRgb('#FFFFFF', 1)).toString(),
         horiz: 0,
         vertical: 0,
         blur: 0
       }
     };
 
-    if (addElemFromWidget === false) {
-      $scope.widget.guiprops.elementsList.push(textElementToAdd);
+    if (this.addElemFromWidget === false) {
+      this.widget.guiprops.elementsList.push(textElementToAdd);
     } else {
-      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, textElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, textElementToAdd);
     }
 
-    addElementModalHide();
+    this.addElementModalHide();
   }
 
   public addSocialElement(disOrNot) {
@@ -623,21 +631,21 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       return false;
     }
 
-    var socialElementToAdd = {
-      name: "social-element"
+    const socialElementToAdd = {
+      name: 'social-element'
     };
-    if (addElemFromWidget === false) {
-      $scope.widget.guiprops.elementsList.push(socialElementToAdd);
+    if (this.addElemFromWidget === false) {
+      this.widget.guiprops.elementsList.push(socialElementToAdd);
     } else {
-      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, socialElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, socialElementToAdd);
     }
 
-    addElementModalHide();
+    this.addElementModalHide();
   }
 
   public disElementOrNotBtnSocial() {
-    for (var i = 0; i < $scope.widget.guiprops.elementsList.length; i++) {
-      if ($scope.widget.guiprops.elementsList[i].name === "social-element") {
+    for (const item of this.widget.guiprops.elementsList) {
+      if (item.name === 'social-element') {
         return true;
       }
     }
@@ -645,121 +653,120 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public addSplitElement() {
-    var splitElementToAdd = {
-      name: "split-element",
-      type: $scope.typeClass[0],
-      color: "#000000",
-      width_type: $scope.widthHrType[0],
+    const splitElementToAdd = {
+      name: 'split-element',
+      type: this.typeClass[0],
+      color: '#000000',
+      width_type: this.widthHrType[0],
       widthpx: 200,
       counter: 0,
-      position: $scope.floatBtn[0]
+      position: this.floatBtn[0]
     };
 
-    if (addElemFromWidget === false) {
-      $scope.widget.guiprops.elementsList.push(splitElementToAdd);
+    if (this.addElemFromWidget === false) {
+      this.widget.guiprops.elementsList.push(splitElementToAdd);
     } else {
-      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, splitElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, splitElementToAdd);
     }
 
-    addElementModalHide();
+    this.addElementModalHide();
   }
 
   public addVideoElement() {
-    var videoElementToAdd = {
-      name: "video-element",
+    const videoElementToAdd = {
+      name: 'video-element',
       videoUrl: 'https://',
       videoId: '',
-      videoType:'youtube',
-      type: $scope.typeClass[0],
-      width_type: $scope.widthHrType[0],
+      videoType: 'youtube',
+      type: this.typeClass[0],
+      width_type: this.widthHrType[0],
       widthpx: 100,
       counter: 0,
-      position: $scope.floatBtn[0]
+      position: this.floatBtn[0]
     };
 
-    if (addElemFromWidget === false) {
-      $scope.widget.guiprops.elementsList.push(videoElementToAdd);
+    if (this.addElemFromWidget === false) {
+      this.widget.guiprops.elementsList.push(videoElementToAdd);
     } else {
-      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, videoElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, videoElementToAdd);
     }
 
-    addElementModalHide();
+    this.addElementModalHide();
   }
 
   public addImageElement() {
-
-    var imageElementToAdd = {
-      name: "image-element",
+    const imageElementToAdd = {
+      name: 'image-element',
       imageUrl: 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg',
-      type: $scope.typeClass[0],
-      width_type: $scope.widthHrType[1],
+      type: this.typeClass[0],
+      width_type: this.widthHrType[1],
       widthpx: 100,
       counter: 0,
-      position: $scope.floatBtn[1]
+      position: this.floatBtn[1]
     };
 
-    if (addElemFromWidget === false) {
-      $scope.widget.guiprops.elementsList.push(imageElementToAdd);
+    if (this.addElemFromWidget === false) {
+      this.widget.guiprops.elementsList.push(imageElementToAdd);
     } else {
-      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, imageElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, imageElementToAdd);
     }
 
-    addElementModalHide();
+    this.addElementModalHide();
   }
 
   public addPaddingElement() {
-    var paddingElementToAdd = {
-      name: "padding-element",
+    const paddingElementToAdd = {
+      name: 'padding-element',
       counter: 0,
       padding: 20
     };
 
-    if (addElemFromWidget === false) {
-      $scope.widget.guiprops.elementsList.push(paddingElementToAdd);
+    if (this.addElemFromWidget === false) {
+      this.widget.guiprops.elementsList.push(paddingElementToAdd);
     } else {
-      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, paddingElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, paddingElementToAdd);
     }
 
-    addElementModalHide();
+    this.addElementModalHide();
   }
 
   public addIframeElement() {
-    var iframeElementToAdd = {
-      name: "iframe-element",
-      type: $scope.typeClass[0],
-      width_type: $scope.widthHrType[0],
+    const iframeElementToAdd = {
+      name: 'iframe-element',
+      type: this.typeClass[0],
+      width_type: this.widthHrType[0],
       widthpx: 100,
-      height_type: $scope.widgwidthBtn[0],
+      height_type: this.widgwidthBtn[0],
       heightpx: 100,
       counter: 0,
-      position: $scope.floatBtn[0],
-      html_value: "",
-      css_value: "",
+      position: this.floatBtn[0],
+      html_value: '',
+      css_value: '',
       real_height: 100
     };
 
-    if (addElemFromWidget === false) {
-      $scope.widget.guiprops.elementsList.push(iframeElementToAdd);
+    if (this.addElemFromWidget === false) {
+      this.widget.guiprops.elementsList.push(iframeElementToAdd);
     } else {
-      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, iframeElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, iframeElementToAdd);
     }
 
-    addElementModalHide();
+    this.addElementModalHide();
   }
 
   public addCouponElement() {
-    if (!$scope.isPayment) {
-      $scope.showPaymentDialog($scope.sid, $scope.localization.paymentFeature);
+    if (!this.isPayment) {
+      this.showPaymentDialog(this.sid, this.translate.instant('widgetsList.payment.features'));
       return;
     }
 
-    if (addElemFromWidget === false) {
-      $scope.widget.guiprops.elementsList.push(angular.copy(globalCouponObject));
+    if (this.addElemFromWidget === false) {
+      this.widget.guiprops.elementsList.push({ ...this.globalCouponObject });
     } else {
-      $scope.widget.guiprops.elementsList.splice(addElemFromWidget + 1, 0, angular.copy(globalCouponObject));
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, { ...this.globalCouponObject });
     }
 
-    addElementModalHide();
+    this.addElementModalHide();
   }
 
   public closeModalImg() {
@@ -767,22 +774,22 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public updateFile() {
-    if ($scope.linkImage == '') {
-      toastr["error"]('Пожалуйста, выберите изображение.', 'Ошибка!');
+    if (this.linkImage === '') {
+      this.toastr.error('Пожалуйста, выберите изображение.', 'Ошибка!');
     } else {
-      $scope.controls.newModal.modal('hide');
+      (this.controls.newModal as any).modal('hide');
       $('body').removeClass('modal-open-h100');
 
-      if (imageCustom === 'imageSingle') {
-        $scope.widget.guiprops.image.url = $scope.linkImage;
-      } else if (imageCustom === 'dotIcon') {
-        $scope.widget.guiprops.dhVisual.url = $scope.linkImage;
-      } else if (imageCustom === 'labelIcon') {
-        $scope.widget.guiprops.labelMain.url = $scope.linkImage;
-      } else if (!imageCustom) {
-        $scope.widget.guiprops.bg.url = $scope.linkImage;
+      if (this.imageCustom === 'imageSingle') {
+        this.widget.guiprops.image.url = this.linkImage;
+      } else if (this.imageCustom === 'dotIcon') {
+        this.widget.guiprops.dhVisual.url = this.linkImage;
+      } else if (this.imageCustom === 'labelIcon') {
+        this.widget.guiprops.labelMain.url = this.linkImage;
+      } else if (!this.imageCustom) {
+        this.widget.guiprops.bg.url = this.linkImage;
       } else {
-        imageCustom.imageUrl = $scope.linkImage;
+        this.imageCustom.imageUrl = this.linkImage;
       }
     }
   }
@@ -1003,21 +1010,15 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   private init() {
-    $scope.controls = {
-      "newModal": $("#addNewWidgetListModal"),
-      "newElementModal":$("#addNewElementListModal")
-    };
 
-    $scope.nameImage = "";
-    $scope.linkImage = "";
+    this.nameImage = "";
 
     /**
      * Fonts
      */
-    $scope.googleFonts = WidgetConstructorDesignService.getGoogleFontList();
-    $scope.systemFonts = WidgetConstructorDesignService.getSystemFontList();
+    this.googleFonts = WidgetConstructorDesignService.getGoogleFontList();
 
-    $scope.optionsSummernote = {
+    this.optionsSummernote = {
       dialogsInBody: true,
       popover: {
         link: [
@@ -1032,19 +1033,16 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       }
     };
 
-    $scope.orientInputForm = ["Вертикальная", "Горизонтальная"];
-    $scope.visualInputForm = ["Под контентом", "На всю ширину"];
+    this.orientInputForm = ["Вертикальная", "Горизонтальная"];
+    this.visualInputForm = ["Под контентом", "На всю ширину"];
 
-    $scope.typeImg = ["От края до края", "От другого края"];
-    $scope.typeForm = ["email", "name", "phone", "message"];
-    $scope.valueForm = ["email", "имя", "телефон", "сообщение"];
-    $scope.widthBtn = ["Авто", "От края до края", "Собственная"];
-    $scope.widgwidthBtn = ["Авто", "Собственная"];
-    $scope.widthHrType = ["От края до края", "Собственная"];
-    $scope.floatBtn = ["Слева", "По центру", "Справа"];
-    $scope.placeImg = ["Слева", "Сверху", "Справа", "Снизу"];
+    this.tthisypeImg = ["От края до края", "От другого края"];
+    this.typeForm = ["email", "name", "phone", "message"];
+    this.valueForm = ["email", "имя", "телефон", "сообщение"];
+    this.widthBtn = ["Авто", "От края до края", "Собственная"];
+    this.placeImg = ["Слева", "Сверху", "Справа", "Снизу"];
 
-    $scope.itemVariable = [{
+    this.itemVariable = [{
       type: 'email',
       value: 'email',
       inpPlace : 'Введите Ваш email'
@@ -1065,42 +1063,41 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         inpPlace : 'Введите Ваше сообщение'
       }];
 
-    $scope.placeDh = ["Левый нижний угол","Правый нижний угол"];
+    this.placeDh = ["Левый нижний угол","Правый нижний угол"];
 
-    $scope.placeLabel = ["Нижний левый угол","Нижний правый угол","Правая сторона браузера","Левая сторона браузера"];
+    this.placeLabel = ["Нижний левый угол","Нижний правый угол","Правая сторона браузера","Левая сторона браузера"];
 
-    $scope.placePopup = ["По центру окна браузера","Верхний левый угол","Верхний правый угол","Сверху по центру","Нижний левый угол","Нижний правый угол","Снизу по центру","Справа по центру","Слева по центру"];
+    this.placePopup = ["По центру окна браузера","Верхний левый угол","Верхний правый угол","Сверху по центру","Нижний левый угол","Нижний правый угол","Снизу по центру","Справа по центру","Слева по центру"];
 
-    $scope.iconsArray = WidgetConstructorDesignService.getIconLabelList();
+    this.iconsArray = WidgetConstructorDesignService.getIconLabelList();
 
-    $scope.typeClass = ["1", "2", "3", "4", "5", "6"];
 
-    $scope.vertOrientDh = ["От верхней границы", "По центру виджета", "От нижней границы"];
+    this.vertOrientDh = ["От верхней границы", "По центру виджета", "От нижней границы"];
 
-    $scope.sizeSocBtn = ["Большой","Средний", "Маленький"];
+    this.sizeSocBtn = ["Большой","Средний", "Маленький"];
 
-    $scope.imageItemsType = ["Растянуть по ширине и высоте блока", "Установить произвольные габариты"];
+    this.imageItemsType = ["Растянуть по ширине и высоте блока", "Установить произвольные габариты"];
 
-    $scope.imageItemsAlign = ["По центру", "По верхнему краю", "По нижнему краю"];
+    this.imageItemsAlign = ["По центру", "По верхнему краю", "По нижнему краю"];
 
-    $scope.staticWidgetAlign = ["По центру", "По левому краю", "По правому краю"];
+    this.staticWidgetAlign = ["По центру", "По левому краю", "По правому краю"];
 
-    $scope.formAlign = ["По центру", "По левому краю", "По правому краю"];
+    this.formAlign = ["По центру", "По левому краю", "По правому краю"];
 
-    $scope.bgPositionTypesList = ["Растянуть", "Замостить"];
+    this.bgPositionTypesList = ["Растянуть", "Замостить"];
 
-    $scope.tilesList = ["Замостить по X", "Замостить по Y", "Замостить по X+Y"];
+    this.tilesList = ["Замостить по X", "Замостить по Y", "Замостить по X+Y"];
 
-    $scope.maskTypeList = ["Вся площадь виджета", "Только под контентом"];
+    this.maskTypeList = ["Вся площадь виджета", "Только под контентом"];
 
-    $scope.defaultInputFormValue = "";
+    this.defaultInputFormValue = "";
 
-    $scope.addOnWidgetLoadListener(loadListener);
+    this.addOnWidgetLoadListener(loadListener);
 
-    globalCouponObject = {
+    this.globalCouponObject = {
       name: "coupon-element",
-      coupon: $scope.coupons.length ? $scope.coupons[0] : {id: null, name: "Какой купон хотите использовать?"},
-      font: angular.copy($scope.systemFonts[0]),
+      coupon: this.coupons.length ? this.coupons[0] : {id: null, name: "Какой купон хотите использовать?"},
+      font: angular.copy(this.systemFonts[0]),
       fontType: "systemFont",
       fontName: "",
       fontSize: 18,
@@ -1113,17 +1110,17 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       clickText: "Скопировано",
       actionText: "Кликните, чтобы скопировать ваш купон на скидку",
       manualText: "Вы можете использовать данный купон при оформлении заказа",
-      width_type: $scope.widthBtn[1],
+      width_type: this.widthBtn[1],
       widthpx: 100,
       counter: 0,
-      position: $scope.floatBtn[1],
-      positionPopup: $scope.placePopup[0],
+      position: this.floatBtn[1],
+      positionPopup: this.placePopup[0],
       closeAfter: false,
       isCopyAction: false,
       title: {
         enable: false,
         textSummer: "<p>Вы можете редактировать этот текст. Если вы хотите<br>изменить цвет, позиционирование или стиль текста,<br>то выделите фрагмент для появления окна редактора.<br>Размер и шрифт изменяются слева в блоке настроек элемента.</p>",
-        font: angular.copy($scope.systemFonts[0]),
+        font: angular.copy(this.systemFonts[0]),
         fontType: "systemFont",
         fontName: "",
         fontSize: 12,
@@ -1141,12 +1138,15 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   private hexToRgb(r, t) {
-    var n = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(r), a = function () {
-      return void 0 == this.alpha
-        ? "rgb(" + this.r + ", " + this.g + ", " + this.b + ")"
-        : (this.alpha > 1 ? this.alpha = 1 : this.alpha < 0 && (this.alpha = 0), "rgba(" + this.r + ", " + this.g + ", " + this.b + ", " + this.alpha + ")")
+    const n = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(r);
+    const a = function() {
+      return void 0 === this.alpha
+        ? 'rgb(' + this.r + ', ' + this.g + ', ' + this.b + ')'
+        : (this.alpha > 1
+          ? this.alpha = 1
+          : this.alpha < 0 && (this.alpha = 0), 'rgba(' + this.r + ', ' + this.g + ', ' + this.b + ', ' + this.alpha + ')');
     };
-    return void 0 == t ? n ? {
+    return void 0 === t ? n ? {
       r: parseInt(n[1], 16),
       g: parseInt(n[2], 16),
       b: parseInt(n[3], 16),
@@ -1157,8 +1157,15 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       b: parseInt(n[3], 16),
       alpha: t,
       toString: a
-    } : null)
+    } : null);
   }
+
+  private showPaymentDialog(siteId, description) {
+    /*window.siteTariffModal.find("h5.paymentSubscription").html(description);
+    window.siteTariffModal.find("span.site-name").html($scope.siteName);
+    window.siteTariffModal.attr("data-id", siteId);
+    loadPlans();*/
+  };
 
 
   ngOnDestroy(): void {

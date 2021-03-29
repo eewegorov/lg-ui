@@ -45,6 +45,42 @@ export class WidgetConstructorDesignService {
     });
   }
 
+  public getSystemFontList() {
+    return [
+      {
+        name: 'Arial',
+        fontFamily: 'Arial, sans-serif'
+      },
+      {
+        name: 'Comic Sans MS',
+        fontFamily: '\'Comic Sans MS\', cursive'
+      },
+      {
+        name: 'Courier New',
+        fontFamily: '\'Courier New\', monospace'
+      },
+      {
+        name: 'Georgia',
+        fontFamily: 'Georgia, serif'
+      },
+      {
+        name: 'Impact',
+        fontFamily: 'Impact, sans-serif'
+      },
+      {
+        name: 'Times New Roman',
+        fontFamily: '\'Times New Roman\', serif'
+      },
+      {
+        name: 'Trebuchet MS',
+        fontFamily: '\'Trebuchet MS\', sans-serif'
+      },
+      {
+        name: 'Verdana',
+        fontFamily: 'Verdana, sans-serif'
+      }];
+  }
+
   private ruleImageLeftOrRight(imagePlace) {
     return imagePlace === 'Слева' || imagePlace === 'Справа';
   }
