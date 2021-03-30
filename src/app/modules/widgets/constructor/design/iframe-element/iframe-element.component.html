@@ -1,1 +1,82 @@
-<p>iframe-element works!</p>
+<div class="border-item">
+  <div>
+    <div class="col-lg-12">
+      <h4 class="h4-element-title">HTML / JS / Iframe &#35;{{${modelName}.counter}} <a ng-click="removeElementFromElementsList($index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a></h4>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-lg-12">
+      <h4 class="h4-text-tit control-label-des helper-title-3level">Настройки элемента</h4>
+    </div>
+    <div class="row row-subitem m-t-lg" tooltiped>
+      <div class="col-md-12 row-subitem-padding">
+        <label class="non-b-textar-iframe">HTML или JAVASCRIPT код:</label>
+        <textarea class="form-control textar-iframe" ng-blur="getCodeForIframe(${modelName})" ng-model="${modelName}.html_value"></textarea>
+        <span class="small">Также вы можете использовать iframe, если нужно.</span>
+        <button ng-click="getCodeForIframe(${modelName})" class="btn btn-default refresh-iframe-element-btn" data-toggle="tooltip" data-container="body"  data-placement="top" title="" data-original-title="Обновить превью виджета"><i class="fa fa-refresh"></i></button>
+      </div>
+    </div>
+    <div class="row row-subitem m-t-sm m-b-md">
+      <div class="col-md-12 row-subitem-padding">
+        <label class="non-b-textar-iframe">CSS стиль:</label>
+        <textarea class="form-control textar-iframe" ng-blur="getCodeForIframe(${modelName})" ng-model="${modelName}.css_value"></textarea>
+        <span class="small">Можно оставить пустым. Применяется только к элементу</span>
+      </div>
+    </div>
+    <div class="col-lg-12 m-b-sm">
+      <h4 class="h4-text-tit control-label-des helper-title-3level">Габариты</h4>
+    </div>
+    <div class="row row-subitem m-t-lg">
+      <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <div>
+          <label class="control-label control-label-des">Ширина:</label>
+          <div class="dropdown" >
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{${modelName}.width_type}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li role="presentation" ng-click="${modelName}.width_type = itemVisual" ng-repeat="itemVisual in widthHrType"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div ng-show="${modelName}.width_type === 'Собственная'" class="padding-top-5 m-t-sm">
+          <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="${modelName}.widthpx">
+          <label class="control-label">px <span>ширина</span></label>
+        </div>
+      </div>
+      <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <div>
+          <label class="control-label control-label-des">Высота:</label>
+          <div class="dropdown" >
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{${modelName}.height_type}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li role="presentation" ng-click="${modelName}.height_type = itemVisual" ng-repeat="itemVisual in widgwidthBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div ng-show="${modelName}.height_type === 'Собственная'" class="padding-top-5 m-t-sm">
+          <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="${modelName}.heightpx">
+          <label class="control-label">px <span>высота</span></label>
+        </div>
+      </div>
+    </div>
+    <div ng-show="${modelName}.width_type === 'Собственная'">
+      <div class="col-sm-12 padding-top-5 margined-top-10">
+        <label class="control-label control-label-des">Выравнивание:</label>
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{${modelName}.position}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation" ng-click="${modelName}.position = itemVisual" ng-repeat="itemVisual in floatBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>

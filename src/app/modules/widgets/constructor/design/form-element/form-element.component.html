@@ -1,1 +1,309 @@
-<p>form-element works!</p>
+<div class="border-item">
+  <div>
+    <div class="col-lg-12">
+      <h4 class="h4-element-title">Форма и кнопка <a ng-click="removeElementFromElementsList($index, ${modelName})" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a></h4>
+    </div>
+    <div class="col-lg-12 m-t-xs m-b-n-xs">
+      <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка полей формы</h4>
+    </div>
+    <!-- Page Input Form -->
+    <div class="formMas">
+      <div class="row row-subitem" ng-repeat="item in widget.guiprops['formSet'].items">
+        <div class="formItem">
+          <div class="col-sm-12 padding-top-5 margined-top-10 greyFormBg">
+            <label class="control-label">Введите название поля:</label>
+            <input type="text" class="form-control" ng-model="item.placeholder">
+
+            <span class="small">Например: Введите email</span>
+            <div class="typeInputRBtn m-t-sm">
+              <div class="form-add-title-type">Тип:</div>
+              <div class="form-rbtn-line" ng-repeat="itemType in itemVariable">
+                <label class="non-bold" ng-click="getPlaceholderFrom(item, $parent.$index)" ng-show="getItemT(item, itemType)">
+                  <input type="radio" class="radio radio-info radio-inline" ng-click="(item.type === 'message')?addFirstInput(item, $parent.$index):''" ng-model="item.type" value="{{itemType.type}}">
+                  {{itemType.value}}
+                </label>
+              </div>
+            </div>
+            <div class="m-t-sm formReqBl">
+              <switch class="switch-xs" ng-model="item.required"></switch><label class="control-label switcher-label-xs control-label-des">Поле обязательно к заполнению</label>
+            </div>
+
+            <div class="m-t-sm formReqBl" ng-if="item.type === 'phone'">
+              <switch class="switch-xs" ng-model="widget.guiprops.formSet.phoneMask.enable"></switch><label class="control-label switcher-label-xs control-label-des">{{ 'widgets.constructor.form.phoneMask.titleSwitcher' | translate }}</label>
+            </div>
+            <div class="m-t-sm formReqBl" ng-if="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable">
+              <label class="control-label">{{ 'widgets.constructor.form.phoneMask.titleInput' | translate }}</label>
+              <input type="text" class="form-control" ng-keyup="blockedUnusedChars($event)" ng-model="widget.guiprops.formSet.phoneMask.maskValue">
+              <span class="small">{{ 'widgets.constructor.form.phoneMask.description' | translate }}</span>
+            </div>
+
+            <div class="remove-sub-form-item margined-right-10" ng-show="widget.guiprops['formSet'].items.length > 1"><a ng-click="removePageInputItem($index)" href="javascript:void(0);"><i class="remove-sub-item col-sm-1 pe-7s-close-circle"></i></a></div>
+          </div>
+
+          <div class="add-sub-form-item margined-right-15 m-t-sm"><a ng-click="addPageInputItem()" ng-show="widget.guiprops['formSet'].items.length < 4" href="javascript:void(0);">Добавить еще одно поле<i class="remove-sub-item col-sm-1 fa fa-plus"></i></a></div>
+          <div class="clearfix"></div>
+        </div>
+
+      </div>
+      <!-- END Page input item -->
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="col-lg-12">
+      <h4 class="h4-text-tit control-label-des helper-title-3level">Дизайн формы</h4>
+    </div>
+
+    <div class="row row-subitem m-t-lg m-b-md">
+      <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-colorpc control-label-des">Цвет названия полей:</label>
+        <color-picker ng-model="widget.guiprops['form'].colorTitleInputForm" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+      </div>
+
+      <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-colorpc control-label-des">Цвет фона полей:</label>
+        <color-picker ng-model="widget.guiprops['form'].bgInputForm" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+      </div>
+    </div>
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
+        <div ui-slider min="0.00" max="1.00" step="0.1" use-decimals ng-model="widget.guiprops['form'].opacityBgInputForm"></div>
+        <label class="control-label control-label-ui">Прозрачность фона полей</label>
+      </div>
+    </div>
+    <div class="row row-subitem m-t-sm m-b-md">
+      <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
+        <div ui-slider min="0" max="50" step="1" use-decimals ng-model="widget.guiprops['form'].borderRadiusInputForm"></div>
+        <label class="control-label control-label-ui">Закругление углов полей</label>
+      </div>
+    </div>
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-des">Ориентация полей:</label>
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{widget.guiprops.form.orient}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation" ng-click="widget.guiprops.form.orient = itemOrient" ng-repeat="itemOrient in orientInputForm"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemOrient}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-6 row-subitem-padding">
+        <label class="control-label control-label-des">Вид полей:</label>
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{widget.guiprops.form.visual}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation" ng-click="widget.guiprops.form.visual = itemVisual" ng-repeat="itemVisual in visualInputForm"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-des">Ширина поля:</label>
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{widget.guiprops['form'].width_type}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation" ng-click="widget.guiprops['form'].width_type = itemVisual" ng-repeat="itemVisual in widthHrType"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div ng-show="widget.guiprops['form'].width_type === 'Собственная'">
+      <div class="col-sm-12 padding-top-5 margined-top-10">
+        <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="widget.guiprops['form'].widthpx">
+        <label class="control-label">px <span>ширина поля</span></label>
+      </div>
+      <div class="clearfix"></div>
+
+    </div>
+    <div class="row row-subitem m-t-md">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <switch class="switch-xs" ng-model="widget.guiprops.form.border.enable"></switch><label class="control-label switcher-label-xs control-label-des">Использовать рамку вокруг полей</label>
+      </div>
+    </div>
+    <div ng-show="widget.guiprops['form'].border.enable == true">
+      <div class="row row-subitem">
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-colorpc control-label-des">Цвет рамки:</label>
+          <color-picker ng-model="widget.guiprops['form'].border.color" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+        </div>
+      </div>
+    </div>
+    <div class="row row-subitem m-t-md">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <switch class="switch-xs" ng-model="widget.guiprops.form.colorPod.enable"></switch><label class="control-label switcher-label-xs control-label-des">Использовать подложку под формой</label>
+      </div>
+    </div>
+    <div ng-show="widget.guiprops['form'].colorPod.enable == true">
+      <div class="row row-subitem">
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-colorpc control-label-des">Цвет подложки:</label>
+          <color-picker ng-model="widget.guiprops['form'].colorPod.color" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+        </div>
+        <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+          <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
+          <div ui-slider min="0.00" max="1.00" step="0.1" use-decimals ng-model="widget.guiprops['form'].colorPod.opacityColorPod"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="col-lg-12 m-t-xs m-b-sm">
+      <h4 class="h4-text-tit control-label-des helper-title-3level">Настройки кнопки</h4>
+    </div>
+
+    <div class="row row-subitem m-t">
+      <div class="col-sm-12 row-subitem-padding">
+        <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
+      </div>
+      <div class="col-sm-6 row-subitem-padding">
+        <div class="form-group widget-selector">
+          <label class="non-bold">
+            <input type="radio" class="radio radio-info radio-inline" ng-click="widget.guiprops.button.font = systemFonts[0]" ng-model="widget.guiprops['button'].fontType" value="systemFont">
+            Системный шрифт
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6 row-subitem-padding">
+        <div class="form-group widget-selector">
+          <label class="non-bold">
+            <input type="radio" class="radio radio-info radio-inline" ng-click="widget.guiprops.button.font = googleFonts[0]" ng-model="widget.guiprops['button'].fontType" value="googleFont">
+            Google fonts
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row row-subitem">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{widget.guiprops.button.font.name}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropd-scroll" role="menu">
+            <li role="presentation" ng-click="widget.guiprops.button.font = itemFont" ng-repeat="itemFont in gecCurrentFontType(widget.guiprops['button'])"><a ng-style="{'font-family':itemFont.fontFamily}" role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemFont.name}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+        <input type="number" class="form-control form-control-font form-cntrl-45w" ng-model="widget.guiprops['button'].fontSize">
+        <label class="control-label">px <span>размер текста</span></label>
+      </div>
+    </div>
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-colorpc control-label-des">Цвет кнопки:</label>
+        <color-picker ng-model="widget.guiprops['button'].colorBtn" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+      </div>
+      <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+        <label class="control-label control-label-colorpc control-label-des">Закругление углов</label>
+        <div ui-slider min="0" max="50" step="1" use-decimals ng-model="widget.guiprops['button'].borderRadiusBtn"></div>
+      </div>
+    </div>
+
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-des">Ширина кнопки:</label>
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{widget.guiprops.button.btn_width}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation" ng-click="widget.guiprops.button.btn_width = item" ng-repeat="item in widthBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-des">Ориентация:</label>
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" ng-disabled="widget.guiprops.button.btn_width === 'От края до края'" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{widget.guiprops.button.position}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation" ng-click="widget.guiprops.button.position = item" ng-repeat="item in floatBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div ng-show="widget.guiprops['button'].btn_width === 'Собственная'">
+      <div class="col-sm-12 padding-top-5 margined-top-10">
+        <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="widget.guiprops['button'].btn_widthpx">
+        <label class="control-label">px <span>ширина кнопки</span></label>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="row row-subitem m-t-sm">
+    <div class="col-sm-12 row-subitem-padding">
+      <label class="control-label control-label-des">Стиль кнопки:</label>
+      <div class="dropdown" >
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+          {{widget.guiprops.button.styleType}}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-with-btn-styles" role="menu">
+          <li role="presentation" ng-click="setBtnStyle('Default', widget.guiprops.button)"><a class="btn-var-styles btn-var-styles__default" ng-style="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}" href="javascript:void(0)">Default</a></li>
+          <li role="presentation" ng-click="setBtnStyle('Material', widget.guiprops.button)"><a class="btn-var-styles btn-var-styles__material" ng-style="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}" href="javascript:void(0)">Material</a></li>
+          <li role="presentation" ng-click="setBtnStyle('Flat', widget.guiprops.button)"><a class="btn-var-styles btn-var-styles__flat" ng-style="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}" href="javascript:void(0)">Flat</a></li>
+          <li role="presentation" ng-click="setBtnStyle('Border Style', widget.guiprops.button)"><a class="btn-var-styles btn-var-styles__border-style" ng-style="{'font-family':widget.guiprops['button'].font.fontFamily, 'border-color':widget.guiprops['button'].colorBtn}" href="javascript:void(0)">Border Style</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="col-lg-12 m-t-sm m-b-xs">
+      <h4 class="h4-text-tit control-label-des helper-title-3level">Ширина и позиционирование формы</h4>
+    </div>
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-des">Ширина формы:</label>
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{widget.guiprops.form.form_width_type}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation" ng-click="widget.guiprops.form.form_width_type = itemVisual" ng-repeat="itemVisual in widthHrType"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-6 row-subitem-padding padding-top-5" ng-show="widget.guiprops.form.form_width_type === 'Собственная'">
+        <label class="control-label control-label-des">Ориентация:</label>
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{widget.guiprops.form.form_position}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation" ng-click="widget.guiprops.form.form_position = itemVisual" ng-repeat="itemVisual in floatBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div ng-show="widget.guiprops.form.form_width_type === 'Собственная'">
+      <div class="col-sm-12 padding-top-5 margined-top-10">
+        <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="widget.guiprops.form.form_widthpx">
+        <label class="control-label">px <span>ширина формы</span></label>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+  <!-- Coupon settings -->
+  <coupon-callback-directive coupons="coupons" place-popup="placePopup" coupon="widget.guiprops.form.couponCallback"></coupon-callback-directive>
+</div>

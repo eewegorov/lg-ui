@@ -1,1 +1,79 @@
-<p>title-element works!</p>
+<div class="border-item">
+  <div>
+    <div class="col-lg-12">
+      <h4 class="h4-element-title">Текст &#35;{{${modelName}.counter}} <a ng-click="removeElementFromElementsList($index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a></h4>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row row-subitem padding-top-5">
+      <div class="col-sm-12 row-subitem-padding">
+        <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
+      </div>
+      <div class="col-sm-6 row-subitem-padding">
+        <div class="form-group widget-selector">
+          <label class="non-bold">
+            <input type="radio" class="radio radio-info radio-inline" ng-click="${modelName}.font = systemFonts[0]" ng-model="${modelName}.fontType" value="systemFont">
+            Системный шрифт
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6 row-subitem-padding">
+        <div class="form-group widget-selector">
+          <label class="non-bold">
+            <input type="radio" class="radio radio-info radio-inline" ng-click="${modelName}.font = googleFonts[0]" ng-model="${modelName}.fontType" value="googleFont">
+            Google fonts
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row row-subitem">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{${modelName}.font.name}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropd-scroll" role="menu">
+            <li role="presentation" ng-click="${modelName}.font = itemFont" ng-repeat="itemFont in gecCurrentFontType(${modelName})"><a ng-style="{'font-family':itemFont.fontFamily}" role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemFont.name}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+        <input type="number" class="form-control form-control-font form-cntrl-45w" ng-model="${modelName}.fontSize">
+        <label class="control-label">px <span>размер текста</span></label>
+      </div>
+    </div>
+    <div class="row row-subitem m-t-md">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <switch class="switch-xs" ng-model="${modelName}.textShadow.enable"></switch><label class="control-label switcher-label-xs control-label-des">Добавить тень</label>
+      </div>
+    </div>
+    <div ng-show="${modelName}.textShadow.enable == true">
+      <div class="row row-subitem">
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-colorpc control-label-des">Цвет тени:</label>
+          <color-picker ng-model="${modelName}.textShadow.color" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+        </div>
+        <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+          <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
+          <div ui-slider min="0.00" max="1.00" step="0.1" use-decimals ng-model="${modelName}.textShadow.opacity"></div>
+        </div>
+      </div>
+      <div class="row row-subitem m-t-xs">
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-des">Сдвиг по горизонтали:</label>
+          <input type="number" class="form-control form-control-font form-control-block form-cntrl-45w" ng-model="${modelName}.textShadow.horiz">
+        </div>
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-des">Сдвиг по вертикали:</label>
+          <input type="number" class="form-control form-control-font form-control-block form-cntrl-45w" ng-model="${modelName}.textShadow.vertical">
+        </div>
+      </div>
+      <div class="row row-subitem m-t-xs">
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-des">Резкость:</label>
+          <input type="number" class="form-control form-control-font form-control-block form-cntrl-45w" ng-model="${modelName}.textShadow.blur">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

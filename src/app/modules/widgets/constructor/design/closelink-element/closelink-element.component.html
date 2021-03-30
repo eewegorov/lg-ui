@@ -1,1 +1,193 @@
-<p>closelink-element works!</p>
+<div class="border-item">
+  <div class="col-lg-12">
+    <h4 class="h4-element-title">Ссылка/Кнопка закрытия <a ng-click="removeElementFromElementsList($index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a></h4>
+  </div>
+  <div class="clearfix"></div>
+  <div class="m-b-sm m-t-xs">
+    <div class="row row-subitem padding-top-5">
+      <div class="col-sm-12 row-subitem-padding">
+        <h4 class="h4-text-tit control-label-des">Выберите тип элемента:</h4>
+      </div>
+      <div class="col-sm-6 row-subitem-padding">
+        <div class="form-group widget-selector">
+          <label class="non-bold">
+            <input type="radio" class="radio radio-info radio-inline" ng-model="widget.guiprops.exit.button.enable" ng-value="false">
+            Ссылка закрытия
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6 row-subitem-padding">
+        <div class="form-group widget-selector">
+          <label class="non-bold">
+            <input type="radio" class="radio radio-info radio-inline" ng-model="widget.guiprops.exit.button.enable" ng-value="true">
+            Кнопка закрытия
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="!widget.guiprops.exit.button.enable">
+    <div class="row row-subitem padding-top-5">
+      <div class="col-sm-12 row-subitem-padding">
+        <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
+      </div>
+      <div class="col-sm-6 row-subitem-padding">
+        <div class="form-group widget-selector">
+          <label class="non-bold">
+            <input type="radio" class="radio radio-info radio-inline" ng-click="widget.guiprops.exit.font = systemFonts[0]" ng-model="widget.guiprops['exit'].fontType" value="systemFont">
+            Системный шрифт
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-6 row-subitem-padding">
+        <div class="form-group widget-selector">
+          <label class="non-bold">
+            <input type="radio" class="radio radio-info radio-inline" ng-click="widget.guiprops.exit.font = googleFonts[0]" ng-model="widget.guiprops['exit'].fontType" value="googleFont">
+            Google fonts
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row row-subitem">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{widget.guiprops.exit.font.name}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropd-scroll" role="menu">
+            <li role="presentation" ng-click="widget.guiprops.exit.font = itemFont" ng-repeat="itemFont in gecCurrentFontType(widget.guiprops['exit'])"><a ng-style="{'font-family':itemFont.fontFamily}" role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemFont.name}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+        <input type="number" class="form-control form-control-font form-cntrl-45w" ng-model="widget.guiprops['exit'].fontSize">
+        <label class="control-label">px <span>размер текста</span></label>
+      </div>
+    </div>
+
+    <div class="row row-subitem padding-top-5 m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-des">Выравнивание:</label>
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{widget.guiprops.exit.position}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation" ng-click="widget.guiprops.exit.position = itemVisual" ng-repeat="itemVisual in floatBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="widget.guiprops.exit.button.enable">
+    <div>
+
+      <div class="row row-subitem">
+        <div class="col-sm-12 row-subitem-padding">
+          <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
+        </div>
+        <div class="col-sm-6 row-subitem-padding">
+          <div class="form-group widget-selector">
+            <label class="non-bold">
+              <input type="radio" class="radio radio-info radio-inline" ng-click="widget.guiprops.exit.button.font = systemFonts[0]" ng-model="widget.guiprops.exit.button.fontType" value="systemFont">
+              Системный шрифт
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-6 row-subitem-padding">
+          <div class="form-group widget-selector">
+            <label class="non-bold">
+              <input type="radio" class="radio radio-info radio-inline" ng-click="widget.guiprops.exit.button.font = googleFonts[0]" ng-model="widget.guiprops.exit.button.fontType" value="googleFont">
+              Google fonts
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row row-subitem">
+        <div class="col-sm-12 row-subitem-padding padding-top-5">
+          <div class="dropdown" >
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{widget.guiprops.exit.button.font.name}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropd-scroll" role="menu">
+              <li role="presentation" ng-click="widget.guiprops.exit.button.font = itemFont" ng-repeat="itemFont in gecCurrentFontType(widget.guiprops.exit.button)"><a ng-style="{'font-family':itemFont.fontFamily}" role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemFont.name}}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+          <input type="number" class="form-control form-control-font form-cntrl-45w" ng-model="widget.guiprops.exit.button.fontSize">
+          <label class="control-label">px <span>размер текста</span></label>
+        </div>
+      </div>
+      <div class="row row-subitem m-t-sm m-b-md">
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-colorpc control-label-des">Цвет кнопки:</label>
+          <color-picker ng-model="widget.guiprops.exit.button.colorBtn" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+        </div>
+        <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+          <label class="control-label control-label-colorpc control-label-des">Закругление углов</label>
+          <div ui-slider min="0" max="50" step="1" use-decimals ng-model="widget.guiprops.exit.button.borderRadiusBtn"></div>
+        </div>
+      </div>
+
+      <div class="row row-subitem m-t-sm">
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-des">Ширина кнопки:</label>
+          <div class="dropdown" >
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{widget.guiprops.exit.button.btn_width}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li role="presentation" ng-click="widget.guiprops.exit.button.btn_width = item" ng-repeat="item in widthBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-des">Ориентация:</label>
+          <div class="dropdown" >
+            <button class="btn btn-default dropdown-toggle" ng-disabled="widget.guiprops.exit.button.btn_width === 'От края до края'" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{widget.guiprops.exit.button.position}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li role="presentation" ng-click="widget.guiprops.exit.button.position = item" ng-repeat="item in floatBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div ng-show="widget.guiprops.exit.button.btn_width === 'Собственная'">
+        <div class="col-sm-12 padding-top-5 margined-top-10">
+          <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="widget.guiprops.exit.button.btn_widthpx">
+          <label class="control-label">px <span>ширина кнопки</span></label>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="row row-subitem m-t-sm">
+        <div class="col-sm-12 row-subitem-padding">
+          <label class="control-label control-label-des">Стиль кнопки:</label>
+          <div class="dropdown" >
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{widget.guiprops.exit.button.styleType}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-with-btn-styles" role="menu">
+              <li role="presentation" ng-click="setBtnStyle('Default', widget.guiprops.exit.button)"><a class="btn-var-styles btn-var-styles__default" ng-style="{'font-family':widget.guiprops.exit.button.font.fontFamily, 'background':widget.guiprops.exit.button.colorBtn}" href="javascript:void(0)">Default</a></li>
+              <li role="presentation" ng-click="setBtnStyle('Material', widget.guiprops.exit.button)"><a class="btn-var-styles btn-var-styles__material" ng-style="{'font-family':widget.guiprops.exit.button.font.fontFamily, 'background':widget.guiprops.exit.button.colorBtn}" href="javascript:void(0)">Material</a></li>
+              <li role="presentation" ng-click="setBtnStyle('Flat', widget.guiprops.exit.button)"><a class="btn-var-styles btn-var-styles__flat" ng-style="{'font-family':widget.guiprops.exit.button.font.fontFamily, 'background':widget.guiprops.exit.button.colorBtn}" href="javascript:void(0)">Flat</a></li>
+              <li role="presentation" ng-click="setBtnStyle('Border Style', widget.guiprops.exit.button)"><a class="btn-var-styles btn-var-styles__border-style" ng-style="{'font-family':widget.guiprops.exit.button.font.fontFamily, 'border-color':widget.guiprops.exit.button.colorBtn}" href="javascript:void(0)">Border Style</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+  <!-- Coupon settings -->
+  <coupon-callback-directive coupons="coupons" place-popup="placePopup" coupon="widget.guiprops.exit.couponCallback"></coupon-callback-directive>
+</div>
