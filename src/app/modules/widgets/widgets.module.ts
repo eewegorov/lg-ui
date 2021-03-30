@@ -35,6 +35,22 @@ import { RuleVisitComponent } from './constructor/audiences/rule-visit/rule-visi
 import { RuleVisitNoComponent } from './constructor/audiences/rule-visit-no/rule-visit-no.component';
 import { RuleDevicesComponent } from './constructor/audiences/rule-devices/rule-devices.component';
 import { RuleSocialComponent } from './constructor/audiences/rule-social/rule-social.component';
+import { ButtonElementComponent } from './constructor/design/button-element/button-element.component';
+import { CloselinkElementComponent } from './constructor/design/closelink-element/closelink-element.component';
+import { ContentElementComponent } from './constructor/design/content-element/content-element.component';
+import { CouponElementComponent } from './constructor/design/coupon-element/coupon-element.component';
+import { CrmElementComponent } from './constructor/design/crm-element/crm-element.component';
+import { FormElementComponent } from './constructor/design/form-element/form-element.component';
+import { IframeElementComponent } from './constructor/design/iframe-element/iframe-element.component';
+import { ImageElementComponent } from './constructor/design/image-element/image-element.component';
+import { PaddingElementComponent } from './constructor/design/padding-element/padding-element.component';
+import { RedirectElementComponent } from './constructor/design/redirect-element/redirect-element.component';
+import { SocialElementComponent } from './constructor/design/social-element/social-element.component';
+import { SplitElementComponent } from './constructor/design/split-element/split-element.component';
+import { ThankElementComponent } from './constructor/design/thank-element/thank-element.component';
+import { TitleElementComponent } from './constructor/design/title-element/title-element.component';
+import { VideoElementComponent } from './constructor/design/video-element/video-element.component';
+import { VisualElementComponent } from './constructor/design/visual-element/visual-element.component';
 
 
 @NgModule({
@@ -64,6 +80,22 @@ import { RuleSocialComponent } from './constructor/audiences/rule-social/rule-so
     RuleVisitNoComponent,
     RuleDevicesComponent,
     RuleSocialComponent,
+    ButtonElementComponent,
+    CloselinkElementComponent,
+    ContentElementComponent,
+    CouponElementComponent,
+    CrmElementComponent,
+    FormElementComponent,
+    IframeElementComponent,
+    ImageElementComponent,
+    PaddingElementComponent,
+    RedirectElementComponent,
+    SocialElementComponent,
+    SplitElementComponent,
+    ThankElementComponent,
+    TitleElementComponent,
+    VideoElementComponent,
+    VisualElementComponent,
   ],
   exports: [
     SmartpointsControlComponent
