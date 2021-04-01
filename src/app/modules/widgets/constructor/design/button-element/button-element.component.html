@@ -68,11 +68,16 @@
     <div class="row row-subitem m-t-sm m-b-md">
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <label class="control-label control-label-colorpc control-label-des">Цвет кнопки:</label>
-        <color-picker ng-model="widget.guiprops['button'].colorBtn" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+        <input
+          [(colorPicker)]="widget.guiprops['button'].colorBtn"
+          [style.background]="widget.guiprops['button'].colorBtn"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+        />
       </div>
       <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
         <label class="control-label control-label-colorpc control-label-des">Закругление углов</label>
-        <div ui-slider min="0" max="50" step="1" use-decimals ng-model="widget.guiprops['button'].borderRadiusBtn"></div>
+        <ngx-slider [(value)]="widget.guiprops['button'].borderRadiusBtn" [options]="optionsRound"></ngx-slider>
       </div>
     </div>
 
@@ -87,8 +92,8 @@
           <ul class="dropdown-menu" role="menu">
             <li
               role="presentation"
-              (click)="widget.guiprops.form.visual = itemVisual"
               *ngFor="let itemVisual of visualInputForm"
+              (click)="widget.guiprops.form.visual = itemVisual"
             ><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a></li>
           </ul>
         </div>
@@ -106,8 +111,8 @@
           <ul class="dropdown-menu" role="menu">
             <li
               role="presentation"
-              (click)="widget.guiprops.button.btn_width = item"
               *ngFor="let item of widthBtn"
+              (click)="widget.guiprops.button.btn_width = item"
             ><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a></li>
           </ul>
         </div>
@@ -126,14 +131,14 @@
           <ul class="dropdown-menu" role="menu">
             <li
               role="presentation"
-              (click)="widget.guiprops.button.position = item"
               *ngFor="let item of floatBtn"
+              (click)="widget.guiprops.button.position = item"
             ><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a></li>
           </ul>
         </div>
       </div>
     </div>
-    <div ng-show="widget.guiprops['button'].btn_width === 'Собственная'">
+    <div *ngIf="widget.guiprops['button'].btn_width === 'Собственная'">
       <div class="col-sm-12 padding-top-5 margined-top-10">
         <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="widget.guiprops['button'].btn_widthpx">
         <label class="control-label">px <span>ширина кнопки</span></label>
@@ -150,10 +155,46 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu dropdown-with-btn-styles" role="menu">
-            <li role="presentation" (click)="setBtnStyle('Default', widget.guiprops.button)"><a class="btn-var-styles btn-var-styles__default" [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}" href="javascript:void(0)">Default</a></li>
-            <li role="presentation" (click)="setBtnStyle('Material', widget.guiprops.button)"><a class="btn-var-styles btn-var-styles__material" [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}" href="javascript:void(0)">Material</a></li>
-            <li role="presentation" (click)="setBtnStyle('Flat', widget.guiprops.button)"><a class="btn-var-styles btn-var-styles__flat" [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}" href="javascript:void(0)">Flat</a></li>
-            <li role="presentation" (click)="setBtnStyle('Border Style', widget.guiprops.button)"><a class="btn-var-styles btn-var-styles__border-style" [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'border-color':widget.guiprops['button'].colorBtn}" href="javascript:void(0)">Border Style</a></li>
+            <li
+              role="presentation"
+              (click)="setBtnStyle('Default', widget.guiprops.button)"
+            >
+              <a
+                class="btn-var-styles btn-var-styles__default"
+                [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}"
+                href="javascript:void(0)"
+              >Default</a>
+            </li>
+            <li
+              role="presentation"
+              (click)="setBtnStyle('Material', widget.guiprops.button)"
+            >
+              <a
+                class="btn-var-styles btn-var-styles__material"
+                [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}"
+                href="javascript:void(0)"
+              >Material</a>
+            </li>
+            <li
+              role="presentation"
+              (click)="setBtnStyle('Flat', widget.guiprops.button)"
+            >
+              <a
+                class="btn-var-styles btn-var-styles__flat"
+                [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}"
+                href="javascript:void(0)"
+              >Flat</a>
+            </li>
+            <li
+              role="presentation"
+              (click)="setBtnStyle('Border Style', widget.guiprops.button)"
+            >
+              <a
+                class="btn-var-styles btn-var-styles__border-style"
+                [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'border-color':widget.guiprops['button'].colorBtn}"
+                href="javascript:void(0)"
+              >Border Style</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -162,18 +203,26 @@
     <div *ngIf="widget.guiprops['form'].enable == false">
       <div class="row row-subitem m-t-md">
         <div class="col-sm-12 row-subitem-padding padding-top-5">
-          <switch class="switch-xs" ng-model="widget.guiprops.form.colorPod.enable"></switch><label class="control-label switcher-label-xs control-label-des">Использовать подложку под кнопкой</label>
+          <ui-switch
+            size="small"
+            [checked]="widget.guiprops.form.colorPod.enable"
+          ></ui-switch><label class="control-label switcher-label-xs control-label-des">Использовать подложку под кнопкой</label>
         </div>
       </div>
       <div *ngIf="widget.guiprops['form'].colorPod.enable == true">
         <div class="row row-subitem">
           <div class="col-sm-6 row-subitem-padding padding-top-5">
             <label class="control-label control-label-colorpc control-label-des">Цвет подложки:</label>
-            <color-picker ng-model="widget.guiprops['form'].colorPod.color" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+            <input
+              [(colorPicker)]="widget.guiprops['form'].colorPod.color"
+              [style.background]="widget.guiprops['button'].colorBtn"
+              [cpAlphaChannel]="'disabled'"
+              [cpOutputFormat]="'hex'"
+            />
           </div>
           <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
             <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
-            <div ui-slider min="0.00" max="1.00" step="0.1" use-decimals ng-model="widget.guiprops['form'].colorPod.opacityColorPod"></div>
+            <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod" [options]="optionsOpacity"></ngx-slider>
           </div>
         </div>
       </div>

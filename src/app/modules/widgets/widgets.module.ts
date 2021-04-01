@@ -51,6 +51,7 @@ import { ThankElementComponent } from './constructor/design/thank-element/thank-
 import { TitleElementComponent } from './constructor/design/title-element/title-element.component';
 import { VideoElementComponent } from './constructor/design/video-element/video-element.component';
 import { VisualElementComponent } from './constructor/design/visual-element/visual-element.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 
 @NgModule({
@@ -111,7 +112,8 @@ import { VisualElementComponent } from './constructor/design/visual-element/visu
     WidgetsRoutingModule,
     NgxFlowModule,
     NgSelectModule,
-    LaddaModule
+    LaddaModule,
+    ColorPickerModule
   ]
 })
 export class WidgetsModule { }
