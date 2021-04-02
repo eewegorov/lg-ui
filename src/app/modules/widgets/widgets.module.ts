@@ -52,6 +52,7 @@ import { TitleElementComponent } from './constructor/design/title-element/title-
 import { VideoElementComponent } from './constructor/design/video-element/video-element.component';
 import { VisualElementComponent } from './constructor/design/visual-element/visual-element.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
 @NgModule({
@@ -113,7 +114,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     NgxFlowModule,
     NgSelectModule,
     LaddaModule,
-    ColorPickerModule
+    ColorPickerModule,
+    NgxSliderModule
   ]
 })
 export class WidgetsModule { }
