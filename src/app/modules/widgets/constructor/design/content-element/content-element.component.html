@@ -1,50 +1,93 @@
-<div id="mainBlockWidget"
-     class="widget1 block-widget-show active"
-     ng-style="{'border': widget.guiprops['bg'].border.style, 'border-radius':widget.guiprops['bg'].borderRadius+'px', 'box-shadow': widget.guiprops['bg'].shadow.style}">
-
-  <div class="absolute-bg-content"
-       ng-class="(widget.guiprops['bg'].fillorImg === 'useImg')?'block-widget-bg':''"
-       ng-style="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity}">
-    <div ng-show="widget.guiprops.bg.fillorImg === 'useVideo'" class="video-bg">
-      <div ng-class="setVideoBGStyle()" ng-show="widget.guiprops.bg.video.videoId">
+<div
+  id="mainBlockWidget"
+  class="widget1 block-widget-show active"
+  [ngStyle]="{'border': widget.guiprops['bg'].border.style, 'border-radius': widget.guiprops['bg'].borderRadius+'px', 'box-shadow': widget.guiprops['bg'].shadow.style}"
+>
+  <div
+    class="absolute-bg-content"
+    [ngClass]="(widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
+    [ngStyle]="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity}"
+  >
+    <div *ngIf="widget.guiprops.bg.fillorImg === 'useVideo'" class="video-bg">
+      <div *ngIf="widget.guiprops.bg.video.videoId" [ngClass]="setVideoBGStyle()">
         <iframe style="" id="idBgVideoFrame" src="" frameborder="0"></iframe>
       </div>
-      <img ng-show="!widget.guiprops.bg.video.videoId" class="item-image-video-block" src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
+      <img *ngIf="!widget.guiprops.bg.video.videoId" class="item-image-video-block" src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
     </div>
   </div>
 
-  <div id="globalMask"
-       ng-show="widget.guiprops.bg.mask.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo')) && widget.guiprops.bg.mask.area === 'Вся площадь виджета'"
-       ng-style="{'background':widget.guiprops.bg.mask.rgbaColor}"></div>
+  <div
+    *ngIf="widget.guiprops.bg.mask.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo')) && widget.guiprops.bg.mask.area === 'Вся площадь виджета'"
+    id="globalMask"
+    [ngStyle]="{'background':widget.guiprops.bg.mask.rgbaColor}"
+  ></div>
 
-  <div id="colorFormPod" class="color-bg-on-form"
-       ng-show="widget.guiprops.form.enable || widget.guiprops.button.enable || widget.guiprops.formExt.enable"
-       ng-style="colorPodStyles()">
-  </div>
+  <div
+    *ngIf="widget.guiprops.form.enable || widget.guiprops.button.enable || widget.guiprops.formExt.enable"
+    id="colorFormPod"
+    class="color-bg-on-form"
+    [ngStyle]="colorPodStyles()"
+  ></div>
 
-  <div class="widget-image" ng-click="scrollToEl('IVBl', 'i-or-v-element'); $event.stopPropagation();" ng-style="{'width':widthImageStyle, 'height':heightImageStyle}" ng-show="widget.guiprops.image.enable == true" ng-class="classNameImg()">
-    <div ng-if="((widget.guiprops.image.typeBl == 'imageBl') || (widget.guiprops.image.typeBl !== 'videoBl')) && (widget.guiprops.image.typeBl !== 'paddingBl')" ng-style="{'background':'url(' + widget.guiprops.image.url + ') center no-repeat', 'background-size':'cover', 'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}" class="widget-image-item-block"></div>
-    <div ng-if="widget.guiprops.image.typeBl == 'videoBl'" ng-style="{'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}" class="widget-video-item-block">
-      <iframe ng-show="widget.guiprops.image.videoId" style="" id="idImageVideoFrame" src="" frameborder="0"></iframe>
-      <img ng-show="!widget.guiprops.image.videoId" class="item-image-video-block" src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
+  <div
+    *ngIf="widget.guiprops.image.enable == true"
+    class="widget-image"
+    [ngClass]="classNameImg()"
+    [ngStyle]="{'width':widthImageStyle, 'height':heightImageStyle}"
+    (click)="scrollToEl('IVBl', 'i-or-v-element'); $event.stopPropagation();"
+  >
+    <div
+      *ngIf="((widget.guiprops.image.typeBl == 'imageBl') || (widget.guiprops.image.typeBl !== 'videoBl')) && (widget.guiprops.image.typeBl !== 'paddingBl')" [ngStyle]="{'background':'url(' + widget.guiprops.image.url + ') center no-repeat', 'background-size':'cover', 'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
+      class="widget-image-item-block"
+    ></div>
+    <div
+      *ngIf="widget.guiprops.image.typeBl == 'videoBl'"
+      [ngStyle]="{'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
+      class="widget-video-item-block"
+    >
+      <iframe *ngIf="widget.guiprops.image.videoId" style="" id="idImageVideoFrame" src="" frameborder="0"></iframe>
+      <img *ngIf="!widget.guiprops.image.videoId" class="item-image-video-block" src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
     </div>
   </div>
 
-  <div id="widgetMainWr" class="wigdet-main-wr" ng-class="classNameImgMain()" ng-style="{'width':widthContentStyle}">
-    <div id="widgetMaskTop" class="widget-mask" ng-show="widget.guiprops.bg.mask.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo')) && widget.guiprops.bg.mask.area === 'Только под контентом'" ng-style="{'background':widget.guiprops.bg.mask.rgbaColor}"></div>
-    <ul id="mainElListUl" class="widget-flex-dis" ng-sortable="{group: 'ng', animated: 100, handle: '.grab-handle-element'}" ng-style="{'height':heightContentStyle}" ng-class="classNameVerticalOrient()">
-      <div class="help-block-add-if-not-sel" ng-show="(widget.guiprops.elementsList.length == 0 && showAddButtonOnWidget)">
+  <div id="widgetMainWr" class="wigdet-main-wr" [ngClass]="classNameImgMain()" [ngStyle]="{'width': widthContentStyle}">
+    <div
+      *ngIf="widget.guiprops.bg.mask.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo')) && widget.guiprops.bg.mask.area === 'Только под контентом'"
+      id="widgetMaskTop"
+      class="widget-mask"
+      [ngStyle]="{'background': widget.guiprops.bg.mask.rgbaColor}"
+    ></div>
+    <ul
+      id="mainElListUl"
+      class="widget-flex-dis"
+      [sortablejs]="widget.guiprops.elementsList"
+      [sortablejsOptions]="{ animation: 100, handle: '.grab-handle-element' }"
+      [ngStyle]="{'height': heightContentStyle}"
+      [ngClass]="classNameVerticalOrient()"
+    >
+      <div *ngIf="(widget.guiprops.elementsList.length == 0 && showAddButtonOnWidget)" class="help-block-add-if-not-sel">
         <div>
           <div class="widget-content-add">
-            <button class="btn-default widget-content-add-btn" ng-click="addNewElementToContent(); $event.stopPropagation();"><i class="fa fa-plus"></i>Добавить новый элемент</button>
+            <button class="btn-default widget-content-add-btn" (click)="addNewElementToContent(); $event.stopPropagation();"><i class="fa fa-plus"></i>Добавить новый элемент</button>
             <span>Для добавления элемента нажмите на эту кнопку и выберите элемент из списка</span>
-            <a href="" ng-click="hiddenAddButtonOnWidget(); $event.stopPropagation();">скрыть кнопку</a>
+            <a href="" (click)="hiddenAddButtonOnWidget(); $event.stopPropagation();">скрыть кнопку</a>
           </div>
         </div>
       </div>
-      <li ng-repeat="item in widget.guiprops.elementsList track by $index" class="element-to-append-summernote margin-if-{{item.name}}" ng-class="addExtraClassForFullWidth($index)" ng-attr-data-to="elemScrN{{$index}}" ng-click="scrollToEl($index, item.name); $event.stopPropagation();" ng-style="{'z-index':100-$index}" draggable="false">
-
-        <div class="remove-element-from-list-view remove-sub-form-item"><a ng-click="removeElementFromElementsList($index, item); $event.stopPropagation();" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a></div>
+      <li
+        *ngFor="let item of widget.guiprops.elementsList; trackBy: trackById; index as i"
+        class="element-to-append-summernote margin-if-{{item.name}}"
+        [ngClass]="addExtraClassForFullWidth($index)"
+        [attr.data-to]="'elemScrN' + i"
+        (click)="scrollToEl($index, item.name); $event.stopPropagation();"
+        [ngStyle]="{'z-index': 100 - i}"
+      >
+        <div class="remove-element-from-list-view remove-sub-form-item">
+          <a
+            (click)="removeElementFromElementsList($index, item); $event.stopPropagation();"
+            href="javascript:void(0);"
+          ><i class="remove-sub-item fa fa-trash-o"></i></a>
+        </div>
         <div class="move-element-view grab-handle-element"><i class="fa fa-arrows"></i></div>
 
         <div class="btn-add-on-elem" ng-class="getItemClassData(item)" ng-click="addNewElementToContent($index, $event); $event.stopPropagation();">

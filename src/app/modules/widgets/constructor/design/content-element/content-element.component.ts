@@ -12,4 +12,8 @@ export class ContentElementComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public trackById(index, item) {
+    return item.id;
+  }
+
 }

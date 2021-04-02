@@ -10,6 +10,7 @@ import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
 import { LaddaModule } from 'angular2-ladda';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { SortablejsModule } from 'ngx-sortablejs';
 import { SharedModule } from '../../shared/shared.module';
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { WidgetsListComponent } from './widgets-list/widgets-list.component';
@@ -117,7 +118,8 @@ import { CouponCallbackComponent } from './constructor/design/coupon-callback/co
     NgSelectModule,
     LaddaModule,
     ColorPickerModule,
-    NgxSliderModule
+    NgxSliderModule,
+    SortablejsModule
   ]
 })
 export class WidgetsModule { }
