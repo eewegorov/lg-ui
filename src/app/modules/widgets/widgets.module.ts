@@ -8,6 +8,8 @@ import { NgxFlowModule } from '@flowjs/ngx-flow';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
 import { LaddaModule } from 'angular2-ladda';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { SharedModule } from '../../shared/shared.module';
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { WidgetsListComponent } from './widgets-list/widgets-list.component';
@@ -51,8 +53,7 @@ import { ThankElementComponent } from './constructor/design/thank-element/thank-
 import { TitleElementComponent } from './constructor/design/title-element/title-element.component';
 import { VideoElementComponent } from './constructor/design/video-element/video-element.component';
 import { VisualElementComponent } from './constructor/design/visual-element/visual-element.component';
-import { ColorPickerModule } from 'ngx-color-picker';
-import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { CouponCallbackComponent } from './constructor/design/coupon-callback/coupon-callback.component';
 
 
 @NgModule({
@@ -98,6 +99,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     TitleElementComponent,
     VideoElementComponent,
     VisualElementComponent,
+    CouponCallbackComponent,
   ],
   exports: [
     SmartpointsControlComponent

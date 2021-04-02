@@ -1,0 +1,230 @@
+<div>
+  <div class="row row-subitem m-t-md">
+    <div class="col-sm-12 row-subitem-padding padding-top-5">
+      <ui-switch
+        size="small"
+        [checked]="coupon.enable"
+        (change)="onChangePayment"
+      ></ui-switch>
+      <label *ngIf="coupon.elementType === 'form'" class="control-label switcher-label-xs control-label-des">
+        {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.form' | translate }}<span class="label label-warning tariff-info ">окупаемый</span>
+      </label>
+      <label *ngIf="coupon.elementType === 'social'" class="control-label switcher-label-xs control-label-des">
+        {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.social' | translate }}<span class="label label-warning tariff-info ">окупаемый</span>
+      </label>
+      <label *ngIf="coupon.elementType === 'closeBtn'" class="control-label switcher-label-xs control-label-des">
+        {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.closeBtn' | translate }}<span class="label label-warning tariff-info ">окупаемый</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="row row-subitem m-t-xs">
+    <div *ngIf="coupon.elementType === 'form'" class="col-sm-12 row-subitem-padding widget-small-text">
+      {{ 'widgets.constructor.coupon.couponCallback.actionDesc2.form' | translate }}
+    </div>
+    <div *ngIf="coupon.elementType === 'social'" class="col-sm-12 row-subitem-padding widget-small-text">
+      {{ 'widgets.constructor.coupon.couponCallback.actionDesc2.social' | translate }}
+    </div>
+    <div *ngIf="coupon.elementType === 'closeBtn'" class="col-sm-12 row-subitem-padding widget-small-text">
+      {{ 'widgets.constructor.coupon.couponCallback.actionDesc2.closeBtn' | translate }}
+    </div>
+  </div>
+
+  <div *ngIf="coupon.enable">
+    <div *ngIf="!coupons.length" class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5 coupons-flex-wr">
+        <a href="../../../coupons/?enableCouponModal=true" target="_blank" class="btn btn-primary btn-coupon-add">
+          {{ 'widgets.constructor.coupon.couponCallback.couponAdd' | translate }}
+        </a>
+        <button
+          (click)="refreshCouponsList()"
+          class="btn btn-default refresh-coupons-element-btn"
+          data-toggle="tooltip"
+          data-container="body"
+          data-placement="top"
+          title=""
+          data-original-title="{{ 'widgets.constructor.coupon.couponCallback.couponRefresh' | translate }}"
+        >
+          <i class="fa fa-refresh"></i>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="coupons.length" class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-des">{{ 'widgets.constructor.coupon.couponCallback.couponChosse' | translate }}:</label>
+        <div class="coupons-flex-wr">
+          <div class="dropdown btn-coupon-chose">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{ coupon.coupon.coupon.name }}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li
+                role="presentation"
+                *ngFor="let itemCoupon of coupons"
+                (click)="coupon.coupon.coupon = itemCoupon"
+              >
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemCoupon.name }}</a>
+              </li>
+            </ul>
+          </div>
+          <button
+            (click)="refreshCouponsList()"
+            class="btn btn-default refresh-coupons-element-btn"
+            data-toggle="tooltip"
+            data-container="body"
+            data-placement="top"
+            title=""
+            data-original-title="{{ 'widgets.constructor.coupon.couponCallback.couponRefresh' | translate }}"
+          >
+            <i class="fa fa-refresh"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row row-subitem m-t-xs">
+      <div
+        class="col-sm-12 row-subitem-padding widget-small-text underline-links blue-links hover-links"
+        [innerHTML]="'widgets.constructor.coupon.couponCallback.desc' | translate"
+      ></div>
+    </div>
+
+    <div class="col-lg-12 m-t-xs m-b-xs">
+      <h4 class="h4-text-tit control-label-des helper-title-3level">
+        {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.title' | translate }}
+      </h4>
+    </div>
+
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5 m-t-xs">
+        <label class="control-label control-label-des">{{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.position' | translate }}:</label>
+        <div class="dropdown" >
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{ coupon.coupon.positionPopup }}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropd-scroll-sm" role="menu">
+            <li
+              role="presentation"
+              *ngFor="let item of placePopup"
+              (click)="coupon.coupon.positionPopup = item"
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-subitem">
+      <div class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5 margined-top-10">
+        <label class="control-label control-label-des">
+          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.hover' | translate }}:
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="coupon.coupon.hoverText"
+          placeholder=""
+        />
+      </div>
+    </div>
+
+    <div class="row row-subitem">
+      <div class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5 margined-top-10">
+        <label class="control-label control-label-des">
+          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.click' | translate }}:
+        </label>
+        <input type="text" class="form-control" [(ngModel)]="coupon.coupon.clickText" placeholder="">
+      </div>
+    </div>
+
+    <div class="row row-subitem">
+      <div class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5 margined-top-10">
+        <label class="control-label control-label-des">
+          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.action' | translate }}:
+        </label>
+        <textarea type="text" row="2" class="form-control" [(ngModel)]="coupon.coupon.actionText"></textarea>
+      </div>
+    </div>
+
+    <div class="row row-subitem">
+      <div class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5 margined-top-10">
+        <label class="control-label control-label-des">
+          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.manual' | translate }}:
+        </label>
+        <textarea type="text" row="2" class="form-control" [(ngModel)]="coupon.coupon.manualText"></textarea>
+      </div>
+    </div>
+
+    <div class="row row-subitem">
+      <div class="col-lg-12 row-subitem-padding">
+        <h4 class="h4-text-tit control-label-des helper-title-3level">
+          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.design' | translate }}
+        </h4>
+      </div>
+    </div>
+
+    <!-- Coupon preview -->
+    <div class="row row-subitem">
+      <div class="coupon-viewer-wr">
+        <div class="coupon-viewer-text1">{{ coupon.coupon.actionText }}</div>
+        <div class="element-coupon-wr" [ngStyle]="{'background-color': coupon.coupon.color, 'color': coupon.coupon.colorText}">
+          <div class="element-coupon-name">COUPON CODE</div>
+          <div class="element-coupon-hover">{{ coupon.coupon.hoverText }}</div>
+        </div>
+        <div class="coupon-viewer-text2">{{ coupon.coupon.manualText }}</div>
+      </div>
+    </div>
+
+    <div class="row row-subitem">
+      <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-colorpc control-label-des">
+          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.color' | translate }}:
+        </label>
+        <input
+          [(colorPicker)]="coupon.coupon.colorText"
+          [style.background]="coupon.coupon.colorText"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+        />
+      </div>
+      <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-colorpc control-label-des">
+          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.colorBg' | translate }}:
+        </label>
+        <input
+          [(colorPicker)]="coupon.coupon.color"
+          [style.background]="coupon.coupon.color"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+        />
+      </div>
+    </div>
+
+    <div class="col-lg-12 m-t-xs m-b-xs">
+      <h4 class="h4-text-tit control-label-des helper-title-3level">
+        {{ 'widgets.constructor.coupon.setting.actions' | translate }}
+      </h4>
+    </div>
+
+    <div class="row row-subitem row-subitem-static-hide" *ngIf="coupon.elementType !== 'closeBtn'">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <label class="non-bold">
+          <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="coupon.coupon.closeAfter">
+          {{ 'widgets.constructor.coupon.setting.closeAfter' | translate }}
+        </label>
+      </div>
+    </div>
+
+    <div class="row row-subitem">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <label class="non-bold">
+          <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="coupon.coupon.isCopyAction">
+          {{ 'widgets.constructor.coupon.setting.isCopyAction' | translate }}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

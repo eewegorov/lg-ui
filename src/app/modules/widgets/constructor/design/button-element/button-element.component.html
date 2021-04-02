@@ -2,7 +2,9 @@
   <div>
     <div class="row row-subitem">
       <div class="col-lg-12 row-subitem-padding">
-        <h4 class="h4-element-title">Кнопка <a (click)="removeElementFromElementsList(index, modelName)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a></h4>
+        <h4 class="h4-element-title">
+          Кнопка <a (click)="removeElementFromElementsList($parent.$index, {name: 'button-element'})" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
+        </h4>
       </div>
       <div class="col-lg-12 row-subitem-padding">
         <h4 class="h4-text-tit control-label-des">Настройки кнопки</h4>
@@ -13,53 +15,11 @@
       <div class="col-sm-12 row-subitem-padding">
         <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
       </div>
-      <div class="col-sm-6 row-subitem-padding">
-        <div class="form-group widget-selector">
-          <label class="non-bold">
-            <input
-              type="radio"
-              class="radio radio-info radio-inline"
-              (click)="widget.guiprops.button.font = systemFonts[0]"
-              [(ngModel)]="widget.guiprops['button'].fontType"
-              value="systemFont"
-            >
-            Системный шрифт
-          </label>
-        </div>
-      </div>
-      <div class="col-sm-6 row-subitem-padding">
-        <div class="form-group widget-selector">
-          <label class="non-bold">
-            <input
-              type="radio"
-              class="radio radio-info radio-inline"
-              (click)="widget.guiprops.button.font = googleFonts[0]"
-              [(ngModel)]="widget.guiprops['button'].fontType"
-              value="googleFont"
-            >
-            Google fonts
-          </label>
-        </div>
+      <div class="col-sm-12 row-subitem-padding">
+        <input [id]="'font-picker' + $parent.$index" type="text">
       </div>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <div class="dropdown" >
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{ widget.guiprops.button.font.name }}
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu dropd-scroll" role="menu">
-            <li
-              role="presentation"
-              (click)="widget.guiprops.button.font = itemFont"
-              *ngFor="let itemFont of gecCurrentFontType(widget.guiprops['button'])"
-            ><a [ngStyle]="{'font-family': itemFont.fontFamily}" role="menuitem" tabindex="-1" href="javascript:void(0)">
-              {{ itemFont.name }}
-            </a></li>
-          </ul>
-        </div>
-      </div>
       <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
         <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="widget.guiprops['button'].fontSize">
         <label class="control-label">px <span>размер текста</span></label>
@@ -94,7 +54,9 @@
               role="presentation"
               *ngFor="let itemVisual of visualInputForm"
               (click)="widget.guiprops.form.visual = itemVisual"
-            ><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a></li>
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -113,7 +75,9 @@
               role="presentation"
               *ngFor="let item of widthBtn"
               (click)="widget.guiprops.button.btn_width = item"
-            ><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a></li>
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -121,9 +85,11 @@
         <label class="control-label control-label-des">Ориентация:</label>
         <div class="dropdown" >
           <button
-            class="btn btn-default dropdown-toggle"
+            type="button"
             [disabled]="widget.guiprops.button.btn_width === 'От края до края'"
-            type="button" data-toggle="dropdown" aria-expanded="true"
+            class="btn btn-default dropdown-toggle"
+            data-toggle="dropdown"
+            aria-expanded="true"
           >
             {{ widget.guiprops.button.position }}
             <span class="caret"></span>
@@ -133,7 +99,9 @@
               role="presentation"
               *ngFor="let item of floatBtn"
               (click)="widget.guiprops.button.position = item"
-            ><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a></li>
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -173,8 +141,7 @@
                 class="btn-var-styles btn-var-styles__material"
                 [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}"
                 href="javascript:void(0)"
-              >Material</a>
-            </li>
+              >Material</a></li>
             <li
               role="presentation"
               (click)="setBtnStyle('Flat', widget.guiprops.button)"
@@ -183,8 +150,7 @@
                 class="btn-var-styles btn-var-styles__flat"
                 [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}"
                 href="javascript:void(0)"
-              >Flat</a>
-            </li>
+              >Flat</a></li>
             <li
               role="presentation"
               (click)="setBtnStyle('Border Style', widget.guiprops.button)"

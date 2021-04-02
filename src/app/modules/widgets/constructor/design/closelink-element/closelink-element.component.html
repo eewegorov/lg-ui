@@ -33,53 +33,11 @@
       <div class="col-sm-12 row-subitem-padding">
         <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
       </div>
-      <div class="col-sm-6 row-subitem-padding">
-        <div class="form-group widget-selector">
-          <label class="non-bold">
-            <input
-              type="radio"
-              class="radio radio-info radio-inline"
-              (click)="widget.guiprops.exit.font = systemFonts[0]"
-              [(ngModel)]="widget.guiprops['exit'].fontType"
-              value="'systemFont'"
-            >
-            Системный шрифт
-          </label>
-        </div>
-      </div>
-      <div class="col-sm-6 row-subitem-padding">
-        <div class="form-group widget-selector">
-          <label class="non-bold">
-            <input
-              type="radio"
-              class="radio radio-info radio-inline"
-              (click)="widget.guiprops.exit.font = googleFonts[0]"
-              [(ngModel)]="widget.guiprops['exit'].fontType"
-              value="googleFont"
-            >
-            Google fonts
-          </label>
-        </div>
+      <div class="col-sm-12 row-subitem-padding">
+        <input [id]="'font-picker' + $parent.$index" type="text">
       </div>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <div class="dropdown" >
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{ widget.guiprops.exit.font.name }}
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu dropd-scroll" role="menu">
-            <li
-              role="presentation"
-              *ngFor="let itemFont of gecCurrentFontType(widget.guiprops['exit'])"
-              (click)="widget.guiprops.exit.font = itemFont"
-            >
-              <a [ngStyle]="{'font-family':itemFont.fontFamily}" role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemFont.name }}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
       <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
         <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="widget.guiprops['exit'].fontSize">
         <label class="control-label">px <span>размер текста</span></label>
@@ -109,60 +67,15 @@
   </div>
   <div *ngIf="widget.guiprops.exit.button.enable">
     <div>
-
       <div class="row row-subitem">
         <div class="col-sm-12 row-subitem-padding">
           <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
         </div>
-        <div class="col-sm-6 row-subitem-padding">
-          <div class="form-group widget-selector">
-            <label class="non-bold">
-              <input
-                type="radio"
-                class="radio radio-info radio-inline"
-                (click)="widget.guiprops.exit.button.font = systemFonts[0]"
-                [(ngModel)]="widget.guiprops.exit.button.fontType"
-                value="systemFont"
-              >
-              Системный шрифт
-            </label>
-          </div>
-        </div>
-        <div class="col-sm-6 row-subitem-padding">
-          <div class="form-group widget-selector">
-            <label class="non-bold">
-              <input
-                type="radio"
-                class="radio radio-info radio-inline"
-                (click)="widget.guiprops.exit.button.font = googleFonts[0]"
-                [(ngModel)]="widget.guiprops.exit.button.fontType"
-                value="googleFont"
-              >
-              Google fonts
-            </label>
-          </div>
+        <div class="col-sm-12 row-subitem-padding">
+          <input [id]="'font-picker-button-l' + $parent.$index" type="text">
         </div>
       </div>
       <div class="row row-subitem">
-        <div class="col-sm-12 row-subitem-padding padding-top-5">
-          <div class="dropdown" >
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{ widget.guiprops.exit.button.font.name }}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu dropd-scroll" role="menu">
-              <li
-                role="presentation"
-                (click)="widget.guiprops.exit.button.font = itemFont"
-                *ngFor="let itemFont of gecCurrentFontType(widget.guiprops.exit.button)"
-              >
-                <a [ngStyle]="{'font-family':itemFont.fontFamily}" role="menuitem" tabindex="-1" href="javascript:void(0)">
-                  {{ itemFont.name }}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
         <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
           <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="widget.guiprops.exit.button.fontSize">
           <label class="control-label">px <span>размер текста</span></label>
@@ -187,13 +100,17 @@
       <div class="row row-subitem m-t-sm">
         <div class="col-sm-6 row-subitem-padding padding-top-5">
           <label class="control-label control-label-des">Ширина кнопки:</label>
-          <div class="dropdown">
+          <div class="dropdown" >
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
               {{ widget.guiprops.exit.button.btn_width }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li role="presentation" *ngFor="let item of widthBtn" (click)="widget.guiprops.exit.button.btn_width = item">
+              <li
+                role="presentation"
+                *ngFor="let item of widthBtn"
+                (click)="widget.guiprops.exit.button.btn_width = item"
+              >
                 <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
               </li>
             </ul>
@@ -201,11 +118,11 @@
         </div>
         <div class="col-sm-6 row-subitem-padding padding-top-5">
           <label class="control-label control-label-des">Ориентация:</label>
-          <div class="dropdown" >
+          <div class="dropdown">
             <button
-              type="button"
-              [disabled]="widget.guiprops.exit.button.btn_width === 'От края до края'"
               class="btn btn-default dropdown-toggle"
+              [disabled]="widget.guiprops.exit.button.btn_width === 'От края до края'"
+              type="button"
               data-toggle="dropdown"
               aria-expanded="true"
             >
@@ -213,7 +130,11 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li role="presentation" *ngFor="let item of floatBtn" (click)="widget.guiprops.exit.button.position = item">
+              <li
+                role="presentation"
+                *ngFor="let item of floatBtn"
+                (click)="widget.guiprops.exit.button.position = item"
+              >
                 <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
               </li>
             </ul>
@@ -231,37 +152,49 @@
       <div class="row row-subitem m-t-sm">
         <div class="col-sm-12 row-subitem-padding">
           <label class="control-label control-label-des">Стиль кнопки:</label>
-          <div class="dropdown">
+          <div class="dropdown" >
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
               {{ widget.guiprops.exit.button.styleType }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu dropdown-with-btn-styles" role="menu">
-              <li role="presentation" (click)="setBtnStyle('Default', widget.guiprops.exit.button)">
+              <li
+                role="presentation"
+                (click)="setBtnStyle('Default', widget.guiprops.exit.button)"
+              >
                 <a
                   class="btn-var-styles btn-var-styles__default"
-                  [ngStyle]="{'font-family':widget.guiprops.exit.button.font.fontFamily, 'background':widget.guiprops.exit.button.colorBtn}"
+                  [ngStyle]="{'font-family': widget.guiprops.exit.button.font.fontFamily, 'background': widget.guiprops.exit.button.colorBtn}"
                   href="javascript:void(0)"
                 >Default</a>
               </li>
-              <li role="presentation" (click)="setBtnStyle('Material', widget.guiprops.exit.button)">
+              <li
+                role="presentation"
+                (click)="setBtnStyle('Material', widget.guiprops.exit.button)"
+              >
                 <a
                   class="btn-var-styles btn-var-styles__material"
-                  [ngStyle]="{'font-family':widget.guiprops.exit.button.font.fontFamily, 'background':widget.guiprops.exit.button.colorBtn}"
+                  [ngStyle]="{'font-family': widget.guiprops.exit.button.font.fontFamily, 'background': widget.guiprops.exit.button.colorBtn}"
                   href="javascript:void(0)"
                 >Material</a>
               </li>
-              <li role="presentation" (click)="setBtnStyle('Flat', widget.guiprops.exit.button)">
+              <li
+                role="presentation"
+                (click)="setBtnStyle('Flat', widget.guiprops.exit.button)"
+              >
                 <a
                   class="btn-var-styles btn-var-styles__flat"
-                  [ngStyle]="{'font-family':widget.guiprops.exit.button.font.fontFamily, 'background':widget.guiprops.exit.button.colorBtn}"
+                  [ngStyle]="{'font-family': widget.guiprops.exit.button.font.fontFamily, 'background': widget.guiprops.exit.button.colorBtn}"
                   href="javascript:void(0)"
                 >Flat</a>
               </li>
-              <li role="presentation" (click)="setBtnStyle('Border Style', widget.guiprops.exit.button)">
+              <li
+                role="presentation"
+                (click)="setBtnStyle('Border Style', widget.guiprops.exit.button)"
+              >
                 <a
                   class="btn-var-styles btn-var-styles__border-style"
-                  [ngStyle]="{'font-family':widget.guiprops.exit.button.font.fontFamily, 'border-color':widget.guiprops.exit.button.colorBtn}"
+                  [ngStyle]="{'font-family': widget.guiprops.exit.button.font.fontFamily, 'border-color': widget.guiprops.exit.button.colorBtn}"
                   href="javascript:void(0)"
                 >Border Style</a>
               </li>
@@ -274,5 +207,5 @@
   </div>
 
   <!-- Coupon settings -->
-  <coupon-callback-directive coupons="coupons" place-popup="placePopup" coupon="widget.guiprops.exit.couponCallback"></coupon-callback-directive>
+  <app-coupon-callback coupons="coupons" place-popup="placePopup" coupon="widget.guiprops.exit.couponCallback"></app-coupon-callback>
 </div>
