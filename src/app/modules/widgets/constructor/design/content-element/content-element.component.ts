@@ -6,6 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./content-element.component.scss']
 })
 export class ContentElementComponent implements OnInit {
+  public optionsSummernote = {
+    airMode: true,
+    dialogsInBody: true,
+    popover: {
+      link: [
+        ['link', ['linkDialogShow', 'unlink']]
+      ],
+      air: [
+        ['color', ['color']],
+        ['font', ['bold', 'underline', 'italic', 'clear', 'fontsize', 'strikethrough']],
+        ['para', ['paragraph', 'height']],
+        ['insert', ['link']]
+      ]
+    }
+  };
 
   constructor() { }
 

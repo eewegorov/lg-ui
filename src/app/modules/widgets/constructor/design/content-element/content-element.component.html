@@ -90,14 +90,14 @@
         </div>
         <div class="move-element-view grab-handle-element"><i class="fa fa-arrows"></i></div>
 
-        <div class="btn-add-on-elem" ng-class="getItemClassData(item)" ng-click="addNewElementToContent($index, $event); $event.stopPropagation();">
+        <div class="btn-add-on-elem" [ngClass]="getItemClassData(item)" (click)="addNewElementToContent($index, $event); $event.stopPropagation();">
           <i class="fa fa-plus" aria-hidden="true"></i>
           <div class="tooltip top fade in">
             <div class="tooltip-arrow"></div>
             <div class="tooltip-inner">Добавить элемент</div>
           </div>
         </div>
-        <div class="btn-copy-on-elem" ng-class="getItemClassData(item)" ng-click="copyNewElementToContent(item, $index, $event); $event.stopPropagation();">
+        <div class="btn-copy-on-elem" [ngClass]="getItemClassData(item)" (click)="copyNewElementToContent(item, $index, $event); $event.stopPropagation();">
           <i class="fa fa-copy" aria-hidden="true"></i>
           <div class="tooltip top fade in">
             <div class="tooltip-arrow"></div>
@@ -105,55 +105,58 @@
           </div>
         </div>
 
-        <div ng-if="item.name == 'title-element'" class="social-block-pd">
+        <div *ngIf="item.name == 'title-element'" class="social-block-pd">
           <div class="editorFontLine">
-            <div class="title-main click-edit-cl" ng-class="(item.textShadow.enable)?'':'no-text-shadow-imp'" ng-style="{'font-size':item.fontSize+'px', 'font-family':  item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}">
-              <summernote airMode ng-model="item.textSummer" config="optionsSummernote"></summernote>
+            <div
+              class="title-main click-edit-cl"
+              [ngClass]="(item.textShadow.enable) ? '' : 'no-text-shadow-imp'"
+              [ngStyle]="{'font-size': item.fontSize + 'px', 'font-family': item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}">
+              <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="item.textSummer"></div>
             </div>
           </div>
         </div>
 
-        <div ng-if="item.name == 'split-element'" class="social-block-pd">
-          <div class="split-element-block" ng-class="hrPosSel(item)">
-            <hr class="style{{item.type}}" ng-style="{'border-color':item.color, 'width': item.widthpx + 'px'}">
+        <div *ngIf="item.name == 'split-element'" class="social-block-pd">
+          <div class="split-element-block" [ngClass]="hrPosSel(item)">
+            <hr class="style{{item.type}}" [ngStyle]="{'border-color':item.color, 'width': item.widthpx + 'px'}">
           </div>
         </div>
 
-        <div ng-if="item.name == 'padding-element'">
-          <div class="padding-element-block" ng-style="{'height':item.padding - 15 + 'px'}"></div>
+        <div *ngIf="item.name == 'padding-element'">
+          <div class="padding-element-block" [ngStyle]="{'height':item.padding - 15 + 'px'}"></div>
         </div>
 
-        <div ng-if="item.name == 'video-element'" class="social-block-pd">
-          <div class="element-video-block" ng-class="hrPosSel(item)">
-            <iframe ng-show="item.videoId" style="" id="idVideoFrame{{item.counter}}" src="" frameborder="0"></iframe>
-            <img ng-show="!item.videoId" class="element-video-block-img" ng-style="{'width': item.widthpx + 'px'}" src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
+        <div *ngIf="item.name == 'video-element'" class="social-block-pd">
+          <div class="element-video-block" [ngClass]="hrPosSel(item)">
+            <iframe *ngIf="item.videoId" style="" id="idVideoFrame{{item.counter}}" src="" frameborder="0"></iframe>
+            <img *ngIf="!item.videoId" class="element-video-block-img" [ngStyle]="{'width': item.widthpx + 'px'}" src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
           </div>
         </div>
 
-        <div ng-if="item.name == 'image-element'" class="social-block-pd">
-          <div class="element-image-block" ng-class="hrPosSel(item)">
-            <img class="element-image-block-img" ng-style="{'width': item.widthpx + 'px'}" ng-src="{{item.imageUrl}}">
+        <div *ngIf="item.name == 'image-element'" class="social-block-pd">
+          <div class="element-image-block" [ngClass]="hrPosSel(item)">
+            <img class="element-image-block-img" [ngStyle]="{'width': item.widthpx + 'px'}" [src]="item.imageUrl">
           </div>
         </div>
 
-        <div ng-if="item.name == 'coupon-element'" class="social-block-pd">
-          <div class="editorFontLine element-coupon-title" ng-if="item.title.enable">
-            <div class="title-main click-edit-cl" ng-class="(item.title.textShadow.enable)?'':'no-text-shadow-imp'" ng-style="{'font-size':item.title.fontSize+'px', 'font-family':item.title.font.fontFamily, 'text-shadow': item.title.textShadow.horiz + 'px ' + item.title.textShadow.vertical + 'px ' + item.title.textShadow.blur + 'px ' + getRGBAColor(item.title.textShadow)}">
-              <summernote airMode ng-model="item.title.textSummer" config="optionsSummernote"></summernote>
+        <div *ngIf="item.name == 'coupon-element'" class="social-block-pd">
+          <div class="editorFontLine element-coupon-title" *ngIf="item.title.enable">
+            <div class="title-main click-edit-cl" [ngClass]="(item.title.textShadow.enable) ? '' : 'no-text-shadow-imp'" [ngStyle]="{'font-size': item.title.fontSize + 'px', 'font-family': item.title.font.fontFamily, 'text-shadow': item.title.textShadow.horiz + 'px ' + item.title.textShadow.vertical + 'px ' + item.title.textShadow.blur + 'px ' + getRGBAColor(item.title.textShadow)}">
+              <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="item.title.textSummer"></div>
             </div>
           </div>
-          <div class="element-coupon-block" ng-class="hrPosSel(item)">
-            <div class="element-coupon-wr" ng-style="{'width': widthCouponStyle(item), 'background': getRGBAColor(item), 'color': item.colorText, 'border-radius': item.borderRadius + 'px', 'font-size': item.fontSize+'px', 'font-family': item.font.fontFamily}">
+          <div class="element-coupon-block" [ngClass]="hrPosSel(item)">
+            <div class="element-coupon-wr" [ngStyle]="{'width': widthCouponStyle(item), 'background': getRGBAColor(item), 'color': item.colorText, 'border-radius': item.borderRadius + 'px', 'font-size': item.fontSize+'px', 'font-family': item.font.fontFamily}">
               <div class="element-coupon-name">COUPON CODE</div>
-              <div class="element-coupon-hover" ng-bind="item.hoverText"></div>
+              <div class="element-coupon-hover">{{ item.hoverText }}</div>
             </div>
           </div>
         </div>
 
-        <div ng-if="item.name == 'iframe-element'" class="social-block-pd">
-          <div ng-class="hrPosSel(item)">
-            <div ng-class="heightIfrmPosSel(item)">
-              <div id="elementIframeBlock{{item.counter}}" class="element-iframe-block" ng-style="{'width': item.widthpx + 'px', 'height': item.heightpx + 'px'}">
+        <div *ngIf="item.name == 'iframe-element'" class="social-block-pd">
+          <div [ngClass]="hrPosSel(item)">
+            <div [ngClass]="heightIfrmPosSel(item)">
+              <div id="elementIframeBlock{{item.counter}}" class="element-iframe-block" [ngStyle]="{'width': item.widthpx + 'px', 'height': item.heightpx + 'px'}">
                 <iframe id="idFrame{{item.counter}}">
                   <!DOCTYPE html>
                   <html lang="en">
@@ -166,39 +169,39 @@
           </div>
         </div>
 
-        <div ng-if="item.name == 'closelink-element'">
-          <div ng-if="!widget.guiprops.exit.button.enable">
-            <div class="widget1-btn-exit" ng-class="hrPosSel(widget.guiprops['exit'])">
-              <div class="click-edit-cl button-link-close" ng-style="{'font-size':widget.guiprops['exit'].fontSize+'px', 'font-family':widget.guiprops['exit'].font.fontFamily}">
-                <summernote airMode ng-model="widget.guiprops['exit'].textSummer" config="optionsSummernote"></summernote>
+        <div *ngIf="item.name == 'closelink-element'">
+          <div *ngIf="!widget.guiprops.exit.button.enable">
+            <div class="widget1-btn-exit" [ngClass]="hrPosSel(widget.guiprops['exit'])">
+              <div class="click-edit-cl button-link-close" [ngStyle]="{'font-size':widget.guiprops['exit'].fontSize+'px', 'font-family':widget.guiprops['exit'].font.fontFamily}">
+                <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops['exit'].textSummer"></div>
               </div>
             </div>
           </div>
-          <div ng-if="widget.guiprops.exit.button.enable">
-            <div class="widget1-btn-bl" ng-class="btnPosSel(widget.guiprops.exit.button)">
-              <div class="click-edit-cl button-send button-alone" ng-class="setBtnStyleClass(widget.guiprops.exit.button)" ng-style="{'font-size':widget.guiprops.exit.button.fontSize+'px', 'font-family':widget.guiprops.exit.button.font.fontFamily, 'border-color':widget.guiprops.exit.button.colorBtn, 'background':widget.guiprops.exit.button.colorBtn, 'color':widget.guiprops.exit.button.colorTextBtn, 'border-radius':widget.guiprops.exit.button.borderRadiusBtn+'px', 'width':widthExitBtnStyle}">
-                <summernote airMode ng-model="widget.guiprops.exit.button.textSummer" config="optionsSummernote"></summernote>
+          <div *ngIf="widget.guiprops.exit.button.enable">
+            <div class="widget1-btn-bl" [ngClass]="btnPosSel(widget.guiprops.exit.button)">
+              <div class="click-edit-cl button-send button-alone" [ngClass]="setBtnStyleClass(widget.guiprops.exit.button)" [ngStyle]="{'font-size':widget.guiprops.exit.button.fontSize+'px', 'font-family':widget.guiprops.exit.button.font.fontFamily, 'border-color':widget.guiprops.exit.button.colorBtn, 'background':widget.guiprops.exit.button.colorBtn, 'color':widget.guiprops.exit.button.colorTextBtn, 'border-radius':widget.guiprops.exit.button.borderRadiusBtn+'px', 'width':widthExitBtnStyle}">
+                <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops.exit.button.textSummer"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div ng-if="item.name == 'form-element'" class="color-pod" ng-class="hrPosSelWholeForm(widget.guiprops['form'])">
-          <div class="form-whole-bl" ng-style="{'width': widget.guiprops.form.form_widthpx + 'px'}">
-            <div id="widgetFormBlockM" class="widget1-form-bl" ng-class="hrPosSelForm(widget.guiprops['form'])">
+        <div *ngIf="item.name == 'form-element'" class="color-pod" [ngClass]="hrPosSelWholeForm(widget.guiprops['form'])">
+          <div class="form-whole-bl" [ngStyle]="{'width': widget.guiprops.form.form_widthpx + 'px'}">
+            <div id="widgetFormBlockM" class="widget1-form-bl" [ngClass]="hrPosSelForm(widget.guiprops['form'])">
               <div>
-                <div class="widget-inp-bl" ng-repeat="item in widget.guiprops['formSet'].items" ng-class="classNameInputItem(item)" ng-style="{'width': widget.guiprops['form'].widthpx + 'px'}">
+                <div class="widget-inp-bl" *ngFor="let item of widget.guiprops['formSet'].items" [ngClass]="classNameInputItem(item)" [ngStyle]="{'width': widget.guiprops['form'].widthpx + 'px'}">
                   <div ng-switch on="elementInputItem(item)">
                     <div ng-switch-when="inputEl" class="text-input-class">
-                      <input ng-if="item.type !== 'phone' || !widget.guiprops.formSet.phoneMask.enable" id="elementid{{item.type}}" type="text" ng-class="classNameFormInput(item.type)" class="form-control form-widget-cntrl" style="background:{{widget.guiprops['form'].rgbaInputForm}};color:{{widget.guiprops['form'].colorTitleInputForm}};border-radius:{{widget.guiprops['form'].borderRadiusInputForm}}px;border-color:{{widget.guiprops['form'].border.color}}!important">
-                      <input ng-if="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable" id="elementid{{item.type}}" type="text" ng-class="classNameFormInput(item.type)" class="form-control form-widget-cntrl" readonly style="background:{{widget.guiprops['form'].rgbaInputForm}};color:{{widget.guiprops['form'].colorTitleInputForm}};border-radius:{{widget.guiprops['form'].borderRadiusInputForm}}px;border-color:{{widget.guiprops['form'].border.color}}!important">
+                      <input *ngIf="item.type !== 'phone' || !widget.guiprops.formSet.phoneMask.enable" [id]="'elementid' + item.type" type="text" [ngClass]="classNameFormInput(item.type)" class="form-control form-widget-cntrl" style="background:{{widget.guiprops['form'].rgbaInputForm}};color:{{widget.guiprops['form'].colorTitleInputForm}};border-radius:{{widget.guiprops['form'].borderRadiusInputForm}}px;border-color:{{widget.guiprops['form'].border.color}}!important">
+                      <input *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable" [id]="'elementid' + item.type" type="text" [ngClass]="classNameFormInput(item.type)" class="form-control form-widget-cntrl" readonly style="background:{{widget.guiprops['form'].rgbaInputForm}};color:{{widget.guiprops['form'].colorTitleInputForm}};border-radius:{{widget.guiprops['form'].borderRadiusInputForm}}px;border-color:{{widget.guiprops['form'].border.color}}!important">
 
-                      <label for="elementid{{item.type}}" class="form-widget-cntrl-label" style="color:{{widget.guiprops['form'].colorTitleInputForm}}">{{item.placeholder}}</label>
-                      <span class="masked-span-helper" ng-if="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable" ng-bind="getInputFormPhoneMask()" style="color:{{widget.guiprops['form'].colorTitleInputForm}}"></span>
+                      <label [for]="'elementid' + item.type" class="form-widget-cntrl-label" style="color:{{widget.guiprops['form'].colorTitleInputForm}}">{{ item.placeholder }}</label>
+                      <span class="masked-span-helper" *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable" style="color:{{widget.guiprops['form'].colorTitleInputForm}}">{{ getInputFormPhoneMask() }}</span>
                     </div>
                     <div ng-switch-when="textarEl" class="text-input-class text-input-area-class">
-                      <textarea id="elementid{{item.type}}" type="text" ng-class="classNameFormInput(item.type)" class="form-control form-widget-cntrl" style="background:{{widget.guiprops['form'].rgbaInputForm}};color:{{widget.guiprops['form'].colorTitleInputForm}};border-radius:{{widget.guiprops['form'].borderRadiusInputForm}}px;border-color:{{widget.guiprops['form'].border.color}}!important"></textarea>
-                      <label for="elementid{{item.type}}" class="form-widget-cntrl-label" style="color:{{widget.guiprops['form'].colorTitleInputForm}}">{{item.placeholder}}</label>
+                      <textarea [id]="'elementid' + item.type" type="text" [ngClass]="classNameFormInput(item.type)" class="form-control form-widget-cntrl" style="background:{{widget.guiprops['form'].rgbaInputForm}};color:{{widget.guiprops['form'].colorTitleInputForm}};border-radius:{{widget.guiprops['form'].borderRadiusInputForm}}px;border-color:{{widget.guiprops['form'].border.color}}!important"></textarea>
+                      <label [for]="'elementid' + item.type" class="form-widget-cntrl-label" style="color:{{widget.guiprops['form'].colorTitleInputForm}}">{{ item.placeholder }}</label>
                     </div>
                   </div>
                 </div>
@@ -206,154 +209,28 @@
             </div>
 
             <div>
-              <div class="widget1-btn-bl widget1-btn-bl-min-marg" ng-class="btnPosSel(widget.guiprops.button)">
-                <div class="click-edit-cl button-send" ng-class="setBtnStyleClass(widget.guiprops.button)" ng-style="{'font-size':widget.guiprops['button'].fontSize+'px', 'font-family':widget.guiprops['button'].font.fontFamily, 'border-color':widget.guiprops['button'].colorBtn, 'background':widget.guiprops['button'].colorBtn, 'color':widget.guiprops['button'].colorTextBtn, 'border-radius':widget.guiprops['button'].borderRadiusBtn+'px', 'width':widthBtnFormStyle}">
-                  <summernote airMode ng-model="widget.guiprops['button'].textSummer" config="optionsSummernote"></summernote>
+              <div class="widget1-btn-bl widget1-btn-bl-min-marg" [ngClass]="btnPosSel(widget.guiprops.button)">
+                <div class="click-edit-cl button-send" [ngClass]="setBtnStyleClass(widget.guiprops.button)" [ngStyle]="{'font-size':widget.guiprops['button'].fontSize+'px', 'font-family':widget.guiprops['button'].font.fontFamily, 'border-color':widget.guiprops['button'].colorBtn, 'background':widget.guiprops['button'].colorBtn, 'color':widget.guiprops['button'].colorTextBtn, 'border-radius':widget.guiprops['button'].borderRadiusBtn+'px', 'width':widthBtnFormStyle}">
+                  <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops['button'].textSummer"></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div ng-if="item.name == 'form-ext-element'" class="form-ext-main-wr color-pod" ng-class="formExtHrPosSelWholeForm(widget.guiprops.formExt.model.mainSettings)">
-          <div class="widget-form-ext-wrapper" ng-style="{'width': widget.guiprops.formExt.model.mainSettings.form_widthpx + 'px'}">
-            <div id="widgetFormBlockMExt" class="widget1-form-ext-bl" ng-class="formExtGlobalAlignmentClass(widget.guiprops.formExt.model.mainSettings)">
-
-              <div ng-repeat-start="item in widget.guiprops.formExt.model.list track by $index" class="widget-form-ext-start-el"></div>
-
-              <div class="widget-inp-bl" ng-class="formExtItemExtraClass(item)" ng-style="{'width': formExtGetItemWidth(item)}">
-                <div class="form-ext-element-wr form-ext-element-{{$index}}">
-                  <div class="form-ext-element-highlighted-context"></div>
-                  <div ng-switch on="formExtElementInputItem(item)">
-                    <!-- FORM EXT NAME, TEXT, PHONE, EMAIL -->
-                    <div ng-switch-when="inputElement" class="text-input-class">
-                      <input ng-if="item.type !== 'phone' || !item.mask.enable" id="elementid{{item.type}}" type="text" ng-class="formExtClassNameFormInput(item)" class="form-control form-widget-cntrl" style="background:{{widget.guiprops.formExt.model.mainSettings.rgbaInputForm}};color:{{widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}};border-radius:{{widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm}}px;border-color:{{widget.guiprops.formExt.model.mainSettings.border.color}}!important">
-                      <input ng-if="item.type === 'phone' && item.mask.enable" id="elementid{{item.type}}" type="text" ng-class="formExtClassNameFormInput(item)" class="form-control form-widget-cntrl" readonly style="background:{{widget.guiprops.formExt.model.mainSettings.rgbaInputForm}};color:{{widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}};border-radius:{{widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm}}px;border-color:{{widget.guiprops.formExt.model.mainSettings.border.color}}!important">
-
-                      <label for="elementid{{item.type}}" class="form-widget-cntrl-label" style="color:{{widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}}">{{item.placeholder}}</label>
-                      <span class="masked-span-helper" ng-if="item.type === 'phone' && item.mask.enable" ng-bind="formExtGetInputFormPhoneMask(item.mask.value)" style="color:{{widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}}"></span>
-                    </div>
-
-                    <!-- FORM EXT TEXTAREA -->
-                    <div ng-switch-when="textareaElement" class="text-input-class text-input-area-class text-input-class-form-ext">
-                                            <textarea
-                                              id="elementid{{item.type}}"
-                                              type="text"
-                                              ng-class="formExtClassNameFormInput(item)"
-                                              class="form-control form-widget-cntrl"
-                                              style="background:{{widget.guiprops.formExt.model.mainSettings.rgbaInputForm}};color:{{widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}};border-radius:{{widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm}}px;border-color:{{widget.guiprops.formExt.model.mainSettings.border.color}}!important"></textarea>
-                      <label for="elementid{{item.type}}"
-                             class="form-widget-cntrl-label"
-                             style="color:{{widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}}">{{item.placeholder}}</label>
-                    </div>
-
-                    <!-- FORM EXT RATING -->
-                    <div ng-switch-when="ratingElement" class="rating-input-class">
-                      <div class="rating-wrapper">
-                        <div class="rating-container" data-content="{{ratingStars(item)}}"
-                             ng-style="{'color': item.colorInactive}"
-                             ng-click="ratingStarClicked($event, item)"
-                             ng-mousemove="ratingStarMoved($event, item)"
-                             ng-mouseleave="ratingStarLeaved($event, item)">
-                          <div class="rating-stars" data-content="{{ratingStars(item)}}" ng-style="{'color': item.colorActive}"></div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- FORM EXT VARIANTS -->
-                    <div ng-switch-when="variantsElement" class="checkbox-input-class">
-                      <div class="form-ext-checkbox-wrapper" ng-class="{'form-ext-checkbox-wrapper__wrapped' : item.everyNewLine}">
-                        <label class="form-ext-checkbox-container"
-                               ng-repeat="variant in item.variants"
-                               ng-style="{'font-size':item.fontSize+'px', 'font-family':item.font.fontFamily,'color':item.colorText}">{{variant}}
-                          <div style="background-color:{{widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}};border-color:{{widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}}">
-                            <input type="{{item.multiEnable ? 'checkbox' : 'radio'}}" name="{{item.multiEnable ? '' : ('radio-' + item.id)}}">
-                            <span class="form-ext-checkbox-checkmark"
-                                  ng-class="item.multiEnable ? 'form-ext-checkbox-checkmark' : 'form-ext-checkbox-checkmark-radio'"
-                                  ng-style="{'background-color': widget.guiprops.formExt.model.mainSettings.rgbaInputForm, 'border-color': widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : 'transparent'}"
-                            ></span>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-
-                    <!-- FORM EXT DROPDOWN -->
-                    <div ng-switch-when="ddElement" class="dd-input-class">
-                      <div class="form-ext-dropdown-wrapper" ng-class="formExtClassNameFormInput(item)">
-                        <dd-w-form-ext-directive item="item" st="widget.guiprops.formExt.model.mainSettings"></dd-w-form-ext-directive>
-                      </div>
-                    </div>
-
-                    <!-- FORM EXT TITLE TEXT -->
-                    <div ng-switch-when="titleFElement" class="title-f-input-class">
-                      <div class="form-ext-title-wrapper">
-                        <div class="click-edit-cl" ng-class="(item.textShadow.enable)?'':'no-text-shadow-imp'" ng-style="{'font-size':item.fontSize+'px', 'font-family':item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}">
-                          <summernote airMode ng-model="item.textSummer" config="optionsSummernote"></summernote>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- FORM EXT TERMS -->
-                    <div ng-switch-when="termElement" class="term-input-class">
-                      <div class="form-ext-term-wrapper">
-                        <label class="form-ext-term-checkbox-container" ng-click="termClick($event)">
-                          <div class="form-ext-term-checkbox-container-help-cl" style="background-color:{{widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}};border-color:{{widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}}">
-                            <input type="checkbox">
-                            <span class="form-ext-term-checkbox-checkmark" ng-style="{'background-color': widget.guiprops.formExt.model.mainSettings.rgbaInputForm, 'border-color': widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : 'transparent'}"></span>
-                          </div>
-                          <div class="click-edit-cl" ng-class="(item.textShadow.enable)?'':'no-text-shadow-imp'" ng-style="{'font-size':item.fontSize+'px', 'font-family':item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}">
-                            <summernote airMode ng-model="item.textSummer" config="optionsSummernote"></summernote>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-
-                    <!-- FORM EXT DATE -->
-                    <div ng-switch-when="dateFElement" class="date-f-input-class">
-                      <div class="form-ext-date-wrapper" ng-class="formExtClassNameFormInput(item)">
-                        <datepicker-form-ext-directive item="item" st="widget.guiprops.formExt.model.mainSettings"></datepicker-form-ext-directive>
-                      </div>
-                    </div>
-
-                    <!-- FORM EXT BUTTON -->
-                    <div ng-switch-when="buttonElement" class="button-input-class">
-                      <div class="widget-form-ext-button">
-                        <div class="widget1-btn-bl">
-                          <div class="click-edit-cl button-send form-ext-btn-el" ng-class="setBtnStyleClass(item)" ng-style="{'font-size':item.fontSize+'px', 'font-family':item.font.fontFamily, 'border-color':item.colorBtn, 'background':item.colorBtn, 'color':item.colorTextBtn, 'border-radius':item.borderRadiusBtn+'px'}">
-                            <div class="form-ext-btn-el-wr">
-                              <div ng-if="item.bType.type === 1 || item.bType.type === 2">
-                                <i ng-class="item.icon.selectedIcon" ng-style="{'color':item.icon.color}"></i>
-                              </div>
-                              <div ng-if="item.bType.type === 0 || item.bType.type === 1">
-                                <summernote airMode ng-model="item.textSummer" config="optionsSummernote"></summernote>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div ng-repeat-end class="widget-form-ext-end-el" ng-class="formExtItemNewLineClass(widget.guiprops.formExt.model.list[$index + 1], $index)"></div>
-            </div>
-          </div>
-        </div>
-
-        <div ng-if="item.name == 'button-element'">
+        <div *ngIf="item.name == 'button-element'">
           <div>
-            <div id="widgetButtonBlockM" class="widget1-btn-bl" ng-class="btnPosSel(widget.guiprops.button)">
-              <div class="click-edit-cl button-send button-alone" ng-class="setBtnStyleClass(widget.guiprops.button)" ng-style="{'font-size':widget.guiprops['button'].fontSize+'px', 'font-family':widget.guiprops['button'].font.fontFamily, 'border-color':widget.guiprops['button'].colorBtn, 'background':widget.guiprops['button'].colorBtn, 'color':widget.guiprops['button'].colorTextBtn, 'border-radius':widget.guiprops['button'].borderRadiusBtn+'px', 'width':widthBtnStyle}">
-                <summernote airMode ng-model="widget.guiprops['button'].textSummer" config="optionsSummernote"></summernote>
+            <div id="widgetButtonBlockM" class="widget1-btn-bl" [ngClass]="btnPosSel(widget.guiprops.button)">
+              <div class="click-edit-cl button-send button-alone" [ngClass]="setBtnStyleClass(widget.guiprops.button)" [ngStyle]="{'font-size':widget.guiprops['button'].fontSize+'px', 'font-family':widget.guiprops['button'].font.fontFamily, 'border-color':widget.guiprops['button'].colorBtn, 'background':widget.guiprops['button'].colorBtn, 'color':widget.guiprops['button'].colorTextBtn, 'border-radius':widget.guiprops['button'].borderRadiusBtn+'px', 'width':widthBtnStyle}">
+                <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops['button'].textSummer"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div ng-if="item.name == 'social-element'" class="m-r-n-xs m-b-n-sm social-block-pd" ng-class="hrPosSel(widget.guiprops.social)">
+        <div *ngIf="item.name == 'social-element'" class="m-r-n-xs m-b-n-sm social-block-pd" [ngClass]="hrPosSel(widget.guiprops.social)">
           <div class="center-mode-social">
-            <div ng-repeat="itemSocial in widget.guiprops['social'].items" class="webicon large soc-var-1 {{itemSocial.name}} {{widget.guiprops['social'].type}}"></div>
+            <div *ngFor="let itemSocial of widget.guiprops['social'].items" class="webicon large soc-var-1 {{itemSocial.name}} {{widget.guiprops['social'].type}}"></div>
           </div>
         </div>
 

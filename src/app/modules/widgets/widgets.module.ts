@@ -55,6 +55,7 @@ import { TitleElementComponent } from './constructor/design/title-element/title-
 import { VideoElementComponent } from './constructor/design/video-element/video-element.component';
 import { VisualElementComponent } from './constructor/design/visual-element/visual-element.component';
 import { CouponCallbackComponent } from './constructor/design/coupon-callback/coupon-callback.component';
+import { NgxSummernoteModule } from 'ngx-summernote';
 
 
 @NgModule({
@@ -119,7 +120,8 @@ import { CouponCallbackComponent } from './constructor/design/coupon-callback/co
     LaddaModule,
     ColorPickerModule,
     NgxSliderModule,
-    SortablejsModule
+    SortablejsModule,
+    NgxSummernoteModule
   ]
 })
 export class WidgetsModule { }
