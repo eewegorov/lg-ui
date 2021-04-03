@@ -129,7 +129,7 @@
         <div *ngIf="item.name == 'video-element'" class="social-block-pd">
           <div class="element-video-block" [ngClass]="hrPosSel(item)">
             <iframe *ngIf="item.videoId" style="" id="idVideoFrame{{item.counter}}" src="" frameborder="0"></iframe>
-            <img *ngIf="!item.videoId" class="element-video-block-img" [ngStyle]="{'width': item.widthpx + 'px'}" src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
+            <img *ngIf="!item.videoId" class="element-video-block-img" [ngStyle]="{'width': item.widthpx + 'px'}" src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png" />
           </div>
         </div>
 
@@ -141,12 +141,19 @@
 
         <div *ngIf="item.name == 'coupon-element'" class="social-block-pd">
           <div class="editorFontLine element-coupon-title" *ngIf="item.title.enable">
-            <div class="title-main click-edit-cl" [ngClass]="(item.title.textShadow.enable) ? '' : 'no-text-shadow-imp'" [ngStyle]="{'font-size': item.title.fontSize + 'px', 'font-family': item.title.font.fontFamily, 'text-shadow': item.title.textShadow.horiz + 'px ' + item.title.textShadow.vertical + 'px ' + item.title.textShadow.blur + 'px ' + getRGBAColor(item.title.textShadow)}">
+            <div
+              class="title-main click-edit-cl"
+              [ngClass]="(item.title.textShadow.enable) ? '' : 'no-text-shadow-imp'"
+              [ngStyle]="{'font-size': item.title.fontSize + 'px', 'font-family': item.title.font.fontFamily, 'text-shadow': item.title.textShadow.horiz + 'px ' + item.title.textShadow.vertical + 'px ' + item.title.textShadow.blur + 'px ' + getRGBAColor(item.title.textShadow)}"
+            >
               <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="item.title.textSummer"></div>
             </div>
           </div>
           <div class="element-coupon-block" [ngClass]="hrPosSel(item)">
-            <div class="element-coupon-wr" [ngStyle]="{'width': widthCouponStyle(item), 'background': getRGBAColor(item), 'color': item.colorText, 'border-radius': item.borderRadius + 'px', 'font-size': item.fontSize+'px', 'font-family': item.font.fontFamily}">
+            <div
+              class="element-coupon-wr"
+              [ngStyle]="{'width': widthCouponStyle(item), 'background': getRGBAColor(item), 'color': item.colorText, 'border-radius': item.borderRadius + 'px', 'font-size': item.fontSize+'px', 'font-family': item.font.fontFamily}"
+            >
               <div class="element-coupon-name">COUPON CODE</div>
               <div class="element-coupon-hover">{{ item.hoverText }}</div>
             </div>
@@ -156,11 +163,11 @@
         <div *ngIf="item.name == 'iframe-element'" class="social-block-pd">
           <div [ngClass]="hrPosSel(item)">
             <div [ngClass]="heightIfrmPosSel(item)">
-              <div id="elementIframeBlock{{item.counter}}" class="element-iframe-block" [ngStyle]="{'width': item.widthpx + 'px', 'height': item.heightpx + 'px'}">
-                <iframe id="idFrame{{item.counter}}">
+              <div id="elementIframeBlock{{ item.counter }}" class="element-iframe-block" [ngStyle]="{'width': item.widthpx + 'px', 'height': item.heightpx + 'px'}">
+                <iframe id="idFrame{{ item.counter }}">
                   <!DOCTYPE html>
                   <html lang="en">
-                  <head><meta charset="UTF-8"</head>
+                  <head><meta charset="UTF-8" /></head>
                   <body></body>
                   </html>
                 </iframe>
@@ -172,14 +179,21 @@
         <div *ngIf="item.name == 'closelink-element'">
           <div *ngIf="!widget.guiprops.exit.button.enable">
             <div class="widget1-btn-exit" [ngClass]="hrPosSel(widget.guiprops['exit'])">
-              <div class="click-edit-cl button-link-close" [ngStyle]="{'font-size':widget.guiprops['exit'].fontSize+'px', 'font-family':widget.guiprops['exit'].font.fontFamily}">
+              <div
+                class="click-edit-cl button-link-close"
+                [ngStyle]="{'font-size': widget.guiprops['exit'].fontSize + 'px', 'font-family': widget.guiprops['exit'].font.fontFamily}"
+              >
                 <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops['exit'].textSummer"></div>
               </div>
             </div>
           </div>
           <div *ngIf="widget.guiprops.exit.button.enable">
             <div class="widget1-btn-bl" [ngClass]="btnPosSel(widget.guiprops.exit.button)">
-              <div class="click-edit-cl button-send button-alone" [ngClass]="setBtnStyleClass(widget.guiprops.exit.button)" [ngStyle]="{'font-size':widget.guiprops.exit.button.fontSize+'px', 'font-family':widget.guiprops.exit.button.font.fontFamily, 'border-color':widget.guiprops.exit.button.colorBtn, 'background':widget.guiprops.exit.button.colorBtn, 'color':widget.guiprops.exit.button.colorTextBtn, 'border-radius':widget.guiprops.exit.button.borderRadiusBtn+'px', 'width':widthExitBtnStyle}">
+              <div
+                class="click-edit-cl button-send button-alone"
+                [ngClass]="setBtnStyleClass(widget.guiprops.exit.button)"
+                [ngStyle]="{'font-size': widget.guiprops.exit.button.fontSize + 'px', 'font-family': widget.guiprops.exit.button.font.fontFamily, 'border-color': widget.guiprops.exit.button.colorBtn, 'background': widget.guiprops.exit.button.colorBtn, 'color': widget.guiprops.exit.button.colorTextBtn, 'border-radius': widget.guiprops.exit.button.borderRadiusBtn + 'px', 'width': widthExitBtnStyle}"
+              >
                 <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops.exit.button.textSummer"></div>
               </div>
             </div>
@@ -191,17 +205,48 @@
             <div id="widgetFormBlockM" class="widget1-form-bl" [ngClass]="hrPosSelForm(widget.guiprops['form'])">
               <div>
                 <div class="widget-inp-bl" *ngFor="let item of widget.guiprops['formSet'].items" [ngClass]="classNameInputItem(item)" [ngStyle]="{'width': widget.guiprops['form'].widthpx + 'px'}">
-                  <div ng-switch on="elementInputItem(item)">
-                    <div ng-switch-when="inputEl" class="text-input-class">
-                      <input *ngIf="item.type !== 'phone' || !widget.guiprops.formSet.phoneMask.enable" [id]="'elementid' + item.type" type="text" [ngClass]="classNameFormInput(item.type)" class="form-control form-widget-cntrl" style="background:{{widget.guiprops['form'].rgbaInputForm}};color:{{widget.guiprops['form'].colorTitleInputForm}};border-radius:{{widget.guiprops['form'].borderRadiusInputForm}}px;border-color:{{widget.guiprops['form'].border.color}}!important">
-                      <input *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable" [id]="'elementid' + item.type" type="text" [ngClass]="classNameFormInput(item.type)" class="form-control form-widget-cntrl" readonly style="background:{{widget.guiprops['form'].rgbaInputForm}};color:{{widget.guiprops['form'].colorTitleInputForm}};border-radius:{{widget.guiprops['form'].borderRadiusInputForm}}px;border-color:{{widget.guiprops['form'].border.color}}!important">
-
-                      <label [for]="'elementid' + item.type" class="form-widget-cntrl-label" style="color:{{widget.guiprops['form'].colorTitleInputForm}}">{{ item.placeholder }}</label>
-                      <span class="masked-span-helper" *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable" style="color:{{widget.guiprops['form'].colorTitleInputForm}}">{{ getInputFormPhoneMask() }}</span>
+                  <div [ngSwitch]="elementInputItem(item)">
+                    <div *ngSwitchCase="inputEl" class="text-input-class">
+                      <input
+                        type="text"
+                        *ngIf="item.type !== 'phone' || !widget.guiprops.formSet.phoneMask.enable"
+                        [id]="'elementid' + item.type"
+                        [ngClass]="classNameFormInput(item.type)"
+                        class="form-control form-widget-cntrl"
+                        [style]="'background: ' + widget.guiprops['form'].rgbaInputForm + '; color: ' + widget.guiprops['form'].colorTitleInputForm + '; border-radius: ' + widget.guiprops['form'].borderRadiusInputForm + 'px; border-color: ' + widget.guiprops['form'].border.color + '!important'"
+                      />
+                      <input
+                        type="text"
+                        *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable"
+                        [id]="'elementid' + item.type"
+                        [ngClass]="classNameFormInput(item.type)"
+                        class="form-control form-widget-cntrl"
+                        readonly
+                        [style]="'background: ' + widget.guiprops['form'].rgbaInputForm + '; color: ' + widget.guiprops['form'].colorTitleInputForm + '; border-radius: ' + widget.guiprops['form'].borderRadiusInputForm + 'px; border-color: ' + widget.guiprops['form'].border.color + '!important'"
+                      />
+                      <label
+                        [for]="'elementid' + item.type"
+                        class="form-widget-cntrl-label"
+                        [style]="'color: ' + widget.guiprops['form'].colorTitleInputForm"
+                      >{{ item.placeholder }}</label>
+                      <span
+                        *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable"
+                        class="masked-span-helper"
+                        [style]="'color: ' + widget.guiprops['form'].colorTitleInputForm"
+                      >{{ getInputFormPhoneMask() }}</span>
                     </div>
-                    <div ng-switch-when="textarEl" class="text-input-class text-input-area-class">
-                      <textarea [id]="'elementid' + item.type" type="text" [ngClass]="classNameFormInput(item.type)" class="form-control form-widget-cntrl" style="background:{{widget.guiprops['form'].rgbaInputForm}};color:{{widget.guiprops['form'].colorTitleInputForm}};border-radius:{{widget.guiprops['form'].borderRadiusInputForm}}px;border-color:{{widget.guiprops['form'].border.color}}!important"></textarea>
-                      <label [for]="'elementid' + item.type" class="form-widget-cntrl-label" style="color:{{widget.guiprops['form'].colorTitleInputForm}}">{{ item.placeholder }}</label>
+                    <div *ngSwitchCase="textarEl" class="text-input-class text-input-area-class">
+                      <textarea
+                        [id]="'elementid' + item.type"
+                        [ngClass]="classNameFormInput(item.type)"
+                        class="form-control form-widget-cntrl"
+                        [style]="'background: ' + widget.guiprops['form'].rgbaInputForm + ';color: ' + widget.guiprops['form'].colorTitleInputForm + ';border-radius: ' + widget.guiprops['form'].borderRadiusInputForm + 'px;border-color: ' + widget.guiprops['form'].border.color + '!important'"
+                      ></textarea>
+                      <label
+                        [for]="'elementid' + item.type"
+                        class="form-widget-cntrl-label"
+                        [style]="'color: ' + widget.guiprops['form'].colorTitleInputForm"
+                      >{{ item.placeholder }}</label>
                     </div>
                   </div>
                 </div>
@@ -218,7 +263,7 @@
           </div>
         </div>
 
-        <div *ngIf="item.name == 'button-element'">
+        <div *ngIf="item.name === 'button-element'">
           <div>
             <div id="widgetButtonBlockM" class="widget1-btn-bl" [ngClass]="btnPosSel(widget.guiprops.button)">
               <div class="click-edit-cl button-send button-alone" [ngClass]="setBtnStyleClass(widget.guiprops.button)" [ngStyle]="{'font-size':widget.guiprops['button'].fontSize+'px', 'font-family':widget.guiprops['button'].font.fontFamily, 'border-color':widget.guiprops['button'].colorBtn, 'background':widget.guiprops['button'].colorBtn, 'color':widget.guiprops['button'].colorTextBtn, 'border-radius':widget.guiprops['button'].borderRadiusBtn+'px', 'width':widthBtnStyle}">
@@ -228,9 +273,11 @@
           </div>
         </div>
 
-        <div *ngIf="item.name == 'social-element'" class="m-r-n-xs m-b-n-sm social-block-pd" [ngClass]="hrPosSel(widget.guiprops.social)">
+        <div *ngIf="item.name === 'social-element'" class="m-r-n-xs m-b-n-sm social-block-pd" [ngClass]="hrPosSel(widget.guiprops.social)">
           <div class="center-mode-social">
-            <div *ngFor="let itemSocial of widget.guiprops['social'].items" class="webicon large soc-var-1 {{itemSocial.name}} {{widget.guiprops['social'].type}}"></div>
+            <div
+              *ngFor="let itemSocial of widget.guiprops['social'].items"
+              class="webicon large soc-var-1 {{ itemSocial.name }} {{ widget.guiprops['social'].type }}"></div>
           </div>
         </div>
 
