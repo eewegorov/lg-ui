@@ -9,50 +9,78 @@
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <div>
           <label class="control-label control-label-des">Ширина контента:</label>
-          <div class="dropdown" >
+          <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{widget.guiprops.dhVisual.widget_content_width}}
+              {{ widget.guiprops.dhVisual.widget_content_width }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li role="presentation" ng-click="widget.guiprops.dhVisual.widget_content_width = item" ng-repeat="item in widgwidthBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+              <li
+                role="presentation"
+                *ngFor="let item of widgwidthBtn"
+                (click)="widget.guiprops.dhVisual.widget_content_width = item"
+              >
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+              </li>
             </ul>
           </div>
         </div>
-        <div ng-show="widget.guiprops['dhVisual'].widget_content_width === 'Собственная'" class="padding-top-5 m-t-sm">
-          <input type="number" min="60" class="form-control form-control-font form-cntrl-55w" ng-model="widget.guiprops['dhVisual'].widget_content_widthpx">
+        <div *ngIf="widget.guiprops['dhVisual'].widget_content_width === 'Собственная'" class="padding-top-5 m-t-sm">
+          <input
+            type="number"
+            min="60"
+            class="form-control form-control-font form-cntrl-55w"
+            [(ngModel)]="widget.guiprops['dhVisual'].widget_content_widthpx"
+          />
           <label class="control-label">px <span>ширина</span></label>
         </div>
       </div>
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <div>
           <label class="control-label control-label-des">Высота контента:</label>
-          <div class="dropdown" >
+          <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{widget.guiprops.dhVisual.widget_content_height}}
+              {{ widget.guiprops.dhVisual.widget_content_height }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li role="presentation" ng-click="widget.guiprops.dhVisual.widget_content_height = item" ng-repeat="item in widgwidthBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+              <li
+                role="presentation"
+                *ngFor="item in widgwidthBtn"
+                (click)="widget.guiprops.dhVisual.widget_content_height = item"
+              >
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+              </li>
             </ul>
           </div>
         </div>
-        <div ng-show="widget.guiprops['dhVisual'].widget_content_height === 'Собственная'" class="padding-top-5 m-t-sm">
-          <input type="number" min="60" class="form-control form-control-font form-cntrl-55w" ng-model="widget.guiprops['dhVisual'].widget_content_heightpx">
+        <div *ngIf="widget.guiprops['dhVisual'].widget_content_height === 'Собственная'" class="padding-top-5 m-t-sm">
+          <input
+            type="number"
+            min="60"
+            class="form-control form-control-font form-cntrl-55w"
+            [(ngModel)]="widget.guiprops['dhVisual'].widget_content_heightpx"
+          />
           <label class="control-label">px <span>высота</span></label>
         </div>
       </div>
     </div>
-    <div ng-show="widget.guiprops['dhVisual'].widget_content_height === 'Собственная'" class="row row-subitem m-t-sm">
+    <div *ngIf="widget.guiprops['dhVisual'].widget_content_height === 'Собственная'" class="row row-subitem m-t-sm">
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <label class="control-label control-label-des">Позиционирование контента:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{widget.guiprops.dhVisual.widget_content_height_orient}}
+            {{ widget.guiprops.dhVisual.widget_content_height_orient }}
             <span class="caret"></span>
           </button>
-          <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="widget.guiprops.dhVisual.widget_content_height_orient = item" ng-repeat="item in vertOrientDh"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+          <ul role="menu" class="dropdown-menu">
+            <li
+              role="presentation"
+              (click)="widget.guiprops.dhVisual.widget_content_height_orient = item"
+              *ngFor="let item of vertOrientDh"
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -68,7 +96,12 @@
           <div class="row-subitem-padding radio-group-item">
             <div class="form-group widget-selector">
               <label class="non-bold">
-                <input type="radio" class="radio radio-info radio-inline" ng-model="widget.guiprops['bg'].fillorImg" value="fill">
+                <input
+                  type="radio"
+                  class="radio radio-info radio-inline"
+                  [(ngModel)]="widget.guiprops['bg'].fillorImg"
+                  value="fill"
+                />
                 Залить цветом
               </label>
             </div>
@@ -76,7 +109,12 @@
           <div class="row-subitem-padding radio-group-item">
             <div class="form-group widget-selector">
               <label class="non-bold">
-                <input type="radio" class="radio radio-info radio-inline" ng-model="widget.guiprops['bg'].fillorImg" value="useImg">
+                <input
+                  type="radio"
+                  class="radio radio-info radio-inline"
+                  [(ngModel)]="widget.guiprops['bg'].fillorImg"
+                  value="useImg"
+                />
                 Изображение
               </label>
             </div>
@@ -84,7 +122,12 @@
           <div class="row-subitem-padding">
             <div class="form-group widget-selector">
               <label class="non-bold">
-                <input type="radio" class="radio radio-info radio-inline" ng-model="widget.guiprops['bg'].fillorImg" value="useVideo">
+                <input
+                  type="radio"
+                  class="radio radio-info radio-inline"
+                  [(ngModel)]="widget.guiprops['bg'].fillorImg"
+                  value="useVideo"
+                />
                 Видео
               </label>
             </div>
@@ -92,22 +135,12 @@
         </div>
       </div>
 
-      <div ng-show="widget.guiprops['bg'].fillorImg === 'useImg'">
+      <div *ngIf="widget.guiprops['bg'].fillorImg === 'useImg'">
         <div class="row row-subitem">
           <div class="col-sm-12 row-subitem-padding m-t-sm">
-            <a ng-click="listFile('bg')" class="widget-download-img"><i class="fa fa-image"></i> Установить или изменить изображение</a>
+            <a (click)="listFile('bg')" class="widget-download-img"><i class="fa fa-image"></i> Установить или изменить изображение</a>
           </div>
         </div>
-        <%--<div class="row row-subitem m-t-sm widget-small-text-rec">--%>
-        <%--<div class="col-sm-12 row-subitem-padding">--%>
-          <%--<b class="control-label-des">Рекомендуемый размер изображения: <span class="img-size-form">80x150</span></b>--%>
-          <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="row row-subitem">--%>
-        <%--<div class="col-sm-12 row-subitem-padding m-t-sm widget-small-text">--%>
-          <%--Размер изображения может меняться в зависимости от объема текста, количества используемых полей и их расположения. Загружайте изображения в последнюю очередь.--%>
-          <%--</div>--%>
-        <%--</div>--%>
 
         <div class="row row-subitem m-t-sm">
           <div class="col-sm-6 row-subitem-padding padding-top-5">
@@ -115,25 +148,37 @@
               <label class="control-label control-label-des">Положение:</label>
               <div class="dropdown" >
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                  {{widget.guiprops.bg.positionType}}
+                  {{ widget.guiprops.bg.positionType }}
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li role="presentation" ng-click="widget.guiprops.bg.positionType = item" ng-repeat="item in bgPositionTypesList"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+                <ul role="menu" class="dropdown-menu">
+                  <li
+                    role="presentation"
+                    *ngFor="let item of bgPositionTypesList"
+                    (click)="widget.guiprops.bg.positionType = item"
+                  >
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
-          <div ng-show="widget.guiprops['bg'].positionType === 'Замостить'" class="col-sm-6 row-subitem-padding padding-top-5">
+          <div *ngIf="widget.guiprops['bg'].positionType === 'Замостить'" class="col-sm-6 row-subitem-padding padding-top-5">
             <div>
               <label class="control-label control-label-des">Плитка:</label>
               <div class="dropdown" >
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                  {{widget.guiprops.bg.tiles}}
+                  {{ widget.guiprops.bg.tiles }}
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li role="presentation" ng-click="widget.guiprops.bg.tiles = item" ng-repeat="item in tilesList"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+                <ul role="menu" class="dropdown-menu">
+                  <li
+                    role="presentation"
+                    *ngFor="let item of tilesList"
+                    (click)="widget.guiprops.bg.tiles = item"
+                  >
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -141,16 +186,22 @@
         </div>
       </div>
 
-      <div ng-show="widget.guiprops['bg'].fillorImg === 'useVideo'">
+      <div *ngIf="widget.guiprops['bg'].fillorImg === 'useVideo'">
         <div class="imaget-item-video-settings m-b">
-          <div class="row row-subitem padding-top-5" tooltiped>
+          <div class="row row-subitem padding-top-5">
             <div class="col-sm-12 row-subitem-padding m-t-sm m-b-xs">
               <h4 class="h4-text-tit control-label-des helper-title-3level">Источник видео</h4>
             </div>
             <div class="col-sm-6 row-subitem-padding">
               <div class="form-group widget-selector">
                 <label class="non-bold">
-                  <input type="radio" class="radio radio-info radio-inline" ng-change="getVideoId(widget.guiprops.bg.video)" ng-model="widget.guiprops.bg.video.videoType" value="youtube">
+                  <input
+                    type="radio"
+                    class="radio radio-info radio-inline"
+                    (change)="getVideoId(widget.guiprops.bg.video)"
+                    [ngModel]="widget.guiprops.bg.video.videoType"
+                    value="youtube"
+                  />
                   Youtube
                 </label>
               </div>
@@ -158,49 +209,86 @@
             <div class="col-sm-6 row-subitem-padding">
               <div class="form-group widget-selector">
                 <label class="non-bold">
-                  <input type="radio" class="radio radio-info radio-inline" ng-change="getVideoId(widget.guiprops.bg.video)" ng-model="widget.guiprops.bg.video.videoType" value="vimeo">
+                  <input
+                    type="radio"
+                    class="radio radio-info radio-inline"
+                    (change)="getVideoId(widget.guiprops.bg.video)"
+                    [ngModel]="widget.guiprops.bg.video.videoType"
+                    value="vimeo"
+                  />
                   Vimeo
                 </label>
               </div>
             </div>
-            <button ng-click="getVideoId(widget.guiprops.bg.video)" class="btn btn-default refresh-video-element-btn" data-toggle="tooltip" data-container="body"  data-placement="top" title="" data-original-title="Обновить превью видео"><i class="fa fa-refresh"></i></button>
+            <button
+              (click)="getVideoId(widget.guiprops.bg.video)"
+              class="btn btn-default refresh-video-element-btn"
+              data-toggle="tooltip"
+              data-container="body"
+              data-placement="top"
+              title=""
+              data-original-title="Обновить превью видео"
+            >
+              <i class="fa fa-refresh"></i>
+            </button>
           </div>
           <div class="row row-subitem">
             <div class="col-sm-12 row-subitem-padding padding-top-5 widget-name-block-rel">
-              <input type="text" class="form-control widgetVideoUrl" ng-blur="getVideoId(widget.guiprops.bg.video)" ng-model="widget.guiprops.bg.video.videoUrl">
-              <span class="input-down-sm-lab small">{{(widget.guiprops.bg.video.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253'}}</span>
+              <input
+                type="text"
+                class="form-control widgetVideoUrl"
+                (blur)="getVideoId(widget.guiprops.bg.video)"
+                [(ngModel)]="widget.guiprops.bg.video.videoUrl"
+              />
+              <span class="input-down-sm-lab small">
+                {{ (widget.guiprops.bg.video.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253'}}
+              </span>
             </div>
           </div>
         </div>
       </div>
 
-      <div ng-show="((widget.guiprops['bg'].fillorImg === 'useVideo') || (widget.guiprops['bg'].fillorImg === 'useImg'))">
+      <div *ngIf="((widget.guiprops['bg'].fillorImg === 'useVideo') || (widget.guiprops['bg'].fillorImg === 'useImg'))">
         <div class="row row-subitem m-t-md">
           <div class="col-sm-12 row-subitem-padding padding-top-5">
-            <switch class="switch-xs" ng-model="widget.guiprops['bg'].mask.enable"></switch><label class="control-label switcher-label-xs control-label-des">Затемнить фон виджета маской</label>
+            <ui-switch
+              size="small"
+              [checked]="widget.guiprops['bg'].mask.enable"
+            ></ui-switch><label class="control-label switcher-label-xs control-label-des">Затемнить фон виджета маской</label>
           </div>
         </div>
-        <div ng-show="widget.guiprops['bg'].mask.enable == true">
+        <div *ngIf="widget.guiprops['bg'].mask.enable == true">
           <div class="row row-subitem">
             <div class="col-sm-6 row-subitem-padding padding-top-5">
               <label class="control-label control-label-colorpc control-label-des">Цвет маски:</label>
-              <color-picker ng-model="widget.guiprops['bg'].mask.color" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+              <input
+                [(colorPicker)]="widget.guiprops['bg'].mask.color"
+                [style.background]="widget.guiprops['bg'].mask.color"
+                [cpAlphaChannel]="'disabled'"
+                [cpOutputFormat]="'hex'"
+              />
             </div>
             <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
               <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
-              <div ui-slider min="0.00" max="1.00" step="0.1" use-decimals ng-model="widget.guiprops['bg'].mask.opacity"></div>
+              <ngx-slider [(value)]="widget.guiprops['bg'].mask.opacity" [options]="optionsOpacity"></ngx-slider>
             </div>
           </div>
           <div class="row row-subitem">
             <div class="col-sm-12 row-subitem-padding">
               <label class="control-label control-label-colorpc control-label-des">Расположение маски:</label>
-              <div class="dropdown" >
+              <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                  {{widget.guiprops.bg.mask.area}}
+                  {{ widget.guiprops.bg.mask.area }}
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <li role="presentation" ng-click="widget.guiprops.bg.mask.area = item" ng-repeat="item in maskTypeList"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+                  <li
+                    role="presentation"
+                    *ngFor="let item of maskTypeList"
+                    (click)="widget.guiprops.bg.mask.area = item"
+                  >
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -208,11 +296,16 @@
         </div>
       </div>
 
-      <div ng-show="widget.guiprops['bg'].fillorImg === 'fill'">
+      <div *ngIf="widget.guiprops['bg'].fillorImg === 'fill'">
         <div class="row row-subitem m-t-sm">
           <div class="col-sm-6 row-subitem-padding padding-top-5">
             <label class="control-label control-label-colorpc control-label-des">Цвет фона:</label>
-            <color-picker ng-model="widget.guiprops['bg'].colorBg" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+            <input
+              [(colorPicker)]="widget.guiprops['bg'].colorBg"
+              [style.background]="widget.guiprops['bg'].colorBg"
+              [cpAlphaChannel]="'disabled'"
+              [cpOutputFormat]="'hex'"
+            />
           </div>
         </div>
       </div>
@@ -222,7 +315,7 @@
           <h5 class="label-style-ic control-label-des">Прозрачность фона:</h5>
         </div>
         <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
-          <div ui-slider min="0.00" max="1.00" step="0.1" use-decimals ng-model="widget.guiprops['bg'].opacity"></div>
+          <ngx-slider [(value)]="widget.guiprops['bg'].opacity" [options]="optionsOpacity"></ngx-slider>
         </div>
       </div>
 
@@ -230,9 +323,12 @@
 
     <div class="image-or-video-settings-bl" id="elemScrNIVBl">
       <div class="col-lg-12 m-b-sm">
-        <switch ng-model="widget.guiprops.image.enable"></switch><label class="control-label switcher-label control-label-des">Добавить изображение, видео или отступ</label>
+        <ui-switch
+          [checked]="widget.guiprops.image.enable"
+        ></ui-switch><label class="control-label switcher-label control-label-des">Добавить изображение, видео или отступ</label>
       </div>
       <div class="clearfix"></div>
+
       <!-- Page rule item -->
       <div class="row row-subitem">
         <div class="col-sm-12 row-subitem-padding widget-small-text">
@@ -240,7 +336,7 @@
         </div>
       </div>
 
-      <div ng-show="widget.guiprops['image'].enable == true">
+      <div *ngIf="widget.guiprops['image'].enable == true">
         <div class="row row-subitem m-t-md">
           <div class="col-sm-12 row-subitem-padding">
             <h4 class="h4-text-tit control-label-des">Выберите, что вы хотите добавить:</h4>
@@ -250,7 +346,7 @@
             <div class="row-subitem-padding radio-group-item">
               <div class="form-group widget-selector">
                 <label class="non-bold">
-                  <input type="radio" class="radio radio-info radio-inline" ng-model="widget.guiprops['image'].typeBl" value="imageBl">
+                  <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops['image'].typeBl" value="imageBl">
                   Изображение
                 </label>
               </div>
@@ -258,7 +354,7 @@
             <div class="row-subitem-padding radio-group-item">
               <div class="form-group widget-selector">
                 <label class="non-bold">
-                  <input type="radio" class="radio radio-info radio-inline" ng-model="widget.guiprops['image'].typeBl" value="videoBl">
+                  <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops['image'].typeBl" value="videoBl">
                   Видео
                 </label>
               </div>
@@ -266,7 +362,7 @@
             <div class="row-subitem-padding">
               <div class="form-group widget-selector">
                 <label class="non-bold">
-                  <input type="radio" class="radio radio-info radio-inline" ng-model="widget.guiprops['image'].typeBl" value="paddingBl">
+                  <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops['image'].typeBl" value="paddingBl">
                   Отступ
                 </label>
               </div>
@@ -274,31 +370,32 @@
           </div>
         </div>
 
-        <div class="m-t-sm m-b" ng-show="widget.guiprops['image'].typeBl == 'imageBl'">
+        <div *ngIf="widget.guiprops['image'].typeBl == 'imageBl'" class="m-t-sm m-b">
           <div class="row row-subitem">
             <div class="col-sm-12 row-subitem-padding m-b-xs">
               <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка изображения</h4>
             </div>
             <div class="col-sm-12 row-subitem-padding">
-              <a ng-click="listFile('imageSingle')" class="widget-download-img"><i class="fa fa-image"></i> Установить или изменить изображение</a>
+              <a (click)="listFile('imageSingle')" class="widget-download-img"><i class="fa fa-image"></i> Установить или изменить изображение</a>
             </div>
           </div>
-          <%--<div class="row row-subitem m-t-sm m-b-sm widget-small-text-rec">--%>
-          <%--<div class="col-sm-12 row-subitem-padding">--%>
-            <%--<b class="control-label-des">Рекомендуемый размер изображения: <span class="img-size">80x150</span></b>--%>
-            <%--</div>--%>
-          <%--</div>--%>
         </div>
 
-        <div class="imaget-item-video-settings m-b" ng-show="widget.guiprops['image'].typeBl == 'videoBl'">
-          <div class="row row-subitem padding-top-5" tooltiped>
+        <div *ngIf="widget.guiprops['image'].typeBl == 'videoBl'" class="imaget-item-video-settings m-b">
+          <div class="row row-subitem padding-top-5">
             <div class="col-sm-12 row-subitem-padding m-t-sm m-b-xs">
               <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка видео</h4>
             </div>
             <div class="col-sm-6 row-subitem-padding">
               <div class="form-group widget-selector">
                 <label class="non-bold">
-                  <input type="radio" class="radio radio-info radio-inline" ng-change="getVideoId(widget.guiprops.image)" ng-model="widget.guiprops.image.videoType" value="youtube">
+                  <input
+                    type="radio"
+                    class="radio radio-info radio-inline"
+                    (change)="getVideoId(widget.guiprops.image)"
+                    [ngModel]="widget.guiprops.image.videoType"
+                    value="youtube"
+                  />
                   Youtube
                 </label>
               </div>
@@ -306,23 +403,49 @@
             <div class="col-sm-6 row-subitem-padding">
               <div class="form-group widget-selector">
                 <label class="non-bold">
-                  <input type="radio" class="radio radio-info radio-inline" ng-change="getVideoId(widget.guiprops.image)" ng-model="widget.guiprops.image.videoType" value="vimeo">
+                  <input
+                    type="radio"
+                    class="radio radio-info radio-inline"
+                    (change)="getVideoId(widget.guiprops.image)"
+                    [ngModel]="widget.guiprops.image.videoType"
+                    value="vimeo"
+                  />
                   Vimeo
                 </label>
               </div>
             </div>
-            <button ng-click="getVideoId(widget.guiprops.image)" class="btn btn-default refresh-video-element-btn" data-toggle="tooltip" data-container="body"  data-placement="top" title="" data-original-title="Обновить превью видео"><i class="fa fa-refresh"></i></button>
+            <button
+              (click)="getVideoId(widget.guiprops.image)"
+              class="btn btn-default refresh-video-element-btn"
+              data-toggle="tooltip"
+              data-container="body"
+              data-placement="top"
+              title=""
+              data-original-title="Обновить превью видео"
+            >
+              <i class="fa fa-refresh"></i>
+            </button>
           </div>
           <div class="row row-subitem">
             <div class="col-sm-12 row-subitem-padding padding-top-5 widget-name-block-rel">
-              <input type="text" class="form-control widgetVideoUrl" ng-blur="getVideoId(widget.guiprops.image)" ng-model="widget.guiprops.image.videoUrl">
-              <span class="input-down-sm-lab small">{{(widget.guiprops.image.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253'}}</span>
+              <input
+                type="text"
+                class="form-control widgetVideoUrl"
+                (blur)="getVideoId(widget.guiprops.image)"
+                [(ngModel)]="widget.guiprops.image.videoUrl"
+              />
+              <span class="input-down-sm-lab small">
+                {{( widget.guiprops.image.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253'}}
+              </span>
             </div>
           </div>
 
           <div class="row row-subitem m-t-md">
             <div class="col-sm-12 row-subitem-padding padding-top-5">
-              <switch class="switch-xs" ng-model="widget.guiprops.image.autoplay"></switch><label class="control-label switcher-label-xs control-label-des">Автоматически проигрывать видео</label>
+              <ui-switch
+                size="small"
+                [checked]="widget.guiprops.image.autoplay"
+              ></ui-switch><label class="control-label switcher-label-xs control-label-des">Автоматически проигрывать видео</label>
             </div>
           </div>
           <div class="row row-subitem">
@@ -342,82 +465,128 @@
               <label class="control-label control-label-des">Расположение блока:</label>
               <div class="dropdown" >
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                  {{widget.guiprops.image.place}}
+                  {{ widget.guiprops.image.place }}
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li role="presentation" ng-click="widget.guiprops.image.place = itemPlace" ng-repeat="itemPlace in placeImg"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemPlace}}</a></li>
+                <ul role="menu" class="dropdown-menu">
+                  <li
+                    role="presentation"
+                    *ngFor="let itemPlace of placeImg"
+                    (click)="widget.guiprops.image.place = itemPlace"
+                  >
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemPlace }}</a>
+                  </li>
                 </ul>
               </div>
             </div>
 
-            <div ng-show="(widget.guiprops['image'].place === 'Слева' || widget.guiprops['image'].place === 'Справа')" class="col-sm-6 row-subitem-padding padding-top-5">
+            <div
+              *ngIf="(widget.guiprops['image'].place === 'Слева' || widget.guiprops['image'].place === 'Справа')"
+              class="col-sm-6 row-subitem-padding padding-top-5"
+            >
               <div>
                 <label class="control-label control-label-des">Ширина блока:</label>
                 <div class="dropdown" >
                   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                    {{widget.guiprops.image.img_width}}
+                    {{ widget.guiprops.image.img_width }}
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li role="presentation" ng-click="widget.guiprops.image.img_width = item" ng-repeat="item in widgwidthBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+                    <li
+                      role="presentation"
+                      *ngFor="let item of widgwidthBtn"
+                      (click)="widget.guiprops.image.img_width = item"
+                    >
+                      <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                    </li>
                   </ul>
                 </div>
               </div>
-              <div class="margined-top-10" ng-show="widget.guiprops['image'].img_width === 'Собственная'">
-                <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="widget.guiprops['image'].img_widthpx">
+              <div *ngIf="widget.guiprops['image'].img_width === 'Собственная'" class="margined-top-10">
+                <input
+                  type="number"
+                  class="form-control form-control-font form-cntrl-55w"
+                  [(ngModel)]="widget.guiprops['image'].img_widthpx"
+                />
                 <label class="control-label">px <span>ширина блока</span></label>
               </div>
             </div>
 
-            <div ng-show="(widget.guiprops['image'].place === 'Сверху' || widget.guiprops['image'].place === 'Снизу')" class="col-sm-6 row-subitem-padding padding-top-5">
+            <div
+              *ngIf="(widget.guiprops['image'].place === 'Сверху' || widget.guiprops['image'].place === 'Снизу')"
+              class="col-sm-6 row-subitem-padding padding-top-5"
+            >
               <div>
                 <label class="control-label control-label-des">Высота блока:</label>
                 <div class="dropdown" >
                   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                    {{widget.guiprops.image.img_height}}
+                    {{ widget.guiprops.image.img_height }}
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li role="presentation" ng-click="widget.guiprops.image.img_height = item" ng-repeat="item in widgwidthBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+                    <li
+                      role="presentation"
+                      *ngFor="let item of widgwidthBtn"
+                      (click)="widget.guiprops.image.img_height = item"
+                    >
+                      <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                    </li>
                   </ul>
                 </div>
               </div>
-              <div class="margined-top-10" ng-show="widget.guiprops['image'].img_height === 'Собственная'">
-                <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="widget.guiprops['image'].img_heightpx">
+              <div *ngIf="widget.guiprops['image'].img_height === 'Собственная'" class="margined-top-10">
+                <input
+                  type="number"
+                  class="form-control form-control-font form-cntrl-55w"
+                  [(ngModel)]="widget.guiprops['image'].img_heightpx"
+                />
                 <label class="control-label">px <span>высота блока</span></label>
               </div>
             </div>
           </div>
 
-          <div class="row row-subitem" ng-show="widget.guiprops['image'].typeBl !== 'paddingBl'">
+          <div class="row row-subitem" *ngIf="widget.guiprops['image'].typeBl !== 'paddingBl'">
             <div class="col-sm-12 row-subitem-padding m-t-sm">
-              <label ng-show="widget.guiprops['image'].typeBl == 'imageBl'" class="control-label control-label-des">Габариты изображения:</label>
-              <label ng-show="widget.guiprops['image'].typeBl == 'videoBl'" class="control-label control-label-des">Габариты видео:</label>
+              <label *ngIf="widget.guiprops['image'].typeBl == 'imageBl'" class="control-label control-label-des">Габариты изображения:</label>
+              <label *ngIf="widget.guiprops['image'].typeBl == 'videoBl'" class="control-label control-label-des">Габариты видео:</label>
               <div class="dropdown" >
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                  {{widget.guiprops.image.img_item_type}}
+                  {{ widget.guiprops.image.img_item_type }}
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li role="presentation" ng-click="widget.guiprops.image.img_item_type = item" ng-repeat="item in imageItemsType"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+                <ul role="menu" class="dropdown-menu">
+                  <li
+                    role="presentation"
+                    *ngFor="let item of imageItemsType"
+                    (click)="widget.guiprops.image.img_item_type = item"
+                  >
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
 
-          <div ng-show="widget.guiprops['image'].typeBl !== 'paddingBl'">
-            <div ng-show="widget.guiprops['image'].img_item_type === 'Установить произвольные габариты'">
+          <div *ngIf="widget.guiprops['image'].typeBl !== 'paddingBl'">
+            <div *ngIf="widget.guiprops['image'].img_item_type === 'Установить произвольные габариты'">
               <div class="row row-subitem">
                 <div class="col-sm-6 row-subitem-padding padding-top-5">
                   <div class="padding-top-5 m-t-sm">
-                    <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="widget.guiprops.image.img_item_widthpx">
+                    <input
+                      type="number"
+                      class="form-control form-control-font form-cntrl-55w"
+                      [(ngModel)]="widget.guiprops.image.img_item_widthpx"
+                    />
                     <label class="control-label">px <span>ширина</span></label>
                   </div>
                 </div>
                 <div class="col-sm-6 row-subitem-padding padding-top-5">
                   <div class="padding-top-5 m-t-sm">
-                    <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="widget.guiprops.image.img_item_heightpx">
+                    <input
+                      type="number"
+                      class="form-control form-control-font form-cntrl-55w"
+                      [(ngModel)]="widget.guiprops.image.img_item_heightpx"
+                    />
                     <label class="control-label">px <span>высота</span></label>
                   </div>
                 </div>
@@ -428,11 +597,17 @@
                   <label class="control-label control-label-des">Выравнивание по вертикали:</label>
                   <div class="dropdown" >
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                      {{widget.guiprops.image.img_item_align}}
+                      {{ widget.guiprops.image.img_item_align }}
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li role="presentation" ng-click="widget.guiprops.image.img_item_align = item" ng-repeat="item in imageItemsAlign"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+                      <li
+                        role="presentation"
+                        *ngFor="let item of imageItemsAlign"
+                        (click)="widget.guiprops.image.img_item_align = item"
+                      >
+                        <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -451,52 +626,80 @@
 
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <switch class="switch-xs" ng-model="widget.guiprops['bg'].border.enable"></switch><label class="control-label switcher-label-xs control-label-des">Добавить рамку</label>
+        <ui-switch
+          size="small"
+          [checked]="widget.guiprops['bg'].border.enable"
+        ></ui-switch><label class="control-label switcher-label-xs control-label-des">Добавить рамку</label>
       </div>
     </div>
-    <div ng-show="widget.guiprops['bg'].border.enable == true">
+    <div *ngIf="widget.guiprops['bg'].border.enable == true">
       <div class="row row-subitem">
         <div class="col-sm-6 row-subitem-padding padding-top-5">
           <label class="control-label control-label-colorpc control-label-des">Цвет рамки:</label>
-          <color-picker ng-model="widget.guiprops['bg'].border.color" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+          <input
+            [(colorPicker)]="widget.guiprops['bg'].border.color"
+            [style.background]="widget.guiprops['bg'].border.color"
+            [cpAlphaChannel]="'disabled'"
+            [cpOutputFormat]="'hex'"
+          />
         </div>
         <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
           <label class="control-label control-label-colorpc control-label-des">Толщина:</label>
-          <div ui-slider min="0.00" max="10.00" step="1" use-decimals ng-model="widget.guiprops['bg'].border.thickness"></div>
+          <ngx-slider [(value)]="widget.guiprops['bg'].border.thickness" [options]="optionsThickness"></ngx-slider>
         </div>
       </div>
     </div>
 
     <div class="row row-subitem m-t-md">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <switch class="switch-xs" ng-model="widget.guiprops['bg'].shadow.enable"></switch><label class="control-label switcher-label-xs control-label-des">Добавить тень</label>
+        <ui-switch
+          size="small"
+          [checked]="widget.guiprops['bg'].shadow.enable"
+        ></ui-switch><label class="control-label switcher-label-xs control-label-des">Добавить тень</label>
       </div>
     </div>
-    <div ng-show="widget.guiprops['bg'].shadow.enable == true">
+    <div *ngIf="widget.guiprops['bg'].shadow.enable == true">
       <div class="row row-subitem">
         <div class="col-sm-6 row-subitem-padding padding-top-5">
           <label class="control-label control-label-colorpc control-label-des">Цвет тени:</label>
-          <color-picker ng-model="widget.guiprops['bg'].shadow.color" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+          <input
+            [(colorPicker)]="widget.guiprops['bg'].shadow.color"
+            [style.background]="widget.guiprops['bg'].shadow.color"
+            [cpAlphaChannel]="'disabled'"
+            [cpOutputFormat]="'hex'"
+          />
         </div>
         <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
           <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
-          <div ui-slider min="0.00" max="1.00" step="0.1" use-decimals ng-model="widget.guiprops['bg'].shadow.opacity"></div>
+          <ngx-slider [(value)]="widget.guiprops['bg'].shadow.opacity" [options]="optionsOpacity"></ngx-slider>
         </div>
       </div>
       <div class="row row-subitem m-t-xs">
         <div class="col-sm-6 row-subitem-padding padding-top-5">
           <label class="control-label control-label-des">Сдвиг по горизонтали:</label>
-          <input type="number" class="form-control form-control-font form-control-block form-cntrl-45w" ng-model="widget.guiprops['bg'].shadow.horiz">
+          <input
+            type="number"
+            class="form-control form-control-font form-control-block form-cntrl-45w"
+            [(ngModel)]="widget.guiprops['bg'].shadow.horiz"
+          />
         </div>
         <div class="col-sm-6 row-subitem-padding padding-top-5">
           <label class="control-label control-label-des">Сдвиг по вертикали:</label>
-          <input type="number" class="form-control form-control-font form-control-block form-cntrl-45w" ng-model="widget.guiprops['bg'].shadow.vertical">
+          <input
+            type="number"
+            class="form-control form-control-font form-control-block form-cntrl-45w"
+            [(ngModel)]="widget.guiprops['bg'].shadow.vertical"
+          />
         </div>
       </div>
       <div class="row row-subitem m-t-xs">
         <div class="col-sm-6 row-subitem-padding padding-top-5">
           <label class="control-label control-label-des">Резкость:</label>
-          <input type="number" class="form-control form-control-font form-control-block form-cntrl-45w" ng-model="widget.guiprops['bg'].shadow.blur">
+          <input
+            type="number"
+            class="form-control form-control-font form-control-block form-cntrl-45w"
+            [(ngModel)]="widget.guiprops['bg'].shadow.blur"
+          />
         </div>
       </div>
     </div>
@@ -506,7 +709,7 @@
         <h5 class="label-style-ic control-label-des">Углы виджета:</h5>
       </div>
       <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
-        <div ui-slider min="0" max="50" step="1" use-decimals ng-model="widget.guiprops['bg'].borderRadius"></div>
+        <ngx-slider [(value)]="widget.guiprops['bg'].borderRadius" [options]="optionsRound"></ngx-slider>
         <label class="control-label control-label-ui">Закругление углов в виджете</label>
       </div>
     </div>
