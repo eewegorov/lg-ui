@@ -1,29 +1,42 @@
-<div id="thankWidget" ng-class="(widget.guiprops['bg'].fillorImg === 'useImg')?'block-widget-bg':''"
-     class="hide block-widget-show block-thank"
-     ng-style="{'background': bgStyle, 'border': widget.guiprops['bg'].border.style, 'border-radius':widget.guiprops['bg'].borderRadius+'px', 'box-shadow': widget.guiprops['bg'].shadow.style}">
+<div
+  id="thankWidget"
+  class="hide block-widget-show block-thank"
+  [ngClass]="(widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
+  [ngStyle]="{'background': bgStyle, 'border': widget.guiprops['bg'].border.style, 'border-radius': widget.guiprops['bg'].borderRadius + 'px', 'box-shadow': widget.guiprops['bg'].shadow.style}"
+>
   <div class="thank-text-cent">
     <div class="editorFontLine">
-      <div class="element-to-append-summernote click-edit-cl title-main" ng-style="{'font-size':widget.guiprops['title'].fontSize+'px', 'font-family':widget.guiprops['title'].font.fontFamily}">
-        <summernote airMode ng-model="widget.guiprops['thank'].textSummer" config="optionsSummernote"></summernote>
+      <div
+        class="element-to-append-summernote click-edit-cl title-main"
+        [ngStyle]="{'font-size': widget.guiprops['title'].fontSize + 'px', 'font-family': widget.guiprops['title'].font.fontFamily}"
+      >
+        <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops['thank'].textSummer"></div>
       </div>
-      <div class="element-to-append-summernote click-edit-cl description" style="font-size:{{widget.guiprops['desc'].fontSize}}px;font-family:{{widget.guiprops['desc'].font.fontFamily}}">
-        <summernote airMode ng-model="widget.guiprops['thank2'].textSummer" config="optionsSummernote"></summernote>
+      <div
+        class="element-to-append-summernote click-edit-cl description"
+        [ngStyle]="{'font-size': widget.guiprops['desc'].fontSize + 'px', 'font-family': widget.guiprops['desc'].font.fontFamily}"
+      >
+        <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops['thank2'].textSummer"></div>
       </div>
     </div>
   </div>
 
-  <div class="absolute-bg-content"
-       ng-class="(widget.guiprops['bg'].fillorImg === 'useImg')?'block-widget-bg':''"
-       ng-style="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity}">
-    <div ng-show="widget.guiprops.bg.fillorImg === 'useVideo'" class="video-bg video-bg-thank">
-      <div ng-class="setVideoBGThankStyle()" ng-show="widget.guiprops.bg.video.videoId">
-        <iframe style="" id="idBgVideoFrameThank" src="" frameborder="0"></iframe>
+  <div
+    class="absolute-bg-content"
+    [ngClass]="(widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
+    [ngStyle]="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity}"
+  >
+    <div *ngIf="widget.guiprops.bg.fillorImg === 'useVideo'" class="video-bg video-bg-thank">
+      <div *ngIf="widget.guiprops.bg.video.videoId" [ngClass]="setVideoBGThankStyle()">
+        <iframe id="idBgVideoFrameThank" style="" src="" frameborder="0"></iframe>
       </div>
-      <img ng-show="!widget.guiprops.bg.video.videoId" class="item-image-video-block" src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
+      <img *ngIf="!widget.guiprops.bg.video.videoId" class="item-image-video-block" src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
     </div>
   </div>
 
-  <div id="globalMask"
-       ng-show="widget.guiprops.bg.mask.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo'))"
-       ng-style="{'background':widget.guiprops.bg.mask.rgbaColor, 'border-radius':widget.guiprops['bg'].borderRadius+'px'}"></div>
+  <div
+    *ngIf="widget.guiprops.bg.mask.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo'))"
+    id="globalMask"
+    [ngStyle]="{'background': widget.guiprops.bg.mask.rgbaColor, 'border-radius': widget.guiprops['bg'].borderRadius + 'px'}"
+  ></div>
 </div>

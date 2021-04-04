@@ -1,14 +1,23 @@
 <div class="border-item">
   <div>
     <div class="col-lg-12">
-      <h4 class="h4-element-title">Видео &#35;{{${modelName}.counter}} <a ng-click="removeElementFromElementsList($index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a></h4>
+      <h4 class="h4-element-title">
+        Видео &#35;{{${modelName}.counter}} <a (click)="removeElementFromElementsList($index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
+      </h4>
     </div>
     <div class="clearfix"></div>
-    <div class="row row-subitem padding-top-5" tooltiped>
+    <div class="row row-subitem padding-top-5">
       <div class="col-sm-6 row-subitem-padding">
         <div class="form-group widget-selector">
           <label class="non-bold">
-            <input type="radio" class="radio radio-info radio-inline" ng-change="getVideoId(${modelName})" ng-model="${modelName}.videoType" value="youtube">
+            <input
+              type="radio"
+              class="radio radio-info radio-inline"
+              (change)="getVideoId(${modelName})"
+              [ngModel]="${modelName}.videoType"
+              value="youtube"
+              name="radio"
+            >
             Youtube
           </label>
         </div>
@@ -16,17 +25,36 @@
       <div class="col-sm-6 row-subitem-padding">
         <div class="form-group widget-selector">
           <label class="non-bold">
-            <input type="radio" class="radio radio-info radio-inline" ng-change="getVideoId(${modelName})" ng-model="${modelName}.videoType" value="vimeo">
+            <input
+              type="radio"
+              class="radio radio-info radio-inline"
+              (change)="getVideoId(${modelName})"
+              [ngModel]="${modelName}.videoType"
+              value="vimeo"
+              name="radio"
+            >
             Vimeo
           </label>
         </div>
       </div>
-      <button ng-click="getVideoId(${modelName})" class="btn btn-default refresh-video-element-btn" data-toggle="tooltip" data-container="body"  data-placement="top" title="" data-original-title="Обновить превью видео"><i class="fa fa-refresh"></i></button>
+      <button
+        (click)="getVideoId(${modelName})"
+        class="btn btn-default refresh-video-element-btn"
+        data-toggle="tooltip"
+        data-container="body"
+        data-placement="top"
+        title=""
+        data-original-title="Обновить превью видео"
+      >
+        <i class="fa fa-refresh"></i>
+      </button>
     </div>
     <div class="row row-subitem">
       <div class="col-sm-12 row-subitem-padding padding-top-5 widget-name-block-rel">
-        <input type="text" class="form-control widgetVideoUrl" ng-blur="getVideoId(${modelName})" ng-model="${modelName}.videoUrl">
-        <span class="input-down-sm-lab small">{{(${modelName}.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253'}}</span>
+        <input type="text" class="form-control widgetVideoUrl" (blur)="getVideoId(${modelName})" [(ngModel)]="${modelName}.videoUrl">
+        <span class="input-down-sm-lab small">
+          {{(modelName.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253'}}
+        </span>
       </div>
     </div>
     <div class="row row-subitem m-t-sm">
@@ -34,42 +62,70 @@
         <label class="control-label control-label-des">Ширина видео:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{${modelName}.width_type}}
+            {{ ${modelName}.width_type }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="changeWidthTypeOfVideo(${modelName}, itemVisual)" ng-click="${modelName}.width_type = itemVisual" ng-repeat="itemVisual in widthHrType"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+            <li
+              role="presentation"
+              *ngFor="let itemVisual of widthHrType"
+              (click)="changeWidthTypeOfVideo(${modelName}, itemVisual)"
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+            </li>
           </ul>
         </div>
       </div>
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <label class="control-label control-label-des">Ориентация:</label>
         <div class="dropdown" >
-          <button class="btn btn-default dropdown-toggle" ng-disabled="${modelName}.width_type === 'От края до края'" type="button" data-toggle="dropdown" aria-expanded="true">
+          <button
+            type="button"
+            [disabled]="${modelName}.width_type === 'От края до края'"
+            class="btn btn-default dropdown-toggle"
+            data-toggle="dropdown"
+            aria-expanded="true"
+          >
             {{${modelName}.position}}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="${modelName}.position = itemVisual" ng-repeat="itemVisual in floatBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+            <li
+              role="presentation"
+              *ngFor="let itemVisual of floatBtn"
+              (click)="${modelName}.position = itemVisual"
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
-    <div ng-show="${modelName}.width_type === 'Собственная'">
+    <div *ngIf="${modelName}.width_type === 'Собственная'">
       <div class="col-sm-12 padding-top-5 margined-top-10">
-        <input type="number" class="form-control form-control-font form-cntrl-55w" ng-change="goToResize(${modelName})" ng-model="${modelName}.widthpx">
+        <input
+          type="number"
+          class="form-control form-control-font form-cntrl-55w"
+          (change)="goToResize(${modelName})"
+          [ngModel]="${modelName}.widthpx"
+        >
         <label class="control-label">px <span>ширина видео</span></label>
       </div>
       <div class="clearfix"></div>
     </div>
     <div class="row row-subitem m-t-md">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <switch class="switch-xs" ng-model="${modelName}.autoplay"></switch><label class="control-label switcher-label-xs control-label-des">Автоматически проигрывать видео</label>
+        <ui-switch
+          size="small"
+          [checked]="${modelName}.autoplay"
+        ></ui-switch><label class="control-label switcher-label-xs control-label-des">Автоматически проигрывать видео</label>
       </div>
     </div>
     <div class="row row-subitem">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <div class="sm-video-text sm-video-text-act widget-small-text">Видео будет автоматически воспроизводиться при показе виджета.</div>
+        <div class="sm-video-text sm-video-text-act widget-small-text">
+          Видео будет автоматически воспроизводиться при показе виджета.
+        </div>
       </div>
     </div>
   </div>
