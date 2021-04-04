@@ -597,9 +597,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     this.addElementModalHide();
   }
 
-  public addTitleElement() {
+  public addTextElement() {
     const textElementToAdd = {
-      name: 'title-element',
+      name: 'text-element',
       textSummer: '<p>Вы можете редактировать этот текст. Если вы хотите<br>изменить цвет, позиционирование или стиль текста,<br>то выделите фрагмент для появления окна редактора.<br>Размер и шрифт изменяются слева в блоке настроек элемента.</p>',
       font: this.systemFonts[0],
       fontType: 'systemFont',

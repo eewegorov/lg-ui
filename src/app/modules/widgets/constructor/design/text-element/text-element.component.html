@@ -1,0 +1,77 @@
+<div class="border-item">
+  <div>
+    <div class="col-lg-12">
+      <h4 class="h4-element-title">
+        Текст &#35;{{item.counter}} <a (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
+      </h4>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row row-subitem padding-top-5">
+      <div class="col-sm-12 row-subitem-padding">
+        <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
+      </div>
+      <div class="col-sm-12 row-subitem-padding">
+        <input [id]="'font-picker' + index" type="text">
+      </div>
+    </div>
+    <div class="row row-subitem">
+      <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+        <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
+        <label class="control-label">px <span>размер текста</span></label>
+      </div>
+    </div>
+    <div class="row row-subitem m-t-md">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <ui-switch
+          size="small"
+          [checked]="item.textShadow.enable"
+        ></ui-switch><label class="control-label switcher-label-xs control-label-des">Добавить тень</label>
+      </div>
+    </div>
+    <div *ngIf="item.textShadow.enable == true">
+      <div class="row row-subitem">
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-colorpc control-label-des">Цвет тени:</label>
+          <input
+            [(colorPicker)]="item.textShadow.color"
+            [style.background]="item.textShadow.color"
+            [cpAlphaChannel]="'disabled'"
+            [cpOutputFormat]="'hex'"
+          />
+        </div>
+        <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+          <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
+          <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod" [options]="optionsOpacity"></ngx-slider>
+        </div>
+      </div>
+      <div class="row row-subitem m-t-xs">
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-des">Сдвиг по горизонтали:</label>
+          <input
+            type="number"
+            class="form-control form-control-font form-control-block form-cntrl-45w"
+            [(ngModel)]="item.textShadow.horiz"
+          />
+        </div>
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-des">Сдвиг по вертикали:</label>
+          <input
+            type="number"
+            class="form-control form-control-font form-control-block form-cntrl-45w"
+            [(ngModel)]="item.textShadow.vertical"
+          />
+        </div>
+      </div>
+      <div class="row row-subitem m-t-xs">
+        <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <label class="control-label control-label-des">Резкость:</label>
+          <input
+            type="number"
+            class="form-control form-control-font form-control-block form-cntrl-45w"
+            [(ngModel)]="item.textShadow.blur"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

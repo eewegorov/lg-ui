@@ -95,7 +95,7 @@
               <div
                 class="newElementItem"
                 (click)="addFormExtButtonElement(disElementOrNotBtn())"
-                [ngClass]="(disElementOrNotBtn())?'disable-new-element-btn':''"
+                [ngClass]="(disElementOrNotBtn()) ? 'disable-new-element-btn' : ''"
               >
                 <div class="element-form-new-icon"></div>
                 <span>Форма+кнопки (новый)</span>
@@ -105,7 +105,7 @@
               <div
                 class="newElementItem"
                 (click)="addFormButtonElement(disElementOrNotBtn())"
-                [ngClass]="(disElementOrNotBtn())?'disable-new-element-btn':''"
+                [ngClass]="(disElementOrNotBtn()) ? 'disable-new-element-btn' : ''"
               >
                 <div class="element-form-icon"></div>
                 <span>Форма (устаревший)</span>
@@ -115,7 +115,7 @@
               <div
                 class="newElementItem"
                 (click)="addCloseLinkElement(disElementOrNotBtnCloseLink())"
-                [ngClass]="(disElementOrNotBtnCloseLink())?'disable-new-element-btn':''"
+                [ngClass]="(disElementOrNotBtnCloseLink()) ? 'disable-new-element-btn' : ''"
               >
                 <div class="element-dismiss-icon"></div>
                 <span class="m-r-n m-l-n">Ссылка/Кнопка закрытия</span>
@@ -125,7 +125,7 @@
               <div
                 class="newElementItem"
                 (click)="addButtonElement(disElementOrNotBtn())"
-                [ngClass]="(disElementOrNotBtn())?'disable-new-element-btn':''"
+                [ngClass]="(disElementOrNotBtn()) ? 'disable-new-element-btn' : ''"
               >
                 <div class="element-button-icon"></div>
                 <span>Кнопка</span>
@@ -133,7 +133,7 @@
             </div>
 
             <div class="row-panel-item small-pdn">
-              <div class="newElementItem" (click)="addTitleElement()">
+              <div class="newElementItem" (click)="addTextElement()">
                 <div class="element-text-icon"></div>
                 <span>Текст</span>
               </div>
@@ -142,7 +142,7 @@
               <div
                 class="newElementItem"
                 (click)="addSocialElement(disElementOrNotBtnSocial())"
-                [ngClass]="(disElementOrNotBtnSocial())?'disable-new-element-btn':''"
+                [ngClass]="(disElementOrNotBtnSocial()) ? 'disable-new-element-btn' : ''"
               >
                 <div class="element-social-icon"></div>
                 <span>Социальные кнопки</span>

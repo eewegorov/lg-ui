@@ -105,12 +105,13 @@
           </div>
         </div>
 
-        <div *ngIf="item.name == 'title-element'" class="social-block-pd">
+        <div *ngIf="item.name == 'text-element'" class="social-block-pd">
           <div class="editorFontLine">
             <div
               class="title-main click-edit-cl"
               [ngClass]="(item.textShadow.enable) ? '' : 'no-text-shadow-imp'"
-              [ngStyle]="{'font-size': item.fontSize + 'px', 'font-family': item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}">
+              [ngStyle]="{'font-size': item.fontSize + 'px', 'font-family': item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}"
+            >
               <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="item.textSummer"></div>
             </div>
           </div>
@@ -118,7 +119,7 @@
 
         <div *ngIf="item.name == 'split-element'" class="social-block-pd">
           <div class="split-element-block" [ngClass]="hrPosSel(item)">
-            <hr class="style{{item.type}}" [ngStyle]="{'border-color':item.color, 'width': item.widthpx + 'px'}">
+            <hr class="style{{item.type}}" [ngStyle]="{'border-color': item.color, 'width': item.widthpx + 'px'}">
           </div>
         </div>
 

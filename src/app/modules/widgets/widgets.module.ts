@@ -51,7 +51,7 @@ import { RedirectElementComponent } from './constructor/design/redirect-element/
 import { SocialElementComponent } from './constructor/design/social-element/social-element.component';
 import { SplitElementComponent } from './constructor/design/split-element/split-element.component';
 import { ThankElementComponent } from './constructor/design/thank-element/thank-element.component';
-import { TitleElementComponent } from './constructor/design/title-element/title-element.component';
+import { TextElementComponent } from './constructor/design/text-element/text-element.component';
 import { VideoElementComponent } from './constructor/design/video-element/video-element.component';
 import { VisualElementComponent } from './constructor/design/visual-element/visual-element.component';
 import { CouponCallbackComponent } from './constructor/design/coupon-callback/coupon-callback.component';
@@ -98,7 +98,7 @@ import { NgxSummernoteModule } from 'ngx-summernote';
     SocialElementComponent,
     SplitElementComponent,
     ThankElementComponent,
-    TitleElementComponent,
+    TextElementComponent,
     VideoElementComponent,
     VisualElementComponent,
     CouponCallbackComponent,

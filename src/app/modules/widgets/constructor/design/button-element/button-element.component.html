@@ -181,7 +181,7 @@
             <label class="control-label control-label-colorpc control-label-des">Цвет подложки:</label>
             <input
               [(colorPicker)]="widget.guiprops['form'].colorPod.color"
-              [style.background]="widget.guiprops['button'].colorBtn"
+              [style.background]="widget.guiprops['form'].colorPod.color"
               [cpAlphaChannel]="'disabled'"
               [cpOutputFormat]="'hex'"
             />
