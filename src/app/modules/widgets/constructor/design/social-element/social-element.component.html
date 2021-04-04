@@ -1,7 +1,9 @@
 <div class="border-item">
   <div>
     <div class="col-lg-12">
-      <h4 class="h4-element-title">Социальные кнопки <a ng-click="removeElementFromElementsList($index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a></h4>
+      <h4 class="h4-element-title">
+        Социальные кнопки <a (click)="removeElementFromElementsList($index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
+      </h4>
     </div>
     <div class="clearfix"></div>
     <div class="row row-subitem padding-top-5">
@@ -12,79 +14,169 @@
     <div class="row row-subitem padding-top-5 social-block-choose">
       <div class="col-sm-4 row-subitem-padding">
         <label class="non-bold">
-          <checkbox ng-true-value="vkontakte" ng-model="widget.guiprops['social'].vkontakte" ng-change="setSocialBtn(widget.guiprops['social'].vkontakte, 'vkontakte')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].vkontakte === 'vkontakte'"
+            (change)="setSocialBtn(widget.guiprops['social'].vkontakte, 'vkontakte')"
+          />
           Vkontakte
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="facebook" ng-model="widget.guiprops['social'].facebook" ng-change="setSocialBtn(widget.guiprops['social'].facebook, 'facebook')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].facebook === 'facebook'"
+            (change)="setSocialBtn(widget.guiprops['social'].facebook, 'facebook')"
+          />
           Facebook
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="googleplus" ng-model="widget.guiprops['social'].googleplus" ng-change="setSocialBtn(widget.guiprops['social'].googleplus, 'googleplus')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].googleplus === 'googleplus'"
+            (change)="setSocialBtn(widget.guiprops['social'].googleplus, 'googleplus')"
+          />
           Google plus
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="digg" ng-model="widget.guiprops['social'].digg" ng-change="setSocialBtn(widget.guiprops['social'].digg, 'digg')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].digg === 'digg'"
+            (change)="setSocialBtn(widget.guiprops['social'].digg, 'digg')"
+          />
           Digg
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="pinterest" ng-model="widget.guiprops['social'].pinterest" ng-change="setSocialBtn(widget.guiprops['social'].pinterest, 'pinterest')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].pinterest === 'pinterest'"
+            (change)="setSocialBtn(widget.guiprops['social'].pinterest, 'pinterest')"
+          />
           Pinterest
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="tumblr" ng-model="widget.guiprops['social'].tumblr" ng-change="setSocialBtn(widget.guiprops['social'].tumblr, 'tumblr')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].tumblr === 'tumblr'"
+            (change)="setSocialBtn(widget.guiprops['social'].tumblr, 'tumblr')"
+          />
           Tumblr
         </label>
       </div>
       <div class="col-sm-4 row-subitem-padding">
         <label class="non-bold">
-          <checkbox ng-true-value="twitter" ng-model="widget.guiprops['social'].twitter" ng-change="setSocialBtn(widget.guiprops['social'].twitter, 'twitter')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].twitter === 'twitter'"
+            (change)="setSocialBtn(widget.guiprops['social'].twitter, 'twitter')"
+          />
           Twitter
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="mail" ng-model="widget.guiprops['social'].mail" ng-change="setSocialBtn(widget.guiprops['social'].mail, 'mail')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].mail === 'mail'"
+            (change)="setSocialBtn(widget.guiprops['social'].mail, 'mail')"
+          />
           Mail
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="buffer" ng-model="widget.guiprops['social'].buffer" ng-change="setSocialBtn(widget.guiprops['social'].buffer, 'buffer')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].buffer === 'buffer'"
+            (change)="setSocialBtn(widget.guiprops['social'].buffer, 'buffer')"
+          />
           Buffer
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="pocket" ng-model="widget.guiprops['social'].pocket" ng-change="setSocialBtn(widget.guiprops['social'].pocket, 'pocket')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].pocket === 'pocket'"
+            (change)="setSocialBtn(widget.guiprops['social'].pocket, 'pocket')"
+          />
           Pocket
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="xing" ng-model="widget.guiprops['social'].xing" ng-change="setSocialBtn(widget.guiprops['social'].xing, 'xing')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].xing === 'xing'"
+            (change)="setSocialBtn(widget.guiprops['social'].xing, 'xing')"
+          />
           Xing
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="print" ng-model="widget.guiprops['social'].print" ng-change="setSocialBtn(widget.guiprops['social'].print, 'print')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].print === 'print'"
+            (change)="setSocialBtn(widget.guiprops['social'].print, 'print')"
+          />
           Print
         </label>
       </div>
       <div class="col-sm-4 row-subitem-padding">
         <label class="non-bold">
-          <checkbox ng-true-value="linkedin" ng-model="widget.guiprops['social'].linkedin" ng-change="setSocialBtn(widget.guiprops['social'].linkedin, 'linkedin')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].linkedin === 'linkedin'"
+            (change)="setSocialBtn(widget.guiprops['social'].linkedin, 'linkedin')"
+          />
           Linkedin
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="reddit" ng-model="widget.guiprops['social'].reddit" ng-change="setSocialBtn(widget.guiprops['social'].reddit, 'reddit')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].reddit === 'reddit'"
+            (change)="setSocialBtn(widget.guiprops['social'].reddit, 'reddit')"
+          />
           Reddit
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="stumbleupon" ng-model="widget.guiprops['social'].stumbleupon" ng-change="setSocialBtn(widget.guiprops['social'].stumbleupon, 'stumbleupon')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].stumbleupon === 'stumbleupon'"
+            (change)="setSocialBtn(widget.guiprops['social'].stumbleupon, 'stumbleupon')"
+          />
           Stumbleupon
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="odnoklassniki" ng-model="widget.guiprops['social'].odnoklassniki" ng-change="setSocialBtn(widget.guiprops['social'].odnoklassniki, 'odnoklassniki')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].odnoklassniki === 'odnoklassniki'"
+            (change)="setSocialBtn(widget.guiprops['social'].odnoklassniki, 'odnoklassniki')"
+          />
           Odnoklassniki
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="blogger" ng-model="widget.guiprops['social'].blogger" ng-change="setSocialBtn(widget.guiprops['social'].blogger, 'blogger')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].blogger === 'blogger'"
+            (change)="setSocialBtn(widget.guiprops['social'].blogger, 'blogger')"
+          />
           Blogger
         </label>
         <label class="non-bold">
-          <checkbox ng-true-value="yummly" ng-model="widget.guiprops['social'].yummly" ng-change="setSocialBtn(widget.guiprops['social'].yummly, 'yummly')" class="checkbox-green-btn"></checkbox>
+          <input
+            type="checkbox"
+            class="checkbox-green-btn"
+            [checked]="widget.guiprops['social'].yummly === 'yummly'"
+            (change)="setSocialBtn(widget.guiprops['social'].yummly, 'yummly')"
+          />
           Yummly
         </label>
       </div>
@@ -94,13 +186,25 @@
       <div class="col-sm-12 row-subitem-padding padding-top-5">
         <label class="control-label control-label-des">Дизайн кнопок:</label>
         <div class="social-variable-bl">
-          <div class="social-var-el social-var-1" ng-class="(widget.guiprops['social'].type === 'style-1')? 'active': ''" ng-click="widget.guiprops['social'].type = 'style-1'">
+          <div
+            class="social-var-el social-var-1"
+            [ngClass]="(widget.guiprops['social'].type === 'style-1') ? 'active' : ''"
+            (click)="widget.guiprops['social'].type = 'style-1'"
+          >
             <div class="social-var-fill"></div>
           </div>
-          <div class="social-var-el social-var-2" ng-class="(widget.guiprops['social'].type === 'style-2')? 'active': ''" ng-click="widget.guiprops['social'].type = 'style-2'">
+          <div
+            class="social-var-el social-var-2"
+            [ngClass]="(widget.guiprops['social'].type === 'style-2') ? 'active' : ''"
+            (click)="widget.guiprops['social'].type = 'style-2'"
+          >
             <div class="social-var-fill"></div>
           </div>
-          <div class="social-var-el social-var-3" ng-class="(widget.guiprops['social'].type === 'style-3')? 'active': ''" ng-click="widget.guiprops['social'].type = 'style-3'">
+          <div
+            class="social-var-el social-var-3"
+            [ngClass]="(widget.guiprops['social'].type === 'style-3') ? 'active' : ''"
+            (click)="widget.guiprops['social'].type = 'style-3'"
+          >
             <div class="social-var-fill"></div>
           </div>
         </div>
@@ -112,11 +216,13 @@
         <label class="control-label control-label-des">Выравнивание:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{widget.guiprops['social'].position}}
+            {{ widget.guiprops['social'].position }}
             <span class="caret"></span>
           </button>
-          <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="widget.guiprops['social'].position = itemVisual" ng-repeat="itemVisual in floatBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+          <ul role="menu" class="dropdown-menu">
+            <li role="presentation" *ngFor="let itemVisual of floatBtn" (click)="widget.guiprops['social'].position = itemVisual">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -131,7 +237,7 @@
       <div class="col-sm-6 row-subitem-padding">
         <div class="form-group widget-selector">
           <label class="non-bold">
-            <input type="radio" class="radio radio-info radio-inline" ng-model="widget.guiprops['social'].linkForShare" value="site">
+            <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops['social'].linkForShare" value="site">
             Текущей страницей
           </label>
         </div>
@@ -139,7 +245,7 @@
       <div class="col-sm-6 row-subitem-padding">
         <div class="form-group widget-selector">
           <label class="non-bold">
-            <input type="radio" class="radio radio-info radio-inline" ng-model="widget.guiprops['social'].linkForShare" value="own">
+            <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops['social'].linkForShare" value="own">
             Указать URL
           </label>
         </div>
@@ -147,18 +253,19 @@
     </div>
     <div>
       <div class="row row-subitem">
-        <div ng-show="widget.guiprops['social'].linkForShare === 'own'" class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5">
-          <input type="text" class="form-control" ng-model="widget.guiprops['social'].linkText" placeholder="Введите URL">
+        <div *ngIf="widget.guiprops['social'].linkForShare === 'own'" class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5">
+          <input type="text" class="form-control" [(ngModel)]="widget.guiprops['social'].linkText" placeholder="Введите URL">
         </div>
         <div class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5">
-          <span class="iframe-small-label">Вы можете выбрать, какой страницей поделится посетитель в социальных сетях. Это может быть страница, на которой он находится или указанный вами URL.</span>
-          <!--<a href="#" class="remove-widget-name" id="removeWidgetName"></a>-->
+          <span class="iframe-small-label">
+            Вы можете выбрать, какой страницей поделится посетитель в социальных сетях. Это может быть страница, на которой он находится или указанный вами URL.
+          </span>
         </div>
       </div>
     </div>
 
     <!-- Coupon settings -->
-    <coupon-callback-directive coupons="coupons" place-popup="placePopup" coupon="widget.guiprops.social.couponCallback"></coupon-callback-directive>
+    <app-coupon-callback coupons="coupons" place-popup="placePopup" coupon="widget.guiprops.social.couponCallback"></app-coupon-callback>
 
   </div>
 </div>
