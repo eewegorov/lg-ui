@@ -263,17 +263,25 @@
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <label class="control-label control-label-des">Ориентация:</label>
         <div class="dropdown" >
-          <button class="btn btn-default dropdown-toggle" [disabled]="widget.guiprops.button.btn_width === 'От края до края'" type="button" data-toggle="dropdown" aria-expanded="true">
+          <button
+            type="button"
+            class="btn btn-default dropdown-toggle"
+            [disabled]="widget.guiprops.button.btn_width === 'От края до края'"
+            data-toggle="dropdown"
+            aria-expanded="true"
+          >
             {{ widget.guiprops.button.position }}
             <span class="caret"></span>
           </button>
-          <ul class="dropdown-menu" role="menu">
-            <li role="presentation" (click)="widget.guiprops.button.position = item" *ngFor="let item of floatBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a></li>
+          <ul role="menu" class="dropdown-menu">
+            <li role="presentation" *ngFor="let item of floatBtn" (click)="widget.guiprops.button.position = item">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
-    <div ng-show="widget.guiprops['button'].btn_width === 'Собственная'">
+    <div *ngIf="widget.guiprops['button'].btn_width === 'Собственная'">
       <div class="col-sm-12 padding-top-5 margined-top-10">
         <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="widget.guiprops['button'].btn_widthpx">
         <label class="control-label">px <span>ширина кнопки</span></label>
@@ -335,11 +343,13 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" *ngFor="let itemVisual of widthHrType" (click)="widget.guiprops.form.form_width_type = itemVisual"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+            <li role="presentation" *ngFor="let itemVisual of widthHrType" (click)="widget.guiprops.form.form_width_type = itemVisual">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+            </li>
           </ul>
         </div>
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5" ng-show="widget.guiprops.form.form_width_type === 'Собственная'">
+      <div class="col-sm-6 row-subitem-padding padding-top-5" *ngIf="widget.guiprops.form.form_width_type === 'Собственная'">
         <label class="control-label control-label-des">Ориентация:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -347,12 +357,14 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" *ngFor="let itemVisual of floatBtn" (click)="widget.guiprops.form.form_position = itemVisual"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+            <li role="presentation" *ngFor="let itemVisual of floatBtn" (click)="widget.guiprops.form.form_position = itemVisual">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
-    <div *ngIf="" w="widget.guiprops.form.form_width_type === 'Собственная'">
+    <div *ngIf="widget.guiprops.form.form_width_type === 'Собственная'">
       <div class="col-sm-12 padding-top-5 margined-top-10">
         <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="widget.guiprops.form.form_widthpx">
         <label class="control-label">px <span>ширина формы</span></label>

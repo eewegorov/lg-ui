@@ -1,12 +1,14 @@
 <div class="border-item">
   <div>
     <div class="col-lg-12">
-      <h4 class="h4-element-title">Изображение &#35;{{${modelName}.counter}} <a ng-click="removeElementFromElementsList($index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a></h4>
+      <h4 class="h4-element-title">
+        Изображение &#35;{{${modelName}.counter}} <a (click)="removeElementFromElementsList($index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
+      </h4>
     </div>
     <div class="clearfix"></div>
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding">
-        <a ng-click="listFile('image', ${modelName})" class="widget-download-img"><i class="fa fa-image"></i> Установить или изменить изображение</a>
+        <a (click)="listFile('image', ${modelName})" class="widget-download-img"><i class="fa fa-image"></i> Установить или изменить изображение</a>
       </div>
     </div>
     <div class="row row-subitem m-t-sm">
@@ -18,26 +20,36 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="${modelName}.width_type = itemVisual" ng-repeat="itemVisual in widthHrType"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+            <li role="presentation" *ngFor="let itemVisual of widthHrType" (click)="${modelName}.width_type = itemVisual">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+            </li>
           </ul>
         </div>
       </div>
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <label class="control-label control-label-des">Ориентация:</label>
-        <div class="dropdown" >
-          <button class="btn btn-default dropdown-toggle" ng-disabled="${modelName}.width_type === 'От края до края'" type="button" data-toggle="dropdown" aria-expanded="true">
+        <div class="dropdown">
+          <button
+            class="btn btn-default dropdown-toggle"
+            [disabled]="${modelName}.width_type === 'От края до края'"
+            type="button"
+            data-toggle="dropdown"
+            aria-expanded="true"
+          >
             {{${modelName}.position}}
             <span class="caret"></span>
           </button>
-          <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="${modelName}.position = itemVisual" ng-repeat="itemVisual in floatBtn"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual}}</a></li>
+          <ul role="menu" class="dropdown-menu">
+            <li role="presentation" *ngFor="let itemVisual of floatBtn" (click)="${modelName}.position = itemVisual">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
-    <div ng-show="${modelName}.width_type === 'Собственная'">
+    <div *ngIf="${modelName}.width_type === 'Собственная'">
       <div class="col-sm-12 padding-top-5 margined-top-10">
-        <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="${modelName}.widthpx">
+        <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="${modelName}.widthpx">
         <label class="control-label">px <span>ширина изображения</span></label>
       </div>
       <div class="clearfix"></div>
