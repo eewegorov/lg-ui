@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FullWidget } from '../../../../../core/models/widgets';
 
 @Component({
   selector: 'app-content-element',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./content-element.component.scss']
 })
 export class ContentElementComponent implements OnInit {
+  @Input() public widget: FullWidget;
+
   public optionsSummernote = {
     airMode: true,
     dialogsInBody: true,

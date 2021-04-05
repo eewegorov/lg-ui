@@ -794,6 +794,20 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     }
   }
 
+  public removeElementFromElementsList(index, elem) {
+    if (elem) {
+      if (elem.name === 'form-element' || elem.name === 'button-element') {
+        this.widget.guiprops.form.enable = false;
+        this.widget.guiprops.button.enable = false;
+      }
+      if (elem.name === 'form-ext-element') {
+        this.widget.guiprops.formExt.enable = false;
+        this.widget.guiprops.formExt.model.list = [];
+      }
+    }
+    this.widget.guiprops.elementsList = this.widget.guiprops.elementsList.filter((element, i) => i !== index);
+  }
+
   private saveWidgetItem() {
     this.widget.guiprops.dhVisual.lastModifiedDate = new Date().toString();
     this.widget.guiprops.dhVisual.widget_width_all   = this.SP_widget.widget_width_all;
