@@ -32,6 +32,17 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     ceil: 1.00,
     step: 0.1
   };
+  public placePopup = [
+    'По центру окна браузера',
+    'Верхний левый угол',
+    'Верхний правый угол',
+    'Сверху по центру',
+    'Нижний левый угол',
+    'Нижний правый угол',
+    'Снизу по центру',
+    'Справа по центру',
+    'Слева по центру'
+  ];
 
   private SP_widget: any;
   private validators = [];
@@ -120,6 +131,17 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     } else {
       this.saveWidgetItem();
     }
+  }
+
+  public addNewElementToContent(item?) {
+    if (typeof item !== 'undefined') {
+      this.addElemFromWidget = item;
+    } else {
+      this.addElemFromWidget = false;
+    }
+
+    (this.controls.newElementModal as any).modal('show');
+    $('body').addClass('modal-open-h100');
   }
 
   private switchWidget(widget, newValue) {
