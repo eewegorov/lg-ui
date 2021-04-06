@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 
 @Component({
-  selector: 'app-title-element',
+  selector: 'app-text-element',
   templateUrl: './text-element.component.html',
   styleUrls: ['./text-element.component.scss']
 })

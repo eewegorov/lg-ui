@@ -9,6 +9,7 @@ import { FullWidget } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorDesignService } from '../../services/widget-constructor-design.service';
+import { Options } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-constructor-design',
@@ -26,6 +27,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   @Input() private currentActiveTab: string;
 
   public isLoading = false;
+  public optionsOpacity: Options = {
+    floor: 0.00,
+    ceil: 1.00,
+    step: 0.1
+  };
 
   private SP_widget: any;
   private validators = [];
@@ -73,6 +79,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         this.flow.upload();
       }
     });
+  }
+
+  public trackById(index, item) {
+    return item.id;
   }
 
   public goToTest(widget) {

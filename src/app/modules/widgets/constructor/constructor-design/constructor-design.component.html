@@ -1,5 +1,199 @@
 <div class="widgets-settings-container" id="widgetStyle">
 
+  <div class="row" style="height: 100%; overflow:hidden">
+    <div class="col-lg-4 widget-style-menu">
+      <div class="menu-fixed">
+        <div class="menu-fixed-bg">
+          <h4 class="panel-title" id="menu-select">
+            Настройки виджета
+          </h4>
+        </div>
+      </div>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div id="disabledFuncAct" class="hide"></div>
+        <div id="accordionIn">
+
+          <div class="panel panel-default" id="0">
+            <div class="panel-heading" role="tab" id="headingFour">
+              <h4 class="panel-title" data-detect="НАСТРОЙКИ ВИДЖЕТА">
+                Настройки виджета
+              </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+              <div class="panel-body">
+                <div class="border-item">
+                  <div class="row row-subitem m-b-sm">
+                    <div class="col-sm-12 row-subitem-padding">
+                      <h3 class="marg-minus-bord-des">Расположение</h3>
+                    </div>
+                  </div>
+                  <div class="row row-subitem">
+                    <div class="col-sm-12 row-subitem-padding m-t-sm">
+                      <label class="control-label control-label-des">Где показывать всплывающее окно:</label>
+                      <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                          {{ widget.guiprops.popupMain.place }}
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu dropd-scroll-sm" role="menu">
+                          <li
+                            role="presentation"
+                            *ngFor="let item of placePopup"
+                            (click)="widget.guiprops.popupMain.place = item"
+                          >
+                            <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="border-item">
+                  <div class="row row-subitem m-b-md">
+                    <div class="col-sm-12 row-subitem-padding">
+                      <h3 class="marg-minus-bord-des">Маска</h3>
+                    </div>
+                  </div>
+                  <div class="row row-subitem m-t-xs">
+                    <div class="col-sm-12 row-subitem-padding padding-top-5">
+                      <ui-switch
+                        size="small"
+                        [checked]="widget.guiprops.popupMain.shadow.enable"
+                      ></ui-switch><label class="control-label switcher-label-xs control-label-des">Затемнять фон маской при показе виджета</label>
+                    </div>
+                  </div>
+                  <div *ngIf="widget.guiprops['popupMain'].shadow.enable == true">
+                    <div class="row row-subitem">
+                      <div class="col-sm-6 row-subitem-padding padding-top-5">
+                        <label class="control-label control-label-colorpc control-label-des">Цвет маски:</label>
+                        <input
+                          [(colorPicker)]="widget.guiprops['popupMain'].shadow.color"
+                          [style.background]="widget.guiprops['popupMain'].shadow.color"
+                          [cpAlphaChannel]="'disabled'"
+                          [cpOutputFormat]="'hex'"
+                        />
+                      </div>
+                      <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+                        <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
+                        <ngx-slider [(value)]="widget.guiprops['popupMain'].shadow.opacityColor" [options]="optionsOpacity"></ngx-slider>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row padding-left-10 margined-top-15">
+                  <div class="col-sm-12 row-subitem-padding">
+                    <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
+                  </div>
+                </div>
+                <app-visual-element></app-visual-element>
+                <app-redirect-element></app-redirect-element>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="panel panel-default" id="1">
+            <div class="panel-heading" role="tab" id="headingTwo">
+              <h4 class="panel-title" data-detect="НАСТРОЙКИ ЭЛЕМЕНТОВ">
+                Настройки элементов
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="panel-body">
+
+                <div class="row row-subitem m-b-sm m-t-md">
+                  <div class="col-sm-12 row-subitem-padding">
+                    <h3 class="marg-minus-bord">
+                      Содержимое виджета<a
+                      data-toggle="tooltip"
+                      data-placement="right"
+                      data-container="body"
+                      title=""
+                      class="info-link info-link-wd"
+                      href="#"
+                      data-original-title="Вы можете включать и отключать различные элементы, в зависимости от того, какой виджет вы хотите создать."
+                    ><i class="fa fa-info-circle"></i></a>
+                    </h3>
+                  </div>
+                </div>
+                <div *ngFor="let item of widget.guiprops.elementsList; trackBy: trackById; index as i" [id]="'elemScrN' + i">
+                  <div *ngIf="item.name === 'title-element'">
+                    <app-text-element item="item" index="$index"></app-text-element>
+                  </div>
+                  <div *ngIf="item.name === 'video-element'">
+                    <app-video-element [ngModel]="item"></app-video-element>
+                  </div>
+                  <div *ngIf="item.name == 'image-element'">
+                    <app-image-element [ngModel]="item"></app-image-element>
+                  </div>
+                  <div *ngIf="item.name == 'iframe-element'">
+                    <app-iframe-element [ngModel]="item"></app-iframe-element>
+                  </div>
+                  <div *ngIf="item.name == 'padding-element'">
+                    <app-padding-element [ngModel]="item"></app-padding-element>
+                  </div>
+                  <div *ngIf="item.name == 'split-element'">
+                    <app-split-element [ngModel]="item"></app-split-element>
+                  </div>
+                  <div *ngIf="item.name == 'coupon-element'">
+                    <app-coupon-element item="item" coupons="coupons" [index]="i"></app-coupon-element>
+                  </div>
+                  <div *ngIf="item.name == 'form-element'">
+                    <app-form-element></app-form-element>
+                  </div>
+                  <div *ngIf="item.name === 'form-ext-element'">
+                    <app-form-extended-directive [ngModel]="item"></app-form-extended-directive>
+                  </div>
+                  <div *ngIf="item.name == 'closelink-element'">
+                    <app-closelink-element></app-closelink-element>
+                  </div>
+                  <div *ngIf="item.name == 'button-element'">
+                    <app-button-element></app-button-element>
+                  </div>
+                  <div *ngIf="item.name == 'social-element'">
+                    <app-social-element></app-social-element>
+                  </div>
+                </div>
+                <div>
+                  <div class="widget-content-add">
+                    <button
+                      class="btn-default widget-content-add-btn"
+                      (click)="addNewElementToContent()"
+                    >
+                      <i class="fa fa-plus"></i>Добавить новый элемент
+                    </button>
+                    <span>Для добавления элемента нажмите на эту кнопку и выберите элемент из списка</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 max-h-100" ng-class="(widget.guiprops.popupMain.shadow.enable === true)?'ifr-sh-bg':''">
+      <div class="widget-select-mode btn-group" ng-show="isThankShouldShow()">
+        <span class="btn btn-default active" data-widget="mainBlockWidget" ng-click="calcWidthThank(); $event.stopPropagation();">Основной экран</span>
+        <span class="btn btn-default" data-widget="thankWidget" ng-click="calcWidthThank(); $event.stopPropagation();" data-toggle="tooltip" data-placement="top" data-container="body" title="" data-original-title="Сообщение, которое видит посетитель после совершения целевого действия. Ваше сообщение благодарности будет показано посетителю, если в виджете отключена ссылка на LeadGenic, отключить ссылку можно в настройках сайта. В случае, если ссылка включена, посетителю будет показано сообщение благодарности LeadGenic.">Сообщение благодарности</span>
+      </div>
+      <div ng-click="scrollToEl('MainSetBl', 'main-w-element')" class="max-wh-over" ng-style="{'background':widget.guiprops['popupMain'].shadow.rgbaColor}">
+        <div class="popup-shadow popup-sh-pad">
+          <div class="max-h-1001">
+            <div class="widget-visual-block" ng-style="{'width':'auto'}" ng-class="wvBLeft()">
+              <div ng-show="!(disElementOrNotBtnCloseLink())" class="close-btn-x">
+                <span></span>
+              </div>
+              <div class="clearfix"></div>
+              <content-element></content-element>
+              <thank-element></thank-element>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <app-content-element [widget]="widget"></app-content-element>
 
   <div class="footer-group">
