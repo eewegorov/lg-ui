@@ -826,20 +826,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     }
   }
 
-  public removeElementFromElementsList(index, elem) {
-    if (elem) {
-      if (elem.name === 'form-element' || elem.name === 'button-element') {
-        this.widget.guiprops.form.enable = false;
-        this.widget.guiprops.button.enable = false;
-      }
-      if (elem.name === 'form-ext-element') {
-        this.widget.guiprops.formExt.enable = false;
-        this.widget.guiprops.formExt.model.list = [];
-      }
-    }
-    this.widget.guiprops.elementsList = this.widget.guiprops.elementsList.filter((element, i) => i !== index);
-  }
-
   private saveWidgetItem() {
     this.widget.guiprops.dhVisual.lastModifiedDate = new Date().toString();
     this.widget.guiprops.dhVisual.widget_width_all   = this.SP_widget.widget_width_all;
@@ -1055,134 +1041,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     return errorsList;
   }
 
-  private init() {
-
-    this.nameImage = "";
-
-    /**
-     * Fonts
-     */
-    this.googleFonts = WidgetConstructorDesignService.getGoogleFontList();
-
-    this.optionsSummernote = {
-      dialogsInBody: true,
-      popover: {
-        link: [
-          ['link', ['linkDialogShow', 'unlink']]
-        ],
-        air: [
-          ['color', ['color']],
-          ['font', ['bold', 'underline', 'italic', 'clear', 'fontsize', 'strikethrough']],
-          ['para', ['paragraph', 'height']],
-          ['insert', ['link']]
-        ]
-      }
-    };
-
-    this.orientInputForm = ["Вертикальная", "Горизонтальная"];
-    this.visualInputForm = ["Под контентом", "На всю ширину"];
-
-    this.tthisypeImg = ["От края до края", "От другого края"];
-    this.typeForm = ["email", "name", "phone", "message"];
-    this.valueForm = ["email", "имя", "телефон", "сообщение"];
-    this.widthBtn = ["Авто", "От края до края", "Собственная"];
-    this.placeImg = ["Слева", "Сверху", "Справа", "Снизу"];
-
-    this.itemVariable = [{
-      type: 'email',
-      value: 'email',
-      inpPlace : 'Введите Ваш email'
-    },
-      {
-        type: 'name',
-        value: 'имя',
-        inpPlace : 'Введите Вашe имя'
-      },
-      {
-        type: 'phone',
-        value: 'телефон',
-        inpPlace : 'Введите Ваш телефон'
-      },
-      {
-        type: 'message',
-        value: 'сообщение',
-        inpPlace : 'Введите Ваше сообщение'
-      }];
-
-    this.placeDh = ["Левый нижний угол","Правый нижний угол"];
-
-    this.placeLabel = ["Нижний левый угол","Нижний правый угол","Правая сторона браузера","Левая сторона браузера"];
-
-    this.placePopup = ["По центру окна браузера","Верхний левый угол","Верхний правый угол","Сверху по центру","Нижний левый угол","Нижний правый угол","Снизу по центру","Справа по центру","Слева по центру"];
-
-    this.iconsArray = WidgetConstructorDesignService.getIconLabelList();
-
-
-    this.vertOrientDh = ["От верхней границы", "По центру виджета", "От нижней границы"];
-
-    this.sizeSocBtn = ["Большой","Средний", "Маленький"];
-
-    this.imageItemsType = ["Растянуть по ширине и высоте блока", "Установить произвольные габариты"];
-
-    this.imageItemsAlign = ["По центру", "По верхнему краю", "По нижнему краю"];
-
-    this.staticWidgetAlign = ["По центру", "По левому краю", "По правому краю"];
-
-    this.formAlign = ["По центру", "По левому краю", "По правому краю"];
-
-    this.bgPositionTypesList = ["Растянуть", "Замостить"];
-
-    this.tilesList = ["Замостить по X", "Замостить по Y", "Замостить по X+Y"];
-
-    this.maskTypeList = ["Вся площадь виджета", "Только под контентом"];
-
-    this.defaultInputFormValue = "";
-
-    this.addOnWidgetLoadListener(loadListener);
-
-    this.globalCouponObject = {
-      name: "coupon-element",
-      coupon: this.coupons.length ? this.coupons[0] : {id: null, name: "Какой купон хотите использовать?"},
-      font: angular.copy(this.systemFonts[0]),
-      fontType: "systemFont",
-      fontName: "",
-      fontSize: 18,
-      colorText: "#262626",
-      color: "#BEBECC",
-      opacity: "1",
-      borderRadius: 5,
-      rgbaColor: (hexToRgb("#BEBECC", 1)).toString(),
-      hoverText: "Скопировать",
-      clickText: "Скопировано",
-      actionText: "Кликните, чтобы скопировать ваш купон на скидку",
-      manualText: "Вы можете использовать данный купон при оформлении заказа",
-      width_type: this.widthBtn[1],
-      widthpx: 100,
-      counter: 0,
-      position: this.floatBtn[1],
-      positionPopup: this.placePopup[0],
-      closeAfter: false,
-      isCopyAction: false,
-      title: {
-        enable: false,
-        textSummer: "<p>Вы можете редактировать этот текст. Если вы хотите<br>изменить цвет, позиционирование или стиль текста,<br>то выделите фрагмент для появления окна редактора.<br>Размер и шрифт изменяются слева в блоке настроек элемента.</p>",
-        font: angular.copy(this.systemFonts[0]),
-        fontType: "systemFont",
-        fontName: "",
-        fontSize: 12,
-        textShadow: {
-          enable: false,
-          color: "#262626",
-          opacity: "1",
-          rgbaColor: (hexToRgb("#262626", 1)).toString(),
-          horiz: 0,
-          vertical: 0,
-          blur: 0
-        }
-      }
-    };
-  }
-
   private hexToRgb(r, t) {
     const n = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(r);
     const a = function() {
@@ -1206,12 +1064,26 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     } : null);
   }
 
+  public removeElementFromElementsList(index, elem) {
+    if (elem) {
+      if (elem.name === 'form-element' || elem.name === 'button-element') {
+        this.widget.guiprops.form.enable = false;
+        this.widget.guiprops.button.enable = false;
+      }
+      if (elem.name === 'form-ext-element') {
+        this.widget.guiprops.formExt.enable = false;
+        this.widget.guiprops.formExt.model.list = [];
+      }
+    }
+    this.widget.guiprops.elementsList = this.widget.guiprops.elementsList.filter((element, i) => i !== index);
+  }
+
   private showPaymentDialog(siteId, description) {
     /*window.siteTariffModal.find("h5.paymentSubscription").html(description);
     window.siteTariffModal.find("span.site-name").html($scope.siteName);
     window.siteTariffModal.attr("data-id", siteId);
     loadPlans();*/
-  };
+  }
 
 
   ngOnDestroy(): void {
