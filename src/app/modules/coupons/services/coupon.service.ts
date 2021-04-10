@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ApiResponse } from '../../../core/models/api';
 import {
@@ -19,6 +19,7 @@ import { CouponApiService } from './coupon-api.service';
   providedIn: 'root'
 })
 export class CouponService {
+  public updateCouponsList = new Subject();
 
   constructor(
     private errorHandlerService: ErrorHandlerService,

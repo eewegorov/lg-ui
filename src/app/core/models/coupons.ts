@@ -40,3 +40,9 @@ export interface UpdateCoupon {
   needUseDefault: boolean;
   notificationThreshold: number;
 }
+
+export interface CouponCallback {
+  enable: boolean;
+  elementType: string;
+  coupon: Record<any, any>;
+}

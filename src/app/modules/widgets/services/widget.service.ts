@@ -49,6 +49,7 @@ export class WidgetService {
   public updateCurrentContainer = new Subject<string>();
   public openCloneWidgetModal = new Subject<{data: WidgetInfo; containerId: string}>();
   public loadWidgetToController = new Subject<MockupShort | FullWidget>();
+  public onChangePayment = new Subject<boolean>();
 
   public loadWidgetListeners = [];
 

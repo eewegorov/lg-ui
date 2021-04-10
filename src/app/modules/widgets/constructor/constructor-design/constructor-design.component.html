@@ -117,6 +117,31 @@
                   </div>
                 </div>
                 <div *ngFor="let item of widget.guiprops.elementsList; trackBy: trackById; index as i" [id]="'elemScrN' + i">
+                  <div *ngIf="item.name === 'button-element'">
+                    <app-button-element
+                      [widget]="widget"
+                      [index]="i"
+                      [visualInputForm]="visualInputForm"
+                      [widthBtn]="widthBtn"
+                      [floatBtn]="floatBtn"
+                      (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
+                      (setBtn)="setBtnStyle($event.type, $event.item)"
+                    ></app-button-element>
+                  </div>
+
+                  <div *ngIf="item.name === 'closelink-element'">
+                    <app-closelink-element
+                      [widget]="widget"
+                      [coupons]="coupons"
+                      [index]="i"
+                      [placePopup]="placePopup"
+                      [widthBtn]="widthBtn"
+                      [floatBtn]="floatBtn"
+                      (removeElement)="removeElementFromElementsList($event)"
+                      (setBtn)="setBtnStyle($event.type, $event.item)"
+                    ></app-closelink-element>
+                  </div>
+
                   <div *ngIf="item.name === 'title-element'">
                     <app-text-element item="item" index="$index"></app-text-element>
                   </div>
@@ -143,16 +168,6 @@
                   </div>
                   <div *ngIf="item.name === 'form-ext-element'">
                     <app-form-extended-directive [ngModel]="item"></app-form-extended-directive>
-                  </div>
-                  <div *ngIf="item.name === 'closelink-element'">
-                    <app-closelink-element></app-closelink-element>
-                  </div>
-                  <div *ngIf="item.name === 'button-element'">
-                    <app-button-element
-                      [widget]="widget"
-                      [index]="i"
-                      (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
-                    ></app-button-element>
                   </div>
                   <div *ngIf="item.name === 'social-element'">
                     <app-social-element></app-social-element>

@@ -36,6 +36,10 @@ export class CouponsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getCouponsList();
+
+    this.couponService.updateCouponsList.subscribe(() => {
+      this.getCouponsList();
+    });
   }
 
   public getCouponsList() {

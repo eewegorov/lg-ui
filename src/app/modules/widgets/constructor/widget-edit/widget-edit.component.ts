@@ -11,6 +11,7 @@ import { Coupon } from '../../../../core/models/coupons';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../../core/models/user';
 import { UserService } from '../../../user/services/user.service';
+import { CloneWidgetComponent } from '../../clone-widget/clone-widget.component';
 
 @Component({
   selector: 'app-widget-edit',
@@ -20,17 +21,18 @@ import { UserService } from '../../../user/services/user.service';
 export class WidgetEditComponent implements OnInit, OnDestroy {
   public weekDays = [];
   public renamedWidget = { id: '', name: '' };
-  public widget: WidgetInfo;
+  public widget: FullWidget;
   public isDesigner = false;
   public isMockup = false;
   public sid: string;
   public wid: string;
+  public isPayment = false;
   public isContainerized: boolean;
   public currentActiveTab = 'design';
+  public coupons = [];
 
   private validators = [];
   private types = [];
-  private coupons = [];
   private audiences = [];
   private catsList = [];
   private formExtIdsErrorFlag = false;
@@ -62,6 +64,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
     this.sid = this.route.snapshot.paramMap.get('id').split('-')[0];
     this.wid = this.route.snapshot.paramMap.get('id').split('-')[1];
+    this.isPayment = !this.sitesService.isSiteHasExpTariff(this.sitesService.getSiteById(this.sid));
   }
 
   ngOnInit(): void {
@@ -83,6 +86,42 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     this.loadGroups();
 
     ($('.start-widget-btn, .stop-widget-btn') as any).tooltip();
+
+    this.widgetService.onChangePayment.subscribe((value: boolean) => {
+      this.onChangePayment(value);
+    });
+
+    this.couponService.updateCouponsList.subscribe(() => {
+      this.getCoupons();
+    });
+  }
+
+  public onChangePayment(value) {
+    const val = (value || typeof value === 'undefined');
+
+    if (val && !this.isPayment) {
+      setTimeout(() => {
+        this.widget.rules.pageNo.enable = false;
+        this.widget.rules.prevPages.enable = false;
+        this.widget.rules.time.enable = false;
+        this.widget.rules.days.enable = false;
+        this.widget.rules.period.enable = false;
+        this.widget.autoinvite.pages.enable = false;
+        this.widget.autoinvite.inactive.enabled = false;
+        this.widget.autoinvite.percent.enable = false;
+        this.widget.audiencesEnabled = false;
+        this.widget.restrictions.target.mode = 1;
+        this.widget.restrictions.count.enable = false;
+        this.widget.restrictions.action.enable = false;
+
+        this.widget.guiprops.form.couponCallback.enable = false;
+        this.widget.guiprops.exit.couponCallback.enable = false;
+        this.widget.guiprops.social.couponCallback.enable = false;
+        this.widget.jsInfo.enablePlaceholding = false;
+
+        this.showPaymentDialog(this.sid, this.translate.instant('widgetsList.payment.features'));
+      }, 1000);
+    }
   }
 
   public startRenameWidget(widget) {
@@ -213,7 +252,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
   private loadMockup() {
     this.widgetService.getMockup(this.wid).subscribe((data: MockupShort) => {
-      this.widget = data as unknown as WidgetInfo;
+      this.widget = data as unknown as FullWidget;
       this.widgetService.loadWidgetListeners.forEach(item => {
         item.call(this);
       });
@@ -226,7 +265,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
   private loadWidget() {
     this.widgetService.getWidgetById(this.sid, this.wid).subscribe((response: FullWidget) => {
-      this.widget = response as unknown as WidgetInfo;
+      this.widget = response as unknown as FullWidget;
       this.audiences = response.audience;
       this.widget.id = this.wid;
       this.widgetService.loadWidgetListeners.forEach(item => {
@@ -244,6 +283,13 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     this.widgetService.getMockupGroups('').subscribe((response: MockupGroup[]) => {
       this.catsList = response;
     });
+  }
+
+  private showPaymentDialog(siteId, description) {
+    /*window.siteTariffModal.find('h5.paymentSubscription').html(description);
+    window.siteTariffModal.find('span.site-name').html($scope.siteName);
+    window.siteTariffModal.attr('data-id', siteId);
+    loadPlans();*/
   }
 
   ngOnDestroy(): void {

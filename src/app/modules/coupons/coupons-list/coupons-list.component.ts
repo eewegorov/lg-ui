@@ -107,7 +107,7 @@ export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
           if (response) {
             this.toastr.success(this.translate.instant('coupons.coupon.delete.desc'), this.translate.instant('global.done'));
           }
-          this.couponService.getCouponsList();
+          this.couponService.updateCouponsList.next();
         });
       }
     });

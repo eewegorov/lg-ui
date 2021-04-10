@@ -4,7 +4,7 @@
       <ui-switch
         size="small"
         [checked]="coupon.enable"
-        (change)="onChangePayment"
+        (change)="onChangePayment($event)"
       ></ui-switch>
       <label *ngIf="coupon.elementType === 'form'" class="control-label switcher-label-xs control-label-des">
         {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.form' | translate }}<span class="label label-warning tariff-info ">окупаемый</span>

@@ -10,7 +10,12 @@ import { FullWidget } from '../../../../../core/models/widgets';
 export class ButtonElementComponent implements OnInit {
   @Input() public index: number;
   @Input() public widget: FullWidget;
-  @Output() private removeElement = new EventEmitter<{index: number, elem: object}>();
+  @Input() public visualInputForm: string[];
+  @Input() public widthBtn: string[];
+  @Input() public floatBtn: string[];
+
+  @Output() private removeElement = new EventEmitter<{index: number, elem: Record<string, string>}>();
+  @Output() private setBtn = new EventEmitter<{type: string, item: Record<string, string | number>}>();
 
   public optionsRound: Options = {
     floor: 0,
@@ -30,7 +35,11 @@ export class ButtonElementComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public removeElementFromElementsList(index: number, elem: object): void {
+  public removeElementFromElementsList(index: number, elem: Record<string, string>): void {
     this.removeElement.emit({index, elem});
+  }
+
+  public setBtnStyle(type: string, item: Record<string, string | number>): void {
+    this.setBtn.emit({type, item});
   }
 }

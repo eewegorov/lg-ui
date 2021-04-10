@@ -4,13 +4,13 @@ import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
+import { Coupon } from '../../../../core/models/coupons';
 import { FullWidget } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorDesignService } from '../../services/widget-constructor-design.service';
-import { Options } from '@angular-slider/ngx-slider';
-import { SitesService } from '../../../sites/services/sites.service';
 
 @Component({
   selector: 'app-constructor-design',
@@ -21,7 +21,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   @ViewChild('flow') public flow: FlowDirective;
   @Input() public sid: string;
   @Input() public wid: string;
+  @Input() public isPayment: boolean;
   @Input() public widget: FullWidget;
+  @Input() public coupons: Coupon[];
   @Input() public isDesigner: boolean;
   @Input() public isMockup: boolean;
   @Input() public isContainerized: boolean;
@@ -44,8 +46,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     'Справа по центру',
     'Слева по центру'
   ];
-
-  private isPayment = false;
+  public visualInputForm = ['Под контентом', 'На всю ширину'];
+  public floatBtn = ['Слева', 'По центру', 'Справа'];
+  public widthBtn = ['Авто', 'От края до края', 'Собственная'];
 
   private SP_widget: any;
   private validators = [];
@@ -64,11 +67,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   };
   private typeClass = ['1', '2', '3', '4', '5', '6'];
   private widthHrType = ['От края до края', 'Собственная'];
-  private floatBtn = ['Слева', 'По центру', 'Справа'];
-  private widthBtn = ['Авто', 'От края до края', 'Собственная'];
   private widgwidthBtn = ['Авто', 'Собственная'];
   private orientInputForm = ['Вертикальная', 'Горизонтальная'];
-  private visualInputForm = ['Под контентом', 'На всю ширину'];
   private typeImg = ['От края до края', 'От другого края'];
   private placeImg = ['Слева', 'Сверху', 'Справа', 'Снизу'];
   private imageItemsType = ['Растянуть по ширине и высоте блока', 'Установить произвольные габариты'];
@@ -91,13 +91,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     private router: Router,
     private translate: TranslateService,
     private toastr: ToastrService,
-    private sitesService: SitesService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService,
     private widgetConstructorDesignService: WidgetConstructorDesignService
   ) {
     this.systemFonts = this.widgetConstructorDesignService.getSystemFontList();
-    this.isPayment = !this.sitesService.isSiteHasExpTariff(this.sitesService.getSiteById(this.sid));
   }
 
   ngOnInit(): void {
@@ -1620,7 +1618,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     } : null);
   }
 
-  public removeElementFromElementsList(index, elem) {
+  public removeElementFromElementsList(index: number, elem?: Record<string, string>) {
     if (elem) {
       if (elem.name === 'form-element' || elem.name === 'button-element') {
         this.widget.guiprops.form.enable = false;
@@ -1632,6 +1630,22 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       }
     }
     this.widget.guiprops.elementsList = this.widget.guiprops.elementsList.filter((element, i) => i !== index);
+  }
+
+  public setBtnStyle(type: string, item: Record<string, string | number>): void {
+    if (type === 'Default') {
+      item.styleType = 'Default';
+      item.borderRadiusBtn = 0;
+    } else if (type === 'Material') {
+      item.styleType = 'Material';
+      item.borderRadiusBtn = 2;
+    } else if (type === 'Flat') {
+      item.styleType = 'Flat';
+      item.borderRadiusBtn = 3;
+    } else if (type === 'Border Style') {
+      item.styleType = 'Border Style';
+      item.borderRadiusBtn = 0;
+    }
   }
 
   private showPaymentDialog(siteId, description) {

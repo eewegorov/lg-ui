@@ -16,6 +16,7 @@ export interface WidgetResponse extends ApiResponse {
 }
 
 export interface FullWidget {
+  id: string;
   abtestInfo: AbtestInfo;
   containerId: string;
   name: string;
@@ -23,18 +24,18 @@ export interface FullWidget {
   active: boolean;
   sendCrm: boolean;
   template: string;
-  restrictions: Record<string, string>;
+  restrictions: Record<string, any>;
   autoresponder: Record<string, string>;
   audiencesEnabled: boolean;
   audience: Record<string, string>[];
-  rules: Record<string, string>[];
+  rules: Record<string, any>;
   guiprops: Record<string, any>;
   coupons: string[];
   integrations: string[];
   useCustomIntegrationsList: boolean;
   customFields: CustomField[];
   jsInfo: WidgetJsInfo;
-  autoinvite?: Record<string, string>;
+  autoinvite?: Record<string, any>;
 }
 
 export interface CustomField {

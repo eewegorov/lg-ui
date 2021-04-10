@@ -21,7 +21,7 @@ export class CouponModalService {
     modalRef.componentInstance.currentCoupon = coupon || null;
     modalRef.result.then((result: boolean) => {
       if (result) {
-        this.couponService.getCouponsList();
+        this.couponService.updateCouponsList.next();
       }
     })
       .catch(() => {});
