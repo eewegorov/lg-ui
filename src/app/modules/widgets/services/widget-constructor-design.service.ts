@@ -71,6 +71,73 @@ export class WidgetConstructorDesignService {
     });
   }
 
+  public getGoogleFontListPicker() {
+    return [
+      'Arimo',
+      'Bad+Script',
+      'Comfortaa',
+      'Cormorant+Infant',
+      'Cuprum',
+      'El+Messiri',
+      'Exo+2',
+      'Fira+Mono',
+      'Fira+Sans',
+      'Forum',
+      'Jura',
+      'Kelly+Slab',
+      'Kurale',
+      'Lobster',
+      'Lora',
+      'Marck+Script',
+      'Marmelad',
+      'Merriweather',
+      'Neucha',
+      'Noto+Sans',
+      'Noto+Serif',
+      'Open+Sans',
+      'Open+Sans+Condensed:300,700',
+      'Pattaya',
+      'Philosopher',
+      'Play',
+      'Playfair+Display',
+      'Poiret+One',
+      'Press+Start+2P',
+      'Prosto+One',
+      'PT+Mono',
+      'PT+Sans',
+      'PT+Sans+Caption',
+      'PT+Sans+Narrow',
+      'PT+Serif',
+      'Roboto',
+      'Roboto+Condensed',
+      'Roboto+Slab',
+      'Rubik',
+      'Ruslan+Display',
+      'Rubik+Mono+One',
+      'Russo+One',
+      'Seymour+One',
+      'Stalinist+One',
+      'Tenor+Sans',
+      'Ubuntu',
+      'Ubuntu+Condensed',
+      'Ubuntu+Mono',
+      'Underdog'
+    ];
+  }
+
+  public getSystemFontListPicker() {
+    return [
+      'Arial',
+      'Comic+Sans+MS',
+      'Courier+New',
+      'Georgia',
+      'Impact',
+      'Times+New+Roman',
+      'Trebuchet+MS',
+      'Verdana'
+    ];
+  }
+
   public getSystemFontList() {
     return [
       {

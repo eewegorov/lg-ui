@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { FullWidget } from '../../../../../core/models/widgets';
+import { WidgetConstructorDesignService } from '../../../services/widget-constructor-design.service';
 
 @Component({
   selector: 'app-button-element',
@@ -30,9 +31,10 @@ export class ButtonElementComponent implements OnInit {
   };
 
 
-  constructor() { }
+  constructor(private widgetConstructorDesignService: WidgetConstructorDesignService) { }
 
   ngOnInit(): void {
+    this.initPicker();
   }
 
   public removeElementFromElementsList(index: number, elem: Record<string, string>): void {
@@ -41,5 +43,31 @@ export class ButtonElementComponent implements OnInit {
 
   public setBtnStyle(type: string, item: Record<string, string | number>): void {
     this.setBtn.emit({type, item});
+  }
+
+  private initPicker() {
+    setTimeout(() => {
+      ($('#font-picker' + this.index) as any).fontselect({
+        placeholder: 'Выберите шрифт',
+        placeholderSearch: 'Поиск...',
+        systemFonts: this.widgetConstructorDesignService.getSystemFontListPicker(),
+        googleFonts: this.widgetConstructorDesignService.getGoogleFontListPicker()
+      }).on('change', (change) => {
+        this.setNewFont(change.value, this.widget.guiprops.button.font);
+      });
+
+      $('#font-picker' + this.index).trigger('setFont', this.widget.guiprops.button.font.name);
+    }, 500);
+  }
+
+  private setNewFont(value, data) {
+    let font = value.replace(/\+/g, ' ');
+
+    // Split font into family and weight
+    font = font.split(':');
+    const fontFamily = font[0];
+
+    data.name = fontFamily;
+    data.fontFamily = '\'' + fontFamily + '\'';
   }
 }

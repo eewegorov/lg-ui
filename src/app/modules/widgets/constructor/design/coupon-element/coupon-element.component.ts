@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
+import { Coupon } from '../../../../../core/models/coupons';
 
 @Component({
   selector: 'app-coupon-element',
@@ -7,6 +8,11 @@ import { Options } from '@angular-slider/ngx-slider';
   styleUrls: ['./coupon-element.component.scss']
 })
 export class CouponElementComponent implements OnInit {
+  @Input() public index: number;
+  @Input() public coupons: Coupon[];
+
+  @Output() private removeElement = new EventEmitter<number>();
+
   public optionsRound: Options = {
     floor: 0,
     ceil: 50,
@@ -22,6 +28,10 @@ export class CouponElementComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public removeElementFromElementsList(index: number): void {
+    this.removeElement.emit(index);
   }
 
 }
