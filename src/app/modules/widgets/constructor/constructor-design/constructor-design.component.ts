@@ -69,6 +69,18 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   private widgwidthBtn = ['Авто', 'Собственная'];
   private orientInputForm = ['Вертикальная', 'Горизонтальная'];
   private visualInputForm = ['Под контентом', 'На всю ширину'];
+  private typeImg = ['От края до края', 'От другого края'];
+  private placeImg = ['Слева', 'Сверху', 'Справа', 'Снизу'];
+  private imageItemsType = ['Растянуть по ширине и высоте блока', 'Установить произвольные габариты'];
+  private imageItemsAlign = ['По центру', 'По верхнему краю', 'По нижнему краю'];
+  private maskTypeList = ['Вся площадь виджета', 'Только под контентом'];
+  private tilesList = ['Замостить по X', 'Замостить по Y', 'Замостить по X+Y'];
+  private bgPositionTypesList = ['Растянуть', 'Замостить'];
+  private placeDh = ['Левый нижний угол', 'Правый нижний угол'];
+  private vertOrientDh = ['От верхней границы', 'По центру виджета', 'От нижней границы'];
+  private staticWidgetAlign = ['По центру', 'По левому краю', 'По правому краю'];
+  private sizeSocBtn = ['Большой', 'Средний', 'Маленький'];
+  private placeLabel = ['Нижний левый угол', 'Нижний правый угол', 'Правая сторона браузера', 'Левая сторона браузера'];
   private globalCouponObject;
   private imageCustom = null;
   private linkImage = '';
@@ -348,7 +360,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           style: '0px 1px 5px 0px rgba(0,0,0,0.25)',
           color: '#000000',
           opacity: '0.3',
-          rgbaColor: (hexToRgb('#000000', 0.3)).toString(),
+          rgbaColor: (this.hexToRgb('#000000', 0.3)).toString(),
           horiz: 0,
           vertical: 1,
           blur: 5
@@ -357,7 +369,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           enable: false,
           area: this.maskTypeList[0],
           color: '#000000',
-          rgbaColor: (hexToRgb('#000000', 1)).toString(),
+          rgbaColor: (this.hexToRgb('#000000', 1)).toString(),
           opacity: '1'
         },
         positionType: this.bgPositionTypesList[0],
@@ -373,7 +385,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         style: '0px 1px 5px 0px rgba(0,0,0,0.25)',
         color: '#000000',
         opacity: '0.3',
-        rgbaColor: (hexToRgb('#000000', 0.3)).toString(),
+        rgbaColor: (this.hexToRgb('#000000', 0.3)).toString(),
         horiz: 0,
         vertical: 1,
         blur: 5
@@ -401,7 +413,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         enable: false,
         area: this.maskTypeList[0],
         color: '#000000',
-        rgbaColor: (hexToRgb('#000000', 1)).toString(),
+        rgbaColor: (this.hexToRgb('#000000', 1)).toString(),
         opacity: '1'
       };
     }
@@ -1623,9 +1635,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   private showPaymentDialog(siteId, description) {
-    /*window.siteTariffModal.find("h5.paymentSubscription").html(description);
-    window.siteTariffModal.find("span.site-name").html($scope.siteName);
-    window.siteTariffModal.attr("data-id", siteId);
+    /*window.siteTariffModal.find('h5.paymentSubscription').html(description);
+    window.siteTariffModal.find('span.site-name').html($scope.siteName);
+    window.siteTariffModal.attr('data-id', siteId);
     loadPlans();*/
   }
 

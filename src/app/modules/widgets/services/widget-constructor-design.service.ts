@@ -1,11 +1,37 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WidgetConstructorDesignService {
 
-  constructor() { }
+  constructor(private translate: TranslateService) { }
+
+  public getDefaultFormExtMainSettings() {
+    return {
+      colorTitleInputForm: '#000000',
+      bgInputForm: '#EFEFEF',
+      opacityBgInputForm: '1',
+      borderRadiusInputForm: '0',
+      rgbaInputForm: '',
+      orientation: this.getExtFormMainFieldsOrientationType()[0],
+      visual: this.getExtFormVisualTypeOfField()[0],
+      border: {
+        enable: false,
+        color: '#000000'
+      },
+      colorPod: {
+        enable: false,
+        color: '#000000',
+        opacityColorPod: '1',
+        rgbaColorPod: ''
+      },
+      form_width_type: this.getExtFormMainWidthTypes()[0],
+      form_width_orientation_type: this.getExtFormMainWidthOrientationType()[0],
+      form_widthpx: 200
+    };
+  }
 
   public isItemMultiAndHasId(type) {
     return type !== 'email' && type !== 'name' && type !== 'phone' && type !== 'message' && type !== 'term' && type !== 'title' && type !== 'button';
@@ -83,5 +109,65 @@ export class WidgetConstructorDesignService {
 
   private ruleImageLeftOrRight(imagePlace) {
     return imagePlace === 'Слева' || imagePlace === 'Справа';
+  }
+
+  private getExtFormMainFieldsOrientationType() {
+    return [
+      {
+        type: 0,
+        label: this.translate.instant('widgets.formExt.mainSettings.formField.orientation1')
+      },
+      {
+        type: 1,
+        label: this.translate.instant('widgets.formExt.mainSettings.formField.orientation2')
+      },
+      {
+        type: 2,
+        label: this.translate.instant('widgets.formExt.mainSettings.formField.orientation3')
+      }
+    ];
+  }
+
+  private getExtFormVisualTypeOfField() {
+    return [
+      {
+        type: 0,
+        label: this.translate.instant('widgets.formExt.mainSettings.visualField1')
+      },
+      {
+        type: 1,
+        label: this.translate.instant('widgets.formExt.mainSettings.visualField2')
+      }
+    ];
+  }
+
+  private getExtFormMainWidthTypes() {
+    return [
+      {
+        type: 0,
+        label: this.translate.instant('widgets.formExt.mainSettings.widthForm1')
+      },
+      {
+        type: 1,
+        label: this.translate.instant('widgets.formExt.mainSettings.widthForm2')
+      }
+    ];
+  }
+
+  private getExtFormMainWidthOrientationType() {
+    return [
+      {
+        type: 0,
+        label: this.translate.instant('widgets.formExt.mainSettings.widthForm.orientation1')
+      },
+      {
+        type: 1,
+        label: this.translate.instant('widgets.formExt.mainSettings.widthForm.orientation2')
+      },
+      {
+        type: 2,
+        label: this.translate.instant('widgets.formExt.mainSettings.widthForm.orientation3')
+      }
+    ];
   }
 }
