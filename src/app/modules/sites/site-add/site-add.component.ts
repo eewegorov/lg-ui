@@ -17,7 +17,7 @@ import { WidgetService } from '../../widgets/services/widget.service';
 })
 export class SiteAddComponent implements OnInit, AfterViewChecked {
   @Input() public hidePhone: boolean;
-  @Output() public updateSites = new EventEmitter<boolean>();
+  @Output() private updateSites = new EventEmitter<boolean>();
   public newSiteForm: FormGroup;
   public createdSite = {} as CreateSiteData;
   public tab = 1;

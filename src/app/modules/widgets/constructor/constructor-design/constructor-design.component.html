@@ -148,7 +148,11 @@
                     <app-closelink-element></app-closelink-element>
                   </div>
                   <div *ngIf="item.name === 'button-element'">
-                    <app-button-element></app-button-element>
+                    <app-button-element
+                      [widget]="widget"
+                      [index]="i"
+                      (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
+                    ></app-button-element>
                   </div>
                   <div *ngIf="item.name === 'social-element'">
                     <app-social-element></app-social-element>

@@ -3,7 +3,7 @@
     <div class="row row-subitem">
       <div class="col-lg-12 row-subitem-padding">
         <h4 class="h4-element-title">
-          Кнопка <a (click)="removeElementFromElementsList($parent.$index, {name: 'button-element'})" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
+          Кнопка <a (click)="removeElementFromElementsList(index, {name: 'button-element'})" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
         </h4>
       </div>
       <div class="col-lg-12 row-subitem-padding">
@@ -16,7 +16,7 @@
         <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
       </div>
       <div class="col-sm-12 row-subitem-padding">
-        <input [id]="'font-picker' + $parent.$index" type="text">
+        <input [id]="'font-picker' + index" type="text">
       </div>
     </div>
     <div class="row row-subitem">

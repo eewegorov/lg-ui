@@ -10,6 +10,7 @@ import { ContainerizedWidgetService } from '../../services/containerized-widget.
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorDesignService } from '../../services/widget-constructor-design.service';
 import { Options } from '@angular-slider/ngx-slider';
+import { SitesService } from '../../../sites/services/sites.service';
 
 @Component({
   selector: 'app-constructor-design',
@@ -44,6 +45,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     'Слева по центру'
   ];
 
+  private isPayment = false;
+
   private SP_widget: any;
   private validators = [];
   private couponsId = [];
@@ -62,7 +65,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   private typeClass = ['1', '2', '3', '4', '5', '6'];
   private widthHrType = ['От края до края', 'Собственная'];
   private floatBtn = ['Слева', 'По центру', 'Справа'];
+  private widthBtn = ['Авто', 'От края до края', 'Собственная'];
   private widgwidthBtn = ['Авто', 'Собственная'];
+  private orientInputForm = ['Вертикальная', 'Горизонтальная'];
+  private visualInputForm = ['Под контентом', 'На всю ширину'];
   private globalCouponObject;
   private imageCustom = null;
   private linkImage = '';
@@ -73,15 +79,17 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     private router: Router,
     private translate: TranslateService,
     private toastr: ToastrService,
+    private sitesService: SitesService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService,
     private widgetConstructorDesignService: WidgetConstructorDesignService
   ) {
     this.systemFonts = this.widgetConstructorDesignService.getSystemFontList();
+    this.isPayment = !this.sitesService.isSiteHasExpTariff(this.sitesService.getSiteById(this.sid));
   }
 
   ngOnInit(): void {
-    this.init();
+    this.widgetService.addOnWidgetLoadListener(this.loadListener);
   }
 
   ngAfterViewInit(): void {
@@ -90,6 +98,542 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         this.flow.upload();
       }
     });
+  }
+
+  private loadListener() {
+    /**
+     * Def Objects
+     */
+    if (typeof this.widget.guiprops === 'undefined') {
+      this.widget.guiprops = {};
+    }
+
+    if (typeof this.widget.guiprops.elementsList === 'undefined') {
+      this.widget.guiprops.elementsList = [];
+    }
+
+    this.widget.guiprops.selected = null;
+
+
+    if (this.widget.name === '') {
+
+      this.widget.name = 'Точка захвата';
+    }
+
+
+    if (typeof this.widget.guiprops.title === 'undefined') {
+      this.widget.guiprops.title = {
+        enable: false,
+        textSummer: '<p>Заголовок (выделите для редактирования)</p>',
+        font: this.systemFonts[0],
+        fontType: 'systemFont',
+        fontName: '',
+        fontSize: 22,
+      };
+    }
+
+    if (typeof this.widget.guiprops.exit === 'undefined') {
+      this.widget.guiprops.exit = {
+        enable: false,
+        textSummer: '<span>Закрыть окно (выделите, что бы редактировать)</span>',
+        font: this.systemFonts[0],
+        fontType: 'systemFont',
+        fontName: '',
+        position: 'Слева',
+        fontSize: 14,
+        button: {
+          enable: false,
+          textSummer: '<span>Закрыть окно</span>',
+          font: this.systemFonts[0],
+          fontType: 'systemFont',
+          fontName: '',
+          fontSize: 20,
+          colorBtn: '#000000',
+          colorTextBtn: '#FFFFFF',
+          borderRadiusBtn: 0,
+          btn_width: this.widthBtn[0],
+          btn_widthpx: 200,
+          position: this.floatBtn[0],
+          styleType: 'Default'
+        },
+        couponCallback: {
+          enable: false,
+          elementType: 'closeBtn',
+          coupon: { ...this.globalCouponObject }
+        }
+      };
+    }
+
+
+    if (typeof this.widget.guiprops.thank === 'undefined') {
+      this.widget.guiprops.thank = {
+        enable: false,
+        textSummer: '<p>Спасибо!</p>',
+        font: this.systemFonts[0],
+        fontType: 'systemFont',
+        fontName: '',
+        fontSize: 20
+      };
+    }
+
+    if (typeof this.widget.guiprops.thank2 === 'undefined') {
+      this.widget.guiprops.thank2 = {
+        textSummer: '<p>Форма успешно отправлена.</p>'
+      };
+    }
+
+
+    if (typeof this.widget.guiprops.desc === 'undefined') {
+      this.widget.guiprops.desc = {
+        enable: false,
+        textSummer: '<p>Описание (выделите для редактирования)</p>',
+        font: this.systemFonts[0],
+        fontType: 'systemFont',
+        fontName: '',
+        fontSize: 18
+      };
+    }
+
+
+    if (typeof this.widget.guiprops.form === 'undefined') {
+      this.widget.guiprops.form = {
+        enable: false,
+        colorTitleInputForm: '#000000',
+        bgInputForm: '#FFFFFF',
+        opacityBgInputForm: '1',
+        borderRadiusInputForm: '0',
+        rgbaInputForm: '',
+        orient: this.orientInputForm[0],
+        visual: this.visualInputForm[0],
+        border: {
+          enable: false,
+          color: '#000000'
+        },
+        colorPod: {
+          enable: false,
+          color: '#000000',
+          opacityColorPod: '1',
+          rgbaColorPod: ''
+        },
+        width_type: this.widthHrType[0],
+        position: this.floatBtn[0],
+        form_width_type: this.widthHrType[0],
+        form_position: this.floatBtn[0],
+        form_widthpx: 200,
+        widthpx: 100,
+        couponCallback: {
+          enable: false,
+          elementType: 'form',
+          coupon: { ...this.globalCouponObject }
+        }
+      };
+    }
+
+
+    if (typeof this.widget.guiprops.button === 'undefined') {
+      this.widget.guiprops.button = {
+        enable: false,
+        textSummer: '<span>Отправить</span>',
+        font: this.systemFonts[0],
+        fontType: 'systemFont',
+        fontName: '',
+        fontSize: 20,
+        colorBtn: '#000000',
+        colorTextBtn: '#FFFFFF',
+        borderRadiusBtn: 0,
+        btn_width: this.widthBtn[0],
+        btn_widthpx: 200,
+        position: this.floatBtn[0],
+        styleType: 'Default'
+      };
+    }
+
+
+    if (typeof this.widget.guiprops.image === 'undefined') {
+      this.widget.guiprops.image = {
+        enable: false,
+        type: this.typeImg[0],
+        place: this.placeImg[0],
+        img_width: this.widgwidthBtn[0],
+        img_widthpx: 100,
+        img_height: this.widgwidthBtn[0],
+        img_heightpx: 100,
+        width: 0,
+        height: 0,
+        url: 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg',
+        typeBl: 'imageBl',
+        img_item_widthpx: 100,
+        img_item_heightpx: 100,
+        img_item_type: this.imageItemsType[0],
+        img_item_align: this.imageItemsAlign[0],
+        videoUrl: 'https://',
+        videoId: '',
+        videoType: 'youtube',
+        autoplay: false
+      };
+    }
+
+    if (typeof this.widget.guiprops.image.typeBl === 'undefined') {
+      this.widget.guiprops.image.typeBl = 'imageBl';
+    }
+    if (typeof this.widget.guiprops.image.img_item_widthpx === 'undefined') {
+      this.widget.guiprops.image.img_item_widthpx = 100;
+    }
+    if (typeof this.widget.guiprops.image.img_item_heightpx === 'undefined') {
+      this.widget.guiprops.image.img_item_heightpx = 100;
+    }
+    if (typeof this.widget.guiprops.image.img_item_type === 'undefined') {
+      this.widget.guiprops.image.img_item_type = this.imageItemsType[0];
+    }
+    if (typeof this.widget.guiprops.image.img_item_align === 'undefined') {
+      this.widget.guiprops.image.img_item_align = this.imageItemsAlign[0];
+    }
+    if (typeof this.widget.guiprops.image.videoUrl === 'undefined') {
+      this.widget.guiprops.image.videoUrl = 'https://';
+    }
+    if (typeof this.widget.guiprops.image.videoId === 'undefined') {
+      this.widget.guiprops.image.videoId = '';
+    }
+    if (typeof this.widget.guiprops.image.videoType === 'undefined') {
+      this.widget.guiprops.image.videoType = 'youtube';
+    }
+    if (typeof this.widget.guiprops.exit.position === 'undefined') {
+      this.widget.guiprops.exit.position = 'Слева';
+    }
+    if (typeof this.widget.guiprops.form.form_width_type === 'undefined') {
+      this.widget.guiprops.form.form_width_type = this.widthHrType[0];
+    }
+    if (typeof this.widget.guiprops.form.form_position === 'undefined') {
+      this.widget.guiprops.form.form_position = this.floatBtn[0];
+    }
+    if (typeof this.widget.guiprops.form.form_widthpx === 'undefined') {
+      this.widget.guiprops.form.form_widthpx = 200;
+    }
+
+    if (typeof this.widget.guiprops.form.couponCallback === 'undefined') {
+      this.widget.guiprops.form.couponCallback = {
+        enable: false,
+        elementType: 'form',
+        coupon: { ...this.globalCouponObject }
+      };
+    }
+    if (typeof this.widget.guiprops.exit.couponCallback === 'undefined') {
+      this.widget.guiprops.exit.couponCallback = {
+        enable: false,
+        elementType: 'closeBtn',
+        coupon: { ...this.globalCouponObject }
+      };
+    }
+
+    if (typeof this.widget.guiprops.button.styleType === 'undefined') {
+      this.widget.guiprops.button.styleType = 'Default';
+    }
+
+    if (typeof this.widget.guiprops.bg === 'undefined') {
+      this.widget.guiprops.bg = {
+        fillorImg: 'fill',
+        colorBg: '#FFFFFF',
+        bgStyle: '#FFFFFF',
+        fillorContentImg: 'fill',
+        colorContentBg: '#FFFFFF',
+        borderRadius: '',
+        border: {
+          enable: false,
+          style: '0px solid transparent',
+          color: '#000000',
+          thickness: '1'
+        },
+        shadow: {
+          enable: true,
+          style: '0px 1px 5px 0px rgba(0,0,0,0.25)',
+          color: '#000000',
+          opacity: '0.3',
+          rgbaColor: (hexToRgb('#000000', 0.3)).toString(),
+          horiz: 0,
+          vertical: 1,
+          blur: 5
+        },
+        mask: {
+          enable: false,
+          area: this.maskTypeList[0],
+          color: '#000000',
+          rgbaColor: (hexToRgb('#000000', 1)).toString(),
+          opacity: '1'
+        },
+        positionType: this.bgPositionTypesList[0],
+        tiles: this.tilesList[0],
+        url: 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg',
+        opacity: '1'
+      };
+    }
+
+    if (typeof this.widget.guiprops.bg.shadow === 'undefined') {
+      this.widget.guiprops.bg.shadow = {
+        enable: true,
+        style: '0px 1px 5px 0px rgba(0,0,0,0.25)',
+        color: '#000000',
+        opacity: '0.3',
+        rgbaColor: (hexToRgb('#000000', 0.3)).toString(),
+        horiz: 0,
+        vertical: 1,
+        blur: 5
+      };
+    }
+    if (typeof this.widget.guiprops.bg.border === 'undefined') {
+      this.widget.guiprops.bg.border = {
+        enable: false,
+        style: '0px solid transparent',
+        color: '#000000',
+        thickness: '1'
+      };
+    }
+    if (typeof this.widget.guiprops.bg.positionType === 'undefined') {
+      this.widget.guiprops.bg.positionType = this.bgPositionTypesList[0];
+    }
+    if (typeof this.widget.guiprops.bg.tiles === 'undefined') {
+      this.widget.guiprops.bg.tiles = this.tilesList[0];
+    }
+    if (typeof this.widget.guiprops.bg.opacity === 'undefined') {
+      this.widget.guiprops.bg.opacity = '1';
+    }
+    if (typeof this.widget.guiprops.bg.mask === 'undefined') {
+      this.widget.guiprops.bg.mask = {
+        enable: false,
+        area: this.maskTypeList[0],
+        color: '#000000',
+        rgbaColor: (hexToRgb('#000000', 1)).toString(),
+        opacity: '1'
+      };
+    }
+
+    if (typeof this.widget.guiprops.exit.button === 'undefined') {
+      this.widget.guiprops.exit.button = {
+        enable: false,
+        textSummer: '<span>Закрыть окно</span>',
+        font: this.systemFonts[0],
+        fontType: 'systemFont',
+        fontName: '',
+        fontSize: 20,
+        colorBtn: '#000000',
+        colorTextBtn: '#FFFFFF',
+        borderRadiusBtn: 0,
+        btn_width: this.widthBtn[0],
+        btn_widthpx: 200,
+        position: this.floatBtn[0],
+        styleType: 'Default'
+      };
+    }
+
+    if (typeof this.widget.guiprops.bg.video === 'undefined') {
+      this.widget.guiprops.bg.video = {
+        videoUrl: 'https://',
+        videoId: '',
+        videoType: 'youtube',
+        isVideoBG: true
+      };
+    }
+
+
+    if (typeof this.widget.guiprops.formSet === 'undefined') {
+      this.widget.guiprops.formSet = {
+        items: [{
+          state: 0,
+          type: 'email',
+          required: false,
+          placeholder: 'Введите Ваш email'
+        }],
+        phoneMask: {
+          enable: false,
+          maskValue: '+7 (***) ***-**-**'
+        },
+        redirect: {
+          enable: false,
+          url: '',
+          blank: false
+        }
+      };
+    }
+
+    if (typeof this.widget.guiprops.formSet.phoneMask === 'undefined') {
+      this.widget.guiprops.formSet.phoneMask = { enable: false, maskValue: '+7 (***) ***-**-**' };
+    }
+
+
+    if (typeof this.widget.guiprops.dhVisual === 'undefined') {
+      this.widget.guiprops.dhVisual = {
+        enable: false,
+        enableBlink: false,
+        title: 'Узнайте о акции!',
+        colorMain: '#FFFFFF',
+        place: this.placeDh[0],
+        colorBg: '#000000',
+        rgbaShadowForm1: '',
+        rgbaShadowForm2: '',
+        widget_width: this.widgwidthBtn[1],
+        widget_widthpx: 400,
+        widget_heightpx: 300,
+        widget_content_width: this.widgwidthBtn[1],
+        widget_content_widthpx: 400,
+        widget_content_height: this.widgwidthBtn[0],
+        widget_content_heightpx: 300,
+        widget_content_height_orient: this.vertOrientDh[0],
+        selectedIcon: 'fas fa-circle',
+        iconOrImage: 'useIcon',
+        url: 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg',
+        widget_width_all: 'auto',
+        widget_height_all: 'auto',
+        widget_plash_width: 'auto',
+        widget_width_nopx: 500,
+        widget_height_nopx: 100,
+        widget_ul_width_nopx: 400,
+        CP_width: 500,
+        CP_offset_top: 100,
+        showAddButtonOnWidget: true
+      };
+    }
+
+    if (typeof this.widget.guiprops.popupMain === 'undefined') {
+      this.widget.guiprops.popupMain = {
+        place: this.placePopup[0],
+        shadow: {
+          enable: false,
+          color: '#000000',
+          opacityColor: '0.5',
+          rgbaColor: ''
+        }
+      };
+    }
+
+    if (typeof this.widget.guiprops.staticMain === 'undefined') {
+      this.widget.guiprops.staticMain = {
+        position: this.staticWidgetAlign[0]
+      };
+    }
+
+
+    if (typeof this.widget.guiprops.social === 'undefined') {
+      this.widget.guiprops.social = {
+        vkontakte: 'vkontakte',
+        facebook: false,
+        googleplus: false,
+        digg: false,
+        twitter: false,
+        pinterest: false,
+        buffer: false,
+        pocket: false,
+        odnoklassniki: false,
+        stumbleupon: false,
+        reddit: false,
+        linkedid: false,
+        items: [{
+          name: 'vkontakte'
+        }],
+        position: this.floatBtn[0],
+        sizeBtn: this.sizeSocBtn[0],
+        type: 'style-2',
+        linkForShare: 'site',
+        couponCallback: {
+          enable: false,
+          elementType: 'social',
+          coupon: { ...this.globalCouponObject }
+        }
+      };
+    }
+
+    if (typeof this.widget.guiprops.social.couponCallback === 'undefined') {
+      this.widget.guiprops.social.couponCallback = {
+        enable: false,
+        elementType: 'social',
+        coupon: { ...this.globalCouponObject }
+      };
+    }
+
+    if (typeof this.widget.guiprops.labelMain === 'undefined') {
+      this.widget.guiprops.labelMain = {
+        place: this.placeLabel[0],
+        width: 100,
+        height: 30,
+        text: 'Подпишитесь на нашу рассылку!',
+        font: this.systemFonts[0],
+        fontType: 'systemFont',
+        fontName: '',
+        fontSize: 16,
+        colorLabel: '#000000',
+        colorText: '#FFFFFF',
+        opacityBgLabel: '1',
+        borderRadiusLabel: '0',
+        rgbaLabel: '',
+        icon: {
+          enable: false,
+          color: '#FFFFFF',
+          selectedIcon: 'fas fa-circle'
+        },
+        iconOrImage: 'useIcon',
+        url: 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg'
+      };
+    }
+
+    if (typeof this.widget.guiprops.dhVisual.iconOrImage === 'undefined') {
+      this.widget.guiprops.dhVisual.iconOrImage = 'useIcon';
+    }
+    if (typeof this.widget.guiprops.dhVisual.url === 'undefined') {
+      this.widget.guiprops.dhVisual.url = 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg';
+    }
+    if (typeof this.widget.guiprops.labelMain.iconOrImage === 'undefined' && this.widget.guiprops.labelMain.icon.enable) {
+      this.widget.guiprops.labelMain.iconOrImage = 'useIcon';
+    }
+    if (typeof this.widget.guiprops.labelMain.url === 'undefined') {
+      this.widget.guiprops.labelMain.url = 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg';
+    }
+
+    if (this.widget.guiprops.elementsList.length) {
+      this.widget.guiprops.elementsList.forEach((el) => {
+        if (el.name && el.name === 'coupon-element') {
+          if (typeof el.closeAfter === 'undefined') {
+            el.closeAfter = false;
+          }
+          if (typeof el.isCopyAction === 'undefined') {
+            el.isCopyAction = false;
+          }
+        }
+      });
+    }
+    if (typeof this.widget.guiprops.form.couponCallback.coupon.closeAfter === 'undefined') {
+      this.widget.guiprops.form.couponCallback.coupon.closeAfter = false;
+    }
+    if (typeof this.widget.guiprops.form.couponCallback.coupon.isCopyAction === 'undefined') {
+      this.widget.guiprops.form.couponCallback.coupon.isCopyAction = false;
+    }
+    if (typeof this.widget.guiprops.social.couponCallback.coupon.closeAfter === 'undefined') {
+      this.widget.guiprops.social.couponCallback.coupon.closeAfter = false;
+    }
+    if (typeof this.widget.guiprops.social.couponCallback.coupon.isCopyAction === 'undefined') {
+      this.widget.guiprops.social.couponCallback.coupon.isCopyAction = false;
+    }
+    if (typeof this.widget.guiprops.exit.couponCallback.coupon.closeAfter === 'undefined') {
+      this.widget.guiprops.exit.couponCallback.coupon.closeAfter = false;
+    }
+    if (typeof this.widget.guiprops.exit.couponCallback.coupon.isCopyAction === 'undefined') {
+      this.widget.guiprops.exit.couponCallback.coupon.isCopyAction = false;
+    }
+
+    if (typeof this.widget.guiprops.formExt === 'undefined') {
+      this.widget.guiprops.formExt = {
+        enable: false,
+        model: {
+          list: [],
+          mainSettings: this.widgetConstructorDesignService.getDefaultFormExtMainSettings()
+        },
+        couponCallback: {
+          enable: false,
+          elementType: 'form',
+          coupon: { ...this.globalCouponObject }
+        }
+      };
+      setTimeout(() => {
+        this.widget.guiprops.formExt.model.mainSettings = this.widgetConstructorDesignService.getDefaultFormExtMainSettings();
+      }, 50);
+    }
   }
 
   public trackById(index, item) {
