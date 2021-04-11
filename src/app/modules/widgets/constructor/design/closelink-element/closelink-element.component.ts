@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { Coupon } from '../../../../../core/models/coupons';
 import { FullWidget } from '../../../../../core/models/widgets';
+import { WidgetConstructorDesignService } from '../../../services/widget-constructor-design.service';
 
 @Component({
   selector: 'app-closelink-element',
@@ -25,9 +26,10 @@ export class CloselinkElementComponent implements OnInit {
     step: 1
   };
 
-  constructor() { }
+  constructor(private widgetConstructorDesignService: WidgetConstructorDesignService) { }
 
   ngOnInit(): void {
+    this.initPicker();
   }
 
   public removeElementFromElementsList(index: number): void {
@@ -36,6 +38,42 @@ export class CloselinkElementComponent implements OnInit {
 
   public setBtnStyle(type: string, item: Record<string, string | number>): void {
     this.setBtn.emit({type, item});
+  }
+
+  private initPicker() {
+    setTimeout(() => {
+      ($('#font-picker' + this.index) as any).fontselect({
+        placeholder: 'Выберите шрифт',
+        placeholderSearch: 'Поиск...',
+        systemFonts: this.widgetConstructorDesignService.getSystemFontListPicker(),
+        googleFonts: this.widgetConstructorDesignService.getGoogleFontListPicker()
+      }).on('change', (change) => {
+        this.setNewFont(change.value, this.widget.guiprops.exit.font);
+      });
+
+      ($('#font-picker-button-l' + this.index) as any).fontselect({
+        placeholder: 'Выберите шрифт',
+        placeholderSearch: 'Поиск...',
+        systemFonts: this.widgetConstructorDesignService.getSystemFontListPicker(),
+        googleFonts: this.widgetConstructorDesignService.getGoogleFontListPicker()
+      }).on('change', (change) => {
+        this.setNewFont(change.value, this.widget.guiprops.exit.button.font);
+      });
+
+      $('#font-picker' + this.index).trigger('setFont', this.widget.guiprops.exit.font.name);
+      $('#font-picker-button-l' + this.index).trigger('setFont', this.widget.guiprops.exit.button.font.name);
+    }, 500);
+  }
+
+  private setNewFont(value, data) {
+    let font = value.replace(/\+/g, ' ');
+
+    // Split font into family and weight
+    font = font.split(':');
+    const fontFamily = font[0];
+
+    data.name = fontFamily;
+    data.fontFamily = '\'' + fontFamily + '\'';
   }
 
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -17,7 +17,7 @@ import { WidgetConstructorDesignService } from '../../services/widget-constructo
   templateUrl: './constructor-design.component.html',
   styleUrls: ['./constructor-design.component.scss']
 })
-export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @ViewChild('flow') public flow: FlowDirective;
   @Input() public sid: string;
   @Input() public wid: string;
@@ -108,6 +108,166 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         this.flow.upload();
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.widget.guiprops.form.rgbaInputForm =
+      (this.hexToRgb(this.widget.guiprops.form.bgInputForm, this.widget.guiprops.form.opacityBgInputForm)).toString();
+
+    if (this.widget.guiprops.form.enable === true) {
+      this.widget.guiprops.button.enable = true;
+      if (this.widget.guiprops.button.enable === true) {
+        this.widget.guiprops.button.enable = true;
+      }
+    }
+    if (this.widget.guiprops.button.enable === true && this.widget.guiprops.form.enable === false) {
+      this.widget.guiprops.formSet.redirect.enable = true;
+      if (this.widget.guiprops.formSet.redirect.enable === true) {
+        this.widget.guiprops.formSet.redirect.enable = true;
+      }
+    }
+
+    if (this.widget.guiprops.popupMain.shadow.enable) {
+      this.widget.guiprops.popupMain.shadow.rgbaColor =
+        (this.hexToRgb(this.widget.guiprops.popupMain.shadow.color, this.widget.guiprops.popupMain.shadow.opacityColor)).toString();
+    }
+    else {
+      this.widget.guiprops.popupMain.shadow.rgbaColor = 'transparent!important';
+    }
+
+    if (this.widget.guiprops.labelMain.colorLabel != null) {
+      this.widget.guiprops.labelMain.rgbaLabel =
+        (this.hexToRgb(this.widget.guiprops.labelMain.colorLabel, this.widget.guiprops.labelMain.opacityBgLabel)).toString();
+    }
+
+    this.widget.guiprops.dhVisual.rgbaShadowForm1 = (this.hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.6)).toString();
+    this.widget.guiprops.dhVisual.rgbaShadowForm2 = (this.hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.8)).toString();
+
+
+    if (this.widget.guiprops.dhVisual.widget_content_width === 'Собственная') {
+      let newWidth: string;
+
+      if (this.widget.guiprops.image.enable && ((this.widget.guiprops.image.place === 'Слева') || (this.widget.guiprops.image.place === 'Справа'))) {
+        newWidth = ((this.widget.guiprops.dhVisual.widget_content_widthpx * 1) - 45).toString();
+      } else {
+        newWidth = ((this.widget.guiprops.dhVisual.widget_content_widthpx * 1) - 60).toString();
+      }
+      this.widthContentStyle = newWidth + 'px';
+    }
+    else {
+      this.widthContentStyle = 'auto';
+    }
+
+    if (this.widget.guiprops.dhVisual.widget_content_height === 'Собственная') {
+      let newHeight = ((this.widget.guiprops.dhVisual.widget_content_heightpx * 1) - 60).toString();
+      this.heightContentStyle = newHeight + 'px';
+    }
+    else {
+      this.heightContentStyle = 'auto';
+    }
+
+    if (this.widget.guiprops.bg.fillorImg === 'useImg') {
+      if (this.widget.guiprops.bg.positionType === 'Растянуть') {
+        this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / cover no-repeat';
+      } else {
+        if (this.widget.guiprops.bg.tiles === 'Замостить по X') {
+          this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / auto repeat-x';
+        } else if (this.widget.guiprops.bg.tiles === 'Замостить по Y') {
+          this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / auto repeat-y';
+        } else {
+          this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / auto repeat';
+        }
+      }
+
+    }
+    else if (this.widget.guiprops.bg.fillorImg === 'fill') {
+      this.bgStyle = this.widget.guiprops.bg.colorBg;
+    }
+    this.widget.guiprops.bg.bgStyle = this.bgStyle;
+
+    if (!this.widget.guiprops.bg.border.enable) {
+      this.widget.guiprops.bg.border.style = '0px solid transparent';
+    }
+    else {
+      this.widget.guiprops.bg.border.style = this.widget.guiprops.bg.border.thickness + 'px solid ' + this.widget.guiprops.bg.border.color;
+    }
+
+    if (!this.widget.guiprops.bg.shadow.enable) {
+      this.widget.guiprops.bg.shadow.style = '0px 0px 0px 0px rgba(0,0,0,0.25)';
+    }
+    else {
+      this.widget.guiprops.bg.shadow.style = this.widget.guiprops.bg.shadow.horiz + 'px ' + this.widget.guiprops.bg.shadow.vertical + 'px ' + this.widget.guiprops.bg.shadow.blur + 'px ' + this.getRGBAColor(this.widget.guiprops.bg.shadow);
+    }
+
+    if (this.widget.guiprops.bg.mask.enable) {
+      this.widget.guiprops.bg.mask.rgbaColor = (this.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
+    }
+    else {
+      this.widget.guiprops.bg.mask.rgbaColor = 'transparent!important';
+    }
+
+    $timeout(function() {
+      if (this.widget.guiprops.labelMain.place === 'Левая сторона браузера') {
+        labelMain.css({'margin-left': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2)) - 12 + 'px', 'margin-right': '0', bottom: 'auto'});
+        setTimeout(function() {
+          labelMain.css({'margin-left': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2)) - 12 + 'px', 'margin-right': '0', bottom: 'auto'});
+          this.widget.guiprops.labelMain.width  = labelMain.innerWidth() + 1;
+          this.widget.guiprops.labelMain.height = labelMain.innerHeight() + 1;
+        }, 200);
+      }
+
+      if (this.widget.guiprops.labelMain.place === 'Правая сторона браузера') {
+        labelMain.css({'margin-right': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2) - 6) + 'px', 'margin-left': '0', bottom: 'auto'});
+        setTimeout(function() {
+          labelMain.css({'margin-right': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2) - 6) + 'px', 'margin-left': '0', bottom: 'auto'});
+          this.widget.guiprops.labelMain.width  = labelMain.innerWidth() + 1;
+          this.widget.guiprops.labelMain.height = labelMain.innerHeight() + 1;
+        }, 200);
+      }
+
+      if ((this.widget.guiprops.labelMain.place === 'Нижний левый угол') || (this.widget.guiprops.labelMain.place === 'Нижний правый угол')) {
+        // labelMain.css({'margin-left': '0', 'margin-right': '0', 'bottom': '72px'});
+        labelMain.css({'margin-left': '0', 'margin-right': '0', bottom: '55px'});
+        setTimeout(function() {
+          this.widget.guiprops.labelMain.width  = labelMain.innerWidth() + 1;
+          this.widget.guiprops.labelMain.height = labelMain.innerHeight() + 1;
+        }, 200);
+      }
+    }, 1000);
+
+    if (this.widget.guiprops.form.enable) {
+      for (let i = 0; i < this.widget.guiprops.formSet.items.length; i++) {
+        if (this.widget.guiprops.formSet.items[i].type === 'message' || this.widget.guiprops.formSet.items[i].type === 'phone') {
+          this.widget.sendCrm = true;
+          if (this.widget.sendCrm === true) {
+            this.widget.sendCrm = true;
+          }
+        }
+        if (!this.widget.sendCrm) {
+          this.widget.sendCrm = false;
+          if (this.widget.sendCrm === false) {
+            this.widget.sendCrm = false;
+          }
+        }
+      }
+    }
+
+    if (this.widget.guiprops.formExt.enable) {
+      this.widget.guiprops.formExt.model.list.forEach(function(item) {
+        if (WidgetConstructorDesignService.isFormHasInputs(item)) {
+          this.widget.sendCrm = true;
+          if (this.widget.sendCrm === true) {
+            this.widget.sendCrm = true;
+          }
+        }
+        if (!this.widget.sendCrm) {
+          this.widget.sendCrm = false;
+          if (this.widget.sendCrm === false) {
+            this.widget.sendCrm = false;
+          }
+        }
+      });
+    }
   }
 
   private loadListener() {

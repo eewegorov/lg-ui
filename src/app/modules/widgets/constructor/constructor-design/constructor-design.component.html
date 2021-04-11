@@ -142,6 +142,17 @@
                     ></app-closelink-element>
                   </div>
 
+                  <div *ngIf="item.name === 'coupon-element'">
+                    <app-coupon-element
+                      [index]="i"
+                      [coupons]="coupons"
+                      [item]="item"
+                      [widthBtn]="widthBtn"
+                      [floatBtn]="floatBtn"
+                      (removeElement)="removeElementFromElementsList($event)"
+                    ></app-coupon-element>
+                  </div>
+
                   <div *ngIf="item.name === 'title-element'">
                     <app-text-element item="item" index="$index"></app-text-element>
                   </div>
@@ -159,9 +170,6 @@
                   </div>
                   <div *ngIf="item.name === 'split-element'">
                     <app-split-element [ngModel]="item"></app-split-element>
-                  </div>
-                  <div *ngIf="item.name === 'coupon-element'">
-                    <app-coupon-element item="item" coupons="coupons" [index]="i"></app-coupon-element>
                   </div>
                   <div *ngIf="item.name === 'form-element'">
                     <app-form-element></app-form-element>
@@ -212,8 +220,6 @@
       </div>
     </div>
   </div>
-
-  <app-content-element [widget]="widget"></app-content-element>
 
   <div class="footer-group">
     <div class="text-right padding10">
