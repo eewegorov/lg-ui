@@ -52,6 +52,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   public widthContentStyle = '';
   public heightContentStyle = '';
   public bgStyle = '';
+  public widthImageStyle = '';
+  public heightImageStyle = '';
 
   private SP_widget: any;
   private validators = [];
@@ -305,6 +307,94 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
           }
         }
       });
+    }
+
+    const labelContent = $('.lab-content');
+    const labelElementWithText = $('.label-text-with-add');
+
+    if (this.widget.guiprops.labelMain.iconOrImage === 'useImg') {
+      setTimeout(() => {
+        let imageSize;
+        let margTopValue;
+
+        if (labelElementWithText.height() >= 24) {
+          imageSize = labelElementWithText.height() + 2;
+          margTopValue = (imageSize / 2) + 1;
+        } else {
+          imageSize = 25;
+          margTopValue = 14;
+        }
+
+        $('.lgiconfontImg').css({width: imageSize + 'px', height: imageSize + 'px', 'margin-top': - margTopValue + 'px'});
+        labelContent.css({'padding-left': (imageSize + 10) + 'px'});
+
+        this.widget.guiprops.labelMain.imgWidth = imageSize;
+        this.widget.guiprops.labelMain.imgMargTop = margTopValue;
+      }, 0);
+    } else {
+      labelContent.css({'padding-left': ''});
+    }
+
+    this.changeModel();
+    this.changeColorPodAndSRC();
+
+    let counterNewText    = 0;
+    let counterNewImage   = 0;
+    let counterNewVideo   = 0;
+    let counterNewPadding = 0;
+    let counterNewSplit   = 0;
+    let counterNewIframe  = 0;
+    let counterNewCoupon  = 0;
+
+    for (const item of this.widget.guiprops.elementsList) {
+      if (item.name) {
+        if (item.name === 'title-element') {
+          counterNewText++;
+          item.counter = counterNewText;
+        }
+
+        if (item.name === 'image-element') {
+          counterNewImage++;
+          item.counter = counterNewImage;
+        }
+
+        if (item.name === 'iframe-element') {
+          counterNewIframe++;
+          item.counter = counterNewIframe;
+        }
+
+        if (item.name === 'video-element') {
+          counterNewVideo++;
+          item.counter = counterNewVideo;
+        }
+
+        if (item.name === 'padding-element') {
+          counterNewPadding++;
+          item.counter = counterNewPadding;
+        }
+
+        if (item.name === 'split-element') {
+          counterNewSplit++;
+          item.counter = counterNewSplit;
+        }
+
+        if (item.name === 'coupon-element') {
+          counterNewCoupon++;
+          item.counter = counterNewCoupon;
+        }
+      }
+    }
+
+    for (const item of this.widget.guiprops.elementsList) {
+      if (item.name) {
+        if (item.name === 'iframe-element') {
+          this.buildIframeElement(item);
+        }
+
+        if (item.name === 'video-element') {
+          this.newVideoSize(item);
+        }
+      }
     }
   }
 
@@ -955,16 +1045,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     }
   }
 
-  public changeModel() {
+  private changeModel() {
     const mainBlockW = $('.widget-image');
     const mainBl     = $('#mainBlockWidget');
     const mainBlWr   = $('#widgetMainWr');
     const maskTop = $('#widgetMaskTop');
     const gap18  = '-18px';
     const gap3   = '-3px';
-
-    let widthImageStyle = '';
-    let heightImageStyle = '';
 
     mainBlockW.addClass('hide-image-bl-for-rebuild');
     setTimeout(() => {
@@ -977,21 +1064,21 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
 
     if (((this.widget.guiprops.image.place === 'Слева') || (this.widget.guiprops.image.place === 'Справа'))) {
       if (this.widget.guiprops.image.img_width === 'Собственная') {
-        const newWidth = (this.widget.guiprops.image.img_widthpx * 1).toString();
-        widthImageStyle = newWidth + 'px';
+        const newWidth = (+this.widget.guiprops.image.img_widthpx).toString();
+        this.widthImageStyle = newWidth + 'px';
       }
       else {
-        widthImageStyle = '33%';
+        this.widthImageStyle = '33%';
       }
     }
 
     if (((this.widget.guiprops.image.place === 'Сверху') || (this.widget.guiprops.image.place === 'Снизу'))) {
       if (this.widget.guiprops.image.img_height === 'Собственная') {
-        const newHeight = (this.widget.guiprops.image.img_heightpx * 1).toString();
-        heightImageStyle = newHeight + 'px';
+        const newHeight = (+this.widget.guiprops.image.img_heightpx).toString();
+        this.heightImageStyle = newHeight + 'px';
       }
       else {
-        heightImageStyle = '150px';
+        this.heightImageStyle = '150px';
       }
     }
 
@@ -1011,7 +1098,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
                 let imageWidgetWidthPod;
                 setTimeout(() => {
                   $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
-                  mainBlockW.css({width: widthImageStyle, height: '100%'});
+                  mainBlockW.css({width: this.widthImageStyle, height: '100%'});
                 }, 100);
 
                 if (this.widget.guiprops.image.place === 'Слева') {
@@ -1067,7 +1154,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
               // Размер ЗАДАН
               if (this.widget.guiprops.image.img_height === 'Собственная') {
                 setTimeout(() => {
-                  mainBlockW.css({height: heightImageStyle});
+                  mainBlockW.css({height: this.heightImageStyle});
                   $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
                   mainBlockW.css({width: '100%'});
                 }, 100);
@@ -1124,7 +1211,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
                 console.log('FULL WIDTH LR 2', $('.color-pod'));
                 let mainBlHeight;
                 setTimeout(() => {
-                  mainBlockW.css({width: widthImageStyle});
+                  mainBlockW.css({width: this.widthImageStyle});
                   mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
                   if (this.widget.guiprops.bg.border.enable) {
                     mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
@@ -1619,6 +1706,80 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     return className;
   }
 
+  public removeElementFromElementsList(index: number, elem?: Record<string, string>) {
+    if (elem) {
+      if (elem.name === 'form-element' || elem.name === 'button-element') {
+        this.widget.guiprops.form.enable = false;
+        this.widget.guiprops.button.enable = false;
+      }
+      if (elem.name === 'form-ext-element') {
+        this.widget.guiprops.formExt.enable = false;
+        this.widget.guiprops.formExt.model.list = [];
+      }
+    }
+    this.widget.guiprops.elementsList = this.widget.guiprops.elementsList.filter((element, i) => i !== index);
+  }
+
+  public setBtnStyle(type: string, item: Record<string, string | number>): void {
+    if (type === 'Default') {
+      item.styleType = 'Default';
+      item.borderRadiusBtn = 0;
+    } else if (type === 'Material') {
+      item.styleType = 'Material';
+      item.borderRadiusBtn = 2;
+    } else if (type === 'Flat') {
+      item.styleType = 'Flat';
+      item.borderRadiusBtn = 3;
+    } else if (type === 'Border Style') {
+      item.styleType = 'Border Style';
+      item.borderRadiusBtn = 0;
+    }
+  }
+
+  private changeColorPodAndSRC() {
+    setTimeout(() => {
+      // PODLOZHKA settings
+      if (this.widget.guiprops.formExt.enable || this.widget.guiprops.form.enable || this.widget.guiprops.button.enable) {
+        const colorFormPod = $('#colorFormPod');
+        const widgetFormBlM = $('#widgetFormBlockM');
+        const widgetFormExtBlM = $('#widgetFormBlockMExt');
+        const widgetButtonBlM = $('#widgetButtonBlockM');
+        const mainBl = $('#mainBlockWidget');
+        const offsetPadding = 6;
+
+        setTimeout(() => {
+          this.setTopForColorPod(mainBl, colorFormPod, widgetFormBlM, widgetButtonBlM, widgetFormExtBlM, offsetPadding);
+        }, 100);
+        setTimeout(() => {
+          this.setTopForColorPod(mainBl, colorFormPod, widgetFormBlM, widgetButtonBlM, widgetFormExtBlM, offsetPadding, );
+        }, 200);
+      }
+    }, 0);
+  }
+
+  private setTopForColorPod(mainBl, colorFormPod, widgetFormBlM, widgetButtonBlM, widgetFormExtBlM, offsetPadding) {
+    let topOfColorPod: number;
+
+    if (this.widget.guiprops.form.enable) {
+      if (this.widget.guiprops.form.orient === 'Вертикальная') {
+        offsetPadding = - 8;
+      }
+      topOfColorPod = widgetFormBlM.offset().top - mainBl.offset().top + offsetPadding;
+    } else if (this.widget.guiprops.button.enable) {
+      offsetPadding = 8;
+      if (widgetButtonBlM) {
+        topOfColorPod = widgetButtonBlM.offset().top - mainBl.offset().top - offsetPadding;
+      }
+    } else if (this.widget.guiprops.formExt.enable) {
+      topOfColorPod = widgetFormExtBlM.offset().top - mainBl.offset().top + offsetPadding;
+    }
+    if (this.widget.guiprops.bg.border.enable) {
+      topOfColorPod = topOfColorPod - this.widget.guiprops.bg.border.thickness;
+    }
+
+    colorFormPod.css({top: topOfColorPod + 'px'});
+  }
+
   private downUpInitAir() {
     const globalAir = $('.note-air-popover');
     const topH = $(window).height();
@@ -1904,34 +2065,44 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     } : null);
   }
 
-  public removeElementFromElementsList(index: number, elem?: Record<string, string>) {
-    if (elem) {
-      if (elem.name === 'form-element' || elem.name === 'button-element') {
-        this.widget.guiprops.form.enable = false;
-        this.widget.guiprops.button.enable = false;
-      }
-      if (elem.name === 'form-ext-element') {
-        this.widget.guiprops.formExt.enable = false;
-        this.widget.guiprops.formExt.model.list = [];
-      }
-    }
-    this.widget.guiprops.elementsList = this.widget.guiprops.elementsList.filter((element, i) => i !== index);
+  private buildIframeElement(item) {
+    setTimeout(() => {
+      const elementToRemove = document.getElementById('idFrame' + item.counter);
+
+      const ifrm = document.createElement('iframe');
+      ifrm.setAttribute('src', 'about:blank');
+      ifrm.setAttribute('frameBorder', '0');
+      ifrm.setAttribute('id', 'idFrame' + item.counter);
+      ifrm.setAttribute('style', 'position:relative!important;width:100%!important;height:100%!important;border:none!important');
+
+      document.getElementById('elementIframeBlock' + item.counter).replaceChild(ifrm, elementToRemove);
+
+      const doc = ifrm.contentWindow.document;
+      doc.open().write('<body>' + '<style>body{margin:0!important;}' + item.css_value + '</style>' + item.html_value + '</body>');
+      doc.close();
+    }, 0);
   }
 
-  public setBtnStyle(type: string, item: Record<string, string | number>): void {
-    if (type === 'Default') {
-      item.styleType = 'Default';
-      item.borderRadiusBtn = 0;
-    } else if (type === 'Material') {
-      item.styleType = 'Material';
-      item.borderRadiusBtn = 2;
-    } else if (type === 'Flat') {
-      item.styleType = 'Flat';
-      item.borderRadiusBtn = 3;
-    } else if (type === 'Border Style') {
-      item.styleType = 'Border Style';
-      item.borderRadiusBtn = 0;
-    }
+  private newVideoSize(item) {
+    setTimeout(() => {
+      if (item.typeBl) {
+        $('#idImageVideoFrame').attr('src', item.videoUrl);
+      } else if (item.counter) {
+        $('#idVideoFrame' + item.counter).attr('src', item.videoUrl);
+      } else if (item.isVideoBG) {
+        $('#idBgVideoFrame').attr('src', item.videoUrl);
+        $('#idBgVideoFrameThank').attr('src', item.videoUrl);
+      }
+
+      if (item.width_type) {
+        if (item.width_type === 'От края до края') {
+          $('#idVideoFrame' + item.counter).css({width: '100%'});
+        } else {
+          $('#idVideoFrame' + item.counter).css({width: (item.widthpx + 'px')});
+        }
+        $('#idVideoFrame' + item.counter).css({height: ($('#idVideoFrame' + item.counter).innerWidth() / 1.666) + 'px'});
+      }
+    }, 0);
   }
 
   private showPaymentDialog(siteId, description) {

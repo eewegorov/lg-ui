@@ -184,6 +184,78 @@ export class WidgetConstructorDesignService {
       }];
   }
 
+  public classNameImg(imageSettings, formSettings, formExtSettings) {
+    let className = '';
+
+    if (imageSettings.place === 'Слева') {
+      className = 'widget-image-left';
+    }
+
+    if (imageSettings.place === 'Справа') {
+      className = 'widget-image-right';
+    }
+
+    if (imageSettings.place === 'Снизу') {
+      className = 'widget-image-bottom';
+    }
+
+    if (imageSettings.place === 'Сверху') {
+      className = 'widget-image-top';
+    }
+
+    if ((formSettings.visual === 'На всю ширину' || formExtSettings.visual.type === 1) && imageSettings.place === 'Слева') {
+      className = 'widget-image-left-all';
+    }
+
+    if ((formSettings.visual === 'На всю ширину' || formExtSettings.visual.type === 1) && imageSettings.place === 'Справа') {
+      className = 'widget-image-right-all';
+    }
+
+    if (imageSettings.img_item_type === 'Растянуть по ширине и высоте блока') {
+      className += ' widget-image-has-full-wh';
+    }
+
+    if (imageSettings.img_item_type === 'Установить произвольные габариты') {
+      if (imageSettings.img_item_align === 'По центру') {
+        className += ' widget-image-has-center-orient';
+      }
+
+      if (imageSettings.img_item_align === 'По верхнему краю') {
+        className += ' widget-image-has-top-orient';
+      }
+
+      if (imageSettings.img_item_align === 'По нижнему краю') {
+        className += ' widget-image-has-bottom-orient';
+      }
+    }
+
+    return className;
+  }
+
+  public classNameImgMain(imageSettings) {
+    let className = '';
+
+    if (imageSettings.enable) {
+      if (imageSettings.place === 'Слева') {
+        className = 'widget-main-img-left';
+      }
+
+      if (imageSettings.place === 'Справа') {
+        className = 'widget-main-img-right';
+      }
+
+      if (imageSettings.place === 'Снизу') {
+        className = 'widget-main-img-bottom';
+      }
+
+      if (imageSettings.place === 'Сверху') {
+        className = 'widget-main-img-top';
+      }
+    }
+
+    return className;
+  }
+
   private ruleImageLeftOrRight(imagePlace) {
     return imagePlace === 'Слева' || imagePlace === 'Справа';
   }
