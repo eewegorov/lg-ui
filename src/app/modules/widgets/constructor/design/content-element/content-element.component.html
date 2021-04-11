@@ -77,27 +77,27 @@
       <li
         *ngFor="let item of widget.guiprops.elementsList; trackBy: trackById; index as i"
         class="element-to-append-summernote margin-if-{{item.name}}"
-        [ngClass]="addExtraClassForFullWidth($index)"
+        [ngClass]="addExtraClassForFullWidth(i)"
         [attr.data-to]="'elemScrN' + i"
-        (click)="scrollToEl($index, item.name); $event.stopPropagation();"
+        (click)="scrollToEl(i, item.name); $event.stopPropagation();"
         [ngStyle]="{'z-index': 100 - i}"
       >
         <div class="remove-element-from-list-view remove-sub-form-item">
           <a
-            (click)="removeElementFromElementsList($index, item); $event.stopPropagation();"
+            (click)="removeElementFromElementsList(i, item); $event.stopPropagation();"
             href="javascript:void(0);"
           ><i class="remove-sub-item fa fa-trash-o"></i></a>
         </div>
         <div class="move-element-view grab-handle-element"><i class="fa fa-arrows"></i></div>
 
-        <div class="btn-add-on-elem" [ngClass]="getItemClassData(item)" (click)="addNewElementToContent($index, $event); $event.stopPropagation();">
+        <div class="btn-add-on-elem" [ngClass]="getItemClassData(item)" (click)="addNewElementToContent(i); $event.stopPropagation();">
           <i class="fa fa-plus" aria-hidden="true"></i>
           <div class="tooltip top fade in">
             <div class="tooltip-arrow"></div>
             <div class="tooltip-inner">Добавить элемент</div>
           </div>
         </div>
-        <div class="btn-copy-on-elem" [ngClass]="getItemClassData(item)" (click)="copyNewElementToContent(item, $index, $event); $event.stopPropagation();">
+        <div class="btn-copy-on-elem" [ngClass]="getItemClassData(item)" (click)="copyNewElementToContent(item, i); $event.stopPropagation();">
           <i class="fa fa-copy" aria-hidden="true"></i>
           <div class="tooltip top fade in">
             <div class="tooltip-arrow"></div>

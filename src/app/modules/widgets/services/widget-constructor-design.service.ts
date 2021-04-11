@@ -256,6 +256,49 @@ export class WidgetConstructorDesignService {
     return className;
   }
 
+  public classNameVerticalOrient(dhVisual) {
+    let className = '';
+
+    if (dhVisual.widget_content_height === 'Собственная') {
+      if (dhVisual.widget_content_height_orient === 'От нижней границы') {
+        className = 'widget-main-ul-bottom';
+      }
+
+      if (dhVisual.widget_content_height_orient === 'По центру виджета') {
+        className = 'widget-main-ul-center';
+      }
+    }
+
+    return className;
+  }
+
+  public getRGBAColor(item) {
+    return (this.hexToRgb(item.color, item.opacity)).toString();
+  }
+
+  public hexToRgb(r, t) {
+    const n = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(r);
+    const a = function() {
+      return void 0 === this.alpha
+        ? 'rgb(' + this.r + ', ' + this.g + ', ' + this.b + ')'
+        : (this.alpha > 1
+          ? this.alpha = 1
+          : this.alpha < 0 && (this.alpha = 0), 'rgba(' + this.r + ', ' + this.g + ', ' + this.b + ', ' + this.alpha + ')');
+    };
+    return void 0 === t ? n ? {
+      r: parseInt(n[1], 16),
+      g: parseInt(n[2], 16),
+      b: parseInt(n[3], 16),
+      toString: a
+    } : null : (t > 1 ? t = 1 : 0 > t && (t = 0), n ? {
+      r: parseInt(n[1], 16),
+      g: parseInt(n[2], 16),
+      b: parseInt(n[3], 16),
+      alpha: t,
+      toString: a
+    } : null);
+  }
+
   private ruleImageLeftOrRight(imagePlace) {
     return imagePlace === 'Слева' || imagePlace === 'Справа';
   }

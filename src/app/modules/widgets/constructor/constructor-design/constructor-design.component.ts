@@ -127,8 +127,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.widget.guiprops.form.rgbaInputForm =
-      (this.hexToRgb(this.widget.guiprops.form.bgInputForm, this.widget.guiprops.form.opacityBgInputForm)).toString();
+    this.widget.guiprops.form.rgbaInputForm = (this.widgetConstructorDesignService
+      .hexToRgb(this.widget.guiprops.form.bgInputForm, this.widget.guiprops.form.opacityBgInputForm)).toString();
 
     if (this.widget.guiprops.form.enable === true) {
       this.widget.guiprops.button.enable = true;
@@ -144,29 +144,31 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     }
 
     if (this.widget.guiprops.popupMain.shadow.enable) {
-      this.widget.guiprops.popupMain.shadow.rgbaColor =
-        (this.hexToRgb(this.widget.guiprops.popupMain.shadow.color, this.widget.guiprops.popupMain.shadow.opacityColor)).toString();
+      this.widget.guiprops.popupMain.shadow.rgbaColor = (this.widgetConstructorDesignService
+        .hexToRgb(this.widget.guiprops.popupMain.shadow.color, this.widget.guiprops.popupMain.shadow.opacityColor)).toString();
     }
     else {
       this.widget.guiprops.popupMain.shadow.rgbaColor = 'transparent!important';
     }
 
     if (this.widget.guiprops.labelMain.colorLabel != null) {
-      this.widget.guiprops.labelMain.rgbaLabel =
-        (this.hexToRgb(this.widget.guiprops.labelMain.colorLabel, this.widget.guiprops.labelMain.opacityBgLabel)).toString();
+      this.widget.guiprops.labelMain.rgbaLabel = (this.widgetConstructorDesignService
+        .hexToRgb(this.widget.guiprops.labelMain.colorLabel, this.widget.guiprops.labelMain.opacityBgLabel)).toString();
     }
 
-    this.widget.guiprops.dhVisual.rgbaShadowForm1 = (this.hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.6)).toString();
-    this.widget.guiprops.dhVisual.rgbaShadowForm2 = (this.hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.8)).toString();
+    this.widget.guiprops.dhVisual.rgbaShadowForm1 = (this.widgetConstructorDesignService
+      .hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.6)).toString();
+    this.widget.guiprops.dhVisual.rgbaShadowForm2 = (this.widgetConstructorDesignService
+      .hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.8)).toString();
 
 
     if (this.widget.guiprops.dhVisual.widget_content_width === 'Собственная') {
       let newWidth: string;
 
       if (this.widget.guiprops.image.enable && ((this.widget.guiprops.image.place === 'Слева') || (this.widget.guiprops.image.place === 'Справа'))) {
-        newWidth = ((this.widget.guiprops.dhVisual.widget_content_widthpx * 1) - 45).toString();
+        newWidth = (+this.widget.guiprops.dhVisual.widget_content_widthpx - 45).toString();
       } else {
-        newWidth = ((this.widget.guiprops.dhVisual.widget_content_widthpx * 1) - 60).toString();
+        newWidth = (+this.widget.guiprops.dhVisual.widget_content_widthpx - 60).toString();
       }
       this.widthContentStyle = newWidth + 'px';
     }
@@ -214,12 +216,12 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     else {
       this.widget.guiprops.bg.shadow.style =
         this.widget.guiprops.bg.shadow.horiz + 'px ' + this.widget.guiprops.bg.shadow.vertical + 'px ' +
-        this.widget.guiprops.bg.shadow.blur + 'px ' + this.getRGBAColor(this.widget.guiprops.bg.shadow);
+        this.widget.guiprops.bg.shadow.blur + 'px ' + this.widgetConstructorDesignService.getRGBAColor(this.widget.guiprops.bg.shadow);
     }
 
     if (this.widget.guiprops.bg.mask.enable) {
       this.widget.guiprops.bg.mask.rgbaColor =
-        (this.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
+        (this.widgetConstructorDesignService.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
     }
     else {
       this.widget.guiprops.bg.mask.rgbaColor = 'transparent!important';
@@ -646,7 +648,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
           style: '0px 1px 5px 0px rgba(0,0,0,0.25)',
           color: '#000000',
           opacity: '0.3',
-          rgbaColor: (this.hexToRgb('#000000', 0.3)).toString(),
+          rgbaColor: (this.widgetConstructorDesignService.hexToRgb('#000000', 0.3)).toString(),
           horiz: 0,
           vertical: 1,
           blur: 5
@@ -655,7 +657,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
           enable: false,
           area: this.maskTypeList[0],
           color: '#000000',
-          rgbaColor: (this.hexToRgb('#000000', 1)).toString(),
+          rgbaColor: (this.widgetConstructorDesignService.hexToRgb('#000000', 1)).toString(),
           opacity: '1'
         },
         positionType: this.bgPositionTypesList[0],
@@ -671,7 +673,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         style: '0px 1px 5px 0px rgba(0,0,0,0.25)',
         color: '#000000',
         opacity: '0.3',
-        rgbaColor: (this.hexToRgb('#000000', 0.3)).toString(),
+        rgbaColor: (this.widgetConstructorDesignService.hexToRgb('#000000', 0.3)).toString(),
         horiz: 0,
         vertical: 1,
         blur: 5
@@ -699,7 +701,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         enable: false,
         area: this.maskTypeList[0],
         color: '#000000',
-        rgbaColor: (this.hexToRgb('#000000', 1)).toString(),
+        rgbaColor: (this.widgetConstructorDesignService.hexToRgb('#000000', 1)).toString(),
         opacity: '1'
       };
     }
@@ -1481,7 +1483,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         enable: false,
         color: '#000000',
         opacity: '1',
-        rgbaColor: (this.hexToRgb('#FFFFFF', 1)).toString(),
+        rgbaColor: (this.widgetConstructorDesignService.hexToRgb('#FFFFFF', 1)).toString(),
         horiz: 0,
         vertical: 0,
         blur: 0
@@ -2036,33 +2038,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     });
 
     return errorsList;
-  }
-
-  private getRGBAColor(item) {
-    return (this.hexToRgb(item.color, item.opacity)).toString();
-  }
-
-  private hexToRgb(r, t) {
-    const n = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(r);
-    const a = function() {
-      return void 0 === this.alpha
-        ? 'rgb(' + this.r + ', ' + this.g + ', ' + this.b + ')'
-        : (this.alpha > 1
-          ? this.alpha = 1
-          : this.alpha < 0 && (this.alpha = 0), 'rgba(' + this.r + ', ' + this.g + ', ' + this.b + ', ' + this.alpha + ')');
-    };
-    return void 0 === t ? n ? {
-      r: parseInt(n[1], 16),
-      g: parseInt(n[2], 16),
-      b: parseInt(n[3], 16),
-      toString: a
-    } : null : (t > 1 ? t = 1 : 0 > t && (t = 0), n ? {
-      r: parseInt(n[1], 16),
-      g: parseInt(n[2], 16),
-      b: parseInt(n[3], 16),
-      alpha: t,
-      toString: a
-    } : null);
   }
 
   private buildIframeElement(item) {
