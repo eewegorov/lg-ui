@@ -49,6 +49,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   public visualInputForm = ['Под контентом', 'На всю ширину'];
   public floatBtn = ['Слева', 'По центру', 'Справа'];
   public widthBtn = ['Авто', 'От края до края', 'Собственная'];
+  public widthContentStyle = '';
+  public heightContentStyle = '';
+  public bgStyle = '';
 
   private SP_widget: any;
   private validators = [];
@@ -100,6 +103,17 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
 
   ngOnInit(): void {
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
+
+    this.downUpInit();
+
+    $('.widget-style-menu .panel-group').scroll(() => {
+      this.downUpInit();
+    });
+
+    $(window).resize(() => {
+      this.downUpInit();
+      this.downUpInitAir();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -159,7 +173,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     }
 
     if (this.widget.guiprops.dhVisual.widget_content_height === 'Собственная') {
-      let newHeight = ((this.widget.guiprops.dhVisual.widget_content_heightpx * 1) - 60).toString();
+      const newHeight = (+this.widget.guiprops.dhVisual.widget_content_heightpx - 60).toString();
       this.heightContentStyle = newHeight + 'px';
     }
     else {
@@ -196,39 +210,62 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       this.widget.guiprops.bg.shadow.style = '0px 0px 0px 0px rgba(0,0,0,0.25)';
     }
     else {
-      this.widget.guiprops.bg.shadow.style = this.widget.guiprops.bg.shadow.horiz + 'px ' + this.widget.guiprops.bg.shadow.vertical + 'px ' + this.widget.guiprops.bg.shadow.blur + 'px ' + this.getRGBAColor(this.widget.guiprops.bg.shadow);
+      this.widget.guiprops.bg.shadow.style =
+        this.widget.guiprops.bg.shadow.horiz + 'px ' + this.widget.guiprops.bg.shadow.vertical + 'px ' +
+        this.widget.guiprops.bg.shadow.blur + 'px ' + this.getRGBAColor(this.widget.guiprops.bg.shadow);
     }
 
     if (this.widget.guiprops.bg.mask.enable) {
-      this.widget.guiprops.bg.mask.rgbaColor = (this.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
+      this.widget.guiprops.bg.mask.rgbaColor =
+        (this.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
     }
     else {
       this.widget.guiprops.bg.mask.rgbaColor = 'transparent!important';
     }
 
-    $timeout(function() {
+    const labelMain  = $('#labelMain');
+
+    setTimeout(() => {
       if (this.widget.guiprops.labelMain.place === 'Левая сторона браузера') {
-        labelMain.css({'margin-left': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2)) - 12 + 'px', 'margin-right': '0', bottom: 'auto'});
-        setTimeout(function() {
-          labelMain.css({'margin-left': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2)) - 12 + 'px', 'margin-right': '0', bottom: 'auto'});
+        labelMain.css({
+          'margin-left': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2)) - 12 + 'px',
+          'margin-right': '0',
+          bottom: 'auto'
+        });
+        setTimeout(() => {
+          labelMain.css({
+            'margin-left': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2)) - 12 + 'px',
+            'margin-right': '0',
+            bottom: 'auto'
+          });
+
           this.widget.guiprops.labelMain.width  = labelMain.innerWidth() + 1;
           this.widget.guiprops.labelMain.height = labelMain.innerHeight() + 1;
         }, 200);
       }
 
       if (this.widget.guiprops.labelMain.place === 'Правая сторона браузера') {
-        labelMain.css({'margin-right': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2) - 6) + 'px', 'margin-left': '0', bottom: 'auto'});
-        setTimeout(function() {
-          labelMain.css({'margin-right': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2) - 6) + 'px', 'margin-left': '0', bottom: 'auto'});
+        labelMain.css({
+          'margin-right': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2) - 6) + 'px',
+          'margin-left': '0',
+          bottom: 'auto'
+        });
+        setTimeout(() => {
+          labelMain.css({
+            'margin-right': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2) - 6) + 'px',
+            'margin-left': '0',
+            bottom: 'auto'
+          });
           this.widget.guiprops.labelMain.width  = labelMain.innerWidth() + 1;
           this.widget.guiprops.labelMain.height = labelMain.innerHeight() + 1;
         }, 200);
       }
 
-      if ((this.widget.guiprops.labelMain.place === 'Нижний левый угол') || (this.widget.guiprops.labelMain.place === 'Нижний правый угол')) {
-        // labelMain.css({'margin-left': '0', 'margin-right': '0', 'bottom': '72px'});
+      if ((this.widget.guiprops.labelMain.place === 'Нижний левый угол') ||
+        (this.widget.guiprops.labelMain.place === 'Нижний правый угол')
+      ) {
         labelMain.css({'margin-left': '0', 'margin-right': '0', bottom: '55px'});
-        setTimeout(function() {
+        setTimeout(() => {
           this.widget.guiprops.labelMain.width  = labelMain.innerWidth() + 1;
           this.widget.guiprops.labelMain.height = labelMain.innerHeight() + 1;
         }, 200);
@@ -236,6 +273,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     }, 1000);
 
     if (this.widget.guiprops.form.enable) {
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.widget.guiprops.formSet.items.length; i++) {
         if (this.widget.guiprops.formSet.items[i].type === 'message' || this.widget.guiprops.formSet.items[i].type === 'phone') {
           this.widget.sendCrm = true;
@@ -253,8 +291,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     }
 
     if (this.widget.guiprops.formExt.enable) {
-      this.widget.guiprops.formExt.model.list.forEach(function(item) {
-        if (WidgetConstructorDesignService.isFormHasInputs(item)) {
+      this.widget.guiprops.formExt.model.list.forEach((item) => {
+        if (this.widgetConstructorDesignService.isFormHasInputs(item)) {
           this.widget.sendCrm = true;
           if (this.widget.sendCrm === true) {
             this.widget.sendCrm = true;
@@ -1540,6 +1578,90 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     }
   }
 
+  public isThankShouldShow() {
+    return (this.widget.guiprops.form.enable && !this.widget.guiprops.formSet.redirect.enable) ||
+      (this.widget.guiprops.formExt.enable &&
+        this.widgetConstructorDesignService.isFormHasCurrentTypeOfActions(this.widget.guiprops.formExt.model.list, 0));
+  }
+
+  public scrollToEl(id, elementName) {
+    const accordion = $('#accordion');
+    const accordionIn = $('#accordionIn');
+    const target = $('#elemScrN' + id);
+
+    const scrollTo = (target.offset().top) - (accordionIn.offset().top) - 40;
+    if (((target.offset().top - accordion.offset().top - 42) <= 10) && ((target.offset().top - accordion.offset().top - 42) >= -10)) {
+      return;
+    }
+
+    accordion.animate({scrollTop: scrollTo}, 500, 'swing', () => {});
+    target.addClass('border-active-element');
+    setTimeout(() => {
+      target.removeClass('border-active-element');
+    }, 1500);
+
+    if (elementName === 'title-element' || elementName === 'form-element' || elementName === 'button-element' || elementName === 'closelink-element') {
+      this.downUpInitAir();
+    }
+  }
+
+  public wvBLeft() {
+    let className = '';
+
+    if (this.widget.guiprops.dhVisual.place === 'Левый нижний угол') {
+      className = 'wv-b-left';
+    }
+
+    if (this.widget.guiprops.dhVisual.place === 'Правый нижний угол') {
+      className = 'wv-b-right';
+    }
+
+    return className;
+  }
+
+  private downUpInitAir() {
+    const globalAir = $('.note-air-popover');
+    const topH = $(window).height();
+
+    globalAir
+      .find('.note-btn-group').each(function() {
+      const topInner = $(this).offset().top;
+      if (topInner >= (topH - 250)) {
+        $(this).addClass('dropup');
+      }
+      else {
+        $(this).removeClass('dropup');
+      }
+    });
+  }
+
+  private downUpInit() {
+    const globalBl = $('.widgets-settings-container');
+    const topH = $(window).height();
+
+    globalBl
+      .find('.dropdown').each(function() {
+      const topInner = $(this).offset().top;
+      if (topInner >= (topH - 250)) {
+        $(this).addClass('dropup');
+      }
+      else {
+        $(this).removeClass('dropup');
+      }
+    });
+
+    globalBl
+      .find('.font-select').each(function() {
+      const topInner = $(this).offset().top;
+      if (topInner >= (topH - 250)) {
+        $(this).addClass('dropup');
+      }
+      else {
+        $(this).removeClass('dropup');
+      }
+    });
+  }
+
   private saveWidgetItem() {
     this.widget.guiprops.dhVisual.lastModifiedDate = new Date().toString();
     this.widget.guiprops.dhVisual.widget_width_all   = this.SP_widget.widget_width_all;
@@ -1753,6 +1875,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     });
 
     return errorsList;
+  }
+
+  private getRGBAColor(item) {
+    return (this.hexToRgb(item.color, item.opacity)).toString();
   }
 
   private hexToRgb(r, t) {

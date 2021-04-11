@@ -8,6 +8,7 @@ import { FullWidget } from '../../../../../core/models/widgets';
 })
 export class ContentElementComponent implements OnInit {
   @Input() public widget: FullWidget;
+  @Input() public bgStyle: string;
 
   public optionsSummernote = {
     airMode: true,

@@ -71,6 +71,16 @@ export class WidgetConstructorDesignService {
     });
   }
 
+  public isFormHasCurrentTypeOfActions(list, currentType) {
+    return list.some((_) => {
+      return (_.type === 'button' && _.redirect.type.type === currentType) || this.isItemSendFormIfAction(_);
+    });
+  }
+
+  private isItemSendFormIfAction(item) {
+    return (item.type === 'dd' || item.type === 'variants' || item.type === 'rating') && item.sendFormIfAction;
+  }
+
   public getGoogleFontListPicker() {
     return [
       'Arimo',
