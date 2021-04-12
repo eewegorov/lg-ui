@@ -240,7 +240,10 @@
                 (scrollToElement)="scrollToEl($event.id, $event.elementName)"
                 (addNewElement)="addNewElementToContent($event)"
               ></app-content-element>
-              <app-thank-element></app-thank-element>
+              <app-thank-element
+                [widget]="widget"
+                [bgStyle]="bgStyle"
+              ></app-thank-element>
             </div>
           </div>
         </div>
