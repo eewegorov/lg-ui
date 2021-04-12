@@ -205,9 +205,14 @@
           <div class="form-whole-bl" [ngStyle]="{'width': widget.guiprops.form.form_widthpx + 'px'}">
             <div id="widgetFormBlockM" class="widget1-form-bl" [ngClass]="hrPosSelForm(widget.guiprops['form'])">
               <div>
-                <div class="widget-inp-bl" *ngFor="let item of widget.guiprops['formSet'].items" [ngClass]="classNameInputItem(item)" [ngStyle]="{'width': widget.guiprops['form'].widthpx + 'px'}">
+                <div
+                  *ngFor="let item of widget.guiprops['formSet'].items"
+                  class="widget-inp-bl"
+                  [ngClass]="classNameInputItem(item)"
+                  [ngStyle]="{'width': widget.guiprops['form'].widthpx + 'px'}"
+                >
                   <div [ngSwitch]="elementInputItem(item)">
-                    <div *ngSwitchCase="inputEl" class="text-input-class">
+                    <div *ngSwitchCase="'inputEl'" class="text-input-class">
                       <input
                         type="text"
                         *ngIf="item.type !== 'phone' || !widget.guiprops.formSet.phoneMask.enable"
@@ -217,13 +222,13 @@
                         [style]="'background: ' + widget.guiprops['form'].rgbaInputForm + '; color: ' + widget.guiprops['form'].colorTitleInputForm + '; border-radius: ' + widget.guiprops['form'].borderRadiusInputForm + 'px; border-color: ' + widget.guiprops['form'].border.color + '!important'"
                       />
                       <input
-                        type="text"
                         *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable"
+                        type="text"
                         [id]="'elementid' + item.type"
-                        [ngClass]="classNameFormInput(item.type)"
                         class="form-control form-widget-cntrl"
-                        readonly
+                        [ngClass]="classNameFormInput(item.type)"
                         [style]="'background: ' + widget.guiprops['form'].rgbaInputForm + '; color: ' + widget.guiprops['form'].colorTitleInputForm + '; border-radius: ' + widget.guiprops['form'].borderRadiusInputForm + 'px; border-color: ' + widget.guiprops['form'].border.color + '!important'"
+                        readonly
                       />
                       <label
                         [for]="'elementid' + item.type"
@@ -236,7 +241,7 @@
                         [style]="'color: ' + widget.guiprops['form'].colorTitleInputForm"
                       >{{ getInputFormPhoneMask() }}</span>
                     </div>
-                    <div *ngSwitchCase="textarEl" class="text-input-class text-input-area-class">
+                    <div *ngSwitchCase="'textarEl'" class="text-input-class text-input-area-class">
                       <textarea
                         [id]="'elementid' + item.type"
                         [ngClass]="classNameFormInput(item.type)"
@@ -267,7 +272,11 @@
         <div *ngIf="item.name === 'button-element'">
           <div>
             <div id="widgetButtonBlockM" class="widget1-btn-bl" [ngClass]="btnPosSel(widget.guiprops.button)">
-              <div class="click-edit-cl button-send button-alone" [ngClass]="setBtnStyleClass(widget.guiprops.button)" [ngStyle]="{'font-size':widget.guiprops['button'].fontSize+'px', 'font-family':widget.guiprops['button'].font.fontFamily, 'border-color':widget.guiprops['button'].colorBtn, 'background':widget.guiprops['button'].colorBtn, 'color':widget.guiprops['button'].colorTextBtn, 'border-radius':widget.guiprops['button'].borderRadiusBtn+'px', 'width':widthBtnStyle}">
+              <div
+                class="click-edit-cl button-send button-alone"
+                [ngClass]="setBtnStyleClass(widget.guiprops.button)"
+                [ngStyle]="{'font-size': widget.guiprops['button'].fontSize+'px', 'font-family':widget.guiprops['button'].font.fontFamily, 'border-color':widget.guiprops['button'].colorBtn, 'background':widget.guiprops['button'].colorBtn, 'color':widget.guiprops['button'].colorTextBtn, 'border-radius':widget.guiprops['button'].borderRadiusBtn+'px', 'width':widthBtnStyle}"
+              >
                 <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops['button'].textSummer"></div>
               </div>
             </div>

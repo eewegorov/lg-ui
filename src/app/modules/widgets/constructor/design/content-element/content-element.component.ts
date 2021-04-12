@@ -36,9 +36,34 @@ export class ContentElementComponent implements OnInit {
     }
   };
 
+  public widthBtnStyle = '';
+  public widthBtnFormStyle = '';
+  public widthExitBtnStyle = '';
+
   constructor(private widgetConstructorDesignService: WidgetConstructorDesignService) { }
 
   ngOnInit(): void {
+    if (this.widget.guiprops.button.btn_width === 'Собственная') {
+      this.widthBtnStyle = this.widget.guiprops.button.btn_widthpx + 'px';
+      this.widthBtnFormStyle = this.widget.guiprops.button.btn_widthpx + 'px';
+    }
+    if (this.widget.guiprops.button.btn_width === 'От края до края') {
+      this.widthBtnStyle = '100%';
+      this.widthBtnFormStyle = '98%';
+    }
+    if (this.widget.guiprops.button.btn_width === 'Авто') {
+      this.widthBtnStyle = 'auto';
+      this.widthBtnFormStyle = 'auto';
+    }
+    if (this.widget.guiprops.exit.button.btn_width === 'Собственная') {
+      this.widthExitBtnStyle = this.widget.guiprops.exit.button.btn_widthpx + 'px';
+    }
+    if (this.widget.guiprops.exit.button.btn_width === 'От края до края') {
+      this.widthExitBtnStyle = '100%';
+    }
+    if (this.widget.guiprops.exit.button.btn_width === 'Авто') {
+      this.widthExitBtnStyle = 'auto';
+    }
   }
 
   public trackById(index, item) {
@@ -143,6 +168,137 @@ export class ContentElementComponent implements OnInit {
     }
 
     return className;
+  }
+
+  public btnPosSel(item) {
+    let className = '';
+
+    if (item.position === 'По центру') {
+      className = 'widget1-btn-bl-center';
+    }
+
+    if (item.position === 'Справа') {
+      className = 'widget1-btn-bl-right';
+    }
+
+    if (this.widget.guiprops.dhVisual.place === 'Слева') {
+      className = 'widget1-btn-bl';
+    }
+
+    return className;
+  }
+
+  public setBtnStyleClass(item) {
+    let className = '';
+
+    if (item.styleType === 'Border Style') {
+      className += ' widget-btn-border-style-none-bg';
+    }
+
+    if (item.styleType === 'Material') {
+      className += ' widget-btn-style__material widget-btn-border-style-none-border';
+    }
+
+    if (item.styleType === 'Flat') {
+      className += ' widget-btn-style__flat widget-btn-border-style-none-border';
+    }
+
+    if (item.styleType === 'Default') {
+      className += ' widget-btn-border-style-none-border';
+    }
+
+    return className;
+  }
+
+  public hrPosSelWholeForm(item) {
+    let className = '';
+
+    if (item.form_position === 'По центру') {
+      className = 'widget1-w-hr-center';
+    }
+
+    if (item.form_position === 'Справа') {
+      className = 'widget1-w-hr-right';
+    }
+
+    if (item.form_position === 'Слева') {
+      className = 'widget1-w-hr-left';
+    }
+
+    if (item.form_width_type === 'От края до края') {
+      className += ' widget1-w-hr-full-w';
+    }
+
+    if (item.form_width_type === 'Собственная') {
+      className += ' widget1-w-hr-user-w';
+    }
+
+    return className;
+  }
+
+  public hrPosSelForm(item) {
+    let className = '';
+
+    if (item.width_type === 'От края до края') {
+      className += ' widget1-hr-full-w';
+    }
+
+    if (item.width_type === 'Собственная') {
+      className += ' widget1-hr-user-w';
+    }
+
+    return className;
+  }
+
+  public classNameInputItem(item) {
+    let className = '';
+
+    if (this.widget.guiprops.form.orient === 'Горизонтальная') {
+      if (item.type === 'message') {
+        className = 'widget-input-gorizontal-textar';
+      }
+      else {
+        className = 'widget-input-gorizontal';
+      }
+    }
+    else {
+      if (item.type === 'message') {
+        className = 'widget-input-vert-textar';
+      }
+    }
+
+    return className;
+  }
+
+  public elementInputItem(item) {
+    let elementName = '';
+
+    if (item.type === 'message') {
+      elementName = 'textarEl';
+    }
+    else {
+      elementName = 'inputEl';
+    }
+
+    return elementName;
+  }
+
+  public classNameFormInput(itemType) {
+    let className = '';
+
+    if (this.widget.guiprops.form.border.enable) {
+      className += ' widget-input-border';
+    }
+
+    if (itemType === 'phone' && this.widget.guiprops.formSet.phoneMask.enable) {
+      className += ' masked';
+    }
+
+    return className;
+  }
+
+  public getInputFormPhoneMask() {
+    return this.widget.guiprops.formSet.phoneMask.maskValue.replace(/\*/g, '_');
   }
 
   public getRGBAColor(item) {
