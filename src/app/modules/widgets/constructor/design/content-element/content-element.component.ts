@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FullWidget } from '../../../../../core/models/widgets';
-import { WidgetConstructorDesignService } from '../../../services/widget-constructor-design.service';
+import { WidgetConstructorService } from '../../../services/widget-constructor.service';
 
 @Component({
   selector: 'app-content-element',
@@ -40,7 +40,7 @@ export class ContentElementComponent implements OnInit {
   public widthBtnFormStyle = '';
   public widthExitBtnStyle = '';
 
-  constructor(private widgetConstructorDesignService: WidgetConstructorDesignService) { }
+  constructor(private widgetConstructorService: WidgetConstructorService) { }
 
   ngOnInit(): void {
     if (this.widget.guiprops.button.btn_width === 'Собственная') {
@@ -302,20 +302,20 @@ export class ContentElementComponent implements OnInit {
   }
 
   public getRGBAColor(item) {
-    return this.widgetConstructorDesignService.getRGBAColor(item);
+    return this.widgetConstructorService.getRGBAColor(item);
   }
 
   public classNameImg() {
-    return this.widgetConstructorDesignService
+    return this.widgetConstructorService
       .classNameImg(this.widget.guiprops.image, this.widget.guiprops.form, this.widget.guiprops.formExt.model.mainSettings);
   }
 
   public classNameImgMain() {
-    return this.widgetConstructorDesignService.classNameImgMain(this.widget.guiprops.image);
+    return this.widgetConstructorService.classNameImgMain(this.widget.guiprops.image);
   }
 
   public classNameVerticalOrient() {
-    return this.widgetConstructorDesignService.classNameVerticalOrient(this.widget.guiprops.dhVisual);
+    return this.widgetConstructorService.classNameVerticalOrient(this.widget.guiprops.dhVisual);
   }
 
   public setVideoBGStyle() {

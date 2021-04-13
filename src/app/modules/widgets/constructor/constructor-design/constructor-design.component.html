@@ -172,7 +172,14 @@
                     <app-split-element [ngModel]="item"></app-split-element>
                   </div>
                   <div *ngIf="item.name === 'form-element'">
-                    <app-form-element></app-form-element>
+                    <app-form-element
+                      [index]="i"
+                      [widget]="widget"
+                      [orientInputForm]="orientInputForm"
+                      [visualInputForm]="visualInputForm"
+                      [widthHrType]="widthHrType"
+                      (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
+                    ></app-form-element>
                   </div>
                   <div *ngIf="item.name === 'form-ext-element'">
                     <app-form-extended-directive [ngModel]="item"></app-form-extended-directive>

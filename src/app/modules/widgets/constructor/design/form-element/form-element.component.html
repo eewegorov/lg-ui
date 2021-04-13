@@ -2,7 +2,7 @@
   <div>
     <div class="col-lg-12">
       <h4 class="h4-element-title">
-        Форма и кнопка <a (click)="removeElementFromElementsList($parent.$index, {name: 'form-element'})" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
+        Форма и кнопка <a (click)="removeElementFromElementsList(index, {name: 'form-element'})" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
       </h4>
     </div>
     <div class="col-lg-12 m-t-xs m-b-n-xs">
@@ -10,7 +10,7 @@
     </div>
     <!-- Page Input Form -->
     <div class="formMas">
-      <div *ngFor="let item of widget.guiprops['formSet'].items; trackBy: trackById" class="row row-subitem">
+      <div *ngFor="let item of widget.guiprops['formSet'].items; trackBy: trackById; index as i" class="row row-subitem">
         <div class="formItem">
           <div class="col-sm-12 padding-top-5 margined-top-10 greyFormBg">
             <label class="control-label">Введите название поля:</label>
@@ -20,11 +20,11 @@
             <div class="typeInputRBtn m-t-sm">
               <div class="form-add-title-type">Тип:</div>
               <div *ngFor="let itemType of itemVariable" class="form-rbtn-line">
-                <label *ngIf="getItemT(item, itemType)" class="non-bold" (click)="getPlaceholderFrom(item, $parent.$index)">
+                <label *ngIf="getItemT(item, itemType)" class="non-bold" (click)="getPlaceholderFrom(item, i)">
                   <input
                     type="radio"
                     class="radio radio-info radio-inline"
-                    (click)="(item.type === 'message') ? addFirstInput(item, $parent.$index) : ''"
+                    (click)="(item.type === 'message') ? addFirstInput(item, i) : ''"
                     [(ngModel)]="item.type"
                     value="{{ itemType.type }}"
                   />
@@ -47,12 +47,12 @@
             </div>
             <div *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable" class="m-t-sm formReqBl">
               <label class="control-label">{{ 'widgets.constructor.form.phoneMask.titleInput' | translate }}</label>
-              <input type="text" class="form-control" (keyup)="blockedUnusedChars($event)" [(ngModel)]="widget.guiprops.formSet.phoneMask.maskValue">
+              <input type="text" class="form-control" (keyup)="blockedUnusedChars()" [(ngModel)]="widget.guiprops.formSet.phoneMask.maskValue">
               <span class="small">{{ 'widgets.constructor.form.phoneMask.description' | translate }}</span>
             </div>
 
             <div *ngIf="widget.guiprops['formSet'].items.length > 1" class="remove-sub-form-item margined-right-10">
-              <a (click)="removePageInputItem($index)" href="javascript:void(0);"><i class="remove-sub-item col-sm-1 pe-7s-close-circle"></i></a>
+              <a (click)="removePageInputItem(i)" href="javascript:void(0);"><i class="remove-sub-item col-sm-1 pe-7s-close-circle"></i></a>
             </div>
           </div>
 

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { FullWidget } from '../../../../../core/models/widgets';
-import { WidgetConstructorDesignService } from '../../../services/widget-constructor-design.service';
+import { WidgetConstructorService } from '../../../services/widget-constructor.service';
 
 @Component({
   selector: 'app-button-element',
@@ -31,7 +31,7 @@ export class ButtonElementComponent implements OnInit {
   };
 
 
-  constructor(private widgetConstructorDesignService: WidgetConstructorDesignService) { }
+  constructor(private widgetConstructorService: WidgetConstructorService) { }
 
   ngOnInit(): void {
     this.initPicker();
@@ -50,8 +50,8 @@ export class ButtonElementComponent implements OnInit {
       ($('#font-picker' + this.index) as any).fontselect({
         placeholder: 'Выберите шрифт',
         placeholderSearch: 'Поиск...',
-        systemFonts: this.widgetConstructorDesignService.getSystemFontListPicker(),
-        googleFonts: this.widgetConstructorDesignService.getGoogleFontListPicker()
+        systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
+        googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
       }).on('change', (change) => {
         this.setNewFont(change.value, this.widget.guiprops.button.font);
       });

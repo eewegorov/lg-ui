@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { Options } from '@angular-slider/ngx-slider';
 import { Coupon } from '../../../../../core/models/coupons';
 import { CouponService } from '../../../../coupons/services/coupon.service';
-import { WidgetConstructorDesignService } from '../../../services/widget-constructor-design.service';
+import { WidgetConstructorService } from '../../../services/widget-constructor.service';
 
 @Component({
   selector: 'app-coupon-element',
@@ -32,7 +32,7 @@ export class CouponElementComponent implements OnInit, OnChanges {
 
   constructor(
     private couponService: CouponService,
-    private widgetConstructorDesignService: WidgetConstructorDesignService
+    private widgetConstructorService: WidgetConstructorService
   ) {
   }
 
@@ -60,8 +60,8 @@ export class CouponElementComponent implements OnInit, OnChanges {
       ($('#font-picker' + this.index) as any).fontselect({
         placeholder: 'Выберите шрифт',
         placeholderSearch: 'Поиск...',
-        systemFonts: this.widgetConstructorDesignService.getSystemFontListPicker(),
-        googleFonts: this.widgetConstructorDesignService.getGoogleFontListPicker()
+        systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
+        googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
       }).on('change', (change) => {
         this.setNewFont(change.value, this.item.font);
       });
@@ -69,8 +69,8 @@ export class CouponElementComponent implements OnInit, OnChanges {
       ($('#font-picker-title' + this.index) as any).fontselect({
         placeholder: 'Выберите шрифт',
         placeholderSearch: 'Поиск...',
-        systemFonts: this.widgetConstructorDesignService.getSystemFontListPicker(),
-        googleFonts: this.widgetConstructorDesignService.getGoogleFontListPicker()
+        systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
+        googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
       }).on('change', (change) => {
         this.setNewFont(change.value, this.item.title.font);
       });

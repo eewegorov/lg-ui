@@ -10,7 +10,7 @@ import { Coupon } from '../../../../core/models/coupons';
 import { FullWidget } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetService } from '../../services/widget.service';
-import { WidgetConstructorDesignService } from '../../services/widget-constructor-design.service';
+import { WidgetConstructorService } from '../../services/widget-constructor.service';
 
 @Component({
   selector: 'app-constructor-design',
@@ -46,7 +46,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     'Справа по центру',
     'Слева по центру'
   ];
+  public orientInputForm = ['Вертикальная', 'Горизонтальная'];
   public visualInputForm = ['Под контентом', 'На всю ширину'];
+  public widthHrType = ['От края до края', 'Собственная'];
   public floatBtn = ['Слева', 'По центру', 'Справа'];
   public widthBtn = ['Авто', 'От края до края', 'Собственная'];
   public widthContentStyle = '';
@@ -71,9 +73,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     newElementModal: $('#addNewElementListModal')
   };
   private typeClass = ['1', '2', '3', '4', '5', '6'];
-  private widthHrType = ['От края до края', 'Собственная'];
   private widgwidthBtn = ['Авто', 'Собственная'];
-  private orientInputForm = ['Вертикальная', 'Горизонтальная'];
   private typeImg = ['От края до края', 'От другого края'];
   private placeImg = ['Слева', 'Сверху', 'Справа', 'Снизу'];
   private imageItemsType = ['Растянуть по ширине и высоте блока', 'Установить произвольные габариты'];
@@ -98,9 +98,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     private toastr: ToastrService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService,
-    private widgetConstructorDesignService: WidgetConstructorDesignService
+    private widgetConstructorService: WidgetConstructorService
   ) {
-    this.systemFonts = this.widgetConstructorDesignService.getSystemFontList();
+    this.systemFonts = this.widgetConstructorService.getSystemFontList();
   }
 
   ngOnInit(): void {
@@ -127,7 +127,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.widget.guiprops.form.rgbaInputForm = (this.widgetConstructorDesignService
+    this.widget.guiprops.form.rgbaInputForm = (this.widgetConstructorService
       .hexToRgb(this.widget.guiprops.form.bgInputForm, this.widget.guiprops.form.opacityBgInputForm)).toString();
 
     if (this.widget.guiprops.form.enable === true) {
@@ -144,7 +144,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     }
 
     if (this.widget.guiprops.popupMain.shadow.enable) {
-      this.widget.guiprops.popupMain.shadow.rgbaColor = (this.widgetConstructorDesignService
+      this.widget.guiprops.popupMain.shadow.rgbaColor = (this.widgetConstructorService
         .hexToRgb(this.widget.guiprops.popupMain.shadow.color, this.widget.guiprops.popupMain.shadow.opacityColor)).toString();
     }
     else {
@@ -152,13 +152,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     }
 
     if (this.widget.guiprops.labelMain.colorLabel != null) {
-      this.widget.guiprops.labelMain.rgbaLabel = (this.widgetConstructorDesignService
+      this.widget.guiprops.labelMain.rgbaLabel = (this.widgetConstructorService
         .hexToRgb(this.widget.guiprops.labelMain.colorLabel, this.widget.guiprops.labelMain.opacityBgLabel)).toString();
     }
 
-    this.widget.guiprops.dhVisual.rgbaShadowForm1 = (this.widgetConstructorDesignService
+    this.widget.guiprops.dhVisual.rgbaShadowForm1 = (this.widgetConstructorService
       .hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.6)).toString();
-    this.widget.guiprops.dhVisual.rgbaShadowForm2 = (this.widgetConstructorDesignService
+    this.widget.guiprops.dhVisual.rgbaShadowForm2 = (this.widgetConstructorService
       .hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.8)).toString();
 
 
@@ -216,12 +216,12 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     else {
       this.widget.guiprops.bg.shadow.style =
         this.widget.guiprops.bg.shadow.horiz + 'px ' + this.widget.guiprops.bg.shadow.vertical + 'px ' +
-        this.widget.guiprops.bg.shadow.blur + 'px ' + this.widgetConstructorDesignService.getRGBAColor(this.widget.guiprops.bg.shadow);
+        this.widget.guiprops.bg.shadow.blur + 'px ' + this.widgetConstructorService.getRGBAColor(this.widget.guiprops.bg.shadow);
     }
 
     if (this.widget.guiprops.bg.mask.enable) {
       this.widget.guiprops.bg.mask.rgbaColor =
-        (this.widgetConstructorDesignService.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
+        (this.widgetConstructorService.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
     }
     else {
       this.widget.guiprops.bg.mask.rgbaColor = 'transparent!important';
@@ -296,7 +296,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
 
     if (this.widget.guiprops.formExt.enable) {
       this.widget.guiprops.formExt.model.list.forEach((item) => {
-        if (this.widgetConstructorDesignService.isFormHasInputs(item)) {
+        if (this.widgetConstructorService.isFormHasInputs(item)) {
           this.widget.sendCrm = true;
           if (this.widget.sendCrm === true) {
             this.widget.sendCrm = true;
@@ -648,7 +648,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
           style: '0px 1px 5px 0px rgba(0,0,0,0.25)',
           color: '#000000',
           opacity: '0.3',
-          rgbaColor: (this.widgetConstructorDesignService.hexToRgb('#000000', 0.3)).toString(),
+          rgbaColor: (this.widgetConstructorService.hexToRgb('#000000', 0.3)).toString(),
           horiz: 0,
           vertical: 1,
           blur: 5
@@ -657,7 +657,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
           enable: false,
           area: this.maskTypeList[0],
           color: '#000000',
-          rgbaColor: (this.widgetConstructorDesignService.hexToRgb('#000000', 1)).toString(),
+          rgbaColor: (this.widgetConstructorService.hexToRgb('#000000', 1)).toString(),
           opacity: '1'
         },
         positionType: this.bgPositionTypesList[0],
@@ -673,7 +673,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         style: '0px 1px 5px 0px rgba(0,0,0,0.25)',
         color: '#000000',
         opacity: '0.3',
-        rgbaColor: (this.widgetConstructorDesignService.hexToRgb('#000000', 0.3)).toString(),
+        rgbaColor: (this.widgetConstructorService.hexToRgb('#000000', 0.3)).toString(),
         horiz: 0,
         vertical: 1,
         blur: 5
@@ -701,7 +701,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         enable: false,
         area: this.maskTypeList[0],
         color: '#000000',
-        rgbaColor: (this.widgetConstructorDesignService.hexToRgb('#000000', 1)).toString(),
+        rgbaColor: (this.widgetConstructorService.hexToRgb('#000000', 1)).toString(),
         opacity: '1'
       };
     }
@@ -922,7 +922,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         enable: false,
         model: {
           list: [],
-          mainSettings: this.widgetConstructorDesignService.getDefaultFormExtMainSettings()
+          mainSettings: this.widgetConstructorService.getDefaultFormExtMainSettings()
         },
         couponCallback: {
           enable: false,
@@ -931,7 +931,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         }
       };
       setTimeout(() => {
-        this.widget.guiprops.formExt.model.mainSettings = this.widgetConstructorDesignService.getDefaultFormExtMainSettings();
+        this.widget.guiprops.formExt.model.mainSettings = this.widgetConstructorService.getDefaultFormExtMainSettings();
       }, 50);
     }
   }
@@ -1089,7 +1089,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         if (!$('#thankWidget').hasClass('active')) {
           if (this.widget.guiprops.image.enable) {
             // Под контентом Слева или Справа
-            if (this.widgetConstructorDesignService.ruleLeftOrRightUnderContent(
+            if (this.widgetConstructorService.ruleLeftOrRightUnderContent(
               this.widget.guiprops.formExt,
               this.widget.guiprops.form.visual,
               this.widget.guiprops.image.place
@@ -1201,7 +1201,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
             }
 
             // На ВСЮ ШИРИНУ СЛЕВА или СПРАВА
-            if (this.widgetConstructorDesignService.ruleLeftOrRightWholeWidth(
+            if (this.widgetConstructorService.ruleLeftOrRightWholeWidth(
               this.widget.guiprops.formExt, this.widget.guiprops.form.visual, this.widget.guiprops.image.place
             )) {
               setTimeout(() => {
@@ -1444,7 +1444,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     for (const item of this.widget.guiprops.elementsList) {
       if (item.name === 'closelink-element' ||
         (this.widget.guiprops.formExt && this.widget.guiprops.formExt.enable &&
-          this.widgetConstructorDesignService.isFormHasCurrentTypeButtons(this.widget.guiprops.formExt.model.list, 2))) {
+          this.widgetConstructorService.isFormHasCurrentTypeButtons(this.widget.guiprops.formExt.model.list, 2))) {
         return true;
       }
     }
@@ -1483,7 +1483,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         enable: false,
         color: '#000000',
         opacity: '1',
-        rgbaColor: (this.widgetConstructorDesignService.hexToRgb('#FFFFFF', 1)).toString(),
+        rgbaColor: (this.widgetConstructorService.hexToRgb('#FFFFFF', 1)).toString(),
         horiz: 0,
         vertical: 0,
         blur: 0
@@ -1670,7 +1670,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   public isThankShouldShow() {
     return (this.widget.guiprops.form.enable && !this.widget.guiprops.formSet.redirect.enable) ||
       (this.widget.guiprops.formExt.enable &&
-        this.widgetConstructorDesignService.isFormHasCurrentTypeOfActions(this.widget.guiprops.formExt.model.list, 0));
+        this.widgetConstructorService.isFormHasCurrentTypeOfActions(this.widget.guiprops.formExt.model.list, 0));
   }
 
   public scrollToEl(id, elementName) {
@@ -1956,7 +1956,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
 
     this.widget.guiprops.formExt.model.list.forEach((item, index) => {
       // Map identifier of elements in form
-      if (this.widgetConstructorDesignService.isItemMultiAndHasId(item.type)) {
+      if (this.widgetConstructorService.isItemMultiAndHasId(item.type)) {
         if (this.isFieldIdUnique(item.idField)) {
           const formExtEnumType = {
             text: 'TEXT',
@@ -1986,7 +1986,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
 
     let isFormHasSendIfActionFLAG;
     const isFormHasInputsFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
-      return this.widgetConstructorDesignService.isFormHasInputs(item);
+      return this.widgetConstructorService.isFormHasInputs(item);
     });
 
     const isFormHasSpecElementsFLAG = this.widget.guiprops.formExt.model.list.some((item) => {

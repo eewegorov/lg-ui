@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Injectable({
   providedIn: 'root'
 })
-export class WidgetConstructorDesignService {
+export class WidgetConstructorService {
 
   constructor(private translate: TranslateService) { }
 
@@ -31,6 +31,18 @@ export class WidgetConstructorDesignService {
       form_width_orientation_type: this.getExtFormMainWidthOrientationType()[0],
       form_widthpx: 200
     };
+  }
+
+  public removeFromArray(array, index) {
+    const newArray = [];
+    let j = 0;
+    for (let i = 0; i < array.length; i++) {
+      if (i !== index) {
+        newArray[j] = array[i];
+        j++;
+      }
+    }
+    return newArray;
   }
 
   public isItemMultiAndHasId(type) {
