@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-image-element',
@@ -6,10 +6,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./image-element.component.scss']
 })
 export class ImageElementComponent implements OnInit {
+  @Input() public index: number;
+  @Input() public modelName: any;
+  @Input() public widthHrType: string[];
+  @Input() public floatBtn: string[];
+
+  @Output() private removeElement = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public removeElementFromElementsList(index: number): void {
+    this.removeElement.emit(index);
+  }
+
+  public listFile(place, item) {
+    this.linkImage = '';
+    if (place === 'image') {
+      imageCustom = item;
+    } else if (place === 'imageSingle') {
+      imageCustom = 'imageSingle';
+    } else if (place === 'dotIcon') {
+      imageCustom = 'dotIcon';
+    } else if (place === 'labelIcon') {
+      imageCustom = 'labelIcon';
+    } else {
+      imageCustom = false;
+    }
+
+    var listUrl = openapi.getUrl("imagestore/"+$scope.sid);
+    fileList.listFileToUrl(listUrl, $scope);
+
+    $scope.controls.newModal.modal('show');
+    $('body').addClass('modal-open-h100');
   }
 
 }

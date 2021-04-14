@@ -51,6 +51,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   public widthHrType = ['От края до края', 'Собственная'];
   public floatBtn = ['Слева', 'По центру', 'Справа'];
   public widthBtn = ['Авто', 'От края до края', 'Собственная'];
+  public widgwidthBtn = ['Авто', 'Собственная'];
   public widthContentStyle = '';
   public heightContentStyle = '';
   public bgStyle = '';
@@ -73,7 +74,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     newElementModal: $('#addNewElementListModal')
   };
   private typeClass = ['1', '2', '3', '4', '5', '6'];
-  private widgwidthBtn = ['Авто', 'Собственная'];
   private typeImg = ['От края до края', 'От другого края'];
   private placeImg = ['Слева', 'Сверху', 'Справа', 'Снизу'];
   private imageItemsType = ['Растянуть по ширине и высоте блока', 'Установить произвольные габариты'];
@@ -2040,7 +2040,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     return errorsList;
   }
 
-  private buildIframeElement(item) {
+  public buildIframeElement(item) {
     setTimeout(() => {
       const elementToRemove = document.getElementById('idFrame' + item.counter);
 

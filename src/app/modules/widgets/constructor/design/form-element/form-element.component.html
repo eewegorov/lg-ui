@@ -117,7 +117,7 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" *ngFor="let itemOrient of orientInputForm" (click)="widget.guiprops.form.orient = itemOrient">
+            <li role="presentation" *ngFor="let itemOrient of orientInputForm" (click)="widget.guiprops.form['orient'] = itemOrient">
               <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemOrient }}</a>
             </li>
           </ul>
@@ -220,7 +220,7 @@
         <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
       </div>
       <div class="col-sm-12 row-subitem-padding">
-        <input [id]="'font-picker' + $parent.$index" type="text">
+        <input [id]="'font-picker' + index" type="text">
       </div>
     </div>
     <div class="row row-subitem">
@@ -374,5 +374,9 @@
   </div>
 
   <!-- Coupon settings -->
-  <app-coupon-callback coupons="coupons" place-popup="placePopup" coupon="widget.guiprops.form.couponCallback"></app-coupon-callback>
+  <app-coupon-callback
+    [coupons]="coupons"
+    [coupon]="widget.guiprops.exit.couponCallback"
+    [placePopup]="placePopup"
+  ></app-coupon-callback>
 </div>

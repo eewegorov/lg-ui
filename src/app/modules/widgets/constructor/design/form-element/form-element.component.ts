@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { FullWidget } from '../../../../../core/models/widgets';
 import { WidgetConstructorService } from '../../../services/widget-constructor.service';
+import { Coupon } from '../../../../../core/models/coupons';
 
 @Component({
   selector: 'app-form-element',
@@ -11,12 +12,16 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
 export class FormElementComponent implements OnInit {
   @Input() public index: number;
   @Input() public widget: FullWidget;
+  @Input() public coupons: Coupon[];
+  @Input() public placePopup: string[];
   @Input() public orientInputForm: string[];
   @Input() public visualInputForm: string[];
   @Input() public widthHrType: string[];
+  @Input() public widthBtn: string[];
+  @Input() public floatBtn: string[];
 
   @Output() private removeElement = new EventEmitter<{index: number, elem: Record<string, string>}>();
-
+  @Output() private setBtn = new EventEmitter<{type: string, item: Record<string, string | number>}>();
 
   public optionsRound: Options = {
     floor: 0,
@@ -59,6 +64,10 @@ export class FormElementComponent implements OnInit {
 
   public removeElementFromElementsList(index: number, elem: Record<string, string>): void {
     this.removeElement.emit({index, elem});
+  }
+
+  public setBtnStyle(type: string, item: Record<string, string | number>): void {
+    this.setBtn.emit({type, item});
   }
 
   public getItemT(item, itemType) {

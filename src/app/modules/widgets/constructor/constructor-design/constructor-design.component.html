@@ -119,8 +119,8 @@
                 <div *ngFor="let item of widget.guiprops.elementsList; trackBy: trackById; index as i" [id]="'elemScrN' + i">
                   <div *ngIf="item.name === 'button-element'">
                     <app-button-element
-                      [widget]="widget"
                       [index]="i"
+                      [widget]="widget"
                       [visualInputForm]="visualInputForm"
                       [widthBtn]="widthBtn"
                       [floatBtn]="floatBtn"
@@ -131,9 +131,9 @@
 
                   <div *ngIf="item.name === 'closelink-element'">
                     <app-closelink-element
+                      [index]="i"
                       [widget]="widget"
                       [coupons]="coupons"
-                      [index]="i"
                       [placePopup]="placePopup"
                       [widthBtn]="widthBtn"
                       [floatBtn]="floatBtn"
@@ -153,34 +153,52 @@
                     ></app-coupon-element>
                   </div>
 
+                  <div *ngIf="item.name === 'form-element'">
+                    <app-form-element
+                      [index]="i"
+                      [widget]="widget"
+                      [coupons]="coupons"
+                      [placePopup]="placePopup"
+                      [orientInputForm]="orientInputForm"
+                      [visualInputForm]="visualInputForm"
+                      [widthHrType]="widthHrType"
+                      [widthBtn]="widthBtn"
+                      [floatBtn]="floatBtn"
+                      (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
+                      (setBtn)="setBtnStyle($event.type, $event.item)"
+                    ></app-form-element>
+                  </div>
+
+                  <div *ngIf="item.name === 'iframe-element'">
+                    <app-iframe-element
+                      [index]="i"
+                      [modelName]="item"
+                      [widthHrType]="widthHrType"
+                      [widgwidthBtn]="widgwidthBtn"
+                      [floatBtn]="floatBtn"
+                      (removeElement)="removeElementFromElementsList($event)"
+                      (buildIframeElement)="buildIframeElement($event)"
+                    ></app-iframe-element>
+                  </div>
+
+                  <div *ngIf="item.name === 'image-element'">
+                    <app-image-element [ngModel]="item"></app-image-element>
+                  </div>
+
                   <div *ngIf="item.name === 'title-element'">
                     <app-text-element item="item" index="$index"></app-text-element>
                   </div>
                   <div *ngIf="item.name === 'video-element'">
                     <app-video-element [ngModel]="item"></app-video-element>
                   </div>
-                  <div *ngIf="item.name === 'image-element'">
-                    <app-image-element [ngModel]="item"></app-image-element>
-                  </div>
-                  <div *ngIf="item.name === 'iframe-element'">
-                    <app-iframe-element [ngModel]="item"></app-iframe-element>
-                  </div>
+
                   <div *ngIf="item.name === 'padding-element'">
                     <app-padding-element [ngModel]="item"></app-padding-element>
                   </div>
                   <div *ngIf="item.name === 'split-element'">
                     <app-split-element [ngModel]="item"></app-split-element>
                   </div>
-                  <div *ngIf="item.name === 'form-element'">
-                    <app-form-element
-                      [index]="i"
-                      [widget]="widget"
-                      [orientInputForm]="orientInputForm"
-                      [visualInputForm]="visualInputForm"
-                      [widthHrType]="widthHrType"
-                      (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
-                    ></app-form-element>
-                  </div>
+
                   <div *ngIf="item.name === 'form-ext-element'">
                     <app-form-extended-directive [ngModel]="item"></app-form-extended-directive>
                   </div>
