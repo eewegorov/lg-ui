@@ -118,4 +118,12 @@ export class WidgetApiService {
   public deleteCompany(siteId: string, companyId: string, company: DeleteCompanyRequest): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/companies`, company);
   }
+
+  public listFileToUrl(listUrl) {
+    return this.http.get(`${ environment.url }/${listUrl}`);
+  }
+
+  public deleteFileToUrl(deleteFileUrl, name): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(`${ environment.url }/${deleteFileUrl}/${name}`);
+  }
 }

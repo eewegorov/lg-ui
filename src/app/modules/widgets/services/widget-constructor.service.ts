@@ -1,12 +1,36 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { WidgetApiService } from './widget-api.service';
+import { catchError, map } from 'rxjs/operators';
+import { WidgetsResponse } from '../../../core/models/widgets';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { ApiResponse } from '../../../core/models/api';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WidgetConstructorService {
 
-  constructor(private translate: TranslateService) { }
+  constructor(
+    private translate: TranslateService,
+    private errorHandlerService: ErrorHandlerService,
+    private widgetApiService: WidgetApiService
+  ) { }
+
+  public listFileToUrl(listUrl) {
+    return this.widgetApiService.listFileToUrl(listUrl).pipe(
+      map((response: any) => response.data),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public deleteFileToUrl(deleteFileUrl, name): Observable<boolean> {
+    return this.widgetApiService.deleteFileToUrl(deleteFileUrl, name).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
 
   public getDefaultFormExtMainSettings() {
     return {

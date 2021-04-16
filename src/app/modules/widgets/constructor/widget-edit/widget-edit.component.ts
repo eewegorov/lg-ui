@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { FullWidget, MockupGroup, MockupShort, WidgetInfo, WidgetType } from '../../../../core/models/widgets';
+import { FullWidget, MockupGroup, MockupShort, WidgetType } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetService } from '../../services/widget.service';
 import { SitesService } from '../../../sites/services/sites.service';
@@ -11,7 +11,6 @@ import { Coupon } from '../../../../core/models/coupons';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../../core/models/user';
 import { UserService } from '../../../user/services/user.service';
-import { CloneWidgetComponent } from '../../clone-widget/clone-widget.component';
 
 @Component({
   selector: 'app-widget-edit',
