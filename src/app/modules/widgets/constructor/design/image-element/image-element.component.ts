@@ -12,6 +12,7 @@ export class ImageElementComponent implements OnInit {
   @Input() public floatBtn: string[];
 
   @Output() private removeElement = new EventEmitter<number>();
+  @Output() private listFileItem = new EventEmitter<{place: string, item: any}>();
 
   constructor() { }
 
@@ -23,24 +24,7 @@ export class ImageElementComponent implements OnInit {
   }
 
   public listFile(place, item) {
-    this.linkImage = '';
-    if (place === 'image') {
-      imageCustom = item;
-    } else if (place === 'imageSingle') {
-      imageCustom = 'imageSingle';
-    } else if (place === 'dotIcon') {
-      imageCustom = 'dotIcon';
-    } else if (place === 'labelIcon') {
-      imageCustom = 'labelIcon';
-    } else {
-      imageCustom = false;
-    }
-
-    var listUrl = openapi.getUrl("imagestore/"+$scope.sid);
-    fileList.listFileToUrl(listUrl, $scope);
-
-    $scope.controls.newModal.modal('show');
-    $('body').addClass('modal-open-h100');
+    this.listFileItem.emit({ place, item });
   }
 
 }

@@ -1667,6 +1667,113 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     }
   }
 
+  public listFile(place, item) {
+    this.linkImage = '';
+    if (place === 'image') {
+      this.imageCustom = item;
+    } else if (place === 'imageSingle') {
+      this.imageCustom = 'imageSingle';
+    } else if (place === 'dotIcon') {
+      this.imageCustom = 'dotIcon';
+    } else if (place === 'labelIcon') {
+      this.imageCustom = 'labelIcon';
+    } else {
+      this.imageCustom = false;
+    }
+
+    const listUrl = `/imagestore${this.sid}`;
+    this.listFileToUrl(listUrl);
+
+    (this.controls.newModal as any).modal('show');
+    $('body').addClass('modal-open-h100');
+  }
+
+  private listFileToUrl(listUrl){
+    $http.get(listUrl)
+      .success((data) => {
+        this.fillListImage(data);
+      })
+      .error(() => {
+      });
+  }
+
+  private fillListImage(data) {
+    if (data.data[1].length == 0) {
+      $('#addNewWidgetListModal .modal-body').find('h4').html('У вас еще нет загруженных изображений');
+    } else {
+      $('#addNewWidgetListModal .modal-body').find('h4').html('Загруженные изображения');
+    }
+
+    var response = data.data[1];
+    $('#listImagesBlock').html("");
+    for (var i = 0; i < response.length; i++) {
+      var link = response[i].link.replace('imaginarium', 'imaginarium');
+      var name = response[i].name;
+      $('#listImagesBlock').append('<div class="imageGlItem" data-link="' + link + '" data-id="' + name + '"><div class="imageGlItemIn"><div class="imageItem" style="background: url(' + link + ') center no-repeat; background-size:cover"></div></div><div class="delete-cur-img-btn" data-del="' + name + '"><span></span></div></div>');
+    }
+
+    ladLoad.stop();
+
+    $('.imageGlItemIn').on('click', function() {
+      $('.imageGlItemIn').each(function() {
+        $(this).removeClass('active');
+      });
+      $scope.nameImage = $(this).parent('.imageGlItem').data('id');
+      $scope.linkImage = $(this).parent('.imageGlItem').data('link');
+      $(this).addClass('active');
+    });
+
+    $('.imageGlItem').on('dblclick', function() {
+      $scope.updateFileDB();
+    });
+
+    $('.delete-cur-img-btn').on('click', function() {
+      var delUrl = $(this).parent('.imageGlItem').data("link");
+      $scope.nameImage = $(this).data("del");
+      var listUrl = openapi.getUrl("imagestore/"+$scope.sid+"/"+$scope.nameImage+"/");
+
+      if (delUrl == $scope.widget.guiprops.image.url) {
+        if ($scope.widget.guiprops.image.enable === true) {
+          toastr["error"]('Это изображение установлено в виджете. Выберите другое.', 'Ошибка!');
+          return false;
+        } else {
+          $scope.widget.guiprops.image.url = 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg';
+          deleteFile.deleteFileToUrl(listUrl, $scope.nameImage, $scope);
+          return false;
+        }
+      } else if (delUrl == $scope.widget.guiprops.dhVisual.url) {
+        if ($scope.widget.guiprops.dhVisual.iconOrImage === 'useImg') {
+          toastr["error"]('Это изображение установлено в виджете. Выберите другое.', 'Ошибка!');
+          return false;
+        } else {
+          $scope.widget.guiprops.dhVisual.url = 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg';
+          deleteFile.deleteFileToUrl(listUrl, $scope.nameImage, $scope);
+          return false;
+        }
+      } else if (delUrl == $scope.widget.guiprops.labelMain.url) {
+        if ($scope.widget.guiprops.labelMain.iconOrImage === 'useImg') {
+          toastr["error"]('Это изображение установлено в виджете. Выберите другое.', 'Ошибка!');
+          return false;
+        } else {
+          $scope.widget.guiprops.labelMain.url = 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg';
+          deleteFile.deleteFileToUrl(listUrl, $scope.nameImage, $scope);
+          return false;
+        }
+      } else if (delUrl == $scope.widget.guiprops.bg.url) {
+        if ($scope.widget.guiprops['bg'].fillorImg === 'useImg') {
+          toastr["error"]('Это изображение установлено в виджете. Выберите другое.', 'Ошибка!');
+          return false;
+        } else {
+          $scope.widget.guiprops.bg.url = 'https://static.leadgenic.com/lg_widgets_l11/img/land.jpg';
+          deleteFile.deleteFileToUrl(listUrl, $scope.nameImage, $scope);
+          return false;
+        }
+      } else {
+        deleteFile.deleteFileToUrl(listUrl, $scope.nameImage, $scope);
+      }
+    });
+  }
+
   public isThankShouldShow() {
     return (this.widget.guiprops.form.enable && !this.widget.guiprops.formSet.redirect.enable) ||
       (this.widget.guiprops.formExt.enable &&

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FullWidget } from '../../../../../core/models/widgets';
 
 @Component({
   selector: 'app-redirect-element',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./redirect-element.component.scss']
 })
 export class RedirectElementComponent implements OnInit {
+  @Input() public widget: FullWidget;
 
   constructor() { }
 

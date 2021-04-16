@@ -182,7 +182,22 @@
                   </div>
 
                   <div *ngIf="item.name === 'image-element'">
-                    <app-image-element [ngModel]="item"></app-image-element>
+                    <app-image-element
+                      [index]="i"
+                      [modelName]="item"
+                      [widthHrType]="widthHrType"
+                      [floatBtn]="floatBtn"
+                      (removeElement)="removeElementFromElementsList($event)"
+                      (listFileItem)="listFile($event.place, $event.item)"
+                    ></app-image-element>
+                  </div>
+
+                  <div *ngIf="item.name === 'padding-element'">
+                    <app-padding-element
+                      [index]="i"
+                      [modelName]="item"
+                      (removeElement)="removeElementFromElementsList($event)"
+                    ></app-padding-element>
                   </div>
 
                   <div *ngIf="item.name === 'title-element'">
@@ -190,10 +205,6 @@
                   </div>
                   <div *ngIf="item.name === 'video-element'">
                     <app-video-element [ngModel]="item"></app-video-element>
-                  </div>
-
-                  <div *ngIf="item.name === 'padding-element'">
-                    <app-padding-element [ngModel]="item"></app-padding-element>
                   </div>
                   <div *ngIf="item.name === 'split-element'">
                     <app-split-element [ngModel]="item"></app-split-element>
