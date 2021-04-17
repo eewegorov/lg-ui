@@ -14,4 +14,23 @@ export class RedirectElementComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public validateRedirect(e) {
+    const widgetInput = $(e.target).val();
+    const widgetNameBtnDel = $('#removeWidgetRedirect');
+    if (widgetInput === '') {
+      widgetNameBtnDel.addClass('hide');
+    }
+    else {
+      widgetNameBtnDel.removeClass('hide');
+    }
+  }
+
+  public removeWidgetRedirect(e) {
+    e.preventDefault();
+    $('#widgetRedirectUrl').val('');
+    this.widget.guiprops.formSet.redirect.url = '';
+    $('#widgetRedirectUrl').change();
+    $(e.target).addClass('hide');
+  }
+
 }

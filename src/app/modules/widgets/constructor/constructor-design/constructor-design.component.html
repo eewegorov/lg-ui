@@ -86,7 +86,7 @@
                   </div>
                 </div>
                 <app-visual-element></app-visual-element>
-                <app-redirect-element></app-redirect-element>
+                <app-redirect-element [widget]="widget"></app-redirect-element>
               </div>
             </div>
           </div>
@@ -200,21 +200,41 @@
                     ></app-padding-element>
                   </div>
 
-                  <div *ngIf="item.name === 'title-element'">
-                    <app-text-element item="item" index="$index"></app-text-element>
+                  <div *ngIf="item.name === 'social-element'">
+                    <app-social-element
+                      [index]="i"
+                      [widget]="widget"
+                      [coupons]="coupons"
+                      [placePopup]="placePopup"
+                      [floatBtn]="floatBtn"
+                      (removeElement)="removeElementFromElementsList($event)"
+                    ></app-social-element>
                   </div>
+
+                  <div *ngIf="item.name === 'split-element'">
+                    <app-split-element
+                      [index]="i"
+                      [modelName]="item"
+                      [typeClass]="typeClass"
+                      [widthHrType]="widthHrType"
+                      [floatBtn]="floatBtn"
+                      (removeElement)="removeElementFromElementsList($event)"
+                    ></app-split-element>
+                  </div>
+
+                  <div *ngIf="item.name === 'title-element'">
+                    <app-text-element
+                      item="item"
+                      index="$index"
+                    ></app-text-element>
+                  </div>
+
                   <div *ngIf="item.name === 'video-element'">
                     <app-video-element [ngModel]="item"></app-video-element>
                   </div>
-                  <div *ngIf="item.name === 'split-element'">
-                    <app-split-element [ngModel]="item"></app-split-element>
-                  </div>
 
                   <div *ngIf="item.name === 'form-ext-element'">
-                    <app-form-extended-directive [ngModel]="item"></app-form-extended-directive>
-                  </div>
-                  <div *ngIf="item.name === 'social-element'">
-                    <app-social-element></app-social-element>
+                    <app-form-extended></app-form-extended>
                   </div>
                 </div>
                 <div>

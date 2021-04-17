@@ -2,7 +2,7 @@
   <div>
     <div class="col-lg-12">
       <h4 class="h4-element-title">
-        Разделитель &#35;{{${modelName}.counter}} <a (click)="removeElementFromElementsList($index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
+        Разделитель &#35;{{ modelName.counter }} <a (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
       </h4>
     </div>
     <div class="clearfix"></div>
@@ -11,11 +11,11 @@
         <label class="control-label control-label-colorpc control-label-des">Тип разделителя:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            <hr class="style{{${modelName}.type}}">
+            <hr class="style{{ modelName.type }}">
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" *ngFor="let itemVisual of typeClass" (click)="${modelName}.type = itemVisual">
+            <li role="presentation" *ngFor="let itemVisual of typeClass" (click)="modelName.type = itemVisual">
               <a role="menuitem" tabindex="-1" href="javascript:void(0)"><hr class="style{{ itemVisual }}"></a>
             </li>
           </ul>
@@ -24,8 +24,8 @@
       <div class="col-sm-6 row-subitem-padding">
         <label class="control-label control-label-colorpc control-label-des">Цвет разделителя:</label>
         <input
-          [(colorPicker)]="${modelName}.color"
-          [style.background]="${modelName}.color"
+          [(colorPicker)]="modelName.color"
+          [style.background]="modelName.color"
           [cpAlphaChannel]="'disabled'"
           [cpOutputFormat]="'hex'"
         />
@@ -36,11 +36,11 @@
         <label class="control-label control-label-des">Ширина разделителя:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{${modelName}.width_type}}
+            {{ modelName.width_type }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" *ngFor="let itemVisual of widthHrType" (click)="${modelName}.width_type = itemVisual">
+            <li role="presentation" *ngFor="let itemVisual of widthHrType" (click)="modelName.width_type = itemVisual">
               <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
             </li>
           </ul>
@@ -50,20 +50,20 @@
         <label class="control-label control-label-des">Ориентация:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{${modelName}.position}}
+            {{ modelName.position }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" *ngFor="let itemVisual of floatBtn" (click)="${modelName}.position = itemVisual">
+            <li role="presentation" *ngFor="let itemVisual of floatBtn" (click)="modelName.position = itemVisual">
               <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <div *ngIf="${modelName}.width_type === 'Собственная'">
+    <div *ngIf="modelName.width_type === 'Собственная'">
       <div class="col-sm-12 padding-top-5 margined-top-10">
-        <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="${modelName}.widthpx">
+        <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="modelName.widthpx">
         <label class="control-label">px <span>ширина разделителя</span></label>
       </div>
       <div class="clearfix"></div>

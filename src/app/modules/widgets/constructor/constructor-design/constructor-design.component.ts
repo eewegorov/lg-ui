@@ -11,7 +11,6 @@ import { FullWidget } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-constructor-design',
@@ -53,6 +52,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   public floatBtn = ['Слева', 'По центру', 'Справа'];
   public widthBtn = ['Авто', 'От края до края', 'Собственная'];
   public widgwidthBtn = ['Авто', 'Собственная'];
+  public typeClass = ['1', '2', '3', '4', '5', '6'];
   public widthContentStyle = '';
   public heightContentStyle = '';
   public bgStyle = '';
@@ -74,7 +74,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     newModal: $('#addNewWidgetListModal'),
     newElementModal: $('#addNewElementListModal')
   };
-  private typeClass = ['1', '2', '3', '4', '5', '6'];
   private typeImg = ['От края до края', 'От другого края'];
   private placeImg = ['Слева', 'Сверху', 'Справа', 'Снизу'];
   private imageItemsType = ['Растянуть по ширине и высоте блока', 'Установить произвольные габариты'];

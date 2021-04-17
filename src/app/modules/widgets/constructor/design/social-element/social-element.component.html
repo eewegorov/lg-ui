@@ -264,8 +264,10 @@
       </div>
     </div>
 
-    <!-- Coupon settings -->
-    <app-coupon-callback coupons="coupons" place-popup="placePopup" coupon="widget.guiprops.social.couponCallback"></app-coupon-callback>
-
+    <app-coupon-callback
+      [coupons]="coupons"
+      [coupon]="widget.guiprops.social.couponCallback"
+      [placePopup]="placePopup"
+    ></app-coupon-callback>
   </div>
 </div>

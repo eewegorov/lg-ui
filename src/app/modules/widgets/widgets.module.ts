@@ -56,6 +56,7 @@ import { VideoElementComponent } from './constructor/design/video-element/video-
 import { VisualElementComponent } from './constructor/design/visual-element/visual-element.component';
 import { CouponCallbackComponent } from './constructor/design/coupon-callback/coupon-callback.component';
 import { NgxSummernoteModule } from 'ngx-summernote';
+import { FormExtendedComponent } from './constructor/design/form-extended/form-extended.component';
 
 
 @NgModule({
@@ -102,6 +103,7 @@ import { NgxSummernoteModule } from 'ngx-summernote';
     VideoElementComponent,
     VisualElementComponent,
     CouponCallbackComponent,
+    FormExtendedComponent,
   ],
   exports: [
     SmartpointsControlComponent
