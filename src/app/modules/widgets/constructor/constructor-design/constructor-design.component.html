@@ -85,7 +85,19 @@
                     <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
                   </div>
                 </div>
-                <app-visual-element></app-visual-element>
+                <app-visual-element
+                  [widget]="widget"
+                  [widgwidthBtn]="widgwidthBtn"
+                  [vertOrientDh]="vertOrientDh"
+                  [bgPositionTypesList]="bgPositionTypesList"
+                  [tilesList]="tilesList"
+                  [maskTypeList]="maskTypeList"
+                  [placeImg]="placeImg"
+                  [imageItemsType]="imageItemsType"
+                  [imageItemsAlign]="imageItemsAlign"
+                  (getVideo)="getVideoId($event)"
+                  (listFileItem)="listFile($event)"
+                ></app-visual-element>
                 <app-redirect-element [widget]="widget"></app-redirect-element>
               </div>
             </div>
@@ -224,13 +236,23 @@
 
                   <div *ngIf="item.name === 'title-element'">
                     <app-text-element
-                      item="item"
-                      index="$index"
+                      [index]="i"
+                      [item]="item"
+                      [widget]="widget"
+                      (removeElement)="removeElementFromElementsList($event)"
                     ></app-text-element>
                   </div>
 
                   <div *ngIf="item.name === 'video-element'">
-                    <app-video-element [ngModel]="item"></app-video-element>
+                    <app-video-element
+                      [index]="i"
+                      [modelName]="item"
+                      [widthHrType]="widthHrType"
+                      [floatBtn]="floatBtn"
+                      (removeElement)="removeElementFromElementsList($event)"
+                      (getVideo)="getVideoId($event)"
+                      (setVideoSize)="newVideoSize($event)"
+                    ></app-video-element>
                   </div>
 
                   <div *ngIf="item.name === 'form-ext-element'">

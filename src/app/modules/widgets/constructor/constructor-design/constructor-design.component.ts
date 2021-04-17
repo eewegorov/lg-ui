@@ -46,6 +46,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     'Справа по центру',
     'Слева по центру'
   ];
+  public vertOrientDh = ['От верхней границы', 'По центру виджета', 'От нижней границы'];
+  public bgPositionTypesList = ['Растянуть', 'Замостить'];
+  public tilesList = ['Замостить по X', 'Замостить по Y', 'Замостить по X+Y'];
+  public maskTypeList = ['Вся площадь виджета', 'Только под контентом'];
+  public placeImg = ['Слева', 'Сверху', 'Справа', 'Снизу'];
+  public imageItemsType = ['Растянуть по ширине и высоте блока', 'Установить произвольные габариты'];
+  public imageItemsAlign = ['По центру', 'По верхнему краю', 'По нижнему краю'];
   public orientInputForm = ['Вертикальная', 'Горизонтальная'];
   public visualInputForm = ['Под контентом', 'На всю ширину'];
   public widthHrType = ['От края до края', 'Собственная'];
@@ -75,14 +82,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     newElementModal: $('#addNewElementListModal')
   };
   private typeImg = ['От края до края', 'От другого края'];
-  private placeImg = ['Слева', 'Сверху', 'Справа', 'Снизу'];
-  private imageItemsType = ['Растянуть по ширине и высоте блока', 'Установить произвольные габариты'];
-  private imageItemsAlign = ['По центру', 'По верхнему краю', 'По нижнему краю'];
-  private maskTypeList = ['Вся площадь виджета', 'Только под контентом'];
-  private tilesList = ['Замостить по X', 'Замостить по Y', 'Замостить по X+Y'];
-  private bgPositionTypesList = ['Растянуть', 'Замостить'];
   private placeDh = ['Левый нижний угол', 'Правый нижний угол'];
-  private vertOrientDh = ['От верхней границы', 'По центру виджета', 'От нижней границы'];
   private staticWidgetAlign = ['По центру', 'По левому краю', 'По правому краю'];
   private sizeSocBtn = ['Большой', 'Средний', 'Маленький'];
   private placeLabel = ['Нижний левый угол', 'Нижний правый угол', 'Правая сторона браузера', 'Левая сторона браузера'];
@@ -117,6 +117,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       this.downUpInit();
       this.downUpInitAir();
     });
+
+    // Init video BG
+    if (this.widget.guiprops.bg.video && (this.widget.guiprops.bg.fillorImg === 'useVideo') && this.widget.guiprops.bg.video.videoId) {
+      this.newVideoSize(this.widget.guiprops.bg.video);
+    }
   }
 
   ngAfterViewInit(): void {
@@ -128,6 +133,28 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.widget.guiprops.formExt.model.mainSettings.colorPod.enable) {
+      this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod =
+        (this.widgetConstructorService.hexToRgb(
+          this.widget.guiprops.formExt.model.mainSettings.colorPod.color,
+          this.widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod
+        )).toString();
+    }
+    else {
+      this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent!important';
+    }
+
+    if (this.widget.guiprops.form.colorPod.enable) {
+      this.widget.guiprops.form.colorPod.rgbaColorPod =
+        (this.widgetConstructorService.hexToRgb(
+          this.widget.guiprops.form.colorPod.color,
+          this.widget.guiprops.form.colorPod.opacityColorPod
+        )).toString();
+    }
+    else {
+      this.widget.guiprops.form.colorPod.rgbaColorPod = 'transparent!important';
+    }
+
     this.widget.guiprops.form.rgbaInputForm = (this.widgetConstructorService
       .hexToRgb(this.widget.guiprops.form.bgInputForm, this.widget.guiprops.form.opacityBgInputForm)).toString();
 
@@ -1668,7 +1695,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     }
   }
 
-  public listFile(place, item) {
+  public listFile(place, item?) {
     this.linkImage = '';
     if (place === 'image') {
       this.imageCustom = item;
@@ -2192,7 +2219,43 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     }, 0);
   }
 
-  private newVideoSize(item) {
+  public getVideoId(item) {
+    if (!item.videoUrl) {
+      item.videoUrl = 'https://';
+    }
+
+    let result = '';
+    if (item.videoType === 'youtube') {
+      const regYExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+      const match = item.videoUrl.match(regYExp);
+      result = (match && match[7].length === 11) ? match[7] : false;
+      if (result) {
+        if (item.isVideoBG) {
+          item.videoPreview = 'https://img.youtube.com/vi/' + result + '/hqdefault.jpg';
+          result = result +
+            '?controls=0&iv_load_policy=3&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&modestbranding=1&disablekb=1&playlist=' + result;
+        }
+        item.videoUrl = 'https://www.youtube.com/embed/' + result;
+      }
+    } else {
+      const regVExp = /^.+vimeo.com\/(.*\/)?([^#\?]*)/;
+      const parseUrl = item.videoUrl.match(regVExp);
+      result = (parseUrl && parseUrl[2].length === 9) ? parseUrl[2] : false;
+      result += '';
+      if (result) {
+        if (item.isVideoBG) {
+          item.videoPreview = 'https://i.vimeocdn.com/video/' + result + '.png';
+          result = result + '?background=1';
+        }
+        item.videoUrl = 'https://player.vimeo.com/video/' + result;
+      }
+    }
+
+    item.videoId = result;
+    this.newVideoSize(item);
+  }
+
+  public newVideoSize(item) {
     setTimeout(() => {
       if (item.typeBl) {
         $('#idImageVideoFrame').attr('src', item.videoUrl);

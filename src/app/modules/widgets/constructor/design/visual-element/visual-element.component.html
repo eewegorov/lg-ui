@@ -46,7 +46,7 @@
             <ul class="dropdown-menu" role="menu">
               <li
                 role="presentation"
-                *ngFor="item in widgwidthBtn"
+                *ngFor="let item of widgwidthBtn"
                 (click)="widget.guiprops.dhVisual.widget_content_height = item"
               >
                 <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
