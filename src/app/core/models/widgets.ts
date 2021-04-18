@@ -27,7 +27,7 @@ export interface FullWidget {
   restrictions: Record<string, any>;
   autoresponder: Record<string, string>;
   audiencesEnabled: boolean;
-  audience: Record<string, string>[];
+  audience: Audience;
   rules: Record<string, any>;
   guiprops: Record<string, any>;
   coupons: string[];
@@ -36,6 +36,19 @@ export interface FullWidget {
   customFields: CustomField[];
   jsInfo: WidgetJsInfo;
   autoinvite?: Record<string, any>;
+}
+
+export interface Audience {
+  groups: AudienceGroup[];
+}
+
+export interface AudienceGroup {
+  items: AudienceGroupItem[];
+}
+
+export interface AudienceGroupItem {
+  type: string;
+  subitems: object;
 }
 
 export interface CustomField {

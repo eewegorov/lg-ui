@@ -1,6 +1,6 @@
 <div class="widgets-settings-container">
   <!-- Audiences list -->
-  <div id="audiences-list" *ngIf="audienceMode == MODE_LIST">
+  <div id="audiences-list" *ngIf="audienceMode === MODE_LIST">
     <h1>{{ 'widgetsList.editor.audiences.title' | translate }}</h1>
     <div class="f-4 audience-tooolbar-desc" style="margin-top: 30px;">{{ 'widgetsList.editor.audiences.disc' | translate }}</div>
     <div class="toolbar-content no-padding padding-top-30">
@@ -140,7 +140,7 @@
   <!-- End Audiences list -->
 
   <!-- Audience editor -->
-  <div id="audiences-item" *ngIf="audienceMode == MODE_ITEM">
+  <div id="audiences-item" *ngIf="audienceMode === MODE_ITEM">
     <!-- TEMPLATES -->
 
     <!-- CONTENT -->
