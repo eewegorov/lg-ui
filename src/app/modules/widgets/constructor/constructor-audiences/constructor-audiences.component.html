@@ -1,6 +1,6 @@
 <div class="widgets-settings-container">
   <!-- Audiences list -->
-  <div id="audiences-list" *ngIf="audienceMode === MODE_LIST">
+  <div id="audiences-list">
     <h1>{{ 'widgetsList.editor.audiences.title' | translate }}</h1>
     <div class="f-4 audience-tooolbar-desc" style="margin-top: 30px;">{{ 'widgetsList.editor.audiences.disc' | translate }}</div>
     <div class="toolbar-content no-padding padding-top-30">
@@ -13,42 +13,6 @@
           ></ui-switch><h3 class="f-5 margined-top-5">{{ 'widgetsList.editor.audiences.enabled' | translate }}<span
           class="label label-warning tariff-info biggest">окупаемый</span></h3>
         </div>
-        <button
-          type="button"
-          id="addAudience"
-          *ngIf="widget.audiencesEnabled"
-          (click)="addNewAudience()"
-          class="btn btn-lg w-xs btn-success margined-right-20"
-        ><i class="fa fa-plus-circle"></i>{{ 'audience.addNew' | translate }}</button>
-      </div>
-    </div>
-
-    <div class="row no-animate padding-bottom-70" *ngIf="widget.audiencesEnabled">
-      <div class="col-sm-4" *ngIf="audiences.length == 0">
-        <div class="audience-panel-content">
-          <i class="fa fa-group audience-icon"></i>
-          <h3 class="audience-title">{{ 'audience.allUser.name' | translate }}</h3>
-          <p class="audience-desc-tilte">{{ 'audience.desc' | translate }}:</p>
-          <p>{{ 'audience.allUser.desc' | translate }}</p>
-        </div>
-      </div>
-
-      <div class="col-xs-6 col-sm-4" *ngFor="let audItem of audiences">
-        <div class="text-center m-t-xs row">
-          <button class="btn btn-primary margined-right-5 audience-panel-btn text-left" (click)="editAudience(audItem)">
-            <i class="pe-7s-pen"></i> {{ 'audience.edit' | translate }}
-          </button>
-          <button class="btn btn-danger margined-left-5 audience-panel-btn text-left" (click)="deleteAudience(audItem)">
-            <i class="pe-7s-trash"></i> {{ 'global.delete' | translate }}
-          </button>
-        </div>
-
-        <div class="audience-panel-content">
-          <i class="fa fa-group audience-icon"></i>
-          <h3 class="audience-title">{{ getCroppedString(audItem.name, 60, "…") }}</h3>
-          <p class="audience-desc-tilte">{{ 'audience.desc' | translate }}:</p>
-          <p class="audience-desc">{{ getCroppedString(audItem.description, 60, "…") }}</p>
-        </div>
       </div>
     </div>
 
@@ -58,7 +22,7 @@
         <button
           type="button"
           *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-          (click)="goToTest(widget)"
+          (click)="goToTest()"
           class="btn w-xs gototest-widget-btn"
         >
           <i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту
@@ -140,20 +104,7 @@
   <!-- End Audiences list -->
 
   <!-- Audience editor -->
-  <div id="audiences-item" *ngIf="audienceMode === MODE_ITEM">
-    <!-- TEMPLATES -->
-
-    <!-- CONTENT -->
-    <div class="row row-nomargined margined-bottom-15" style="max-height: 72px;">
-      <div class="validable col-lg-6" data-context="name" [ngClass]="(audience.name.trim().length == 0) ? 'has-error' : ''">
-        <label class="control-label">{{ 'audience.name' | translate }}</label>
-        <input type="text" name="name" class="form-control" id="name" [(ngModel)]="audience.name" autocomplete="off">
-      </div>
-      <div class="validable col-lg-6" data-context="description">
-        <label class="control-label">{{ 'audience.description' | translate }}</label>
-        <input type="text" name="description" class="form-control" id="description" [(ngModel)]="audience.description" autocomplete="off">
-      </div>
-    </div>
+  <div id="audiences-item">
     <!-- Audience editor core -->
     <div class="row row-nomargined margined-bottom-15">
       <div class="col-lg-8" id="rules-containers">
@@ -164,11 +115,11 @@
           </div>
         </div>
         <div *ngFor="let group of audience.groups; index as i">
-          <div class="rule-groups-text" *ngIf="$index != 0">{{ 'audience.rule.logic.and' | translate }}</div>
+          <div class="rule-groups-text" *ngIf="i !== 0">{{ 'audience.rule.logic.and' | translate }}</div>
           <div *ngFor="let item of group.items">
             <div class="rule-block">
               <div class="rule-header">
-                {{ item.name }}<i class="pe-7s-close-circle" (click)="removeItem(group.$$hashKey, $index)"></i>
+                <i class="pe-7s-close-circle" (click)="removeItem(group.id, $index)"></i>
               </div>
               <div class="rule-body" [ngSwitch]="item.type">
                 <rule-refer     *ngSwitchCase="refer"   ng-model="item"></rule-refer>
@@ -236,23 +187,6 @@
           <div name="name">{{ 'audience.rule.social' | translate }}</div>
           <div name="description">{{ 'audience.rule.social.desc' | translate }}</div>
         </div>
-
-        <button
-          type="button"
-          id="saveAudience"
-          class="btn btn-lg w-xs btn-success margined-top-10"
-          (click)="saveAudience()"
-        >
-          <i class="fa fa-save"></i> {{ 'audience.save' | translate }}
-        </button>
-        <button
-          type="button"
-          id="cancelAudience"
-          class="btn btn-lg w-xs btn-default margined-top-10"
-          (click)="audienceMode = MODE_LIST"
-        >
-          <i class="fa fa-undo"></i> {{ 'audience.return' | translate }}
-        </button>
       </div>
     </div>
   </div>

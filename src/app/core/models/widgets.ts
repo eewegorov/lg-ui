@@ -43,6 +43,7 @@ export interface Audience {
 }
 
 export interface AudienceGroup {
+  id?: number;
   items: AudienceGroupItem[];
 }
 

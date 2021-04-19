@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import Swal from 'sweetalert2';
-import { AudienceGroup, FullWidget } from '../../../../core/models/widgets';
+import { Audience, AudienceGroup, FullWidget } from '../../../../core/models/widgets';
+import { WidgetService } from '../../services/widget.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-constructor-audiences',
@@ -9,36 +9,23 @@ import { AudienceGroup, FullWidget } from '../../../../core/models/widgets';
   styleUrls: ['./constructor-audiences.component.scss']
 })
 export class ConstructorAudiencesComponent implements OnInit {
-  @Input() public wid: string;
   @Input() public widget: FullWidget;
-  @Input() public audiences: AudienceGroup[];
+  @Input() public audience: Audience;
+  @Input() public isMockup: boolean;
 
-  public MODE_LIST = 0;
-  public MODE_ITEM = 1;
-  public audienceMode: number;
-  public audience: any;
 
-  constructor(private translate: TranslateService) {
-    this.audienceMode = this.MODE_LIST;
+  constructor(
+    private router: Router,
+    private widgetService: WidgetService
+  ) {
   }
 
   ngOnInit(): void {
+    this.audience.groups = this.audience.groups.map((group: AudienceGroup, i: number) => ({ ...group, id: i }));
   }
 
-  public addNewAudience() {
-    this.audience = {
-      name       : '',
-      description: '',
-      groups: [],
-      sites: [],
-      widgetId: this.wid
-    };
-    this.audienceMode = this.MODE_ITEM;
-  }
-
-  public editAudience(item) {
-    this.audience = item;
-    this.audienceMode = this.MODE_ITEM;
+  public goToTest() {
+    this.router.navigate([`/abtests/active?testIdNum-${this.widget.abtestInfo.id}`]).then();
   }
 
   public getCroppedString(str, count, addedSymbol) {
@@ -81,6 +68,10 @@ export class ConstructorAudiencesComponent implements OnInit {
         return;
       }
     }
+  }
+
+  public onChangePayment(enabled) {
+    this.widgetService.onChangePayment.next(enabled);
   }
 
 }

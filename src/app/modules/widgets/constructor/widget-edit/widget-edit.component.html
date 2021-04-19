@@ -132,7 +132,11 @@
     *ngIf="isCurrentActiveTab('audience')"
     [ngClass]="{ active: isCurrentActiveTab('audience') }"
   >
-    <app-constructor-audiences></app-constructor-audiences>
+    <app-constructor-audiences
+      [widget]="widget"
+      [audience]="audience"
+      [isMockup]="isMockup"
+    ></app-constructor-audiences>
   </div>
 
   <div

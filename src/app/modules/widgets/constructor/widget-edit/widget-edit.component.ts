@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import {
-  AudienceGroup,
+  Audience,
   FullWidget,
   MockupGroup,
   MockupShort,
@@ -34,7 +34,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   public isPayment = false;
   public isContainerized: boolean;
   public currentActiveTab = 'design';
-  public audiences: AudienceGroup[] = [];
+  public audience: Audience;
   public coupons = [];
 
   private validators = [];
@@ -271,7 +271,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   private loadWidget() {
     this.widgetService.getWidgetById(this.sid, this.wid).subscribe((response: FullWidget) => {
       this.widget = response as unknown as FullWidget;
-      this.audiences = response.audience.groups;
+      this.audience = response.audience;
       this.widget.id = this.wid;
       this.widgetService.loadWidgetListeners.forEach(item => {
         item.call(this);
