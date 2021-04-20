@@ -49,7 +49,8 @@ export interface AudienceGroup {
 
 export interface AudienceGroupItem {
   type: string;
-  subitems: object;
+  subitems: object[];
+  id?: number;
 }
 
 export interface CustomField {

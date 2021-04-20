@@ -15,91 +15,6 @@
         </div>
       </div>
     </div>
-
-    <!-- FOOTER -->
-    <div class="footer-group" id="save-widget-panel">
-      <div class="text-right padding10">
-        <button
-          type="button"
-          *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-          (click)="goToTest()"
-          class="btn w-xs gototest-widget-btn"
-        >
-          <i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту
-        </button>
-        <a
-          type="button"
-          *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
-          class="btn w-xs btn-primary buy-widget-btn"
-        >
-          <i class="pe-7s-tools margined-right-10"></i>{{ 'widgetsList.add.alt2' | translate }}
-        </a>
-        <div class="btn-group play-btns widget-enabler-btns" *ngIf="!isMockup">
-          <p>{{ 'widgetsList.widget.state' | translate }}</p>
-          <button
-            *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
-            (click)="startWidget(widget)"
-            [ngClass]="(widget.active) ? 'active' : ''"
-            class="btn btn-xs btn-default start-widget-btn"
-            data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
-          >
-            <i class="fa fa-play"></i>
-          </button>
-          <button
-            *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
-            (click)="stopWidget(widget)"
-            [ngClass]="(widget.active) ? '' : 'active'"
-            class="btn btn-xs btn-default stop-widget-btn"
-            data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
-          >
-            <i class="fa fa-pause"></i>
-          </button>
-
-          <button
-            *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-            (click)="startWidget(widget)"
-            [ngClass]="(widget.active) ? 'active' : ''"
-            class="btn btn-xs btn-default start-widget-btn"
-            data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить варинт"
-          >
-            <i class="fa fa-play"></i>
-          </button>
-          <button
-            *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-            (click)="stopWidget(widget)"
-            [ngClass]="(widget.active) ? '' : 'active'"
-            class="btn btn-xs btn-default stop-widget-btn"
-            data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
-          >
-            <i class="fa fa-pause"></i>
-          </button>
-        </div>
-
-        <ng-container *ngIf="hasRole('ROLE_DESIGNER')">
-          <button
-            type="button"
-            (click)="saveAsMockup()"
-            class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left"
-            data-style="slide-down" *ngIf="!isMockup"
-          >
-            <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
-          </button>
-        </ng-container>
-
-        <button
-          type="button"
-          id="saveWidget"
-          (click)="saveWidget()"
-          class="ladda-button btn w-xs btn-success floated-left"
-          data-style="slide-down"
-        >
-              <span class="ladda-label"><i class="fa fa-save"></i> <span
-                *ngIf="!isMockup">{{ (widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет' }}</span><span
-                *ngIf="isMockup">Сохранить темплейт</span>
-              </span>
-        </button>
-      </div>
-    </div>
   </div>
   <!-- End Audiences list -->
 
@@ -116,10 +31,10 @@
         </div>
         <div *ngFor="let group of audience.groups; index as i">
           <div class="rule-groups-text" *ngIf="i !== 0">{{ 'audience.rule.logic.and' | translate }}</div>
-          <div *ngFor="let item of group.items">
+          <div *ngFor="let item of group.items; index as j">
             <div class="rule-block">
               <div class="rule-header">
-                <i class="pe-7s-close-circle" (click)="removeItem(group.id, $index)"></i>
+                <i class="pe-7s-close-circle" (click)="removeItem(group.id, j)"></i>
               </div>
               <div class="rule-body" [ngSwitch]="item.type">
                 <rule-refer     *ngSwitchCase="refer"   ng-model="item"></rule-refer>

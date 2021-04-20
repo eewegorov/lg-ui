@@ -1,4 +1,86 @@
 <div class="title-widget-container">
+  <!-- HEADER -->
+  <div class="footer-group" id="save-widget-panel">
+    <div class="text-right padding10">
+      <button
+        type="button"
+        *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+        (click)="goToTest(widget)"
+        class="btn w-xs gototest-widget-btn"
+      >
+        <i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту
+      </button>
+      <a
+        type="button"
+        *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
+        class="btn w-xs btn-primary buy-widget-btn"
+      >
+        <i class="pe-7s-tools margined-right-10"></i> {{ 'widgetsList.add.alt2' | translate }}
+      </a>
+      <div class="btn-group play-btns" *ngIf="!isMockup">
+        <p>Статус:</p>
+        <button
+          *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+          (click)="startWidget(widget)"
+          [ngClass]="(widget.active) ? 'active' : ''"
+          class="btn btn-xs btn-default start-widget-btn"
+          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
+        >
+          <i class="fa fa-play"></i>
+        </button>
+        <button
+          *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+          (click)="stopWidget(widget)"
+          [ngClass]="(widget.active) ? '' : 'active'"
+          class="btn btn-xs btn-default stop-widget-btn"
+          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
+        >
+          <i class="fa fa-pause"></i>
+        </button>
+
+        <button
+          *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+          (click)="startWidget(widget)"
+          [ngClass]="(widget.active) ? 'active' : ''"
+          class="btn btn-xs btn-default start-widget-btn"
+          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить вариант"
+        >
+          <i class="fa fa-play"></i>
+        </button>
+        <button
+          *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+          (click)="stopWidget(widget)"
+          [ngClass]="(widget.active) ? '' : 'active'"
+          class="btn btn-xs btn-default stop-widget-btn"
+          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
+        >
+          <i class="fa fa-pause"></i>
+        </button>
+      </div>
+
+      <ng-container *ngIf="isDesigner">
+        <button
+          type="button"
+          *ngIf="!isMockup"
+          (click)="saveAsMockup()"
+          class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left"
+          data-style="slide-down"
+        >
+          <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
+        </button>
+      </ng-container>
+
+      <button type="button" id="saveWidget" (click)="saveWidget()" class="ladda-button btn w-xs btn-success" data-style="slide-down">
+        <span class="ladda-label">
+          <i class="fa fa-save"></i> <span
+          *ngIf="!isMockup"
+          [innerHTML]="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span
+          *ngIf="isMockup">Сохранить темплейт</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
   <h3 *ngIf="renamedWidget.id !== widget.id" class="widget-title-main">
     {{ (widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Настройка варианта:' : 'Настройка виджета:' }}
   </h3>

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Audience, AudienceGroup, FullWidget } from '../../../../core/models/widgets';
-import { WidgetService } from '../../services/widget.service';
 import { Router } from '@angular/router';
+import { Audience, AudienceGroup, AudienceGroupItem, FullWidget } from '../../../../core/models/widgets';
+import { WidgetService } from '../../services/widget.service';
+import { WidgetConstructorService } from '../../services/widget-constructor.service';
 
 @Component({
   selector: 'app-constructor-audiences',
@@ -13,19 +14,19 @@ export class ConstructorAudiencesComponent implements OnInit {
   @Input() public audience: Audience;
   @Input() public isMockup: boolean;
 
-
   constructor(
     private router: Router,
-    private widgetService: WidgetService
+    private widgetService: WidgetService,
+    private widgetConstructorService: WidgetConstructorService
   ) {
   }
 
   ngOnInit(): void {
-    this.audience.groups = this.audience.groups.map((group: AudienceGroup, i: number) => ({ ...group, id: i }));
-  }
-
-  public goToTest() {
-    this.router.navigate([`/abtests/active?testIdNum-${this.widget.abtestInfo.id}`]).then();
+    this.audience.groups = this.audience.groups.map((group: AudienceGroup, i: number) => ({
+      ...group,
+      id: i,
+      items: group.items.map((item: AudienceGroupItem, j: number) => ({ ...item, id: j }))
+    }));
   }
 
   public getCroppedString(str, count, addedSymbol) {
@@ -38,11 +39,11 @@ export class ConstructorAudiencesComponent implements OnInit {
 
   public removeItem(group, index) {
     for (let i = 0; i < this.audience.groups.length; i++) {
-      if (this.audience.groups[i].$$hashKey === group) {
-        this.audience.groups[i].items = removeFromArray(this.audience.groups[i].items, index);
+      if (this.audience.groups[i].id === group.id) {
+        this.audience.groups[i].items = this.widgetConstructorService.removeFromArray(this.audience.groups[i].items, index);
 
         if (this.audience.groups[i].items.length === 0) {
-          this.audience.groups = removeFromArray(this.audience.groups, i);
+          this.audience.groups = this.widgetConstructorService.removeFromArray(this.audience.groups, i);
         }
         return;
       }
@@ -50,15 +51,16 @@ export class ConstructorAudiencesComponent implements OnInit {
   }
 
   public removeSubItem(groupId, itemId, index) {
-    for (let i = 0; i < this.audience.groups.length; i++) {
-      if (this.audience.groups[i].$$hashKey === groupId) {
+    for (const item of this.audience.groups) {
+      if (item.id === groupId) {
 
-        for (let j = 0; j < this.audience.groups[i].items.length; j++) {
-          if (this.audience.groups[i].items[j].$$hashKey === itemId) {
-            this.audience.groups[i].items[j].subitems = removeFromArray(this.audience.groups[i].items[j].subitems, index);
+        for (let j = 0; j < item.items.length; j++) {
+          if (item.items[j].id === itemId) {
+            item.items[j].subitems =
+              this.widgetConstructorService.removeFromArray(item.items[j].subitems, index);
 
-            if (this.audience.groups[i].items[j].subitems.length === 0) {
-              this.removeItem(this.audience.groups[i].$$hashKey, j);
+            if (item.items[j].subitems.length === 0) {
+              this.removeItem(item.id, j);
             }
 
             return;
