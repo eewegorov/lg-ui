@@ -9,7 +9,7 @@ import { AudienceGroup, AudienceGroupItem } from '../../../../../core/models/wid
 export class RuleVisitNoComponent implements OnInit {
   @Input() public item: AudienceGroupItem;
   @Input() public group: AudienceGroup;
-  
+
   constructor() { }
 
   ngOnInit(): void {

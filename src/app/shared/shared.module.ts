@@ -10,6 +10,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { ColorLineComponent } from './components/color-line/color-line.component';
 import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
+import { AndDropContainerDirective } from './directives/and-drop-container.directive';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     DropdownComponent,
     ColorLineComponent,
     PaymentModalComponent,
+    AndDropContainerDirective,
 
   ],
   imports: [
