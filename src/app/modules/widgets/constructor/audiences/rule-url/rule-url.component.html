@@ -28,7 +28,7 @@
               {{ vals.compareTypes[subitem.paramCompareType] }} <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li *ngFor="let val of vals.compareTypes" (click)="subitem.paramCompareType = $index">
+              <li *ngFor="let val of vals.compareTypes; index as i" (click)="subitem.paramCompareType = i">
                 <a href="javascript:void(0)">{{ val }}</a>
               </li>
             </ul>

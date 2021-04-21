@@ -2,7 +2,9 @@
   <!-- Audiences list -->
   <div id="audiences-list">
     <h1>{{ 'widgetsList.editor.audiences.title' | translate }}</h1>
-    <div class="f-4 audience-tooolbar-desc" style="margin-top: 30px;">{{ 'widgetsList.editor.audiences.disc' | translate }}</div>
+    <div class="f-4 audience-tooolbar-desc" style="margin-top: 30px;">
+      {{ 'widgetsList.editor.audiences.disc' | translate }}
+    </div>
     <div class="toolbar-content no-padding padding-top-30">
       <div class="row btnpanel">
         <div class="audience-tooolbar-switcher">
@@ -43,13 +45,62 @@
                 <i class="pe-7s-close-circle" (click)="removeItem(group.id, j)"></i>
               </div>
               <div class="rule-body" [ngSwitch]="item.type">
-                <app-rule-devices   *ngSwitchCase="'devices'" [item]="item" [group]="group"></app-rule-devices>
-                <app-rule-refer     *ngSwitchCase="'refer'"   [item]="item" [group]="group"></app-rule-refer>
-                <app-rule-social    *ngSwitchCase="'social'"  [item]="item" [group]="group"></app-rule-social>
-                <app-rule-type      *ngSwitchCase="'type'"    [item]="item" [group]="group"></app-rule-type>
-                <app-rule-url       *ngSwitchCase="'url'"     [item]="item" [group]="group"></app-rule-url>
-                <app-rule-visit     *ngSwitchCase="'visit'"   [item]="item" [group]="group"></app-rule-visit>
-                <app-rule-visit-no  *ngSwitchCase="'visitno'" [item]="item" [group]="group"></app-rule-visit-no>
+                <app-rule-devices
+                  *ngSwitchCase="'devices'"
+                  [item]="item"
+                  [group]="group"
+                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                  (add)="addSubItem($event)"
+                ></app-rule-devices>
+                
+                <app-rule-refer
+                  *ngSwitchCase="'refer'"
+                  [item]="item"
+                  [group]="group"
+                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                  (add)="addSubItem($event)"
+                ></app-rule-refer>
+
+                <app-rule-social
+                  *ngSwitchCase="'social'"
+                  [item]="item"
+                  [group]="group"
+                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                  (add)="addSubItem($event)"
+                ></app-rule-social>
+
+                <app-rule-type
+                  *ngSwitchCase="'type'"
+                  [item]="item"
+                  [group]="group"
+                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                  (add)="addSubItem($event)"
+                ></app-rule-type>
+
+                <app-rule-url
+                  *ngSwitchCase="'url'"
+                  [item]="item"
+                  [group]="group"
+                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                  (add)="addSubItem($event)"
+                ></app-rule-url>
+
+                <app-rule-visit
+                  *ngSwitchCase="'visit'"
+                  [item]="item"
+                  [group]="group"
+                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                  (add)="addSubItem($event)"
+                ></app-rule-visit>
+
+                <app-rule-visit-no
+                  *ngSwitchCase="'visitno'"
+                  [item]="item"
+                  [group]="group"
+                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                  (add)="addSubItem($event)"
+                ></app-rule-visit-no>
+
                 <h1 *ngSwitchDefault>ERROR!</h1>
               </div>
             </div>
@@ -84,40 +135,102 @@
       </div>
       <div class="col-lg-4 rules-templates-list">
         <label class="control-label">{{ 'audience.rules' | translate }}</label>
-        <div>
-          <div name="code">refer</div>
-          <div name="name">{{ 'audience.rule.refer' | translate }}</div>
-          <div name="description">{{ 'audience.rule.refer.desc' | translate }}</div>
+
+        <div
+          class="audience-rule"
+          data-code="refer"
+          data-title="{{ 'audience.rule.refer.title' | translate }}"
+        >
+          <i class="pe-7s-menu"></i> {{ 'audience.rule.refer.title' | translate }} <a
+          data-toggle="tooltip"
+          data-placement="top"
+          title=""
+          class="info-link"
+          href="#"
+          data-original-title="{{ 'audience.rule.refer.desc' | translate }}"><i class="fa fa-info-circle"></i></a>
         </div>
-        <div>
-          <div name="code">type</div>
-          <div name="name">{{ 'audience.rule.type' | translate }}</div>
-          <div name="description">{{ 'audience.rule.type.desc' | translate }}</div>
+
+        <div
+          class="audience-rule"
+          data-code="type"
+          data-title="{{ 'audience.rule.type.title' | translate }}"
+        >
+          <i class="pe-7s-menu"></i> {{ 'audience.rule.type.title' | translate }} <a
+          data-toggle="tooltip"
+          data-placement="top"
+          title=""
+          class="info-link"
+          href="#"
+          data-original-title="{{ 'audience.rule.type.desc' | translate }}"><i class="fa fa-info-circle"></i></a>
         </div>
-        <div>
-          <div name="code">url</div>
-          <div name="name">{{ 'audience.rule.url' | translate }}</div>
-          <div name="description">{{ 'audience.rule.url.desc' | translate }}</div>
+
+        <div
+          data-code="url"
+          data-title="{{ 'audience.rule.url.title' | translate }}"
+          class="audience-rule"
+        >
+          <i class="pe-7s-menu"></i> {{ 'audience.rule.url.title' | translate }} <a
+          data-toggle="tooltip"
+          data-placement="top"
+          title=""
+          class="info-link"
+          href="#"
+          data-original-title="{{ 'audience.rule.url.desc' | translate }}"><i class="fa fa-info-circle"></i></a>
         </div>
-        <div>
-          <div name="code">visit</div>
-          <div name="name">{{ 'audience.rule.visit' | translate }}</div>
-          <div name="description">{{ 'audience.rule.visit.desc' | translate }}</div>
+
+        <div
+          data-code="visit"
+          data-title="{{ 'audience.rule.visit.title' | translate }}"
+          class="audience-rule"
+        >
+          <i class="pe-7s-menu"></i> {{ 'audience.rule.visit.title' | translate }} <a
+          data-toggle="tooltip"
+          data-placement="top"
+          title=""
+          class="info-link"
+          href="#"
+          data-original-title="{{ 'audience.rule.visit.desc' | translate }}"><i class="fa fa-info-circle"></i></a>
         </div>
-        <div>
-          <div name="code">visitno</div>
-          <div name="name">{{ 'audience.rule.visitno' | translate }}</div>
-          <div name="description">{{ 'audience.rule.visitno.desc' | translate }}</div>
+
+        <div
+          data-code="visitno"
+          data-title="{{ 'audience.rule.visitno.title' | translate }}"
+          class="audience-rule"
+        >
+          <i class="pe-7s-menu"></i> {{ 'audience.rule.visitno.title' | translate }} <a
+          data-toggle="tooltip"
+          data-placement="top"
+          title=""
+          class="info-link"
+          href="#"
+          data-original-title="{{ 'audience.rule.visitno.desc' | translate }}"><i class="fa fa-info-circle"></i></a>
         </div>
-        <div>
-          <div name="code">devices</div>
-          <div name="name">{{ 'audience.rule.devices' | translate }}</div>
-          <div name="description">{{ 'audience.rule.devices.desc' | translate }}</div>
+
+        <div
+          data-code="devices"
+          data-title="{{ 'audience.rule.devices.title' | translate }}"
+          class="audience-rule"
+        >
+          <i class="pe-7s-menu"></i> {{ 'audience.rule.devices.title' | translate }} <a
+          data-toggle="tooltip"
+          data-placement="top"
+          title=""
+          class="info-link"
+          href="#"
+          data-original-title="{{ 'audience.rule.devices.desc' | translate }}"><i class="fa fa-info-circle"></i></a>
         </div>
-        <div>
-          <div name="code">social</div>
-          <div name="name">{{ 'audience.rule.social' | translate }}</div>
-          <div name="description">{{ 'audience.rule.social.desc' | translate }}</div>
+
+        <div
+          data-code="social"
+          data-title="{{ 'audience.rule.social.title' | translate }}"
+          class="audience-rule"
+        >
+          <i class="pe-7s-menu"></i> {{ 'audience.rule.social.title' | translate }}й <a
+          data-toggle="tooltip"
+          data-placement="top"
+          title=""
+          class="info-link" href="#"
+          data-original-title="{{ 'audience.rule.social.desc' | translate }}"><i class="fa fa-info-circle"></i></a>
         </div>
       </div>
     </div>

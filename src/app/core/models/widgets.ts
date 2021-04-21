@@ -49,7 +49,7 @@ export interface AudienceGroup {
 
 export interface AudienceGroupItem {
   type: string;
-  subitems: object[];
+  subitems: Record<string, string | number>[];
   id?: number;
 }
 
