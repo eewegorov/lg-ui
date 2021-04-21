@@ -2,10 +2,12 @@ import { Directive, ElementRef, Input } from '@angular/core';
 import { Audience } from '../../core/models/widgets';
 
 @Directive({
-  selector: '[appAndDropContainer]'
+  selector: '[appDropContainer]'
 })
-export class AndDropContainerDirective {
+export class DropContainerDirective {
   @Input() private audience: Audience;
+  @Input() private type: 'AND' | 'OR';
+  @Input() private index: number;
 
   constructor(private el: ElementRef) {
     ($(el) as any).droppable({
@@ -13,10 +15,14 @@ export class AndDropContainerDirective {
       drop(event, ui) {
         const rule = ui.draggable;
 
-        this.audience.groups.push({
-          name: 'testgroup',
-          items: [this.getItemTemplate(rule)]
-        });
+        if (this.type === 'AND') {
+          this.audience.groups.push({
+            name: 'testgroup',
+            items: [this.getItemTemplate(rule)]
+          });
+        } else {
+          this.audience.groups[this.index].items.push(this.getItemTemplate(rule));
+        }
       }
     });
   }

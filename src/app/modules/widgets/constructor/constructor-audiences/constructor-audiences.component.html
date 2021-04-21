@@ -24,7 +24,13 @@
     <div class="row row-nomargined margined-bottom-15">
       <div class="col-lg-8" id="rules-containers">
         <label class="control-label">{{ 'audience.settings' | translate }}</label>
-        <div class="rule-container rule-def" appAndDropContainer [audience]="audience" *ngIf="audience.groups.length == 0">
+        <div
+          *ngIf="audience.groups.length == 0"
+          class="rule-container rule-def"
+          appDropContainer
+          [audience]="audience"
+          [type]="'AND'"
+        >
           <div class="rule-droppable">
             <h4>{{ 'audience.rule.droppable' | translate }}</h4>
           </div>
@@ -50,14 +56,25 @@
             <div class="rule-groups-text">{{ 'audience.rule.logic.or' | translate }}</div>
           </div>
 
-          <div class="rule-container margined-bottom-15" ordropcontainer data-index="{{ i }}">
+          <div
+            class="rule-container margined-bottom-15"
+            appDropContainer
+            [audience]="audience"
+            [type]="'OR'"
+            [index]="i"
+          >
             <div class="rule-droppable-or">
               <h4>{{ 'audience.rule.ordroppable' | translate }}</h4>
             </div>
           </div>
           <div *ngIf="i === audience.groups.length - 1">
             <div class="rule-groups-text rule-groups-text-ok">{{ 'audience.rule.logic.and' | translate }}</div>
-            <div class="rule-container rule-container-ok" appAndDropContainer [audience]="audience">
+            <div
+              class="rule-container rule-container-ok"
+              appDropContainer
+              [audience]="audience"
+              [type]="'AND'"
+            >
               <div class="rule-droppable-and">
                 <h4>{{ 'audience.rule.anddroppable' | translate }}</h4>
               </div>
