@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AudienceGroup, AudienceGroupItem } from '../../../../../core/models/widgets';
 
 @Component({
   selector: 'app-rule-devices',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rule-devices.component.scss']
 })
 export class RuleDevicesComponent implements OnInit {
+  @Input() public item: AudienceGroupItem;
+  @Input() public group: AudienceGroup;
 
   constructor() { }
 

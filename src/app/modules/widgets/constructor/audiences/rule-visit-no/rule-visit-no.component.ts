@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AudienceGroup, AudienceGroupItem } from '../../../../../core/models/widgets';
 
 @Component({
   selector: 'app-rule-visit-no',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rule-visit-no.component.scss']
 })
 export class RuleVisitNoComponent implements OnInit {
-
+  @Input() public item: AudienceGroupItem;
+  @Input() public group: AudienceGroup;
+  
   constructor() { }
 
   ngOnInit(): void {

@@ -37,13 +37,13 @@
                 <i class="pe-7s-close-circle" (click)="removeItem(group.id, j)"></i>
               </div>
               <div class="rule-body" [ngSwitch]="item.type">
-                <rule-refer     *ngSwitchCase="refer"   ng-model="item"></rule-refer>
-                <rule-url       *ngSwitchCase="url"     ng-model="item"></rule-url>
-                <rule-type      *ngSwitchCase="type"    ng-model="item"></rule-type>
-                <rule-visit     *ngSwitchCase="visit"   ng-model="item"></rule-visit>
-                <rule-visit-no  *ngSwitchCase="visitno" ng-model="item"></rule-visit-no>
-                <rule-devices   *ngSwitchCase="devices" ng-model="item"></rule-devices>
-                <rule-social    *ngSwitchCase="social"  ng-model="item"></rule-social>
+                <app-rule-devices   *ngSwitchCase="'devices'" [item]="item" [group]="group"></app-rule-devices>
+                <app-rule-refer     *ngSwitchCase="'refer'"   [item]="item" [group]="group"></app-rule-refer>
+                <app-rule-social    *ngSwitchCase="'social'"  [item]="item" [group]="group"></app-rule-social>
+                <app-rule-type      *ngSwitchCase="'type'"    [item]="item" [group]="group"></app-rule-type>
+                <app-rule-url       *ngSwitchCase="'url'"     [item]="item" [group]="group"></app-rule-url>
+                <app-rule-visit     *ngSwitchCase="'visit'"   [item]="item" [group]="group"></app-rule-visit>
+                <app-rule-visit-no  *ngSwitchCase="'visitno'" [item]="item" [group]="group"></app-rule-visit-no>
                 <h1 *ngSwitchDefault>ERROR!</h1>
               </div>
             </div>

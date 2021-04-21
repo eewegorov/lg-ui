@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 import {
   Audience,
   FullWidget,
@@ -17,7 +19,7 @@ import { Coupon } from '../../../../core/models/coupons';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../../core/models/user';
 import { UserService } from '../../../user/services/user.service';
-import Swal from 'sweetalert2';
+import { WidgetConstructorService } from '../../services/widget-constructor.service';
 
 @Component({
   selector: 'app-widget-edit',
@@ -37,7 +39,13 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   public currentActiveTab = 'design';
   public audience: Audience;
   public coupons = [];
+  public isLoading = false;
+  public SP_widget: any;
 
+  private couponsErrorFlag = false;
+  private couponsId = [];
+  private customFields = [];
+  private formExtIdsCached = [];
   private validators = [];
   private types = [];
   private catsList = [];
@@ -52,11 +60,13 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private translate: TranslateService,
+    private toastr: ToastrService,
     private userService: UserService,
     private couponService: CouponService,
     private sitesService: SitesService,
     private containerizedWidgetService: ContainerizedWidgetService,
-    private widgetService: WidgetService
+    private widgetService: WidgetService,
+    private widgetConstructorService: WidgetConstructorService
   ) {
     this.weekDays = [
       { id: 0, name: this.translate.instant('global.week.monday') },
@@ -355,6 +365,56 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
         }, 1000);
       });
     }
+  }
+
+  private addCouponsId() {
+    this.couponsErrorFlag = false;
+    this.couponsId = [];
+    if (this.isItExitCallbackCoupon(this.widget.guiprops.exit)) {
+      if (this.widget.guiprops.exit.couponCallback.coupon.coupon.id) {
+        this.couponsId.push(this.widget.guiprops.exit.couponCallback.coupon.coupon.id);
+      } else {
+        this.couponsErrorFlag = true;
+      }
+    }
+
+    if (this.isItSocialCallbackCoupon(this.widget.guiprops.social)) {
+      if (this.widget.guiprops.social.couponCallback.coupon.coupon.id) {
+        this.couponsId.push(this.widget.guiprops.social.couponCallback.coupon.coupon.id);
+      } else {
+        this.couponsErrorFlag = true;
+      }
+    }
+
+    if (this.isItFormCallbackCoupon(this.widget.guiprops.form)) {
+      if (this.widget.guiprops.form.couponCallback.coupon.coupon.id) {
+        this.couponsId.push(this.widget.guiprops.form.couponCallback.coupon.coupon.id);
+      } else {
+        this.couponsErrorFlag = true;
+      }
+    }
+
+    this.widget.guiprops.elementsList.forEach((item) => {
+      if (item.name && item.name === 'coupon-element') {
+        if (item.coupon.id) {
+          this.couponsId.push(item.coupon.id);
+        } else {
+          this.couponsErrorFlag = true;
+        }
+      }
+    });
+  }
+
+  private isItExitCallbackCoupon(_) {
+    return (_.enable || (_.button && _.button.enable)) && _.couponCallback && _.couponCallback.enable;
+  }
+
+  private isItSocialCallbackCoupon(_) {
+    return _.couponCallback && _.couponCallback.enable;
+  }
+
+  private isItFormCallbackCoupon(_) {
+    return _.enable && _.couponCallback && _.couponCallback.enable;
   }
 
   private runValidators() {

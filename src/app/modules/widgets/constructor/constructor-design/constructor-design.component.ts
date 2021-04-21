@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import Swal from 'sweetalert2';
 import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
 import { Coupon } from '../../../../core/models/coupons';
@@ -24,10 +23,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   @Input() public isPayment: boolean;
   @Input() public widget: FullWidget;
   @Input() public coupons: Coupon[];
-  @Input() public isDesigner: boolean;
   @Input() public isMockup: boolean;
   @Input() public isContainerized: boolean;
   @Input() private currentActiveTab: string;
+  @Input() private SP_widget: any;
 
   public isLoading = false;
   public optionsOpacity: Options = {
@@ -65,16 +64,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   public bgStyle = '';
   public widthImageStyle = '';
   public heightImageStyle = '';
-
-  private SP_widget: any;
-  private validators = [];
-  private couponsId = [];
-  private customFields = [];
-  private formExtIdsCached = [];
-  private couponsErrorFlag = false;
-  private formExtIdsErrorFlag = false;
-  private formExtNeedButton = false;
-  private formExtRedirectFieldEmpty = false;
   private addElemFromWidget = false;
   private systemFonts = [];
   private controls = {
@@ -1888,56 +1877,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         $(this).removeClass('dropup');
       }
     });
-  }
-
-  private addCouponsId() {
-    this.couponsErrorFlag = false;
-    this.couponsId = [];
-    if (this.isItExitCallbackCoupon(this.widget.guiprops.exit)) {
-      if (this.widget.guiprops.exit.couponCallback.coupon.coupon.id) {
-        this.couponsId.push(this.widget.guiprops.exit.couponCallback.coupon.coupon.id);
-      } else {
-        this.couponsErrorFlag = true;
-      }
-    }
-
-    if (this.isItSocialCallbackCoupon(this.widget.guiprops.social)) {
-      if (this.widget.guiprops.social.couponCallback.coupon.coupon.id) {
-        this.couponsId.push(this.widget.guiprops.social.couponCallback.coupon.coupon.id);
-      } else {
-        this.couponsErrorFlag = true;
-      }
-    }
-
-    if (this.isItFormCallbackCoupon(this.widget.guiprops.form)) {
-      if (this.widget.guiprops.form.couponCallback.coupon.coupon.id) {
-        this.couponsId.push(this.widget.guiprops.form.couponCallback.coupon.coupon.id);
-      } else {
-        this.couponsErrorFlag = true;
-      }
-    }
-
-    this.widget.guiprops.elementsList.forEach((item) => {
-      if (item.name && item.name === 'coupon-element') {
-        if (item.coupon.id) {
-          this.couponsId.push(item.coupon.id);
-        } else {
-          this.couponsErrorFlag = true;
-        }
-      }
-    });
-  }
-
-  private isItExitCallbackCoupon(_) {
-    return (_.enable || (_.button && _.button.enable)) && _.couponCallback && _.couponCallback.enable;
-  }
-
-  private isItSocialCallbackCoupon(_) {
-    return _.couponCallback && _.couponCallback.enable;
-  }
-
-  private isItFormCallbackCoupon(_) {
-    return _.enable && _.couponCallback && _.couponCallback.enable;
   }
 
   public buildIframeElement(item) {

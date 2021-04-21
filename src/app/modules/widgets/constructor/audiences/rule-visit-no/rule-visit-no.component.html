@@ -1,5 +1,5 @@
 <div class="form-group filter-section">
-  <div *ngFor="let subitem of modelName.subitems; index as i" class="row section-audience-row filterow">
+  <div *ngFor="let subitem of item.subitems; index as i" class="row section-audience-row filterow">
     <div *ngIf="i > 0" class="rule-subitem-text margined-left-20">{{ 'audience.rule.logic.or' | translate }}</div>
     <div class="row row-subitem margined-top-10">
       <div class="col-sm-6 row-subitem-padding">
@@ -24,7 +24,7 @@
         </div>
         <div class="remove-sub-item">
           <a
-            (click)="removeSubItem(groupName.hashKey, modelName.hashKey, i)"
+            (click)="removeSubItem(group.id, item.id, i)"
             href="javascript:void(0);"
           ><i class="remove-sub-item col-sm-1 pe-7s-close-circle"></i>
           </a>
@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="text-center margined-top-20">
-    <a href="javascript:void(0);" (click)="addSubItem(modelName)">
+    <a href="javascript:void(0);" (click)="addSubItem(item)">
       {{ 'audience.variant.add' | translate }}
     </a>
   </div>

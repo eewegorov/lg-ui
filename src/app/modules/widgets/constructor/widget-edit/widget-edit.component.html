@@ -70,7 +70,14 @@
         </button>
       </ng-container>
 
-      <button type="button" id="saveWidget" (click)="saveWidget()" class="ladda-button btn w-xs btn-success" data-style="slide-down">
+      <button
+        type="button"
+        id="saveWidget"
+        class="ladda-button btn w-xs btn-success"
+        data-style="slide-down"
+        [ladda]="isLoading"
+        (click)="saveWidget()"
+      >
         <span class="ladda-label">
           <i class="fa fa-save"></i> <span
           *ngIf="!isMockup"
@@ -202,10 +209,10 @@
       [isPayment]="isPayment"
       [widget]="widget"
       [coupons]="coupons"
-      [isDesigner]="isDesigner"
       [isMockup]="isMockup"
       [isContainerized]="isContainerized"
       [currentActiveTab]="currentActiveTab"
+      [SP_widget]="SP_widget"
     ></app-constructor-design>
   </div>
 
