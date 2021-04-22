@@ -27,7 +27,6 @@ import { WidgetConstructorService } from '../../services/widget-constructor.serv
   styleUrls: ['./widget-edit.component.scss']
 })
 export class WidgetEditComponent implements OnInit, OnDestroy {
-  public weekDays = [];
   public renamedWidget = { id: '', name: '' };
   public widget: FullWidget;
   public isDesigner = false;
@@ -46,7 +45,6 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   private couponsId = [];
   private customFields = [];
   private formExtIdsCached = [];
-  private validators = [];
   private types = [];
   private catsList = [];
   private formExtIdsErrorFlag = false;
@@ -68,16 +66,6 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
   ) {
-    this.weekDays = [
-      { id: 0, name: this.translate.instant('global.week.monday') },
-      { id: 1, name: this.translate.instant('global.week.tuesday') },
-      { id: 2, name: this.translate.instant('global.week.wednesday') },
-      { id: 3, name: this.translate.instant('global.week.thursday') },
-      { id: 4, name: this.translate.instant('global.week.friday') },
-      { id: 5, name: this.translate.instant('global.week.saturday') },
-      { id: 6, name: this.translate.instant('global.week.sunday') }
-    ];
-
     this.sid = this.route.snapshot.paramMap.get('id').split('-')[0];
     this.wid = this.route.snapshot.paramMap.get('id').split('-')[1];
     this.isPayment = !this.sitesService.isSiteHasExpTariff(this.sitesService.getSiteById(this.sid));
@@ -183,7 +171,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
   public saveAsMockup() {
     let errorsList = this.runValidators();
-    this.validators.forEach(validator => {
+    this.widgetService.validators.forEach(validator => {
       errorsList = errorsList.concat(validator.call(this));
     });
 
@@ -260,7 +248,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     let errorsList = this.runValidators();
     this.isLoading = true;
 
-    this.validators.forEach(validator => {
+    this.widgetService.validators.forEach(validator => {
       errorsList = errorsList.concat(validator.call(this));
     });
 
@@ -316,7 +304,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
     let errorsList = this.runValidators();
     this.isLoading = true;
-    this.validators.forEach(validator => {
+    this.widgetService.validators.forEach(validator => {
       errorsList = errorsList.concat(validator.call(this));
     });
 
@@ -419,7 +407,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
   private runValidators() {
     let errorsList = [];
-    this.validators.forEach(item => {
+    this.widgetService.validators.forEach(item => {
       errorsList = errorsList.concat(item.call(this));
     });
 

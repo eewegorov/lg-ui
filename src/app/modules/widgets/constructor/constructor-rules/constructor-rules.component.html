@@ -16,7 +16,7 @@
     </div>
     <!-- Page rule item -->
     <ng-container *ngIf="widget.rules['pages'].enable == true">
-      <div *ngFor="let item of widget.rules['pages'].items" class="row row-subitem width-900 margined-top-10">
+      <div *ngFor="let item of widget.rules['pages'].items; index as i" class="row row-subitem width-900 margined-top-10">
         <div class="col-sm-3 row-subitem-padding padding-top-5">
           <label class="control-label">{{ 'widgetsList.editor.rules.widget' | translate }}:</label>
           <div class="dropdown" >
@@ -26,10 +26,14 @@
             </button>
             <ul class="dropdown-menu" role="menu">
               <li role="presentation" (click)="item.state = 0">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.hide' | translate }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)">
+                  {{ 'widgetsList.editor.rules.pageTargeting.hide' | translate }}
+                </a>
               </li>
               <li role="presentation" (click)="item.state = 1">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.show' | translate }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)">
+                  {{ 'widgetsList.editor.rules.pageTargeting.show' | translate }}
+                </a>
               </li>
             </ul>
           </div>
@@ -43,26 +47,38 @@
             </button>
             <ul class="dropdown-menu" role="menu">
               <li role="presentation" (click)="item.compare = 0">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)">
+                  {{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}
+                </a>
               </li>
               <li role="presentation" (click)="item.compare = 1">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)">
+                  {{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}
+                </a>
               </li>
               <li role="presentation" (click)="item.compare = 2">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)">
+                  {{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}
+                </a>
               </li>
               <li role="presentation" (click)="item.compare = 3">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)">
+                  {{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}
+                </a>
               </li>
               <li role="presentation" (click)="item.compare = 4">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)">
+                  {{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}
+                </a>
               </li>
             </ul>
           </div>
         </div>
         <div class="col-sm-6 form-group row-subitem-padding padding-top-5">
-          <label class="control-label input-with-remove" style="display: block;">{{ 'widgetsList.editor.rules.pageTargeting.urlortitle' | translate }}:</label>
-          <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0)?'has-error':''">
+          <label class="control-label input-with-remove" style="display: block;">
+            {{ 'widgetsList.editor.rules.pageTargeting.urlortitle' | translate }}:
+          </label>
+          <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0) ? 'has-error' : ''">
             <div class="input-group-btn">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ getPageTypeName(item) }} <span class="caret"></span>
@@ -84,7 +100,7 @@
             </a>
           </div>
           <div *ngIf="widget.rules['pages'].items.length > 1" class="remove-sub-item-rules margined-right-10">
-            <a (click)="removePageRuleItem($index)" href="javascript:void(0);">
+            <a (click)="removePageRuleItem(i)" href="javascript:void(0);">
               <i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
             </a>
           </div>
@@ -220,7 +236,7 @@
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.time.enable' | translate }}</h5>
     </div>
     <ng-container *ngIf="widget.rules['time'].enable == true">
-      <div class="row row-subitem width-400 margined-top-10" *ngFor="let item of widget.rules['time'].items">
+      <div class="row row-subitem width-400 margined-top-10" *ngFor="let item of widget.rules['time'].items; index as i">
         <div class="col-lg-12">
           <label class="control-label">{{ 'widgetsList.editor.rules.time.title' | translate }}:</label>
         </div>
@@ -468,19 +484,40 @@
         </h4>
       </div>
       <div class="col-lg-12 margined-top-10">
-        <input class="radio-left" type="radio" name="restrictions" [(ngModel)]="widget.restrictions.target.mode" value="1" (ngModelChange)="onRestrictionModeChange()">
+        <input
+          type="radio"
+          class="radio-left"
+          name="restrictions"
+          value="1"
+          [(ngModel)]="widget.restrictions.target.mode"
+          (ngModelChange)="onRestrictionModeChange()"
+        >
         <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
           {{ 'widgetsList.editor.restrictions.disable.title' | translate }}
         </label>
       </div>
       <div class="col-lg-12 margined-top-10">
-        <input class="radio-left" type="radio" name="restrictions" [(ngModel)]="widget.restrictions.target.mode" value="2" (ngModelChange)="onRestrictionModeChange()">
+        <input
+          type="radio"
+          class="radio-left"
+          name="restrictions"
+          value="2"
+          [(ngModel)]="widget.restrictions.target.mode"
+          (ngModelChange)="onRestrictionModeChange()"
+        >
         <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
           {{ 'widgetsList.editor.restrictions.enable.title' | translate }}
         </label>
       </div>
       <div class="col-lg-12 margined-top-10">
-        <input class="radio-left" type="radio" name="restrictions" [(ngModel)]="widget.restrictions.target.mode" value="0" (ngModelChange)="onRestrictionModeChange()">
+        <input
+          type="radio"
+          class="radio-left"
+          name="restrictions"
+          value="0"
+          [(ngModel)]="widget.restrictions.target.mode"
+          (ngModelChange)="onRestrictionModeChange()"
+        >
         <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
           {{ 'widgetsList.editor.restrictions.ontime.title' | translate }}
         </label>
@@ -497,7 +534,7 @@
           <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
             <li
               role="presentation"
-              *ngFor="let timeItem of getRestrictionsGaps()"
+              *ngFor="let timeItem of restrictionsGaps"
               (click)="widget.restrictions.target.gap = timeItem"
             ><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ timeItem }}</a></li>
           </ul>
@@ -721,88 +758,5 @@
 
     <!-- END JS Code Actions -->
 
-  </div>
-
-  <!-- FOOTER -->
-  <div class="footer-group" id="save-widget-panel">
-    <div class="text-right padding10">
-      <button
-        type="button"
-        *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-        (click)="goToTest(widget)"
-        class="btn w-xs gototest-widget-btn"
-      >
-        <i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту
-      </button>
-      <a
-        *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
-        type="button"
-        class="btn w-xs btn-primary buy-widget-btn"
-      ><i class="pe-7s-tools margined-right-10"></i>{{ 'widgetsList.add.alt2' | translate }}</a>
-      <div class="btn-group play-btns widget-enabler-btns" *ngIf="!isMockup">
-        <p>{{ 'widgetsList.widget.state' | translate }}</p>
-        <button
-          *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
-          (click)="startWidget(widget)"
-          [ngClass]="(widget.active) ? 'active' : ''" class="btn btn-xs btn-default start-widget-btn"
-          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
-        >
-          <i class="fa fa-play"></i>
-        </button>
-        <button
-          *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
-          (click)="stopWidget(widget)"
-          [ngClass]="(widget.active) ? '' : 'active'"
-          class="btn btn-xs btn-default stop-widget-btn"
-          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
-        >
-          <i class="fa fa-pause"></i>
-        </button>
-
-        <button
-          *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-          (click)="startWidget(widget)"
-          [ngClass]="(widget.active) ? 'active' : ''"
-          class="btn btn-xs btn-default start-widget-btn"
-          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить вариант"
-        >
-          <i class="fa fa-play"></i>
-        </button>
-        <button
-          *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-          (click)="stopWidget(widget)"
-          [ngClass]="(widget.active)? '' : 'active'"
-          class="btn btn-xs btn-default stop-widget-btn"
-          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
-        >
-          <i class="fa fa-pause"></i>
-        </button>
-      </div>
-
-      <ng-container *ngIf="hasRole('ROLE_DESIGNER')">
-        <button
-          type="button"
-          *ngIf="!isMockup"
-          (click)="saveAsMockup()"
-          class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left"
-          data-style="slide-down"
-        >
-          <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
-        </button>
-      </ng-container>
-
-      <button
-        id="saveWidget"
-        (click)="saveWidget()"
-        type="button"
-        class="ladda-button btn w-xs btn-success"
-        data-style="slide-down"
-      >
-        <span class="ladda-label"><i class="fa fa-save"></i> <span
-          *ngIf="!isMockup">{{ (widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет' }}</span><span
-          *ngIf="isMockup">Сохранить темплейт</span>
-        </span>
-      </button>
-    </div>
   </div>
 </div>

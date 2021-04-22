@@ -52,6 +52,7 @@ export class WidgetService {
   public onChangePayment = new Subject<boolean>();
 
   public loadWidgetListeners = [];
+  public validators = [];
 
   private currentCompanies = [];
   private currentContainers = [];
@@ -281,5 +282,9 @@ export class WidgetService {
 
   public addOnWidgetLoadListener(listener) {
     this.loadWidgetListeners.push(listener);
+  }
+
+  public addValidator(callbackFunc) {
+    this.validators.push(callbackFunc);
   }
 }

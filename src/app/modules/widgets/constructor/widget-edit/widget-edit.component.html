@@ -233,7 +233,10 @@
     id="rules"
     [ngClass]="{ active: isCurrentActiveTab('rules') }"
   >
-    <app-constructor-rules></app-constructor-rules>
+    <app-constructor-rules
+      [widget]="widget"
+      [isContainerized]="isContainerized"
+    ></app-constructor-rules>
   </div>
 
   <div
@@ -242,6 +245,7 @@
     id="integrations"
   >
     <app-constructor-integrations
+      [sid]="sid"
       [widget]="widget"
     ></app-constructor-integrations>
   </div>
