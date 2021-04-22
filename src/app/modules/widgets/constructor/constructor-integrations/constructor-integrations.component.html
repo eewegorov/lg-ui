@@ -32,9 +32,9 @@
     <div class="f-4 audience-tooolbar-desc" [innerHTML]="'widgetsList.editor.integrations.description' | translate"></div>
   </div>
 
-  <div class="padding-top-30 padding-bottom-20 intagrations-container" *ngIf="widget.useCustomIntegrationsList">
+  <div *ngIf="widget.useCustomIntegrationsList" class="padding-top-30 padding-bottom-20 intagrations-container">
     <!-- Integration item -->
-    <div class="row row-subitem width-900 margined-top-10" *ngFor="item in wIntegrations">
+    <div *ngFor="let item of wIntegrations; index as i" class="row row-subitem width-900 margined-top-10">
       <div class="col-sm-9 row-subitem-padding padding-top-5 integration-item-wr">
         <div class="integration-item__main integration-item__main-list">
           <div class="integration-item__icon_wr">
@@ -45,7 +45,7 @@
         <div class="integration-item__extra">
           <div class="remove-sub-item-integration">
             <a
-              (click)="removeIntegrationItem($index)"
+              (click)="removeIntegrationItem(i)"
               href="javascript:void(0);"
               data-container="body" data-toggle="tooltip" data-placement="top"
               title="{{ 'settings.site.tabs.integration.tooltip.remove' | translate }}"
@@ -68,21 +68,21 @@
               aria-haspopup="true"
               aria-expanded="true"
             >
-                  <span *ngIf="!currentIntegrationToAdd.type" class="dropdown-selected-cropp">
-                    {{ vdefIntegrationToAddTitle }}
-                  </span>
+              <span *ngIf="!currentIntegrationToAdd.type" class="dropdown-selected-cropp">
+                {{ defIntegrationToAddTitle }}
+              </span>
               <span
                 *ngIf="currentIntegrationToAdd.type"
                 class="dropdown-selected-cropp integration-selector-item {{ currentIntegrationToAdd.type }}"
               >
-                    {{ currentIntegrationToAdd.name }}
-                  </span>
+                {{ currentIntegrationToAdd.name }}
+              </span>
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu dropdown-integration-max-240h">
-                  <span *ngIf="integrationsAvailableMailing.length" class="integration-selector-group">
-                    {{ 'settings.site.newIntegration.group.mailing' | translate }}
-                  </span>
+              <span *ngIf="integrationsAvailableMailing.length" class="integration-selector-group">
+                {{ 'settings.site.newIntegration.group.mailing' | translate }}
+              </span>
               <li *ngFor="let item of integrationsAvailableMailing" (click)="changeIntegrationToAdd(item)">
                 <a class="integration-selector-item {{ item.type }}" href="#"
                 >{{ item.name || defIntegrationToAddTitle }} <span
@@ -90,8 +90,8 @@
                 </a>
               </li>
               <span *ngIf="integrationsAvailableCRM.length" class="integration-selector-group">
-                    {{ 'settings.site.newIntegration.group.crm' | translate }}
-                  </span>
+                {{ 'settings.site.newIntegration.group.crm' | translate }}
+              </span>
               <li *ngFor="let item of integrationsAvailableCRM" (click)="changeIntegrationToAdd(item)">
                 <a class="integration-selector-item {{ item.type }}" href="#"
                 >{{ item.name || defIntegrationToAddTitle }} <span
@@ -99,8 +99,8 @@
                 </a>
               </li>
               <span *ngIf="integrationsAvailableNotifications.length" class="integration-selector-group">
-                    {{'settings.site.newIntegration.group.notification' | translate }}
-                  </span>
+                {{'settings.site.newIntegration.group.notification' | translate }}
+              </span>
               <li *ngFor="let item of integrationsAvailableNotifications" (click)="changeIntegrationToAdd(item)">
                 <a class="integration-selector-item {{ item.type }}" href="#"
                 >{{ item.name || defIntegrationToAddTitle }} <span
@@ -108,8 +108,8 @@
                 </a>
               </li>
               <span *ngIf="integrationsAvailableOthers.length" class="integration-selector-group">
-                    {{ 'settings.site.newIntegration.group.others' | translate }}
-                  </span>
+                {{ 'settings.site.newIntegration.group.others' | translate }}
+              </span>
               <li *ngFor="let item of integrationsAvailableOthers" (click)="changeIntegrationToAdd(item)">
                 <a class="integration-selector-item {{item.type}}" href="#"
                 >{{ item.name || defIntegrationToAddTitle }} <span
@@ -130,92 +130,5 @@
       </div>
     </div>
     <!-- END Integration item -->
-  </div>
-
-  <!-- FOOTER -->
-  <div class="footer-group" id="save-widget-panel">
-    <div class="text-right padding10">
-      <button
-        type="button"
-        *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-        (click)="goToTest(widget)"
-        class="btn w-xs gototest-widget-btn"
-      >
-        <i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту
-      </button>
-      <a
-        *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
-        type="button" class="btn w-xs btn-primary buy-widget-btn"
-      >
-        <i class="pe-7s-tools margined-right-10"></i> {{ 'widgetsList.add.alt2' | translate }}
-      </a>
-      <div class="btn-group play-btns widget-enabler-btns" *ngIf="!isMockup">
-        <p>{{ 'widgetsList.widget.state' | translate }}</p>
-        <button
-          *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
-          class="btn btn-xs btn-default start-widget-btn"
-          [ngClass]="(widget.active) ? 'active' : ''"
-          (click)="startWidget(widget)"
-          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
-        >
-          <i class="fa fa-play"></i>
-        </button>
-        <button
-          *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
-          class="btn btn-xs btn-default stop-widget-btn"
-          [ngClass]="(widget.active) ? '' : 'active'"
-          (click)="stopWidget(widget)"
-          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
-        >
-          <i class="fa fa-pause"></i>
-        </button>
-
-        <button
-          *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-          class="btn btn-xs btn-default start-widget-btn"
-          [ngClass]="(widget.active)?'active':''"
-          (click)="startWidget(widget)"
-          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить варинт"
-        >
-          <i class="fa fa-play"></i>
-        </button>
-        <button
-          *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-          class="btn btn-xs btn-default stop-widget-btn"
-          [ngClass]="(widget.active)?'':'active'"
-          (click)="stopWidget(widget)"
-          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
-        >
-          <i class="fa fa-pause"></i>
-        </button>
-      </div>
-
-      <ng-container *ngIf="hasRole('ROLE_DESIGNER')">
-        <button
-          type="button"
-          *ngIf="!isMockup"
-          (click)="saveAsMockup()"
-          class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left"
-          data-style="slide-down"
-        >
-          <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
-        </button>
-      </ng-container>
-
-      <button
-        type="button"
-        id="saveWidget"
-        (click)="saveWidget()"
-        class="ladda-button btn w-xs btn-success floated-left"
-        data-style="slide-down"
-      >
-            <span class="ladda-label">
-              <i class="fa fa-save"></i> <span
-              *ngIf="!isMockup">
-              {{ (widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет' }}</span>
-              <span *ngIf="isMockup">Сохранить темплейт</span>
-            </span>
-      </button>
-    </div>
   </div>
 </div>

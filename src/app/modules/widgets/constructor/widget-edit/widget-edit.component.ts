@@ -574,7 +574,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
         item.call(this);
       });
       this.checkWidgetRenameTitle();
-      this.widgetService.loadWidgetToController.next(data);
+      this.widgetService.loadWidgetToController.next();
     },
       () => this.router.navigate(['/widgets/'])
     );
@@ -590,7 +590,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
       });
       this.isContainerized = !!this.widget.containerId;
       this.checkWidgetRenameTitle();
-      this.widgetService.loadWidgetToController.next(response);
+      this.widgetService.loadWidgetToController.next();
     },
       () => this.router.navigate(['/widgets/'])
     );

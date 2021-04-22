@@ -185,7 +185,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
   }
 
   public getTomorrowCopyDate(date: Date): Date {
-    let tomorrowDate = new Date(date.valueOf());
+    const tomorrowDate = new Date(date.valueOf());
     tomorrowDate.setDate(tomorrowDate.getDate() + 1);
     return tomorrowDate;
   }
