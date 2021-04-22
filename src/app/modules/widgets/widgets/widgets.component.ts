@@ -6,13 +6,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CampaignDeleteComponent } from '../campaign-delete/campaign-delete.component';
 import { WidgetAddComponent } from '../widget-add/widget-add.component';
-import { Company, CompanyShort, Entities, WidgetInfo } from '../../../core/models/widgets';
+import { Company, CompanyShort, Entities, WidgetInfo, WidgetTemplate, WidgetType } from '../../../core/models/widgets';
 import { Abtest } from '../../../core/models/abtests';
 import { BillingService } from '../../../core/services/billing.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { WidgetService } from '../services/widget.service';
 import { CloneWidgetComponent } from '../clone-widget/clone-widget.component';
+import { SiteShort } from '../../../core/models/sites';
 
 
 @Component({
@@ -21,23 +22,21 @@ import { CloneWidgetComponent } from '../clone-widget/clone-widget.component';
   styleUrls: ['./widgets.component.scss']
 })
 export class WidgetsComponent implements OnInit {
-  sites = [];
-  widgets = [];
-  companies = [];
-  containers = [];
-  smartPoints;
-  company = { name: '' };
-  currentSite = { id: '', name: '' };
-  site = { name: '' };
-  currentCompany: Company;
-  defCompanyName;
-  types: { id: string; name: string; }[];
-  newCompany = {
+  public sites = [];
+  public companies = [];
+  public containers = [];
+  public smartPoints;
+  public currentSite = { id: '', name: '' };
+  public currentCompany: Company;
+  public defCompanyName = '';
+  public newCompany = {
     on: false,
     name: ''
   };
-  enableWidgetsModal = false;
 
+  private widgets = [];
+  private types: { id: string; name: string; }[];
+  private enableWidgetsModal = false;
 
   constructor(
     private location: Location,
@@ -53,6 +52,23 @@ export class WidgetsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const selectedSite = (location as any).search().selected || localStorage.getItem('currentSite');
+
+    this.translate.get('widgetsList.defCompany').subscribe((translatedValue: string) => {
+      this.defCompanyName = translatedValue;
+      this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
+        if (response) {
+          this.sites = response;
+          this.sitesService.sites = response;
+          this.currentSite = selectedSite ? this.sitesService.getSiteById(selectedSite) : response[0];
+          if (!this.currentSite) {
+            this.currentSite = response[0];
+          }
+          this.setCurrentSite();
+        }
+      });
+    });
+
     this.widgetService.updateWidgetsList.subscribe((data: string) => {
       this.getAllWidgetsForSite(data, true);
     });
@@ -68,6 +84,26 @@ export class WidgetsComponent implements OnInit {
       modalRef.componentInstance.widget = data;
       modalRef.componentInstance.containerId = containerId;
     });
+
+    this.widgetService.getWidgetsTemplates().subscribe((response: WidgetTemplate[]) => {
+      if (response) {
+        this.widgetService.setCurrentWidgetsTemplates(response);
+      }
+    });
+
+    this.widgetService.getWidgetsTypes().subscribe((response: WidgetType[]) => {
+      if (response) {
+        this.types = response;
+        this.widgetService.setCurrentWidgetsTypes(response);
+      }
+    });
+  }
+
+  private setCurrentSite() {
+    localStorage.setItem('currentSite', this.currentSite.id);
+    this.sitesService.setCurrentSiteId(this.currentSite.id);
+    this.getAllWidgetsForSite(this.currentSite.id);
+    this.resetNewCompany();
   }
 
   public getTypeItem(typeId: string): { id: string; name: string; } {
@@ -160,6 +196,7 @@ export class WidgetsComponent implements OnInit {
 
   public changeCurrentSite(site): void {
     this.currentSite = site;
+    this.setCurrentSite();
   }
 
   public changeCurrentCompany(company): void {
@@ -185,10 +222,11 @@ export class WidgetsComponent implements OnInit {
 
   public isHasWidgets() {
     const types = Object.keys(this.widgets);
-    for (let i = 0; i < types.length; i++) {
-      for (let j = 0; j < this.widgets[types[i]].length; j++) {
+    for (const item of types) {
+      // tslint:disable-next-line:prefer-for-of
+      for (let j = 0; j < this.widgets[item].length; j++) {
         if (this.currentCompany.id === this.widgetService.getDefaultCompany(this.companies).id ||
-          this.widgets[types[i]][j].companyId === this.currentCompany.id) {
+          this.widgets[item][j].companyId === this.currentCompany.id) {
           return true;
         }
       }

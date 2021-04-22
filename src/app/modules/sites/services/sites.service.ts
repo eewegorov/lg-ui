@@ -220,6 +220,10 @@ export class SitesService {
     return this.currentSiteId;
   }
 
+  public setCurrentSiteId(id) {
+    this.currentSiteId = id;
+  }
+
   public isSiteHasExpTariff(site): boolean {
     if (this.isSiteHasFreeTariff(site)) {
       return true;

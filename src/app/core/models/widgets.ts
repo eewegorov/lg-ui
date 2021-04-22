@@ -25,7 +25,7 @@ export interface FullWidget {
   sendCrm: boolean;
   template: string;
   restrictions: Record<string, any>;
-  autoresponder: Record<string, string>;
+  autoresponder: Record<string, string | boolean>;
   audiencesEnabled: boolean;
   audience: Audience;
   rules: Record<string, any>;
