@@ -5,7 +5,7 @@
       <h3>{{ 'widgetsList.editor.section.targeting' | translate }}</h3>
     </div>
     <div class="col-lg-12 ">
-      <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.pageTargeting' | translate }} <a
+      <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }} <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageTargeting.tooltip' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
@@ -196,8 +196,8 @@
     <!-- Page no rule -->
     <div class="col-lg-12 margined-top-20">
       <h4 class="widgets-settings-subtitle no-bold">
-        {{ 'widgetsList.editor.rules.pageNo' | translate }} <span class="label label-warning tariff-info">окупаемый</span> <a
-        data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageNo.tooltip' | translate }}"
+        {{ 'widgetsList.editor.rules.pageNo.title' | translate }} <span class="label label-warning tariff-info">окупаемый</span> <a
+        data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageNo.select.title' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
     </div>
@@ -210,7 +210,7 @@
       class="col-lg-12 margined-top-10 width-900"
       [ngClass]="(widget.rules.pageNo.items.length > 0) ? '' : 'has-error'"
     >
-      <label class="control-label">{{ 'widgetsList.editor.rules.pageNo.select' | translate }}:</label>
+      <label class="control-label">{{ 'widgetsList.editor.rules.pageNo.select.title' | translate }}:</label>
       <ng-select
         id="widgetSelector"
         bindValue="current"
@@ -289,7 +289,7 @@
     <div class="col-lg-12 margined-top-20">
       <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.days.header' | translate }} <span
         class="label label-warning tariff-info ">окупаемый</span> <a
-        data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.days.tooltip' | translate }}"
+        data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.days.title' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
     </div>
