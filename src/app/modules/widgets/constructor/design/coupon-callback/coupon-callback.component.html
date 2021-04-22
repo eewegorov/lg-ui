@@ -7,13 +7,13 @@
         (change)="onChangePayment($event)"
       ></ui-switch>
       <label *ngIf="coupon.elementType === 'form'" class="control-label switcher-label-xs control-label-des">
-        {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.form' | translate }}<span class="label label-warning tariff-info ">окупаемый</span>
+        {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.form' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
       </label>
       <label *ngIf="coupon.elementType === 'social'" class="control-label switcher-label-xs control-label-des">
-        {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.social' | translate }}<span class="label label-warning tariff-info ">окупаемый</span>
+        {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.social' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
       </label>
       <label *ngIf="coupon.elementType === 'closeBtn'" class="control-label switcher-label-xs control-label-des">
-        {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.closeBtn' | translate }}<span class="label label-warning tariff-info ">окупаемый</span>
+        {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.closeBtn' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
       </label>
     </div>
   </div>
@@ -42,8 +42,7 @@
           data-toggle="tooltip"
           data-container="body"
           data-placement="top"
-          title=""
-          data-original-title="{{ 'widgets.constructor.coupon.couponCallback.couponRefresh' | translate }}"
+          [attr.data-original-title]="'widgets.constructor.coupon.couponCallback.couponRefresh' | translate"
         >
           <i class="fa fa-refresh"></i>
         </button>
@@ -76,7 +75,7 @@
             data-container="body"
             data-placement="top"
             title=""
-            data-original-title="{{ 'widgets.constructor.coupon.couponCallback.couponRefresh' | translate }}"
+            [attr.data-original-title]="'widgets.constructor.coupon.couponCallback.couponRefresh' | translate"
           >
             <i class="fa fa-refresh"></i>
           </button>

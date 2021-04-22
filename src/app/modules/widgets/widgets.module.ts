@@ -11,6 +11,8 @@ import { LaddaModule } from 'angular2-ladda';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { SortablejsModule } from 'ngx-sortablejs';
+import { NgxSummernoteModule } from 'ngx-summernote';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { SharedModule } from '../../shared/shared.module';
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { WidgetsListComponent } from './widgets-list/widgets-list.component';
@@ -42,7 +44,6 @@ import { ButtonElementComponent } from './constructor/design/button-element/butt
 import { CloselinkElementComponent } from './constructor/design/closelink-element/closelink-element.component';
 import { ContentElementComponent } from './constructor/design/content-element/content-element.component';
 import { CouponElementComponent } from './constructor/design/coupon-element/coupon-element.component';
-import { CrmElementComponent } from './constructor/design/crm-element/crm-element.component';
 import { FormElementComponent } from './constructor/design/form-element/form-element.component';
 import { IframeElementComponent } from './constructor/design/iframe-element/iframe-element.component';
 import { ImageElementComponent } from './constructor/design/image-element/image-element.component';
@@ -55,7 +56,6 @@ import { TextElementComponent } from './constructor/design/text-element/text-ele
 import { VideoElementComponent } from './constructor/design/video-element/video-element.component';
 import { VisualElementComponent } from './constructor/design/visual-element/visual-element.component';
 import { CouponCallbackComponent } from './constructor/design/coupon-callback/coupon-callback.component';
-import { NgxSummernoteModule } from 'ngx-summernote';
 import { FormExtendedComponent } from './constructor/design/form-extended/form-extended.component';
 
 
@@ -90,7 +90,6 @@ import { FormExtendedComponent } from './constructor/design/form-extended/form-e
     CloselinkElementComponent,
     ContentElementComponent,
     CouponElementComponent,
-    CrmElementComponent,
     FormElementComponent,
     IframeElementComponent,
     ImageElementComponent,
@@ -123,7 +122,8 @@ import { FormExtendedComponent } from './constructor/design/form-extended/form-e
     ColorPickerModule,
     NgxSliderModule,
     SortablejsModule,
-    NgxSummernoteModule
+    NgxSummernoteModule,
+    AngularEditorModule
   ]
 })
 export class WidgetsModule { }

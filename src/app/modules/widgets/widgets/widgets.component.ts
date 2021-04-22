@@ -52,12 +52,27 @@ export class WidgetsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const selectedSite = (location as any).search().selected || localStorage.getItem('currentSite');
+    const selectedSite = localStorage.getItem('currentSite');
 
     this.translate.get('widgetsList.defCompany').subscribe((translatedValue: string) => {
       this.defCompanyName = translatedValue;
-      this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
-        if (response) {
+      /*this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
+        if (response) {*/
+      const response = [{
+        id: '5f120a7646e0fb00012c2632',
+        name: 'mysecondsite',
+        url: 'secondsecond.ru',
+        tariffName: 'Пробный',
+        tariffExp: 1595881841107,
+        trial: false
+      }, {
+        id: '5f120a5446e0fb0001d8c981',
+        name: 'mysupermegasite',
+        url: 'mysupermegasite.com',
+        tariffName: 'Пробный',
+        tariffExp: 1595881811225,
+        trial: true
+      }]; // удалить статику и раскомментировать подписку
           this.sites = response;
           this.sitesService.sites = response;
           this.currentSite = selectedSite ? this.sitesService.getSiteById(selectedSite) : response[0];
@@ -65,8 +80,8 @@ export class WidgetsComponent implements OnInit {
             this.currentSite = response[0];
           }
           this.setCurrentSite();
-        }
-      });
+        /*}
+      });*/
     });
 
     this.widgetService.updateWidgetsList.subscribe((data: string) => {

@@ -704,7 +704,7 @@
     <div
       *ngIf="widget.autoresponder.enabled"
       class="col-lg-12 margined-top-10"
-      [ngClass]="(widget.autoresponder.subject.trim().length < 1) ? 'has-error' : ''"
+      [ngClass]="(widget.autoresponder.subject.toString().trim().length < 1) ? 'has-error' : ''"
     >
       <label class="control-label">{{ 'widgetsList.editor.autoresponder.subject' | translate }}:</label>
       <input class="form-control width-900" [(ngModel)]="widget.autoresponder.subject">
@@ -712,7 +712,7 @@
     <div
       *ngIf="widget.autoresponder.enabled"
       class="col-lg-12 margined-top-10 width-930"
-      [ngClass]="(widget.autoresponder.text.trim().length < 1) ? 'has-error' : ''"
+      [ngClass]="(widget.autoresponder.text.toString().trim().length < 1) ? 'has-error' : ''"
     >
       <label class="control-label">{{ 'widgetsList.editor.autoresponder.text' | translate }}:</label>
       <angular-editor class="width-900" [(ngModel)]="widget.autoresponder.text"></angular-editor>

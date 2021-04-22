@@ -17,7 +17,7 @@
           data-container="body"
           data-placement="top"
           title=""
-          data-original-title="Обновить список купонов"
+          [attr.data-original-title]="'Обновить список купонов'"
         ><i class="fa fa-refresh"></i></button>
       </div>
     </div>
@@ -44,7 +44,7 @@
             data-container="body"
             data-placement="top"
             title=""
-            data-original-title="{{ 'widgets.constructor.coupon.couponCallback.couponRefresh' | translate }}"
+            [attr.data-original-title]="'widgets.constructor.coupon.couponCallback.couponRefresh' | translate"
           ><i class="fa fa-refresh"></i></button>
         </div>
       </div>
