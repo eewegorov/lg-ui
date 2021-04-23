@@ -1,8 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { SiteShort } from '../../../../core/models/sites';
+import { Coupon } from '../../../../core/models/coupons';
+import { User } from '../../../../core/models/user';
 import {
   Audience,
   FullWidget,
@@ -10,16 +14,13 @@ import {
   MockupShort,
   WidgetType
 } from '../../../../core/models/widgets';
-import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
-import { WidgetService } from '../../services/widget.service';
 import { SitesService } from '../../../sites/services/sites.service';
-import { SiteShort } from '../../../../core/models/sites';
 import { CouponService } from '../../../coupons/services/coupon.service';
-import { Coupon } from '../../../../core/models/coupons';
-import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../../../../core/models/user';
 import { UserService } from '../../../user/services/user.service';
+import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
+import { BillingService } from '../../../../core/services/billing.service';
+import { WidgetService } from '../../services/widget.service';
 
 @Component({
   selector: 'app-widget-edit',
@@ -59,9 +60,10 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private translate: TranslateService,
     private toastr: ToastrService,
-    private userService: UserService,
-    private couponService: CouponService,
     private sitesService: SitesService,
+    private couponService: CouponService,
+    private userService: UserService,
+    private billingService: BillingService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
@@ -591,10 +593,10 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   private showPaymentDialog(siteId, description) {
-    /*window.siteTariffModal.find('h5.paymentSubscription').html(description);
-    window.siteTariffModal.find('span.site-name').html($scope.siteName);
-    window.siteTariffModal.attr('data-id', siteId);
-    loadPlans();*/
+    this.billingService.checkTariffPlans(siteId,
+      this.translate.instant('sitelist.tariff.title'),
+      description, {siteName: this.sitesService.getSiteById(siteId).name}
+    );
   }
 
   ngOnDestroy(): void {

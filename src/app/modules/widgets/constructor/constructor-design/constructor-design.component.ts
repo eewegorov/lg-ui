@@ -7,9 +7,11 @@ import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
 import { Coupon } from '../../../../core/models/coupons';
 import { FullWidget } from '../../../../core/models/widgets';
+import { BillingService } from '../../../../core/services/billing.service';
+import { SitesService } from '../../../sites/services/sites.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
-import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
+import { WidgetService } from '../../services/widget.service';
 
 @Component({
   selector: 'app-constructor-design',
@@ -86,6 +88,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     private router: Router,
     private translate: TranslateService,
     private toastr: ToastrService,
+    private sitesService: SitesService,
+    private billingService: BillingService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
@@ -1956,10 +1960,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   }
 
   private showPaymentDialog(siteId, description) {
-    /*window.siteTariffModal.find('h5.paymentSubscription').html(description);
-    window.siteTariffModal.find('span.site-name').html($scope.siteName);
-    window.siteTariffModal.attr('data-id', siteId);
-    loadPlans();*/
+    this.billingService.checkTariffPlans(siteId,
+      this.translate.instant('sitelist.tariff.title'),
+      description, {siteName: this.sitesService.getSiteById(siteId).name}
+    );
   }
 
 

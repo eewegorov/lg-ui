@@ -4,9 +4,9 @@ import { map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PaymentModalComponent } from '../components/payment-modal/payment-modal.component';
 import { TariffPlan, TariffPlansResponse } from '../models/tariffPlans';
 import { CoreApiService } from './core-api.service';
+import { PaymentModalComponent } from '../../shared/components/payment-modal/payment-modal.component';
 
 
 @Injectable({

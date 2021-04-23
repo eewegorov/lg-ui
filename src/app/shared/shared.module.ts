@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbdDatepickerI18n } from './components/datepicker/datepicker.component';
 import { SelectOnClickDirective } from './directives/select-on-click.directive';
@@ -23,12 +24,12 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     ModalComponent,
     DropdownComponent,
     ColorLineComponent,
-    PaymentModalComponent,
-
+    PaymentModalComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
     NgbDatepickerModule
   ],
   exports: [
@@ -39,7 +40,8 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     NgbdDatepickerI18n,
     ModalComponent,
     DropdownComponent,
-    ColorLineComponent
+    ColorLineComponent,
+    PaymentModalComponent
   ],
   providers: [
     OrderByPipe
