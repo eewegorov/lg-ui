@@ -157,7 +157,7 @@ export interface WidgetInfo extends WidgetInfoShort {
   abtestInfo: AbtestInfo;
   widgetConversion?: WidgetConversion;
   containerId?: string;
-  guiprops: Record<string, any>;
+  guiprops?: Record<string, any>;
 }
 
 export interface AbtestInfo {

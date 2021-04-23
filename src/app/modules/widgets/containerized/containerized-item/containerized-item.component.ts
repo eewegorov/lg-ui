@@ -17,7 +17,8 @@ import { Abtest } from '../../../../core/models/abtests';
 @Component({
   selector: 'app-containerized-item',
   templateUrl: './containerized-item.component.html',
-  styleUrls: ['../../shared/shared.scss', './containerized-item.component.scss']
+  styleUrls: ['../../shared/shared.scss', './containerized-item.component.scss'],
+  providers: [DecimalPipe]
 })
 export class ContainerizedItemComponent implements OnInit {
   @Input() public item: WidgetInfo;
@@ -28,7 +29,7 @@ export class ContainerizedItemComponent implements OnInit {
   @Input() private prev: WidgetInfo;
   @Input() private next: WidgetInfo;
 
-  public widgetCurrentCompany: Company;
+  public widgetCurrentCompany = {} as Company;
 
   public changeCompanyWidget = {
     id: '',
@@ -58,6 +59,8 @@ export class ContainerizedItemComponent implements OnInit {
         }
       });
     }
+
+    this.widgetCurrentCompany = this.widgetService.getCompanyById(this.item.companyId, this.widgetService.getCurrentCompanies());
 
     this.widgetService.getWidgetConversion(this.siteId, this.item.id).subscribe((response: WidgetConversion) => {
       if (response) {

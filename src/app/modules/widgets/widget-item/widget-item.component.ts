@@ -28,7 +28,7 @@ export class WidgetItemComponent implements OnInit {
   public widgetCurrentCompany: WidgetInfoShort;
   public widgetConversion: WidgetConversion;
   public isConversionLoaded = false;
-  public changeCompanyWidget: WidgetInfoShort;
+  public changeCompanyWidget = {} as WidgetInfoShort;
   public widgetType;
   private currentSiteId;
 
@@ -43,12 +43,7 @@ export class WidgetItemComponent implements OnInit {
     private abtestsService: AbtestsService,
     private widgetService: WidgetService
   ) {
-    this.widgetCurrentCompany = this.widgetService.getCompanyById(this.widget.companyId, this.widgetService.getCurrentCompanies());
     this.currentSiteId = this.sitesService.getCurrentSiteId();
-
-    this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item) => {
-      return item.id === this.widget.type;
-    });
   }
 
   ngOnInit(): void {
@@ -57,7 +52,6 @@ export class WidgetItemComponent implements OnInit {
     }
 
     const abTests = this.abtestsService.getListOfABTests();
-
     if (this.widget.abtestInfo) {
       abTests.forEach((test: Abtest) => {
         if (this.widget.abtestInfo.id === test.id) {
@@ -65,6 +59,14 @@ export class WidgetItemComponent implements OnInit {
         }
       });
     }
+
+    this.widgetCurrentCompany = this.widgetService.getCompanyById(this.widget.companyId, this.widgetService.getCurrentCompanies());
+
+    console.log(this.widgetService.getCurrentWidgetsTypes());
+    console.log(this.widget)
+    this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item) => {
+      return item.code === this.widget.type;
+    });
   }
 
   public switchWidget(newValue) {
