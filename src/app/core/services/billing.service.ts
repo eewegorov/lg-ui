@@ -21,6 +21,36 @@ export class BillingService {
     private coreApiService: CoreApiService
   ) { }
 
+  public getInvoiceAndGoToWallet(siteId, tariffId) { // ned to fix for create order
+    // TODO: old API
+    $.ajax({
+      type: "POST",
+      async: false,
+      url: openapi.getUrl("site/getInvoice"),
+      data: {siteid: siteId, tarrifid: tariffId},
+      success: function(map) {
+        var form = document.createElement("form");
+        form.setAttribute("method", "POST");
+        form.setAttribute("target", "_blank");
+        form.setAttribute("action", "https://wl.walletone.com/checkout/checkout/Index");
+
+        for (var key in map) {
+          if (map.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", map[key]);
+
+            form.appendChild(hiddenField);
+          }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+      }
+    });
+  }
+
   public checkTariffPlans(siteId, title, subscription, siteName?, expTime?) {
     this.getTariffPlans().subscribe((response: TariffPlan[]) => {
       if (response.length) {
