@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Abtest } from '../../../core/models/abtests';
 import { WidgetConversion, WidgetInfo, WidgetInfoShort } from '../../../core/models/widgets';
-import { BillingService } from '../../../core/services/billing.service';
+import { TariffsService } from '../../../core/services/tariffs.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
 import { AbtestAddComponent } from '../../abtests/abtest-add/abtest-add.component';
@@ -38,7 +38,7 @@ export class WidgetItemComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: NgbModal,
     private decimalPipe: DecimalPipe,
-    private billingService: BillingService,
+    private tariffsService: TariffsService,
     private sitesService: SitesService,
     private abtestsService: AbtestsService,
     private widgetService: WidgetService
@@ -172,7 +172,7 @@ export class WidgetItemComponent implements OnInit {
 
     // TODO: Check if it's payment query
     if (this.sitesService.isSiteHasExpTariff(currentSite)) {
-      this.billingService.checkTariffPlans(this.currentSiteId,
+      this.tariffsService.checkTariffPlans(this.currentSiteId,
         this.translate.instant('sitelist.tariff.title'),
         this.translate.instant('widgetsList.payment.abtest', {siteName: currentSite.name}));
     } else {

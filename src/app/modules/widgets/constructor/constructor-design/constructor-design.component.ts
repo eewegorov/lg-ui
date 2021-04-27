@@ -7,7 +7,7 @@ import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
 import { Coupon } from '../../../../core/models/coupons';
 import { FullWidget } from '../../../../core/models/widgets';
-import { BillingService } from '../../../../core/services/billing.service';
+import { TariffsService } from '../../../../core/services/tariffs.service';
 import { SitesService } from '../../../sites/services/sites.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
@@ -89,7 +89,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     private translate: TranslateService,
     private toastr: ToastrService,
     private sitesService: SitesService,
-    private billingService: BillingService,
+    private tariffsService: TariffsService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
@@ -1960,7 +1960,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   }
 
   private showPaymentDialog(siteId, description) {
-    this.billingService.checkTariffPlans(siteId,
+    this.tariffsService.checkTariffPlans(siteId,
       this.translate.instant('sitelist.tariff.title'),
       description, {siteName: this.sitesService.getSiteById(siteId).name}
     );

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import 'moment-timezone';
-import { BillingService } from '../../../core/services/billing.service';
+import { TariffsService } from '../../../core/services/tariffs.service';
 import { SitesService } from '../services/sites.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class SitesListComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private datePipe: DatePipe,
-    private billingService: BillingService,
+    private tariffsService: TariffsService,
     private sitesService: SitesService
   ) {
     this.options = {
@@ -92,7 +92,7 @@ export class SitesListComponent implements OnInit {
   }
 
   public improvePlan() {
-    this.billingService.checkTariffPlans(this.item.id, this.translate.instant('sitelist.tariff.improvement'), undefined, this.item.name);
+    this.tariffsService.checkTariffPlans(this.item.id, this.translate.instant('sitelist.tariff.improvement'), undefined, this.item.name);
   }
 
   private getSiteDates(data) {

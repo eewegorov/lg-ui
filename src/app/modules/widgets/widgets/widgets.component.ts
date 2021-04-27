@@ -8,7 +8,7 @@ import { CampaignDeleteComponent } from '../campaign-delete/campaign-delete.comp
 import { WidgetAddComponent } from '../widget-add/widget-add.component';
 import { Company, CompanyShort, Entities, WidgetInfo, WidgetTemplate, WidgetType } from '../../../core/models/widgets';
 import { Abtest } from '../../../core/models/abtests';
-import { BillingService } from '../../../core/services/billing.service';
+import { TariffsService } from '../../../core/services/tariffs.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { WidgetService } from '../services/widget.service';
@@ -43,7 +43,7 @@ export class WidgetsComponent implements OnInit {
     private translate: TranslateService,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    private billingService: BillingService,
+    private tariffsService: TariffsService,
     private sitesService: SitesService,
     private abtestsService: AbtestsService,
     private widgetService: WidgetService
@@ -381,7 +381,7 @@ export class WidgetsComponent implements OnInit {
   public createNewWidget() {
     // TODO: Check tariffExp
     if (this.sitesService.isSiteHasExpTariff(this.currentSite) && this.getWidgetsCount() >= 3) {
-      this.billingService.checkTariffPlans(this.currentSite.id,
+      this.tariffsService.checkTariffPlans(this.currentSite.id,
         this.translate.instant('sitelist.tariff.improve'),
         this.translate.instant('widgetsList.payment.limit', { siteName: this.currentSite.name }));
     } else {

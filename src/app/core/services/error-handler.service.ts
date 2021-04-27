@@ -4,7 +4,7 @@ import { throwError } from 'rxjs';
 import { Payment } from '../models/payment';
 import { ApiResponse } from '../models/api';
 import { Site } from '../models/sites';
-import { BillingService } from './billing.service';
+import { TariffsService } from './tariffs.service';
 
 
 @Injectable({
@@ -15,7 +15,7 @@ export class ErrorHandlerService {
 
   constructor(
     private translate: TranslateService,
-    private billingService: BillingService
+    private tariffsService: TariffsService
   ) { }
 
   public handleError(error: ApiResponse) {
@@ -32,27 +32,27 @@ export class ErrorHandlerService {
 
   private prepareResponseForPaymentService(type: Payment, siteId): void {
     if (type === Payment.WIDGETS_LIMIT) {
-      this.billingService.checkTariffPlans(siteId,
+      this.tariffsService.checkTariffPlans(siteId,
         this.translate.instant('sitelist.tariff.improve'),
         this.translate.instant('widgetsList.payment.limit', { siteName: this.getSiteById(siteId).name }));
     } else if (type === Payment.CONTAINER_WIDGETS_LIMIT) {
-      this.billingService.checkTariffPlans(siteId,
+      this.tariffsService.checkTariffPlans(siteId,
         this.translate.instant('sitelist.tariff.improve'),
         this.translate.instant('widgetsList.payment.limit.container', { siteName: this.getSiteById(siteId).name }));
     } else if (type === Payment.INTEGRATION_PAYMENT) {
-      this.billingService.checkTariffPlans(siteId,
+      this.tariffsService.checkTariffPlans(siteId,
         this.translate.instant('sitelist.tariff.improve'),
         this.translate.instant('settings.site.integration.paymentLabel', { siteName: this.getSiteById(siteId).name }));
     } else if (type === Payment.WIDGET_HAS_PAYMENT_OPTIONS) {
-      this.billingService.checkTariffPlans(siteId,
+      this.tariffsService.checkTariffPlans(siteId,
         this.translate.instant('sitelist.tariff.improve'),
         this.translate.instant('widgetsList.payment.options', { siteName: this.getSiteById(siteId).name }));
     } else if (type === Payment.PAYMENT_SETTINGS) {
-      this.billingService.checkTariffPlans(siteId,
+      this.tariffsService.checkTariffPlans(siteId,
         this.translate.instant('sitelist.tariff.improve'),
         this.translate.instant('settings.site.update.paymentLabel', { siteName: this.getSiteById(siteId).name }));
     } else if (type === Payment.MAX_LEADS_SHOW_REACHED) {
-      this.billingService.checkTariffPlans(siteId,
+      this.tariffsService.checkTariffPlans(siteId,
         this.translate.instant('sitelist.tariff.improve'),
         this.translate.instant('settings.site.update.crm.paymentLabel', { siteName: this.getSiteById(siteId).name }));
     }

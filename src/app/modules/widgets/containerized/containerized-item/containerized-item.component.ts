@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Company, Container, WidgetConversion, WidgetInfo } from '../../../../core/models/widgets';
-import { BillingService } from '../../../../core/services/billing.service';
+import { TariffsService } from '../../../../core/services/tariffs.service';
 import { SitesService } from '../../../sites/services/sites.service';
 import { WidgetService } from '../../services/widget.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
@@ -43,7 +43,7 @@ export class ContainerizedItemComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: NgbModal,
     private decimalPipe: DecimalPipe,
-    private billingService: BillingService,
+    private tariffsService: TariffsService,
     private sitesService: SitesService,
     private abtestsService: AbtestsService,
     private widgetService: WidgetService,
@@ -174,7 +174,7 @@ export class ContainerizedItemComponent implements OnInit {
 
     // TODO: Check if it's payment query
     if (this.sitesService.isSiteHasExpTariff(currentSite)) {
-      this.billingService.checkTariffPlans(this.siteId,
+      this.tariffsService.checkTariffPlans(this.siteId,
         this.translate.instant('sitelist.tariff.title'),
         this.translate.instant('widgetsList.payment.abtest', {siteName: currentSite.name}));
     } else {

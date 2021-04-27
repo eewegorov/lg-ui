@@ -6,7 +6,7 @@ import { IntegrationAddComponent } from '../integration-add/integration-add.comp
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Integration, SiteSettings, SiteShort } from '../../../core/models/sites';
-import { BillingService } from '../../../core/services/billing.service';
+import { TariffsService } from '../../../core/services/tariffs.service';
 import { SitesService } from '../services/sites.service';
 
 
@@ -43,7 +43,7 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
     private translate: TranslateService,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    private billingService: BillingService,
+    private tariffsService: TariffsService,
     private sitesService: SitesService
   ) {
     this.siteId = this.route.snapshot.params.id;
@@ -94,7 +94,7 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
       setTimeout(() => {
         this.site.needHideLogo = false;
         this.site.logoRefLink = false;
-        this.billingService.checkTariffPlans(this.siteId,
+        this.tariffsService.checkTariffPlans(this.siteId,
           this.translate.instant('sitelist.tariff.title'),
           this.translate.instant('settings.site.integration.paymentLabel', { siteName: this.site.name }));
       }, 500);

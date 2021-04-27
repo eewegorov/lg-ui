@@ -1,12 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { SitesService } from '../../../modules/sites/services/sites.service';
 import { BillingService } from '../../../core/services/billing.service';
+import { Order } from '../../../core/models/payment';
 
 @Component({
   selector: 'app-payment-modal',
   templateUrl: './payment-modal.component.html',
-  styleUrls: ['./payment-modal.component.scss']
+  styleUrls: ['./payment-modal.component.scss'],
+  providers: [DatePipe]
 })
 export class PaymentModalComponent implements OnInit {
   @Input() public title;
@@ -25,6 +28,7 @@ export class PaymentModalComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
+    private datePipe: DatePipe,
     private sitesService: SitesService,
     private billingService: BillingService
   ) {
@@ -54,7 +58,26 @@ export class PaymentModalComponent implements OnInit {
   }
 
   public activatePlan() {
-    this.billingService.getInvoiceAndGoToWallet(this.siteId, this.activePriceId);
+    this.billingService.createOrder(this.siteId, this.activePriceId).subscribe((order: Order) => {
+      const form = document.createElement('form');
+      form.setAttribute('method', 'POST');
+      form.setAttribute('target', '_blank');
+      form.setAttribute('action', 'https://wl.walletone.com/checkout/checkout/Index');
+
+      for (const key in order) {
+        if (order.hasOwnProperty(key)) {
+          const hiddenField = document.createElement('input');
+          hiddenField.setAttribute('type', 'hidden');
+          hiddenField.setAttribute('name', key);
+          hiddenField.setAttribute('value', order[key]);
+
+          form.appendChild(hiddenField);
+        }
+      }
+
+      document.body.appendChild(form);
+      form.submit();
+    });
   }
 
   private getPayDescription(payTerm, payDiscount) {
@@ -66,7 +89,10 @@ export class PaymentModalComponent implements OnInit {
     const startDate = expectedTime ? new Date(expectedTime) : new Date();
     const endDate   = new Date(startDate.getTime() + 1000 * 60 * 60 * 24 * (days || this.firstPrice.days));
 
-    return this.translate.instant('sitelist.tarrif.activationDate', {startDate: $filter('date')(startDate, "dd.MM.yy"), endDate: $filter('date')(endDate, "dd.MM.yy")});
+    return this.translate.instant('sitelist.tarrif.activationDate', {
+      startDate: this.datePipe.transform(startDate, 'dd.MM.yy'),
+      endDate: this.datePipe.transform(endDate, 'dd.MM.yy')
+    });
   }
 
 }

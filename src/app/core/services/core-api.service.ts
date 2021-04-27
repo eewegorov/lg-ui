@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { ApiResponse } from '../models/api';
 import { TariffPlansResponse } from '../models/tariffPlans';
 import { Phone, UserResponse, Wallet } from '../models/user';
+import { OrderRequest, OrderResponse } from '../models/payment';
 
 
 @Injectable({
@@ -20,6 +21,10 @@ export class CoreApiService {
 
   public getTariffPlans(): Observable<TariffPlansResponse> {
     return this.http.get<TariffPlansResponse>(`${ environment.url }/plans`);
+  }
+
+  public createOrder(data: OrderRequest): Observable<OrderResponse> {
+    return this.http.post<OrderResponse>(`${ environment.url }/billing/orders`, data);
   }
 
   public savePhone(data: Phone): Observable<ApiResponse> {

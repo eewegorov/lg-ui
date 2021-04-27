@@ -19,7 +19,7 @@ import { CouponService } from '../../../coupons/services/coupon.service';
 import { UserService } from '../../../user/services/user.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
-import { BillingService } from '../../../../core/services/billing.service';
+import { TariffsService } from '../../../../core/services/tariffs.service';
 import { WidgetService } from '../../services/widget.service';
 
 @Component({
@@ -63,7 +63,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     private sitesService: SitesService,
     private couponService: CouponService,
     private userService: UserService,
-    private billingService: BillingService,
+    private tariffsService: TariffsService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
@@ -593,7 +593,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   private showPaymentDialog(siteId, description) {
-    this.billingService.checkTariffPlans(siteId,
+    this.tariffsService.checkTariffPlans(siteId,
       this.translate.instant('sitelist.tariff.title'),
       description, {siteName: this.sitesService.getSiteById(siteId).name}
     );
