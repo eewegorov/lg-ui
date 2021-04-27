@@ -21,6 +21,7 @@ import {
   SiteShort
 } from '../../../core/models/sites';
 import { SitesService } from '../services/sites.service';
+import { CoreSitesService } from '../../../core/services/core-sites.service';
 
 
 @Component({
@@ -77,6 +78,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
     private translate: TranslateService,
     private activeModal: NgbActiveModal,
     private toastr: ToastrService,
+    private coreSitesService: CoreSitesService,
     private sitesService: SitesService
   ) {
   }
@@ -177,7 +179,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
           trial: true
         }
       ];
-      this.sitesService.sites = response;
+      this.coreSitesService.sites = response;
       this.sites = response.filter((item: SiteShort) => {
         return item.id !== this.siteId;
       });

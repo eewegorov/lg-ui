@@ -1,4 +1,5 @@
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,11 +9,10 @@ import { sortBy, unzip } from 'lodash-es';
 import { WidgetTemplate } from '../../../core/models/widgets';
 import { Abtest, NewVariant, Variant } from '../../../core/models/abtests';
 import { BinsDataService } from '../services/bins-data.service';
-import { SitesService } from '../../sites/services/sites.service';
+import { CoreSitesService } from '../../../core/services/core-sites.service';
 import { WidgetService } from '../../widgets/services/widget.service';
 import { ContainerizedWidgetService } from '../../widgets/services/containerized-widget.service';
 import { AbtestsService } from '../services/abtests.service';
-import { Location } from '@angular/common';
 
 
 
@@ -56,9 +56,9 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
     private translate: TranslateService,
     private modalService: NgbModal,
     private binsDataService: BinsDataService,
+    private coreSitesService: CoreSitesService,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService,
-    private sitesService: SitesService,
     private abTestsService: AbtestsService
   ) { }
 
@@ -150,7 +150,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
         tariffExp: 1595881811225,
         trial: true
       }]; // удалить статику и раскомментировать подписку
-      this.sitesService.sites = response;
+      this.coreSitesService.sites = response;
       this.sites = this.sites.concat(response);
       this.currSite = this.sites[0].id;
     /*});*/

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { Integration, SiteSettings, SiteShort } from '../../../core/models/sites';
 import { TariffsService } from '../../../core/services/tariffs.service';
 import { SitesService } from '../services/sites.service';
+import { CoreSitesService } from '../../../core/services/core-sites.service';
 
 
 @Component({
@@ -44,6 +45,7 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
     private modalService: NgbModal,
     private toastr: ToastrService,
     private tariffsService: TariffsService,
+    private coreSitesService: CoreSitesService,
     private sitesService: SitesService
   ) {
     this.siteId = this.route.snapshot.params.id;
@@ -197,7 +199,7 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
       this.siteInfo.isNotPayment = this.sitesService.isSiteHasExpTariff(this.siteInfo) && !this.siteInfo.trial;
     });
     this.sitesService.getSitesShort().subscribe((responseSites: SiteShort[]) => {
-      this.sitesService.sites = responseSites;
+      this.coreSitesService.sites = responseSites;
     });
     /*});*/
   }

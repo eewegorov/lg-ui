@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SiteAddComponent } from '../site-add/site-add.component';
-import { UserService } from '../../user/services/user.service';
-import { SitesService } from '../services/sites.service';
 import { Site, SiteShort } from '../../../core/models/sites';
 import { User } from '../../../core/models/user';
+import { UserService } from '../../user/services/user.service';
+import { CoreSitesService } from '../../../core/services/core-sites.service';
 
 @Component({
   selector: 'app-sites',
@@ -22,7 +22,7 @@ export class SitesComponent implements OnInit, OnDestroy {
   constructor(
     private modalService: NgbModal,
     private userService: UserService,
-    private sitesService: SitesService
+    private coreSitesService: CoreSitesService
   ) { }
 
   ngOnInit(): void {
@@ -161,7 +161,7 @@ export class SitesComponent implements OnInit, OnDestroy {
       ]
     }];
       this.isSitesListLoaded = true;
-      this.sites = this.sitesService.sites = response;
+      this.sites = this.coreSitesService.sites = response;
       if (this.sites.length) {
         setTimeout(() => {
           /*window.showPhoneCollector();*/

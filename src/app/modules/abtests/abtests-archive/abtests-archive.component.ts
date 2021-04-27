@@ -5,7 +5,7 @@ import {
   VariantArchiveExtended
 } from '../../../core/models/abtests';
 import { BinsDataService } from '../services/bins-data.service';
-import { SitesService } from '../../sites/services/sites.service';
+import { CoreSitesService } from '../../../core/services/core-sites.service';
 import { AbtestsService } from '../services/abtests.service';
 
 
@@ -26,7 +26,7 @@ export class AbtestsArchiveComponent implements OnInit, AfterViewChecked {
 
   constructor(
     private binsDataService: BinsDataService,
-    private sitesService: SitesService,
+    private coreSitesService: CoreSitesService,
     private abTestsService: AbtestsService
   ) { }
 
@@ -56,7 +56,7 @@ export class AbtestsArchiveComponent implements OnInit, AfterViewChecked {
       tariffExp: 1595881811225,
       trial: true
     }]; // удалить статику и раскомментировать подписку
-    this.sitesService.sites = response;
+    this.coreSitesService.sites = response;
     this.sites = this.sites.concat(response);
     this.currSite = this.sites[0].id;
     /*});*/
@@ -226,9 +226,9 @@ export class AbtestsArchiveComponent implements OnInit, AfterViewChecked {
   }
 
   private getSiteById(siteId) {
-    for (let i = 0; i < this.sites.length; i++) {
-      if (this.sites[i].id === siteId) {
-        return this.sites[i];
+    for (const item of this.sites) {
+      if (item.id === siteId) {
+        return item;
       }
     }
     return null;

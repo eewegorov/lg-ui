@@ -9,8 +9,9 @@ import { WidgetAddComponent } from '../widget-add/widget-add.component';
 import { Company, CompanyShort, Entities, WidgetInfo, WidgetTemplate, WidgetType } from '../../../core/models/widgets';
 import { Abtest } from '../../../core/models/abtests';
 import { TariffsService } from '../../../core/services/tariffs.service';
-import { AbtestsService } from '../../abtests/services/abtests.service';
+import { CoreSitesService } from '../../../core/services/core-sites.service';
 import { SitesService } from '../../sites/services/sites.service';
+import { AbtestsService } from '../../abtests/services/abtests.service';
 import { WidgetService } from '../services/widget.service';
 import { CloneWidgetComponent } from '../clone-widget/clone-widget.component';
 import { SiteShort } from '../../../core/models/sites';
@@ -44,6 +45,7 @@ export class WidgetsComponent implements OnInit {
     private modalService: NgbModal,
     private toastr: ToastrService,
     private tariffsService: TariffsService,
+    private coreSitesService: CoreSitesService,
     private sitesService: SitesService,
     private abtestsService: AbtestsService,
     private widgetService: WidgetService
@@ -74,8 +76,8 @@ export class WidgetsComponent implements OnInit {
         trial: true
       }]; // удалить статику и раскомментировать подписку
           this.sites = response;
-          this.sitesService.sites = response;
-          this.currentSite = selectedSite ? this.sitesService.getSiteById(selectedSite) : response[0];
+          this.coreSitesService.sites = response;
+          this.currentSite = selectedSite ? this.coreSitesService.getSiteById(selectedSite) : response[0];
           if (!this.currentSite) {
             this.currentSite = response[0];
           }

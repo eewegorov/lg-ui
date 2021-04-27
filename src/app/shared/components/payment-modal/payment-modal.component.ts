@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
-import { SitesService } from '../../../modules/sites/services/sites.service';
-import { BillingService } from '../../../core/services/billing.service';
 import { Order } from '../../../core/models/payment';
+import { CoreSitesService } from '../../../core/services/core-sites.service';
+import { BillingService } from '../../../core/services/billing.service';
 
 @Component({
   selector: 'app-payment-modal',
@@ -29,12 +29,12 @@ export class PaymentModalComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private datePipe: DatePipe,
-    private sitesService: SitesService,
+    private coreSitesService: CoreSitesService,
     private billingService: BillingService
   ) {
     this.title = this.title || this.translate.instant('sitelist.tarrif.title');
     this.subscription = this.subscription || null;
-    this.siteName = this.siteName ? this.siteName : this.sitesService.getSiteById(this.siteId).name;
+    this.siteName = this.siteName ? this.siteName : this.coreSitesService.getSiteById(this.siteId).name;
 
     this.planLabels = {
       activationLabel: this.translate.instant('sitelist.tarrif.activation', {tariffName: this.plan.name, siteName: this.siteName}),

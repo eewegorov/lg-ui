@@ -1,6 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { ApiResponse } from '../../../core/models/api';
 import {
   AmoAuthByCodeRequest, AmoAuthByRefreshTokenRequest,
   AmoAuthRequest,
@@ -28,22 +29,21 @@ import {
   SmartpointsResponse,
   UpdateIntegrationRequest
 } from '../../../core/models/sites';
-import {ErrorHandlerService} from '../../../core/services/error-handler.service';
-import {SitesApiService} from './sites-api.service';
-import {ApiResponse} from '../../../core/models/api';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { SitesApiService } from './sites-api.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SitesService {
-  public sites: Site[] | SiteShort[] = [];
   private currentSiteId: string;
 
   constructor(
     private errorHandlerService: ErrorHandlerService,
     private sitesApiService: SitesApiService
-  ) { }
+  ) {
+  }
 
   public getSites(): Observable<Site[]> {
     return this.sitesApiService.getSites().pipe(
@@ -208,7 +208,7 @@ export class SitesService {
 
   public generatePath(path: string, needUrl: boolean = false): string {
     let scriptPath = '<!-- BEGIN LEADGENIC CODE {literal} -->\r\n';
-    scriptPath +=  '<!-- Put this script tag before the </body> tag of your page -->';
+    scriptPath += '<!-- Put this script tag before the </body> tag of your page -->';
     scriptPath += '\r\n<script type="text/javascript" charset="UTF-8" async src="';
     scriptPath += needUrl ? ('https://gate.leadgenic.ru/getscript?site=' + path) : path;
     scriptPath += '"></script>\r\n';
@@ -327,16 +327,6 @@ export class SitesService {
         isPayment: true
       }
     ];
-  }
-
-  public getSiteById(siteId) {
-    for (const item of this.sites) {
-      if (item.id === siteId) {
-        return item;
-      }
-    }
-
-    return null;
   }
 
 }

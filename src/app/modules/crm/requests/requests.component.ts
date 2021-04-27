@@ -7,8 +7,8 @@ import { CookieService } from 'ngx-cookie-service';
 import * as moment from 'moment';
 import { SiteShort } from '../../../core/models/sites';
 import { Lead, LeadRequest, Periods, StateWithIndex } from '../../../core/models/crm';
+import { CoreSitesService } from '../../../core/services/core-sites.service';
 import { UserService } from '../../user/services/user.service';
-import { SitesService } from '../../sites/services/sites.service';
 import { CrmService } from '../services/crm.service';
 
 
@@ -74,8 +74,8 @@ export class RequestsComponent implements OnInit, OnDestroy {
   constructor(
     private translate: TranslateService,
     private cookieService: CookieService,
+    private coreSitesService: CoreSitesService,
     private userService: UserService,
-    private sitesService: SitesService,
     private crmService: CrmService
   ) {
   }
@@ -98,7 +98,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
       this.defaultExtraName = translation;
     });
     this.updateLeadInfo = this.crmService.updateLeadInfo.subscribe((response: StateWithIndex) => {
-      if (!response) return;
+      if (!response) { return; }
       this.leads[response.index].state = response.state;
       this.leads[response.index].status = this.setStatusByState(response.state);
     });
@@ -141,7 +141,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
         "tariffExp": 1595881811225,
         "trial": true
       }]; // удалить статику и раскомментировать подписку
-        this.sitesService.sites = response;
+        this.coreSitesService.sites = response;
         if (notificationOffCookie !== this.userId && this.isTrialSites(response)) {
           this.isNotificationEnable = true;
         }

@@ -21,6 +21,7 @@ import { ContainerizedWidgetService } from '../../services/containerized-widget.
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
 import { TariffsService } from '../../../../core/services/tariffs.service';
 import { WidgetService } from '../../services/widget.service';
+import { CoreSitesService } from '../../../../core/services/core-sites.service';
 
 @Component({
   selector: 'app-widget-edit',
@@ -61,6 +62,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private toastr: ToastrService,
     private sitesService: SitesService,
+    private coreSitesService: CoreSitesService,
     private couponService: CouponService,
     private userService: UserService,
     private tariffsService: TariffsService,
@@ -70,7 +72,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   ) {
     this.sid = this.route.snapshot.paramMap.get('id').split('-')[0];
     this.wid = this.route.snapshot.paramMap.get('id').split('-')[1];
-    this.isPayment = !this.sitesService.isSiteHasExpTariff(this.sitesService.getSiteById(this.sid));
+    this.isPayment = !this.sitesService.isSiteHasExpTariff(this.coreSitesService.getSiteById(this.sid));
   }
 
   ngOnInit(): void {
@@ -514,7 +516,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
       this.getCoupons();
       if (response) {
-        this.sitesService.sites = response;
+        this.coreSitesService.sites = response;
       }
     });
   }
@@ -595,7 +597,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   private showPaymentDialog(siteId, description) {
     this.tariffsService.checkTariffPlans(siteId,
       this.translate.instant('sitelist.tariff.title'),
-      description, {siteName: this.sitesService.getSiteById(siteId).name}
+      description, {siteName: this.coreSitesService.getSiteById(siteId).name}
     );
   }
 

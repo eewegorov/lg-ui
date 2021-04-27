@@ -13,6 +13,7 @@ import { ContainerizedWidgetService } from '../../services/containerized-widget.
 import { AbtestAddComponent } from '../../../abtests/abtest-add/abtest-add.component';
 import { AbtestsService } from '../../../abtests/services/abtests.service';
 import { Abtest } from '../../../../core/models/abtests';
+import { CoreSitesService } from '../../../../core/services/core-sites.service';
 
 @Component({
   selector: 'app-containerized-item',
@@ -44,6 +45,7 @@ export class ContainerizedItemComponent implements OnInit {
     private modalService: NgbModal,
     private decimalPipe: DecimalPipe,
     private tariffsService: TariffsService,
+    private coreSitesService: CoreSitesService,
     private sitesService: SitesService,
     private abtestsService: AbtestsService,
     private widgetService: WidgetService,
@@ -170,7 +172,7 @@ export class ContainerizedItemComponent implements OnInit {
   }
 
   public abAction() {
-    const currentSite = this.sitesService.getSiteById(this.siteId);
+    const currentSite = this.coreSitesService.getSiteById(this.siteId);
 
     // TODO: Check if it's payment query
     if (this.sitesService.isSiteHasExpTariff(currentSite)) {
