@@ -27,7 +27,7 @@ export class AuthService {
     return this.http.post<Token>(`${ environment.oauthUrl }/token`,
       null, {
         headers: new HttpHeaders({
-          'Authorization': `Basic ${btoa('ui:ui')}`
+          Authorization: `Basic ${btoa('ui:ui')}`
         }),
         params: {
           password: data.password,
@@ -39,7 +39,6 @@ export class AuthService {
         tap((token: Token) => this.doLoginUser(data.username, token)),
         mapTo(true),
         catchError(error => {
-          console.log(error)
           alert(error.error);
           return of(false);
         })
@@ -48,7 +47,7 @@ export class AuthService {
 
   public logout() {
     return this.http.post<any>(`${environment.oauthUrl}/logout`, {
-      'refreshToken': this.getRefreshToken()
+      refreshToken: this.getRefreshToken()
     }).pipe(
       tap(() => this.doLogoutUser()),
       mapTo(true),
@@ -64,7 +63,7 @@ export class AuthService {
 
   public refreshToken() {
     return this.http.post<any>(`${environment.oauthUrl}/refresh`, {
-      'refreshToken': this.getRefreshToken()
+      refreshToken: this.getRefreshToken()
     }).pipe(tap((token: Token) => {
       this.storeJwtToken(token.access_token);
     }));
@@ -75,7 +74,6 @@ export class AuthService {
   }
 
   private doLoginUser(username: string, token: Token) {
-    console.log(token)
     this.loggedUser = username;
     this.storeTokens(token);
   }

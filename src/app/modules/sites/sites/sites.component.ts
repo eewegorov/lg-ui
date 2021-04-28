@@ -2,10 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SiteAddComponent } from '../site-add/site-add.component';
-import { Site, SiteShort } from '../../../core/models/sites';
+import { Site } from '../../../core/models/sites';
 import { User } from '../../../core/models/user';
 import { UserService } from '../../user/services/user.service';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
+import { SitesService } from '../services/sites.service';
 
 @Component({
   selector: 'app-sites',
@@ -22,7 +23,8 @@ export class SitesComponent implements OnInit, OnDestroy {
   constructor(
     private modalService: NgbModal,
     private userService: UserService,
-    private coreSitesService: CoreSitesService
+    private coreSitesService: CoreSitesService,
+    private sitesService: SitesService
   ) { }
 
   ngOnInit(): void {
@@ -41,14 +43,7 @@ export class SitesComponent implements OnInit, OnDestroy {
   }
 
   private getMeInfo() {
-    /*this.userService.getMeInfo().subscribe((response: User) => {*/
-    const response = {
-      "login": "user@example.com",
-      "id": "5a6e4fefc9f6afaff395fdff",
-      "timeZone": "Asia/Vladivostok",
-      "phone": "+15968977523598",
-      "wallet": "78994596648"
-    };
+    this.userService.getMeInfo().subscribe((response: User) => {
       this.timezone = response.timeZone;
       if (!response.phone) {
         this.userService.userPhone = null;
@@ -59,107 +54,11 @@ export class SitesComponent implements OnInit, OnDestroy {
         this.hidePhoneFieldInModal = true;
       }
       this.getSites();
-    /*});*/
+    });
   }
 
   private getSites(): void {
-    /*this.sitesSub = this.sitesService.getSites().subscribe((response: Site[]) => {*/
-    const response = [{
-      "id": "5a6e51b4c9f6afb093583e0b",
-      "name": "Сайт 1",
-      "url": "site1.ru",
-      "tariffName": "Партнерский",
-      "tariffExp": 1641798721000,
-      "actions": [
-        {
-          "date": 1516647600000,
-          "value": 0
-        },
-        {
-          "date": 1516734000000,
-          "value": 0
-        },
-        {
-          "date": 1516820400000,
-          "value": 0
-        },
-        {
-          "date": 1516906800000,
-          "value": 1
-        },
-        {
-          "date": 1516993200000,
-          "value": 0
-        },
-        {
-          "date": 1517079600000,
-          "value": 0
-        },
-        {
-          "date": 1517166000000,
-          "value": 0
-        }
-      ],
-      "emails": [
-        {
-          "date": 1516647600000,
-          "value": 1
-        },
-        {
-          "date": 1516734000000,
-          "value": 0
-        },
-        {
-          "date": 1516820400000,
-          "value": 1
-        },
-        {
-          "date": 1516906800000,
-          "value": 0
-        },
-        {
-          "date": 1516993200000,
-          "value": 1
-        },
-        {
-          "date": 1517079600000,
-          "value": 0
-        },
-        {"date": 1517166000000,
-          "value": 1
-        }
-      ],
-      "leads": [
-        {
-          "date": 1516647600000,
-          "value": 0
-        },
-        {
-          "date": 1516734000000,
-          "value": 1
-        },
-        {
-          "date": 1516820400000,
-          "value": 0
-        },
-        {
-          "date": 1516906800000,
-          "value": 0
-        },
-        {
-          "date": 1516993200000,
-          "value": 0
-        },
-        {
-          "date": 1517079600000,
-          "value": 0
-        },
-        {
-          "date": 1517166000000,
-          "value": 1
-        }
-      ]
-    }];
+    this.sitesSub = this.sitesService.getSites().subscribe((response: Site[]) => {
       this.isSitesListLoaded = true;
       this.sites = this.coreSitesService.sites = response;
       if (this.sites.length) {
@@ -169,7 +68,7 @@ export class SitesComponent implements OnInit, OnDestroy {
       } else {
         this.openModalForCreatingNewSite();
       }
-    /*});*/
+    });
   }
 
   ngOnDestroy(): void {

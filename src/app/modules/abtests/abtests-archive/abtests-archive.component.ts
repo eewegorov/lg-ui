@@ -4,10 +4,11 @@ import {
   AbtestArchiveExtended,
   VariantArchiveExtended
 } from '../../../core/models/abtests';
+import { SiteShort } from '../../../core/models/sites';
 import { BinsDataService } from '../services/bins-data.service';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
+import { SitesService } from '../../sites/services/sites.service';
 import { AbtestsService } from '../services/abtests.service';
-
 
 
 @Component({
@@ -27,6 +28,7 @@ export class AbtestsArchiveComponent implements OnInit, AfterViewChecked {
   constructor(
     private binsDataService: BinsDataService,
     private coreSitesService: CoreSitesService,
+    private sitesService: SitesService,
     private abTestsService: AbtestsService
   ) { }
 
@@ -40,84 +42,21 @@ export class AbtestsArchiveComponent implements OnInit, AfterViewChecked {
   }
 
   private initSites() {
-    /*this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {*/
-    const response = [{
-      id: '5f120a7646e0fb00012c2632',
-      name: 'mysecondsite',
-      url: 'secondsecond.ru',
-      tariffName: 'Пробный',
-      tariffExp: 1595881841107,
-      trial: false
-    }, {
-      id: '5f120a5446e0fb0001d8c981',
-      name: 'mysupermegasite',
-      url: 'mysupermegasite.com',
-      tariffName: 'Пробный',
-      tariffExp: 1595881811225,
-      trial: true
-    }]; // удалить статику и раскомментировать подписку
+    this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
+
     this.coreSitesService.sites = response;
     this.sites = this.sites.concat(response);
     this.currSite = this.sites[0].id;
-    /*});*/
+    });
   }
 
   private initTests() {
-    /*this.abTestsService.getArchTests().subscribe((response: AbtestArchive[]) => {*/
-    const response =  [
-      {
-        "id": "b4df594e739be5a62923cf3806ee1893",
-        "name": "8ef97a68cff72492a1f24b5794b6aa35",
-        "description": "ffb67686f34ce4ea79b258d501f3b9c5",
-        "siteId": "5f3ea7ae7b9c7b3f16eaa43eea21a075",
-        "variants": [
-          {
-            "widgetId": "c345a94addc98332dc7e4ec1c774d387",
-            "name": "Another test",
-            "shows": 4,
-            "target": 1,
-            "winner": true,
-            "etalon": true
-          },
-          {
-            "widgetId": "9969c0bda0cb60cfb4a2da91f2d150bc",
-            "name": "c35074951c160ede5268ca96a203b240",
-            "shows": 4,
-            "target": 0,
-            "winner": false,
-            "etalon": false
-          }
-        ]
-      }, {
-        "id": "b4df594sfsdfe5a62923cf3806ee1893",
-        "name": "Shalalala",
-        "description": "Helllllo",
-        "siteId": "52342347b9c7b3f16eaa43eea21a075",
-        "variants": [
-          {
-            "widgetId": "c345a94addc98332dc7e4ec1c774d387",
-            "name": "Another test",
-            "shows": 4,
-            "target": 1,
-            "winner": false,
-            "etalon": false
-          },
-          {
-            "widgetId": "9969c0bda0cb60cfb4a2da91f2d150bc",
-            "name": "c35074951c160ede5268ca96a203b240",
-            "shows": 12,
-            "target": 2,
-            "winner": true,
-            "etalon": false
-          }
-        ]
-      }
-    ];
+    this.abTestsService.getArchTests().subscribe((response: AbtestArchive[]) => {
       this.allABTests = response;
       this.abTests = this.allABTests;
       this.isLoad = true;
       this.getConversions();
-    /*});*/
+    });
   }
 
   private getConversions() {

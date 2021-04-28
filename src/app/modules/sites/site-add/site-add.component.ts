@@ -43,29 +43,27 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
   public createSite() {
     const newSiteData = Object.assign({}, this.newSiteForm.getRawValue());
     delete newSiteData.phone;
-    /*this.createSiteSub = this.sitesService.createSite(newSiteData).pipe(
+    this.createSiteSub = this.sitesService.createSite(newSiteData).pipe(
       switchMap(
-        (response: CreateSiteData) => {*/
-          const response = {"id":"5a60c3891185132fa781",
-            "link":"https://gate.leadgenic.ru/getscript?site=5a60c3891185132fa781"};
+        (response: CreateSiteData) => {
           this.createdSite = {
             id: response.id,
             link: this.sitesService.generatePath(response.link),
           };
-          /*if (this.newSiteForm.controls.phone.value) {
+          if (this.newSiteForm.controls.phone.value) {
             return this.userService.savePhone({ phone: this.newSiteForm.controls.phone.value });
-          }*/
-        /*})
+          }
+        })
     ).subscribe(
-      () => {*/
+      () => {
         this.tab = 2;
         this.updateSites.emit(true);
-      /*},
+      },
       error => {
         console.log(error);
         this.isUrlInvalid = true;
       }
-    );*/
+    );
   }
 
   public enableTyping(): void {
