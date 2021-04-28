@@ -5,15 +5,15 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { Abtest } from '../../../../core/models/abtests';
 import { Company, Container, WidgetConversion, WidgetInfo } from '../../../../core/models/widgets';
 import { TariffsService } from '../../../../core/services/tariffs.service';
+import { AbtestsService } from '../../../abtests/services/abtests.service';
+import { CoreSitesService } from '../../../../core/services/core-sites.service';
 import { SitesService } from '../../../sites/services/sites.service';
 import { WidgetService } from '../../services/widget.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { AbtestAddComponent } from '../../../abtests/abtest-add/abtest-add.component';
-import { AbtestsService } from '../../../abtests/services/abtests.service';
-import { Abtest } from '../../../../core/models/abtests';
-import { CoreSitesService } from '../../../../core/services/core-sites.service';
 
 @Component({
   selector: 'app-containerized-item',
@@ -50,7 +50,8 @@ export class ContainerizedItemComponent implements OnInit {
     private abtestsService: AbtestsService,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     const abTests = this.abtestsService.getListOfABTests();
@@ -89,9 +90,13 @@ export class ContainerizedItemComponent implements OnInit {
   }
 
   public switchCWidget(newValue) {
-    if (this.item.active === newValue) { return false; }
+    if (this.item.active === newValue) {
+      return false;
+    }
     this.containerizedWidgetService.switch(this.siteId, this.item.id, newValue).subscribe((response: boolean) => {
-      if (!response) { return false; }
+      if (!response) {
+        return false;
+      }
       this.item.active = newValue;
     });
   }
@@ -178,7 +183,7 @@ export class ContainerizedItemComponent implements OnInit {
     if (this.sitesService.isSiteHasExpTariff(currentSite)) {
       this.tariffsService.checkTariffPlans(this.siteId,
         this.translate.instant('sitelist.tariff.title'),
-        this.translate.instant('widgetsList.payment.abtest', {siteName: currentSite.name}));
+        this.translate.instant('widgetsList.payment.abtest', { siteName: currentSite.name }));
     } else {
       const modalRef = this.modalService.open(AbtestAddComponent, {
         size: 'lg',

@@ -116,7 +116,8 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
         this.getSiteIntegrations();
       }
     })
-      .catch(() => {});
+      .catch(() => {
+      });
   }
 
   public changeAnalyticGService(value) {
@@ -136,72 +137,39 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
   }
 
   public getSiteIntegrations() {
-    /*this.sitesService.getSiteIntegrations(this.siteId).subscribe((response: Integration[]) => {*/
-    const response = [
-      {
-        id: 'a97e831035277bdb2d580cce4de0e399',
-        name: 'Amo integration',
-        type: 'AMOCRM',
-        default: true,
-        active: false
-      },
-      {
-        id: '3d2591d2fe9af9c2e126168865719e22',
-        name: 'Another bitrix integration',
-        type: 'BITRIX',
-        default: false,
-        active: true
-      },
-      {
-        id: 'ff8b3189fea5aab92ecb6fad14b2ed0d',
-        name: 'Bitrix integrations',
-        type: 'BITRIX',
-        default: true,
-        active: false
-      }
-    ];
-    this.integrations = response.map((item: Integration) => {
-      item.serviceName = this.sitesService.getCorrectNameByType(item.type);
-      item.isPayment = this.sitesService.getPaymentByType(item.type);
-      return item;
+    this.sitesService.getSiteIntegrations(this.siteId).subscribe((response: Integration[]) => {
+      this.integrations = response.map((item: Integration) => {
+        item.serviceName = this.sitesService.getCorrectNameByType(item.type);
+        item.isPayment = this.sitesService.getPaymentByType(item.type);
+        return item;
+      });
+      this.integrationsCRM = this.integrations.filter((item) => {
+        return this.sitesService.isIntegrationCRM(item.type);
+      });
+      this.integrationsMailing = this.integrations.filter((item) => {
+        return this.sitesService.isIntegrationMailing(item.type);
+      });
+      this.integrationsNotifications = this.integrations.filter((item) => {
+        return this.sitesService.isIntegrationNotification(item.type);
+      });
+      this.integrationsOthers = this.integrations.filter((item) => {
+        return this.sitesService.isIntegrationOthers(item.type);
+      });
     });
-    this.integrationsCRM = this.integrations.filter((item) => {
-      return this.sitesService.isIntegrationCRM(item.type);
-    });
-    this.integrationsMailing = this.integrations.filter((item) => {
-      return this.sitesService.isIntegrationMailing(item.type);
-    });
-    this.integrationsNotifications = this.integrations.filter((item) => {
-      return this.sitesService.isIntegrationNotification(item.type);
-    });
-    this.integrationsOthers = this.integrations.filter((item) => {
-      return this.sitesService.isIntegrationOthers(item.type);
-    });
-    /*});*/
   }
 
   private getSiteSettings() {
-    /*this.sitesService.getSiteSettings(this.siteId).subscribe((response: SiteSettings) => {*/
-    const response = {
-      name: 'Some site name',
-      url: 'valera.petrarch.com',
-      needLeadNotification: false,
-      logoRefLink: false,
-      needEmailSubscriptions: true,
-      needHideLogo: true,
-      yandexAnalyticsCounter: '31aasdfsdfs',
-      googleAnalyticsService: 'GTAG'
-    };
-    this.site = response;
-    this.sitesService.getSiteShortInfo(this.siteId).subscribe((info: SiteShort) => {
-      this.siteInfo = info;
-      this.siteInfo.isFree = this.sitesService.isSiteHasExpTariff(this.siteInfo) || this.siteInfo.trial;
-      this.siteInfo.isNotPayment = this.sitesService.isSiteHasExpTariff(this.siteInfo) && !this.siteInfo.trial;
+    this.sitesService.getSiteSettings(this.siteId).subscribe((response: SiteSettings) => {
+      this.site = response;
+      this.sitesService.getSiteShortInfo(this.siteId).subscribe((info: SiteShort) => {
+        this.siteInfo = info;
+        this.siteInfo.isFree = this.sitesService.isSiteHasExpTariff(this.siteInfo) || this.siteInfo.trial;
+        this.siteInfo.isNotPayment = this.sitesService.isSiteHasExpTariff(this.siteInfo) && !this.siteInfo.trial;
+      });
+      this.sitesService.getSitesShort().subscribe((responseSites: SiteShort[]) => {
+        this.coreSitesService.sites = responseSites;
+      });
     });
-    this.sitesService.getSitesShort().subscribe((responseSites: SiteShort[]) => {
-      this.coreSitesService.sites = responseSites;
-    });
-    /*});*/
   }
 
 }

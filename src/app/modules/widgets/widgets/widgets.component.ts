@@ -58,32 +58,17 @@ export class WidgetsComponent implements OnInit {
 
     this.translate.get('widgetsList.defCompany').subscribe((translatedValue: string) => {
       this.defCompanyName = translatedValue;
-      /*this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
-        if (response) {*/
-      const response = [{
-        id: '5f120a7646e0fb00012c2632',
-        name: 'mysecondsite',
-        url: 'secondsecond.ru',
-        tariffName: 'Пробный',
-        tariffExp: 1595881841107,
-        trial: false
-      }, {
-        id: '5f120a5446e0fb0001d8c981',
-        name: 'mysupermegasite',
-        url: 'mysupermegasite.com',
-        tariffName: 'Пробный',
-        tariffExp: 1595881811225,
-        trial: true
-      }]; // удалить статику и раскомментировать подписку
-          this.sites = response;
-          this.coreSitesService.sites = response;
-          this.currentSite = selectedSite ? this.coreSitesService.getSiteById(selectedSite) : response[0];
+      this.sitesService.getSitesShort().subscribe((sites: SiteShort[]) => {
+        if (sites) {
+          this.sites = sites;
+          this.coreSitesService.sites = sites;
+          this.currentSite = selectedSite ? this.coreSitesService.getSiteById(selectedSite) : sites[0];
           if (!this.currentSite) {
-            this.currentSite = response[0];
+            this.currentSite = sites[0];
           }
           this.setCurrentSite();
-        /*}
-      });*/
+        }
+      });
     });
 
     this.widgetService.updateWidgetsList.subscribe((data: string) => {
@@ -108,44 +93,12 @@ export class WidgetsComponent implements OnInit {
       }
     });
 
-    /*this.widgetService.getWidgetsTypes().subscribe((response: WidgetType[]) => {*/
-    const response = [
-      {
-        "id": "41546171c1119ffa9b64fa1bb81d5020",
-        "name": "Another type",
-        "description": "",
-        "previewLink":
-          "http://static.leadgenic.com/img/31spadx88210.jpg",
-        "code": "TYPE2",
-        "static": false,
-        "containerized": true
-      },
-      {
-        "id": "24df1be21857f12573487da968c2fc3f",
-        "name": "Other",
-        "description": "",
-        "previewLink":
-          "http://static.leadgenic.com/img/dasdcz781313xc9z.jpg",
-        "code": "other",
-        "static": true,
-        "containerized": false
-      },
-      {
-        "id": "0bf813e40c9823e90f286775eb6b801c",
-        "name": "Type 1",
-        "description": "Type description",
-        "previewLink":
-          "http://static.leadgenic.com/img/ztyappqmyuv.jpg",
-        "code": "TYPE1",
-        "static": true,
-        "containerized": false
-      }
-    ];
+    this.widgetService.getWidgetsTypes().subscribe((response: WidgetType[]) => {
       if (response) {
         this.types = response;
         this.widgetService.setCurrentWidgetsTypes(response);
       }
-    /*});*/
+    });
   }
 
   private setCurrentSite() {
@@ -174,7 +127,8 @@ export class WidgetsComponent implements OnInit {
       }
       this.getAllWidgetsForSite(this.sitesService.getCurrentSiteId());
     })
-      .catch(() => {});
+      .catch(() => {
+      });
   }
 
   public getTypesWithCompanyFilter() {
@@ -197,170 +151,12 @@ export class WidgetsComponent implements OnInit {
   }
 
   private getAllWidgetsForSite(siteId, stayCompany?) {
-    /*this.abtestsService.getTests().pipe(
-      switchMap((response: Abtest[]) => {
-        this.abtestsService.setListOfABTests(response);
+    this.abtestsService.getTests().pipe(
+      switchMap((responseTests: Abtest[]) => {
+        this.abtestsService.setListOfABTests(responseTests);
         return this.widgetService.getWidgetsList(siteId);
       })
-    ).subscribe((response: Entities) => {*/
-
-    const responseTests = [{
-      "id": "7f7f888d41b6c33ef1884db7c48a2d32",
-      "name": "Another test",
-      "description": "test description",
-      "state": "ACTIVE",
-      "type": "0bf813e40c9823e90f286775eb6b801c",
-      "siteId": "9aafd4f7bd05ca810dea91985b7ace93"
-    },
-      {
-        "id": "acd0411f5e83a8f476db619c87e85fe8",
-        "name": "TEST2",
-        "description": "",
-        "state": "PAUSED",
-        "type": "41546171c1119ffa9b64fa1bb81d5020",
-        "siteId": "9aafd4f7bd05ca810dea91985b7ace93"
-      }];
-    this.abtestsService.setListOfABTests(responseTests as Abtest[]);
-
-      const response = {
-        "companies": [
-          {
-            "id": "1de2578605e8244560bacd479de4c284",
-            "name": null,
-            "default": true
-          }, {
-            "id": "c283a66ec3d804d3a7ae8f6a40aadf59",
-            "name": "An apple",
-            "default": false
-          }, {
-            "id": "80b842f12ed04a969f9c98843efa5430",
-            "name": "Company 1",
-            "default": false
-          }, {
-            "id": "9ea36db589f37dbc5c51848d0ffbab3f",
-            "name": "Some another company",
-            "default": false
-          } ],
-        "smartPoints": {
-          "enabled": true,
-          "list": [ {
-            "enabled": true,
-            "autoinvite": true,
-            "pos": "LEFT_DOWN",
-            "type": "CALLBACK"
-          },
-            {
-              "enabled": true,
-              "autoinvite": true,
-              "pos": "LEFT_EDGE",
-              "type": "EXIT_INTENT"
-            }, {
-              "enabled": true,
-              "autoinvite": true,
-              "pos": "RIGHT_DOWN",
-              "type": "INSTANT_POPUP"
-            }, {
-              "enabled": true,
-              "autoinvite": true,
-              "pos": "LEFT_EDGE",
-              "type": "INVITE"
-            }, {
-              "enabled": false,
-              "autoinvite": false,
-              "pos": "LEFT_EDGE",
-              "type": "MOBILE"
-            }, {
-              "enabled": false,
-              "autoinvite": false,
-              "pos": "LEFT_EDGE",
-              "type": "POPUP"
-            } ]
-        },
-        "widgets": {
-          "TYPE2": [ {
-            "id": "60db34a8b6707488fde8a78a3c7e86a0",
-            "name": "f417ec1f254b1e179f31c23c0ba1a3b9",
-            "type": "TYPE2",
-            "template": "TEMPLATE3",
-            "companyId": "1de2578605e8244560bacd479de4c284",
-            "active": true,
-            "abtestInfo": null
-          } ],
-          "TYPE1": [{
-            "id": "a4503b9afbcace0588309cd26eed71d1",
-            "name": "2ccace33c0cb86f40e6423a0597de107",
-            "type": "TYPE1",
-            "template": "TEMPLATE1",
-            "companyId": "80b842f12ed04a969f9c98843efa5430",
-            "active": true,
-            "abtestInfo": {
-              "id": "fe6c99154f201821387137aac2150821",
-              "type": "SUPERWIDGET"
-            }
-          }, {
-            "id": "5c212366f48b7ea60f93af6c08fb6ead",
-            "name": "fdfc2aedc82ae9b173da25032043e473",
-            "type": "TYPE1",
-            "template": "TEMPLATE2",
-            "companyId": "1de2578605e8244560bacd479de4c284",
-            "active": true,
-            "abtestInfo": null
-          }, {
-            "id": "d7e6bd030a7d2ad0e66809b53f66e3e3",
-            "name": "7d6a249156f580fb03c456af02255338",
-            "type": "TYPE1",
-            "template": "TEMPLATE2",
-            "companyId": "9ea36db589f37dbc5c51848d0ffbab3f",
-            "active": false,
-            "abtestInfo": null
-          } ]
-        },
-        "containers": [
-          {
-            "id": "be4f43ffe117a6efbe9f43e7ba2d6ed0",
-            "name": "Container 1",
-            "description": "Container 1 desc",
-            "widgets": [
-              {
-                "id": "cab80406809a26c2c880380aaf5b4798",
-                "name": "030540042056d3404f0cb7a84a765868",
-                "type": "TYPE1",
-                "template": "TEMPLATE1",
-                "companyId":
-                  "c283a66ec3d804d3a7ae8f6a40aadf59",
-                "active": true,
-                "abtestInfo": {
-                  "id": "615c865f4ed9135e0937fb077c900e55",
-                  "type": "SUPERWIDGET"
-                }
-              }, {
-                "id": "682c3d745dece0db85812a1d1b6197b8",
-                "name": "63f26001f4c8c15dbc67b76ef6bcd1cd",
-                "type": "TYPE1",
-                "template": "TEMPLATE1",
-                "companyId":
-                  "9ea36db589f37dbc5c51848d0ffbab3f",
-                "active": true,
-                "abtestInfo": null
-              }]
-          }, {
-            "id": "a126e39e8388cf9884ab9ee66ecedba6",
-            "name": "Container 2",
-            "description": "Container 2 desc",
-            "widgets": [
-              {
-                "id": "e9202b18bcdb4d1daff3cdb5c3e2f844",
-                "name": "766145d2796dd1bdb17cd7970739cecc",
-                "type": "TYPE1",
-                "template": "TEMPLATE1",
-                "companyId":
-                  "80b842f12ed04a969f9c98843efa5430",
-                "active": true,
-                "abtestInfo": null
-              }
-            ] }],
-
-      };
+    ).subscribe((response: Entities) => {
       this.companies = response.companies;
       this.widgetService.setCurrentCompanies(response.companies);
 
@@ -370,14 +166,14 @@ export class WidgetsComponent implements OnInit {
       this.containers = response.containers;
       this.widgetService.setContainers(this.containers);
       this.smartPoints = response.smartPoints;
-      this.widgets = response.widgets as Record<string, WidgetInfo[]>;
+      this.widgets = response.widgets as unknown as Record<string, WidgetInfo[]>;
       if (this.enableWidgetsModal) {
         this.enableWidgetsModal = false;
         setTimeout(() => {
           this.createNewWidget();
         }, 500);
       }
-    /*});*/
+    });
   }
 
   public createNewWidget() {
@@ -396,8 +192,7 @@ export class WidgetsComponent implements OnInit {
       modalRef.componentInstance.currentCompany = this.currentCompany;
       modalRef.result.then((result) => {
         // TODO: Implement logic when close modal. Don't forget "result"
-      })
-        .catch(() => {});
+      }).catch(() => {});
     }
   }
 
@@ -442,7 +237,9 @@ export class WidgetsComponent implements OnInit {
   }
 
   public filteredContainers() {
-    if (!this.currentCompany || this.currentCompany.default) { return this.containers; }
+    if (!this.currentCompany || this.currentCompany.default) {
+      return this.containers;
+    }
 
     return this.containers.filter((item) => {
       return item.widgets.some((widget) => widget.companyId === this.currentCompany.id);

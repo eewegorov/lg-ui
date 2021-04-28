@@ -30,7 +30,8 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
     private activeModal: NgbActiveModal,
     private userService: UserService,
     private sitesService: SitesService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.resetForm();
@@ -75,31 +76,17 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
   }
 
   public goToCreateOwnWidgets() {
-    this.router.navigate(['widgets'], { queryParams: {enableModal: true, selected: this.createdSite.id}}).then(
+    this.router.navigate(['widgets'], { queryParams: { enableModal: true, selected: this.createdSite.id } }).then(
       () => this.closeModal()
     );
   }
 
   public setTab(newTab) {
     if (newTab === 3) {
-      /*this.sitesService.getSiteSmartpointsList(this.createdSite.id).subscribe((response: Smartpoints) => {*/
-      const response = {
-        "enabled": true,
-        "list": [{
-          "enabled": true,
-          "autoinvite": true,
-          "pos": "LEFT_DOWN",
-          "type": "CALLBACK"
-        }, {
-          "enabled": false,
-          "autoinvite": false,
-          "pos": "LEFT_EDGE",
-          "type": "POPUP"
-        }]
-      };
+      this.sitesService.getSiteSmartpointsList(this.createdSite.id).subscribe((response: Smartpoints) => {
         this.smartPoints = response;
         this.tab = newTab;
-      /*});*/
+      });
     } else {
       this.tab = newTab;
     }
@@ -107,8 +94,8 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
 
   private resetForm() {
     this.newSiteForm = new FormGroup({
-      name: new FormControl('', [ Validators.required ]),
-      url: new FormControl('', [ Validators.required ]),
+      name: new FormControl('', [Validators.required]),
+      url: new FormControl('', [Validators.required]),
       phone: new FormControl('')
     });
   }

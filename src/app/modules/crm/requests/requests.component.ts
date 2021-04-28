@@ -6,10 +6,12 @@ import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import * as moment from 'moment';
 import { SiteShort } from '../../../core/models/sites';
-import { Lead, LeadRequest, Periods, StateWithIndex } from '../../../core/models/crm';
+import { Lead, LeadById, LeadRequest, Periods, StateWithIndex } from '../../../core/models/crm';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
 import { UserService } from '../../user/services/user.service';
 import { CrmService } from '../services/crm.service';
+import { SitesService } from '../../sites/services/sites.service';
+import { User } from '../../../core/models/user';
 
 
 @Component({
@@ -29,29 +31,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
   public sitesIds = [];
   public widgetsIds = [];
   public statesIds = [];
-  public leads: Lead[] = [{
-    id: '4b7e89b0b224669bcb5f1bf53d2bf71a',
-    title: 'Test lead 1',
-    widgetName: 'This is my custom widget',
-    siteId: '27b7f32bd10521503acc2b38d3e5b640',
-    siteName: 'U1 site 1',
-    siteUrl: 'http://u1s1.com',
-    pageUrl: 'http://u1s1.com/test',
-    state: 'NEW',
-    date: 1263161699000,
-    comment: 'Comment is missing'
-  }, {
-    id: '4b7e34535345669bcb5f1bf53d2bf71a',
-    title: 'Test lead 2',
-    widgetName: 'This is my better widget',
-    siteId: '27b7f3sdfsf521503acc2b38d3e5b640',
-    siteName: 'U1 site 2',
-    siteUrl: 'http://u2s2.com',
-    pageUrl: 'http://u2s2.com/test',
-    state: 'NEW',
-    date: 1263171799000,
-    comment: 'Comment is commented'
-  }];
+  public leads: Lead[] = [];
   private ALL_SITE_ID = '0000000000000000';
   private ONE_DAY = 86400000;
   private filterTimeout: ReturnType<typeof setTimeout>;
@@ -75,6 +55,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private cookieService: CookieService,
     private coreSitesService: CoreSitesService,
+    private sitesService: SitesService,
     private userService: UserService,
     private crmService: CrmService
   ) {
@@ -110,11 +91,11 @@ export class RequestsComponent implements OnInit, OnDestroy {
   }
 
   private initStats() {
-    /*this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
-      this.userId = response.id;*/
+    this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
+      this.userId = response.id;
       this.getSites();
       this.getFilters();
-    /*});*/
+    });
   }
 
   private getSites() {
@@ -125,27 +106,12 @@ export class RequestsComponent implements OnInit, OnDestroy {
         name: translation
       }];
       this.sitesIds = [this.ALL_SITE_ID];
-      /*this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {*/
-      const response = [{
-        "id": "5f120a7646e0fb00012c2632",
-        "name": "mysecondsite",
-        "url": "secondsecond.ru",
-        "tariffName": "Пробный",
-        "tariffExp": 1595881841107,
-        "trial": false
-      }, {
-        "id": "5f120a5446e0fb0001d8c981",
-        "name": "mysupermegasite",
-        "url": "mysupermegasite.com",
-        "tariffName": "Пробный",
-        "tariffExp": 1595881811225,
-        "trial": true
-      }]; // удалить статику и раскомментировать подписку
+      this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
         this.coreSitesService.sites = response;
         if (notificationOffCookie !== this.userId && this.isTrialSites(response)) {
           this.isNotificationEnable = true;
         }
-      /*});*/
+      });
     });
   }
 
@@ -156,37 +122,14 @@ export class RequestsComponent implements OnInit, OnDestroy {
         name: translation
       }];
       this.widgetsIds = [this.ALL_SITE_ID];
-      /*this.crmService.getSitesFilters().subscribe((response: LeadWidgets[]) => {*/
-      const response = [{
-        "id": "8424d5434e646da8bea2af85cd425d37",
-        "name": "This is another site",
-        "widgets": [
-          {
-            "id": "ec51425b57722d47d4d086c07ca2bea4",
-            "name": "Site 2 Widget 2"
-          }
-        ]
-      },
-        {
-          "id": "cd5a8465ca12cc69d603317fe463e377",
-          "name": "Yet another site",
-          "widgets": [
-            {
-              "id": "68aae9e38a885a9f9023e5f16affe05b",
-              "name": "Ambulance widget"
-            },
-            {
-              "id": "cc98a926cbf246b375d2bb508e396492",
-              "name": "This is widget 1"
-            }
-          ]
-        }]; // удалить статику и раскомментировать подписку
+      this.crmService.getSitesFilters().subscribe((response: LeadWidgets[]) => {
+
 
       this.allSites = this.allSites.concat(response);
       response.forEach(site =>
         site.widgets.forEach(widget => this.allWidgets.push(widget))
       );
-      /*});*/
+      });
     });
   }
 
@@ -225,10 +168,10 @@ export class RequestsComponent implements OnInit, OnDestroy {
 
   public periodApply() {
     const prevPeriodType = this.periodType;
-    this.periodType = "USER";
+    this.periodType = 'USER';
     this.popover.close();
-    if (prevPeriodType === "USER") {
-      this.changePeriod("USER");
+    if (prevPeriodType === 'USER') {
+      this.changePeriod('USER');
     }
   }
 
@@ -273,70 +216,22 @@ export class RequestsComponent implements OnInit, OnDestroy {
   }
 
   public openLeadInfo(lead: Lead, index: number) {
-    /*this.crmService.getLeadById(lead.id).subscribe((response: LeadById) => {
-      if (response) {*/
-    const response = {
-      "id": "5cde635badbf9c72acf266a8",
-      "title": "Hat request",
-      "firstName": "Sergey",
-      "lastName": "Kolivanov","phones": [
-        "+7(985) 665-89-89"
-      ],
-      "emails": [
-        "sergey@kolivanov.ru"
-      ],
-      "comment": "Need call to client",
-      "userComment": "I want buy this shit",
-      "pageUrl": "http://site.com/shit",
-      "pageTitle": "Hat as Product",
-      "visitNo": 3,
-      "ip": "0.0.0.0",
-      "history": [
-        {
-          "title": "Hat as Product",
-          "url": "http://site.com/shit",
-          "serverDate": 1484032321000,
-          "userDate": 1484032321000
-        },
-        {
-          "title": "Hat store",
-          "url": "http://site.com",
-          "serverDate": 1484032320000,
-          "userDate": 1484032320000
-        }
-      ],
-      "state": "b73515bd1b78c4b545b1e9131e4509e4",
-      "siteName": "Hat store",
-      "siteUrl": "site.com",
-      "createDate": 1484032321000,
-      "widgetName": "Widget Hotpoint",
-      "fieldsValues": [
-        {
-          "id": "1b1dfbb46232c26cdf1172239ebedbe6",
-          "name": "Field1",
-          "value": "value1"
-        },
-        {
-          "id": "7f27c0dc041e2b0de33b6c63e4c2434e",
-          "name": "Field2",
-          "value": "value2"
-        }
-      ]
-    };
+    this.crmService.getLeadById(lead.id).subscribe((response: LeadById) => {
+      if (response) {
         this.currentOpenedRow = index;
-        this.crmService.openLeadInfoSidebar.next({ data: response, index: index });
-    /*  }
-    });*/
-  };
+        this.crmService.openLeadInfoSidebar.next({ data: response, index });
+      }
+    });
+  }
 
   public prevList() {
-    if (this.searchParams.offset === 0) return;
+    if (this.searchParams.offset === 0) { return; }
     this.searchParams.offset -= this.searchParams.limit.value;
     this.timeoutFiltering(true);
   }
 
   public nextList() {
-    if (this.leads.length < this.searchParams.limit.value) return;
+    if (this.leads.length < this.searchParams.limit.value) { return; }
     this.searchParams.offset = this.searchParams.offset + this.searchParams.limit.value;
     this.timeoutFiltering(true);
   }
@@ -371,7 +266,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
     }
 
     if (this.widgetsIds.length && this.widgetsIds[0] !== this.ALL_SITE_ID) {
-      params.widgetName = this.widgetsIds.join(",");
+      params.widgetName = this.widgetsIds.join(',');
     }
 
     this.crmService.getLeadList(params).pipe(
