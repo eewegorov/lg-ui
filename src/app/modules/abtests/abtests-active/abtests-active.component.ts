@@ -6,14 +6,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VariantAddComponent } from '../variant-add/variant-add.component';
 import Swal from 'sweetalert2';
 import { sortBy, unzip } from 'lodash-es';
-import { WidgetTemplate } from '../../../core/models/widgets';
-import { Abtest, NewVariant, Variant } from '../../../core/models/abtests';
+import { WidgetTemplate, WidgetType } from '../../../core/models/widgets';
+import { Abtest, AbtestStatistics, NewVariant, Variant } from '../../../core/models/abtests';
+import { SiteShort } from '../../../core/models/sites';
 import { BinsDataService } from '../services/bins-data.service';
+import { TariffsService } from '../../../core/services/tariffs.service';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
+import { SitesService } from '../../sites/services/sites.service';
 import { WidgetService } from '../../widgets/services/widget.service';
 import { ContainerizedWidgetService } from '../../widgets/services/containerized-widget.service';
 import { AbtestsService } from '../services/abtests.service';
-
 
 
 @Component({
@@ -23,7 +25,7 @@ import { AbtestsService } from '../services/abtests.service';
 })
 export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
   public currSite = '';
-  public sites =  [{ id: 'allsitesid', name: 'Все сайты' }];
+  public sites = [{ id: 'allsitesid', name: 'Все сайты' }];
   public showWhat = 'ALL';
   public allABTests = [];
   public abTests = [];
@@ -37,7 +39,11 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
       yAxes: [{
         ticks: {
           beginAtZero: true,
-          callback: (value) => { if (value % 1 === 0) { return value; } }
+          callback: (value) => {
+            if (value % 1 === 0) {
+              return value;
+            }
+          }
         }
       }]
     }
@@ -56,76 +62,25 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
     private translate: TranslateService,
     private modalService: NgbModal,
     private binsDataService: BinsDataService,
+    private tariffsService: TariffsService,
     private coreSitesService: CoreSitesService,
+    private sitesService: SitesService,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private abTestsService: AbtestsService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
-    /*this.widgetService.getWidgetsTemplates().subscribe((response: WidgetTemplate[]) => {*/
-    const response =  [
-      {
-        "id": "11a2839e8952f5ad9d0455129bd0815c",
-        "name": "Exit-intent",
-        "preview":
-          "http://static.leadgenic.com/images/asduaoidu21831.jpg",
-        "type": "81f24bd19c6517ac723dbfe43a9614f9",
-        "active": true
-      },
-      {
-        "id": "836439eee8559825dcebbc1e2b7672e7",
-        "name": "Popup",
-        "preview": "http://static.leadgenic.com/images/22.jpg",
-        "type": "c74e95e279ab6674838a11fac182ccce",
-        "active": true
-      },
-      {
-        "id": "5974c4b200f2060a8c3acc67ed17a6bb",
-        "name": "Template 1",
-        "preview": "http://static.leadgenic.com/images/31.jpg",
-        "type": "c74e95e279ab6674838a11fac182ccce",
-        "active": true
-      }
-    ];
+    this.widgetService.getWidgetsTemplates().subscribe((response: WidgetTemplate[]) => {
       this.templates = response;
-    /*});*/
-    /*this.widgetService.getWidgetsTypes().subscribe((responseTypes: WidgetType[]) => {*/
-    const responseTypes =  [
-      {
-        "id": "41546171c1119ffa9b64fa1bb81d5020",
-        "name": "Another type",
-        "description": "",
-        "previewLink":
-          "http://static.leadgenic.com/img/31spadx88210.jpg",
-        "code": "anotherType",
-        "static": false,
-        "containerized": true
-      },
-      {
-        "id": "24df1be21857f12573487da968c2fc3f",
-        "name": "Other",
-        "description": "",
-        "previewLink":
-          "http://static.leadgenic.com/img/dasdcz781313xc9z.jpg",
-        "code": "other",
-        "static": true,
-        "containerized": false
-      },
-      {
-        "id": "0bf813e40c9823e90f286775eb6b801c",
-        "name": "Type 1",
-        "description": "Type description",
-        "previewLink":
-          "http://static.leadgenic.com/img/ztyappqmyuv.jpg",
-        "code": "type1",
-        "static": true,
-        "containerized": false
-      }
-    ];
+    });
+
+    this.widgetService.getWidgetsTypes().subscribe((responseTypes: WidgetType[]) => {
       this.widgetTypes = responseTypes;
       this.initTests();
-    /*});*/
+    });
+
     this.initSites();
   }
 
@@ -134,51 +89,20 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
   }
 
   private initSites() {
-    /*this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {*/
-      const response = [{
-        id: '5f120a7646e0fb00012c2632',
-        name: 'mysecondsite',
-        url: 'secondsecond.ru',
-        tariffName: 'Пробный',
-        tariffExp: 1595881841107,
-        trial: false
-      }, {
-        id: '5f120a5446e0fb0001d8c981',
-        name: 'mysupermegasite',
-        url: 'mysupermegasite.com',
-        tariffName: 'Пробный',
-        tariffExp: 1595881811225,
-        trial: true
-      }]; // удалить статику и раскомментировать подписку
+    this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
       this.coreSitesService.sites = response;
       this.sites = this.sites.concat(response);
       this.currSite = this.sites[0].id;
-    /*});*/
+    });
   }
 
   private initTests() {
-    /*this.abTestsService.getTests().subscribe((response: Abtest[]) => {*/
-    const response = [{
-        "id": "7f7f888d41b6c33ef1884db7c48a2d32",
-        "name": "Another test",
-        "description": "test description",
-        "state": "ACTIVE",
-        "type": "0bf813e40c9823e90f286775eb6b801c",
-        "siteId": "9aafd4f7bd05ca810dea91985b7ace93"
-      },
-    {
-      "id": "acd0411f5e83a8f476db619c87e85fe8",
-      "name": "TEST2",
-      "description": "",
-      "state": "PAUSED",
-      "type": "41546171c1119ffa9b64fa1bb81d5020",
-      "siteId": "9aafd4f7bd05ca810dea91985b7ace93"
-    }];
+    this.abTestsService.getTests().subscribe((response: Abtest[]) => {
       this.allABTests = this.mapABTests(response);
       this.abTests = this.allABTests;
       const testsLength = this.abTests.length;
       this.getConversions(0, testsLength);
-    /*});*/
+    });
   }
 
   private mapABTests(tests) {
@@ -196,35 +120,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
 
   private getConversions(itemNumber: number, testsLength: number) {
     if (itemNumber < testsLength) {
-     /* this.abTestsService.getConversion(this.abTests[itemNumber].id).subscribe((response: AbtestStatistics[]) => {*/
-      const response =  [
-        {
-          "id": "1653271de635b9266ada2119bbdda452",
-          "name": "ETALON",
-          "conversions": [
-            {
-              "date": 1263081600000,
-              "shows": 2,
-              "target": 2
-            }
-          ],
-          "active": true,
-          "etalon": true
-        },
-        {
-          "id": "949e75c2d25412efaadaab3fd42aec33",
-          "name": "VARIANT",
-          "conversions": [
-            {
-              "date": 1263254400000,
-              "shows": 2,
-              "target": 1
-            }
-          ],
-          "active": false,
-          "etalon": false
-        }
-      ];
+      this.abTestsService.getConversion(this.abTests[itemNumber].id).subscribe((response: AbtestStatistics[]) => {
         if (response) {
           this.abTests[itemNumber].variants = response;
           this.abTests[itemNumber].chartData = [];
@@ -251,7 +147,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
         } else {
           this.getConversions(itemNumber + 1, testsLength);
         }
-      /*});*/
+      });
     } else {
       this.isLoad = true;
       this.startScrollToTest();
@@ -259,8 +155,8 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
   }
 
   private chartGetLegend(incoming) {
-    let chart = {};
-    let data = this.prepareData(incoming);
+    const chart = {};
+    const data = this.prepareData(incoming);
 
     let prevKey = null;
 
@@ -274,8 +170,8 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
       return chart;
     }
 
-    for (let day = data.range.min; day <= data.range.max; day.setDate(day.getDate() + 1)) {
-      let key = `${day.getDate()}.${day.getMonth() + 1}.${day.getFullYear()}`;
+    for (const day = data.range.min; day <= data.range.max; day.setDate(day.getDate() + 1)) {
+      const key = `${day.getDate()}.${day.getMonth() + 1}.${day.getFullYear()}`;
       this.fillCharts(data, chart, prevKey, key);
       prevKey = key;
     }
@@ -286,7 +182,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
     if (!chartObj) {
       return [];
     }
-    let chartAr = [];
+    const chartAr = [];
     for (const key in chartObj) {
       if (chartObj[key]) {
         const dayData = chartObj[key];
@@ -310,11 +206,11 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
   }
 
   private prepareData(incoming) {
-    let range = {
+    const range = {
       min: null,
       max: null
     };
-    let widgetsMap = [];
+    const widgetsMap = [];
     for (let i = 0; i < incoming.length; i++) {
       widgetsMap[i] = {
         id: incoming[i].id,
@@ -325,12 +221,13 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
           target: null
         }
       };
+      // tslint:disable-next-line:prefer-for-of
       for (let j = 0; j < incoming[i].conversions.length; j++) {
-        let item = incoming[i].conversions[j];
+        const item = incoming[i].conversions[j];
         item.day = this.timeConverter(item.date).day;
         item.month = this.timeConverter(item.date).month;
         item.year = this.timeConverter(item.date).year;
-        let date = new Date(item.year, (item.month - 1), item.day);
+        const date = new Date(item.year, (item.month - 1), item.day);
 
         if (range.min == null || date < range.min) {
           range.min = date;
@@ -478,6 +375,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
   public setWinner(testId, variantId, parentIndex) {
     Swal.fire({
       title: 'Вы уверены?',
+      // tslint:disable-next-line:max-line-length
       text: 'При выборе, все настройки и дизайн варианта-победителя будут скопированы в виджет, а тест будет остановлен и перемещен в архив',
       icon: 'warning',
       showCancelButton: true,
@@ -561,7 +459,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
         } else if (response === 402) {
           this.showPaymentDialog(
             test.siteId,
-            this.translate.instant('widgetsList.payment.abtest', { 0: this.getSiteName(test.siteId)})
+            this.translate.instant('widgetsList.payment.abtest', { 0: this.getSiteName(test.siteId) })
           );
         }
       });
@@ -659,18 +557,18 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
   }
 
   private showPaymentDialog(siteId, description) {
-    /*window.siteTariffModal.find("h5.paymentSubscription").html(description);
-    window.siteTariffModal.find("span.site-name").html(this.getSiteName(siteId));
-    window.siteTariffModal.attr("data-id", siteId);
-    this.loadPlans();*/
+    this.tariffsService.checkTariffPlans(siteId,
+      this.translate.instant('sitelist.tariff.title'),
+      description, {siteName: this.getSiteName(siteId)}
+    );
   }
 
   private addMoreDataToVariant(variant, index, test) {
     variant.conversions = sortBy(variant.conversions, 'date');
     variant.color = this.colorsArray[index];
     const arrayForInfo = this.binsDataService.binDist(
-      [{s: this.getActions(variant), n: this.getShows(variant)}], {confRange: 0.8, disc: 30000}
-      ).res;
+      [{ s: this.getActions(variant), n: this.getShows(variant) }], { confRange: 0.8, disc: 30000 }
+    ).res;
 
     variant.convInfo = arrayForInfo[0];
     variant.convInfo.conversion = this.getConvItem(variant.convInfo);
@@ -741,9 +639,9 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
   }
 
   private getSiteById(siteId) {
-    for (let i = 0; i < this.sites.length; i++) {
-      if (this.sites[i].id === siteId) {
-        return this.sites[i];
+    for (const item of this.sites) {
+      if (item.id === siteId) {
+        return item;
       }
     }
     return null;

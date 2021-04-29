@@ -6,12 +6,12 @@ import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import * as moment from 'moment';
 import { SiteShort } from '../../../core/models/sites';
-import { Lead, LeadById, LeadRequest, Periods, StateWithIndex } from '../../../core/models/crm';
+import { User } from '../../../core/models/user';
+import { Lead, LeadById, LeadRequest, LeadWidgets, Periods, StateWithIndex } from '../../../core/models/crm';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
+import { SitesService } from '../../sites/services/sites.service';
 import { UserService } from '../../user/services/user.service';
 import { CrmService } from '../services/crm.service';
-import { SitesService } from '../../sites/services/sites.service';
-import { User } from '../../../core/models/user';
 
 
 @Component({
@@ -35,7 +35,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
   private ALL_SITE_ID = '0000000000000000';
   private ONE_DAY = 86400000;
   private filterTimeout: ReturnType<typeof setTimeout>;
-  public limitOptions = [{value: 10}, {value: 25}, {value: 50}, {value: 100}];
+  public limitOptions = [{ value: 10 }, { value: 25 }, { value: 50 }, { value: 100 }];
   public searchParams = {
     offset: 0,
     limit: this.limitOptions[1]
@@ -79,7 +79,9 @@ export class RequestsComponent implements OnInit, OnDestroy {
       this.defaultExtraName = translation;
     });
     this.updateLeadInfo = this.crmService.updateLeadInfo.subscribe((response: StateWithIndex) => {
-      if (!response) { return; }
+      if (!response) {
+        return;
+      }
       this.leads[response.index].state = response.state;
       this.leads[response.index].status = this.setStatusByState(response.state);
     });
@@ -122,13 +124,11 @@ export class RequestsComponent implements OnInit, OnDestroy {
         name: translation
       }];
       this.widgetsIds = [this.ALL_SITE_ID];
-      this.crmService.getSitesFilters().subscribe((response: LeadWidgets[]) => {
-
-
-      this.allSites = this.allSites.concat(response);
-      response.forEach(site =>
-        site.widgets.forEach(widget => this.allWidgets.push(widget))
-      );
+      this.crmService.getLeadsFilters().subscribe((response: LeadWidgets[]) => {
+        this.allSites = this.allSites.concat(response);
+        response.forEach(site =>
+          site.widgets.forEach(widget => this.allWidgets.push(widget))
+        );
       });
     });
   }
@@ -225,13 +225,17 @@ export class RequestsComponent implements OnInit, OnDestroy {
   }
 
   public prevList() {
-    if (this.searchParams.offset === 0) { return; }
+    if (this.searchParams.offset === 0) {
+      return;
+    }
     this.searchParams.offset -= this.searchParams.limit.value;
     this.timeoutFiltering(true);
   }
 
   public nextList() {
-    if (this.leads.length < this.searchParams.limit.value) { return; }
+    if (this.leads.length < this.searchParams.limit.value) {
+      return;
+    }
     this.searchParams.offset = this.searchParams.offset + this.searchParams.limit.value;
     this.timeoutFiltering(true);
   }

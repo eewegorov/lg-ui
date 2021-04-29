@@ -44,7 +44,11 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
       yAxes: [{
         ticks: {
           beginAtZero: true,
-          callback: (value) => { if (value % 1 === 0) { return value; } }
+          callback: (value) => {
+            if (value % 1 === 0) {
+              return value;
+            }
+          }
         }
       }]
     }
@@ -60,7 +64,8 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
     private utilsService: UtilsService,
     private sitesService: SitesService,
     private emailsService: EmailsService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.changePeriod(this.periodType);
@@ -69,7 +74,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    (<any>$('[data-toggle="tooltip"]')).tooltip();
+    ($('[data-toggle="tooltip"]') as any).tooltip();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -138,7 +143,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
       cancelButtonText: this.translate.instant('global.no'),
     }).then((isConfirm) => {
       if (isConfirm) {
-        let params = {
+        const params = {
           start: this.getISOTime(this.periodStart),
           end: this.getISOTime(this.getTomorrowCopyDate(this.periodEnd)),
           siteIds: ''
@@ -163,7 +168,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
   }
 
   public downloadCsv(startPeriod?, endPeriod?, sites = this.sitesIds) {
-    let params = {siteIds: '', dateFrom: '', dateTo: ''};
+    const params = { siteIds: '', dateFrom: '', dateTo: '' };
     if (sites.length && sites[0] !== this.ALL_SITE_ID) {
       params.siteIds = sites.join(',');
     }
@@ -174,7 +179,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
     this.emailsService.downloadEmailList(params).subscribe((response) => {
       if (response) {
         const blob = new Blob([response], { type: 'text/csv;charset=UTF-8' });
-        let link = document.createElement('a');
+        const link = document.createElement('a');
         link.style.display = 'none';
         link.href = window.URL.createObjectURL(blob);
         link.download = 'email_subscribers.csv';
@@ -197,54 +202,28 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
         name: translation
       }];
       this.sitesIds = [this.ALL_SITE_ID];
-      /*this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {*/
-      const response = [{
-        "id": "5f120a7646e0fb00012c2632",
-        "name": "mysecondsite",
-        "url": "secondsecond.ru",
-        "tariffName": "Пробный",
-        "tariffExp": 1595881841107,
-        "trial": false
-      }, {
-        "id": "5f120a5446e0fb0001d8c981",
-        "name": "mysupermegasite",
-        "url": "mysupermegasite.com",
-        "tariffName": "Пробный",
-        "tariffExp": 1595881811225,
-        "trial": true
-      }];
-      this.allSites = this.allSites.concat(response);
-      this.getBestSites();
-      /*});*/
+      this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
+        this.allSites = this.allSites.concat(response);
+        this.getBestSites();
+      });
     });
   }
 
   private getEmails() {
     this.lastEmails = [];
-    /*this.emailsService.getEmailList({ limit: 5, orders: '-date' }).subscribe((response: Email[]) => {*/
-    const response = [{
-      "id": "6cc7eaafd67cf4c5245c42cbb8699c06",
-      "email": "valera@gmail.com",
-      "siteId": "c658c5afd692ba4f3ee38852c269928e",
-      "date": 1510718671000
-    },
-      {
-        "id": "7ac92486435bfaf5e0832271dc641061",
-        "email": "hohoho@coco.ru",
-        "siteId": "4f3b3a3a295fe42341036afab0fbe3da",
-        "date": 1510787530000
-      }];
+    this.emailsService.getEmailList({ limit: 5, orders: '-date' }).subscribe((response: Email[]) => {
       if (response.length) {
         response.forEach((item: Email) => {
-          /*this.utilsService.useGravatarIfExists(item.email).subscribe((responseGravatar) => {
+          this.utilsService.useGravatarIfExists(item.email).subscribe((responseGravatar) => {
             if (responseGravatar) {
               item.gravatarUrl = responseGravatar;
-            }*/
+            }
+
             this.lastEmails.push(item);
-          /*});*/
+          });
         });
       }
-    /*});*/
+    });
   }
 
   private getToday(): Date {
@@ -253,33 +232,19 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
 
   private getBestSites() {
     this.allSitesStats = [];
-    let params = {
+    const params = {
       start: this.getISOTime(this.periodStart),
       end: this.getISOTime(this.getTomorrowCopyDate(this.periodEnd))
     };
 
-   /* this.emailsService.getEmailStatistic(params).subscribe((response: EmailsStatistics[]) => {*/
-    const response = [
-      {
-        "date": 1510693200000,
-        "items": {
-          "eb2e55025bd4b56f2a5bc90703f32411": 1,
-          "1c00e8fc3fbf11f01f8d2901ae1fa68f": 0
-        }
-      },
-      {
-        "date": 1510866000000,
-        "items": {
-          "eb2e55025bd4b56f2a5bc90703f32411": 0,
-          "1c00e8fc3fbf11f01f8d2901ae1fa68f": 0
-        }
-      }
-    ];
+    this.emailsService.getEmailStatistic(params).subscribe((response: EmailsStatistics[]) => {
       this.allSitesStats = this.allSites.slice(1).map((site) => {
         return { id: site.id, count: 0, name: site.name };
       });
+
       response.forEach((stat: EmailsStatistics) => {
-        for (let key in stat.items) {
+        // tslint:disable-next-line:forin
+        for (const key in stat.items) {
           this.allSitesStats.forEach((item) => {
             if (item.id === key) {
               item.count += stat.items[key];
@@ -290,14 +255,14 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
       setTimeout(() => {
         $('.reports-emails-preloader-best').hide();
       }, 0);
-    /*});*/
+    });
   }
 
   private doReloadData(requestSites) {
     setTimeout(() => {
       $('.reports-emails-preloader-main').show();
     }, 0);
-    var params = {
+    const params = {
       start: this.getISOTime(this.periodStart),
       end: this.getISOTime(this.getTomorrowCopyDate(this.periodEnd)),
       siteIds: ''
@@ -311,48 +276,33 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
   }
 
   private getSiteEmailsCount(sites) {
-    let params = { siteId: '' };
+    const params = { siteId: '' };
     if (sites) {
       params.siteId = sites;
     }
-    /*this.emailsService.getEmailListCount(params).subscribe((response: number) => {*/
-    const response = 2523;
+    this.emailsService.getEmailListCount(params).subscribe((response: number) => {
       this.overallStats.allCount = response;
-    /*});*/
+    });
   }
 
   private getEmailStatistics(params) {
-    /*this.emailsService.getEmailStatistic(params).subscribe((response: EmailsStatistics[]) => {*/
-    const response = [
-      {
-        "date": 1510693200000,
-        "items": {
-          "eb2e55025bd4b56f2a5bc90703f32411": 1,
-          "1c00e8fc3fbf11f01f8d2901ae1fa68f": 0
-        }
-      },
-      {
-        "date": 1510866000000,
-        "items": {
-          "eb2e55025bd4b56f2a5bc90703f32411": 0,
-          "1c00e8fc3fbf11f01f8d2901ae1fa68f": 0
-        }
+    this.emailsService.getEmailStatistic(params).subscribe((response: EmailsStatistics[]) => {
+    let mailStatistics: EmailsStatisticsView[] = [];
+    response.forEach((stat: EmailsStatistics) => {
+      let count = 0;
+      // tslint:disable-next-line:forin
+      for (const key in stat.items) {
+        count += stat.items[key];
       }
-    ];
-      let mailStatistics: EmailsStatisticsView[] = [];
-      response.forEach((stat: EmailsStatistics) => {
-        let count = 0;
-        for (let key in stat.items) {
-          count += stat.items[key];
-        }
-        mailStatistics.push({ date: stat.date, value: count });
-      });
-      mailStatistics = this.orderBy.transform(mailStatistics, ['date']);
-      this.reloadChart(mailStatistics);
-      setTimeout(() => {
-        $('.reports-emails-preloader-main').hide();
-      }, 0);
-    /*});*/
+      mailStatistics.push({ date: stat.date, value: count });
+    });
+    mailStatistics = this.orderBy.transform(mailStatistics, ['date']);
+    this.reloadChart(mailStatistics);
+
+    setTimeout(() => {
+      $('.reports-emails-preloader-main').hide();
+    }, 0);
+    });
   }
 
   private reloadChart(statistics: EmailsStatisticsView[]) {
@@ -361,14 +311,14 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
     let days = 0;
 
     this.overallStats.periodCount = 0;
-    this.overallStats.periodAvg   = 0;
+    this.overallStats.periodAvg = 0;
 
     let ts = this.periodStart.getTime();
     while (ts <= this.periodEnd.getTime()) {
-      let dd = new Date(ts);
-      let date = this.getDDMMYYTime(dd);
-      let item = this.getByDate(statistics, date);
-      let value = (item !== null) ? item.value : 0;
+      const dd = new Date(ts);
+      const date = this.getDDMMYYTime(dd);
+      const item = this.getByDate(statistics, date);
+      const value = (item !== null) ? item.value : 0;
       labels.push(date);
       data.push(value);
       days++;
@@ -378,7 +328,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
     this.overallStats.periodAvg = this.overallStats.periodCount / days;
 
     if (days > 40) {
-      let mData = {};
+      const mData = {};
       for (let i = 0; i < days; i++) {
         const monthLabel = labels[i].substring(labels[i].indexOf('.') + 1);
         if (mData[monthLabel] === undefined) {
@@ -389,9 +339,10 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
 
       labels = Object.keys(mData);
       data = [];
-      for (let j = 0; j < labels.length; j++) {
-        data.push(mData[labels[j]]);
-      }
+
+      labels.forEach(item => {
+        data.push(mData[item]);
+      });
     } else if (labels.length < 7) {
       while (labels.length < 7) {
         labels.unshift('');
@@ -407,9 +358,9 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
   }
 
   private getByDate(list: EmailsStatisticsView[], search: string): EmailsStatisticsView {
-    for (let i = 0; i < list.length; i++) {
-      if (this.getDDMMYYTime(list[i].date) === search) {
-        return list[i];
+    for (const item of list) {
+      if (this.getDDMMYYTime(item.date) === search) {
+        return item;
       }
     }
     return null;

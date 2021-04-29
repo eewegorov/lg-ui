@@ -20,8 +20,8 @@ import {
   IntegrationTypes,
   SiteShort
 } from '../../../core/models/sites';
-import { SitesService } from '../services/sites.service';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
+import { SitesService } from '../services/sites.service';
 
 
 @Component({
@@ -160,30 +160,12 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public setIntegrationType(newTab) {
     this.tab = newTab;
     if (newTab === 'COPY') {
-      /*this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {*/
-      const response = [
-        {
-          id: '5a57b226936a824c0396eb0b',
-          name: 'Another site',
-          url: 'another.com',
-          tariffName: 'Another',
-          tariffExp: null,
-          trial: false
-        },
-        {
-          id: '5a57b226936a824c0396eb0a',
-          name: 'Test site',
-          url: 'test.com',
-          tariffName: 'Payment',
-          tariffExp: 1484032321000,
-          trial: true
-        }
-      ];
-      this.coreSitesService.sites = response;
-      this.sites = response.filter((item: SiteShort) => {
-        return item.id !== this.siteId;
+      this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
+        this.coreSitesService.sites = response;
+        this.sites = response.filter((item: SiteShort) => {
+          return item.id !== this.siteId;
+        });
       });
-      /*});*/
     }
   }
 
@@ -194,46 +176,23 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public changeCurrentIntegrationSite(site) {
     this.currentIntegrationSite = site;
     this.integrationSitesLoading = true;
-    /*this.sitesService.getSiteIntegrations(site.id).subscribe((response: Integration[]) => {*/
-    const response = [
-      {
-        id: 'a97e831035277bdb2d580cce4de0e399',
-        name: 'Amo integration',
-        type: 'AMOCRM',
-        default: true,
-        active: false
-      },
-      {
-        id: '3d2591d2fe9af9c2e126168865719e22',
-        name: 'Another bitrix integration',
-        type: 'BITRIX',
-        default: false,
-        active: true
-      },
-      {
-        id: 'ff8b3189fea5aab92ecb6fad14b2ed0d',
-        name: 'Bitrix integrations',
-        type: 'BITRIX',
-        default: true,
-        active: false
-      }
-    ];
-    const integrationSiteServices = response;
+    this.sitesService.getSiteIntegrations(site.id).subscribe((response: Integration[]) => {
+      const integrationSiteServices = response;
 
-    this.integrationSiteServicesCRM = integrationSiteServices.filter((item: Integration) => {
-      return this.sitesService.isIntegrationCRM(item.type);
+      this.integrationSiteServicesCRM = integrationSiteServices.filter((item: Integration) => {
+        return this.sitesService.isIntegrationCRM(item.type);
+      });
+      this.integrationSiteServicesMailing = integrationSiteServices.filter((item: Integration) => {
+        return this.sitesService.isIntegrationMailing(item.type);
+      });
+      this.integrationSiteServicesNotifications = integrationSiteServices.filter((item: Integration) => {
+        return this.sitesService.isIntegrationNotification(item.type);
+      });
+      this.integrationSiteServicesOthers = integrationSiteServices.filter((item: Integration) => {
+        return this.sitesService.isIntegrationOthers(item.type);
+      });
+      this.integrationSitesLoading = false;
     });
-    this.integrationSiteServicesMailing = integrationSiteServices.filter((item: Integration) => {
-      return this.sitesService.isIntegrationMailing(item.type);
-    });
-    this.integrationSiteServicesNotifications = integrationSiteServices.filter((item: Integration) => {
-      return this.sitesService.isIntegrationNotification(item.type);
-    });
-    this.integrationSiteServicesOthers = integrationSiteServices.filter((item: Integration) => {
-      return this.sitesService.isIntegrationOthers(item.type);
-    });
-    this.integrationSitesLoading = false;
-    /*});*/
   }
 
   public changeCurrentIntegrationSiteService(service) {

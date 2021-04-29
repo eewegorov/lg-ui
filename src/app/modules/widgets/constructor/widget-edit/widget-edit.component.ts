@@ -14,14 +14,14 @@ import {
   MockupShort,
   WidgetType
 } from '../../../../core/models/widgets';
+import { TariffsService } from '../../../../core/services/tariffs.service';
+import { CoreSitesService } from '../../../../core/services/core-sites.service';
 import { SitesService } from '../../../sites/services/sites.service';
 import { CouponService } from '../../../coupons/services/coupon.service';
 import { UserService } from '../../../user/services/user.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
-import { WidgetConstructorService } from '../../services/widget-constructor.service';
-import { TariffsService } from '../../../../core/services/tariffs.service';
 import { WidgetService } from '../../services/widget.service';
-import { CoreSitesService } from '../../../../core/services/core-sites.service';
+import { WidgetConstructorService } from '../../services/widget-constructor.service';
 
 @Component({
   selector: 'app-widget-edit',
@@ -61,11 +61,11 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private translate: TranslateService,
     private toastr: ToastrService,
-    private sitesService: SitesService,
+    private tariffsService: TariffsService,
     private coreSitesService: CoreSitesService,
+    private sitesService: SitesService,
     private couponService: CouponService,
     private userService: UserService,
-    private tariffsService: TariffsService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
