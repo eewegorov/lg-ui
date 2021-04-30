@@ -5,10 +5,11 @@ import { CoreRoutingModule } from './core-routing.module';
 import { ChatComponent } from './components/chat/chat.component';
 import { PreloaderComponent } from './components/preloader/preloader.component';
 import { SharedModule } from '../shared/shared.module';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
-  declarations: [ ChatComponent, PreloaderComponent ],
+  declarations: [ ChatComponent, PreloaderComponent, LogoutComponent ],
   imports: [
     CommonModule,
     CoreRoutingModule,

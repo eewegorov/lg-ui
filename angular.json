@@ -51,7 +51,8 @@
               "jquery",
               "moment-timezone",
               "chart.js",
-              "rxjs/internal/Subject"
+              "rxjs/internal/Subject",
+              "@flowjs/flow.js"
             ]
           },
           "configurations": {

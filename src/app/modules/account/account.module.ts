@@ -9,8 +9,6 @@ import { PasswordRecoveryComponent } from './password-recovery/password-recovery
 import { AccountComponent } from './account/account.component';
 
 
-
-
 @NgModule({
   declarations: [
     LoginComponent,

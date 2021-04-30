@@ -8,6 +8,7 @@ import {
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { Token } from '../models/token';
 
 
 @Injectable()
@@ -46,10 +47,10 @@ export class TokenInterceptor implements HttpInterceptor {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
       return this.authService.refreshToken().pipe(
-        switchMap((token: any) => {
+        switchMap((token: Token) => {
           this.isRefreshing = false;
-          this.refreshTokenSubject.next(token.jwt);
-          return next.handle(this.addToken(request, token.jwt));
+          this.refreshTokenSubject.next(token.access_token);
+          return next.handle(this.addToken(request, token.access_token));
         })
       );
     } else {

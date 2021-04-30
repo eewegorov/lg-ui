@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mapTo, tap } from 'rxjs/operators';
+import { catchError, mapTo, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Token } from '../models/token';
+import { ApiResponse } from '../models/api';
 import { AuthRequest } from '../models/account';
 import { CoreApiService } from './core-api.service';
 import { ErrorHandlerService } from './error-handler.service';
@@ -46,9 +47,7 @@ export class AuthService {
   }
 
   public logout() {
-    return this.http.post<any>(`${environment.oauthUrl}/logout`, {
-      refreshToken: this.getRefreshToken()
-    }).pipe(
+    return this.http.post<ApiResponse>(`${environment.url}/auth/logout`, null).pipe(
       tap(() => this.doLogoutUser()),
       mapTo(true),
       catchError(error => {
@@ -62,8 +61,14 @@ export class AuthService {
   }
 
   public refreshToken() {
-    return this.http.post<any>(`${environment.oauthUrl}/refresh`, {
-      refreshToken: this.getRefreshToken()
+    return this.http.post<any>(`${ environment.oauthUrl }/token`, null, {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${btoa('ui:ui')}`
+      }),
+      params: {
+        grant_type: 'refresh_token',
+        refresh_token: this.getRefreshToken()
+      }
     }).pipe(tap((token: Token) => {
       this.storeJwtToken(token.access_token);
     }));
