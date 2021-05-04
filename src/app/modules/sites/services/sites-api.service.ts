@@ -38,7 +38,7 @@ export class SitesApiService {
   }
 
   public createSite(data: CreateSiteRequest): Observable<CreateSiteResponse> {
-    return this.http.post<CreateSiteResponse>(`${ environment.url }/sites/statistics`, data);
+    return this.http.post<CreateSiteResponse>(`${ environment.url }/sites`, data);
   }
 
   public deleteSite(id: string): Observable<ApiResponse> {

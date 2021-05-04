@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
 import { OAuthResponse } from '../../../core/models/account';
 import { AccountService } from '../services/account.service';
@@ -19,9 +19,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private accountService: AccountService
   ) {
-    this.error = this.route.snapshot.queryParams['error'] === '';
+    this.error = this.route.snapshot.queryParams.error === '';
   }
 
   ngOnInit(): void {
@@ -30,7 +31,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public submitAuth() {
-    this.authSub = this.accountService.handleAuth(this.loginForm.value).subscribe();
+    this.authSub = this.accountService.handleAuth(this.loginForm.value).subscribe((response: boolean) => {
+      if (response) {
+        this.router.navigate([ '/' ]);
+      }
+    });
   }
 
   public authYandex(event: Event) {

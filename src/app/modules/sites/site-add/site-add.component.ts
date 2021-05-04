@@ -1,7 +1,7 @@
 import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SubscriptionLike } from 'rxjs';
+import { EMPTY, of, SubscriptionLike } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateSiteData, Smartpoints } from '../../../core/models/sites';
@@ -53,6 +53,8 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
           };
           if (this.newSiteForm.controls.phone.value) {
             return this.userService.savePhone({ phone: this.newSiteForm.controls.phone.value });
+          } else {
+            return of(null);
           }
         })
     ).subscribe(
