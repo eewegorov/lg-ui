@@ -7,8 +7,9 @@ import {
 } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
-import { AuthService } from './auth.service';
 import { Token } from '../models/token';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -16,7 +17,10 @@ export class TokenInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (this.authService.getJwtToken()) {
@@ -26,6 +30,9 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError(error => {
         if (error instanceof HttpErrorResponse && error.status === 401) {
+          if (this.isRefreshing) {
+            this.router.navigate(['/logout']);
+          }
           return this.handle401Error(request, next);
         } else {
           return throwError(error);

@@ -4,23 +4,23 @@ import { switchMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { CampaignDeleteComponent } from '../campaign-delete/campaign-delete.component';
-import { WidgetAddComponent } from '../widget-add/widget-add.component';
-import { Company, CompanyShort, Entities, WidgetInfo, WidgetTemplate, WidgetType } from '../../../core/models/widgets';
 import { Abtest } from '../../../core/models/abtests';
+import { SiteShort } from '../../../core/models/sites';
+import { Company, CompanyShort, Entities, WidgetInfo, WidgetTemplate, WidgetType } from '../../../core/models/widgets';
 import { TariffsService } from '../../../core/services/tariffs.service';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
 import { WidgetService } from '../services/widget.service';
+import { CampaignDeleteComponent } from '../campaign-delete/campaign-delete.component';
 import { CloneWidgetComponent } from '../clone-widget/clone-widget.component';
-import { SiteShort } from '../../../core/models/sites';
+import { WidgetAddComponent } from '../widget-add/widget-add.component';
 
 
 @Component({
   selector: 'app-widgets',
   templateUrl: './widgets.component.html',
-  styleUrls: ['./widgets.component.scss']
+  styleUrls: ['../shared/shared.scss', './widgets.component.scss']
 })
 export class WidgetsComponent implements OnInit {
   public sites = [];
@@ -223,17 +223,21 @@ export class WidgetsComponent implements OnInit {
   }
 
   public isHasWidgets() {
-    const types = Object.keys(this.widgets);
-    for (const item of types) {
-      // tslint:disable-next-line:prefer-for-of
-      for (let j = 0; j < this.widgets[item].length; j++) {
-        if (this.currentCompany.id === this.widgetService.getDefaultCompany(this.companies).id ||
-          this.widgets[item][j].companyId === this.currentCompany.id) {
-          return true;
+    if (this.widgets) {
+      const types = Object.keys(this.widgets);
+      for (const item of types) {
+        // tslint:disable-next-line:prefer-for-of
+        for (let j = 0; j < this.widgets[item].length; j++) {
+          if (this.currentCompany.id === this.widgetService.getDefaultCompany(this.companies).id ||
+            this.widgets[item][j].companyId === this.currentCompany.id) {
+            return true;
+          }
         }
       }
+      return false;
+    } else {
+      return false;
     }
-    return false;
   }
 
   public filteredContainers() {
@@ -263,7 +267,7 @@ export class WidgetsComponent implements OnInit {
     return count;
   }
 
-  private resetNewCompany() {
+  public resetNewCompany() {
     this.newCompany = {
       on: false,
       name: ''

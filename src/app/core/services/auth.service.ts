@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Token } from '../models/token';
@@ -8,6 +8,7 @@ import { ApiResponse } from '../models/api';
 import { AuthRequest } from '../models/account';
 import { CoreApiService } from './core-api.service';
 import { ErrorHandlerService } from './error-handler.service';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -19,9 +20,8 @@ export class AuthService {
   private loggedUser: string;
 
   constructor(
-    private http: HttpClient,
-    private errorHandlerService: ErrorHandlerService,
-    private coreApiService: CoreApiService
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   public login(data: AuthRequest): Observable<boolean> {
@@ -40,18 +40,20 @@ export class AuthService {
         tap((token: Token) => this.doLoginUser(data.username, token)),
         mapTo(true),
         catchError(error => {
-          alert(error.error);
+          console.log(error);
           return of(false);
         })
       );
   }
 
   public logout() {
+    this.doLogoutUser();
+
     return this.http.post<ApiResponse>(`${environment.url}/auth/logout`, null).pipe(
-      tap(() => this.doLogoutUser()),
       mapTo(true),
       catchError(error => {
-        alert(error.error);
+        console.log(error);
+        this.router.navigate(['/logout']);
         return of(false);
       }));
   }
@@ -69,9 +71,16 @@ export class AuthService {
         grant_type: 'refresh_token',
         refresh_token: this.getRefreshToken()
       }
-    }).pipe(tap((token: Token) => {
-      this.storeJwtToken(token.access_token);
-    }));
+    }).pipe(
+      tap((token: Token) => {
+        this.storeJwtToken(token.access_token);
+      }),
+      catchError((err) => {
+        console.log(err);
+        this.router.navigate(['/logout']);
+        return of(false);
+      })
+    );
   }
 
   public getJwtToken() {

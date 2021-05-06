@@ -1,9 +1,9 @@
 <div *ngIf="sites.length > 0" class="toolbar-content widgets-toolbar">
-  <div class="textcontent">
-    <h1 class="title-main">{{ 'sidebar.widgets' | translate }}</h1>
-    <div class="row col-lg-12 select-site">
+  <h1 class="title-main">{{ 'sidebar.widgets' | translate }}</h1>
+  <div class="textcontent col-lg-12">
+    <div class="select-site">
       <!-- Site selector -->
-      <div class="col-lg-6">
+      <div class="selector">
         <div class="row select-site-title"><h5>{{ 'widgetsList.selectSite' | translate }}:</h5></div>
         <div class="row dropdown site-selector">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -12,31 +12,31 @@
           </button>
           <ul class="dropdown-menu">
             <li *ngFor="let site of sites" (click)="changeCurrentSite(site)">
-              <a href="#">{{ site.name }}</a>
+              <a href="#" class="dropdown-item">{{ site.name }}</a>
             </li>
           </ul>
         </div>
       </div>
       <!-- Company selector -->
-      <div class="col-lg-6">
+      <div>
         <div class="row select-site-title"><h5>{{ 'widgetsList.selectCompany' | translate }}:</h5></div>
         <div class="row width-350">
-          <div *ngIf="!newCompany.on">
-            <div class="dropdown site-selector floated-left" style="min-width: 255px!important; width: 255px;">
+          <div *ngIf="!newCompany.on" class="d-flex">
+            <div class="dropdown site-selector floated-left" style="min-width: 260px!important; width: 260px;">
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <span class="dropdown-selected-cropp" style="max-width: 215px!important;">{{ currentCompany.name || defCompanyName }}</span>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" *ngIf="companies.length">
                 <li *ngFor="let company of companies" (click)="changeCurrentCompany(company)">
-                  <a href="#">{{ company.name || defCompanyName }}</a>
+                  <a href="#" class="dropdown-item">{{ company.name || defCompanyName }}</a>
                 </li>
               </ul>
             </div>
 
             <button
               (click)="newCompany.on = true"
-              class="btn btn-default floated-left margined-top-10half hovered-btn-blue margined-left-5"
+              class="btn btn-default ml-1"
               data-container="body"
               data-toggle="tooltip"
               data-placement="top"
@@ -47,7 +47,7 @@
             <button
               (click)="deleteCompany()"
               *ngIf="!currentCompany.default"
-              class="btn btn-default floated-left margined-top-10half hovered-btn-red margined-left-5"
+              class="btn btn-default ml-1"
               data-container="body"
               data-toggle="tooltip"
               data-placement="top"
@@ -63,11 +63,18 @@
                 class="form-control"
                 [(ngModel)]="newCompany.name"
                 style="width: 245px;"
-                placeholder="{{'widgetsList.clone.company.add.label' | translate}}"
+                placeholder="{{ 'widgetsList.clone.company.add.label' | translate }}"
               >
             </div>
             <div class="floated-right margined-right-15">
-              <button class="btn btn-default floated-left" data-container="body"  data-toggle="tooltip" data-placement="top" title="{{ 'global.cancel' | translate }}" ng-click="resetNewCompany()">
+              <button
+                class="btn btn-default floated-left"
+                data-container="body"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="{{ 'global.cancel' | translate }}"
+                (click)="resetNewCompany()"
+              >
                 <i class="fa fa-times"></i>
               </button>
               <button
@@ -86,24 +93,25 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="btnpanel padding-top-75">
-    <div>
-      <button
-        (click)="createNewWidget()"
-        type="button"
-        class="btn btn-lg w-xs btn-success"
-      ><i class="fa fa-plus-circle"></i> {{ 'widgetsList.add.title' | translate }}
-      </button>
+    <div class="btnpanel padding-top-75">
+      <div>
+        <button
+          (click)="createNewWidget()"
+          type="button"
+          class="btn btn-lg w-xs btn-success"
+        ><i class="fa fa-plus-circle"></i> {{ 'widgetsList.add.title' | translate }}
+        </button>
+      </div>
+      <div id="buyWidgetDevelopmentContainer"><a href="#" id="buyWidgetDevelopment">{{ 'widgetsList.add.alt' | translate }}</a></div>
     </div>
-    <div id="buyWidgetDevelopmentContainer"><a href="#" id="buyWidgetDevelopment">{{ 'widgetsList.add.alt' | translate }}</a></div>
   </div>
+
 </div>
 
 
 <!-- smart points settings -->
-<div class="widgets-site-settings no-animate" *ngIf="sites.length > 0">
-  <div class="row">
+<div class="widgets-site-settings no-animate" *ngIf="sites.length > 0 && smartPoints">
+  <div class="row col-lg-12">
     <div class="col-lg-12">
       <ui-switch
         [checked]="smartPoints.enabled"

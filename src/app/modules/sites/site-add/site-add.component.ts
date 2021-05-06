@@ -1,13 +1,12 @@
 import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EMPTY, of, SubscriptionLike } from 'rxjs';
+import { of, SubscriptionLike } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateSiteData, Smartpoints } from '../../../core/models/sites';
 import { UserService } from '../../user/services/user.service';
 import { SitesService } from '../services/sites.service';
-import { WidgetService } from '../../widgets/services/widget.service';
 
 
 @Component({

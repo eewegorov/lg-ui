@@ -1,5 +1,10 @@
+.toolbar-content {
+  flex-direction: column;
+}
+
 .toolbar-content.widgets-toolbar .textcontent {
-  width: 590px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .toolbar-content.widgets-toolbar #addNewWidget {
@@ -8,7 +13,17 @@
   width: 225px;
 }
 
+.btnpanel {
+  margin-bottom: 15px;
+  margin-left: 20px;
+}
+
+.selector {
+  margin-right: 40px;
+}
+
 .select-site {
+  display: flex;
   margin-top: 15px;
 }
 
@@ -23,7 +38,6 @@
 
 .site-selector .dropdown-toggle {
   text-align: left;
-  width: 90%;
 }
 
 .site-selector .caret {
@@ -32,9 +46,14 @@
   top: 8px;
 }
 
-@media (max-width: 600px) {
-  .toolbar-content.widgets-toolbar .textcontent {
+@media (max-width: 1000px) {
+  .select-site {
+    flex-direction: column;
     width: 100%;
+  }
+
+  .toolbar-content.widgets-toolbar .textcontent {
+    flex-direction: column;
   }
 
   .toolbar-content .btnpanel {
