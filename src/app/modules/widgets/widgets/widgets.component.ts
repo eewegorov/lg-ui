@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
@@ -22,7 +22,7 @@ import { WidgetAddComponent } from '../widget-add/widget-add.component';
   templateUrl: './widgets.component.html',
   styleUrls: ['../shared/shared.scss', './widgets.component.scss']
 })
-export class WidgetsComponent implements OnInit {
+export class WidgetsComponent implements OnInit, AfterViewChecked {
   public sites = [];
   public companies = [];
   public containers = [];
@@ -99,6 +99,10 @@ export class WidgetsComponent implements OnInit {
         this.widgetService.setCurrentWidgetsTypes(response);
       }
     });
+  }
+
+  ngAfterViewChecked(): void {
+    ($('[data-toggle="tooltip"]') as any).tooltip();
   }
 
   private setCurrentSite() {

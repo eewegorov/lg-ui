@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Token } from '../models/token';
 import { ApiResponse } from '../models/api';
 import { AuthRequest } from '../models/account';
-import { CoreApiService } from './core-api.service';
-import { ErrorHandlerService } from './error-handler.service';
-import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -53,7 +51,6 @@ export class AuthService {
       mapTo(true),
       catchError(error => {
         console.log(error);
-        this.router.navigate(['/logout']);
         return of(false);
       }));
   }
@@ -95,6 +92,7 @@ export class AuthService {
   private doLogoutUser() {
     this.loggedUser = null;
     this.removeTokens();
+    this.router.navigate(['/logout']);
   }
 
   private getRefreshToken() {

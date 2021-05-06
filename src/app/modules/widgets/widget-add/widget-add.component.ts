@@ -17,7 +17,8 @@ import { WidgetService } from '../services/widget.service';
 @Component({
   selector: 'app-widget-add',
   templateUrl: './widget-add.component.html',
-  styleUrls: ['./widget-add.component.scss']
+  styleUrls: ['./widget-add.component.scss'],
+  providers: [FilterPipe]
 })
 export class WidgetAddComponent implements OnInit {
   @Input() public currentSite;
