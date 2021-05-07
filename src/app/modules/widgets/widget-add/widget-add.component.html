@@ -12,7 +12,7 @@
         <div class="templates-gallery-header">
           <div class="header-modal">
             <span>{{ 'widgetsList.add.params.mockup.title' | translate }}</span>
-            <button class="btn w-xs btn-success" (click)="createNullWidget()">
+            <button class="btn btn-success" (click)="createNullWidget()">
               {{ 'widgetsList.add.params.mockup.notselect' | translate }}
             </button>
           </div>
@@ -49,16 +49,16 @@
 
   <div id="step4" class="p-m max-w-868" *ngIf="newWidgetStep === 4">
     <label class="big-label">{{ 'widgetsList.add.params.label' | translate }}:</label>
-    <div class="row margined-top-20">
+    <div class="row mt-3">
       <div class="col-lg-12">
-        <div class="row margined-bottom-15 margined-left-0 select-site-title">
+        <div class="row mb-2 ml-0 select-site-title">
           <h5>{{ 'widgetsList.add.params.name' | translate }}:</h5>
         </div>
         <input type="text" class="form-control" [(ngModel)]="editableWidget.name">
         <span class="underow-comment">{{ 'widgetsList.add.params.name.tooltip' | translate }}</span>
       </div>
       <div class="col-lg-12" *ngIf="editableWidget.companyMode === 0">
-        <div class="row margined-bottom-15 margined-left-0 select-site-title">
+        <div class="row mb-2 ml-0 select-site-title">
           <h5>{{ 'widgetsList.selectCompany' | translate }}: <a
             data-toggle="tooltip" data-placement="top"
             title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
@@ -95,7 +95,7 @@
         class="col-lg-12"
         [ngClass]="(editableWidget.company.trim().length == 0) ? 'has-error' : ''"
       >
-        <div class="row margined-bottom-15 margined-left-0 select-site-title">
+        <div class="row mb-2 ml-0 select-site-title">
           <h5>{{ 'widgetsList.add.params.company.add.name' | translate }}: <a
             data-toggle="tooltip" data-placement="top"
             title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
@@ -108,15 +108,15 @@
           {{ 'widgetsList.add.params.company.add.back' | translate }}
         </a>
       </div>
-      <div class="col-lg-12 margined-top-30">
+      <div class="col-lg-12 mt-4 d-flex justify-content-between">
         <button
-          class="btn btn-lg w-xs btn-default floated-left"
+          class="btn btn-lg w-25 btn-default"
           (click)="closeNewWidgetModal(false)"
         >
           {{ 'global.cancel' | translate }}
         </button>
         <button
-          class="btn btn-lg w-xs btn-success floated-right"
+          class="btn btn-lg w-25 btn-success"
           (click)="addWidget()" type="button"
           [disabled]="(editableWidget.companyMode == 0 && editableWidget.companyId == null) || (editableWidget.companyMode == 1 && editableWidget.company.trim().length == 0)"
         >

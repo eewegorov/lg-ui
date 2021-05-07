@@ -15,7 +15,7 @@ import { ContainerizedWidgetService } from '../../services/containerized-widget.
 @Component({
   selector: 'app-containerized-add',
   templateUrl: './containerized-add.component.html',
-  styleUrls: ['./containerized-add.component.scss']
+  styleUrls: ['../../shared/shared.scss', './containerized-add.component.scss']
 })
 export class ContainerizedAddComponent implements OnInit {
   @Input() currentSiteId: string;
