@@ -485,6 +485,198 @@ button.hovered-btn-blue:hover {
   max-width: 260px;
 }
 
+.left-panel-filter {
+  width: 300px;
+  height: calc(100vh - 308px);
+  overflow: auto;
+  padding-left: 15px;
+  transition: opacity 0.3s ease;
+}
+
+.left-category-item {
+  padding-bottom: 10px;
+}
+
+.left-panel-filter .checkbox-green-btn {
+  width: auto;
+  text-align: left;
+  padding: 1px 4px;
+  margin-top: -3px;
+  border-radius: 0;
+  color: #fff;
+}
+
+.left-panel-filter .checkbox-green-btn.checked {
+  background-color: #62cb31;
+}
+
+.left-panel-filter-categories-category label {
+  cursor: pointer;
+}
+
+.panel-widgets-list {
+  position: relative;
+  width: calc(100% - 330px);
+  height: calc(100vh - 308px);
+  overflow: auto;
+  overflow-x: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.panel-widgets-list,
+.left-panel-filter {
+  height: calc(100vh - 232px);
+}
+
+.panel-widgets-list,
+.left-panel-filter {
+  height: calc(100vh - 202px);
+}
+
+.panel-widgets-list .alert-if-empty {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.test-scroll-inf {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.mockup-selector-categories-mockups-item-container {
+  padding: 0 15px;
+  position: relative;
+  float: none;
+  transform-origin: 0 0;
+  transition: transform 0.3s ease;
+}
+
+.main-content-container-loader .mockup-selector-categories-mockups-item-container {
+  transform: scale(0);
+}
+
+.mockup-selector-categories-mockups-item {
+  border: 1px solid #ebebeb;
+  margin: auto auto 20px auto !important;
+  width: 305px;
+}
+
+.mockup-selector-categories-mockups-item:hover .mockup-selector-categories-mockups-item-hover {
+  display: block;
+}
+
+.mockup-selector-categories-mockups-item-hover {
+  background-color: rgba(0,0,0, .55);
+  display: none;
+  height: calc(100% - 20px);
+  position: absolute;
+  text-align: center;
+  left: 15px;
+  right: 15px;
+  z-index: 100;
+}
+
+.mockup-selector-categories-mockups-item-hover button {
+  position: relative;
+  top: 45% !important;
+}
+
+.mockup-selector-categories-mockups-item-content img {
+  display: block;
+  height: 200px;
+  width: 100%;
+}
+
+.mockup-selector-categories-mockups-item-title {
+  font-size: 16px;
+  font-weight: 600;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  overflow: hidden;
+  height: 46px;
+  width: 100%;
+  line-height: 22px;
+}
+.mockup-selector-categories-mockups-item-title:before {
+  content: "";
+  float: left;
+  width: 5px;
+  height: 46px;
+}
+
+.mockup-selector-categories-mockups-item-title > *:first-child {
+  float: right;
+  width: 100%;
+  margin-left: -5px;
+}
+
+.mockup-selector-categories-mockups-item-title:after {
+  content: "\02026";
+  box-sizing: content-box;
+  float: right;
+  position: relative;
+  top: -24px;
+  left: 100%;
+  width: 3em;
+  margin-left: -3em;
+  padding-right: 5px;
+  text-align: right;
+  background-size: 100% 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+}
+
+.mockup-selector-categories-mockups-item-desc {
+  font-size: 12px !important;
+  margin-bottom: 15px !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  overflow: hidden;
+  height: 50px;
+  width: 100%;
+  line-height: 16px;
+}
+.mockup-selector-categories-mockups-item-desc:before {
+  content: "";
+  float: left;
+  width: 5px;
+  height: 50px;
+}
+
+.mockup-selector-categories-mockups-item-desc > *:first-child {
+  float: right;
+  width: 100%;
+  margin-left: -5px;
+}
+
+.mockup-selector-categories-mockups-item-desc:after {
+  content: "\02026";
+  box-sizing: content-box;
+  float: right;
+  position: relative;
+  top: -18px;
+  left: 100%;
+  width: 3em;
+  margin-left: -3em;
+  padding-right: 5px;
+  text-align: right;
+  background-size: 100% 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+}
+
+#mockup-selector-categories-mockups-item-tariff-container {
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+}
+
 
 
 @media (max-width: 1310px) {

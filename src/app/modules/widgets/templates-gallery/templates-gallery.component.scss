@@ -53,3 +53,24 @@
   height: 1px;
   background-color: #4fa6e0;
 }
+
+.main-content-container {
+  position: relative;
+}
+
+@media (max-width: 1410px) {
+  .filter-tabs div {
+    padding-left: 10px;
+    width: 200px;
+    background-image: none!important;
+  }
+
+  .min-w-1353 {
+    min-width: 1068px;
+    max-width: 1100px;
+  }
+
+  .test-scroll-inf {
+    justify-content: flex-start;
+  }
+}
