@@ -1,0 +1,55 @@
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+}
+
+.filter-tabs div {
+  width: 258px;
+  padding: 6px 10px 10px 75px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  background-color: #f3f3f3;
+  cursor: pointer;
+  margin: 0 7px;
+}
+
+.filter-tabs div:first-child {
+  margin-left: 0;
+}
+
+.filter-tabs div:last-child {
+  margin-right: 0;
+}
+
+.filter-tabs div.active {
+  background-color: #ffffff;
+  border-color: #4fa6e0;
+  border-bottom: 1px solid #fff;
+  z-index: 4;
+}
+
+.filter-tabs span.filter-tab-title {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  color: #2c3239;
+  margin-bottom: 2px;
+}
+
+.filter-tabs span.filter-tab-sub {
+  display: block;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #2c3239;
+}
+
+.just-blue-line {
+  position: relative;
+  z-index: 3;
+  margin-top: -1px;
+  height: 1px;
+  background-color: #4fa6e0;
+}

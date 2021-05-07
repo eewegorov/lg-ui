@@ -333,4 +333,9 @@ export interface Mockup extends MockupShort {
   type: string;
 }
 
+export interface SiteForWidget {
+  id: string;
+  name: string;
+}
+
 

@@ -7,7 +7,7 @@ import { FilterPipe } from 'ngx-filter-pipe';
 import {
   CompanyShort,
   ContainerShort,
-  NewWidgetInfo,
+  NewWidgetInfo, SiteForWidget,
   WidgetCreated,
   WidgetCreateRequest
 } from '../../../core/models/widgets';
@@ -21,7 +21,7 @@ import { WidgetService } from '../services/widget.service';
   providers: [FilterPipe]
 })
 export class WidgetAddComponent implements OnInit {
-  @Input() public currentSite;
+  @Input() public currentSite: SiteForWidget;
   @Input() public companies;
   @Input() public currentCompany;
 
@@ -38,6 +38,11 @@ export class WidgetAddComponent implements OnInit {
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService
   ) {
+    this.widgetTypes = this.widgetService.getCurrentWidgetsTypes();
+    this.templates = this.widgetService.getCurrentWidgetsTemplates();
+  }
+
+  ngOnInit(): void {
     this.editableWidget = {
       siteId: this.currentSite.id,
       templateId: '',
@@ -49,12 +54,6 @@ export class WidgetAddComponent implements OnInit {
       company: this.currentCompany.default ? this.translate.instant('widgetsList.clone.company.chose') : this.currentCompany.name,
       companyId: this.currentCompany.default ? null : this.currentCompany.id
     };
-
-    this.widgetTypes = this.widgetService.getCurrentWidgetsTypes();
-    this.templates = this.widgetService.getCurrentWidgetsTemplates();
-  }
-
-  ngOnInit(): void {
   }
 
   public closeNewWidgetModal(result) {

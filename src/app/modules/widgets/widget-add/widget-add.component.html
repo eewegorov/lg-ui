@@ -1,5 +1,6 @@
 <app-color-line type="modals"></app-color-line>
-<div class="modal-header text-center" *ngIf="newWidgetStep === 2 || newWidgetStep === 3 || newWidgetStep === 4">
+<div class="modal-header text-center justify-content-center"
+     *ngIf="newWidgetStep === 2 || newWidgetStep === 3 || newWidgetStep === 4">
   <h4 class="modal-title">{{ 'widgetsList.add.modal.title' | translate }}</h4>
 </div>
 
@@ -11,8 +12,9 @@
         <div class="templates-gallery-header">
           <div class="header-modal">
             <span>{{ 'widgetsList.add.params.mockup.title' | translate }}</span>
-            <button class="btn w-xs btn-success"
-                    (click)="createNullWidget()">{{ 'widgetsList.add.params.mockup.notselect' | translate }}</button>
+            <button class="btn w-xs btn-success" (click)="createNullWidget()">
+              {{ 'widgetsList.add.params.mockup.notselect' | translate }}
+            </button>
           </div>
           <span class="sub-text">{{ 'widgetsList.add.modal.gallery.desc' | translate }}</span>
         </div>
@@ -36,7 +38,8 @@
   <div id="step3" class="p-m max-w-868" *ngIf="newWidgetStep === 3">
     <label class="big-label">{{ 'widgetsList.add.chooseTemplate.label' | translate }}:</label>
     <div class="row">
-      <div class="col-lg-4 widget-type-view" *ngFor="let template of templates | filterBy:editableWidget.typeId" (click)="setTemplate(template)">
+      <div class="col-lg-4 widget-type-view" *ngFor="let template of templates | filterBy:editableWidget.typeId"
+           (click)="setTemplate(template)">
         <img src="{{ template.previewLink }}" alt="preview">
         <div class="view-name">{{ template.name }}</div>
         <div class="view-desc">{{ template.description }}</div>
@@ -57,47 +60,68 @@
       <div class="col-lg-12" *ngIf="editableWidget.companyMode === 0">
         <div class="row margined-bottom-15 margined-left-0 select-site-title">
           <h5>{{ 'widgetsList.selectCompany' | translate }}: <a
-            data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
+            data-toggle="tooltip" data-placement="top"
+            title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
             class="info-link" href="#"><i class="fa fa-info-circle"></i></a></h5>
         </div>
-        <div class="dropdown widget-company-selector" style="float: left; width: calc(100% - 50px)" [ngClass]="!editableWidget.companyId ? 'has-error' : ''">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <div class="dropdown widget-company-selector" style="float: left; width: calc(100% - 50px)"
+             [ngClass]="!editableWidget.companyId ? 'has-error' : ''">
+          <button
+            type="button"
+            class="btn btn-default dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="true"
+          >
             <span class="dropdown-selected-cropp" style="max-width:90%">{{editableWidget.company}}</span>
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" *ngIf="companies.length">
-            <li *ngFor="let company of getFilteredCompanies()" (click)="changeCompany(company)"><a href="javascript:void(0);">{{company.name}}</a></li>
+            <li *ngFor="let company of getFilteredCompanies()" (click)="changeCompany(company)"><a
+              href="javascript:void(0);">{{company.name}}</a></li>
           </ul>
         </div>
 
         <div class="remove-sub-item">
-          <a (click)="openAddCompanyMode()" href="javascript:void(0);" >
+          <a (click)="openAddCompanyMode()" href="javascript:void(0);">
             <i class="remove-sub-item colored-blue pe-7s-plus"
                data-toggle="tooltip" data-placement="top" data-container="body"
                title="{{ 'widgetsList.company.add.tooltip' | translate }}"></i>
           </a>
         </div>
       </div>
-      <div class="col-lg-12" [ngClass]="(editableWidget.company.trim().length == 0)?'has-error':''" *ngIf="editableWidget.companyMode === 1">
+      <div
+        *ngIf="editableWidget.companyMode === 1"
+        class="col-lg-12"
+        [ngClass]="(editableWidget.company.trim().length == 0) ? 'has-error' : ''"
+      >
         <div class="row margined-bottom-15 margined-left-0 select-site-title">
-          <h5>{{ 'widgetsList.add.params.company.add.name' | translate }}: <a data-toggle="tooltip"
-                                                                                data-placement="top"
-                                                                                title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
-                                                                                class="info-link" href="#"><i class="fa fa-info-circle"></i></a></h5>
+          <h5>{{ 'widgetsList.add.params.company.add.name' | translate }}: <a
+            data-toggle="tooltip" data-placement="top"
+            title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
+            class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+          </h5>
         </div>
         <input type="text" class="form-control" [(ngModel)]="editableWidget.company">
         <span class="underow-comment">{{ 'widgetsList.add.params.company.under' | translate }}</span>
-        <a href="#"
-           *ngIf="companies.length"
-           (click)="closeAddCompanyMode()"
-           class="companies-underline">{{ 'widgetsList.add.params.company.add.back' | translate }}</a>
+        <a *ngIf="companies.length" href="#" class="companies-underline" (click)="closeAddCompanyMode()">
+          {{ 'widgetsList.add.params.company.add.back' | translate }}
+        </a>
       </div>
       <div class="col-lg-12 margined-top-30">
-        <button (click)="closeNewWidgetModal(false)"
-                class="btn btn-lg w-xs btn-default floated-left">{{ 'global.cancel' | translate }}</button>
-        <button [disabled]="(editableWidget.companyMode == 0 && editableWidget.companyId == null) || (editableWidget.companyMode == 1 && editableWidget.company.trim().length == 0)"
-                (click)="addWidget()" type="button"
-                class="btn btn-lg w-xs btn-success floated-right">{{ 'widgetsList.add.modal.gallery.gotosettings' | translate }}</button>
+        <button
+          class="btn btn-lg w-xs btn-default floated-left"
+          (click)="closeNewWidgetModal(false)"
+        >
+          {{ 'global.cancel' | translate }}
+        </button>
+        <button
+          class="btn btn-lg w-xs btn-success floated-right"
+          (click)="addWidget()" type="button"
+          [disabled]="(editableWidget.companyMode == 0 && editableWidget.companyId == null) || (editableWidget.companyMode == 1 && editableWidget.company.trim().length == 0)"
+        >
+          {{ 'widgetsList.add.modal.gallery.gotosettings' | translate }}
+        </button>
       </div>
     </div>
   </div>

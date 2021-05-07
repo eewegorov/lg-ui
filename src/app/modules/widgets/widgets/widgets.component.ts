@@ -6,7 +6,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Abtest } from '../../../core/models/abtests';
 import { SiteShort } from '../../../core/models/sites';
-import { Company, CompanyShort, Entities, WidgetInfo, WidgetTemplate, WidgetType } from '../../../core/models/widgets';
+import {
+  Company,
+  CompanyShort,
+  Entities,
+  SiteForWidget,
+  WidgetInfo,
+  WidgetTemplate,
+  WidgetType
+} from '../../../core/models/widgets';
 import { TariffsService } from '../../../core/services/tariffs.service';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
 import { SitesService } from '../../sites/services/sites.service';
@@ -27,7 +35,7 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
   public companies = [];
   public containers = [];
   public smartPoints;
-  public currentSite = { id: '', name: '' };
+  public currentSite = {} as SiteForWidget;
   public currentCompany = {} as Company;
   public defCompanyName = '';
   public newCompany = {

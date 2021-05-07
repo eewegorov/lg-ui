@@ -51,12 +51,12 @@ export class WidgetApiService {
 
   public getMockupGroups(type: string): Observable<MockupGroupsResponse> {
     const opts = { params: new HttpParams().append('type', type) };
-    return this.http.get<MockupGroupsResponse>(`${ environment.url }/mockupGroups`, opts);
+    return this.http.get<MockupGroupsResponse>(`${ environment.url }/mockupgroups`, type ? opts : {});
   }
 
   public getMockups(type: string, categories: string): Observable<MockupsResponse> {
     const opts = { params: new HttpParams().append('type', type).append('categories', categories) };
-    return this.http.get<MockupsResponse>(`${ environment.url }/mockups`, opts);
+    return this.http.get<MockupsResponse>(`${ environment.url }/mockups`, type || categories ? opts : {});
   }
 
   public getMockup(id: string): Observable<MockupResponse> {
