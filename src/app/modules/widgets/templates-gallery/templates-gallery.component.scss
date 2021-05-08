@@ -46,6 +46,36 @@
   color: #2c3239;
 }
 
+.filter-tabs div.filter-tab-on-all {
+  background-image: url("~src/assets/images/widgets/preview/all_w_prev.png");
+  background-position: 10px 9px;
+  background-repeat: no-repeat;
+}
+
+.filter-tabs div.filter-tab-on-popup {
+  background-image: url("~src/assets/images/widgets/preview/popup_w_prev.png");
+  background-position: 10px 9px;
+  background-repeat: no-repeat;
+}
+
+.filter-tabs div.filter-tab-on-containerized {
+  background-image: url("~src/assets/images/widgets/preview/static_widget_prev.png");
+  background-position: 10px 9px;
+  background-repeat: no-repeat;
+}
+
+.filter-tabs div.filter-tab-on-optindot {
+  background-image: url("~src/assets/images/widgets/preview/dot_w_prev.png");
+  background-position: 10px 9px;
+  background-repeat: no-repeat;
+}
+
+.filter-tabs div.filter-tab-on-label_widget {
+  background-image: url("~src/assets/images/widgets/preview/label_w_prev.png");
+  background-position: 10px 9px;
+  background-repeat: no-repeat;
+}
+
 .just-blue-line {
   position: relative;
   z-index: 3;
@@ -56,6 +86,9 @@
 
 .main-content-container {
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 25px;
 }
 
 @media (max-width: 1410px) {

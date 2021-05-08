@@ -431,6 +431,10 @@ button.hovered-btn-blue:hover {
   text-align: right;
 }
 
+.widget__constructor .modal-dialog {
+  max-width: 1405px;
+}
+
 .filters-loader {
   display: none;
   position: absolute;
@@ -487,7 +491,7 @@ button.hovered-btn-blue:hover {
 
 .left-panel-filter {
   width: 300px;
-  height: calc(100vh - 308px);
+  height: calc(100vh - 312px);
   overflow: auto;
   padding-left: 15px;
   transition: opacity 0.3s ease;
@@ -517,20 +521,40 @@ button.hovered-btn-blue:hover {
 .panel-widgets-list {
   position: relative;
   width: calc(100% - 330px);
-  height: calc(100vh - 308px);
+  height: calc(100vh - 312px);
   overflow: auto;
   overflow-x: hidden;
   transition: opacity 0.3s ease;
 }
 
-.panel-widgets-list,
-.left-panel-filter {
-  height: calc(100vh - 232px);
+#NewABTestModal .panel-widgets-list,
+#NewABTestModal .left-panel-filter {
+  height: calc(100vh - 202px);
 }
 
-.panel-widgets-list,
-.left-panel-filter {
-  height: calc(100vh - 202px);
+.create-widget-m span.left-panel-filter-title {
+  font-size: 20px;
+  font-weight: 300;
+  color: #363636;
+}
+.create-widget-m .left-panel-filter h5 {
+  font-weight: 600;
+  font-size: 14px;
+  color: #363636;
+  margin: 15px 0;
+}
+.create-widget-m .left-panel-filter-categories-category-name {
+  float: right;
+  left: 5px;
+  position: relative;
+  top: 2px;
+}
+.main-content-container-loader .left-panel-filter {
+  opacity: 0.4;
+}
+.main-content-container-loader .left-panel-filter-categories,
+.main-content-container-loader .panel-widgets-list {
+  opacity: 0.6;
 }
 
 .panel-widgets-list .alert-if-empty {

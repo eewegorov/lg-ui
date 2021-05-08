@@ -197,7 +197,7 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
     } else {
       const modalRef = this.modalService.open(WidgetAddComponent, {
         size: 'xl',
-        windowClass: 'animate__animated animate__slideInDown animate__faster'
+        windowClass: 'animate__animated animate__slideInDown animate__faster widget__constructor'
       });
       modalRef.componentInstance.currentSite = this.currentSite;
       modalRef.componentInstance.companies = this.widgetService.getUndefaultCompanies(this.companies);
