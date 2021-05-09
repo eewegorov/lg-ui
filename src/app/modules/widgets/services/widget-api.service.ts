@@ -55,7 +55,17 @@ export class WidgetApiService {
   }
 
   public getMockups(type: string, categories: string): Observable<MockupsResponse> {
-    const opts = { params: new HttpParams().append('type', type).append('categories', categories) };
+    let params = new HttpParams();
+    if (type) {
+      params = params.append('type', type);
+    }
+
+    if (categories) {
+      params = params.append('categories', categories);
+    }
+
+    const opts = { params };
+
     return this.http.get<MockupsResponse>(`${ environment.url }/mockups`, type || categories ? opts : {});
   }
 

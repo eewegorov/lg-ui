@@ -19,22 +19,21 @@
     <div class="left-panel-filter-categories">
       <div class="left-panel-filter-categories-container">
         <div *ngFor="let grp of groups; index as i">
-          <h5 [ngClass]="(i !== 0) ? 'margined-top-20': '' ">
+          <h5 [ngClass]="(i !== 0) ? 'mt-2': '' ">
             {{ grp.name }}
           </h5>
           <div class="left-category-item" *ngFor="let cat of grp.categories">
             <div class="left-panel-filter-categories-category">
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input
-                    type="checkbox"
-                    [(ngModel)]="cat.checked"
-                    (ngModelChange)="filterByCat(cat.checked, cat.id)"
-                    class="form-check-input checkbox-green-btn"
-                  />
-                  {{ cat.name }}
-                </label>
-              </div>
+              <label class="form-check">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="cat.checked"
+                  (ngModelChange)="filterByCat(cat.checked, cat.id)"
+                  class="form-check-input"
+                />
+                <span class="form-check-text">{{ cat.name }}</span>
+                <span class="checkmark"></span>
+              </label>
             </div>
           </div>
         </div>

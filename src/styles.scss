@@ -431,10 +431,6 @@ button.hovered-btn-blue:hover {
   text-align: right;
 }
 
-.widget__constructor .modal-dialog {
-  max-width: 1405px;
-}
-
 .filters-loader {
   display: none;
   position: absolute;
@@ -499,19 +495,6 @@ button.hovered-btn-blue:hover {
 
 .left-category-item {
   padding-bottom: 10px;
-}
-
-.left-panel-filter .checkbox-green-btn {
-  width: auto;
-  text-align: left;
-  padding: 1px 4px;
-  margin-top: -3px;
-  border-radius: 0;
-  color: #fff;
-}
-
-.left-panel-filter .checkbox-green-btn.checked {
-  background-color: #62cb31;
 }
 
 .left-panel-filter-categories-category label {
@@ -712,5 +695,18 @@ button.hovered-btn-blue:hover {
 
   .filter-flexed__item .btn-group__period-selector {
     flex-wrap: wrap;
+  }
+}
+
+
+
+
+.widget__constructor .modal-dialog {
+  max-width: 1140px;
+}
+
+@media (min-width: 1410px) {
+  .widget__constructor .modal-dialog {
+    max-width: 1405px;
   }
 }

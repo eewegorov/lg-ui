@@ -106,19 +106,17 @@ export class TemplatesGalleryComponent implements OnInit {
     this.checkboxOnArray = [];
     if (typeId) {
       this.queryForMockups.type = typeId;
-      this.queryForGroups = typeId;
     } else {
       delete this.queryForMockups.type;
-      this.queryForGroups = '';
     }
     delete this.queryForMockups.categories;
 
-    const mockups = [];
+    let mockups = [];
 
-    this.widgetService.getMockups(this.queryForMockups.type, this.queryForGroups).pipe(
+    this.widgetService.getMockups(this.queryForMockups.type).pipe(
       mergeMap(((fetchedMockups: Mockup[]) => {
-        mockups.push(fetchedMockups);
-        return this.widgetService.getMockupGroups(this.queryForGroups);
+        mockups = fetchedMockups;
+        return this.widgetService.getMockupGroups(this.queryForMockups.type);
       }))
     ).subscribe((groups: MockupGroup[]) => {
       // Parse groups and categories

@@ -100,7 +100,7 @@ export class WidgetService {
     );
   }
 
-  public getMockups(type: string, categories: string): Observable<Mockup[]> {
+  public getMockups(type: string, categories?: string): Observable<Mockup[]> {
     return this.widgetApiService.getMockups(type, categories).pipe(
       map((response: MockupsResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
