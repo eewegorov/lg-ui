@@ -6,7 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from 'ngx-filter-pipe';
 import {
   CompanyShort,
-  ContainerShort,
+  ContainerShort, Mockup,
   NewWidgetInfo, SiteForWidget,
   WidgetCreated,
   WidgetCreateRequest
@@ -113,7 +113,7 @@ export class WidgetAddComponent implements OnInit {
     }
   }
 
-  public chooseTemplateWidget(data) {
+  public chooseTemplateWidget(data: Mockup) {
     this.newWidgetStep = 4;
 
     const currentType = this.widgetTypes.find((item) => {

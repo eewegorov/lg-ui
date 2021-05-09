@@ -98,34 +98,12 @@
   white-space: nowrap;
 }
 
-.widget-item-view-btns {
-  float: right;
-  width: 300px;
-}
-
-.widget-item-view-btns i {
-  font-size: 13px;
-  padding: 5px;
-}
-
-button.widget-item-view-btns .btn {
-  color: #8c8c8c;
-}
-
-button.widget-item-view-btns .btn:hover {
-  color: #5d5d5d;
-}
-
 button.start-widget-btn.active {
   color: #62cb31;
 }
 
 button.stop-widget-btn.active {
   color: #e74c3c;
-}
-
-.widget-item-view-header {
-  margin: 7px 0;
 }
 
 .long-text {

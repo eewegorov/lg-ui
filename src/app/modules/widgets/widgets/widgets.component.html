@@ -133,10 +133,10 @@
 
 
 <div class="row no-animate">
-  <div class="col-lg-12 margined-top-30" *ngIf="isHasWidgets() || filteredContainers().length">
+  <div class="col-lg-12 mt-3" *ngIf="isHasWidgets() || filteredContainers().length">
     <h3 class="f-0">{{ 'widgetsList.listTitle' | translate }}</h3>
   </div>
-  <div class="col-lg-12 margined-top-30" *ngIf="!sites.length">
+  <div class="col-lg-12 mt-3" *ngIf="!sites.length">
     <h3 class="f-0 text-center">{{ 'widgetsList.sitePlaceholder' | translate }}</h3>
     <h4 class="f-2 text-center underline-links blue-links hover-links">
       <span>{{ 'widgetsList.sitePlaceholder2' | translate }}</span>
@@ -146,7 +146,7 @@
   </div>
 
   <!-- Static widgets -->
-  <div class="col-lg-12 margined-top-30" *ngIf="containers.length && filteredContainers().length">
+  <div class="col-lg-12 mt-3" *ngIf="containers.length && filteredContainers().length">
     <h4 class="f-1 no-bold">{{ 'containerized.title' | translate }}:</h4>
   </div>
   <div *ngIf="containers.length">
@@ -159,7 +159,7 @@
   </div>
   <!-- End Static widgets -->
 
-  <div class="col-lg-12 margined-top-30" *ngIf="!isHasWidgets() && !filteredContainers().length && sites.length">
+  <div class="col-lg-12 mt-3" *ngIf="!isHasWidgets() && !filteredContainers().length && sites.length">
     <div *ngIf="currentCompany.default">
       <h3 class="f-0 text-center">{{ 'widgetsList.listPlaceholder' | translate }}</h3>
       <h4 class="f-2 text-center">{{ 'widgetsList.listPlaceholder2' | translate }}</h4>
@@ -169,8 +169,8 @@
     </div>
   </div>
 
-  <div class="margined-top-10 col-lg-4" *ngFor="let wdgTypes of getTypesWithCompanyFilter()">
-    <h4 class="f-1 no-bold margined-top-30">{{ getTypeItem(wdgTypes)?.name }}:</h4>
+  <div class="mt-1 col-lg-4" *ngFor="let wdgTypes of getTypesWithCompanyFilter()">
+    <h4 class="f-1 no-bold mt-3">{{ getTypeItem(wdgTypes)?.name }}:</h4>
     <div class="row" *ngFor="let widget of getFilteredWidgets(wdgTypes); index as i">
       <app-widget-item
         [widget]="widget"

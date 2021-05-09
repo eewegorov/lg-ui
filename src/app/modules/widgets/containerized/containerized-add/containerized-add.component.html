@@ -23,7 +23,7 @@
           <span class="sub-text">{{ 'widgetsList.add.modal.gallery.desc' | translate }}</span>
         </div>
 
-        <app-templates-gallery [typeId]="newCWidgetInfo.containerizedType" [callback]="chooseTemplateWidget"></app-templates-gallery>
+        <app-templates-gallery [typeId]="newCWidgetInfo.containerizedType" (chooseWidget)="chooseTemplateWidget($event)"></app-templates-gallery>
       </div>
     </div>
   </div>
@@ -32,7 +32,7 @@
     <div class="row margined-top-20">
       <div class="col-lg-12">
         <div class="row margined-bottom-15 margined-left-0 select-site-title">
-          <h5>{{ 'widgetsList.add.params.name' | translate }}:</h5>
+          <h5>{{ 'widgetsList.add.params.name.title' | translate }}:</h5>
         </div>
         <input type="text" class="form-control" [(ngModel)]="editableCW.name">
         <span class="underow-comment">{{ 'widgetsList.add.params.name.tooltip' | translate }}</span>

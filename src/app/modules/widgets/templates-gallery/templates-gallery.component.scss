@@ -91,6 +91,11 @@
   padding-top: 25px;
 }
 
+.min-w-1353 {
+  min-width: 1353px;
+  max-width: 1353px;
+}
+
 @media (max-width: 1410px) {
   .filter-tabs div {
     padding-left: 10px;

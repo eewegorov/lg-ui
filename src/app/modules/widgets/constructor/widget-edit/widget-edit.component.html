@@ -4,7 +4,7 @@
     <div class="text-right padding10">
       <button
         type="button"
-        *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+        *ngIf="widget?.abtestInfo && (widget?.abtestInfo.type === 'VARIANT')"
         (click)="goToTest(widget)"
         class="btn w-xs gototest-widget-btn"
       >
@@ -20,7 +20,7 @@
       <div class="btn-group play-btns" *ngIf="!isMockup">
         <p>Статус:</p>
         <button
-          *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+          *ngIf="(widget?.abtestInfo && (widget?.abtestInfo.type !== 'VARIANT')) || (!widget?.abtestInfo)"
           (click)="startWidget(widget)"
           [ngClass]="(widget.active) ? 'active' : ''"
           class="btn btn-xs btn-default start-widget-btn"

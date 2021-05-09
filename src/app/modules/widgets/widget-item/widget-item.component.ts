@@ -64,8 +64,6 @@ export class WidgetItemComponent implements OnInit {
 
     this.widgetCurrentCompany = this.widgetService.getCompanyById(this.widget.companyId, this.widgetService.getCurrentCompanies());
 
-    console.log(this.widgetService.getCurrentWidgetsTypes());
-    console.log(this.widget)
     this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item) => {
       return item.code === this.widget.type;
     });

@@ -167,3 +167,32 @@ span.underow-comment {
   position: relative;
   top: 5px;
 }
+
+.widget-normal__body .widget-company-editable {
+  white-space: nowrap;
+}
+
+.hpanel .panel-body.widget-normal__body {
+  padding: 15px;
+}
+
+.widget-normal__body form.editable-wrap {
+  display: block;
+}
+
+.widget-normal__body form.editable-wrap .editable-input.editable-has-buttons {
+  width: calc(100% - 95px)!important;
+}
+
+.card-footer .reports-emails-preloader {
+  background-color: transparent;
+  background-size: 25px 25px;
+  position: relative;
+  height: 25px;
+}
+
+.static-widget-block .reports-emails-preloader {
+  background-color: transparent;
+  background-size: 25px 25px;
+  position: relative;
+}

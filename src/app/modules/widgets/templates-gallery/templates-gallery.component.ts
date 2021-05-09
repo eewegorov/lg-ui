@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { mergeMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { Mockup, MockupGroup } from '../../../core/models/widgets';
@@ -11,9 +11,9 @@ import { WidgetService } from '../services/widget.service';
 })
 export class TemplatesGalleryComponent implements OnInit {
   @Input() public types = [];
-
   @Input() private typeId = '';
-  @Input() private callback: (data) => void;
+
+  @Output() private chooseWidget = new EventEmitter<Mockup>();
 
   public groups = [];
   public mockups = [];
@@ -27,7 +27,6 @@ export class TemplatesGalleryComponent implements OnInit {
   private checkboxOnArray = [];
   private testArr = [];
   private queryForMockups = { type: '', categories: '' };
-  private queryForGroups = '';
 
   constructor(
     private translate: TranslateService,
@@ -92,8 +91,8 @@ export class TemplatesGalleryComponent implements OnInit {
     this.startItem = this.newItem;
   }
 
-  public saveWidget(mockup) {
-    this.callback(mockup);
+  public saveWidget(mockup: Mockup): void {
+    this.chooseWidget.emit(mockup);
   }
 
   public trackById(index, item) {

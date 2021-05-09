@@ -122,7 +122,7 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
 
   public getTypeItem(typeId: string): WidgetType {
     return this.types.find((item: WidgetType) => {
-      return item.code === typeId;
+      return item.id === typeId;
     });
   }
 

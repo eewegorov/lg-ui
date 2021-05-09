@@ -520,21 +520,25 @@ button.hovered-btn-blue:hover {
   font-weight: 300;
   color: #363636;
 }
+
 .create-widget-m .left-panel-filter h5 {
   font-weight: 600;
   font-size: 14px;
   color: #363636;
   margin: 15px 0;
 }
+
 .create-widget-m .left-panel-filter-categories-category-name {
   float: right;
   left: 5px;
   position: relative;
   top: 2px;
 }
+
 .main-content-container-loader .left-panel-filter {
   opacity: 0.4;
 }
+
 .main-content-container-loader .left-panel-filter-categories,
 .main-content-container-loader .panel-widgets-list {
   opacity: 0.6;
@@ -684,6 +688,57 @@ button.hovered-btn-blue:hover {
   z-index: 0;
 }
 
+.widget-item-view-btns {
+  float: right;
+  width: 300px;
+}
+
+.widget-item-view-btns i {
+  font-size: 13px;
+  padding: 5px;
+}
+
+button.widget-item-view-btns .btn {
+  color: #8c8c8c;
+}
+
+button.widget-item-view-btns .btn:hover {
+  color: #5d5d5d;
+}
+
+.start-widget-btn.active {
+  color: #62cb31;
+}
+
+.stop-widget-btn.active {
+  color: #e74c3c;
+}
+
+
+
+@media (max-width: 700px) {
+  .sites-settings-page .site-settings-switcher label {
+    width: 100%;
+  }
+  .sites-settings-page .btn-add-new-integration {
+    width: 100%;
+    white-space: inherit;
+  }
+  .sites-settings-page .integration-item__header {
+    display: block;
+  }
+  .sites-settings-page .widget-item-view-btns {
+    width: 100%;
+    float: none;
+  }
+  .analyticssync-sync-panel-wrapper .site-selector {
+    min-width: 100%;
+  }
+  .integration-new-modal-temp .integration-tab {
+    width: 100%;
+  }
+}
+
 
 
 @media (max-width: 1310px) {
@@ -709,4 +764,70 @@ button.hovered-btn-blue:hover {
   .widget__constructor .modal-dialog {
     max-width: 1405px;
   }
+}
+
+
+
+/*AB Tests********************************/
+.ab-widget-btn {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  line-height: 23px;
+  border-radius: 3px!important;
+}
+
+.ab-widget-btn:before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 6px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.ab-widget-btn.in-work:before {
+  background-color: #62cb31;
+}
+
+.ab-widget-btn.in-pause:before {
+  background-color: #ffe567;
+}
+
+.ab-type-icon {
+  background: url("http://dvlas.ru/wp-content/uploads/2014/10/google-play.jpg") center no-repeat;
+  background-size: contain;
+  height: 150px;
+  margin: 20px auto 20px auto;
+  width: 100%;
+}
+
+.ab-type-icon-DUPLICATE {
+  background: url("~src/assets/images/abtests/icon2-type2-abtest.png") center no-repeat;
+  background-size: contain;
+  height: 150px;
+  margin: 20px auto 20px auto;
+  width: 100%;
+}
+
+.ab-type-icon-NEW {
+  background: url("~src/assets/images/abtests/icon3-type3-abtest.png") center no-repeat;
+  background-size: contain;
+  height: 150px;
+  margin: 20px auto 20px auto;
+  width: 100%;
+}
+
+.ab-type-icon-MOCKUP {
+  background: url("~src/assets/images/abtests/icon1-type1-abtest.png") center no-repeat;
+  background-size: contain;
+  height: 150px;
+  margin: 20px auto 20px auto;
+  width: 100%;
+}
+
+.widget-item-view-header {
+  margin: 7px 0;
 }
