@@ -10,6 +10,7 @@ import { AbtestsActiveComponent } from './abtests-active/abtests-active.componen
 import { AbtestsArchiveComponent } from './abtests-archive/abtests-archive.component';
 import { VariantAddComponent } from './variant-add/variant-add.component';
 import { AbtestAddComponent } from './abtest-add/abtest-add.component';
+import { WidgetsModule } from '../widgets/widgets.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AbtestAddComponent } from './abtest-add/abtest-add.component';
     UiSwitchModule,
     ChartsModule,
     SharedModule,
-    AbtestsRoutingModule
+    AbtestsRoutingModule,
+    WidgetsModule
   ]
 })
 export class AbtestsModule { }

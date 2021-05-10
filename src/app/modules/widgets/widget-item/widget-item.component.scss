@@ -1,3 +1,11 @@
+.hpanel.hgreen .panel-body {
+  border-top: 2px solid #62cb31;
+}
+
+.hpanel.hred .panel-body {
+  border-top: 2px solid #e74c3c;
+}
+
 .btn {
   border-radius: 3px;
   font-size: 14px;
@@ -19,10 +27,6 @@
 .widget-item-view-header__name {
   margin-top: 35px;
   height: 38px;
-}
-
-.widget-item-view-header__name a.editable {
-  font-size: 14px;
 }
 
 .widget-item-view-priority-btns {
@@ -80,6 +84,17 @@
 .contact-stat .stat {
   color: #000;
   font-size: 18px;
+}
+
+.editable {
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  color: #428bca;
+  min-width: 100px !important;
+  max-width: 250px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 

@@ -7,7 +7,7 @@ import {
   AbtestsResponse,
   UpdateAbtest,
   CloneVariantResponse,
-  AbtestStatisticsResponse, AbtestsArchiveResponse
+  AbtestStatisticsResponse, AbtestsArchiveResponse, AbtestCreateRequest, AbtestCreateResponse
 } from '../../../core/models/abtests';
 
 
@@ -20,6 +20,10 @@ export class AbtestsApiService {
 
   public getTests(): Observable<AbtestsResponse> {
     return this.http.get<AbtestsResponse>(`${ environment.url }/abtests`);
+  }
+
+  public createTest(test: AbtestCreateRequest): Observable<AbtestCreateResponse> {
+    return this.http.post<AbtestCreateResponse>(`${ environment.url }/abtests`, test);
   }
 
   public getConversion(id: string): Observable<AbtestStatisticsResponse> {

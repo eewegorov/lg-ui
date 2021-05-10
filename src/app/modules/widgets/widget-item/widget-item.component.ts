@@ -91,7 +91,7 @@ export class WidgetItemComponent implements OnInit {
     if (!data) {
       return false;
     }
-    this.widgetService.rename(this.currentSiteId, this.widget.id, data);
+    this.widgetService.rename(this.currentSiteId, this.widget.id, data).subscribe();
   }
 
   public swapWidgets(isUp) {

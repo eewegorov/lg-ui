@@ -105,7 +105,8 @@ import { FormExtendedComponent } from './constructor/design/form-extended/form-e
     FormExtendedComponent,
   ],
   exports: [
-    SmartpointsControlComponent
+    SmartpointsControlComponent,
+    TemplatesGalleryComponent
   ],
   imports: [
     CommonModule,
