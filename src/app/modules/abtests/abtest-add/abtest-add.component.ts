@@ -39,16 +39,16 @@ export class AbtestAddComponent implements OnInit {
     this.newABTestInfo = {
       step: 0,
       abtTypeWidget: this.widget.type,
-      widgetVarName: this.translate.instant('abtest.create.variant1'),
+      widgetVarName: this.translate.instant('abtests.create.variant1'),
       ABTypes: [{
         type: 'DUPLICATE',
-        title: this.translate.instant('abtest.abtypes.title.duplicate')
+        title: this.translate.instant('abtests.abtypes.title.duplicate')
       }, {
         type: 'NEW',
-        title: this.translate.instant('abtest.abtypes.title.new')
+        title: this.translate.instant('abtests.abtypes.title.new')
       }, {
         type: 'MOCKUP',
-        title: this.translate.instant('abtest.abtypes.title.mockup')
+        title: this.translate.instant('abtests.abtypes.title.mockup')
       }]
     };
   }
@@ -88,12 +88,11 @@ export class AbtestAddComponent implements OnInit {
     this.abTestsService.createTest(dataObj).subscribe((response: AbtestShort) => {
       if (this.isContainerized) {
         this.containerizedWidgetService.rename(this.currentSite.id, response.variantId, this.newABTestInfo.widgetVarName).subscribe(() => {
-          this.router.navigate([`/widgets/edit/${this.currentSite.id}-${response.variantId}/`]).then();
-
+          this.router.navigate([`/widgets/edit/${this.currentSite.id}-${response.variantId}/`]).then(() => this.closeModal());
         });
       } else {
         this.widgetService.rename(this.currentSite.id, response.variantId, this.newABTestInfo.widgetVarName).subscribe(() => {
-          this.router.navigate([`/widgets/edit/${this.currentSite.id}-${response.variantId}/`]).then();
+          this.router.navigate([`/widgets/edit/${this.currentSite.id}-${response.variantId}/`]).then(() => this.closeModal());
         });
       }
     });

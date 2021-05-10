@@ -4,35 +4,35 @@
 </div>
 
 <div class="modal-body">
-  <div id="step1" class="p-m max-w-868" *ngIf="newABTestInfo.step === 0">
+  <div id="step1" class="p-2 max-w-868" *ngIf="newABTestInfo.step === 0">
     <div class="row">
       <div class="col-lg-12">
-        <label class="row margined-bottom-15 margined-left-0 select-site-title control-label">{{ 'abtests.modal.variant.title' | translate }}</label>
+        <label class="row mb-2 ml-0 select-site-title control-label">{{ 'abtests.modal.variant.title' | translate }}</label>
         <input type="text" class="form-control" [(ngModel)]="editableAB.name">
         <span class="underow-comment">{{ 'abtests.modal.variant.comment' | translate }}</span>
       </div>
 
       <div class="col-lg-12">
-        <label class="row margined-bottom-15 margined-left-0 select-site-title control-label">{{ 'abtests.modal.variant.description' | translate }}</label>
+        <label class="row mt-2 mb-2 ml-0 select-site-title control-label">{{ 'abtests.modal.variant.description' | translate }}</label>
         <textarea class="form-control" [(ngModel)]="editableAB.description" rows="3"></textarea>
       </div>
 
-      <div class="col-lg-12 margined-top-30">
+      <div class="col-lg-12 mt-5">
         <button (click)="closeModal()"
-                class="btn btn-lg w-xs btn-default floated-left">{{ 'global.cancel' | translate }}</button>
+                class="btn btn-lg btn-default float-left">{{ 'global.cancel' | translate }}</button>
         <button [disabled]="editableAB.name.trim().length === 0"
                 (click)="goToABType()"
                 type="button"
-                class="btn btn-lg w-xs btn-success floated-right">{{ 'abtests.modal.variant.create' | translate }}</button>
+                class="btn btn-lg btn-success float-right">{{ 'abtests.modal.variant.create' | translate }}</button>
       </div>
     </div>
   </div>
-  <div id="step2" class="p-m max-w-868" *ngIf="newABTestInfo.step === 1">
+  <div id="step2" class="p-2 max-w-868" *ngIf="newABTestInfo.step === 1">
     <div class="sub-text-extra-create-new-test">{{ 'abtests.modal.newAB.chooseVariant' | translate }}</div>
     <div class="row">
       <div class="col-lg-4 widget-type-view" *ngFor="let type of newABTestInfo.ABTypes" (click)="setABType(type)">
         <div class="ab-type-icon-{{ type.type }}"></div>
-        <div class="view-name">{{ type.title }}</div>
+        <div class="view-name text-center">{{ type.title }}</div>
       </div>
     </div>
   </div>

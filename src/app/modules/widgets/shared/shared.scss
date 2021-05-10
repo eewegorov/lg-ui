@@ -98,42 +98,6 @@ label.big-label {
   color: #a94442;
 }
 
-.create-widget-m {
-  position: relative;
-  padding: 20px 10px 0;
-}
-
-.create-widget-m .header-modal {
-  display: flex;
-  justify-content: center;
-}
-
-.create-widget-m .header-modal button {
-  height: 34px;
-  margin-top: 5px;
-  margin-left: 25px;
-}
-
-.create-widget-m .header-modal span {
-  font-weight: 300;
-  font-size: 30px;
-  color: #2c3239;
-}
-
-.create-widget-m span.sub-text {
-  text-align: center;
-  display: block;
-  color: #363636;
-  font-size: 16px;
-  font-weight: 300;
-  margin: 5px 0 20px;
-}
-
-span.underow-comment {
-  font-size: 10px;
-  font-style: italic;
-}
-
 .widget-company-selector button {
   overflow: hidden;
   text-align: left;
@@ -163,11 +127,6 @@ span.underow-comment {
   font-size: 34px;
 }
 
-.select-site-title {
-  position: relative;
-  top: 5px;
-}
-
 .widget-normal__body .widget-company-editable {
   white-space: nowrap;
 }
@@ -191,8 +150,7 @@ span.underow-comment {
   height: 25px;
 }
 
-.static-widget-block .reports-emails-preloader {
-  background-color: transparent;
-  background-size: 25px 25px;
-  position: relative;
+.test-item-header {
+  display: flex;
+  justify-content: space-between;
 }

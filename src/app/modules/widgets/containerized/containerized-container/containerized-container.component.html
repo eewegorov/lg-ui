@@ -1,4 +1,4 @@
-<div class="col-lg-12 static-wrapper-scr">
+<div class="col-lg-12">
   <div class="static-widget-block test-item">
     <div class="test-item-header">
       <div class="test-item-left">
@@ -24,8 +24,8 @@
         </div>
       </div>
       <div class="test-item-right">
-        <div class="btn-group play-btns margined-right-10">
-          <button class="btn btn-xs btn-default btn-show-dialog-code"
+        <div class="btn-group play-btns mr-2">
+          <button class="btn btn-default btn-show-dialog-code"
                   (click)="openContainerCodeModal()"
                   data-toggle="tooltip"
                   data-placement="top"
@@ -35,7 +35,7 @@
         </div>
 
         <div class="btn-group edit-btns">
-          <button class="btn btn-xs btn-default btn-remove-container"
+          <button class="btn btn-default btn-remove-container"
                   (click)="removeContainer()"
                   data-container="body"  data-toggle="tooltip" data-placement="top"
                   title="{{ 'containerized.container.remove' | translate }}">

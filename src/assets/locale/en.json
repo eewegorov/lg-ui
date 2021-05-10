@@ -3,6 +3,7 @@
 		"ab": "",
 		"abtypes": {
 			"title": {
+				"duplicate": "",
 				"mockup": "",
 				"new": ""
 			}
@@ -43,6 +44,9 @@
 			"title": ""
 		},
 		"conversion": "",
+		"create": {
+			"variant1": ""
+		},
 		"improvement": "",
 		"modal": {
 			"newAB": {
