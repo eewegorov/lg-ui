@@ -1,13 +1,3 @@
-.long-text-item {
-  display: inline-block;
-  position: relative;
-  border: none;
-  padding-right: 20px;
-  line-height: 30px;
-  max-width: 100%;
-  text-overflow: ellipsis;
-}
-
 .form-check {
   display: block;
   position: relative;
@@ -153,4 +143,54 @@ label.big-label {
 .test-item-header {
   display: flex;
   justify-content: space-between;
+}
+
+.ab-grid__header--name,
+.ab-grid__item--name {
+  flex-basis: 28%;
+  max-width: 28%;
+}
+
+.ab-grid__header--company,
+.ab-grid__item--company {
+  flex-basis: 21%;
+  max-width: 21%;
+}
+
+.ab-grid__header--shows,
+.ab-grid__item--shows {
+  flex-basis: 7%;
+  max-width: 7%;
+}
+
+.ab-grid__header--targets,
+.ab-grid__item--targets {
+  flex-basis: 7%;
+  max-width: 7%;
+}
+
+.ab-grid__header--conv,
+.ab-grid__item--conv {
+  flex-basis: 7%;
+  max-width: 7%;
+}
+
+.ab-grid__header--priority,
+.ab-grid__item--priority {
+  flex-basis: 8%;
+  max-width: 8%;
+  min-width: 117px;
+}
+
+.ab-grid__header--actions-static,
+.ab-grid__item--actions-static {
+  flex-basis: 22%;
+  max-width: 22%;
+  min-width: 265px;
+}
+
+.reports-emails-preloader {
+  background-color: transparent;
+  background-size: 25px 25px;
+  position: relative;
 }

@@ -1,0 +1,65 @@
+.ab-grid__item--targets,
+.ab-grid__item--priority,
+.ab-grid__item--actions-static {
+  padding: 7px 10px;
+  height: 44px;
+  font-size: 14px;
+  line-height: 28px;
+}
+
+.ab-grid__item--company {
+  padding: 7px 10px;
+  height: 44px;
+  font-size: 14px;
+  line-height: 28px;
+}
+
+.ab-grid__item--name {
+  padding-left: 10px;
+}
+
+.ab-grid__item--priority {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ab-grid__item--actions-static {
+  display: flex;
+  align-items: center;
+}
+
+.ab-grid__item--actions-static .btn {
+  line-height: 23px;
+  padding-left: 12px;
+  padding-right: 10px;
+}
+
+.ab-grid__item--actions-static {
+  justify-content: flex-end;
+}
+
+.ab-grid__item--actions-static .btn.ab-widget-btn {
+  padding-left: 22px;
+}
+
+.ab-grid__item .editable-input {
+  width: 200px !important;
+  height: 30px;
+}
+
+.ab-grid__item .editable-buttons .btn {
+  line-height: 16px !important;
+  padding-left: 9px;
+  padding-right: 9px;
+}
+
+.ab-grid__item--company .btn {
+  line-height: 16px !important;
+  padding-left: 9px;
+  padding-right: 9px;
+}
+
+.ab-grid__item--company .widget-company-selector .value {
+  width: calc(100% - 15px);
+}

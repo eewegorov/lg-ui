@@ -4,12 +4,8 @@
   min-width: 1220px;
 }
 
-.static-widget-block .test-item-left {
+.test-item-left {
   width: 70%;
-}
-
-.static-widget-block .ab-grid__header {
-
 }
 
 .static-widget-block button.btn-show-dialog-code {
@@ -27,161 +23,58 @@
   padding-bottom: 2px;
 }
 
-.static-widget-block .ab-grid__header--priority {
+.ab-grid__header--priority {
   line-height: 17px;
 }
 
-.static-widget-block .ab-grid__header--priority a,
-.static-widget-block .ab-grid__header--priority div {
+.ab-grid__header--priority a,
+.ab-grid__header--priority div {
   text-transform: none;
 }
 
-.static-widget-block .ab-grid__header--company,
-.static-widget-block .ab-grid__header--targets,
-.static-widget-block .ab-grid__header--priority,
-.static-widget-block .ab-grid__header--actions-static {
+.ab-grid__header--company,
+.ab-grid__header--targets,
+.ab-grid__header--priority,
+.ab-grid__header--actions-static {
   padding: 7px 10px;
 }
 
-.static-widget-block .ab-grid__item--targets,
-.static-widget-block .ab-grid__item--priority,
-.static-widget-block .ab-grid__item--actions-static {
-  padding: 7px 10px;
-  height: 44px;
-  font-size: 14px;
-  line-height: 28px;
-}
-
-.static-widget-block .ab-grid__item--company {
-  padding: 7px 10px;
-  height: 44px;
-  font-size: 14px;
-  line-height: 28px;
-}
-
-.static-widget-block .ab-grid__item--name {
-  padding-left: 10px;
-}
-
-.static-widget-block .ab-grid__header--actions-static {
+.ab-grid__header--actions-static {
   text-align: right;
 }
 
-.static-widget-block .ab-grid__header--name,
-.static-widget-block .ab-grid__item--name {
-  flex-basis: 28%;
-  max-width: 28%;
-}
-
-.static-widget-block .ab-grid__header--company,
-.static-widget-block .ab-grid__item--company {
-  flex-basis: 21%;
-  max-width: 21%;
-}
-
-.static-widget-block .ab-grid__header--shows,
-.static-widget-block .ab-grid__item--shows {
-  flex-basis: 7%;
-  max-width: 7%;
-}
-
-.static-widget-block .ab-grid__header--targets,
-.static-widget-block .ab-grid__item--targets {
-  flex-basis: 7%;
-  max-width: 7%;
-}
-
-.static-widget-block .ab-grid__header--conv,
-.static-widget-block .ab-grid__item--conv {
-  flex-basis: 7%;
-  max-width: 7%;
-}
-
-.static-widget-block .ab-grid__header--priority,
-.static-widget-block .ab-grid__item--priority {
-  flex-basis: 8%;
-  max-width: 8%;
-  min-width: 115px;
-}
-
-.static-widget-block .ab-grid__header--actions-static,
-.static-widget-block .ab-grid__item--actions-static {
-  flex-basis: 22%;
-  max-width: 22%;
-  min-width: 265px;
-}
-
-.static-widget-block .ab-grid__header--priority {
+.ab-grid__header--priority {
   text-align: center;
 }
 
-.static-widget-block .ab-grid__item--priority {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.static-widget-block .ab-grid__item--actions-static {
-  display: flex;
-  align-items: center;
-}
-
-.static-widget-block .ab-grid__item--actions-static .btn {
-  line-height: 23px;
-  padding-left: 12px;
-  padding-right: 10px;
-}
-
-.static-widget-block .ab-grid__item--actions-static {
-  justify-content: flex-end;
-}
-
-.static-widget-block .ab-grid__item--actions-static .btn.ab-widget-btn {
-  padding-left: 22px;
-}
-
-.static-widget-block .ab-grid__footer {
+.ab-grid__footer {
   font-size: 16px;
   display: flex;
   font-weight: 600;
   justify-content: space-between;
 }
 
-.static-widget-block .ng-submitted .editable-input.editable-has-buttons {
+.ng-submitted .editable-input.editable-has-buttons {
   border-color: red;
 }
 
-.static-widget-block .ab-grid__item .editable-input {
-  width: 200px !important;
-  height: 30px;
-}
-
-.static-widget-block .ab-grid__item .editable-buttons .btn {
-  line-height: 16px !important;
-  padding-left: 9px;
-  padding-right: 9px;
-}
-
-.static-widget-block .ab-grid__item--company .btn {
-  line-height: 16px !important;
-  padding-left: 9px;
-  padding-right: 9px;
-}
-
-.static-widget-block .ab-grid__item--company .widget-company-selector .value {
-  width: calc(100% - 15px);
-}
-
-.static-widget-block .grid-containerized-item {
+.grid-containerized-item {
   display: block;
 }
 
-.static-widget-block .priority-btns i {
+.priority-btns i {
   margin: 0;
 }
 
-.static-widget-block .reports-emails-preloader {
-  background-color: transparent;
-  background-size: 25px 25px;
-  position: relative;
+@media (max-width: 1460px) {
+  .static-wrapper-scr {
+    overflow: auto;
+    padding: 0;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  .modal-flex .modal.in .modal-dialog {
+    overflow: auto;
+  }
 }
