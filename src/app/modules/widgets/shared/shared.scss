@@ -117,7 +117,7 @@ label.big-label {
   font-size: 34px;
 }
 
-.widget-normal__body .widget-company-editable {
+.widget-company-editable {
   white-space: nowrap;
 }
 
@@ -193,4 +193,30 @@ label.big-label {
   background-color: transparent;
   background-size: 25px 25px;
   position: relative;
+}
+
+.penciled .fa.fa-pencil {
+  display: none;
+}
+
+.penciled:hover .fa.fa-pencil {
+  display: inline;
+}
+
+.priority-btns i {
+  font-size:    18px;
+  margin-right: 10px;
+}
+
+.priority-btns button {
+  padding: 3px 10px;
+  font-size: 14px;
+}
+
+.priority-up-widget-btn i {
+  color: #62cb31;
+}
+
+.priority-down-widget-btn i {
+  color: #e74c3c;
 }

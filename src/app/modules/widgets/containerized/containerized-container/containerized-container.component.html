@@ -37,14 +37,14 @@
         <div class="btn-group edit-btns">
           <button class="btn btn-default btn-remove-container"
                   (click)="removeContainer()"
-                  data-container="body"  data-toggle="tooltip" data-placement="top"
+                  data-container="body" data-toggle="tooltip" data-placement="top"
                   title="{{ 'containerized.container.remove' | translate }}">
             <i class="fa fa-trash"></i>
           </button>
         </div>
       </div>
     </div>
-    <div class="ab-content">
+    <div class="ab-content mt-2">
       <div class="ab-grid">
         <div class="ab-grid__header">
           <div class="ab-grid__header--name">{{ 'widgetsList.widget.widget' | translate }}</div>
@@ -53,7 +53,7 @@
           <div class="ab-grid__header--targets">{{ 'widgetsList.widget.show.actions' | translate }}</div>
           <div class="ab-grid__header--conv">{{ 'widgetsList.widget.show.conversion' | translate }}</div>
           <div class="ab-grid__header--priority">{{ 'widgetsList.widget.priority.title' | translate }} <a
-            class="info-link" href="#" data-toggle="tooltip" data-placement="top"
+            class="info-link" href="#" data-toggle="tooltip" data-placement="top" data-container="#myWidgets"
             title="{{ 'widgetsList.widget.priority.tooltip' | translate }}"><i class="fa fa-info-circle"></i></a>
           </div>
           <div class="ab-grid__header--actions-static">{{ 'containerized.container.header.control' | translate }}</div>

@@ -19,12 +19,11 @@ export class ContainerCodeComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private sitesService: SitesService,
     private containerizedWidgetService: ContainerizedWidgetService
-  ) {
-    this.codeSiteId = this.sitesService.generatePath(this.currentSiteId, true);
-    this.codeContainerId = this.containerizedWidgetService.getContainerInstallCode(this.containerId);
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.codeSiteId = this.sitesService.generatePath(this.currentSiteId, true);
+    this.codeContainerId = this.containerizedWidgetService.getContainerInstallCode(this.containerId);
   }
 
   public closeModal(result) {

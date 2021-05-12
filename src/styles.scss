@@ -153,6 +153,11 @@ h6 {
   font-size: 12px;
 }
 
+#myWidgets .tooltip-inner {
+  max-width: 750px;
+  font-size: 11px;
+}
+
 .long-text {
   display: block;
   max-width: 350px;
@@ -707,11 +712,11 @@ button.widget-item-view-btns .btn:hover {
   color: #5d5d5d;
 }
 
-.start-widget-btn.active {
+button.start-widget-btn.active {
   color: #62cb31;
 }
 
-.stop-widget-btn.active {
+button.stop-widget-btn.active {
   color: #e74c3c;
 }
 
@@ -1092,6 +1097,30 @@ span.underow-comment {
 .test-item-right i {
   font-size: 13px;
   padding: 5px;
+}
+
+.ab-test-footer {
+  padding: 15px 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ab-test-footer button {
+  color: #6a6c6f;
+}
+
+.ab-test-footer button.btn {
+  background-color: #fff;
+  border: 1px solid #e4e5e7;
+}
+
+.ab-test-footer button.btn i.fa-plus {
+  color: #62cb31;
+}
+
+.ab-test-footer button.btn-test-var:hover {
+  border-color: #c7c7c7;
+  color: #444444;
 }
 
 

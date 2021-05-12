@@ -14,11 +14,11 @@
        *ngIf="changeCompanyWidget.id !== item.id"
        (click)="startChangeCompany()"
        class="widget-company-editable penciled"
-    ><span class="long-text-item">{{ widgetCurrentCompany.name }}</span><i class="fa fa-pencil margined-left-6"></i>
+    ><span class="long-text-item">{{ widgetCurrentCompany.name }}</span><i class="fa fa-pencil ml-1"></i>
     </a>
 
     <div class="changeable-company-widget" *ngIf="changeCompanyWidget.id === item.id">
-      <div class="floated-left" style="width: calc(100% - 80px)">
+      <div class="float-left" style="width: calc(100% - 80px)">
         <div class="dropdown widget-company-selector">
           <button class="btn btn-default dropdown-toggle" type="button"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -27,14 +27,14 @@
           </button>
           <ul class="dropdown-menu">
             <li *ngFor="let company of getFilteredCompanies()" (click)="changeCurrentCompany(company)">
-              <a href="javascript:void(0);">{{company.name}}</a>
+              <a href="javascript:void(0);" class="dropdown-item">{{company.name}}</a>
             </li>
           </ul>
         </div>
       </div>
-      <div class="floated-right">
+      <div class="float-right">
         <button (click)="changeCWidgetCompany()"
-                class="btn btn-success margined-left-5 floated-right"
+                class="btn btn-success ml-1 float-right"
                 data-container="body"  data-toggle="tooltip" data-placement="top"
                 title="{{ 'widgetsList.widget.changecompany.tooltip' | translate }}"><i class="fa fa-check"></i></button>
 
@@ -55,54 +55,54 @@
 
   <div class="ab-grid__item--priority">
     <div class="btn-group priority-btns">
-      <button class="btn btn-xs btn-default priority-up-widget-btn"
+      <button class="btn btn-sm btn-default priority-up-widget-btn"
               [disabled]="first"
               (click)="swapCWidgets(true)">
         <i class="fa fa-angle-up"></i></button>
 
-      <button class="btn btn-xs btn-default priority-down-widget-btn"
+      <button class="btn btn-sm btn-default priority-down-widget-btn"
               [disabled]="last"
               (click)="swapCWidgets(false)">
         <i class="fa fa-angle-down"></i></button>
     </div>
   </div>
   <div class="ab-grid__item--actions-static">
-    <div class="btn-group play-btns margined-right-10">
+    <div class="btn-group play-btns mr-2">
       <button (click)="switchCWidget(true)"
               [ngClass]="item.active ? 'active' : ''"
-              class="btn btn-xs btn-default start-widget-btn"
+              class="btn btn-sm btn-default start-widget-btn"
               data-container="body" data-toggle="tooltip" data-placement="top"
               title="{{ 'widgetsList.widget.start' | translate }}"><i class="fa fa-play"></i></button>
 
       <button (click)="switchCWidget(false)"
               [ngClass]="item.active ? '' : 'active'"
-              class="btn btn-xs btn-default stop-widget-btn"
+              class="btn btn-sm btn-default stop-widget-btn"
               data-container="body"  data-toggle="tooltip" data-placement="top"
               title="{{ 'widgetsList.widget.stop' | translate }}"><i class="fa fa-pause"></i></button>
     </div>
 
-    <div class="btn-group ab-btns margined-right-10">
+    <div class="btn-group ab-btns mr-2">
       <button (click)="abAction()"
               *ngIf="abIfNoTest()"
-              class="btn btn-xs btn-default ab-widget-btn"
+              class="btn btn-sm btn-default ab-widget-btn"
               data-container="body" data-toggle="tooltip" data-placement="top"
               title="{{ 'widgetsList.widget.ab.start.desc' | translate }}">{{ 'abtests.ab' | translate }}</button>
 
       <button (click)="goToTest()"
               *ngIf="abIfTestOnWork()"
-              class="btn btn-xs btn-default ab-widget-btn in-work"
+              class="btn btn-sm btn-default ab-widget-btn in-work"
               data-container="body" data-toggle="tooltip" data-placement="top"
               title="{{ 'widgetsList.widget.ab.state.desc' | translate }}">{{ 'abtests.ab' | translate }}</button>
 
       <button (click)="goToTest()"
               *ngIf="abIfTestOnPause()"
-              class="btn btn-xs btn-default ab-widget-btn in-pause"
+              class="btn btn-sm btn-default ab-widget-btn in-pause"
               data-container="body" data-toggle="tooltip" data-placement="top"
               title="{{ 'widgetsList.widget.ab.stop.desc' | translate }}">{{ 'abtests.ab' | translate }}</button>
     </div>
 
     <div class="btn-group edit-btns">
-      <button class="btn btn-xs btn-default"
+      <button class="btn btn-sm btn-default"
               (click)="duplicateCWidget()"
               data-container="body"  data-toggle="tooltip" data-placement="top"
               title="{{ 'widgetsList.widget.duplicate' | translate }}">
@@ -110,11 +110,11 @@
       </button>
 
       <button (click)="goToConstructor()"
-              class="btn btn-xs btn-default"
+              class="btn btn-sm btn-default"
               data-container="body" data-toggle="tooltip" data-placement="top"
-              title="{{ 'widgetsList.widget.settings' | translate }}"><i class="fa fa-gears"></i></button>
+              title="{{ 'widgetsList.widget.settings' | translate }}"><i class="fa fa-cogs"></i></button>
 
-      <button class="btn btn-xs btn-default"
+      <button class="btn btn-sm btn-default"
               (click)="removeCWidget()"
               data-container="body"  data-toggle="tooltip" data-placement="top"
               title="{{ 'widgetsList.widget.trash' | translate }}">

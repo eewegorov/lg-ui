@@ -62,8 +62,17 @@
   display: block;
 }
 
-.priority-btns i {
-  margin: 0;
+a.static-help-link {
+  margin-top: 9px;
+  display: block;
+  float: right;
+  color: #727477;
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+a.static-help-link:hover {
+  text-decoration: none;
 }
 
 @media (max-width: 1460px) {

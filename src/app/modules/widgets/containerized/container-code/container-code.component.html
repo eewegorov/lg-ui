@@ -1,18 +1,18 @@
 <app-color-line type="modals"></app-color-line>
-<div class="modal-header text-center">
+<div class="modal-header text-center justify-content-center">
   <h3 class="modal-title">{{ 'settings.script.header' | translate }}</h3>
 </div>
 
 <div class="modal-body">
   <div class="static-widget-code-modal">
-    <p class="margined-left-20 small m-t-md m-b">
+    <p class="ml-3 small mt-3">
       <b>{{ 'widgets.types.static.step1.title' | translate }}: </b>
       {{ 'widgets.types.static.step1.desc' | translate }}
     </p>
     <div class="form-group col-lg-12">
       <textarea appSelectOnClick [(ngModel)]="codeSiteId" class="form-control not-readonly-hand" width="80%" rows="5" readonly></textarea>
     </div>
-    <p class="margined-left-20 small m-t-md m-b">
+    <p class="ml-3 small mt-3">
       <b>{{ 'widgets.types.static.step2.title' | translate }}: </b>
       {{ 'widgets.types.static.step2.desc' | translate }}
     </p>
@@ -25,10 +25,9 @@
 </div>
 
 <div class="modal-footer">
-  <!-- Step 1 -->
-  <div class="text-right m-r">
-    <a class="btn btn-default floated-right"
-       (click)="closeModal(false)"
-       href="">{{ 'global.close' | translate }}</a>
+  <div class="text-right">
+    <a class="btn btn-default float-right" (click)="closeModal(false)">
+      {{ 'global.close' | translate }}
+    </a>
   </div>
 </div>
