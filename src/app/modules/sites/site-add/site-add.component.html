@@ -14,7 +14,7 @@
                 <input type="text" id="name" class="form-control" formControlName="name" required>
                 <span class="small" [innerHTML]="'sitelist.form.start.desc1' | translate"></span>
               </div>
-              <div class="form-group col-lg-12" [ngClass]="{ 'has-error': isUrlInvalid }">
+              <div class="form-group col-lg-12" [ngClass]="{ 'is-invalid': isUrlInvalid }">
                 <label for="url" class="control-label">{{ 'sitelist.form.url' | translate }}</label>
                 <input type="text" id="url" class="form-control" formControlName="url" (change)="enableTyping()" required>
                 <span class="small" [innerHTML]="'sitelist.form.start.desc2' | translate">.</span>

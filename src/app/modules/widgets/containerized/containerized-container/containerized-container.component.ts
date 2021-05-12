@@ -97,7 +97,7 @@ export class ContainerizedContainerComponent implements OnInit {
 
   public addVariant() {
     const modalRef = this.modalService.open(ContainerizedAddComponent, {
-      size: 'lg',
+      size: 'xl',
       windowClass: 'animate__animated animate__slideInDown animate__faster'
     });
     modalRef.componentInstance.currentSiteId = this.site.id;

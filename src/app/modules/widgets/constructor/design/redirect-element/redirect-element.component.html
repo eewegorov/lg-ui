@@ -29,7 +29,7 @@
     <div class="row row-subitem">
       <div
         class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10 widget-name-block-rel"
-        [ngClass]="(widget.guiprops['formSet'].redirect.url === '') ? 'has-error' : ''"
+        [ngClass]="(widget.guiprops['formSet'].redirect.url === '') ? 'is-invalid' : ''"
       >
         <label class="control-label">{{ 'widgets.constructor.redirect.onClickRedirect' | translate }}:</label>
         <input

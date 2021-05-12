@@ -78,7 +78,7 @@
           <label class="control-label input-with-remove" style="display: block;">
             {{ 'widgetsList.editor.rules.pageTargeting.urlortitle' | translate }}:
           </label>
-          <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0) ? 'has-error' : ''">
+          <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0) ? 'is-invalid' : ''">
             <div class="input-group-btn">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ getPageTypeName(item) }} <span class="caret"></span>
@@ -159,7 +159,7 @@
         </div>
         <div class="col-sm-6 form-group row-subitem-padding padding-top-5">
           <label class="control-label input-with-remove" style="display: block;">{{ 'widgetsList.editor.rules.pageTargeting.urlortitle' | translate }}:</label>
-          <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0) ? 'has-error' : ''">
+          <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0) ? 'is-invalid' : ''">
             <div class="input-group-btn">
               <button
                 type="button"
@@ -208,7 +208,7 @@
     <div
       *ngIf="widget.rules.pageNo.enable"
       class="col-lg-12 margined-top-10 width-900"
-      [ngClass]="(widget.rules.pageNo.items.length > 0) ? '' : 'has-error'"
+      [ngClass]="(widget.rules.pageNo.items.length > 0) ? '' : 'is-invalid'"
     >
       <label class="control-label">{{ 'widgetsList.editor.rules.pageNo.select.title' | translate }}:</label>
       <ng-select
@@ -303,7 +303,7 @@
     <div
       *ngIf="widget.rules.days.enable"
       class="col-lg-12 margined-top-10 width-900"
-      [ngClass]="(widget.rules.days.items.length > 0) ? '' : 'has-error'"
+      [ngClass]="(widget.rules.days.items.length > 0) ? '' : 'is-invalid'"
     >
       <label class="control-label">{{ 'widgetsList.editor.rules.days.title' | translate }}:</label>
 
@@ -364,7 +364,7 @@
       <div
         *ngIf="widget.autoinvite.pages.enable"
         class="col-lg-12 margined-top-10 width-400"
-        [ngClass]="(widget.autoinvite.pages.value <= 0) ? 'has-error' : ''"
+        [ngClass]="(widget.autoinvite.pages.value <= 0) ? 'is-invalid' : ''"
       >
         <div class="time-settings-fromto">
           {{ 'widgetsList.editor.autoinvite.pages.prefix' | translate }}
@@ -386,7 +386,7 @@
       <div
         *ngIf="widget.autoinvite.seconds.enable"
         class="col-lg-12 margined-top-10 width-400"
-        [ngClass]="(widget.autoinvite.seconds.value <= 0) ? 'has-error' : ''"
+        [ngClass]="(widget.autoinvite.seconds.value <= 0) ? 'is-invalid' : ''"
       >
         <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.seconds.value" />
         <div class="time-settings-fromto">
@@ -407,7 +407,7 @@
       <div
         *ngIf="widget.autoinvite.inactive.enabled"
         class="col-lg-12 margined-top-10 width-400"
-        [ngClass]="(widget.autoinvite.inactive.value <= 0) ? 'has-error' : ''"
+        [ngClass]="(widget.autoinvite.inactive.value <= 0) ? 'is-invalid' : ''"
       >
         <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.inactive.value"/>
         <div class="time-settings-fromto">
@@ -428,7 +428,7 @@
       <div
         *ngIf="widget.autoinvite.percent.enable"
         class="col-lg-12 margined-top-10 width-400"
-        [ngClass]="(widget.autoinvite.percent.value <= 0) ? 'has-error' : ''"
+        [ngClass]="(widget.autoinvite.percent.value <= 0) ? 'is-invalid' : ''"
       >
         <input style="float: left; width: 70px;" class="form-control" type="number" min="1" max="100" [(ngModel)]="widget.autoinvite.percent.value" />
         <div class="time-settings-fromto">
@@ -447,7 +447,7 @@
       <div
         *ngIf="widget.autoinvite.click.enable"
         class="col-lg-12 margined-top-10 width-900"
-        [ngClass]="(widget.autoinvite.click.value.trim().length == 0) ? 'has-error' : ''"
+        [ngClass]="(widget.autoinvite.click.value.trim().length == 0) ? 'is-invalid' : ''"
       >
         <label class="control-label">
           {{ 'widgetsList.editor.autoinvite.click.title' | translate }}
@@ -667,7 +667,7 @@
         id="period-rule-start-date-picker"
         class="form-control period-range"
         type="text"
-        [ngClass]="(widget.rules.period.startDate == null) ? 'has-error' : ''"
+        [ngClass]="(widget.rules.period.startDate == null) ? 'is-invalid' : ''"
       >
       <div class="time-settings-fromto">
         {{ 'widgetsList.editor.rules.time.to' | translate }}:
@@ -677,7 +677,7 @@
         id="period-rule-end-date-picker"
         class="form-control period-range"
         type="text"
-        [ngClass]="(widget.rules.period.endDate == null) ? 'has-error' : ''"
+        [ngClass]="(widget.rules.period.endDate == null) ? 'is-invalid' : ''"
       >
     </div>
     <!-- End Date range -->
@@ -704,7 +704,7 @@
     <div
       *ngIf="widget.autoresponder.enabled"
       class="col-lg-12 margined-top-10"
-      [ngClass]="(widget.autoresponder.subject.toString().trim().length < 1) ? 'has-error' : ''"
+      [ngClass]="(widget.autoresponder.subject.toString().trim().length < 1) ? 'is-invalid' : ''"
     >
       <label class="control-label">{{ 'widgetsList.editor.autoresponder.subject' | translate }}:</label>
       <input class="form-control width-900" [(ngModel)]="widget.autoresponder.subject">
@@ -712,7 +712,7 @@
     <div
       *ngIf="widget.autoresponder.enabled"
       class="col-lg-12 margined-top-10 width-930"
-      [ngClass]="(widget.autoresponder.text.toString().trim().length < 1) ? 'has-error' : ''"
+      [ngClass]="(widget.autoresponder.text.toString().trim().length < 1) ? 'is-invalid' : ''"
     >
       <label class="control-label">{{ 'widgetsList.editor.autoresponder.text' | translate }}:</label>
       <angular-editor class="width-900" [(ngModel)]="widget.autoresponder.text"></angular-editor>

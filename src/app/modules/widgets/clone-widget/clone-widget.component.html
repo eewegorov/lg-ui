@@ -40,7 +40,7 @@
         <div class="row margined-left-0 select-site-title margined-bottom-10">
           <h5>{{ 'widgetsList.clone.company.title' | translate }}:</h5>
         </div>
-        <div class="dropdown widget-company-selector" style="float: left; width: calc(100% - 50px)" [ngClass]="!clonable.companyId ? 'has-error' : ''">
+        <div class="dropdown widget-company-selector" style="float: left; width: calc(100% - 50px)" [ngClass]="!clonable.companyId ? 'is-invalid' : ''">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <span class="dropdown-selected-cropp" style="max-width:90%">{{clonable.companyName}}</span>
             <span class="caret"></span>
@@ -58,7 +58,7 @@
       </div>
       <div
         *ngIf="clonable.companyMode === 1"
-        [ngClass]="(clonable.companyName.trim().length == 0) ? 'has-error' : ''"
+        [ngClass]="(clonable.companyName.trim().length == 0) ? 'is-invalid' : ''"
       >
         <div class="row margined-bottom-15 margined-left-0 select-site-title">
           <h5>{{ 'widgetsList.add.params.company.add.name' | translate }}: <a data-toggle="tooltip"

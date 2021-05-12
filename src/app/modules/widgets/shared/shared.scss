@@ -84,7 +84,7 @@ label.big-label {
   font-weight: 300;
 }
 
-.has-error label.big-label {
+.is-invalid label.big-label {
   color: #a94442;
 }
 
@@ -219,4 +219,14 @@ label.big-label {
 
 .priority-down-widget-btn i {
   color: #e74c3c;
+}
+
+.colored-blue {
+  color: #3498D8 !important;
+}
+
+.companies-underline {
+  float: right;
+  margin-top: 5px;
+  text-decoration: underline;
 }

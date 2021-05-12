@@ -35,7 +35,6 @@ export class ContainerizedAddComponent implements OnInit {
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
   ) {
-    this.companies = this.widgetService.getCurrentCompanies();
     this.editableCW = {
       companyId: '',
       containerId: this.containerId,
@@ -43,6 +42,10 @@ export class ContainerizedAddComponent implements OnInit {
       templateId: '',
       mockupId: ''
     };
+  }
+
+  ngOnInit(): void {
+    this.companies = this.widgetService.getCurrentCompanies();
 
     this.newCWidgetInfo = {
       step: 1,
@@ -61,9 +64,6 @@ export class ContainerizedAddComponent implements OnInit {
           title: this.translate.instant('abtests.abtypes.title.mockup')
         }]
     };
-  }
-
-  ngOnInit(): void {
   }
 
   public setNewCWidgetType(type) {

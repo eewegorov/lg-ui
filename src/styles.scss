@@ -456,6 +456,10 @@ button.hovered-btn-blue:hover {
 }
 
 .widget-type-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border: 3px solid #fff;
   cursor: pointer;
 }
@@ -1141,4 +1145,9 @@ span.underow-comment {
   .edit-btns.margined-right-76 {
     margin-right: 0px!important;
   }
+}
+
+.is-invalid .btn.dropdown-toggle, input.is-invalid {
+  color: #a94442;
+  border-color: #a94442;
 }

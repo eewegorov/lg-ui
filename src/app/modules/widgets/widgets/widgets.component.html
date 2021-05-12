@@ -57,7 +57,7 @@
             </button>
           </div>
           <div class="no-padding margined-top-10" *ngIf="newCompany.on">
-            <div class="floated-left" [ngClass]="(newCompany.name.trim().length === 0) ? 'has-error' : ''">
+            <div class="floated-left" [ngClass]="(newCompany.name.trim().length === 0) ? 'is-invalid' : ''">
               <input
                 type="text"
                 class="form-control"
