@@ -62,7 +62,7 @@
           <h5>{{ 'widgetsList.selectCompany' | translate }}: <a
             data-toggle="tooltip" data-placement="top"
             title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
-            class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+            class="info-link"><i class="fa fa-info-circle"></i></a>
           </h5>
         </div>
         <div
@@ -103,12 +103,12 @@
           <h5>{{ 'widgetsList.add.params.company.add.name' | translate }}: <a
             data-toggle="tooltip" data-placement="top"
             title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
-            class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+            class="info-link"><i class="fa fa-info-circle"></i></a>
           </h5>
         </div>
         <input type="text" class="form-control" [(ngModel)]="editableWidget.company">
         <span class="underow-comment">{{ 'widgetsList.add.params.company.under' | translate }}</span>
-        <a *ngIf="companies.length" href="#" class="companies-underline" (click)="closeAddCompanyMode()">
+        <a *ngIf="companies.length" class="companies-underline" (click)="closeAddCompanyMode()">
           {{ 'widgetsList.add.params.company.add.back' | translate }}
         </a>
       </div>

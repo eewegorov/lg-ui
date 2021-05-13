@@ -9,7 +9,7 @@ import { WidgetService } from '../services/widget.service';
 @Component({
   selector: 'app-clone-widget',
   templateUrl: './clone-widget.component.html',
-  styleUrls: ['./clone-widget.component.scss']
+  styleUrls: ['../shared/shared.scss', './clone-widget.component.scss']
 })
 export class CloneWidgetComponent implements OnInit {
   @Input() public sites;
@@ -27,7 +27,9 @@ export class CloneWidgetComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
-  ) {
+  ) { }
+
+  ngOnInit(): void {
     this.companies = this.widgetService.getUndefaultCompanies(this.companies);
 
     const currentCompany = this.widgetService.getCompanyById(this.widget.companyId, this.companies);
@@ -45,9 +47,6 @@ export class CloneWidgetComponent implements OnInit {
     if (this.containerId) {
       this.getContainersForCurrentSite(this.currentSite.id);
     }
-  }
-
-  ngOnInit(): void {
   }
 
   public getFilteredCompanies() {

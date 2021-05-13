@@ -34,15 +34,7 @@ export class ContainerizedAddComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
-  ) {
-    this.editableCW = {
-      companyId: '',
-      containerId: this.containerId,
-      name: '',
-      templateId: '',
-      mockupId: ''
-    };
-  }
+  ) { }
 
   ngOnInit(): void {
     this.companies = this.widgetService.getCurrentCompanies();
@@ -63,6 +55,14 @@ export class ContainerizedAddComponent implements OnInit {
           type: 'MOCKUP',
           title: this.translate.instant('abtests.abtypes.title.mockup')
         }]
+    };
+
+    this.editableCW = {
+      companyId: '',
+      containerId: this.containerId,
+      name: '',
+      templateId: '',
+      mockupId: ''
     };
   }
 
@@ -125,7 +125,9 @@ export class ContainerizedAddComponent implements OnInit {
 
   private createCWidget() {
     this.containerizedWidgetService.create(this.newCWidgetInfo.siteId, this.editableCW).subscribe((response: WidgetCreated) => {
-      this.router.navigate([`/widgets/edit/${this.newCWidgetInfo.siteId}-${response.value}/`]).then();
+      this.router.navigate([`/widgets/edit/${this.newCWidgetInfo.siteId}-${response.value}/`]).then(
+        () => this.activeModal.close()
+      );
     });
   }
 

@@ -168,11 +168,15 @@ export class WidgetAddComponent implements OnInit {
           return this.containerizedWidgetService.create(siteId, widget);
         })
       ).subscribe((response: WidgetCreated) => {
-        this.router.navigate([`/widgets/edit/${siteId}-${response.value}/`]).then();
+        this.router.navigate([`/widgets/edit/${siteId}-${response.value}/`]).then(
+          () => this.activeModal.close()
+        );
       });
     } else {
       this.widgetService.create(siteId, widget).subscribe((response: WidgetCreated) => {
-        this.router.navigate([`/widgets/edit/${siteId}-${response.value}/`]).then();
+        this.router.navigate([`/widgets/edit/${siteId}-${response.value}/`]).then(
+          () => this.activeModal.close()
+        );
       });
     }
   }
