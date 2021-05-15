@@ -13,10 +13,6 @@ export class VariantAddComponent implements OnInit {
   @Input() private currentTestIndex;
   @Input() private abtTypeWidget;
   @Input() public editableAB;
-  public type;
-  public grp;
-  public cat;
-  public mckp;
 
   constructor() { }
 

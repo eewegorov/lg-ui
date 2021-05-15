@@ -11,6 +11,7 @@ import { AbtestsArchiveComponent } from './abtests-archive/abtests-archive.compo
 import { VariantAddComponent } from './variant-add/variant-add.component';
 import { AbtestAddComponent } from './abtest-add/abtest-add.component';
 import { WidgetsModule } from '../widgets/widgets.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { WidgetsModule } from '../widgets/widgets.module';
     ChartsModule,
     SharedModule,
     AbtestsRoutingModule,
-    WidgetsModule
+    WidgetsModule,
+    InfiniteScrollModule
   ]
 })
 export class AbtestsModule { }
