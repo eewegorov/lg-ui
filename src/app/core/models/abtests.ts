@@ -13,25 +13,35 @@ export interface Abtest {
   siteId: string;
 }
 
-export interface AbtestCreateRequest {
+export interface AbtestVariantRequest {
+  mode: string;
+  templateId: string;
+  mockupId: string;
+}
+
+export interface AbtestCreateRequest extends AbtestVariantRequest {
   siteId: string;
   widgetId: string;
   name: string;
   description: string;
-  mode: string;
-  templateId: string;
-  mockupId: string;
+}
+
+export interface AbtestVariantResponse extends ApiResponse {
+  data: AbtestVariant;
 }
 
 export interface AbtestCreateResponse extends ApiResponse {
   data: AbtestShort;
 }
 
+export interface AbtestVariant {
+  value: string;
+}
+
 export interface AbtestShort {
   id: string;
   variantId: string;
 }
-
 
 export interface AbtestStatisticsResponse extends ApiResponse {
   data: AbtestStatistics[];

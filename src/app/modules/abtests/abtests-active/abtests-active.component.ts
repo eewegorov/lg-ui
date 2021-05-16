@@ -438,6 +438,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
       windowClass: 'animate__animated animate__slideInDown animate__faster'
     });
     modalRef.componentInstance.step = 0;
+    modalRef.componentInstance.abTests = this.abTests;
     modalRef.componentInstance.currentVariantsLength = widget.variants.length;
     modalRef.componentInstance.currentSiteId = widget.siteId;
     modalRef.componentInstance.currentTestId = widget.id;

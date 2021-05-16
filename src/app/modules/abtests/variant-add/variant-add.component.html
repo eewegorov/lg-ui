@@ -13,7 +13,7 @@
     </div>
   </div>
   <div id="step2" class="active" *ngIf="step == 1">
-    <div class="create-widget-m" style="padding-top: 0">
+    <div class="create-widget-m" style="padding-top: 0" [ngClass]="{'main-content-container-loader': isLoaderActive}">
       <div class="filters-loader"></div>
       <div class="container-for-loader">
         <div class="header-modal">
@@ -26,8 +26,8 @@
             <span class="left-panel-filter-title">{{ 'abtests.modal.template.categories' | translate }}</span>
             <div class="left-panel-filter-categories">
               <div class="left-panel-filter-categories-container">
-                <div *ngFor="let grp of groups">
-                  <h5 [ngClass]="($index != 0) ? 'margined-top-20' : ''">
+                <div *ngFor="let grp of groups; index as i">
+                  <h5 [ngClass]="(i !== 0) ? 'margined-top-20' : ''">
                     {{ grp.name }}
                   </h5>
                   <div class="left-category-item" *ngFor="let cat of grp.categories">
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="panel-widgets-list">
-            <div class="alert-if-empty" *ngIf="mockups.length==0">
+            <div class="alert-if-empty" *ngIf="mockups.length === 0">
               <h3>{{ 'abtests.modal.noWidgets' | translate }}</h3>
             </div>
             <div class="test-scroll-inf" infiniteScroll (scrolled)="loadMore()">
@@ -74,29 +74,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div id="step3" class="p-m" *ngIf="step == 3">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="row margined-bottom-15 margined-left-0 select-site-title"><h5>{{ 'abtests.modal.variant.title' | translate }}</h5></div>
-        <input type="text" class="form-control" [(ngModel)]="editableAB.name">
-        <span class="underow-comment">{{ 'abtests.modal.variant.comment' | translate }}</span>
-      </div>
-
-      <div class="col-lg-12">
-        <div class="row margined-bottom-15 margined-left-0 select-site-title"><h5>{{ 'abtests.modal.variant.description' | translate }}</h5></div>
-        <textarea class="form-control" [(ngModel)]="editableAB.description" rows="3"></textarea>
-      </div>
-
-      <div class="col-lg-12 margined-top-30">
-        <button data-target="#NewABTestModal" data-toggle="modal" type="button" class="btn btn-lg w-xs btn-default floated-left">
-          {{ 'widgetsList.widget.delete.cancel' | translate }}
-        </button>
-        <button [disabled]="editableAB.name.trim().length == 0" (click)="goToABType()" type="button" class="btn btn-lg w-xs btn-success floated-right">
-          {{ 'abtests.modal.variant.create' | translate }}
-        </button>
       </div>
     </div>
   </div>

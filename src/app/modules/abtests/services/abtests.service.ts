@@ -4,7 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 import {
   Abtest, AbtestArchive, AbtestCreateRequest, AbtestCreateResponse, AbtestsArchiveResponse, AbtestShort,
   AbtestsResponse, AbtestStatistics,
-  AbtestStatisticsResponse,
+  AbtestStatisticsResponse, AbtestVariant, AbtestVariantRequest, AbtestVariantResponse,
   CloneVariantResponse,
   UpdateAbtest,
   Variant
@@ -70,6 +70,13 @@ export class AbtestsService {
   public update(id: string, test: UpdateAbtest): Observable<boolean> {
     return this.abtestsApiService.update(id, test).pipe(
       map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public createVariant(testId: string, test: AbtestVariantRequest): Observable<AbtestVariant> {
+    return this.abtestsApiService.createVariant(testId, test).pipe(
+      map((response: AbtestVariantResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }
