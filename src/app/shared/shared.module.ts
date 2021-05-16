@@ -10,7 +10,6 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { ThousandSuffixPipe } from './pipes/thousand-suffix.pipe';
 import { ModalComponent } from './components/modal/modal.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { ColorLineComponent } from './components/color-line/color-line.component';
 import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
 
 
@@ -23,7 +22,6 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     NgbdDatepickerI18n,
     ModalComponent,
     DropdownComponent,
-    ColorLineComponent,
     PaymentModalComponent
   ],
   imports: [
@@ -40,7 +38,6 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     NgbdDatepickerI18n,
     ModalComponent,
     DropdownComponent,
-    ColorLineComponent,
     PaymentModalComponent
   ],
   providers: [

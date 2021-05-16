@@ -434,7 +434,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
 
   public addVariant(widget, index) {
     const modalRef = this.modalService.open(VariantAddComponent, {
-      size: 'lg',
+      size: 'xl',
       windowClass: 'animate__animated animate__slideInDown animate__faster'
     });
     modalRef.componentInstance.step = 0;
