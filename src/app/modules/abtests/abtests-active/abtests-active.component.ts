@@ -194,12 +194,12 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
 
   private startScrollToTest() {
     const getUrlStr = this.location.path();
-    const getPosOfId = getUrlStr.indexOf('testIdNum-');
+    const getPosOfId = getUrlStr.indexOf('testIdNum=');
     if (getPosOfId > -1) {
       const newStrGet = getUrlStr.substring(getPosOfId);
       const body = $('html, body');
       setTimeout(() => {
-        const target = $('#' + newStrGet).offset().top - 80;
+        const target = $('#' + newStrGet.replace('=', '-')).offset().top - 80;
         body.animate({ scrollTop: target }, 500, 'swing');
       }, 100);
     }

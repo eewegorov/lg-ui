@@ -170,7 +170,8 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   public goToTest(widget) {
-    this.router.navigate([`/abtests/active?testIdNum-${widget.abtestInfo.id}`]).then();
+    this.router.navigate([`/abtests/active`], { queryParams: { testIdNum: widget.abtestInfo.id } }).then();
+
   }
 
   public saveAsMockup() {

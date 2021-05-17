@@ -186,7 +186,7 @@ export class ContainerizedItemComponent implements OnInit {
         this.translate.instant('widgetsList.payment.abtest', { siteName: currentSite.name }));
     } else {
       const modalRef = this.modalService.open(AbtestAddComponent, {
-        size: 'lg',
+        size: 'xl',
         windowClass: 'animate__animated animate__slideInDown animate__faster'
       });
       modalRef.componentInstance.currentSite = currentSite;
@@ -214,7 +214,7 @@ export class ContainerizedItemComponent implements OnInit {
   }
 
   public goToTest() {
-    this.router.navigate([`/abtests/active?testIdNum-${this.item.abtestInfo.id}`]).then();
+    this.router.navigate([`/abtests/active`], { queryParams: { testIdNum: this.item.abtestInfo.id } }).then();
   }
 
   public goToConstructor() {

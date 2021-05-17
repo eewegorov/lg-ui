@@ -205,7 +205,7 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public goToTest() {
-    this.router.navigate([`/abtests/active?testIdNum-${this.widget.abtestInfo.id}`]).then();
+    this.router.navigate([`/abtests/active`], { queryParams: { testIdNum: this.widget.abtestInfo.id } }).then();
   }
 
   public goToConstructor() {

@@ -82,6 +82,29 @@ export class VariantAddComponent implements OnInit {
     this.startItem = this.newItem;
   }
 
+  public filterByCat(checked, catId) {
+    if (!checked) {
+      for (let i = 0; i < this.checkboxOnArray.length; i++) {
+        if (this.checkboxOnArray[i] === catId) {
+          this.checkboxOnArray.splice(i, 1);
+        }
+      }
+    } else {
+      this.checkboxOnArray.push(catId);
+    }
+
+    this.isLoaderActive = true;
+    this.testArr = [];
+
+    if (!this.queryForMockups.type) {
+      delete this.queryForMockups.type;
+    }
+    this.queryForMockups.categories = this.checkboxOnArray.join(',');
+    this.widgetService.getMockups(this.queryForMockups.type, this.queryForMockups.categories).subscribe((response: Mockup[]) => {
+      this.actionAfterTabSwitch(response);
+    });
+  }
+
   public setMockupABT(mockup) {
     this.editableAB.mockupId = mockup.id;
     delete this.editableAB.templateId;

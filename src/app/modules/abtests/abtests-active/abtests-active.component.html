@@ -36,11 +36,11 @@
       <div class="how-to-add-test-bg"></div>
     </div>
 
-    <div *ngIf="allABTests.length && !abTests.length && (showWhat === 'PAUSED') && !showOnlyIfNoTestsForCurrentSite" class="margined-top-30">
+    <div *ngIf="allABTests.length && !abTests.length && (showWhat === 'PAUSED') && !showOnlyIfNoTestsForCurrentSite" class="mt-3">
       <h3 class="f-0 text-center">{{ 'abtests.active.noPaused' | translate }}</h3>
     </div>
 
-    <div *ngIf="allABTests.length && !abTests.length && (showWhat === 'ACTIVE') && !showOnlyIfNoTestsForCurrentSite" class="margined-top-30">
+    <div *ngIf="allABTests.length && !abTests.length && (showWhat === 'ACTIVE') && !showOnlyIfNoTestsForCurrentSite" class="mt-3">
       <h3 class="f-0 text-center">{{ 'abtests.active.noActive' | translate }}</h3>
     </div>
 
