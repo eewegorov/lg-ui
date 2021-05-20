@@ -1,6 +1,6 @@
 <div class="widgets-settings-container" id="widgetStyle">
 
-  <div class="row" style="height: 100%; overflow:hidden">
+  <div *ngIf="widget.guiprops" class="row" style="height: 100%; overflow:hidden">
     <div class="col-lg-4 widget-style-menu">
       <div class="menu-fixed">
         <div class="menu-fixed-bg">
@@ -12,7 +12,6 @@
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div id="disabledFuncAct" class="hide"></div>
         <div id="accordionIn">
-
           <div class="panel panel-default" id="0">
             <div class="panel-heading" role="tab" id="headingFour">
               <h4 class="panel-title" data-detect="НАСТРОЙКИ ВИДЖЕТА">
@@ -32,7 +31,7 @@
                       <label class="control-label control-label-des">Где показывать всплывающее окно:</label>
                       <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                          {{ widget.guiprops.popupMain.place }}
+                          {{ widget.guiprops.popupMain?.place }}
                           <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu dropd-scroll-sm" role="menu">
@@ -58,11 +57,11 @@
                     <div class="col-sm-12 row-subitem-padding padding-top-5">
                       <ui-switch
                         size="small"
-                        [checked]="widget.guiprops.popupMain.shadow.enable"
+                        [checked]="widget.guiprops.popupMain?.shadow.enable"
                       ></ui-switch><label class="control-label switcher-label-xs control-label-des">Затемнять фон маской при показе виджета</label>
                     </div>
                   </div>
-                  <div *ngIf="widget.guiprops['popupMain'].shadow.enable == true">
+                  <div *ngIf="widget.guiprops.popupMain?.shadow.enable == true">
                     <div class="row row-subitem">
                       <div class="col-sm-6 row-subitem-padding padding-top-5">
                         <label class="control-label control-label-colorpc control-label-des">Цвет маски:</label>
@@ -277,7 +276,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-8 max-h-100" [ngClass]="(widget.guiprops.popupMain.shadow.enable === true) ? 'ifr-sh-bg' : ''">
+    <div class="col-lg-8 max-h-100" [ngClass]="(widget.guiprops.popupMain?.shadow.enable === true) ? 'ifr-sh-bg' : ''">
       <div *ngIf="isThankShouldShow()" class="widget-select-mode btn-group">
         <span class="btn btn-default active" data-widget="mainBlockWidget" (click)="$event.stopPropagation();">
           Основной экран
@@ -297,7 +296,7 @@
       </div>
       <div
         class="max-wh-over"
-        [ngStyle]="{'background': widget.guiprops['popupMain'].shadow.rgbaColor}"
+        [ngStyle]="{'background': widget.guiprops['popupMain']?.shadow.rgbaColor}"
         (click)="scrollToEl('MainSetBl', 'main-w-element')"
       >
         <div class="popup-shadow popup-sh-pad">

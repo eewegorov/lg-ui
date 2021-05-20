@@ -30,7 +30,7 @@ import { WidgetConstructorService } from '../../services/widget-constructor.serv
 })
 export class WidgetEditComponent implements OnInit, OnDestroy {
   public renamedWidget = { id: '', name: '' };
-  public widget: FullWidget;
+  public widget = {} as FullWidget;
   public isDesigner = false;
   public isMockup = false;
   public sid: string;
@@ -70,12 +70,12 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
   ) {
-    this.sid = this.route.snapshot.paramMap.get('id').split('-')[0];
-    this.wid = this.route.snapshot.paramMap.get('id').split('-')[1];
-    this.isPayment = !this.sitesService.isSiteHasExpTariff(this.coreSitesService.getSiteById(this.sid));
   }
 
   ngOnInit(): void {
+    this.sid = this.route.snapshot.paramMap.get('id').split('-')[0];
+    this.wid = this.route.snapshot.paramMap.get('id').split('-')[1];
+
     this.initTypes();
 
     this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
@@ -518,6 +518,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
       this.getCoupons();
       if (response) {
         this.coreSitesService.sites = response;
+        this.isPayment = !this.sitesService.isSiteHasExpTariff(this.coreSitesService.getSiteById(this.sid));
       }
     });
   }

@@ -112,13 +112,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     });
 
     // Init video BG
-    if (this.widget.guiprops.bg.video && (this.widget.guiprops.bg.fillorImg === 'useVideo') && this.widget.guiprops.bg.video.videoId) {
+    if (this.widget.guiprops?.bg.video && (this.widget.guiprops?.bg.fillorImg === 'useVideo') && this.widget.guiprops?.bg.video.videoId) {
       this.newVideoSize(this.widget.guiprops.bg.video);
     }
   }
 
   ngAfterViewInit(): void {
-    this.autoUploadSubscription = this.flow.events$.subscribe(event => {
+    this.autoUploadSubscription = this.flow?.events$.subscribe(event => {
       if (event.type === 'filesSubmitted') {
         this.flow.upload();
       }
@@ -126,6 +126,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (!this.widget.guiprops || !this.widget.guiprops.formExt) {
+      return;
+    }
+
     if (this.widget.guiprops.formExt.model.mainSettings.colorPod.enable) {
       this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod =
         (this.widgetConstructorService.hexToRgb(
@@ -1362,10 +1366,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   }
 
   public disElementOrNotBtn() {
-    return this.widget.guiprops.form.enable || this.widget.guiprops.button.enable || this.widget.guiprops.formExt.enable;
+    return this.widget.guiprops?.form?.enable || this.widget.guiprops?.button?.enable || this.widget.guiprops?.formExt?.enable;
   }
 
   public disElementOrNotBtnCloseLink() {
+    if (!this.widget.guiprops) {
+      return;
+    }
+
     for (const item of this.widget.guiprops.elementsList) {
       if (item.name === 'closelink-element' ||
         (this.widget.guiprops.formExt && this.widget.guiprops.formExt.enable &&
@@ -1442,6 +1450,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   }
 
   public disElementOrNotBtnSocial() {
+    if (!this.widget.guiprops) {
+      return;
+    }
+
     for (const item of this.widget.guiprops.elementsList) {
       if (item.name === 'social-element') {
         return true;
@@ -1726,8 +1738,12 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   }
 
   public isThankShouldShow() {
-    return (this.widget.guiprops.form.enable && !this.widget.guiprops.formSet.redirect.enable) ||
-      (this.widget.guiprops.formExt.enable &&
+    if (!this.widget.guiprops) {
+      return;
+    }
+
+    return (this.widget.guiprops.form?.enable && !this.widget.guiprops.formSet?.redirect.enable) ||
+      (this.widget.guiprops?.formExt?.enable &&
         this.widgetConstructorService.isFormHasCurrentTypeOfActions(this.widget.guiprops.formExt.model.list, 0));
   }
 
