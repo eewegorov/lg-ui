@@ -1,21 +1,21 @@
 <div class="title-widget-container">
   <!-- HEADER -->
   <div class="footer-group" id="save-widget-panel">
-    <div class="text-right padding10">
+    <div class="text-right p-2">
       <button
         type="button"
         *ngIf="widget?.abtestInfo && (widget?.abtestInfo.type === 'VARIANT')"
         (click)="goToTest(widget)"
-        class="btn w-xs gototest-widget-btn"
+        class="btn gototest-widget-btn"
       >
-        <i class="pe-7s-back margined-right-5"></i> Перейти к A/B тесту
+        <i class="pe-7s-back mr-1"></i> Перейти к A/B тесту
       </button>
       <a
         type="button"
         *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
-        class="btn w-xs btn-primary buy-widget-btn"
+        class="btn btn-primary buy-widget-btn"
       >
-        <i class="pe-7s-tools margined-right-10"></i> {{ 'widgetsList.add.alt2' | translate }}
+        <i class="pe-7s-tools mr-2"></i> {{ 'widgetsList.add.alt2' | translate }}
       </a>
       <div class="btn-group play-btns" *ngIf="!isMockup">
         <p>Статус:</p>
@@ -23,7 +23,7 @@
           *ngIf="(widget?.abtestInfo && (widget?.abtestInfo.type !== 'VARIANT')) || (!widget?.abtestInfo)"
           (click)="startWidget(widget)"
           [ngClass]="(widget.active) ? 'active' : ''"
-          class="btn btn-xs btn-default start-widget-btn"
+          class="btn btn-sm btn-default start-widget-btn"
           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
         >
           <i class="fa fa-play"></i>
@@ -32,7 +32,7 @@
           *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
           (click)="stopWidget(widget)"
           [ngClass]="(widget.active) ? '' : 'active'"
-          class="btn btn-xs btn-default stop-widget-btn"
+          class="btn btn-sm btn-default stop-widget-btn"
           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
         >
           <i class="fa fa-pause"></i>
@@ -42,7 +42,7 @@
           *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
           (click)="startWidget(widget)"
           [ngClass]="(widget.active) ? 'active' : ''"
-          class="btn btn-xs btn-default start-widget-btn"
+          class="btn btn-sm btn-default start-widget-btn"
           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить вариант"
         >
           <i class="fa fa-play"></i>
@@ -51,7 +51,7 @@
           *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
           (click)="stopWidget(widget)"
           [ngClass]="(widget.active) ? '' : 'active'"
-          class="btn btn-xs btn-default stop-widget-btn"
+          class="btn btn-sm btn-default stop-widget-btn"
           data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
         >
           <i class="fa fa-pause"></i>
@@ -62,9 +62,10 @@
         <button
           type="button"
           *ngIf="!isMockup"
-          (click)="saveAsMockup()"
-          class="saveAsMockupBtn ladda-button btn w-xs btn-primary floated-left"
+          class="saveAsMockupBtn ladda-button btn btn-primary float-left"
           data-style="slide-down"
+          [ladda]="isLoading"
+          (click)="saveAsMockup()"
         >
           <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
         </button>
@@ -73,7 +74,7 @@
       <button
         type="button"
         id="saveWidget"
-        class="ladda-button btn w-xs btn-success"
+        class="ladda-button btn btn-success"
         data-style="slide-down"
         [ladda]="isLoading"
         (click)="saveWidget()"
@@ -99,13 +100,13 @@
     data-toggle="tooltip"
     data-placement="top"
     title=""
-    class="f-2 no-bold title-widget-name-editable"
+    class="f-2 title-widget-name-editable"
   >
-    {{ getCroppedString(widget.name, 35, "…") }}<i class="fa fa-pencil margined-left-6"></i>
+    {{ getCroppedString(widget.name, 35, "…") }}<i class="fa fa-pencil ml-1"></i>
   </a>
 
   <div class="row" *ngIf="renamedWidget.id === widget.id">
-    <div class="col-lg-12 no-padding title-widget-rename">
+    <div class="col-lg-12 p-0 title-widget-rename">
       <input type="text" class="form-control" [(ngModel)]="renamedWidget.name">
       <button
         class="btn btn-default"
@@ -119,7 +120,7 @@
       </button>
 
       <button
-        class="btn btn-success margined-left-5"
+        class="btn btn-success ml-1"
         data-container="body"
         data-toggle="tooltip"
         data-placement="top"
@@ -141,7 +142,7 @@
       class="tab-text">{{ 'widgetsList.editor.tab.design' | translate }}</span> <span
       *ngIf="isTabHasErrorForFormExt() || isTabHasError('design')"
       data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
-      class="info-link badge badge-danger" href="#">!</span>
+      class="info-link badge badge-danger">!</span>
     </a>
   </li>
 
