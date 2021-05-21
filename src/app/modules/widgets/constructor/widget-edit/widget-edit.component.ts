@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -22,11 +22,12 @@ import { UserService } from '../../../user/services/user.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
+import { ConstructorDesignComponent } from '../constructor-design/constructor-design.component';
 
 @Component({
   selector: 'app-widget-edit',
   templateUrl: './widget-edit.component.html',
-  styleUrls: ['./widget-edit.component.scss']
+  styleUrls: ['../../shared/shared.scss', './widget-edit.component.scss']
 })
 export class WidgetEditComponent implements OnInit, OnDestroy {
   public renamedWidget = { id: '', name: '' };
@@ -55,6 +56,8 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   private defaultCoupon = { id: null, name: 'Какой купон хотите использовать?' };
 
   private meInfoSub: SubscriptionLike;
+
+  @ViewChild(ConstructorDesignComponent) constructorDesignComponent: ConstructorDesignComponent;
 
   constructor(
     private router: Router,
@@ -243,7 +246,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
   private checkWidgetRenameTitle() {
     ($('#renameWidgetBtn') as any).tooltip('destroy');
-    if (this.widget.name.length > 35) {
+    if (this.widget?.name?.length > 35) {
       ($('#renameWidgetBtn') as any).attr('title', this.widget.name);
       ($('#renameWidgetBtn') as any).tooltip();
     }
@@ -524,6 +527,10 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   private getCoupons() {
+    if (!this.widget.guiprops) {
+      return;
+    }
+
     $('.widget-style-menu').addClass('loading-coupons');
     this.couponService.getCouponsList().subscribe((response: Coupon[]) => {
       if (response) {
@@ -580,7 +587,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
       this.audience = response.audience;
       this.widget.id = this.wid;
       this.widgetService.loadWidgetListeners.forEach(item => {
-        item.call(this);
+        item.call(this.constructorDesignComponent);
       });
       this.isContainerized = !!this.widget.containerId;
       this.checkWidgetRenameTitle();

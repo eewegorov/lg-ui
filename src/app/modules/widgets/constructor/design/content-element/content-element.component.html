@@ -1,4 +1,5 @@
 <div
+  *ngIf="widget.guiprops.bg"
   id="mainBlockWidget"
   class="widget1 block-widget-show active"
   [ngStyle]="{'border': widget.guiprops['bg'].border.style, 'border-radius': widget.guiprops['bg'].borderRadius+'px', 'box-shadow': widget.guiprops['bg'].shadow.style}"
@@ -259,10 +260,10 @@
               </div>
             </div>
 
-            <div>
+            <div *ngIf="widget.guiprops?.button?.textSummer">
               <div class="widget1-btn-bl widget1-btn-bl-min-marg" [ngClass]="btnPosSel(widget.guiprops.button)">
-                <div class="click-edit-cl button-send" [ngClass]="setBtnStyleClass(widget.guiprops.button)" [ngStyle]="{'font-size':widget.guiprops['button'].fontSize+'px', 'font-family':widget.guiprops['button'].font.fontFamily, 'border-color':widget.guiprops['button'].colorBtn, 'background':widget.guiprops['button'].colorBtn, 'color':widget.guiprops['button'].colorTextBtn, 'border-radius':widget.guiprops['button'].borderRadiusBtn+'px', 'width':widthBtnFormStyle}">
-                  <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops['button'].textSummer"></div>
+                <div class="click-edit-cl button-send" [ngClass]="setBtnStyleClass(widget.guiprops.button)" [ngStyle]="{'font-size': widget.guiprops['button'].fontSize + 'px', 'font-family': widget.guiprops['button'].font.fontFamily, 'border-color': widget.guiprops['button'].colorBtn, 'background': widget.guiprops['button'].colorBtn, 'color': widget.guiprops['button'].colorTextBtn, 'border-radius': widget.guiprops['button'].borderRadiusBtn + 'px', 'width': widthBtnFormStyle}">
+                  <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="widget.guiprops['button'].textSummer"></div>
                 </div>
               </div>
             </div>
@@ -270,14 +271,14 @@
         </div>
 
         <div *ngIf="item.name === 'button-element'">
-          <div>
+          <div *ngIf="widget.guiprops?.button?.textSummer">
             <div id="widgetButtonBlockM" class="widget1-btn-bl" [ngClass]="btnPosSel(widget.guiprops.button)">
               <div
                 class="click-edit-cl button-send button-alone"
                 [ngClass]="setBtnStyleClass(widget.guiprops.button)"
-                [ngStyle]="{'font-size': widget.guiprops['button'].fontSize+'px', 'font-family':widget.guiprops['button'].font.fontFamily, 'border-color':widget.guiprops['button'].colorBtn, 'background':widget.guiprops['button'].colorBtn, 'color':widget.guiprops['button'].colorTextBtn, 'border-radius':widget.guiprops['button'].borderRadiusBtn+'px', 'width':widthBtnStyle}"
+                [ngStyle]="{'font-size': widget.guiprops['button'].fontSize + 'px', 'font-family': widget.guiprops['button'].font.fontFamily, 'border-color': widget.guiprops['button'].colorBtn, 'background': widget.guiprops['button'].colorBtn, 'color': widget.guiprops['button'].colorTextBtn, 'border-radius': widget.guiprops['button'].borderRadiusBtn + 'px', 'width': widthBtnStyle}"
               >
-                <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops['button'].textSummer"></div>
+                <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="widget.guiprops['button'].textSummer"></div>
               </div>
             </div>
           </div>

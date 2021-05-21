@@ -11,7 +11,7 @@
           <label class="control-label control-label-des">Ширина контента:</label>
           <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{ widget.guiprops.dhVisual.widget_content_width }}
+              {{ widget.guiprops?.dhVisual?.widget_content_width }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
@@ -25,12 +25,12 @@
             </ul>
           </div>
         </div>
-        <div *ngIf="widget.guiprops['dhVisual'].widget_content_width === 'Собственная'" class="padding-top-5 m-t-sm">
+        <div *ngIf="widget.guiprops?.dhVisual?.widget_content_width === 'Собственная'" class="padding-top-5 m-t-sm">
           <input
             type="number"
             min="60"
             class="form-control form-control-font form-cntrl-55w"
-            [(ngModel)]="widget.guiprops['dhVisual'].widget_content_widthpx"
+            [(ngModel)]="widget.guiprops.dhVisual.widget_content_widthpx"
           />
           <label class="control-label">px <span>ширина</span></label>
         </div>
@@ -40,7 +40,7 @@
           <label class="control-label control-label-des">Высота контента:</label>
           <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{ widget.guiprops.dhVisual.widget_content_height }}
+              {{ widget.guiprops?.dhVisual?.widget_content_height }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
@@ -54,7 +54,7 @@
             </ul>
           </div>
         </div>
-        <div *ngIf="widget.guiprops['dhVisual'].widget_content_height === 'Собственная'" class="padding-top-5 m-t-sm">
+        <div *ngIf="widget.guiprops?.dhVisual?.widget_content_height === 'Собственная'" class="padding-top-5 m-t-sm">
           <input
             type="number"
             min="60"
@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="widget.guiprops['dhVisual'].widget_content_height === 'Собственная'" class="row row-subitem m-t-sm">
+    <div *ngIf="widget.guiprops?.dhVisual?.widget_content_height === 'Собственная'" class="row row-subitem m-t-sm">
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <label class="control-label control-label-des">Позиционирование контента:</label>
         <div class="dropdown" >
@@ -86,7 +86,7 @@
       </div>
     </div>
     <!-- Page rule item -->
-    <div>
+    <div *ngIf="widget.guiprops.bg">
       <div class="row row-subitem m-t-md">
         <div class="col-sm-12 row-subitem-padding">
           <h4 class="h4-text-tit control-label-des">Фон контента:</h4>
@@ -321,7 +321,7 @@
 
     </div>
 
-    <div class="image-or-video-settings-bl" id="elemScrNIVBl">
+    <div *ngIf="widget.guiprops.image" id="elemScrNIVBl" class="image-or-video-settings-bl">
       <div class="col-lg-12 m-b-sm">
         <ui-switch
           [checked]="widget.guiprops.image.enable"
@@ -624,7 +624,7 @@
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
+    <div *ngIf="widget.guiprops.bg" class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
         <ui-switch
           size="small"
@@ -632,7 +632,7 @@
         ></ui-switch><label class="control-label switcher-label-xs control-label-des">Добавить рамку</label>
       </div>
     </div>
-    <div *ngIf="widget.guiprops['bg'].border.enable == true">
+    <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.border.enable == true">
       <div class="row row-subitem">
         <div class="col-sm-6 row-subitem-padding padding-top-5">
           <label class="control-label control-label-colorpc control-label-des">Цвет рамки:</label>
@@ -650,7 +650,7 @@
       </div>
     </div>
 
-    <div class="row row-subitem m-t-md">
+    <div *ngIf="widget.guiprops.bg" class="row row-subitem m-t-md">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
         <ui-switch
           size="small"
@@ -658,7 +658,7 @@
         ></ui-switch><label class="control-label switcher-label-xs control-label-des">Добавить тень</label>
       </div>
     </div>
-    <div *ngIf="widget.guiprops['bg'].shadow.enable == true">
+    <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.shadow.enable == true">
       <div class="row row-subitem">
         <div class="col-sm-6 row-subitem-padding padding-top-5">
           <label class="control-label control-label-colorpc control-label-des">Цвет тени:</label>
@@ -704,7 +704,7 @@
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
+    <div *ngIf="widget.guiprops.bg" class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding">
         <h5 class="label-style-ic control-label-des">Углы виджета:</h5>
       </div>

@@ -93,11 +93,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
-  ) {
-    this.systemFonts = this.widgetConstructorService.getSystemFontList();
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.systemFonts = this.widgetConstructorService.getSystemFontList();
+
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
 
     this.downUpInit();
@@ -441,10 +441,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
 
 
     if (this.widget.name === '') {
-
       this.widget.name = 'Точка захвата';
     }
-
 
     if (typeof this.widget.guiprops.title === 'undefined') {
       this.widget.guiprops.title = {
@@ -956,6 +954,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         }
       };
       setTimeout(() => {
+        if (!this.widget.guiprops.formExt) {
+          return;
+        }
+
         this.widget.guiprops.formExt.model.mainSettings = this.widgetConstructorService.getDefaultFormExtMainSettings();
       }, 50);
     }
@@ -1769,6 +1771,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   }
 
   public wvBLeft() {
+    if (!this.widget.guiprops.dhVisual) {
+      return;
+    }
+
     let className = '';
 
     if (this.widget.guiprops.dhVisual.place === 'Левый нижний угол') {

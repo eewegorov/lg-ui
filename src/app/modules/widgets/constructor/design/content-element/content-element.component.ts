@@ -43,25 +43,25 @@ export class ContentElementComponent implements OnInit {
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
   ngOnInit(): void {
-    if (this.widget.guiprops.button.btn_width === 'Собственная') {
+    if (this.widget.guiprops?.button?.btn_width === 'Собственная') {
       this.widthBtnStyle = this.widget.guiprops.button.btn_widthpx + 'px';
       this.widthBtnFormStyle = this.widget.guiprops.button.btn_widthpx + 'px';
     }
-    if (this.widget.guiprops.button.btn_width === 'От края до края') {
+    if (this.widget.guiprops?.button?.btn_width === 'От края до края') {
       this.widthBtnStyle = '100%';
       this.widthBtnFormStyle = '98%';
     }
-    if (this.widget.guiprops.button.btn_width === 'Авто') {
+    if (this.widget.guiprops?.button?.btn_width === 'Авто') {
       this.widthBtnStyle = 'auto';
       this.widthBtnFormStyle = 'auto';
     }
-    if (this.widget.guiprops.exit.button.btn_width === 'Собственная') {
+    if (this.widget.guiprops?.exit?.button?.btn_width === 'Собственная') {
       this.widthExitBtnStyle = this.widget.guiprops.exit.button.btn_widthpx + 'px';
     }
-    if (this.widget.guiprops.exit.button.btn_width === 'От края до края') {
+    if (this.widget.guiprops?.exit?.button?.btn_width === 'От края до края') {
       this.widthExitBtnStyle = '100%';
     }
-    if (this.widget.guiprops.exit.button.btn_width === 'Авто') {
+    if (this.widget.guiprops?.exit?.button?.btn_width === 'Авто') {
       this.widthExitBtnStyle = 'auto';
     }
   }
@@ -98,6 +98,10 @@ export class ContentElementComponent implements OnInit {
   }
 
   public addExtraClassForFullWidth(index) {
+    if (!this.widget.guiprops.formExt) {
+      return;
+    }
+
     const indexValue = (100 - index);
     const indexValueForm = this.widget.guiprops.formExt.enable ? $('.margin-if-form-ext-element').css('z-index') : $('.margin-if-form-element').css('z-index');
     const indexValueButton = $('.margin-if-button-element').css('z-index');
@@ -331,7 +335,7 @@ export class ContentElementComponent implements OnInit {
 
   public colorPodStyles() {
     return {
-      background: this.widget.guiprops.formExt.enable
+      background: this.widget.guiprops?.formExt?.enable
         ? this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod
         : this.widget.guiprops.form.colorPod.rgbaColorPod,
       'border-bottom-left-radius': this.getColorPodBorderRadius(),
@@ -340,7 +344,7 @@ export class ContentElementComponent implements OnInit {
   }
 
   private getColorPodBorderRadius() {
-    if (this.widget.guiprops.formExt.model.mainSettings.visual.type === 1 ||
+    if (this.widget.guiprops.formExt?.model?.mainSettings?.visual?.type === 1 ||
       this.widget.guiprops.form.visual === 'На всю ширину' || this.widget.guiprops.image.enable === false)
     {
       if ((this.widget.guiprops.image.place === 'Слева') || (this.widget.guiprops.image.place === 'Справа') ||

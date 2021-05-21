@@ -1,4 +1,5 @@
 <div
+  *ngIf="widget.guiprops.bg"
   id="thankWidget"
   class="hide block-widget-show block-thank"
   [ngClass]="(widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
@@ -10,13 +11,13 @@
         class="element-to-append-summernote click-edit-cl title-main"
         [ngStyle]="{'font-size': widget.guiprops['title'].fontSize + 'px', 'font-family': widget.guiprops['title'].font.fontFamily}"
       >
-        <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops['thank'].textSummer"></div>
+        <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="widget.guiprops['thank'].textSummer"></div>
       </div>
       <div
         class="element-to-append-summernote click-edit-cl description"
         [ngStyle]="{'font-size': widget.guiprops['desc'].fontSize + 'px', 'font-family': widget.guiprops['desc'].font.fontFamily}"
       >
-        <div [ngxSummernote]="optionsSummernote" [(summernoteModel)]="widget.guiprops['thank2'].textSummer"></div>
+        <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="widget.guiprops['thank2'].textSummer"></div>
       </div>
     </div>
   </div>

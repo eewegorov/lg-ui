@@ -110,8 +110,7 @@
               </h4>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-              <div class="panel-body">
-
+              <div *ngIf="widget.guiprops && widget.guiprops.elementsList" class="panel-body">
                 <div class="row row-subitem m-b-sm m-t-md">
                   <div class="col-sm-12 row-subitem-padding">
                     <h3 class="marg-minus-bord">

@@ -44,7 +44,8 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/metismenu/dist/metisMenu.min.js",
               "node_modules/icheck/icheck.min.js",
-              "node_modules/summernote/dist/summernote-lite.min.js"
+              "node_modules/summernote/dist/summernote-lite.min.js",
+              "node_modules/fontselect-jquery-plugin/jquery.fontselect.min.js"
             ],
             "allowedCommonJsDependencies": [
               "metismenu",

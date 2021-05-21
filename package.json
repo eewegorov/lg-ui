@@ -40,6 +40,7 @@
     "bootstrap": "^4.5.3",
     "chart.js": "^2.9.4",
     "classlist.js": "^1.1.20150312",
+    "fontselect-jquery-plugin": "^1.1.0",
     "icheck": "^1.0.2",
     "jquery": "^3.6.0",
     "lodash-es": "^4.17.15",

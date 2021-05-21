@@ -34,7 +34,7 @@ export class WidgetApiService {
   }
 
   public getWidgetById(siteId: string, widgetId: string): Observable<WidgetResponse> {
-    return this.http.get<WidgetResponse>(`${ environment.url }/sites/${siteId}/widgets`);
+    return this.http.get<WidgetResponse>(`${ environment.url }/sites/${siteId}/widgets/${widgetId}`);
   }
 
   public getWidgetsTypes(): Observable<WidgetTypesResponse> {
