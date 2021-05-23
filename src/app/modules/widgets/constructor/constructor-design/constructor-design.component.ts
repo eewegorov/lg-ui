@@ -126,19 +126,20 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!this.widget.guiprops || !this.widget.guiprops.formExt) {
+    if (!this.widget.guiprops) {
       return;
     }
 
-    if (this.widget.guiprops.formExt.model.mainSettings.colorPod.enable) {
-      this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod =
-        (this.widgetConstructorService.hexToRgb(
-          this.widget.guiprops.formExt.model.mainSettings.colorPod.color,
-          this.widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod
-        )).toString();
-    }
-    else {
-      this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent!important';
+    if (this.widget.guiprops.formExt) {
+      if (this.widget.guiprops.formExt.model.mainSettings.colorPod.enable) {
+        this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod =
+          (this.widgetConstructorService.hexToRgb(
+            this.widget.guiprops.formExt.model.mainSettings.colorPod.color,
+            this.widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod
+          )).toString();
+      } else {
+        this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent!important';
+      }
     }
 
     if (this.widget.guiprops.form.colorPod.enable) {
@@ -319,21 +320,23 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       }
     }
 
-    if (this.widget.guiprops.formExt.enable) {
-      this.widget.guiprops.formExt.model.list.forEach((item) => {
-        if (this.widgetConstructorService.isFormHasInputs(item)) {
-          this.widget.sendCrm = true;
-          if (this.widget.sendCrm === true) {
+    if (this.widget.guiprops.formExt) {
+      if (this.widget.guiprops.formExt.enable) {
+        this.widget.guiprops.formExt.model.list.forEach((item) => {
+          if (this.widgetConstructorService.isFormHasInputs(item)) {
             this.widget.sendCrm = true;
+            if (this.widget.sendCrm === true) {
+              this.widget.sendCrm = true;
+            }
           }
-        }
-        if (!this.widget.sendCrm) {
-          this.widget.sendCrm = false;
-          if (this.widget.sendCrm === false) {
+          if (!this.widget.sendCrm) {
             this.widget.sendCrm = false;
+            if (this.widget.sendCrm === false) {
+              this.widget.sendCrm = false;
+            }
           }
-        }
-      });
+        });
+      }
     }
 
     const labelContent = $('.lab-content');
@@ -1270,17 +1273,19 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
             $('span.img-size').text(mainBlockW.innerWidth() + 'x' + mainBlockW.innerHeight() + ' px');
             $('span.img-size-form').text((mainBl.innerWidth()) + 'x' + mainBl.innerHeight() + ' px');
 
-            this.SP_widget.img_width = mainBlockW.innerWidth();
-            this.SP_widget.img_height = mainBlockW.innerHeight();
-            this.SP_widget.widget_width_all = mainBl.outerWidth() + 1 + 'px';
-            this.SP_widget.widget_height_all = mainBl.outerHeight() + 'px';
-            this.SP_widget.widget_width_nopx = mainBl.outerWidth() + 1;
-            this.SP_widget.widget_height_nopx = mainBl.outerHeight();
-            this.SP_widget.widget_CP_width = $('#colorFormPod').innerWidth();
-            this.SP_widget.widget_CP_offset_top = $('#colorFormPod').css('top');
-            this.SP_widget.widget_ul_width_nopx = $('#mainElListUl').innerWidth() + 1;
-            this.SP_widget.widget_plash_width = $('.widget2-plashka').innerWidth() + 'px';
-            this.SP_widget.widget_plash_width = $('.widget2-plashka').innerWidth() + 'px';
+            if (this.SP_widget) {
+              this.SP_widget.img_width = mainBlockW.innerWidth();
+              this.SP_widget.img_height = mainBlockW.innerHeight();
+              this.SP_widget.widget_width_all = mainBl.outerWidth() + 1 + 'px';
+              this.SP_widget.widget_height_all = mainBl.outerHeight() + 'px';
+              this.SP_widget.widget_width_nopx = mainBl.outerWidth() + 1;
+              this.SP_widget.widget_height_nopx = mainBl.outerHeight();
+              this.SP_widget.widget_CP_width = $('#colorFormPod').innerWidth();
+              this.SP_widget.widget_CP_offset_top = $('#colorFormPod').css('top');
+              this.SP_widget.widget_ul_width_nopx = $('#mainElListUl').innerWidth() + 1;
+              this.SP_widget.widget_plash_width = $('.widget2-plashka').innerWidth() + 'px';
+              this.SP_widget.widget_plash_width = $('.widget2-plashka').innerWidth() + 'px';
+            }
 
             $('#thankWidget').css({width: mainBl.outerWidth() + 'px', height: mainBl.outerHeight() + 'px'});
           }, 500);
@@ -1821,7 +1826,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   private changeColorPodAndSRC() {
     setTimeout(() => {
       // PODLOZHKA settings
-      if (this.widget.guiprops.formExt.enable || this.widget.guiprops.form.enable || this.widget.guiprops.button.enable) {
+      if (this.widget.guiprops?.formExt?.enable || this.widget.guiprops?.form?.enable || this.widget.guiprops?.button?.enable) {
         const colorFormPod = $('#colorFormPod');
         const widgetFormBlM = $('#widgetFormBlockM');
         const widgetFormExtBlM = $('#widgetFormBlockMExt');
