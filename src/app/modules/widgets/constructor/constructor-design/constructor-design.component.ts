@@ -16,7 +16,7 @@ import { WidgetService } from '../../services/widget.service';
 @Component({
   selector: 'app-constructor-design',
   templateUrl: './constructor-design.component.html',
-  styleUrls: ['./constructor-design.component.scss']
+  styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss']
 })
 export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @ViewChild('flow') public flow: FlowDirective;

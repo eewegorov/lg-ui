@@ -20,13 +20,13 @@
             <div id="collapseFour" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingFour">
               <div class="panel-body">
                 <div class="border-item">
-                  <div class="row row-subitem m-b-sm">
+                  <div class="row row-subitem mb-1">
                     <div class="col-sm-12 row-subitem-padding">
                       <h3 class="marg-minus-bord-des">Расположение</h3>
                     </div>
                   </div>
                   <div class="row row-subitem">
-                    <div class="col-sm-12 row-subitem-padding m-t-sm">
+                    <div class="col-sm-12 row-subitem-padding mt-1">
                       <label class="control-label control-label-des">Где показывать всплывающее окно:</label>
                       <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -39,7 +39,7 @@
                             *ngFor="let item of placePopup"
                             (click)="widget.guiprops.popupMain.place = item"
                           >
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
                           </li>
                         </ul>
                       </div>
@@ -47,13 +47,13 @@
                   </div>
                 </div>
                 <div class="border-item">
-                  <div class="row row-subitem m-b-md">
+                  <div class="row row-subitem mb-2">
                     <div class="col-sm-12 row-subitem-padding">
                       <h3 class="marg-minus-bord-des">Маска</h3>
                     </div>
                   </div>
-                  <div class="row row-subitem m-t-xs">
-                    <div class="col-sm-12 row-subitem-padding padding-top-5">
+                  <div class="row row-subitem mt-1">
+                    <div class="col-sm-12 row-subitem-padding pt-1">
                       <ui-switch
                         size="small"
                         [checked]="widget.guiprops.popupMain?.shadow.enable"
@@ -62,7 +62,7 @@
                   </div>
                   <div *ngIf="widget.guiprops.popupMain?.shadow.enable == true">
                     <div class="row row-subitem">
-                      <div class="col-sm-6 row-subitem-padding padding-top-5">
+                      <div class="col-sm-6 row-subitem-padding pt-1">
                         <label class="control-label control-label-colorpc control-label-des">Цвет маски:</label>
                         <input
                           [(colorPicker)]="widget.guiprops['popupMain'].shadow.color"
@@ -71,14 +71,14 @@
                           [cpOutputFormat]="'hex'"
                         />
                       </div>
-                      <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+                      <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
                         <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
                         <ngx-slider [(value)]="widget.guiprops['popupMain'].shadow.opacityColor" [options]="optionsOpacity"></ngx-slider>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="row padding-left-10 margined-top-15">
+                <div class="row pl-2 mt-3">
                   <div class="col-sm-12 row-subitem-padding">
                     <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
                   </div>
@@ -109,7 +109,7 @@
             </div>
             <div id="collapseTwo" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingTwo">
               <div *ngIf="widget.guiprops && widget.guiprops.elementsList" class="panel-body">
-                <div class="row row-subitem m-b-sm m-t-md">
+                <div class="row row-subitem mb-1 mt-2">
                   <div class="col-sm-12 row-subitem-padding">
                     <h3 class="marg-minus-bord">
                       Содержимое виджета<a

@@ -161,3 +161,89 @@ label.big-label {
   margin-top: 5px;
   text-decoration: underline;
 }
+
+.row-subitem {
+  padding-left:  25px;
+  padding-right: 15px;
+}
+
+.row-subitem-padding {
+  padding-left: 5px;
+}
+
+.dropd-scroll-sm {
+  min-height: 112px;
+  overflow: auto;
+}
+
+.widget-style-menu .side-ui-dev .ui-slider {
+  width: 100%;
+  margin-top: 13px;
+}
+
+.control-label-colorpc {
+  position: relative;
+  line-height: 30px;
+}
+
+label.control-label-colorpc {
+  margin-bottom: 0;
+}
+
+/*New constructor********************************/
+.widget-content-add {
+  width: 280px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.widget-content-add a {
+  text-decoration: underline;
+  color: #6a6c6f;
+}
+
+.widget-content-add a:hover {
+  text-decoration: none;
+}
+
+.widget-content-add span {
+  text-align: center;
+  display: block;
+  line-height: 16px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+button.widget-content-add-btn {
+  width: 242px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px 10px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 700!important;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #62cb31;
+  border: none;
+  border-radius: 6px;
+}
+
+.widget-content-add-btn:hover {
+  opacity: 0.9;
+}
+
+.widget-content-add-btn i.fa-plus {
+  color: #fff;
+}
