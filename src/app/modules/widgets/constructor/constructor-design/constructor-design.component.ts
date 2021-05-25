@@ -68,10 +68,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   public heightImageStyle = '';
   private addElemFromWidget = false;
   private systemFonts = [];
-  private controls = {
-    newModal: $('#addNewWidgetListModal'),
-    newElementModal: $('#addNewElementListModal')
-  };
+  private controls: Record<string, any>;
   private typeImg = ['От края до края', 'От другого края'];
   private placeDh = ['Левый нижний угол', 'Правый нижний угол'];
   private staticWidgetAlign = ['По центру', 'По левому краю', 'По правому краю'];
@@ -101,6 +98,15 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
 
     this.downUpInit();
+
+    this.controls = {
+      newModal: $('#addNewWidgetListModal'),
+      newElementModal: $('#addNewElementListModal')
+    };
+
+    $('#addNewElementListModal').on('hide.bs.modal', (e) => {
+      $('body').removeClass('modal-open-h100');
+    });
 
     $('.widget-style-menu .panel-group').scroll(() => {
       this.downUpInit();
@@ -976,6 +982,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     } else {
       this.addElemFromWidget = false;
     }
+
+    console.log(this.controls);
 
     (this.controls.newElementModal as any).modal('show');
     $('body').addClass('modal-open-h100');

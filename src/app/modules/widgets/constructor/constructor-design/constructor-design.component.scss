@@ -401,3 +401,179 @@ h5.label-style-ic {
 .max-h-100 .popup-shadow .max-h-1001 {
   min-width: 100%;
 }
+
+.close-btn-x {
+  position: absolute;
+  top: 15px;
+  right: 55px;
+  font-size: 26px;
+  overflow: hidden;
+  border: 1px solid #999;
+  background: rgba(204, 204, 204, 0.3);
+  text-align: center;
+  color: #999;
+  border-radius: 50%;
+  line-height: 30px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.close-btn-x span {
+  display: block;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  background: url('~src/assets/images/widgets/close_widg_ic.png') center no-repeat;
+  background-size: contain;
+}
+
+#addNewElementListModal .modal-dialog {
+  width: 760px;
+}
+
+#addNewElementListModal .modal-body {
+  padding: 10px 30px 20px;
+  background-color: #edf0f5;
+}
+
+#addNewElementListModal h4 {
+  font-size: 24px;
+  margin: 19px 0;
+  color: #9a9a9a;
+}
+
+#addNewElementListModal .small-pdn {
+  padding: 0 5px;
+}
+
+#addNewElementListModal .row-panel-fl {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#addNewElementListModal .row-panel-item {
+  flex-basis: 33.333333%;
+}
+
+.disable-new-element-btn {
+  cursor: not-allowed;
+  opacity: 0.5;
+  border-color: #e4e5e7!important;
+  -webkit-box-shadow: none!important;
+  -moz-box-shadow: none!important;
+  box-shadow: none!important;
+}
+
+.newElementItem {
+  position: relative;
+  background-color: #fff;
+  cursor: pointer;
+  margin-top: 10px;
+  border: 1px solid #e4e5e7;
+  border-radius: 2px;
+  padding: 25px 15px 10px;
+  text-align: center;
+}
+
+.payment-modal-icon {
+  position: absolute!important;
+  top: 5px!important;
+  left: auto!important;
+  right: 5px!important;
+}
+
+.newElementItem:hover {
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
+}
+
+.newElementItem span {
+  display: block;
+  font-size: 16px;
+}
+
+.newElementItem i {
+  font-size: 36px;
+  margin-top: 5px;
+}
+
+.element-form-new-icon,
+.element-form-icon,
+.element-dismiss-icon,
+.element-button-icon,
+.element-text-icon,
+.element-social-icon,
+.element-divider-icon,
+.element-video-icon,
+.element-image-icon,
+.element-iframe-icon,
+.element-padding-icon,
+.element-coupon-icon {
+  height: 44px;
+  margin-bottom: 13px;
+}
+
+.element-form-new-icon {
+  background: url("../images/widgets/modal_item/element_icons/form_button_icon_new.png") no-repeat center;
+  background-size: contain;
+}
+
+.element-form-icon {
+  background: url("../images/widgets/modal_item/element_icons/form_button_icon.png") no-repeat center;
+  background-size: contain;
+}
+
+.element-dismiss-icon {
+  background: url("../images/widgets/modal_item/element_icons/dismiss_link_icon.png") no-repeat center;
+  background-size: contain;
+}
+
+.element-button-icon {
+  background: url("../images/widgets/modal_item/element_icons/button_icon.png") no-repeat center;
+  background-size: contain;
+}
+
+.element-text-icon {
+  background: url("../images/widgets/modal_item/element_icons/text_icon.png") no-repeat center;
+  background-size: contain;
+}
+
+.element-social-icon {
+  background: url("../images/widgets/modal_item/element_icons/social_icon.png") no-repeat center;
+  background-size: contain;
+}
+
+.element-divider-icon {
+  background: url("../images/widgets/modal_item/element_icons/divider_icon.png") no-repeat center;
+  background-size: contain;
+}
+
+.element-video-icon {
+  background: url("../images/widgets/modal_item/element_icons/video_icon.png") no-repeat center;
+  background-size: contain;
+}
+
+.element-image-icon {
+  background: url("../images/widgets/modal_item/element_icons/image_icon.png") no-repeat center;
+  background-size: contain;
+}
+
+.element-padding-icon {
+  background: url("../images/widgets/modal_item/element_icons/padding_icon.png") no-repeat center;
+  background-size: contain;
+}
+
+.element-iframe-icon {
+  background: url("../images/widgets/modal_item/element_icons/iframe_icon.png") no-repeat center;
+  background-size: contain;
+}
+
+.element-coupon-icon {
+  background: url("../images/widgets/modal_item/element_icons/coupon_icon.png") no-repeat center;
+  background-size: contain;
+}
