@@ -587,3 +587,129 @@ h5.label-style-ic {
   color: #fff;
   background-color: #f0ad4e;
 }
+
+#listImagesBlock .imageGlItem {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+  border: 1px solid transparent;
+  padding: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+#listImagesBlock .imageGlItem .delete-cur-img-btn {
+  position: absolute;
+  opacity: 0;
+  top: -6px;
+  right: -6px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+#listImagesBlock .imageGlItem .delete-cur-img-btn span {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: url("~src/assets/images/widgets/delete_img_ic.png") center no-repeat;
+  background-size: contain;
+}
+
+#listImagesBlock .imageGlItem:hover .delete-cur-img-btn {
+  opacity: 1;
+}
+
+.widget-style-menu .border-item .row {
+  margin-left: 0;
+  padding-left: 10px;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+#listImagesBlock .imageItem {
+  width: 108px;
+  height: 108px;
+}
+
+#listImagesBlock .imageGlItemIn {
+  border: 3px solid transparent;
+  position: relative;
+  z-index: 1;
+}
+
+#listImagesBlock .imageGlItemIn.active {
+  background: #e5e5e5;
+  border-color: #3498db;
+}
+
+.modal #listImagesBlock {
+  overflow: auto;
+  max-height: 275px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.img-set-foot1 {
+  margin: -15px -15px 15px;
+  padding: 15px 15px;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: left;
+}
+
+.img-set-foot1 .dragDropBl {
+  border: 2px dashed #e4e5e7;
+}
+
+.upload-drag-icon {
+  margin: 5px auto;
+  text-align: center;
+  font-size: 24px;
+}
+
+.img-set-foot1 .dragDropBl span.dragOr {
+  display: block;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.modal#addNewWidgetListModal .img-set-foot1-l {
+  float: left;
+  width: 50%;
+}
+
+.modal#addNewWidgetListModal .img-set-foot1 p {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.modal#addNewWidgetListModal h4 {
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+#addNewWidgetListModal .load-img-gal {
+  display: block;
+  margin: 0 auto;
+  min-width: 208px;
+}
+
+#addNewWidgetListModal .dragAndDropFilter {
+  display: none;
+  position: absolute;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(98, 203, 49, 0.4);
+}
+
+#addNewWidgetListModal .alert-success .dragAndDropFilter {
+  display: block;
+}
+
+#addNewWidgetListModal .set-img-gal {
+  min-width: 208px;
+}
