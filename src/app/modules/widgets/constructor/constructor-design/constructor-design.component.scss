@@ -330,7 +330,7 @@ h5.label-style-ic {
 
 .widget-style-menu .border-item .row {
   margin-left: 0;
-  padding-left: 10px;
+  padding-left: 0;
   margin-right: 0;
   padding-right: 0;
 }
@@ -432,7 +432,7 @@ h5.label-style-ic {
 }
 
 #addNewElementListModal .modal-dialog {
-  width: 760px;
+  max-width: 760px;
 }
 
 #addNewElementListModal .modal-body {
@@ -519,61 +519,71 @@ h5.label-style-ic {
 }
 
 .element-form-new-icon {
-  background: url("../images/widgets/modal_item/element_icons/form_button_icon_new.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/form_button_icon_new.png") no-repeat center;
   background-size: contain;
 }
 
 .element-form-icon {
-  background: url("../images/widgets/modal_item/element_icons/form_button_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/form_button_icon.png") no-repeat center;
   background-size: contain;
 }
 
 .element-dismiss-icon {
-  background: url("../images/widgets/modal_item/element_icons/dismiss_link_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/dismiss_link_icon.png") no-repeat center;
   background-size: contain;
 }
 
 .element-button-icon {
-  background: url("../images/widgets/modal_item/element_icons/button_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/button_icon.png") no-repeat center;
   background-size: contain;
 }
 
 .element-text-icon {
-  background: url("../images/widgets/modal_item/element_icons/text_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/text_icon.png") no-repeat center;
   background-size: contain;
 }
 
 .element-social-icon {
-  background: url("../images/widgets/modal_item/element_icons/social_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/social_icon.png") no-repeat center;
   background-size: contain;
 }
 
 .element-divider-icon {
-  background: url("../images/widgets/modal_item/element_icons/divider_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/divider_icon.png") no-repeat center;
   background-size: contain;
 }
 
 .element-video-icon {
-  background: url("../images/widgets/modal_item/element_icons/video_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/video_icon.png") no-repeat center;
   background-size: contain;
 }
 
 .element-image-icon {
-  background: url("../images/widgets/modal_item/element_icons/image_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/image_icon.png") no-repeat center;
   background-size: contain;
 }
 
 .element-padding-icon {
-  background: url("../images/widgets/modal_item/element_icons/padding_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/padding_icon.png") no-repeat center;
   background-size: contain;
 }
 
 .element-iframe-icon {
-  background: url("../images/widgets/modal_item/element_icons/iframe_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/iframe_icon.png") no-repeat center;
   background-size: contain;
 }
 
 .element-coupon-icon {
-  background: url("../images/widgets/modal_item/element_icons/coupon_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/coupon_icon.png") no-repeat center;
   background-size: contain;
+}
+
+.label.label-warning.tariff-info {
+  font-size: 7px;
+  font-weight: bold;
+  margin-left: 10px;
+  padding: 0 0.2rem;
+  position: absolute;
+  color: #fff;
+  background-color: #f0ad4e;
 }
