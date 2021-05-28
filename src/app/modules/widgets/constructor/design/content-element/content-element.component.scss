@@ -105,3 +105,211 @@
 .widget-image-has-bottom-orient {
   align-items: flex-end;
 }
+
+.wigdet-main-wr {
+  position: relative;
+  z-index: 3;
+}
+
+.wigdet-main-wr ul.widget-flex-dis {
+  width: 100%;
+}
+
+.wigdet-main-wr ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.wigdet-main-wr ul.widget-main-ul-bottom {
+  justify-content: flex-end;
+}
+
+.wigdet-main-wr ul.widget-main-ul-center {
+  justify-content: center;
+}
+
+.wigdet-main-wr ul li {
+  display: block;
+  width: 100%;
+  position: relative;
+  border: 1px dashed transparent;
+  margin: 0 0 0;
+  padding-bottom: 15px;
+  transition: margin 0.1s ease;
+}
+
+.wigdet-main-wr ul li:first-child {
+  margin-top: 0;
+}
+
+.wigdet-main-wr ul li:last-child {
+  margin-bottom: -5px;
+  padding-bottom: 5px;
+}
+
+.wigdet-main-wr ul li.margin-if-split-element {
+  margin-bottom: 5px;
+}
+
+.wigdet-main-wr ul li.margin-if-iframe-element .widget1-hrh-user-w {
+  margin-bottom: -4px;
+}
+
+.wigdet-main-wr ul li.margin-if-iframe-element .widget1-hrh-full-w {
+  margin-bottom: -8px;
+}
+
+.wigdet-main-wr ul li:hover {
+  border-color: #3498db;
+}
+
+.wigdet-main-wr ul li.help-block-add-if-not-sel:hover {
+  border-color: transparent;
+}
+
+.widget-mask {
+  position: absolute;
+  left: -18px;
+  right: -18px;
+  top: -15px;
+  bottom: -15px;
+}
+
+.help-block-add-if-not-sel {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+.wigdet-main-wr ul li.extraClassDefWidth {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+.remove-element-from-list-view {
+  position: absolute;
+  top: -1px;
+  right: -19px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin: 0;
+  color: #fff;
+  display: none;
+  background-color: rgba(52, 152, 219, 1);
+  background-color: #3498db;
+}
+
+.wigdet-main-wr ul li:hover .remove-element-from-list-view {
+  display: block;
+}
+
+.remove-element-from-list-view .remove-sub-item {
+  font-size: 18px;
+  width: 15px;
+  padding: 0;
+  float: none;
+  color: #fff;
+}
+
+.remove-element-from-list-view:hover .remove-sub-item {
+  color: #ff0000;
+}
+
+.remove-sub-form-item {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  margin-right: 10px;
+}
+
+.remove-sub-form-item .remove-sub-item {
+  font-size: 25px;
+}
+
+.move-element-view {
+  color: #fff;
+  cursor: move;
+  position: absolute;
+  top: -1px;
+  left: -19px;
+  padding-left: 1px;
+  padding-right: 1px;
+  text-align: center;
+  width: 19px;
+  height: 19px;
+  margin: 0;
+  display: none;
+  background-color: rgba(52, 152, 219, 1);
+  background-color: #3498db;
+}
+
+.wigdet-main-wr ul li:hover .move-element-view {
+  display: block;
+}
+
+.move-element-view i {
+  display: block;
+  font-size: 16px;
+  width: 15px;
+  line-height: 19px;
+  padding: 0;
+}
+
+.btn-add-on-elem,
+.btn-copy-on-elem {
+  display: none!important;
+  cursor: pointer;
+  position: absolute;
+  z-index: 999;
+  left: 50%;
+  bottom: -12px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 28px;
+  border-radius: 3px;
+  background-color: #3498db;
+}
+
+.btn-add-on-elem {
+  margin-left: -12.5px;
+}
+
+.btn-add-on-elem.clonable-button {
+  margin-left: -26px;
+}
+
+.btn-copy-on-elem {
+  margin-left: 1px;
+}
+
+.btn-add-on-elem:hover,
+.btn-copy-on-elem:hover {
+  opacity: 1 !important;
+}
+
+.btn-add-on-elem i.fa-plus {
+  float: none;
+  color: #fff;
+  margin: 0;
+}
+
+.btn-copy-on-elem i.fa-copy {
+  float: none;
+  color: #fff;
+  margin: 0;
+}
+
+.wigdet-main-wr ul li:hover .btn-add-on-elem {
+  display: block !important;
+}
+
+.wigdet-main-wr ul li:hover .btn-copy-on-elem.clonable-button {
+  display: block !important;
+}
