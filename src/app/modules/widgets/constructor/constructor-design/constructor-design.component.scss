@@ -362,6 +362,19 @@ h5.label-style-ic {
 
 .max-h-100 {
   height: 100%;
+  max-width: calc(100% - 450px);
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 55px;
+}
+
+@media (max-width: 1500px) {
+  .widget-style-menu {
+    width: 40%;
+  }
+  .max-h-100 {
+    width: 60%;
+  }
 }
 
 .max-h-100 .popup-shadow {
@@ -618,13 +631,6 @@ h5.label-style-ic {
 
 #listImagesBlock .imageGlItem:hover .delete-cur-img-btn {
   opacity: 1;
-}
-
-.widget-style-menu .border-item .row {
-  margin-left: 0;
-  padding-left: 10px;
-  margin-right: 0;
-  padding-right: 0;
 }
 
 #listImagesBlock .imageItem {

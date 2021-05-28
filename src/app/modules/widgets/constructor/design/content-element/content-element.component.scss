@@ -19,12 +19,89 @@
   top: 0;
   left: 0;
   display: block;
-  width: 100%!important;
-  height: 100%!important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .absolute-bg-content .video-bg img {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.block-widget-bg {
+  background: url("~src/assets/images/widgets/land.jpg") center no-repeat;
+  background-size: cover;
+}
+
+#globalMask {
+  position: absolute;
+  left: -5px;
+  right: -5px;
+  top: -5px;
+  bottom: -5px;
+}
+
+.color-bg-on-form {
+  position: absolute;
+  left: -30px;
+  width: calc(100% + 60px);
+  height: calc(100% + 15px);
+}
+
+.widget-image {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  z-index: 101;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.2s linear;
+}
+
+.widget-image.hide-image-bl-for-rebuild {
+  opacity: 0;
+}
+
+.widget-image-item-block {
+  background: url("~src/assets/images/widgets/image_def2.png") center no-repeat, #fff;
+  background-size: contain;
+}
+
+.widget-video-item-block {
+  position: relative;
+}
+
+.widget-video-item-block img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.widget-video-item-block iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%!important;
+  height: 100%!important;
+  z-index: -1;
+}
+
+.widget-image-has-full-wh .widget-image-item-block,
+.widget-image-has-full-wh .widget-video-item-block {
+  width: 100%!important;
+  height: 100%!important;
+}
+
+.widget-image-has-center-orient {
+  align-items: center;
+}
+
+.widget-image-has-top-orient {
+  align-items: flex-start;
+}
+
+.widget-image-has-bottom-orient {
+  align-items: flex-end;
 }

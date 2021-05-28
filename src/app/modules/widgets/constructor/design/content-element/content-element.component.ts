@@ -5,7 +5,7 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
 @Component({
   selector: 'app-content-element',
   templateUrl: './content-element.component.html',
-  styleUrls: ['./content-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './content-element.component.scss']
 })
 export class ContentElementComponent implements OnInit {
   @Input() public widget: FullWidget;
