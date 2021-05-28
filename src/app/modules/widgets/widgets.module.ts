@@ -56,7 +56,22 @@ import { TextElementComponent } from './constructor/design/text-element/text-ele
 import { VideoElementComponent } from './constructor/design/video-element/video-element.component';
 import { VisualElementComponent } from './constructor/design/visual-element/visual-element.component';
 import { CouponCallbackComponent } from './constructor/design/coupon-callback/coupon-callback.component';
-import { FormExtendedComponent } from './constructor/design/form-extended/form-extended.component';
+import { FormExtendedComponent } from './constructor/design/form-extended/form-extended/form-extended.component';
+import { ExtendedButtonComponent } from './constructor/design/form-extended/extended-button/extended-button.component';
+import { ExtendedDateComponent } from './constructor/design/form-extended/extended-date/extended-date.component';
+import { ExtendedDatepickerComponent } from './constructor/design/form-extended/extended-datepicker/extended-datepicker.component';
+import { ExtendedDdComponent } from './constructor/design/form-extended/extended-dd/extended-dd.component';
+import { ExtendedDdwComponent } from './constructor/design/form-extended/extended-ddw/extended-ddw.component';
+import { ExtendedEmailComponent } from './constructor/design/form-extended/extended-email/extended-email.component';
+import { ExtendedHiddenComponent } from './constructor/design/form-extended/extended-hidden/extended-hidden.component';
+import { ExtendedMessageComponent } from './constructor/design/form-extended/extended-message/extended-message.component';
+import { ExtendedNameComponent } from './constructor/design/form-extended/extended-name/extended-name.component';
+import { ExtendedPhoneComponent } from './constructor/design/form-extended/extended-phone/extended-phone.component';
+import { ExtendedRatingComponent } from './constructor/design/form-extended/extended-rating/extended-rating.component';
+import { ExtendedTermComponent } from './constructor/design/form-extended/extended-term/extended-term.component';
+import { ExtendedTextComponent } from './constructor/design/form-extended/extended-text/extended-text.component';
+import { ExtendedTitleComponent } from './constructor/design/form-extended/extended-title/extended-title.component';
+import { ExtendedVariantsComponent } from './constructor/design/form-extended/extended-variants/extended-variants.component';
 
 
 @NgModule({
@@ -103,6 +118,21 @@ import { FormExtendedComponent } from './constructor/design/form-extended/form-e
     VisualElementComponent,
     CouponCallbackComponent,
     FormExtendedComponent,
+    ExtendedButtonComponent,
+    ExtendedDateComponent,
+    ExtendedDatepickerComponent,
+    ExtendedDdComponent,
+    ExtendedDdwComponent,
+    ExtendedEmailComponent,
+    ExtendedHiddenComponent,
+    ExtendedMessageComponent,
+    ExtendedNameComponent,
+    ExtendedPhoneComponent,
+    ExtendedRatingComponent,
+    ExtendedTermComponent,
+    ExtendedTextComponent,
+    ExtendedTitleComponent,
+    ExtendedVariantsComponent,
   ],
   exports: [
     SmartpointsControlComponent,
