@@ -1,3 +1,16 @@
+.widget1 {
+  background: transparent;
+  width: 100%;
+  margin: 25px auto 0;
+  padding: 15px 18px;
+  overflow: hidden;
+  display: block;
+  position: relative;
+  min-width: 56px;
+  min-height: 50px;
+  z-index: 1;
+}
+
 .absolute-bg-content {
   position: absolute;
   top: 0;

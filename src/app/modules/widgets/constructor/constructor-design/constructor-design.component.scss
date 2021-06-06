@@ -361,7 +361,7 @@ h5.label-style-ic {
 }
 
 .max-h-100 {
-  height: 100%;
+  max-height: 100%;
   max-width: calc(100% - 450px);
   position: relative;
   padding-top: 60px;
@@ -718,4 +718,41 @@ h5.label-style-ic {
 
 #addNewWidgetListModal .set-img-gal {
   min-width: 208px;
+}
+
+.widget-visual-block {
+  position: absolute;
+  top: 30px;
+  right: 110px;
+  width: auto;
+  display: inline-block;
+  padding-bottom: 100px;
+  padding-right: 100px;
+}
+
+.popup-sh-pad .widget-visual-block {
+  top: 70px;
+}
+.wv-b-left {
+  left: 110px;
+  right: auto;
+}
+
+.wv-b-right {
+  left: auto;
+  right: 110px;
+  left: 110px;
+  right: auto;
+}
+
+.widget-visual-block h1 {
+  margin: 0 0 15px;
+}
+
+.widget-visual-block h2 {
+  margin: 0 0 20px;
+}
+
+.widget-visual-block .title-main, .widget-visual-block .description {
+  margin-bottom: 0;
 }
