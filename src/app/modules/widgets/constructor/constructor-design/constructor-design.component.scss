@@ -177,12 +177,6 @@
   vertical-align: super;
 }
 
-
-.tooltip {
-  z-index: 999999999!important;
-}
-
-
 #widgetStyle label.title-lab {
   left: 15px;
   font-weight: 500;
@@ -190,15 +184,8 @@
   margin-top: -7px;
 }
 
-
 .title-lab .tooltip.top {
   left: -10px!important;
-}
-
-
-#widgetStyle .tooltip {
-  position: relative;
-  z-index: 9999999;
 }
 
 h3.widget-title-main {

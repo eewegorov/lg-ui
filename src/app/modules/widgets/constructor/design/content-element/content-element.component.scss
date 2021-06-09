@@ -326,3 +326,129 @@
 .wigdet-main-wr ul li:hover .btn-copy-on-elem.clonable-button {
   display: block !important;
 }
+
+.social-block-pd img {
+  display: inline-block;
+}
+
+.no-text-shadow-imp {
+  text-shadow: none!important;
+}
+
+.note-editor h1,
+.note-editor h2,
+.note-editor h3,
+.note-editor h4,
+.note-editor h5,
+.note-editor h6,
+.note-editor p,
+.note-editor span {
+  margin: 0;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: 1em;
+  color: #424242;
+  -webkit-font-smoothing: antialiased;
+}
+
+.note-editor font p,
+.note-editor font span {
+  color: inherit;
+}
+
+div.button-send.click-edit-cl .note-editor h1,
+div.button-send.click-edit-cl .note-editor h2,
+div.button-send.click-edit-cl .note-editor h3,
+div.button-send.click-edit-cl .note-editor h4,
+div.button-send.click-edit-cl .note-editor h5,
+div.button-send.click-edit-cl .note-editor h6,
+div.button-send.click-edit-cl .note-editor p,
+div.button-send.click-edit-cl .note-editor span {
+  color: #fff;
+}
+
+div.button-send.click-edit-cl .note-editor font p,
+div.button-send.click-edit-cl .note-editor font span {
+  color: inherit;
+}
+
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor h1,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor h2,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor h3,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor h4,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor h5,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor h6,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor p,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor span {
+  color: #6a6c6f;
+}
+
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor font p,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor font span {
+  color: inherit;
+}
+
+.note-editor a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.note-editor a:hover {
+  text-decoration: none;
+}
+
+.tooltip-inner {
+  background-color: #34495e;
+  word-wrap: break-word;
+}
+
+.tooltip.top .tooltip-arrow {
+  border-top-color: #34495e
+}
+
+.editorFontLine .note-editor .note-editing-area .note-editable {
+  line-height: 1em;
+}
+
+.widget1-hr-left {
+  text-align: left;
+}
+
+.widget1-hr-center {
+  text-align: center;
+}
+
+.widget1-hr-right {
+  text-align: right;
+}
+
+.widget1-w-hr-left {
+  text-align: left;
+}
+
+.widget1-w-hr-center {
+  text-align: center;
+}
+
+.widget1-w-hr-right {
+  text-align: right;
+}
+
+.widget1-hr-full-w hr,
+.widget1-hr-full-w img,
+.widget1-hr-full-w .element-iframe-block,
+.editorFontLine {
+  width: 100%!important;
+}
+
+.widget1-hrh-full-w .element-iframe-block {
+  height: auto!important;
+}
+
+.widget1-w-hr-full-w .form-whole-bl {
+  width: 100%!important;
+}
+
+.form-whole-bl {
+  display: inline-block;
+}
