@@ -388,6 +388,38 @@ div.button-send.click-edit-cl .note-editor font span {
   color: inherit;
 }
 
+.widget1-btn-bl .click-edit-cl .note-editor,
+.widget1-btn-exit .click-edit-cl .note-editor {
+  line-height: 1.5em!important;
+}
+.widget1-btn-bl .click-edit-cl .note-editor,
+.widget1-btn-exit .click-edit-cl .note-editor{
+  display: flex;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center;
+  text-align: center;
+}
+.widget1-btn-bl .click-edit-cl .note-editor .note-editing-area,
+.widget1-btn-exit .click-edit-cl .note-editor .note-editing-area{
+  width: 100%;
+  text-align: center;
+}
+.widget1-btn-bl div.button-send .note-editor,
+.widget1-btn-exit div.button-send .note-editor{
+  min-height: 30px;
+}
+.widget1-btn-bl div.button-link-close .note-editor,
+.widget1-btn-exit div.button-link-close .note-editor{
+  min-height: 21px;
+}
+
+.note-editor {
+  border: none;
+  line-height: 1em;
+}
+
 .note-editor a {
   color: inherit;
   text-decoration: underline;
@@ -451,4 +483,121 @@ div.button-send.click-edit-cl .note-editor font span {
 
 .form-whole-bl {
   display: inline-block;
+}
+
+.element-video-block iframe {
+  position: relative;
+  z-index: -1;
+}
+
+.split-element-block hr {
+  display: inline-block;
+}
+
+.element-coupon-title {
+  margin-bottom: 3px;
+}
+
+.element-coupon-block {
+  margin-bottom: -4px;
+}
+
+.element-coupon-block:not(.widget1-hr-user-w) .element-coupon-wr {
+  max-width: 100%;
+}
+
+.element-coupon-wr {
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  line-height: 2em;
+  height: 2em;
+  padding: 0 10px;
+  position: relative;
+}
+
+.element-coupon-wr > div {
+  white-space: nowrap;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.element-coupon-wr:hover .element-coupon-name {
+  margin-top: -2em;
+}
+
+.widget1 .widget1-hr-full-w .widget-inp-bl {
+  width: 98%!important;
+}
+
+.widget1 .widget1-hr-full-w .widget-input-gorizontal {
+  width: 48%!important;
+}
+
+.element-iframe-block {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.element-iframe-block iframe {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: none;
+  z-index: -1;
+}
+
+.widget1-btn-exit {
+  margin-top: 0px;
+  text-align: center;
+}
+
+.widget1-btn-exit div.button-link-close {
+  display: inline-block;
+  background: transparent;
+  border: none;
+  width: auto;
+  margin: 0 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.widget1-btn-exit div.button-link-close:hover {
+  text-decoration: none;
+}
+
+.widget1-btn-bl {
+  text-align: left;
+}
+
+.widget1-btn-bl-center {
+  text-align: center;
+}
+
+.widget1-btn-bl-right {
+  text-align: right;
+}
+
+.widget1-btn-bl div.button-send {
+  display: inline-block;
+  text-align: center;
+  margin: 15px 0 0;
+  /*border: 1px solid transparent;*/
+  padding: 5px 20px;
+  min-height: 42px;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased!important;
+}
+
+.widget1-btn-bl-min-marg div.button-send {
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.widget1-btn-bl div.button-alone {
+  margin-top: 0;
 }
