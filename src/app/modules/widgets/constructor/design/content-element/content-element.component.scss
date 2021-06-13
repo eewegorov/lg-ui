@@ -714,3 +714,125 @@ div.button-send.click-edit-cl .note-editor font span {
 .center-mode-social {
   display: inline-block;
 }
+
+.webicon {
+  cursor: pointer;
+  display: inline-block;
+  background-size: 100%;
+  width: 30px;
+  height: 30px;
+  text-indent: -999em;
+  text-align: left;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-right: 7px;
+  transition: transform 0.3s ease;
+}
+
+.webicon:hover {
+  transform: scale(1.07);
+}
+
+.webicon.small {
+  width: 20px;
+  height: 20px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px; }
+
+.webicon.large {
+  width: 48px;
+  height: 48px;
+}
+
+.webicon.large.style-1 {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+.webicon.large.style-2 {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+
+.webicon.large.style-3 {
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.webicon.linkedin {
+  background: url("~src/assets/images/widgets/social/webicon-linkedin.svg"), #41B8D0;
+}
+
+.webicon.pinterest {
+  background: url("~src/assets/images/widgets/social/webicon-pinterest.svg"), #F93C2D;
+}
+
+.webicon.facebook {
+  background: url("~src/assets/images/widgets/social/webicon-facebook.svg"), #4B71B8;
+}
+
+.webicon.buffer {
+  background: url("~src/assets/images/widgets/social/webicon-buffer.svg"), #f5f5f5;
+}
+
+.webicon.tumblr {
+  background: url("~src/assets/images/widgets/social/webicon-tumblr.svg"), #2F4E68;
+}
+
+.webicon.yummly {
+  background: url("~src/assets/images/widgets/social/webicon-yummly.svg"), #fff;
+}
+
+.webicon.print {
+  background: url("~src/assets/images/widgets/social/webicon-print.svg"), #f5f5f5;
+}
+
+.webicon.blogger {
+  background: url("~src/assets/images/widgets/social/webicon-blogger.svg"), #EC9728;
+}
+
+.webicon.xing {
+  background: url("~src/assets/images/widgets/social/webicon-xing.svg"), #057272;
+}
+
+.webicon.pocket {
+  background: url("~src/assets/images/widgets/social/webicon-pocketapp.svg"), #f5f5f5;
+}
+
+.webicon.digg {
+  background: url("~src/assets/images/widgets/social/webicon-digg.svg"), #fff;
+}
+
+.webicon.googleplus {
+  background: url("~src/assets/images/widgets/social/webicon-googleplus.svg"), #E16D35;
+}
+
+.webicon.odnoklassniki {
+  background: url("~src/assets/images/widgets/social/webicon-odnoklassniki.svg"), #fff;
+}
+
+.webicon.reddit {
+  background: url("~src/assets/images/widgets/social/webicon-reddit.svg"), #f5f5f5;
+}
+
+.webicon.stumbleupon {
+  background: url("~src/assets/images/widgets/social/webicon-stumbleupon.svg"), #F93C2D;
+}
+
+.webicon.twitter {
+  background: url("~src/assets/images/widgets/social/webicon-twitter.svg"), #4BD0EF;
+}
+
+.webicon.vkontakte {
+  background: url("~src/assets/images/widgets/social/webicon-vkontakte.svg"), #fff;
+}
+
+.webicon.mail {
+  background: url("~src/assets/images/widgets/social/webicon-mail.svg"), #F5F5F5;
+}
