@@ -6,7 +6,7 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
 @Component({
   selector: 'app-button-element',
   templateUrl: './button-element.component.html',
-  styleUrls: ['./button-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './button-element.component.scss']
 })
 export class ButtonElementComponent implements OnInit {
   @Input() public index: number;

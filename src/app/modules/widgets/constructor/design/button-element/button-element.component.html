@@ -20,13 +20,13 @@
       </div>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+      <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="widget.guiprops['button'].fontSize">
         <label class="control-label">px <span>размер текста</span></label>
       </div>
     </div>
-    <div class="row row-subitem m-t-sm m-b-md">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-1 mb-2">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">Цвет кнопки:</label>
         <input
           [(colorPicker)]="widget.guiprops['button'].colorBtn"
@@ -35,16 +35,16 @@
           [cpOutputFormat]="'hex'"
         />
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+      <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
         <label class="control-label control-label-colorpc control-label-des">Закругление углов</label>
         <ngx-slider [(value)]="widget.guiprops['button'].borderRadiusBtn" [options]="optionsRound"></ngx-slider>
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm m-b-md">
+    <div class="row row-subitem mt-1 mb-2">
       <div class="col-sm-12 row-subitem-padding">
         <label class="control-label control-label-des">Вид кнопки:</label>
-        <div class="dropdown" >
+        <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ widget.guiprops.form.visual }}
             <span class="caret"></span>
@@ -62,10 +62,10 @@
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-1">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Ширина кнопки:</label>
-        <div class="dropdown" >
+        <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ widget.guiprops.button.btn_width }}
             <span class="caret"></span>
@@ -81,9 +81,9 @@
           </ul>
         </div>
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Ориентация:</label>
-        <div class="dropdown" >
+        <div class="dropdown">
           <button
             type="button"
             [disabled]="widget.guiprops.button.btn_width === 'От края до края'"
@@ -107,7 +107,7 @@
       </div>
     </div>
     <div *ngIf="widget.guiprops['button'].btn_width === 'Собственная'">
-      <div class="col-sm-12 padding-top-5 margined-top-10">
+      <div class="col-sm-12 pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="widget.guiprops['button'].btn_widthpx">
         <label class="control-label">px <span>ширина кнопки</span></label>
       </div>
@@ -117,7 +117,7 @@
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding">
         <label class="control-label control-label-des">Стиль кнопки:</label>
-        <div class="dropdown" >
+        <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ widget.guiprops.button.styleType }}
             <span class="caret"></span>
@@ -129,7 +129,7 @@
             >
               <a
                 class="btn-var-styles btn-var-styles__default"
-                [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}"
+                [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'background': widget.guiprops['button'].colorBtn}"
                 href="javascript:void(0)"
               >Default</a>
             </li>
@@ -139,7 +139,7 @@
             >
               <a
                 class="btn-var-styles btn-var-styles__material"
-                [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}"
+                [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'background': widget.guiprops['button'].colorBtn}"
                 href="javascript:void(0)"
               >Material</a></li>
             <li
@@ -148,7 +148,7 @@
             >
               <a
                 class="btn-var-styles btn-var-styles__flat"
-                [ngStyle]="{'font-family':widget.guiprops['button'].font.fontFamily, 'background':widget.guiprops['button'].colorBtn}"
+                [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'background': widget.guiprops['button'].colorBtn}"
                 href="javascript:void(0)"
               >Flat</a></li>
             <li
@@ -167,8 +167,8 @@
     </div>
 
     <div *ngIf="widget.guiprops['form'].enable == false">
-      <div class="row row-subitem m-t-md">
-        <div class="col-sm-12 row-subitem-padding padding-top-5">
+      <div class="row row-subitem mt-2">
+        <div class="col-sm-12 row-subitem-padding pt-1">
           <ui-switch
             size="small"
             [checked]="widget.guiprops.form.colorPod.enable"
