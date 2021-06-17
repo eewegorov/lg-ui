@@ -451,3 +451,15 @@ a.widget-download-img {
   color: #3b99fc;
   text-decoration: underline;
 }
+
+.radio-info input[type="radio"] + label::after {
+  background-color: #3498db
+}
+
+.radio-info input[type="radio"]:checked + label::before {
+  border-color: #3498db
+}
+
+.radio-info input[type="radio"]:checked + label::after {
+  background-color: #3498db
+}

@@ -7,7 +7,7 @@ import { Coupon } from '../../../../../core/models/coupons';
 @Component({
   selector: 'app-form-element',
   templateUrl: './form-element.component.html',
-  styleUrls: ['./form-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './form-element.component.scss']
 })
 export class FormElementComponent implements OnInit {
   @Input() public index: number;

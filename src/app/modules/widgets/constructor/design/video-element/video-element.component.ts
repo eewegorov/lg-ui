@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-video-element',
   templateUrl: './video-element.component.html',
-  styleUrls: ['./video-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './video-element.component.scss']
 })
 export class VideoElementComponent implements OnInit {
   @Input() public index: number;

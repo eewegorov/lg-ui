@@ -5,7 +5,7 @@ import { FullWidget } from '../../../../../core/models/widgets';
 @Component({
   selector: 'app-visual-element',
   templateUrl: './visual-element.component.html',
-  styleUrls: ['./visual-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './visual-element.component.scss']
 })
 export class VisualElementComponent implements OnInit {
   @Input() public widget: FullWidget;

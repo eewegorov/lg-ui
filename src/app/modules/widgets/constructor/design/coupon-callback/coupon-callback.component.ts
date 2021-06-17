@@ -6,7 +6,7 @@ import { WidgetService } from '../../../services/widget.service';
 @Component({
   selector: 'app-coupon-callback',
   templateUrl: './coupon-callback.component.html',
-  styleUrls: ['./coupon-callback.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './coupon-callback.component.scss']
 })
 export class CouponCallbackComponent implements OnInit {
   @Input() public coupons: Coupon[];

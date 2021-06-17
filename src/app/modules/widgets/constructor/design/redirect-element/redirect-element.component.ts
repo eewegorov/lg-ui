@@ -4,7 +4,7 @@ import { FullWidget } from '../../../../../core/models/widgets';
 @Component({
   selector: 'app-redirect-element',
   templateUrl: './redirect-element.component.html',
-  styleUrls: ['./redirect-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './redirect-element.component.scss']
 })
 export class RedirectElementComponent implements OnInit {
   @Input() public widget: FullWidget;

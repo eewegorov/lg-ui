@@ -5,7 +5,7 @@ import { FullWidget } from '../../../../../core/models/widgets';
 @Component({
   selector: 'app-text-element',
   templateUrl: './text-element.component.html',
-  styleUrls: ['./text-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './text-element.component.scss']
 })
 export class TextElementComponent implements OnInit {
   @Input() public index: number;

@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-iframe-element',
   templateUrl: './iframe-element.component.html',
-  styleUrls: ['./iframe-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './iframe-element.component.scss']
 })
 export class IframeElementComponent implements OnInit {
   @Input() public index: number;

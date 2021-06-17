@@ -7,7 +7,7 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
 @Component({
   selector: 'app-closelink-element',
   templateUrl: './closelink-element.component.html',
-  styleUrls: ['./closelink-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './closelink-element.component.scss']
 })
 export class CloselinkElementComponent implements OnInit {
   @Input() public index: number;

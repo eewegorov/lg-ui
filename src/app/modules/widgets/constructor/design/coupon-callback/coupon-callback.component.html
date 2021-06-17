@@ -210,7 +210,7 @@
 
     <div class="row row-subitem row-subitem-static-hide" *ngIf="coupon.elementType !== 'closeBtn'">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <label class="non-bold">
+        <label>
           <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="coupon.coupon.closeAfter">
           {{ 'widgets.constructor.coupon.setting.closeAfter' | translate }}
         </label>
@@ -219,7 +219,7 @@
 
     <div class="row row-subitem">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <label class="non-bold">
+        <label>
           <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="coupon.coupon.isCopyAction">
           {{ 'widgets.constructor.coupon.setting.isCopyAction' | translate }}
         </label>

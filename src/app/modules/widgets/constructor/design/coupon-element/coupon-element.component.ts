@@ -7,7 +7,7 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
 @Component({
   selector: 'app-coupon-element',
   templateUrl: './coupon-element.component.html',
-  styleUrls: ['./coupon-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './coupon-element.component.scss']
 })
 export class CouponElementComponent implements OnInit, OnChanges {
   @Input() public index: number;

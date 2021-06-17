@@ -6,7 +6,7 @@ import { Coupon } from '../../../../../core/models/coupons';
 @Component({
   selector: 'app-social-element',
   templateUrl: './social-element.component.html',
-  styleUrls: ['./social-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './social-element.component.scss']
 })
 export class SocialElementComponent implements OnInit {
   @Input() public index: number;

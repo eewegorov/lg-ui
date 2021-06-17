@@ -177,7 +177,7 @@
       </div>
       <div *ngIf="widget.guiprops['form'].colorPod.enable == true">
         <div class="row row-subitem">
-          <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <div class="col-sm-6 row-subitem-padding pt-1">
             <label class="control-label control-label-colorpc control-label-des">Цвет подложки:</label>
             <input
               [(colorPicker)]="widget.guiprops['form'].colorPod.color"
@@ -186,7 +186,7 @@
               [cpOutputFormat]="'hex'"
             />
           </div>
-          <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+          <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
             <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
             <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod" [options]="optionsOpacity"></ngx-slider>
           </div>

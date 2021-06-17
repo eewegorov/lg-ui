@@ -4,7 +4,7 @@ import { FullWidget } from '../../../../../core/models/widgets';
 @Component({
   selector: 'app-thank-element',
   templateUrl: './thank-element.component.html',
-  styleUrls: ['./thank-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './thank-element.component.scss']
 })
 export class ThankElementComponent implements OnInit {
   @Input() public widget: FullWidget;

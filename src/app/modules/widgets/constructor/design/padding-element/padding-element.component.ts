@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-padding-element',
   templateUrl: './padding-element.component.html',
-  styleUrls: ['./padding-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './padding-element.component.scss']
 })
 export class PaddingElementComponent implements OnInit {
   @Input() public index: number;
