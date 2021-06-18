@@ -1,0 +1,49 @@
+.social-block-choose label {
+  width: 100%;
+}
+
+.social-variable-bl {
+  display: flex;
+  justify-content: flex-start
+}
+
+.social-var-el {
+  width: 58px;
+  height: 58px;
+  padding: 3px;
+  border: 1px solid transparent;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.social-var-el:hover,
+.social-var-el.active {
+  border-color: #3498db;
+}
+
+.social-var-fill {
+  background-color: #a2a2a2;
+}
+
+.social-var-1 .social-var-fill {
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.social-var-2 .social-var-fill {
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+}
+
+.social-var-3 .social-var-fill {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+span.iframe-small-label {
+  font-size: 11px;
+  color: #8e8e8e;
+}

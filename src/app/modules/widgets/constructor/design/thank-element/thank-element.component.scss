@@ -1,0 +1,30 @@
+.block-thank {
+  background-color: #f7f9fa;
+  width: 100%;
+  margin: 25px auto 0;
+  padding: 30px;
+  display: block;
+  text-align: center;
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.block-thank .thank-text-cent {
+  z-index: 1;
+  text-align: center;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}

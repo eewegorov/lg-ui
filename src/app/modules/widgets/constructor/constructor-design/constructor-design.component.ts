@@ -78,6 +78,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   private imageCustom = null;
   private linkImage = '';
   private nameImage = '';
+  private blocks = [];
+  private linkDetectArr = [];
 
   private autoUploadSubscription: SubscriptionLike;
 
@@ -117,10 +119,66 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       this.downUpInitAir();
     });
 
+    $(window).resize(this.getHeightBlock);
+    this.getHeightBlock();
+
     // Init video BG
     if (this.widget.guiprops?.bg.video && (this.widget.guiprops?.bg.fillorImg === 'useVideo') && this.widget.guiprops?.bg.video.videoId) {
       this.newVideoSize(this.widget.guiprops.bg.video);
     }
+
+    $('[data-detect]').each((index) => {
+      this.linkDetectArr[index] = $(this).data('detect');
+    });
+
+    $('#accordion').scroll(this.anchorsDetector);
+
+    $('.nav-drop-men li').each(() => {
+      const href = $(this).find('a').attr('href').replace('#', '').trim();
+
+      if (href.length > 0) {
+        const anchor = $('div#' + href);
+        if ((anchor as any).size() > 0) {
+          this.blocks[this.blocks.length] = anchor.eq(0);
+        }
+      }
+    });
+
+    $('#removeWidgetName').click(function(e) {
+      e.preventDefault();
+      $('#widgetNameInp').val('');
+      $(this).addClass('hide');
+    });
+
+    $('#widgetNameInp').on('input', function() {
+      const widgetInput = $(this).val();
+      const widgetNameBtnDel = $('#removeWidgetName');
+      if (widgetInput === '') {
+        widgetNameBtnDel.addClass('hide');
+      }
+      else {
+        widgetNameBtnDel.removeClass('hide');
+      }
+    });
+
+    $('[data-widget]').click(function(e) {
+      e.preventDefault();
+      const link = '#' + $(this).data('widget');
+      $('.widget-select-mode span').removeClass('active');
+      $(this).addClass('active');
+
+      $('.block-widget-show.active').addClass('hide').removeClass('active');
+      $(link).toggleClass('hide').addClass('active');
+
+      if ($('#thankWidget').hasClass('active')) {
+        $('#disabledFuncAct').removeClass('hide');
+        $('.panel-group').addClass('non-scroll');
+      }
+      else {
+        $('#disabledFuncAct').addClass('hide');
+        $('.panel-group').removeClass('non-scroll');
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -432,6 +490,20 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         }
       }
     }
+  }
+
+  private anchorsDetector() {
+    this.blocks.forEach(item => {
+      if (item.position().top <= 0) {
+        const id = item.attr('id');
+        $('#menu-select').text(this.linkDetectArr[id]);
+      }
+    });
+  }
+
+  private getHeightBlock() {
+    const mainBlock = document.getElementById('widgetStyle');
+    mainBlock.style.height = $(window).height() - 135 + 'px';
   }
 
   private loadListener() {

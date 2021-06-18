@@ -55,13 +55,7 @@
   margin: 0;
 }
 
-
-.info-link-wd {
-  margin-left: 3px;
-  vertical-align: super;
-}
-
-#widgetStyle label.title-lab {
+label.title-lab {
   left: 15px;
   font-weight: 500;
   font-size: 18px;
@@ -80,24 +74,10 @@ h3.widget-title-main {
   margin-top: 0px !important;
 }
 
-
-.editorFontLine h1, .editorFontLine h2, .editorFontLine p {
-  margin: 0;
-}
-
-
 .widget-editor-tabs {
   position: relative;
   margin-left: 265px;
   margin-top: -45px;
-}
-
-
-.widget-editor-tabs span.input-down-sm-lab {
-  display: block;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11px;
-  color: #6a6c6f;
 }
 
 .widget-editor-tabs li>a {
@@ -540,16 +520,4 @@ h6.title-h6-widget a:hover {
   right: 110px;
   left: 110px;
   right: auto;
-}
-
-.widget-visual-block h1 {
-  margin: 0 0 15px;
-}
-
-.widget-visual-block h2 {
-  margin: 0 0 20px;
-}
-
-.widget-visual-block .title-main, .widget-visual-block .description {
-  margin-bottom: 0;
 }

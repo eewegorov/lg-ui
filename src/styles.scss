@@ -1240,3 +1240,10 @@ span.underow-comment {
   justify-content: space-between;
   padding-top: 25px;
 }
+
+.border-active-element .border-item,
+.border-active-element.image-or-video-settings-bl,
+.border-active-element.main-settings-for-top-el {
+  -webkit-animation: flashBG 0.8s 0.5s;
+  animation: flashBG 0.8s 0.5s;
+}
