@@ -295,6 +295,13 @@ h4.h4-element-title a:hover .remove-sub-item {
   color: #ff0000;
 }
 
+.remove-sub-form-item {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  margin-right: 10px;
+}
+
 .remove-sub-form-item .remove-sub-item {
   font-size: 25px;
 }

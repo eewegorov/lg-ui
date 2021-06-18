@@ -1,7 +1,7 @@
 <div class="form-group filter-section">
   <div *ngFor="let subitem of item.subitems; index as i" class="row section-audience-row filterow">
-    <div *ngIf="i > 0" class="rule-subitem-text margined-left-20">{{ 'audience.rule.logic.or' | translate }}</div>
-    <div class="col-sm-12 mt-2 margined-bottom-10" [ngClass]="(subitem.value.trim().length == 0) ? 'is-invalid' : ''">
+    <div *ngIf="i > 0" class="rule-subitem-text ml-3">{{ 'audience.rule.logic.or' | translate }}</div>
+    <div class="col-sm-12 mt-2 mb-2" [ngClass]="(subitem.value.trim().length == 0) ? 'is-invalid' : ''">
       <div class="row row-nomargined">
         <div class="input-group subitem-left">
           <div class="input-group-btn">
@@ -32,7 +32,7 @@
       </div>
     </div>
   </div>
-  <div class="text-center margined-top-20">
+  <div class="text-center mt-3">
     <a href="javascript:void(0);" (click)="addSubItem(item)">
       {{ 'audience.variant.add' | translate }}
     </a>

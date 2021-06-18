@@ -1,5 +1,35 @@
+.formMas .add-sub-form-item {
+  display: none;
+}
+
+.formMas .row:last-child .add-sub-form-item {
+  display: block;
+}
+
+.formItem {
+  padding-right: 10px;
+}
+
+.greyFormBg {
+  position: relative;
+  background-color: #f2f2f2;
+  padding: 15px;
+}
+
 .form-add-title-type {
   float: left;
   padding-right: 5px;
   font-weight: 600;
+}
+
+.form-rbtn-line {
+  display: inline-block;
+}
+
+.form-rbtn-line label {
+  margin-right: 10px;
+}
+
+.formReqBl {
+  position: relative;
 }

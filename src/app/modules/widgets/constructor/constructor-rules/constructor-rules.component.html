@@ -1,7 +1,7 @@
 <div class="widgets-settings-container">
   <h1>{{ 'widgetsList.editor.rules.title' | translate }}</h1>
   <div class="row padding-bottom-70">
-    <div class="col-lg-12 margined-top-20">
+    <div class="col-lg-12 mt-3">
       <h3>{{ 'widgetsList.editor.section.targeting' | translate }}</h3>
     </div>
     <div class="col-lg-12 ">
@@ -10,7 +10,7 @@
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
     </div>
-    <div class="col-lg-12 mt-2" [ngClass]="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0)?'margined-bottom-10':''">
+    <div class="col-lg-12 mt-2" [ngClass]="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0)?'mb-2':''">
       <ui-switch size="small" [checked]="widget.rules['pages'].enable"></ui-switch><h5
       class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageTargeting.enable' | translate }}</h5>
     </div>
@@ -94,12 +94,12 @@
             </div>
             <input type="text" class="form-control" [(ngModel)]="item.value">
           </div>
-          <div class="remove-sub-item-rules margined-right-10">
+          <div class="remove-sub-item-rules mr-2">
             <a (click)="addPageRuleItem()" href="javascript:void(0);">
               <i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i>
             </a>
           </div>
-          <div *ngIf="widget.rules['pages'].items.length > 1" class="remove-sub-item-rules margined-right-10">
+          <div *ngIf="widget.rules['pages'].items.length > 1" class="remove-sub-item-rules mr-2">
             <a (click)="removePageRuleItem(i)" href="javascript:void(0);">
               <i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
             </a>
@@ -112,7 +112,7 @@
     </ng-container>
     <!-- END Page rule item -->
 
-    <div class="col-lg-12 margined-top-20">
+    <div class="col-lg-12 mt-3">
       <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.pageVTargeting.title' | translate }} <span
         class="label label-warning tariff-info ">окупаемый</span> <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageVTargeting.tooltip' | translate }}"
@@ -121,7 +121,7 @@
     </div>
     <div
       class="col-lg-12 mt-2"
-      [ngClass]="(widget.rules['prevPages'].enable && widget.rules['prevPages'].items.length > 0) ? 'margined-bottom-10' : ''"
+      [ngClass]="(widget.rules['prevPages'].enable && widget.rules['prevPages'].items.length > 0) ? 'mb-2' : ''"
     >
       <ui-switch
         size="small"
@@ -179,11 +179,11 @@
             </div>
             <input type="text" class="form-control" [(ngModel)]="item.value">
           </div>
-          <div class="remove-sub-item-rules margined-right-10">
+          <div class="remove-sub-item-rules mr-2">
             <a (click)="addPrevPageRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i>
             </a>
           </div>
-          <div *ngIf="widget.rules['prevPages'].items.length > 1" class="remove-sub-item-rules margined-right-10">
+          <div *ngIf="widget.rules['prevPages'].items.length > 1" class="remove-sub-item-rules mr-2">
             <a (click)="removePrevPageRuleItem(i)" href="javascript:void(0);"><i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
             </a>
           </div>
@@ -194,7 +194,7 @@
     <!-- END Target to viewed pages -->
 
     <!-- Page no rule -->
-    <div class="col-lg-12 margined-top-20">
+    <div class="col-lg-12 mt-3">
       <h4 class="widgets-settings-subtitle no-bold">
         {{ 'widgetsList.editor.rules.pageNo.title' | translate }} <span class="label label-warning tariff-info">окупаемый</span> <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageNo.select.title' | translate }}"
@@ -224,14 +224,14 @@
     </div>
     <!-- End Page No rule -->
     <!-- Time options start -->
-    <div class="col-lg-12 margined-top-20 margined-bottom-10">
+    <div class="col-lg-12 mt-3 mb-2">
       <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.dateTime.title' | translate }} <span
         class="label label-warning tariff-info ">окупаемый</span> <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.dateTime.placeholder' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
     </div>
-    <div class="col-lg-12" [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0)?'margined-bottom-10':''">
+    <div class="col-lg-12" [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0)?'mb-2':''">
       <ui-switch size="small" [checked]="widget.rules.time.enable" (change)="onChangePayment"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.time.enable' | translate }}</h5>
     </div>
@@ -273,10 +273,10 @@
               </li>
             </ul>
           </div>
-          <div class="remove-sub-item-rules-time margined-right-10">
+          <div class="remove-sub-item-rules-time mr-2">
             <a (click)="addTimeRuleItem()" href="javascript:void(0);"><i class="remove-sub-item-rules-time colored-blue col-sm-1 pe-7s-plus"></i></a>
           </div>
-          <div *ngIf="widget.rules['time'].items.length > 1" class="remove-sub-item-rules-time margined-right-10">
+          <div *ngIf="widget.rules['time'].items.length > 1" class="remove-sub-item-rules-time mr-2">
             <a (click)="removeTimeRuleItem(i)" href="javascript:void(0);">
               <i class="remove-sub-item-rules-time colored-red col-sm-1 pe-7s-close-circle"></i>
             </a>
@@ -286,7 +286,7 @@
     </ng-container>
     <!-- End Time options -->
     <!-- Days options start -->
-    <div class="col-lg-12 margined-top-20">
+    <div class="col-lg-12 mt-3">
       <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.days.header' | translate }} <span
         class="label label-warning tariff-info ">окупаемый</span> <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.days.title' | translate }}"
@@ -322,13 +322,13 @@
     <!-- End days options-->
     <!-- Autoinvite options: pages -->
     <div *ngIf="!isContainerized">
-      <div class="col-lg-12 margined-top-40">
+      <div class="col-lg-12 mt-5">
         <h3>{{ 'widgetsList.editor.autoinvite.title' | translate }} <a
           data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.autoinvite.tooltip' | translate }}"
-          class="info-link margined-left-5" href="#"><i class="fa fa-info-circle"></i></a>
+          class="info-link ml-1" href="#"><i class="fa fa-info-circle"></i></a>
         </h3>
       </div>
-      <div class="col-lg-12 mt-2 margined-bottom-5">
+      <div class="col-lg-12 mt-2 mb-1">
         <label class="control-label smal-subtitle">{{ 'widgetsList.editor.autoinvite.subtitle' | translate }}</label>
       </div>
       <div class="col-lg-12 mt-2">
@@ -349,7 +349,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-lg-12 margined-top-20 margined-bottom-10">
+      <div class="col-lg-12 mt-3 mb-2">
         <label class="control-label smal-subtitle">{{ 'widgetsList.editor.autoinvite.subtitle2' | translate }}</label>
       </div>
       <div class="col-lg-12 mt-2">
@@ -466,14 +466,14 @@
       </div>
       <!-- End Autoinvite: exit-intent -->
       <!-- Autoinvite: sound -->
-      <div class="col-lg-12 margined-top-40">
+      <div class="col-lg-12 mt-5">
         <ui-switch size="small" [checked]="widget.autoinvite.sound.enable"></ui-switch><h5
         class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}</h5>
       </div>
       <!-- End Autoinvite: sound -->
 
       <!-- Restrictions -->
-      <div class="col-lg-12 margined-top-40">
+      <div class="col-lg-12 mt-5">
         <h3>{{ 'widgetsList.editor.section.block' | translate }}</h3>
       </div>
       <div class="col-lg-12">
@@ -492,7 +492,7 @@
           [(ngModel)]="widget.restrictions.target.mode"
           (ngModelChange)="onRestrictionModeChange()"
         >
-        <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
+        <label class="control-label switcher-label switcher-label-xs ml-1 mt-2 no-bold">
           {{ 'widgetsList.editor.restrictions.disable.title' | translate }}
         </label>
       </div>
@@ -505,7 +505,7 @@
           [(ngModel)]="widget.restrictions.target.mode"
           (ngModelChange)="onRestrictionModeChange()"
         >
-        <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
+        <label class="control-label switcher-label switcher-label-xs ml-1 mt-2 no-bold">
           {{ 'widgetsList.editor.restrictions.enable.title' | translate }}
         </label>
       </div>
@@ -518,11 +518,11 @@
           [(ngModel)]="widget.restrictions.target.mode"
           (ngModelChange)="onRestrictionModeChange()"
         >
-        <label class="control-label switcher-label switcher-label-xs margined-left-5 margined-top-7 no-bold">
+        <label class="control-label switcher-label switcher-label-xs ml-1 mt-2 no-bold">
           {{ 'widgetsList.editor.restrictions.ontime.title' | translate }}
         </label>
       </div>
-      <div class="col-lg-12 margined-top-20" *ngIf="widget.restrictions.target.mode == 0">
+      <div class="col-lg-12 mt-3" *ngIf="widget.restrictions.target.mode == 0">
         <div class="time-settings-fromto">
           {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
         </div>
@@ -543,7 +543,7 @@
           {{ 'widgetsList.editor.restrictions.hours' | translate }}
         </div>
       </div>
-      <div class="col-lg-12 margined-top-20">
+      <div class="col-lg-12 mt-3">
         <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.restrictions.title2' | translate }} <a
           data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.restrictions.autoinvite.tooltip' | translate }}"
           class="info-link" href="#"><i class="fa fa-info-circle"></i></a></h4>
@@ -555,7 +555,7 @@
           {{ 'widgetsList.editor.restrictions.autoinvite.text' | translate }}<br />
         </h5>
       </div>
-      <div *ngIf="widget.restrictions.autoinvite.enable" class="col-lg-12 margined-top-20 width-900">
+      <div *ngIf="widget.restrictions.autoinvite.enable" class="col-lg-12 mt-3 width-900">
         <div class="time-settings-fromto">
           {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
         </div>
@@ -573,7 +573,7 @@
           {{ 'widgetsList.editor.restrictions.unique.text' | translate }}<br />
         </h5>
       </div>
-      <div *ngIf="widget.restrictions.unique.enable" class="col-lg-12 margined-top-20 width-900">
+      <div *ngIf="widget.restrictions.unique.enable" class="col-lg-12 mt-3 width-900">
         <div class="time-settings-fromto">
           {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
         </div>
@@ -591,7 +591,7 @@
           {{ 'widgets.constructor.settings.lockAfterAction.title' | translate }}<span class="label label-warning tariff-info ">окупаемый</span><br />
         </h5>
       </div>
-      <div class="col-lg-12 margined-top-20 width-900" *ngIf="widget.restrictions.action.enable">
+      <div class="col-lg-12 mt-3 width-900" *ngIf="widget.restrictions.action.enable">
         <div class="time-settings-fromto">
           {{ 'widgets.constructor.settings.lockAfterAction.lock1' | translate }}:
         </div>
@@ -609,7 +609,7 @@
           {{ 'widgetsList.editor.restrictions.count.text' | translate }}><span class="label label-warning tariff-info ">окупаемый</span><br />
         </h5>
       </div>
-      <div *ngIf="widget.restrictions.count.enable" class="col-lg-12 margined-top-20">
+      <div *ngIf="widget.restrictions.count.enable" class="col-lg-12 mt-3">
         <div class="time-settings-fromto">
           {{ 'widgetsList.editor.restrictions.count.part1' | translate }}
         </div>
@@ -618,7 +618,7 @@
           {{ 'widgetsList.editor.restrictions.count.part2' | translate }}
         </div>
         <div class="floated-left">
-          <input class="form-control widgets-num-input margined-right-5" type="number" min="0" [(ngModel)]="widget.restrictions.count.interval"/>
+          <input class="form-control widgets-num-input mr-1" type="number" min="0" [(ngModel)]="widget.restrictions.count.interval"/>
           <div class="dropdown" style="display: inline;">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
               {{ units[widget.restrictions.count.unit] }}
@@ -643,7 +643,7 @@
     <!-- END Restrictions.count -->
 
     <!-- Date range -->
-    <div class="col-lg-12 margined-top-20">
+    <div class="col-lg-12 mt-3">
       <h4 class="widgets-settings-subtitle no-bold">
         {{ 'widgetsList.editor.rules.period.header' | translate }} <span
         class="label label-warning tariff-info ">окупаемый</span> <a
@@ -685,7 +685,7 @@
 
     <!-- End Restrictions-->
     <!-- Autoresponder -->
-    <div class="col-lg-12 margined-top-40">
+    <div class="col-lg-12 mt-5">
       <h3>{{ 'widgetsList.editor.section.autoresponder' | translate }} <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.autoresponder.tooltip' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
@@ -720,14 +720,14 @@
     <!-- End autoresponder -->
 
     <!-- JS Code Actions -->
-    <div class="col-lg-12 margined-top-40">
+    <div class="col-lg-12 mt-5">
       <h3>{{ 'widgets.constructor.settings.jscode.title' | translate }}</h3>
     </div>
     <div class="col-lg-12 mt-2">
       <div class="f-4 audience-tooolbar-desc" [innerHTML]="'widgets.constructor.settings.jscode.desc' | translate"></div>
     </div>
 
-    <div class="col-lg-12 margined-top-20">
+    <div class="col-lg-12 mt-3">
       <ui-switch size="small" [(ngModel)]="widget.jsInfo.onShowScript.enable"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgets.constructor.settings.jscode.onShowChecker' | translate }}</h5>
     </div>
@@ -735,7 +735,7 @@
       <textarea class="form-control textar-iframe cons-settings-js-textarea" [(ngModel)]="widget.jsInfo.onShowScript.script"></textarea>
     </div>
 
-    <div class="col-lg-12 margined-top-20">
+    <div class="col-lg-12 mt-3">
       <ui-switch
         size="small"
         [checked]="widget.jsInfo.onTargetScript.enable"

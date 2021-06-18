@@ -11,8 +11,8 @@
           <ui-switch
             [checked]="widget.audiencesEnabled"
             (change)="onChangePayment"
-            class="margined-top-5 margined-right-10 floated-left"
-          ></ui-switch><h3 class="f-5 margined-top-5">{{ 'widgetsList.editor.audiences.enabled' | translate }}<span
+            class="mt-1 mr-2 floated-left"
+          ></ui-switch><h3 class="f-5 mt-1">{{ 'widgetsList.editor.audiences.enabled' | translate }}<span
           class="label label-warning tariff-info biggest">окупаемый</span></h3>
         </div>
       </div>
@@ -23,7 +23,7 @@
   <!-- Audience editor -->
   <div id="audiences-item">
     <!-- Audience editor core -->
-    <div class="row row-nomargined margined-bottom-15">
+    <div class="row row-nomargined mb-3">
       <div class="col-lg-8" id="rules-containers">
         <label class="control-label">{{ 'audience.settings' | translate }}</label>
         <div
@@ -108,7 +108,7 @@
           </div>
 
           <div
-            class="rule-container margined-bottom-15"
+            class="rule-container mb-3"
             appDropContainer
             [audience]="audience"
             [type]="'OR'"
