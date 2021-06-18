@@ -5,19 +5,19 @@
         Форма и кнопка <a (click)="removeElementFromElementsList(index, {name: 'form-element'})" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
       </h4>
     </div>
-    <div class="col-lg-12 m-t-xs m-b-n-xs">
+    <div class="col-lg-12 mt-1 m-b-n-xs">
       <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка полей формы</h4>
     </div>
     <!-- Page Input Form -->
     <div class="formMas">
       <div *ngFor="let item of widget.guiprops['formSet'].items; trackBy: trackById; index as i" class="row row-subitem">
         <div class="formItem">
-          <div class="col-sm-12 padding-top-5 margined-top-10 greyFormBg">
+          <div class="col-sm-12 pt-1 mt-2 greyFormBg">
             <label class="control-label">Введите название поля:</label>
             <input type="text" class="form-control" [(ngModel)]="item.placeholder">
 
             <span class="small">Например: Введите email</span>
-            <div class="typeInputRBtn m-t-sm">
+            <div class="typeInputRBtn mt-2">
               <div class="form-add-title-type">Тип:</div>
               <div *ngFor="let itemType of itemVariable" class="form-rbtn-line">
                 <label *ngIf="getItemT(item, itemType)" class="non-bold" (click)="getPlaceholderFrom(item, i)">
@@ -32,20 +32,20 @@
                 </label>
               </div>
             </div>
-            <div class="m-t-sm formReqBl">
+            <div class="mt-2 formReqBl">
               <ui-switch
                 size="small"
                 [checked]="item.required"
               ></ui-switch><label class="control-label switcher-label-xs control-label-des">Поле обязательно к заполнению</label>
             </div>
 
-            <div class="m-t-sm formReqBl" *ngIf="item.type === 'phone'">
+            <div class="mt-2 formReqBl" *ngIf="item.type === 'phone'">
               <ui-switch
                 size="small"
                 [checked]="widget.guiprops.formSet.phoneMask.enable"
               ></ui-switch><label class="control-label switcher-label-xs control-label-des">{{ 'widgets.constructor.form.phoneMask.titleSwitcher' | translate }}</label>
             </div>
-            <div *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable" class="m-t-sm formReqBl">
+            <div *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable" class="mt-2 formReqBl">
               <label class="control-label">{{ 'widgets.constructor.form.phoneMask.titleInput' | translate }}</label>
               <input type="text" class="form-control" (keyup)="blockedUnusedChars()" [(ngModel)]="widget.guiprops.formSet.phoneMask.maskValue">
               <span class="small">{{ 'widgets.constructor.form.phoneMask.description' | translate }}</span>
@@ -56,7 +56,7 @@
             </div>
           </div>
 
-          <div class="add-sub-form-item margined-right-15 m-t-sm">
+          <div class="add-sub-form-item margined-right-15 mt-2">
             <a
               *ngIf="widget.guiprops['formSet'].items.length < 4"
               (click)="addPageInputItem()"
@@ -76,7 +76,7 @@
     </div>
 
     <div class="row row-subitem m-t-lg m-b-md">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">Цвет названия полей:</label>
         <input
           [(colorPicker)]="widget.guiprops['form'].colorTitleInputForm"
@@ -86,7 +86,7 @@
         />
       </div>
 
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">Цвет фона полей:</label>
         <input
           [(colorPicker)]="widget.guiprops['form'].bgInputForm"
@@ -96,20 +96,20 @@
         />
       </div>
     </div>
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
         <ngx-slider [(value)]="widget.guiprops['form'].opacityBgInputForm" [options]="optionsOpacity"></ngx-slider>
         <label class="control-label control-label-ui">Прозрачность фона полей</label>
       </div>
     </div>
-    <div class="row row-subitem m-t-sm m-b-md">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
+    <div class="row row-subitem mt-2 m-b-md">
+      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
         <ngx-slider [(value)]="widget.guiprops['form'].borderRadiusInputForm" [options]="optionsRound"></ngx-slider>
         <label class="control-label control-label-ui">Закругление углов полей</label>
       </div>
     </div>
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Ориентация полей:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -138,8 +138,8 @@
         </div>
       </div>
     </div>
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Ширина поля:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -155,15 +155,15 @@
       </div>
     </div>
     <div *ngIf="widget.guiprops['form'].width_type === 'Собственная'">
-      <div class="col-sm-12 padding-top-5 margined-top-10">
+      <div class="col-sm-12 pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="widget.guiprops['form'].widthpx">
         <label class="control-label">px <span>ширина поля</span></label>
       </div>
       <div class="clearfix"></div>
 
     </div>
-    <div class="row row-subitem m-t-md">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-3">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
           [checked]="widget.guiprops.form.border.enable"
@@ -172,7 +172,7 @@
     </div>
     <div *ngIf="widget.guiprops['form'].border.enable == true">
       <div class="row row-subitem">
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-colorpc control-label-des">Цвет рамки:</label>
           <input
             [(colorPicker)]="widget.guiprops['form'].border.color"
@@ -183,8 +183,8 @@
         </div>
       </div>
     </div>
-    <div class="row row-subitem m-t-md">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-3">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
           [checked]="widget.guiprops.form.colorPod.enable"
@@ -193,7 +193,7 @@
     </div>
     <div *ngIf="widget.guiprops['form'].colorPod.enable == true">
       <div class="row row-subitem">
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-colorpc control-label-des">Цвет подложки:</label>
           <input
             [(colorPicker)]="widget.guiprops['form'].colorPod.color"
@@ -202,7 +202,7 @@
             [cpOutputFormat]="'hex'"
           />
         </div>
-        <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+        <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
           <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
           <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod" [options]="optionsOpacity"></ngx-slider>
         </div>
@@ -211,7 +211,7 @@
   </div>
 
   <div>
-    <div class="col-lg-12 m-t-xs m-b-sm">
+    <div class="col-lg-12 mt-1 m-b-sm">
       <h4 class="h4-text-tit control-label-des helper-title-3level">Настройки кнопки</h4>
     </div>
 
@@ -224,13 +224,13 @@
       </div>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+      <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="widget.guiprops['button'].fontSize">
         <label class="control-label">px <span>размер текста</span></label>
       </div>
     </div>
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">Цвет кнопки:</label>
         <input
           [(colorPicker)]="widget.guiprops['button'].colorBtn"
@@ -239,14 +239,14 @@
           [cpOutputFormat]="'hex'"
         />
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+      <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
         <label class="control-label control-label-colorpc control-label-des">Закругление углов</label>
         <ngx-slider [(value)]="widget.guiprops['button'].borderRadiusBtn" [options]="optionsRound"></ngx-slider>
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Ширина кнопки:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -260,7 +260,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Ориентация:</label>
         <div class="dropdown" >
           <button
@@ -282,7 +282,7 @@
       </div>
     </div>
     <div *ngIf="widget.guiprops['button'].btn_width === 'Собственная'">
-      <div class="col-sm-12 padding-top-5 margined-top-10">
+      <div class="col-sm-12 pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="widget.guiprops['button'].btn_widthpx">
         <label class="control-label">px <span>ширина кнопки</span></label>
       </div>
@@ -292,7 +292,7 @@
     <div class="clearfix"></div>
   </div>
 
-  <div class="row row-subitem m-t-sm">
+  <div class="row row-subitem mt-2">
     <div class="col-sm-12 row-subitem-padding">
       <label class="control-label control-label-des">Стиль кнопки:</label>
       <div class="dropdown" >
@@ -331,11 +331,11 @@
   </div>
 
   <div>
-    <div class="col-lg-12 m-t-sm m-b-xs">
+    <div class="col-lg-12 mt-2 mb-1">
       <h4 class="h4-text-tit control-label-des helper-title-3level">Ширина и позиционирование формы</h4>
     </div>
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Ширина формы:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -349,7 +349,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5" *ngIf="widget.guiprops.form.form_width_type === 'Собственная'">
+      <div class="col-sm-6 row-subitem-padding pt-1" *ngIf="widget.guiprops.form.form_width_type === 'Собственная'">
         <label class="control-label control-label-des">Ориентация:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -365,7 +365,7 @@
       </div>
     </div>
     <div *ngIf="widget.guiprops.form.form_width_type === 'Собственная'">
-      <div class="col-sm-12 padding-top-5 margined-top-10">
+      <div class="col-sm-12 pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="widget.guiprops.form.form_widthpx">
         <label class="control-label">px <span>ширина формы</span></label>
       </div>

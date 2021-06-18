@@ -34,8 +34,8 @@
 
   <div *ngIf="widget.useCustomIntegrationsList" class="padding-top-30 padding-bottom-20 intagrations-container">
     <!-- Integration item -->
-    <div *ngFor="let item of wIntegrations; index as i" class="row row-subitem width-900 margined-top-10">
-      <div class="col-sm-9 row-subitem-padding padding-top-5 integration-item-wr">
+    <div *ngFor="let item of wIntegrations; index as i" class="row row-subitem width-900 mt-2">
+      <div class="col-sm-9 row-subitem-padding pt-1 integration-item-wr">
         <div class="integration-item__main integration-item__main-list">
           <div class="integration-item__icon_wr">
             <div class="integration-item__icon integration-item__icon--{{ item.type }}"></div>
@@ -57,8 +57,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem width-900 margined-top-10">
-      <div class="col-sm-9 row-subitem-padding padding-top-5 integration-item-wr">
+    <div class="row row-subitem width-900 mt-2">
+      <div class="col-sm-9 row-subitem-padding pt-1 integration-item-wr">
         <div class="integration-item__main">
           <div class="dropdown integration-selector dropup">
             <button

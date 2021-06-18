@@ -1,7 +1,7 @@
 <div class="form-group filter-section">
   <div *ngFor="let subitem of item.subitems; index as i" class="row section-audience-row filterow">
     <div *ngIf="i > 0" class="rule-subitem-text margined-left-20">{{ 'audience.rule.logic.or' | translate }}</div>
-    <div class="row row-subitem margined-top-10">
+    <div class="row row-subitem mt-2">
       <div class="col-sm-6 row-subitem-padding">
         <div class="dropdown" data-val="true" data-field="present">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <div class="row small m-t-md underline-comment row-subitem-underline">
+    <div class="row small mt-3 underline-comment row-subitem-underline">
       <div class="col-sm-6 col-sm-offset-6">
         {{ 'audience.rule.visitno.underline' | translate }}
       </div>

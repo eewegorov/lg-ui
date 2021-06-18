@@ -27,7 +27,7 @@
         </button>
       </div>
     </div>
-    <div class="row row-subitem m-t-sm m-b-md">
+    <div class="row row-subitem mt-2 m-b-md">
       <div class="col-md-12 row-subitem-padding">
         <label class="non-b-textar-iframe">CSS стиль:</label>
         <textarea class="form-control textar-iframe" (blur)="getCodeForIframe(modelName)" [(ngModel)]="modelName.css_value"></textarea>
@@ -38,7 +38,7 @@
       <h4 class="h4-text-tit control-label-des helper-title-3level">Габариты</h4>
     </div>
     <div class="row row-subitem m-t-lg">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <div>
           <label class="control-label control-label-des">Ширина:</label>
           <div class="dropdown">
@@ -53,12 +53,12 @@
             </ul>
           </div>
         </div>
-        <div *ngIf="modelName.width_type === 'Собственная'" class="padding-top-5 m-t-sm">
+        <div *ngIf="modelName.width_type === 'Собственная'" class="pt-1 mt-2">
           <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="modelName.widthpx">
           <label class="control-label">px <span>ширина</span></label>
         </div>
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <div>
           <label class="control-label control-label-des">Высота:</label>
           <div class="dropdown">
@@ -73,14 +73,14 @@
             </ul>
           </div>
         </div>
-        <div *ngIf="modelName.height_type === 'Собственная'" class="padding-top-5 m-t-sm">
+        <div *ngIf="modelName.height_type === 'Собственная'" class="pt-1 mt-2">
           <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="modelName.heightpx">
           <label class="control-label">px <span>высота</span></label>
         </div>
       </div>
     </div>
     <div *ngIf="modelName.width_type === 'Собственная'">
-      <div class="col-sm-12 padding-top-5 margined-top-10">
+      <div class="col-sm-12 pt-1 mt-2">
         <label class="control-label control-label-des">Выравнивание:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">

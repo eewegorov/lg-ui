@@ -6,7 +6,7 @@
       </h4>
     </div>
     <div class="clearfix"></div>
-    <div class="row row-subitem padding-top-5">
+    <div class="row row-subitem pt-1">
       <div class="col-sm-6 row-subitem-padding">
         <div class="form-group widget-selector">
           <label>
@@ -50,15 +50,15 @@
       </button>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 widget-name-block-rel">
+      <div class="col-sm-12 row-subitem-padding pt-1 widget-name-block-rel">
         <input type="text" class="form-control widgetVideoUrl" (blur)="getVideoId(modelName)" [(ngModel)]="modelName.videoUrl">
         <span class="input-down-sm-lab small">
           {{(modelName.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253'}}
         </span>
       </div>
     </div>
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Ширина видео:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -76,7 +76,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Ориентация:</label>
         <div class="dropdown" >
           <button
@@ -102,7 +102,7 @@
       </div>
     </div>
     <div *ngIf="modelName.width_type === 'Собственная'">
-      <div class="col-sm-12 padding-top-5 margined-top-10">
+      <div class="col-sm-12 pt-1 mt-2">
         <input
           type="number"
           class="form-control form-control-font form-cntrl-55w"
@@ -113,8 +113,8 @@
       </div>
       <div class="clearfix"></div>
     </div>
-    <div class="row row-subitem m-t-md">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-3">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
           [checked]="modelName.autoplay"
@@ -122,7 +122,7 @@
       </div>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <div class="sm-video-text sm-video-text-act widget-small-text">
           Видео будет автоматически воспроизводиться при показе виджета.
         </div>

@@ -17,7 +17,7 @@
       </h3>
     </div>
   </div>
-  <div class="col-lg-12 margined-top-10">
+  <div class="col-lg-12 mt-2">
     <ui-switch
       size="small"
       [checked]="widget.guiprops.formSet.redirect.enable"
@@ -28,7 +28,7 @@
   <div *ngIf="widget.guiprops['formSet'].redirect.enable == true">
     <div class="row row-subitem">
       <div
-        class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10 widget-name-block-rel"
+        class="col-sm-12 row-subitem-padding pt-1 mt-2 widget-name-block-rel"
         [ngClass]="(widget.guiprops['formSet'].redirect.url === '') ? 'is-invalid' : ''"
       >
         <label class="control-label">{{ 'widgets.constructor.redirect.onClickRedirect' | translate }}:</label>
@@ -44,13 +44,13 @@
       </div>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding m-t-sm widget-small-text">
+      <div class="col-sm-12 row-subitem-padding mt-2 widget-small-text">
         {{ 'widgets.constructor.redirect.descriptionOld' | translate }}
       </div>
 
     </div>
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label>
           <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="widget.guiprops.formSet.redirect.blank">
           {{ 'widgets.constructor.redirect.blank' | translate }}

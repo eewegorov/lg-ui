@@ -6,7 +6,7 @@
       </h4>
     </div>
     <div class="clearfix"></div>
-    <div class="row row-subitem padding-top-5">
+    <div class="row row-subitem pt-1">
       <div class="col-sm-12 row-subitem-padding">
         <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
       </div>
@@ -15,13 +15,13 @@
       </div>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+      <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
         <label class="control-label">px <span>размер текста</span></label>
       </div>
     </div>
-    <div class="row row-subitem m-t-md">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-3">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
           [checked]="item.textShadow.enable"
@@ -30,7 +30,7 @@
     </div>
     <div *ngIf="item.textShadow.enable == true">
       <div class="row row-subitem">
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-colorpc control-label-des">Цвет тени:</label>
           <input
             [(colorPicker)]="item.textShadow.color"
@@ -39,13 +39,13 @@
             [cpOutputFormat]="'hex'"
           />
         </div>
-        <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+        <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
           <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
           <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod" [options]="optionsOpacity"></ngx-slider>
         </div>
       </div>
-      <div class="row row-subitem m-t-xs">
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="row row-subitem mt-1">
+        <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-des">Сдвиг по горизонтали:</label>
           <input
             type="number"
@@ -53,7 +53,7 @@
             [(ngModel)]="item.textShadow.horiz"
           />
         </div>
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-des">Сдвиг по вертикали:</label>
           <input
             type="number"
@@ -62,8 +62,8 @@
           />
         </div>
       </div>
-      <div class="row row-subitem m-t-xs">
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="row row-subitem mt-1">
+        <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-des">Резкость:</label>
           <input
             type="number"

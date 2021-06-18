@@ -7,8 +7,8 @@
     </div>
     <div class="clearfix"></div>
 
-    <div *ngIf="!coupons.length" class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 coupons-flex-wr">
+    <div *ngIf="!coupons.length" class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1 coupons-flex-wr">
         <a href="../../../coupons/?enableCouponModal=true" target="_blank" class="btn btn-primary btn-coupon-add">Добавить купон</a>
         <button
           (click)="refreshCouponsList()"
@@ -22,8 +22,8 @@
       </div>
     </div>
 
-    <div *ngIf="coupons.length" class="row row-subitem m-t-xs3">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div *ngIf="coupons.length" class="row row-subitem mt-1">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Выберите купон:</label>
         <div class="coupons-flex-wr">
           <div class="dropdown btn-coupon-chose">
@@ -49,18 +49,18 @@
         </div>
       </div>
     </div>
-    <div class="row row-subitem m-t-xs">
+    <div class="row row-subitem mt-1">
       <div class="col-sm-12 row-subitem-padding widget-small-text underline-links blue-links hover-links">
         Вы можете использовать в элементе один из ранее добавленных купонов. Если вы еще не добавили ни одного купона, вы можете добавить его на <a href="../../../coupons/" target="_blank">странице "Купоны"</a> и после этого вернуться к настройке элемента.
       </div>
     </div>
 
-    <div class="col-lg-12 m-t-xs m-b-xs">
+    <div class="col-lg-12 mt-1 mb-1">
       <h4 class="h4-text-tit control-label-des helper-title-3level">Настройки дизайна</h4>
     </div>
 
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">Цвет текста:</label>
         <input
           [(colorPicker)]="item.colorText"
@@ -69,7 +69,7 @@
           [cpOutputFormat]="'hex'"
         />
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">Цвет фона:</label>
         <input
           [(colorPicker)]="item.color"
@@ -80,21 +80,21 @@
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
         <ngx-slider [(value)]="item.opacity" [options]="optionsOpacity" style="margin-right: 18px"></ngx-slider>
         <label class="control-label control-label-ui">Прозрачность фона</label>
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm m-b-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
+    <div class="row row-subitem mt-2 mb-2">
+      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
         <ngx-slider [(value)]="item.borderRadius" [options]="optionsRound" style="margin-right: 18px"></ngx-slider>
         <label class="control-label control-label-ui">Закругление углов</label>
       </div>
     </div>
 
-    <div class="row row-subitem padding-top-5">
+    <div class="row row-subitem pt-1">
       <div class="col-sm-12 row-subitem-padding">
         <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
       </div>
@@ -103,14 +103,14 @@
       </div>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+      <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
         <label class="control-label">px <span>размер текста</span></label>
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Ширина элемента:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -124,7 +124,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Ориентация:</label>
         <div class="dropdown" >
           <button
@@ -146,7 +146,7 @@
       </div>
     </div>
     <div *ngIf="item.width_type === 'Собственная'">
-      <div class="col-sm-12 padding-top-5 margined-top-10">
+      <div class="col-sm-12 pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthpx">
         <label class="control-label">px <span>ширина элемента</span></label>
       </div>
@@ -154,21 +154,21 @@
     </div>
 
     <div class="row row-subitem">
-      <div class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5 margined-top-10">
+      <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
         <label class="control-label control-label-des">Текст при наведении:</label>
         <input type="text" class="form-control"[(ngModel)]="item.hoverText" placeholder="">
       </div>
     </div>
 
     <div class="row row-subitem">
-      <div class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5 margined-top-10">
+      <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
         <label class="control-label control-label-des">Текст при клике:</label>
         <input type="text" class="form-control" [(ngModel)]="item.clickText" placeholder="">
       </div>
     </div>
 
-    <div class="row row-subitem m-t-md">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-3">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
           [checked]="item.title.enable"
@@ -176,8 +176,8 @@
       </div>
     </div>
 
-    <div *ngIf="item.title.enable" class="m-t-sm">
-      <div class="row row-subitem padding-top-5">
+    <div *ngIf="item.title.enable" class="mt-2">
+      <div class="row row-subitem pt-1">
         <div class="col-sm-12 row-subitem-padding">
           <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
         </div>
@@ -186,13 +186,13 @@
         </div>
       </div>
       <div class="row row-subitem">
-        <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+        <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
           <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.title.fontSize">
           <label class="control-label">px <span>размер текста</span></label>
         </div>
       </div>
-      <div class="row row-subitem m-t-md">
-        <div class="col-sm-12 row-subitem-padding padding-top-5">
+      <div class="row row-subitem mt-3">
+        <div class="col-sm-12 row-subitem-padding pt-1">
           <ui-switch
             size="small"
             [checked]="item.title.textShadow.enable"
@@ -201,7 +201,7 @@
       </div>
       <div *ngIf="item.title.textShadow.enable">
         <div class="row row-subitem">
-          <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <div class="col-sm-6 row-subitem-padding pt-1">
             <label class="control-label control-label-colorpc control-label-des">Цвет тени:</label>
             <input
               [(colorPicker)]="item.title.textShadow.color"
@@ -210,13 +210,13 @@
               [cpOutputFormat]="'hex'"
             />
           </div>
-          <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+          <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
             <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
             <ngx-slider [(value)]="item.title.textShadow.opacity" [options]="optionsOpacity" style="margin-right: 18px"></ngx-slider>
           </div>
         </div>
-        <div class="row row-subitem m-t-xs">
-          <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <div class="row row-subitem mt-1">
+          <div class="col-sm-6 row-subitem-padding pt-1">
             <label class="control-label control-label-des">Сдвиг по горизонтали:</label>
             <input
               type="number"
@@ -224,7 +224,7 @@
               [(ngModel)]="item.title.textShadow.horiz"
             />
           </div>
-          <div class="col-sm-6 row-subitem-padding padding-top-5">
+          <div class="col-sm-6 row-subitem-padding pt-1">
             <label class="control-label control-label-des">Сдвиг по вертикали:</label>
             <input
               type="number"
@@ -233,8 +233,8 @@
             />
           </div>
         </div>
-        <div class="row row-subitem m-t-xs">
-          <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <div class="row row-subitem mt-1">
+          <div class="col-sm-6 row-subitem-padding pt-1">
             <label class="control-label control-label-des">Резкость:</label>
             <input
               type="number"
@@ -246,14 +246,14 @@
       </div>
     </div>
 
-    <div class="col-lg-12 m-t-xs m-b-xs">
+    <div class="col-lg-12 mt-1 mb-1">
       <h4 class="h4-text-tit control-label-des helper-title-3level">
         {{ 'widgets.constructor.coupon.setting.actions' | translate }}
       </h4>
     </div>
 
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label>
           <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="item.isCopyAction">
           {{ 'widgets.constructor.coupon.setting.isCopyAction' | translate }}

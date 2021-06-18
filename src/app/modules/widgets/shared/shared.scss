@@ -439,12 +439,12 @@ i.fa-plus {
 }
 
 .ui-state-default {
-  background: #3b99fc!important;
-  cursor: pointer!important;
+  background: #3b99fc !important;
+  cursor: pointer !important;
 }
 
 label.control-label-ui {
-  font-weight: 400!important;
+  font-weight: 400 !important;
 }
 
 a.widget-download-img {
@@ -462,4 +462,50 @@ a.widget-download-img {
 
 .radio-info input[type="radio"]:checked + label::after {
   background-color: #3498db
+}
+
+.coupons-flex-wr {
+  display: flex;
+}
+
+.coupons-flex-wr .btn-coupon-add,
+.coupons-flex-wr .btn-coupon-chose {
+  max-width: 88%;
+  flex-basis: 88%;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.btn-coupon-chose .btn.dropdown-toggle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 20px;
+}
+
+.coupons-flex-wr .refresh-coupons-element-btn {
+  max-width: calc(12% - 10px);
+  flex-basis: calc(12% - 10px);
+}
+
+.btn-coupon-chose .dropdown-menu {
+  width: 100%;
+}
+
+.btn-coupon-chose .dropdown-menu li a {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+h4.helper-title-3level {
+  padding-top: 15px;
+  font-size: 14px !important;
+}
+
+.widget-name-block-rel {
+  position: relative;
+}
+
+.side-ui-sm .ui-slider {
+  width: 47%;
+  margin-right: 5px;
 }

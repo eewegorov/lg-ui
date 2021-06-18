@@ -6,12 +6,12 @@
       </h4>
     </div>
     <div class="clearfix"></div>
-    <div class="row row-subitem padding-top-5">
-      <div class="col-sm-12 row-subitem-padding m-b-xs">
+    <div class="row row-subitem pt-1">
+      <div class="col-sm-12 row-subitem-padding mb-1">
         <span class="input-down-sm-lab control-label-des">Выберите сервисы, которые вы хотите использовать</span>
       </div>
     </div>
-    <div class="row row-subitem padding-top-5 social-block-choose">
+    <div class="row row-subitem pt-1 social-block-choose">
       <div class="col-sm-4 row-subitem-padding">
         <label>
           <input
@@ -182,8 +182,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem padding-top-5 m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem pt-1 mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Дизайн кнопок:</label>
         <div class="social-variable-bl">
           <div
@@ -211,8 +211,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem padding-top-5 m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem pt-1 mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Выравнивание:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -228,8 +228,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem padding-top-5 m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem pt-1 mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Какой страницей делиться:</label>
       </div>
     </div>
@@ -253,10 +253,10 @@
     </div>
     <div>
       <div class="row row-subitem">
-        <div *ngIf="widget.guiprops['social'].linkForShare === 'own'" class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5">
+        <div *ngIf="widget.guiprops['social'].linkForShare === 'own'" class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1">
           <input type="text" class="form-control" [(ngModel)]="widget.guiprops['social'].linkText" placeholder="Введите URL">
         </div>
-        <div class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5">
+        <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1">
           <span class="iframe-small-label">
             Вы можете выбрать, какой страницей поделится посетитель в социальных сетях. Это может быть страница, на которой он находится или указанный вами URL.
           </span>
