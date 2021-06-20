@@ -68,7 +68,7 @@
     <div *ngIf="widget.guiprops?.dhVisual?.widget_content_height === 'Собственная'" class="row row-subitem mt-2">
       <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Позиционирование контента:</label>
-        <div class="dropdown" >
+        <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ widget.guiprops.dhVisual.widget_content_height_orient }}
             <span class="caret"></span>
@@ -146,7 +146,7 @@
           <div class="col-sm-6 row-subitem-padding pt-1">
             <div>
               <label class="control-label control-label-des">Положение:</label>
-              <div class="dropdown" >
+              <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
                   {{ widget.guiprops.bg.positionType }}
                   <span class="caret"></span>
@@ -166,7 +166,7 @@
           <div *ngIf="widget.guiprops['bg'].positionType === 'Замостить'" class="col-sm-6 row-subitem-padding pt-1">
             <div>
               <label class="control-label control-label-des">Плитка:</label>
-              <div class="dropdown" >
+              <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
                   {{ widget.guiprops.bg.tiles }}
                   <span class="caret"></span>
@@ -187,7 +187,7 @@
       </div>
 
       <div *ngIf="widget.guiprops['bg'].fillorImg === 'useVideo'">
-        <div class="imaget-item-video-settings m-b">
+        <div class="imaget-item-video-settings mb-3">
           <div class="row row-subitem pt-1">
             <div class="col-sm-12 row-subitem-padding mt-2 mb-1">
               <h4 class="h4-text-tit control-label-des helper-title-3level">Источник видео</h4>
@@ -241,7 +241,7 @@
                 [(ngModel)]="widget.guiprops.bg.video.videoUrl"
               />
               <span class="input-down-sm-lab small">
-                {{ (widget.guiprops.bg.video.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253'}}
+                {{ (widget.guiprops.bg.video.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253' }}
               </span>
             </div>
           </div>
@@ -370,7 +370,7 @@
           </div>
         </div>
 
-        <div *ngIf="widget.guiprops['image'].typeBl == 'imageBl'" class="mt-2 m-b">
+        <div *ngIf="widget.guiprops['image'].typeBl == 'imageBl'" class="mt-2 mb-3">
           <div class="row row-subitem">
             <div class="col-sm-12 row-subitem-padding mb-1">
               <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка изображения</h4>
@@ -381,7 +381,7 @@
           </div>
         </div>
 
-        <div *ngIf="widget.guiprops['image'].typeBl == 'videoBl'" class="imaget-item-video-settings m-b">
+        <div *ngIf="widget.guiprops['image'].typeBl == 'videoBl'" class="imaget-item-video-settings mb-3">
           <div class="row row-subitem pt-1">
             <div class="col-sm-12 row-subitem-padding mt-2 mb-1">
               <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка видео</h4>
@@ -455,7 +455,7 @@
           </div>
         </div>
 
-        <div class="margined-top-minus-5">
+        <div>
           <div class="col-lg-12 mt-1 mb-1">
             <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка расположения и габаритов</h4>
           </div>
@@ -463,7 +463,7 @@
           <div class="row row-subitem mt-2">
             <div class="col-sm-6 row-subitem-padding">
               <label class="control-label control-label-des">Расположение блока:</label>
-              <div class="dropdown" >
+              <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
                   {{ widget.guiprops.image.place }}
                   <span class="caret"></span>
@@ -486,7 +486,7 @@
             >
               <div>
                 <label class="control-label control-label-des">Ширина блока:</label>
-                <div class="dropdown" >
+                <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
                     {{ widget.guiprops.image.img_width }}
                     <span class="caret"></span>
@@ -518,7 +518,7 @@
             >
               <div>
                 <label class="control-label control-label-des">Высота блока:</label>
-                <div class="dropdown" >
+                <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
                     {{ widget.guiprops.image.img_height }}
                     <span class="caret"></span>
@@ -549,7 +549,7 @@
             <div class="col-sm-12 row-subitem-padding mt-2">
               <label *ngIf="widget.guiprops['image'].typeBl == 'imageBl'" class="control-label control-label-des">Габариты изображения:</label>
               <label *ngIf="widget.guiprops['image'].typeBl == 'videoBl'" class="control-label control-label-des">Габариты видео:</label>
-              <div class="dropdown" >
+              <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
                   {{ widget.guiprops.image.img_item_type }}
                   <span class="caret"></span>
@@ -595,7 +595,7 @@
               <div class="row row-subitem">
                 <div class="col-sm-12 row-subitem-padding mt-2">
                   <label class="control-label control-label-des">Выравнивание по вертикали:</label>
-                  <div class="dropdown" >
+                  <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
                       {{ widget.guiprops.image.img_item_align }}
                       <span class="caret"></span>

@@ -19,7 +19,7 @@
       <div *ngFor="let item of widget.rules['pages'].items; index as i" class="row row-subitem width-900 mt-2">
         <div class="col-sm-3 row-subitem-padding pt-1">
           <label class="control-label">{{ 'widgetsList.editor.rules.widget' | translate }}:</label>
-          <div class="dropdown" >
+          <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
               {{ getPageStateName(item) }}
               <span class="caret"></span>
@@ -133,7 +133,7 @@
       <div *ngFor="let item of widget.rules['prevPages'].items; index as i" class="row row-subitem width-900 mt-2">
         <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label">{{ 'widgetsList.editor.rules.pageVTargeting.user' | translate }}:</label>
-          <div class="dropdown" >
+          <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
               {{ getPageCompareName(item) }}
               <span class="caret"></span>
@@ -333,7 +333,7 @@
       </div>
       <div class="col-lg-12 mt-2">
         <label class="control-label control-label-des">{{ 'widgetsList.editor.autoinvite.variants' | translate }}:</label>
-        <div class="dropdown" >
+        <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ widget.autoinvite.ruleLogic }}
             <span class="caret"></span>
