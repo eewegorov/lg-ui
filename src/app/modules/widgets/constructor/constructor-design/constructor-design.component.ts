@@ -1055,8 +1055,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       this.addElemFromWidget = false;
     }
 
-    console.log(this.controls);
-
     (this.controls.newElementModal as any).modal('show');
     $('body').addClass('modal-open-h100');
   }
