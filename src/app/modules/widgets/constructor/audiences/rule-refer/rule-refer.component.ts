@@ -5,7 +5,7 @@ import { AUDIENCES_VALS } from '../../../../../configs/audiences';
 @Component({
   selector: 'app-rule-refer',
   templateUrl: './rule-refer.component.html',
-  styleUrls: ['./rule-refer.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './rule-refer.component.scss']
 })
 export class RuleReferComponent implements OnInit {
   @Input() public item: AudienceGroupItem;

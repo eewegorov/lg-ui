@@ -5,7 +5,7 @@ import { AUDIENCES_VALS } from '../../../../../configs/audiences';
 @Component({
   selector: 'app-rule-visit',
   templateUrl: './rule-visit.component.html',
-  styleUrls: ['./rule-visit.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './rule-visit.component.scss']
 })
 export class RuleVisitComponent implements OnInit {
   @Input() public item: AudienceGroupItem;

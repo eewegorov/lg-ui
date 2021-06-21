@@ -680,3 +680,21 @@ button.refresh-video-element-btn {
 .audience-tooolbar-desc.integration-tooolbar-desc {
   width: calc(100% - 30px) !important;
 }
+
+.rule-subitem-text {
+  padding: 0px;
+}
+
+.subitem-left {
+  float: left;
+  width: calc(100% - 30px);
+}
+
+.underline-comment {
+  margin: 3px 0px 0px;
+}
+
+.underline-comment.row-subitem-underline {
+  margin: 0px !important;
+  margin-bottom: 10px !important;
+}

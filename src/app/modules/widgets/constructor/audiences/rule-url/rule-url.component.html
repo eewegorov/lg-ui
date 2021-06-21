@@ -2,8 +2,8 @@
   <div *ngFor="let subitem of item.subitems; index as i" class="row section-audience-row filterow">
     <div *ngIf="i > 0" class="rule-subitem-text ml-3">{{ 'audience.rule.logic.or' | translate }}</div>
     <div class="row row-subitem mt-2">
-      <div class="col-sm-3 row-subitem-padding padding-top-22">
-        <div class="dropdown"  data-val="true" data-field="present">
+      <div class="col-sm-3 row-subitem-padding pt-3">
+        <div class="dropdown" data-val="true" data-field="present">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ vals.conditions[subitem.condition] }} <span class="caret"></span>
           </button>
@@ -18,7 +18,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-sm-4 p-l-none">
+      <div class="col-sm-4 pl-0">
         <div class="row row-subitem-underline ml-1 mb-1">
           <span class="underline-comment">{{ 'audience.rule.url.value.upline' | translate }}:</span>
         </div>
@@ -36,7 +36,7 @@
           <input type="text" class="form-control" aria-label="" [(ngModel)]="subitem.param">
         </div>
       </div>
-      <div class="col-sm-5 p-l-none">
+      <div class="col-sm-5 pl-0">
         <div class="row row-subitem-underline ml-1 mb-1">
           <span class="underline-comment">{{ 'audience.rule.url.value.upline' | translate }}:</span>
         </div>

@@ -7,7 +7,7 @@ import { WidgetConstructorService } from '../../services/widget-constructor.serv
 @Component({
   selector: 'app-constructor-audiences',
   templateUrl: './constructor-audiences.component.html',
-  styleUrls: ['./constructor-audiences.component.scss']
+  styleUrls: ['../../shared/shared.scss', './constructor-audiences.component.scss']
 })
 export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
   @Input() public widget: FullWidget;
