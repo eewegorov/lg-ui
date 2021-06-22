@@ -677,10 +677,6 @@ button.refresh-video-element-btn {
   font-size: 11px;
 }
 
-.audience-tooolbar-desc.integration-tooolbar-desc {
-  width: calc(100% - 30px) !important;
-}
-
 .rule-subitem-text {
   padding: 0px;
 }
@@ -701,4 +697,8 @@ button.refresh-video-element-btn {
 
 textarea.textar-iframe {
   height: 120px;
+}
+
+.width-900 {
+  width: 900px;
 }

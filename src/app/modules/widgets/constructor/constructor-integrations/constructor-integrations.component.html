@@ -1,14 +1,14 @@
-<div class="widgets-settings-container1 padding-bottom-40-imp">
+<div class="widgets-settings-container pb-5">
   <h1>{{ 'widgetsList.editor.integrations.title' | translate }}</h1>
 
   <div class="integrations-switcher-component-item">
-    <div class="toolbar-content no-padding padding-top-30">
-      <div class="row btnpanel">
+    <div class="toolbar-content p-0 pt-4">
+      <div class="row">
         <div class="audience-tooolbar-switcher">
           <ui-switch
             [checked]="widget.sendCrm"
-            class="mt-1 mr-2 floated-left"
-          ></ui-switch><h3 class="f-5 mt-1">{{ 'widgetsList.editor.integrations.crmSwitcher.title' | translate }}</h3>
+            class="mt-1 mr-2 float-left"
+          ></ui-switch><h3 class="mt-1">{{ 'widgetsList.editor.integrations.crmSwitcher.title' | translate }}</h3>
         </div>
       </div>
     </div>
@@ -19,20 +19,20 @@
   </div>
 
   <div class="integrations-switcher-component-item">
-    <div class="toolbar-content no-padding padding-top-30">
+    <div class="toolbar-content p-0 pt-4">
       <div class="row btnpanel">
         <div class="audience-tooolbar-switcher">
           <ui-switch
             [checked]="widget.useCustomIntegrationsList"
-            class="mt-1 mr-2 floated-left"
-          ></ui-switch><h3 class="f-5 mt-1">{{ 'widgetsList.editor.integrations.mainSwitcher' | translate }}</h3>
+            class="mt-1 mr-2 float-left"
+          ></ui-switch><h3 class="mt-1">{{ 'widgetsList.editor.integrations.mainSwitcher' | translate }}</h3>
         </div>
       </div>
     </div>
     <div class="audience-tooolbar-desc" [innerHTML]="'widgetsList.editor.integrations.description' | translate"></div>
   </div>
 
-  <div *ngIf="widget.useCustomIntegrationsList" class="padding-top-30 padding-bottom-20 intagrations-container">
+  <div *ngIf="widget.useCustomIntegrationsList" class="pt-4 pb-3 intagrations-container">
     <!-- Integration item -->
     <div *ngFor="let item of wIntegrations; index as i" class="row row-subitem width-900 mt-2">
       <div class="col-sm-9 row-subitem-padding pt-1 integration-item-wr">
