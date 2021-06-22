@@ -11,7 +11,7 @@ import { IntegrationAddComponent } from '../../../sites/integration-add/integrat
 @Component({
   selector: 'app-constructor-integrations',
   templateUrl: './constructor-integrations.component.html',
-  styleUrls: ['./constructor-integrations.component.scss']
+  styleUrls: ['../../shared/shared.scss', './constructor-integrations.component.scss']
 })
 export class ConstructorIntegrationsComponent implements OnInit, OnDestroy {
   @Input() public sid: string;

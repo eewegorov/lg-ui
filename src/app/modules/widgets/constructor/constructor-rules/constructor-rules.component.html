@@ -1,18 +1,18 @@
 <div class="widgets-settings-container">
   <h1>{{ 'widgetsList.editor.rules.title' | translate }}</h1>
-  <div class="row padding-bottom-70">
+  <div class="row pb-5">
     <div class="col-lg-12 mt-3">
       <h3>{{ 'widgetsList.editor.section.targeting' | translate }}</h3>
     </div>
-    <div class="col-lg-12 ">
-      <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }} <a
+    <div class="col-lg-12">
+      <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }} <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageTargeting.tooltip' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
     </div>
-    <div class="col-lg-12 mt-2" [ngClass]="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0)?'mb-2':''">
+    <div class="col-lg-12 mt-2" [ngClass]="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0) ? 'mb-2' : ''">
       <ui-switch size="small" [checked]="widget.rules['pages'].enable"></ui-switch><h5
-      class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageTargeting.enable' | translate }}</h5>
+      class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.pageTargeting.enable' | translate }}</h5>
     </div>
     <!-- Page rule item -->
     <ng-container *ngIf="widget.rules['pages'].enable == true">
@@ -113,7 +113,7 @@
     <!-- END Page rule item -->
 
     <div class="col-lg-12 mt-3">
-      <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.pageVTargeting.title' | translate }} <span
+      <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.pageVTargeting.title' | translate }} <span
         class="label label-warning tariff-info ">окупаемый</span> <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageVTargeting.tooltip' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
@@ -126,7 +126,7 @@
       <ui-switch
         size="small"
         [checked]="widget.rules['prevPages'].enable"
-      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageVTargeting.enable' | translate }}</h5>
+      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.pageVTargeting.enable' | translate }}</h5>
     </div>
     <!-- Target to viewed pages -->
     <ng-container *ngIf="widget.rules['prevPages'].enable == true">
@@ -195,7 +195,7 @@
 
     <!-- Page no rule -->
     <div class="col-lg-12 mt-3">
-      <h4 class="widgets-settings-subtitle no-bold">
+      <h4 class="widgets-settings-subtitle">
         {{ 'widgetsList.editor.rules.pageNo.title' | translate }} <span class="label label-warning tariff-info">окупаемый</span> <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageNo.select.title' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
@@ -203,7 +203,7 @@
     </div>
     <div class="col-lg-12 mt-2">
       <ui-switch size="small" [checked]="widget.rules.pageNo.enable" (change)="onChangePayment"
-      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.pageNo.enable' | translate }}</h5>
+      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.pageNo.enable' | translate }}</h5>
     </div>
     <div
       *ngIf="widget.rules.pageNo.enable"
@@ -225,15 +225,15 @@
     <!-- End Page No rule -->
     <!-- Time options start -->
     <div class="col-lg-12 mt-3 mb-2">
-      <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.dateTime.title' | translate }} <span
+      <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.dateTime.title' | translate }} <span
         class="label label-warning tariff-info ">окупаемый</span> <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.dateTime.placeholder' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
     </div>
-    <div class="col-lg-12" [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0)?'mb-2':''">
+    <div class="col-lg-12" [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0) ? 'mb-2' : ''">
       <ui-switch size="small" [checked]="widget.rules.time.enable" (change)="onChangePayment"
-      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.time.enable' | translate }}</h5>
+      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.time.enable' | translate }}</h5>
     </div>
     <ng-container *ngIf="widget.rules['time'].enable == true">
       <div class="row row-subitem width-400 mt-2" *ngFor="let item of widget.rules['time'].items; index as i">
@@ -287,8 +287,8 @@
     <!-- End Time options -->
     <!-- Days options start -->
     <div class="col-lg-12 mt-3">
-      <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.rules.days.header' | translate }} <span
-        class="label label-warning tariff-info ">окупаемый</span> <a
+      <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.days.header' | translate }} <span
+        class="label label-warning tariff-info">окупаемый</span> <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.days.title' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
@@ -298,7 +298,7 @@
         size="small"
         [checked]="widget.rules.days.enable"
         (change)="onChangePayment"
-      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.days.enable' | translate }}</h5>
+      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.days.enable' | translate }}</h5>
     </div>
     <div
       *ngIf="widget.rules.days.enable"
@@ -358,8 +358,8 @@
           [checked]="widget.autoinvite.pages.enable"
           (change)="onChangePayment"
         ></ui-switch><h5
-        class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.pages.enable' | translate }}<span
-        class="label label-warning tariff-info ">окупаемый</span></h5>
+        class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.pages.enable' | translate }}<span
+        class="label label-warning tariff-info">окупаемый</span></h5>
       </div>
       <div
         *ngIf="widget.autoinvite.pages.enable"
@@ -378,10 +378,10 @@
       <!-- Autoinvite: seconds -->
       <div class="col-lg-12 mt-2">
         <ui-switch
-          class="switch-xs"
+          size="small"
           [checked]="widget.autoinvite.seconds.enable"
         ></ui-switch><h5
-        class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}</h5>
+        class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}</h5>
       </div>
       <div
         *ngIf="widget.autoinvite.seconds.enable"
@@ -401,8 +401,8 @@
           [checked]="widget.autoinvite.inactive.enabled"
           (change)="onChangePayment"
         ></ui-switch><h5
-        class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.inactive.enabled' | translate }}<span
-        class="label label-warning tariff-info ">окупаемый</span></h5>
+        class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.inactive.enabled' | translate }}<span
+        class="label label-warning tariff-info">окупаемый</span></h5>
       </div>
       <div
         *ngIf="widget.autoinvite.inactive.enabled"
@@ -422,8 +422,8 @@
           [checked]="widget.autoinvite.percent.enable"
           (change)="onChangePayment"
         ></ui-switch><h5
-        class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.percent.enable' | translate }}<span
-        class="label label-warning tariff-info ">окупаемый</span></h5>
+        class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.percent.enable' | translate }}<span
+        class="label label-warning tariff-info">окупаемый</span></h5>
       </div>
       <div
         *ngIf="widget.autoinvite.percent.enable"
@@ -442,7 +442,7 @@
         <ui-switch
           size="small"
           [checked]="widget.autoinvite.click.enable"
-        ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.click.enable' | translate }}</h5>
+        ></ui-switch><h5 class="control-label switcher-label switcher-labe">{{ 'widgetsList.editor.autoinvite.click.enable' | translate }}</h5>
       </div>
       <div
         *ngIf="widget.autoinvite.click.enable"
@@ -462,13 +462,13 @@
       <!-- Autoinvite: exit-intent -->
       <div class="col-lg-12 mt-2">
         <ui-switch size="small" [checked]="widget.autoinvite.exit.enable"></ui-switch><h5
-        class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.exit.enable' | translate }}</h5>
+        class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.exit.enable' | translate }}</h5>
       </div>
       <!-- End Autoinvite: exit-intent -->
       <!-- Autoinvite: sound -->
       <div class="col-lg-12 mt-5">
         <ui-switch size="small" [checked]="widget.autoinvite.sound.enable"></ui-switch><h5
-        class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}</h5>
+        class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}</h5>
       </div>
       <!-- End Autoinvite: sound -->
 
@@ -477,9 +477,7 @@
         <h3>{{ 'widgetsList.editor.section.block' | translate }}</h3>
       </div>
       <div class="col-lg-12">
-        <h4
-          class="widgets-settings-subtitle no-bold"
-        >
+        <h4 class="widgets-settings-subtitle">
           {{ 'widgetsList.editor.restrictions.title' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
         </h4>
       </div>
@@ -492,7 +490,7 @@
           [(ngModel)]="widget.restrictions.target.mode"
           (ngModelChange)="onRestrictionModeChange()"
         >
-        <label class="control-label switcher-label switcher-label-xs ml-1 mt-2 no-bold">
+        <label class="control-label switcher-label switcher-label-xs ml-1 mt-2">
           {{ 'widgetsList.editor.restrictions.disable.title' | translate }}
         </label>
       </div>
@@ -505,7 +503,7 @@
           [(ngModel)]="widget.restrictions.target.mode"
           (ngModelChange)="onRestrictionModeChange()"
         >
-        <label class="control-label switcher-label switcher-label-xs ml-1 mt-2 no-bold">
+        <label class="control-label switcher-label switcher-label-xs ml-1 mt-2">
           {{ 'widgetsList.editor.restrictions.enable.title' | translate }}
         </label>
       </div>
@@ -518,7 +516,7 @@
           [(ngModel)]="widget.restrictions.target.mode"
           (ngModelChange)="onRestrictionModeChange()"
         >
-        <label class="control-label switcher-label switcher-label-xs ml-1 mt-2 no-bold">
+        <label class="control-label switcher-label switcher-label-xs ml-1 mt-2">
           {{ 'widgetsList.editor.restrictions.ontime.title' | translate }}
         </label>
       </div>
@@ -544,14 +542,14 @@
         </div>
       </div>
       <div class="col-lg-12 mt-3">
-        <h4 class="widgets-settings-subtitle no-bold">{{ 'widgetsList.editor.restrictions.title2' | translate }} <a
+        <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.restrictions.title2' | translate }} <a
           data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.restrictions.autoinvite.tooltip' | translate }}"
           class="info-link" href="#"><i class="fa fa-info-circle"></i></a></h4>
       </div>
       <!-- Restrictions.autoinvite -->
       <div class="col-lg-12 mt-2">
         <input type="checkbox" id="autoinviteEnable" name="autoinviteEnable" [(ngModel)]="widget.restrictions.autoinvite.enable">
-        <h5 class="control-label switcher-label switcher-label-xs f-7">
+        <h5 class="control-label switcher-label switcher-label-xs">
           {{ 'widgetsList.editor.restrictions.autoinvite.text' | translate }}<br />
         </h5>
       </div>
@@ -569,7 +567,7 @@
       <!-- Restrictions.unique -->
       <div class="col-lg-12 mt-2">
         <input type="checkbox" id="uniqueEnable" name="uniqueEnable" [(ngModel)]="widget.restrictions.unique.enable">
-        <h5 class="control-label switcher-label switcher-label-xs f-7">
+        <h5 class="control-label switcher-label switcher-label-xs">
           {{ 'widgetsList.editor.restrictions.unique.text' | translate }}<br />
         </h5>
       </div>
@@ -587,8 +585,8 @@
       <!-- Restrictions.lockAfterAction -->
       <div class="col-lg-12 mt-2">
         <input #actionEnable id="actionEnable" type="checkbox" [checked]="widget.restrictions.action.enable" (change)="onChangePayment(actionEnable.checked)" />
-        <h5 class="control-label switcher-label switcher-label-xs f-7">
-          {{ 'widgets.constructor.settings.lockAfterAction.title' | translate }}<span class="label label-warning tariff-info ">окупаемый</span><br />
+        <h5 class="control-label switcher-label switcher-label-xs">
+          {{ 'widgets.constructor.settings.lockAfterAction.title' | translate }}<span class="label label-warning tariff-info">окупаемый</span><br />
         </h5>
       </div>
       <div class="col-lg-12 mt-3 width-900" *ngIf="widget.restrictions.action.enable">
@@ -605,7 +603,7 @@
       <!-- Restrictions.count -->
       <div class="col-lg-12 mt-2">
         <input #countEnable id="countEnable" type="checkbox" [checked]="widget.restrictions.count.enable" (change)="onChangePayment(countEnable.checked)" />
-        <h5 class="control-label switcher-label switcher-label-xs f-7">
+        <h5 class="control-label switcher-label switcher-label-xs">
           {{ 'widgetsList.editor.restrictions.count.text' | translate }}><span class="label label-warning tariff-info ">окупаемый</span><br />
         </h5>
       </div>
@@ -644,9 +642,9 @@
 
     <!-- Date range -->
     <div class="col-lg-12 mt-3">
-      <h4 class="widgets-settings-subtitle no-bold">
+      <h4 class="widgets-settings-subtitle">
         {{ 'widgetsList.editor.rules.period.header' | translate }} <span
-        class="label label-warning tariff-info ">окупаемый</span> <a
+        class="label label-warning tariff-info">окупаемый</span> <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.period.tooltip' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
@@ -656,7 +654,7 @@
         size="small"
         [(ngModel)]="widget.rules.period.enable"
         (change)="onChangePayment"
-      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.rules.period.title' | translate }}</h5>
+      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.period.title' | translate }}</h5>
     </div>
     <div *ngIf="widget.rules.period.enable" class="col-lg-12 mt-2 width-900">
       <div class="time-settings-fromto">
@@ -693,7 +691,7 @@
     </div>
     <div class="col-lg-12 mt-2">
       <ui-switch size="small" [checked]="widget.autoresponder.enabled"
-      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgetsList.editor.autoresponder.enable' | translate }}</h5>
+      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoresponder.enable' | translate }}</h5>
     </div>
     <div *ngIf="widget.autoresponder.enabled" class="col-lg-12 mt-1 mb-1">
       <div
@@ -729,7 +727,7 @@
 
     <div class="col-lg-12 mt-3">
       <ui-switch size="small" [(ngModel)]="widget.jsInfo.onShowScript.enable"
-      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgets.constructor.settings.jscode.onShowChecker' | translate }}</h5>
+      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgets.constructor.settings.jscode.onShowChecker' | translate }}</h5>
     </div>
     <div class="col-lg-12 mt-2" *ngIf="widget.jsInfo.onShowScript.enable">
       <textarea class="form-control textar-iframe cons-settings-js-textarea" [(ngModel)]="widget.jsInfo.onShowScript.script"></textarea>
@@ -739,7 +737,7 @@
       <ui-switch
         size="small"
         [checked]="widget.jsInfo.onTargetScript.enable"
-      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs f-6">{{ 'widgets.constructor.settings.jscode.onActionChecker' | translate }}</h5>
+      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgets.constructor.settings.jscode.onActionChecker' | translate }}</h5>
     </div>
     <div *ngIf="widget.jsInfo.onTargetScript.enable">
       <div class="col-lg-12 mt-2">
@@ -750,8 +748,8 @@
       </div>
       <div class="col-lg-12 mt-2">
         <input #enablePlaceholding id="enablePlaceholding" type="checkbox" [checked]="widget.jsInfo.enablePlaceholding" (change)="onChangePayment(enablePlaceholding.checked)" />
-        <h5 class="control-label switcher-label switcher-label-xs f-7">
-          {{ 'widgets.constructor.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info ">окупаемый</span>
+        <h5 class="control-label switcher-label switcher-label-xs">
+          {{ 'widgets.constructor.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
         </h5>
       </div>
     </div>

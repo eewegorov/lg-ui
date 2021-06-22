@@ -1,5 +1,85 @@
+h4.widgets-settings-subtitle {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.width-900 {
+  width: 900px;
+}
+
+.width-930 {
+  width: 930px;
+}
+
+.width-400 {
+  width: 400px;
+}
+
+.input-with-remove {
+  float: left;
+  width: calc(100% - 100px);
+}
+
 span.combo-box-underow-comment-comment {
   left: 10px;
   position: absolute;
   top: 60px;
+}
+
+.remove-sub-item-rules {
+  display: inline-block;
+  padding-top: 11px;
+  width: 25px;
+}
+
+.remove-sub-item-rules i {
+  color: rgb(106, 108, 111);
+  font-size: 34px;
+}
+
+.remove-sub-item-rules-time {
+  display: inline-block;
+  width: 25px;
+}
+
+.remove-sub-item-rules-time i {
+  color: rgb(106, 108, 111);
+  font-size: 34px;
+}
+
+.time-settings-fromto {
+  float: left;
+  font-size: 18px;
+  font-weight: 100;
+  line-height: 30px;
+  margin-left: 10px;
+  margin-right:10px;
+}
+
+label.smal-subtitle {
+  font-size: 16px !important;
+  color: #6a6c6f !important;
+  font-weight: 200 !important;
+}
+
+input.radio-left {
+  float: left;
+  font-size: 30px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.widgets-num-input {
+  float: left !important;
+  width: 60px !important;
+}
+
+.form-control.period-range {
+  float: left;
+  width: 100px !important;
+}
+
+.cons-settings-js-textarea {
+  width: 900px;
+  height: 180px;
 }

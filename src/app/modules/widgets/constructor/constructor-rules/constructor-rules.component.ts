@@ -8,7 +8,7 @@ import { WidgetConstructorService } from '../../services/widget-constructor.serv
 @Component({
   selector: 'app-constructor-rules',
   templateUrl: './constructor-rules.component.html',
-  styleUrls: ['./constructor-rules.component.scss']
+  styleUrls: ['../../shared/shared.scss', './constructor-rules.component.scss']
 })
 export class ConstructorRulesComponent implements OnInit {
   @Input() public widget: FullWidget;
