@@ -42,7 +42,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   public audience: Audience;
   public coupons = [];
   public isLoading = false;
-  public SP_widget: any;
+  public SP_widget = {} as any;
 
   private couponsErrorFlag = false;
   private couponsId = [];
@@ -423,6 +423,10 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   private mapFormExtFieldId() {
+    if (!this.widget.guiprops.formExt) {
+      return;
+    }
+
     this.formExtIdsErrorFlag = false;
     this.formExtNeedButton = false;
     this.formExtRedirectFieldEmpty = false;

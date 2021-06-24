@@ -44,6 +44,7 @@ export interface Audience {
 
 export interface AudienceGroup {
   id?: number;
+  name?: string;
   items: AudienceGroupItem[];
 }
 

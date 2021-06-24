@@ -1,18 +1,22 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 import { Audience } from '../../core/models/widgets';
+
+declare var require: any;
+const $ = require('jquery');
+import 'jquery-ui/ui/widgets/droppable.js';
 
 @Directive({
   selector: '[appDropContainer]'
 })
-export class DropContainerDirective {
+export class DropContainerDirective implements AfterViewInit {
   @Input() private audience: Audience;
   @Input() private type: 'AND' | 'OR';
   @Input() private index: number;
 
   constructor(private el: ElementRef) {
-    ($(el) as any).droppable({
+    ($(el.nativeElement) as any).droppable({
       hoverClass: 'rule-droppable-hover',
-      drop(event, ui) {
+      drop: (event, ui) => {
         const rule = ui.draggable;
 
         if (this.type === 'AND') {
@@ -25,6 +29,10 @@ export class DropContainerDirective {
         }
       }
     });
+  }
+
+  ngAfterViewInit() {
+
   }
 
   private getItemTemplate(rule) {

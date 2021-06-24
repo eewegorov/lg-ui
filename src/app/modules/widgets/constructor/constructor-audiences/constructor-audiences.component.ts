@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { Audience, AudienceGroup, AudienceGroupItem, FullWidget } from '../../../../core/models/widgets';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
+declare var require: any;
+const $ = require('jquery');
+import 'jquery-ui/ui/widgets/draggable.js';
+
 
 @Component({
   selector: 'app-constructor-audiences',
@@ -30,7 +34,7 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    ($('.info-link') as any).tooltip({
+    (jQuery('.info-link') as any).tooltip({
       container: 'body'
     });
 

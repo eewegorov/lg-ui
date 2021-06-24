@@ -2073,7 +2073,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
 
 
   ngOnDestroy(): void {
-    this.autoUploadSubscription.unsubscribe();
+    if (this.autoUploadSubscription) {
+      this.autoUploadSubscription.unsubscribe();
+    }
   }
 
 }
