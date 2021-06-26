@@ -1,3 +1,7 @@
+h3 {
+  font-size: 24px;
+}
+
 .audience-tooolbar-switcher {
   float: left;
   padding-left: 18px !important;
@@ -5,7 +9,8 @@
 }
 
 .audience-tooolbar-desc.integration-tooolbar-desc {
-  width: calc(100% - 30px) !important;
+  width: calc(100% - 200px) !important;
+  font-size: 13px;
 }
 
 .integration-item__main {
@@ -209,7 +214,8 @@
 }
 
 .integration-constructor-new-one-btn {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
   padding-top: 5px;
   padding-right: 75px;
 }

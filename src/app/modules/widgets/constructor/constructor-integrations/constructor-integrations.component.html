@@ -3,10 +3,10 @@
 
   <div class="integrations-switcher-component-item">
     <div class="toolbar-content p-0 pt-4">
-      <div class="row">
+      <div class="row w-100 mb-3">
         <div class="audience-tooolbar-switcher">
           <ui-switch
-            [checked]="widget.sendCrm"
+            [(ngModel)]="widget.sendCrm"
             class="mt-1 mr-2 float-left"
           ></ui-switch><h3 class="mt-1">{{ 'widgetsList.editor.integrations.crmSwitcher.title' | translate }}</h3>
         </div>
@@ -20,16 +20,19 @@
 
   <div class="integrations-switcher-component-item">
     <div class="toolbar-content p-0 pt-4">
-      <div class="row btnpanel">
+      <div class="row w-100 mb-3">
         <div class="audience-tooolbar-switcher">
           <ui-switch
-            [checked]="widget.useCustomIntegrationsList"
+            [(ngModel)]="widget.useCustomIntegrationsList"
             class="mt-1 mr-2 float-left"
           ></ui-switch><h3 class="mt-1">{{ 'widgetsList.editor.integrations.mainSwitcher' | translate }}</h3>
         </div>
       </div>
     </div>
-    <div class="audience-tooolbar-desc" [innerHTML]="'widgetsList.editor.integrations.description' | translate"></div>
+    <div
+      class="audience-tooolbar-desc integration-tooolbar-desc"
+      [innerHTML]="'widgetsList.editor.integrations.description' | translate"
+    ></div>
   </div>
 
   <div *ngIf="widget.useCustomIntegrationsList" class="pt-4 pb-3 intagrations-container">
@@ -58,7 +61,7 @@
     </div>
 
     <div class="row row-subitem width-900 mt-2">
-      <div class="col-sm-9 row-subitem-padding pt-1 integration-item-wr">
+      <div class="col-sm-9 pt-1 integration-item-wr">
         <div class="integration-item__main">
           <div class="dropdown integration-selector dropup">
             <button

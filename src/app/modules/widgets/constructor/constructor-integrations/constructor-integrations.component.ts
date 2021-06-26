@@ -17,12 +17,12 @@ export class ConstructorIntegrationsComponent implements OnInit, OnDestroy {
   @Input() public sid: string;
   @Input() public widget: FullWidget;
 
-  public wIntegrations: Integration[];
-  public integrationsAvailableCRM: Integration[];
-  public integrationsAvailableMailing: Integration[];
-  public integrationsAvailableNotifications: Integration[];
-  public integrationsAvailableOthers: Integration[];
-  public currentIntegrationToAdd: Integration;
+  public wIntegrations: Integration[] = [];
+  public integrationsAvailableCRM: Integration[] = [];
+  public integrationsAvailableMailing: Integration[] = [];
+  public integrationsAvailableNotifications: Integration[] = [];
+  public integrationsAvailableOthers: Integration[] = [];
+  public currentIntegrationToAdd: Integration = {} as Integration;
   public defIntegrationToAddTitle: string;
 
   private loadWidgetToControllerSub: SubscriptionLike;

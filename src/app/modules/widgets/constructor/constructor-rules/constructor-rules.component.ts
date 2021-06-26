@@ -49,6 +49,10 @@ export class ConstructorRulesComponent implements OnInit {
   ngOnInit(): void {
     this.widgetService.addValidator(this.validator);
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
+
+    if (!this.widget.restrictions.action) {
+      this.widget.restrictions.action = false;
+    }
   }
 
   public getPageStateName(item) {

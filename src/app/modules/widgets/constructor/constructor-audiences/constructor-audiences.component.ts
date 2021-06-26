@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Audience, AudienceGroup, AudienceGroupItem, FullWidget } from '../../../../core/models/widgets';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
+
 declare var require: any;
 const $ = require('jquery');
 import 'jquery-ui/ui/widgets/draggable.js';
