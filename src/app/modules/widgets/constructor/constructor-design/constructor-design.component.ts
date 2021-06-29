@@ -503,6 +503,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
 
   private getHeightBlock() {
     const mainBlock = document.getElementById('widgetStyle');
+    if (!mainBlock) {
+      return;
+    }
+
     mainBlock.style.height = $(window).height() - 135 + 'px';
   }
 

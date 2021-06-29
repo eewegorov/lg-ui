@@ -7,6 +7,14 @@ h2 {
   margin: 0 0 20px;
 }
 
+h3 {
+  font-weight: 200;
+  font-size: 18px;
+  color: #6a6c6f;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
 .title-main, .description {
   margin-bottom: 0;
 }
@@ -408,14 +416,6 @@ label.switcher-label {
 
 label.switcher-label-xs {
   font-weight: 400 !important;
-}
-
-h3 {
-  font-weight: 200;
-  font-size: 18px;
-  color: #6a6c6f;
-  margin-bottom: 0;
-  margin-top: 0;
 }
 
 .widget-small-text {

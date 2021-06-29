@@ -1,7 +1,7 @@
 <div class="widgets-settings-container">
   <h1>{{ 'widgetsList.editor.rules.title' | translate }}</h1>
   <div class="row pb-5">
-    <div class="col-lg-12 mt-3">
+    <div class="col-lg-12 mt-2">
       <h3>{{ 'widgetsList.editor.section.targeting' | translate }}</h3>
     </div>
     <div class="col-lg-12">
@@ -10,7 +10,7 @@
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
     </div>
-    <div class="col-lg-12 mt-2" [ngClass]="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0) ? 'mb-2' : ''">
+    <div class="col-lg-12 d-flex mt-2" [ngClass]="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0) ? 'mb-2' : ''">
       <ui-switch size="small" [checked]="widget.rules['pages'].enable"></ui-switch><h5
       class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.pageTargeting.enable' | translate }}</h5>
     </div>
@@ -120,7 +120,7 @@
       </h4>
     </div>
     <div
-      class="col-lg-12 mt-2"
+      class="col-lg-12 d-flex mt-2"
       [ngClass]="(widget.rules['prevPages'].enable && widget.rules['prevPages'].items.length > 0) ? 'mb-2' : ''"
     >
       <ui-switch
@@ -201,7 +201,7 @@
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
     </div>
-    <div class="col-lg-12 mt-2">
+    <div class="col-lg-12 d-flex mt-2">
       <ui-switch size="small" [checked]="widget.rules.pageNo.enable" (change)="onChangePayment"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.pageNo.enable' | translate }}</h5>
     </div>
@@ -231,7 +231,7 @@
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
     </div>
-    <div class="col-lg-12" [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0) ? 'mb-2' : ''">
+    <div class="col-lg-12 d-flex" [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0) ? 'mb-2' : ''">
       <ui-switch size="small" [checked]="widget.rules.time.enable" (change)="onChangePayment"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.time.enable' | translate }}</h5>
     </div>
@@ -293,7 +293,7 @@
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
     </div>
-    <div class="col-lg-12 mt-2">
+    <div class="col-lg-12 d-flex mt-2">
       <ui-switch
         size="small"
         [checked]="widget.rules.days.enable"
@@ -352,7 +352,7 @@
       <div class="col-lg-12 mt-3 mb-2">
         <label class="control-label smal-subtitle">{{ 'widgetsList.editor.autoinvite.subtitle2' | translate }}</label>
       </div>
-      <div class="col-lg-12 mt-2">
+      <div class="col-lg-12 d-flex mt-2">
         <ui-switch
           size="small"
           [checked]="widget.autoinvite.pages.enable"
@@ -376,7 +376,7 @@
       </div>
       <!-- END Autoinvite options -->
       <!-- Autoinvite: seconds -->
-      <div class="col-lg-12 mt-2">
+      <div class="col-lg-12 d-flex mt-2">
         <ui-switch
           size="small"
           [checked]="widget.autoinvite.seconds.enable"
@@ -395,7 +395,7 @@
       </div>
       <!-- End Autoinvite seconds -->
       <!-- Autoinvite: anactive -->
-      <div class="col-lg-12 mt-2">
+      <div class="col-lg-12 d-flex mt-2">
         <ui-switch
           size="small"
           [checked]="widget.autoinvite.inactive.enabled"
@@ -416,7 +416,7 @@
       </div>
       <!-- End Autoinvite: anactive -->
       <!-- Autoinvite: percent -->
-      <div class="col-lg-12 mt-2">
+      <div class="col-lg-12 d-flex mt-2">
         <ui-switch
           size="small"
           [checked]="widget.autoinvite.percent.enable"
@@ -438,7 +438,7 @@
       <!-- End Autoinvite: percent -->
 
       <!-- Autoinvite: click -->
-      <div class="col-lg-12 mt-2">
+      <div class="col-lg-12 d-flex mt-2">
         <ui-switch
           size="small"
           [checked]="widget.autoinvite.click.enable"
@@ -460,13 +460,13 @@
       <!-- End Autoinvite seconds -->
 
       <!-- Autoinvite: exit-intent -->
-      <div class="col-lg-12 mt-2">
+      <div class="col-lg-12 d-flex mt-2">
         <ui-switch size="small" [checked]="widget.autoinvite.exit.enable"></ui-switch><h5
         class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.exit.enable' | translate }}</h5>
       </div>
       <!-- End Autoinvite: exit-intent -->
       <!-- Autoinvite: sound -->
-      <div class="col-lg-12 mt-5">
+      <div class="col-lg-12 d-flex mt-5">
         <ui-switch size="small" [checked]="widget.autoinvite.sound.enable"></ui-switch><h5
         class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}</h5>
       </div>
@@ -649,7 +649,7 @@
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
     </div>
-    <div class="col-lg-12 mt-2">
+    <div class="col-lg-12 d-flex mt-2">
       <ui-switch
         size="small"
         [(ngModel)]="widget.rules.period.enable"
@@ -689,7 +689,7 @@
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h3>
     </div>
-    <div class="col-lg-12 mt-2">
+    <div class="col-lg-12 d-flex mt-2">
       <ui-switch size="small" [checked]="widget.autoresponder.enabled"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoresponder.enable' | translate }}</h5>
     </div>
@@ -725,7 +725,7 @@
       <div class="audience-tooolbar-desc" [innerHTML]="'widgets.constructor.settings.jscode.desc' | translate"></div>
     </div>
 
-    <div class="col-lg-12 mt-3">
+    <div class="col-lg-12 d-flex mt-3">
       <ui-switch size="small" [(ngModel)]="widget.jsInfo.onShowScript.enable"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgets.constructor.settings.jscode.onShowChecker' | translate }}</h5>
     </div>
@@ -733,7 +733,7 @@
       <textarea class="form-control textar-iframe cons-settings-js-textarea" [(ngModel)]="widget.jsInfo.onShowScript.script"></textarea>
     </div>
 
-    <div class="col-lg-12 mt-3">
+    <div class="col-lg-12 d-flex mt-3">
       <ui-switch
         size="small"
         [checked]="widget.jsInfo.onTargetScript.enable"
