@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { FullWidget } from '../../../../core/models/widgets';
@@ -10,7 +10,7 @@ import { WidgetConstructorService } from '../../services/widget-constructor.serv
   templateUrl: './constructor-rules.component.html',
   styleUrls: ['../../shared/shared.scss', './constructor-rules.component.scss']
 })
-export class ConstructorRulesComponent implements OnInit {
+export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   @Input() public widget: FullWidget;
   @Input() public isContainerized: boolean;
 
@@ -53,6 +53,12 @@ export class ConstructorRulesComponent implements OnInit {
     if (!this.widget.restrictions.action) {
       this.widget.restrictions.action = false;
     }
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      ($('[data-toggle="tooltip"]') as any).tooltip();
+    }, 1000);
   }
 
   public getPageStateName(item) {
