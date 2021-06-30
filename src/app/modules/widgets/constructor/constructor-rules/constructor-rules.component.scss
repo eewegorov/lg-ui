@@ -23,6 +23,21 @@ h5 {
   width: 930px;
 }
 
+.row-subitem {
+  margin: 0px !important;
+  padding: 0 15px;
+}
+
+.label.label-warning.tariff-info {
+  font-size: 7px;
+  font-weight: bold;
+  margin-left: 20px;
+  padding: 0 0.2rem;
+  position: absolute;
+  color: #fff;
+  background-color: #f0ad4e;
+}
+
 .input-with-remove {
   float: left;
   width: calc(100% - 100px);

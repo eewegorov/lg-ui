@@ -11,7 +11,7 @@
       </h4>
     </div>
     <div class="col-lg-12 d-flex mt-2" [ngClass]="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0) ? 'mb-2' : ''">
-      <ui-switch size="small" [checked]="widget.rules['pages'].enable"></ui-switch><h5
+      <ui-switch size="small" [(ngModel)]="widget.rules['pages'].enable"></ui-switch><h5
       class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.pageTargeting.enable' | translate }}</h5>
     </div>
     <!-- Page rule item -->
@@ -125,7 +125,7 @@
     >
       <ui-switch
         size="small"
-        [checked]="widget.rules['prevPages'].enable"
+        [(ngModel)]="widget.rules['prevPages'].enable"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.pageVTargeting.enable' | translate }}</h5>
     </div>
     <!-- Target to viewed pages -->
@@ -202,7 +202,7 @@
       </h4>
     </div>
     <div class="col-lg-12 d-flex mt-2">
-      <ui-switch size="small" [checked]="widget.rules.pageNo.enable" (change)="onChangePayment"
+      <ui-switch size="small" [(ngModel)]="widget.rules.pageNo.enable" (change)="onChangePayment"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.pageNo.enable' | translate }}</h5>
     </div>
     <div
@@ -232,7 +232,7 @@
       </h4>
     </div>
     <div class="col-lg-12 d-flex" [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0) ? 'mb-2' : ''">
-      <ui-switch size="small" [checked]="widget.rules.time.enable" (change)="onChangePayment"
+      <ui-switch size="small" [(ngModel)]="widget.rules.time.enable" (change)="onChangePayment"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.time.enable' | translate }}</h5>
     </div>
     <ng-container *ngIf="widget.rules['time'].enable == true">
@@ -296,7 +296,7 @@
     <div class="col-lg-12 d-flex mt-2">
       <ui-switch
         size="small"
-        [checked]="widget.rules.days.enable"
+        [(ngModel)]="widget.rules.days.enable"
         (change)="onChangePayment"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.days.enable' | translate }}</h5>
     </div>
@@ -355,7 +355,7 @@
       <div class="col-lg-12 d-flex mt-2">
         <ui-switch
           size="small"
-          [checked]="widget.autoinvite.pages.enable"
+          [(ngModel)]="widget.autoinvite.pages.enable"
           (change)="onChangePayment"
         ></ui-switch><h5
         class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.pages.enable' | translate }}<span
@@ -379,7 +379,7 @@
       <div class="col-lg-12 d-flex mt-2">
         <ui-switch
           size="small"
-          [checked]="widget.autoinvite.seconds.enable"
+          [(ngModel)]="widget.autoinvite.seconds.enable"
         ></ui-switch><h5
         class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}</h5>
       </div>
@@ -398,7 +398,7 @@
       <div class="col-lg-12 d-flex mt-2">
         <ui-switch
           size="small"
-          [checked]="widget.autoinvite.inactive.enabled"
+          [(ngModel)]="widget.autoinvite.inactive.enabled"
           (change)="onChangePayment"
         ></ui-switch><h5
         class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.inactive.enabled' | translate }}<span
@@ -419,7 +419,7 @@
       <div class="col-lg-12 d-flex mt-2">
         <ui-switch
           size="small"
-          [checked]="widget.autoinvite.percent.enable"
+          [(ngModel)]="widget.autoinvite.percent.enable"
           (change)="onChangePayment"
         ></ui-switch><h5
         class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.percent.enable' | translate }}<span
@@ -441,7 +441,7 @@
       <div class="col-lg-12 d-flex mt-2">
         <ui-switch
           size="small"
-          [checked]="widget.autoinvite.click.enable"
+          [(ngModel)]="widget.autoinvite.click.enable"
         ></ui-switch><h5 class="control-label switcher-label switcher-labe">{{ 'widgetsList.editor.autoinvite.click.enable' | translate }}</h5>
       </div>
       <div
@@ -461,13 +461,13 @@
 
       <!-- Autoinvite: exit-intent -->
       <div class="col-lg-12 d-flex mt-2">
-        <ui-switch size="small" [checked]="widget.autoinvite.exit.enable"></ui-switch><h5
+        <ui-switch size="small" [(ngModel)]="widget.autoinvite.exit.enable"></ui-switch><h5
         class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.exit.enable' | translate }}</h5>
       </div>
       <!-- End Autoinvite: exit-intent -->
       <!-- Autoinvite: sound -->
       <div class="col-lg-12 d-flex mt-5">
-        <ui-switch size="small" [checked]="widget.autoinvite.sound.enable"></ui-switch><h5
+        <ui-switch size="small" [(ngModel)]="widget.autoinvite.sound.enable"></ui-switch><h5
         class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}</h5>
       </div>
       <!-- End Autoinvite: sound -->
@@ -584,7 +584,7 @@
 
       <!-- Restrictions.lockAfterAction -->
       <div class="col-lg-12 mt-2">
-        <input #actionEnable id="actionEnable" type="checkbox" [checked]="widget.restrictions.action.enable" (change)="onChangePayment(actionEnable.checked)" />
+        <input #actionEnable id="actionEnable" type="checkbox" [(ngModel)]="widget.restrictions.action.enable" (change)="onChangePayment(actionEnable.checked)" />
         <h5 class="control-label switcher-label switcher-label-xs">
           {{ 'widgets.constructor.settings.lockAfterAction.title' | translate }}<span class="label label-warning tariff-info">окупаемый</span><br />
         </h5>
@@ -602,7 +602,7 @@
 
       <!-- Restrictions.count -->
       <div class="col-lg-12 mt-2">
-        <input #countEnable id="countEnable" type="checkbox" [checked]="widget.restrictions.count.enable" (change)="onChangePayment(countEnable.checked)" />
+        <input #countEnable id="countEnable" type="checkbox" [(ngModel)]="widget.restrictions.count.enable" (change)="onChangePayment(countEnable.checked)" />
         <h5 class="control-label switcher-label switcher-label-xs">
           {{ 'widgetsList.editor.restrictions.count.text' | translate }}><span class="label label-warning tariff-info ">окупаемый</span><br />
         </h5>
@@ -690,7 +690,7 @@
       </h3>
     </div>
     <div class="col-lg-12 d-flex mt-2">
-      <ui-switch size="small" [checked]="widget.autoresponder.enabled"
+      <ui-switch size="small" [(ngModel)]="widget.autoresponder.enabled"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoresponder.enable' | translate }}</h5>
     </div>
     <div *ngIf="widget.autoresponder.enabled" class="col-lg-12 mt-1 mb-1">
@@ -736,7 +736,7 @@
     <div class="col-lg-12 d-flex mt-3">
       <ui-switch
         size="small"
-        [checked]="widget.jsInfo.onTargetScript.enable"
+        [(ngModel)]="widget.jsInfo.onTargetScript.enable"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgets.constructor.settings.jscode.onActionChecker' | translate }}</h5>
     </div>
     <div *ngIf="widget.jsInfo.onTargetScript.enable">
@@ -747,7 +747,7 @@
           ></textarea>
       </div>
       <div class="col-lg-12 mt-2">
-        <input #enablePlaceholding id="enablePlaceholding" type="checkbox" [checked]="widget.jsInfo.enablePlaceholding" (change)="onChangePayment(enablePlaceholding.checked)" />
+        <input #enablePlaceholding id="enablePlaceholding" type="checkbox" [(ngModel)]="widget.jsInfo.enablePlaceholding" (change)="onChangePayment(enablePlaceholding.checked)" />
         <h5 class="control-label switcher-label switcher-label-xs">
           {{ 'widgets.constructor.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
         </h5>
