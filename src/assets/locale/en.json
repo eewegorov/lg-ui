@@ -1010,13 +1010,17 @@
 					"ends": "",
 					"equals": "",
 					"hide": "",
+					"name": "",
 					"notcontain": "",
 					"pageInfo": "",
 					"show": "",
 					"starts": "",
 					"title": "",
 					"tooltip": "",
-					"url": "",
+					"url": {
+						"title": "",
+						"tooltip": ""
+					},
 					"urlortitle": ""
 				},
 				"pageVTargeting": {

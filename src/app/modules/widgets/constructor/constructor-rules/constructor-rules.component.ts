@@ -88,7 +88,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
 
   public getPageTypeName(item) {
     if (item.type === 0) {
-      return this.translate.instant('widgetsList.editor.rules.pageTargeting.url');
+      return this.translate.instant('widgetsList.editor.rules.pageTargeting.url.title');
     } else {
       return this.translate.instant('widgetsList.editor.rules.pageTargeting.title');
     }

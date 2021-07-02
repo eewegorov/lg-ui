@@ -23,6 +23,15 @@ h5 {
   width: 930px;
 }
 
+.form-control {
+  font-size: 14px;
+  margin-left: -1px;
+}
+
+.is-invalid .form-control {
+  border-color: #a94442;
+}
+
 .row-subitem {
   margin: 0px !important;
   padding: 0 15px;
@@ -46,7 +55,7 @@ h5 {
 span.combo-box-underow-comment-comment {
   left: 10px;
   position: absolute;
-  top: 60px;
+  top: 63px;
 }
 
 .remove-sub-item-rules {

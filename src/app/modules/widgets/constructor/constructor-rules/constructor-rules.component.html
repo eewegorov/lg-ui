@@ -5,7 +5,7 @@
       <h3>{{ 'widgetsList.editor.section.targeting' | translate }}</h3>
     </div>
     <div class="col-lg-12">
-      <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }} <a
+      <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.pageTargeting.name' | translate }} <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.pageTargeting.tooltip' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h4>
@@ -26,12 +26,12 @@
             </button>
             <ul class="dropdown-menu" role="menu">
               <li role="presentation" (click)="item.state = 0">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">
+                <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">
                   {{ 'widgetsList.editor.rules.pageTargeting.hide' | translate }}
                 </a>
               </li>
               <li role="presentation" (click)="item.state = 1">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">
+                <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">
                   {{ 'widgetsList.editor.rules.pageTargeting.show' | translate }}
                 </a>
               </li>
@@ -47,26 +47,26 @@
             </button>
             <ul class="dropdown-menu" role="menu">
               <li role="presentation" (click)="item.compare = 0">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">
+                <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">
                   {{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}
                 </a>
               </li>
-              <li role="presentation" (click)="item.compare = 1">
+              <li role="presentation" class="dropdown-item" (click)="item.compare = 1">
                 <a role="menuitem" tabindex="-1" href="javascript:void(0)">
                   {{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}
                 </a>
               </li>
-              <li role="presentation" (click)="item.compare = 2">
+              <li role="presentation" class="dropdown-item" (click)="item.compare = 2">
                 <a role="menuitem" tabindex="-1" href="javascript:void(0)">
                   {{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}
                 </a>
               </li>
-              <li role="presentation" (click)="item.compare = 3">
+              <li role="presentation" class="dropdown-item" (click)="item.compare = 3">
                 <a role="menuitem" tabindex="-1" href="javascript:void(0)">
                   {{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}
                 </a>
               </li>
-              <li role="presentation" (click)="item.compare = 4">
+              <li role="presentation" class="dropdown-item" (click)="item.compare = 4">
                 <a role="menuitem" tabindex="-1" href="javascript:void(0)">
                   {{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}
                 </a>
@@ -84,10 +84,10 @@
                 {{ getPageTypeName(item) }} <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li role="presentation" (click)="item.type = 0">
-                  <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.url' | translate }}</a>
+                <li role="presentation" class="dropdown-item" (click)="item.type = 0">
+                  <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.url.title' | translate }}</a>
                 </li>
-                <li role="presentation" (click)="item.type = 1">
+                <li role="presentation" class="dropdown-item" (click)="item.type = 1">
                   <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }}</a>
                 </li>
               </ul>
@@ -96,12 +96,12 @@
           </div>
           <div class="remove-sub-item-rules mr-2">
             <a (click)="addPageRuleItem()" href="javascript:void(0);">
-              <i class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i>
+              <i class="remove-sub-item-rules colored-blue ml-2 pe-7s-plus"></i>
             </a>
           </div>
           <div *ngIf="widget.rules['pages'].items.length > 1" class="remove-sub-item-rules mr-2">
             <a (click)="removePageRuleItem(i)" href="javascript:void(0);">
-              <i class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
+              <i class="remove-sub-item-rules colored-red ml-2 pe-7s-close-circle"></i>
             </a>
           </div>
           <span class="underow-comment combo-box-underow-comment-comment">
@@ -140,19 +140,19 @@
             </button>
             <ul class="dropdown-menu" role="menu">
               <li role="presentation" (click)="item.compare = 0">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}</a>
+                <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}</a>
               </li>
               <li role="presentation" (click)="item.compare = 1">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}</a>
+                <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}</a>
               </li>
               <li role="presentation" (click)="item.compare = 2">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}</a>
+                <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}</a>
               </li>
               <li role="presentation" (click)="item.compare = 3">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}</a>
+                <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}</a>
               </li>
               <li role="presentation" (click)="item.compare = 4">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}</a>
+                <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}</a>
               </li>
             </ul>
           </div>
@@ -170,10 +170,10 @@
               </button>
               <ul class="dropdown-menu">
                 <li role="presentation" (click)="item.type = 0">
-                  <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.url' | translate }}</a>
+                  <a role="menuitem" class="dropdown-item" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.url.title' | translate }}</a>
                 </li>
                 <li role="presentation" (click)="item.type = 1">
-                  <a role="menuitem" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }}</a>
+                  <a role="menuitem" class="dropdown-item" href="javascript:void(0)">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }}</a>
                 </li>
               </ul>
             </div>
