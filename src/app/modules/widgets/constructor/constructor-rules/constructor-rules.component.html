@@ -236,7 +236,7 @@
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.time.enable' | translate }}</h5>
     </div>
     <ng-container *ngIf="widget.rules['time'].enable == true">
-      <div class="row row-subitem width-400 mt-2" *ngFor="let item of widget.rules['time'].items; index as i">
+      <div class="row col-lg-12 row-subitem width-400 mb-2" *ngFor="let item of widget.rules['time'].items; index as i">
         <div class="col-lg-12">
           <label class="control-label">{{ 'widgetsList.editor.rules.time.title' | translate }}:</label>
         </div>
@@ -251,7 +251,7 @@
             </button>
             <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
               <li role="presentation" *ngFor="let timeItem of getTimeList()" (click)="item.startTime = timeItem.value">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ timeItem.name }}</a>
+                <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ timeItem.name }}</a>
               </li>
             </ul>
           </div>
@@ -269,7 +269,7 @@
                 *ngFor="let timeItem of getTimeList()"
                 (click)="item.endTime = timeItem.value"
               >
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ timeItem.name }}</a>
+                <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ timeItem.name }}</a>
               </li>
             </ul>
           </div>
@@ -328,7 +328,7 @@
           class="info-link ml-1" href="#"><i class="fa fa-info-circle"></i></a>
         </h3>
       </div>
-      <div class="col-lg-12 mt-2 mb-1">
+      <div class="col-lg-12 mt-3 mb-1">
         <label class="control-label smal-subtitle">{{ 'widgetsList.editor.autoinvite.subtitle' | translate }}</label>
       </div>
       <div class="col-lg-12 mt-2">
@@ -344,7 +344,7 @@
               *ngFor="let itemLogic of autoinviteVariants"
               (click)="widget.autoinvite.ruleLogic = itemLogic"
             >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemLogic }}</a>
+              <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ itemLogic }}</a>
             </li>
           </ul>
         </div>
@@ -352,7 +352,7 @@
       <div class="col-lg-12 mt-3 mb-2">
         <label class="control-label smal-subtitle">{{ 'widgetsList.editor.autoinvite.subtitle2' | translate }}</label>
       </div>
-      <div class="col-lg-12 d-flex mt-2">
+      <div class="col-lg-12 d-flex pt-2">
         <ui-switch
           size="small"
           [(ngModel)]="widget.autoinvite.pages.enable"
@@ -363,7 +363,7 @@
       </div>
       <div
         *ngIf="widget.autoinvite.pages.enable"
-        class="col-lg-12 mt-2 width-400"
+        class="col-lg-12 mt-1 width-400"
         [ngClass]="(widget.autoinvite.pages.value <= 0) ? 'is-invalid' : ''"
       >
         <div class="time-settings-fromto">
@@ -376,7 +376,7 @@
       </div>
       <!-- END Autoinvite options -->
       <!-- Autoinvite: seconds -->
-      <div class="col-lg-12 d-flex mt-2">
+      <div class="col-lg-12 d-flex pt-2">
         <ui-switch
           size="small"
           [(ngModel)]="widget.autoinvite.seconds.enable"
@@ -385,7 +385,7 @@
       </div>
       <div
         *ngIf="widget.autoinvite.seconds.enable"
-        class="col-lg-12 mt-2 width-400"
+        class="col-lg-12 mt-1 width-400"
         [ngClass]="(widget.autoinvite.seconds.value <= 0) ? 'is-invalid' : ''"
       >
         <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.seconds.value" />
@@ -395,7 +395,7 @@
       </div>
       <!-- End Autoinvite seconds -->
       <!-- Autoinvite: anactive -->
-      <div class="col-lg-12 d-flex mt-2">
+      <div class="col-lg-12 d-flex pt-2">
         <ui-switch
           size="small"
           [(ngModel)]="widget.autoinvite.inactive.enabled"
@@ -406,7 +406,7 @@
       </div>
       <div
         *ngIf="widget.autoinvite.inactive.enabled"
-        class="col-lg-12 mt-2 width-400"
+        class="col-lg-12 mt-1 width-400"
         [ngClass]="(widget.autoinvite.inactive.value <= 0) ? 'is-invalid' : ''"
       >
         <input style="float: left; width: 70px;" class="form-control" type="number" min="1" [(ngModel)]="widget.autoinvite.inactive.value"/>
@@ -416,7 +416,7 @@
       </div>
       <!-- End Autoinvite: anactive -->
       <!-- Autoinvite: percent -->
-      <div class="col-lg-12 d-flex mt-2">
+      <div class="col-lg-12 d-flex pt-2">
         <ui-switch
           size="small"
           [(ngModel)]="widget.autoinvite.percent.enable"
@@ -427,7 +427,7 @@
       </div>
       <div
         *ngIf="widget.autoinvite.percent.enable"
-        class="col-lg-12 mt-2 width-400"
+        class="col-lg-12 mt-1 width-400"
         [ngClass]="(widget.autoinvite.percent.value <= 0) ? 'is-invalid' : ''"
       >
         <input style="float: left; width: 70px;" class="form-control" type="number" min="1" max="100" [(ngModel)]="widget.autoinvite.percent.value" />
@@ -438,7 +438,7 @@
       <!-- End Autoinvite: percent -->
 
       <!-- Autoinvite: click -->
-      <div class="col-lg-12 d-flex mt-2">
+      <div class="col-lg-12 d-flex pt-2">
         <ui-switch
           size="small"
           [(ngModel)]="widget.autoinvite.click.enable"
@@ -446,27 +446,58 @@
       </div>
       <div
         *ngIf="widget.autoinvite.click.enable"
-        class="col-lg-12 mt-2 width-900"
+        class="col-lg-12 pt-2 width-900"
         [ngClass]="(widget.autoinvite.click.value.trim().length == 0) ? 'is-invalid' : ''"
       >
         <label class="control-label">
           {{ 'widgetsList.editor.autoinvite.click.title' | translate }}
         </label>
         <input class="form-control" type="text" [(ngModel)]="widget.autoinvite.click.value"/>
-        <div class="row small mt-3 underline-comment">
-          <i>{{ 'widgetsList.editor.autoinvite.click.comment' | translate }}</i>
+        <div class="row small mt-1 underline-comment">
+          <i [innerHTML]="'widgetsList.editor.autoinvite.click.comment' | translate"></i>
         </div>
       </div>
       <!-- End Autoinvite seconds -->
 
       <!-- Autoinvite: exit-intent -->
-      <div class="col-lg-12 d-flex mt-2">
+      <div class="col-lg-12 d-flex pt-2">
         <ui-switch size="small" [(ngModel)]="widget.autoinvite.exit.enable"></ui-switch><h5
         class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.exit.enable' | translate }}</h5>
       </div>
+
+      <div class="col-lg-12 mt-2" *ngIf="widget.autoinvite.exit.enable">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="widget.autoinvite.exit.desktopEnable"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <h5 class="control-label switcher-label switcher-label-xs">
+          {{ 'widgets.constructor.settings.exitIntent.desktop' | translate }}
+        </h5>
+      </div>
+      <div class="col-lg-12 mt-2" *ngIf="widget.autoinvite.exit.enable">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="widget.autoinvite.exit.mobileEnable"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <h5 class="control-label switcher-label switcher-label-xs">
+          {{ 'widgets.constructor.settings.exitIntent.mobile' | translate }}
+        </h5>
+      </div>
       <!-- End Autoinvite: exit-intent -->
       <!-- Autoinvite: sound -->
-      <div class="col-lg-12 d-flex mt-5">
+      <div class="col-lg-12 d-flex mt-3">
         <ui-switch size="small" [(ngModel)]="widget.autoinvite.sound.enable"></ui-switch><h5
         class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}</h5>
       </div>

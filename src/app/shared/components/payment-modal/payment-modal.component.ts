@@ -32,12 +32,12 @@ export class PaymentModalComponent implements OnInit {
     private coreSitesService: CoreSitesService,
     private billingService: BillingService
   ) {
-    this.title = this.title || this.translate.instant('sitelist.tarrif.title');
+    this.title = this.title || this.translate.instant('sitelist.tariff.title');
     this.subscription = this.subscription || null;
     this.siteName = this.siteName ? this.siteName : this.coreSitesService.getSiteById(this.siteId).name;
 
     this.planLabels = {
-      activationLabel: this.translate.instant('sitelist.tarrif.activation', {tariffName: this.plan.name, siteName: this.siteName}),
+      activationLabel: this.translate.instant('sitelist.tariff.activation', {tariffName: this.plan.name, siteName: this.siteName}),
       activationDateLabel: this.getDatesLabel(),
       payDescription: this.getPayDescription(this.firstPrice.name, this.firstPrice.desc),
       currentPrice: this.firstPrice.price
@@ -89,7 +89,7 @@ export class PaymentModalComponent implements OnInit {
     const startDate = expectedTime ? new Date(expectedTime) : new Date();
     const endDate   = new Date(startDate.getTime() + 1000 * 60 * 60 * 24 * (days || this.firstPrice.days));
 
-    return this.translate.instant('sitelist.tarrif.activationDate', {
+    return this.translate.instant('sitelist.tariff.activationDate', {
       startDate: this.datePipe.transform(startDate, 'dd.MM.yy'),
       endDate: this.datePipe.transform(endDate, 'dd.MM.yy')
     });

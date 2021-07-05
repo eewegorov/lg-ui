@@ -28,12 +28,13 @@ h5 {
   margin-left: -1px;
 }
 
-.is-invalid .form-control {
-  border-color: #a94442;
+.is-invalid label.control-label, .underline-comment {
+  color: #a94442;
 }
 
 .row-subitem {
-  margin: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
   padding: 0 15px;
 }
 
@@ -114,4 +115,8 @@ input.radio-left {
 .cons-settings-js-textarea {
   width: 900px;
   height: 180px;
+}
+
+.checkmark {
+  cursor: pointer;
 }

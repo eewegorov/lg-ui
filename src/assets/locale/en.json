@@ -741,15 +741,12 @@
 			"onPage": ""
 		},
 		"tariff": {
+			"activation": "",
+			"activationDate": "",
 			"free": "",
 			"improve": "",
 			"improvement": "",
 			"length": "",
-			"title": ""
-		},
-		"tarrif": {
-			"activation": "",
-			"activationDate": "",
 			"title": ""
 		},
 		"weekinfo": {

@@ -132,7 +132,7 @@
 	},
 	"billing": {
 		"modal": {
-			"footer": "",
+			"footer": "Активация тарифа происходит автоматически сразу после оплаты.<br>Если вы хотите внести оплату по безналичному расчету, то пожалуйста, напишите нам на email <a href='mailto:hello@leadgenic.ru'>hello@leadgenic.ru</a> или в чат.",
 			"paysum": {
 				"btn": "Оплатить и активировать тариф",
 				"label": "Сумма к оплате"
@@ -321,10 +321,10 @@
 		"currency": {
 			"ruble": "руб."
 		},
-		"discount": "",
+		"discount": "скидка",
 		"done": "Готово",
 		"error": "Ошибка!",
-		"for": "",
+		"for": "За",
 		"from": "от",
 		"general": "Общие",
 		"no": "Нет",
@@ -769,16 +769,13 @@
 			"onPage": "На странице:"
 		},
 		"tariff": {
+			"activation": "Активация тарифа {{tariffName}} для сайта {{siteName}}",
+			"activationDate": "c {{startDate}} до {{endDate}}",
 			"free": "Бесплатный",
 			"improve": "Необходимо улучшить тариф",
 			"improvement": "Улучшение тарифа",
 			"length": "Срок действия тарифа",
 			"title": "Тариф"
-		},
-		"tarrif": {
-			"activation": "",
-			"activationDate": "",
-			"title": ""
 		},
 		"vkEnable": "Включить определение профилей VK",
 		"weekinfo": {

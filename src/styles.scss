@@ -1247,3 +1247,7 @@ span.underow-comment {
   -webkit-animation: flashBG 0.8s 0.5s;
   animation: flashBG 0.8s 0.5s;
 }
+
+.is-invalid .form-control, .is-invalid .ng-select-container {
+  border-color: #a94442 !important;
+}

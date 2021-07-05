@@ -176,6 +176,14 @@ label.big-label {
   color: #3498D8 !important;
 }
 
+.colored-red {
+  color: #C0392B !important;
+}
+
+.is-invalid .form-control, .is-invalid .ng-select-container {
+  border-color: #a94442 !important;
+}
+
 .companies-underline {
   float: right;
   margin-top: 5px;
