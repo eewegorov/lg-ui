@@ -112,23 +112,67 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
     if (val && !this.isPayment) {
       setTimeout(() => {
-        this.widget.rules.pageNo.enable = false;
-        this.widget.rules.prevPages.enable = false;
-        this.widget.rules.time.enable = false;
-        this.widget.rules.days.enable = false;
-        this.widget.rules.period.enable = false;
-        this.widget.autoinvite.pages.enable = false;
-        this.widget.autoinvite.inactive.enabled = false;
-        this.widget.autoinvite.percent.enable = false;
-        this.widget.audiencesEnabled = false;
-        this.widget.restrictions.target.mode = 1;
-        this.widget.restrictions.count.enable = false;
-        this.widget.restrictions.action.enable = false;
+        if (this.widget.rules.pageNo) {
+          this.widget.rules.pageNo.enable = false;
+        }
 
-        this.widget.guiprops.form.couponCallback.enable = false;
-        this.widget.guiprops.exit.couponCallback.enable = false;
-        this.widget.guiprops.social.couponCallback.enable = false;
-        this.widget.jsInfo.enablePlaceholding = false;
+        if (this.widget.rules.prevPages.action) {
+          this.widget.rules.prevPages.enable = false;
+        }
+
+        if (this.widget.rules.time) {
+          this.widget.rules.time.enable = false;
+        }
+
+        if (this.widget.rules.days) {
+          this.widget.rules.daysn.enable = false;
+        }
+
+        if (this.widget.rules.period) {
+          this.widget.rules.period.enable = false;
+        }
+
+        if (this.widget.autoinvite.pages) {
+          this.widget.autoinvite.pages.enable = false;
+        }
+
+        if (this.widget.autoinvite.inactive) {
+          this.widget.autoinvite.inactive.enabled = false;
+        }
+
+        if (this.widget.autoinvite.percent) {
+          this.widget.autoinvite.percent.enable = false;
+        }
+
+        this.widget.audiencesEnabled = false;
+
+        if (this.widget.restrictions.target) {
+          this.widget.restrictions.target.mode = 1;
+        }
+
+        if (this.widget.restrictions.count) {
+          this.widget.restrictions.count.enable = false;
+        }
+
+        if (this.widget.restrictions.action) {
+          this.widget.restrictions.action.enable = false;
+        }
+
+        if (this.widget.guiprops.form.couponCallback) {
+          this.widget.guiprops.form.couponCallback.enable = false;
+        }
+
+        if (this.widget.guiprops.exit.couponCallback) {
+          this.widget.guiprops.exit.couponCallback.enable = false;
+        }
+
+        if (this.widget.guiprops.social.couponCallback) {
+          this.widget.guiprops.social.couponCallback.enable = false;
+        }
+
+        if (this.widget.jsInfo) {
+          this.widget.jsInfo.enablePlaceholding = false;
+        }
 
         this.showPaymentDialog(this.sid, this.translate.instant('widgetsList.payment.features'));
       }, 1000);

@@ -51,7 +51,9 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
 
     if (!this.widget.restrictions.action) {
-      this.widget.restrictions.action = false;
+      this.widget.restrictions.action = {
+        enable: false
+      };
     }
   }
 

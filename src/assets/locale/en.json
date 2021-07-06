@@ -787,6 +787,17 @@
 				"widthForm2": ""
 			}
 		},
+		"settings": {
+			"exitIntent": {
+				"desktop": "",
+				"mobile": ""
+			},
+			"lockAfterAction": {
+				"lock1": "",
+				"lock2": "",
+				"title": ""
+			}
+		},
 		"types": {
 			"static": {
 				"step1": {
