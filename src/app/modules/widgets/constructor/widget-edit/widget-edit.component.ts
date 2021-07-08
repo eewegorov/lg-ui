@@ -4,6 +4,7 @@ import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import * as moment from 'moment';
 import { SiteShort } from '../../../../core/models/sites';
 import { Coupon } from '../../../../core/models/coupons';
 import { User } from '../../../../core/models/user';
@@ -350,6 +351,9 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     this.widget.guiprops.dhVisual.CP_offset_top = this.SP_widget.widget_CP_offset_top;
     this.widget.guiprops.image.width = this.SP_widget.img_width;
     this.widget.guiprops.image.height = this.SP_widget.img_height;
+    this.widget.rules.period.startDate = moment(this.widget.rules.period.startDate).format('DD.MM.YYYY');
+    this.widget.rules.period.endDate = moment(this.widget.rules.period.endDate).format('DD.MM.YYYY');
+
 
     this.addCouponsId();
     this.mapFormExtFieldId();

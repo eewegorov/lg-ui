@@ -418,25 +418,8 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   }
 
   private prepareControls() {
-    if (this.widget.rules.period.enable) {
-      ($('#period-rule-start-date-picker') as any).datetimepicker({
-        format: 		'DD.MM.YYYY',
-        locale        : 'ru',
-        showClose     : false,
-        defaultDate   : moment(this.widget.rules.period.startDate, 'DD.MM.YYYY')
-      }).on('dp.change', () => {
-        this.widget.rules.period.startDate = $('#period-rule-start-date-picker').data('DateTimePicker').date().format('DD.MM.YYYY');
-      });
-
-      ($('#period-rule-end-date-picker') as any).datetimepicker({
-        format: 		'DD.MM.YYYY',
-        locale        : 'ru',
-        showClose     : false,
-        defaultDate   : moment(this.widget.rules.period.endDate, 'DD.MM.YYYY')
-      }).on('dp.change', () => {
-        this.widget.rules.period.endDate = $('#period-rule-end-date-picker').data('DateTimePicker').date().format('DD.MM.YYYY');
-      });
-    }
+    this.widget.rules.period.startDate = moment(this.widget.rules.period.startDate, 'DD.MM.YYYY').toDate();
+    this.widget.rules.period.endDate = moment(this.widget.rules.period.endDate, 'DD.MM.YYYY').toDate();
   }
 
 }

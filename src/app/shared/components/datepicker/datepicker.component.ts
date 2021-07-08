@@ -3,7 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgbDate, NgbDateParserFormatter, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 const I18N_VALUES = {
-  'ru': {
+  ru: {
     weekdays: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
     months: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
   }
@@ -75,11 +75,12 @@ export function padNumber(value: number) {
   if (isNumber(value)) {
     return `0${value}`.slice(-2);
   } else {
-    return "";
+    return '';
   }
 }
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'ngbd-datepicker-i18n',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
@@ -94,19 +95,25 @@ export function padNumber(value: number) {
     }
     ]
 })
+// tslint:disable-next-line:component-class-suffix
 export class NgbdDatepickerI18n implements ControlValueAccessor {
-  selectedDate;
-  onChange = (date?: Date) => {};
+  public selectedDate;
   private today = new Date();
+  onChange = (date?: Date) => {};
 
   writeValue(value: Date) {
+    console.log(value)
     this.selectedDate = value;
-    if (!value) return;
+
+    if (!value) {
+      return;
+    }
+
     this.selectedDate = {
       year: value.getFullYear(),
       month: value.getMonth() + 1,
       day: value.getDate()
-    }
+    };
   }
 
   registerOnChange(fn: (date: Date) => void): void {
@@ -118,10 +125,10 @@ export class NgbdDatepickerI18n implements ControlValueAccessor {
   onDateChange(value: any) {
     this.onChange(new Date(value.year, value.month - 1, value.day));
   }
-  
+
   isToday = (date: NgbDateStruct) => {
     return date.day == this.today.getDate() &&
-      date.month == this.today.getMonth()+1 &&
+      date.month == this.today.getMonth() + 1 &&
       date.year == this.today.getFullYear();
   }
 }

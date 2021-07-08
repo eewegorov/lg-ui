@@ -654,7 +654,7 @@
           {{ 'widgets.settings.lockAfterAction.title' | translate }}<span class="label label-warning tariff-info">окупаемый</span><br />
         </h5>
       </div>
-      <div class="col-lg-12 mt-3 width-900" *ngIf="widget.restrictions?.action?.enable">
+      <div *ngIf="widget.restrictions?.action?.enable" class="col-lg-12 mb-2 pb-5 width-900">
         <div class="time-settings-fromto">
           {{ 'widgets.settings.lockAfterAction.lock1' | translate }}:
         </div>
@@ -685,7 +685,7 @@
           {{ 'widgetsList.editor.restrictions.count.text' | translate }} <span class="label label-warning tariff-info ">окупаемый</span><br />
         </h5>
       </div>
-      <div *ngIf="widget.restrictions.count.enable" class="col-lg-12 mt-3">
+      <div *ngIf="widget.restrictions.count.enable" class="col-lg-12 mb-2 pb-4 d-flex">
         <div class="time-settings-fromto">
           {{ 'widgetsList.editor.restrictions.count.part1' | translate }}
         </div>
@@ -693,7 +693,7 @@
         <div class="time-settings-fromto">
           {{ 'widgetsList.editor.restrictions.count.part2' | translate }}
         </div>
-        <div class="floated-left">
+        <div class="float-left">
           <input class="form-control widgets-num-input mr-1" type="number" min="0" [(ngModel)]="widget.restrictions.count.interval"/>
           <div class="dropdown" style="display: inline;">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -706,7 +706,7 @@
                 *ngFor="let key of getUnitsKeys()"
                 (click)="widget.restrictions.count.unit = key"
               >
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ units[key] }}</a>
+                <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ units[key] }}</a>
               </li>
             </ul>
           </div>
@@ -734,40 +734,31 @@
         (change)="onChangePayment"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.rules.period.title' | translate }}</h5>
     </div>
-    <div *ngIf="widget.rules.period.enable" class="col-lg-12 mt-2 width-900">
+    <div *ngIf="widget.rules.period.enable" class="col-lg-12 mt-2 width-900 d-flex ">
       <div class="time-settings-fromto">
         {{ 'widgetsList.editor.rules.time.from' | translate }}:
       </div>
-      <input
-        style="float: left;"
-        id="period-rule-start-date-picker"
-        class="form-control period-range"
-        type="text"
-        [ngClass]="(widget.rules.period.startDate == null) ? 'is-invalid' : ''"
-      >
+      <div id="period-rule-start-date-picker" class="datepicker">
+        <ngbd-datepicker-i18n [(ngModel)]="widget.rules.period.startDate"></ngbd-datepicker-i18n>
+      </div>
       <div class="time-settings-fromto">
         {{ 'widgetsList.editor.rules.time.to' | translate }}:
       </div>
-      <input
-        style="float: left;"
-        id="period-rule-end-date-picker"
-        class="form-control period-range"
-        type="text"
-        [ngClass]="(widget.rules.period.endDate == null) ? 'is-invalid' : ''"
-      >
+      <div id="period-rule-end-date-picker" class="datepicker">
+        <ngbd-datepicker-i18n [(ngModel)]="widget.rules.period.endDate"></ngbd-datepicker-i18n>
+      </div>
     </div>
     <!-- End Date range -->
 
-
     <!-- End Restrictions-->
     <!-- Autoresponder -->
-    <div class="col-lg-12 mt-5">
+    <div class="col-lg-12 mt-4">
       <h3>{{ 'widgetsList.editor.section.autoresponder' | translate }} <a
         data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.autoresponder.tooltip' | translate }}"
         class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
       </h3>
     </div>
-    <div class="col-lg-12 d-flex mt-2">
+    <div class="col-lg-12 d-flex mt-1">
       <ui-switch size="small" [(ngModel)]="widget.autoresponder.enabled"
       ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoresponder.enable' | translate }}</h5>
     </div>
@@ -780,7 +771,7 @@
     <div
       *ngIf="widget.autoresponder.enabled"
       class="col-lg-12 mt-2"
-      [ngClass]="(widget.autoresponder.subject.toString().trim().length < 1) ? 'is-invalid' : ''"
+      [ngClass]="(widget.autoresponder.subject?.toString().trim().length < 1) ? 'is-invalid' : ''"
     >
       <label class="control-label">{{ 'widgetsList.editor.autoresponder.subject' | translate }}:</label>
       <input class="form-control width-900" [(ngModel)]="widget.autoresponder.subject">
@@ -788,7 +779,7 @@
     <div
       *ngIf="widget.autoresponder.enabled"
       class="col-lg-12 mt-2 width-930"
-      [ngClass]="(widget.autoresponder.text.toString().trim().length < 1) ? 'is-invalid' : ''"
+      [ngClass]="(widget.autoresponder.text?.toString().trim().length < 1) ? 'is-invalid' : ''"
     >
       <label class="control-label">{{ 'widgetsList.editor.autoresponder.text' | translate }}:</label>
       <angular-editor class="width-900" [(ngModel)]="widget.autoresponder.text"></angular-editor>
@@ -797,15 +788,15 @@
 
     <!-- JS Code Actions -->
     <div class="col-lg-12 mt-5">
-      <h3>{{ 'widgets.constructor.settings.jscode.title' | translate }}</h3>
+      <h3>{{ 'widgets.settings.jscode.title' | translate }}</h3>
     </div>
     <div class="col-lg-12 mt-2">
-      <div class="audience-tooolbar-desc" [innerHTML]="'widgets.constructor.settings.jscode.desc' | translate"></div>
+      <div class="audience-tooolbar-desc" [innerHTML]="'widgets.settings.jscode.desc' | translate"></div>
     </div>
 
     <div class="col-lg-12 d-flex mt-3">
       <ui-switch size="small" [(ngModel)]="widget.jsInfo.onShowScript.enable"
-      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgets.constructor.settings.jscode.onShowChecker' | translate }}</h5>
+      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgets.settings.jscode.onShowChecker' | translate }}</h5>
     </div>
     <div class="col-lg-12 mt-2" *ngIf="widget.jsInfo.onShowScript.enable">
       <textarea class="form-control textar-iframe cons-settings-js-textarea" [(ngModel)]="widget.jsInfo.onShowScript.script"></textarea>
@@ -815,7 +806,7 @@
       <ui-switch
         size="small"
         [(ngModel)]="widget.jsInfo.onTargetScript.enable"
-      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgets.constructor.settings.jscode.onActionChecker' | translate }}</h5>
+      ></ui-switch><h5 class="control-label switcher-label switcher-label-xs">{{ 'widgets.settings.jscode.onActionChecker' | translate }}</h5>
     </div>
     <div *ngIf="widget.jsInfo.onTargetScript.enable">
       <div class="col-lg-12 mt-2">
@@ -827,7 +818,7 @@
       <div class="col-lg-12 mt-2">
         <input #enablePlaceholding id="enablePlaceholding" type="checkbox" [(ngModel)]="widget.jsInfo.enablePlaceholding" (change)="onChangePayment(enablePlaceholding.checked)" />
         <h5 class="control-label switcher-label switcher-label-xs">
-          {{ 'widgets.constructor.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
+          {{ 'widgets.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
         </h5>
       </div>
     </div>
