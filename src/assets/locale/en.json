@@ -769,6 +769,9 @@
 		"settingsChanged": ""
 	},
 	"widgets": {
+		"coupon": {
+			"autoresponder": ""
+		},
 		"formExt": {
 			"mainSettings": {
 				"formField": {
@@ -791,6 +794,13 @@
 			"exitIntent": {
 				"desktop": "",
 				"mobile": ""
+			},
+			"jscode": {
+				"autochange": "",
+				"desc": "",
+				"onActionChecker": "",
+				"onShowChecker": "",
+				"title": ""
 			},
 			"lockAfterAction": {
 				"lock1": "",

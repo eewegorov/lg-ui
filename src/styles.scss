@@ -1251,3 +1251,11 @@ span.underow-comment {
 .is-invalid .form-control, .is-invalid .ng-select-container {
   border-color: #a94442 !important;
 }
+
+.angular-editor {
+  width: 900px !important;
+}
+
+.angular-editor-textarea {
+  min-height: 300px !important;
+}

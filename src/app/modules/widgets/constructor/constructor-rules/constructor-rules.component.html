@@ -642,7 +642,7 @@
               #actionEnable
               type="checkbox"
               id="actionEnable"
-              name="uniqueEnable"
+              name="actionEnable"
               [(ngModel)]="widget.restrictions.action.enable"
               (change)="onChangePayment(actionEnable.checked)"
               class="form-check-input"
@@ -673,7 +673,7 @@
               #countEnable
               type="checkbox"
               id="countEnable"
-              name="uniqueEnable"
+              name="countEnable"
               [(ngModel)]="widget.restrictions.count.enable"
               (change)="onChangePayment(countEnable.checked)"
               class="form-check-input"
@@ -765,7 +765,7 @@
     <div *ngIf="widget.autoresponder.enabled" class="col-lg-12 mt-1 mb-1">
       <div
         class="audience-tooolbar-desc underline-links blue-links hover-links"
-        [innerHTML]="'widgets.constructor.coupon.autoresponder' | translate"
+        [innerHTML]="'widgets.coupon.autoresponder' | translate"
       ></div>
     </div>
     <div
@@ -778,16 +778,16 @@
     </div>
     <div
       *ngIf="widget.autoresponder.enabled"
-      class="col-lg-12 mt-2 width-930"
+      class="col-lg-12 mt-2 width-900"
       [ngClass]="(widget.autoresponder.text?.toString().trim().length < 1) ? 'is-invalid' : ''"
     >
       <label class="control-label">{{ 'widgetsList.editor.autoresponder.text' | translate }}:</label>
-      <angular-editor class="width-900" [(ngModel)]="widget.autoresponder.text"></angular-editor>
+      <angular-editor class="width-900" placeholder="" [(ngModel)]="widget.autoresponder.text"></angular-editor>
     </div>
     <!-- End autoresponder -->
 
     <!-- JS Code Actions -->
-    <div class="col-lg-12 mt-5">
+    <div class="col-lg-12 mt-3">
       <h3>{{ 'widgets.settings.jscode.title' | translate }}</h3>
     </div>
     <div class="col-lg-12 mt-2">
@@ -810,13 +810,26 @@
     </div>
     <div *ngIf="widget.jsInfo.onTargetScript.enable">
       <div class="col-lg-12 mt-2">
-          <textarea
-            class="form-control textar-iframe cons-settings-js-textarea"
-            [(ngModel)]="widget.jsInfo.onTargetScript.script"
-          ></textarea>
+        <textarea
+          class="form-control textar-iframe cons-settings-js-textarea"
+          [(ngModel)]="widget.jsInfo.onTargetScript.script"
+        ></textarea>
       </div>
-      <div class="col-lg-12 mt-2">
-        <input #enablePlaceholding id="enablePlaceholding" type="checkbox" [(ngModel)]="widget.jsInfo.enablePlaceholding" (change)="onChangePayment(enablePlaceholding.checked)" />
+      <div class="col-lg-12 mt-2 pt-2 d-flex align-items-baseline">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              #enablePlaceholding
+              type="checkbox"
+              id="enablePlaceholding"
+              name="enablePlaceholding"
+              [(ngModel)]="widget.jsInfo.enablePlaceholding"
+              (change)="onChangePayment(enablePlaceholding.checked)"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
+        </div>
         <h5 class="control-label switcher-label switcher-label-xs">
           {{ 'widgets.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
         </h5>
