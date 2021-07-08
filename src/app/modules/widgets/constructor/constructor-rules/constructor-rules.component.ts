@@ -49,17 +49,12 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.widgetService.addValidator(this.validator);
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
-
-    if (!this.widget.restrictions.action) {
-      this.widget.restrictions.action = {
-        enable: false
-      };
-    }
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       ($('[data-toggle="tooltip"]') as any).tooltip();
+      this.loadListener();
     }, 1000);
   }
 
@@ -423,23 +418,25 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   }
 
   private prepareControls() {
-    ($('#period-rule-start-date-picker') as any).datetimepicker({
-      format: 		'DD.MM.YYYY',
-      locale        : 'ru',
-      showClose     : false,
-      defaultDate   : moment(this.widget.rules.period.startDate, 'DD.MM.YYYY')
-    }).on('dp.change', () => {
-      this.widget.rules.period.startDate = $('#period-rule-start-date-picker').data('DateTimePicker').date().format('DD.MM.YYYY');
-    });
+    if (this.widget.rules.period.enable) {
+      ($('#period-rule-start-date-picker') as any).datetimepicker({
+        format: 		'DD.MM.YYYY',
+        locale        : 'ru',
+        showClose     : false,
+        defaultDate   : moment(this.widget.rules.period.startDate, 'DD.MM.YYYY')
+      }).on('dp.change', () => {
+        this.widget.rules.period.startDate = $('#period-rule-start-date-picker').data('DateTimePicker').date().format('DD.MM.YYYY');
+      });
 
-    ($('#period-rule-end-date-picker') as any).datetimepicker({
-      format: 		'DD.MM.YYYY',
-      locale        : 'ru',
-      showClose     : false,
-      defaultDate   : moment(this.widget.rules.period.endDate, 'DD.MM.YYYY')
-    }).on('dp.change', () => {
-      this.widget.rules.period.endDate = $('#period-rule-end-date-picker').data('DateTimePicker').date().format('DD.MM.YYYY');
-    });
+      ($('#period-rule-end-date-picker') as any).datetimepicker({
+        format: 		'DD.MM.YYYY',
+        locale        : 'ru',
+        showClose     : false,
+        defaultDate   : moment(this.widget.rules.period.endDate, 'DD.MM.YYYY')
+      }).on('dp.change', () => {
+        this.widget.rules.period.endDate = $('#period-rule-end-date-picker').data('DateTimePicker').date().format('DD.MM.YYYY');
+      });
+    }
   }
 
 }

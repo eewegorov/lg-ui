@@ -125,7 +125,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
         }
 
         if (this.widget.rules.days) {
-          this.widget.rules.daysn.enable = false;
+          this.widget.rules.days.enable = false;
         }
 
         if (this.widget.rules.period) {
