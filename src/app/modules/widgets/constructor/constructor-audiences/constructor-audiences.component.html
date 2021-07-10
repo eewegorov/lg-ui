@@ -6,15 +6,13 @@
       {{ 'widgetsList.editor.audiences.desc' | translate }}
     </div>
     <div class="toolbar-content pt-4">
-      <div class="row btnpanel">
-        <div class="audience-tooolbar-switcher">
-          <ui-switch
-            [checked]="widget.audiencesEnabled"
-            (change)="onChangePayment"
-            class="mt-1 mr-2 float-left"
-          ></ui-switch><h3 class="mt-1">{{ 'widgetsList.editor.audiences.enabled' | translate }}<span
-          class="label label-warning tariff-info biggest">окупаемый</span></h3>
-        </div>
+      <div class="audience-tooolbar-switcher">
+        <ui-switch
+          [(ngModel)]="widget.audiencesEnabled"
+          (change)="onChangePayment"
+          class="mt-1 mr-2 float-left"
+        ></ui-switch><h3 class="mt-1">{{ 'widgetsList.editor.audiences.enabled' | translate }}<span
+        class="label label-warning tariff-info biggest">окупаемый</span></h3>
       </div>
     </div>
   </div>
@@ -42,7 +40,7 @@
           <div *ngFor="let item of group.items; index as j">
             <div class="rule-block">
               <div class="rule-header">
-                <i class="pe-7s-close-circle" (click)="removeItem(group.id, j)"></i>
+                {{ item.name }} <i class="pe-7s-close-circle" (click)="removeItem(group.id, j)"></i>
               </div>
               <div class="rule-body" [ngSwitch]="item.type">
                 <app-rule-devices
@@ -225,7 +223,7 @@
           data-title="{{ 'audience.rule.social.title' | translate }}"
           class="audience-rule"
         >
-          <i class="pe-7s-menu"></i> {{ 'audience.rule.social.title' | translate }}й <a
+          <i class="pe-7s-menu"></i> {{ 'audience.rule.social.title' | translate }} <a
           data-toggle="tooltip"
           data-placement="top"
           title=""

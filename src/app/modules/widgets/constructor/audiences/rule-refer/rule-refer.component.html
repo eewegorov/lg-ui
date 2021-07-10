@@ -1,10 +1,10 @@
 <div class="form-group filter-section">
-  <div *ngFor="let subitem of item.subitems; index as i" class="row section-audience-row filterow">
+  <div *ngFor="let subitem of item.subitems; index as i" class="section-audience-row filterow">
     <div *ngIf="i > 0" class="rule-subitem-text ml-3">{{ 'audience.rule.logic.or' | translate }}</div>
     <div class="col-sm-12 mt-2 mb-2" [ngClass]="(subitem.value.trim().length == 0) ? 'is-invalid' : ''">
-      <div class="row row-nomargined">
+      <div class="d-flex row-nomargined">
         <div class="input-group subitem-left">
-          <div class="input-group-btn">
+          <div class="input-group-prepend">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               {{ vals.compareTypes[subitem.valueCompareType] }} <span class="caret"></span>
             </button>
@@ -27,7 +27,7 @@
           </a>
         </div>
       </div>
-      <div class="row small mt-3 underline-comment">
+      <div class="row small mt-1 underline-comment">
         {{ 'audience.rule.refer.underline' | translate }}
       </div>
     </div>

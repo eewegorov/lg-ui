@@ -41,12 +41,17 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
 
     ($('.audience-rule') as any).draggable({
       helper: 'clone',
-      revert: false
+      revert: false,
+      appendTo: '#audiences-item',
+      drag: function(e, ui) {
+        ui.position.top = e.pageY - 70;
+        ui.position.left = e.pageX - 200;
+      }
     });
 
     $(window).scroll(() => {
-      if ($(window).scrollTop() > 100) {
-        $('.rules-templates-list').css('top', $(window).scrollTop() - 100);
+      if ($(window).scrollTop() > 300) {
+        $('.rules-templates-list').css('top', $(window).scrollTop() - 300);
       } else {
         $('.rules-templates-list').css('top', 0);
       }
@@ -61,9 +66,9 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
     return str;
   }
 
-  public removeItem(group, index) {
+  public removeItem(groupId, index) {
     for (let i = 0; i < this.audience.groups.length; i++) {
-      if (this.audience.groups[i].id === group.id) {
+      if (this.audience.groups[i].id === groupId) {
         this.audience.groups[i].items = this.widgetConstructorService.removeFromArray(this.audience.groups[i].items, index);
 
         if (this.audience.groups[i].items.length === 0) {

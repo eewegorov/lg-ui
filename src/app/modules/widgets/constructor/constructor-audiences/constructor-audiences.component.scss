@@ -1,5 +1,21 @@
+.widgets-settings-container {
+  overflow: hidden;
+}
+
+.audiences-item {
+  overflow: auto;
+}
+
+h3 {
+  font-size: 24px;
+}
+
 #rules-containers {
   padding-bottom: 50px;
+}
+
+#audiences-item {
+  overflow: hidden;
 }
 
 .rule-droppable, .rule-droppable-or, .rule-droppable-and {
@@ -62,7 +78,7 @@
   font-size: 14px;
   margin-bottom: 5px;
   padding: 6px 12px;
-  width: 100%;
+  min-width: 30%;
 }
 
 .audience-rule:hover {
@@ -77,4 +93,14 @@
 
 .audience-rule a {
   float: right;
+}
+
+.label.label-warning.tariff-info.biggest {
+  font-size: 10px;
+}
+
+.toolbar-content {
+  margin-bottom: 20px;
+  padding: 3px;
+  flex-direction: column;
 }

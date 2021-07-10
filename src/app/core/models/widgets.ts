@@ -50,6 +50,7 @@ export interface AudienceGroup {
 
 export interface AudienceGroupItem {
   type: string;
+  name: string;
   subitems: Record<string, string | number>[];
   id?: number;
 }

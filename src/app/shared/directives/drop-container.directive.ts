@@ -33,7 +33,7 @@ export class DropContainerDirective {
 
   private getItemTemplate(rule) {
     const baseObj = {
-      name: rule.attr('data-title'),
+      name: rule.attr('title'),
       type: rule.attr('data-code'),
       subitems: []
     };
