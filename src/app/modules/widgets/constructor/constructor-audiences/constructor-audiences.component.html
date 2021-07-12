@@ -19,7 +19,7 @@
   <!-- End Audiences list -->
 
   <!-- Audience editor -->
-  <div id="audiences-item">
+  <div id="audiences-item" [hidden]="!widget.audiencesEnabled">
     <!-- Audience editor core -->
     <div class="row mb-3">
       <div class="col-lg-8" id="rules-containers">

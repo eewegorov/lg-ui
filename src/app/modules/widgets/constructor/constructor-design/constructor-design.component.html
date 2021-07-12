@@ -20,13 +20,13 @@
             <div id="collapseFour" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingFour">
               <div class="panel-body">
                 <div class="border-item">
-                  <div class="row row-subitem mb-1">
+                  <div class="row row-subitem mb-2">
                     <div class="col-sm-12 row-subitem-padding">
                       <h3 class="marg-minus-bord-des">Расположение</h3>
                     </div>
                   </div>
                   <div class="row row-subitem">
-                    <div class="col-sm-12 row-subitem-padding mt-1">
+                    <div class="col-sm-12 row-subitem-padding mt-2">
                       <label class="control-label control-label-des">Где показывать всплывающее окно:</label>
                       <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -53,11 +53,11 @@
                     </div>
                   </div>
                   <div class="row row-subitem mt-1">
-                    <div class="col-sm-12 row-subitem-padding pt-1">
+                    <div class="d-flex col-sm-12 row-subitem-padding pt-1">
                       <ui-switch
                         size="small"
-                        [checked]="widget.guiprops.popupMain?.shadow.enable"
-                      ></ui-switch><label class="control-label switcher-label-xs control-label-des">Затемнять фон маской при показе виджета</label>
+                        [(ngModel)]="widget.guiprops.popupMain?.shadow.enable"
+                      ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Затемнять фон маской при показе виджета</label>
                     </div>
                   </div>
                   <div *ngIf="widget.guiprops.popupMain?.shadow.enable == true">
@@ -73,12 +73,15 @@
                       </div>
                       <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
                         <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
-                        <ngx-slider [(value)]="widget.guiprops['popupMain'].shadow.opacityColor" [options]="optionsOpacity"></ngx-slider>
+                        <ngx-slider
+                          [(value)]="widget.guiprops['popupMain'].shadow.opacityColor"
+                          [options]="optionsOpacity"
+                        ></ngx-slider>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="row pl-2 mt-3">
+                <div class="mt-3">
                   <div class="col-sm-12 row-subitem-padding">
                     <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
                   </div>

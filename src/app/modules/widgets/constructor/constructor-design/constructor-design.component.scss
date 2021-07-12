@@ -13,6 +13,11 @@
   border-radius: 4px;
 }
 
+.widget-style-menu .btn-default {
+  width: 100%;
+  text-align: left;
+}
+
 .panel-default {
   border-color: transparent!important;
 }
@@ -495,8 +500,6 @@ h6.title-h6-widget a:hover {
 }
 
 .wv-b-right {
-  left: auto;
-  right: 110px;
   left: 110px;
   right: auto;
 }

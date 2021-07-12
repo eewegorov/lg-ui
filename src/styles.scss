@@ -1269,3 +1269,21 @@ span.underow-comment {
   color: #fff;
   background-color: #f0ad4e;
 }
+
+.ngx-slider {
+  margin: 0 !important;
+}
+
+.ngx-slider .ngx-slider-pointer {
+  width: 12px !important;
+  height: 12px !important;
+  top: -4px !important;
+}
+
+.ngx-slider-bubble {
+  display: none !important;
+}
+
+.ngx-slider-pointer:after {
+  display: none !important;
+}

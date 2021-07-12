@@ -1,6 +1,7 @@
 .title-widget-container {
   position: relative;
   width: 260px;
+  min-height: 50px;
   margin: -5px 0 10px 0;
 }
 
@@ -113,7 +114,7 @@ h3.widget-title-main {
 }
 
 .title-widget-rename {
-  margin-top: 10px;
+  margin-top: 5px;
   position: relative;
   z-index: 1;
 }
