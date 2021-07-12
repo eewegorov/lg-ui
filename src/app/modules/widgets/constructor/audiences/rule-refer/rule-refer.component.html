@@ -10,10 +10,10 @@
             </button>
             <ul class="dropdown-menu" role="menu">
               <li
-                *ngFor="let val of vals.compareTypes"
-                (click)="subitem.valueCompareType = i"
+                *ngFor="let val of vals.compareTypes; index as j"
+                (click)="subitem.valueCompareType = j"
               >
-                <a href="javascript:void(0);">{{ val }}</a>
+                <a href="javascript:void(0);" class="dropdown-item">{{ val }}</a>
               </li>
             </ul>
           </div>

@@ -1,8 +1,8 @@
 <div class="form-group filter-section">
-  <div *ngFor="let subitem of item.subitems; index as i" class="row section-audience-row filterow">
+  <div *ngFor="let subitem of item.subitems; index as i" class="section-audience-row filterow">
     <div *ngIf="i > 0" class="rule-subitem-text ml-3">{{ 'audience.rule.logic.or' | translate }}</div>
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-3 row-subitem-padding pt-3">
+    <div class="d-flex row-subitem mt-2">
+      <div class="col-sm-3 row-subitem-padding mt-1 pt-4">
         <div class="dropdown" data-val="true" data-field="present">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ vals.conditions[subitem.condition] }} <span class="caret"></span>
@@ -10,10 +10,10 @@
           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
             <li
               role="presentation"
-              *ngFor="let val of vals.conditions"
-              (click)="subitem.condition = i"
+              *ngFor="let val of vals.conditions; index as j"
+              (click)="subitem.condition = j"
             >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ val }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ val }}</a>
             </li>
           </ul>
         </div>
@@ -28,8 +28,8 @@
               {{ vals.compareTypes[subitem.paramCompareType] }} <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li *ngFor="let val of vals.compareTypes; index as i" (click)="subitem.paramCompareType = i">
-                <a href="javascript:void(0)">{{ val }}</a>
+              <li *ngFor="let val of vals.compareTypes; index as k" (click)="subitem.paramCompareType = k">
+                <a href="javascript:void(0)" class="dropdown-item">{{ val }}</a>
               </li>
             </ul>
           </div>
@@ -38,7 +38,7 @@
       </div>
       <div class="col-sm-5 pl-0">
         <div class="row row-subitem-underline ml-1 mb-1">
-          <span class="underline-comment">{{ 'audience.rule.url.value.upline' | translate }}:</span>
+          <span class="underline-comment">{{ 'audience.rule.url.param.upline' | translate }}:</span>
         </div>
         <div class="input-group subitem-left" [ngClass]="(subitem.value.trim().length == 0) ? 'is-invalid' : ''">
           <div class="input-group-prepend">
@@ -47,10 +47,10 @@
             </button>
             <ul role="menu" class="dropdown-menu">
               <li
-                *ngFor="let val of vals.compareTypes; index as j"
-                (click)="subitem.valueCompareType = j"
+                *ngFor="let val of vals.compareTypes; index as l"
+                (click)="subitem.valueCompareType = l"
               >
-                <a href="javascript:void(0)">{{ val }}</a>
+                <a href="javascript:void(0)" class="dropdown-item">{{ val }}</a>
               </li>
             </ul>
           </div>
@@ -67,12 +67,11 @@
     </div>
     <div class="row small row-subitem-underline">
       <div class="col-sm-3">
-
       </div>
       <div class="col-sm-4" [ngClass]="(subitem.param.trim().length == 0) ? 'is-invalid' : ''">
         <span class="underline-comment">{{ 'audience.rule.url.param.underline' | translate }}</span>
       </div>
-      <div class="col-sm-5" [ngClass]="(subitem.value.trim().length == 0) ? 'is-invalid' : ''">
+      <div class="col-sm-5 p-0" [ngClass]="(subitem.value.trim().length == 0) ? 'is-invalid' : ''">
         <span class="underline-comment">{{ 'audience.rule.url.value.underline' | translate }}</span>
       </div>
     </div>

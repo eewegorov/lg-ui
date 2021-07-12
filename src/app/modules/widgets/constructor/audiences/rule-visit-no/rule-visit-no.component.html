@@ -1,7 +1,7 @@
 <div class="form-group filter-section">
-  <div *ngFor="let subitem of item.subitems; index as i" class="row section-audience-row filterow">
+  <div *ngFor="let subitem of item.subitems; index as i" class="section-audience-row filterow">
     <div *ngIf="i > 0" class="rule-subitem-text ml-3">{{ 'audience.rule.logic.or' | translate }}</div>
-    <div class="row row-subitem mt-2">
+    <div class="d-flex row-subitem mt-2">
       <div class="col-sm-6 row-subitem-padding">
         <div class="dropdown" data-val="true" data-field="present">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -10,10 +10,10 @@
           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
             <li
               role="presentation"
-              *ngFor="let val of vals.arifmethic"
-              (click)="subitem.valueCompareType = i"
+              *ngFor="let val of vals.arifmethic; index as j"
+              (click)="subitem.valueCompareType = j"
             >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ val }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ val }}</a>
             </li>
           </ul>
         </div>
@@ -31,8 +31,8 @@
         </div>
       </div>
     </div>
-    <div class="row small mt-3 underline-comment row-subitem-underline">
-      <div class="col-sm-6">
+    <div class="row small mt-1 underline-comment row-subitem-underline">
+      <div class="col-sm-6 offset-sm-6">
         {{ 'audience.rule.visitno.underline' | translate }}
       </div>
     </div>

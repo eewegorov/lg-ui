@@ -1,8 +1,8 @@
 <div class="form-group filter-section">
-  <div *ngFor="let subitem of item.subitems; index as i" class="row section-audience-row filterow">
+  <div *ngFor="let subitem of item.subitems; index as i" class="section-audience-row filterow">
     <div *ngIf="i > 0" class="rule-subitem-text ml-3">{{ 'audience.rule.logic.or' | translate }}</div>
     <div class="col-sm-12 mt-2 mb-2">
-      <div class="row row-nomargined">
+      <div class="d-flex row-nomargined">
         <div class="dropdown subitem-left">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ vals.deviceList[subitem.value] }} <span class="caret"></span>
@@ -10,10 +10,10 @@
           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
             <li
               role="presentation"
-              *ngFor="let val of vals.deviceList"
-              (click)="subitem.value = i"
+              *ngFor="let val of vals.deviceList; index as j"
+              (click)="subitem.value = j"
             >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ val }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ val }}</a>
             </li>
           </ul>
         </div>
@@ -25,7 +25,7 @@
           </a>
         </div>
       </div>
-      <div class="row small mt-3 underline-comment">
+      <div class="row small mt-1 underline-comment">
         {{ 'audience.rule.devices.underline' | translate }}
       </div>
     </div>
