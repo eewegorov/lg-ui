@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DoCheck,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,7 +28,7 @@ import { WidgetService } from '../../services/widget.service';
   templateUrl: './constructor-design.component.html',
   styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss']
 })
-export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
   @ViewChild('flow') public flow: FlowDirective;
   @Input() public sid: string;
   @Input() public wid: string;
@@ -92,7 +102,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.systemFonts = this.widgetConstructorService.getSystemFontList();
@@ -155,8 +166,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       const widgetNameBtnDel = $('#removeWidgetName');
       if (widgetInput === '') {
         widgetNameBtnDel.addClass('hide');
-      }
-      else {
+      } else {
         widgetNameBtnDel.removeClass('hide');
       }
     });
@@ -173,8 +183,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       if ($('#thankWidget').hasClass('active')) {
         $('#disabledFuncAct').removeClass('hide');
         $('.panel-group').addClass('non-scroll');
-      }
-      else {
+      } else {
         $('#disabledFuncAct').addClass('hide');
         $('.panel-group').removeClass('non-scroll');
       }
@@ -187,9 +196,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         this.flow.upload();
       }
     });
+
+    setTimeout(() => {
+      this.changeModel();
+      this.changeColorPodAndSRC();
+    }, 1000);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngDoCheck(): void {
     if (!this.widget.guiprops) {
       return;
     }
@@ -212,13 +226,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
           this.widget.guiprops.form.colorPod.color,
           this.widget.guiprops.form.colorPod.opacityColorPod
         )).toString();
-    }
-    else {
+    } else {
       this.widget.guiprops.form.colorPod.rgbaColorPod = 'transparent!important';
     }
 
-    this.widget.guiprops.form.rgbaInputForm = (this.widgetConstructorService
-      .hexToRgb(this.widget.guiprops.form.bgInputForm, this.widget.guiprops.form.opacityBgInputForm)).toString();
+    if (this.widget.guiprops.form.bgInputForm && this.widget.guiprops.form.opacityBgInputForm) {
+      this.widget.guiprops.form.rgbaInputForm = (this.widgetConstructorService
+        .hexToRgb(this.widget.guiprops.form.bgInputForm, this.widget.guiprops.form.opacityBgInputForm)).toString();
+    }
 
     if (this.widget.guiprops.form.enable === true) {
       this.widget.guiprops.button.enable = true;
@@ -226,6 +241,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         this.widget.guiprops.button.enable = true;
       }
     }
+
     if (this.widget.guiprops.button.enable === true && this.widget.guiprops.form.enable === false) {
       this.widget.guiprops.formSet.redirect.enable = true;
       if (this.widget.guiprops.formSet.redirect.enable === true) {
@@ -236,8 +252,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     if (this.widget.guiprops.popupMain.shadow.enable) {
       this.widget.guiprops.popupMain.shadow.rgbaColor = (this.widgetConstructorService
         .hexToRgb(this.widget.guiprops.popupMain.shadow.color, this.widget.guiprops.popupMain.shadow.opacityColor)).toString();
-    }
-    else {
+    } else {
       this.widget.guiprops.popupMain.shadow.rgbaColor = 'transparent!important';
     }
 
@@ -246,11 +261,12 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         .hexToRgb(this.widget.guiprops.labelMain.colorLabel, this.widget.guiprops.labelMain.opacityBgLabel)).toString();
     }
 
-    this.widget.guiprops.dhVisual.rgbaShadowForm1 = (this.widgetConstructorService
-      .hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.6)).toString();
-    this.widget.guiprops.dhVisual.rgbaShadowForm2 = (this.widgetConstructorService
-      .hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.8)).toString();
-
+    if (this.widget.guiprops.dhVisual.colorBg) {
+      this.widget.guiprops.dhVisual.rgbaShadowForm1 = (this.widgetConstructorService
+        .hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.6)).toString();
+      this.widget.guiprops.dhVisual.rgbaShadowForm2 = (this.widgetConstructorService
+        .hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.8)).toString();
+    }
 
     if (this.widget.guiprops.dhVisual.widget_content_width === 'Собственная') {
       let newWidth: string;
@@ -261,16 +277,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
         newWidth = (+this.widget.guiprops.dhVisual.widget_content_widthpx - 60).toString();
       }
       this.widthContentStyle = newWidth + 'px';
-    }
-    else {
+    } else {
       this.widthContentStyle = 'auto';
     }
 
     if (this.widget.guiprops.dhVisual.widget_content_height === 'Собственная') {
       const newHeight = (+this.widget.guiprops.dhVisual.widget_content_heightpx - 60).toString();
       this.heightContentStyle = newHeight + 'px';
-    }
-    else {
+    } else {
       this.heightContentStyle = 'auto';
     }
 
@@ -286,24 +300,21 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
           this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / auto repeat';
         }
       }
-
-    }
-    else if (this.widget.guiprops.bg.fillorImg === 'fill') {
+      this.widget.guiprops.bg.bgStyle = this.bgStyle;
+    } else if (this.widget.guiprops.bg.fillorImg === 'fill') {
       this.bgStyle = this.widget.guiprops.bg.colorBg;
+      this.widget.guiprops.bg.bgStyle = this.bgStyle;
     }
-    this.widget.guiprops.bg.bgStyle = this.bgStyle;
 
     if (!this.widget.guiprops.bg.border.enable) {
       this.widget.guiprops.bg.border.style = '0px solid transparent';
-    }
-    else {
+    } else {
       this.widget.guiprops.bg.border.style = this.widget.guiprops.bg.border.thickness + 'px solid ' + this.widget.guiprops.bg.border.color;
     }
 
     if (!this.widget.guiprops.bg.shadow.enable) {
       this.widget.guiprops.bg.shadow.style = '0px 0px 0px 0px rgba(0,0,0,0.25)';
-    }
-    else {
+    } else {
       this.widget.guiprops.bg.shadow.style =
         this.widget.guiprops.bg.shadow.horiz + 'px ' + this.widget.guiprops.bg.shadow.vertical + 'px ' +
         this.widget.guiprops.bg.shadow.blur + 'px ' + this.widgetConstructorService.getRGBAColor(this.widget.guiprops.bg.shadow);
@@ -312,59 +323,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     if (this.widget.guiprops.bg.mask.enable) {
       this.widget.guiprops.bg.mask.rgbaColor =
         (this.widgetConstructorService.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
-    }
-    else {
+    } else {
       this.widget.guiprops.bg.mask.rgbaColor = 'transparent!important';
     }
-
-    const labelMain  = $('#labelMain');
-
-    setTimeout(() => {
-      if (this.widget.guiprops.labelMain.place === 'Левая сторона браузера') {
-        labelMain.css({
-          'margin-left': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2)) - 12 + 'px',
-          'margin-right': '0',
-          bottom: 'auto'
-        });
-        setTimeout(() => {
-          labelMain.css({
-            'margin-left': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2)) - 12 + 'px',
-            'margin-right': '0',
-            bottom: 'auto'
-          });
-
-          this.widget.guiprops.labelMain.width  = labelMain.innerWidth() + 1;
-          this.widget.guiprops.labelMain.height = labelMain.innerHeight() + 1;
-        }, 200);
-      }
-
-      if (this.widget.guiprops.labelMain.place === 'Правая сторона браузера') {
-        labelMain.css({
-          'margin-right': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2) - 6) + 'px',
-          'margin-left': '0',
-          bottom: 'auto'
-        });
-        setTimeout(() => {
-          labelMain.css({
-            'margin-right': - ((labelMain.innerWidth() / 2) - (labelMain.innerHeight() / 2) - 6) + 'px',
-            'margin-left': '0',
-            bottom: 'auto'
-          });
-          this.widget.guiprops.labelMain.width  = labelMain.innerWidth() + 1;
-          this.widget.guiprops.labelMain.height = labelMain.innerHeight() + 1;
-        }, 200);
-      }
-
-      if ((this.widget.guiprops.labelMain.place === 'Нижний левый угол') ||
-        (this.widget.guiprops.labelMain.place === 'Нижний правый угол')
-      ) {
-        labelMain.css({'margin-left': '0', 'margin-right': '0', bottom: '55px'});
-        setTimeout(() => {
-          this.widget.guiprops.labelMain.width  = labelMain.innerWidth() + 1;
-          this.widget.guiprops.labelMain.height = labelMain.innerHeight() + 1;
-        }, 200);
-      }
-    }, 1000);
 
     if (this.widget.guiprops.form.enable) {
       // tslint:disable-next-line:prefer-for-of
@@ -419,26 +380,27 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
           margTopValue = 14;
         }
 
-        $('.lgiconfontImg').css({width: imageSize + 'px', height: imageSize + 'px', 'margin-top': - margTopValue + 'px'});
-        labelContent.css({'padding-left': (imageSize + 10) + 'px'});
+        $('.lgiconfontImg').css({
+          width: imageSize + 'px',
+          height: imageSize + 'px',
+          'margin-top': -margTopValue + 'px'
+        });
+        labelContent.css({ 'padding-left': (imageSize + 10) + 'px' });
 
         this.widget.guiprops.labelMain.imgWidth = imageSize;
         this.widget.guiprops.labelMain.imgMargTop = margTopValue;
       }, 0);
     } else {
-      labelContent.css({'padding-left': ''});
+      labelContent.css({ 'padding-left': '' });
     }
 
-    this.changeModel();
-    this.changeColorPodAndSRC();
-
-    let counterNewText    = 0;
-    let counterNewImage   = 0;
-    let counterNewVideo   = 0;
+    let counterNewText = 0;
+    let counterNewImage = 0;
+    let counterNewVideo = 0;
     let counterNewPadding = 0;
-    let counterNewSplit   = 0;
-    let counterNewIframe  = 0;
-    let counterNewCoupon  = 0;
+    let counterNewSplit = 0;
+    let counterNewIframe = 0;
+    let counterNewCoupon = 0;
 
     for (const item of this.widget.guiprops.elementsList) {
       if (item.name) {
@@ -866,7 +828,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       this.widget.guiprops.formSet.phoneMask = { enable: false, maskValue: '+7 (***) ***-**-**' };
     }
 
-
     if (typeof this.widget.guiprops.dhVisual === 'undefined') {
       this.widget.guiprops.dhVisual = {
         enable: false,
@@ -1065,11 +1026,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
 
   private changeModel() {
     const mainBlockW = $('.widget-image');
-    const mainBl     = $('#mainBlockWidget');
-    const mainBlWr   = $('#widgetMainWr');
+    const mainBl = $('#mainBlockWidget');
+    const mainBlWr = $('#widgetMainWr');
     const maskTop = $('#widgetMaskTop');
-    const gap18  = '-18px';
-    const gap3   = '-3px';
+    const gap18 = '-18px';
+    const gap3 = '-3px';
 
     mainBlockW.addClass('hide-image-bl-for-rebuild');
     setTimeout(() => {
@@ -1084,8 +1045,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       if (this.widget.guiprops.image.img_width === 'Собственная') {
         const newWidth = (+this.widget.guiprops.image.img_widthpx).toString();
         this.widthImageStyle = newWidth + 'px';
-      }
-      else {
+      } else {
         this.widthImageStyle = '33%';
       }
     }
@@ -1094,8 +1054,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       if (this.widget.guiprops.image.img_height === 'Собственная') {
         const newHeight = (+this.widget.guiprops.image.img_heightpx).toString();
         this.heightImageStyle = newHeight + 'px';
-      }
-      else {
+      } else {
         this.heightImageStyle = '150px';
       }
     }
@@ -1110,29 +1069,42 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
               this.widget.guiprops.form.visual,
               this.widget.guiprops.image.place
             )) {
-              $('#colorFormPod').css({'z-index': '0'});
+              $('#colorFormPod').css({ 'z-index': '0' });
               // Размер ЗАДАН
               if (this.widget.guiprops.image.img_width === 'Собственная') {
                 let imageWidgetWidthPod;
                 setTimeout(() => {
-                  $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
-                  mainBlockW.css({width: this.widthImageStyle, height: '100%'});
+                  $('.color-pod').css({ 'margin-left': '0', 'margin-right': '0' });
+                  mainBlockW.css({ width: this.widthImageStyle, height: '100%' });
                 }, 100);
 
                 if (this.widget.guiprops.image.place === 'Слева') {
                   setTimeout(() => {
-                    $('.widget-main-img-left').css({'margin-left': mainBlockW.innerWidth() - 15 + 'px', 'margin-right': 0});
-                    $('#colorFormPod').css({width: (mainBl.innerWidth() - mainBlockW.innerWidth()) + 'px', left: 'auto', right: '0'});
-                    maskTop.css({left: gap3, right: gap18});
+                    $('.widget-main-img-left').css({
+                      'margin-left': mainBlockW.innerWidth() - 15 + 'px',
+                      'margin-right': 0
+                    });
+                    $('#colorFormPod').css({
+                      width: (mainBl.innerWidth() - mainBlockW.innerWidth()) + 'px',
+                      left: 'auto',
+                      right: '0'
+                    });
+                    maskTop.css({ left: gap3, right: gap18 });
                   }, 200);
                 }
 
                 if (this.widget.guiprops.image.place === 'Справа') {
                   setTimeout(() => {
                     imageWidgetWidthPod = (mainBlockW.innerWidth() - 10);
-                    $('.widget-main-img-right').css({'margin-right': mainBlockW.innerWidth() - 15 + 'px', 'margin-left': 0});
-                    $('#colorFormPod').css({width: (mainBl.innerWidth() - mainBlockW.innerWidth()) + 'px', left: '0'});
-                    maskTop.css({left: gap18, right: gap3});
+                    $('.widget-main-img-right').css({
+                      'margin-right': mainBlockW.innerWidth() - 15 + 'px',
+                      'margin-left': 0
+                    });
+                    $('#colorFormPod').css({
+                      width: (mainBl.innerWidth() - mainBlockW.innerWidth()) + 'px',
+                      left: '0'
+                    });
+                    maskTop.css({ left: gap18, right: gap3 });
                   }, 200);
                 }
               }
@@ -1141,24 +1113,38 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
                 let imageWidgetWidthPod;
                 setTimeout(() => {
                   imageWidgetWidthPod = (mainBlWr.innerWidth() + 60) / 2;
-                  $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
-                  mainBlockW.css({width: imageWidgetWidthPod + 'px'});
-                  mainBlockW.css({height: '100%'});
+                  $('.color-pod').css({ 'margin-left': '0', 'margin-right': '0' });
+                  mainBlockW.css({ width: imageWidgetWidthPod + 'px' });
+                  mainBlockW.css({ height: '100%' });
                 }, 100);
 
                 if (this.widget.guiprops.image.place === 'Слева') {
                   setTimeout(() => {
-                    $('.widget-main-img-left').css({'margin-left': mainBlockW.innerWidth() - 15 + 'px', 'margin-right': 0});
-                    $('#colorFormPod').css({width: (mainBl.innerWidth() - mainBlockW.innerWidth()) + 'px', left: 'auto', right: '0'});
-                    maskTop.css({left: gap3, right: gap18});
+                    $('.widget-main-img-left').css({
+                      'margin-left': mainBlockW.innerWidth() - 15 + 'px',
+                      'margin-right': 0
+                    });
+                    $('#colorFormPod').css({
+                      width: (mainBl.innerWidth() - mainBlockW.innerWidth()) + 'px',
+                      left: 'auto',
+                      right: '0'
+                    });
+                    maskTop.css({ left: gap3, right: gap18 });
                   }, 200);
                 }
 
                 if (this.widget.guiprops.image.place === 'Справа') {
                   setTimeout(() => {
-                    $('.widget-main-img-right').css({'margin-right': mainBlockW.innerWidth() - 15 + 'px', 'margin-left': 0});
-                    $('#colorFormPod').css({width: (mainBl.innerWidth() - mainBlockW.innerWidth()) + 'px', left: '0', right: 'auto'});
-                    maskTop.css({left: gap18, right: gap3});
+                    $('.widget-main-img-right').css({
+                      'margin-right': mainBlockW.innerWidth() - 15 + 'px',
+                      'margin-left': 0
+                    });
+                    $('#colorFormPod').css({
+                      width: (mainBl.innerWidth() - mainBlockW.innerWidth()) + 'px',
+                      left: '0',
+                      right: 'auto'
+                    });
+                    maskTop.css({ left: gap18, right: gap3 });
                   }, 200);
                 }
               }
@@ -1166,28 +1152,38 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
 
             // Картинка сверху или снизу
             if (((this.widget.guiprops.image.place === 'Сверху') || (this.widget.guiprops.image.place === 'Снизу'))) {
-              $('#colorFormPod').css({'z-index': '0'});
-              $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
-              maskTop.css({left: gap18, right: gap18});
+              $('#colorFormPod').css({ 'z-index': '0' });
+              $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
+              maskTop.css({ left: gap18, right: gap18 });
               // Размер ЗАДАН
               if (this.widget.guiprops.image.img_height === 'Собственная') {
                 setTimeout(() => {
-                  mainBlockW.css({height: this.heightImageStyle});
-                  $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
-                  mainBlockW.css({width: '100%'});
+                  mainBlockW.css({ height: this.heightImageStyle });
+                  $('.color-pod').css({ 'margin-left': '0', 'margin-right': '0' });
+                  mainBlockW.css({ width: '100%' });
                 }, 100);
 
                 if (this.widget.guiprops.image.place === 'Сверху') {
                   setTimeout(() => {
-                    $('.widget-main-img-top').css({'margin-left': 0, 'margin-right': 0, 'margin-top': mainBlockW.innerHeight() + 'px', 'margin-bottom': 0});
-                    $('.widget-main-img-bottom').css({'margin-left': 0, 'margin-right': 0});
+                    $('.widget-main-img-top').css({
+                      'margin-left': 0,
+                      'margin-right': 0,
+                      'margin-top': mainBlockW.innerHeight() + 'px',
+                      'margin-bottom': 0
+                    });
+                    $('.widget-main-img-bottom').css({ 'margin-left': 0, 'margin-right': 0 });
                   }, 200);
                 }
 
                 if (this.widget.guiprops.image.place === 'Снизу') {
                   setTimeout(() => {
-                    $('.widget-main-img-top').css({'margin-left': 0, 'margin-right': 0});
-                    $('.widget-main-img-bottom').css({'margin-left': 0, 'margin-right': 0, 'margin-bottom': mainBlockW.innerHeight() - 1 + 'px', 'margin-top': 0});
+                    $('.widget-main-img-top').css({ 'margin-left': 0, 'margin-right': 0 });
+                    $('.widget-main-img-bottom').css({
+                      'margin-left': 0,
+                      'margin-right': 0,
+                      'margin-bottom': mainBlockW.innerHeight() - 1 + 'px',
+                      'margin-top': 0
+                    });
                   }, 200);
                 }
               }
@@ -1196,21 +1192,31 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
                 let imageHeightWidthPod;
                 setTimeout(() => {
                   imageHeightWidthPod = mainBlWr.innerHeight() / 3;
-                  $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
-                  mainBlockW.css({height: imageHeightWidthPod, width: '100%'});
+                  $('.color-pod').css({ 'margin-left': '0', 'margin-right': '0' });
+                  mainBlockW.css({ height: imageHeightWidthPod, width: '100%' });
                 }, 100);
 
                 if (this.widget.guiprops.image.place === 'Сверху') {
                   setTimeout(() => {
-                    $('.widget-main-img-top').css({'margin-left': 0, 'margin-right': 0, 'margin-top': mainBlockW.innerHeight() + 'px', 'margin-bottom': 0});
-                    $('.widget-main-img-bottom').css({'margin-left': 0, 'margin-right': 0});
+                    $('.widget-main-img-top').css({
+                      'margin-left': 0,
+                      'margin-right': 0,
+                      'margin-top': mainBlockW.innerHeight() + 'px',
+                      'margin-bottom': 0
+                    });
+                    $('.widget-main-img-bottom').css({ 'margin-left': 0, 'margin-right': 0 });
                   }, 200);
                 }
 
                 if (this.widget.guiprops.image.place === 'Снизу') {
                   setTimeout(() => {
-                    $('.widget-main-img-top').css({'margin-left': 0, 'margin-right': 0});
-                    $('.widget-main-img-bottom').css({'margin-left': 0, 'margin-right': 0, 'margin-bottom': mainBlockW.innerHeight() + 'px', 'margin-top': 0});
+                    $('.widget-main-img-top').css({ 'margin-left': 0, 'margin-right': 0 });
+                    $('.widget-main-img-bottom').css({
+                      'margin-left': 0,
+                      'margin-right': 0,
+                      'margin-bottom': mainBlockW.innerHeight() + 'px',
+                      'margin-top': 0
+                    });
                   }, 200);
                 }
               }
@@ -1221,56 +1227,70 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
               this.widget.guiprops.formExt, this.widget.guiprops.form.visual, this.widget.guiprops.image.place
             )) {
               setTimeout(() => {
-                $('#colorFormPod').css({'z-index': '2'});
-                $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
+                $('#colorFormPod').css({ 'z-index': '2' });
+                $('.color-pod').css({ 'margin-left': '0', 'margin-right': '0' });
               }, 220);
               // Размер ЗАДАН
               if (this.widget.guiprops.image.img_width === 'Собственная') {
                 console.log('FULL WIDTH LR 2', $('.color-pod'));
                 let mainBlHeight;
                 setTimeout(() => {
-                  mainBlockW.css({width: this.widthImageStyle});
+                  mainBlockW.css({ width: this.widthImageStyle });
                   mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
                   if (this.widget.guiprops.bg.border.enable) {
                     mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
                   }
-                  mainBlockW.css({height: mainBlHeight + 'px'});
+                  mainBlockW.css({ height: mainBlHeight + 'px' });
                 }, 100);
 
                 if (this.widget.guiprops.image.place === 'Слева') {
                   setTimeout(() => {
                     $('#colorFormPod').innerWidth();
-                    $('.widget-main-img-left').css({'margin-left': mainBlockW.innerWidth() - 15 + 'px', 'margin-right': 0});
-                    $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
+                    $('.widget-main-img-left').css({
+                      'margin-left': mainBlockW.innerWidth() - 15 + 'px',
+                      'margin-right': 0
+                    });
+                    $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
                     $('.extraClassFullWidth')
-                      .css({'margin-left': - mainBlockW.innerWidth() + 'px', width: $('#colorFormPod').innerWidth() - 95 + 'px', 'margin-right': 0});
+                      .css({
+                        'margin-left': -mainBlockW.innerWidth() + 'px',
+                        width: $('#colorFormPod').innerWidth() - 95 + 'px',
+                        'margin-right': 0
+                      });
 
-                    maskTop.css({left: gap3, right: gap18});
+                    maskTop.css({ left: gap3, right: gap18 });
                   }, 200);
                   setTimeout(() => {
                     mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
                     if (this.widget.guiprops.bg.border.enable) {
                       mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
                     }
-                    mainBlockW.css({height: mainBlHeight + 'px'});
+                    mainBlockW.css({ height: mainBlHeight + 'px' });
                   }, 210);
                 }
 
                 if (this.widget.guiprops.image.place === 'Справа') {
                   setTimeout(() => {
-                    $('.widget-main-img-right').css({'margin-right': mainBlockW.innerWidth() - 15 + 'px', 'margin-left': 0});
-                    $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
+                    $('.widget-main-img-right').css({
+                      'margin-right': mainBlockW.innerWidth() - 15 + 'px',
+                      'margin-left': 0
+                    });
+                    $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
                     $('.extraClassFullWidth')
-                      .css({'margin-right': - mainBlockW.innerWidth() + 'px', width: $('#colorFormPod').innerWidth() - 95 + 'px', 'margin-left': 0});
+                      .css({
+                        'margin-right': -mainBlockW.innerWidth() + 'px',
+                        width: $('#colorFormPod').innerWidth() - 95 + 'px',
+                        'margin-left': 0
+                      });
 
-                    maskTop.css({left: gap18, right: gap3});
+                    maskTop.css({ left: gap18, right: gap3 });
                   }, 200);
                   setTimeout(() => {
                     mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
                     if (this.widget.guiprops.bg.border.enable) {
                       mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
                     }
-                    mainBlockW.css({height: mainBlHeight + 'px'});
+                    mainBlockW.css({ height: mainBlHeight + 'px' });
                   }, 210);
                 }
               }
@@ -1281,72 +1301,85 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
                 let mainBlHeightAll;
                 setTimeout(() => {
                   imageWidgetWidthPod = (mainBlWr.innerWidth() + 60) / 2;
-                  mainBlockW.css({width: imageWidgetWidthPod + 'px'});
+                  mainBlockW.css({ width: imageWidgetWidthPod + 'px' });
                   mainBlHeightAll = $('#colorFormPod').offset().top - mainBl.offset().top;
                   if (this.widget.guiprops.bg.border.enable) {
                     mainBlHeightAll = mainBlHeightAll - this.widget.guiprops.bg.border.thickness;
                   }
-                  mainBlockW.css({height: mainBlHeightAll + 'px'});
+                  mainBlockW.css({ height: mainBlHeightAll + 'px' });
                 }, 100);
 
                 if (this.widget.guiprops.image.place === 'Слева') {
                   setTimeout(() => {
-                    $('.widget-main-img-left').css({'margin-left': mainBlockW.innerWidth() - 15 + 'px', 'margin-right': 0});
-                    $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
+                    $('.widget-main-img-left').css({
+                      'margin-left': mainBlockW.innerWidth() - 15 + 'px',
+                      'margin-right': 0
+                    });
+                    $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
                     $('.extraClassFullWidth')
-                      .css({'margin-left': - mainBlockW.innerWidth() + 'px', width: $('#colorFormPod').innerWidth() - 95 + 'px', 'margin-right': 0});
+                      .css({
+                        'margin-left': -mainBlockW.innerWidth() + 'px',
+                        width: $('#colorFormPod').innerWidth() - 95 + 'px',
+                        'margin-right': 0
+                      });
 
-                    maskTop.css({left: gap3, right: gap18});
+                    maskTop.css({ left: gap3, right: gap18 });
                   }, 200);
                   setTimeout(() => {
                     mainBlHeightAll = $('#colorFormPod').offset().top - mainBl.offset().top;
                     if (this.widget.guiprops.bg.border.enable) {
                       mainBlHeightAll = mainBlHeightAll - this.widget.guiprops.bg.border.thickness;
                     }
-                    mainBlockW.css({height: mainBlHeightAll + 'px'});
+                    mainBlockW.css({ height: mainBlHeightAll + 'px' });
                   }, 210);
                 }
 
                 if (this.widget.guiprops.image.place === 'Справа') {
                   setTimeout(() => {
-                    $('.widget-main-img-right').css({'margin-right': mainBlockW.innerWidth() - 15 + 'px', 'margin-left': 0});
-                    $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
+                    $('.widget-main-img-right').css({
+                      'margin-right': mainBlockW.innerWidth() - 15 + 'px',
+                      'margin-left': 0
+                    });
+                    $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
                     $('.extraClassFullWidth')
-                      .css({'margin-right': - mainBlockW.innerWidth() + 'px', width: $('#colorFormPod').innerWidth() - 95 + 'px', 'margin-left': 0});
+                      .css({
+                        'margin-right': -mainBlockW.innerWidth() + 'px',
+                        width: $('#colorFormPod').innerWidth() - 95 + 'px',
+                        'margin-left': 0
+                      });
 
-                    maskTop.css({left: gap18, right: gap3});
+                    maskTop.css({ left: gap18, right: gap3 });
                   }, 200);
                   setTimeout(() => {
                     mainBlHeightAll = $('#colorFormPod').offset().top - mainBl.offset().top;
                     if (this.widget.guiprops.bg.border.enable) {
                       mainBlHeightAll = mainBlHeightAll - this.widget.guiprops.bg.border.thickness;
                     }
-                    mainBlockW.css({height: mainBlHeightAll + 'px'});
+                    mainBlockW.css({ height: mainBlHeightAll + 'px' });
                   }, 210);
                 }
               }
             } else {
-              $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
-              $('.extraClassFullWidth').css({'margin-left': '0', 'margin-right': '0', width: '100%'});
+              $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
+              $('.extraClassFullWidth').css({ 'margin-left': '0', 'margin-right': '0', width: '100%' });
             }
 
             if ((!this.widget.guiprops.button.enable && !this.widget.guiprops.form.enable && !this.widget.guiprops.formExt.enable)
               && (this.widget.guiprops.image.place === 'Справа' || this.widget.guiprops.image.place === 'Слева')) {
 
               setTimeout(() => {
-                mainBlockW.css({height: '100%'});
+                mainBlockW.css({ height: '100%' });
               }, 220);
             }
 
-          }
-          else {
-            $('#colorFormPod').css({width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto'});
-            $('.color-pod').css({'margin-left': '0', 'margin-right': '0'});
-            $('.extraClassFullWidth').css({'margin-left': '0', 'margin-right': '0', width: '100%'});
-            maskTop.css({left: gap18, right: gap18});
+          } else {
+            $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
+            $('.color-pod').css({ 'margin-left': '0', 'margin-right': '0' });
+            $('.extraClassFullWidth').css({ 'margin-left': '0', 'margin-right': '0', width: '100%' });
+            maskTop.css({ left: gap18, right: gap18 });
 
             setTimeout(() => {
-              $('#widgetMainWr').css({margin: 0});
+              $('#widgetMainWr').css({ margin: 0 });
             }, 200);
           }
 
@@ -1369,7 +1402,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
               this.SP_widget.widget_plash_width = $('.widget2-plashka').innerWidth() + 'px';
             }
 
-            $('#thankWidget').css({width: mainBl.outerWidth() + 'px', height: mainBl.outerHeight() + 'px'});
+            $('#thankWidget').css({ width: mainBl.outerWidth() + 'px', height: mainBl.outerHeight() + 'px' });
           }, 500);
         }
       }, 0);
@@ -1799,7 +1832,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
     });
   }
 
-  private deleteFileToUrl(deleteFileUrl, name){
+  private deleteFileToUrl(deleteFileUrl, name) {
     this.widgetConstructorService.deleteFileToUrl(deleteFileUrl, name).subscribe(() => {
       this.listFileIfOpen();
     });
@@ -1846,7 +1879,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       return;
     }
 
-    accordion.animate({scrollTop: scrollTo}, 500, 'swing', () => {});
+    accordion.animate({ scrollTop: scrollTo }, 500, 'swing', () => {
+    });
     target.addClass('border-active-element');
     setTimeout(() => {
       target.removeClass('border-active-element');
@@ -1931,7 +1965,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
 
     if (this.widget.guiprops.form.enable) {
       if (this.widget.guiprops.form.orient === 'Вертикальная') {
-        offsetPadding = - 8;
+        offsetPadding = -8;
       }
       topOfColorPod = widgetFormBlM.offset().top - mainBl.offset().top + offsetPadding;
     } else if (this.widget.guiprops.button.enable) {
@@ -1946,7 +1980,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       topOfColorPod = topOfColorPod - this.widget.guiprops.bg.border.thickness;
     }
 
-    colorFormPod.css({top: topOfColorPod + 'px'});
+    colorFormPod.css({ top: topOfColorPod + 'px' });
   }
 
   private downUpInitAir() {
@@ -1958,8 +1992,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       const topInner = $(this).offset().top;
       if (topInner >= (topH - 250)) {
         $(this).addClass('dropup');
-      }
-      else {
+      } else {
         $(this).removeClass('dropup');
       }
     });
@@ -1974,8 +2007,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       const topInner = $(this).offset().top;
       if (topInner >= (topH - 250)) {
         $(this).addClass('dropup');
-      }
-      else {
+      } else {
         $(this).removeClass('dropup');
       }
     });
@@ -1985,8 +2017,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
       const topInner = $(this).offset().top;
       if (topInner >= (topH - 250)) {
         $(this).addClass('dropup');
-      }
-      else {
+      } else {
         $(this).removeClass('dropup');
       }
     });
@@ -2059,11 +2090,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
 
       if (item.width_type) {
         if (item.width_type === 'От края до края') {
-          $('#idVideoFrame' + item.counter).css({width: '100%'});
+          $('#idVideoFrame' + item.counter).css({ width: '100%' });
         } else {
-          $('#idVideoFrame' + item.counter).css({width: (item.widthpx + 'px')});
+          $('#idVideoFrame' + item.counter).css({ width: (item.widthpx + 'px') });
         }
-        $('#idVideoFrame' + item.counter).css({height: ($('#idVideoFrame' + item.counter).innerWidth() / 1.666) + 'px'});
+        $('#idVideoFrame' + item.counter).css({ height: ($('#idVideoFrame' + item.counter).innerWidth() / 1.666) + 'px' });
       }
     }, 0);
   }
@@ -2071,7 +2102,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnChan
   private showPaymentDialog(siteId, description) {
     this.tariffsService.checkTariffPlans(siteId,
       this.translate.instant('sitelist.tariff.title'),
-      description, {siteName: this.coreSitesService.getSiteById(siteId).name}
+      description, { siteName: this.coreSitesService.getSiteById(siteId).name }
     );
   }
 

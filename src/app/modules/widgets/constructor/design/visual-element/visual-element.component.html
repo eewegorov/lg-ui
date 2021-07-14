@@ -5,8 +5,8 @@
         <h4 class="h4-element-title">Контент виджета</h4>
       </div>
     </div>
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-6 row-subitem-padding pt-1">
+    <div class="row row-subitem mt-1">
+      <div class="col-sm-6 row-subitem-padding pr-3">
         <div>
           <label class="control-label control-label-des">Ширина контента:</label>
           <div class="dropdown">
@@ -20,7 +20,7 @@
                 *ngFor="let item of widgwidthBtn"
                 (click)="widget.guiprops.dhVisual.widget_content_width = item"
               >
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
               </li>
             </ul>
           </div>
@@ -32,10 +32,10 @@
             class="form-control form-control-font form-cntrl-55w"
             [(ngModel)]="widget.guiprops.dhVisual.widget_content_widthpx"
           />
-          <label class="control-label">px <span>ширина</span></label>
+          <label class="control-label ml-1">px <span>ширина</span></label>
         </div>
       </div>
-      <div class="col-sm-6 row-subitem-padding pt-1">
+      <div class="col-sm-6 row-subitem-padding">
         <div>
           <label class="control-label control-label-des">Высота контента:</label>
           <div class="dropdown">
@@ -49,7 +49,7 @@
                 *ngFor="let item of widgwidthBtn"
                 (click)="widget.guiprops.dhVisual.widget_content_height = item"
               >
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
               </li>
             </ul>
           </div>
@@ -61,7 +61,7 @@
             class="form-control form-control-font form-cntrl-55w"
             [(ngModel)]="widget.guiprops['dhVisual'].widget_content_heightpx"
           />
-          <label class="control-label">px <span>высота</span></label>
+          <label class="control-label ml-1">px <span>высота</span></label>
         </div>
       </div>
     </div>
@@ -79,7 +79,7 @@
               (click)="widget.guiprops.dhVisual.widget_content_height_orient = item"
               *ngFor="let item of vertOrientDh"
             >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
             </li>
           </ul>
         </div>

@@ -449,6 +449,11 @@ b.control-label-des {
   margin-top: 7px;
 }
 
+.row-subitem .btn-default {
+  width: 100%;
+  text-align: left;
+}
+
 h4.panel-title {
   font-size: 12px;
   font-weight: 700;
@@ -653,9 +658,8 @@ button.refresh-video-element-btn {
   padding: 20px 20px 0 20px;
 }
 
-.widgets-settings-container label span {
+.row-subitem label span {
   margin-left: 5px !important;
-  font-size: 10px;
   vertical-align: top;
 }
 
