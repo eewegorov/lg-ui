@@ -98,6 +98,7 @@
               <label>
                 <input
                   type="radio"
+                  name="content"
                   class="radio radio-info radio-inline"
                   [(ngModel)]="widget.guiprops['bg'].fillorImg"
                   value="fill"
@@ -111,6 +112,7 @@
               <label>
                 <input
                   type="radio"
+                  name="content"
                   class="radio radio-info radio-inline"
                   [(ngModel)]="widget.guiprops['bg'].fillorImg"
                   value="useImg"
@@ -124,6 +126,7 @@
               <label>
                 <input
                   type="radio"
+                  name="content"
                   class="radio radio-info radio-inline"
                   [(ngModel)]="widget.guiprops['bg'].fillorImg"
                   value="useVideo"
@@ -143,7 +146,7 @@
         </div>
 
         <div class="row row-subitem mt-2">
-          <div class="col-sm-6 row-subitem-padding pt-1">
+          <div class="col-sm-6 row-subitem-padding pt-1 pr-3">
             <div>
               <label class="control-label control-label-des">Положение:</label>
               <div class="dropdown">
@@ -157,7 +160,7 @@
                     *ngFor="let item of bgPositionTypesList"
                     (click)="widget.guiprops.bg.positionType = item"
                   >
-                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
                   </li>
                 </ul>
               </div>
@@ -177,7 +180,7 @@
                     *ngFor="let item of tilesList"
                     (click)="widget.guiprops.bg.tiles = item"
                   >
-                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
                   </li>
                 </ul>
               </div>
@@ -188,7 +191,7 @@
 
       <div *ngIf="widget.guiprops['bg'].fillorImg === 'useVideo'">
         <div class="imaget-item-video-settings mb-3">
-          <div class="row row-subitem pt-1">
+          <div class="row row-subitem">
             <div class="col-sm-12 row-subitem-padding mt-2 mb-1">
               <h4 class="h4-text-tit control-label-des helper-title-3level">Источник видео</h4>
             </div>
@@ -197,9 +200,10 @@
                 <label>
                   <input
                     type="radio"
+                    name="video"
                     class="radio radio-info radio-inline"
                     (change)="getVideoId(widget.guiprops.bg.video)"
-                    [ngModel]="widget.guiprops.bg.video.videoType"
+                    [(ngModel)]="widget.guiprops.bg.video.videoType"
                     value="youtube"
                   />
                   Youtube
@@ -211,9 +215,10 @@
                 <label>
                   <input
                     type="radio"
+                    name="video"
                     class="radio radio-info radio-inline"
                     (change)="getVideoId(widget.guiprops.bg.video)"
-                    [ngModel]="widget.guiprops.bg.video.videoType"
+                    [(ngModel)]="widget.guiprops.bg.video.videoType"
                     value="vimeo"
                   />
                   Vimeo
@@ -229,7 +234,7 @@
               title=""
               data-original-title="Обновить превью видео"
             >
-              <i class="fa fa-refresh"></i>
+              <i class="fas fa-sync"></i>
             </button>
           </div>
           <div class="row row-subitem">
@@ -250,11 +255,11 @@
 
       <div *ngIf="((widget.guiprops['bg'].fillorImg === 'useVideo') || (widget.guiprops['bg'].fillorImg === 'useImg'))">
         <div class="row row-subitem mt-3">
-          <div class="col-sm-12 row-subitem-padding pt-1">
+          <div class="d-flex col-sm-12 row-subitem-padding pt-1">
             <ui-switch
               size="small"
-              [checked]="widget.guiprops['bg'].mask.enable"
-            ></ui-switch><label class="control-label switcher-label-xs control-label-des">Затемнить фон виджета маской</label>
+              [(ngModel)]="widget.guiprops['bg'].mask.enable"
+            ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Затемнить фон виджета маской</label>
           </div>
         </div>
         <div *ngIf="widget.guiprops['bg'].mask.enable == true">
@@ -274,7 +279,7 @@
             </div>
           </div>
           <div class="row row-subitem">
-            <div class="col-sm-12 row-subitem-padding">
+            <div class="col-sm-12 row-subitem-padding mt-1">
               <label class="control-label control-label-colorpc control-label-des">Расположение маски:</label>
               <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -287,7 +292,7 @@
                     *ngFor="let item of maskTypeList"
                     (click)="widget.guiprops.bg.mask.area = item"
                   >
-                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a>
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
                   </li>
                 </ul>
               </div>
@@ -298,7 +303,7 @@
 
       <div *ngIf="widget.guiprops['bg'].fillorImg === 'fill'">
         <div class="row row-subitem mt-2">
-          <div class="col-sm-6 row-subitem-padding pt-1">
+          <div class="col-sm-6 row-subitem-padding">
             <label class="control-label control-label-colorpc control-label-des">Цвет фона:</label>
             <input
               [(colorPicker)]="widget.guiprops['bg'].colorBg"
@@ -310,11 +315,11 @@
         </div>
       </div>
 
-      <div class="row row-subitem mt-2">
+      <div class="row row-subitem mt-2 pt-2">
         <div class="col-sm-12 row-subitem-padding">
           <h5 class="label-style-ic control-label-des">Прозрачность фона:</h5>
         </div>
-        <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
+        <div class="col-sm-12 row-subitem-padding side-ui-sm">
           <ngx-slider [(value)]="widget.guiprops['bg'].opacity" [options]="optionsOpacity"></ngx-slider>
         </div>
       </div>
@@ -423,7 +428,7 @@
               title=""
               data-original-title="Обновить превью видео"
             >
-              <i class="fa fa-refresh"></i>
+              <i class="fas fa-sync"></i>
             </button>
           </div>
           <div class="row row-subitem">
@@ -708,7 +713,7 @@
       <div class="col-sm-12 row-subitem-padding">
         <h5 class="label-style-ic control-label-des">Углы виджета:</h5>
       </div>
-      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
+      <div class="col-sm-12 row-subitem-padding side-ui-sm">
         <ngx-slider [(value)]="widget.guiprops['bg'].borderRadius" [options]="optionsRound"></ngx-slider>
         <label class="control-label control-label-ui">Закругление углов в виджете</label>
       </div>

@@ -18,7 +18,7 @@
           data-placement="top"
           title=""
           [attr.data-original-title]="'Обновить список купонов'"
-        ><i class="fa fa-refresh"></i></button>
+        ><i class="fas fa-sync"></i></button>
       </div>
     </div>
 
@@ -45,7 +45,7 @@
             data-placement="top"
             title=""
             [attr.data-original-title]="'widgets.constructor.coupon.couponCallback.couponRefresh' | translate"
-          ><i class="fa fa-refresh"></i></button>
+          ><i class="fas fa-sync"></i></button>
         </div>
       </div>
     </div>
@@ -81,14 +81,14 @@
     </div>
 
     <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
+      <div class="col-sm-12 row-subitem-padding side-ui-sm">
         <ngx-slider [(value)]="item.opacity" [options]="optionsOpacity" style="margin-right: 18px"></ngx-slider>
         <label class="control-label control-label-ui">Прозрачность фона</label>
       </div>
     </div>
 
     <div class="row row-subitem mt-2 mb-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
+      <div class="col-sm-12 row-subitem-padding side-ui-sm">
         <ngx-slider [(value)]="item.borderRadius" [options]="optionsRound" style="margin-right: 18px"></ngx-slider>
         <label class="control-label control-label-ui">Закругление углов</label>
       </div>

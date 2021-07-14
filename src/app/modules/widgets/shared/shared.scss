@@ -544,11 +544,6 @@ h4.helper-title-3level {
   position: relative;
 }
 
-.side-ui-sm .ui-slider {
-  width: 47%;
-  margin-right: 5px;
-}
-
 .info-link-wd {
   margin-left: 3px;
   vertical-align: super text-top;
@@ -634,7 +629,7 @@ button.refresh-video-element-btn {
   top: 38px;
   text-align: center !important;
   line-height: 22px;
-  right: 15px;
+  right: 0;
   width: 25px !important;
   height: 24px;
   border-radius: 3px;
