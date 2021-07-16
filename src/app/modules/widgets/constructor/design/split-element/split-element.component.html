@@ -2,7 +2,7 @@
   <div>
     <div class="col-lg-12">
       <h4 class="h4-element-title">
-        Разделитель &#35;{{ modelName.counter }} <a (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
+        Разделитель &#35;{{ modelName.counter }} <a (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
       </h4>
     </div>
     <div class="clearfix"></div>
@@ -64,7 +64,7 @@
     <div *ngIf="modelName.width_type === 'Собственная'">
       <div class="col-sm-12 pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="modelName.widthpx">
-        <label class="control-label">px <span>ширина разделителя</span></label>
+        <label class="control-label ml-1">px <span>ширина разделителя</span></label>
       </div>
       <div class="clearfix"></div>
     </div>

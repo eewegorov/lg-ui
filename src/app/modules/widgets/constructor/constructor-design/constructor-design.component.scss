@@ -119,11 +119,13 @@ h6.title-h6-widget a:hover {
   padding-top: 0;
 }
 
-.panel-heading {
+.panel-default .panel-heading {
   background-color: #dddddd;
   margin-left: -1px;
   margin-right: -1px;
   border-radius: 0;
+  color: #333;
+  padding: 10px 15px;
 }
 
 .max-h-100 {

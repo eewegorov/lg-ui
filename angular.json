@@ -36,6 +36,7 @@
               "node_modules/animate.css/animate.min.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/summernote/dist/summernote-lite.min.css",
+              "node_modules/fontselect-jquery-plugin/styles/fontselect-default.css",
               "src/styles.scss"
             ],
             "scripts": [

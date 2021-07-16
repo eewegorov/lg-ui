@@ -2,7 +2,7 @@
   <div>
     <div class="col-lg-12">
       <h4 class="h4-element-title">
-        Видео &#35;{{ modelName.counter }} <a (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a>
+        Видео &#35;{{ modelName.counter }} <a (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
       </h4>
     </div>
     <div class="clearfix"></div>
@@ -109,7 +109,7 @@
           (change)="goToResize(modelName)"
           [ngModel]="modelName.widthpx"
         >
-        <label class="control-label">px <span>ширина видео</span></label>
+        <label class="control-label ml-1">px <span>ширина видео</span></label>
       </div>
       <div class="clearfix"></div>
     </div>
