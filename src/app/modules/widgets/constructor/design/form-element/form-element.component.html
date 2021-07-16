@@ -43,12 +43,12 @@
               <ui-switch
                 size="small"
                 [checked]="widget.guiprops.formSet.phoneMask.enable"
-              ></ui-switch><label class="control-label switcher-label-xs control-label-des">{{ 'widgets.constructor.form.phoneMask.titleSwitcher' | translate }}</label>
+              ></ui-switch><label class="control-label switcher-label-xs control-label-des">{{ 'widgets.form.phoneMask.titleSwitcher' | translate }}</label>
             </div>
             <div *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable" class="mt-2 formReqBl">
-              <label class="control-label">{{ 'widgets.constructor.form.phoneMask.titleInput' | translate }}</label>
+              <label class="control-label">{{ 'widgets.form.phoneMask.titleInput' | translate }}</label>
               <input type="text" class="form-control" (keyup)="blockedUnusedChars()" [(ngModel)]="widget.guiprops.formSet.phoneMask.maskValue">
-              <span class="small">{{ 'widgets.constructor.form.phoneMask.description' | translate }}</span>
+              <span class="small">{{ 'widgets.form.phoneMask.description' | translate }}</span>
             </div>
 
             <div *ngIf="widget.guiprops['formSet'].items.length > 1" class="remove-sub-form-item mr-2">

@@ -7,26 +7,26 @@
         (change)="onChangePayment($event)"
       ></ui-switch>
       <label *ngIf="coupon.elementType === 'form'" class="control-label switcher-label-xs control-label-des">
-        {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.form' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
+        {{ 'widgets.coupon.couponCallback.actionDesc1.form' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
       </label>
       <label *ngIf="coupon.elementType === 'social'" class="control-label switcher-label-xs control-label-des">
-        {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.social' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
+        {{ 'widgets.coupon.couponCallback.actionDesc1.social' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
       </label>
       <label *ngIf="coupon.elementType === 'closeBtn'" class="control-label switcher-label-xs control-label-des">
-        {{ 'widgets.constructor.coupon.couponCallback.actionDesc1.closeBtn' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
+        {{ 'widgets.coupon.couponCallback.actionDesc1.closeBtn' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
       </label>
     </div>
   </div>
 
   <div class="row row-subitem mt-1">
     <div *ngIf="coupon.elementType === 'form'" class="col-sm-12 row-subitem-padding widget-small-text">
-      {{ 'widgets.constructor.coupon.couponCallback.actionDesc2.form' | translate }}
+      {{ 'widgets.coupon.couponCallback.actionDesc2.form' | translate }}
     </div>
     <div *ngIf="coupon.elementType === 'social'" class="col-sm-12 row-subitem-padding widget-small-text">
-      {{ 'widgets.constructor.coupon.couponCallback.actionDesc2.social' | translate }}
+      {{ 'widgets.coupon.couponCallback.actionDesc2.social' | translate }}
     </div>
     <div *ngIf="coupon.elementType === 'closeBtn'" class="col-sm-12 row-subitem-padding widget-small-text">
-      {{ 'widgets.constructor.coupon.couponCallback.actionDesc2.closeBtn' | translate }}
+      {{ 'widgets.coupon.couponCallback.actionDesc2.closeBtn' | translate }}
     </div>
   </div>
 
@@ -34,7 +34,7 @@
     <div *ngIf="!coupons.length" class="row row-subitem mt-2">
       <div class="col-sm-12 row-subitem-padding pt-1 coupons-flex-wr">
         <a href="../../../coupons/?enableCouponModal=true" target="_blank" class="btn btn-primary btn-coupon-add">
-          {{ 'widgets.constructor.coupon.couponCallback.couponAdd' | translate }}
+          {{ 'widgets.coupon.couponCallback.couponAdd' | translate }}
         </a>
         <button
           (click)="refreshCouponsList()"
@@ -42,7 +42,7 @@
           data-toggle="tooltip"
           data-container="body"
           data-placement="top"
-          [attr.data-original-title]="'widgets.constructor.coupon.couponCallback.couponRefresh' | translate"
+          [attr.data-original-title]="'widgets.coupon.couponCallback.couponRefresh' | translate"
         >
           <i class="fas fa-sync"></i>
         </button>
@@ -51,7 +51,7 @@
 
     <div *ngIf="coupons.length" class="row row-subitem mt-2">
       <div class="col-sm-12 row-subitem-padding pt-1">
-        <label class="control-label control-label-des">{{ 'widgets.constructor.coupon.couponCallback.couponChosse' | translate }}:</label>
+        <label class="control-label control-label-des">{{ 'widgets.coupon.couponCallback.couponChoose' | translate }}:</label>
         <div class="coupons-flex-wr">
           <div class="dropdown btn-coupon-chose">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -75,7 +75,7 @@
             data-container="body"
             data-placement="top"
             title=""
-            [attr.data-original-title]="'widgets.constructor.coupon.couponCallback.couponRefresh' | translate"
+            [attr.data-original-title]="'widgets.coupon.couponCallback.couponRefresh' | translate"
           >
             <i class="fas fa-sync"></i>
           </button>
@@ -85,19 +85,19 @@
     <div class="row row-subitem mt-1">
       <div
         class="col-sm-12 row-subitem-padding widget-small-text underline-links blue-links hover-links"
-        [innerHTML]="'widgets.constructor.coupon.couponCallback.desc' | translate"
+        [innerHTML]="'widgets.coupon.couponCallback.desc' | translate"
       ></div>
     </div>
 
     <div class="col-lg-12 mt-1 mb-1">
       <h4 class="h4-text-tit control-label-des helper-title-3level">
-        {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.title' | translate }}
+        {{ 'widgets.coupon.couponCallback.popupWindow.setting.title' | translate }}
       </h4>
     </div>
 
     <div class="row row-subitem mt-2">
       <div class="col-sm-12 row-subitem-padding pt-1 mt-1">
-        <label class="control-label control-label-des">{{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.position' | translate }}:</label>
+        <label class="control-label control-label-des">{{ 'widgets.coupon.couponCallback.popupWindow.setting.position' | translate }}:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ coupon.coupon.positionPopup }}
@@ -119,7 +119,7 @@
     <div class="row row-subitem">
       <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
         <label class="control-label control-label-des">
-          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.hover' | translate }}:
+          {{ 'widgets.coupon.couponCallback.popupWindow.setting.hover' | translate }}:
         </label>
         <input
           type="text"
@@ -133,7 +133,7 @@
     <div class="row row-subitem">
       <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
         <label class="control-label control-label-des">
-          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.click' | translate }}:
+          {{ 'widgets.coupon.couponCallback.popupWindow.setting.click' | translate }}:
         </label>
         <input type="text" class="form-control" [(ngModel)]="coupon.coupon.clickText" placeholder="">
       </div>
@@ -142,7 +142,7 @@
     <div class="row row-subitem">
       <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
         <label class="control-label control-label-des">
-          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.action' | translate }}:
+          {{ 'widgets.coupon.couponCallback.popupWindow.setting.action' | translate }}:
         </label>
         <textarea type="text" row="2" class="form-control" [(ngModel)]="coupon.coupon.actionText"></textarea>
       </div>
@@ -151,7 +151,7 @@
     <div class="row row-subitem">
       <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
         <label class="control-label control-label-des">
-          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.manual' | translate }}:
+          {{ 'widgets.coupon.couponCallback.popupWindow.setting.manual' | translate }}:
         </label>
         <textarea type="text" row="2" class="form-control" [(ngModel)]="coupon.coupon.manualText"></textarea>
       </div>
@@ -160,7 +160,7 @@
     <div class="row row-subitem">
       <div class="col-lg-12 row-subitem-padding">
         <h4 class="h4-text-tit control-label-des helper-title-3level">
-          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.design' | translate }}
+          {{ 'widgets.coupon.couponCallback.popupWindow.setting.design' | translate }}
         </h4>
       </div>
     </div>
@@ -180,7 +180,7 @@
     <div class="row row-subitem">
       <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">
-          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.color' | translate }}:
+          {{ 'widgets.coupon.couponCallback.popupWindow.setting.color' | translate }}:
         </label>
         <input
           [(colorPicker)]="coupon.coupon.colorText"
@@ -191,7 +191,7 @@
       </div>
       <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">
-          {{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.colorBg' | translate }}:
+          {{ 'widgets.coupon.couponCallback.popupWindow.setting.colorBg' | translate }}:
         </label>
         <input
           [(colorPicker)]="coupon.coupon.color"
@@ -204,7 +204,7 @@
 
     <div class="col-lg-12 mt-1 mb-1">
       <h4 class="h4-text-tit control-label-des helper-title-3level">
-        {{ 'widgets.constructor.coupon.setting.actions' | translate }}
+        {{ 'widgets.coupon.setting.actions' | translate }}
       </h4>
     </div>
 
@@ -212,7 +212,7 @@
       <div class="col-sm-12 row-subitem-padding pt-1">
         <label>
           <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="coupon.coupon.closeAfter">
-          {{ 'widgets.constructor.coupon.setting.closeAfter' | translate }}
+          {{ 'widgets.coupon.setting.closeAfter' | translate }}
         </label>
       </div>
     </div>
@@ -221,7 +221,7 @@
       <div class="col-sm-12 row-subitem-padding pt-1">
         <label>
           <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="coupon.coupon.isCopyAction">
-          {{ 'widgets.constructor.coupon.setting.isCopyAction' | translate }}
+          {{ 'widgets.coupon.setting.isCopyAction' | translate }}
         </label>
       </div>
     </div>

@@ -771,7 +771,49 @@
 	},
 	"widgets": {
 		"coupon": {
-			"autoresponder": ""
+			"autoresponder": "",
+			"couponCallback": {
+				"actionDesc1": {
+					"closeBtn": "",
+					"form": "",
+					"social": ""
+				},
+				"actionDesc2": {
+					"closeBtn": "",
+					"form": "",
+					"social": ""
+				},
+				"couponAdd": "",
+				"couponChoose": "",
+				"couponRefresh": "",
+				"desc": "",
+				"popupWindow": {
+					"setting": {
+						"action": "",
+						"click": "",
+						"color": "",
+						"colorBg": "",
+						"design": "",
+						"hover": "",
+						"manual": "",
+						"position": "",
+						"title": ""
+					}
+				}
+			},
+			"saveError": "",
+			"setting": {
+				"actions": "",
+				"closeAfter": "",
+				"isCopyAction": ""
+			}
+		},
+		"form": {
+			"phoneMask": {
+				"description": "",
+				"titleInput": "",
+				"titleSwitcher": ""
+			}
 		},
 		"formExt": {
 			"mainSettings": {
@@ -790,6 +832,25 @@
 				"widthForm1": "",
 				"widthForm2": ""
 			}
+		},
+		"formExtId": {
+			"actionButton": {
+				"saveError": ""
+			},
+			"redirectError": "",
+			"saveError": ""
+		},
+		"integration": {
+			"saveError": ""
+		},
+		"redirect": {
+			"blank": "",
+			"descriptionOld": "",
+			"doOnClick": "",
+			"example": "",
+			"onClickRedirect": "",
+			"title": "",
+			"tooltip": ""
 		},
 		"settings": {
 			"exitIntent": {

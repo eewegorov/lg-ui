@@ -2,7 +2,7 @@
   <div class="row row-subitem mb-2">
     <div class="col-sm-12 row-subitem-padding">
       <h3 class="marg-minus-bord-des">
-        {{ 'widgets.constructor.redirect.title' | translate }}
+        {{ 'widgets.redirect.title' | translate }}
         <a
           data-toggle="tooltip"
           data-placement="right"
@@ -10,7 +10,7 @@
           title=""
           class="info-link info-link-wd"
           href="#"
-          [attr.data-original-title]="'widgets.constructor.redirect.tooltip' | translate"
+          [attr.data-original-title]="'widgets.redirect.tooltip' | translate"
         >
           <i class="fa fa-info-circle"></i>
         </a>
@@ -21,7 +21,7 @@
     <ui-switch
       size="small"
       [checked]="widget.guiprops.formSet.redirect.enable"
-    ></ui-switch><label class="control-label switcher-label control-label-des">{{ 'widgets.constructor.redirect.doOnClick' | translate }}</label>
+    ></ui-switch><label class="control-label switcher-label control-label-des">{{ 'widgets.redirect.doOnClick' | translate }}</label>
   </div>
   <div class="clearfix"></div>
   <!-- Page rule item -->
@@ -31,7 +31,7 @@
         class="col-sm-12 row-subitem-padding pt-1 mt-2 widget-name-block-rel"
         [ngClass]="(widget.guiprops['formSet'].redirect.url === '') ? 'is-invalid' : ''"
       >
-        <label class="control-label">{{ 'widgets.constructor.redirect.onClickRedirect' | translate }}:</label>
+        <label class="control-label">{{ 'widgets.redirect.onClickRedirect' | translate }}:</label>
         <input
           type="text"
           class="form-control"
@@ -39,13 +39,13 @@
           (keyup)="validateRedirect($event)"
           [(ngModel)]="widget.guiprops['formSet'].redirect.url"
         />
-        <span class="input-down-sm-lab">{{ 'widgets.constructor.redirect.example' | translate }}: http://mywebsite.com</span>
+        <span class="input-down-sm-lab">{{ 'widgets.redirect.example' | translate }}: http://mywebsite.com</span>
         <a href="#" (click)="removeWidgetRedirect($event)" class="remove-widget-name remove-widget-redirect" id="removeWidgetRedirect"></a>
       </div>
     </div>
     <div class="row row-subitem">
       <div class="col-sm-12 row-subitem-padding mt-2 widget-small-text">
-        {{ 'widgets.constructor.redirect.descriptionOld' | translate }}
+        {{ 'widgets.redirect.descriptionOld' | translate }}
       </div>
 
     </div>
@@ -53,7 +53,7 @@
       <div class="col-sm-12 row-subitem-padding pt-1">
         <label>
           <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="widget.guiprops.formSet.redirect.blank">
-          {{ 'widgets.constructor.redirect.blank' | translate }}
+          {{ 'widgets.redirect.blank' | translate }}
         </label>
       </div>
     </div>
