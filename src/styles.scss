@@ -1181,7 +1181,6 @@ span.underow-comment {
 .form-check input {
   position: absolute;
   opacity: 0;
-  cursor: pointer;
 }
 
 /* Create a custom checkbox */
@@ -1193,6 +1192,7 @@ span.underow-comment {
   width: 20px;
   border: 1px solid #d9dbdd;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 /* On mouse-over, add a grey background color */

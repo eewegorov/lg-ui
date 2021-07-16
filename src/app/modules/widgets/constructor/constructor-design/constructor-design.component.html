@@ -1,6 +1,6 @@
 <div class="widgets-settings-container" id="widgetStyle">
   <div *ngIf="widget.guiprops" class="row" style="height: 100%; overflow: hidden">
-    <div class="col-lg-4 widget-style-menu">
+    <div class="col-lg-3 widget-style-menu">
       <div class="menu-fixed">
         <div class="menu-fixed-bg">
           <h4 class="panel-title" id="menu-select">
@@ -277,7 +277,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-8 max-h-100" [ngClass]="(widget.guiprops.popupMain?.shadow.enable === true) ? 'ifr-sh-bg' : ''">
+    <div class="col-lg-9 max-h-100" [ngClass]="(widget.guiprops.popupMain?.shadow.enable === true) ? 'ifr-sh-bg' : ''">
       <div *ngIf="isThankShouldShow()" class="widget-select-mode btn-group">
         <span class="btn btn-default active" data-widget="mainBlockWidget" (click)="$event.stopPropagation();">
           Основной экран

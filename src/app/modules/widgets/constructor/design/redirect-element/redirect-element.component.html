@@ -5,8 +5,8 @@
         {{ 'widgets.redirect.title' | translate }}
         <a
           data-toggle="tooltip"
-          data-placement="right"
-          data-container="body"
+          data-placement="top"
+          data-container="#widgetStyle"
           title=""
           class="info-link info-link-wd"
           href="#"
@@ -17,15 +17,15 @@
       </h3>
     </div>
   </div>
-  <div class="col-lg-12 mt-2">
+  <div class="d-flex mt-3">
     <ui-switch
       size="small"
-      [checked]="widget.guiprops.formSet.redirect.enable"
-    ></ui-switch><label class="control-label switcher-label control-label-des">{{ 'widgets.redirect.doOnClick' | translate }}</label>
+      [(ngModel)]="widget.guiprops.formSet.redirect.enable"
+    ></ui-switch><label class="control-label switcher-label control-label-des mt-1 ml-2">{{ 'widgets.redirect.doOnClick' | translate }}</label>
   </div>
   <div class="clearfix"></div>
   <!-- Page rule item -->
-  <div *ngIf="widget.guiprops['formSet'].redirect.enable == true">
+  <div *ngIf="widget.guiprops['formSet'].redirect.enable === true">
     <div class="row row-subitem">
       <div
         class="col-sm-12 row-subitem-padding pt-1 mt-2 widget-name-block-rel"
@@ -51,10 +51,17 @@
     </div>
     <div class="row row-subitem mt-2">
       <div class="col-sm-12 row-subitem-padding pt-1">
-        <label>
-          <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="widget.guiprops.formSet.redirect.blank">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="widget.guiprops.formSet.redirect.blank"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
           {{ 'widgets.redirect.blank' | translate }}
-        </label>
+        </div>
       </div>
     </div>
   </div>

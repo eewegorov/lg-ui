@@ -34,8 +34,12 @@ label.big-label {
   font-weight: 300;
 }
 
-.is-invalid label.big-label, .is-invalid .underline-comment {
-  color: #a94442;
+.is-invalid label.big-label, .is-invalid label.control-label, .is-invalid .underline-comment {
+  color: #a94442 ;
+}
+
+.is-invalid .form-control, .is-invalid .ng-select-container {
+  border-color: #a94442 !important;
 }
 
 .widget-company-selector button {
@@ -177,10 +181,6 @@ label.big-label {
 
 .colored-red {
   color: #C0392B !important;
-}
-
-.is-invalid .form-control, .is-invalid .ng-select-container {
-  border-color: #a94442 !important;
 }
 
 .companies-underline {
@@ -340,6 +340,10 @@ h4.h4-text-tit {
   margin-bottom: 10px;
   font-weight: 200;
   color: #6a6c6f;
+}
+
+.form-control {
+  font-size: 14px;
 }
 
 .form-control-font {
@@ -552,14 +556,14 @@ h4.helper-title-3level {
 span.input-down-sm-lab {
   display: block;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   color: #6a6c6f;
 }
 
 .remove-widget-redirect {
   position: absolute;
-  top: 30px;
-  right: 23px;
+  top: 35px;
+  right: 13px;
   width: 20px;
   height: 20px;
   display: block;
@@ -653,7 +657,7 @@ button.refresh-video-element-btn {
   padding: 20px 20px 0 20px;
 }
 
-.row-subitem label span {
+.row-subitem label span:not(.checkmark) {
   margin-left: 5px !important;
   vertical-align: top;
 }

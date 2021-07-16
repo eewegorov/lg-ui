@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FullWidget } from '../../../../../core/models/widgets';
 
 @Component({
@@ -6,12 +6,19 @@ import { FullWidget } from '../../../../../core/models/widgets';
   templateUrl: './redirect-element.component.html',
   styleUrls: ['../../../shared/shared.scss', './redirect-element.component.scss']
 })
-export class RedirectElementComponent implements OnInit {
+export class RedirectElementComponent implements OnInit, AfterViewInit {
   @Input() public widget: FullWidget;
 
   constructor() { }
 
   ngOnInit(): void {
+    if (this.widget.guiprops.button.enable === true && this.widget.guiprops.form.enable === false) {
+      this.widget.guiprops.formSet.redirect.enable = true;
+    }
+  }
+
+  ngAfterViewInit(): void {
+    ($('[data-toggle="tooltip"]') as any).tooltip();
   }
 
   public validateRedirect(e) {

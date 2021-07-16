@@ -45,7 +45,6 @@ export class VisualElementComponent implements OnInit {
   }
 
   public getVideoId(item) {
-    console.log(item)
     this.getVideo.emit(item);
   }
 

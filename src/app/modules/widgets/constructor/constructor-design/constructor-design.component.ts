@@ -240,13 +240,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       }
     }
 
-    if (this.widget.guiprops.button.enable === true && this.widget.guiprops.form.enable === false) {
-      this.widget.guiprops.formSet.redirect.enable = true;
-      if (this.widget.guiprops.formSet.redirect.enable === true) {
-        this.widget.guiprops.formSet.redirect.enable = true;
-      }
-    }
-
     if (this.widget.guiprops.popupMain.shadow.enable) {
       this.widget.guiprops.popupMain.shadow.rgbaColor = (this.widgetConstructorService
         .hexToRgb(this.widget.guiprops.popupMain.shadow.color, this.widget.guiprops.popupMain.shadow.opacityColor)).toString();
@@ -467,7 +460,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       return;
     }
 
-    mainBlock.style.height = $(window).height() - 150 + 'px';
+    mainBlock.style.height = $(window).height() - 140 + 'px';
   }
 
   private loadListener() {
