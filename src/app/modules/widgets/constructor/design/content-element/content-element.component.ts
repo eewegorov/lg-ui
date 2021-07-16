@@ -311,7 +311,7 @@ export class ContentElementComponent implements OnInit {
 
   public classNameImg() {
     return this.widgetConstructorService
-      .classNameImg(this.widget.guiprops.image, this.widget.guiprops.form, this.widget.guiprops.formExt.model.mainSettings);
+      .classNameImg(this.widget.guiprops.image, this.widget.guiprops.form, this.widget.guiprops.formExt?.model?.mainSettings);
   }
 
   public classNameImgMain() {

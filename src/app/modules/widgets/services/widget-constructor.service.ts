@@ -239,11 +239,11 @@ export class WidgetConstructorService {
       className = 'widget-image-top';
     }
 
-    if ((formSettings.visual === 'На всю ширину' || formExtSettings.visual.type === 1) && imageSettings.place === 'Слева') {
+    if ((formSettings.visual === 'На всю ширину' || formExtSettings?.visual?.type === 1) && imageSettings.place === 'Слева') {
       className = 'widget-image-left-all';
     }
 
-    if ((formSettings.visual === 'На всю ширину' || formExtSettings.visual.type === 1) && imageSettings.place === 'Справа') {
+    if ((formSettings.visual === 'На всю ширину' || formExtSettings?.visual?.type === 1) && imageSettings.place === 'Справа') {
       className = 'widget-image-right-all';
     }
 

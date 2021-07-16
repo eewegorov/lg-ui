@@ -3,10 +3,8 @@ import {
   Component,
   DoCheck,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -200,7 +198,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     setTimeout(() => {
       this.changeModel();
       this.changeColorPodAndSRC();
-    }, 1000);
+    }, 1500);
   }
 
   ngDoCheck(): void {
@@ -469,7 +467,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       return;
     }
 
-    mainBlock.style.height = $(window).height() - 135 + 'px';
+    mainBlock.style.height = $(window).height() - 150 + 'px';
   }
 
   private loadListener() {

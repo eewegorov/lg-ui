@@ -327,10 +327,11 @@
     </div>
 
     <div *ngIf="widget.guiprops.image" id="elemScrNIVBl" class="image-or-video-settings-bl">
-      <div class="col-lg-12 mb-2">
+      <div class="d-flex mb-2">
         <ui-switch
-          [checked]="widget.guiprops.image.enable"
-        ></ui-switch><label class="control-label switcher-label control-label-des">Добавить изображение, видео или отступ</label>
+          [(ngModel)]="widget.guiprops.image.enable"
+          size="small"
+        ></ui-switch><label class="control-label switcher-label control-label-des mt-1 ml-2">Добавить изображение, видео или отступ</label>
       </div>
       <div class="clearfix"></div>
 
@@ -351,7 +352,14 @@
             <div class="row-subitem-padding radio-group-item">
               <div class="form-group widget-selector">
                 <label>
-                  <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops['image'].typeBl" value="imageBl">
+                  <input
+                    type="radio"
+                    name="addition"
+                    class="radio radio-info radio-inline"
+                    [(ngModel)]="widget.guiprops['image'].typeBl"
+                    value="imageBl"
+
+                  >
                   Изображение
                 </label>
               </div>
@@ -359,7 +367,13 @@
             <div class="row-subitem-padding radio-group-item">
               <div class="form-group widget-selector">
                 <label>
-                  <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops['image'].typeBl" value="videoBl">
+                  <input
+                    type="radio"
+                    name="addition"
+                    class="radio radio-info radio-inline"
+                    [(ngModel)]="widget.guiprops['image'].typeBl"
+                    value="videoBl"
+                  >
                   Видео
                 </label>
               </div>
@@ -367,7 +381,13 @@
             <div class="row-subitem-padding">
               <div class="form-group widget-selector">
                 <label>
-                  <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops['image'].typeBl" value="paddingBl">
+                  <input
+                    type="radio"
+                    name="addition"
+                    class="radio radio-info radio-inline"
+                    [(ngModel)]="widget.guiprops['image'].typeBl"
+                    value="paddingBl"
+                  >
                   Отступ
                 </label>
               </div>
@@ -387,7 +407,7 @@
         </div>
 
         <div *ngIf="widget.guiprops['image'].typeBl == 'videoBl'" class="imaget-item-video-settings mb-3">
-          <div class="row row-subitem pt-1">
+          <div class="row row-subitem">
             <div class="col-sm-12 row-subitem-padding mt-2 mb-1">
               <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка видео</h4>
             </div>
@@ -396,9 +416,10 @@
                 <label>
                   <input
                     type="radio"
+                    name="video2"
                     class="radio radio-info radio-inline"
                     (change)="getVideoId(widget.guiprops.image)"
-                    [ngModel]="widget.guiprops.image.videoType"
+                    [(ngModel)]="widget.guiprops.image.videoType"
                     value="youtube"
                   />
                   Youtube
@@ -410,9 +431,10 @@
                 <label>
                   <input
                     type="radio"
+                    name="video2"
                     class="radio radio-info radio-inline"
                     (change)="getVideoId(widget.guiprops.image)"
-                    [ngModel]="widget.guiprops.image.videoType"
+                    [(ngModel)]="widget.guiprops.image.videoType"
                     value="vimeo"
                   />
                   Vimeo
@@ -446,11 +468,11 @@
           </div>
 
           <div class="row row-subitem mt-3">
-            <div class="col-sm-12 row-subitem-padding pt-1">
+            <div class="d-flex col-sm-12 row-subitem-padding pt-1">
               <ui-switch
                 size="small"
-                [checked]="widget.guiprops.image.autoplay"
-              ></ui-switch><label class="control-label switcher-label-xs control-label-des">Автоматически проигрывать видео</label>
+                [(ngModel)]="widget.guiprops.image.autoplay"
+              ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Автоматически проигрывать видео</label>
             </div>
           </div>
           <div class="row row-subitem">
@@ -461,12 +483,12 @@
         </div>
 
         <div>
-          <div class="col-lg-12 mt-1 mb-1">
+          <div class="mt-1 mb-1">
             <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка расположения и габаритов</h4>
           </div>
 
           <div class="row row-subitem mt-2">
-            <div class="col-sm-6 row-subitem-padding">
+            <div class="col-sm-6 row-subitem-padding pr-3">
               <label class="control-label control-label-des">Расположение блока:</label>
               <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -479,7 +501,7 @@
                     *ngFor="let itemPlace of placeImg"
                     (click)="widget.guiprops.image.place = itemPlace"
                   >
-                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemPlace }}</a>
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemPlace }}</a>
                   </li>
                 </ul>
               </div>
@@ -487,7 +509,7 @@
 
             <div
               *ngIf="(widget.guiprops['image'].place === 'Слева' || widget.guiprops['image'].place === 'Справа')"
-              class="col-sm-6 row-subitem-padding pt-1"
+              class="col-sm-6 row-subitem-padding"
             >
               <div>
                 <label class="control-label control-label-des">Ширина блока:</label>
@@ -502,7 +524,7 @@
                       *ngFor="let item of widgwidthBtn"
                       (click)="widget.guiprops.image.img_width = item"
                     >
-                      <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                      <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
                     </li>
                   </ul>
                 </div>
@@ -513,13 +535,13 @@
                   class="form-control form-control-font form-cntrl-55w"
                   [(ngModel)]="widget.guiprops['image'].img_widthpx"
                 />
-                <label class="control-label">px <span>ширина блока</span></label>
+                <label class="control-label ml-1">px <span>ширина блока</span></label>
               </div>
             </div>
 
             <div
               *ngIf="(widget.guiprops['image'].place === 'Сверху' || widget.guiprops['image'].place === 'Снизу')"
-              class="col-sm-6 row-subitem-padding pt-1"
+              class="col-sm-6 row-subitem-padding"
             >
               <div>
                 <label class="control-label control-label-des">Высота блока:</label>
@@ -534,7 +556,7 @@
                       *ngFor="let item of widgwidthBtn"
                       (click)="widget.guiprops.image.img_height = item"
                     >
-                      <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                      <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
                     </li>
                   </ul>
                 </div>
@@ -545,7 +567,7 @@
                   class="form-control form-control-font form-cntrl-55w"
                   [(ngModel)]="widget.guiprops['image'].img_heightpx"
                 />
-                <label class="control-label">px <span>высота блока</span></label>
+                <label class="control-label ml-1">px <span>высота блока</span></label>
               </div>
             </div>
           </div>
@@ -565,7 +587,7 @@
                     *ngFor="let item of imageItemsType"
                     (click)="widget.guiprops.image.img_item_type = item"
                   >
-                    <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
                   </li>
                 </ul>
               </div>
@@ -582,7 +604,7 @@
                       class="form-control form-control-font form-cntrl-55w"
                       [(ngModel)]="widget.guiprops.image.img_item_widthpx"
                     />
-                    <label class="control-label">px <span>ширина</span></label>
+                    <label class="control-label ml-1">px <span>ширина</span></label>
                   </div>
                 </div>
                 <div class="col-sm-6 row-subitem-padding pt-1">
@@ -592,7 +614,7 @@
                       class="form-control form-control-font form-cntrl-55w"
                       [(ngModel)]="widget.guiprops.image.img_item_heightpx"
                     />
-                    <label class="control-label">px <span>высота</span></label>
+                    <label class="control-label ml-1">px <span>высота</span></label>
                   </div>
                 </div>
               </div>
@@ -611,7 +633,7 @@
                         *ngFor="let item of imageItemsAlign"
                         (click)="widget.guiprops.image.img_item_align = item"
                       >
-                        <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
                       </li>
                     </ul>
                   </div>
@@ -629,23 +651,24 @@
       </div>
     </div>
 
-    <div *ngIf="widget.guiprops.bg" class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1">
+    <div *ngIf="widget.guiprops.bg" class="row row-subitem mt-1">
+      <div class="d-flex col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
-          [checked]="widget.guiprops['bg'].border.enable"
-        ></ui-switch><label class="control-label switcher-label-xs control-label-des">Добавить рамку</label>
+          [(ngModel)]="widget.guiprops['bg'].border.enable"
+        ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Добавить рамку</label>
       </div>
     </div>
     <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.border.enable == true">
       <div class="row row-subitem">
-        <div class="col-sm-6 row-subitem-padding pt-1">
+        <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
           <label class="control-label control-label-colorpc control-label-des">Цвет рамки:</label>
           <input
             [(colorPicker)]="widget.guiprops['bg'].border.color"
             [style.background]="widget.guiprops['bg'].border.color"
             [cpAlphaChannel]="'disabled'"
             [cpOutputFormat]="'hex'"
+            class="w-100"
           />
         </div>
         <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
@@ -656,22 +679,23 @@
     </div>
 
     <div *ngIf="widget.guiprops.bg" class="row row-subitem mt-3">
-      <div class="col-sm-12 row-subitem-padding pt-1">
+      <div class="d-flex col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
-          [checked]="widget.guiprops['bg'].shadow.enable"
-        ></ui-switch><label class="control-label switcher-label-xs control-label-des">Добавить тень</label>
+          [(ngModel)]="widget.guiprops['bg'].shadow.enable"
+        ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Добавить тень</label>
       </div>
     </div>
     <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.shadow.enable == true">
       <div class="row row-subitem">
-        <div class="col-sm-6 row-subitem-padding pt-1">
+        <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
           <label class="control-label control-label-colorpc control-label-des">Цвет тени:</label>
           <input
             [(colorPicker)]="widget.guiprops['bg'].shadow.color"
             [style.background]="widget.guiprops['bg'].shadow.color"
             [cpAlphaChannel]="'disabled'"
             [cpOutputFormat]="'hex'"
+            class="w-100"
           />
         </div>
         <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
@@ -680,7 +704,7 @@
         </div>
       </div>
       <div class="row row-subitem mt-1">
-        <div class="col-sm-6 row-subitem-padding pt-1">
+        <div class="col-sm-5 row-subitem-padding pt-1 mr-3 d-flex flex-column">
           <label class="control-label control-label-des">Сдвиг по горизонтали:</label>
           <input
             type="number"
@@ -688,7 +712,7 @@
             [(ngModel)]="widget.guiprops['bg'].shadow.horiz"
           />
         </div>
-        <div class="col-sm-6 row-subitem-padding pt-1">
+        <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
           <label class="control-label control-label-des">Сдвиг по вертикали:</label>
           <input
             type="number"
@@ -698,7 +722,7 @@
         </div>
       </div>
       <div class="row row-subitem mt-1">
-        <div class="col-sm-6 row-subitem-padding pt-1">
+        <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
           <label class="control-label control-label-des">Резкость:</label>
           <input
             type="number"
@@ -709,13 +733,13 @@
       </div>
     </div>
 
-    <div *ngIf="widget.guiprops.bg" class="row row-subitem mt-2">
+    <div *ngIf="widget.guiprops.bg" class="row row-subitem mt-3">
       <div class="col-sm-12 row-subitem-padding">
         <h5 class="label-style-ic control-label-des">Углы виджета:</h5>
       </div>
       <div class="col-sm-12 row-subitem-padding side-ui-sm">
         <ngx-slider [(value)]="widget.guiprops['bg'].borderRadius" [options]="optionsRound"></ngx-slider>
-        <label class="control-label control-label-ui">Закругление углов в виджете</label>
+        <label class="control-label control-label-ui ml-2">Закругление углов в виджете</label>
       </div>
     </div>
   </div>
