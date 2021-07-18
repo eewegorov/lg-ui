@@ -36,7 +36,7 @@
               "node_modules/animate.css/animate.min.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/summernote/dist/summernote-lite.min.css",
-              "node_modules/fontselect-jquery-plugin/styles/fontselect-default.css",
+              "src/assets/plugins/fontselect/jquery.fontselect.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -46,7 +46,7 @@
               "node_modules/metismenu/dist/metisMenu.min.js",
               "node_modules/icheck/icheck.min.js",
               "node_modules/summernote/dist/summernote-lite.min.js",
-              "node_modules/fontselect-jquery-plugin/jquery.fontselect.min.js"
+              "src/assets/plugins/fontselect/jquery.fontselect.min.js"
             ],
             "allowedCommonJsDependencies": [
               "metismenu",

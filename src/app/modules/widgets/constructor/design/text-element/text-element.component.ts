@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { FullWidget } from '../../../../../core/models/widgets';
 import { WidgetConstructorService } from '../../../services/widget-constructor.service';
@@ -8,7 +8,7 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
   templateUrl: './text-element.component.html',
   styleUrls: ['../../../shared/shared.scss', './text-element.component.scss']
 })
-export class TextElementComponent implements OnInit, AfterViewInit {
+export class TextElementComponent implements OnInit {
   @Input() public index: number;
   @Input() public item: any;
   @Input() public widget: FullWidget;
@@ -23,14 +23,8 @@ export class TextElementComponent implements OnInit, AfterViewInit {
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
-  ngAfterViewInit(): void {
-        setTimeout(() => {
-          this.initPicker();
-        }, 1000)
-    }
-
   ngOnInit(): void {
-
+    this.initPicker();
   }
 
   public removeElementFromElementsList(index: number): void {
@@ -40,15 +34,12 @@ export class TextElementComponent implements OnInit, AfterViewInit {
   private initPicker() {
     setTimeout(() => {
       ($('#font-picker' + this.index) as any).fontselect({
-        style: 'font-select',
         placeholder: 'Выберите шрифт',
         placeholderSearch: 'Поиск...',
         systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
-        googleFonts: this.widgetConstructorService.getGoogleFontListPicker(),
-        searchable: true
+        googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
       }).on('change', (change) => {
-        console.log(change)
-        this.setNewFont(change.target.value, this.widget.guiprops.button.font);
+        this.setNewFont(change.value, this.widget.guiprops.button.font);
       });
 
       $('#font-picker' + this.index).trigger('setFont', this.widget.guiprops.button.font.name);
