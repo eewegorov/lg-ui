@@ -36,14 +36,14 @@
               <ui-switch
                 size="small"
                 [checked]="item.required"
-              ></ui-switch><label class="control-label switcher-label-xs control-label-des">Поле обязательно к заполнению</label>
+              ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Поле обязательно к заполнению</label>
             </div>
 
             <div class="mt-2 formReqBl" *ngIf="item.type === 'phone'">
               <ui-switch
                 size="small"
                 [checked]="widget.guiprops.formSet.phoneMask.enable"
-              ></ui-switch><label class="control-label switcher-label-xs control-label-des">{{ 'widgets.form.phoneMask.titleSwitcher' | translate }}</label>
+              ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">{{ 'widgets.form.phoneMask.titleSwitcher' | translate }}</label>
             </div>
             <div *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable" class="mt-2 formReqBl">
               <label class="control-label">{{ 'widgets.form.phoneMask.titleInput' | translate }}</label>
@@ -163,11 +163,11 @@
 
     </div>
     <div class="row row-subitem mt-3">
-      <div class="col-sm-12 row-subitem-padding pt-1">
+      <div class="d-flex col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
           [checked]="widget.guiprops.form.border.enable"
-        ></ui-switch><label class="control-label switcher-label-xs control-label-des">Использовать рамку вокруг полей</label>
+        ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Использовать рамку вокруг полей</label>
       </div>
     </div>
     <div *ngIf="widget.guiprops['form'].border.enable == true">
@@ -184,11 +184,11 @@
       </div>
     </div>
     <div class="row row-subitem mt-3">
-      <div class="col-sm-12 row-subitem-padding pt-1">
+      <div class="d-flex col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
           [checked]="widget.guiprops.form.colorPod.enable"
-        ></ui-switch><label class="control-label switcher-label-xs control-label-des">Использовать подложку под формой</label>
+        ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Использовать подложку под формой</label>
       </div>
     </div>
     <div *ngIf="widget.guiprops['form'].colorPod.enable == true">
