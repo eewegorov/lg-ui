@@ -1,17 +1,15 @@
 <div class="border-item">
-  <div class="col-lg-12">
-    <h4 class="h4-element-title">Ссылка/Кнопка закрытия <a
-      (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
-    </h4>
-  </div>
+  <h4 class="h4-element-title">Ссылка/Кнопка закрытия <a
+    (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
+  </h4>
   <div class="clearfix"></div>
-  <div class="mb-2 mt-1">
-    <div class="row row-subitem pt-1">
+  <div class="mt-1">
+    <div class="row row-subitem pt-1 mb-2">
       <div class="col-sm-12 row-subitem-padding">
         <h4 class="h4-text-tit control-label-des">Выберите тип элемента:</h4>
       </div>
       <div class="col-sm-6 row-subitem-padding">
-        <div class="form-group widget-selector">
+        <div class="form-group widget-selector mb-0">
           <label>
             <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops.exit.button.enable" [value]="false">
             Ссылка закрытия
@@ -19,7 +17,7 @@
         </div>
       </div>
       <div class="col-sm-6 row-subitem-padding">
-        <div class="form-group widget-selector">
+        <div class="form-group widget-selector mb-0">
           <label>
             <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops.exit.button.enable" [value]="true">
             Кнопка закрытия
@@ -28,8 +26,8 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!widget.guiprops.exit.button.enable">
-    <div class="row row-subitem pt-1">
+  <div [hidden]="widget.guiprops.exit.button.enable">
+    <div class="row row-subitem">
       <div class="col-sm-12 row-subitem-padding">
         <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
       </div>
@@ -58,14 +56,14 @@
               *ngFor="let itemVisual of floatBtn"
               (click)="widget.guiprops.exit.position = itemVisual"
             >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="widget.guiprops.exit.button.enable">
+  <div [hidden]="!widget.guiprops.exit.button.enable">
     <div>
       <div class="row row-subitem">
         <div class="col-sm-12 row-subitem-padding">
@@ -98,7 +96,7 @@
       </div>
 
       <div class="row row-subitem mt-2">
-        <div class="col-sm-6 row-subitem-padding pt-1">
+        <div class="col-sm-6 row-subitem-padding pt-1 pr-3">
           <label class="control-label control-label-des">Ширина кнопки:</label>
           <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -111,7 +109,7 @@
                 *ngFor="let item of widthBtn"
                 (click)="widget.guiprops.exit.button.btn_width = item"
               >
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
               </li>
             </ul>
           </div>
@@ -135,14 +133,14 @@
                 *ngFor="let item of floatBtn"
                 (click)="widget.guiprops.exit.button.position = item"
               >
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
               </li>
             </ul>
           </div>
         </div>
       </div>
       <div *ngIf="widget.guiprops.exit.button.btn_width === 'Собственная'">
-        <div class="col-sm-12 pt-1 mt-2">
+        <div class="pt-1 mt-2">
           <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="widget.guiprops.exit.button.btn_widthpx">
           <label class="control-label ml-1">px <span>ширина кнопки</span></label>
         </div>
@@ -163,7 +161,7 @@
                 (click)="setBtnStyle('Default', widget.guiprops.exit.button)"
               >
                 <a
-                  class="btn-var-styles btn-var-styles__default"
+                  class="dropdown-item btn-var-styles btn-var-styles__default"
                   [ngStyle]="{'font-family': widget.guiprops.exit.button.font.fontFamily, 'background': widget.guiprops.exit.button.colorBtn}"
                   href="javascript:void(0)"
                 >Default</a>
@@ -173,7 +171,7 @@
                 (click)="setBtnStyle('Material', widget.guiprops.exit.button)"
               >
                 <a
-                  class="btn-var-styles btn-var-styles__material"
+                  class="dropdown-item btn-var-styles btn-var-styles__material"
                   [ngStyle]="{'font-family': widget.guiprops.exit.button.font.fontFamily, 'background': widget.guiprops.exit.button.colorBtn}"
                   href="javascript:void(0)"
                 >Material</a>
@@ -183,7 +181,7 @@
                 (click)="setBtnStyle('Flat', widget.guiprops.exit.button)"
               >
                 <a
-                  class="btn-var-styles btn-var-styles__flat"
+                  class="dropdown-item btn-var-styles btn-var-styles__flat"
                   [ngStyle]="{'font-family': widget.guiprops.exit.button.font.fontFamily, 'background': widget.guiprops.exit.button.colorBtn}"
                   href="javascript:void(0)"
                 >Flat</a>
@@ -193,7 +191,7 @@
                 (click)="setBtnStyle('Border Style', widget.guiprops.exit.button)"
               >
                 <a
-                  class="btn-var-styles btn-var-styles__border-style"
+                  class="dropdown-item btn-var-styles btn-var-styles__border-style"
                   [ngStyle]="{'font-family': widget.guiprops.exit.button.font.fontFamily, 'border-color': widget.guiprops.exit.button.colorBtn}"
                   href="javascript:void(0)"
                 >Border Style</a>
