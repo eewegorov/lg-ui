@@ -72,6 +72,7 @@ import { ExtendedTermComponent } from './constructor/design/form-extended/extend
 import { ExtendedTextComponent } from './constructor/design/form-extended/extended-text/extended-text.component';
 import { ExtendedTitleComponent } from './constructor/design/form-extended/extended-title/extended-title.component';
 import { ExtendedVariantsComponent } from './constructor/design/form-extended/extended-variants/extended-variants.component';
+import { TimerElementComponent } from './constructor/design/timer-element/timer-element.component';
 
 
 @NgModule({
@@ -133,6 +134,7 @@ import { ExtendedVariantsComponent } from './constructor/design/form-extended/ex
     ExtendedTextComponent,
     ExtendedTitleComponent,
     ExtendedVariantsComponent,
+    TimerElementComponent,
   ],
   exports: [
     SmartpointsControlComponent,
