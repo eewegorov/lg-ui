@@ -363,7 +363,12 @@ input.form-cntrl-55w {
   width: 55px;
 }
 
+.dropdown-with-btn-styles li {
+  padding: 3px 10px;
+}
+
 .dropdown-with-btn-styles li a {
+  display: block;
   padding: 0 5px;
   height: 26px;
   line-height: 26px;
