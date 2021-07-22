@@ -583,7 +583,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
       return;
     }
 
-    $('.widget-style-menu').addClass('loading-coupons');
+    $('.coupons-flex-wr').addClass('loading-coupons');
     this.couponService.getCouponsList().subscribe((response: Coupon[]) => {
       if (response) {
         this.coupons = response;
@@ -606,7 +606,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
           }
         });
 
-        $('.widget-style-menu').removeClass('loading-coupons');
+        $('.coupons-flex-wr').removeClass('loading-coupons');
       }
     });
   }

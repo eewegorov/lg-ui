@@ -1,9 +1,9 @@
 <div>
-  <div class="row row-subitem mt-2">
-    <div class="col-sm-12 row-subitem-padding pt-1">
+  <div class="row-subitem mt-2">
+    <div class="d-flex row-subitem-padding pt-1">
       <ui-switch
         size="small"
-        [checked]="coupon.enable"
+        [(ngModel)]="coupon.enable"
         (change)="onChangePayment($event)"
       ></ui-switch>
       <label *ngIf="coupon.elementType === 'form'" class="control-label switcher-label-xs control-label-des mt-1 ml-2">
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="row row-subitem mt-1">
+  <div class="row-subitem mt-1">
     <div *ngIf="coupon.elementType === 'form'" class="col-sm-12 row-subitem-padding widget-small-text">
       {{ 'widgets.coupon.couponCallback.actionDesc2.form' | translate }}
     </div>
@@ -31,8 +31,8 @@
   </div>
 
   <div *ngIf="coupon.enable">
-    <div *ngIf="!coupons.length" class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 coupons-flex-wr">
+    <div *ngIf="!coupons.length" class="row-subitem mt-2">
+      <div class="row-subitem-padding pt-1 coupons-flex-wr">
         <a href="../../../coupons/?enableCouponModal=true" target="_blank" class="btn btn-primary btn-coupon-add">
           {{ 'widgets.coupon.couponCallback.couponAdd' | translate }}
         </a>
@@ -49,8 +49,8 @@
       </div>
     </div>
 
-    <div *ngIf="coupons.length" class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1">
+    <div *ngIf="coupons.length" class="row-subitem mt-2">
+      <div class="row-subitem-padding pt-1">
         <label class="control-label control-label-des">{{ 'widgets.coupon.couponCallback.couponChoose' | translate }}:</label>
         <div class="coupons-flex-wr">
           <div class="dropdown btn-coupon-chose">
@@ -64,7 +64,7 @@
                 *ngFor="let itemCoupon of coupons"
                 (click)="coupon.coupon.coupon = itemCoupon"
               >
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemCoupon.name }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemCoupon.name }}</a>
               </li>
             </ul>
           </div>
@@ -82,21 +82,21 @@
         </div>
       </div>
     </div>
-    <div class="row row-subitem mt-1">
+    <div class="row-subitem mt-1">
       <div
-        class="col-sm-12 row-subitem-padding widget-small-text underline-links blue-links hover-links"
+        class="row-subitem-padding widget-small-text underline-links blue-links hover-links"
         [innerHTML]="'widgets.coupon.couponCallback.desc' | translate"
       ></div>
     </div>
 
-    <div class="col-lg-12 mt-1 mb-1">
+    <div class="mt-1 mb-1">
       <h4 class="h4-text-tit control-label-des helper-title-3level">
         {{ 'widgets.coupon.couponCallback.popupWindow.setting.title' | translate }}
       </h4>
     </div>
 
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 mt-1">
+    <div class="row-subitem mt-2">
+      <div class="row-subitem-padding pt-1 mt-1">
         <label class="control-label control-label-des">{{ 'widgets.coupon.couponCallback.popupWindow.setting.position' | translate }}:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -109,15 +109,15 @@
               *ngFor="let item of placePopup"
               (click)="coupon.coupon.positionPopup = item"
             >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
 
-    <div class="row row-subitem">
-      <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
+    <div class="row-subitem">
+      <div class="widget-name-block-rel row-subitem-padding pt-1 mt-2">
         <label class="control-label control-label-des">
           {{ 'widgets.coupon.couponCallback.popupWindow.setting.hover' | translate }}:
         </label>
@@ -130,8 +130,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem">
-      <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
+    <div class="row-subitem">
+      <div class="widget-name-block-rel row-subitem-padding pt-1 mt-2">
         <label class="control-label control-label-des">
           {{ 'widgets.coupon.couponCallback.popupWindow.setting.click' | translate }}:
         </label>
@@ -139,8 +139,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem">
-      <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
+    <div class="row-subitem">
+      <div class="widget-name-block-rel row-subitem-padding pt-1 mt-2">
         <label class="control-label control-label-des">
           {{ 'widgets.coupon.couponCallback.popupWindow.setting.action' | translate }}:
         </label>
@@ -148,8 +148,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem">
-      <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
+    <div class="row-subitem">
+      <div class="widget-name-block-rel row-subitem-padding pt-1 mt-2">
         <label class="control-label control-label-des">
           {{ 'widgets.coupon.couponCallback.popupWindow.setting.manual' | translate }}:
         </label>
@@ -157,8 +157,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem">
-      <div class="col-lg-12 row-subitem-padding">
+    <div class="row-subitem">
+      <div class="row-subitem-padding">
         <h4 class="h4-text-tit control-label-des helper-title-3level">
           {{ 'widgets.coupon.couponCallback.popupWindow.setting.design' | translate }}
         </h4>
@@ -202,14 +202,14 @@
       </div>
     </div>
 
-    <div class="col-lg-12 mt-1 mb-1">
+    <div class="mt-1 mb-1">
       <h4 class="h4-text-tit control-label-des helper-title-3level">
         {{ 'widgets.coupon.setting.actions' | translate }}
       </h4>
     </div>
 
-    <div class="row row-subitem row-subitem-static-hide" *ngIf="coupon.elementType !== 'closeBtn'">
-      <div class="col-sm-12 row-subitem-padding pt-1">
+    <div class="row-subitem row-subitem-static-hide" *ngIf="coupon.elementType !== 'closeBtn'">
+      <div class="row-subitem-padding pt-1">
         <label>
           <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="coupon.coupon.closeAfter">
           {{ 'widgets.coupon.setting.closeAfter' | translate }}
@@ -217,8 +217,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding pt-1">
+    <div class="row-subitem">
+      <div class="row-subitem-padding pt-1">
         <label>
           <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="coupon.coupon.isCopyAction">
           {{ 'widgets.coupon.setting.isCopyAction' | translate }}

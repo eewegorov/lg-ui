@@ -403,7 +403,7 @@ input.form-cntrl-55w {
   color: #a94442;
 }
 
-label.control-label span {
+label.control-label span:not(.tariff-info) {
   font-weight: 400 !important;
   font-size: 13px;
   color: #6a6c6f;
@@ -514,6 +514,10 @@ a.widget-download-img {
 
 .coupons-flex-wr {
   display: flex;
+
+  & > * {
+    font-size: 14px;
+  }
 }
 
 .coupons-flex-wr .btn-coupon-add,
@@ -524,15 +528,28 @@ a.widget-download-img {
   text-align: center;
 }
 
-.btn-coupon-chose .btn.dropdown-toggle {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-right: 20px;
+.btn-primary {
+  background-color: #3f5872;
+  border-color: #3f5872;
+  color: #FFFFFF;
 }
 
 .coupons-flex-wr .refresh-coupons-element-btn {
   max-width: calc(12% - 10px);
   flex-basis: calc(12% - 10px);
+}
+
+.coupons-flex-wr.loading-coupons .refresh-coupons-element-btn i.fa-sync {
+  animation: rotaterefresh 0.8s linear infinite;
+}
+
+@keyframes rotaterefresh {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .btn-coupon-chose .dropdown-menu {
