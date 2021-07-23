@@ -166,7 +166,7 @@
     </div>
 
     <!-- Coupon preview -->
-    <div class="row row-subitem">
+    <div class="row-subitem">
       <div class="coupon-viewer-wr">
         <div class="coupon-viewer-text1">{{ coupon.coupon.actionText }}</div>
         <div class="element-coupon-wr" [ngStyle]="{'background-color': coupon.coupon.color, 'color': coupon.coupon.colorText}">
@@ -177,8 +177,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem">
-      <div class="col-sm-6 row-subitem-padding pt-1">
+    <div class="d-flex justify-content-between row-subitem">
+      <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
         <label class="control-label control-label-colorpc control-label-des">
           {{ 'widgets.coupon.couponCallback.popupWindow.setting.color' | translate }}:
         </label>
@@ -187,6 +187,8 @@
           [style.background]="coupon.coupon.colorText"
           [cpAlphaChannel]="'disabled'"
           [cpOutputFormat]="'hex'"
+          cpPosition="top"
+          class="w-100"
         />
       </div>
       <div class="col-sm-6 row-subitem-padding pt-1">
@@ -198,31 +200,48 @@
           [style.background]="coupon.coupon.color"
           [cpAlphaChannel]="'disabled'"
           [cpOutputFormat]="'hex'"
+          cpPosition="top"
+          class="w-100"
+
         />
       </div>
     </div>
 
-    <div class="mt-1 mb-1">
+    <div class="mt-2">
       <h4 class="h4-text-tit control-label-des helper-title-3level">
         {{ 'widgets.coupon.setting.actions' | translate }}
       </h4>
     </div>
 
-    <div class="row-subitem row-subitem-static-hide" *ngIf="coupon.elementType !== 'closeBtn'">
+    <div *ngIf="coupon.elementType !== 'closeBtn'" class="row-subitem">
       <div class="row-subitem-padding pt-1">
-        <label>
-          <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="coupon.coupon.closeAfter">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="coupon.coupon.closeAfter"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
           {{ 'widgets.coupon.setting.closeAfter' | translate }}
-        </label>
+        </div>
       </div>
     </div>
 
     <div class="row-subitem">
       <div class="row-subitem-padding pt-1">
-        <label>
-          <input type="checkbox" class="checkbox-green-btn" [(ngModel)]="coupon.coupon.isCopyAction">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="coupon.coupon.isCopyAction"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
           {{ 'widgets.coupon.setting.isCopyAction' | translate }}
-        </label>
+        </div>
       </div>
     </div>
   </div>

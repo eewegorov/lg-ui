@@ -451,28 +451,6 @@ div.button-send.click-edit-cl .note-editor font span {
   max-width: 100%;
 }
 
-.element-coupon-wr {
-  display: inline-block;
-  text-align: center;
-  overflow: hidden;
-  line-height: 2em;
-  height: 2em;
-  padding: 0 10px;
-  position: relative;
-}
-
-.element-coupon-wr > div {
-  white-space: nowrap;
-  cursor: pointer;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.element-coupon-wr:hover .element-coupon-name {
-  margin-top: -2em;
-}
-
 .element-iframe-block {
   position: relative;
   display: inline-block;
