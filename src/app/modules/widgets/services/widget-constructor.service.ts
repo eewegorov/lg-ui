@@ -469,7 +469,7 @@ export class WidgetConstructorService {
     ];
   }
 
-  private getTimerCountdownTypes() {
+  getTimerCountdownTypes() {
     return [
       {
         type: 0,
@@ -482,7 +482,7 @@ export class WidgetConstructorService {
     ];
   }
 
-  private getTimerExpTypes() {
+  getTimerExpTypes() {
     return [
       {
         type: 0,
@@ -499,7 +499,7 @@ export class WidgetConstructorService {
     ];
   }
 
-  private getTimerAlignTypes() {
+  getTimerAlignTypes() {
     return [
       {
         type: 0,

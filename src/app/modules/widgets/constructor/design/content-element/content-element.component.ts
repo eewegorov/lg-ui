@@ -301,6 +301,28 @@ export class ContentElementComponent implements OnInit {
     return className;
   }
 
+  public hrFlexedPosSel(type) {
+    let className = '';
+
+    if (type === 0) {
+      className = 'align-flexed-pos-left';
+    }
+
+    if (type === 1) {
+      className = 'align-flexed-pos-center';
+    }
+
+    if (type === 2) {
+      className = 'align-flexed-pos-right';
+    }
+
+    return className;
+  }
+
+  public isTimerTypeShown(item, type) {
+    return Boolean(item.design.nullData[type] || item.type1Model[type]);
+  }
+
   public getInputFormPhoneMask() {
     return this.widget.guiprops.formSet.phoneMask.maskValue.replace(/\*/g, '_');
   }
@@ -322,6 +344,10 @@ export class ContentElementComponent implements OnInit {
     return this.widgetConstructorService.classNameVerticalOrient(this.widget.guiprops.dhVisual);
   }
 
+  public getRGBAColorItems(color, opacity) {
+    return (this.widgetConstructorService.hexToRgb(color, opacity)).toString();
+  }
+
   public setVideoBGStyle() {
     if (($('.video-bg').width() !== 0) && ($('.video-bg').height() !== 0)) {
       if (($('.video-bg').width() / $('.video-bg').height()) >= (16 / 9)) {
@@ -341,6 +367,17 @@ export class ContentElementComponent implements OnInit {
       'border-bottom-left-radius': this.getColorPodBorderRadius(),
       'border-bottom-right-radius': this.getColorPodBorderRadius()
     };
+  }
+
+  public getTimerLabelItem(item, type, index) {
+    if (item.type.type === 0) {
+      return '1';
+    }
+    return this.prepareItemTime(item.type1Model[type])[index];
+  }
+
+  private prepareItemTime(data) {
+    return ('0' + data).slice(-2);
   }
 
   private getColorPodBorderRadius() {
