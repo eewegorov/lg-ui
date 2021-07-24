@@ -348,16 +348,6 @@
                 <span>Форма+кнопки (новый)</span>
               </div>
             </div>
-            <div class="row-panel-item small-pdn">
-              <div
-                class="newElementItem"
-                (click)="addFormButtonElement(disElementOrNotBtn())"
-                [ngClass]="(disElementOrNotBtn()) ? 'disable-new-element-btn' : ''"
-              >
-                <div class="element-form-icon"></div>
-                <span>Форма (устаревший)</span>
-              </div>
-            </div>
             <div class="row-panel-item small-pdn" *ngIf="!isContainerized">
               <div
                 class="newElementItem"
@@ -433,6 +423,13 @@
                 <span class="payment-modal-icon label label-warning tariff-info">окупаемый</span>
                 <div class="element-coupon-icon"></div>
                 <span>Купон</span>
+              </div>
+            </div>
+
+            <div class="row-panel-item small-pdn">
+              <div class="newElementItem" (click)="addTimerElement()">
+                <div class="element-countdown-icon"></div>
+                <span>Таймер</span>
               </div>
             </div>
           </div>

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { WidgetApiService } from './widget-api.service';
-import { catchError, map } from 'rxjs/operators';
-import { WidgetsResponse } from '../../../core/models/widgets';
-import { ErrorHandlerService } from '../../../core/services/error-handler.service';
-import { ApiResponse } from '../../../core/models/api';
 import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
+import { ApiResponse } from '../../../core/models/api';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { UtilsService } from '../../../core/services/utils.service';
+import { WidgetApiService } from './widget-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,10 @@ export class WidgetConstructorService {
   constructor(
     private translate: TranslateService,
     private errorHandlerService: ErrorHandlerService,
+    private utilsService: UtilsService,
     private widgetApiService: WidgetApiService
-  ) { }
+  ) {
+  }
 
   public listFileToUrl(listUrl) {
     return this.widgetApiService.listFileToUrl(listUrl).pipe(
@@ -83,6 +86,73 @@ export class WidgetConstructorService {
       item.type === 'rating' ||
       item.type === 'dd' ||
       item.type === 'variants';
+  }
+
+  public getDefaultTimerSettings() {
+    return {
+      enable: false,
+      name: 'timer-element',
+      counter: 0,
+      type: this.getTimerCountdownTypes()[1],
+      type1Model: {
+        d: 10,
+        h: 10,
+        m: 10,
+        s: 10
+      },
+      loop: {
+        enable: false,
+        model: {
+          d: 10,
+          h: 10,
+          m: 10,
+          s: 10
+        }
+      },
+      id: 'timer_' + this.utilsService.generateShortID(),
+      ids: 'timer_' + this.utilsService.generateShortID(),
+      date: (moment(new Date()) as any)._d,
+      timezoneType: 'local',
+      expType: this.getTimerExpTypes()[0],
+      expUrl: '',
+      design: {
+        font: {
+          name: 'PT Sans',
+          fontFamily: '\'PT Sans\''
+        },
+        fontType: 'systemFont',
+        fontName: '',
+        fontNumberSize: 35,
+        fontLabelSize: 18,
+        fontLabel: {
+          name: 'PT Sans',
+          fontFamily: '\'PT Sans\''
+        },
+        fontLabelType: 'systemFont',
+        fontLabelName: '',
+        bgWidth: 35,
+        bgHeight: 42,
+        opacity: 1,
+        radius: 6,
+        colorText: '#FFFFFF',
+        colorBG: '#000000',
+        colorDevider: '#000000',
+        colorIntervalName: '#4E4E4E',
+        nullData: {
+          d: true,
+          h: true,
+          m: true
+        },
+        align: this.getTimerAlignTypes()[1],
+        tempInterval: {
+          enable: true,
+          dText: this.translate.instant('widgets.constructor.timerDirective.label.days'),
+          hText: this.translate.instant('widgets.constructor.timerDirective.label.hours'),
+          mText: this.translate.instant('widgets.constructor.timerDirective.label.mins'),
+          sText: this.translate.instant('widgets.constructor.timerDirective.label.secs')
+        }
+      }
+    };
   }
 
   public ruleLeftOrRightUnderContent(formExtModel, formBasicVisual, imagePlace) {
@@ -395,6 +465,53 @@ export class WidgetConstructorService {
       {
         type: 2,
         label: this.translate.instant('widgets.formExt.mainSettings.widthForm.orientation3')
+      }
+    ];
+  }
+
+  private getTimerCountdownTypes() {
+    return [
+      {
+        type: 0,
+        label: this.translate.instant('widgets.constructor.timerDirective.countdown.type0')
+      },
+      {
+        type: 1,
+        label: this.translate.instant('widgets.constructor.timerDirective.countdown.type1')
+      }
+    ];
+  }
+
+  private getTimerExpTypes() {
+    return [
+      {
+        type: 0,
+        label: this.translate.instant('widgets.constructor.timerDirective.countdown.action.type0')
+      },
+      {
+        type: 1,
+        label: this.translate.instant('widgets.constructor.timerDirective.countdown.action.type1')
+      },
+      {
+        type: 2,
+        label: this.translate.instant('widgets.constructor.timerDirective.countdown.action.type2')
+      }
+    ];
+  }
+
+  private getTimerAlignTypes() {
+    return [
+      {
+        type: 0,
+        label: this.translate.instant('widgets.constructor.timerDirective.design.align.type0')
+      },
+      {
+        type: 1,
+        label: this.translate.instant('widgets.constructor.timerDirective.design.align.type1')
+      },
+      {
+        type: 2,
+        label: this.translate.instant('widgets.constructor.timerDirective.design.align.type2')
       }
     ];
   }
