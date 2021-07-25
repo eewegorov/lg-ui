@@ -754,3 +754,61 @@ div.button-send.click-edit-cl .note-editor font span {
 .webicon.mail {
   background: url("~src/assets/images/widgets/social/webicon-mail.svg"), #F5F5F5;
 }
+
+.timer-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.timer-items {
+  display: flex;
+  justify-content: space-around;
+}
+
+.timer-item-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-items_item-bgs-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.timer-items_item {
+  position: relative;
+  text-align: center;
+}
+
+.timer-items_item-bgs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timer-items_dots {
+  min-width: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.timer-items_dots > div {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.align-flexed-pos-left {
+  justify-content: flex-start;
+}
+
+.align-flexed-pos-center {
+  justify-content: center;
+}
+
+.align-flexed-pos-right {
+  justify-content: flex-end;
+}

@@ -6,7 +6,7 @@ import { WidgetConstructorService } from '../../../../services/widget-constructo
 @Component({
   selector: 'app-timer-element',
   templateUrl: './timer-element.component.html',
-  styleUrls: ['./timer-element.component.scss']
+  styleUrls: ['../../../../shared/shared.scss', './timer-element.component.scss']
 })
 export class TimerElementComponent implements OnInit {
   @Input() public index: number;
