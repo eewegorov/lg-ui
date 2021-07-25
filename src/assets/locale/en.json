@@ -808,6 +808,9 @@
 				"isCopyAction": ""
 			}
 		},
+		"font": {
+			"textSize": ""
+		},
 		"form": {
 			"phoneMask": {
 				"description": "",
@@ -869,6 +872,78 @@
 				"lock2": "",
 				"title": ""
 			}
+		},
+		"timerDirective": {
+			"countdown": {
+				"action": {
+					"title": "",
+					"type0": "",
+					"type1": "",
+					"type2": ""
+				},
+				"title": "",
+				"type0": "",
+				"type1": ""
+			},
+			"design": {
+				"align": {
+					"label": "",
+					"type0": "",
+					"type1": "",
+					"type2": ""
+				},
+				"bgHeight": "",
+				"bgOpacity": "",
+				"bgRadius": "",
+				"bgWidth": "",
+				"colorBG": "",
+				"colorDivider": "",
+				"colorIntervalName": "",
+				"colorText": "",
+				"fontLabel": "",
+				"fontNumber": "",
+				"nullData": {
+					"desc": "",
+					"label": ""
+				},
+				"tempInterval": {
+					"days": "",
+					"hours": "",
+					"label": "",
+					"mins": "",
+					"secs": ""
+				},
+				"title": ""
+			},
+			"id": {
+				"desc1": "",
+				"desc2": "",
+				"label": ""
+			},
+			"label": {
+				"days": "",
+				"hours": "",
+				"mins": "",
+				"secs": ""
+			},
+			"labelShort": {
+				"days": "",
+				"hours": "",
+				"mins": ""
+			},
+			"loop": {
+				"desc": "",
+				"label": ""
+			},
+			"settings": {
+				"title": ""
+			},
+			"timezone": {
+				"gmt": "",
+				"local": "",
+				"title": ""
+			},
+			"title": ""
 		},
 		"types": {
 			"static": {

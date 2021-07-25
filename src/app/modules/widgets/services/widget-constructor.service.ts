@@ -136,7 +136,7 @@ export class WidgetConstructorService {
         radius: 6,
         colorText: '#FFFFFF',
         colorBG: '#000000',
-        colorDevider: '#000000',
+        colorDivider: '#000000',
         colorIntervalName: '#4E4E4E',
         nullData: {
           d: true,
@@ -146,10 +146,10 @@ export class WidgetConstructorService {
         align: this.getTimerAlignTypes()[1],
         tempInterval: {
           enable: true,
-          dText: this.translate.instant('widgets.constructor.timerDirective.label.days'),
-          hText: this.translate.instant('widgets.constructor.timerDirective.label.hours'),
-          mText: this.translate.instant('widgets.constructor.timerDirective.label.mins'),
-          sText: this.translate.instant('widgets.constructor.timerDirective.label.secs')
+          dText: this.translate.instant('widgets.timerDirective.label.days'),
+          hText: this.translate.instant('widgets.timerDirective.label.hours'),
+          mText: this.translate.instant('widgets.timerDirective.label.mins'),
+          sText: this.translate.instant('widgets.timerDirective.label.secs')
         }
       }
     };
@@ -473,11 +473,11 @@ export class WidgetConstructorService {
     return [
       {
         type: 0,
-        label: this.translate.instant('widgets.constructor.timerDirective.countdown.type0')
+        label: this.translate.instant('widgets.timerDirective.countdown.type0')
       },
       {
         type: 1,
-        label: this.translate.instant('widgets.constructor.timerDirective.countdown.type1')
+        label: this.translate.instant('widgets.timerDirective.countdown.type1')
       }
     ];
   }
@@ -486,15 +486,15 @@ export class WidgetConstructorService {
     return [
       {
         type: 0,
-        label: this.translate.instant('widgets.constructor.timerDirective.countdown.action.type0')
+        label: this.translate.instant('widgets.timerDirective.countdown.action.type0')
       },
       {
         type: 1,
-        label: this.translate.instant('widgets.constructor.timerDirective.countdown.action.type1')
+        label: this.translate.instant('widgets.timerDirective.countdown.action.type1')
       },
       {
         type: 2,
-        label: this.translate.instant('widgets.constructor.timerDirective.countdown.action.type2')
+        label: this.translate.instant('widgets.timerDirective.countdown.action.type2')
       }
     ];
   }
@@ -503,15 +503,15 @@ export class WidgetConstructorService {
     return [
       {
         type: 0,
-        label: this.translate.instant('widgets.constructor.timerDirective.design.align.type0')
+        label: this.translate.instant('widgets.timerDirective.design.align.type0')
       },
       {
         type: 1,
-        label: this.translate.instant('widgets.constructor.timerDirective.design.align.type1')
+        label: this.translate.instant('widgets.timerDirective.design.align.type1')
       },
       {
         type: 2,
-        label: this.translate.instant('widgets.constructor.timerDirective.design.align.type2')
+        label: this.translate.instant('widgets.timerDirective.design.align.type2')
       }
     ];
   }

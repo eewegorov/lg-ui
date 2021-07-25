@@ -72,7 +72,7 @@ import { ExtendedTermComponent } from './constructor/design/form-extended/extend
 import { ExtendedTextComponent } from './constructor/design/form-extended/extended-text/extended-text.component';
 import { ExtendedTitleComponent } from './constructor/design/form-extended/extended-title/extended-title.component';
 import { ExtendedVariantsComponent } from './constructor/design/form-extended/extended-variants/extended-variants.component';
-import { TimerElementComponent } from './constructor/design/timer-element/timer-element.component';
+import { TimerElementComponent } from './constructor/design/timer-element/timer-element/timer-element.component';
 import { TimerDatepickerComponent } from './constructor/design/timer-element/timer-datepicker/timer-datepicker.component';
 
 
