@@ -332,7 +332,7 @@
                   <div *ngIf="item.design.tempInterval.enable" class="timer-items_label" [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontLabelSize + 'px', 'font-family': item.design.fontLabel.fontFamily, 'color': item.design.colorIntervalName}">{{item.design.tempInterval.hText}}</div>
                 </div>
 
-                <div class="timer-items_item" ng-if="isTimerTypeShown(item, 'm')">
+                <div class="timer-items_item" *ngIf="isTimerTypeShown(item, 'm')">
                   <div class="timer-items_item-bgs-wrapper" >
                     <div class="timer-items_item-bgs" [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontNumberSize + 'px', 'font-family': item.design.font.fontFamily, 'color': item.design.colorText}">
                       <div class="timer-item-block" [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}">
