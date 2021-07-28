@@ -739,6 +739,9 @@
 			"done": ""
 		},
 		"table": {
+			"filter": {
+				"search": ""
+			},
 			"onPage": ""
 		},
 		"tariff": {
@@ -900,6 +903,9 @@
 				"colorDivider": "",
 				"colorIntervalName": "",
 				"colorText": "",
+				"font": {
+					"choose": ""
+				},
 				"fontLabel": "",
 				"fontNumber": "",
 				"nullData": {

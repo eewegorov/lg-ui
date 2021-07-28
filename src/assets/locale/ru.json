@@ -767,6 +767,9 @@
 			"title": "Сохранить сайт"
 		},
 		"table": {
+			"filter": {
+				"search": "Поиск"
+			},
 			"onPage": "На странице:"
 		},
 		"tariff": {
@@ -930,6 +933,9 @@
 				"colorDivider": "Цвет разделителя:",
 				"colorIntervalName": "Цвет названия интервала:",
 				"colorText": "Цвет цифр:",
+				"font": {
+					"choose": "Выберите шрифт"
+				},
 				"fontLabel": "Шрифт названий интервалов",
 				"fontNumber": "Шрифт цифр таймера",
 				"nullData": {
