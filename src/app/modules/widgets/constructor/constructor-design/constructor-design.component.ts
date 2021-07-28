@@ -392,6 +392,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     let counterNewSplit = 0;
     let counterNewIframe = 0;
     let counterNewCoupon = 0;
+    let counterNewTimer = 0;
 
     for (const item of this.widget.guiprops.elementsList) {
       if (item.name) {
@@ -428,6 +429,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         if (item.name === 'coupon-element') {
           counterNewCoupon++;
           item.counter = counterNewCoupon;
+        }
+
+        if (item.name === 'timer-element') {
+          counterNewTimer++;
+          item.counter = counterNewTimer;
         }
       }
     }

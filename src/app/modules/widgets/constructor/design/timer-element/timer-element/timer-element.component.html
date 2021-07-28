@@ -1,15 +1,13 @@
 <div class="border-item timer-template-wrapper">
   <div>
-    <div class="col-lg-12">
-      <h4 class="h4-element-title">
-        {{ 'widgets.timerDirective.title' | translate }} &#35;{{ item.counter }} <a
-        (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
-      </h4>
-    </div>
+    <h4 class="h4-element-title mb-0">
+      {{ 'widgets.timerDirective.title' | translate }} &#35;{{ item.counter }} <a
+      (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
+    </h4>
     <div class="clearfix"></div>
 
     <!-- SETTINGS -->
-    <div class="col-lg-12 mt-1 mb-1">
+    <div class="mb-1">
       <h4 class="h4-text-tit control-label-des helper-title-3level">{{ 'widgets.timerDirective.settings.title' | translate }}</h4>
     </div>
 

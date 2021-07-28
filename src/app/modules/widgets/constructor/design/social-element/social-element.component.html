@@ -1,184 +1,254 @@
 <div class="border-item">
   <div>
-    <div class="col-lg-12">
-      <h4 class="h4-element-title">
-        Социальные кнопки <a (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
-      </h4>
-    </div>
+    <h4 class="h4-element-title">
+      Социальные кнопки <a (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
+    </h4>
     <div class="clearfix"></div>
-    <div class="row row-subitem pt-1">
+    <div class="row row-subitem">
       <div class="col-sm-12 row-subitem-padding mb-1">
         <span class="input-down-sm-lab control-label-des">Выберите сервисы, которые вы хотите использовать</span>
       </div>
     </div>
     <div class="row row-subitem pt-1 social-block-choose">
       <div class="col-sm-4 row-subitem-padding">
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].vkontakte === 'vkontakte'"
-            (change)="setSocialBtn(widget.guiprops['social'].vkontakte, 'vkontakte')"
-          />
-          Vkontakte
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].facebook === 'facebook'"
-            (change)="setSocialBtn(widget.guiprops['social'].facebook, 'facebook')"
-          />
-          Facebook
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].googleplus === 'googleplus'"
-            (change)="setSocialBtn(widget.guiprops['social'].googleplus, 'googleplus')"
-          />
-          Google plus
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].digg === 'digg'"
-            (change)="setSocialBtn(widget.guiprops['social'].digg, 'digg')"
-          />
-          Digg
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].pinterest === 'pinterest'"
-            (change)="setSocialBtn(widget.guiprops['social'].pinterest, 'pinterest')"
-          />
-          Pinterest
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].tumblr === 'tumblr'"
-            (change)="setSocialBtn(widget.guiprops['social'].tumblr, 'tumblr')"
-          />
-          Tumblr
-        </label>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].vkontakte === 'vkontakte'"
+              (change)="setSocialBtn(widget.guiprops['social'].vkontakte, 'vkontakte')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Vkontakte</span>
+          </label>
+
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].facebook === 'facebook'"
+              (change)="setSocialBtn(widget.guiprops['social'].facebook, 'facebook')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Facebook</span>
+          </label>
+
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].googleplus === 'googleplus'"
+              (change)="setSocialBtn(widget.guiprops['social'].googleplus, 'googleplus')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Google plus</span>
+          </label>
+
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].digg === 'digg'"
+              (change)="setSocialBtn(widget.guiprops['social'].digg, 'digg')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Digg</span>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].pinterest === 'pinterest'"
+              (change)="setSocialBtn(widget.guiprops['social'].pinterest, 'pinterest')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Pinterest</span>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].tumblr === 'tumblr'"
+              (change)="setSocialBtn(widget.guiprops['social'].tumblr, 'tumblr')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Tumblr</span>
+          </label>
+        </div>
       </div>
       <div class="col-sm-4 row-subitem-padding">
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].twitter === 'twitter'"
-            (change)="setSocialBtn(widget.guiprops['social'].twitter, 'twitter')"
-          />
-          Twitter
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].mail === 'mail'"
-            (change)="setSocialBtn(widget.guiprops['social'].mail, 'mail')"
-          />
-          Mail
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].buffer === 'buffer'"
-            (change)="setSocialBtn(widget.guiprops['social'].buffer, 'buffer')"
-          />
-          Buffer
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].pocket === 'pocket'"
-            (change)="setSocialBtn(widget.guiprops['social'].pocket, 'pocket')"
-          />
-          Pocket
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].xing === 'xing'"
-            (change)="setSocialBtn(widget.guiprops['social'].xing, 'xing')"
-          />
-          Xing
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].print === 'print'"
-            (change)="setSocialBtn(widget.guiprops['social'].print, 'print')"
-          />
-          Print
-        </label>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].twitter === 'twitter'"
+              (change)="setSocialBtn(widget.guiprops['social'].twitter, 'twitter')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Twitter</span>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].mail === 'mail'"
+              (change)="setSocialBtn(widget.guiprops['social'].mail, 'mail')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Mail</span>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].buffer === 'buffer'"
+              (change)="setSocialBtn(widget.guiprops['social'].buffer, 'buffer')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Buffer</span>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].pocket === 'pocket'"
+              (change)="setSocialBtn(widget.guiprops['social'].pocket, 'pocket')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Pocket</span>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].xing === 'xing'"
+              (change)="setSocialBtn(widget.guiprops['social'].xing, 'xing')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Xing</span>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].print === 'print'"
+              (change)="setSocialBtn(widget.guiprops['social'].print, 'print')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Print</span>
+          </label>
+        </div>
       </div>
       <div class="col-sm-4 row-subitem-padding">
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].linkedin === 'linkedin'"
-            (change)="setSocialBtn(widget.guiprops['social'].linkedin, 'linkedin')"
-          />
-          Linkedin
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].reddit === 'reddit'"
-            (change)="setSocialBtn(widget.guiprops['social'].reddit, 'reddit')"
-          />
-          Reddit
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].stumbleupon === 'stumbleupon'"
-            (change)="setSocialBtn(widget.guiprops['social'].stumbleupon, 'stumbleupon')"
-          />
-          Stumbleupon
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].odnoklassniki === 'odnoklassniki'"
-            (change)="setSocialBtn(widget.guiprops['social'].odnoklassniki, 'odnoklassniki')"
-          />
-          Odnoklassniki
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].blogger === 'blogger'"
-            (change)="setSocialBtn(widget.guiprops['social'].blogger, 'blogger')"
-          />
-          Blogger
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            class="checkbox-green-btn"
-            [checked]="widget.guiprops['social'].yummly === 'yummly'"
-            (change)="setSocialBtn(widget.guiprops['social'].yummly, 'yummly')"
-          />
-          Yummly
-        </label>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].linkedin === 'linkedin'"
+              (change)="setSocialBtn(widget.guiprops['social'].linkedin, 'linkedin')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Linkedin</span>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].reddit === 'reddit'"
+              (change)="setSocialBtn(widget.guiprops['social'].reddit, 'reddit')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Reddit</span>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].stumbleupon === 'stumbleupon'"
+              (change)="setSocialBtn(widget.guiprops['social'].stumbleupon, 'stumbleupon')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Stumbleupon</span>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].odnoklassniki === 'odnoklassniki'"
+              (change)="setSocialBtn(widget.guiprops['social'].odnoklassniki, 'odnoklassniki')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Odnoklassniki</span>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].blogger === 'blogger'"
+              (change)="setSocialBtn(widget.guiprops['social'].blogger, 'blogger')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Blogger</span>
+          </label>
+        </div>
+
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [checked]="widget.guiprops['social'].yummly === 'yummly'"
+              (change)="setSocialBtn(widget.guiprops['social'].yummly, 'yummly')"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+            <span class="ml-1">Yummly</span>
+          </label>
+        </div>
       </div>
     </div>
 
@@ -211,7 +281,7 @@
       </div>
     </div>
 
-    <div class="row row-subitem pt-1 mt-2">
+    <div class="row row-subitem pt-1 mt-1">
       <div class="col-sm-12 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Выравнивание:</label>
         <div class="dropdown">
@@ -221,7 +291,7 @@
           </button>
           <ul role="menu" class="dropdown-menu">
             <li role="presentation" *ngFor="let itemVisual of floatBtn" (click)="widget.guiprops['social'].position = itemVisual">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
             </li>
           </ul>
         </div>
@@ -235,7 +305,7 @@
     </div>
     <div class="row row-subitem">
       <div class="col-sm-6 row-subitem-padding">
-        <div class="form-group widget-selector">
+        <div class="form-group widget-selector mb-0">
           <label>
             <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops['social'].linkForShare" value="site">
             Текущей страницей
@@ -243,7 +313,7 @@
         </div>
       </div>
       <div class="col-sm-6 row-subitem-padding">
-        <div class="form-group widget-selector">
+        <div class="form-group widget-selector mb-0">
           <label>
             <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops['social'].linkForShare" value="own">
             Указать URL
