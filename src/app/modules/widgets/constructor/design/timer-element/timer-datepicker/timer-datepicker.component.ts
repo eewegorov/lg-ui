@@ -11,7 +11,7 @@ export class TimerDatepickerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    ($('body').find('.timer-datepicker-block') as any).datepicker('destroy');
+    ($ as any).datetimepicker.setLocale('ru');
     setTimeout(() => {
       this.enableDatePicker($('body').find('.timer-datepicker-block'));
     }, 500);
@@ -19,16 +19,18 @@ export class TimerDatepickerComponent implements OnInit {
 
   private enableDatePicker(jqItem) {
     jqItem.datetimepicker({
-      date: this.item.date,
+      value: this.item.date,
       useCurrent: true,
       allowInputToggle: true,
       format: 'D MMMM YYYY HH:mm',
       locale: 'ru',
+      lang: 'ru',
       minDate: new Date(),
       maxDate: this.addDays(new Date(), 99),
-      widgetPositioning: {vertical: 'bottom'}
-    }).on('dp.change', e => {
-      this.item.date = e.date._d;
+      widgetPositioning: {vertical: 'bottom'},
+      onSelectDate: e => {
+        this.item.date = e.date._d;
+      }
     });
   }
 

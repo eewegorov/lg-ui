@@ -761,3 +761,9 @@ textarea.textar-iframe {
 .element-coupon-wr:hover .element-coupon-name {
   margin-top: -2em;
 }
+
+.flex-bl-for-radio-group {
+  display: flex;
+  justify-content: flex-start;
+  padding-right: 15px;
+}

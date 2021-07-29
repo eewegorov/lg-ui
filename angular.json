@@ -36,6 +36,7 @@
               "node_modules/animate.css/animate.min.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/summernote/dist/summernote-lite.min.css",
+              "node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css",
               "src/assets/plugins/fontselect/jquery.fontselect.css",
               "src/styles.scss"
             ],
@@ -46,6 +47,7 @@
               "node_modules/metismenu/dist/metisMenu.min.js",
               "node_modules/icheck/icheck.min.js",
               "node_modules/summernote/dist/summernote-lite.min.js",
+              "node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.js",
               "src/assets/plugins/fontselect/jquery.fontselect.min.js"
             ],
             "allowedCommonJsDependencies": [

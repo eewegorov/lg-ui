@@ -54,11 +54,11 @@ export class TimerElementComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.item) {
-      if (changes.item.currentValue.design.font.name !== changes.item.previousValue.design.font.name) {
-        $('#font-picker-number-timer' + this.index).trigger('setFont', changes.item.currentValue.design.font.name.design.font.name);
+      if (changes.item.currentValue?.design.font.name !== changes.item.previousValue?.design.font.name) {
+        $('#font-picker-number-timer' + this.index).trigger('setFont', changes.item.currentValue.design.font.name);
       }
 
-      if (changes.item.currentValue.design.fontLabel.name !== changes.item.previousValue.design.fontLabel.name) {
+      if (changes.item.currentValue?.design.fontLabel.name !== changes.item.previousValue?.design.fontLabel.name) {
         $('#font-picker-label-timer' + this.index).trigger('setFont', changes.item.currentValue.design.fontLabel.name);
       }
     }
