@@ -1,10 +1,17 @@
 <div class="timer-datepicker">
   <div class="form-group">
-    <div class='input-group date timer-datepicker-block'>
-      <input type='text' class="form-control"/>
-      <span class="input-group-addon">
-        <span class="fa fa-calendar"></span>
-      </span>
+    <div class="input-group date timer-datepicker-block" id="datetimepicker" data-target-input="nearest" NgTempusdominusBootstrap>
+      <input
+        data-target="#datetimepicker"
+        [(ngModel)]="value"
+        (ngModelChange)="update()"
+        [options]="options"
+        NgTempusdominusBootstrapInput
+        type="text" class="form-control datetimepicker-input"
+      />
+      <div class="input-group-append" NgTempusdominusBootstrapToggle>
+        <div class="input-group-text" data-target="#datetimepicker"><i class="fa fa-calendar"></i></div>
+      </div>
     </div>
   </div>
 </div>

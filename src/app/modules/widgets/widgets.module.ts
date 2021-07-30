@@ -13,6 +13,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { SortablejsModule } from 'ngx-sortablejs';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { NgTempusdominusBootstrapModule } from 'ngx-tempusdominus-bootstrap';
 import { SharedModule } from '../../shared/shared.module';
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { WidgetsListComponent } from './widgets-list/widgets-list.component';
@@ -158,7 +159,8 @@ import { TimerDatepickerComponent } from './constructor/design/timer-element/tim
     NgxSliderModule,
     SortablejsModule,
     NgxSummernoteModule,
-    AngularEditorModule
+    AngularEditorModule,
+    NgTempusdominusBootstrapModule
   ]
 })
 export class WidgetsModule { }
