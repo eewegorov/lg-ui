@@ -265,7 +265,13 @@
                   </div>
 
                   <div *ngIf="item.name === 'form-ext-element'">
-                    <app-form-extended></app-form-extended>
+                    <app-form-extended
+                      [index]="i"
+                      [widget]="widget"
+                      [coupons]="coupons"
+                      [placePopup]="placePopup"
+                      (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
+                    ></app-form-extended>
                   </div>
                 </div>
                 <div>

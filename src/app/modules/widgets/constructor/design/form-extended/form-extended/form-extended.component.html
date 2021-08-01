@@ -1,7 +1,11 @@
 <div class="border-item">
   <div>
     <div class="col-lg-12">
-      <h4 class="h4-element-title">{{ 'widgets.formExt.leftBlock.title' | translate }} <a (click)="removeElementFromElementsList(index, item)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a></h4>
+      <h4 class="h4-element-title">
+        {{ 'widgets.formExt.leftBlock.title' | translate }} <a
+        (click)="removeElementFromElementsList(index, {name: 'form-ext-element'})"
+        href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
+      </h4>
     </div>
   </div>
   <div class="clearfix"></div>
@@ -19,10 +23,18 @@
           <i class="fa fa-bars"></i>
         </div>
         <div class="form-ext-item__header-r">
-          <div class="form-ext-item__header-delete" (click)="removeElementFromFormExtList(innerIndex, extItem)" *ngIf="!((innerIndex === 0) && (widget.guiprops.formExt.model.list.length === 1))">
-            <i class="fa fa-trash-o"></i>
+          <div
+            *ngIf="!((innerIndex === 0) && (widget.guiprops.formExt.model.list.length === 1))"
+            class="form-ext-item__header-delete"
+            (click)="removeElementFromFormExtList($event, innerIndex)"
+          >
+            <i class="far fa-trash-alt"></i>
           </div>
-          <div class="form-ext-item__header-clone" (click)="cloneElementFromFormExtList($event, innerIndex, extItem)" *ngIf="!isUnclonable(extItem.type)">
+          <div
+            *ngIf="!isUnclonable(extItem.type)"
+            class="form-ext-item__header-clone"
+            (click)="cloneElementFromFormExtList($event, innerIndex, extItem)"
+          >
             <i class="fa fa-copy"></i>
           </div>
           <div class="form-ext-item__header-collapse form-ext-item__header-collapse-opened" (click)="toggleItem($event, innerIndex)">
@@ -34,43 +46,43 @@
         </div>
       </div>
       <div class="form-ext-item__body">
-        <div *ngIf="item.type === 'email'">
+        <div *ngIf="extItem.type === 'email'">
           <app-extended-email [item]="extItem" [index]="innerIndex"></app-extended-email>
         </div>
-        <div *ngIf="item.type === 'name'">
+        <div *ngIf="extItem.type === 'name'">
           <app-extended-name [item]="extItem" [index]="innerIndex"></app-extended-name>
         </div>
-        <div *ngIf="item.type === 'message'">
+        <div *ngIf="extItem.type === 'message'">
           <app-extended-message [item]="extItem" [index]="innerIndex"></app-extended-message>
         </div>
-        <div *ngIf="item.type === 'phone'">
+        <div *ngIf="extItem.type === 'phone'">
           <app-extended-phone [item]="extItem" [index]="innerIndex"></app-extended-phone>
         </div>
-        <div *ngIf="item.type === 'text'">
+        <div *ngIf="extItem.type === 'text'">
           <app-extended-text [item]="extItem" [index]="innerIndex"></app-extended-text>
         </div>
-        <div *ngIf="item.type === 'rating'">
+        <div *ngIf="extItem.type === 'rating'">
           <app-extended-rating [item]="extItem" [index]="innerIndex"></app-extended-rating>
         </div>
-        <div *ngIf="item.type === 'variants'">
+        <div *ngIf="extItem.type === 'variants'">
           <app-extended-variants [item]="extItem" [index]="innerIndex"></app-extended-variants>
         </div>
-        <div *ngIf="item.type === 'dd'">
+        <div *ngIf="extItem.type === 'dd'">
           <app-extended-dd [item]="extItem" [index]="innerIndex"></app-extended-dd>
         </div>
-        <div *ngIf="item.type === 'date'">
+        <div *ngIf="extItem.type === 'date'">
           <app-extended-date [item]="extItem" [index]="innerIndex"></app-extended-date>
         </div>
-        <div *ngIf="item.type === 'title'">
+        <div *ngIf="extItem.type === 'title'">
           <app-extended-title [item]="extItem" [index]="innerIndex"></app-extended-title>
         </div>
-        <div *ngIf="item.type === 'term'">
+        <div *ngIf="extItem.type === 'term'">
           <app-extended-term [item]="extItem" [index]="innerIndex"></app-extended-term>
         </div>
-        <div *ngIf="item.type === 'button'">
+        <div *ngIf="extItem.type === 'button'">
           <app-extended-button [item]="extItem" [containerId]="widget.containerId" [index]="innerIndex"></app-extended-button>
         </div>
-        <div *ngIf="item.type === 'hidden'">
+        <div *ngIf="extItem.type === 'hidden'">
           <app-extended-hidden [item]="extItem" [index]="innerIndex"></app-extended-hidden>
         </div>
       </div>

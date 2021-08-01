@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
@@ -12,6 +12,8 @@ import { WidgetApiService } from './widget-api.service';
   providedIn: 'root'
 })
 export class WidgetConstructorService {
+  public arrayOfUsedItems = [];
+  public changeArrayOfFormExtTypes = new Subject();
 
   constructor(
     private translate: TranslateService,
@@ -33,6 +35,48 @@ export class WidgetConstructorService {
       map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
     );
+  }
+
+  public setArrayOfUsedItems(items) {
+    this.arrayOfUsedItems = items;
+
+    setTimeout(() => {
+      this.changeArrayOfFormExtTypes.next();
+    }, 500);
+  }
+
+  public isThatElementUnclonable(type) {
+    return !this.getAvailableTypes().some((_) => {
+      return _.type === type;
+    });
+  }
+
+  public getAvailableTypes() {
+    return this.getItemFormTypes().filter((_) => {
+      return ((_.type !== 'email') &&
+        (_.type !== 'name') &&
+        (_.type !== 'phone') &&
+        (_.type !== 'message') &&
+        (_.type !== 'term')) ||
+        (_.type === 'email' && !this.isFormExtListAlreadyHas(_.type)) ||
+        (_.type === 'name' && !this.isFormExtListAlreadyHas(_.type)) ||
+        (_.type === 'phone' && !this.isFormExtListAlreadyHas(_.type)) ||
+        (_.type === 'message' && !this.isFormExtListAlreadyHas(_.type)) ||
+        (_.type === 'term' && !this.isFormExtListAlreadyHas(_.type));
+    });
+  }
+
+  public getExtFormWidthTypes() {
+    return [
+      {
+        type: 0,
+        label: this.translate.instant('widgets.formExt.widthField2')
+      },
+      {
+        type: 1,
+        label: this.translate.instant('widgets.formExt.widthField3')
+      }
+    ];
   }
 
   public getDefaultFormExtMainSettings() {
@@ -185,6 +229,154 @@ export class WidgetConstructorService {
 
   private isItemSendFormIfAction(item) {
     return (item.type === 'dd' || item.type === 'variants' || item.type === 'rating') && item.sendFormIfAction;
+  }
+
+  public getExtFormDateTypes() {
+    return [
+      {
+        type: 0,
+        label: this.translate.instant('widgets.formExt.date.type2'),
+        value: 'dd/mm/yyyy'
+      },
+      {
+        type: 1,
+        label: this.translate.instant('widgets.formExt.date.type3'),
+        value: 'yyyy/mm/dd'
+      },
+      {
+        type: 2,
+        label: this.translate.instant('widgets.formExt.date.type4'),
+        value: 'mm/dd/yyyy'
+      }
+    ];
+  }
+
+  public getExtFormButtonBType() {
+    return [
+      {
+        type: 0,
+        label: this.translate.instant('widgets.formExt.button.bType1')
+      },
+      {
+        type: 1,
+        label: this.translate.instant('widgets.formExt.button.bType2')
+      },
+      {
+        type: 2,
+        label: this.translate.instant('widgets.formExt.button.bType3')
+      }
+    ];
+  }
+
+  public getExtFormButtonWidthType() {
+    return [
+      {
+        type: 0,
+        label: this.translate.instant('widgets.formExt.mainSettings.buttonSettings.width1')
+      },
+      {
+        type: 1,
+        label: this.translate.instant('widgets.formExt.mainSettings.buttonSettings.width2')
+      },
+      {
+        type: 2,
+        label: this.translate.instant('"widgets.formExt.mainSettings.buttonSettings.width3')
+      }
+    ];
+  }
+
+  public getExtFormBtnRedirectTypes() {
+    return [
+      {
+        type: 0,
+        label: this.translate.instant('widgets.formExt.mainSettings.buttonSettings.redirect.action1')
+      },
+      {
+        type: 1,
+        label: this.translate.instant('widgets.formExt.mainSettings.buttonSettings.redirect.action2')
+      },
+      {
+        type: 2,
+        label: this.translate.instant('widgets.formExt.mainSettings.buttonSettings.redirect.action3')
+      },
+      {
+        type: 3,
+        label: this.translate.instant('widgets.formExt.mainSettings.buttonSettings.redirect.action4')
+      }
+    ];
+  }
+
+  public getExtFormHiddenFieldType() {
+    return [
+      {
+        type: 'utm_source',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType1')
+      },
+      {
+        type: 'utm_medium',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType2')
+      },
+      {
+        type: 'utm_campaign',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType3')
+      },
+      {
+        type: 'utm_term',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType4')
+      },
+      {
+        type: 'utm_content',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType5')
+      },
+      {
+        type: 'referrer',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType6')
+      },
+      {
+        type: 'page_url',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType7')
+      },
+      {
+        type: 'custom_parameter',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType8')
+      },
+      {
+        type: 'browser_language',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType9')
+      },
+      {
+        type: 'device_type',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType10')
+      },
+      {
+        type: 'device_os',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType11')
+      },
+      {
+        type: 'timezone',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType12')
+      },
+      {
+        type: 'coupon',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType13')
+      },
+      {
+        type: 'session_number',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType14')
+      },
+      {
+        type: 'pageviews',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType15')
+      },
+      {
+        type: 'cookie',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType16')
+      },
+      {
+        type: 'user_value',
+        label: this.translate.instant('widgets.formExt.hidden.fieldType17')
+      }
+    ];
   }
 
   public getGoogleFontListPicker() {
@@ -469,7 +661,7 @@ export class WidgetConstructorService {
     ];
   }
 
-  getTimerCountdownTypes() {
+  private getTimerCountdownTypes() {
     return [
       {
         type: 0,
@@ -482,7 +674,7 @@ export class WidgetConstructorService {
     ];
   }
 
-  getTimerExpTypes() {
+  private getTimerExpTypes() {
     return [
       {
         type: 0,
@@ -499,7 +691,7 @@ export class WidgetConstructorService {
     ];
   }
 
-  getTimerAlignTypes() {
+  private getTimerAlignTypes() {
     return [
       {
         type: 0,
@@ -514,5 +706,259 @@ export class WidgetConstructorService {
         label: this.translate.instant('widgets.timerDirective.design.align.type2')
       }
     ];
+  }
+
+  private getItemFormTypes() {
+    return [
+      {
+        type: 'email',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typeEmail'),
+        placeholder: this.translate.instant('widgets.formExt.email.placeholder2'),
+        service: this.translate.instant('widgets.formExt.email.service2'),
+        idField: 'email',
+        useOutsideCRM: true,
+        widthValue: 50,
+        widthType: this.getExtFormWidthTypes()[0],
+        required: false,
+        newLine: false
+      },
+      {
+        type: 'name',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typeName'),
+        placeholder: this.translate.instant('widgets.formExt.name.placeholder2'),
+        service: this.translate.instant('widgets.formExt.name.service2'),
+        idField: 'name',
+        useOutsideCRM: true,
+        widthValue: 50,
+        widthType: this.getExtFormWidthTypes()[0],
+        required: false,
+        newLine: false
+      },
+      {
+        type: 'message',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typeMessage'),
+        placeholder: this.translate.instant('widgets.formExt.message.placeholder2'),
+        service: this.translate.instant('widgets.formExt.message.service2'),
+        idField: 'message',
+        useOutsideCRM: true,
+        widthValue: 50,
+        widthType: this.getExtFormWidthTypes()[0],
+        required: false,
+        newLine: false
+      },
+      {
+        type: 'phone',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typePhone'),
+        placeholder: this.translate.instant('widgets.formExt.phone.placeholder2'),
+        service: this.translate.instant('widgets.formExt.phone.service2'),
+        idField: 'phone',
+        useOutsideCRM: true,
+        widthValue: 50,
+        widthType: this.getExtFormWidthTypes()[0],
+        required: false,
+        newLine: false,
+        mask: {
+          enable: false,
+          value: '+7 (***) ***-**-**'
+        }
+      },
+      {
+        type: 'text',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typeText'),
+        placeholder: this.translate.instant('widgets.formExt.text.placeholder2'),
+        service: this.translate.instant('widgets.formExt.text.service2'),
+        idField: 'field_id_',
+        id: this.utilsService.generateShortID(),
+        useOutsideCRM: true,
+        widthValue: 50,
+        widthType: this.getExtFormWidthTypes()[0],
+        required: false,
+        newLine: false,
+        multiLine: false
+      },
+      {
+        type: 'rating',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typeRating'),
+        service: this.translate.instant('widgets.formExt.rating.service2'),
+        idField: 'field_id_',
+        id: this.utilsService.generateShortID(),
+        useOutsideCRM: true,
+        widthValue: 50,
+        widthType: this.getExtFormWidthTypes()[0],
+        required: false,
+        newLine: false,
+        sendFormIfAction: false,
+        numberOfStars: 5,
+        colorInactive: '#ccc',
+        colorActive: '#ff0000',
+        serviceData: {
+          starClicked: false,
+          cacheWidth: '0%'
+        }
+      },
+      {
+        type: 'variants',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typeVariants'),
+        service: this.translate.instant('widgets.formExt.variants.service2'),
+        idField: 'field_id_',
+        id: this.utilsService.generateShortID(),
+        useOutsideCRM: true,
+        widthValue: 50,
+        widthType: this.getExtFormWidthTypes()[0],
+        required: false,
+        newLine: false,
+        everyNewLine: false,
+        multiEnable: false,
+        sendFormIfAction: false,
+        variants: ['Variant 1', 'Variant 2'],
+        font: this.getSystemFontList()[0],
+        fontType: 'systemFont',
+        fontName: '',
+        fontSize: 17,
+        colorText: '#000000'
+      },
+      {
+        type: 'dd',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typeDropdown'),
+        placeholder: this.translate.instant('widgets.formExt.dropdown.placeholder2'),
+        service: this.translate.instant('widgets.formExt.dropdown.service2'),
+        idField: 'field_id_',
+        id: this.utilsService.generateShortID(),
+        useOutsideCRM: true,
+        widthValue: 50,
+        widthType: this.getExtFormWidthTypes()[0],
+        required: false,
+        newLine: false,
+        sendFormIfAction: false,
+        serviceData: {
+          isOpen: false,
+          extraLabel: null
+        },
+        variants: ['Variant 1', 'Variant 2']
+      },
+      {
+        type: 'date',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typeDate'),
+        placeholder: this.translate.instant('widgets.formExt.date.placeholder2'),
+        service: this.translate.instant('widgets.formExt.date.service2'),
+        idField: 'field_id_',
+        id: this.utilsService.generateShortID(),
+        useOutsideCRM: true,
+        widthValue: 50,
+        widthType: this.getExtFormWidthTypes()[0],
+        required: false,
+        newLine: false,
+        dateType: this.getExtFormDateTypes()[1]
+      },
+      {
+        type: 'title',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typeTitle'),
+        placeholder: this.translate.instant('widgets.formExt.title.placeholder2'),
+        widthValue: 50,
+        widthType: this.getExtFormWidthTypes()[0],
+        newLine: false,
+        textSummer: '<p>Текст или заголовок (нажмите, чтобы изменить)</p>',
+        font: this.getSystemFontList()[0],
+        fontType: 'systemFont',
+        fontName: '',
+        fontSize: 12,
+        textShadow: {
+          enable: false,
+          color: '#262626',
+          opacity: '1',
+          rgbaColor: (this.hexToRgb('#262626', 1)).toString(),
+          horiz: 0,
+          vertical: 0,
+          blur: 0
+        }
+      },
+      {
+        type: 'term',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typeTerm'),
+        placeholder: this.translate.instant('widgets.formExt.term.placeholder2'),
+        widthValue: 50,
+        widthType: this.getExtFormWidthTypes()[0],
+        newLine: false,
+        required: false,
+        checked: false,
+        textSummer: '<p>Я согласен с условиями</p>',
+        font: this.getSystemFontList()[0],
+        fontType: 'systemFont',
+        fontName: '',
+        fontSize: 18,
+        textShadow: {
+          enable: false,
+          color: '#262626',
+          opacity: '1',
+          rgbaColor: (this.hexToRgb('#262626', 1)).toString(),
+          horiz: 0,
+          vertical: 0,
+          blur: 0
+        }
+      },
+      {
+        type: 'button',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typeButton'),
+        bType: this.getExtFormButtonBType()[0],
+        btnWidthType: this.getExtFormButtonWidthType()[0],
+        widthValue: 50,
+        widthType: this.getExtFormWidthTypes()[0],
+        newLine: false,
+        textSummer: '<span>Отправить</span>',
+        font: this.getSystemFontList()[0],
+        fontType: 'systemFont',
+        fontName: '',
+        fontSize: 20,
+        colorBtn: '#000000',
+        colorTextBtn: '#FFFFFF',
+        borderRadiusBtn: 0,
+        styleType: 'Default',
+        redirect: {
+          type: this.getExtFormBtnRedirectTypes()[0],
+          url: '',
+          blank: false
+        },
+        icon: {
+          enable: false,
+          color: '#FFFFFF',
+          selectedIcon: 'fa fa-fw fa-heart'
+        },
+        targetAction: false
+      },
+      {
+        type: 'hidden',
+        isTabOpened: true,
+        label: this.translate.instant('widgets.formExt.typeHidden'),
+        placeholder: this.translate.instant('widgets.formExt.text.placeholder2'),
+        utmRefPage: {
+          currentPage: true
+        },
+        service: this.getExtFormHiddenFieldType()[0].label,
+        idField: 'field_id_',
+        id: this.utilsService.generateShortID(),
+        fieldType: this.getExtFormHiddenFieldType()[0],
+        customParamValue: '',
+        cookieValue: '',
+        customUserValue: ''
+      }
+    ];
+  }
+
+  private isFormExtListAlreadyHas(type) {
+    return this.arrayOfUsedItems.some((item) => {
+      return item.type === type;
+    });
   }
 }
