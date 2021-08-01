@@ -1,12 +1,12 @@
 <div>
   <div class="row row-subitem">
     <div class="col-sm-12 row-subitem-padding padding-top-5">
-      <div class="item-placeholder-name">{{item.bType.label}}</div>
+      <div class="item-placeholder-name">{{ item.bType.label }}</div>
     </div>
   </div>
   <div class="row row-subitem">
     <div class="col-sm-12 row-subitem-padding padding-top-5">
-      <div class="item-placeholder-type">{{item.label}}</div>
+      <div class="item-placeholder-type">{{ item.label }}</div>
     </div>
   </div>
 
@@ -16,11 +16,17 @@
         <label class="control-label control-label-des">{{ 'widgets.formExt.choseTypeOfItem' | translate }}:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{item.label}}
+            {{ item.label }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="changeFormType(itemForm.type)" ng-repeat="itemForm in availItemTypes"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemForm.label}}</a></li>
+            <li
+              role="presentation"
+              *ngFor="let itemForm of availItemTypes"
+              (click)="changeFormType(itemForm.type)"
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemForm.label }}</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -31,22 +37,29 @@
         <label class="control-label control-label-des">{{ 'widgets.formExt.button.bType.label' | translate }}:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{item.bType.label}}
+            {{ item.bType.label }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="item.bType = itemBType" ng-repeat="itemBType in bTypes"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemBType.label}}</a></li>
+            <li role="presentation" (click)="item.bType = itemBType" *ngFor="let itemBType of bTypes">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemBType.label }}</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
 
     <!-- ICON SETTINGS -->
-    <div ng-show="item.bType.type === 1 || item.bType.type === 2">
+    <div *ngIf="item.bType.type === 1 || item.bType.type === 2">
       <div class="row row-subitem m-t-sm">
         <div class="col-sm-6 row-subitem-padding padding-top-5">
           <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.button.icon.color' | translate }}:</label>
-          <color-picker ng-model="item.icon.color" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+          <input
+            [(colorPicker)]="item.icon.color"
+            [style.background]="item.icon.color"
+            [cpAlphaChannel]="'disabled'"
+            [cpOutputFormat]="'hex'"
+          />
         </div>
       </div>
 
@@ -57,10 +70,15 @@
         <div class="col-sm-12 row-subitem-padding">
           <div class="btn-group">
             <button type="button" class="btn btn-primary iconpicker-component">
-              <i class="{{item.icon.selectedIcon}}"></i>
+              <i class="{{ item.icon.selectedIcon }}"></i>
             </button>
-            <button type="button" ng-attr-id="icon-picker-ext-form{{index}}" class="icp icp-dd btn btn-primary dropdown-toggle"
-                    data-selected="fa-car" data-toggle="dropdown">
+            <button
+              type="button"
+              [id]="'icon-picker-ext-form' + index"
+              class="icp icp-dd btn btn-primary dropdown-toggle"
+              data-selected="fa-car"
+              data-toggle="dropdown"
+            >
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
@@ -68,9 +86,9 @@
           </div>
         </div>
       </div>
-      <div ng-show="item.bType.type === 2" class="row row-subitem">
+      <div *ngIf="item.bType.type === 2" class="row row-subitem">
         <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
-          <input type="number" class="form-control form-control-font form-cntrl-45w" ng-model="item.fontSize">
+          <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
           <label class="control-label">px <span>{{ 'widgets.constructor.icon.iconSize' | translate }}</span></label>
         </div>
       </div>
@@ -78,18 +96,18 @@
     <!-- END ICON SETTINGS -->
 
     <!-- FONT SETTINGS -->
-    <div ng-show="item.bType.type === 0 || item.bType.type === 1">
+    <div *ngIf="item.bType.type === 0 || item.bType.type === 1">
       <div class="row row-subitem padding-top-5 m-t-sm">
         <div class="col-sm-12 row-subitem-padding">
           <h4 class="h4-text-tit control-label-des">{{ 'widgets.constructor.font.title' | translate }}:</h4>
         </div>
         <div class="col-sm-12 row-subitem-padding">
-          <input ng-attr-id="font-picker-ext-form{{index}}" type="text">
+          <input [id]="'font-picker-ext-form' + index" type="text">
         </div>
       </div>
       <div class="row row-subitem">
         <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
-          <input type="number" class="form-control form-control-font form-cntrl-45w" ng-model="item.fontSize">
+          <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
           <label class="control-label">px <span>{{ 'widgets.constructor.font.textSize' | translate }}</span></label>
         </div>
       </div>
@@ -99,11 +117,16 @@
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.buttonSettings.color' | translate }}:</label>
-        <color-picker ng-model="item.colorBtn" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+        <input
+          [(colorPicker)]="item.colorBtn"
+          [style.background]="item.colorBtn"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+        />
       </div>
       <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
         <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.buttonSettings.radiusCorner' | translate }}</label>
-        <div ui-slider min="0" max="50" step="1" use-decimals ng-model="item.borderRadiusBtn"></div>
+        <ngx-slider [(value)]="item.borderRadiusBtn" [options]="optionsRound"></ngx-slider>
       </div>
     </div>
 
@@ -116,17 +139,19 @@
       <div class="col-sm-12 row-subitem-padding padding-top-5">
         <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
           <div>
-            <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="item.widthValue">
+            <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthValue">
           </div>
 
           <div>
             <div class="dropdown">
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                {{item.widthType.label}}
+                {{ item.widthType.label }}
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" role="menu">
-                <li role="presentation" ng-click="item.widthType = itemWidth" ng-repeat="itemWidth in availWidthTypes"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemWidth.label}}</a></li>
+                <li role="presentation" *ngFor="let itemWidth of availWidthTypes" (click)="item.widthType = itemWidth">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemWidth.label }}</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -136,10 +161,17 @@
 
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <label class="non-bold">
-          <checkbox ng-model="item.newLine" class="checkbox-green-btn"></checkbox>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="item.newLine"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
           {{ 'widgets.formExt.newLineElement' | translate }}
-        </label>
+        </div>
       </div>
     </div>
 
@@ -148,14 +180,50 @@
         <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.buttonSettings.style' | translate }}:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{item.styleType}}
+            {{ item.styleType }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu dropdown-with-btn-styles" role="menu">
-            <li role="presentation" ng-click="setBtnStyle('Default', item)"><a class="btn-var-styles btn-var-styles__default" ng-style="{'font-family':item.font.fontFamily, 'background':item.colorBtn}" href="javascript:void(0)">Default</a></li>
-            <li role="presentation" ng-click="setBtnStyle('Material', item)"><a class="btn-var-styles btn-var-styles__material" ng-style="{'font-family':item.font.fontFamily, 'background':item.colorBtn}" href="javascript:void(0)">Material</a></li>
-            <li role="presentation" ng-click="setBtnStyle('Flat', item)"><a class="btn-var-styles btn-var-styles__flat" ng-style="{'font-family':item.font.fontFamily, 'background':item.colorBtn}" href="javascript:void(0)">Flat</a></li>
-            <li role="presentation" ng-click="setBtnStyle('Border Style', item)"><a class="btn-var-styles btn-var-styles__border-style" ng-style="{'font-family':item.font.fontFamily, 'border-color':item.colorBtn}" href="javascript:void(0)">Border Style</a></li>
+            <li role="presentation"
+                (click)="setBtnStyle('Default', item)">
+              <a
+                class="btn-var-styles btn-var-styles__default"
+                [ngStyle]="{'font-family':item.font.fontFamily, 'background':item.colorBtn}"
+                href="javascript:void(0)"
+              >
+                Default
+              </a>
+            </li>
+            <li role="presentation"
+                (click)="setBtnStyle('Material', item)">
+              <a
+                class="btn-var-styles btn-var-styles__material"
+                [ngStyle]="{'font-family':item.font.fontFamily, 'background':item.colorBtn}"
+                href="javascript:void(0)"
+              >
+                Material
+              </a>
+            </li>
+            <li role="presentation"
+                (click)="setBtnStyle('Flat', item)">
+              <a
+                class="btn-var-styles btn-var-styles__flat"
+                [ngStyle]="{'font-family':item.font.fontFamily, 'background':item.colorBtn}"
+                href="javascript:void(0)"
+              >
+                Flat
+              </a>
+            </li>
+            <li role="presentation"
+                (click)="setBtnStyle('Border Style', item)">
+              <a
+                class="btn-var-styles btn-var-styles__border-style"
+                [ngStyle]="{'font-family':item.font.fontFamily, 'border-color':item.colorBtn}"
+                href="javascript:void(0)"
+              >
+                Border Style
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -166,23 +234,25 @@
         <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.buttonSettings.redirect.action' | translate }}:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{item.redirect.type.label}}
+            {{ item.redirect.type.label }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="item.redirect.type = itemR" ng-repeat="itemR in redirectAvail"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemR.label}}</a></li>
+            <li role="presentation" (click)="item.redirect.type = itemR" *ngFor="let itemR of redirectAvail">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemR.label }}</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
 
-    <div ng-if="item.redirect.type.type === 1 || item.redirect.type.type === 3">
+    <div *ngIf="item.redirect.type.type === 1 || item.redirect.type.type === 3">
       <div class="row row-subitem">
         <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10 widget-name-block-rel" ng-class="(item.redirect.url === '')?'has-error':''">
           <label class="control-label">{{ 'widgets.constructor.redirect.onClickRedirect' | translate }}:</label>
-          <input type="text" class="form-control" ng-model="item.redirect.url">
+          <input type="text" class="form-control" [(ngModel)]="item.redirect.url">
           <span class="input-down-sm-lab">{{ 'widgets.constructor.redirect.example' | translate }}: http://mywebsite.com</span>
-          <a href="" ng-show="item.redirect.url" ng-click="item.redirect.url = ''" class="remove-widget-name remove-widget-redirect"></a>
+          <a href="" *ngIf="item.redirect.url" (click)="item.redirect.url = ''" class="remove-widget-name remove-widget-redirect"></a>
         </div>
       </div>
       <div class="row row-subitem">
@@ -193,15 +263,22 @@
       </div>
       <div class="row row-subitem m-t-sm">
         <div class="col-sm-12 row-subitem-padding padding-top-5">
-          <label class="non-bold">
-            <checkbox ng-model="item.redirect.blank" class="checkbox-green-btn"></checkbox>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                type="checkbox"
+                [(ngModel)]="item.redirect.blank"
+                class="form-check-input"
+              />
+              <span class="checkmark"></span>
+            </label>
             {{ 'widgets.constructor.redirect.blank' | translate }}
-          </label>
+          </div>
         </div>
       </div>
     </div>
 
-    <div ng-if="item.redirect.type.type === 2 || item.redirect.type.type === 3">
+    <div *ngIf="item.redirect.type.type === 2 || item.redirect.type.type === 3">
       <div class="row row-subitem m-t-sm">
         <div class="col-sm-12 row-subitem-padding padding-top-5">
           <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.buttonSettings.actions' | translate }}:</label>
@@ -210,10 +287,17 @@
 
       <div class="row row-subitem">
         <div class="col-sm-12 row-subitem-padding padding-top-5">
-          <label class="non-bold">
-            <checkbox ng-model="item.targetAction" class="checkbox-green-btn"></checkbox>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                type="checkbox"
+                [(ngModel)]="item.targetAction"
+                class="form-check-input"
+              />
+              <span class="checkmark"></span>
+            </label>
             {{ 'widgets.formExt.mainSettings.buttonSettings.isBtnAction' | translate }}
-          </label>
+          </div>
         </div>
       </div>
     </div>

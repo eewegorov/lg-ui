@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Options } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-extended-button',
@@ -9,6 +10,12 @@ export class ExtendedButtonComponent implements OnInit {
   @Input() public index: number;
   @Input() public containerId: string;
   @Input() public item: Record<string, any>;
+
+  public optionsRound: Options = {
+    floor: 0,
+    ceil: 50,
+    step: 1
+  };
 
   constructor() { }
 
