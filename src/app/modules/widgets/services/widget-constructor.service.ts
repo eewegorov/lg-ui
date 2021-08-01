@@ -14,6 +14,7 @@ import { WidgetApiService } from './widget-api.service';
 export class WidgetConstructorService {
   public arrayOfUsedItems = [];
   public changeArrayOfFormExtTypes = new Subject();
+  public changeItemFormType = new Subject<{type: string; index: number}>();
 
   constructor(
     private translate: TranslateService,
@@ -77,6 +78,12 @@ export class WidgetConstructorService {
         label: this.translate.instant('widgets.formExt.widthField3')
       }
     ];
+  }
+
+  public getItemFormByType(newType) {
+    return this.getItemFormTypes().find((item) => {
+      return item.type === newType;
+    });
   }
 
   public getDefaultFormExtMainSettings() {
@@ -601,7 +608,7 @@ export class WidgetConstructorService {
     return imagePlace === 'Слева' || imagePlace === 'Справа';
   }
 
-  private getExtFormMainFieldsOrientationType() {
+  public getExtFormMainFieldsOrientationType() {
     return [
       {
         type: 0,
@@ -618,7 +625,7 @@ export class WidgetConstructorService {
     ];
   }
 
-  private getExtFormVisualTypeOfField() {
+  public getExtFormVisualTypeOfField() {
     return [
       {
         type: 0,
@@ -631,7 +638,7 @@ export class WidgetConstructorService {
     ];
   }
 
-  private getExtFormMainWidthTypes() {
+  public getExtFormMainWidthTypes() {
     return [
       {
         type: 0,
@@ -644,7 +651,7 @@ export class WidgetConstructorService {
     ];
   }
 
-  private getExtFormMainWidthOrientationType() {
+  public getExtFormMainWidthOrientationType() {
     return [
       {
         type: 0,
@@ -661,7 +668,7 @@ export class WidgetConstructorService {
     ];
   }
 
-  private getTimerCountdownTypes() {
+  public getTimerCountdownTypes() {
     return [
       {
         type: 0,
@@ -674,7 +681,7 @@ export class WidgetConstructorService {
     ];
   }
 
-  private getTimerExpTypes() {
+  public getTimerExpTypes() {
     return [
       {
         type: 0,
@@ -691,7 +698,7 @@ export class WidgetConstructorService {
     ];
   }
 
-  private getTimerAlignTypes() {
+  public getTimerAlignTypes() {
     return [
       {
         type: 0,

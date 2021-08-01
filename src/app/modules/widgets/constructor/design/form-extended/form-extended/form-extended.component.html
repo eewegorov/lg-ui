@@ -17,7 +17,7 @@
         (click)="toggleItem($event, innerIndex, true)"
         (mouseover)="highlightContentOn(innerIndex, extItem.type)"
         (mouseleave)="highlightContentOff(innerIndex)"
-        data-to-ext="{{ innerIndex }}">
+        [attr.data-to-ext]="innerIndex">
       <div class="form-ext-item__header">
         <div class="form-ext-item__header-l grab-form-ext-item">
           <i class="fa fa-bars"></i>
@@ -164,44 +164,68 @@
   <div class="row row-subitem m-t-sm">
     <div class="col-sm-6 row-subitem-padding">
       <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.formField.orientation' | translate }}:</label>
-      <div class="dropdown" >
+      <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-          {{widget.guiprops.formExt.model.mainSettings.orientation.label}}
+          {{ widget.guiprops.formExt.model.mainSettings.orientation.label }}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li role="presentation" (click)="widget.guiprops.formExt.model.mainSettings.orientation = itemOrientation" *ngFor="let itemOrientation of orientationTypesOfField"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemOrientation.label}}</a></li>
+          <li
+            role="presentation"
+            *ngFor="let itemOrientation of orientationTypesOfField"
+            (click)="widget.guiprops.formExt.model.mainSettings.orientation = itemOrientation"
+          >
+            <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemOrientation.label}}</a>
+          </li>
         </ul>
       </div>
     </div>
     <div class="col-sm-6 row-subitem-padding">
       <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.visualField' | translate }}:</label>
-      <div class="dropdown" >
+      <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-          {{widget.guiprops.formExt.model.mainSettings.visual.label}}
+          {{ widget.guiprops.formExt.model.mainSettings.visual.label }}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li role="presentation" (click)="widget.guiprops.formExt.model.mainSettings.visual = itemVisual" *ngFor="let itemVisual of visualTypesOfField"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual.label}}</a></li>
+          <li
+            role="presentation"
+            *ngFor="let itemVisual of visualTypesOfField"
+            (click)="widget.guiprops.formExt.model.mainSettings.visual = itemVisual"
+          >
+            <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual.label }}</a>
+          </li>
         </ul>
       </div>
     </div>
   </div>
 
   <div class="row row-subitem m-t-md">
-    <div class="col-sm-12 row-subitem-padding padding-top-5">
-      <switch class="switch-xs" ng-model="widget.guiprops.formExt.model.mainSettings.colorPod.enable"></switch><label class="control-label switcher-label-xs control-label-des">{{ 'widgets.formExt.mainSettings.usePodBG' | translate }}</label>
+    <div class="col-sm-12 row-subitem-padding pt-1 d-flex">
+      <ui-switch
+        size="small"
+        [(ngModel)]="widget.guiprops.formExt.model.mainSettings.colorPod.enable"
+      ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">{{ 'widgets.formExt.mainSettings.usePodBG' | translate }}</label>
     </div>
   </div>
   <div *ngIf="widget.guiprops.formExt.model.mainSettings.colorPod.enable == true">
     <div class="row row-subitem">
       <div class="col-sm-6 row-subitem-padding padding-top-5">
-        <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.usePodBG.color' | translate }}:</label>
-        <color-picker ng-model="widget.guiprops.formExt.model.mainSettings.colorPod.color" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+        <label class="control-label control-label-colorpc control-label-des">
+          {{ 'widgets.formExt.mainSettings.usePodBG.color' | translate }}:
+        </label>
+        <input
+          [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.colorPod.color"
+          [style.background]="widget.guiprops.formExt.model.mainSettings.colorPod.color"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+        />
       </div>
       <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
-        <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.usePodBG.opacity' | translate }}:</label>
-        <div ui-slider min="0.00" max="1.00" step="0.1" use-decimals ng-model="widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod"></div>
+        <label class="control-label control-label-colorpc control-label-des">
+          {{ 'widgets.formExt.mainSettings.usePodBG.opacity' | translate }}:
+        </label>
+        <ngx-slider [(value)]="widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod" [options]="optionsOpacity"></ngx-slider>
       </div>
     </div>
   </div>
@@ -210,37 +234,58 @@
   <!-- FORM ORIENTATION SETTINGS -->
   <div>
     <div class="col-lg-12 m-t-sm m-b-xs">
-      <h4 class="h4-text-tit control-label-des helper-title-3level">{{ 'widgets.formExt.mainSettings.widthAndPositionForm' | translate }}</h4>
+      <h4 class="h4-text-tit control-label-des helper-title-3level">
+        {{ 'widgets.formExt.mainSettings.widthAndPositionForm' | translate }}
+      </h4>
     </div>
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.widthForm' | translate }}:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{widget.guiprops.formExt.model.mainSettings.form_width_type.label}}
+            {{ widget.guiprops.formExt.model.mainSettings.form_width_type.label }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" (click)="widget.guiprops.formExt.model.mainSettings.form_width_type = itemVisual" *ngFor="let itemVisual of availMainWidthTypes"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual.label}}</a></li>
+            <li
+              role="presentation"
+              *ngFor="let itemVisual of availMainWidthTypes"
+              (click)="widget.guiprops.formExt.model.mainSettings.form_width_type = itemVisual"
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual.label}}</a>
+            </li>
           </ul>
         </div>
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5" *ngIf="widget.guiprops.formExt.model.mainSettings.form_width_type.type === 1">
+      <div
+        *ngIf="widget.guiprops.formExt.model.mainSettings.form_width_type.type === 1"
+        class="col-sm-6 row-subitem-padding padding-top-5"
+      >
         <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.widthForm.orientation' | translate }}:</label>
-        <div class="dropdown" >
+        <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{widget.guiprops.formExt.model.mainSettings.form_width_orientation_type.label}}
+            {{ widget.guiprops.formExt.model.mainSettings.form_width_orientation_type.label }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" (click)="widget.guiprops.formExt.model.mainSettings.form_width_orientation_type = itemVisual" *ngFor="let itemVisual of availMainWidthOrientationTypes"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual.label}}</a></li>
+            <li
+              role="presentation"
+              *ngFor="let itemVisual of availMainWidthOrientationTypes"
+              (click)="widget.guiprops.formExt.model.mainSettings.form_width_orientation_type = itemVisual"
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual.label}}</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
     <div *ngIf="widget.guiprops.formExt.model.mainSettings.form_width_type.type === 1">
       <div class="col-sm-12 padding-top-5 margined-top-10">
-        <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="widget.guiprops.formExt.model.mainSettings.form_widthpx">
+        <input
+          type="number"
+          class="form-control form-control-font form-cntrl-55w"
+          [(ngModel)]="widget.guiprops.formExt.model.mainSettings.form_widthpx"
+        />
         <label class="control-label">px <span>ширина формы</span></label>
       </div>
       <div class="clearfix"></div>
