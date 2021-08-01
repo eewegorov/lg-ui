@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-extended-button',
   templateUrl: './extended-button.component.html',
-  styleUrls: ['./extended-button.component.scss']
+  styleUrls: ['../../../../shared/shared.scss', './extended-button.component.scss']
 })
 export class ExtendedButtonComponent implements OnInit {
+  @Input() public index: number;
+  @Input() public containerId: string;
+  @Input() public item: Record<string, any>;
 
   constructor() { }
 

@@ -1,77 +1,77 @@
 <div class="border-item">
   <div>
     <div class="col-lg-12">
-      <h4 class="h4-element-title">{{ 'widgets.formExt.leftBlock.title' | translate }} <a ng-click="removeElementFromElementsList($index, item)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a></h4>
+      <h4 class="h4-element-title">{{ 'widgets.formExt.leftBlock.title' | translate }} <a (click)="removeElementFromElementsList(index, item)" href="javascript:void(0);"><i class="remove-sub-item fa fa-trash-o"></i></a></h4>
     </div>
   </div>
   <div class="clearfix"></div>
 
-  <ul class="form-ext-wrapper" ng-sortable="onDrDr">
+  <ul class="form-ext-wrapper" [sortablejs]="onDrDr">
     <li class="form-ext-item"
-        ng-repeat="item in widget.guiprops.formExt.model.list track by $index"
-        ng-class="dragItemClass(item)"
-        ng-click="toggleItem($event, $index, true)"
-        ng-mouseover="highlightContentOn($index, item.type)"
-        ng-mouseleave="highlightContentOff($index)"
-        data-to-ext="{{$index}}">
+        *ngFor="let extItem of widget.guiprops.formExt.model.list; index as innerIndex; trackBy: trackByIndex;"
+        [ngClass]="dragItemClass(extItem)"
+        (click)="toggleItem($event, innerIndex, true)"
+        (mouseover)="highlightContentOn(innerIndex, extItem.type)"
+        (mouseleave)="highlightContentOff(innerIndex)"
+        data-to-ext="{{ innerIndex }}">
       <div class="form-ext-item__header">
         <div class="form-ext-item__header-l grab-form-ext-item">
           <i class="fa fa-bars"></i>
         </div>
         <div class="form-ext-item__header-r">
-          <div class="form-ext-item__header-delete" ng-click="removeElementFromFormExtList($index, item)" ng-hide="($index === 0) && (widget.guiprops.formExt.model.list.length === 1)">
+          <div class="form-ext-item__header-delete" (click)="removeElementFromFormExtList(innerIndex, extItem)" *ngIf="!((innerIndex === 0) && (widget.guiprops.formExt.model.list.length === 1))">
             <i class="fa fa-trash-o"></i>
           </div>
-          <div class="form-ext-item__header-clone" ng-click="cloneElementFromFormExtList($event, $index, item)" ng-hide="isUnclonable(item.type)">
+          <div class="form-ext-item__header-clone" (click)="cloneElementFromFormExtList($event, innerIndex, extItem)" *ngIf="!isUnclonable(extItem.type)">
             <i class="fa fa-copy"></i>
           </div>
-          <div class="form-ext-item__header-collapse form-ext-item__header-collapse-opened" ng-click="toggleItem($event, $index)">
+          <div class="form-ext-item__header-collapse form-ext-item__header-collapse-opened" (click)="toggleItem($event, innerIndex)">
             <i class="fa fa-angle-up"></i>
           </div>
-          <div class="form-ext-item__header-collapse form-ext-item__header-collapse-closed" ng-click="toggleItem($event, $index)">
+          <div class="form-ext-item__header-collapse form-ext-item__header-collapse-closed" (click)="toggleItem($event, innerIndex)">
             <i class="fa fa-pencil"></i>
           </div>
         </div>
       </div>
       <div class="form-ext-item__body">
-        <div ng-if="item.type === 'email'">
-          <email-form-ext-directive item="item" index="$index"></email-form-ext-directive>
+        <div *ngIf="item.type === 'email'">
+          <app-extended-email [item]="extItem" [index]="innerIndex"></app-extended-email>
         </div>
-        <div ng-if="item.type === 'name'">
-          <name-form-ext-directive item="item" index="$index"></name-form-ext-directive>
+        <div *ngIf="item.type === 'name'">
+          <app-extended-name [item]="extItem" [index]="innerIndex"></app-extended-name>
         </div>
-        <div ng-if="item.type === 'message'">
-          <message-form-ext-directive item="item" index="$index"></message-form-ext-directive>
+        <div *ngIf="item.type === 'message'">
+          <app-extended-message [item]="extItem" [index]="innerIndex"></app-extended-message>
         </div>
-        <div ng-if="item.type === 'phone'">
-          <phone-form-ext-directive item="item" index="$index"></phone-form-ext-directive>
+        <div *ngIf="item.type === 'phone'">
+          <app-extended-phone [item]="extItem" [index]="innerIndex"></app-extended-phone>
         </div>
-        <div ng-if="item.type === 'text'">
-          <text-form-ext-directive item="item" index="$index"></text-form-ext-directive>
+        <div *ngIf="item.type === 'text'">
+          <app-extended-text [item]="extItem" [index]="innerIndex"></app-extended-text>
         </div>
-        <div ng-if="item.type === 'rating'">
-          <rating-form-ext-directive item="item" index="$index"></rating-form-ext-directive>
+        <div *ngIf="item.type === 'rating'">
+          <app-extended-rating [item]="extItem" [index]="innerIndex"></app-extended-rating>
         </div>
-        <div ng-if="item.type === 'variants'">
-          <variants-form-ext-directive item="item" index="$index"></variants-form-ext-directive>
+        <div *ngIf="item.type === 'variants'">
+          <app-extended-variants [item]="extItem" [index]="innerIndex"></app-extended-variants>
         </div>
-        <div ng-if="item.type === 'dd'">
-          <dd-form-ext-directive item="item" index="$index"></dd-form-ext-directive>
+        <div *ngIf="item.type === 'dd'">
+          <app-extended-dd [item]="extItem" [index]="innerIndex"></app-extended-dd>
         </div>
-        <div ng-if="item.type === 'date'">
-          <date-form-ext-directive item="item" index="$index"></date-form-ext-directive>
+        <div *ngIf="item.type === 'date'">
+          <app-extended-date [item]="extItem" [index]="innerIndex"></app-extended-date>
         </div>
-        <div ng-if="item.type === 'title'">
-          <title-form-ext-directive item="item" index="$index"></title-form-ext-directive>
+        <div *ngIf="item.type === 'title'">
+          <app-extended-title [item]="extItem" [index]="innerIndex"></app-extended-title>
         </div>
-        <div ng-if="item.type === 'term'">
-          <term-form-ext-directive item="item" index="$index"></term-form-ext-directive>
+        <div *ngIf="item.type === 'term'">
+          <app-extended-term [item]="extItem" [index]="innerIndex"></app-extended-term>
         </div>
-        <div ng-if="item.type === 'button'">
-          <button-form-ext-directive item="item" container_id="widget.containerId" index="$index"></button-form-ext-directive>
+        <div *ngIf="item.type === 'button'">
+          <app-extended-button [item]="extItem" [containerId]="widget.containerId" [index]="innerIndex"></app-extended-button>
         </div>
-        <div ng-if="item.type === 'hidden'">
-          <hidden-form-ext-directive item="item" index="$index"></hidden-form-ext-directive>
+        <div *ngIf="item.type === 'hidden'">
+          <app-extended-hidden [item]="extItem" [index]="innerIndex"></app-extended-hidden>
         </div>
       </div>
     </li>
@@ -79,9 +79,9 @@
 
   <div>
     <div class="add-form-ext-new-item margined-right-15">
-      <button class="btn-default widget-content-add-btn"
-              ng-click="addItemToExtForm(); $event.stopPropagation();">
-        <i class="fa fa-plus"></i>{{ 'widgets.formExt.addAnotherElementToForm' | translate }}</button>
+      <button class="btn-default widget-content-add-btn" (click)="addItemToExtForm(); $event.stopPropagation();">
+        <i class="fa fa-plus"></i>{{ 'widgets.formExt.addAnotherElementToForm' | translate }}
+      </button>
     </div>
     <div class="clearfix"></div>
   </div>
@@ -91,41 +91,59 @@
     <h4 class="h4-text-tit control-label-des helper-title-3level">{{ 'widgets.formExt.mainSettings.formDesign' | translate }}</h4>
   </div>
 
-  <div ng-show="isFieldSettings()">
+  <div *ngIf="isFieldSettings()">
     <div class="row row-subitem m-t-lg m-b-md">
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.colorNameField' | translate }}:</label>
-        <color-picker ng-model="widget.guiprops.formExt.model.mainSettings.colorTitleInputForm" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+        <input
+          [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.colorTitleInputForm"
+          [style.background]="widget.guiprops.formExt.model.mainSettings.colorTitleInputForm"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+        />
       </div>
 
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.colorBGField' | translate }}:</label>
-        <color-picker ng-model="widget.guiprops.formExt.model.mainSettings.bgInputForm" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+        <input
+          [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.bgInputForm"
+          [style.background]="widget.guiprops.formExt.model.mainSettings.bgInputForm"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+        />
       </div>
     </div>
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
-        <div ui-slider min="0.00" max="1.00" step="0.1" use-decimals ng-model="widget.guiprops.formExt.model.mainSettings.opacityBgInputForm"></div>
+        <ngx-slider [(value)]="widget.guiprops.formExt.model.mainSettings.opacityBgInputForm" [options]="optionsOpacity"></ngx-slider>
         <label class="control-label control-label-ui">{{ 'widgets.formExt.mainSettings.opacityBGField' | translate }}</label>
       </div>
     </div>
     <div class="row row-subitem m-t-sm m-b-md">
       <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
-        <div ui-slider min="0" max="50" step="1" use-decimals ng-model="widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm"></div>
+        <ngx-slider [(value)]="widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm" [options]="optionsRound"></ngx-slider>
         <label class="control-label control-label-ui">{{ 'widgets.formExt.mainSettings.radiusCornerField' | translate }}</label>
       </div>
     </div>
 
     <div class="row row-subitem m-t-md">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <switch class="switch-xs" ng-model="widget.guiprops.formExt.model.mainSettings.border.enable"></switch><label class="control-label switcher-label-xs control-label-des">{{ 'widgets.formExt.mainSettings.useBorderAroundFields' | translate }}</label>
+      <div class="col-sm-12 row-subitem-padding pt-1 d-flex">
+        <ui-switch
+          size="small"
+          [(ngModel)]="widget.guiprops.formExt.model.mainSettings.border.enable"
+        ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">{{ 'widgets.formExt.mainSettings.useBorderAroundFields' | translate }}</label>
       </div>
     </div>
-    <div ng-show="widget.guiprops.formExt.model.mainSettings.border.enable == true">
+    <div *ngIf="widget.guiprops.formExt.model.mainSettings.border.enable == true">
       <div class="row row-subitem">
         <div class="col-sm-6 row-subitem-padding padding-top-5">
           <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.colorBorder' | translate }}:</label>
-          <color-picker ng-model="widget.guiprops.formExt.model.mainSettings.border.color" color-picker-format="'hex'" color-picker-alpha="false"></color-picker>
+          <input
+            [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.border.color"
+            [style.background]="widget.guiprops.formExt.model.mainSettings.border.color"
+            [cpAlphaChannel]="'disabled'"
+            [cpOutputFormat]="'hex'"
+          />
         </div>
       </div>
     </div>
@@ -140,7 +158,7 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li role="presentation" ng-click="widget.guiprops.formExt.model.mainSettings.orientation = itemOrientation" ng-repeat="itemOrientation in orientationTypesOfField"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemOrientation.label}}</a></li>
+          <li role="presentation" (click)="widget.guiprops.formExt.model.mainSettings.orientation = itemOrientation" *ngFor="let itemOrientation of orientationTypesOfField"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemOrientation.label}}</a></li>
         </ul>
       </div>
     </div>
@@ -152,7 +170,7 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li role="presentation" ng-click="widget.guiprops.formExt.model.mainSettings.visual = itemVisual" ng-repeat="itemVisual in visualTypesOfField"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual.label}}</a></li>
+          <li role="presentation" (click)="widget.guiprops.formExt.model.mainSettings.visual = itemVisual" *ngFor="let itemVisual of visualTypesOfField"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual.label}}</a></li>
         </ul>
       </div>
     </div>
@@ -163,7 +181,7 @@
       <switch class="switch-xs" ng-model="widget.guiprops.formExt.model.mainSettings.colorPod.enable"></switch><label class="control-label switcher-label-xs control-label-des">{{ 'widgets.formExt.mainSettings.usePodBG' | translate }}</label>
     </div>
   </div>
-  <div ng-show="widget.guiprops.formExt.model.mainSettings.colorPod.enable == true">
+  <div *ngIf="widget.guiprops.formExt.model.mainSettings.colorPod.enable == true">
     <div class="row row-subitem">
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.usePodBG.color' | translate }}:</label>
@@ -191,11 +209,11 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="widget.guiprops.formExt.model.mainSettings.form_width_type = itemVisual" ng-repeat="itemVisual in availMainWidthTypes"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual.label}}</a></li>
+            <li role="presentation" (click)="widget.guiprops.formExt.model.mainSettings.form_width_type = itemVisual" *ngFor="let itemVisual of availMainWidthTypes"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual.label}}</a></li>
           </ul>
         </div>
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5" ng-show="widget.guiprops.formExt.model.mainSettings.form_width_type.type === 1">
+      <div class="col-sm-6 row-subitem-padding padding-top-5" *ngIf="widget.guiprops.formExt.model.mainSettings.form_width_type.type === 1">
         <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.widthForm.orientation' | translate }}:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -203,14 +221,14 @@
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="widget.guiprops.formExt.model.mainSettings.form_width_orientation_type = itemVisual" ng-repeat="itemVisual in availMainWidthOrientationTypes"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual.label}}</a></li>
+            <li role="presentation" (click)="widget.guiprops.formExt.model.mainSettings.form_width_orientation_type = itemVisual" *ngFor="let itemVisual of availMainWidthOrientationTypes"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemVisual.label}}</a></li>
           </ul>
         </div>
       </div>
     </div>
-    <div ng-show="widget.guiprops.formExt.model.mainSettings.form_width_type.type === 1">
+    <div *ngIf="widget.guiprops.formExt.model.mainSettings.form_width_type.type === 1">
       <div class="col-sm-12 padding-top-5 margined-top-10">
-        <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="widget.guiprops.formExt.model.mainSettings.form_widthpx">
+        <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="widget.guiprops.formExt.model.mainSettings.form_widthpx">
         <label class="control-label">px <span>ширина формы</span></label>
       </div>
       <div class="clearfix"></div>
@@ -219,5 +237,9 @@
   <!-- END FORM ORIENTATION SETTINGS -->
 
   <!-- Coupon settings -->
-  <coupon-callback-directive coupons="coupons" place-popup="placePopup" coupon="widget.guiprops.formExt.couponCallback"></coupon-callback-directive>
+  <app-coupon-callback
+    [coupons]="coupons"
+    [coupon]="widget.guiprops.formExt.couponCallback"
+    [placePopup]="placePopup"
+  ></app-coupon-callback>
 </div>
