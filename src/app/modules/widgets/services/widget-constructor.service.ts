@@ -287,7 +287,7 @@ export class WidgetConstructorService {
       },
       {
         type: 2,
-        label: this.translate.instant('"widgets.formExt.mainSettings.buttonSettings.width3')
+        label: this.translate.instant('widgets.formExt.mainSettings.buttonSettings.width3')
       }
     ];
   }
@@ -836,7 +836,7 @@ export class WidgetConstructorService {
         isTabOpened: true,
         label: this.translate.instant('widgets.formExt.typeDropdown'),
         placeholder: this.translate.instant('widgets.formExt.dropdown.placeholder2'),
-        service: this.translate.instant('widgets.formExt.dropdown.service2'),
+        service: this.translate.instant('widgets.formExt.dropdown.placeholder2'),
         idField: 'field_id_',
         id: this.utilsService.generateShortID(),
         useOutsideCRM: true,

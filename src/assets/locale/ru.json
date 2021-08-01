@@ -852,22 +852,140 @@
 			}
 		},
 		"formExt": {
+			"addAnotherElementToForm": "Добавить еще один элемент в форму",
+			"button": {
+				"bType": {
+					"label": "Тип кнопки"
+				},
+				"bType1": "Текст",
+				"bType2": "Иконка + текст",
+				"bType3": "Иконка",
+				"icon": {
+					"color": "Цвет иконки"
+				}
+			},
+			"choseTypeOfItem": "Выберите тип элемента формы",
+			"date": {
+				"placeholder2": "Выбор даты",
+				"service2": "Дата",
+				"type2": "дд.мм.гг",
+				"type3": "гг.мм.дд",
+				"type4": "мм.дд.гг"
+			},
+			"dropdown": {
+				"placeholder2": "Выпадающий список"
+			},
+			"email": {
+				"placeholder2": "Введите email",
+				"service2": "email"
+			},
+			"hidden": {
+				"fieldType1": "Utm_source",
+				"fieldType10": "Тип устройства",
+				"fieldType11": "OS устройства посетителя",
+				"fieldType12": "Таймзона посетителя",
+				"fieldType13": "Купон",
+				"fieldType14": "Номер сессии",
+				"fieldType15": "Количество просмотренных страниц",
+				"fieldType16": "Содержимое кукис",
+				"fieldType17": "Пользовательское значение",
+				"fieldType2": "Utm_medium",
+				"fieldType3": "Utm_campaign",
+				"fieldType4": "Utm_term",
+				"fieldType5": "Utm_content",
+				"fieldType6": "Реферер",
+				"fieldType7": "URL текущей страницы",
+				"fieldType8": "Пользовательский параметр в URL",
+				"fieldType9": "Язык браузера"
+			},
+			"leftBlock": {
+				"title": "Форма + кнопки"
+			},
 			"mainSettings": {
+				"buttonSettings": {
+					"actions": "Настройки действий",
+					"color": "Цвет кнопки",
+					"isBtnAction": "Считать нажатие кнопки целевым действием",
+					"radiusCorner": "Закругление углов",
+					"redirect": {
+						"action": "Действие при клике",
+						"action1": "Отправить форму",
+						"action2": "Отправить форму и сделать редирект",
+						"action3": "Закрыть окно с виджетом",
+						"action4": "Сделать редирект"
+					},
+					"style": "Стиль кнопки",
+					"width1": "Авто",
+					"width2": "От края до края",
+					"width3": "Собственная"
+				},
+				"colorBGField": "Цвет фона полей",
+				"colorBorder": "Цвет рамки",
+				"colorNameField": "Цвет названия полей",
+				"formDesign": "Дизайн формы",
 				"formField": {
+					"orientation": "Ориентация полей",
 					"orientation1": "По левому краю",
 					"orientation2": "По центру",
 					"orientation3": "По правому краю"
 				},
+				"opacityBGField": "Прозрачность фона полей",
+				"radiusCornerField": "Закругление углов полей",
+				"useBorderAroundFields": "Использовать рамку вокруг полей",
+				"usePodBG": "Использовать подложку под формой",
+				"visualField": "Вид полей",
 				"visualField1": "Под контентом",
 				"visualField2": "На всю ширину",
-				"widthForm": {
-					"orientation1": "Слева",
-					"orientation2": "По центру",
-					"orientation3": "Справа"
-				},
+				"widthAndPositionForm": "Ширина и позиционирование формы",
+				"widthForm": "Ширина формы",
 				"widthForm1": "От края до края",
 				"widthForm2": "Собственная"
-			}
+			},
+			"message": {
+				"placeholder2": "Введите сообщение",
+				"service2": "Сообщение"
+			},
+			"name": {
+				"placeholder2": "Введите имя",
+				"service2": "Имя"
+			},
+			"newLineElement": "Разместить элемент с новой строки",
+			"phone": {
+				"placeholder2": "Введите телефон",
+				"service2": "Телефон"
+			},
+			"rating": {
+				"service2": "Рейтинг"
+			},
+			"term": {
+				"placeholder2": "Согласен с условиями"
+			},
+			"text": {
+				"placeholder2": "Введите текст",
+				"service2": "Текст"
+			},
+			"title": {
+				"placeholder2": "Текст"
+			},
+			"typeButton": "Кнопка",
+			"typeDate": "Выбор даты",
+			"typeDropdown": "Выпадающий список",
+			"typeEmail": "Email",
+			"typeHidden": "Скрытое поле",
+			"typeMessage": "Сообщение",
+			"typeName": "Имя",
+			"typePhone": "Телефон",
+			"typeRating": "Рейтинг",
+			"typeTerm": "Пользовательское соглашение",
+			"typeText": "Текстовое поле",
+			"typeTitle": "Текст или заголовок",
+			"typeVariants": "Выбор варианта (радиокнопка или чекбокс)",
+			"variants": {
+				"service2": "Выбор варианта"
+			},
+			"widthField1": "Ширина элемента",
+			"widthField2": "% от ширины строки",
+			"widthField3": "в пикселях"
 		},
 		"formExtId": {
 			"actionButton": {

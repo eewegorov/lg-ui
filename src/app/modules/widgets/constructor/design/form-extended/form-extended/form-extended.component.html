@@ -1,12 +1,10 @@
 <div class="border-item">
-  <div>
-    <div class="col-lg-12">
-      <h4 class="h4-element-title">
-        {{ 'widgets.formExt.leftBlock.title' | translate }} <a
-        (click)="removeElementFromElementsList(index, {name: 'form-ext-element'})"
-        href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
-      </h4>
-    </div>
+  <div class="col-lg-12">
+    <h4 class="h4-element-title">
+      {{ 'widgets.formExt.leftBlock.title' | translate }} <a
+      (click)="removeElementFromElementsList(index, {name: 'form-ext-element'})"
+      href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
+    </h4>
   </div>
   <div class="clearfix"></div>
 
@@ -241,7 +239,7 @@
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-6 row-subitem-padding padding-top-5">
         <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.widthForm' | translate }}:</label>
-        <div class="dropdown" >
+        <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ widget.guiprops.formExt.model.mainSettings.form_width_type.label }}
             <span class="caret"></span>

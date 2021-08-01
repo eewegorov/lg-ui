@@ -822,22 +822,140 @@
 			}
 		},
 		"formExt": {
+			"addAnotherElementToForm": "",
+			"button": {
+				"bType": {
+					"label": ""
+				},
+				"bType1": "",
+				"bType2": "",
+				"bType3": "",
+				"icon": {
+					"color": ""
+				}
+			},
+			"choseTypeOfItem": "",
+			"date": {
+				"placeholder2": "",
+				"service2": "",
+				"type2": "",
+				"type3": "",
+				"type4": ""
+			},
+			"dropdown": {
+				"placeholder2": ""
+			},
+			"email": {
+				"placeholder2": "",
+				"service2": ""
+			},
+			"hidden": {
+				"fieldType1": "",
+				"fieldType10": "",
+				"fieldType11": "",
+				"fieldType12": "",
+				"fieldType13": "",
+				"fieldType14": "",
+				"fieldType15": "",
+				"fieldType16": "",
+				"fieldType17": "",
+				"fieldType2": "",
+				"fieldType3": "",
+				"fieldType4": "",
+				"fieldType5": "",
+				"fieldType6": "",
+				"fieldType7": "",
+				"fieldType8": "",
+				"fieldType9": ""
+			},
+			"leftBlock": {
+				"title": ""
+			},
 			"mainSettings": {
+				"buttonSettings": {
+					"actions": "",
+					"color": "",
+					"isBtnAction": "",
+					"radiusCorner": "",
+					"redirect": {
+						"action": "",
+						"action1": "",
+						"action2": "",
+						"action3": "",
+						"action4": ""
+					},
+					"style": "",
+					"width1": "",
+					"width2": "",
+					"width3": ""
+				},
+				"colorBGField": "",
+				"colorBorder": "",
+				"colorNameField": "",
+				"formDesign": "",
 				"formField": {
+					"orientation": "",
 					"orientation1": "",
 					"orientation2": "",
 					"orientation3": ""
 				},
+				"opacityBGField": "",
+				"radiusCornerField": "",
+				"useBorderAroundFields": "",
+				"usePodBG": "",
+				"visualField": "",
 				"visualField1": "",
 				"visualField2": "",
-				"widthForm": {
-					"orientation1": "",
-					"orientation2": "",
-					"orientation3": ""
-				},
+				"widthAndPositionForm": "",
+				"widthForm": "",
 				"widthForm1": "",
 				"widthForm2": ""
-			}
+			},
+			"message": {
+				"placeholder2": "",
+				"service2": ""
+			},
+			"name": {
+				"placeholder2": "",
+				"service2": ""
+			},
+			"newLineElement": "",
+			"phone": {
+				"placeholder2": "",
+				"service2": ""
+			},
+			"rating": {
+				"service2": ""
+			},
+			"term": {
+				"placeholder2": ""
+			},
+			"text": {
+				"placeholder2": "",
+				"service2": ""
+			},
+			"title": {
+				"placeholder2": ""
+			},
+			"typeButton": "",
+			"typeDate": "",
+			"typeDropdown": "",
+			"typeEmail": "",
+			"typeHidden": "",
+			"typeMessage": "",
+			"typeName": "",
+			"typePhone": "",
+			"typeRating": "",
+			"typeTerm": "",
+			"typeText": "",
+			"typeTitle": "",
+			"typeVariants": "",
+			"variants": {
+				"service2": ""
+			},
+			"widthField1": "",
+			"widthField2": "",
+			"widthField3": ""
 		},
 		"formExtId": {
 			"actionButton": {
