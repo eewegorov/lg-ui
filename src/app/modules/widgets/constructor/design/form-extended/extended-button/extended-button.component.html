@@ -53,7 +53,9 @@
     <div *ngIf="item.bType.type === 1 || item.bType.type === 2">
       <div class="row row-subitem m-t-sm">
         <div class="col-sm-6 row-subitem-padding padding-top-5">
-          <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.button.icon.color' | translate }}:</label>
+          <label class="control-label control-label-colorpc control-label-des">
+            {{ 'widgets.formExt.button.icon.color' | translate }}:
+          </label>
           <input
             [(colorPicker)]="item.icon.color"
             [style.background]="item.icon.color"
@@ -116,7 +118,9 @@
 
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-6 row-subitem-padding padding-top-5">
-        <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.buttonSettings.color' | translate }}:</label>
+        <label class="control-label control-label-colorpc control-label-des">
+          {{ 'widgets.formExt.mainSettings.buttonSettings.color' | translate }}:
+        </label>
         <input
           [(colorPicker)]="item.colorBtn"
           [style.background]="item.colorBtn"
@@ -125,7 +129,9 @@
         />
       </div>
       <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
-        <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.buttonSettings.radiusCorner' | translate }}</label>
+        <label class="control-label control-label-colorpc control-label-des">
+          {{ 'widgets.formExt.mainSettings.buttonSettings.radiusCorner' | translate }}
+        </label>
         <ngx-slider [(value)]="item.borderRadiusBtn" [options]="optionsRound"></ngx-slider>
       </div>
     </div>
@@ -177,7 +183,9 @@
 
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.buttonSettings.style' | translate }}:</label>
+        <label class="control-label control-label-des">
+          {{ 'widgets.formExt.mainSettings.buttonSettings.style' | translate }}:
+        </label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ item.styleType }}
@@ -231,7 +239,9 @@
 
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.buttonSettings.redirect.action' | translate }}:</label>
+        <label class="control-label control-label-des">
+          {{ 'widgets.formExt.mainSettings.buttonSettings.redirect.action' | translate }}:
+        </label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ item.redirect.type.label }}
@@ -248,7 +258,10 @@
 
     <div *ngIf="item.redirect.type.type === 1 || item.redirect.type.type === 3">
       <div class="row row-subitem">
-        <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10 widget-name-block-rel" ng-class="(item.redirect.url === '')?'has-error':''">
+        <div
+          class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10 widget-name-block-rel"
+          [ngClass]="(item.redirect.url === '') ? 'has-error' : ''"
+        >
           <label class="control-label">{{ 'widgets.constructor.redirect.onClickRedirect' | translate }}:</label>
           <input type="text" class="form-control" [(ngModel)]="item.redirect.url">
           <span class="input-down-sm-lab">{{ 'widgets.constructor.redirect.example' | translate }}: http://mywebsite.com</span>
@@ -281,7 +294,9 @@
     <div *ngIf="item.redirect.type.type === 2 || item.redirect.type.type === 3">
       <div class="row row-subitem m-t-sm">
         <div class="col-sm-12 row-subitem-padding padding-top-5">
-          <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.buttonSettings.actions' | translate }}:</label>
+          <label class="control-label control-label-des">
+            {{ 'widgets.formExt.mainSettings.buttonSettings.actions' | translate }}:
+          </label>
         </div>
       </div>
 
