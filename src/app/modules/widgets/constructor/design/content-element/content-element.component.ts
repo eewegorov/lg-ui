@@ -323,6 +323,215 @@ export class ContentElementComponent implements OnInit {
     return className;
   }
 
+  public formExtHrPosSelWholeForm(item) {
+    let className = '';
+
+    if (item.form_width_orientation_type.type === 0) {
+      className = 'widget1-form-ext-w-hr-left';
+    }
+
+    if (item.form_width_orientation_type.type === 1) {
+      className = 'widget1-form-ext-w-hr-center';
+    }
+
+    if (item.form_width_orientation_type.type === 2) {
+      className = 'widget1-form-ext-w-hr-right';
+    }
+
+    if (item.form_width_type.type === 0) {
+      className += ' widget1-form-ext-w-hr-full-w';
+    }
+
+    if (item.form_width_type.type === 1) {
+      className += ' widget1-form-ext-w-hr-own';
+    }
+
+    return className;
+  }
+
+  public formExtGlobalAlignmentClass(item) {
+    let className = '';
+
+    if (item.orientation.type === 0) {
+      className += ' widget1-form-ext-bl-left';
+    }
+
+    if (item.orientation.type === 1) {
+      className += ' widget1-form-ext-bl-center';
+    }
+
+    if (item.orientation.type === 2) {
+      className += ' widget1-form-ext-bl-right';
+    }
+
+    return className;
+  }
+
+  public formExtItemExtraClass(item) {
+    let className = '';
+
+    if (item.type === 'message' || ((item.type === 'text') && item.multiLine)) {
+      className += ' form-ext-item-h90';
+    }
+
+    return className;
+  }
+
+  public formExtElementInputItem(item) {
+    let elementName = '';
+
+    if (item.type === 'message' || ((item.type === 'text') && item.multiLine)) {
+      elementName = 'textareaElement';
+    } else if (item.type === 'email' || item.type === 'text' || item.type === 'name' || item.type === 'phone') {
+      elementName = 'inputElement';
+    } else if (item.type === 'rating') {
+      elementName = 'ratingElement';
+    } else if (item.type === 'variants') {
+      elementName = 'variantsElement';
+    } else if (item.type === 'button') {
+      elementName = 'buttonElement';
+    } else if (item.type === 'dd') {
+      elementName = 'ddElement';
+    } else if (item.type === 'title') {
+      elementName = 'titleFElement';
+    } else if (item.type === 'term') {
+      elementName = 'termElement';
+    } else if (item.type === 'date') {
+      elementName = 'dateFElement';
+    } else {
+      elementName = 'other';
+    }
+
+    return elementName;
+  }
+
+  public formExtClassNameFormInput(item) {
+    let className = '';
+
+    if (this.widget.guiprops.formExt.model.mainSettings.border.enable) {
+      className += ' widget-input-border';
+    }
+
+    if (item.type === 'phone' && item.mask.enable) {
+      className += ' masked';
+    }
+
+    return className;
+  }
+
+  public formExtItemNewLineClass(nextElement) {
+    let className = '';
+    if (nextElement && nextElement.newLine) {
+      className += ' widget1-form-ext-new-line-for-next';
+    }
+    return className;
+  }
+
+  public formExtGetItemWidth(item) {
+    return item.widthValue + (item.widthType.type === 0 ? '%' : 'px');
+  }
+
+  public formExtGetInputFormPhoneMask(value) {
+    const inputMaskLabel = value.replace(/\*/g, '_');
+    return inputMaskLabel;
+  }
+
+  // Rating
+  public ratingStars(item) {
+    let content = '';
+    const star = '\ue819';
+    for (let i = 1; i <= item.numberOfStars; i++) {
+      content += star;
+    }
+    return content;
+  }
+
+  public ratingStarClicked(e, item) {
+    const _this = $(e.currentTarget);
+    const pos = this.getPosition(e, _this);
+    this.setStars(pos, _this, item);
+    item.serviceData.starClicked = true;
+  }
+
+  public ratingStarMoved(e, item) {
+    item.serviceData.starClicked = false;
+    const _this = $(e.currentTarget);
+    const pos = this.getPosition(e, _this);
+    const out = this.calculate(pos, _this, item.numberOfStars);
+    this.hoverStars(out.width, _this);
+  }
+
+  public ratingStarLeaved(e, item) {
+    const _this = $(e.currentTarget);
+    if (item.serviceData.starClicked) {
+      return;
+    }
+    this.hoverStars(item.serviceData.cacheWidth, _this);
+  }
+
+  private getPosition(e, target) {
+    return e.pageX - target.offset().left;
+  }
+
+  private getDecimalPlaces(num) {
+    const match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+    return !match ? 0 : Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
+  }
+
+  private applyPrecision(val, precision) {
+    return parseFloat(val.toFixed(precision));
+  }
+
+  private getValueFromPosition(pos, target, maxStars) {
+    const self = {
+      min: 0,
+      step: 1
+    };
+    const precision = this.getDecimalPlaces(self.step);
+    const maxWidth = target.width();
+    let factor = ((maxStars - self.min) * pos) / (maxWidth * self.step);
+    factor = Math.ceil(factor);
+    let val = this.applyPrecision(parseFloat((self.min + factor * self.step).toString()), precision);
+    val = Math.max(Math.min(val, maxStars), self.min);
+    return val;
+  }
+
+  private getWidthFromValue(val, maxStars): number {
+    if (val >= maxStars) {
+      return 100;
+    }
+    return val * 100 / maxStars;
+  }
+
+  private calculate(pos, target, maxStars) {
+    const val = this.getValueFromPosition(pos, target, maxStars);
+    const widthNumber = this.getWidthFromValue(val, maxStars);
+
+    const width = widthNumber.toString() + '%';
+    return { width };
+  }
+
+  private setStars(pos, target, item) {
+    const stars = target.find('.rating-stars');
+    const out = this.calculate(pos, target, item.numberOfStars);
+    stars.css('width', out.width);
+    item.serviceData.cacheWidth = out.width;
+  }
+
+  private hoverStars(w, target) {
+    const stars = target.find('.rating-stars');
+    stars.css('width', w);
+  }
+
+  public termClick(event) {
+    const _this = $(event.target);
+    const parent = _this.parents('.note-editable');
+    if (parent.length) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
   public isTimerTypeShown(item, type) {
     return Boolean(item.design.nullData[type] || item.type1Model[type]);
   }

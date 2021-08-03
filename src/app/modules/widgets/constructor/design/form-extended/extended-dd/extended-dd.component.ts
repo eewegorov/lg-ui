@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ExtendedDdComponent implements OnInit {
   @Input() public index: number;
   @Input() public item: Record<string, any>;
+  @Input() public st: Record<string, any>;
 
   constructor() { }
 
