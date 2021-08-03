@@ -13,6 +13,7 @@ import { WidgetApiService } from './widget-api.service';
 })
 export class WidgetConstructorService {
   public arrayOfUsedItems = [];
+  public formExtIdFieldFocusOut = new Subject();
   public changeArrayOfFormExtTypes = new Subject();
   public changeItemFormType = new Subject<{type: string; index: number}>();
 
@@ -237,7 +238,7 @@ export class WidgetConstructorService {
   private isItemSendFormIfAction(item) {
     return (item.type === 'dd' || item.type === 'variants' || item.type === 'rating') && item.sendFormIfAction;
   }
-  
+
   public getExtFormBtnRedirectTypesForContainerized() {
     return this.getExtFormBtnRedirectTypes().filter((item) => { return item.type !== 2 });
   }

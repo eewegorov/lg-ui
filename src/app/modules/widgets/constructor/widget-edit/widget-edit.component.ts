@@ -106,6 +106,14 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     this.couponService.updateCouponsList.subscribe(() => {
       this.getCoupons();
     });
+
+    this.widgetConstructorService.formExtIdFieldFocusOut.subscribe(() => {
+      this.formExtIdsErrorFlag = false;
+      const listOfBodies = $('#collapseTwo').find('.form-ext-item');
+      listOfBodies.each((index, item) => {
+        $(item).removeClass('form-ext-item__alarm-class');
+      });
+    });
   }
 
   public onChangePayment(value) {

@@ -53,7 +53,6 @@ export class ExtendedButtonComponent implements OnInit, DoCheck {
     this.availWidthTypes = this.widgetConstructorService.getExtFormWidthTypes();
     this.redirectAvail = this.containerId ? this.widgetConstructorService.getExtFormBtnRedirectTypesForContainerized() :
       this.widgetConstructorService.getExtFormBtnRedirectTypes();
-
   }
 
   public changeFormType(type) {

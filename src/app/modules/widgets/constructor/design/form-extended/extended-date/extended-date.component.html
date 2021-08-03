@@ -1,12 +1,12 @@
 <div>
   <div class="row row-subitem">
     <div class="col-sm-12 row-subitem-padding padding-top-5">
-      <div class="item-placeholder-name">{{item.placeholder}}</div>
+      <div class="item-placeholder-name">{{ item.placeholder }}</div>
     </div>
   </div>
   <div class="row row-subitem">
     <div class="col-sm-12 row-subitem-padding padding-top-5">
-      <div class="item-placeholder-type">{{item.label}}</div>
+      <div class="item-placeholder-type">{{ item.label }}</div>
     </div>
   </div>
 
@@ -16,11 +16,17 @@
         <label class="control-label control-label-des">{{ 'widgets.formExt.choseTypeOfItem' | translate }}:</label>
         <div class="dropdown" >
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{item.label}}
+            {{ item.label }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="changeFormType(itemForm.type)" ng-repeat="itemForm in availItemTypes"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemForm.label}}</a></li>
+            <li
+              role="presentation"
+              (click)="changeFormType(itemForm.type)"
+              *ngFor="let itemForm of availItemTypes"
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemForm.label }}</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -29,14 +35,14 @@
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding padding-top-5 form-ext-item__item-input">
         <label class="control-label control-label-des">{{ 'widgets.formExt.email.placeholder1' | translate }}:</label>
-        <input type="text" class="form-control" ng-model="item.placeholder">
+        <input type="text" class="form-control" [(ngModel)]="item.placeholder">
       </div>
     </div>
 
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding padding-top-5 form-ext-item__item-input">
         <label class="control-label control-label-des">{{ 'widgets.formExt.email.service1' | translate }}:</label>
-        <input type="text" class="form-control" ng-model="item.service">
+        <input type="text" class="form-control" [(ngModel)]="item.service">
         <span class="input-down-sm-lab small">{{ 'widgets.formExt.email.service3' | translate }}</span>
       </div>
     </div>
@@ -44,32 +50,48 @@
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding padding-top-5 form-ext-item__item-input">
         <label class="control-label control-label-des">{{ 'widgets.formExt.email.id1' | translate }}:</label>
-        <input type="text" class="form-control form-control-form-ext-id-field" ng-blur="idFocusOut()" ng-model="item.idField">
+        <input type="text" class="form-control form-control-form-ext-id-field" (blur)="idFocusOut()" [(ngModel)]="item.idField">
         <span class="input-down-sm-lab">{{ 'widgets.formExt.mainSettings.id.example' | translate }}</span>
       </div>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding m-t-sm widget-small-text" ng-bind-html="'widgets.formExt.mainSettings.id.description' | translate"></div>
+      <div
+        class="col-sm-12 row-subitem-padding m-t-sm widget-small-text"
+        [innerHTML]="'widgets.formExt.mainSettings.id.description' | translate"
+      ></div>
     </div>
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <label class="non-bold">
-          <checkbox ng-model="item.useOutsideCRM" class="checkbox-green-btn"></checkbox>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="item.useOutsideCRM"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
           {{ 'widgets.formExt.mainSettings.id.useOutsideCRM' | translate }}
-        </label>
+        </div>
       </div>
     </div>
 
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
         <label class="control-label control-label-des">{{ 'widgets.formExt.date.type1' | translate }}:</label>
-        <div class="dropdown" >
+        <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{item.dateType.label}}
+            {{ item.dateType.label }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" ng-click="item.dateType = itemType" ng-repeat="itemType in availItemDateTypes"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemType.label}}</a></li>
+            <li
+              role="presentation"
+              *ngFor="let itemType of availItemDateTypes"
+              (click)="item.dateType = itemType"
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemType.label}}</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -84,17 +106,23 @@
       <div class="col-sm-12 row-subitem-padding padding-top-5">
         <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
           <div>
-            <input type="number" class="form-control form-control-font form-cntrl-55w" ng-model="item.widthValue">
+            <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthValue">
           </div>
 
           <div>
             <div class="dropdown" >
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                {{item.widthType.label}}
+                {{ item.widthType.label }}
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" role="menu">
-                <li role="presentation" ng-click="item.widthType = itemWidth" ng-repeat="itemWidth in availWidthTypes"><a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemWidth.label}}</a></li>
+                <li
+                  role="presentation"
+                  *ngFor="let itemWidth of availWidthTypes"
+                  (click)="item.widthType = itemWidth"
+                >
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemWidth.label }}</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -104,19 +132,33 @@
 
     <div class="row row-subitem m-t-sm">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <label class="non-bold">
-          <checkbox ng-model="item.required" class="checkbox-green-btn"></checkbox>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="item.required"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
           {{ 'widgets.formExt.enableRequire' | translate }}
-        </label>
+        </div>
       </div>
     </div>
 
     <div class="row row-subitem">
       <div class="col-sm-12 row-subitem-padding padding-top-5">
-        <label class="non-bold">
-          <checkbox ng-model="item.newLine" class="checkbox-green-btn"></checkbox>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="item.newLine"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
           {{ 'widgets.formExt.newLineField' | translate }}
-        </label>
+        </div>
       </div>
     </div>
   </div>
