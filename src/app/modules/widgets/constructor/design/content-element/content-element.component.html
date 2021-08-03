@@ -270,6 +270,155 @@
           </div>
         </div>
 
+        <div *ngIf="item.name == 'form-ext-element'" class="form-ext-main-wr color-pod" [ngClass]="formExtHrPosSelWholeForm(widget.guiprops.formExt.model.mainSettings)">
+          <div class="widget-form-ext-wrapper" [ngStyle]="{'width': widget.guiprops.formExt.model.mainSettings.form_widthpx + 'px'}">
+            <div id="widgetFormBlockMExt" class="widget1-form-ext-bl" [ngClass]="formExtGlobalAlignmentClass(widget.guiprops.formExt.model.mainSettings)">
+
+              <div *ngFor="let item of widget.guiprops.formExt.model.list; trackBy: trackByIndex; index as i" class="widget-form-ext-start-el"></div>
+
+              <div *ngIf="item.type !== 'hidden'" class="widget-inp-bl" [ngClass]="formExtItemExtraClass(item)" [ngStyle]="{'width': formExtGetItemWidth(item)}">
+                <div class="form-ext-element-wr form-ext-element-{{ i }}">
+                  <div class="form-ext-element-highlighted-context"></div>
+                  <div [ngSwitch]="formExtElementInputItem(item)">
+                    <!-- FORM EXT NAME, TEXT, PHONE, EMAIL -->
+                    <div *ngSwitchCase="'inputElement'" class="text-input-class">
+                      <input
+                        *ngIf="item.type !== 'phone' || !item.mask.enable"
+                        [id]="'elementid' + item.type"
+                        type="text"
+                        [ngClass]="formExtClassNameFormInput(item)"
+                        class="form-control form-widget-cntrl"
+                        style="background:{{widget.guiprops.formExt.model.mainSettings.rgbaInputForm}};color:{{widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}};border-radius:{{widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm}}px;border-color:{{widget.guiprops.formExt.model.mainSettings.border.color}}!important">
+                      <input
+                        *ngIf="item.type === 'phone' && item.mask.enable"
+                        [id]="'elementid' + item.type"
+                        type="text"
+                        [ngClass]="formExtClassNameFormInput(item)"
+                        class="form-control form-widget-cntrl"
+                        readonly
+                        style="background:{{widget.guiprops.formExt.model.mainSettings.rgbaInputForm}};color:{{widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}};border-radius:{{widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm}}px;border-color:{{widget.guiprops.formExt.model.mainSettings.border.color}}!important">
+
+                      <label [for]="'elementid' + item.type" class="form-widget-cntrl-label" style="color:{{widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}}">{{item.placeholder}}</label>
+                      <span class="masked-span-helper" *ngIf="item.type === 'phone' && item.mask.enable" [innerHTML]="formExtGetInputFormPhoneMask(item.mask.value)" style="color:{{widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}}"></span>
+                    </div>
+
+                    <!-- FORM EXT TEXTAREA -->
+                    <div *ngSwitchCase="'textareaElement'" class="text-input-class text-input-area-class text-input-class-form-ext">
+                      <textarea
+                        [id]="'elementid' + item.type"
+                        type="text"
+                        [ngClass]="formExtClassNameFormInput(item)"
+                        class="form-control form-widget-cntrl"
+                        style="background:{{widget.guiprops.formExt.model.mainSettings.rgbaInputForm}};color:{{widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}};border-radius:{{widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm}}px;border-color:{{widget.guiprops.formExt.model.mainSettings.border.color}}!important"
+                      ></textarea>
+                      <label
+                        [for]="'elementid' + item.type}"
+                        class="form-widget-cntrl-label"
+                        style="color:{{widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}}"
+                      >{{ item.placeholder }}</label>
+                    </div>
+
+                    <!-- FORM EXT RATING -->
+                    <div *ngSwitchCase="'ratingElement'" class="rating-input-class">
+                      <div class="rating-wrapper">
+                        <div
+                          class="rating-container"
+                          data-content="{{ratingStars(item)}}"
+                          [ngStyle]="{'color': item.colorInactive}"
+                          (click)="ratingStarClicked($event, item)"
+                          (mousemove)="ratingStarMoved($event, item)"
+                          (mouseleave)="ratingStarLeaved($event, item)"
+                        >
+                          <div class="rating-stars" data-content="{{ ratingStars(item) }}" [ngStyle]="{'color': item.colorActive}"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- FORM EXT VARIANTS -->
+                    <div *ngSwitchCase="'variantsElement'" class="checkbox-input-class">
+                      <div class="form-ext-checkbox-wrapper" [ngClass]="{'form-ext-checkbox-wrapper__wrapped' : item.everyNewLine}">
+                        <div
+                          class="form-ext-checkbox-container"
+                          *ngFor="let variant of item.variants"
+                          [ngStyle]="{'font-size':item.fontSize+'px', 'font-family':item.font.fontFamily,'color':item.colorText}"
+                        >{{ variant }}
+                          <div style="background-color:{{widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}};border-color:{{widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}}">
+                            <input [type]="item.multiEnable ? 'checkbox' : 'radio'" [name]="item.multiEnable ? '' : ('radio-' + item.id)">
+                            <span
+                              class="form-ext-checkbox-checkmark"
+                              [ngClass]="item.multiEnable ? 'form-ext-checkbox-checkmark' : 'form-ext-checkbox-checkmark-radio'"
+                              [ngStyle]="{'background-color': widget.guiprops.formExt.model.mainSettings.rgbaInputForm, 'border-color': widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : 'transparent'}"
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- FORM EXT DROPDOWN -->
+                    <div *ngSwitchCase="'ddElement'" class="dd-input-class">
+                      <div class="form-ext-dropdown-wrapper" [ngClass]="formExtClassNameFormInput(item)">
+                        <app-extended-dd [item]="item" [st]="widget.guiprops.formExt.model.mainSettings"></app-extended-dd>
+                      </div>
+                    </div>
+
+                    <!-- FORM EXT TITLE TEXT -->
+                    <div *ngSwitchCase="'titleFElement'" class="title-f-input-class">
+                      <div class="form-ext-title-wrapper">
+                        <div class="click-edit-cl" [ngClass]="(item.textShadow.enable)?'':'no-text-shadow-imp'" [ngStyle]="{'font-size':item.fontSize+'px', 'font-family':item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}">
+                          <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="item.textSummer"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- FORM EXT TERMS -->
+                    <div *ngSwitchCase="'termElement'" class="term-input-class">
+                      <div class="form-ext-term-wrapper">
+                        <label class="form-ext-term-checkbox-container" (click)="termClick($event)">
+                          <div class="form-ext-term-checkbox-container-help-cl" style="background-color:{{widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}};border-color:{{widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm}}">
+                            <input type="checkbox">
+                            <span class="form-ext-term-checkbox-checkmark" [ngStyle]="{'background-color': widget.guiprops.formExt.model.mainSettings.rgbaInputForm, 'border-color': widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : 'transparent'}"></span>
+                          </div>
+                          <div class="click-edit-cl" [ngClass]="(item.textShadow.enable) ? '' : 'no-text-shadow-imp'" [ngStyle]="{'font-size':item.fontSize+'px', 'font-family':item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}">
+                            <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="item.textSummer"></div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+
+                    <!-- FORM EXT DATE -->
+                    <div *ngSwitchCase="'dateFElement'" class="date-f-input-class">
+                      <div class="form-ext-date-wrapper" [ngClass]="formExtClassNameFormInput(item)">
+                        <app-extended-datepicker [item]="item" [st]="widget.guiprops.formExt.model.mainSettings"></app-extended-datepicker>
+                      </div>
+                    </div>
+
+                    <!-- FORM EXT BUTTON -->
+                    <div *ngSwitchCase="'buttonElement'" class="button-input-class">
+                      <div class="widget-form-ext-button">
+                        <div class="widget1-btn-bl">
+                          <div class="click-edit-cl button-send form-ext-btn-el" [ngClass]="setBtnStyleClass(item)" [ngStyle]="{'font-size':item.fontSize+'px', 'font-family':item.font.fontFamily, 'border-color':item.colorBtn, 'background':item.colorBtn, 'color':item.colorTextBtn, 'border-radius':item.borderRadiusBtn+'px'}">
+                            <div class="form-ext-btn-el-wr">
+                              <div *ngIf="item.bType.type === 1 || item.bType.type === 2">
+                                <i [ngClass]="item.icon.selectedIcon" [ngStyle]="{'color':item.icon.color}"></i>
+                              </div>
+                              <div *ngIf="item.bType.type === 0 || item.bType.type === 1">
+                                <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="item.textSummer"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="widget-form-ext-end-el" [ngClass]="formExtItemNewLineClass(widget.guiprops.formExt.model.list[i + 1], i)"></div>
+            </div>
+          </div>
+        </div>
+
+
         <div *ngIf="item.name === 'button-element'">
           <div *ngIf="widget.guiprops?.button?.textSummer">
             <div id="widgetButtonBlockM" class="widget1-btn-bl" [ngClass]="btnPosSel(widget.guiprops.button)">

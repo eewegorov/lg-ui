@@ -70,6 +70,10 @@ export class ContentElementComponent implements OnInit {
     return item.id;
   }
 
+  public trackByIndex(index) {
+    return index;
+  }
+
   public scrollToEl(id, elementName) {
     this.scrollToElement.emit({ id, elementName });
   }
