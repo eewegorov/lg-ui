@@ -1,15 +1,11 @@
 <div class="border-item">
   <div>
-    <div class="col-lg-12">
-      <h4 class="h4-element-title">
-        HTML / JS / Iframe &#35;{{ modelName.counter }} <a (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
-      </h4>
-    </div>
+    <h4 class="h4-element-title">
+      HTML / JS / Iframe &#35;{{ modelName.counter }} <a (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
+    </h4>
     <div class="clearfix"></div>
-    <div class="col-lg-12">
-      <h4 class="h4-text-tit control-label-des helper-title-3level">Настройки элемента</h4>
-    </div>
-    <div class="row row-subitem mt-4">
+    <h4 class="h4-text-tit control-label-des helper-title-3level pt-1">Настройки элемента</h4>
+    <div class="row row-subitem mt-2 mb-2">
       <div class="col-md-12 row-subitem-padding">
         <label class="non-b-textar-iframe">HTML или JAVASCRIPT код:</label>
         <textarea class="form-control textar-iframe" (blur)="getCodeForIframe(modelName)" [(ngModel)]="modelName.html_value"></textarea>
@@ -34,21 +30,21 @@
         <span class="small">Можно оставить пустым. Применяется только к элементу</span>
       </div>
     </div>
-    <div class="col-lg-12 mb-2">
+    <div class="mb-2">
       <h4 class="h4-text-tit control-label-des helper-title-3level">Габариты</h4>
     </div>
-    <div class="row row-subitem mt-4">
-      <div class="col-sm-6 row-subitem-padding pt-1">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-6 row-subitem-padding pt-1 pr-3">
         <div>
           <label class="control-label control-label-des">Ширина:</label>
           <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{modelName.width_type}}
+              {{ modelName.width_type }}
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
               <li role="presentation" *ngFor="let itemVisual of widthHrType" (click)="modelName.width_type = itemVisual">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
               </li>
             </ul>
           </div>
@@ -68,7 +64,7 @@
             </button>
             <ul class="dropdown-menu" role="menu">
               <li role="presentation" *ngFor="let itemVisual of widgwidthBtn" (click)="modelName.height_type = itemVisual">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
               </li>
             </ul>
           </div>
@@ -80,16 +76,16 @@
       </div>
     </div>
     <div *ngIf="modelName.width_type === 'Собственная'">
-      <div class="col-sm-12 pt-1 mt-2">
+      <div class="pt-1 mt-2">
         <label class="control-label control-label-des">Выравнивание:</label>
         <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+          <button class="btn btn-default dropdown-toggle w-50" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ modelName.position }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
             <li role="presentation" *ngFor="let itemVisual of floatBtn" (click)="modelName.position = itemVisual">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
             </li>
           </ul>
         </div>
