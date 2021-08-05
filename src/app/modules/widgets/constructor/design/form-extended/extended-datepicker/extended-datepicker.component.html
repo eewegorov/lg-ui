@@ -1,1 +1,13 @@
-<p>extended-datepicker works!</p>
+<div class="w-datepicker" [ngClass]="{'filled': isFilled}">
+  <div class="input-group date timer-datepicker-block" id="datetimepicker" data-target-input="nearest" NgTempusdominusBootstrap>
+    <input
+      data-target="#datetimepicker"
+      [options]="options"
+      NgTempusdominusBootstrapInput
+      type="text"
+      class="form-control datetimepicker-input"
+      [style]="'background: ' + st.rgbaInputForm + ';color: ' + st.colorTitleInputForm + ';border-radius: ' + st.borderRadiusInputForm + 'px;border-color: ' + st.border.color + '!important'" />
+    />
+    <label [style]="'color: ' + st.colorTitleInputForm">{{ item.placeholder }}</label>
+  </div>
+</div>
