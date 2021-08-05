@@ -1,1 +1,15 @@
-<p>extended-ddw works!</p>
+<div class="dropdown" ng-class="{'open' : item.serviceData.isOpen}">
+  <button
+    class="btn btn-default dropdown-toggle"
+    ng-class="{'filled' : item.serviceData.extraLabel}"
+    type="button"
+    ng-click="item.serviceData.isOpen = !item.serviceData.isOpen" aria-expanded="true"
+    style="background:{{st.rgbaInputForm}};color:{{st.colorTitleInputForm}};border-radius:{{st.borderRadiusInputForm}}px;border-color:{{st.border.color}}!important">
+    <label style="color:{{st.colorTitleInputForm}}">{{item.placeholder}}</label>
+    <div ng-show="item.serviceData.extraLabel">{{item.serviceData.extraLabel}}</div>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation" ng-click="setFormExtDDState(item, variant)" ng-repeat="variant in item.variants"><a tabindex="-1" href="javascript:void(0)">{{variant}}</a></li>
+  </ul>
+</div>

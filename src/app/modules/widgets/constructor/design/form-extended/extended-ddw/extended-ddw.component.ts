@@ -6,8 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['../../../../shared/shared.scss', './extended-ddw.component.scss']
 })
 export class ExtendedDdwComponent implements OnInit {
-  @Input() public index: number;
   @Input() public item: Record<string, any>;
+  @Input() public st: Record<string, any>;
 
   constructor() { }
 
