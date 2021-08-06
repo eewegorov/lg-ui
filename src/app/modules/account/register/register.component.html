@@ -11,7 +11,7 @@
           name="login"
           id="usernameReg"
           class="form-control"
-          [ngModel]="registrationEmail"
+          [(ngModel)]="registrationEmail"
           required
         >
         <span class="errorMessage small" [class.valid]="!invalidLogin">
@@ -30,7 +30,7 @@
           class="form-control"
           (focus)="togglePasswordFocus($event, '')"
           (blur)="togglePasswordFocus($event, '********')"
-          [ngModel]="registrationPassword"
+          [(ngModel)]="registrationPassword"
           required
           #password
         >
@@ -105,7 +105,7 @@
     name="j_username"
     id="username"
     class="form-control"
-    [ngModel]="registrationEmail"
+    [(ngModel)]="registrationEmail"
   >
   <input
     type="password"
@@ -114,6 +114,6 @@
     name="j_password"
     id="password"
     class="form-control"
-    [ngModel]="registrationPassword"
+    [(ngModel)]="registrationPassword"
   >
 </form>

@@ -15,19 +15,19 @@
     <h6 *ngIf="!currentCoupon" [innerHTML]="'coupons.modal.newCoupon.tab1.desc' | translate"></h6>
     <div class="coupon-tab-item">
       <label for="name" class="control-label">{{ 'coupons.modal.newCoupon.name.title' | translate }}</label>
-      <input type="text" id="name" class="form-control" name="name" [ngModel]="editableCoupon.name">
+      <input type="text" id="name" class="form-control" name="name" [(ngModel)]="editableCoupon.name">
       <span class="small" [innerHTML]="'coupons.modal.newCoupon.name.desc' | translate"></span>
     </div>
 
     <div class="coupon-tab-item">
       <label for="code" class="control-label">{{ 'coupons.modal.newCoupon.code.title' | translate }}</label>
-      <input type="text" id="code" class="form-control" name="name" [ngModel]="editableCoupon.code" [disabled]="currentCoupon">
+      <input type="text" id="code" class="form-control" name="name" [(ngModel)]="editableCoupon.code" [disabled]="currentCoupon">
       <span *ngIf="!currentCoupon" class="small" [innerHTML]="'coupons.modal.newCoupon.code.desc' | translate"></span>
     </div>
 
     <div class="coupon-tab-item">
       <label for="defaultValue" class="control-label">{{ 'coupons.modal.newCoupon.value.title' | translate }}</label>
-      <input type="text" id="defaultValue" class="form-control" name="name" [ngModel]="editableCoupon.defaultValue">
+      <input type="text" id="defaultValue" class="form-control" name="name" [(ngModel)]="editableCoupon.defaultValue">
       <span class="small" [innerHTML]="'coupons.modal.newCoupon.value.desc' | translate"></span>
     </div>
   </div>
@@ -36,19 +36,19 @@
     <h6 *ngIf="!currentCoupon" [innerHTML]="'coupons.modal.newCoupon.tab2.desc' | translate"></h6>
     <div class="coupon-tab-item">
       <label for="name2" class="control-label">{{ 'coupons.modal.newCoupon.name.title' | translate }}</label>
-      <input type="text" id="name2" class="form-control" name="name" [ngModel]="editableCoupon.name">
+      <input type="text" id="name2" class="form-control" name="name" [(ngModel)]="editableCoupon.name">
       <span class="small" [innerHTML]="'coupons.modal.newCoupon.name.desc' | translate"></span>
     </div>
 
     <div class="coupon-tab-item">
       <label for="code2" class="control-label">{{ 'coupons.modal.newCoupon.code.title' | translate }}</label>
-      <input type="text" id="code2" class="form-control" name="name" [ngModel]="editableCoupon.code" [disabled]="currentCoupon">
+      <input type="text" id="code2" class="form-control" name="name" [(ngModel)]="editableCoupon.code" [disabled]="currentCoupon">
       <span *ngIf="!currentCoupon" class="small mt-3" [innerHTML]="'coupons.modal.newCoupon.code.desc' | translate"></span>
     </div>
 
     <div class="coupon-tab-item">
       <label for="tags" class="control-label">{{ 'coupons.modal.newCoupon.tab2.list.title' | translate }}</label>
-      <textarea type="text" id="tags" class="form-control" rows="5" [ngModel]="tags"></textarea>
+      <textarea type="text" id="tags" class="form-control" rows="5" [(ngModel)]="tags"></textarea>
       <span class="small" [innerHTML]="'coupons.modal.newCoupon.tab2.list.desc' | translate"></span>
     </div>
 
@@ -59,7 +59,7 @@
 
     <div class="coupon-tab-item" *ngIf="editableCoupon.needUseDefault">
       <label for="defaultValue2" class="control-label">{{ 'coupons.modal.newCoupon.value.title' | translate }}</label>
-      <input type="text" id="defaultValue2" class="form-control" name="name" [ngModel]="editableCoupon.defaultValue">
+      <input type="text" id="defaultValue2" class="form-control" name="name" [(ngModel)]="editableCoupon.defaultValue">
       <span class="small" [innerHTML]="'coupons.modal.newCoupon.value.desc' | translate"></span>
     </div>
 
@@ -68,7 +68,7 @@
         {{ 'coupons.modal.newCoupon.tab2.threshold.title' | translate }}
         <a data-container="body" data-toggle="tooltip" data-placement="top" data-title="{{ 'coupons.modal.newCoupon.tab2.threshold.desc1' | translate }}" class="info-link"><i class="fa fa-info-circle"></i></a>
       </label>
-      <input type="number" id="notificationThreshold" [ngModel]="editableCoupon.notificationThreshold" class="form-control" name="name">
+      <input type="number" id="notificationThreshold" [(ngModel)]="editableCoupon.notificationThreshold" class="form-control" name="name">
       <span class="small" [innerHTML]="'coupons.modal.newCoupon.tab2.threshold.desc2' | translate"></span>
     </div>
   </div>

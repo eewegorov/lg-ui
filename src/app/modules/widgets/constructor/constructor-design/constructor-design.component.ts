@@ -82,7 +82,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   private staticWidgetAlign = ['По центру', 'По левому краю', 'По правому краю'];
   private sizeSocBtn = ['Большой', 'Средний', 'Маленький'];
   private placeLabel = ['Нижний левый угол', 'Нижний правый угол', 'Правая сторона браузера', 'Левая сторона браузера'];
-  private globalCouponObject;
+  private globalCouponObject: object;
   private imageCustom = null;
   private linkImage = '';
   private nameImage = '';
@@ -186,6 +186,48 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         $('.panel-group').removeClass('non-scroll');
       }
     });
+
+    this.globalCouponObject = {
+      name: 'coupon-element',
+      coupon: this.coupons.length ? this.coupons[0] : {id: null, name: 'Какой купон хотите использовать?'},
+      font: this.systemFonts[0],
+      fontType: 'systemFont',
+      fontName: '',
+      fontSize: 18,
+      colorText: '#262626',
+      color: '#BEBECC',
+      opacity: '1',
+      borderRadius: 5,
+      rgbaColor: (this.widgetConstructorService.hexToRgb('#BEBECC', 1)).toString(),
+      hoverText: 'Скопировать',
+      clickText: 'Скопировано',
+      actionText: 'Кликните, чтобы скопировать ваш купон на скидку',
+      manualText: 'Вы можете использовать данный купон при оформлении заказа',
+      width_type: this.widthBtn[1],
+      widthpx: 100,
+      counter: 0,
+      position: this.floatBtn[1],
+      positionPopup: this.placePopup[0],
+      closeAfter: false,
+      isCopyAction: false,
+      title: {
+        enable: false,
+        textSummer: '<p>Вы можете редактировать этот текст. Если вы хотите<br>изменить цвет, позиционирование или стиль текста,<br>то выделите фрагмент для появления окна редактора.<br>Размер и шрифт изменяются слева в блоке настроек элемента.</p>',
+        font: this.systemFonts[0],
+        fontType: 'systemFont',
+        fontName: '',
+        fontSize: 12,
+        textShadow: {
+          enable: false,
+          color: '#262626',
+          opacity: '1',
+          rgbaColor: (this.widgetConstructorService.hexToRgb('#262626', 1)).toString(),
+          horiz: 0,
+          vertical: 0,
+          blur: 0
+        }
+      }
+    };
   }
 
   ngAfterViewInit(): void {

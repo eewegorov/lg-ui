@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { Coupon } from '../../../../../core/models/coupons';
 import { CouponService } from '../../../../coupons/services/coupon.service';
@@ -9,7 +9,7 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
   templateUrl: './coupon-element.component.html',
   styleUrls: ['../../../shared/shared.scss', './coupon-element.component.scss']
 })
-export class CouponElementComponent implements OnInit, OnChanges {
+export class CouponElementComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() public index: number;
   @Input() public coupons: Coupon[];
   @Input() public item: Record<string, any>;
@@ -36,14 +36,18 @@ export class CouponElementComponent implements OnInit, OnChanges {
   ) {
   }
 
+  ngAfterViewInit(): void {
+    this.refreshCouponsList();
+  }
+
   ngOnInit(): void {
     this.initPicker();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.item.currentValue !== changes.item.previousValue) {
-      $('#font-picker' + this.index).trigger('setFont', this.item.currentValue.font.name);
-      $('#font-picker-title' + this.index).trigger('setFont', this.item.currentValue.title.font.name);
+    if (changes.item && (changes.item.currentValue !== changes.item.previousValue)) {
+      $('#font-picker' + this.index).trigger('setFont', this.item.font.name);
+      $('#font-picker-title' + this.index).trigger('setFont', this.item.title.font.name);
     }
   }
 
