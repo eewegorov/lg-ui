@@ -23,7 +23,7 @@
           <button class="btn btn-default dropdown-toggle" type="button"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <span class="value">{{changeCompanyWidget.name}}</span>
-            <span class="caret" ></span>
+            <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
             <li *ngFor="let company of getFilteredCompanies()" (click)="changeCurrentCompany(company)">

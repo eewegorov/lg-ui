@@ -28,7 +28,7 @@
           </button>
           <ul class="dropdown-menu" role="menu">
             <ng-container *ngFor="let item of positions; let isEven = even">
-              <li *ngIf="isEven" (click)="setPosition(smWidgets.CALLBACK, item.pos)" >
+              <li *ngIf="isEven" (click)="setPosition(smWidgets.CALLBACK, item.pos)">
                 <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item.text | translate }}</a>
               </li>
             </ng-container>

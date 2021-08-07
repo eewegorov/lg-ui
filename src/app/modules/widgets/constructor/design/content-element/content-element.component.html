@@ -446,7 +446,7 @@
             <div class="timer-wrapper" [ngClass]="hrFlexedPosSel(item.design.align.type)">
               <div class="timer-items">
                 <div *ngIf="isTimerTypeShown(item, 'd')" class="timer-items_item">
-                  <div class="timer-items_item-bgs-wrapper" >
+                  <div class="timer-items_item-bgs-wrapper">
                     <div class="timer-items_item-bgs" [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontNumberSize + 'px', 'font-family': item.design.font.fontFamily, 'color': item.design.colorText}">
                       <div class="timer-item-block" [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}">
                         <span [ngStyle]="{'line-height': item.design.bgHeight + 'px'}">{{ getTimerLabelItem(item, 'd', 0) }}</span>
@@ -464,7 +464,7 @@
                 </div>
 
                 <div class="timer-items_item" *ngIf="isTimerTypeShown(item, 'h')">
-                  <div class="timer-items_item-bgs-wrapper" >
+                  <div class="timer-items_item-bgs-wrapper">
                     <div class="timer-items_item-bgs" [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontNumberSize + 'px', 'font-family': item.design.font.fontFamily, 'color': item.design.colorText}">
                       <div class="timer-item-block" [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}">
                         <span [ngStyle]="{'line-height': item.design.bgHeight + 'px'}">{{getTimerLabelItem(item, 'h', 0)}}</span>
@@ -482,7 +482,7 @@
                 </div>
 
                 <div class="timer-items_item" *ngIf="isTimerTypeShown(item, 'm')">
-                  <div class="timer-items_item-bgs-wrapper" >
+                  <div class="timer-items_item-bgs-wrapper">
                     <div class="timer-items_item-bgs" [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontNumberSize + 'px', 'font-family': item.design.font.fontFamily, 'color': item.design.colorText}">
                       <div class="timer-item-block" [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}">
                         <span [ngStyle]="{'line-height': item.design.bgHeight + 'px'}">{{getTimerLabelItem(item, 'm', 0)}}</span>
@@ -500,7 +500,7 @@
                 </div>
 
                 <div class="timer-items_item">
-                  <div class="timer-items_item-bgs-wrapper" >
+                  <div class="timer-items_item-bgs-wrapper">
                     <div class="timer-items_item-bgs" [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontNumberSize + 'px', 'font-family': item.design.font.fontFamily, 'color': item.design.colorText}">
                       <div class="timer-item-block" [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}">
                         <span [ngStyle]="{'line-height': item.design.bgHeight + 'px'}">{{getTimerLabelItem(item, 's', 0)}}</span>

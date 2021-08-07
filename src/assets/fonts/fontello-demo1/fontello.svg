@@ -3,7 +3,7 @@
 <svg xmlns="http://www.w3.org/2000/svg">
 <metadata>Copyright (C) 2021 by original authors @ fontello.com</metadata>
 <defs>
-<font id="fontello" horiz-adv-x="1000" >
+<font id="fontello" horiz-adv-x="1000">
 <font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
 <missing-glyph horiz-adv-x="1000" />
 <glyph glyph-name="ic_menu_support" unicode="&#xe800;" d="M31 366c0 16 1 33 0 0 0 6 2 12 0 0 27 293 233 483 482 484 1 0 2 0 3 0 0 0 1 0 3 0 264-1 479-216 481-481 0-1 0-2 0-3 0-1 0-2 0-4-2-265-218-481-484-481-268 0-485 217-485 485z m438-388l0 126c-109 20-196 106-215 215h-126c21-178 163-320 341-341z m434 341h-126c-19-109-105-195-214-215v-126c178 21 319 163 340 341z m-215 47c0 95-78 172-172 172-95 0-172-77-172-172 0-95 77-172 172-172 94 0 172 77 172 172z m-219 261v126c-178-21-320-162-341-340h126c20 109 106 195 215 214z m94 126v-126c109-19 195-105 214-214h126c-21 178-162 319-340 340z" horiz-adv-x="1000" />
