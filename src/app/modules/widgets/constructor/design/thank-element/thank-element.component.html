@@ -3,7 +3,7 @@
   id="thankWidget"
   class="hide block-widget-show block-thank"
   [ngClass]="(widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
-  [ngStyle]="{'background': bgStyle, 'border': widget.guiprops['bg'].border.style, 'border-radius': widget.guiprops['bg'].borderRadius + 'px', 'box-shadow': widget.guiprops['bg'].shadow.style}"
+  [ngStyle]="{'background': bgStyle, 'border': widget.guiprops.bg.border?.style, 'border-radius': widget.guiprops.bg.borderRadius + 'px', 'box-shadow': widget.guiprops.bg.shadow?.style}"
 >
   <div class="thank-text-cent">
     <div class="editorFontLine">
@@ -36,7 +36,7 @@
   </div>
 
   <div
-    *ngIf="widget.guiprops.bg.mask.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo'))"
+    *ngIf="widget.guiprops.bg.mask?.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo'))"
     id="globalMask"
     [ngStyle]="{'background': widget.guiprops.bg.mask.rgbaColor, 'border-radius': widget.guiprops['bg'].borderRadius + 'px'}"
   ></div>

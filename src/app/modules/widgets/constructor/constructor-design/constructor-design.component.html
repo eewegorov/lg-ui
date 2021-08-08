@@ -27,66 +27,238 @@
                   </div>
                   <div class="row row-subitem">
                     <div class="col-sm-12 row-subitem-padding mt-2">
-                      <label class="control-label control-label-des">Где показывать всплывающее окно:</label>
+                      <label
+                        *ngIf="widgetType === 'popup'"
+                        class="control-label control-label-des"
+                      >
+                        Где показывать всплывающее окно:
+                      </label>
+                      <label
+                        *ngIf="widgetType === 'optindot'"
+                        class="control-label control-label-des"
+                      >
+                        Где показывать точку захвата:
+                      </label>
+
                       <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                        <button
+                          *ngIf="widgetType === 'popup'"
+                          class="btn btn-default dropdown-toggle"
+                          type="button"
+                          data-toggle="dropdown"
+                          aria-expanded="true"
+                        >
                           {{ widget.guiprops.popupMain?.place }}
-                          <span class="caret"></span>
+                        </button>
+                        <button
+                          *ngIf="widgetType === 'optindot'"
+                          class="btn btn-default dropdown-toggle"
+                          type="button"
+                          data-toggle="dropdown"
+                          aria-expanded="true"
+                        >
+                          {{ widget.guiprops.dhVisual?.place }}
                         </button>
                         <ul class="dropdown-menu dropd-scroll-sm" role="menu">
-                          <li
-                            role="presentation"
-                            *ngFor="let item of placePopup"
-                            (click)="widget.guiprops.popupMain.place = item"
-                          >
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
-                          </li>
+                          <ng-container *ngIf="widgetType === 'popup'">
+                            <li
+                              role="presentation"
+                              *ngFor="let item of placePopup"
+                              (click)="widget.guiprops.popupMain.place = item"
+                            >
+                              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
+                            </li>
+                          </ng-container>
+                          <ng-container *ngIf="widgetType === 'optindot'">
+                            <li
+                              role="presentation"
+                              *ngFor="let item of placeDh"
+                              (click)="widget.guiprops.dhVisual.place = item"
+                            >
+                              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a>
+                            </li>
+                          </ng-container>
                         </ul>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="border-item">
-                  <div class="row row-subitem mb-2">
+
+                <ng-container *ngIf="widgetType === 'popup'">
+                  <div class="border-item">
+                    <div class="row row-subitem mb-2">
+                      <div class="col-sm-12 row-subitem-padding">
+                        <h3 class="marg-minus-bord-des">Маска</h3>
+                      </div>
+                    </div>
+                    <div class="row row-subitem mt-1">
+                      <div class="d-flex col-sm-12 row-subitem-padding pt-1">
+                        <ui-switch
+                          size="small"
+                          [(ngModel)]="widget.guiprops.popupMain?.shadow.enable"
+                        ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Затемнять фон маской при показе виджета</label>
+                      </div>
+                    </div>
+                    <div *ngIf="widget.guiprops.popupMain?.shadow.enable == true">
+                      <div class="row row-subitem">
+                        <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
+                          <label class="control-label control-label-colorpc control-label-des">Цвет маски:</label>
+                          <input
+                            [(colorPicker)]="widget.guiprops['popupMain'].shadow.color"
+                            [style.background]="widget.guiprops['popupMain'].shadow.color"
+                            [cpAlphaChannel]="'disabled'"
+                            [cpOutputFormat]="'hex'"
+                            class="w-100"
+                          />
+                        </div>
+                        <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
+                          <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
+                          <ngx-slider
+                            [(value)]="widget.guiprops['popupMain'].shadow.opacityColor"
+                            [options]="optionsOpacity"
+                          ></ngx-slider>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-3">
                     <div class="col-sm-12 row-subitem-padding">
-                      <h3 class="marg-minus-bord-des">Маска</h3>
+                      <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
                     </div>
                   </div>
-                  <div class="row row-subitem mt-1">
-                    <div class="d-flex col-sm-12 row-subitem-padding pt-1">
-                      <ui-switch
-                        size="small"
-                        [(ngModel)]="widget.guiprops.popupMain?.shadow.enable"
-                      ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Затемнять фон маской при показе виджета</label>
+                </ng-container>
+
+                <ng-container *ngIf="widgetType === 'optindot'">
+                  <div class="border-item">
+                    <div class="row row-subitem m-b-sm">
+                      <div class="col-sm-12 row-subitem-padding">
+                        <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
+                      </div>
                     </div>
-                  </div>
-                  <div *ngIf="widget.guiprops.popupMain?.shadow.enable == true">
+                    <div class="row row-subitem m-t-md">
+                      <div class="col-sm-12 row-subitem-padding">
+                        <h4 class="h4-element-title">Дизайн точки</h4>
+                      </div>
+                    </div>
                     <div class="row row-subitem">
-                      <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
-                        <label class="control-label control-label-colorpc control-label-des">Цвет маски:</label>
+                      <div class="col-sm-6 row-subitem-padding m-t-sm">
+                        <label class="control-label control-label-des">Основной цвет:</label>
                         <input
-                          [(colorPicker)]="widget.guiprops['popupMain'].shadow.color"
-                          [style.background]="widget.guiprops['popupMain'].shadow.color"
+                          [(colorPicker)]="widget.guiprops['dhVisual'].colorMain"
+                          [style.background]="widget.guiprops['dhVisual'].colorMain"
                           [cpAlphaChannel]="'disabled'"
                           [cpOutputFormat]="'hex'"
                           class="w-100"
                         />
                       </div>
-                      <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
-                        <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
-                        <ngx-slider
-                          [(value)]="widget.guiprops['popupMain'].shadow.opacityColor"
-                          [options]="optionsOpacity"
-                        ></ngx-slider>
+                      <div class="col-sm-6 row-subitem-padding m-t-sm">
+                        <label class="control-label control-label-des">Цвет заливки:</label>
+                        <input
+                          [(colorPicker)]="widget.guiprops['dhVisual'].colorBg"
+                          [style.background]="widget.guiprops['dhVisual'].colorBg"
+                          [cpAlphaChannel]="'disabled'"
+                          [cpOutputFormat]="'hex'"
+                          class="w-100"
+                        />
+                      </div>
+                    </div>
+                    <div class="row row-subitem m-t-md">
+                      <div class="col-sm-12 row-subitem-padding">
+                        <h4 class="h4-text-tit control-label-des">Добавить иконку или изображение:</h4>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="flex-bl-for-radio-group">
+                        <div class="row-subitem-padding radio-group-item">
+                          <div class="form-group widget-selector">
+                            <label class="non-bold">
+                              <input
+                                type="radio"
+                                name="dhVisual"
+                                class="radio radio-info radio-inline"
+                                [(ngModel)]="widget.guiprops.dhVisual.iconOrImage" value="useIcon"
+                              >
+                              Иконку
+                            </label>
+                          </div>
+                        </div>
+                        <div class="row-subitem-padding radio-group-item">
+                          <div class="form-group widget-selector">
+                            <label class="non-bold">
+                              <input
+                                type="radio"
+                                name="dhVisual"
+                                class="radio radio-info radio-inline"
+                                [(ngModel)]="widget.guiprops.dhVisual.iconOrImage" value="useImg"
+                              >
+                              Изображение
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="widget.guiprops.dhVisual?.iconOrImage === 'useIcon'" class="row row-subitem">
+                      <div class="col-sm-12 row-subitem-padding">
+                        <h5 class="label-style-ic control-label-des">Иконка:</h5>
+                      </div>
+                      <div class="col-sm-12 row-subitem-padding">
+                        <div class="btn-group">
+                          <button *ngIf="!widget.guiprops.dhVisual.selectedIcon" type="button" class="btn btn-primary">
+                            <i [class]="'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"></i>
+                          </button>
+                          <button *ngIf="widget.guiprops.dhVisual.selectedIcon" type="button" class="btn btn-primary iconpicker-component">
+                            <i class="{{ widget.guiprops.dhVisual.selectedIcon }}"></i>
+                          </button>
+                          <button
+                            type="button"
+                            id="icon-picker-dot"
+                            class="icp icp-dd btn btn-primary dropdown-toggle"
+                            data-selected="fa-car"
+                            data-toggle="dropdown"
+                          >
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                          </button>
+                          <div class="dropdown-menu"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="widget.guiprops.dhVisual?.iconOrImage === 'useImg'">
+                      <div class="row row-subitem">
+                        <div class="col-sm-12 row-subitem-padding m-t-sm">
+                          <a (click)="listFile('dotIcon')" class="widget-download-img">
+                            <i class="fa fa-image"></i> Установить или изменить изображение
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row row-subitem m-t-md">
+                      <div class="col-sm-12 row-subitem-padding padding-top-5">
+                        <ui-switch
+                          size="small"
+                          [(ngModel)]="widget.guiprops.dhVisual.enable"
+                        ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Показывать призыв к действию</label>
+                      </div>
+                    </div>
+                    <div *ngIf="widget.guiprops.dhVisual?.enable">
+                      <div class="row row-subitem m-t-sm">
+                        <div class="col-sm-12 row-subitem-padding">
+                          <label class="control-label control-label-des">Призыв к действию:</label>
+                          <input type="text" class="form-control" [(ngModel)]="widget.guiprops['dhVisual'].title">
+                          <span class="small">Например: Хотите, мы вам перезвоним?</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row row-subitem m-t-md">
+                      <div class="col-sm-12 row-subitem-padding padding-top-5">
+                        <ui-switch
+                          size="small"
+                          [(ngModel)]="widget.guiprops.dhVisual.enableBlink"
+                        ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Убрать мерцание точки захвата</label>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="mt-3">
-                  <div class="col-sm-12 row-subitem-padding">
-                    <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
-                  </div>
-                </div>
+                </ng-container>
+
                 <app-visual-element
                   [widget]="widget"
                   [widgwidthBtn]="widgwidthBtn"

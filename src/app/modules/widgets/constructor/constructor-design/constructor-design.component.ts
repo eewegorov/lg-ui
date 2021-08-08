@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
 import { Coupon } from '../../../../core/models/coupons';
-import { FullWidget } from '../../../../core/models/widgets';
+import { FullWidget, WidgetType } from '../../../../core/models/widgets';
 import { TariffsService } from '../../../../core/services/tariffs.service';
 import { CoreSitesService } from '../../../../core/services/core-sites.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
@@ -55,6 +55,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     'Справа по центру',
     'Слева по центру'
   ];
+  public placeDh = ['Левый нижний угол', 'Правый нижний угол'];
   public vertOrientDh = ['От верхней границы', 'По центру виджета', 'От нижней границы'];
   public bgPositionTypesList = ['Растянуть', 'Замостить'];
   public tilesList = ['Замостить по X', 'Замостить по Y', 'Замостить по X+Y'];
@@ -74,11 +75,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public bgStyle = '';
   public widthImageStyle = '';
   public heightImageStyle = '';
+  public widgetType: string;
   private addElemFromWidget = false;
   private systemFonts = [];
   private controls: Record<string, any>;
   private typeImg = ['От края до края', 'От другого края'];
-  private placeDh = ['Левый нижний угол', 'Правый нижний угол'];
   private staticWidgetAlign = ['По центру', 'По левому краю', 'По правому краю'];
   private sizeSocBtn = ['Большой', 'Средний', 'Маленький'];
   private placeLabel = ['Нижний левый угол', 'Нижний правый угол', 'Правая сторона браузера', 'Левая сторона браузера'];
@@ -238,6 +239,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     });
 
     setTimeout(() => {
+      this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item: WidgetType) => item.id === this.widget.type).code;
       this.changeModel();
       this.changeColorPodAndSRC();
     }, 1500);
@@ -339,25 +341,23 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.widget.guiprops.bg.bgStyle = this.bgStyle;
     }
 
-    if (!this.widget.guiprops.bg.border.enable) {
-      this.widget.guiprops.bg.border.style = '0px solid transparent';
-    } else {
-      this.widget.guiprops.bg.border.style = this.widget.guiprops.bg.border.thickness + 'px solid ' + this.widget.guiprops.bg.border.color;
+    if (this.widget.guiprops.bg.border) {
+      if (!this.widget.guiprops.bg.border.enable) {
+        this.widget.guiprops.bg.border.style = '0px solid transparent';
+      } else {
+        this.widget.guiprops.bg.border.style =
+          this.widget.guiprops.bg.border.thickness + 'px solid ' + this.widget.guiprops.bg.border.color;
+      }
     }
 
-    if (!this.widget.guiprops.bg.shadow.enable) {
-      this.widget.guiprops.bg.shadow.style = '0px 0px 0px 0px rgba(0,0,0,0.25)';
-    } else {
-      this.widget.guiprops.bg.shadow.style =
-        this.widget.guiprops.bg.shadow.horiz + 'px ' + this.widget.guiprops.bg.shadow.vertical + 'px ' +
-        this.widget.guiprops.bg.shadow.blur + 'px ' + this.widgetConstructorService.getRGBAColor(this.widget.guiprops.bg.shadow);
-    }
-
-    if (this.widget.guiprops.bg.mask.enable) {
-      this.widget.guiprops.bg.mask.rgbaColor =
-        (this.widgetConstructorService.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
-    } else {
-      this.widget.guiprops.bg.mask.rgbaColor = 'transparent!important';
+    if (this.widget.guiprops.bg.shadow) {
+      if (!this.widget.guiprops.bg.shadow.enable) {
+        this.widget.guiprops.bg.shadow.style = '0px 0px 0px 0px rgba(0,0,0,0.25)';
+      } else {
+        this.widget.guiprops.bg.shadow.style =
+          this.widget.guiprops.bg.shadow.horiz + 'px ' + this.widget.guiprops.bg.shadow.vertical + 'px ' +
+          this.widget.guiprops.bg.shadow.blur + 'px ' + this.widgetConstructorService.getRGBAColor(this.widget.guiprops.bg.shadow);
+      }
     }
 
     if (this.widget.guiprops.form.enable) {
@@ -1403,8 +1403,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
               $('.extraClassFullWidth').css({ 'margin-left': '0', 'margin-right': '0', width: '100%' });
             }
 
-            if ((!this.widget.guiprops.button.enable && !this.widget.guiprops.form.enable && !this.widget.guiprops.formExt.enable)
-              && (this.widget.guiprops.image.place === 'Справа' || this.widget.guiprops.image.place === 'Слева')) {
+            if ((!this.widget.guiprops.button?.enable && !this.widget.guiprops.form?.enable && !this.widget.guiprops.formExt?.enable)
+              && (this.widget.guiprops.image?.place === 'Справа' || this.widget.guiprops.image?.place === 'Слева')) {
 
               setTimeout(() => {
                 mainBlockW.css({ height: '100%' });

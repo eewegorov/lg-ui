@@ -2,7 +2,7 @@
   *ngIf="widget.guiprops.bg"
   id="mainBlockWidget"
   class="widget1 block-widget-show active"
-  [ngStyle]="{'border': widget.guiprops['bg'].border.style, 'border-radius': widget.guiprops['bg'].borderRadius+'px', 'box-shadow': widget.guiprops['bg'].shadow.style}"
+  [ngStyle]="{'border': widget.guiprops.bg.border?.style, 'border-radius': widget.guiprops.bg.borderRadius + 'px', 'box-shadow': widget.guiprops.bg.shadow?.style}"
 >
   <div
     class="absolute-bg-content"
@@ -18,20 +18,20 @@
   </div>
 
   <div
-    *ngIf="widget.guiprops.bg.mask.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo')) && widget.guiprops.bg.mask.area === 'Вся площадь виджета'"
+    *ngIf="widget.guiprops.bg.mask?.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo')) && widget.guiprops.bg.mask.area === 'Вся площадь виджета'"
     id="globalMask"
     [ngStyle]="{'background': widget.guiprops.bg.mask.rgbaColor}"
   ></div>
 
   <div
-    *ngIf="widget.guiprops.form.enable || widget.guiprops.button.enable || widget.guiprops.formExt.enable"
+    *ngIf="widget.guiprops.form?.enable || widget.guiprops.button?.enable || widget.guiprops.formExt?.enable"
     id="colorFormPod"
     class="color-bg-on-form"
     [ngStyle]="colorPodStyles()"
   ></div>
 
   <div
-    *ngIf="widget.guiprops.image.enable == true"
+    *ngIf="widget.guiprops.image?.enable"
     class="widget-image"
     [ngClass]="classNameImg()"
     [ngStyle]="{'width': widthImageStyle, 'height': heightImageStyle}"
@@ -53,7 +53,7 @@
 
   <div id="widgetMainWr" class="wigdet-main-wr" [ngClass]="classNameImgMain()" [ngStyle]="{'width': widthContentStyle}">
     <div
-      *ngIf="widget.guiprops.bg.mask.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo')) && widget.guiprops.bg.mask.area === 'Только под контентом'"
+      *ngIf="widget.guiprops.bg.mask?.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo')) && widget.guiprops.bg.mask.area === 'Только под контентом'"
       id="widgetMaskTop"
       class="widget-mask"
       [ngStyle]="{'background': widget.guiprops.bg.mask.rgbaColor}"
@@ -165,8 +165,8 @@
         <div *ngIf="item.name == 'iframe-element'" class="social-block-pd">
           <div [ngClass]="hrPosSel(item)">
             <div [ngClass]="heightIfrmPosSel(item)">
-              <div id="elementIframeBlock{{ item.counter }}" class="element-iframe-block" [ngStyle]="{'width': item.widthpx + 'px', 'height': item.heightpx + 'px'}">
-                <iframe id="idFrame{{ item.counter }}">
+              <div [id]="'elementIframeBlock' +  item.counter" class="element-iframe-block" [ngStyle]="{'width': item.widthpx + 'px', 'height': item.heightpx + 'px'}">
+                <iframe [id]="'idFrame' + item.counter">
                   <!DOCTYPE html>
                   <html lang="en">
                   <head><meta charset="UTF-8" /></head>

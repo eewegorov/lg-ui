@@ -651,7 +651,7 @@
       </div>
     </div>
 
-    <div *ngIf="widget.guiprops.bg" class="row row-subitem mt-1">
+    <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.border" class="row row-subitem mt-1">
       <div class="d-flex col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
@@ -659,7 +659,7 @@
         ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Добавить рамку</label>
       </div>
     </div>
-    <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.border.enable == true">
+    <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.border && widget.guiprops.bg.border.enable">
       <div class="row row-subitem">
         <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
           <label class="control-label control-label-colorpc control-label-des">Цвет рамки:</label>
@@ -678,7 +678,7 @@
       </div>
     </div>
 
-    <div *ngIf="widget.guiprops.bg" class="row row-subitem mt-3">
+    <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.shadow" class="row row-subitem mt-3">
       <div class="d-flex col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
@@ -686,7 +686,7 @@
         ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Добавить тень</label>
       </div>
     </div>
-    <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.shadow.enable == true">
+    <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.shadow && widget.guiprops.bg.shadow.enable">
       <div class="row row-subitem">
         <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
           <label class="control-label control-label-colorpc control-label-des">Цвет тени:</label>

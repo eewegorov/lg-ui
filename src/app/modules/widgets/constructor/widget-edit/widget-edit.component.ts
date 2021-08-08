@@ -49,7 +49,6 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   private couponsId = [];
   private customFields = [];
   private formExtIdsCached = [];
-  private types = [];
   private catsList = [];
   private formExtIdsErrorFlag = false;
   private formExtNeedButton = false;
@@ -572,7 +571,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   private initTypes() {
     this.widgetService.getWidgetsTypes().subscribe((response: WidgetType[]) => {
       this.initSites();
-      this.types = response;
+      this.widgetService.setCurrentWidgetsTypes(response);
     });
   }
 

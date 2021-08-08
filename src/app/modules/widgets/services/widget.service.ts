@@ -258,11 +258,11 @@ export class WidgetService {
     return this.currentCompanies;
   }
 
-  public setCurrentWidgetsTypes(types) {
+  public setCurrentWidgetsTypes(types: WidgetType[]): void {
     this.currentWidgetTypes = types;
   }
 
-  public getCurrentWidgetsTypes() {
+  public getCurrentWidgetsTypes(): WidgetType[] {
     return this.currentWidgetTypes;
   }
 
