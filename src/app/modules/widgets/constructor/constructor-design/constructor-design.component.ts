@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
 import { Coupon } from '../../../../core/models/coupons';
-import { FullWidget, WidgetType } from '../../../../core/models/widgets';
+import { FullWidget, WidgetType, WidgetTypeCode } from '../../../../core/models/widgets';
 import { TariffsService } from '../../../../core/services/tariffs.service';
 import { CoreSitesService } from '../../../../core/services/core-sites.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
@@ -39,6 +39,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   @Input() private SP_widget: any;
 
   public isLoading = false;
+  public optionsRound: Options = {
+    floor: 0,
+    ceil: 50,
+    step: 1
+  };
   public optionsOpacity: Options = {
     floor: 0.00,
     ceil: 1.00,
@@ -56,6 +61,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     'Слева по центру'
   ];
   public placeDh = ['Левый нижний угол', 'Правый нижний угол'];
+  public placeLabel = ['Нижний левый угол', 'Нижний правый угол', 'Правая сторона браузера', 'Левая сторона браузера'];
   public vertOrientDh = ['От верхней границы', 'По центру виджета', 'От нижней границы'];
   public bgPositionTypesList = ['Растянуть', 'Замостить'];
   public tilesList = ['Замостить по X', 'Замостить по Y', 'Замостить по X+Y'];
@@ -75,14 +81,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public bgStyle = '';
   public widthImageStyle = '';
   public heightImageStyle = '';
-  public widgetType: string;
+  public widgetType: WidgetTypeCode;
   private addElemFromWidget = false;
   private systemFonts = [];
   private controls: Record<string, any>;
   private typeImg = ['От края до края', 'От другого края'];
   private staticWidgetAlign = ['По центру', 'По левому краю', 'По правому краю'];
   private sizeSocBtn = ['Большой', 'Средний', 'Маленький'];
-  private placeLabel = ['Нижний левый угол', 'Нижний правый угол', 'Правая сторона браузера', 'Левая сторона браузера'];
   private globalCouponObject: object;
   private imageCustom = null;
   private linkImage = '';
@@ -2028,20 +2033,20 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   private setTopForColorPod(mainBl, colorFormPod, widgetFormBlM, widgetButtonBlM, widgetFormExtBlM, offsetPadding) {
     let topOfColorPod: number;
 
-    if (this.widget.guiprops.form.enable) {
+    if (this.widget.guiprops.form?.enable) {
       if (this.widget.guiprops.form.orient === 'Вертикальная') {
         offsetPadding = -8;
       }
       topOfColorPod = widgetFormBlM.offset().top - mainBl.offset().top + offsetPadding;
-    } else if (this.widget.guiprops.button.enable) {
+    } else if (this.widget.guiprops.button?.enable) {
       offsetPadding = 8;
       if (widgetButtonBlM) {
         topOfColorPod = widgetButtonBlM.offset().top - mainBl.offset().top - offsetPadding;
       }
-    } else if (this.widget.guiprops.formExt.enable) {
+    } else if (this.widget.guiprops.formExt?.enable) {
       topOfColorPod = widgetFormExtBlM.offset().top - mainBl.offset().top + offsetPadding;
     }
-    if (this.widget.guiprops.bg.border.enable) {
+    if (this.widget.guiprops.bg?.border?.enable) {
       topOfColorPod = topOfColorPod - this.widget.guiprops.bg.border.thickness;
     }
 

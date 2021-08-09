@@ -216,14 +216,14 @@
                     <div *ngSwitchCase="'inputEl'" class="text-input-class">
                       <input
                         type="text"
-                        *ngIf="item.type !== 'phone' || !widget.guiprops.formSet.phoneMask.enable"
+                        *ngIf="item.type !== 'phone' || (widget.guiprops.formSet.phoneMask && !widget.guiprops.formSet.phoneMask.enable)"
                         [id]="'elementid' + item.type"
                         [ngClass]="classNameFormInput(item.type)"
                         class="form-control form-widget-cntrl"
                         [style]="'background: ' + widget.guiprops['form'].rgbaInputForm + '; color: ' + widget.guiprops['form'].colorTitleInputForm + '; border-radius: ' + widget.guiprops['form'].borderRadiusInputForm + 'px; border-color: ' + widget.guiprops['form'].border.color + '!important'"
                       />
                       <input
-                        *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable"
+                        *ngIf="item.type === 'phone' && (widget.guiprops.formSet.phoneMask && widget.guiprops.formSet.phoneMask.enable)"
                         type="text"
                         [id]="'elementid' + item.type"
                         class="form-control form-widget-cntrl"
@@ -237,7 +237,7 @@
                         [style]="'color: ' + widget.guiprops['form'].colorTitleInputForm"
                       >{{ item.placeholder }}</label>
                       <span
-                        *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable"
+                        *ngIf="item.type === 'phone' && (widget.guiprops.formSet.phoneMask && widget.guiprops.formSet.phoneMask.enable)"
                         class="masked-span-helper"
                         [style]="'color: ' + widget.guiprops['form'].colorTitleInputForm"
                       >{{ getInputFormPhoneMask() }}</span>

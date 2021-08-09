@@ -39,6 +39,12 @@
                       >
                         Где показывать точку захвата:
                       </label>
+                      <label
+                        *ngIf="widgetType === 'label_widget'"
+                        class="control-label control-label-des"
+                      >
+                        Где показывать ярлычок:
+                      </label>
 
                       <div class="dropdown">
                         <button
@@ -59,6 +65,16 @@
                         >
                           {{ widget.guiprops.dhVisual?.place }}
                         </button>
+                        <button
+                          *ngIf="widgetType === 'label_widget'"
+                          class="btn btn-default dropdown-toggle"
+                          type="button"
+                          data-toggle="dropdown"
+                          aria-expanded="true"
+                        >
+                          {{ widget.guiprops.labelMain?.place }}
+                        </button>
+
                         <ul class="dropdown-menu dropd-scroll-sm" role="menu">
                           <ng-container *ngIf="widgetType === 'popup'">
                             <li
@@ -75,7 +91,16 @@
                               *ngFor="let item of placeDh"
                               (click)="widget.guiprops.dhVisual.place = item"
                             >
-                              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{item}}</a>
+                              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
+                            </li>
+                          </ng-container>
+                          <ng-container *ngIf="widgetType === 'label_widget'">
+                            <li
+                              role="presentation"
+                              *ngFor="let item of placeLabel"
+                              (click)="widget.guiprops.labelMain.place = item"
+                            >
+                              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
                             </li>
                           </ng-container>
                         </ul>
@@ -254,6 +279,184 @@
                           size="small"
                           [(ngModel)]="widget.guiprops.dhVisual.enableBlink"
                         ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Убрать мерцание точки захвата</label>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+
+                <ng-container *ngIf="widgetType === 'label_widget'">
+                  <div class="border-item">
+                    <div class="row row-subitem m-b-sm">
+                      <div class="col-sm-12 row-subitem-padding">
+                        <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
+                      </div>
+                    </div>
+                    <div class="row row-subitem m-t-md">
+                      <div class="col-sm-12 row-subitem-padding">
+                        <h4 class="h4-element-title">Дизайн ярлычка</h4>
+                      </div>
+                    </div>
+                    <div class="row row-subitem">
+                      <div class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5 margined-top-10">
+                        <label class="control-label control-label-des">Текст на ярлычке:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="widgetNameInp"
+                          [(ngModel)]="widget.guiprops.labelMain.text"
+                          placeholder="Введите название виджета"
+                        />
+                        <span class="small">Например: Оставьте нам сообщение!</span>
+                      </div>
+                    </div>
+                    <div class="row row-subitem padding-top-5 m-t-md">
+                      <div class="col-sm-12 row-subitem-padding">
+                        <h4 class="h4-text-tit control-label-des helper-title-3level">Шрифт</h4>
+                      </div>
+                      <div class="col-sm-12 row-subitem-padding">
+                        <input id="fontPickerLabelMain" type="text">
+                      </div>
+                    </div>
+                    <div class="row row-subitem">
+                      <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+                        <input
+                          type="number"
+                          class="form-control form-control-font form-cntrl-45w"
+                          [(ngModel)]="widget.guiprops['labelMain'].fontSize"
+                        />
+                        <label class="control-label">px <span>размер текста</span></label>
+                      </div>
+                    </div>
+                    <div class="row row-subitem padding-top-5 m-t-md">
+                      <div class="col-sm-12 row-subitem-padding">
+                        <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка стиля</h4>
+                      </div>
+                    </div>
+                    <div class="row row-subitem">
+                      <div class="col-sm-6 row-subitem-padding padding-top-5">
+                        <label class="control-label control-label-colorpc control-label-des">Цвет ярлычка:</label>
+                        <input
+                          [(colorPicker)]="widget.guiprops['labelMain'].colorLabel"
+                          [style.background]="widget.guiprops['labelMain'].colorLabel"
+                          [cpAlphaChannel]="'disabled'"
+                          [cpOutputFormat]="'hex'"
+                          class="w-100"
+                        />
+                      </div>
+                      <div class="col-sm-6 row-subitem-padding padding-top-5">
+                        <label class="control-label control-label-colorpc control-label-des">Цвет текста:</label>
+                        <input
+                          [(colorPicker)]="widget.guiprops['labelMain'].colorText"
+                          [style.background]="widget.guiprops['labelMain'].colorText"
+                          [cpAlphaChannel]="'disabled'"
+                          [cpOutputFormat]="'hex'"
+                          class="w-100"
+                        />
+                      </div>
+                    </div>
+                    <div class="row row-subitem m-t-sm">
+                      <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
+                        <ngx-slider [(value)]="widget.guiprops['labelMain'].opacityBgLabel" [options]="optionsOpacity"></ngx-slider>
+                        <label class="control-label control-label-ui">Прозрачность</label>
+                      </div>
+                    </div>
+                    <div class="row row-subitem m-t-sm m-b-md">
+                      <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
+                        <ngx-slider [(value)]="widget.guiprops['labelMain'].borderRadiusLabel" [options]="optionsRound"></ngx-slider>
+                        <label class="control-label control-label-ui">Закругление углов</label>
+                      </div>
+                    </div>
+                    <div class="row row-subitem m-t-md">
+                      <div class="col-sm-12 row-subitem-padding">
+                        <h4 class="h4-text-tit control-label-des">Добавить иконку или изображение на ярлычок:</h4>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="flex-bl-for-radio-group">
+                        <div class="row-subitem-padding radio-group-item">
+                          <div class="form-group widget-selector">
+                            <label class="non-bold">
+                              <input
+                                type="radio"
+                                name="label"
+                                class="radio radio-info radio-inline"
+                                [(ngModel)]="widget.guiprops.labelMain.iconOrImage"
+                                value="useIcon"
+                              />
+                              Иконку
+                            </label>
+                          </div>
+                        </div>
+                        <div class="row-subitem-padding radio-group-item">
+                          <div class="form-group widget-selector">
+                            <label class="non-bold">
+                              <input
+                                type="radio"
+                                name="label"
+                                class="radio radio-info radio-inline"
+                                [(ngModel)]="widget.guiprops.labelMain.iconOrImage"
+                                value="useImg"
+                              />
+                              Изображение
+                            </label>
+                          </div>
+                        </div>
+                        <div class="row-subitem-padding">
+                          <div class="form-group widget-selector">
+                            <label class="non-bold">
+                              <input
+                                type="radio"
+                                name="label"
+                                class="radio radio-info radio-inline"
+                                [(ngModel)]="widget.guiprops.labelMain.iconOrImage"
+                                value="useNone"
+                              />
+                              Не добавлять
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="widget.guiprops.labelMain.iconOrImage === 'useIcon'">
+                      <div class="row row-subitem">
+                        <div class="col-sm-6 row-subitem-padding padding-top-5">
+                          <label class="control-label control-label-colorpc control-label-des">Цвет иконки:</label>
+                          <input
+                            [(colorPicker)]="widget.guiprops['labelMain'].icon.color"
+                            [style.background]="widget.guiprops['labelMain'].icon.color"
+                            [cpAlphaChannel]="'disabled'"
+                            [cpOutputFormat]="'hex'"
+                            class="w-100"
+                          />
+                        </div>
+                      </div>
+                      <div class="row row-subitem">
+                        <div class="col-sm-12 row-subitem-padding margined-top-10">
+                          <h5 class="label-style-ic control-label-des">{{ 'widgets.formExt.button.icon.label' | translate }}:</h5>
+                        </div>
+                        <div class="col-sm-12 row-subitem-padding">
+                          <div class="btn-group">
+                            <button *ngIf="!widget.guiprops.labelMain.icon.selectedIcon" type="button" class="btn btn-primary">
+                              <i [class]="'lgiconfont-' + widget.guiprops.labelMain.icon.selectIcon"></i>
+                            </button>
+                            <button *ngIf="widget.guiprops.labelMain.icon.selectedIcon" type="button" class="btn btn-primary iconpicker-component">
+                              <i [class]="widget.guiprops.labelMain.icon.selectedIcon"></i>
+                            </button>
+                            <button type="button" id="icon-picker-label" class="icp icp-dd btn btn-primary dropdown-toggle" data-selected="fa-car" data-toggle="dropdown">
+                              <span class="caret"></span>
+                              <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="widget.guiprops.labelMain.iconOrImage === 'useImg'">
+                      <div class="row row-subitem">
+                        <div class="col-sm-12 row-subitem-padding m-t-sm m-b-xs">
+                          <a (click)="listFile('labelIcon')" class="widget-download-img">
+                            <i class="fa fa-image"></i> Установить или изменить изображение
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>

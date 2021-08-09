@@ -30,7 +30,6 @@ export class ButtonElementComponent implements OnInit {
     step: 0.1
   };
 
-
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
   ngOnInit(): void {

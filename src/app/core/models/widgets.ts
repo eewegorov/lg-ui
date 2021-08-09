@@ -244,7 +244,7 @@ export interface WidgetType {
   name: string;
   description: string;
   previewLink: string;
-  code: string;
+  code: WidgetTypeCode;
   static: boolean;
   containerized: boolean;
 }
@@ -338,6 +338,13 @@ export interface Mockup extends MockupShort {
 export interface SiteForWidget {
   id: string;
   name: string;
+}
+
+export enum WidgetTypeCode {
+  Containerized = 'containerized',
+  Popup = 'popup',
+  Optindot = 'optindot',
+  LabelWidget = 'label_widget'
 }
 
 

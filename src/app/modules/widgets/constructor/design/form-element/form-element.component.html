@@ -35,30 +35,30 @@
             <div class="mt-2 formReqBl">
               <ui-switch
                 size="small"
-                [checked]="item.required"
+                [(ngModel)]="item.required"
               ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Поле обязательно к заполнению</label>
             </div>
 
-            <div class="mt-2 formReqBl" *ngIf="item.type === 'phone'">
+            <div class="mt-2 formReqBl" *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask">
               <ui-switch
                 size="small"
-                [checked]="widget.guiprops.formSet.phoneMask.enable"
+                [(ngModel)]="widget.guiprops.formSet.phoneMask.enable"
               ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">{{ 'widgets.form.phoneMask.titleSwitcher' | translate }}</label>
             </div>
-            <div *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask.enable" class="mt-2 formReqBl">
+            <div *ngIf="item.type === 'phone' && widget.guiprops.formSet?.phoneMask?.enable" class="mt-2 formReqBl">
               <label class="control-label">{{ 'widgets.form.phoneMask.titleInput' | translate }}</label>
               <input type="text" class="form-control" (keyup)="blockedUnusedChars()" [(ngModel)]="widget.guiprops.formSet.phoneMask.maskValue">
               <span class="small">{{ 'widgets.form.phoneMask.description' | translate }}</span>
             </div>
 
-            <div *ngIf="widget.guiprops['formSet'].items.length > 1" class="remove-sub-form-item mr-2">
+            <div *ngIf="widget.guiprops.formSet?.items.length > 1" class="remove-sub-form-item mr-2">
               <a (click)="removePageInputItem(i)" href="javascript:void(0);"><i class="remove-sub-item col-sm-1 pe-7s-close-circle"></i></a>
             </div>
           </div>
 
           <div class="add-sub-form-item mr-3 mt-2">
             <a
-              *ngIf="widget.guiprops['formSet'].items.length < 4"
+              *ngIf="widget.guiprops.formSet?.items.length < 4"
               (click)="addPageInputItem()"
               href="javascript:void(0);"
             >Добавить еще одно поле<i class="remove-sub-item col-sm-1 fa fa-plus"></i></a>
@@ -166,11 +166,11 @@
       <div class="d-flex col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
-          [checked]="widget.guiprops.form.border.enable"
+          [(ngModel)]="widget.guiprops.form.border.enable"
         ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Использовать рамку вокруг полей</label>
       </div>
     </div>
-    <div *ngIf="widget.guiprops['form'].border.enable == true">
+    <div *ngIf="widget.guiprops['form'].border?.enable">
       <div class="row row-subitem">
         <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-colorpc control-label-des">Цвет рамки:</label>
@@ -187,11 +187,11 @@
       <div class="d-flex col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
-          [checked]="widget.guiprops.form.colorPod.enable"
+          [(ngModel)]="widget.guiprops.form.colorPod.enable"
         ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Использовать подложку под формой</label>
       </div>
     </div>
-    <div *ngIf="widget.guiprops['form'].colorPod.enable == true">
+    <div *ngIf="widget.guiprops['form'].colorPod?.enable">
       <div class="row row-subitem">
         <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-colorpc control-label-des">Цвет подложки:</label>
