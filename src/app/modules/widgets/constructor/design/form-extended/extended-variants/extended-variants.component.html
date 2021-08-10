@@ -1,1 +1,223 @@
-<p>extended-variants works!</p>
+<div>
+  <div class="row row-subitem">
+    <div class="col-sm-12 row-subitem-padding padding-top-5">
+      <div class="item-placeholder-name">{{ item.service }}</div>
+    </div>
+  </div>
+  <div class="row row-subitem">
+    <div class="col-sm-12 row-subitem-padding padding-top-5">
+      <div class="item-placeholder-type">{{ item.label }}</div>
+    </div>
+  </div>
+
+  <div class="form-ext-item__toggled-wrapper">
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-des">{{ 'widgets.formExt.choseTypeOfItem' | translate }}:</label>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{ item.label }}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation" *ngFor="let itemForm of availItemTypes" (click)="changeFormType(itemForm.type)">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5 form-ext-item__item-input">
+        <label class="control-label control-label-des">{{ 'widgets.formExt.email.service1' | translate }}:</label>
+        <input type="text" class="form-control" [(ngModel)]="item.service">
+        <span class="input-down-sm-lab small">{{ 'widgets.formExt.email.service3' | translate }}</span>
+      </div>
+    </div>
+
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5 form-ext-item__item-input">
+        <label class="control-label control-label-des">{{ 'widgets.formExt.email.id1' | translate }}:</label>
+        <input type="text" class="form-control form-control-form-ext-id-field" (blur)="idFocusOut()" [(ngModel)]="item.idField">
+        <span class="input-down-sm-lab">{{ 'widgets.formExt.mainSettings.id.example' | translate }}</span>
+      </div>
+    </div>
+    <div class="row row-subitem">
+      <div
+        class="col-sm-12 row-subitem-padding m-t-sm widget-small-text"
+        [innerHTML]="'widgets.formExt.mainSettings.id.description' | translate"
+      ></div>
+    </div>
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="item.useOutsideCRM"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
+          {{ 'widgets.formExt.mainSettings.id.useOutsideCRM' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-des">{{ 'widgets.formExt.variants.variants' | translate }}:</label>
+      </div>
+    </div>
+    <div class="row row-subitem">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <textarea type="text" [(ngModel)]="unmappedVariants" (blur)="unmappedValue()" class="form-control" rows="5"></textarea>
+        <span class="input-down-sm-lab small">{{ 'widgets.formExt.variants.variants.description' | translate }}</span>
+      </div>
+    </div>
+
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-des">{{ 'widgets.formExt.variants.design' | translate }}</label>
+      </div>
+    </div>
+
+    <div class="row row-subitem padding-top-5 m-t-sm">
+      <div class="col-sm-12 row-subitem-padding">
+        <h4 class="h4-text-tit control-label-des">{{ 'widgets.constructor.font.title' | translate }}:</h4>
+      </div>
+      <div class="col-sm-12 row-subitem-padding">
+        <input [id]="'font-picker-ext-form' + index" type="text">
+      </div>
+    </div>
+    <div class="row row-subitem">
+      <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+        <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
+        <label class="control-label">px <span>{{ 'widgets.constructor.font.textSize' | translate }}</span></label>
+      </div>
+    </div>
+
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.constructor.coupon.couponCallback.popupWindow.setting.color' | translate }}:</label>
+        <input
+          [(colorPicker)]="item.colorText"
+          [style.background]="item.colorText"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+        />
+      </div>
+    </div>
+
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <label class="control-label control-label-des">{{ 'widgets.formExt.widthField1' | translate }}:</label>
+      </div>
+    </div>
+    <div class="row row-subitem">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
+          <div>
+            <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthValue">
+          </div>
+
+          <div>
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                {{ item.widthType.label }}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li role="presentation" (click)="item.widthType = itemWidth" *ngFor="let itemWidth of availWidthTypes">
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemWidth.label }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-subitem m-t-sm">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="item.required"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
+          {{ 'widgets.formExt.enableRequire' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-subitem">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="item.newLine"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
+          {{ 'widgets.formExt.newLineField' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-subitem">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="item.everyNewLine"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
+          {{ 'widgets.formExt.variants.every' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-subitem">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="item.multiEnable"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
+          {{ 'widgets.formExt.variants.multi' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-subitem" *ngIf="!item.multiEnable">
+      <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="item.sendFormIfAction"
+              class="form-check-input"
+            />
+            <span class="checkmark"></span>
+          </label>
+          {{ 'widgets.formExt.sendFormIfAnyAction' | translate }}
+        </div>
+        <span class="small form-ext-if-action-desc">{{ 'widgets.formExt.sendFormIfAnyAction.desc' | translate }}</span>
+      </div>
+    </div>
+  </div>
+</div>
