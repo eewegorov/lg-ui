@@ -28,18 +28,6 @@ export class ExtendedButtonComponent implements OnInit, DoCheck {
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
-  ngDoCheck(): void {
-    if (this.item.font.name) {
-      $('#font-picker-ext-form' + this.index).trigger('setFont', this.item.font.name);
-    }
-
-    if (this.item.redirect.types) {
-      if (this.item.redirect.type.type === 0 || this.item.redirect.type.type === 1) {
-        this.item.targetAction = false;
-      }
-    }
-  }
-
   ngOnInit(): void {
     this.initPicker();
     this.initIconPicker();
@@ -53,6 +41,18 @@ export class ExtendedButtonComponent implements OnInit, DoCheck {
     this.availWidthTypes = this.widgetConstructorService.getExtFormWidthTypes();
     this.redirectAvail = this.containerId ? this.widgetConstructorService.getExtFormBtnRedirectTypesForContainerized() :
       this.widgetConstructorService.getExtFormBtnRedirectTypes();
+  }
+
+  ngDoCheck(): void {
+    if (this.item.font.name) {
+      $('#font-picker-ext-form' + this.index).trigger('setFont', this.item.font.name);
+    }
+
+    if (this.item.redirect.types) {
+      if (this.item.redirect.type.type === 0 || this.item.redirect.type.type === 1) {
+        this.item.targetAction = false;
+      }
+    }
   }
 
   public changeFormType(type) {
