@@ -9,11 +9,11 @@
     [ngClass]="(widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
     [ngStyle]="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity}"
   >
-    <div *ngIf="widget.guiprops.bg.fillorImg === 'useVideo'" class="video-bg">
-      <div *ngIf="widget.guiprops.bg.video.videoId" [ngClass]="setVideoBGStyle()">
+    <div *ngIf="widget.guiprops.bg.fillorImg === 'useVideo'" class="video-bg" #videoBg>
+      <div *ngIf="widget.guiprops.bg.video?.videoId" [ngClass]="videoBgClass">
         <iframe style="" id="idBgVideoFrame" src="" frameborder="0"></iframe>
       </div>
-      <img *ngIf="!widget.guiprops.bg.video.videoId" class="item-image-video-block" src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
+      <img *ngIf="!widget.guiprops.bg.video?.videoId" class="item-image-video-block" src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
     </div>
   </div>
 

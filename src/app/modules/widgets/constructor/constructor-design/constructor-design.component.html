@@ -25,6 +25,26 @@
                       <h3 class="marg-minus-bord-des">Расположение</h3>
                     </div>
                   </div>
+
+                  <div *ngIf="widgetType === 'containerized'" class="row row-subitem row-static-widget-wrapper">
+                    <div class="col-sm-12 row-subitem-padding m-t-sm">
+                      <label class="control-label">Код установки виджета:</label>
+                      <input
+                        type="text"
+                        appSelectOnClick
+                        [(ngModel)]="staticWidgetInstallCode"
+                        readonly
+                        class="form-control not-readonly-hand"
+                        name="name"
+                      />
+                    </div>
+                  </div>
+                  <div class="row row-subitem row-static-widget-wrapper m-b-xs">
+                    <div class="col-sm-12 row-subitem-padding m-t-sm widget-small-text">
+                      Установите этот код в месте на странице сайта, где вы хотите разместить виджет. Обратите внимание, что для всех виджетов в одном контейнере используется единый код установки. И если этот код уже установлен, то повторная его установка не требуется.
+                    </div>
+                  </div>
+
                   <div class="row row-subitem">
                     <div class="col-sm-12 row-subitem-padding mt-2">
                       <label
@@ -44,6 +64,12 @@
                         class="control-label control-label-des"
                       >
                         Где показывать ярлычок:
+                      </label>
+                      <label
+                        *ngIf="widgetType === 'containerized'"
+                        class="control-label control-label-des"
+                      >
+                        Ориентация виджета:
                       </label>
 
                       <div class="dropdown">
@@ -74,6 +100,15 @@
                         >
                           {{ widget.guiprops.labelMain?.place }}
                         </button>
+                        <button
+                          *ngIf="widgetType === 'containerized'"
+                          class="btn btn-default dropdown-toggle"
+                          type="button"
+                          data-toggle="dropdown"
+                          aria-expanded="true"
+                        >
+                          {{ widget.guiprops.staticMain?.position }}
+                        </button>
 
                         <ul class="dropdown-menu dropd-scroll-sm" role="menu">
                           <ng-container *ngIf="widgetType === 'popup'">
@@ -99,6 +134,15 @@
                               role="presentation"
                               *ngFor="let item of placeLabel"
                               (click)="widget.guiprops.labelMain.place = item"
+                            >
+                              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
+                            </li>
+                          </ng-container>
+                          <ng-container *ngIf="widgetType === 'containerized'">
+                            <li
+                              role="presentation"
+                              *ngFor="let item of staticWidgetAlign"
+                              (click)="widget.guiprops.staticMain.position = item"
                             >
                               <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
                             </li>
@@ -458,6 +502,14 @@
                           </a>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </ng-container>
+
+                <ng-container *ngIf="widgetType === 'containerized'">
+                  <div class="mt-3">
+                    <div class="col-sm-12 row-subitem-padding">
+                      <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
                     </div>
                   </div>
                 </ng-container>

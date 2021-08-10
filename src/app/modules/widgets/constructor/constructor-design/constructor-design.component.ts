@@ -62,6 +62,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   ];
   public placeDh = ['Левый нижний угол', 'Правый нижний угол'];
   public placeLabel = ['Нижний левый угол', 'Нижний правый угол', 'Правая сторона браузера', 'Левая сторона браузера'];
+  public staticWidgetAlign = ['По центру', 'По левому краю', 'По правому краю'];
   public vertOrientDh = ['От верхней границы', 'По центру виджета', 'От нижней границы'];
   public bgPositionTypesList = ['Растянуть', 'Замостить'];
   public tilesList = ['Замостить по X', 'Замостить по Y', 'Замостить по X+Y'];
@@ -81,12 +82,12 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public bgStyle = '';
   public widthImageStyle = '';
   public heightImageStyle = '';
+  public staticWidgetInstallCode = '';
   public widgetType: WidgetTypeCode;
   private addElemFromWidget = false;
   private systemFonts = [];
   private controls: Record<string, any>;
   private typeImg = ['От края до края', 'От другого края'];
-  private staticWidgetAlign = ['По центру', 'По левому краю', 'По правому краю'];
   private sizeSocBtn = ['Большой', 'Средний', 'Маленький'];
   private globalCouponObject: object;
   private imageCustom = null;
@@ -111,6 +112,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
 
   ngOnInit(): void {
     this.systemFonts = this.widgetConstructorService.getSystemFontList();
+
+    this.staticWidgetInstallCode = this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
 
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
 

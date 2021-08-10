@@ -1,4 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { FullWidget } from '../../../../../core/models/widgets';
 import { WidgetConstructorService } from '../../../services/widget-constructor.service';
 
@@ -7,7 +17,7 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
   templateUrl: './content-element.component.html',
   styleUrls: ['../../../shared/shared.scss', './content-element.component.scss']
 })
-export class ContentElementComponent implements OnInit {
+export class ContentElementComponent implements OnInit, AfterContentInit {
   @Input() public widget: FullWidget;
   @Input() public bgStyle: string;
   @Input() public widthImageStyle: string;
@@ -18,6 +28,8 @@ export class ContentElementComponent implements OnInit {
   @Output() private removeElement = new EventEmitter<{index: number, elem: Record<string, string>}>();
   @Output() private scrollToElement = new EventEmitter<{id: string, elementName: string}>();
   @Output() private addNewElement = new EventEmitter<number>();
+
+  @ViewChild('videoBg') videoBg: ElementRef;
 
   public showAddButtonOnWidget = true;
   public optionsSummernote = {
@@ -39,8 +51,13 @@ export class ContentElementComponent implements OnInit {
   public widthBtnStyle = '';
   public widthBtnFormStyle = '';
   public widthExitBtnStyle = '';
+  public videoBgClass = '';
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }
+
+  ngAfterContentInit(): void {
+    this.videoBgClass = this.setVideoBGStyle();
+  }
 
   ngOnInit(): void {
     if (this.widget.guiprops?.button?.btn_width === 'Собственная') {
@@ -562,8 +579,11 @@ export class ContentElementComponent implements OnInit {
   }
 
   public setVideoBGStyle() {
-    if (($('.video-bg').width() !== 0) && ($('.video-bg').height() !== 0)) {
-      if (($('.video-bg').width() / $('.video-bg').height()) >= (16 / 9)) {
+    if (! this.videoBg || !this.videoBg.nativeElement) {
+      return '';
+    }
+    if (($(this.videoBg.nativeElement).width() !== 0) && ($(this.videoBg.nativeElement).height() !== 0)) {
+      if (($(this.videoBg.nativeElement).width() / $(this.videoBg.nativeElement).height()) >= (16 / 9)) {
         return 'wide-video-bg-ext';
       } else {
         return 'narrow-video-bg-ext';
