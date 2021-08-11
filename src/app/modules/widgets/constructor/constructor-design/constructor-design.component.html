@@ -27,7 +27,7 @@
                   </div>
 
                   <div *ngIf="widgetType === 'containerized'" class="row row-subitem row-static-widget-wrapper">
-                    <div class="col-sm-12 row-subitem-padding m-t-sm">
+                    <div class="col-sm-12 row-subitem-padding mt-2">
                       <label class="control-label">Код установки виджета:</label>
                       <input
                         type="text"
@@ -39,8 +39,8 @@
                       />
                     </div>
                   </div>
-                  <div class="row row-subitem row-static-widget-wrapper m-b-xs">
-                    <div class="col-sm-12 row-subitem-padding m-t-sm widget-small-text">
+                  <div class="row row-subitem row-static-widget-wrapper mb-1">
+                    <div class="col-sm-12 row-subitem-padding mt-2 widget-small-text">
                       Установите этот код в месте на странице сайта, где вы хотите разместить виджет. Обратите внимание, что для всех виджетов в одном контейнере используется единый код установки. И если этот код уже установлен, то повторная его установка не требуется.
                     </div>
                   </div>
@@ -199,18 +199,18 @@
 
                 <ng-container *ngIf="widgetType === 'optindot'">
                   <div class="border-item">
-                    <div class="row row-subitem m-b-sm">
+                    <div class="row row-subitem mb-1">
                       <div class="col-sm-12 row-subitem-padding">
                         <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
                       </div>
                     </div>
-                    <div class="row row-subitem m-t-md">
+                    <div class="row row-subitem mt-2">
                       <div class="col-sm-12 row-subitem-padding">
                         <h4 class="h4-element-title">Дизайн точки</h4>
                       </div>
                     </div>
                     <div class="row row-subitem">
-                      <div class="col-sm-6 row-subitem-padding m-t-sm">
+                      <div class="col-sm-6 row-subitem-padding mt-2">
                         <label class="control-label control-label-des">Основной цвет:</label>
                         <input
                           [(colorPicker)]="widget.guiprops['dhVisual'].colorMain"
@@ -220,7 +220,7 @@
                           class="w-100"
                         />
                       </div>
-                      <div class="col-sm-6 row-subitem-padding m-t-sm">
+                      <div class="col-sm-6 row-subitem-padding mt-2">
                         <label class="control-label control-label-des">Цвет заливки:</label>
                         <input
                           [(colorPicker)]="widget.guiprops['dhVisual'].colorBg"
@@ -231,7 +231,7 @@
                         />
                       </div>
                     </div>
-                    <div class="row row-subitem m-t-md">
+                    <div class="row row-subitem mt-2">
                       <div class="col-sm-12 row-subitem-padding">
                         <h4 class="h4-text-tit control-label-des">Добавить иконку или изображение:</h4>
                       </div>
@@ -293,15 +293,15 @@
                     </div>
                     <div *ngIf="widget.guiprops.dhVisual?.iconOrImage === 'useImg'">
                       <div class="row row-subitem">
-                        <div class="col-sm-12 row-subitem-padding m-t-sm">
+                        <div class="col-sm-12 row-subitem-padding mt-2">
                           <a (click)="listFile('dotIcon')" class="widget-download-img">
                             <i class="fa fa-image"></i> Установить или изменить изображение
                           </a>
                         </div>
                       </div>
                     </div>
-                    <div class="row row-subitem m-t-md">
-                      <div class="col-sm-12 row-subitem-padding padding-top-5">
+                    <div class="row row-subitem mt-2">
+                      <div class="col-sm-12 row-subitem-padding pt-1">
                         <ui-switch
                           size="small"
                           [(ngModel)]="widget.guiprops.dhVisual.enable"
@@ -309,7 +309,7 @@
                       </div>
                     </div>
                     <div *ngIf="widget.guiprops.dhVisual?.enable">
-                      <div class="row row-subitem m-t-sm">
+                      <div class="row row-subitem mt-2">
                         <div class="col-sm-12 row-subitem-padding">
                           <label class="control-label control-label-des">Призыв к действию:</label>
                           <input type="text" class="form-control" [(ngModel)]="widget.guiprops['dhVisual'].title">
@@ -317,8 +317,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row row-subitem m-t-md">
-                      <div class="col-sm-12 row-subitem-padding padding-top-5">
+                    <div class="row row-subitem mt-2">
+                      <div class="col-sm-12 row-subitem-padding pt-1">
                         <ui-switch
                           size="small"
                           [(ngModel)]="widget.guiprops.dhVisual.enableBlink"
@@ -330,18 +330,18 @@
 
                 <ng-container *ngIf="widgetType === 'label_widget'">
                   <div class="border-item">
-                    <div class="row row-subitem m-b-sm">
+                    <div class="row row-subitem mb-1">
                       <div class="col-sm-12 row-subitem-padding">
                         <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
                       </div>
                     </div>
-                    <div class="row row-subitem m-t-md">
+                    <div class="row row-subitem mt-2">
                       <div class="col-sm-12 row-subitem-padding">
                         <h4 class="h4-element-title">Дизайн ярлычка</h4>
                       </div>
                     </div>
                     <div class="row row-subitem">
-                      <div class="col-sm-12 widget-name-block-rel row-subitem-padding padding-top-5 margined-top-10">
+                      <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
                         <label class="control-label control-label-des">Текст на ярлычке:</label>
                         <input
                           type="text"
@@ -353,7 +353,7 @@
                         <span class="small">Например: Оставьте нам сообщение!</span>
                       </div>
                     </div>
-                    <div class="row row-subitem padding-top-5 m-t-md">
+                    <div class="row row-subitem pt-1 mt-2">
                       <div class="col-sm-12 row-subitem-padding">
                         <h4 class="h4-text-tit control-label-des helper-title-3level">Шрифт</h4>
                       </div>
@@ -362,7 +362,7 @@
                       </div>
                     </div>
                     <div class="row row-subitem">
-                      <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+                      <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
                         <input
                           type="number"
                           class="form-control form-control-font form-cntrl-45w"
@@ -371,13 +371,13 @@
                         <label class="control-label">px <span>размер текста</span></label>
                       </div>
                     </div>
-                    <div class="row row-subitem padding-top-5 m-t-md">
+                    <div class="row row-subitem pt-1 mt-2">
                       <div class="col-sm-12 row-subitem-padding">
                         <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка стиля</h4>
                       </div>
                     </div>
                     <div class="row row-subitem">
-                      <div class="col-sm-6 row-subitem-padding padding-top-5">
+                      <div class="col-sm-6 row-subitem-padding pt-1">
                         <label class="control-label control-label-colorpc control-label-des">Цвет ярлычка:</label>
                         <input
                           [(colorPicker)]="widget.guiprops['labelMain'].colorLabel"
@@ -387,7 +387,7 @@
                           class="w-100"
                         />
                       </div>
-                      <div class="col-sm-6 row-subitem-padding padding-top-5">
+                      <div class="col-sm-6 row-subitem-padding pt-1">
                         <label class="control-label control-label-colorpc control-label-des">Цвет текста:</label>
                         <input
                           [(colorPicker)]="widget.guiprops['labelMain'].colorText"
@@ -398,19 +398,19 @@
                         />
                       </div>
                     </div>
-                    <div class="row row-subitem m-t-sm">
-                      <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
+                    <div class="row row-subitem mt-2">
+                      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
                         <ngx-slider [(value)]="widget.guiprops['labelMain'].opacityBgLabel" [options]="optionsOpacity"></ngx-slider>
                         <label class="control-label control-label-ui">Прозрачность</label>
                       </div>
                     </div>
-                    <div class="row row-subitem m-t-sm m-b-md">
-                      <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
+                    <div class="row row-subitem mt-2 mb-3">
+                      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
                         <ngx-slider [(value)]="widget.guiprops['labelMain'].borderRadiusLabel" [options]="optionsRound"></ngx-slider>
                         <label class="control-label control-label-ui">Закругление углов</label>
                       </div>
                     </div>
-                    <div class="row row-subitem m-t-md">
+                    <div class="row row-subitem mt-2">
                       <div class="col-sm-12 row-subitem-padding">
                         <h4 class="h4-text-tit control-label-des">Добавить иконку или изображение на ярлычок:</h4>
                       </div>
@@ -462,7 +462,7 @@
                     </div>
                     <div *ngIf="widget.guiprops.labelMain.iconOrImage === 'useIcon'">
                       <div class="row row-subitem">
-                        <div class="col-sm-6 row-subitem-padding padding-top-5">
+                        <div class="col-sm-6 row-subitem-padding pt-1">
                           <label class="control-label control-label-colorpc control-label-des">Цвет иконки:</label>
                           <input
                             [(colorPicker)]="widget.guiprops['labelMain'].icon.color"
@@ -474,7 +474,7 @@
                         </div>
                       </div>
                       <div class="row row-subitem">
-                        <div class="col-sm-12 row-subitem-padding margined-top-10">
+                        <div class="col-sm-12 row-subitem-padding mt-2">
                           <h5 class="label-style-ic control-label-des">{{ 'widgets.formExt.button.icon.label' | translate }}:</h5>
                         </div>
                         <div class="col-sm-12 row-subitem-padding">
@@ -496,7 +496,7 @@
                     </div>
                     <div *ngIf="widget.guiprops.labelMain.iconOrImage === 'useImg'">
                       <div class="row row-subitem">
-                        <div class="col-sm-12 row-subitem-padding m-t-sm m-b-xs">
+                        <div class="col-sm-12 row-subitem-padding mt-2 mb-1">
                           <a (click)="listFile('labelIcon')" class="widget-download-img">
                             <i class="fa fa-image"></i> Установить или изменить изображение
                           </a>

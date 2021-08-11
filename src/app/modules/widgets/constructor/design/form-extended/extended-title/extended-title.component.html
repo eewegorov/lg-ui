@@ -1,18 +1,18 @@
 <div>
   <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="col-sm-12 row-subitem-padding pt-1">
       <div class="item-placeholder-name">{{ item.placeholder }}</div>
     </div>
   </div>
   <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="col-sm-12 row-subitem-padding pt-1">
       <div class="item-placeholder-type">{{ item.label }}</div>
     </div>
   </div>
 
   <div class="form-ext-item__toggled-wrapper">
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label class="control-label control-label-des">{{ 'widgets.formExt.choseTypeOfItem' | translate }}:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="row row-subitem padding-top-5 m-t-sm">
+    <div class="row row-subitem pt-1 mt-2">
       <div class="col-sm-12 row-subitem-padding">
         <h4 class="h4-text-tit control-label-des">{{ 'widgets.constructor.font.title' | translate }}:</h4>
       </div>
@@ -37,14 +37,14 @@
       </div>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+      <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
         <label class="control-label">px <span>{{ 'widgets.constructor.font.textSize' | translate }}</span></label>
       </div>
     </div>
 
-    <div class="row row-subitem m-t-md">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
           [(ngModel)]="item.textShadow.enable"
@@ -53,7 +53,7 @@
     </div>
     <div *ngIf="item.textShadow.enable == true">
       <div class="row row-subitem">
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.text.shadow.color' | translate }}:</label>
           <input
             [(colorPicker)]="item.textShadow.color"
@@ -62,36 +62,36 @@
             [cpOutputFormat]="'hex'"
           />
         </div>
-        <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+        <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
           <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.text.shadow.opacity' | translate }}:</label>
           <ngx-slider [(value)]="item.textShadow.opacity" [options]="optionsOpacity"></ngx-slider>
         </div>
       </div>
-      <div class="row row-subitem m-t-xs">
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="row row-subitem mt-1">
+        <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.text.shadow.horiz' | translate }}:</label>
           <input type="number" class="form-control form-control-font form-control-block form-cntrl-45w" [(ngModel)]="item.textShadow.horiz">
         </div>
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.text.shadow.vert' | translate }}:</label>
           <input type="number" class="form-control form-control-font form-control-block form-cntrl-45w" [(ngModel)]="item.textShadow.vertical">
         </div>
       </div>
-      <div class="row row-subitem m-t-xs">
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="row row-subitem mt-1">
+        <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.text.shadow.blur' | translate }}:</label>
           <input type="number" class="form-control form-control-font form-control-block form-cntrl-45w" [(ngModel)]="item.textShadow.blur">
         </div>
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label class="control-label control-label-des">{{ 'widgets.formExt.widthField1' | translate }}:</label>
       </div>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
           <div>
             <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthValue">
@@ -114,8 +114,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <div class="form-check">
           <label class="form-check-label">
             <input

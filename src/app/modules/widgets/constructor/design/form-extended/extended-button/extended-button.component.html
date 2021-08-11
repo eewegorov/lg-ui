@@ -1,18 +1,18 @@
 <div>
   <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="col-sm-12 row-subitem-padding pt-1">
       <div class="item-placeholder-name">{{ item.bType.label }}</div>
     </div>
   </div>
   <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="col-sm-12 row-subitem-padding pt-1">
       <div class="item-placeholder-type">{{ item.label }}</div>
     </div>
   </div>
 
   <div class="form-ext-item__toggled-wrapper">
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label class="control-label control-label-des">{{ 'widgets.formExt.choseTypeOfItem' | translate }}:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -32,8 +32,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label class="control-label control-label-des">{{ 'widgets.formExt.button.bType.label' | translate }}:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -51,8 +51,8 @@
 
     <!-- ICON SETTINGS -->
     <div *ngIf="item.bType.type === 1 || item.bType.type === 2">
-      <div class="row row-subitem m-t-sm">
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="row row-subitem mt-2">
+        <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-colorpc control-label-des">
             {{ 'widgets.formExt.button.icon.color' | translate }}:
           </label>
@@ -66,7 +66,7 @@
       </div>
 
       <div class="row row-subitem">
-        <div class="col-sm-12 row-subitem-padding margined-top-10">
+        <div class="col-sm-12 row-subitem-padding mt-2">
           <h5 class="label-style-ic control-label-des">{{ 'widgets.formExt.button.bType3' | translate }}:</h5>
         </div>
         <div class="col-sm-12 row-subitem-padding">
@@ -89,7 +89,7 @@
         </div>
       </div>
       <div *ngIf="item.bType.type === 2" class="row row-subitem">
-        <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+        <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
           <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
           <label class="control-label">px <span>{{ 'widgets.constructor.icon.iconSize' | translate }}</span></label>
         </div>
@@ -99,7 +99,7 @@
 
     <!-- FONT SETTINGS -->
     <div *ngIf="item.bType.type === 0 || item.bType.type === 1">
-      <div class="row row-subitem padding-top-5 m-t-sm">
+      <div class="row row-subitem pt-1 mt-2">
         <div class="col-sm-12 row-subitem-padding">
           <h4 class="h4-text-tit control-label-des">{{ 'widgets.constructor.font.title' | translate }}:</h4>
         </div>
@@ -108,7 +108,7 @@
         </div>
       </div>
       <div class="row row-subitem">
-        <div class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10">
+        <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
           <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
           <label class="control-label">px <span>{{ 'widgets.constructor.font.textSize' | translate }}</span></label>
         </div>
@@ -116,8 +116,8 @@
     </div>
     <!-- END FONT SETTINGS -->
 
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">
           {{ 'widgets.formExt.mainSettings.buttonSettings.color' | translate }}:
         </label>
@@ -128,7 +128,7 @@
           [cpOutputFormat]="'hex'"
         />
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+      <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
         <label class="control-label control-label-colorpc control-label-des">
           {{ 'widgets.formExt.mainSettings.buttonSettings.radiusCorner' | translate }}
         </label>
@@ -136,13 +136,13 @@
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label class="control-label control-label-des">{{ 'widgets.formExt.widthField1' | translate }}:</label>
       </div>
     </div>
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
           <div>
             <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthValue">
@@ -165,8 +165,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <div class="form-check">
           <label class="form-check-label">
             <input
@@ -181,7 +181,7 @@
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
+    <div class="row row-subitem mt-2">
       <div class="col-sm-12 row-subitem-padding">
         <label class="control-label control-label-des">
           {{ 'widgets.formExt.mainSettings.buttonSettings.style' | translate }}:
@@ -237,8 +237,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <label class="control-label control-label-des">
           {{ 'widgets.formExt.mainSettings.buttonSettings.redirect.action' | translate }}:
         </label>
@@ -259,7 +259,7 @@
     <div *ngIf="item.redirect.type.type === 1 || item.redirect.type.type === 3">
       <div class="row row-subitem">
         <div
-          class="col-sm-12 row-subitem-padding padding-top-5 margined-top-10 widget-name-block-rel"
+          class="col-sm-12 row-subitem-padding pt-1 mt-2 widget-name-block-rel"
           [ngClass]="(item.redirect.url === '') ? 'has-error' : ''"
         >
           <label class="control-label">{{ 'widgets.constructor.redirect.onClickRedirect' | translate }}:</label>
@@ -269,13 +269,13 @@
         </div>
       </div>
       <div class="row row-subitem">
-        <div class="col-sm-12 row-subitem-padding m-t-sm widget-small-text">
+        <div class="col-sm-12 row-subitem-padding mt-2 widget-small-text">
           {{ 'widgets.constructor.redirect.description' | translate }}
         </div>
 
       </div>
-      <div class="row row-subitem m-t-sm">
-        <div class="col-sm-12 row-subitem-padding padding-top-5">
+      <div class="row row-subitem mt-2">
+        <div class="col-sm-12 row-subitem-padding pt-1">
           <div class="form-check">
             <label class="form-check-label">
               <input
@@ -292,8 +292,8 @@
     </div>
 
     <div *ngIf="item.redirect.type.type === 2 || item.redirect.type.type === 3">
-      <div class="row row-subitem m-t-sm">
-        <div class="col-sm-12 row-subitem-padding padding-top-5">
+      <div class="row row-subitem mt-2">
+        <div class="col-sm-12 row-subitem-padding pt-1">
           <label class="control-label control-label-des">
             {{ 'widgets.formExt.mainSettings.buttonSettings.actions' | translate }}:
           </label>
@@ -301,7 +301,7 @@
       </div>
 
       <div class="row row-subitem">
-        <div class="col-sm-12 row-subitem-padding padding-top-5">
+        <div class="col-sm-12 row-subitem-padding pt-1">
           <div class="form-check">
             <label class="form-check-label">
               <input

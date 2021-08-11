@@ -88,7 +88,7 @@
   </ul>
 
   <div>
-    <div class="add-form-ext-new-item margined-right-15">
+    <div class="add-form-ext-new-item mr-3">
       <button class="btn-default widget-content-add-btn" (click)="addItemToExtForm(); $event.stopPropagation();">
         <i class="fa fa-plus"></i>{{ 'widgets.formExt.addAnotherElementToForm' | translate }}
       </button>
@@ -102,8 +102,8 @@
   </div>
 
   <div *ngIf="isFieldSettings()">
-    <div class="row row-subitem m-t-lg m-b-md">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-3 mb-2">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.colorNameField' | translate }}:</label>
         <input
           [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.colorTitleInputForm"
@@ -113,7 +113,7 @@
         />
       </div>
 
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.colorBGField' | translate }}:</label>
         <input
           [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.bgInputForm"
@@ -123,20 +123,20 @@
         />
       </div>
     </div>
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
         <ngx-slider [(value)]="widget.guiprops.formExt.model.mainSettings.opacityBgInputForm" [options]="optionsOpacity"></ngx-slider>
         <label class="control-label control-label-ui">{{ 'widgets.formExt.mainSettings.opacityBGField' | translate }}</label>
       </div>
     </div>
-    <div class="row row-subitem m-t-sm m-b-md">
-      <div class="col-sm-12 row-subitem-padding padding-top-5 side-ui-sm">
+    <div class="row row-subitem mt-2 mb-3">
+      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
         <ngx-slider [(value)]="widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm" [options]="optionsRound"></ngx-slider>
         <label class="control-label control-label-ui">{{ 'widgets.formExt.mainSettings.radiusCornerField' | translate }}</label>
       </div>
     </div>
 
-    <div class="row row-subitem m-t-md">
+    <div class="row row-subitem mt-2">
       <div class="col-sm-12 row-subitem-padding pt-1 d-flex">
         <ui-switch
           size="small"
@@ -146,7 +146,7 @@
     </div>
     <div *ngIf="widget.guiprops.formExt.model.mainSettings.border.enable == true">
       <div class="row row-subitem">
-        <div class="col-sm-6 row-subitem-padding padding-top-5">
+        <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.colorBorder' | translate }}:</label>
           <input
             [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.border.color"
@@ -159,7 +159,7 @@
     </div>
   </div>
 
-  <div class="row row-subitem m-t-sm">
+  <div class="row row-subitem mt-2">
     <div class="col-sm-6 row-subitem-padding">
       <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.formField.orientation' | translate }}:</label>
       <div class="dropdown">
@@ -198,7 +198,7 @@
     </div>
   </div>
 
-  <div class="row row-subitem m-t-md">
+  <div class="row row-subitem mt-2">
     <div class="col-sm-12 row-subitem-padding pt-1 d-flex">
       <ui-switch
         size="small"
@@ -208,7 +208,7 @@
   </div>
   <div *ngIf="widget.guiprops.formExt.model.mainSettings.colorPod.enable == true">
     <div class="row row-subitem">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">
           {{ 'widgets.formExt.mainSettings.usePodBG.color' | translate }}:
         </label>
@@ -219,7 +219,7 @@
           [cpOutputFormat]="'hex'"
         />
       </div>
-      <div class="col-sm-6 row-subitem-padding padding-top-5 side-ui-dev">
+      <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
         <label class="control-label control-label-colorpc control-label-des">
           {{ 'widgets.formExt.mainSettings.usePodBG.opacity' | translate }}:
         </label>
@@ -231,13 +231,13 @@
 
   <!-- FORM ORIENTATION SETTINGS -->
   <div>
-    <div class="col-lg-12 m-t-sm m-b-xs">
+    <div class="col-lg-12 mt-2 mb-1">
       <h4 class="h4-text-tit control-label-des helper-title-3level">
         {{ 'widgets.formExt.mainSettings.widthAndPositionForm' | translate }}
       </h4>
     </div>
-    <div class="row row-subitem m-t-sm">
-      <div class="col-sm-6 row-subitem-padding padding-top-5">
+    <div class="row row-subitem mt-2">
+      <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.widthForm' | translate }}:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -257,7 +257,7 @@
       </div>
       <div
         *ngIf="widget.guiprops.formExt.model.mainSettings.form_width_type.type === 1"
-        class="col-sm-6 row-subitem-padding padding-top-5"
+        class="col-sm-6 row-subitem-padding pt-1"
       >
         <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.widthForm.orientation' | translate }}:</label>
         <div class="dropdown">
@@ -278,7 +278,7 @@
       </div>
     </div>
     <div *ngIf="widget.guiprops.formExt.model.mainSettings.form_width_type.type === 1">
-      <div class="col-sm-12 padding-top-5 margined-top-10">
+      <div class="col-sm-12 pt-1 mt-2">
         <input
           type="number"
           class="form-control form-control-font form-cntrl-55w"
