@@ -831,13 +831,16 @@
 				"bType2": "",
 				"bType3": "",
 				"icon": {
-					"color": ""
+					"color": "",
+					"label": ""
 				}
 			},
+			"checkedDefault": "",
 			"choseTypeOfItem": "",
 			"date": {
 				"placeholder2": "",
 				"service2": "",
+				"type1": "",
 				"type2": "",
 				"type3": "",
 				"type4": ""
@@ -846,10 +849,25 @@
 				"placeholder2": ""
 			},
 			"email": {
+				"id1": "",
+				"placeholder1": "",
 				"placeholder2": "",
-				"service2": ""
+				"service1": "",
+				"service2": "",
+				"service3": ""
 			},
+			"enableRequire": "",
 			"hidden": {
+				"fieldCookies": {
+					"desc": "",
+					"label": ""
+				},
+				"fieldRef": {
+					"desc": ""
+				},
+				"fieldType": {
+					"label": ""
+				},
 				"fieldType1": "",
 				"fieldType10": "",
 				"fieldType11": "",
@@ -866,7 +884,23 @@
 				"fieldType6": "",
 				"fieldType7": "",
 				"fieldType8": "",
-				"fieldType9": ""
+				"fieldType9": "",
+				"fieldUserParam": {
+					"desc": "",
+					"label": ""
+				},
+				"fieldUserValue": {
+					"desc": "",
+					"label": ""
+				},
+				"fieldUtm": {
+					"desc": "",
+					"radio": {
+						"label1": "",
+						"label2": "",
+						"title": ""
+					}
+				}
 			},
 			"leftBlock": {
 				"title": ""
@@ -899,8 +933,23 @@
 					"orientation2": "",
 					"orientation3": ""
 				},
+				"id": {
+					"description": "",
+					"example": "",
+					"useOutsideCRM": ""
+				},
 				"opacityBGField": "",
 				"radiusCornerField": "",
+				"text": {
+					"shadow": {
+						"add": "",
+						"blur": "",
+						"color": "",
+						"horiz": "",
+						"opacity": "",
+						"vert": ""
+					}
+				},
 				"useBorderAroundFields": "",
 				"usePodBG": "",
 				"visualField": "",
@@ -919,20 +968,28 @@
 				"placeholder2": "",
 				"service2": ""
 			},
-			"newLineElement": "",
+			"newLineField": "",
 			"phone": {
 				"placeholder2": "",
 				"service2": ""
 			},
 			"rating": {
+				"colorActive": "",
+				"colorInactive": "",
+				"numberOfStars": "",
 				"service2": ""
+			},
+			"sendFormIfAnyAction": {
+				"desc": "",
+				"title": ""
 			},
 			"term": {
 				"placeholder2": ""
 			},
 			"text": {
 				"placeholder2": "",
-				"service2": ""
+				"service2": "",
+				"useMultiLine": ""
 			},
 			"title": {
 				"placeholder2": ""
@@ -951,7 +1008,12 @@
 			"typeTitle": "",
 			"typeVariants": "",
 			"variants": {
-				"service2": ""
+				"description": "",
+				"design": "",
+				"every": "",
+				"multi": "",
+				"service2": "",
+				"title": ""
 			},
 			"widthField1": "",
 			"widthField2": "",
