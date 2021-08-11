@@ -113,8 +113,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   ngOnInit(): void {
     this.systemFonts = this.widgetConstructorService.getSystemFontList();
 
-    this.staticWidgetInstallCode = this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
-
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
 
     this.downUpInit();
@@ -248,6 +246,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
 
     setTimeout(() => {
       this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item: WidgetType) => item.id === this.widget.type).code;
+      this.staticWidgetInstallCode =
+        this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
       this.changeModel();
       this.changeColorPodAndSRC();
     }, 1500);

@@ -920,7 +920,7 @@
 
         <div class="integration-tab-item mb-0">
           <div class="d-flex">
-            <ui-switch size="small" [checked]="editableIntegration.default"></ui-switch>
+            <ui-switch size="small" [(ngModel)]="editableIntegration.default"></ui-switch>
             <label class="control-label ml-2">
               {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
               <a data-toggle="tooltip"
