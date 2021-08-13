@@ -251,8 +251,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.changeModel();
       this.changeColorPodAndSRC();
       this.initLabelMainPicker();
-      this.initLabelIconPicker();
-      this.initDotIconPicker();
     }, 2500);
   }
 
@@ -519,24 +517,15 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     }, 500);
   }
 
-  private initLabelIconPicker() {
-    setTimeout(() => {
-      ($('#icon-picker-label') as any).iconpicker({
-      }).on('iconpickerSelected', (e) => {
-        this.widget.guiprops.labelMain.icon.selectIcon = null;
-        this.widget.guiprops.labelMain.icon.selectedIcon = e.iconpickerValue;
-      });
-    }, 500);
+  // TODO: leave selectIcon or selectedIcon, no need 2 props
+  public onLabelIconPickerSelect(newIcon) {
+    this.widget.guiprops.labelMain.icon.selectIcon = newIcon;
+    this.widget.guiprops.labelMain.icon.selectedIcon = newIcon;
   }
 
-  private initDotIconPicker() {
-    setTimeout(() => {
-      ($('#icon-picker-dot') as any).iconpicker({
-      }).on('iconpickerSelected', (e) => {
-        this.widget.guiprops.dhVisual.selectIcon = null;
-        this.widget.guiprops.dhVisual.selectedIcon = e.iconpickerValue;
-      });
-    }, 500);
+  public onDotIconPickerSelect(newIcon) {
+    this.widget.guiprops.dhVisual.selectIcon = newIcon;
+    this.widget.guiprops.dhVisual.selectedIcon = newIcon;
   }
 
   private setNewFont(value, data) {

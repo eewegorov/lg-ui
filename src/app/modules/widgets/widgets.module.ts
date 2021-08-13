@@ -75,6 +75,7 @@ import { ExtendedTitleComponent } from './constructor/design/form-extended/exten
 import { ExtendedVariantsComponent } from './constructor/design/form-extended/extended-variants/extended-variants.component';
 import { TimerElementComponent } from './constructor/design/timer-element/timer-element/timer-element.component';
 import { TimerDatepickerComponent } from './constructor/design/timer-element/timer-datepicker/timer-datepicker.component';
+import { IconPickerModule } from 'ngx-icon-picker';
 
 
 @NgModule({
@@ -160,7 +161,8 @@ import { TimerDatepickerComponent } from './constructor/design/timer-element/tim
     SortablejsModule,
     NgxSummernoteModule,
     AngularEditorModule,
-    NgTempusdominusBootstrapModule
+    NgTempusdominusBootstrapModule,
+    IconPickerModule
   ]
 })
 export class WidgetsModule { }

@@ -277,17 +277,12 @@
                           <button *ngIf="widget.guiprops.dhVisual.selectedIcon" type="button" class="btn btn-primary iconpicker-component">
                             <i class="{{ widget.guiprops.dhVisual.selectedIcon }}"></i>
                           </button>
-                          <button
-                            type="button"
+                          <input
+                            [iconPicker]="widget.guiprops.dhVisual.icon.selectIcon"
+                            (iconPickerSelect)="onDotIconPickerSelect($event)"
                             id="icon-picker-dot"
                             class="icp icp-dd btn btn-primary dropdown-toggle"
-                            data-selected="fa-car"
-                            data-toggle="dropdown"
-                          >
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <div class="dropdown-menu"></div>
+                          />
                         </div>
                       </div>
                     </div>
@@ -488,11 +483,12 @@
                             <button *ngIf="widget.guiprops.labelMain.icon.selectedIcon" type="button" class="btn btn-primary iconpicker-component">
                               <i [class]="widget.guiprops.labelMain.icon.selectedIcon"></i>
                             </button>
-                            <button type="button" id="icon-picker-label" class="icp icp-dd btn btn-primary dropdown-toggle" data-selected="fa-car" data-toggle="dropdown">
-                              <span class="caret"></span>
-                              <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu"></div>
+                            <input
+                              [iconPicker]="widget.guiprops.labelMain.icon.selectIcon"
+                              (iconPickerSelect)="onLabelIconPickerSelect($event)"
+                              id="icon-picker-label"
+                              class="icp icp-dd btn btn-primary dropdown-toggle"
+                            />
                           </div>
                         </div>
                       </div>
