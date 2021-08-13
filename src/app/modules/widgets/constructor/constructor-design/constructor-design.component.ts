@@ -250,6 +250,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
       this.changeModel();
       this.changeColorPodAndSRC();
+      this.initLabelMainPicker();
     }, 1500);
   }
 
@@ -499,6 +500,52 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         }
       }
     }
+  }
+
+  private initLabelMainPicker() {
+    setTimeout(() => {
+      ($('#fontPickerLabelMain') as any).fontselect({
+        placeholder: 'Выберите шрифт',
+        placeholderSearch: 'Поиск...',
+        systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
+        googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
+      }).on('change', (change) => {
+        this.setNewFont(change.value, this.widget.guiprops.labelMain.font);
+      });
+
+      $('#fontPickerLabelMain').trigger('setFont', this.widget.guiprops.labelMain.font.name);
+    }, 500);
+  }
+
+  private initLabelIconPicker() {
+    setTimeout(() => {
+      $('#icon-picker-label').iconpicker({
+      }).on('iconpickerSelected', (e) => {
+        this.widget.guiprops.labelMain.icon.selectIcon = null;
+        this.widget.guiprops.labelMain.icon.selectedIcon = e.iconpickerValue;
+      });
+    }, 500);
+  }
+
+  private initDotIconPicker() {
+    setTimeout(() => {
+      $('#icon-picker-dot').iconpicker({
+      }).on('iconpickerSelected', (e) => {
+        this.widget.guiprops.dhVisual.selectIcon = null;
+        this.widget.guiprops.dhVisual.selectedIcon = e.iconpickerValue;
+      });
+    }, 500);
+  }
+
+  private setNewFont(value, data) {
+    let font = value.replace(/\+/g, ' ');
+
+    // Split font into family and weight
+    font = font.split(':');
+    const fontFamily = font[0];
+
+    data.name = fontFamily;
+    data.fontFamily = '\'' + fontFamily + '\'';
   }
 
   private anchorsDetector() {

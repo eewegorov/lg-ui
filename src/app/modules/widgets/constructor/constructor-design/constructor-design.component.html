@@ -335,13 +335,13 @@
                         <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
                       </div>
                     </div>
-                    <div class="row row-subitem mt-2">
+                    <div class="row row-subitem mt-3">
                       <div class="col-sm-12 row-subitem-padding">
                         <h4 class="h4-element-title">Дизайн ярлычка</h4>
                       </div>
                     </div>
-                    <div class="row row-subitem">
-                      <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
+                    <div class="row row-subitem pt-1">
+                      <div class="col-sm-12 widget-name-block-rel row-subitem-padding">
                         <label class="control-label control-label-des">Текст на ярлычке:</label>
                         <input
                           type="text"
@@ -353,7 +353,7 @@
                         <span class="small">Например: Оставьте нам сообщение!</span>
                       </div>
                     </div>
-                    <div class="row row-subitem pt-1 mt-2">
+                    <div class="row row-subitem pt-1">
                       <div class="col-sm-12 row-subitem-padding">
                         <h4 class="h4-text-tit control-label-des helper-title-3level">Шрифт</h4>
                       </div>
@@ -368,7 +368,7 @@
                           class="form-control form-control-font form-cntrl-45w"
                           [(ngModel)]="widget.guiprops['labelMain'].fontSize"
                         />
-                        <label class="control-label">px <span>размер текста</span></label>
+                        <label class="control-label ml-1">px <span>размер текста</span></label>
                       </div>
                     </div>
                     <div class="row row-subitem pt-1 mt-2">
@@ -377,13 +377,14 @@
                       </div>
                     </div>
                     <div class="row row-subitem">
-                      <div class="col-sm-6 row-subitem-padding pt-1">
+                      <div class="col-sm-5 row-subitem-padding mr-3">
                         <label class="control-label control-label-colorpc control-label-des">Цвет ярлычка:</label>
                         <input
                           [(colorPicker)]="widget.guiprops['labelMain'].colorLabel"
                           [style.background]="widget.guiprops['labelMain'].colorLabel"
                           [cpAlphaChannel]="'disabled'"
                           [cpOutputFormat]="'hex'"
+                          cpPosition="top"
                           class="w-100"
                         />
                       </div>
@@ -394,6 +395,7 @@
                           [style.background]="widget.guiprops['labelMain'].colorText"
                           [cpAlphaChannel]="'disabled'"
                           [cpOutputFormat]="'hex'"
+                          cpPosition="top"
                           class="w-100"
                         />
                       </div>
@@ -401,24 +403,24 @@
                     <div class="row row-subitem mt-2">
                       <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
                         <ngx-slider [(value)]="widget.guiprops['labelMain'].opacityBgLabel" [options]="optionsOpacity"></ngx-slider>
-                        <label class="control-label control-label-ui">Прозрачность</label>
+                        <label class="control-label control-label-ui ml-2">Прозрачность</label>
                       </div>
                     </div>
                     <div class="row row-subitem mt-2 mb-3">
                       <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
                         <ngx-slider [(value)]="widget.guiprops['labelMain'].borderRadiusLabel" [options]="optionsRound"></ngx-slider>
-                        <label class="control-label control-label-ui">Закругление углов</label>
+                        <label class="control-label control-label-ui ml-2">Закругление углов</label>
                       </div>
                     </div>
-                    <div class="row row-subitem mt-2">
+                    <div class="row row-subitem mt-3">
                       <div class="col-sm-12 row-subitem-padding">
                         <h4 class="h4-text-tit control-label-des">Добавить иконку или изображение на ярлычок:</h4>
                       </div>
                       <div class="clearfix"></div>
                       <div class="flex-bl-for-radio-group">
-                        <div class="row-subitem-padding radio-group-item">
+                        <div class="row-subitem-padding radio-group-item mr-3">
                           <div class="form-group widget-selector">
-                            <label class="non-bold">
+                            <label>
                               <input
                                 type="radio"
                                 name="label"
@@ -430,9 +432,9 @@
                             </label>
                           </div>
                         </div>
-                        <div class="row-subitem-padding radio-group-item">
+                        <div class="row-subitem-padding radio-group-item mr-3">
                           <div class="form-group widget-selector">
-                            <label class="non-bold">
+                            <label>
                               <input
                                 type="radio"
                                 name="label"
@@ -446,7 +448,7 @@
                         </div>
                         <div class="row-subitem-padding">
                           <div class="form-group widget-selector">
-                            <label class="non-bold">
+                            <label>
                               <input
                                 type="radio"
                                 name="label"
@@ -462,13 +464,14 @@
                     </div>
                     <div *ngIf="widget.guiprops.labelMain.iconOrImage === 'useIcon'">
                       <div class="row row-subitem">
-                        <div class="col-sm-6 row-subitem-padding pt-1">
+                        <div class="col-sm-6 row-subitem-padding">
                           <label class="control-label control-label-colorpc control-label-des">Цвет иконки:</label>
                           <input
                             [(colorPicker)]="widget.guiprops['labelMain'].icon.color"
                             [style.background]="widget.guiprops['labelMain'].icon.color"
                             [cpAlphaChannel]="'disabled'"
                             [cpOutputFormat]="'hex'"
+                            cpPosition="top"
                             class="w-100"
                           />
                         </div>
