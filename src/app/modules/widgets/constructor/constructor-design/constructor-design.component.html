@@ -265,7 +265,7 @@
                         </div>
                       </div>
                     </div>
-                    <div *ngIf="widget.guiprops.dhVisual?.iconOrImage === 'useIcon'" class="row row-subitem">
+                    <div [hidden]="widget.guiprops.dhVisual?.iconOrImage !== 'useIcon'" class="row row-subitem">
                       <div class="col-sm-12 row-subitem-padding">
                         <h5 class="label-style-ic control-label-des">Иконка:</h5>
                       </div>
@@ -462,7 +462,7 @@
                         </div>
                       </div>
                     </div>
-                    <div *ngIf="widget.guiprops.labelMain.iconOrImage === 'useIcon'">
+                    <div [hidden]="widget.guiprops.labelMain.iconOrImage !== 'useIcon'">
                       <div class="row row-subitem">
                         <div class="col-sm-6 row-subitem-padding">
                           <label class="control-label control-label-colorpc control-label-des">Цвет иконки:</label>

@@ -251,7 +251,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.changeModel();
       this.changeColorPodAndSRC();
       this.initLabelMainPicker();
-    }, 1500);
+      this.initLabelIconPicker();
+      this.initDotIconPicker();
+    }, 2500);
   }
 
   ngDoCheck(): void {
@@ -519,7 +521,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
 
   private initLabelIconPicker() {
     setTimeout(() => {
-      $('#icon-picker-label').iconpicker({
+      ($('#icon-picker-label') as any).iconpicker({
       }).on('iconpickerSelected', (e) => {
         this.widget.guiprops.labelMain.icon.selectIcon = null;
         this.widget.guiprops.labelMain.icon.selectedIcon = e.iconpickerValue;
@@ -529,7 +531,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
 
   private initDotIconPicker() {
     setTimeout(() => {
-      $('#icon-picker-dot').iconpicker({
+      ($('#icon-picker-dot') as any).iconpicker({
       }).on('iconpickerSelected', (e) => {
         this.widget.guiprops.dhVisual.selectIcon = null;
         this.widget.guiprops.dhVisual.selectedIcon = e.iconpickerValue;
