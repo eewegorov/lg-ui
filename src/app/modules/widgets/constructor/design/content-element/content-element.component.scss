@@ -264,6 +264,24 @@
   margin: 0;
 }
 
+.btn-add-on-elem .tooltip,
+.btn-copy-on-elem .tooltip {
+  opacity: 0;
+  width: 140px;
+  left: -50px;
+  top: -30px;
+}
+
+.btn-add-on-elem:hover .tooltip,
+.btn-copy-on-elem:hover .tooltip {
+  opacity: 1;
+}
+
+.btn-add-on-elem .tooltip-arrow,
+.btn-copy-on-elem .tooltip-arrow {
+  left: 50%;
+}
+
 .wigdet-main-wr ul li:hover .btn-add-on-elem {
   display: block !important;
 }

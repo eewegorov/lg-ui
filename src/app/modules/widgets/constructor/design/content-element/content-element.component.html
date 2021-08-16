@@ -77,7 +77,7 @@
       </div>
       <li
         *ngFor="let item of widget.guiprops.elementsList; trackBy: trackById; index as i"
-        class="element-to-append-summernote margin-if-{{item.name}}"
+        [class]="'element-to-append-summernote margin-if-' + item.name"
         [ngClass]="addExtraClassForFullWidth(i)"
         [attr.data-to]="'elemScrN' + i"
         (click)="scrollToEl(i, item.name); $event.stopPropagation();"
@@ -106,7 +106,7 @@
           </div>
         </div>
 
-        <div *ngIf="item.name == 'text-element'" class="social-block-pd">
+        <div *ngIf="item.name == 'title-element'" class="social-block-pd">
           <div class="editorFontLine">
             <div
               class="title-main click-edit-cl"
