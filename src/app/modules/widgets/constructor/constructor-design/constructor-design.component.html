@@ -275,7 +275,7 @@
                             <i [class]="'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"></i>
                           </button>
                           <button *ngIf="widget.guiprops.dhVisual.selectedIcon" type="button" class="btn btn-primary iconpicker-component">
-                            <i class="{{ widget.guiprops.dhVisual.selectedIcon }}"></i>
+                            <i [class]="widget.guiprops.dhVisual.selectedIcon.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : 'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"></i>
                           </button>
                           <input
                             [iconPicker]="widget.guiprops.dhVisual.selectIcon"
@@ -374,7 +374,7 @@
                         <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка стиля</h4>
                       </div>
                     </div>
-                    <div class="row row-subitem pt-1">
+                    <div class="row row-subitem">
                       <div class="col-sm-5 row-subitem-padding mr-3">
                         <label class="control-label control-label-colorpc control-label-des">Цвет ярлычка:</label>
                         <input
@@ -474,7 +474,7 @@
                           />
                         </div>
                       </div>
-                      <div class="row row-subitem">
+                      <div class="row row-subitem mt-2">
                         <div class="col-sm-12 row-subitem-padding mt-2">
                           <h5 class="label-style-ic control-label-des">{{ 'widgets.formExt.button.icon.label' | translate }}:</h5>
                         </div>
@@ -484,7 +484,7 @@
                               <i [class]="'lgiconfont-' + widget.guiprops.labelMain.icon.selectIcon"></i>
                             </button>
                             <button *ngIf="widget.guiprops.labelMain.icon.selectedIcon" type="button" class="btn btn-primary iconpicker-component">
-                              <i [class]="widget.guiprops.labelMain.icon.selectedIcon"></i>
+                              <i [class]="widget.guiprops.labelMain.icon.selectedIcon.includes('fa ') ? widget.guiprops.labelMain.icon.selectedIcon : 'lgiconfont-' + widget.guiprops.labelMain.icon.selectIcon"></i>
                             </button>
                             <input
                               [iconPicker]="widget.guiprops.labelMain.icon.selectIcon"
