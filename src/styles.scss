@@ -1,6 +1,5 @@
 @CHARSET "UTF-8";
 @import "./_vars.scss";
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&lang=en");
 @import "../node_modules/pe7-icon/dist/scss/pe-icon-7-stroke";
 @import "../node_modules/icheck/skins/square/green.css";
 @import "./assets/css/pe-icon-7-stroke.css";
@@ -1907,4 +1906,12 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 .form-ext-element-wr .text-input-class input.form-control,
 .form-ext-element-wr .text-input-class textarea.form-control {
   text-overflow: ellipsis;
+}
+
+.icon-picker * {
+  font-size: 14px !important;
+}
+
+.ip-button-icon {
+  padding: 0 10px !important;
 }

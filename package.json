@@ -40,6 +40,7 @@
     "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",
     "classlist.js": "^1.1.20150312",
+    "font-awesome": "^4.7.0",
     "icheck": "^1.0.2",
     "jquery": "^3.6.0",
     "jquery-ui": "^1.12.1",

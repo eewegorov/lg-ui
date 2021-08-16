@@ -121,7 +121,7 @@
     </div>
     <div
       class="col-lg-12 d-flex mt-2"
-      [ngClass]="(widget.rules['prevPages'].enable && widget.rules['prevPages'].items.length > 0) ? 'mb-2' : ''"
+      [ngClass]="(widget.rules['prevPages']?.enable && widget.rules['prevPages'].items.length > 0) ? 'mb-2' : ''"
     >
       <ui-switch
         size="small"

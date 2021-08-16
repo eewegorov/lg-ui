@@ -49,12 +49,12 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.widgetService.addValidator(this.validator);
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
+    this.loadListener();
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       ($('[data-toggle="tooltip"]') as any).tooltip();
-      this.loadListener();
     }, 1000);
   }
 
@@ -166,7 +166,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     if (typeof this.widget.rules === 'undefined') {
       return;
     }
-    if (this.widget.rules.pages.enable) {
+    if (this.widget.rules.pages?.enable) {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.widget.rules.pages.items.length; i++) {
         if (this.widget.rules.pages.items[i].value.trim().length === 0) {
@@ -175,7 +175,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
       }
     }
 
-    if (this.widget.rules.prevPages.enable) {
+    if (this.widget.rules.prevPages?.enable) {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.widget.rules.prevPages.items.length; i++) {
         if (this.widget.rules.prevPages.items[i].value.trim().length === 0) {
@@ -184,54 +184,53 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
       }
     }
 
-    if (this.widget.rules.pageNo.enable) {
+    if (this.widget.rules.pageNo?.enable) {
       if (this.widget.rules.pageNo.items.length === 0) {
         errors.push({id: TAB_ID, message: 'Empty pageno'});
       }
     }
 
-    if (this.widget.rules.days.enable) {
+    if (this.widget.rules.days?.enable) {
       if (this.widget.rules.days.items.length === 0) {
         errors.push({id: TAB_ID, message: 'Empty days list'});
       }
     }
 
-    if (this.widget.rules.period.enable) {
+    if (this.widget.rules.period?.enable) {
       if (this.widget.rules.period.startDate == null || this.widget.rules.period.endDate == null) {
         errors.push({id: TAB_ID, message: 'Infinity period range'});
       }
     }
 
-    if (this.widget.autoinvite.pages.enable) {
+    if (this.widget.autoinvite.pages?.enable) {
       if (this.widget.autoinvite.pages.value <= 0) {
         errors.push({id: TAB_ID, message: 'Autoinvite. Pages. Pages less or equal the 0'});
       }
     }
 
-    if (this.widget.autoinvite.seconds.enable) {
+    if (this.widget.autoinvite.seconds?.enable) {
       if (this.widget.autoinvite.seconds.value <= 0) {
         errors.push({id: TAB_ID, message: 'Autoinvite. Seconds. Seconds less or equal the 0'});
       }
     }
 
-    if (this.widget.autoinvite.inactive.enable) {
+    if (this.widget.autoinvite.inactive?.enable) {
       if (this.widget.autoinvite.inactive.value <= 0) {
         errors.push({id: TAB_ID, message: 'Autoinvite. Inactive. Seconds less or equal the 0'});
       }
     }
 
-    if (this.widget.autoinvite.percent.enable) {
+    if (this.widget.autoinvite.percent?.enable) {
       if (this.widget.autoinvite.percent.value <= 0 || this.widget.autoinvite.percent.value > 100) {
         errors.push({id: TAB_ID, message: 'Autoinvite. Percent. Value less or equal the 0 or great then 100'});
       }
     }
 
-    if (this.widget.autoinvite.click.enable) {
+    if (this.widget.autoinvite.click?.enable) {
       if (this.widget.autoinvite.click.value.trim().length === 0) {
         errors.push({id: TAB_ID, message: 'Autoinvite. Click. Empty selector'});
       }
     }
-
 
     return errors;
   }

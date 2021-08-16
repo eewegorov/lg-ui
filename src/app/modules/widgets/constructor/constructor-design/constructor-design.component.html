@@ -39,7 +39,7 @@
                       />
                     </div>
                   </div>
-                  <div class="row row-subitem row-static-widget-wrapper mb-1">
+                  <div *ngIf="widgetType === 'containerized'" class="row row-subitem row-static-widget-wrapper mb-1">
                     <div class="col-sm-12 row-subitem-padding mt-2 widget-small-text">
                       Установите этот код в месте на странице сайта, где вы хотите разместить виджет. Обратите внимание, что для всех виджетов в одном контейнере используется единый код установки. И если этот код уже установлен, то повторная его установка не требуется.
                     </div>
@@ -278,11 +278,14 @@
                             <i class="{{ widget.guiprops.dhVisual.selectedIcon }}"></i>
                           </button>
                           <input
-                            [iconPicker]="widget.guiprops.dhVisual.icon.selectIcon"
+                            [iconPicker]="widget.guiprops.dhVisual.selectIcon"
                             (iconPickerSelect)="onDotIconPickerSelect($event)"
+                            [ipIconPack]="['fa']"
+                            ipPosition="top"
                             id="icon-picker-dot"
-                            class="icp icp-dd btn btn-primary dropdown-toggle"
+                            class="icp btn btn-primary dropdown-toggle"
                           />
+                          <span class="caret"></span>
                         </div>
                       </div>
                     </div>
@@ -475,7 +478,7 @@
                         <div class="col-sm-12 row-subitem-padding mt-2">
                           <h5 class="label-style-ic control-label-des">{{ 'widgets.formExt.button.icon.label' | translate }}:</h5>
                         </div>
-                        <div class="col-sm-12 row-subitem-padding">
+                        <div class="icp-icon col-sm-12 row-subitem-padding">
                           <div class="btn-group">
                             <button *ngIf="!widget.guiprops.labelMain.icon.selectedIcon" type="button" class="btn btn-primary">
                               <i [class]="'lgiconfont-' + widget.guiprops.labelMain.icon.selectIcon"></i>
@@ -485,10 +488,13 @@
                             </button>
                             <input
                               [iconPicker]="widget.guiprops.labelMain.icon.selectIcon"
+                              ipPosition="top"
+                              [ipIconPack]="['fa']"
                               (iconPickerSelect)="onLabelIconPickerSelect($event)"
                               id="icon-picker-label"
-                              class="icp icp-dd btn btn-primary dropdown-toggle"
+                              class="icp btn btn-primary dropdown-toggle"
                             />
+                            <span class="caret"></span>
                           </div>
                         </div>
                       </div>
