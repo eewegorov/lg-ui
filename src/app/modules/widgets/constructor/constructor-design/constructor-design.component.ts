@@ -251,6 +251,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.changeModel();
       this.changeColorPodAndSRC();
       this.initLabelMainPicker();
+      this.loadListener();
     }, 2500);
   }
 

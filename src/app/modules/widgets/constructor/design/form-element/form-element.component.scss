@@ -1,3 +1,13 @@
+.add-sub-form-item {
+  width: auto;
+  float: right;
+  line-height: 25px;
+}
+
+.add-sub-form-item .remove-sub-item {
+  font-size: 25px;
+}
+
 .formMas .add-sub-form-item {
   display: none;
 }
@@ -7,7 +17,7 @@
 }
 
 .formItem {
-  padding-right: 10px;
+  width: 100%;
 }
 
 .greyFormBg {

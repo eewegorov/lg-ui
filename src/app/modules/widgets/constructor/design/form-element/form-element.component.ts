@@ -56,6 +56,7 @@ export class FormElementComponent implements OnInit {
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
   ngOnInit(): void {
+    this.initPicker();
   }
 
   public trackById(index, item) {
@@ -81,11 +82,13 @@ export class FormElementComponent implements OnInit {
   }
 
   public getPlaceholderFrom(item, index) {
-    this.itemVariable.forEach(item1 => {
-      if (item.type === item1.type) {
-        this.widget.guiprops.formSet.items[index].placeholder = item1.inpPlace;
-      }
-    });
+    setTimeout(() => {
+      this.itemVariable.forEach(item1 => {
+        if (item.type === item1.type) {
+          this.widget.guiprops.formSet.items[index].placeholder = item1.inpPlace;
+        }
+      });
+    }, 0);
   }
 
   public addFirstInput(item, index) {
@@ -136,6 +139,32 @@ export class FormElementComponent implements OnInit {
         type: helpArr[0].type
       });
     }
+  }
+
+  private initPicker() {
+    setTimeout(() => {
+      ($('#font-picker' + this.index) as any).fontselect({
+        placeholder: 'Выберите шрифт',
+        placeholderSearch: 'Поиск...',
+        systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
+        googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
+      }).on('change', (change) => {
+        this.setNewFont(change.value, this.widget.guiprops.button.font);
+      });
+
+      $('#font-picker' + this.index).trigger('setFont', this.widget.guiprops.button.font.name);
+    }, 500);
+  }
+
+  private setNewFont(value, data) {
+    let font = value.replace(/\+/g, ' ');
+
+    // Split font into family and weight
+    font = font.split(':');
+    const fontFamily = font[0];
+
+    data.name = fontFamily;
+    data.fontFamily = '\'' + fontFamily + '\'';
   }
 
 }

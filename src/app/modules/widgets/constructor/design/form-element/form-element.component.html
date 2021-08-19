@@ -1,45 +1,43 @@
 <div class="border-item">
   <div>
-    <div class="col-lg-12">
-      <h4 class="h4-element-title">
-        Форма и кнопка <a (click)="removeElementFromElementsList(index, {name: 'form-element'})" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
-      </h4>
-    </div>
-    <div class="col-lg-12 mt-1">
-      <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка полей формы</h4>
-    </div>
+    <h4 class="h4-element-title">
+      Форма и кнопка <a (click)="removeElementFromElementsList(index, {name: 'form-element'})" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
+    </h4>
+    <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка полей формы</h4>
+
     <!-- Page Input Form -->
     <div class="formMas">
       <div *ngFor="let item of widget.guiprops['formSet'].items; trackBy: trackById; index as i" class="row row-subitem">
         <div class="formItem">
-          <div class="col-sm-12 pt-1 mt-2 greyFormBg">
+          <div class="col-sm-12 mt-2 greyFormBg">
             <label class="control-label">Введите название поля:</label>
             <input type="text" class="form-control" [(ngModel)]="item.placeholder">
 
             <span class="small">Например: Введите email</span>
             <div class="typeInputRBtn mt-2">
               <div class="form-add-title-type">Тип:</div>
-              <div *ngFor="let itemType of itemVariable" class="form-rbtn-line">
+              <div *ngFor="let itemType of itemVariable; index as j" class="form-rbtn-line">
                 <label *ngIf="getItemT(item, itemType)" class="non-bold" (click)="getPlaceholderFrom(item, i)">
                   <input
                     type="radio"
                     class="radio radio-info radio-inline"
                     (click)="(item.type === 'message') ? addFirstInput(item, i) : ''"
                     [(ngModel)]="item.type"
-                    value="{{ itemType.type }}"
+                    [value]="itemType.type"
+                    [name]="'form' + i"
                   />
                   {{ itemType.value }}
                 </label>
               </div>
             </div>
-            <div class="mt-2 formReqBl">
+            <div class="mt-2 formReqBl d-flex">
               <ui-switch
                 size="small"
                 [(ngModel)]="item.required"
               ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Поле обязательно к заполнению</label>
             </div>
 
-            <div class="mt-2 formReqBl" *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask">
+            <div class="mt-2 formReqBl d-flex" *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask">
               <ui-switch
                 size="small"
                 [(ngModel)]="widget.guiprops.formSet.phoneMask.enable"
@@ -71,11 +69,9 @@
     </div>
     <div class="clearfix"></div>
 
-    <div class="col-lg-12">
-      <h4 class="h4-text-tit control-label-des helper-title-3level">Дизайн формы</h4>
-    </div>
+    <h4 class="h4-text-tit control-label-des helper-title-3level">Дизайн формы</h4>
 
-    <div class="row row-subitem mt-4 mb-3">
+    <div class="row row-subitem mt-1 mb-3">
       <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-colorpc control-label-des">Цвет названия полей:</label>
         <input
@@ -93,6 +89,7 @@
           [style.background]="widget.guiprops['form'].bgInputForm"
           [cpAlphaChannel]="'disabled'"
           [cpOutputFormat]="'hex'"
+          cpPosition="top"
         />
       </div>
     </div>
@@ -109,7 +106,7 @@
       </div>
     </div>
     <div class="row row-subitem mt-2">
-      <div class="col-sm-6 row-subitem-padding pt-1">
+      <div class="col-sm-6 row-subitem-padding pr-3">
         <label class="control-label control-label-des">Ориентация полей:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -118,7 +115,7 @@
           </button>
           <ul class="dropdown-menu" role="menu">
             <li role="presentation" *ngFor="let itemOrient of orientInputForm" (click)="widget.guiprops.form['orient'] = itemOrient">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemOrient }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemOrient }}</a>
             </li>
           </ul>
         </div>
@@ -132,7 +129,7 @@
           </button>
           <ul class="dropdown-menu" role="menu">
             <li role="presentation" *ngFor="let itemVisual of visualInputForm" (click)="widget.guiprops.form.visual = itemVisual">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
             </li>
           </ul>
         </div>
@@ -148,7 +145,7 @@
           </button>
           <ul class="dropdown-menu" role="menu">
             <li *ngFor="let itemVisual of widthHrType" role="presentation" (click)="widget.guiprops['form'].width_type = itemVisual">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
             </li>
           </ul>
         </div>
@@ -211,7 +208,7 @@
   </div>
 
   <div>
-    <div class="col-lg-12 mt-1 mb-2">
+    <div class="mt-2 mb-2">
       <h4 class="h4-text-tit control-label-des helper-title-3level">Настройки кнопки</h4>
     </div>
 
@@ -245,8 +242,8 @@
       </div>
     </div>
 
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-6 row-subitem-padding pt-1">
+    <div class="row row-subitem mt-2 pt-1">
+      <div class="col-sm-6 row-subitem-padding pr-3">
         <label class="control-label control-label-des">Ширина кнопки:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -255,12 +252,12 @@
           </button>
           <ul class="dropdown-menu" role="menu">
             <li role="presentation" (click)="widget.guiprops.button.btn_width = item" *ngFor="let item of widthBtn">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
             </li>
           </ul>
         </div>
       </div>
-      <div class="col-sm-6 row-subitem-padding pt-1">
+      <div class="col-sm-6 row-subitem-padding">
         <label class="control-label control-label-des">Ориентация:</label>
         <div class="dropdown">
           <button
@@ -275,16 +272,16 @@
           </button>
           <ul role="menu" class="dropdown-menu">
             <li role="presentation" *ngFor="let item of floatBtn" (click)="widget.guiprops.button.position = item">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ item }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
     <div *ngIf="widget.guiprops['button'].btn_width === 'Собственная'">
-      <div class="col-sm-12 pt-1 mt-2">
+      <div class="pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="widget.guiprops['button'].btn_widthpx">
-        <label class="control-label ml-1">px <span>ширина кнопки</span></label>
+        <label class="control-label ml-1">px <span class="ml-1">ширина кнопки</span></label>
       </div>
       <div class="clearfix"></div>
     </div>
@@ -303,25 +300,25 @@
         <ul class="dropdown-menu dropdown-with-btn-styles" role="menu">
           <li role="presentation" (click)="setBtnStyle('Default', widget.guiprops.button)">
             <a
-              class="btn-var-styles btn-var-styles__default"
+              class="dropdown-item btn-var-styles btn-var-styles__default"
               [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'background': widget.guiprops['button'].colorBtn}"
               href="javascript:void(0)"
             >Default</a></li>
           <li role="presentation" (click)="setBtnStyle('Material', widget.guiprops.button)">
             <a
-              class="btn-var-styles btn-var-styles__material"
+              class="dropdown-item btn-var-styles btn-var-styles__material"
               [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'background': widget.guiprops['button'].colorBtn}"
               href="javascript:void(0)"
             >Material</a></li>
           <li role="presentation" (click)="setBtnStyle('Flat', widget.guiprops.button)">
             <a
-              class="btn-var-styles btn-var-styles__flat"
+              class="dropdown-item btn-var-styles btn-var-styles__flat"
               [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'background': widget.guiprops['button'].colorBtn}"
               href="javascript:void(0)"
             >Flat</a></li>
           <li role="presentation" (click)="setBtnStyle('Border Style', widget.guiprops.button)">
             <a
-              class="btn-var-styles btn-var-styles__border-style"
+              class="dropdown-item btn-var-styles btn-var-styles__border-style"
               [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'border-color': widget.guiprops['button'].colorBtn}"
               href="javascript:void(0)"
             >Border Style</a></li>
@@ -331,11 +328,11 @@
   </div>
 
   <div>
-    <div class="col-lg-12 mt-2 mb-1">
+    <div class="mt-2 pt-1 mb-1">
       <h4 class="h4-text-tit control-label-des helper-title-3level">Ширина и позиционирование формы</h4>
     </div>
     <div class="row row-subitem mt-2">
-      <div class="col-sm-6 row-subitem-padding pt-1">
+      <div class="col-sm-6 row-subitem-padding pt-1 pr-3">
         <label class="control-label control-label-des">Ширина формы:</label>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -344,7 +341,7 @@
           </button>
           <ul class="dropdown-menu" role="menu">
             <li role="presentation" *ngFor="let itemVisual of widthHrType" (click)="widget.guiprops.form.form_width_type = itemVisual">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
             </li>
           </ul>
         </div>
@@ -358,16 +355,16 @@
           </button>
           <ul class="dropdown-menu" role="menu">
             <li role="presentation" *ngFor="let itemVisual of floatBtn" (click)="widget.guiprops.form.form_position = itemVisual">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemVisual }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
     <div *ngIf="widget.guiprops.form.form_width_type === 'Собственная'">
-      <div class="col-sm-12 pt-1 mt-2">
+      <div class="pt-1 mt-2">
         <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="widget.guiprops.form.form_widthpx">
-        <label class="control-label ml-1">px <span>ширина формы</span></label>
+        <label class="control-label ml-1">px <span class="ml-1">ширина формы</span></label>
       </div>
       <div class="clearfix"></div>
     </div>
