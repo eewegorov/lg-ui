@@ -724,8 +724,8 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-9 max-h-100" [ngClass]="(widget.guiprops.popupMain?.shadow.enable === true) ? 'ifr-sh-bg' : ''">
-      <div *ngIf="isThankShouldShow()" class="widget-select-mode btn-group">
+    <div class="col-lg-9 max-h-100" [ngClass]="(widget.guiprops.popupMain?.shadow?.enable === true) ? 'ifr-sh-bg' : ''">
+      <div *ngIf="isThankShow" class="widget-select-mode btn-group">
         <span class="btn btn-default active" data-widget="mainBlockWidget" (click)="$event.stopPropagation();">
           Основной экран
         </span>

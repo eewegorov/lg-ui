@@ -449,7 +449,7 @@ export class ContentElementComponent implements OnInit, AfterContentInit {
   }
 
   public formExtGetItemWidth(item) {
-    return item.widthValue + (item.widthType.type === 0 ? '%' : 'px');
+    return item.widthValue + (item.widthType?.type === 0 ? '%' : 'px');
   }
 
   public formExtGetInputFormPhoneMask(value) {

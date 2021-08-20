@@ -14,7 +14,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
-import * as moment from 'moment';
 import { Coupon } from '../../../../core/models/coupons';
 import { FullWidget, WidgetType, WidgetTypeCode } from '../../../../core/models/widgets';
 import { TariffsService } from '../../../../core/services/tariffs.service';
@@ -86,6 +85,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public heightImageStyle = '';
   public staticWidgetInstallCode = '';
   public widgetType: WidgetTypeCode;
+  public isThankShow = false;
   private addElemFromWidget = false;
   private systemFonts = [];
   private controls: Record<string, any>;
@@ -110,6 +110,16 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
   ) {
+  }
+
+  ngAfterViewInit(): void {
+    this.autoUploadSubscription = this.flow?.events$.subscribe(event => {
+      if (event.type === 'filesSubmitted') {
+        this.flow.upload();
+      }
+    });
+
+    this.isThankShow = this.isThankShouldShow();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -249,18 +259,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         }
       }
     };
-  }
-
-  ngAfterViewInit(): void {
-    this.autoUploadSubscription = this.flow?.events$.subscribe(event => {
-      if (event.type === 'filesSubmitted') {
-        this.flow.upload();
-      }
-    });
-
-    setTimeout(() => {
-
-    }, 2500);
   }
 
   ngDoCheck(): void {
