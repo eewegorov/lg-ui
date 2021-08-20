@@ -204,13 +204,13 @@
                         <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
                       </div>
                     </div>
-                    <div class="row row-subitem mt-2">
+                    <div class="row row-subitem mt-3">
                       <div class="col-sm-12 row-subitem-padding">
                         <h4 class="h4-element-title">Дизайн точки</h4>
                       </div>
                     </div>
                     <div class="row row-subitem">
-                      <div class="col-sm-6 row-subitem-padding mt-2">
+                      <div class="col-sm-5 row-subitem-padding mt-1 mr-3">
                         <label class="control-label control-label-des">Основной цвет:</label>
                         <input
                           [(colorPicker)]="widget.guiprops['dhVisual'].colorMain"
@@ -220,7 +220,7 @@
                           class="w-100"
                         />
                       </div>
-                      <div class="col-sm-6 row-subitem-padding mt-2">
+                      <div class="col-sm-6 row-subitem-padding mt-1">
                         <label class="control-label control-label-des">Цвет заливки:</label>
                         <input
                           [(colorPicker)]="widget.guiprops['dhVisual'].colorBg"
@@ -231,13 +231,13 @@
                         />
                       </div>
                     </div>
-                    <div class="row row-subitem mt-2">
+                    <div class="row row-subitem mt-3">
                       <div class="col-sm-12 row-subitem-padding">
                         <h4 class="h4-text-tit control-label-des">Добавить иконку или изображение:</h4>
                       </div>
                       <div class="clearfix"></div>
                       <div class="flex-bl-for-radio-group">
-                        <div class="row-subitem-padding radio-group-item">
+                        <div class="row-subitem-padding radio-group-item mr-4">
                           <div class="form-group widget-selector">
                             <label class="non-bold">
                               <input
@@ -269,7 +269,7 @@
                       <div class="col-sm-12 row-subitem-padding">
                         <h5 class="label-style-ic control-label-des">Иконка:</h5>
                       </div>
-                      <div class="col-sm-12 row-subitem-padding">
+                      <div class="icp-icon col-sm-12 row-subitem-padding">
                         <div class="btn-group">
                           <button *ngIf="!widget.guiprops.dhVisual.selectedIcon" type="button" class="btn btn-primary">
                             <i [class]="'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"></i>
@@ -291,7 +291,7 @@
                     </div>
                     <div *ngIf="widget.guiprops.dhVisual?.iconOrImage === 'useImg'">
                       <div class="row row-subitem">
-                        <div class="col-sm-12 row-subitem-padding mt-2">
+                        <div class="col-sm-12 row-subitem-padding mt-1">
                           <a (click)="listFile('dotIcon')" class="widget-download-img">
                             <i class="fa fa-image"></i> Установить или изменить изображение
                           </a>
@@ -299,7 +299,7 @@
                       </div>
                     </div>
                     <div class="row row-subitem mt-2">
-                      <div class="col-sm-12 row-subitem-padding pt-1">
+                      <div class="col-sm-12 row-subitem-padding pt-1 d-flex">
                         <ui-switch
                           size="small"
                           [(ngModel)]="widget.guiprops.dhVisual.enable"
@@ -316,7 +316,7 @@
                       </div>
                     </div>
                     <div class="row row-subitem mt-2">
-                      <div class="col-sm-12 row-subitem-padding pt-1">
+                      <div class="col-sm-12 row-subitem-padding pt-1 d-flex">
                         <ui-switch
                           size="small"
                           [(ngModel)]="widget.guiprops.dhVisual.enableBlink"

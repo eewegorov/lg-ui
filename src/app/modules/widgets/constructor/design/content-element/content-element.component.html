@@ -59,6 +59,7 @@
       [ngStyle]="{'background': widget.guiprops.bg.mask.rgbaColor}"
     ></div>
     <ul
+      *ngIf="widget.guiprops.elementsList"
       id="mainElListUl"
       class="widget-flex-dis"
       [sortablejs]="widget.guiprops.elementsList"

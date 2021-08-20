@@ -127,6 +127,10 @@ export class ContentElementComponent implements OnInit, AfterContentInit {
     const indexValueForm = this.widget.guiprops.formExt.enable ? $('.margin-if-form-ext-element').css('z-index') : $('.margin-if-form-element').css('z-index');
     const indexValueButton = $('.margin-if-button-element').css('z-index');
 
+    if (!indexValueForm || !indexValueButton) {
+      return;
+    }
+
     if ((indexValueForm && (indexValue <= +indexValueForm)) || (indexValueButton && (indexValue <= +indexValueButton))) {
       return 'extraClassFullWidth';
     } else {

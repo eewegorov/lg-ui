@@ -24,6 +24,7 @@ import { ContainerizedWidgetService } from '../../services/containerized-widget.
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
 import { ConstructorDesignComponent } from '../constructor-design/constructor-design.component';
+import { ConstructorRulesComponent } from '../constructor-rules/constructor-rules.component';
 
 @Component({
   selector: 'app-widget-edit',
@@ -58,6 +59,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   private meInfoSub: SubscriptionLike;
 
   @ViewChild(ConstructorDesignComponent) constructorDesignComponent: ConstructorDesignComponent;
+  @ViewChild(ConstructorDesignComponent) constructorRulesComponent: ConstructorRulesComponent;
 
   constructor(
     private router: Router,
@@ -646,7 +648,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
       this.audience = response.audience;
       this.widget.id = this.wid;
       this.widgetService.loadWidgetListeners.forEach(item => {
-        item.call(this.constructorDesignComponent);
+        item.call({...this.constructorDesignComponent, ...this.constructorRulesComponent});
       });
       this.isContainerized = !!this.widget.containerId;
       this.checkWidgetRenameTitle();

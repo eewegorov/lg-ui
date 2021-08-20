@@ -2,9 +2,10 @@ import {
   AfterViewInit,
   Component,
   DoCheck,
-  Input,
+  Input, OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
+import * as moment from 'moment';
 import { Coupon } from '../../../../core/models/coupons';
 import { FullWidget, WidgetType, WidgetTypeCode } from '../../../../core/models/widgets';
 import { TariffsService } from '../../../../core/services/tariffs.service';
@@ -26,7 +28,7 @@ import { WidgetService } from '../../services/widget.service';
   templateUrl: './constructor-design.component.html',
   styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss']
 })
-export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
+export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoCheck, OnChanges, OnDestroy {
   @ViewChild('flow') public flow: FlowDirective;
   @Input() public sid: string;
   @Input() public wid: string;
@@ -108,6 +110,18 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
   ) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes && changes.widget && !changes.widget.isFirstChange()) {
+      this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item: WidgetType) => item.id === this.widget.type).code;
+      this.staticWidgetInstallCode =
+        this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
+      this.changeModel();
+      this.changeColorPodAndSRC();
+      this.initLabelMainPicker();
+      this.loadListener();
+    }
   }
 
   ngOnInit(): void {
@@ -245,13 +259,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     });
 
     setTimeout(() => {
-      this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item: WidgetType) => item.id === this.widget.type).code;
-      this.staticWidgetInstallCode =
-        this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
-      this.changeModel();
-      this.changeColorPodAndSRC();
-      this.initLabelMainPicker();
-      this.loadListener();
+
     }, 2500);
   }
 
@@ -2145,7 +2153,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       ifrm.setAttribute('id', 'idFrame' + item.counter);
       ifrm.setAttribute('style', 'position:relative!important;width:100%!important;height:100%!important;border:none!important');
 
-      document.getElementById('elementIframeBlock' + item.counter).replaceChild(ifrm, elementToRemove);
+      const iframeBlock = document.getElementById('elementIframeBlock' + item.counter);
+
+      if (!iframeBlock) {
+        return;
+      }
+
+      iframeBlock.replaceChild(ifrm, elementToRemove);
 
       const doc = ifrm.contentWindow.document;
       doc.open().write('<body>' + '<style>body{margin:0!important;}' + item.css_value + '</style>' + item.html_value + '</body>');

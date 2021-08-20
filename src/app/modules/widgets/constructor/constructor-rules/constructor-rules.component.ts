@@ -298,17 +298,17 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     if (typeof this.widget.rules.period === 'undefined') {
       this.widget.rules.period = {
         enable: false,
-        startDate: (new Date() as any).format('dd.mm.yyyy'),
-        endDate: (new Date() as any).format('dd.mm.yyyy')
+        startDate: moment(new Date() as any).format('dd.mm.yyyy'),
+        endDate: moment(new Date() as any).format('dd.mm.yyyy')
       };
     }
 
     if (this.widget.rules.period.startDate == null || this.widget.rules.period.startDate === '01.01.2000') {
-      this.widget.rules.period.startDate = (new Date() as any).format('dd.mm.yyyy');
+      this.widget.rules.period.startDate = moment(new Date() as any).format('dd.mm.yyyy');
     }
 
     if (this.widget.rules.period.endDate == null || this.widget.rules.period.endDate === '01.01.3000') {
-      this.widget.rules.period.endDate = (new Date() as any).format('dd.mm.yyyy');
+      this.widget.rules.period.endDate = moment(new Date() as any).format('dd.mm.yyyy');
     }
 
     if (typeof this.widget.autoinvite === 'undefined') {
