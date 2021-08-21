@@ -1313,6 +1313,8 @@ span.underow-comment {
 .form-ext-item {
   margin-top: 10px;
   padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
   position: relative;
   background-color: #f2f2f2;
   border: 1px solid transparent;
@@ -1320,7 +1322,9 @@ span.underow-comment {
 .form-ext-item__header {
   display: flex;
   justify-content: space-between;
-  padding: 5px 5px 0;
+  padding-top: 5px;
+  margin-left: -25px;
+  margin-right: -25px;
   font-size: 15px;
 }
 .form-ext-item__header-l {

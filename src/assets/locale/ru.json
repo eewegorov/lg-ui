@@ -880,7 +880,7 @@
 			},
 			"email": {
 				"id1": "Id поля",
-				"placeholder1": "Название поля (Placehodler)",
+				"placeholder1": "Название поля (Placeholder)",
 				"placeholder2": "Введите email",
 				"service1": "Служебное название поля",
 				"service2": "email",

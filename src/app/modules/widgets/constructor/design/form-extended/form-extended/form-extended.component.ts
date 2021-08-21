@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, DoCheck, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output, SimpleChanges
+} from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { Options } from '@angular-slider/ngx-slider';
 import { FullWidget } from '../../../../../../core/models/widgets';
@@ -11,7 +19,7 @@ import { WidgetConstructorService } from '../../../../services/widget-constructo
   templateUrl: './form-extended.component.html',
   styleUrls: ['../../../../shared/shared.scss', './form-extended.component.scss']
 })
-export class FormExtendedComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
+export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   @Input() public index: number;
   @Input() public widget: FullWidget;
   @Input() public coupons: Coupon[];
@@ -54,7 +62,37 @@ export class FormExtendedComponent implements OnInit, AfterViewInit, DoCheck, On
     private widgetConstructorService: WidgetConstructorService
   ) { }
 
-  ngDoCheck(): void {
+  ngOnInit(): void {
+    this.changeItemSub = this.widgetConstructorService.changeItemFormType.subscribe(({type, index}) => {
+      const item = this.widgetConstructorService.getItemFormByType(type);
+      if (this.widgetConstructorService.isItemMultiAndHasId(item.type)) {
+        item.idField = item.idField + this.getIdField(item, index);
+      }
+
+      item.widthValue = this.widget.guiprops.formExt.model.list[index].widthValue;
+      item.widthType = this.widget.guiprops.formExt.model.list[index].widthType;
+
+      this.widget.guiprops.formExt.model.list[index] = item;
+      this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
+    });
+
+    this.visualTypesOfField = this.widgetConstructorService.getExtFormVisualTypeOfField();
+    this.orientationTypesOfField = this.widgetConstructorService.getExtFormMainFieldsOrientationType();
+    this.availMainWidthTypes = this.widgetConstructorService.getExtFormMainWidthTypes();
+    this.availMainWidthOrientationTypes = this.widgetConstructorService.getExtFormMainWidthOrientationType();
+
+    if (!this.widget.guiprops.formExt.model.list.length) {
+      const item1 = this.widgetConstructorService.getItemFormByType('text');
+      const item2 = this.widgetConstructorService.getItemFormByType('button');
+      if (this.widgetConstructorService.isItemMultiAndHasId(item1.type)) {
+        item1.idField = item1.idField + this.widget.guiprops.formExt.model.list.length;
+      }
+      this.widget.guiprops.formExt.model.list = [item1, item2];
+    }
+    this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.widget.guiprops.formExt.model.mainSettings.bgInputForm && this.widget.guiprops.formExt.model.mainSettings.opacityBgInputForm) {
       this.widget.guiprops.formExt.model.mainSettings.rgbaInputForm =
         (this.widgetConstructorService.hexToRgb(
@@ -80,38 +118,6 @@ export class FormExtendedComponent implements OnInit, AfterViewInit, DoCheck, On
         this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent!important';
       }
     }
-  }
-
-  ngAfterViewInit(): void {
-    this.visualTypesOfField = this.widgetConstructorService.getExtFormVisualTypeOfField();
-    this.orientationTypesOfField = this.widgetConstructorService.getExtFormMainFieldsOrientationType();
-    this.availMainWidthTypes = this.widgetConstructorService.getExtFormMainWidthTypes();
-    this.availMainWidthOrientationTypes = this.widgetConstructorService.getExtFormMainWidthOrientationType();
-
-    if (!this.widget.guiprops.formExt.model.list.length) {
-      const item1 = this.widgetConstructorService.getItemFormByType('text');
-      const item2 = this.widgetConstructorService.getItemFormByType('button');
-      if (this.widgetConstructorService.isItemMultiAndHasId(item1.type)) {
-        item1.idField = item1.idField + this.widget.guiprops.formExt.model.list.length;
-      }
-      this.widget.guiprops.formExt.model.list = [item1, item2];
-    }
-    this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
-  }
-
-  ngOnInit(): void {
-    this.changeItemSub = this.widgetConstructorService.changeItemFormType.subscribe(({type, index}) => {
-      const item = this.widgetConstructorService.getItemFormByType(type);
-      if (this.widgetConstructorService.isItemMultiAndHasId(item.type)) {
-        item.idField = item.idField + this.getIdField(item, index);
-      }
-
-      item.widthValue = this.widget.guiprops.formExt.model.list[index].widthValue;
-      item.widthType = this.widget.guiprops.formExt.model.list[index].widthType;
-
-      this.widget.guiprops.formExt.model.list[index] = item;
-      this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
-    });
   }
 
   public removeElementFromElementsList(index: number, elem: Record<string, string>): void {

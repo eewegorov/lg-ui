@@ -50,7 +50,7 @@
     </div>
 
     <!-- ICON SETTINGS -->
-    <div *ngIf="item.bType.type === 1 || item.bType.type === 2">
+    <div [hidden]="!(item.bType.type === 1 || item.bType.type === 2)">
       <div class="row row-subitem mt-2">
         <div class="col-sm-6 row-subitem-padding pt-1">
           <label class="control-label control-label-colorpc control-label-des">

@@ -1,11 +1,11 @@
-<div class="border-item">
+<div *ngIf="widget" class="border-item">
   <h4 class="h4-element-title">
     {{ 'widgets.formExt.leftBlock.title' | translate }} <a
     (click)="removeElementFromElementsList(index, {name: 'form-ext-element'})"
     href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
   </h4>
 
-  <ul *ngIf="widget.guiprops?.formExt?.model?.list" class="form-ext-wrapper" [sortablejs]="onDrDr">
+  <ul *ngIf="widget.guiprops?.formExt?.model" class="form-ext-wrapper" [sortablejs]="onDrDr">
     <li class="form-ext-item"
         *ngFor="let extItem of widget.guiprops.formExt.model.list; index as innerIndex; trackBy: trackByIndex;"
         [ngClass]="dragItemClass(extItem)"
@@ -98,63 +98,65 @@
     <h4 class="h4-text-tit control-label-des helper-title-3level">{{ 'widgets.formExt.mainSettings.formDesign' | translate }}</h4>
   </div>
 
-  <div *ngIf="isFieldSettings()">
-    <div class="row row-subitem mt-3 mb-2">
-      <div class="col-sm-6 row-subitem-padding pt-1">
-        <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.colorNameField' | translate }}:</label>
-        <input
-          [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.colorTitleInputForm"
-          [style.background]="widget.guiprops.formExt.model.mainSettings.colorTitleInputForm"
-          [cpAlphaChannel]="'disabled'"
-          [cpOutputFormat]="'hex'"
-        />
-      </div>
-
-      <div class="col-sm-6 row-subitem-padding pt-1">
-        <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.colorBGField' | translate }}:</label>
-        <input
-          [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.bgInputForm"
-          [style.background]="widget.guiprops.formExt.model.mainSettings.bgInputForm"
-          [cpAlphaChannel]="'disabled'"
-          [cpOutputFormat]="'hex'"
-        />
-      </div>
-    </div>
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
-        <ngx-slider [(value)]="widget.guiprops.formExt.model.mainSettings.opacityBgInputForm" [options]="optionsOpacity"></ngx-slider>
-        <label class="control-label control-label-ui">{{ 'widgets.formExt.mainSettings.opacityBGField' | translate }}</label>
-      </div>
-    </div>
-    <div class="row row-subitem mt-2 mb-3">
-      <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
-        <ngx-slider [(value)]="widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm" [options]="optionsRound"></ngx-slider>
-        <label class="control-label control-label-ui">{{ 'widgets.formExt.mainSettings.radiusCornerField' | translate }}</label>
-      </div>
-    </div>
-
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 d-flex">
-        <ui-switch
-          size="small"
-          [(ngModel)]="widget.guiprops.formExt.model.mainSettings.border.enable"
-        ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">{{ 'widgets.formExt.mainSettings.useBorderAroundFields' | translate }}</label>
-      </div>
-    </div>
-    <div *ngIf="widget.guiprops.formExt.model.mainSettings.border.enable == true">
-      <div class="row row-subitem">
+  <ng-container *ngIf="widget.guiprops?.formExt?.model">
+    <div *ngIf="isFieldSettings()">
+      <div class="row row-subitem mt-3 mb-2">
         <div class="col-sm-6 row-subitem-padding pt-1">
-          <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.colorBorder' | translate }}:</label>
+          <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.colorNameField' | translate }}:</label>
           <input
-            [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.border.color"
-            [style.background]="widget.guiprops.formExt.model.mainSettings.border.color"
+            [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.colorTitleInputForm"
+            [style.background]="widget.guiprops.formExt.model.mainSettings.colorTitleInputForm"
+            [cpAlphaChannel]="'disabled'"
+            [cpOutputFormat]="'hex'"
+          />
+        </div>
+
+        <div class="col-sm-6 row-subitem-padding pt-1">
+          <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.colorBGField' | translate }}:</label>
+          <input
+            [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.bgInputForm"
+            [style.background]="widget.guiprops.formExt.model.mainSettings.bgInputForm"
             [cpAlphaChannel]="'disabled'"
             [cpOutputFormat]="'hex'"
           />
         </div>
       </div>
+      <div class="row row-subitem mt-2">
+        <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
+          <ngx-slider [(value)]="widget.guiprops.formExt.model.mainSettings.opacityBgInputForm" [options]="optionsOpacity"></ngx-slider>
+          <label class="control-label control-label-ui">{{ 'widgets.formExt.mainSettings.opacityBGField' | translate }}</label>
+        </div>
+      </div>
+      <div class="row row-subitem mt-2 mb-3">
+        <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
+          <ngx-slider [(value)]="widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm" [options]="optionsRound"></ngx-slider>
+          <label class="control-label control-label-ui">{{ 'widgets.formExt.mainSettings.radiusCornerField' | translate }}</label>
+        </div>
+      </div>
+
+      <div class="row row-subitem mt-2">
+        <div class="col-sm-12 row-subitem-padding pt-1 d-flex">
+          <ui-switch
+            size="small"
+            [(ngModel)]="widget.guiprops.formExt.model.mainSettings.border.enable"
+          ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">{{ 'widgets.formExt.mainSettings.useBorderAroundFields' | translate }}</label>
+        </div>
+      </div>
+      <div *ngIf="widget.guiprops.formExt.model.mainSettings.border.enable == true">
+        <div class="row row-subitem">
+          <div class="col-sm-6 row-subitem-padding pt-1">
+            <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.colorBorder' | translate }}:</label>
+            <input
+              [(colorPicker)]="widget.guiprops.formExt.model.mainSettings.border.color"
+              [style.background]="widget.guiprops.formExt.model.mainSettings.border.color"
+              [cpAlphaChannel]="'disabled'"
+              [cpOutputFormat]="'hex'"
+            />
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </ng-container>
 
   <div class="row row-subitem mt-2">
     <div class="col-sm-6 row-subitem-padding">

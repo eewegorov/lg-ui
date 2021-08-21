@@ -169,7 +169,7 @@
     </div>
   </div>
 
-  <div class="mt-3 col-lg-4" *ngFor="let wdgTypes of getTypesWithCompanyFilter()">
+  <div class="mt-3 col-lg-4 mw-100" *ngFor="let wdgTypes of getTypesWithCompanyFilter()">
     <h4 class="f-1 no-bold mt-3">{{ getTypeItem(wdgTypes)?.name }}:</h4>
     <div class="row" *ngFor="let widget of getFilteredWidgets(wdgTypes); index as i">
       <app-widget-item
