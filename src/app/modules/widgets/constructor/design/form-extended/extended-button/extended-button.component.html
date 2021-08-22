@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding pt-1">
+    <div class="col-sm-12 row-subitem-padding">
       <div class="item-placeholder-type">{{ item.label }}</div>
     </div>
   </div>
@@ -25,7 +25,7 @@
               *ngFor="let itemForm of availItemTypes"
               (click)="changeFormType(itemForm.type)"
             >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemForm.label }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
             </li>
           </ul>
         </div>
@@ -72,19 +72,16 @@
         <div class="col-sm-12 row-subitem-padding">
           <div class="btn-group">
             <button type="button" class="btn btn-primary iconpicker-component">
-              <i class="{{ item.icon.selectedIcon }}"></i>
+              <i [class]="item.icon.selectedIcon"></i>
             </button>
-            <button
-              type="button"
-              [id]="'icon-picker-ext-form' + index"
-              class="icp icp-dd btn btn-primary dropdown-toggle"
-              data-selected="fa-car"
-              data-toggle="dropdown"
-            >
-              <span class="caret"></span>
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <div class="dropdown-menu"></div>
+            <input
+              [iconPicker]="item.icon.selectedIcon"
+              ipPosition="top"
+              [ipIconPack]="['fa']"
+              (iconPickerSelect)="onLabelIconPickerSelect($event)"
+              id="icon-picker-label"
+              class="icp btn btn-primary dropdown-toggle"
+            />
           </div>
         </div>
       </div>

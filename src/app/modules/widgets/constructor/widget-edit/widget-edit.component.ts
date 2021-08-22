@@ -9,7 +9,6 @@ import { SiteShort } from '../../../../core/models/sites';
 import { Coupon } from '../../../../core/models/coupons';
 import { User } from '../../../../core/models/user';
 import {
-  Audience,
   FullWidget,
   MockupGroup,
   MockupShort,
@@ -41,7 +40,6 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   public isPayment = false;
   public isContainerized: boolean;
   public currentActiveTab = 'design';
-  public audience: Audience;
   public coupons = [];
   public isLoading = false;
   public SP_widget = {} as any;
@@ -395,6 +393,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
       this.widget.jsInfo.onShowScript.script = this.widget.jsInfo.onShowScript.script || null;
       this.widget.jsInfo.onTargetScript.script = this.widget.jsInfo.onTargetScript.script || null;
       const widgetUpdatedData = {
+        audience: this.widget.audience,
         guiprops: this.widget.guiprops,
         autoinvite: this.widget.autoinvite,
         autoresponder: this.widget.autoresponder,
@@ -645,7 +644,6 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   private loadWidget() {
     this.widgetService.getWidgetById(this.sid, this.wid).subscribe((response: FullWidget) => {
       this.widget = response as unknown as FullWidget;
-      this.audience = response.audience;
       this.widget.id = this.wid;
       this.widgetService.loadWidgetListeners.forEach(item => {
         item.call({...this.constructorDesignComponent, ...this.constructorRulesComponent});

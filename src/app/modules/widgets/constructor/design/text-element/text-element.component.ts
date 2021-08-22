@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { FullWidget } from '../../../../../core/models/widgets';
 import { WidgetConstructorService } from '../../../services/widget-constructor.service';
@@ -8,7 +8,7 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
   templateUrl: './text-element.component.html',
   styleUrls: ['../../../shared/shared.scss', './text-element.component.scss']
 })
-export class TextElementComponent implements OnInit {
+export class TextElementComponent implements OnInit, AfterViewInit {
   @Input() public index: number;
   @Input() public item: any;
   @Input() public widget: FullWidget;
@@ -23,8 +23,11 @@ export class TextElementComponent implements OnInit {
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.initPicker();
+  }
+
+  ngOnInit(): void {
   }
 
   public removeElementFromElementsList(index: number): void {

@@ -16,7 +16,6 @@ import 'jquery-ui/ui/widgets/draggable.js';
 })
 export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
   @Input() public widget: FullWidget;
-  @Input() public audience: Audience;
   @Input() public isMockup: boolean;
 
   constructor(
@@ -27,7 +26,7 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.audience.groups = this.audience.groups.map((group: AudienceGroup, i: number) => ({
+    this.widget.audience.groups = this.widget.audience.groups.map((group: AudienceGroup, i: number) => ({
       ...group,
       id: i,
       items: group.items.map((item: AudienceGroupItem, j: number) => ({ ...item, id: j }))
@@ -43,7 +42,7 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
       helper: 'clone',
       revert: false,
       appendTo: '#audiences-item',
-      drag: function(e, ui) {
+      drag(e, ui) {
         ui.position.top = e.pageY - 70;
         ui.position.left = e.pageX - 200;
       }
@@ -67,12 +66,12 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
   }
 
   public removeItem(groupId, index) {
-    for (let i = 0; i < this.audience.groups.length; i++) {
-      if (this.audience.groups[i].id === groupId) {
-        this.audience.groups[i].items = this.widgetConstructorService.removeFromArray(this.audience.groups[i].items, index);
+    for (let i = 0; i < this.widget.audience.groups.length; i++) {
+      if (this.widget.audience.groups[i].id === groupId) {
+        this.widget.audience.groups[i].items = this.widgetConstructorService.removeFromArray(this.widget.audience.groups[i].items, index);
 
-        if (this.audience.groups[i].items.length === 0) {
-          this.audience.groups = this.widgetConstructorService.removeFromArray(this.audience.groups, i);
+        if (this.widget.audience.groups[i].items.length === 0) {
+          this.widget.audience.groups = this.widgetConstructorService.removeFromArray(this.widget.audience.groups, i);
         }
         return;
       }
@@ -80,7 +79,7 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
   }
 
   public removeSubItem(groupId: number, itemId: number, index: number): void {
-    for (const item of this.audience.groups) {
+    for (const item of this.widget.audience.groups) {
       if (item.id === groupId) {
 
         for (let j = 0; j < item.items.length; j++) {

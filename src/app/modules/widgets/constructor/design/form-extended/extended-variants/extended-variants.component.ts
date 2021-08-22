@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, Input, OnInit } from '@angular/core';
 import { WidgetConstructorService } from '../../../../services/widget-constructor.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { WidgetConstructorService } from '../../../../services/widget-constructo
   templateUrl: './extended-variants.component.html',
   styleUrls: ['../../../../shared/shared.scss', './extended-variants.component.scss']
 })
-export class ExtendedVariantsComponent implements OnInit, DoCheck {
+export class ExtendedVariantsComponent implements OnInit, AfterViewInit, DoCheck {
   @Input() public index: number;
   @Input() public item: Record<string, any>;
 
@@ -16,9 +16,11 @@ export class ExtendedVariantsComponent implements OnInit, DoCheck {
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.initPicker();
+  }
 
+  ngOnInit(): void {
     this.widgetConstructorService.changeArrayOfFormExtTypes.subscribe(() => {
       this.availItemTypes = this.widgetConstructorService.getAvailableTypes();
     });

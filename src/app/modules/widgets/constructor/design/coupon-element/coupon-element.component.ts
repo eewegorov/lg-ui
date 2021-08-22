@@ -38,10 +38,10 @@ export class CouponElementComponent implements OnInit, AfterViewInit, OnChanges 
 
   ngAfterViewInit(): void {
     this.refreshCouponsList();
+    this.initPicker();
   }
 
   ngOnInit(): void {
-    this.initPicker();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

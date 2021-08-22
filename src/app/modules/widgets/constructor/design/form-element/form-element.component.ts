@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { FullWidget } from '../../../../../core/models/widgets';
 import { WidgetConstructorService } from '../../../services/widget-constructor.service';
@@ -9,7 +9,7 @@ import { Coupon } from '../../../../../core/models/coupons';
   templateUrl: './form-element.component.html',
   styleUrls: ['../../../shared/shared.scss', './form-element.component.scss']
 })
-export class FormElementComponent implements OnInit {
+export class FormElementComponent implements OnInit, AfterViewInit {
   @Input() public index: number;
   @Input() public widget: FullWidget;
   @Input() public coupons: Coupon[];
@@ -55,8 +55,11 @@ export class FormElementComponent implements OnInit {
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.initPicker();
+  }
+
+  ngOnInit(): void {
   }
 
   public trackById(index, item) {

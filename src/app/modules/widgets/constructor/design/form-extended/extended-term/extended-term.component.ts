@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, Input, OnInit } from '@angular/core';
 import { WidgetConstructorService } from '../../../../services/widget-constructor.service';
 import { Options } from '@angular-slider/ngx-slider';
 
@@ -7,7 +7,7 @@ import { Options } from '@angular-slider/ngx-slider';
   templateUrl: './extended-term.component.html',
   styleUrls: ['../../../../shared/shared.scss', './extended-term.component.scss']
 })
-export class ExtendedTermComponent implements OnInit, DoCheck {
+export class ExtendedTermComponent implements OnInit, AfterViewInit, DoCheck {
   @Input() public index: number;
   @Input() public item: Record<string, any>;
 
@@ -22,9 +22,11 @@ export class ExtendedTermComponent implements OnInit, DoCheck {
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.initPicker();
+  }
 
+  ngOnInit(): void {
     this.widgetConstructorService.changeArrayOfFormExtTypes.subscribe(() => {
       this.availItemTypes = this.widgetConstructorService.getAvailableTypes();
     });

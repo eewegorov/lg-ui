@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, Input, OnInit } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { WidgetConstructorService } from '../../../../services/widget-constructor.service';
 import { SubscriptionLike } from 'rxjs';
@@ -8,7 +8,7 @@ import { SubscriptionLike } from 'rxjs';
   templateUrl: './extended-button.component.html',
   styleUrls: ['../../../../shared/shared.scss', './extended-button.component.scss']
 })
-export class ExtendedButtonComponent implements OnInit, DoCheck {
+export class ExtendedButtonComponent implements OnInit, AfterViewInit, DoCheck {
   @Input() public index: number;
   @Input() public containerId: string;
   @Input() public item: Record<string, any>;
@@ -28,10 +28,11 @@ export class ExtendedButtonComponent implements OnInit, DoCheck {
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.initPicker();
-    this.initIconPicker();
+  }
 
+  ngOnInit(): void {
     this.changeExtTypesSub = this.widgetConstructorService.changeArrayOfFormExtTypes.subscribe(() => {
       this.availItemTypes = this.widgetConstructorService.getAvailableTypes();
     });
@@ -89,13 +90,7 @@ export class ExtendedButtonComponent implements OnInit, DoCheck {
     data.fontFamily = '\'' + fontFamily + '\'';
   }
 
-  private initIconPicker() {
-    setTimeout(() => {
-      ($('#icon-picker-ext-form' + this.index) as any).iconpicker({
-      }).on('iconpickerSelected', (e) => {
-        this.item.icon.selectedIcon = e.iconpickerValue;
-      });
-    }, 500);
+  public onLabelIconPickerSelect(newIcon: string) {
+    this.item.icon.selectedIcon = newIcon;
   }
-
 }
