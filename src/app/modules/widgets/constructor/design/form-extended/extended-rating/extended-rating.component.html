@@ -32,7 +32,7 @@
       <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
         <label class="control-label control-label-des">{{ 'widgets.formExt.email.service1' | translate }}:</label>
         <input type="text" class="form-control" [(ngModel)]="item.service">
-        <span class="input-down-sm-lab small">{{ 'widgets.formExt.email.service3' | translate }}</span>
+        <span class="input-down-sm-lab">{{ 'widgets.formExt.email.service3' | translate }}</span>
       </div>
     </div>
 
@@ -108,22 +108,25 @@
     </div>
 
     <div class="row row-subitem mt-2">
-      <div class="col-sm-6 row-subitem-padding pt-1">
-        <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.rating.colorInactive' | translate }}:</label>
+      <div class="col-sm-5 row-subitem-padding pt-1 mr-5">
+        <label class="control-label control-label-colorpc control-label-des label-for-picker">{{ 'widgets.formExt.rating.colorInactive' | translate }}:</label>
         <input
           [(colorPicker)]="item.colorInactive"
           [style.background]="item.colorInactive"
           [cpAlphaChannel]="'disabled'"
           [cpOutputFormat]="'hex'"
+          class="w-100"
         />
       </div>
-      <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
-        <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.rating.colorActive' | translate }}</label>
+      <div class="col-sm-5 row-subitem-padding pt-1 side-ui-dev">
+        <label class="control-label control-label-colorpc control-label-des label-for-picker">{{ 'widgets.formExt.rating.colorActive' | translate }}:</label>
         <input
           [(colorPicker)]="item.colorActive"
           [style.background]="item.colorActive"
           [cpAlphaChannel]="'disabled'"
           [cpOutputFormat]="'hex'"
+          cpPosition="left"
+          class="w-100"
         />
       </div>
     </div>

@@ -25,7 +25,7 @@
               (click)="changeFormType(itemForm.type)"
               *ngFor="let itemForm of availItemTypes"
             >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemForm.label }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
             </li>
           </ul>
         </div>
@@ -43,7 +43,7 @@
       <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
         <label class="control-label control-label-des">{{ 'widgets.formExt.email.service1' | translate }}:</label>
         <input type="text" class="form-control" [(ngModel)]="item.service">
-        <span class="input-down-sm-lab small">{{ 'widgets.formExt.email.service3' | translate }}</span>
+        <span class="input-down-sm-lab">{{ 'widgets.formExt.email.service3' | translate }}</span>
       </div>
     </div>
 
@@ -90,7 +90,7 @@
               *ngFor="let itemType of availItemDateTypes"
               (click)="item.dateType = itemType"
             >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{itemType.label}}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemType.label }}</a>
             </li>
           </ul>
         </div>

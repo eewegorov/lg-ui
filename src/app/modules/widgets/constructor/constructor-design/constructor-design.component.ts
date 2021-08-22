@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   AfterViewInit,
   Component,
   DoCheck,
@@ -27,7 +28,7 @@ import { WidgetService } from '../../services/widget.service';
   templateUrl: './constructor-design.component.html',
   styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss']
 })
-export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoCheck, OnChanges, OnDestroy {
+export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterContentInit, DoCheck, OnChanges, OnDestroy {
   @ViewChild('flow') public flow: FlowDirective;
   @Input() public sid: string;
   @Input() public wid: string;
@@ -112,14 +113,16 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   ) {
   }
 
+  ngAfterContentInit(): void {
+    this.isThankShow = this.isThankShouldShow();
+  }
+
   ngAfterViewInit(): void {
     this.autoUploadSubscription = this.flow?.events$.subscribe(event => {
       if (event.type === 'filesSubmitted') {
         this.flow.upload();
       }
     });
-
-    this.isThankShow = this.isThankShouldShow();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -12,7 +12,7 @@
           </button>
           <ul class="dropdown-menu">
             <li *ngFor="let site of sites" (click)="changeCurrentSite(site)">
-              <a href="#" class="dropdown-item">{{ site.name }}</a>
+              <a class="dropdown-item">{{ site.name }}</a>
             </li>
           </ul>
         </div>
@@ -29,7 +29,7 @@
               </button>
               <ul class="dropdown-menu" *ngIf="companies.length">
                 <li *ngFor="let company of companies" (click)="changeCurrentCompany(company)">
-                  <a href="#" class="dropdown-item">{{ company.name || defCompanyName }}</a>
+                  <a class="dropdown-item">{{ company.name || defCompanyName }}</a>
                 </li>
               </ul>
             </div>
@@ -102,7 +102,7 @@
         ><i class="fa fa-plus-circle"></i> {{ 'widgetsList.add.title' | translate }}
         </button>
       </div>
-      <div id="buyWidgetDevelopmentContainer" class="ng-binding"><a href="#" id="buyWidgetDevelopment">{{ 'widgetsList.add.alt' | translate }}</a></div>
+      <div id="buyWidgetDevelopmentContainer" class="ng-binding"><a id="buyWidgetDevelopment">{{ 'widgetsList.add.alt' | translate }}</a></div>
     </div>
   </div>
 
@@ -121,7 +121,7 @@
       {{ 'widgetsList.site.default.title' | translate }} <a
       data-toggle="tooltip" data-placement="bottom"
       title="{{ 'widgetsList.site.default.tooltip' | translate }}"
-      class="info-link" href="#"><i class="fa fa-info-circle"></i></a>
+      class="info-link"><i class="fa fa-info-circle"></i></a>
     </h3>
   </div>
   <div *ngIf="smartPoints.enabled" class="column ml-5 mr-5 pl-2 widget-page__smaptpoint-container">

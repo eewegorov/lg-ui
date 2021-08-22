@@ -87,7 +87,7 @@
                 {{ 'settings.site.newIntegration.group.mailing' | translate }}
               </span>
               <li *ngFor="let item of integrationsAvailableMailing" (click)="changeIntegrationToAdd(item)">
-                <a class="integration-selector-item {{ item.type }}" href="#"
+                <a class="integration-selector-item {{ item.type }}"
                 >{{ item.name || defIntegrationToAddTitle }} <span
                   *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
                 </a>
@@ -96,7 +96,7 @@
                 {{ 'settings.site.newIntegration.group.crm' | translate }}
               </span>
               <li *ngFor="let item of integrationsAvailableCRM" (click)="changeIntegrationToAdd(item)">
-                <a class="integration-selector-item {{ item.type }}" href="#"
+                <a class="integration-selector-item {{ item.type }}"
                 >{{ item.name || defIntegrationToAddTitle }} <span
                   *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
                 </a>
@@ -105,7 +105,7 @@
                 {{'settings.site.newIntegration.group.notification' | translate }}
               </span>
               <li *ngFor="let item of integrationsAvailableNotifications" (click)="changeIntegrationToAdd(item)">
-                <a class="integration-selector-item {{ item.type }}" href="#"
+                <a class="integration-selector-item {{ item.type }}"
                 >{{ item.name || defIntegrationToAddTitle }} <span
                   *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
                 </a>
@@ -114,7 +114,7 @@
                 {{ 'settings.site.newIntegration.group.others' | translate }}
               </span>
               <li *ngFor="let item of integrationsAvailableOthers" (click)="changeIntegrationToAdd(item)">
-                <a class="integration-selector-item {{item.type}}" href="#"
+                <a class="integration-selector-item {{item.type}}"
                 >{{ item.name || defIntegrationToAddTitle }} <span
                   *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
                 </a>

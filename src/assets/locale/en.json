@@ -812,7 +812,8 @@
 			}
 		},
 		"font": {
-			"textSize": ""
+			"textSize": "",
+			"title": ""
 		},
 		"form": {
 			"phoneMask": {
@@ -1026,11 +1027,15 @@
 			"redirectError": "",
 			"saveError": ""
 		},
+		"icon": {
+			"iconSize": ""
+		},
 		"integration": {
 			"saveError": ""
 		},
 		"redirect": {
 			"blank": "",
+			"description": "",
 			"descriptionOld": "",
 			"doOnClick": "",
 			"example": "",

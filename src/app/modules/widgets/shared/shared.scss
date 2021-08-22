@@ -399,10 +399,6 @@ input.form-cntrl-55w {
   border-color: #000;
 }
 
-.has-error label.control-label {
-  color: #a94442;
-}
-
 label.control-label span:not(.tariff-info) {
   font-weight: 400 !important;
   font-size: 13px;
@@ -767,6 +763,33 @@ textarea.textar-iframe {
   display: flex;
   justify-content: flex-start;
   padding-right: 15px;
+}
+
+.iconpicker-component {
+  width: 50px;
+  height: 35px;
+}
+
+.icp-icon .icp {
+  width: 30px;
+}
+
+.icp-icon .caret {
+  color: white;
+  position: absolute;
+  top: 17px;
+  left: 55px;
+  display: inline-block;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  z-index: 2;
+}
+
+input.icp {
+  caret-color: transparent !important;
 }
 
 

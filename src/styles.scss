@@ -1193,6 +1193,7 @@ span.underow-comment {
   border: 1px solid #d9dbdd;
   border-radius: 3px;
   cursor: pointer;
+  background-color: #fff;
 }
 
 /* On mouse-over, add a grey background color */
@@ -1377,7 +1378,7 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 }
 .form-ext-item__width-settings .form-control-font,
 .form-ext-item__rating-stars-settings .form-control-font {
-  height: 34px;
+  height: 34px !important;
 }
 .form-ext-item__width-settings .dropdown .btn {
   padding-right: 20px;
@@ -1819,8 +1820,7 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   /*margin-top: 42px;*/
 }
 .form-ext-if-action-desc {
-  margin-top: -5px;
-  padding-left: 25px;
+  padding-left: 23px;
   display: block;
 }
 

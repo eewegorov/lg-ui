@@ -511,6 +511,7 @@ h6.title-h6-widget a:hover {
 .popup-sh-pad .widget-visual-block {
   top: 70px;
 }
+
 .wv-b-left {
   left: 110px;
   right: auto;
@@ -519,31 +520,4 @@ h6.title-h6-widget a:hover {
 .wv-b-right {
   left: 110px;
   right: auto;
-}
-
-.iconpicker-component {
-  width: 50px;
-  height: 35px;
-}
-
-.icp-icon .icp {
-  width: 30px;
-}
-
-.icp-icon .caret {
-  color: white;
-  position: absolute;
-  top: 17px;
-  left: 55px;
-  display: inline-block;
-  margin-left: 2px;
-  vertical-align: middle;
-  border-top: 4px solid;
-  border-right: 4px solid transparent;
-  border-left: 4px solid transparent;
-  z-index: 2;
-}
-
-input#icon-picker-label {
-  caret-color: transparent;
 }
