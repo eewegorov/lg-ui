@@ -240,7 +240,7 @@ export class WidgetConstructorService {
   }
 
   public getExtFormBtnRedirectTypesForContainerized() {
-    return this.getExtFormBtnRedirectTypes().filter((item) => { return item.type !== 2 });
+    return this.getExtFormBtnRedirectTypes().filter((item) => item.type !== 2);
   }
 
   public getExtFormDateTypes() {

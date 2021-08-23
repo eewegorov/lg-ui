@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding pt-1">
+    <div class="col-sm-12 row-subitem-padding">
       <div class="item-placeholder-type">{{ item.label }}</div>
     </div>
   </div>
@@ -46,7 +46,7 @@
               *ngFor="let itemFieldType of fieldTypes"
               (click)="selectFieldType(itemFieldType)"
             >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)">{{ itemFieldType.label }}</a>
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemFieldType.label }}</a>
             </li>
           </ul>
         </div>
@@ -77,33 +77,33 @@
 
 
     <div *ngIf="isFieldUtmOrRef(item.fieldType.type)">
-      <div class="row row-subitem mt-2">
+      <div class="row row-subitem mt-2 pt-2">
         <div class="col-sm-12 row-subitem-padding">
           <h4 class="h4-text-tit control-label-des">{{ 'widgets.formExt.hidden.fieldUtm.radio.title' | translate }}</h4>
         </div>
         <div class="col-sm-6 row-subitem-padding">
-          <div class="form-group widget-selector">
+          <div class="form-group widget-selector mb-0">
             <label class="non-bold">
               <input
                 type="radio"
                 name="hidden"
                 class="radio radio-info radio-inline"
                 [(ngModel)]="item.utmRefPage.currentPage"
-                value="true"
+                [value]="true"
               />
               {{ 'widgets.formExt.hidden.fieldUtm.radio.label1' | translate }}
             </label>
           </div>
         </div>
         <div class="col-sm-6 row-subitem-padding">
-          <div class="form-group widget-selector">
+          <div class="form-group widget-selector mb-0">
             <label class="non-bold">
               <input
                 type="radio"
                 name="hidden"
                 class="radio radio-info radio-inline"
                 [(ngModel)]="item.utmRefPage.currentPage"
-                value="false"
+                [value]="false"
               />
               {{ 'widgets.formExt.hidden.fieldUtm.radio.label2' | translate }}
             </label>
@@ -122,7 +122,7 @@
       <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
         <label class="control-label control-label-des">{{ 'widgets.formExt.hidden.fieldUserParam.label' | translate }}</label>
         <input type="text" class="form-control" [(ngModel)]="item.customParamValue">
-        <span class="input-down-sm-lab small">{{ 'widgets.formExt.hidden.fieldUserParam.desc' | translate }}</span>
+        <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldUserParam.desc' | translate }}</span>
       </div>
     </div>
 
@@ -130,7 +130,7 @@
       <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
         <label class="control-label control-label-des">{{ 'widgets.formExt.hidden.fieldCookies.label' | translate }}</label>
         <input type="text" class="form-control" [(ngModel)]="item.cookieValue">
-        <span class="input-down-sm-lab small">{{ 'widgets.formExt.hidden.fieldCookies.desc' | translate }}</span>
+        <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldCookies.desc' | translate }}</span>
       </div>
     </div>
 
@@ -138,7 +138,7 @@
       <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
         <label class="control-label control-label-des">{{ 'widgets.formExt.hidden.fieldUserValue.label' | translate }}</label>
         <input type="text" class="form-control" [(ngModel)]="item.customUserValue">
-        <span class="input-down-sm-lab small">{{ 'widgets.formExt.hidden.fieldUserValue.desc' | translate }}</span>
+        <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldUserValue.desc' | translate }}</span>
       </div>
     </div>
 

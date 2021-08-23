@@ -982,12 +982,22 @@
 					}
 				},
 				"useBorderAroundFields": "Использовать рамку вокруг полей",
-				"usePodBG": "Использовать подложку под формой",
+				"usePodBG": {
+					"color": "Цвет подложки",
+					"opacity": "Прозрачность",
+					"title": "Использовать подложку под формой"
+				},
 				"visualField": "Вид полей",
 				"visualField1": "Под контентом",
 				"visualField2": "На всю ширину",
 				"widthAndPositionForm": "Ширина и позиционирование формы",
-				"widthForm": "Ширина формы",
+				"widthForm": {
+					"orientation": "Ориентация",
+					"orientation1": "Слева",
+					"orientation2": "По центру",
+					"orientation3": "Справа",
+					"title": "Ширина формы"
+				},
 				"widthForm1": "От края до края",
 				"widthForm2": "Собственная"
 			},

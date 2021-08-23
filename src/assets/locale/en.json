@@ -952,12 +952,22 @@
 					}
 				},
 				"useBorderAroundFields": "",
-				"usePodBG": "",
+				"usePodBG": {
+					"color": "",
+					"opacity": "",
+					"title": ""
+				},
 				"visualField": "",
 				"visualField1": "",
 				"visualField2": "",
 				"widthAndPositionForm": "",
-				"widthForm": "",
+				"widthForm": {
+					"orientation": "",
+					"orientation1": "",
+					"orientation2": "",
+					"orientation3": "",
+					"title": ""
+				},
 				"widthForm1": "",
 				"widthForm2": ""
 			},

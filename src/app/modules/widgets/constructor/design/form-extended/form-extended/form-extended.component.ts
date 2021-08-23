@@ -93,31 +93,7 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.widget.guiprops.formExt.model.mainSettings.bgInputForm && this.widget.guiprops.formExt.model.mainSettings.opacityBgInputForm) {
-      this.widget.guiprops.formExt.model.mainSettings.rgbaInputForm =
-        (this.widgetConstructorService.hexToRgb(
-          this.widget.guiprops.formExt.model.mainSettings.bgInputForm,
-          this.widget.guiprops.formExt.model.mainSettings.opacityBgInputForm
-        )).toString();
-    }
 
-    if (this.widget.guiprops.formExt.model.mainSettings.colorPod.color &&
-      this.widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod &&
-      this.widget.guiprops.formExt.model.mainSettings.colorPod.enable &&
-      this.widget.guiprops.formExt.enable &&
-      this.widget.guiprops.formExt.model.mainSettings.button.enable
-    ) {
-      if (this.widget.guiprops.formExt.model.mainSettings.colorPod.enable) {
-        this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod =
-          (this.widgetConstructorService.hexToRgb(
-            this.widget.guiprops.formExt.model.mainSettings.colorPod.color,
-            this.widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod
-          )).toString();
-      }
-      else {
-        this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent!important';
-      }
-    }
   }
 
   public removeElementFromElementsList(index: number, elem: Record<string, string>): void {
