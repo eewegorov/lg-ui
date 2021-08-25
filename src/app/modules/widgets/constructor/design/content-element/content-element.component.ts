@@ -1,6 +1,6 @@
 import {
   AfterContentInit,
-  AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -15,7 +15,8 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
 @Component({
   selector: 'app-content-element',
   templateUrl: './content-element.component.html',
-  styleUrls: ['../../../shared/shared.scss', './content-element.component.scss']
+  styleUrls: ['../../../shared/shared.scss', './content-element.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentElementComponent implements OnInit, AfterContentInit {
   @Input() public widget: FullWidget;

@@ -1,11 +1,13 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
-  Output, SimpleChanges
+  Output,
+  SimpleChanges
 } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { Options } from '@angular-slider/ngx-slider';
@@ -17,7 +19,8 @@ import { WidgetConstructorService } from '../../../../services/widget-constructo
 @Component({
   selector: 'app-form-extended',
   templateUrl: './form-extended.component.html',
-  styleUrls: ['../../../../shared/shared.scss', './form-extended.component.scss']
+  styleUrls: ['../../../../shared/shared.scss', './form-extended.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   @Input() public index: number;
@@ -44,8 +47,8 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     animated: 100,
     filter: '.ignore-elements',
     handle: '.grab-form-ext-item',
-    onStart: this.onStarting,
-    onEnd: this.onEnding
+    onStart: this.onStarting.bind(this),
+    onEnd: this.onEnding.bind(this)
   };
 
   public orientationTypesOfField = [];
@@ -93,7 +96,31 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.widget.guiprops.formExt.model.mainSettings.bgInputForm && this.widget.guiprops.formExt.model.mainSettings.opacityBgInputForm) {
+      this.widget.guiprops.formExt.model.mainSettings.rgbaInputForm =
+        (this.widgetConstructorService.hexToRgb(
+          this.widget.guiprops.formExt.model.mainSettings.bgInputForm,
+          this.widget.guiprops.formExt.model.mainSettings.opacityBgInputForm
+        )).toString();
+    }
 
+    if (this.widget.guiprops.formExt.model.mainSettings.colorPod.color &&
+      this.widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod &&
+      this.widget.guiprops.formExt.model.mainSettings.colorPod.enable &&
+      this.widget.guiprops.formExt.enable &&
+      this.widget.guiprops.formExt.model.mainSettings.button.enable
+    ) {
+      if (this.widget.guiprops.formExt.model.mainSettings.colorPod.enable) {
+        this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod =
+          (this.widgetConstructorService.hexToRgb(
+            this.widget.guiprops.formExt.model.mainSettings.colorPod.color,
+            this.widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod
+          )).toString();
+      }
+      else {
+        this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent!important';
+      }
+    }
   }
 
   public removeElementFromElementsList(index: number, elem: Record<string, string>): void {
@@ -101,14 +128,9 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public dragItemClass(item) {
-    let className = '';
-
     if (!item.isTabOpened) {
-      className += ' form-ext-item-closed';
-
+      return 'form-ext-item-closed';
     }
-
-    return className;
   }
 
   public toggleItem(event, index, isPanelClick?) {
@@ -222,10 +244,6 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     return this.widgetConstructorService.isThatElementUnclonable(type);
   }
 
-  public trackByIndex(index) {
-    return index;
-  }
-
   private getIdField(item, index) {
     return item.type === 'hidden' ? item.fieldType.type : index;
   }
@@ -240,13 +258,11 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private onStarting(drObj) {
-    if (drObj.models.length > 1) {
-      this.isCurrentDraggedWasClosed = !this.widget.guiprops.formExt.model.list[drObj.oldIndex].isTabOpened;
-    }
+    this.isCurrentDraggedWasClosed = !this.widget.guiprops.formExt.model.list[drObj.oldIndex].isTabOpened;
   }
 
   private onEnding(drObj) {
-    if (drObj.models.length > 1 && (drObj.newIndex !== drObj.oldIndex)) {
+    if (drObj.newIndex !== drObj.oldIndex) {
       setTimeout(() => {
         const listOfBodies = $('#collapseTwo').find('.form-ext-item__toggled-wrapper');
         this.closeInactive($(listOfBodies[drObj.newIndex]), this.isCurrentDraggedWasClosed, true);

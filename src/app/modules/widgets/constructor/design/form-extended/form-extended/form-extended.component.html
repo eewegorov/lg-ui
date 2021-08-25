@@ -5,9 +5,14 @@
     href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
   </h4>
 
-  <ul *ngIf="widget.guiprops?.formExt?.model" class="form-ext-wrapper" [sortablejs]="onDrDr">
+  <ul
+    *ngIf="widget.guiprops?.formExt?.model"
+    class="form-ext-wrapper"
+    [sortablejs]="widget.guiprops.formExt.model.list"
+    [sortablejsOptions]="onDrDr"
+  >
     <li class="form-ext-item"
-        *ngFor="let extItem of widget.guiprops.formExt.model.list; index as innerIndex; trackBy: trackByIndex;"
+        *ngFor="let extItem of widget.guiprops.formExt.model.list; index as innerIndex"
         [ngClass]="dragItemClass(extItem)"
         (click)="toggleItem($event, innerIndex, true)"
         (mouseover)="highlightContentOn(innerIndex, extItem.type)"

@@ -1370,6 +1370,12 @@ span.underow-comment {
 ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   opacity: .4;
 }
+
+.form-ext-item__toggled-wrapper {
+  margin: 0 -15px;
+  padding: 0 15px;
+}
+
 .form-ext-item-closed .form-ext-item__toggled-wrapper {
   display: none;
 }
