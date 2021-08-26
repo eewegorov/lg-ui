@@ -1,9 +1,11 @@
 import {
   AfterContentInit,
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   DoCheck,
-  Input, OnChanges,
+  Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   SimpleChanges,
@@ -26,7 +28,8 @@ import { WidgetService } from '../../services/widget.service';
 @Component({
   selector: 'app-constructor-design',
   templateUrl: './constructor-design.component.html',
-  styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss']
+  styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterContentInit, DoCheck, OnChanges, OnDestroy {
   @ViewChild('flow') public flow: FlowDirective;

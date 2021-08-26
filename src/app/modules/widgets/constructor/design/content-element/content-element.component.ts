@@ -36,6 +36,9 @@ export class ContentElementComponent implements OnInit, AfterContentInit {
   public optionsSummernote = {
     airMode: true,
     dialogsInBody: true,
+    height: 300,
+    tabsize: 2,
+    toolbarContainer : '#toolbar',
     popover: {
       link: [
         ['link', ['linkDialogShow', 'unlink']]

@@ -267,13 +267,15 @@
 .btn-add-on-elem .tooltip,
 .btn-copy-on-elem .tooltip {
   opacity: 0;
-  width: 140px;
+  display: none;
+  width: 150px;
   left: -50px;
   top: -30px;
 }
 
 .btn-add-on-elem:hover .tooltip,
 .btn-copy-on-elem:hover .tooltip {
+  display: block;
   opacity: 1;
 }
 

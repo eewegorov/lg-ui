@@ -1307,6 +1307,10 @@ span.underow-comment {
   cursor: pointer;
 }
 
+.note-btn.dropdown-toggle::after {
+  display: none;
+}
+
 
 
 // Form ext styles TODO: need to refactor later
@@ -1929,4 +1933,49 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 
 .note-editor.dragover .note-dropzone {
   display: none;
+}
+
+.note-air-popover {
+  display: block;
+  z-index: 1060000!important;
+}
+.note-air-popover {
+  max-width: 375px!important;
+}
+.note-air-popover .arrow {
+  display: none!important;
+}
+.note-air-popover.popover {
+  border-radius: 0!important;
+  background-color: #3498db;
+  /*left: auto!important;*/
+  /*right: -1px!important;*/
+  /*top: -54px!important;*/
+}
+.note-air-popover.popover .btn-default {
+  color: #fff!important;
+  background-color: #3498db!important;
+  border-color: #fff!important;
+}
+.note-air-popover.popover .btn-default.active,
+.note-air-popover.popover .btn-default:hover {
+  color: #3498db!important;
+  background-color: #fff!important;
+}
+
+.note-air-popover.popover .dropdown-menu {
+  background-color: #3498db!important;
+}
+.note-air-popover.popover .popover-content .note-color .dropdown-menu .btn-group .note-palette-title {
+  color: #fff!important;
+}
+.note-air-popover.popover .dropdown-menu > li > a {
+  color: #fff;
+}
+.note-air-popover.popover .dropdown-menu > li > a:hover,
+.note-air-popover.popover .dropdown-menu > li > a:focus,
+.note-air-popover.popover .dropdown-menu > li > a.checked{
+  color: #fff;
+  text-decoration: none;
+  background-color: #167ac6;
 }
