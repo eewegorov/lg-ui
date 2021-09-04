@@ -7535,7 +7535,7 @@
 
               this.context.memo('button.bold', function () {
                 return _this2.button({
-                  className: 'note-btn-bold',
+                  className: 'note-btn-bold note-action-state',
                   contents: _this2.ui.icon(_this2.options.icons.bold),
                   tooltip: _this2.lang.font.bold + _this2.representShortcut('bold'),
                   click: _this2.context.createInvokeHandlerAndUpdateState('editor.bold')
@@ -7543,7 +7543,7 @@
               });
               this.context.memo('button.italic', function () {
                 return _this2.button({
-                  className: 'note-btn-italic',
+                  className: 'note-btn-italic note-action-state',
                   contents: _this2.ui.icon(_this2.options.icons.italic),
                   tooltip: _this2.lang.font.italic + _this2.representShortcut('italic'),
                   click: _this2.context.createInvokeHandlerAndUpdateState('editor.italic')
@@ -7551,7 +7551,7 @@
               });
               this.context.memo('button.underline', function () {
                 return _this2.button({
-                  className: 'note-btn-underline',
+                  className: 'note-btn-underline note-action-state',
                   contents: _this2.ui.icon(_this2.options.icons.underline),
                   tooltip: _this2.lang.font.underline + _this2.representShortcut('underline'),
                   click: _this2.context.createInvokeHandlerAndUpdateState('editor.underline')
@@ -7566,7 +7566,7 @@
               });
               this.context.memo('button.strikethrough', function () {
                 return _this2.button({
-                  className: 'note-btn-strikethrough',
+                  className: 'note-btn-strikethrough note-action-state',
                   contents: _this2.ui.icon(_this2.options.icons.strikethrough),
                   tooltip: _this2.lang.font.strikethrough + _this2.representShortcut('strikethrough'),
                   click: _this2.context.createInvokeHandlerAndUpdateState('editor.strikethrough')
@@ -7612,7 +7612,7 @@
                     toggle: 'dropdown'
                   }
                 }), _this2.ui.dropdownCheck({
-                  className: 'dropdown-fontname',
+                  className: 'dropdown-fontname note-action-state',
                   checkClassName: _this2.options.icons.menuCheck,
                   items: _this2.options.fontNames.filter(_this2.isFontInstalled.bind(_this2)),
                   title: _this2.lang.font.name,
@@ -7631,7 +7631,7 @@
                     toggle: 'dropdown'
                   }
                 }), _this2.ui.dropdownCheck({
-                  className: 'dropdown-fontsize',
+                  className: 'dropdown-fontsize note-action-state',
                   checkClassName: _this2.options.icons.menuCheck,
                   items: _this2.options.fontSizes,
                   title: _this2.lang.font.size,
@@ -7722,7 +7722,7 @@
                     toggle: 'dropdown'
                   }
                 }), _this2.ui.dropdown([_this2.ui.buttonGroup({
-                  className: 'note-align',
+                  className: 'note-align note-action-state',
                   children: [justifyLeft, justifyCenter, justifyRight, justifyFull]
                 }), _this2.ui.buttonGroup({
                   className: 'note-list',
@@ -8054,31 +8054,31 @@
                   return name.replace(/[\'\"]/g, '').replace(/\s+$/, '').replace(/^\s+/, '');
                 });
                 var fontName = lists.find(fontNames, this.isFontInstalled.bind(this));
-                $cont.find('.dropdown-fontname a').each(function (idx, item) {
+                $(".note-popover").find('.dropdown-fontname a').each(function (idx, item) {
                   var $item = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()(item); // always compare string to avoid creating another func.
 
                   var isChecked = $item.data('value') + '' === fontName + '';
                   $item.toggleClass('checked', isChecked);
                 });
-                $cont.find('.note-current-fontname').text(fontName).css('font-family', fontName);
+                $(".note-popover").find('.note-current-fontname').text(fontName).css('font-family', fontName);
               }
 
               if (styleInfo['font-size']) {
                 var fontSize = styleInfo['font-size'];
-                $cont.find('.dropdown-fontsize a').each(function (idx, item) {
+                $(".note-popover").find('.dropdown-fontsize a').each(function (idx, item) {
                   var $item = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()(item); // always compare with string to avoid creating another func.
 
                   var isChecked = $item.data('value') + '' === fontSize + '';
                   $item.toggleClass('checked', isChecked);
                 });
-                $cont.find('.note-current-fontsize').text(fontSize);
+                $(".note-popover").find('.note-current-fontsize').text(fontSize);
                 var fontSizeUnit = styleInfo['font-size-unit'];
-                $cont.find('.dropdown-fontsizeunit a').each(function (idx, item) {
+                $(".note-popover").find('.dropdown-fontsizeunit a').each(function (idx, item) {
                   var $item = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()(item);
                   var isChecked = $item.data('value') + '' === fontSizeUnit + '';
                   $item.toggleClass('checked', isChecked);
                 });
-                $cont.find('.note-current-fontsizeunit').text(fontSizeUnit);
+                $(".note-popover").find('.note-current-fontsizeunit').text(fontSizeUnit);
               }
 
               if (styleInfo['line-height']) {
@@ -8096,7 +8096,7 @@
               var _this7 = this;
 
               external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.each(infos, function (selector, pred) {
-                _this7.ui.toggleBtnActive($container.find(selector), pred());
+                _this7.ui.toggleBtnActive($(".note-popover").find(selector), pred());
               });
             }
           }, {
@@ -9296,12 +9296,6 @@
                 }
               },
               'summernote.focusout': function (we, e) {
-                // [workaround] Firefox doesn't support relatedTarget on focusout
-                //  - Ignore hide action on focus out in FF.
-                if (env.isFF) {
-                  return;
-                }
-
                 if (!e.relatedTarget || !dom.ancestor(e.relatedTarget, func.eq(_this.$popover[0]))) {
                   _this.hide();
                 }
@@ -9317,20 +9311,15 @@
           }, {
             key: "initialize",
             value: function initialize() {
-              var _this2 = this;
-
               this.$popover = this.ui.popover({
                 className: 'note-air-popover'
               }).render().appendTo('body');
+              //}).render().appendTo(elementToAppend);
               var $content = this.$popover.find('.popover-content');
-              this.context.invoke('buttons.build', $content, this.options.popover.air); // disable hiding this popover preemptively by 'summernote.blur' event.
 
-              this.$popover.on('mousedown', function () {
-                _this2.hidable = false;
-              }); // (re-)enable hiding after 'summernote.blur' has been handled (aka. ignored).
-
-              this.$popover.on('mouseup', function () {
-                _this2.hidable = true;
+              this.context.invoke('buttons.build', $content, this.options.popover.air);
+              $(".note-air-popover .note-action-state").click(() => {
+                this.context.invoke('buttons.updateCurrentStyle');
               });
             }
           }, {
@@ -9341,6 +9330,7 @@
           }, {
             key: "update",
             value: function update(forcelyOpen) {
+              this.context.invoke('buttons.updateCurrentStyle');
               var styleInfo = this.context.invoke('editor.currentStyle');
 
               if (styleInfo.range) {
@@ -9352,30 +9342,25 @@
                 rect.top -= containerOffset.top;
                 rect.left -= containerOffset.left;
 
-                var elementToAppend = this.context.layoutInfo.editor.closest(".element-to-append-summernote");
-                var elementToAddNewOne = elementToAppend.children(".btn-add-on-elem");
-                elementToAddNewOne.css({"opacity": "0.5"});
+                var elementToAppend = this.context.layoutInfo.editor.closest(".max-wh-over");
                 this.$popover.css({
                   display: 'block',
-                  left: 'auto',
-                  right: $(window).width() - (elementToAppend.offset().left + elementToAppend.outerWidth(true)),
-                  top: elementToAppend.offset().top - 53
+                  right: 'auto',
+                  left: elementToAppend.offset().left + 110,
+                  top: elementToAppend.offset().top - 30
                 });
-                this.context.invoke('buttons.updateCurrentStyle', this.$popover);
               }
             }
           }, {
             key: "updatefirst",
             value: function updatefirst() {
-              var elementToAppend = this.context.layoutInfo.editor.closest(".element-to-append-summernote");
-              var elementToAddNewOne = elementToAppend.children(".btn-add-on-elem");
-              elementToAddNewOne.css({"opacity": "0.5"});
+              var elementToAppend = this.context.layoutInfo.editor.closest(".max-wh-over");
 
               this.$popover.css({
                 display: 'block',
-                left: 'auto',
-                right: $(window).width() - (elementToAppend.offset().left + elementToAppend.outerWidth(true)),
-                top: elementToAppend.offset().top - 53
+                right: 'auto',
+                left: elementToAppend.offset().left + 110,
+                top: elementToAppend.offset().top - 30
               });
             }
           }, {
@@ -9390,12 +9375,7 @@
           }, {
             key: "hide",
             value: function hide() {
-              var elementToAppend = this.context.layoutInfo.editor.closest(".element-to-append-summernote");
-              var elementToAddNewOne = elementToAppend.children(".btn-add-on-elem");
-              elementToAddNewOne.css({"opacity": "1"});
-              if (this.hidable) {
-                this.$popover.hide();
-              }
+              this.$popover.hide();
             }
           }]);
 
@@ -9440,7 +9420,7 @@
               'summernote.keydown': function summernoteKeydown(we, e) {
                 _this.handleKeydown(e);
               },
-              'summernote.disable summernote.dialog.shown summernote.blur': function summernoteDisableSummernoteDialogShownSummernoteBlur() {
+              'summernote.dialog.shown': function summernoteDisableSummernoteDialogShownSummernoteBlur() {
                 _this.hide();
               }
             };
