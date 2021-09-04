@@ -234,141 +234,128 @@
         external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.extend(external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summernote.lang, {
           'en-US': {
             font: {
-              bold: 'Bold',
-              italic: 'Italic',
-              underline: 'Underline',
-              clear: 'Remove Font Style',
-              height: 'Line Height',
-              name: 'Font Family',
-              strikethrough: 'Strikethrough',
+              bold: 'Жирный',
+              italic: 'Курсив',
+              underline: 'Подчеркнутый',
+              clear: 'Удалить стиль',
+              height: 'Высота',
+              name: 'Шрифт',
+              strikethrough: 'Перечеркнтутый',
               subscript: 'Subscript',
               superscript: 'Superscript',
-              size: 'Font Size',
-              sizeunit: 'Font Size Unit'
+              size: 'Размер шрифта'
             },
             image: {
-              image: 'Picture',
-              insert: 'Insert Image',
-              resizeFull: 'Resize full',
-              resizeHalf: 'Resize half',
-              resizeQuarter: 'Resize quarter',
-              resizeNone: 'Original size',
-              floatLeft: 'Float Left',
-              floatRight: 'Float Right',
-              floatNone: 'Remove float',
-              shapeRounded: 'Shape: Rounded',
-              shapeCircle: 'Shape: Circle',
-              shapeThumbnail: 'Shape: Thumbnail',
-              shapeNone: 'Shape: None',
-              dragImageHere: 'Drag image or text here',
-              dropImage: 'Drop image or Text',
-              selectFromFiles: 'Select from files',
-              maximumFileSize: 'Maximum file size',
-              maximumFileSizeError: 'Maximum file size exceeded.',
-              url: 'Image URL',
-              remove: 'Remove Image',
-              original: 'Original'
+              image: 'Изображение',
+              insert: 'Вставить изображение',
+              resizeFull: 'Изменить размер',
+              resizeHalf: 'Изменить размер на половину',
+              resizeQuarter: 'Изменить размер на четверть',
+              floatLeft: 'Слева',
+              floatRight: 'Справа',
+              floatNone: 'Без ориентации',
+              shapeRounded: 'Форма: Закругленная',
+              shapeCircle: 'Форма: Круглая',
+              shapeThumbnail: 'Форма: Превью',
+              shapeNone: 'Форма: Нет',
+              dragImageHere: 'Перетащите изображение или текст сюда',
+              dropImage: 'Перетащите изображение или текст',
+              selectFromFiles: 'Выбрать на компьютере',
+              maximumFileSize: 'Максимальный размер файла',
+              maximumFileSizeError: 'Превышен максимальный размер файла.',
+              url: 'Ссылка на изображение',
+              remove: 'Удалить изображение'
             },
             video: {
-              video: 'Video',
-              videoLink: 'Video Link',
-              insert: 'Insert Video',
-              url: 'Video URL',
+              video: 'Видео',
+              videoLink: 'Ссылка на видео',
+              insert: 'Вставить видео',
+              url: 'Ссылка на видео?',
               providers: '(YouTube, Vimeo, Vine, Instagram, DailyMotion or Youku)'
             },
             link: {
-              link: 'Link',
-              insert: 'Insert Link',
-              unlink: 'Unlink',
-              edit: 'Edit',
-              textToDisplay: 'Text to display',
-              url: 'To what URL should this link go?',
-              openInNewWindow: 'Open in new window',
-              useProtocol: 'Use default protocol'
+              link: 'Ссылка',
+              insert: 'Вставить ссылку',
+              unlink: 'Удалить ссылку',
+              edit: 'Редактировать',
+              textToDisplay: 'Текст ссылки',
+              url: 'Куда должна вести ссылка?',
+              openInNewWindow: 'Открывать в новом окне'
             },
             table: {
-              table: 'Table',
-              addRowAbove: 'Add row above',
-              addRowBelow: 'Add row below',
-              addColLeft: 'Add column left',
-              addColRight: 'Add column right',
-              delRow: 'Delete row',
-              delCol: 'Delete column',
-              delTable: 'Delete table'
+              table: 'Таблица'
             },
             hr: {
-              insert: 'Insert Horizontal Rule'
+              insert: 'Установить правило для горизонтали'
             },
             style: {
-              style: 'Style',
-              p: 'Normal',
-              blockquote: 'Quote',
-              pre: 'Code',
-              h1: 'Header 1',
-              h2: 'Header 2',
-              h3: 'Header 3',
-              h4: 'Header 4',
-              h5: 'Header 5',
-              h6: 'Header 6'
+              style: 'Стиль',
+              normal: 'Нормальный',
+              blockquote: 'Цитата',
+              pre: 'Код',
+              h1: 'Заголовок 1',
+              h2: 'Заголовок 2',
+              h3: 'Заголовок 3',
+              h4: 'Заголовок 4',
+              h5: 'Заголовок 5',
+              h6: 'Заголовок 6'
             },
             lists: {
-              unordered: 'Unordered list',
-              ordered: 'Ordered list'
+              unordered: 'Не отсортированный список',
+              ordered: 'Отсортированный список'
             },
             options: {
-              help: 'Help',
-              fullscreen: 'Full Screen',
-              codeview: 'Code View'
+              help: 'Помощь',
+              fullscreen: 'Во весь экран',
+              codeview: 'Режим просмотра кода'
             },
             paragraph: {
-              paragraph: 'Paragraph',
-              outdent: 'Outdent',
-              indent: 'Indent',
-              left: 'Align left',
-              center: 'Align center',
-              right: 'Align right',
-              justify: 'Justify full'
+              paragraph: 'Параграф',
+              outdent: 'Выступ',
+              indent: 'Отступ',
+              left: 'Выровнять по левому краю',
+              center: 'Выровнять по центру',
+              right: 'Выровнять по правому краю',
+              justify: 'Растянуть'
             },
             color: {
-              recent: 'Recent Color',
-              more: 'More Color',
-              background: 'Background Color',
-              foreground: 'Text Color',
-              transparent: 'Transparent',
-              setTransparent: 'Set transparent',
-              reset: 'Reset',
-              resetToDefault: 'Reset to default',
-              cpSelect: 'Select'
+              recent: 'Предыдущий цвет',
+              more: 'Больше цветов',
+              background: 'Цвет фона',
+              foreground: 'Цвет текста',
+              transparent: 'Прозрачный',
+              setTransparent: 'Сделать прозрачным',
+              reset: 'Сбросить',
+              resetToDefault: 'Сбросить'
             },
             shortcut: {
-              shortcuts: 'Keyboard shortcuts',
-              close: 'Close',
-              textFormatting: 'Text formatting',
-              action: 'Action',
-              paragraphFormatting: 'Paragraph formatting',
-              documentStyle: 'Document Style',
-              extraKeys: 'Extra keys'
+              shortcuts: 'Быстрые клавиши',
+              close: 'Закрыть',
+              textFormatting: 'Форматирование текста',
+              action: 'Действие',
+              paragraphFormatting: 'Форматирование параграфа',
+              documentStyle: 'Стиль документа',
+              extraKeys: 'Дополнительные клавиши'
             },
             help: {
-              'escape': 'Escape',
-              'insertParagraph': 'Insert Paragraph',
-              'undo': 'Undo the last command',
-              'redo': 'Redo the last command',
-              'tab': 'Tab',
+              'insertParagraph': 'Вставить параграф',
+              'undo': 'Вернуться назад',
+              'redo': 'Вперед',
+              'tab': 'Таб',
               'untab': 'Untab',
-              'bold': 'Set a bold style',
-              'italic': 'Set a italic style',
-              'underline': 'Set a underline style',
-              'strikethrough': 'Set a strikethrough style',
-              'removeFormat': 'Clean a style',
-              'justifyLeft': 'Set left align',
-              'justifyCenter': 'Set center align',
-              'justifyRight': 'Set right align',
-              'justifyFull': 'Set full align',
-              'insertUnorderedList': 'Toggle unordered list',
-              'insertOrderedList': 'Toggle ordered list',
-              'outdent': 'Outdent on current paragraph',
-              'indent': 'Indent on current paragraph',
+              'bold': 'Выделить жирным',
+              'italic': 'Сделать курсивом',
+              'underline': 'Сделать подчеркнутым',
+              'strikethrough': 'Сделать перечеркнтутым',
+              'removeFormat': 'Удалить стиль',
+              'justifyLeft': 'Выровнять по левому краю',
+              'justifyCenter': 'Выровнять по центру',
+              'justifyRight': 'Выровнять по правому краю',
+              'justifyFull': 'Растянуть',
+              'insertUnorderedList': 'Тумблер несортированного списка',
+              'insertOrderedList': 'Тумблер сортированного списка',
+              'outdent': 'Выступ для текущего параграфа',
+              'indent': 'Отступ для текущего параграфа',
               'formatPara': 'Change current block\'s format as a paragraph(P tag)',
               'formatH1': 'Change current block\'s format as H1',
               'formatH2': 'Change current block\'s format as H2',
@@ -376,8 +363,8 @@
               'formatH4': 'Change current block\'s format as H4',
               'formatH5': 'Change current block\'s format as H5',
               'formatH6': 'Change current block\'s format as H6',
-              'insertHorizontalRule': 'Insert horizontal rule',
-              'linkDialog.show': 'Show Link Dialog'
+              'insertHorizontalRule': 'Вставить правило для горизонтали',
+              'linkDialog.show': 'Показать диалог для ссылки'
             },
             history: {
               undo: 'Undo',
@@ -8484,7 +8471,7 @@
                       range: linkInfo.range,
                       url: $linkUrl.val(),
                       text: $linkText.val(),
-                      isNewWindow: $openInNewWindow.is(':checked'),
+                      isNewWindow: true, // Hardcoded
                       checkProtocol: $useProtocol.is(':checked')
                     });
 
@@ -9294,34 +9281,28 @@
             this.pageX = null;
             this.pageY = null;
             this.events = {
-              'summernote.contextmenu': function summernoteContextmenu(e) {
-                if (_this.options.editing) {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  _this.onContextmenu = true;
-
-                  _this.update(true);
-                }
+              'summernote.keyup summernote.mouseup summernote.scroll': function () {
+                _this.update();
               },
-              'summernote.mousedown': function summernoteMousedown(we, e) {
-                _this.pageX = e.pageX;
-                _this.pageY = e.pageY;
+              'summernote.focus': function () {
+                _this.updatefirst();
               },
-              'summernote.keyup summernote.mouseup summernote.scroll': function summernoteKeyupSummernoteMouseupSummernoteScroll(we, e) {
-                if (_this.options.editing && !_this.onContextmenu) {
-                  _this.pageX = e.pageX;
-                  _this.pageY = e.pageY;
-
-                  _this.update();
-                }
-
-                _this.onContextmenu = false;
-              },
-              'summernote.disable summernote.change summernote.dialog.shown summernote.blur': function summernoteDisableSummernoteChangeSummernoteDialogShownSummernoteBlur() {
+              'summernote.dialog.shown': function () {
                 _this.hide();
               },
-              'summernote.focusout': function summernoteFocusout() {
-                if (!_this.$popover.is(':active,:focus')) {
+              'summernote.blur': function (we, e) {
+                if (!e.relatedTarget || !dom.ancestor(e.relatedTarget, func.eq(_this.$popover[0]))) {
+                  _this.hide();
+                }
+              },
+              'summernote.focusout': function (we, e) {
+                // [workaround] Firefox doesn't support relatedTarget on focusout
+                //  - Ignore hide action on focus out in FF.
+                if (env.isFF) {
+                  return;
+                }
+
+                if (!e.relatedTarget || !dom.ancestor(e.relatedTarget, func.eq(_this.$popover[0]))) {
                   _this.hide();
                 }
               }
@@ -9340,7 +9321,7 @@
 
               this.$popover = this.ui.popover({
                 className: 'note-air-popover'
-              }).render().appendTo(this.options.container);
+              }).render().appendTo('body');
               var $content = this.$popover.find('.popover-content');
               this.context.invoke('buttons.build', $content, this.options.popover.air); // disable hiding this popover preemptively by 'summernote.blur' event.
 
@@ -9362,7 +9343,7 @@
             value: function update(forcelyOpen) {
               var styleInfo = this.context.invoke('editor.currentStyle');
 
-              if (styleInfo.range && (!styleInfo.range.isCollapsed() || forcelyOpen)) {
+              if (styleInfo.range) {
                 var rect = {
                   left: this.pageX,
                   top: this.pageY
@@ -9370,15 +9351,32 @@
                 var containerOffset = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()(this.options.container).offset();
                 rect.top -= containerOffset.top;
                 rect.left -= containerOffset.left;
+
+                var elementToAppend = this.context.layoutInfo.editor.closest(".element-to-append-summernote");
+                var elementToAddNewOne = elementToAppend.children(".btn-add-on-elem");
+                elementToAddNewOne.css({"opacity": "0.5"});
                 this.$popover.css({
                   display: 'block',
-                  left: Math.max(rect.left, 0) + AIRMODE_POPOVER_X_OFFSET,
-                  top: rect.top + AIRMODE_POPOVER_Y_OFFSET
+                  left: 'auto',
+                  right: $(window).width() - (elementToAppend.offset().left + elementToAppend.outerWidth(true)),
+                  top: elementToAppend.offset().top - 53
                 });
                 this.context.invoke('buttons.updateCurrentStyle', this.$popover);
-              } else {
-                this.hide();
               }
+            }
+          }, {
+            key: "updatefirst",
+            value: function updatefirst() {
+              var elementToAppend = this.context.layoutInfo.editor.closest(".element-to-append-summernote");
+              var elementToAddNewOne = elementToAppend.children(".btn-add-on-elem");
+              elementToAddNewOne.css({"opacity": "0.5"});
+
+              this.$popover.css({
+                display: 'block',
+                left: 'auto',
+                right: $(window).width() - (elementToAppend.offset().left + elementToAppend.outerWidth(true)),
+                top: elementToAppend.offset().top - 53
+              });
             }
           }, {
             key: "updateCodeview",
@@ -9392,6 +9390,9 @@
           }, {
             key: "hide",
             value: function hide() {
+              var elementToAppend = this.context.layoutInfo.editor.closest(".element-to-append-summernote");
+              var elementToAddNewOne = elementToAppend.children(".btn-add-on-elem");
+              elementToAddNewOne.css({"opacity": "1"});
               if (this.hidable) {
                 this.$popover.hide();
               }
@@ -9831,7 +9832,7 @@
             fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'],
             fontNamesIgnoreCheck: [],
             addDefaultFonts: true,
-            fontSizes: ['8', '9', '10', '11', '12', '14', '18', '24', '36'],
+            fontSizes: ['8', '10', '12', '14', '16', '18', '20', '22', '24', '26', '28', '30', '36', '52', '72'],
             fontSizeUnits: ['px', 'pt'],
             // pallete colors(n x n)
             colors: [['#000000', '#424242', '#636363', '#9C9C94', '#CEC6CE', '#EFEFEF', '#F7F7F7', '#FFFFFF'], ['#FF0000', '#FF9C00', '#FFFF00', '#00FF00', '#00FFFF', '#0000FF', '#9C00FF', '#FF00FF'], ['#F7C6CE', '#FFE7CE', '#FFEFC6', '#D6EFD6', '#CEDEE7', '#CEE7F7', '#D6D6E7', '#E7D6DE'], ['#E79C9C', '#FFC69C', '#FFE79C', '#B5D6A5', '#A5C6CE', '#9CC6EF', '#B5A5D6', '#D6A5BD'], ['#E76363', '#F7AD6B', '#FFD663', '#94BD7B', '#73A5AD', '#6BADDE', '#8C7BC6', '#C67BA5'], ['#CE0000', '#E79439', '#EFC631', '#6BA54A', '#4A7B8C', '#3984C6', '#634AA5', '#A54A7B'], ['#9C0000', '#B56308', '#BD9400', '#397B21', '#104A5A', '#085294', '#311873', '#731842'], ['#630000', '#7B3900', '#846300', '#295218', '#083139', '#003163', '#21104A', '#4A1031']],
@@ -9841,7 +9842,7 @@
               foreColor: '#000000',
               backColor: '#FFFF00'
             },
-            lineHeights: ['1.0', '1.2', '1.4', '1.5', '1.6', '1.8', '2.0', '3.0'],
+            lineHeights: ['0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8', '0.9', '1.0', '1.2', '1.4', '1.5', '1.6', '1.8', '2.0', '3.0'],
             tableClassName: 'table table-bordered',
             insertTableMaxSize: {
               col: 10,
