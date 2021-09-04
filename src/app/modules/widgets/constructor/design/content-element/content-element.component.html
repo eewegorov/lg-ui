@@ -1,4 +1,5 @@
 <div id="toolbar"></div>
+<div class="draggable"></div>
 <div
   *ngIf="widget.guiprops.bg"
   id="mainBlockWidget"
@@ -115,7 +116,7 @@
               [ngClass]="(item.textShadow.enable) ? '' : 'no-text-shadow-imp'"
               [ngStyle]="{'font-size': item.fontSize + 'px', 'font-family': item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}"
             >
-              <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="item.textSummer"></div>
+              <div [ngxSummernote]="optionsSummernote" [(ngModel)]="item.textSummer"></div>
             </div>
           </div>
         </div>

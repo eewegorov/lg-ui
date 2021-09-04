@@ -33,24 +33,7 @@ export class ContentElementComponent implements OnInit, AfterContentInit {
   @ViewChild('videoBg') videoBg: ElementRef;
 
   public showAddButtonOnWidget = true;
-  public optionsSummernote = {
-    airMode: true,
-    dialogsInBody: true,
-    height: 300,
-    tabsize: 2,
-    toolbarContainer : '#toolbar',
-    popover: {
-      link: [
-        ['link', ['linkDialogShow', 'unlink']]
-      ],
-      air: [
-        ['color', ['color']],
-        ['font', ['bold', 'underline', 'italic', 'clear', 'fontsize', 'strikethrough']],
-        ['para', ['paragraph', 'height']],
-        ['insert', ['link']]
-      ]
-    }
-  };
+  public optionsSummernote = {};
 
   public widthBtnStyle = '';
   public widthBtnFormStyle = '';
@@ -60,6 +43,21 @@ export class ContentElementComponent implements OnInit, AfterContentInit {
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
   ngAfterContentInit(): void {
+    this.optionsSummernote = {
+      airMode: true,
+      dialogsInBody: true,
+      popover: {
+        link: [
+          ['link', ['linkDialogShow', 'unlink']]
+        ],
+        air: [
+          ['color', ['color']],
+          ['font', ['bold', 'underline', 'italic', 'clear', 'fontsize', 'strikethrough']],
+          ['para', ['paragraph', 'height']],
+          ['insert', ['link']]
+        ]
+      }
+    };
     this.videoBgClass = this.setVideoBGStyle();
   }
 
