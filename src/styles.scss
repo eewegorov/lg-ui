@@ -320,6 +320,11 @@ button.hovered-btn-blue:hover {
   color: #FFFFFF !important;
 }
 
+.btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary.active[disabled], fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
+  background-color: #293a4a;
+  border-color: #293a4a
+}
+
 #toast-container.toast-bottom-center > div, #toast-container.toast-top-center > div {
   margin: 10px auto 0;
 }
@@ -1989,4 +1994,22 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 .note-popover .popover-content .dropdown-menu.dropdown-line-height,
 .note-popover .popover-content .dropdown-menu.dropdown-fontsize {
   min-width: 80px!important;
+}
+
+.note-modal .modal-header {
+  display: block;
+}
+
+.note-editor {
+  border: none;
+  line-height: 1em;
+}
+
+.note-editor a {
+  color: inherit;
+  text-decoration: underline !important;
+}
+
+.note-editor a:hover {
+  text-decoration: none;
 }
