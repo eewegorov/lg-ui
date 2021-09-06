@@ -48,7 +48,7 @@ export class CloselinkElementComponent implements OnInit {
         systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
         googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
       }).on('change', (change) => {
-        this.setNewFont(change.value, this.widget.guiprops.exit.font);
+        this.setNewFont(change.target.value, this.widget.guiprops.exit.font);
       });
 
       ($('#font-picker-button-l' + this.index) as any).fontselect({
@@ -57,7 +57,7 @@ export class CloselinkElementComponent implements OnInit {
         systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
         googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
       }).on('change', (change) => {
-        this.setNewFont(change.value, this.widget.guiprops.exit.button.font);
+        this.setNewFont(change.target.value, this.widget.guiprops.exit.button.font);
       });
 
       $('#font-picker' + this.index).trigger('setFont', this.widget.guiprops.exit.font.name);

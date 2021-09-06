@@ -7374,7 +7374,6 @@
                   tooltip: tooltip,
                   click: function click(e) {
                     var $button = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()(e.currentTarget);
-
                     if (backColor && foreColor) {
                       _this.context.invoke('editor.color', {
                         backColor: $button.attr('data-backColor'),
@@ -7449,7 +7448,6 @@
                     });
                   },
                   click: function click(event) {
-                    event.stopPropagation();
                     var $parent = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()('.' + className).find('.note-dropdown-menu');
                     var $button = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()(event.target);
                     var eventName = $button.data('event');
@@ -9347,7 +9345,7 @@
                   display: 'block',
                   right: 'auto',
                   left: elementToAppend.offset().left + 110,
-                  top: elementToAppend.offset().top - 30
+                  top: elementToAppend.offset().top - 20
                 });
               }
             }
@@ -9360,7 +9358,7 @@
                 display: 'block',
                 right: 'auto',
                 left: elementToAppend.offset().left + 110,
-                top: elementToAppend.offset().top - 30
+                top: elementToAppend.offset().top - 20
               });
             }
           }, {

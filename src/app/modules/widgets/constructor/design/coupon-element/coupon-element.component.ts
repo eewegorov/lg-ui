@@ -67,7 +67,7 @@ export class CouponElementComponent implements OnInit, AfterViewInit, OnChanges 
         systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
         googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
       }).on('change', (change) => {
-        this.setNewFont(change.value, this.item.font);
+        this.setNewFont(change.target.value, this.item.font);
       });
 
       ($('#font-picker-title' + this.index) as any).fontselect({
@@ -76,7 +76,7 @@ export class CouponElementComponent implements OnInit, AfterViewInit, OnChanges 
         systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
         googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
       }).on('change', (change) => {
-        this.setNewFont(change.value, this.item.title.font);
+        this.setNewFont(change.target.value, this.item.title.font);
       });
 
       $('#font-picker' + this.index).trigger('setFont', this.item.font.name);

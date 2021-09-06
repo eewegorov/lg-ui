@@ -275,7 +275,7 @@
           <div class="widget-form-ext-wrapper" [ngStyle]="{'width': widget.guiprops.formExt.model.mainSettings.form_widthpx + 'px'}">
             <div id="widgetFormBlockMExt" class="widget1-form-ext-bl" [ngClass]="formExtGlobalAlignmentClass(widget.guiprops.formExt.model.mainSettings)">
 
-              <div *ngFor="let item of widget.guiprops.formExt.model.list; trackBy: trackByIndex; index as i" class="widget-form-ext-start-el"></div>
+              <div *ngFor="let item of widget.guiprops.formExt.model.list; index as i" class="widget-form-ext-start-el"></div>
 
               <div *ngIf="item.type !== 'hidden'" class="widget-inp-bl" [ngClass]="formExtItemExtraClass(item)" [ngStyle]="{'width': formExtGetItemWidth(item)}">
                 <div class="form-ext-element-wr form-ext-element-{{ i }}">

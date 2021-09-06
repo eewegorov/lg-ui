@@ -1,6 +1,5 @@
 import {
   AfterContentInit,
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -16,7 +15,6 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
   selector: 'app-content-element',
   templateUrl: './content-element.component.html',
   styleUrls: ['../../../shared/shared.scss', './content-element.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentElementComponent implements OnInit, AfterContentInit {
   @Input() public widget: FullWidget;
@@ -82,14 +80,6 @@ export class ContentElementComponent implements OnInit, AfterContentInit {
     if (this.widget.guiprops?.exit?.button?.btn_width === 'Авто') {
       this.widthExitBtnStyle = 'auto';
     }
-  }
-
-  public trackById(index, item) {
-    return item.id;
-  }
-
-  public trackByIndex(index) {
-    return index;
   }
 
   public scrollToEl(id, elementName) {

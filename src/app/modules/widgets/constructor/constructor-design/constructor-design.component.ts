@@ -1,7 +1,6 @@
 import {
   AfterContentInit,
   AfterViewInit,
-  ChangeDetectionStrategy,
   Component,
   DoCheck,
   Input,
@@ -28,8 +27,7 @@ import { WidgetService } from '../../services/widget.service';
 @Component({
   selector: 'app-constructor-design',
   templateUrl: './constructor-design.component.html',
-  styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss']
 })
 export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterContentInit, DoCheck, OnChanges, OnDestroy {
   @ViewChild('flow') public flow: FlowDirective;
@@ -523,7 +521,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
         systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
         googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
       }).on('change', (change) => {
-        this.setNewFont(change.value, this.widget.guiprops.labelMain.font);
+        this.setNewFont(change.target.value, this.widget.guiprops.labelMain.font);
       });
 
       $('#fontPickerLabelMain').trigger('setFont', this.widget.guiprops.labelMain.font.name);
@@ -1105,10 +1103,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
         this.widget.guiprops.formExt.model.mainSettings = this.widgetConstructorService.getDefaultFormExtMainSettings();
       }, 50);
     }
-  }
-
-  public trackById(index, item) {
-    return item.id;
   }
 
   public addNewElementToContent(item?) {

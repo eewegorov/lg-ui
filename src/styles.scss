@@ -1940,7 +1940,7 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   z-index: 1060000!important;
 }
 .note-air-popover {
-  max-width: 375px!important;
+  max-width: 420px!important;
 }
 .note-air-popover .arrow {
   display: none!important;
@@ -1970,6 +1970,7 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   color: #fff!important;
 }
 .note-air-popover.popover .dropdown-menu > li > a {
+  width: 100%;
   color: #fff;
 }
 .note-air-popover.popover .dropdown-menu > li > a:hover,
@@ -1978,4 +1979,14 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   color: #fff;
   text-decoration: none;
   background-color: #167ac6;
+}
+
+.note-btn-group .dropdown-menu {
+  left: auto !important;
+  right: 0;
+}
+
+.note-popover .popover-content .dropdown-menu.dropdown-line-height,
+.note-popover .popover-content .dropdown-menu.dropdown-fontsize {
+  min-width: 80px!important;
 }

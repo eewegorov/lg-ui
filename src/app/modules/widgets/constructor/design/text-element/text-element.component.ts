@@ -42,10 +42,10 @@ export class TextElementComponent implements OnInit, AfterViewInit {
         systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
         googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
       }).on('change', (change) => {
-        this.setNewFont(change.value, this.widget.guiprops.button.font);
+        this.setNewFont(change.target.value, this.item.font);
       });
 
-      $('#font-picker' + this.index).trigger('setFont', this.widget.guiprops.button.font.name);
+      $('#font-picker' + this.index).trigger('setFont', this.item.font.name);
     }, 500);
   }
 

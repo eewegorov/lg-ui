@@ -560,7 +560,7 @@
                     </h3>
                   </div>
                 </div>
-                <div *ngFor="let item of widget.guiprops.elementsList; trackBy: trackById; index as i" [id]="'elemScrN' + i">
+                <div *ngFor="let item of widget.guiprops.elementsList; index as i" [id]="'elemScrN' + i">
                   <div *ngIf="item.name === 'button-element'">
                     <app-button-element
                       [index]="i"

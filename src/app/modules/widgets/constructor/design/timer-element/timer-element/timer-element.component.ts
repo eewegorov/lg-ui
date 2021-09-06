@@ -82,7 +82,7 @@ export class TimerElementComponent implements OnInit, OnChanges {
     });
 
     fontselect.on('change', (change) => {
-      this.setNewFont(change.value, this.item.design[modelKey]);
+      this.setNewFont(change.target.value, this.item.design[modelKey]);
     });
 
     selector.trigger('setFont', this.item.design[modelKey].name);
