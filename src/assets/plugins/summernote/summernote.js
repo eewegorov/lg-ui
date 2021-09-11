@@ -7365,6 +7365,7 @@
             key: "colorPalette",
             value: function colorPalette(className, tooltip, backColor, foreColor) {
               var _this = this;
+              _this.context.invoke('saveRange');
 
               return this.ui.buttonGroup({
                 className: 'note-color ' + className,
@@ -7412,8 +7413,8 @@
                     toggle: 'dropdown'
                   }
                 }), this.ui.dropdown({
-                  items: (backColor ? ['<div class="note-palette">', '<div class="note-palette-title">' + this.lang.color.background + '</div>', '<div>', '<button type="button" class="note-color-reset btn btn-light btn-default" data-event="backColor" data-value="transparent">', this.lang.color.transparent, '</button>', '</div>', '<div class="note-holder" data-event="backColor"><!-- back colors --></div>', '<div>', '<button type="button" class="note-color-select btn btn-light btn-default" data-event="openPalette" data-value="backColorPicker">', this.lang.color.cpSelect, '</button>', '<input type="color" id="backColorPicker" class="note-btn note-color-select-btn" value="' + this.options.colorButton.backColor + '" data-event="backColorPalette">', '</div>', '<div class="d-flex justify-content-between"><input id="customBackColor" placeholder="#FFFFFF" value="" style="width: 50%" /><button type="button" id="customBackColorApply" class="btn btn-light btn-default" style="width: 45%; font-size: 10px; padding: 5px 0;">Применить</button></div>', '</div>'].join('') : '') + (foreColor ? ['<div class="note-palette">', '<div class="note-palette-title">' + this.lang.color.foreground + '</div>', '<div>', '<button type="button" class="note-color-reset btn btn-light btn-default" data-event="removeFormat" data-value="foreColor">', this.lang.color.resetToDefault, '</button>', '</div>', '<div class="note-holder" data-event="foreColor"><!-- fore colors --></div>', '<div>', '<button type="button" class="note-color-select btn btn-light btn-default" data-event="openPalette" data-value="foreColorPicker">', this.lang.color.cpSelect, '</button>', '<input type="color" id="foreColorPicker" class="note-btn note-color-select-btn" value="' + this.options.colorButton.foreColor + '" data-event="foreColorPalette">', '</div>', // Fix missing Div, Commented to find easily if it's wrong
-                    '<div class="d-flex justify-content-between"><input id="customForeColor" placeholder="#FFFFFF" value="" style="width: 50%" /><button type="button" id="customForeColorApply" class="btn btn-light btn-default" style="width: 45%; font-size: 10px; padding: 5px 0;">Применить</button></div>', '</div>'].join('') : ''),
+                  items: (backColor ? ['<div class="note-palette">', '<div class="note-palette-title">' + this.lang.color.background + '</div>', '<div>', '<button type="button" class="note-color-reset btn btn-light btn-default" data-event="backColor" data-value="transparent">', this.lang.color.transparent, '</button>', '</div>', '<div class="note-holder" data-event="backColor"><!-- back colors --></div>', '<div>', '<button type="button" class="note-color-select btn btn-light btn-default" data-event="openPalette" data-value="backColorPicker">', this.lang.color.cpSelect, '</button>', '<input type="color" id="backColorPicker" class="note-btn note-color-select-btn" value="' + this.options.colorButton.backColor + '" data-event="backColorPalette">', '</div>', '<div class="d-flex justify-content-between"><input id="customBackColor" placeholder="#FFFFFF" value="" style="width: 50%" /><button type="button" id="customBackApply" class="btn btn-light btn-default" style="width: 45%; font-size: 10px; padding: 5px 0;" data-event="backColor" data-action="apply">Применить</button></div>', '</div>'].join('') : '') + (foreColor ? ['<div class="note-palette">', '<div class="note-palette-title">' + this.lang.color.foreground + '</div>', '<div>', '<button type="button" class="note-color-reset btn btn-light btn-default" data-event="removeFormat" data-value="foreColor">', this.lang.color.resetToDefault, '</button>', '</div>', '<div class="note-holder" data-event="foreColor"><!-- fore colors --></div>', '<div>', '<button type="button" class="note-color-select btn btn-light btn-default" data-event="openPalette" data-value="foreColorPicker">', this.lang.color.cpSelect, '</button>', '<input type="color" id="foreColorPicker" class="note-btn note-color-select-btn" value="' + this.options.colorButton.foreColor + '" data-event="foreColorPalette">', '</div>', // Fix missing Div, Commented to find easily if it's wrong
+                    '<div class="d-flex justify-content-between"><input id="customForeColor" placeholder="#FFFFFF" value="" style="width: 50%" /><button type="button" id="customForeApply" class="btn btn-light btn-default" style="width: 45%; font-size: 10px; padding: 5px 0;" data-event="foreColor" data-action="apply">Применить</button></div>', '</div>'].join('') : ''),
                   callback: function callback($dropdown) {
                     $dropdown.find('.note-holder').each(function (idx, item) {
                       var $holder = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()(item);
@@ -7451,6 +7452,7 @@
                     var $parent = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()('.' + className).find('.note-dropdown-menu');
                     var $button = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()(event.target);
                     var eventName = $button.data('event');
+                    var actionName = $button.data('action');
                     var value = $button.attr('data-value');
 
                     if (eventName === 'openPalette') {
@@ -7468,10 +7470,18 @@
                         var key = eventName === 'backColor' ? 'background-color' : 'color';
                         var $color = $button.closest('.note-color').find('.note-recent-color');
                         var $currentButton = $button.closest('.note-color').find('.note-current-color-button');
+                        if (actionName === 'apply' && key === 'background-color') {
+                          _this.context.invoke('restoreRange');
+                          var $inputBack = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()('.' + className).find('#customBackColor');
+                          value = $inputBack.val();
+                        } else if (actionName === 'apply' && key === 'color') {
+                          _this.context.invoke('restoreRange');
+                          var $inputFore = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()('.' + className).find('#customForeColor');
+                          value = $inputFore.val();
+                        }
                         $color.css(key, value);
                         $currentButton.attr('data-' + eventName, value);
                       }
-
                       _this.context.invoke('editor.' + eventName, value);
                     }
                   }
