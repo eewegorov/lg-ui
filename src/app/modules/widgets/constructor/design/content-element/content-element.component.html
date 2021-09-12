@@ -149,7 +149,7 @@
               [ngClass]="(item.title.textShadow.enable) ? '' : 'no-text-shadow-imp'"
               [ngStyle]="{'font-size': item.title.fontSize + 'px', 'font-family': item.title.font.fontFamily, 'text-shadow': item.title.textShadow.horiz + 'px ' + item.title.textShadow.vertical + 'px ' + item.title.textShadow.blur + 'px ' + getRGBAColor(item.title.textShadow)}"
             >
-              <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="item.title.textSummer"></div>
+              <div [ngxSummernote]="optionsSummernote" [(ngModel)]="item.title.textSummer"></div>
             </div>
           </div>
           <div class="element-coupon-block" [ngClass]="hrPosSel(item)">
@@ -186,7 +186,7 @@
                 class="click-edit-cl button-link-close"
                 [ngStyle]="{'font-size': widget.guiprops['exit'].fontSize + 'px', 'font-family': widget.guiprops['exit'].font.fontFamily}"
               >
-                <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="widget.guiprops['exit'].textSummer"></div>
+                <div [ngxSummernote]="optionsSummernote" [(ngModel)]="widget.guiprops['exit'].textSummer"></div>
               </div>
             </div>
           </div>
@@ -197,7 +197,7 @@
                 [ngClass]="setBtnStyleClass(widget.guiprops.exit.button)"
                 [ngStyle]="{'font-size': widget.guiprops.exit.button.fontSize + 'px', 'font-family': widget.guiprops.exit.button.font.fontFamily, 'border-color': widget.guiprops.exit.button.colorBtn, 'background': widget.guiprops.exit.button.colorBtn, 'color': widget.guiprops.exit.button.colorTextBtn, 'border-radius': widget.guiprops.exit.button.borderRadiusBtn + 'px', 'width': widthExitBtnStyle}"
               >
-                <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="widget.guiprops.exit.button.textSummer"></div>
+                <div [ngxSummernote]="optionsSummernote" [(ngModel)]="widget.guiprops.exit.button.textSummer"></div>
               </div>
             </div>
           </div>
@@ -264,7 +264,7 @@
             <div *ngIf="widget.guiprops?.button?.textSummer">
               <div class="widget1-btn-bl widget1-btn-bl-min-marg" [ngClass]="btnPosSel(widget.guiprops.button)">
                 <div class="click-edit-cl button-send" [ngClass]="setBtnStyleClass(widget.guiprops.button)" [ngStyle]="{'font-size': widget.guiprops['button'].fontSize + 'px', 'font-family': widget.guiprops['button'].font.fontFamily, 'border-color': widget.guiprops['button'].colorBtn, 'background': widget.guiprops['button'].colorBtn, 'color': widget.guiprops['button'].colorTextBtn, 'border-radius': widget.guiprops['button'].borderRadiusBtn + 'px', 'width': widthBtnFormStyle}">
-                  <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="widget.guiprops['button'].textSummer"></div>
+                  <div [ngxSummernote]="optionsSummernote" [(ngModel)]="widget.guiprops['button'].textSummer"></div>
                 </div>
               </div>
             </div>
@@ -366,7 +366,7 @@
                     <div *ngSwitchCase="'titleFElement'" class="title-f-input-class">
                       <div class="form-ext-title-wrapper">
                         <div class="click-edit-cl" [ngClass]="(item.textShadow.enable) ? '' : 'no-text-shadow-imp'" [ngStyle]="{'font-size':item.fontSize+'px', 'font-family':item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}">
-                          <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="item.textSummer"></div>
+                          <div [ngxSummernote]="optionsSummernote" [(ngModel)]="item.textSummer"></div>
                         </div>
                       </div>
                     </div>
@@ -380,7 +380,7 @@
                             <span class="form-ext-term-checkbox-checkmark" [ngStyle]="{'background-color': widget.guiprops.formExt.model.mainSettings.rgbaInputForm, 'border-color': widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : 'transparent'}"></span>
                           </div>
                           <div class="click-edit-cl" [ngClass]="(item.textShadow.enable) ? '' : 'no-text-shadow-imp'" [ngStyle]="{'font-size': item.fontSize + 'px', 'font-family': item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}">
-                            <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="item.textSummer"></div>
+                            <div [ngxSummernote]="optionsSummernote" [(ngModel)]="item.textSummer"></div>
                           </div>
                         </div>
                       </div>
@@ -403,7 +403,7 @@
                                 <i [ngClass]="item.icon.selectedIcon" [ngStyle]="{'color':item.icon.color}"></i>
                               </div>
                               <div *ngIf="item.bType.type === 0 || item.bType.type === 1">
-                                <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="item.textSummer"></div>
+                                <div [ngxSummernote]="optionsSummernote" [(ngModel)]="item.textSummer"></div>
                               </div>
                             </div>
                           </div>
@@ -428,7 +428,7 @@
                 [ngClass]="setBtnStyleClass(widget.guiprops.button)"
                 [ngStyle]="{'font-size': widget.guiprops['button'].fontSize + 'px', 'font-family': widget.guiprops['button'].font.fontFamily, 'border-color': widget.guiprops['button'].colorBtn, 'background': widget.guiprops['button'].colorBtn, 'color': widget.guiprops['button'].colorTextBtn, 'border-radius': widget.guiprops['button'].borderRadiusBtn + 'px', 'width': widthBtnStyle}"
               >
-                <div [ngxSummernote]="optionsSummernote" [ngxSummernoteView]="widget.guiprops['button'].textSummer"></div>
+                <div [ngxSummernote]="optionsSummernote" [(ngModel)]="widget.guiprops['button'].textSummer"></div>
               </div>
             </div>
           </div>

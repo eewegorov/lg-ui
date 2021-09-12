@@ -1944,12 +1944,15 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   display: block;
   z-index: 1060000!important;
 }
+
 .note-air-popover {
   max-width: 420px!important;
 }
+
 .note-air-popover .arrow {
   display: none!important;
 }
+
 .note-air-popover.popover {
   border-radius: 0!important;
   background-color: #3498db;
@@ -1957,11 +1960,13 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   /*right: -1px!important;*/
   /*top: -54px!important;*/
 }
+
 .note-air-popover.popover .btn-default {
   color: #fff!important;
   background-color: #3498db!important;
   border-color: #fff!important;
 }
+
 .note-air-popover.popover .btn-default.active,
 .note-air-popover.popover .btn-default:hover {
   color: #3498db!important;
@@ -1971,9 +1976,11 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 .note-air-popover.popover .dropdown-menu {
   background-color: #3498db!important;
 }
+
 .note-air-popover.popover .popover-content .note-color .dropdown-menu .btn-group .note-palette-title {
   color: #fff!important;
 }
+
 .note-air-popover.popover .dropdown-menu > li > a {
   width: 100%;
   color: #fff;
@@ -2013,3 +2020,92 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 .note-editor a:hover {
   text-decoration: none;
 }
+
+.widget1-btn-bl .click-edit-cl .note-editor,
+.widget1-btn-exit .click-edit-cl .note-editor {
+  line-height: 1.5em!important;
+}
+
+.widget1-btn-bl .click-edit-cl .note-editor,
+.widget1-btn-exit .click-edit-cl .note-editor{
+  display: flex;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center;
+  text-align: center;
+}
+
+.note-editor h1,
+.note-editor h2,
+.note-editor h3,
+.note-editor h4,
+.note-editor h5,
+.note-editor h6,
+.note-editor p,
+.note-editor span {
+  margin: 0;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: 1em;
+  color: #424242;
+  -webkit-font-smoothing: antialiased;
+}
+
+.note-editor font p,
+.note-editor font span {
+  color: inherit;
+}
+
+div.button-send.click-edit-cl .note-editor h1,
+div.button-send.click-edit-cl .note-editor h2,
+div.button-send.click-edit-cl .note-editor h3,
+div.button-send.click-edit-cl .note-editor h4,
+div.button-send.click-edit-cl .note-editor h5,
+div.button-send.click-edit-cl .note-editor h6,
+div.button-send.click-edit-cl .note-editor p,
+div.button-send.click-edit-cl .note-editor span {
+  color: #fff;
+}
+
+div.button-send.click-edit-cl .note-editor font p,
+div.button-send.click-edit-cl .note-editor font span {
+  color: inherit;
+}
+
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor h1,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor h2,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor h3,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor h4,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor h5,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor h6,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor p,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor span {
+  color: #6a6c6f;
+}
+
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor font p,
+.widget1-btn-exit div.button-link-close.click-edit-cl .note-editor font span {
+  color: inherit;
+}
+
+.widget1-btn-bl .click-edit-cl .note-editor .note-editing-area,
+.widget1-btn-exit .click-edit-cl .note-editor .note-editing-area{
+  width: 100%;
+  text-align: center;
+}
+
+.widget1-btn-bl div.button-send .note-editor,
+.widget1-btn-exit div.button-send .note-editor{
+  min-height: 30px;
+}
+
+.widget1-btn-bl div.button-link-close .note-editor,
+.widget1-btn-exit div.button-link-close .note-editor{
+  min-height: 21px;
+}
+
+.note-editor.note-airframe .note-editing-area .note-editable {
+  overflow: hidden;
+}
+
