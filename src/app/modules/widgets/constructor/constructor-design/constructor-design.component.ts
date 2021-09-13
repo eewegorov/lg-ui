@@ -131,10 +131,12 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
       this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item: WidgetType) => item.id === this.widget.type).code;
       this.staticWidgetInstallCode =
         this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
-      this.changeModel();
-      this.changeColorPodAndSRC();
-      this.initLabelMainPicker();
-      this.loadListener();
+      setTimeout(() => {
+        this.changeModel();
+        this.changeColorPodAndSRC();
+        this.initLabelMainPicker();
+        this.loadListener();
+      }, 0);
     }
   }
 
