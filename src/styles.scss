@@ -2109,7 +2109,7 @@ div.button-send.click-edit-cl .note-editor font span {
   min-height: 21px;
 }
 
-.note-editor.note-airframe .note-editing-area .note-editable {
-  overflow: hidden;
+.note-editor * {
+  overflow: unset !important;
 }
 

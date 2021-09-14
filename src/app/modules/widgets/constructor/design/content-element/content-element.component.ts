@@ -1,6 +1,7 @@
 import {
   AfterContentInit,
   Component,
+  DoCheck,
   ElementRef,
   EventEmitter,
   Input,
@@ -16,7 +17,7 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
   templateUrl: './content-element.component.html',
   styleUrls: ['../../../shared/shared.scss', './content-element.component.scss'],
 })
-export class ContentElementComponent implements OnInit, AfterContentInit {
+export class ContentElementComponent implements OnInit, DoCheck, AfterContentInit {
   @Input() public widget: FullWidget;
   @Input() public bgStyle: string;
   @Input() public widthImageStyle: string;
@@ -54,11 +55,7 @@ export class ContentElementComponent implements OnInit, AfterContentInit {
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
-  ngAfterContentInit(): void {
-    this.videoBgClass = this.setVideoBGStyle();
-  }
-
-  ngOnInit(): void {
+  ngDoCheck(): void {
     if (this.widget.guiprops?.button?.btn_width === 'Собственная') {
       this.widthBtnStyle = this.widget.guiprops.button.btn_widthpx + 'px';
       this.widthBtnFormStyle = this.widget.guiprops.button.btn_widthpx + 'px';
@@ -81,6 +78,12 @@ export class ContentElementComponent implements OnInit, AfterContentInit {
       this.widthExitBtnStyle = 'auto';
     }
   }
+
+  ngAfterContentInit(): void {
+    this.videoBgClass = this.setVideoBGStyle();
+  }
+
+  ngOnInit(): void { }
 
   public scrollToEl(id, elementName) {
     this.scrollToElement.emit({ id, elementName });
