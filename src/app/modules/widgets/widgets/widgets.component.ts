@@ -110,7 +110,7 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    ($('[data-toggle="tooltip"]') as any).tooltip();
+    ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
   }
 
   private setCurrentSite() {

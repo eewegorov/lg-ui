@@ -45,7 +45,13 @@
     <div class="alert-if-empty" *ngIf="mockups.length === 0">
       <h3>{{ 'widgetsList.add.modal.gallery.filter.notfound' | translate }}</h3>
     </div>
-    <div class="test-scroll-inf" infiniteScroll (scrolled)="loadMore()">
+    <div
+      class="test-scroll-inf"
+      infiniteScroll
+      [infiniteScrollContainer]="'.panel-widgets-list'"
+      [fromRoot]="true"
+      (scrolled)="loadMore()"
+    >
       <div class="mockup-selector-categories-mockups-item-container" *ngFor="let mckp of mockups">
         <div class="mockup-selector-categories-mockups-item">
           <div class="mockup-selector-categories-mockups-item-hover">

@@ -96,7 +96,8 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
     this.loadGroups();
 
-    ($('.start-widget-btn, .stop-widget-btn') as any).tooltip();
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+    ($('.start-widget-btn, .stop-widget-btn') as any).tooltip({ trigger : 'hover' });
 
     this.widgetService.onChangePayment.subscribe((value: boolean) => {
       this.onChangePayment(value);

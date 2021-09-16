@@ -81,6 +81,26 @@
   max-width: 1353px;
 }
 
+
+p {
+  font-family: Lato;
+}
+.search-results {
+  height: 100%;
+}
+.title {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-70%);
+  left: 0;
+  background-color: rgba(0,0,0,.5);
+  color: white;
+  width: 100%;
+}
+.title small {
+  color: #eaeaea;
+}
+
 @media (max-width: 1410px) {
   .filter-tabs div {
     padding-left: 10px;
