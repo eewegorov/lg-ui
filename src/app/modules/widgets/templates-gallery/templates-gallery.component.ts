@@ -23,7 +23,7 @@ export class TemplatesGalleryComponent implements OnInit {
   private tab: number;
   private startItem;
   private newItem;
-  private ITEMS_TO_ADD = 6;
+  private ITEMS_TO_ADD = 9;
   private checkboxOnArray = [];
   private testArr = [];
   private queryForMockups = { type: '', categories: '' };

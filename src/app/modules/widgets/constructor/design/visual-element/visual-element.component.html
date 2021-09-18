@@ -128,6 +128,7 @@
                   type="radio"
                   name="content"
                   class="radio radio-info radio-inline"
+                  (change)="getVideoId(widget.guiprops.bg.video)"
                   [(ngModel)]="widget.guiprops['bg'].fillorImg"
                   value="useVideo"
                 />
@@ -253,7 +254,7 @@
         </div>
       </div>
 
-      <div *ngIf="((widget.guiprops['bg'].fillorImg === 'useVideo') || (widget.guiprops['bg'].fillorImg === 'useImg'))">
+      <div *ngIf="widget.guiprops['bg'].mask && ((widget.guiprops['bg'].fillorImg === 'useVideo') || (widget.guiprops['bg'].fillorImg === 'useImg'))">
         <div class="row row-subitem mt-3">
           <div class="d-flex col-sm-12 row-subitem-padding pt-1">
             <ui-switch
@@ -262,7 +263,7 @@
             ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Затемнить фон виджета маской</label>
           </div>
         </div>
-        <div *ngIf="widget.guiprops['bg'].mask.enable == true">
+        <div *ngIf="widget.guiprops['bg'].mask.enable">
           <div class="row row-subitem">
             <div class="col-sm-6 row-subitem-padding pt-1">
               <label class="control-label control-label-colorpc control-label-des">Цвет маски:</label>

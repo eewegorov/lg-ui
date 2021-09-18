@@ -116,6 +116,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
 
   ngAfterContentInit(): void {
     this.isThankShow = this.isThankShouldShow();
+    // Init video BG
   }
 
   ngAfterViewInit(): void {
@@ -137,6 +138,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
         this.initLabelMainPicker();
         this.loadListener();
       }, 0);
+
+      if (this.widget.guiprops?.bg.video && (this.widget.guiprops?.bg.fillorImg === 'useVideo') && this.widget.guiprops?.bg.video.videoId) {
+        this.newVideoSize(this.widget.guiprops.bg.video);
+      }
     }
   }
 
@@ -167,11 +172,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
 
     $(window).resize(this.getHeightBlock);
     this.getHeightBlock();
-
-    // Init video BG
-    if (this.widget.guiprops?.bg.video && (this.widget.guiprops?.bg.fillorImg === 'useVideo') && this.widget.guiprops?.bg.video.videoId) {
-      this.newVideoSize(this.widget.guiprops.bg.video);
-    }
 
     $('[data-detect]').each((index) => {
       this.linkDetectArr[index] = $(this).data('detect');
@@ -2222,7 +2222,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
         }
         $('#idVideoFrame' + item.counter).css({ height: ($('#idVideoFrame' + item.counter).innerWidth() / 1.666) + 'px' });
       }
-    }, 0);
+    }, 1000);
   }
 
   private showPaymentDialog(siteId, description) {

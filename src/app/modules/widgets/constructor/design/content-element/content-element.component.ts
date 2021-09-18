@@ -80,7 +80,9 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
   }
 
   ngAfterContentInit(): void {
-    this.videoBgClass = this.setVideoBGStyle();
+    setTimeout(() => {
+      this.videoBgClass = this.setVideoBGStyle();
+    }, 0);
   }
 
   ngOnInit(): void { }
