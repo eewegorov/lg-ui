@@ -1,17 +1,15 @@
 import {
-  AfterContentInit,
   AfterViewInit,
   Component,
   DoCheck,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { SubscriptionLike } from 'rxjs';
+import { BehaviorSubject, Subject, SubscriptionLike } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Options } from '@angular-slider/ngx-slider';
@@ -29,12 +27,13 @@ import { WidgetService } from '../../services/widget.service';
   templateUrl: './constructor-design.component.html',
   styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss']
 })
-export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterContentInit, DoCheck, OnChanges, OnDestroy {
+export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
   @ViewChild('flow') public flow: FlowDirective;
   @Input() public sid: string;
   @Input() public wid: string;
   @Input() public isPayment: boolean;
   @Input() public widget: FullWidget;
+  @Input() public image: any;
   @Input() public coupons: Coupon[];
   @Input() public isMockup: boolean;
   @Input() public isContainerized: boolean;
@@ -100,6 +99,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
   private blocks = [];
   private linkDetectArr = [];
 
+  private changeSubject = new BehaviorSubject(null);
   private autoUploadSubscription: SubscriptionLike;
 
   constructor(
@@ -114,11 +114,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
   ) {
   }
 
-  ngAfterContentInit(): void {
-    this.isThankShow = this.isThankShouldShow();
-    // Init video BG
-  }
-
   ngAfterViewInit(): void {
     this.autoUploadSubscription = this.flow?.events$.subscribe(event => {
       if (event.type === 'filesSubmitted') {
@@ -127,25 +122,30 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes.widget && !changes.widget.isFirstChange()) {
+  ngOnInit(): void {
+    this.changeSubject.pipe(
+      distinctUntilChanged(),
+      debounceTime(800),
+      filter(value => value === true || value === null)
+    ).subscribe( () => {
       this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item: WidgetType) => item.id === this.widget.type).code;
       this.staticWidgetInstallCode =
         this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
-      setTimeout(() => {
-        this.changeModel();
-        this.changeColorPodAndSRC();
-        this.initLabelMainPicker();
-        this.loadListener();
-      }, 0);
+      this.isThankShow = this.isThankShouldShow();
 
+      this.changeModel();
+      this.changeColorPodAndSRC();
+      this.initLabelMainPicker();
+      this.loadListener();
+
+      // Init video BG
       if (this.widget.guiprops?.bg.video && (this.widget.guiprops?.bg.fillorImg === 'useVideo') && this.widget.guiprops?.bg.video.videoId) {
         this.newVideoSize(this.widget.guiprops.bg.video);
       }
-    }
-  }
 
-  ngOnInit(): void {
+      this.changeSubject.next(false);
+    });
+
     this.systemFonts = this.widgetConstructorService.getSystemFontList();
 
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
@@ -268,9 +268,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
   }
 
   ngDoCheck(): void {
-    if (!this.widget.guiprops) {
+    if (!this.widget.guiprops || this.changeSubject.getValue()) {
       return;
     }
+
+    this.changeSubject.next(true);
 
     if (this.widget.guiprops.formExt) {
       if (this.widget.guiprops.formExt.model.mainSettings.colorPod.enable) {
@@ -1213,6 +1215,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
                 }, 100);
 
                 if (this.widget.guiprops.image.place === 'Слева') {
+                  console.log($('.widget-main-img-left'));
                   setTimeout(() => {
                     $('.widget-main-img-left').css({
                       'margin-left': mainBlockW.innerWidth() - 15 + 'px',
@@ -2222,7 +2225,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
         }
         $('#idVideoFrame' + item.counter).css({ height: ($('#idVideoFrame' + item.counter).innerWidth() / 1.666) + 'px' });
       }
-    }, 1000);
+    }, 0);
   }
 
   private showPaymentDialog(siteId, description) {
@@ -2240,4 +2243,3 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, AfterC
   }
 
 }
-

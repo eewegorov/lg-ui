@@ -197,7 +197,7 @@
   <div
     id="design"
     class="design-tab-fixed"
-    *ngIf="isCurrentActiveTab('design')"
+    *ngIf="isCurrentActiveTab('design') && widget.guiprops"
     [ngClass]="{ active: isCurrentActiveTab('design') }"
   >
     <app-constructor-design
