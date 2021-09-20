@@ -1,5 +1,7 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   DoCheck,
   Input,
@@ -8,8 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject, SubscriptionLike } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Options } from '@angular-slider/ngx-slider';
@@ -25,7 +26,8 @@ import { WidgetService } from '../../services/widget.service';
 @Component({
   selector: 'app-constructor-design',
   templateUrl: './constructor-design.component.html',
-  styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss']
+  styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
   @ViewChild('flow') public flow: FlowDirective;
@@ -99,10 +101,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   private blocks = [];
   private linkDetectArr = [];
 
-  private changeSubject = new BehaviorSubject(null);
   private autoUploadSubscription: SubscriptionLike;
 
   constructor(
+    private ref: ChangeDetectorRef,
     private router: Router,
     private translate: TranslateService,
     private toastr: ToastrService,
@@ -123,28 +125,15 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   }
 
   ngOnInit(): void {
-    this.changeSubject.pipe(
-      distinctUntilChanged(),
-      debounceTime(800),
-      filter(value => value === true || value === null)
-    ).subscribe( () => {
-      this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item: WidgetType) => item.id === this.widget.type).code;
-      this.staticWidgetInstallCode =
-        this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
-      this.isThankShow = this.isThankShouldShow();
+    this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item: WidgetType) => item.id === this.widget.type).code;
+    this.staticWidgetInstallCode =
+      this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
+    this.isThankShow = this.isThankShouldShow();
 
-      this.changeModel();
-      this.changeColorPodAndSRC();
-      this.initLabelMainPicker();
-      this.loadListener();
-
-      // Init video BG
-      if (this.widget.guiprops?.bg.video && (this.widget.guiprops?.bg.fillorImg === 'useVideo') && this.widget.guiprops?.bg.video.videoId) {
-        this.newVideoSize(this.widget.guiprops.bg.video);
-      }
-
-      this.changeSubject.next(false);
-    });
+    // Init video BG
+    if (this.widget.guiprops?.bg.video && (this.widget.guiprops?.bg.fillorImg === 'useVideo') && this.widget.guiprops?.bg.video.videoId) {
+      this.newVideoSize(this.widget.guiprops.bg.video);
+    }
 
     this.systemFonts = this.widgetConstructorService.getSystemFontList();
 
@@ -265,14 +254,18 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         }
       }
     };
+
+    this.changeModel();
+    this.changeColorPodAndSRC();
+    this.initLabelMainPicker();
+    this.loadListener();
   }
 
   ngDoCheck(): void {
-    if (!this.widget.guiprops || this.changeSubject.getValue()) {
+    console.log('aaa')
+    if (!this.widget.guiprops) {
       return;
     }
-
-    this.changeSubject.next(true);
 
     if (this.widget.guiprops.formExt) {
       if (this.widget.guiprops.formExt.model.mainSettings.colorPod.enable) {
