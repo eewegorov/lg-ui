@@ -29,6 +29,15 @@ export class CloselinkElementComponent implements OnInit {
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
   ngOnInit(): void {
+    this.widget.guiprops.exit = {
+      ...this.widget.guiprops.exit,
+      button: {
+        ...this.widget.guiprops.exit.button,
+        enable: !!this.widget.guiprops.exit?.button?.enable,
+        font: { name: 'Arial' }
+      }
+    };
+
     this.initPicker();
   }
 
@@ -51,6 +60,8 @@ export class CloselinkElementComponent implements OnInit {
         this.setNewFont(change.target.value, this.widget.guiprops.exit.font);
       });
 
+      console.log(this.widget.guiprops.exit.button.font.name);
+
       ($('#font-picker-button-l' + this.index) as any).fontselect({
         placeholder: 'Выберите шрифт',
         placeholderSearch: 'Поиск...',
@@ -62,7 +73,7 @@ export class CloselinkElementComponent implements OnInit {
 
       $('#font-picker' + this.index).trigger('setFont', this.widget.guiprops.exit.font.name);
       $('#font-picker-button-l' + this.index).trigger('setFont', this.widget.guiprops.exit.button.font.name);
-    }, 500);
+    }, 1500);
   }
 
   private setNewFont(value, data) {
