@@ -1,12 +1,13 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   DoCheck,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -29,7 +30,7 @@ import { WidgetService } from '../../services/widget.service';
   styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
+export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy, OnChanges {
   @ViewChild('flow') public flow: FlowDirective;
   @Input() public sid: string;
   @Input() public wid: string;
@@ -104,7 +105,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   private autoUploadSubscription: SubscriptionLike;
 
   constructor(
-    private ref: ChangeDetectorRef,
     private router: Router,
     private translate: TranslateService,
     private toastr: ToastrService,
@@ -124,17 +124,24 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     });
   }
 
-  ngOnInit(): void {
-    this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item: WidgetType) => item.id === this.widget.type).code;
-    this.staticWidgetInstallCode =
-      this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
-    this.isThankShow = this.isThankShouldShow();
-
-    // Init video BG
-    if (this.widget.guiprops?.bg.video && (this.widget.guiprops?.bg.fillorImg === 'useVideo') && this.widget.guiprops?.bg.video.videoId) {
-      this.newVideoSize(this.widget.guiprops.bg.video);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes && changes.widget && !changes.widget.isFirstChange()) {
+      this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item: WidgetType) => item.id === this.widget.type).code;
+      this.staticWidgetInstallCode =
+        this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
+      setTimeout(() => {
+        this.changeModel();
+        this.changeColorPodAndSRC();
+        this.initLabelMainPicker();
+        this.loadListener();
+      }, 0);
     }
+  }
 
+  ngOnInit(): void {
+    setInterval(() => {
+      this.widgetConstructorService.updateWidget.next();
+    }, 1000);
     this.systemFonts = this.widgetConstructorService.getSystemFontList();
 
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
@@ -161,6 +168,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
 
     $(window).resize(this.getHeightBlock);
     this.getHeightBlock();
+
+    // Init video BG
+    if (this.widget.guiprops?.bg.video && (this.widget.guiprops?.bg.fillorImg === 'useVideo') && this.widget.guiprops?.bg.video.videoId) {
+      this.newVideoSize(this.widget.guiprops.bg.video);
+    }
 
     $('[data-detect]').each((index) => {
       this.linkDetectArr[index] = $(this).data('detect');
@@ -254,15 +266,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         }
       }
     };
-
-    this.changeModel();
-    this.changeColorPodAndSRC();
-    this.initLabelMainPicker();
-    this.loadListener();
   }
 
   ngDoCheck(): void {
-    console.log('aaa')
     if (!this.widget.guiprops) {
       return;
     }
@@ -1121,10 +1127,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     const gap18 = '-18px';
     const gap3 = '-3px';
 
-    mainBlockW.addClass('hide-image-bl-for-rebuild');
+    // another rebuild has already implemented
+    /*mainBlockW.addClass('hide-image-bl-for-rebuild');
     setTimeout(() => {
       mainBlockW.removeClass('hide-image-bl-for-rebuild');
-    }, 300);
+    }, 300);*/
 
     if (this.widget.guiprops.image.enable && this.widget.guiprops.image.typeBl && (this.widget.guiprops.image.typeBl === 'videoBl')) {
       $('#idImageVideoFrame').attr('src', this.widget.guiprops.image.videoUrl);
@@ -1208,7 +1215,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
                 }, 100);
 
                 if (this.widget.guiprops.image.place === 'Слева') {
-                  console.log($('.widget-main-img-left'));
                   setTimeout(() => {
                     $('.widget-main-img-left').css({
                       'margin-left': mainBlockW.innerWidth() - 15 + 'px',

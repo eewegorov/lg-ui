@@ -16,6 +16,7 @@ export class WidgetConstructorService {
   public formExtIdFieldFocusOut = new Subject();
   public changeArrayOfFormExtTypes = new Subject();
   public changeItemFormType = new Subject<{type: string; index: number}>();
+  public updateWidget = new Subject();
 
   constructor(
     private translate: TranslateService,

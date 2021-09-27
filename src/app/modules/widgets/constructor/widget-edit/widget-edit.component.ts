@@ -107,6 +107,10 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
       this.getCoupons();
     });
 
+    this.widgetConstructorService.updateWidget.subscribe(() => {
+      this.widget = { ...this.widget };
+    });
+
     this.widgetConstructorService.formExtIdFieldFocusOut.subscribe(() => {
       this.formExtIdsErrorFlag = false;
       const listOfBodies = $('#collapseTwo').find('.form-ext-item');

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { FullWidget } from '../../../../../core/models/widgets';
+import { WidgetConstructorService } from '../../../services/widget-constructor.service';
 
 @Component({
   selector: 'app-visual-element',
