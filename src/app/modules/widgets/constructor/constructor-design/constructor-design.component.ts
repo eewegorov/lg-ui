@@ -266,6 +266,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         }
       }
     };
+
+    this.loadListener();
   }
 
   ngDoCheck(): void {
