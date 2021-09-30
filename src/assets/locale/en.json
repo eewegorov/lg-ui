@@ -1414,17 +1414,19 @@
 				}
 			},
 			"section": {
+				"audience": "",
 				"autoresponder": "",
 				"block": "",
+				"integrations": "",
+				"javascript": "",
+				"showing": "",
 				"targeting": ""
 			},
 			"tab": {
-				"audience": "",
 				"design": "",
 				"errors": {
 					"tooltip": ""
 				},
-				"integrations": "",
 				"rules": ""
 			}
 		},

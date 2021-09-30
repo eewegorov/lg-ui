@@ -13,6 +13,7 @@ import { WidgetConstructorService } from '../../services/widget-constructor.serv
 export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   @Input() public widget: FullWidget;
   @Input() public isContainerized: boolean;
+  @Input() public isMockup: boolean;
 
   @Output() private addValidator = new EventEmitter<() => void>();
 
@@ -26,6 +27,16 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     HOU: this.translate.instant('global.unit.hours'),
     DAY: this.translate.instant('global.unit.days')
   };
+  public widgetSettingsCategories = [
+    this.translate.instant('widgetsList.editor.section.audience'),
+    this.translate.instant('widgetsList.editor.section.targeting'),
+    this.translate.instant('widgetsList.editor.section.showing'),
+    this.translate.instant('widgetsList.editor.section.block'),
+    this.translate.instant('widgetsList.editor.section.autoresponder'),
+    this.translate.instant('widgetsList.editor.section.javascript'),
+    this.translate.instant('widgetsList.editor.section.integrations')
+  ];
+  public currentCategory = this.widgetSettingsCategories[0];
 
   private ONE_MINUTE = 1000 * 60;
   private ONE_HOUR   = this.ONE_MINUTE * 60;

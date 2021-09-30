@@ -155,7 +155,7 @@
     <a
       (click)="setActiveTab('audience')"
     >
-      <i class="pe-7s-users"></i> <span class="tab-text">{{ 'widgetsList.editor.tab.audience' | translate }}</span>
+      <i class="pe-7s-users"></i> <span class="tab-text">{{ 'widgetsList.editor.section.audience' | translate }}</span>
     </a>
   </li>
 
@@ -184,7 +184,7 @@
       (click)="setActiveTab('integrations')"
     >
       <i class="pe-7s-plug"></i> <span
-      class="tab-text">{{ 'widgetsList.editor.tab.integrations' | translate }}</span> <span
+      class="tab-text">{{ 'widgetsList.editor.section.integrations' | translate }}</span> <span
       *ngIf="isTabHasError('integrations')" data-toggle="tooltip"
       data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
       class="info-link badge badge-pill badge-danger">!</span>
@@ -214,17 +214,6 @@
   </div>
 
   <div
-    id="audience"
-    *ngIf="isCurrentActiveTab('audience')"
-    [ngClass]="{ active: isCurrentActiveTab('audience') }"
-  >
-    <app-constructor-audiences
-      [widget]="widget"
-      [isMockup]="isMockup"
-    ></app-constructor-audiences>
-  </div>
-
-  <div
     *ngIf="isCurrentActiveTab('rules')"
     id="rules"
     [ngClass]="{ active: isCurrentActiveTab('rules') }"
@@ -232,6 +221,7 @@
     <app-constructor-rules
       [widget]="widget"
       [isContainerized]="isContainerized"
+      [isMockup]="isMockup"
     ></app-constructor-rules>
   </div>
 
