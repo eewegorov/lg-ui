@@ -225,6 +225,15 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     return false;
   }
 
+  public runValidators() {
+    let errorsList = [];
+    this.widgetService.validators.forEach(item => {
+      errorsList = errorsList.concat(item.call(this));
+    });
+
+    return errorsList;
+  }
+
   public isTabHasErrorForFormExt() {
     return this.formExtIdsErrorFlag || this.formExtNeedButton || this.formExtRedirectFieldEmpty;
   }
@@ -472,15 +481,6 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
   private isItFormCallbackCoupon(_) {
     return _.enable && _.couponCallback && _.couponCallback.enable;
-  }
-
-  private runValidators() {
-    let errorsList = [];
-    this.widgetService.validators.forEach(item => {
-      errorsList = errorsList.concat(item.call(this));
-    });
-
-    return errorsList;
   }
 
   private mapFormExtFieldId() {

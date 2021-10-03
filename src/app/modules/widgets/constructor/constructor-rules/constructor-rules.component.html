@@ -1,14 +1,20 @@
 <div class="widgets-settings-container">
-  <div class="settings-category">
+  <div class="settings-categories">
     <div
       *ngFor="let category of widgetSettingsCategories"
-      [ngClass]="{ active: currentCategory === widgetSettingsCategories[0] }"
+      class="settings-category"
+      [ngClass]="{ 'active': currentCategory === category }"
       (click)="currentCategory = category"
     >
-      {{ category }}
+      <span>{{ category }}</span>
+      <span
+        *ngIf="isTabHasError(category)" data-toggle="tooltip" data-placement="top"
+        title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
+        class="info-link badge badge-pill badge-danger"
+      >!</span>
     </div>
   </div>
-  <div>
+  <div class="settings-container">
     <div class="row pb-5">
       <!-- Section Audience -->
       <div

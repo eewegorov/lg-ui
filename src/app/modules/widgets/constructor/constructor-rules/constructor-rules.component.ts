@@ -15,6 +15,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   @Input() public isContainerized: boolean;
   @Input() public isMockup: boolean;
   @Input() public sid: string;
+  @Input() private runValidators: () => any[];
 
   @Output() private addValidator = new EventEmitter<() => void>();
 
@@ -71,6 +72,17 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       ($('[data-toggle="tooltip"]') as any).tooltip();
     }, 1000);
+  }
+
+  public isTabHasError(tabId) {
+    const errors = this.runValidators();
+    for (const item of errors) {
+      if ((typeof item !== 'undefined') && item.id === tabId) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   public getPageStateName(item) {
