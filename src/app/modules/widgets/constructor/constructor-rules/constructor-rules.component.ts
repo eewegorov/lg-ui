@@ -14,6 +14,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   @Input() public widget: FullWidget;
   @Input() public isContainerized: boolean;
   @Input() public isMockup: boolean;
+  @Input() public sid: string;
 
   @Output() private addValidator = new EventEmitter<() => void>();
 
@@ -61,6 +62,9 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     this.widgetService.addValidator(this.validator);
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
     this.loadListener();
+
+    this.widgetSettingsCategories = this.widgetSettingsCategories
+      .filter((_, index) => !this.isContainerized || (this.isContainerized && index !== 2 && index !== 3));
   }
 
   ngAfterViewInit(): void {

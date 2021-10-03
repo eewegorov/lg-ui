@@ -147,19 +147,6 @@
   </li>
 
   <li
-    *ngIf="!isMockup"
-    role="presentation"
-    class="widget-editor-tab"
-    [ngClass]="{ active: isCurrentActiveTab('audience') }"
-  >
-    <a
-      (click)="setActiveTab('audience')"
-    >
-      <i class="pe-7s-users"></i> <span class="tab-text">{{ 'widgetsList.editor.section.audience' | translate }}</span>
-    </a>
-  </li>
-
-  <li
     role="presentation"
     class="widget-editor-tab"
     [ngClass]="{ active: isCurrentActiveTab('rules') }"
@@ -170,22 +157,6 @@
       <i class="pe-7s-config"></i> <span
       class="tab-text">{{ 'widgetsList.editor.tab.rules' | translate }}</span> <span
       *ngIf="isTabHasError('rules')" data-toggle="tooltip"
-      data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
-      class="info-link badge badge-pill badge-danger">!</span>
-    </a>
-  </li>
-
-  <li
-    role="presentation"
-    class="widget-editor-tab"
-    [ngClass]="{ active: isCurrentActiveTab('integrations') }"
-  >
-    <a
-      (click)="setActiveTab('integrations')"
-    >
-      <i class="pe-7s-plug"></i> <span
-      class="tab-text">{{ 'widgetsList.editor.section.integrations' | translate }}</span> <span
-      *ngIf="isTabHasError('integrations')" data-toggle="tooltip"
       data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
       class="info-link badge badge-pill badge-danger">!</span>
     </a>
@@ -223,16 +194,5 @@
       [isContainerized]="isContainerized"
       [isMockup]="isMockup"
     ></app-constructor-rules>
-  </div>
-
-  <div
-    *ngIf="isCurrentActiveTab('integrations')"
-    [ngClass]="{ active: isCurrentActiveTab('integrations') }"
-    id="integrations"
-  >
-    <app-constructor-integrations
-      [sid]="sid"
-      [widget]="widget"
-    ></app-constructor-integrations>
   </div>
 </div>
