@@ -1,141 +1,136 @@
 <div class="widgets-settings-container">
-  <!-- Audiences list -->
-  <div id="audiences-list">
-    <h1>{{ 'widgetsList.editor.audiences.title' | translate }}</h1>
-    <div class="audience-tooolbar-desc" style="margin-top: 30px;">
-      {{ 'widgetsList.editor.audiences.desc' | translate }}
-    </div>
-    <div class="toolbar-content pt-4">
-      <div class="audience-tooolbar-switcher">
-        <ui-switch
-          [(ngModel)]="widget.audiencesEnabled"
-          (change)="onChangePayment"
-          class="mt-1 mr-2 float-left"
-        ></ui-switch><h3 class="mt-1">{{ 'widgetsList.editor.audiences.enabled' | translate }}<span
-        class="label label-warning tariff-info biggest">окупаемый</span></h3>
-      </div>
-    </div>
-  </div>
-  <!-- End Audiences list -->
-
   <!-- Audience editor -->
-  <div id="audiences-item" [hidden]="!widget.audiencesEnabled">
+  <div id="audiences-item">
     <!-- Audience editor core -->
     <div class="row mb-3">
       <div class="col-lg-8" id="rules-containers">
-        <label class="control-label">{{ 'audience.settings' | translate }}</label>
+        <div class="audiences-header">
+          <h1>{{ 'widgetsList.editor.audiences.title' | translate }}<span
+            class="label label-warning tariff-info biggest">окупаемый</span></h1>
+          <ui-switch
+            [(ngModel)]="widget.audiencesEnabled"
+            (change)="onChangePayment"
+            class="mt-1 mr-2 float-left"
+          ></ui-switch>
+        </div>
+
         <div
-          *ngIf="widget.audience.groups.length == 0"
+          *ngIf="widget.audience.groups.length == 0 || !widget.audiencesEnabled"
           class="rule-container rule-def"
           appDropContainer
           [audience]="widget.audience"
           [type]="'AND'"
         >
           <div class="rule-droppable">
-            <h4>{{ 'audience.rule.droppable' | translate }}</h4>
+            <h4 *ngIf="widget.audiencesEnabled && widget.audience.groups.length == 0">{{ 'audience.rule.droppable' | translate }}</h4>
+            <h4 *ngIf="!widget.audiencesEnabled">{{ 'audience.rule.nonactive' | translate }}</h4>
           </div>
         </div>
-        <div *ngFor="let group of widget.audience.groups; index as i">
-          <div *ngIf="i !== 0" class="rule-groups-text">{{ 'audience.rule.logic.and' | translate }}</div>
-          <div *ngFor="let item of group.items; index as j">
-            <div class="rule-block">
-              <div class="rule-header">
-                {{ item.name }} <i class="pe-7s-close-circle" (click)="removeItem(group.id, j)"></i>
+
+        <ng-container *ngIf="widget.audiencesEnabled">
+          <div *ngFor="let group of widget.audience.groups; index as i">
+            <div *ngIf="i !== 0" class="rule-groups-text">{{ 'audience.rule.logic.and' | translate }}</div>
+            <div *ngFor="let item of group.items; index as j">
+              <div class="rule-block">
+                <div class="rule-header">
+                  {{ item.name }} <i class="pe-7s-close-circle" (click)="removeItem(group.id, j)"></i>
+                </div>
+                <div class="rule-body" [ngSwitch]="item.type">
+                  <app-rule-devices
+                    *ngSwitchCase="'devices'"
+                    [item]="item"
+                    [group]="group"
+                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (add)="addSubItem($event)"
+                  ></app-rule-devices>
+
+                  <app-rule-refer
+                    *ngSwitchCase="'refer'"
+                    [item]="item"
+                    [group]="group"
+                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (add)="addSubItem($event)"
+                  ></app-rule-refer>
+
+                  <app-rule-social
+                    *ngSwitchCase="'social'"
+                    [item]="item"
+                    [group]="group"
+                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (add)="addSubItem($event)"
+                  ></app-rule-social>
+
+                  <app-rule-type
+                    *ngSwitchCase="'type'"
+                    [item]="item"
+                    [group]="group"
+                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (add)="addSubItem($event)"
+                  ></app-rule-type>
+
+                  <app-rule-url
+                    *ngSwitchCase="'url'"
+                    [item]="item"
+                    [group]="group"
+                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (add)="addSubItem($event)"
+                  ></app-rule-url>
+
+                  <app-rule-visit
+                    *ngSwitchCase="'visit'"
+                    [item]="item"
+                    [group]="group"
+                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (add)="addSubItem($event)"
+                  ></app-rule-visit>
+
+                  <app-rule-visit-no
+                    *ngSwitchCase="'visitno'"
+                    [item]="item"
+                    [group]="group"
+                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (add)="addSubItem($event)"
+                  ></app-rule-visit-no>
+
+                  <h1 *ngSwitchDefault>ERROR!</h1>
+                </div>
               </div>
-              <div class="rule-body" [ngSwitch]="item.type">
-                <app-rule-devices
-                  *ngSwitchCase="'devices'"
-                  [item]="item"
-                  [group]="group"
-                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
-                  (add)="addSubItem($event)"
-                ></app-rule-devices>
-
-                <app-rule-refer
-                  *ngSwitchCase="'refer'"
-                  [item]="item"
-                  [group]="group"
-                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
-                  (add)="addSubItem($event)"
-                ></app-rule-refer>
-
-                <app-rule-social
-                  *ngSwitchCase="'social'"
-                  [item]="item"
-                  [group]="group"
-                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
-                  (add)="addSubItem($event)"
-                ></app-rule-social>
-
-                <app-rule-type
-                  *ngSwitchCase="'type'"
-                  [item]="item"
-                  [group]="group"
-                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
-                  (add)="addSubItem($event)"
-                ></app-rule-type>
-
-                <app-rule-url
-                  *ngSwitchCase="'url'"
-                  [item]="item"
-                  [group]="group"
-                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
-                  (add)="addSubItem($event)"
-                ></app-rule-url>
-
-                <app-rule-visit
-                  *ngSwitchCase="'visit'"
-                  [item]="item"
-                  [group]="group"
-                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
-                  (add)="addSubItem($event)"
-                ></app-rule-visit>
-
-                <app-rule-visit-no
-                  *ngSwitchCase="'visitno'"
-                  [item]="item"
-                  [group]="group"
-                  (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
-                  (add)="addSubItem($event)"
-                ></app-rule-visit-no>
-
-                <h1 *ngSwitchDefault>ERROR!</h1>
-              </div>
+              <div class="rule-groups-text">{{ 'audience.rule.logic.or' | translate }}</div>
             </div>
-            <div class="rule-groups-text">{{ 'audience.rule.logic.or' | translate }}</div>
-          </div>
 
-          <div
-            class="rule-container mb-3"
-            appDropContainer
-            [audience]="widget.audience"
-            [type]="'OR'"
-            [index]="i"
-          >
-            <div class="rule-droppable-or">
-              <h4>{{ 'audience.rule.ordroppable' | translate }}</h4>
-            </div>
-          </div>
-          <div *ngIf="i === widget.audience.groups.length - 1">
-            <div class="rule-groups-text rule-groups-text-ok">{{ 'audience.rule.logic.and' | translate }}</div>
             <div
-              class="rule-container rule-container-ok"
+              class="rule-container mb-3"
               appDropContainer
               [audience]="widget.audience"
-              [type]="'AND'"
+              [type]="'OR'"
+              [index]="i"
             >
-              <div class="rule-droppable-and">
-                <h4>{{ 'audience.rule.anddroppable' | translate }}</h4>
+              <div class="rule-droppable-or">
+                <h4>{{ 'audience.rule.ordroppable' | translate }}</h4>
+              </div>
+            </div>
+            <div *ngIf="i === widget.audience.groups.length - 1">
+              <div class="rule-groups-text rule-groups-text-ok">{{ 'audience.rule.logic.and' | translate }}</div>
+              <div
+                class="rule-container rule-container-ok"
+                appDropContainer
+                [audience]="widget.audience"
+                [type]="'AND'"
+              >
+                <div class="rule-droppable-and">
+                  <h4>{{ 'audience.rule.anddroppable' | translate }}</h4>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </ng-container>
       </div>
       <div class="col-lg-4 rules-templates-list">
-        <label class="control-label">{{ 'audience.rules' | translate }}</label>
+        <h3 class="control-label">{{ 'audience.rules' | translate }}</h3>
 
         <div
           class="audience-rule"
+          [class.disabled]="!widget.audiencesEnabled"
           data-code="refer"
           data-title="{{ 'audience.rule.refer.title' | translate }}"
         >
@@ -150,6 +145,7 @@
 
         <div
           class="audience-rule"
+          [class.disabled]="!widget.audiencesEnabled"
           data-code="type"
           data-title="{{ 'audience.rule.type.title' | translate }}"
         >
@@ -163,9 +159,10 @@
         </div>
 
         <div
+          class="audience-rule"
+          [class.disabled]="!widget.audiencesEnabled"
           data-code="url"
           data-title="{{ 'audience.rule.url.title' | translate }}"
-          class="audience-rule"
         >
           <i class="pe-7s-menu"></i> {{ 'audience.rule.url.title' | translate }} <a
           data-toggle="tooltip"
@@ -177,9 +174,10 @@
         </div>
 
         <div
+          class="audience-rule"
+          [class.disabled]="!widget.audiencesEnabled"
           data-code="visit"
           data-title="{{ 'audience.rule.visit.title' | translate }}"
-          class="audience-rule"
         >
           <i class="pe-7s-menu"></i> {{ 'audience.rule.visit.title' | translate }} <a
           data-toggle="tooltip"
@@ -191,9 +189,10 @@
         </div>
 
         <div
+          class="audience-rule"
+          [class.disabled]="!widget.audiencesEnabled"
           data-code="visitno"
           data-title="{{ 'audience.rule.visitno.title' | translate }}"
-          class="audience-rule"
         >
           <i class="pe-7s-menu"></i> {{ 'audience.rule.visitno.title' | translate }} <a
           data-toggle="tooltip"
@@ -205,9 +204,10 @@
         </div>
 
         <div
+          class="audience-rule"
+          [class.disabled]="!widget.audiencesEnabled"
           data-code="devices"
           data-title="{{ 'audience.rule.devices.title' | translate }}"
-          class="audience-rule"
         >
           <i class="pe-7s-menu"></i> {{ 'audience.rule.devices.title' | translate }} <a
           data-toggle="tooltip"
@@ -219,9 +219,10 @@
         </div>
 
         <div
+          class="audience-rule"
+          [class.disabled]="!widget.audiencesEnabled"
           data-code="social"
           data-title="{{ 'audience.rule.social.title' | translate }}"
-          class="audience-rule"
         >
           <i class="pe-7s-menu"></i> {{ 'audience.rule.social.title' | translate }} <a
           data-toggle="tooltip"
@@ -229,6 +230,11 @@
           title=""
           class="info-link"
           [attr.data-original-title]="'audience.rule.social.desc' | translate"><i class="fa fa-info-circle"></i></a>
+        </div>
+
+        <div class="audience-tooolbar-desc" style="margin-top: 30px;">
+          <p>{{ 'widgetsList.editor.audiences.desc1' | translate }}</p>
+          <p>{{ 'widgetsList.editor.audiences.desc2' | translate }}</p>
         </div>
       </div>
     </div>

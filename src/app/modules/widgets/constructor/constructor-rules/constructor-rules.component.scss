@@ -21,11 +21,15 @@ h5 {
 
 .settings-categories {
   width: 20%;
-  margin-right: 25px;
+  margin-right: 35px;
 }
 
 .settings-container {
   width: 80%;
+
+  .row div {
+    width: 100%;
+  }
 }
 
 .settings-category {
