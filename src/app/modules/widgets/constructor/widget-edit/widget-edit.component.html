@@ -1,167 +1,167 @@
-<div class="title-widget-container">
-  <!-- HEADER -->
-  <div class="footer-group" id="save-widget-panel">
-    <div class="text-right p-2">
-      <button
-        type="button"
-        *ngIf="widget?.abtestInfo && (widget?.abtestInfo.type === 'VARIANT')"
-        (click)="goToTest(widget)"
-        class="btn gototest-widget-btn"
-      >
-        <i class="pe-7s-back mr-1"></i> Перейти к A/B тесту
-      </button>
-      <a
-        type="button"
-        *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
-        class="btn btn-primary buy-widget-btn"
-      >
-        <i class="pe-7s-tools mr-2"></i> {{ 'widgetsList.add.alt2' | translate }}
-      </a>
-      <div class="btn-group play-btns" *ngIf="!isMockup">
-        <p>Статус:</p>
+<div class="widgets-editor-header">
+  <div class="title-widget-container">
+    <h3 *ngIf="renamedWidget.id !== widget.id" class="widget-title-main">
+      {{ (widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Настройка варианта:' : 'Настройка виджета:' }}
+    </h3>
+    <a
+      id="renameWidgetBtn"
+      (click)="startRenameWidget(widget)"
+      *ngIf="widget.name && renamedWidget.id !== widget.id"
+      href="javascript:void(0);"
+      data-toggle="tooltip"
+      data-placement="top"
+      title=""
+      class="f-2 title-widget-name-editable"
+    >
+      {{ getCroppedString(widget.name, 35, "…") }}<i class="fa fa-pencil ml-1"></i>
+    </a>
+
+    <div class="row" *ngIf="renamedWidget.id === widget.id">
+      <div class="col-lg-12 p-0 title-widget-rename">
+        <input type="text" class="form-control" [(ngModel)]="renamedWidget.name">
         <button
-          *ngIf="(widget?.abtestInfo && (widget?.abtestInfo.type !== 'VARIANT')) || (!widget?.abtestInfo)"
-          (click)="startWidget(widget)"
-          [ngClass]="(widget.active) ? 'active' : ''"
-          class="btn btn-sm btn-default start-widget-btn"
-          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
+          class="btn btn-default rename-button"
+          data-container="body"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="{{ 'global.cancel' | translate }}"
+          (click)="resetRenaming()"
         >
-          <i class="fa fa-play"></i>
-        </button>
-        <button
-          *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
-          (click)="stopWidget(widget)"
-          [ngClass]="(widget.active) ? '' : 'active'"
-          class="btn btn-sm btn-default stop-widget-btn"
-          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
-        >
-          <i class="fa fa-pause"></i>
+          <i class="fa fa-times"></i>
         </button>
 
         <button
-          *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-          (click)="startWidget(widget)"
-          [ngClass]="(widget.active) ? 'active' : ''"
-          class="btn btn-sm btn-default start-widget-btn"
-          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить вариант"
+          class="btn btn-success ml-1 rename-button"
+          data-container="body"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="{{ 'widgetsList.widget.rename.tooltip' | translate }}"
+          (click)="renameWidget()"
         >
-          <i class="fa fa-play"></i>
-        </button>
-        <button
-          *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-          (click)="stopWidget(widget)"
-          [ngClass]="(widget.active) ? '' : 'active'"
-          class="btn btn-sm btn-default stop-widget-btn"
-          data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
-        >
-          <i class="fa fa-pause"></i>
+          <i class="fa fa-check"></i>
         </button>
       </div>
+    </div>
+  </div>
 
-      <ng-container *ngIf="isDesigner">
-        <button
-          type="button"
-          *ngIf="!isMockup"
-          class="saveAsMockupBtn ladda-button btn btn-primary float-left"
-          data-style="slide-down"
-          [ladda]="isLoading"
-          (click)="saveAsMockup()"
-        >
-          <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
-        </button>
-      </ng-container>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs widget-editor-tabs" role="tablist">
+    <li role="presentation" class="widget-editor-tab" [ngClass]="{ active: isCurrentActiveTab('design') }">
+      <a
+        (click)="setActiveTab('design')"
+      ><i class="pe-7s-paint"></i> <span
+        class="tab-text">{{ 'widgetsList.editor.tab.design' | translate }}</span> <span
+        *ngIf="isTabHasErrorForFormExt() || isTabHasError('design')"
+        data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
+        class="info-link badge badge-pill badge-danger">!</span>
+      </a>
+    </li>
+
+    <li
+      role="presentation"
+      class="widget-editor-tab"
+      [ngClass]="{ active: isCurrentActiveTab('rules') }"
+    >
+      <a
+        (click)="setActiveTab('rules')"
+      >
+        <i class="pe-7s-config"></i> <span
+        class="tab-text">{{ 'widgetsList.editor.tab.rules' | translate }}</span> <span
+        *ngIf="isTabHasError('rules')" data-toggle="tooltip"
+        data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
+        class="info-link badge badge-pill badge-danger">!</span>
+      </a>
+    </li>
+  </ul>
+
+  <!-- Controls -->
+  <div class="controls-group" id="save-widget-panel">
+    <button
+      type="button"
+      *ngIf="widget?.abtestInfo && (widget?.abtestInfo.type === 'VARIANT')"
+      (click)="goToTest(widget)"
+      class="btn gototest-widget-btn"
+    >
+      <i class="pe-7s-back mr-1"></i> Перейти к A/B тесту
+    </button>
+    <a
+      type="button"
+      *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
+      class="btn btn-primary buy-widget-btn"
+    >
+      <i class="pe-7s-tools mr-2"></i> {{ 'widgetsList.add.alt2' | translate }}
+    </a>
+    <div class="btn-group play-btns" *ngIf="!isMockup">
+      <p>Статус:</p>
+      <button
+        *ngIf="(widget?.abtestInfo && (widget?.abtestInfo.type !== 'VARIANT')) || (!widget?.abtestInfo)"
+        (click)="startWidget(widget)"
+        [ngClass]="(widget.active) ? 'active' : ''"
+        class="btn btn-sm btn-default start-widget-btn"
+        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
+      >
+        <i class="fa fa-play"></i>
+      </button>
+      <button
+        *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
+        (click)="stopWidget(widget)"
+        [ngClass]="(widget.active) ? '' : 'active'"
+        class="btn btn-sm btn-default stop-widget-btn"
+        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
+      >
+        <i class="fa fa-pause"></i>
+      </button>
 
       <button
+        *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+        (click)="startWidget(widget)"
+        [ngClass]="(widget.active) ? 'active' : ''"
+        class="btn btn-sm btn-default start-widget-btn"
+        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить вариант"
+      >
+        <i class="fa fa-play"></i>
+      </button>
+      <button
+        *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
+        (click)="stopWidget(widget)"
+        [ngClass]="(widget.active) ? '' : 'active'"
+        class="btn btn-sm btn-default stop-widget-btn"
+        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
+      >
+        <i class="fa fa-pause"></i>
+      </button>
+    </div>
+
+    <ng-container *ngIf="isDesigner">
+      <button
         type="button"
-        id="saveWidget"
-        class="ladda-button btn btn-success"
+        *ngIf="!isMockup"
+        class="saveAsMockupBtn ladda-button btn btn-primary float-left"
         data-style="slide-down"
         [ladda]="isLoading"
-        (click)="saveWidget()"
+        (click)="saveAsMockup()"
       >
+        <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
+      </button>
+    </ng-container>
+
+    <button
+      type="button"
+      id="saveWidget"
+      class="ladda-button btn btn-success"
+      data-style="slide-down"
+      [ladda]="isLoading"
+      (click)="saveWidget()"
+    >
         <span class="ladda-label">
           <i class="fa fa-save"></i> <span
           *ngIf="!isMockup"
           [innerHTML]="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span
           *ngIf="isMockup">Сохранить темплейт</span>
         </span>
-      </button>
-    </div>
-  </div>
-
-  <h3 *ngIf="renamedWidget.id !== widget.id" class="widget-title-main">
-    {{ (widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Настройка варианта:' : 'Настройка виджета:' }}
-  </h3>
-  <a
-    id="renameWidgetBtn"
-    (click)="startRenameWidget(widget)"
-    *ngIf="widget.name && renamedWidget.id !== widget.id"
-    href="javascript:void(0);"
-    data-toggle="tooltip"
-    data-placement="top"
-    title=""
-    class="f-2 title-widget-name-editable"
-  >
-    {{ getCroppedString(widget.name, 35, "…") }}<i class="fa fa-pencil ml-1"></i>
-  </a>
-
-  <div class="row" *ngIf="renamedWidget.id === widget.id">
-    <div class="col-lg-12 p-0 title-widget-rename">
-      <input type="text" class="form-control" [(ngModel)]="renamedWidget.name">
-      <button
-        class="btn btn-default rename-button"
-        data-container="body"
-        data-toggle="tooltip"
-        data-placement="top"
-        title="{{ 'global.cancel' | translate }}"
-        (click)="resetRenaming()"
-      >
-        <i class="fa fa-times"></i>
-      </button>
-
-      <button
-        class="btn btn-success ml-1 rename-button"
-        data-container="body"
-        data-toggle="tooltip"
-        data-placement="top"
-        title="{{ 'widgetsList.widget.rename.tooltip' | translate }}"
-        (click)="renameWidget()"
-      >
-        <i class="fa fa-check"></i>
-      </button>
-    </div>
+    </button>
   </div>
 </div>
-
-<!-- Nav tabs -->
-<ul class="nav nav-tabs widget-editor-tabs" role="tablist">
-  <li role="presentation" class="widget-editor-tab" [ngClass]="{ active: isCurrentActiveTab('design') }">
-    <a
-      (click)="setActiveTab('design')"
-    ><i class="pe-7s-paint"></i> <span
-      class="tab-text">{{ 'widgetsList.editor.tab.design' | translate }}</span> <span
-      *ngIf="isTabHasErrorForFormExt() || isTabHasError('design')"
-      data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
-      class="info-link badge badge-pill badge-danger">!</span>
-    </a>
-  </li>
-
-  <li
-    role="presentation"
-    class="widget-editor-tab"
-    [ngClass]="{ active: isCurrentActiveTab('rules') }"
-  >
-    <a
-      (click)="setActiveTab('rules')"
-    >
-      <i class="pe-7s-config"></i> <span
-      class="tab-text">{{ 'widgetsList.editor.tab.rules' | translate }}</span> <span
-      *ngIf="isTabHasError('rules')" data-toggle="tooltip"
-      data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
-      class="info-link badge badge-pill badge-danger">!</span>
-    </a>
-  </li>
-</ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
