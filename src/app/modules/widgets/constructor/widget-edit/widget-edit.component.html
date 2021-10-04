@@ -1,8 +1,5 @@
 <div class="widgets-editor-header">
   <div class="title-widget-container">
-    <h3 *ngIf="renamedWidget.id !== widget.id" class="widget-title-main">
-      {{ (widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Настройка варианта:' : 'Настройка виджета:' }}
-    </h3>
     <a
       id="renameWidgetBtn"
       (click)="startRenameWidget(widget)"
@@ -11,7 +8,7 @@
       data-toggle="tooltip"
       data-placement="top"
       title=""
-      class="f-2 title-widget-name-editable"
+      class="title-widget-name-editable"
     >
       {{ getCroppedString(widget.name, 35, "…") }}<i class="fa fa-pencil ml-1"></i>
     </a>
@@ -84,52 +81,23 @@
     >
       <i class="pe-7s-back mr-1"></i> Перейти к A/B тесту
     </button>
-    <a
+
+    <!-- Заказать разработку виджета -->
+    <!--<a
       type="button"
       *ngIf="(!isMockup && widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!isMockup && !widget.abtestInfo)"
       class="btn btn-primary buy-widget-btn"
     >
       <i class="pe-7s-tools mr-2"></i> {{ 'widgetsList.add.alt2' | translate }}
-    </a>
-    <div class="btn-group play-btns" *ngIf="!isMockup">
-      <p>Статус:</p>
-      <button
-        *ngIf="(widget?.abtestInfo && (widget?.abtestInfo.type !== 'VARIANT')) || (!widget?.abtestInfo)"
-        (click)="startWidget(widget)"
-        [ngClass]="(widget.active) ? 'active' : ''"
-        class="btn btn-sm btn-default start-widget-btn"
-        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить виджет"
-      >
-        <i class="fa fa-play"></i>
-      </button>
-      <button
-        *ngIf="(widget.abtestInfo && (widget.abtestInfo.type !== 'VARIANT')) || (!widget.abtestInfo)"
-        (click)="stopWidget(widget)"
-        [ngClass]="(widget.active) ? '' : 'active'"
-        class="btn btn-sm btn-default stop-widget-btn"
-        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить виджет"
-      >
-        <i class="fa fa-pause"></i>
-      </button>
+    </a>-->
 
-      <button
-        *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-        (click)="startWidget(widget)"
-        [ngClass]="(widget.active) ? 'active' : ''"
-        class="btn btn-sm btn-default start-widget-btn"
-        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Запустить вариант"
-      >
-        <i class="fa fa-play"></i>
-      </button>
-      <button
-        *ngIf="widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')"
-        (click)="stopWidget(widget)"
-        [ngClass]="(widget.active) ? '' : 'active'"
-        class="btn btn-sm btn-default stop-widget-btn"
-        data-container="body" data-toggle="tooltip" data-placement="top" title="" data-original-title="Остановить вариант"
-      >
-        <i class="fa fa-pause"></i>
-      </button>
+    <div class="btn-group play-btns" *ngIf="!isMockup">
+      <p>Статус</p>
+      <ui-switch
+        [(ngModel)]="widget.active"
+        (change)="switchWidget(widget, !widget.active)"
+        class="mt-1 mr-2 float-left"
+      ></ui-switch>
     </div>
 
     <ng-container *ngIf="isDesigner">
@@ -141,7 +109,7 @@
         [ladda]="isLoading"
         (click)="saveAsMockup()"
       >
-        <span class="ladda-label"><i class="fa fa-save"></i>Сохранить темплейт</span>
+        <span class="ladda-label"><i class="fa fa-save"></i>Сохранить</span>
       </button>
     </ng-container>
 
@@ -153,12 +121,9 @@
       [ladda]="isLoading"
       (click)="saveWidget()"
     >
-        <span class="ladda-label">
-          <i class="fa fa-save"></i> <span
-          *ngIf="!isMockup"
-          [innerHTML]="(widget.abtestInfo && (widget.abtestInfo.type === 'VARIANT')) ? 'Сохранить вариант' : 'Сохранить виджет'"></span><span
-          *ngIf="isMockup">Сохранить темплейт</span>
-        </span>
+      <span class="ladda-label">
+        <i class="fa fa-save"></i> <span>Сохранить</span>
+      </span>
     </button>
   </div>
 </div>

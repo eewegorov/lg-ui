@@ -282,19 +282,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  public startWidget(widget) {
-    if (!widget.active) {
-      this.switchWidget(widget, true);
-    }
-  }
-
-  public stopWidget(widget) {
-    if (widget.active) {
-      this.switchWidget(widget, false);
-    }
-  }
-
-  private switchWidget(widget, newValue) {
+  public switchWidget(widget, newValue) {
     $('[role="tooltip"]').remove();
     if (widget.active === newValue) { return false; }
     if (this.isContainerized) {
