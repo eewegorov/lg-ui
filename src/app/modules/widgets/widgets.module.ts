@@ -76,6 +76,7 @@ import { ExtendedVariantsComponent } from './constructor/design/form-extended/ex
 import { TimerElementComponent } from './constructor/design/timer-element/timer-element/timer-element.component';
 import { TimerDatepickerComponent } from './constructor/design/timer-element/timer-datepicker/timer-datepicker.component';
 import { IconPickerModule } from 'ngx-icon-picker';
+import { PositionControlComponent } from './shared/position-control/position-control.component';
 
 
 @NgModule({
@@ -139,6 +140,7 @@ import { IconPickerModule } from 'ngx-icon-picker';
     ExtendedVariantsComponent,
     TimerElementComponent,
     TimerDatepickerComponent,
+    PositionControlComponent,
   ],
   exports: [
     SmartpointsControlComponent,
