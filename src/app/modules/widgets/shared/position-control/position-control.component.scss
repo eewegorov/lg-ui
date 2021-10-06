@@ -1,0 +1,17 @@
+.position-control-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.position-control-row {
+  display: flex;
+}
+
+.position-control-item {
+  width: 48px;
+  height: 24px;
+  background: #F4F4F6;
+  border: 1px;
+  border-radius: 2px;
+  margin: 3px;
+}

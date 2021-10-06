@@ -47,32 +47,10 @@
 
                   <div class="row row-subitem">
                     <div class="col-sm-12 row-subitem-padding mt-2">
-                      <label
-                        *ngIf="widgetType === 'popup'"
-                        class="control-label control-label-des"
-                      >
-                        Где показывать всплывающее окно:
-                      </label>
-                      <label
-                        *ngIf="widgetType === 'optindot'"
-                        class="control-label control-label-des"
-                      >
-                        Где показывать точку захвата:
-                      </label>
-                      <label
-                        *ngIf="widgetType === 'label_widget'"
-                        class="control-label control-label-des"
-                      >
-                        Где показывать ярлычок:
-                      </label>
-                      <label
-                        *ngIf="widgetType === 'containerized'"
-                        class="control-label control-label-des"
-                      >
-                        Ориентация виджета:
-                      </label>
-
                       <div class="dropdown">
+                        <app-position-control
+                          *ngIf="widgetType === 'popup'"
+                        ></app-position-control>
                         <button
                           *ngIf="widgetType === 'popup'"
                           class="btn btn-default dropdown-toggle"
