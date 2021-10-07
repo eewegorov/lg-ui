@@ -88,7 +88,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public widthImageStyle = '';
   public heightImageStyle = '';
   public staticWidgetInstallCode = '';
-  public displayedElement = 'settings';
+  public currentElement = 'settings';
   public widgetType: WidgetTypeCode;
   public isThankShow = false;
   private addElemFromWidget = false;
