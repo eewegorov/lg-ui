@@ -3,6 +3,7 @@
   height: 102%;
   position: relative;
   z-index: 1;
+  display: flex;
 }
 
 .widget-style-menu .panel-group {
@@ -18,9 +19,6 @@
 }
 
 .menu-fixed {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   padding: 1px 16px;
   z-index: 10;
@@ -153,7 +151,7 @@ h6.title-h6-widget a:hover {
   top: 0;
   left: 0;
   height: 100%;
-  min-width: 150%;
+  min-width: 100%;
 }
 
 .max-h-100 .popup-sh-pad {

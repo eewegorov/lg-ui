@@ -88,6 +88,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public widthImageStyle = '';
   public heightImageStyle = '';
   public staticWidgetInstallCode = '';
+  public displayedElement = 'settings';
   public widgetType: WidgetTypeCode;
   public isThankShow = false;
   private addElemFromWidget = false;
@@ -2227,6 +2228,49 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         $('#idVideoFrame' + item.counter).css({ height: ($('#idVideoFrame' + item.counter).innerWidth() / 1.666) + 'px' });
       }
     }, 0);
+  }
+
+  public changePosition(position: string): void {
+    if (this.widgetType === 'popup') {
+      this.widget.guiprops.popupMain.place = position;
+    } else if (this.widgetType === 'optindot') {
+      this.widget.guiprops.dhVisual.place = position;
+    } else if (this.widgetType === 'label_widget') {
+      this.widget.guiprops.labelMain.place = position;
+    } else {
+      this.widget.guiprops.staticMain.position = position;
+    }
+  }
+
+  public getElementByName(name: string): string {
+    switch (name) {
+      case 'button-element':
+        return 'Кнопка';
+      case 'closelink-element':
+        return 'Ссылка/Кнопка закрытия';
+      case 'coupon-element':
+        return 'Купон';
+      case 'form-element':
+        return 'Форма и кнопки';
+      case 'iframe-element':
+        return 'HTML / JS / Iframe';
+      case 'image-element':
+        return 'Картинка';
+      case 'padding-element':
+        return 'Отступ';
+      case 'social-element':
+        return 'Соц. кнопки';
+      case 'split-element':
+        return 'Разделитель';
+      case 'title-element':
+        return 'Текст';
+      case 'video-element':
+        return 'Видео';
+      case 'timer-element':
+        return 'Обратный отсчёт';
+      case 'form-ext-element':
+        return 'Форма Ext';
+    }
   }
 
   private showPaymentDialog(siteId, description) {

@@ -1,5 +1,17 @@
 .position-control-container {
   display: flex;
+
+  p {
+    display: flex;
+    margin-bottom: 0;
+    margin-left: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.position-control-selector {
+  display: flex;
   flex-direction: column;
 }
 
@@ -14,4 +26,13 @@
   border: 1px;
   border-radius: 2px;
   margin: 3px;
+  cursor: pointer;
+
+  &:hover {
+    background: lightblue;
+  }
+
+  &.active {
+    background: #4898A8;
+  }
 }
