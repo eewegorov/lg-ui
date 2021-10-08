@@ -16,7 +16,8 @@ export class ExtendedButtonComponent implements OnInit, AfterViewInit, DoCheck {
   public optionsRound: Options = {
     floor: 0,
     ceil: 50,
-    step: 1
+    step: 1,
+    animate: false
   };
 
   public availItemTypes = [];

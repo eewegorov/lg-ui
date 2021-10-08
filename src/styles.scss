@@ -80,7 +80,7 @@ body.page-small.show-sidebar .wrapper {
   border-left: 1px solid #e4e5e7;
   transition: all 0.4s ease 0s;
   position: relative;
-  min-height: calc(100vh - 62px);
+  min-height: calc(100vh - 56px);
 }
 
 .content {
@@ -261,6 +261,13 @@ a.info-link {
   cursor: pointer;
 }
 
+.btn {
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+}
+
 .btn-default {
   background-color: #fff;
   border-color: #e4e5e7;
@@ -284,32 +291,35 @@ a.info-link {
 }
 
 .btn-success, {
-  background-color: #62cb31;
-  border-color: #62cb31;
+  background-color: #4898A8;
+  border-color: #4898A8;
   color: #FFFFFF;
   font-size: 18px;
   transition: none;
 }
 
 .btn-success.btn-outline {
-  color: #62cb31;
+  color: #4898A8;
 }
 
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
-  background-color: #74d348;
-  border-color: #74d348;
+  background-color: darken(#4898A8, 10%);
+  border-color: darken(#4898A8, 10%);
+  box-shadow: none;
   color: #FFFFFF;
 }
 
-.btn-success:active, .btn-success:not(:disabled):not(.disabled):active, .open .dropdown-toggle.btn-success {
-  background-color: #57b42b;
-  border-color: #57b42b;
+.btn-success:active, .btn-success:active:focus, .btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled):active, .open .dropdown-toggle.btn-success {
+  background-color: darken(#4898A8, 10%);
+  border-color: darken(#4898A8, 10%);
+  box-shadow: 0 0 0 0.2rem #4898A8;
   background-image: none;
 }
 
 .btn-success.disabled, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled.active, .btn-success[disabled], .btn-success[disabled]:hover, .btn-success[disabled]:focus, .btn-success[disabled]:active, .btn-success.active[disabled], fieldset[disabled] .btn-success, fieldset[disabled] .btn-success:hover, fieldset[disabled] .btn-success:focus, fieldset[disabled] .btn-success:active, fieldset[disabled] .btn-success.active {
-  background-color: #56b22b;
-  border-color: #56b22b;
+  background-color: #D4D7DD;
+  border-color: #D4D7DD;
+  color: #A9AFBC;
 }
 
 button.hovered-btn-red:hover {

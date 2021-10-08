@@ -1,9 +1,10 @@
 .widget-style-menu {
-  min-width: 450px;
+  min-width: 510px;
   height: 102%;
   position: relative;
   z-index: 1;
   display: flex;
+  padding-right: 0;
 }
 
 .widget-style-menu .panel-group {
@@ -19,15 +20,15 @@
 
 .menu-fixed {
   width: 100%;
-  padding: 1px 16px;
+  padding: 15px 0 10px 23px;
   z-index: 10;
-  color: #000;
+  color: #16181D;
 }
 
-.menu-fixed-bg {
-  border-radius: 0px;
-  background-color: #dddddd;
-  padding: 10px 15px;
+h4.panel-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0;
 }
 
 #widgetStyle {
@@ -105,7 +106,7 @@ h6.title-h6-widget a:hover {
 }
 
 .panel-body {
-  padding: 0 15px;
+  padding: 0 25px;
 }
 
 .panel {
@@ -127,7 +128,7 @@ h6.title-h6-widget a:hover {
 
 .max-h-100 {
   max-height: 100%;
-  max-width: calc(100% - 450px);
+  max-width: calc(100% - 510px);
   position: relative;
   padding-top: 60px;
   padding-bottom: 55px;

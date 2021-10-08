@@ -47,12 +47,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public optionsRound: Options = {
     floor: 0,
     ceil: 50,
-    step: 1
+    step: 1,
+    animate: false
   };
   public optionsOpacity: Options = {
     floor: 0.00,
     ceil: 1.00,
-    step: 0.1
+    step: 0.1,
+    animate: false
   };
   public placePopup = [
     'По центру окна браузера',
@@ -571,7 +573,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       return;
     }
 
-    mainBlock.style.height = $(window).height() - 140 + 'px';
+    mainBlock.style.height = $(window).height() - 131 + 'px';
   }
 
   private loadListener() {

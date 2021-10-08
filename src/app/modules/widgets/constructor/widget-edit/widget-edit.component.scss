@@ -1,10 +1,12 @@
 .widgets-editor-header {
   display: flex;
+  justify-content: space-between;
+  min-width: 1080px;
 }
 
 .title-widget-container {
   position: relative;
-  width: 260px;
+  width: 350px;
   min-height: 50px;
   margin: -5px 0 10px 0;
 }
@@ -18,14 +20,25 @@
 
 .controls-group {
   position: relative;
-  margin-right: 0;
-  height: 55px;
-  border-top: 1px solid #ddd;
+  margin-right: 20px;
+
+  .btn-group {
+    margin-right: 28px;
+  }
+
+  button {
+    font-size: 14px;
+
+    i {
+      font-size: 18px;
+      margin-right: 10px;
+    }
+  }
 }
 
 .controls-group .btn-group p {
   float: left;
-  line-height: 32px;
+  line-height: 27px;
   font-size: 17px;
   margin: 0;
   padding-right: 5px;
@@ -34,23 +47,7 @@
 
 .controls-group .btn-group i {
   font-size: 18px;
-  padding: 5px;
-}
 
-.controls-group .start-widget-btn {
-  color: #ACACAD;
-}
-
-.controls-group .start-widget-btn.active {
-  color: #62cb31;
-}
-
-.controls-group .stop-widget-btn {
-  color: #ACACAD;
-}
-
-.controls-group .stop-widget-btn.active {
-  color: #e74c3c;
 }
 
 .gototest-widget-btn {

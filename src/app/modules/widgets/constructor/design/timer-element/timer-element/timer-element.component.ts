@@ -23,13 +23,15 @@ export class TimerElementComponent implements OnInit, OnChanges {
   public optionsRound: Options = {
     floor: 0,
     ceil: 50,
-    step: 1
+    step: 1,
+    animate: false
   };
 
   public optionsOpacity: Options = {
     floor: 0.00,
     ceil: 1.00,
-    step: 0.1
+    step: 0.1,
+    animate: false
   };
 
   constructor(

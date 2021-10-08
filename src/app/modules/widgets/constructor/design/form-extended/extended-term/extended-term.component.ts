@@ -17,7 +17,8 @@ export class ExtendedTermComponent implements OnInit, AfterViewInit, DoCheck {
   public optionsOpacity: Options = {
     floor: 0.00,
     ceil: 1.00,
-    step: 0.1
+    step: 0.1,
+    animate: false
   };
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }

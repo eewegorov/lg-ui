@@ -157,7 +157,7 @@ import { PositionControlComponent } from './shared/position-control/position-con
     WidgetsRoutingModule,
     NgxFlowModule,
     NgSelectModule,
-    LaddaModule,
+    LaddaModule.forRoot({ style: 'zoom-in' }),
     ColorPickerModule,
     NgxSliderModule,
     SortablejsModule,
