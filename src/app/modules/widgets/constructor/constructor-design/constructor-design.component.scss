@@ -9,7 +9,7 @@
 
 .widget-style-menu .panel-group {
   position: relative;
-  height: 100%;
+  height: calc(100% - 70px);
   overflow: auto;
   border-radius: 4px;
 }
@@ -355,67 +355,67 @@ h6.title-h6-widget a:hover {
 }
 
 .element-form-new-icon {
-  background: url("~src/assets/images/widgets/element_icons/form_button_icon_new.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/form_button_icon_new.svg") no-repeat center;
   background-size: contain;
 }
 
 .element-form-icon {
-  background: url("~src/assets/images/widgets/element_icons/form_button_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/form_button_icon.svg") no-repeat center;
   background-size: contain;
 }
 
 .element-dismiss-icon {
-  background: url("~src/assets/images/widgets/element_icons/dismiss_link_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/dismiss_link_icon.svg") no-repeat center;
   background-size: contain;
 }
 
 .element-button-icon {
-  background: url("~src/assets/images/widgets/element_icons/button_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/button_icon.svg") no-repeat center;
   background-size: contain;
 }
 
 .element-text-icon {
-  background: url("~src/assets/images/widgets/element_icons/text_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/text_icon.svg") no-repeat center;
   background-size: contain;
 }
 
 .element-social-icon {
-  background: url("~src/assets/images/widgets/element_icons/social_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/social_icon.svg") no-repeat center;
   background-size: contain;
 }
 
 .element-divider-icon {
-  background: url("~src/assets/images/widgets/element_icons/divider_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/divider_icon.svg") no-repeat center;
   background-size: contain;
 }
 
 .element-video-icon {
-  background: url("~src/assets/images/widgets/element_icons/video_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/video_icon.svg") no-repeat center;
   background-size: contain;
 }
 
 .element-image-icon {
-  background: url("~src/assets/images/widgets/element_icons/image_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/image_icon.svg") no-repeat center;
   background-size: contain;
 }
 
 .element-padding-icon {
-  background: url("~src/assets/images/widgets/element_icons/padding_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/padding_icon.svg") no-repeat center;
   background-size: contain;
 }
 
 .element-iframe-icon {
-  background: url("~src/assets/images/widgets/element_icons/iframe_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/iframe_icon.svg") no-repeat center;
   background-size: contain;
 }
 
 .element-coupon-icon {
-  background: url("~src/assets/images/widgets/element_icons/coupon_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/coupon_icon.svg") no-repeat center;
   background-size: contain;
 }
 
 .element-countdown-icon {
-  background: url("~src/assets/images/widgets/element_icons/countdown_icon.png") no-repeat center;
+  background: url("~src/assets/images/widgets/element_icons/countdown_icon.svg") no-repeat center;
   background-size: contain;
 }
 
