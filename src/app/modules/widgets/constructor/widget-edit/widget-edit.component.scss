@@ -144,16 +144,41 @@ h3.widget-title-main {
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-  border: 1px solid #e4e5e7;
-  border-bottom-color: rgb(228, 229, 231);
-}
-
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
   color: #555;
   cursor: default;
   background-color: #fff;
-  border: 1px solid #ddd;
-  border-bottom-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 16px 16px 0 0;
+
+  .before, .after {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    bottom: -1px;
+    background: #fff;
+
+    .square {
+      width: 32px;
+      height: 32px;
+      background: #F4F4F6;
+    }
+  }
+
+  .before {
+    left: -33px;
+
+    .square {
+      border-radius: 0 0 16px 0;
+    }
+  }
+
+  .after {
+    right: -33px;
+
+    .square {
+      border-radius: 0 0 0 16px;
+    }
+  }
 }
 
 .widget-editor-tabs li > a {

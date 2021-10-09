@@ -47,11 +47,18 @@
       <li role="presentation" class="widget-editor-tab" [ngClass]="{ active: isCurrentActiveTab('design') }">
         <a
           (click)="setActiveTab('design')"
-        ><i class="pe-7s-paint"></i> <span
+        >
+          <div class="before">
+            <div class="square"></div>
+          </div>
+          <i class="pe-7s-paint"></i> <span
           class="tab-text">{{ 'widgetsList.editor.tab.design' | translate }}</span> <span
           *ngIf="isTabHasErrorForFormExt() || isTabHasError('design')"
           data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
           class="info-link badge badge-pill badge-danger">!</span>
+          <div class="after">
+            <div class="square"></div>
+          </div>
         </a>
       </li>
 
