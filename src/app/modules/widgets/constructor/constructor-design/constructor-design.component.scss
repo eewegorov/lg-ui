@@ -126,9 +126,15 @@ h6.title-h6-widget a:hover {
   padding: 10px 15px;
 }
 
-.max-h-100 {
+.main-frame {
   max-height: 100%;
   max-width: calc(100% - 510px);
+  padding: 0;
+}
+
+.max-h-100 {
+  height: 100%;
+  width: 100%;
   position: relative;
   padding-top: 60px;
   padding-bottom: 55px;
@@ -139,7 +145,7 @@ h6.title-h6-widget a:hover {
   .widget-style-menu {
     width: 40%;
   }
-  .max-h-100 {
+  .main-frame {
     width: 60%;
   }
 }
@@ -180,6 +186,41 @@ h6.title-h6-widget a:hover {
 
 .max-h-100 .popup-shadow .max-h-1001 {
   min-width: 100%;
+}
+
+.widget-select-mode {
+  padding: 20px 0;
+
+  .angle {
+    margin: 3px 10px;
+    font-size: 16px;
+  }
+}
+
+.frame-button {
+  border: none;
+  border-radius: 16px;
+  font-size: 16px;
+  padding: 4px 16px;
+  color: #505662;
+  background-color: #F4F4F6;
+
+  &.active {
+    background: #4898A8;
+    color: #fff;
+
+    i {
+      color: #d7d7d7;
+    }
+  }
+
+  i {
+    position: relative;
+    color: #b3b3b3;
+    font-size: 14px;
+    top: -1px;
+    margin-left: 5px;
+  }
 }
 
 .close-btn-x {
@@ -532,6 +573,7 @@ h6.title-h6-widget a:hover {
   background: #F4F4F6;
 
   .element {
+    position: relative;
     height: 60px;
     font-size: 8px;
     color: #16181D;
@@ -540,6 +582,36 @@ h6.title-h6-widget a:hover {
 
     &.active {
       background: white;
+
+      .before, .after {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        right: 0;
+        background: #fff;
+
+        .square {
+          width: 24px;
+          height: 24px;
+          background: #F4F4F6;
+        }
+      }
+
+      .before {
+        top: -24px;
+
+        .square {
+          border-radius: 0 0 12px 0;
+        }
+      }
+
+      .after {
+        top: 60px;
+
+        .square {
+          border-radius: 0 12px 0 0;
+        }
+      }
     }
   }
 }

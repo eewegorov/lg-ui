@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   min-width: 1080px;
+  margin: 0 -10px;
 }
 
 .title-widget-container {
@@ -133,6 +134,8 @@ h3.widget-title-main {
 }
 
 .widget-editor-tab span.tab-text {
+  position: relative;
+  z-index: 1;
   line-height: 30px;
 }
 
@@ -211,4 +214,8 @@ h3.widget-title-main {
 
 .tab-content > .active, .pill-content > .active {
   display: block;
+}
+
+.tab-content {
+  margin-left: -15px;
 }

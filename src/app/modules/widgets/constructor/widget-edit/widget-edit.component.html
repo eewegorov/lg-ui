@@ -70,11 +70,17 @@
         <a
           (click)="setActiveTab('rules')"
         >
+          <div class="before">
+            <div class="square"></div>
+          </div>
           <i class="pe-7s-config"></i> <span
           class="tab-text">{{ 'widgetsList.editor.tab.rules' | translate }}</span> <span
           *ngIf="isTabHasError('rules')" data-toggle="tooltip"
           data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
           class="info-link badge badge-pill badge-danger">!</span>
+          <div class="after">
+            <div class="square"></div>
+          </div>
         </a>
       </li>
     </ul>

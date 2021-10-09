@@ -5,6 +5,9 @@
         <div class="element" [class.active]="currentElement === 'settings'" (click)="currentElement = 'settings'">
           <i class="lgiconfont-video"></i>
           Настройки
+          <div class="after">
+            <div class="square"></div>
+          </div>
         </div>
         <div
           *ngFor="let element of widget.guiprops.elementsList"
@@ -12,12 +15,22 @@
           [class.active]="currentElement === element.name + (element.counter ?? '')"
           (click)="currentElement = element.name + (element.counter ?? '')"
         >
+          <div class="before">
+            <div class="square"></div>
+          </div>
           {{ getElementByName(element.name) }} <span *ngIf="element.counter"> {{ element.counter }}</span>
+          <div class="after">
+            <div class="square"></div>
+          </div>
         </div>
-        <div>
-          <div class="element" (click)="addNewElementToContent()">
-            <i class="fa fa-plus"></i>
-            Добавить элемент
+        <div class="element" (click)="addNewElementToContent()">
+          <div class="before">
+            <div class="square"></div>
+          </div>
+          <i class="fa fa-plus"></i>
+          Добавить элемент
+          <div class="after">
+            <div class="square"></div>
           </div>
         </div>
       </div>
@@ -613,51 +626,60 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-9 max-h-100" [ngClass]="(widget.guiprops.popupMain?.shadow?.enable === true) ? 'ifr-sh-bg' : ''">
-      <div *ngIf="isThankShow" class="widget-select-mode btn-group">
-        <span class="btn btn-default active" data-widget="mainBlockWidget" (click)="$event.stopPropagation();">
-          Основной экран
-        </span>
-        <span
-          class="btn btn-default"
-          data-widget="thankWidget"
-          (click)="$event.stopPropagation();"
-          data-toggle="tooltip"
-          data-placement="top"
-          data-container="body"
-          title=""
-          data-original-title="Сообщение, которое видит посетитель после совершения целевого действия. Ваше сообщение благодарности будет показано посетителю, если в виджете отключена ссылка на LeadGenic, отключить ссылку можно в настройках сайта. В случае, если ссылка включена, посетителю будет показано сообщение благодарности LeadGenic."
-        >
-          Сообщение благодарности
-        </span>
+    <div class="col-lg-9 main-frame">
+      <div class="widget-select-mode btn-group">
+        <button class="frame-button active" data-widget="mainBlockWidget" (click)="$event.stopPropagation();">
+          Form
+          <i class="fas fa-ellipsis-v"></i>
+        </button>
+        <ng-container *ngIf="isThankShow">
+          <div class="angle">
+            <i class="fas fa-angle-right"></i>
+          </div>
+          <button
+            class="frame-button"
+            data-widget="thankWidget"
+            (click)="$event.stopPropagation();"
+            data-toggle="tooltip"
+            data-placement="top"
+            data-container="body"
+            title=""
+            data-original-title="Сообщение, которое видит посетитель после совершения целевого действия. Ваше сообщение благодарности будет показано посетителю, если в виджете отключена ссылка на LeadGenic, отключить ссылку можно в настройках сайта. В случае, если ссылка включена, посетителю будет показано сообщение благодарности LeadGenic."
+          >
+            Thank you
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+        </ng-container>
       </div>
-      <div
-        class="max-wh-over"
-        [ngStyle]="{'background': this.widget.guiprops.popupMain.shadow.enable ? widget.guiprops['popupMain']?.shadow.rgbaColor : 'none'}"
-        (click)="scrollToEl('MainSetBl', 'main-w-element')"
-      >
-        <div class="popup-shadow popup-sh-pad">
-          <div class="max-h-1001">
-            <div class="widget-visual-block" [ngStyle]="{'width': 'auto'}" [ngClass]="wvBLeft()">
-              <div *ngIf="!(disElementOrNotBtnCloseLink())" class="close-btn-x">
-                <span></span>
+      <div class="max-h-100" [ngClass]="(widget.guiprops.popupMain?.shadow?.enable === true) ? 'ifr-sh-bg' : ''">
+        <div
+          class="max-wh-over"
+          [ngStyle]="{'background': this.widget.guiprops.popupMain.shadow.enable ? widget.guiprops['popupMain']?.shadow.rgbaColor : 'none'}"
+          (click)="scrollToEl('MainSetBl', 'main-w-element')"
+        >
+          <div class="popup-shadow popup-sh-pad">
+            <div class="max-h-1001">
+              <div class="widget-visual-block" [ngStyle]="{'width': 'auto'}" [ngClass]="wvBLeft()">
+                <div *ngIf="!(disElementOrNotBtnCloseLink())" class="close-btn-x">
+                  <span></span>
+                </div>
+                <div class="clearfix"></div>
+                <app-content-element
+                  [widget]="widget"
+                  [bgStyle]="bgStyle"
+                  [widthImageStyle]="widthImageStyle"
+                  [heightImageStyle]="heightImageStyle"
+                  [widthContentStyle]="widthContentStyle"
+                  [heightContentStyle]="heightContentStyle"
+                  (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
+                  (scrollToElement)="scrollToEl($event.id, $event.elementName)"
+                  (addNewElement)="addNewElementToContent($event)"
+                ></app-content-element>
+                <app-thank-element
+                  [widget]="widget"
+                  [bgStyle]="bgStyle"
+                ></app-thank-element>
               </div>
-              <div class="clearfix"></div>
-              <app-content-element
-                [widget]="widget"
-                [bgStyle]="bgStyle"
-                [widthImageStyle]="widthImageStyle"
-                [heightImageStyle]="heightImageStyle"
-                [widthContentStyle]="widthContentStyle"
-                [heightContentStyle]="heightContentStyle"
-                (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
-                (scrollToElement)="scrollToEl($event.id, $event.elementName)"
-                (addNewElement)="addNewElementToContent($event)"
-              ></app-content-element>
-              <app-thank-element
-                [widget]="widget"
-                [bgStyle]="bgStyle"
-              ></app-thank-element>
             </div>
           </div>
         </div>
