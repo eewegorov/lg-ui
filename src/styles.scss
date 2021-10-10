@@ -151,10 +151,19 @@ h6 {
 .title-main {
   font-size: 36px;
   margin-left: -2px;
+  font-weight: bold !important;
 }
 
-.modal-title {
-  font-size: 23px;
+.modal-header {
+  justify-content: flex-start !important;
+  color: #16181D;
+  border: none;
+  padding: 2rem 2rem 1rem;
+
+  h3, h4, .modal-title {
+    font-weight: bold !important;
+    font-size: 24px;
+  }
 }
 
 .tooltip-inner {

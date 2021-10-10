@@ -388,6 +388,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       }
     }
 
+    if (this.widget.guiprops.bg.mask.enable) {
+      this.widget.guiprops.bg.mask.rgbaColor =
+        (this.widgetConstructorService.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
+    }
+    else {
+      this.widget.guiprops.bg.mask.rgbaColor = 'transparent!important';
+    }
+
     if (this.widget.guiprops.form.enable) {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.widget.guiprops.formSet.items.length; i++) {
@@ -580,7 +588,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     /**
      * Def Objects
      */
-    if (typeof this.widget.guiprops === 'undefined') {
+    if (typeof this.widget?.guiprops === 'undefined') {
       this.widget.guiprops = {};
     }
 
@@ -1546,7 +1554,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     this.addElementModalHide();
   }
 
-  private addElementModalHide() {
+  public addElementModalHide() {
     (this.controls.newElementModal as any).modal('hide');
     $('body').removeClass('modal-open-h100');
   }
