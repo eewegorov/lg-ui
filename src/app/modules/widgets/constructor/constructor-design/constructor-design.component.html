@@ -3,8 +3,8 @@
     <div class="col-lg-3 widget-style-menu">
       <div class="elements-selector">
         <div class="element" [class.active]="currentElement === 'settings'" (click)="currentElement = 'settings'">
-          <i class="lgiconfont-video"></i>
-          Настройки
+          <div class="settings-icon-small icon"></div>
+          <span>Настройки</span>
           <div class="after">
             <div class="square"></div>
           </div>
@@ -18,7 +18,8 @@
           <div class="before">
             <div class="square"></div>
           </div>
-          {{ getElementByName(element.name) }} <span *ngIf="element.counter"> {{ element.counter }}</span>
+          <div [class]="element.name + '-icon-small icon'"></div>
+          <span>{{ getElementByName(element.name) }}</span> <span *ngIf="element.counter"> #{{ element.counter }}</span>
           <div class="after">
             <div class="square"></div>
           </div>
@@ -27,8 +28,8 @@
           <div class="before">
             <div class="square"></div>
           </div>
-          <i class="fa fa-plus"></i>
-          Добавить элемент
+          <div class="add-icon-small icon"></div>
+          <span class="add-element">Добавить элемент</span>
           <div class="after">
             <div class="square"></div>
           </div>
