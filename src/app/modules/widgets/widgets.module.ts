@@ -77,6 +77,7 @@ import { TimerElementComponent } from './constructor/design/timer-element/timer-
 import { TimerDatepickerComponent } from './constructor/design/timer-element/timer-datepicker/timer-datepicker.component';
 import { IconPickerModule } from 'ngx-icon-picker';
 import { PositionControlComponent } from './shared/position-control/position-control.component';
+import { ElementsAddComponent } from './shared/elements-add/elements-add.component';
 
 
 @NgModule({
@@ -141,6 +142,7 @@ import { PositionControlComponent } from './shared/position-control/position-con
     TimerElementComponent,
     TimerDatepickerComponent,
     PositionControlComponent,
+    ElementsAddComponent,
   ],
   exports: [
     SmartpointsControlComponent,

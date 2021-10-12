@@ -20,7 +20,7 @@
 
 .menu-fixed {
   width: 100%;
-  padding: 15px 0 10px 23px;
+  padding: 20px 0 10px 23px;
   z-index: 10;
   color: #16181D;
 }
@@ -261,16 +261,18 @@ h6.title-h6-widget a:hover {
 }
 
 #addNewElementListModal .small-pdn {
-  padding: 0 5px;
+  padding: 5px;
+  min-width: 110px;
 }
 
 #addNewElementListModal .row-panel-fl {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 10px;
 }
 
 #addNewElementListModal .row-panel-item {
-  flex-basis: 33.333333%;
+  flex-basis: 25%;
 }
 
 .disable-new-element-btn {
@@ -287,11 +289,11 @@ h6.title-h6-widget a:hover {
   position: relative;
   background-color: #fff;
   cursor: pointer;
-  margin-top: 10px;
   border: 1px solid #e4e5e7;
   border-radius: 2px;
-  padding: 25px 10px 10px;
+  padding: 15px 10px 10px;
   text-align: center;
+  height: 100%;
 }
 
 .newElementItem span.label {
@@ -321,7 +323,7 @@ h6.title-h6-widget a:hover {
 
 .newElementItem span {
   display: block;
-  font-size: 16px;
+  font-size: 11px;
 }
 
 .newElementItem i {
@@ -342,8 +344,8 @@ h6.title-h6-widget a:hover {
 .element-padding-icon,
 .element-coupon-icon,
 .element-countdown-icon {
-  height: 44px;
-  margin-bottom: 13px;
+  height: 60px;
+  margin-bottom: 8px;
 }
 
 .element-form-new-icon {
@@ -726,4 +728,10 @@ h6.title-h6-widget a:hover {
 .timer-element-icon-small {
   mask: url("~src/assets/images/widgets/element_icons_small/timer.svg") no-repeat center;
   mask-size: contain;
+}
+
+.modal-header .close {
+  font-size: 40px;
+  font-weight: 100;
+  padding: 0.5rem 1rem;
 }
