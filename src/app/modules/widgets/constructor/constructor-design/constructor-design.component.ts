@@ -18,8 +18,6 @@ import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
 import { Coupon } from '../../../../core/models/coupons';
 import { FullWidget, WidgetType, WidgetTypeCode } from '../../../../core/models/widgets';
-import { TariffsService } from '../../../../core/services/tariffs.service';
-import { CoreSitesService } from '../../../../core/services/core-sites.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
 import { WidgetService } from '../../services/widget.service';
@@ -93,12 +91,12 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public currentElement = 'settings';
   public widgetType: WidgetTypeCode;
   public isThankShow = false;
-  private addElemFromWidget = false;
-  private systemFonts = [];
-  private controls: Record<string, any>;
+  public addElemFromWidget = false;
+  public systemFonts = [];
+  public controls: Record<string, any>;
+  public globalCouponObject: object;
   private typeImg = ['От края до края', 'От другого края'];
   private sizeSocBtn = ['Большой', 'Средний', 'Маленький'];
-  private globalCouponObject: object;
   private imageCustom = null;
   private linkImage = '';
   private nameImage = '';
@@ -1977,6 +1975,26 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       case 'form-ext-element':
         return 'Форма Ext';
     }
+  }
+
+  public addElementModalHide() {
+    (this.controls.newElementModal as any).modal('hide');
+    $('body').removeClass('modal-open-h100');
+  }
+
+  public disElementOrNotBtnCloseLink() {
+    if (!this.widget.guiprops) {
+      return;
+    }
+
+    for (const item of this.widget.guiprops.elementsList) {
+      if (item.name === 'closelink-element' ||
+        (this.widget.guiprops.formExt && this.widget.guiprops.formExt.enable &&
+          this.widgetConstructorService.isFormHasCurrentTypeButtons(this.widget.guiprops.formExt.model.list, 2))) {
+        return true;
+      }
+    }
+    return false;
   }
 
 

@@ -1,0 +1,160 @@
+.modal-dialog {
+  max-width: 760px;
+}
+
+.modal-body {
+  padding: 10px 30px 20px;
+}
+
+.small-pdn {
+  padding: 5px;
+  min-width: 110px;
+}
+
+.row-panel-fl {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.row-panel-item {
+  flex-basis: 25%;
+}
+
+.disable-new-element-btn {
+  cursor: not-allowed;
+  opacity: 0.5;
+  border-color: #e4e5e7!important;
+  -webkit-box-shadow: none!important;
+  -moz-box-shadow: none!important;
+  box-shadow: none!important;
+}
+
+.newElementItem {
+  min-height: 113px;
+  position: relative;
+  background-color: #fff;
+  cursor: pointer;
+  border: 1px solid #e4e5e7;
+  border-radius: 2px;
+  padding: 15px 10px 10px;
+  text-align: center;
+  height: 100%;
+}
+
+.newElementItem span.label {
+  font-size: 8px;
+  text-transform: uppercase;
+  color: #fffafa;
+  display: block;
+  margin: 0;
+  padding: 4px 6px;
+  position: absolute;
+  top: 16px;
+  left: 11px;
+}
+
+.payment-modal-icon {
+  position: absolute!important;
+  top: 5px!important;
+  left: auto!important;
+  right: 5px!important;
+}
+
+.newElementItem:hover {
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
+}
+
+.newElementItem span {
+  display: block;
+  font-size: 11px;
+}
+
+.newElementItem i {
+  font-size: 36px;
+  margin-top: 5px;
+}
+
+.element-form-new-icon,
+.element-form-icon,
+.element-dismiss-icon,
+.element-button-icon,
+.element-text-icon,
+.element-social-icon,
+.element-divider-icon,
+.element-video-icon,
+.element-image-icon,
+.element-iframe-icon,
+.element-padding-icon,
+.element-coupon-icon,
+.element-countdown-icon {
+  height: 60px;
+  margin-bottom: 8px;
+}
+
+.element-form-new-icon {
+  background: url("~src/assets/images/widgets/element_icons/form_button_icon_new.svg") no-repeat center;
+  background-size: contain;
+}
+
+.element-form-icon {
+  background: url("~src/assets/images/widgets/element_icons/form_button_icon.svg") no-repeat center;
+  background-size: contain;
+}
+
+.element-dismiss-icon {
+  background: url("~src/assets/images/widgets/element_icons/dismiss_link_icon.svg") no-repeat center;
+  background-size: contain;
+}
+
+.element-button-icon {
+  background: url("~src/assets/images/widgets/element_icons/button_icon.svg") no-repeat center;
+  background-size: contain;
+}
+
+.element-text-icon {
+  background: url("~src/assets/images/widgets/element_icons/text_icon.svg") no-repeat center;
+  background-size: contain;
+}
+
+.element-social-icon {
+  background: url("~src/assets/images/widgets/element_icons/social_icon.svg") no-repeat center;
+  background-size: contain;
+}
+
+.element-divider-icon {
+  background: url("~src/assets/images/widgets/element_icons/divider_icon.svg") no-repeat center;
+  background-size: contain;
+}
+
+.element-video-icon {
+  background: url("~src/assets/images/widgets/element_icons/video_icon.svg") no-repeat center;
+  background-size: contain;
+}
+
+.element-image-icon {
+  background: url("~src/assets/images/widgets/element_icons/image_icon.svg") no-repeat center;
+  background-size: contain;
+}
+
+.element-padding-icon {
+  background: url("~src/assets/images/widgets/element_icons/padding_icon.svg") no-repeat center;
+  background-size: contain;
+}
+
+.element-iframe-icon {
+  background: url("~src/assets/images/widgets/element_icons/iframe_icon.svg") no-repeat center;
+  background-size: contain;
+}
+
+.element-coupon-icon {
+  background: url("~src/assets/images/widgets/element_icons/coupon_icon.svg") no-repeat center;
+  background-size: contain;
+}
+
+.element-countdown-icon {
+  background: url("~src/assets/images/widgets/element_icons/countdown_icon.svg") no-repeat center;
+  background-size: contain;
+}
