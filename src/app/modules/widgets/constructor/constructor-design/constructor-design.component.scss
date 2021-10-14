@@ -114,7 +114,7 @@ h6.title-h6-widget a:hover {
 }
 
 .panel-body {
-  padding-top: 0;
+  padding-top: 10px;
 }
 
 .panel-default .panel-heading {
@@ -573,4 +573,12 @@ h6.title-h6-widget a:hover {
   font-size: 40px;
   font-weight: 100;
   padding: 0.5rem 1rem;
+}
+
+.modal-dialog {
+  max-width: 760px;
+}
+
+.modal-body {
+  padding: 10px 30px 20px;
 }

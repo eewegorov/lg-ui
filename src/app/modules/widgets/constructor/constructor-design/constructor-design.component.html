@@ -27,8 +27,7 @@
         <div
           class="element"
           [class.active]="currentElement === 'add-element'"
-          
-          (click)="addNewElementToContent()"
+          (click)="currentElement = 'add-element'"
         >
           <div class="before">
             <div class="square"></div>
@@ -720,22 +719,20 @@
         </div>
 
         <div class="modal-body">
-          <div class="row-panel-fl">
-            <app-elements-add
-              [widget]="widget"
-              [isContainerized]="isContainerized"
-              [sid]="sid"
-              [typeClass]="typeClass"
-              [floatBtn]="floatBtn"
-              [widthHrType]="widthHrType"
-              [isPayment]="isPayment"
-              [addElemFromWidget]="addElemFromWidget"
-              [controls]="controls"
-              [globalCouponObject]="globalCouponObject"
-              [systemFonts]="systemFonts"
-              [widgwidthBtn]="widgwidthBtn"
-            ></app-elements-add>
-          </div>
+          <app-elements-add
+            [widget]="widget"
+            [isContainerized]="isContainerized"
+            [sid]="sid"
+            [typeClass]="typeClass"
+            [floatBtn]="floatBtn"
+            [widthHrType]="widthHrType"
+            [isPayment]="isPayment"
+            [addElemFromWidget]="addElemFromWidget"
+            [controls]="controls"
+            [globalCouponObject]="globalCouponObject"
+            [systemFonts]="systemFonts"
+            [widgwidthBtn]="widgwidthBtn"
+          ></app-elements-add>
         </div>
       </div>
     </div>
