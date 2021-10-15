@@ -11,7 +11,7 @@
         title=""
         class="title-widget-name-editable"
       >
-        {{ getCroppedString(widget.name, 35, "…") }}<i class="fa fa-pencil ml-1"></i>
+        <span>{{ getCroppedString(widget.name, 35, "…") }}</span><i class="fa fa-pencil ml-3"></i>
       </a>
 
       <div class="row" *ngIf="renamedWidget.id === widget.id">
@@ -48,15 +48,15 @@
         <a
           (click)="setActiveTab('design')"
         >
-          <div class="before">
+          <div class="before fade-in">
             <div class="square"></div>
           </div>
-          <i class="pe-7s-paint"></i> <span
+          <div class="design-icon"></div> <span
           class="tab-text">{{ 'widgetsList.editor.tab.design' | translate }}</span> <span
           *ngIf="isTabHasErrorForFormExt() || isTabHasError('design')"
           data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
           class="info-link badge badge-pill badge-danger">!</span>
-          <div class="after">
+          <div class="after fade-in">
             <div class="square"></div>
           </div>
         </a>
@@ -70,16 +70,16 @@
         <a
           (click)="setActiveTab('rules')"
         >
-          <div class="before">
-            <div class="square"></div>
+          <div class="before fade-in">
+            <div class="square fade-in"></div>
           </div>
-          <i class="pe-7s-config"></i> <span
+          <div class="rules-icon"></div> <span
           class="tab-text">{{ 'widgetsList.editor.tab.rules' | translate }}</span> <span
           *ngIf="isTabHasError('rules')" data-toggle="tooltip"
           data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
           class="info-link badge badge-pill badge-danger">!</span>
-          <div class="after">
-            <div class="square"></div>
+          <div class="after fade-in">
+            <div class="square fade-in"></div>
           </div>
         </a>
       </li>
@@ -137,7 +137,7 @@
       (click)="saveWidget()"
     >
       <span class="ladda-label">
-        <i class="fa fa-save"></i> <span>Сохранить</span>
+        <i><img src="/assets/images/widgets/save.svg" alt="save"></i> <span>Сохранить</span>
       </span>
     </button>
   </div>

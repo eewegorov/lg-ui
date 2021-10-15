@@ -3,9 +3,12 @@
     <div class="col-lg-3 widget-style-menu">
       <div class="elements-selector">
         <div class="element" [class.active]="currentElement === 'settings'" (click)="currentElement = 'settings'">
+          <div class="before">
+            <div class="square"></div>
+          </div>
           <div class="settings-icon-small icon"></div>
           <span>Настройки</span>
-          <div class="after">
+          <div class="after fade-in">
             <div class="square"></div>
           </div>
         </div>
@@ -15,12 +18,12 @@
           [class.active]="currentElement === element.name + (element.counter ?? '')"
           (click)="currentElement = element.name + (element.counter ?? '')"
         >
-          <div class="before">
+          <div class="before fade-in">
             <div class="square"></div>
           </div>
           <div [class]="element.name + '-icon-small icon'"></div>
           <span>{{ getElementByName(element.name) }}</span> <span *ngIf="element.counter"> #{{ element.counter }}</span>
-          <div class="after">
+          <div class="after fade-in">
             <div class="square"></div>
           </div>
         </div>
@@ -29,12 +32,12 @@
           [class.active]="currentElement === 'add-element'"
           (click)="currentElement = 'add-element'"
         >
-          <div class="before">
+          <div class="before fade-in">
             <div class="square"></div>
           </div>
           <div class="add-icon-small icon"></div>
           <span class="add-element">Добавить элемент</span>
-          <div class="after">
+          <div class="after fade-in">
             <div class="square"></div>
           </div>
         </div>
@@ -52,7 +55,7 @@
               <div id="collapseFour" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingFour">
                 <div class="panel-body">
                   <div class="border-item">
-                    <div class="row row-subitem mb-2">
+                    <div class="row row-subitem mb-1">
                       <div class="col-sm-12 row-subitem-padding">
                         <h3 class="marg-minus-bord-des">Расположение</h3>
                       </div>

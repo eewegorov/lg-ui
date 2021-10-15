@@ -462,6 +462,34 @@ h6.title-h6-widget a:hover {
         }
       }
     }
+
+    &:first-child {
+      &.active {
+        .before {
+          display: none;
+        }
+      }
+
+      &:not(.active) {
+        .before {
+          display: block;
+          position: absolute;
+          width: 24px;
+          height: 24px;
+          right: -24px;
+          top: 0;
+          background: #F4F4F6;
+
+          .square {
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            border-radius: 12px 0 0 0;
+          }
+        }
+      }
+
+    }
   }
 }
 
@@ -581,4 +609,20 @@ h6.title-h6-widget a:hover {
 
 .modal-body {
   padding: 10px 30px 20px;
+}
+
+.element.active .fade-in {
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-timing-function: linear;
+  animation-duration: 0.8s;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
 }
