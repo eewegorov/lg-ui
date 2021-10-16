@@ -81,7 +81,7 @@
         [class]="'element-to-append-summernote margin-if-' + item.name"
         [ngClass]="addExtraClassForFullWidth(i)"
         [attr.data-to]="'elemScrN' + i"
-        (click)="scrollToEl(i, item.name); $event.stopPropagation();"
+        (click)="scrollToEl(i, item.name, item.counter); $event.stopPropagation();"
         [ngStyle]="{'z-index': 100 - i}"
       >
         <div class="remove-element-from-list-view remove-sub-form-item">

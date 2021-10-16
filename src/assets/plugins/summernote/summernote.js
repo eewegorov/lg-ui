@@ -9348,7 +9348,7 @@
                   display: 'block',
                   right: 'auto',
                   left: elementToAppend.offset().left + 110,
-                  top: elementToAppend.offset().top - 20
+                  top: elementToAppend.offset().top + 15
                 });
               }
             }
@@ -9361,7 +9361,7 @@
                 display: 'block',
                 right: 'auto',
                 left: elementToAppend.offset().left + 110,
-                top: elementToAppend.offset().top - 20
+                top: elementToAppend.offset().top + 15
               });
             }
           }, {

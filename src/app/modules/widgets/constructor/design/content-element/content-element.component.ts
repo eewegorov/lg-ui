@@ -26,7 +26,7 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
   @Input() public heightContentStyle: string;
 
   @Output() private removeElement = new EventEmitter<{index: number, elem: Record<string, string>}>();
-  @Output() private scrollToElement = new EventEmitter<{id: string, elementName: string}>();
+  @Output() private scrollToElement = new EventEmitter<{id: string, elementName: string, elementCounter: number}>();
   @Output() private addNewElement = new EventEmitter<number>();
 
   @ViewChild('videoBg') videoBg: ElementRef;
@@ -87,8 +87,8 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
 
   ngOnInit(): void { }
 
-  public scrollToEl(id, elementName) {
-    this.scrollToElement.emit({ id, elementName });
+  public scrollToEl(id: string, elementName: string, elementCounter?: number) {
+    this.scrollToElement.emit({ id, elementName, elementCounter });
   }
 
   public removeElementFromElementsList(index: number, elem: Record<string, string>): void {

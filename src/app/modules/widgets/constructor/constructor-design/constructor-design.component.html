@@ -697,7 +697,7 @@
                   [widthContentStyle]="widthContentStyle"
                   [heightContentStyle]="heightContentStyle"
                   (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
-                  (scrollToElement)="scrollToEl($event.id, $event.elementName)"
+                  (scrollToElement)="scrollToEl($event.id, $event.elementName, $event.elementCounter)"
                   (addNewElement)="addNewElementToContent($event)"
                 ></app-content-element>
                 <app-thank-element

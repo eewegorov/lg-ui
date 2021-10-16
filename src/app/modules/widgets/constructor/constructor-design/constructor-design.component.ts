@@ -128,6 +128,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item: WidgetType) => item.id === this.widget.type).code;
       this.staticWidgetInstallCode =
         this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
+      this.isThankShow = this.isThankShouldShow();
       setTimeout(() => {
         this.changeModel();
         this.changeColorPodAndSRC();
@@ -584,6 +585,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     /**
      * Def Objects
      */
+    if (!this.widget) {
+      this.widget = {} as FullWidget;
+    }
+
     if (typeof this.widget?.guiprops === 'undefined') {
       this.widget.guiprops = {};
     }
@@ -1698,22 +1703,41 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         this.widgetConstructorService.isFormHasCurrentTypeOfActions(this.widget.guiprops.formExt.model.list, 0));
   }
 
-  public scrollToEl(id, elementName) {
-    const accordion = $('#accordion');
-    const accordionIn = $('#accordionIn');
-    const target = $('#elemScrN' + id);
+  public scrollToEl(id: string, elementName: string, elementCounter?: number) {
+    if ([
+      'button-element',
+      'closelink-element',
+      'coupon-element',
+      'form-element',
+      'iframe-element',
+      'image-element',
+      'padding-element',
+      'social-element',
+      'split-element',
+      'title-element',
+      'video-element',
+      'timer-element',
+      'form-ext-element',
+    ].includes(elementName)) {
+        this.currentElement = elementName + (elementCounter ?? '');
+    } else {
+      this.currentElement = 'settings';
+      const accordion = $('#accordion');
+      const accordionIn = $('#accordionIn');
+      const target = $('#elemScrN' + id);
 
-    const scrollTo = (target.offset().top) - (accordionIn.offset().top) - 40;
-    if (((target.offset().top - accordion.offset().top - 42) <= 10) && ((target.offset().top - accordion.offset().top - 42) >= -10)) {
-      return;
+      const scrollTo = (target.offset().top) - (accordionIn.offset().top) - 40;
+      if (((target.offset().top - accordion.offset().top - 42) <= 10) && ((target.offset().top - accordion.offset().top - 42) >= -10)) {
+        return;
+      }
+
+      accordion.animate({ scrollTop: scrollTo }, 500, 'swing', () => {
+      });
+      target.addClass('border-active-element');
+      setTimeout(() => {
+        target.removeClass('border-active-element');
+      }, 1500);
     }
-
-    accordion.animate({ scrollTop: scrollTo }, 500, 'swing', () => {
-    });
-    target.addClass('border-active-element');
-    setTimeout(() => {
-      target.removeClass('border-active-element');
-    }, 1500);
 
     if (elementName === 'title-element' || elementName === 'form-element' || elementName === 'button-element' || elementName === 'closelink-element') {
       this.downUpInitAir();

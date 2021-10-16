@@ -338,8 +338,8 @@ button.hovered-btn-red:hover {
 }
 
 button.hovered-btn-blue:hover {
-  background-color: #3498db !important;
-  border-color: #3498db !important;
+  background-color: #4898A8 !important;
+  border-color: #4898A8 !important;
   color: #FFFFFF !important;
 }
 
@@ -1978,7 +1978,7 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 
 .note-air-popover.popover {
   border-radius: 0!important;
-  background-color: #3498db;
+  background-color: #4898A8;
   /*left: auto!important;*/
   /*right: -1px!important;*/
   /*top: -54px!important;*/
@@ -1986,18 +1986,18 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 
 .note-air-popover.popover .btn-default {
   color: #fff!important;
-  background-color: #3498db!important;
+  background-color: #4898A8!important;
   border-color: #fff!important;
 }
 
 .note-air-popover.popover .btn-default.active,
 .note-air-popover.popover .btn-default:hover {
-  color: #3498db!important;
+  color: #4898A8!important;
   background-color: #fff!important;
 }
 
 .note-air-popover.popover .dropdown-menu {
-  background-color: #3498db!important;
+  background-color: #4898A8!important;
 }
 
 .note-air-popover.popover .popover-content .note-color .dropdown-menu .btn-group .note-palette-title {
@@ -2019,6 +2019,11 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 .note-btn-group .dropdown-menu {
   left: auto !important;
   right: 0;
+}
+
+.note-btn {
+  font-size: 14px;
+  padding: 3px 8px;
 }
 
 .note-popover .popover-content .dropdown-menu.dropdown-line-height,
