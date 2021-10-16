@@ -1951,7 +1951,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       case 'button-element':
         return 'Кнопка';
       case 'closelink-element':
-        return 'Ссылка/Кнопка закрытия';
+        return 'Кнопка закрытия';
       case 'coupon-element':
         return 'Купон';
       case 'form-element':
@@ -1995,6 +1995,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       }
     }
     return false;
+  }
+
+  public showLastElement() {
+    setTimeout(() => {
+      const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
+      this.currentElement = currentElement.name + (currentElement.counter ?? '');
+    }, 0);
   }
 
 

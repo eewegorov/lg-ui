@@ -625,23 +625,24 @@
                         (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
                       ></app-form-extended>
                     </div>
-
-                    <app-elements-add
-                      [hidden]="currentElement !== 'add-element'"
-                      [widget]="widget"
-                      [isContainerized]="isContainerized"
-                      [sid]="sid"
-                      [typeClass]="typeClass"
-                      [floatBtn]="floatBtn"
-                      [widthHrType]="widthHrType"
-                      [isPayment]="isPayment"
-                      [addElemFromWidget]="addElemFromWidget"
-                      [controls]="controls"
-                      [globalCouponObject]="globalCouponObject"
-                      [systemFonts]="systemFonts"
-                      [widgwidthBtn]="widgwidthBtn"
-                    ></app-elements-add>
                   </div>
+
+                  <app-elements-add
+                    [hidden]="currentElement !== 'add-element'"
+                    [widget]="widget"
+                    [isContainerized]="isContainerized"
+                    [sid]="sid"
+                    [typeClass]="typeClass"
+                    [floatBtn]="floatBtn"
+                    [widthHrType]="widthHrType"
+                    [isPayment]="isPayment"
+                    [addElemFromWidget]="addElemFromWidget"
+                    [controls]="controls"
+                    [globalCouponObject]="globalCouponObject"
+                    [systemFonts]="systemFonts"
+                    [widgwidthBtn]="widgwidthBtn"
+                    (addElement)="showLastElement()"
+                  ></app-elements-add>
                 </div>
               </div>
             </div>
@@ -735,6 +736,7 @@
             [globalCouponObject]="globalCouponObject"
             [systemFonts]="systemFonts"
             [widgwidthBtn]="widgwidthBtn"
+            (addElement)="showLastElement()"
           ></app-elements-add>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { FullWidget } from '../../../../core/models/widgets';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
@@ -23,6 +23,8 @@ export class ElementsAddComponent implements OnInit {
   @Input() private floatBtn: string[];
   @Input() private isPayment: boolean;
   @Input() private globalCouponObject: object;
+
+  @Output() private addElement = new EventEmitter<void>();
 
   constructor(
     private translate: TranslateService,
@@ -55,6 +57,7 @@ export class ElementsAddComponent implements OnInit {
   }
 
   public addElementModalHide() {
+    this.addElement.emit();
     (this.controls.newElementModal as any).modal('hide');
     $('body').removeClass('modal-open-h100');
   }
@@ -136,7 +139,7 @@ export class ElementsAddComponent implements OnInit {
 
   public addTextElement() {
     const textElementToAdd = {
-      name: 'text-element',
+      name: 'title-element',
       textSummer: '<p>Вы можете редактировать этот текст. Если вы хотите<br>изменить цвет, позиционирование или стиль текста,<br>то выделите фрагмент для появления окна редактора.<br>Размер и шрифт изменяются слева в блоке настроек элемента.</p>',
       font: this.systemFonts[0],
       fontType: 'systemFont',
