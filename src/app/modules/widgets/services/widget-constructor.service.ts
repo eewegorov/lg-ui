@@ -141,6 +141,20 @@ export class WidgetConstructorService {
       item.type === 'variants';
   }
 
+  public wvBdLeft(dhVisual) {
+    let className = '';
+
+    if (dhVisual.place === 'Левый нижний угол') {
+      className = 'wv-bd-left';
+    }
+
+    if (dhVisual.place === 'Правый нижний угол') {
+      className = 'wv-bd-right';
+    }
+
+    return className;
+  }
+
   public getDefaultTimerSettings() {
     return {
       enable: false,

@@ -76,7 +76,9 @@
                     </div>
                     <div *ngIf="widgetType === 'containerized'" class="row row-subitem row-static-widget-wrapper mb-1">
                       <div class="col-sm-12 row-subitem-padding mt-2 widget-small-text">
-                        Установите этот код в месте на странице сайта, где вы хотите разместить виджет. Обратите внимание, что для всех виджетов в одном контейнере используется единый код установки. И если этот код уже установлен, то повторная его установка не требуется.
+                        Установите этот код в месте на странице сайта, где вы хотите разместить виджет. Обратите
+                        внимание, что для всех виджетов в одном контейнере используется единый код установки. И если
+                        этот код уже установлен, то повторная его установка не требуется.
                       </div>
                     </div>
 
@@ -104,7 +106,9 @@
                           <ui-switch
                             size="small"
                             [(ngModel)]="widget.guiprops.popupMain?.shadow.enable"
-                          ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Затемнять фон маской при показе виджета</label>
+                          ></ui-switch>
+                          <label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Затемнять фон
+                            маской при показе виджета</label>
                         </div>
                       </div>
                       <div *ngIf="widget.guiprops.popupMain?.shadow.enable == true">
@@ -210,11 +214,14 @@
                         </div>
                         <div class="icp-icon col-sm-12 row-subitem-padding">
                           <div class="btn-group">
-                            <button *ngIf="!widget.guiprops.dhVisual.selectedIcon" type="button" class="btn btn-primary">
+                            <button *ngIf="!widget.guiprops.dhVisual.selectedIcon" type="button"
+                                    class="btn btn-primary">
                               <i [class]="'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"></i>
                             </button>
-                            <button *ngIf="widget.guiprops.dhVisual.selectedIcon" type="button" class="btn btn-primary iconpicker-component">
-                              <i [class]="widget.guiprops.dhVisual.selectedIcon.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : 'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"></i>
+                            <button *ngIf="widget.guiprops.dhVisual.selectedIcon" type="button"
+                                    class="btn btn-primary iconpicker-component">
+                              <i
+                                [class]="widget.guiprops.dhVisual.selectedIcon.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : 'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"></i>
                             </button>
                             <input
                               [iconPicker]="widget.guiprops.dhVisual.selectIcon"
@@ -242,7 +249,9 @@
                           <ui-switch
                             size="small"
                             [(ngModel)]="widget.guiprops.dhVisual.enable"
-                          ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Показывать призыв к действию</label>
+                          ></ui-switch>
+                          <label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Показывать призыв к
+                            действию</label>
                         </div>
                       </div>
                       <div *ngIf="widget.guiprops.dhVisual?.enable">
@@ -259,7 +268,9 @@
                           <ui-switch
                             size="small"
                             [(ngModel)]="widget.guiprops.dhVisual.enableBlink"
-                          ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Убрать мерцание точки захвата</label>
+                          ></ui-switch>
+                          <label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Убрать мерцание
+                            точки захвата</label>
                         </div>
                       </div>
                     </div>
@@ -339,13 +350,15 @@
                       </div>
                       <div class="row row-subitem mt-2">
                         <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
-                          <ngx-slider [(value)]="widget.guiprops['labelMain'].opacityBgLabel" [options]="optionsOpacity"></ngx-slider>
+                          <ngx-slider [(value)]="widget.guiprops['labelMain'].opacityBgLabel"
+                                      [options]="optionsOpacity"></ngx-slider>
                           <label class="control-label control-label-ui ml-2">Прозрачность</label>
                         </div>
                       </div>
                       <div class="row row-subitem mt-2 mb-3">
                         <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
-                          <ngx-slider [(value)]="widget.guiprops['labelMain'].borderRadiusLabel" [options]="optionsRound"></ngx-slider>
+                          <ngx-slider [(value)]="widget.guiprops['labelMain'].borderRadiusLabel"
+                                      [options]="optionsRound"></ngx-slider>
                           <label class="control-label control-label-ui ml-2">Закругление углов</label>
                         </div>
                       </div>
@@ -415,15 +428,20 @@
                         </div>
                         <div class="row row-subitem mt-2">
                           <div class="col-sm-12 row-subitem-padding mt-2">
-                            <h5 class="label-style-ic control-label-des">{{ 'widgets.formExt.button.icon.label' | translate }}:</h5>
+                            <h5
+                              class="label-style-ic control-label-des">{{ 'widgets.formExt.button.icon.label' | translate }}
+                              :</h5>
                           </div>
                           <div class="icp-icon col-sm-12 row-subitem-padding">
                             <div class="btn-group">
-                              <button *ngIf="!widget.guiprops.labelMain.icon.selectedIcon" type="button" class="btn btn-primary">
+                              <button *ngIf="!widget.guiprops.labelMain.icon.selectedIcon" type="button"
+                                      class="btn btn-primary">
                                 <i [class]="'lgiconfont-' + widget.guiprops.labelMain.icon.selectIcon"></i>
                               </button>
-                              <button *ngIf="widget.guiprops.labelMain.icon.selectedIcon" type="button" class="btn btn-primary iconpicker-component">
-                                <i [class]="widget.guiprops.labelMain.icon.selectedIcon.includes('fa ') ? widget.guiprops.labelMain.icon.selectedIcon : 'lgiconfont-' + widget.guiprops.labelMain.icon.selectIcon"></i>
+                              <button *ngIf="widget.guiprops.labelMain.icon.selectedIcon" type="button"
+                                      class="btn btn-primary iconpicker-component">
+                                <i
+                                  [class]="widget.guiprops.labelMain.icon.selectedIcon.includes('fa ') ? widget.guiprops.labelMain.icon.selectedIcon : 'lgiconfont-' + widget.guiprops.labelMain.icon.selectIcon"></i>
                               </button>
                               <input
                                 [iconPicker]="widget.guiprops.labelMain.icon.selectIcon"
@@ -481,7 +499,8 @@
                 <div *ngIf="widget.guiprops && widget.guiprops.elementsList" class="panel-body">
 
                   <div *ngFor="let item of widget.guiprops.elementsList; index as i" [id]="'elemScrN' + i">
-                    <div *ngIf="item.name === 'button-element'" [hidden]="currentElement !== 'button-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'button-element'"
+                         [hidden]="currentElement !== 'button-element' + (item.counter ?? '')">
                       <app-button-element
                         [index]="i"
                         [widget]="widget"
@@ -493,7 +512,8 @@
                       ></app-button-element>
                     </div>
 
-                    <div *ngIf="item.name === 'closelink-element'" [hidden]="currentElement !== 'closelink-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'closelink-element'"
+                         [hidden]="currentElement !== 'closelink-element' + (item.counter ?? '')">
                       <app-closelink-element
                         [index]="i"
                         [widget]="widget"
@@ -506,7 +526,8 @@
                       ></app-closelink-element>
                     </div>
 
-                    <div *ngIf="item.name === 'coupon-element'" [hidden]="currentElement !== 'coupon-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'coupon-element'"
+                         [hidden]="currentElement !== 'coupon-element' + (item.counter ?? '')">
                       <app-coupon-element
                         [index]="i"
                         [coupons]="coupons"
@@ -517,7 +538,8 @@
                       ></app-coupon-element>
                     </div>
 
-                    <div *ngIf="item.name === 'form-element'" [hidden]="currentElement !== 'form-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'form-element'"
+                         [hidden]="currentElement !== 'form-element' + (item.counter ?? '')">
                       <app-form-element
                         [index]="i"
                         [widget]="widget"
@@ -533,7 +555,8 @@
                       ></app-form-element>
                     </div>
 
-                    <div *ngIf="item.name === 'iframe-element'" [hidden]="currentElement !== 'iframe-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'iframe-element'"
+                         [hidden]="currentElement !== 'iframe-element' + (item.counter ?? '')">
                       <app-iframe-element
                         [index]="i"
                         [modelName]="item"
@@ -545,7 +568,8 @@
                       ></app-iframe-element>
                     </div>
 
-                    <div *ngIf="item.name === 'image-element'" [hidden]="currentElement !== 'image-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'image-element'"
+                         [hidden]="currentElement !== 'image-element' + (item.counter ?? '')">
                       <app-image-element
                         [index]="i"
                         [modelName]="item"
@@ -556,7 +580,8 @@
                       ></app-image-element>
                     </div>
 
-                    <div *ngIf="item.name === 'padding-element'" [hidden]="currentElement !== 'padding-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'padding-element'"
+                         [hidden]="currentElement !== 'padding-element' + (item.counter ?? '')">
                       <app-padding-element
                         [index]="i"
                         [modelName]="item"
@@ -564,7 +589,8 @@
                       ></app-padding-element>
                     </div>
 
-                    <div *ngIf="item.name === 'social-element'" [hidden]="currentElement !== 'social-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'social-element'"
+                         [hidden]="currentElement !== 'social-element' + (item.counter ?? '')">
                       <app-social-element
                         [index]="i"
                         [widget]="widget"
@@ -575,7 +601,8 @@
                       ></app-social-element>
                     </div>
 
-                    <div *ngIf="item.name === 'split-element'" [hidden]="currentElement !== 'split-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'split-element'"
+                         [hidden]="currentElement !== 'split-element' + (item.counter ?? '')">
                       <app-split-element
                         [index]="i"
                         [modelName]="item"
@@ -586,7 +613,8 @@
                       ></app-split-element>
                     </div>
 
-                    <div *ngIf="item.name === 'title-element'" [hidden]="currentElement !== 'title-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'title-element'"
+                         [hidden]="currentElement !== 'title-element' + (item.counter ?? '')">
                       <app-text-element
                         [index]="i"
                         [item]="item"
@@ -595,7 +623,8 @@
                       ></app-text-element>
                     </div>
 
-                    <div *ngIf="item.name === 'video-element'" [hidden]="currentElement !== 'video-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'video-element'"
+                         [hidden]="currentElement !== 'video-element' + (item.counter ?? '')">
                       <app-video-element
                         [index]="i"
                         [modelName]="item"
@@ -607,7 +636,8 @@
                       ></app-video-element>
                     </div>
 
-                    <div *ngIf="item.name === 'timer-element'" [hidden]="currentElement !== 'timer-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'timer-element'"
+                         [hidden]="currentElement !== 'timer-element' + (item.counter ?? '')">
                       <app-timer-element
                         [index]="i"
                         [item]="item"
@@ -616,7 +646,8 @@
                       ></app-timer-element>
                     </div>
 
-                    <div *ngIf="item.name === 'form-ext-element'" [hidden]="currentElement !== 'form-ext-element' + (item.counter ?? '')">
+                    <div *ngIf="item.name === 'form-ext-element'"
+                         [hidden]="currentElement !== 'form-ext-element' + (item.counter ?? '')">
                       <app-form-extended
                         [index]="i"
                         [widget]="widget"
@@ -712,6 +743,48 @@
                   [bgStyle]="bgStyle"
                   [hidden]="currentPage !== 'thank'"
                 ></app-thank-element>
+
+                <div *ngIf="widgetType === 'optindot'" class="widget-visual-block-dot" [ngClass]="wvBdLeft()">
+                  <div class="widget2-main-bl">
+                    <div class="widget2-plashka" *ngIf="widget.guiprops['dhVisual'].enable == true">
+                      <span>{{ widget.guiprops.dhVisual.title }}</span>
+                    </div>
+                    <div
+                      *ngIf="widget.guiprops['dhVisual'].enableBlink == false"
+                      class="lg-wg-pulse1"
+                      [style]="'box-shadow: inset 0px 0px 15px 10px ' + widget.guiprops['dhVisual'].rgbaShadowForm1"
+                    ></div>
+                    <div
+                      *ngIf="widget.guiprops['dhVisual'].enableBlink == false"
+                      class="lg-wg-pulse2"
+                      [style]="'box-shadow:inset 0px 0px 12px 5px ' + widget.guiprops['dhVisual'].rgbaShadowForm2"
+                    ></div>
+                    <div class="widget2" [style]="'background: ' + widget.guiprops['dhVisual'].colorMain">
+                      <div
+                        *ngIf="((widget.guiprops['dhVisual'].enableBlink == false) && (widget.guiprops['dhVisual'].iconOrImage === 'useIcon'))"
+                        class="lg-wg-dot-circle-fill1"
+                        [style]="'background: ' + widget.guiprops['dhVisual'].colorBg"
+                      ></div>
+                      <div
+                        *ngIf="((widget.guiprops['dhVisual'].enableBlink == false) && (widget.guiprops['dhVisual'].iconOrImage === 'useIcon'))"
+                        class="lg-wg-dot-circle-fill2"
+                        [style]="'background: ' + widget.guiprops['dhVisual'].colorMain"></div>
+                      <i
+                        *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useIcon' && !widget.guiprops.dhVisual.selectedIcon"
+                        [class]="'lgiconfont-' + widget.guiprops['dhVisual'].selectIcon + ' f30s'"
+                        [style]="'color: ' + widget.guiprops['dhVisual'].colorBg"></i>
+                      <i
+                        *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useIcon' && widget.guiprops.dhVisual.selectedIcon"
+                        [class]="widget.guiprops['dhVisual'].selectedIcon + ' f30s'"
+                        [style]="'color: ' + widget.guiprops['dhVisual'].colorBg"></i>
+                      <div
+                        *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useImg'"
+                        class="lg-wg-dot-circle-img"
+                        [style]="'background-image: url(' + widget.guiprops['dhVisual'].url + ')'"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -798,7 +871,9 @@
             </div>
           </div>
           <div>
-            <button data-dismiss="modal" (click)="closeModalImg()" id="btnCloseImgM" class="btn btn-default pull-left" type="button">Отмена</button>
+            <button data-dismiss="modal" (click)="closeModalImg()" id="btnCloseImgM" class="btn btn-default pull-left"
+                    type="button">Отмена
+            </button>
             <button class="btn btn-info set-img-gal" (click)="updateFile()">Установить изображение</button>
           </div>
         </div>

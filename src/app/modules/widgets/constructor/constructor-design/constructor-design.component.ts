@@ -1747,6 +1747,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     }
   }
 
+  public wvBdLeft() {
+    return this.widgetConstructorService.wvBdLeft(this.widget.guiprops.dhVisual);
+  }
+
   public wvBLeft() {
     if (!this.widget.guiprops.dhVisual) {
       return;
