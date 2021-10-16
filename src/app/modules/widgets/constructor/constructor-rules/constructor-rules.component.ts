@@ -70,7 +70,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      ($('[data-toggle="tooltip"]') as any).tooltip();
+      ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
     }, 1000);
   }
 

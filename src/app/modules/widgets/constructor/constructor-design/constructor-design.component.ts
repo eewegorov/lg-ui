@@ -95,6 +95,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public systemFonts = [];
   public controls: Record<string, any>;
   public globalCouponObject: object;
+  public currentPage = 'main';
   private typeImg = ['От края до края', 'От другого края'];
   private sizeSocBtn = ['Большой', 'Средний', 'Маленький'];
   private imageCustom = null;
@@ -207,7 +208,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       }
     });
 
-    $('[data-widget]').click(function(e) {
+    $('[data-widget]').click((e) => {
       e.preventDefault();
       const link = '#' + $(this).data('widget');
       $('.widget-select-mode span').removeClass('active');
@@ -215,14 +216,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
 
       $('.block-widget-show.active').addClass('hide').removeClass('active');
       $(link).toggleClass('hide').addClass('active');
-
-      if ($('#thankWidget').hasClass('active')) {
-        $('#disabledFuncAct').removeClass('hide');
-        $('.panel-group').addClass('non-scroll');
-      } else {
-        $('#disabledFuncAct').addClass('hide');
-        $('.panel-group').removeClass('non-scroll');
-      }
     });
 
     this.globalCouponObject = {
@@ -1512,7 +1505,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
               this.SP_widget.widget_plash_width = $('.widget2-plashka').innerWidth() + 'px';
             }
 
-            $('#thankWidget').css({ width: mainBl.outerWidth() + 'px', height: mainBl.outerHeight() + 'px' });
+            if (mainBl.outerWidth()) {
+              $('#thankWidget').css({ width: mainBl.outerWidth() + 'px', height: mainBl.outerHeight() + 'px' });
+            }
           }, 500);
         }
       }, 0);
@@ -1533,6 +1528,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         }
       });
     }, 200);
+
+    if (this.currentPage === 'thank') {
+      $('#disabledFuncAct').removeClass('hide');
+      $('.panel-group').addClass('non-scroll');
+    } else {
+      $('#disabledFuncAct').addClass('hide');
+      $('.panel-group').removeClass('non-scroll');
+    }
   }
 
   public closeModalImg() {

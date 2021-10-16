@@ -58,7 +58,7 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    ($('[data-toggle="tooltip"]') as any).tooltip();
+    ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
   }
 
   public setTab(newTab) {

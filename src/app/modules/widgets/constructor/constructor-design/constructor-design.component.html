@@ -653,7 +653,12 @@
     </div>
     <div class="col-lg-9 main-frame">
       <div class="widget-select-mode btn-group">
-        <button class="frame-button active" data-widget="mainBlockWidget" (click)="$event.stopPropagation();">
+        <button
+          class="frame-button"
+          [class.active]="currentPage === 'main'"
+          data-widget="mainBlockWidget"
+          (click)="$event.stopPropagation(); currentPage = 'main'"
+        >
           Form
           <i class="fas fa-ellipsis-v"></i>
         </button>
@@ -663,8 +668,9 @@
           </div>
           <button
             class="frame-button"
+            [class.active]="currentPage === 'thank'"
             data-widget="thankWidget"
-            (click)="$event.stopPropagation();"
+            (click)="$event.stopPropagation(); currentPage = 'thank'"
             data-toggle="tooltip"
             data-placement="top"
             data-container="body"
@@ -699,10 +705,12 @@
                   (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
                   (scrollToElement)="scrollToEl($event.id, $event.elementName, $event.elementCounter)"
                   (addNewElement)="addNewElementToContent($event)"
+                  [hidden]="currentPage !== 'main'"
                 ></app-content-element>
                 <app-thank-element
                   [widget]="widget"
                   [bgStyle]="bgStyle"
+                  [hidden]="currentPage !== 'thank'"
                 ></app-thank-element>
               </div>
             </div>

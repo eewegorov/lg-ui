@@ -1,14 +1,14 @@
 <div
   *ngIf="widget.guiprops.bg"
   id="thankWidget"
-  class="hide block-widget-show block-thank"
+  class="block-widget-show block-thank"
   [ngClass]="(widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
   [ngStyle]="{'background': bgStyle, 'border': widget.guiprops.bg.border?.style, 'border-radius': widget.guiprops.bg.borderRadius + 'px', 'box-shadow': widget.guiprops.bg.shadow?.style}"
 >
   <div class="thank-text-cent">
     <div class="editorFontLine">
       <div
-        class="element-to-append-summernote click-edit-cl title-main"
+        class="element-to-append-summernote click-edit-cl"
         [ngStyle]="{'font-size': widget.guiprops['title'].fontSize + 'px', 'font-family': widget.guiprops['title'].font.fontFamily}"
       >
         <div [ngxSummernote]="optionsSummernote" [(ngModel)]="widget.guiprops['thank'].textSummer"></div>

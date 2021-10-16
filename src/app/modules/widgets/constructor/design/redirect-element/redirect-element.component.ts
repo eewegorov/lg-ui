@@ -18,7 +18,7 @@ export class RedirectElementComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    ($('[data-toggle="tooltip"]') as any).tooltip();
+    ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
   }
 
   public validateRedirect(e) {

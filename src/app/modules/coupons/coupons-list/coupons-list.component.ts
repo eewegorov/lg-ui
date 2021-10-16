@@ -30,7 +30,7 @@ export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      ($('[data-toggle="tooltip"]') as any).tooltip();
+      ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
     }, 1000);
   }
 

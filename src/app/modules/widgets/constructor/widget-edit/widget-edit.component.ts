@@ -302,7 +302,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     ($('#renameWidgetBtn') as any).tooltip('destroy');
     if (this.widget?.name?.length > 35) {
       ($('#renameWidgetBtn') as any).attr('title', this.widget.name);
-      ($('#renameWidgetBtn') as any).tooltip();
+      ($('#renameWidgetBtn') as any).tooltip({ trigger: 'hover' });
     }
   }
 
