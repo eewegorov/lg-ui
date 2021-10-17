@@ -1739,7 +1739,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       'timer-element',
       'form-ext-element',
     ].includes(elementName)) {
-        this.currentElement = elementName + (elementCounter ?? '');
+        this.currentElement = elementName + ('#' + elementCounter ?? '');
     } else {
       this.currentElement = 'settings';
       const accordion = $('#accordion');
