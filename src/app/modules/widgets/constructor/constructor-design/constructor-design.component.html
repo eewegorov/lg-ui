@@ -221,7 +221,8 @@
                             <button *ngIf="widget.guiprops.dhVisual.selectedIcon" type="button"
                                     class="btn btn-primary iconpicker-component">
                               <i
-                                [class]="widget.guiprops.dhVisual.selectedIcon.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : 'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"></i>
+                                [class]="widget.guiprops.dhVisual.selectedIcon.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : 'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"
+                              ></i>
                             </button>
                             <input
                               [iconPicker]="widget.guiprops.dhVisual.selectIcon"
@@ -434,14 +435,21 @@
                           </div>
                           <div class="icp-icon col-sm-12 row-subitem-padding">
                             <div class="btn-group">
-                              <button *ngIf="!widget.guiprops.labelMain.icon.selectedIcon" type="button"
-                                      class="btn btn-primary">
+                              <button
+                                *ngIf="!widget.guiprops.labelMain.icon.selectedIcon"
+                                type="button"
+                                class="btn btn-primary"
+                              >
                                 <i [class]="'lgiconfont-' + widget.guiprops.labelMain.icon.selectIcon"></i>
                               </button>
-                              <button *ngIf="widget.guiprops.labelMain.icon.selectedIcon" type="button"
-                                      class="btn btn-primary iconpicker-component">
+                              <button
+                                *ngIf="widget.guiprops.labelMain.icon.selectedIcon"
+                                type="button"
+                                class="btn btn-primary iconpicker-component"
+                              >
                                 <i
-                                  [class]="widget.guiprops.labelMain.icon.selectedIcon.includes('fa ') ? widget.guiprops.labelMain.icon.selectedIcon : 'lgiconfont-' + widget.guiprops.labelMain.icon.selectIcon"></i>
+                                  [class]="widget.guiprops.labelMain.icon.selectedIcon.includes('fa ') ? widget.guiprops.labelMain.icon.selectedIcon : 'lgiconfont-' + widget.guiprops.labelMain.icon.selectIcon"
+                                ></i>
                               </button>
                               <input
                                 [iconPicker]="widget.guiprops.labelMain.icon.selectIcon"
@@ -770,13 +778,11 @@
                         class="lg-wg-dot-circle-fill2"
                         [style]="'background: ' + widget.guiprops['dhVisual'].colorMain"></div>
                       <i
-                        *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useIcon' && !widget.guiprops.dhVisual.selectedIcon"
-                        [class]="'lgiconfont-' + widget.guiprops['dhVisual'].selectIcon + ' f30s'"
-                        [style]="'color: ' + widget.guiprops['dhVisual'].colorBg"></i>
-                      <i
-                        *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useIcon' && widget.guiprops.dhVisual.selectedIcon"
-                        [class]="widget.guiprops['dhVisual'].selectedIcon + ' f30s'"
-                        [style]="'color: ' + widget.guiprops['dhVisual'].colorBg"></i>
+                        *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useIcon'"
+                        class="f30s"
+                        [class]="widget.guiprops.dhVisual.selectedIcon.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : ('lgiconfont-' + widget.guiprops.dhVisual.selectIcon)"
+                        [style]="'color: ' + widget.guiprops['dhVisual'].colorBg"
+                      ></i>
                       <div
                         *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useImg'"
                         class="lg-wg-dot-circle-img"

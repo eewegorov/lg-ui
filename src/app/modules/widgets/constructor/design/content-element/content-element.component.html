@@ -110,7 +110,7 @@
         <div *ngIf="item.name == 'title-element'" class="social-block-pd">
           <div class="editorFontLine">
             <div
-              class="title-main click-edit-cl"
+              class="click-edit-cl"
               [ngClass]="(item.textShadow.enable) ? '' : 'no-text-shadow-imp'"
               [ngStyle]="{'font-size': item.fontSize + 'px', 'font-family': item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}"
             >
@@ -145,7 +145,7 @@
         <div *ngIf="item.name == 'coupon-element'" class="social-block-pd">
           <div class="editorFontLine element-coupon-title" *ngIf="item.title.enable">
             <div
-              class="title-main click-edit-cl"
+              class="click-edit-cl"
               [ngClass]="(item.title.textShadow.enable) ? '' : 'no-text-shadow-imp'"
               [ngStyle]="{'font-size': item.title.fontSize + 'px', 'font-family': item.title.font.fontFamily, 'text-shadow': item.title.textShadow.horiz + 'px ' + item.title.textShadow.vertical + 'px ' + item.title.textShadow.blur + 'px ' + getRGBAColor(item.title.textShadow)}"
             >
