@@ -2048,7 +2048,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public showLastElement() {
     setTimeout(() => {
       const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
-      this.currentElement = currentElement.name + (currentElement.counter ?? '');
+      this.currentElement = currentElement.name + ('#' + currentElement.counter ?? '');
     }, 0);
   }
 

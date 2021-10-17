@@ -15,8 +15,8 @@
         <div
           *ngFor="let element of widget.guiprops.elementsList"
           class="element"
-          [class.active]="currentElement === element.name + (element.counter ?? '')"
-          (click)="currentElement = element.name + (element.counter ?? '')"
+          [class.active]="currentElement === element.name + ('#' + element.counter ?? '')"
+          (click)="currentElement = element.name + ('#' + element.counter ?? '')"
         >
           <div class="before fade-in">
             <div class="square"></div>
@@ -45,7 +45,18 @@
       <div class="elements">
         <div class="menu-fixed">
           <h4 class="panel-title" id="menu-select">
-            Настройки виджета
+            <ng-container *ngIf="currentElement === 'settings'">
+              Настройки виджета
+            </ng-container>
+            <ng-container *ngIf="currentElement === 'add-element'">
+              Добавить элемент
+            </ng-container>
+            <ng-container *ngIf="currentElement !== 'settings' && currentElement !== 'add-element'">
+              {{ getElementByName(currentElement.split('#')[0]) + ' ' }}
+              <ng-container *ngIf="currentElement.split('#')[1] !== 'undefined'">
+                #{{ currentElement.split('#')[1] }}
+              </ng-container>
+            </ng-container>
           </h4>
         </div>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -508,7 +519,7 @@
 
                   <div *ngFor="let item of widget.guiprops.elementsList; index as i" [id]="'elemScrN' + i">
                     <div *ngIf="item.name === 'button-element'"
-                         [hidden]="currentElement !== 'button-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'button-element' + ('#' + item.counter ?? '')">
                       <app-button-element
                         [index]="i"
                         [widget]="widget"
@@ -521,7 +532,7 @@
                     </div>
 
                     <div *ngIf="item.name === 'closelink-element'"
-                         [hidden]="currentElement !== 'closelink-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'closelink-element' + ('#' + item.counter ?? '')">
                       <app-closelink-element
                         [index]="i"
                         [widget]="widget"
@@ -535,7 +546,7 @@
                     </div>
 
                     <div *ngIf="item.name === 'coupon-element'"
-                         [hidden]="currentElement !== 'coupon-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'coupon-element' + ('#' + item.counter ?? '')">
                       <app-coupon-element
                         [index]="i"
                         [coupons]="coupons"
@@ -547,7 +558,7 @@
                     </div>
 
                     <div *ngIf="item.name === 'form-element'"
-                         [hidden]="currentElement !== 'form-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'form-element' + ('#' + item.counter ?? '')">
                       <app-form-element
                         [index]="i"
                         [widget]="widget"
@@ -564,7 +575,7 @@
                     </div>
 
                     <div *ngIf="item.name === 'iframe-element'"
-                         [hidden]="currentElement !== 'iframe-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'iframe-element' + ('#' + item.counter ?? '')">
                       <app-iframe-element
                         [index]="i"
                         [modelName]="item"
@@ -577,7 +588,7 @@
                     </div>
 
                     <div *ngIf="item.name === 'image-element'"
-                         [hidden]="currentElement !== 'image-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'image-element' + ('#' + item.counter ?? '')">
                       <app-image-element
                         [index]="i"
                         [modelName]="item"
@@ -589,7 +600,7 @@
                     </div>
 
                     <div *ngIf="item.name === 'padding-element'"
-                         [hidden]="currentElement !== 'padding-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'padding-element' + ('#' + item.counter ?? '')">
                       <app-padding-element
                         [index]="i"
                         [modelName]="item"
@@ -598,7 +609,7 @@
                     </div>
 
                     <div *ngIf="item.name === 'social-element'"
-                         [hidden]="currentElement !== 'social-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'social-element' + ('#' + item.counter ?? '')">
                       <app-social-element
                         [index]="i"
                         [widget]="widget"
@@ -610,7 +621,7 @@
                     </div>
 
                     <div *ngIf="item.name === 'split-element'"
-                         [hidden]="currentElement !== 'split-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'split-element' + ('#' + item.counter ?? '')">
                       <app-split-element
                         [index]="i"
                         [modelName]="item"
@@ -622,7 +633,7 @@
                     </div>
 
                     <div *ngIf="item.name === 'title-element'"
-                         [hidden]="currentElement !== 'title-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'title-element' + ('#' + item.counter ?? '')">
                       <app-text-element
                         [index]="i"
                         [item]="item"
@@ -632,7 +643,7 @@
                     </div>
 
                     <div *ngIf="item.name === 'video-element'"
-                         [hidden]="currentElement !== 'video-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'video-element' + ('#' + item.counter ?? '')">
                       <app-video-element
                         [index]="i"
                         [modelName]="item"
@@ -645,7 +656,7 @@
                     </div>
 
                     <div *ngIf="item.name === 'timer-element'"
-                         [hidden]="currentElement !== 'timer-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'timer-element' + ('#' + item.counter ?? '')">
                       <app-timer-element
                         [index]="i"
                         [item]="item"
@@ -655,7 +666,7 @@
                     </div>
 
                     <div *ngIf="item.name === 'form-ext-element'"
-                         [hidden]="currentElement !== 'form-ext-element' + (item.counter ?? '')">
+                         [hidden]="currentElement !== 'form-ext-element' + ('#' +item.counter ?? '')">
                       <app-form-extended
                         [index]="i"
                         [widget]="widget"
@@ -780,7 +791,7 @@
                       <i
                         *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useIcon'"
                         class="f30s"
-                        [class]="widget.guiprops.dhVisual.selectedIcon.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : ('lgiconfont-' + widget.guiprops.dhVisual.selectIcon)"
+                        [class]="widget.guiprops.dhVisual.selectedIcon?.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : ('lgiconfont-' + widget.guiprops.dhVisual.selectIcon)"
                         [style]="'color: ' + widget.guiprops['dhVisual'].colorBg"
                       ></i>
                       <div
