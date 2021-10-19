@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -28,7 +29,18 @@ import { ConstructorRulesComponent } from '../constructor-rules/constructor-rule
 @Component({
   selector: 'app-widget-edit',
   templateUrl: './widget-edit.component.html',
-  styleUrls: ['../../shared/shared.scss', './widget-edit.component.scss']
+  styleUrls: ['../../shared/shared.scss', './widget-edit.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({opacity: 0}),
+        animate(1000, style({ opacity: 1 }))
+      ]),
+      transition(':leave', [   // :leave is alias to '* => void'
+        animate(1000, style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class WidgetEditComponent implements OnInit, OnDestroy {
   public renamedWidget = { id: '', name: '' };

@@ -130,6 +130,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.staticWidgetInstallCode =
         this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
       this.isThankShow = this.isThankShouldShow();
+      this.systemFonts = this.widgetConstructorService.getSystemFontList();
       setTimeout(() => {
         this.changeModel();
         this.changeColorPodAndSRC();
@@ -143,7 +144,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     setInterval(() => {
       this.widgetConstructorService.updateWidget.next();
     }, 1000);
-    this.systemFonts = this.widgetConstructorService.getSystemFontList();
 
     this.widgetService.addOnWidgetLoadListener(this.loadListener);
 
@@ -588,7 +588,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       return;
     }
 
-    mainBlock.style.height = $(window).height() - 131 + 'px';
+    mainBlock.style.height = $(window).height() - 70 + 'px';
   }
 
   private loadListener() {

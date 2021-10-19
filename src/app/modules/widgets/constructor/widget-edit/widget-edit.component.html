@@ -1,4 +1,4 @@
-<div *ngIf="widget.guiprops" class="widgets-editor-header">
+<div *ngIf="widget.guiprops" [@fadeInOut] class="widgets-editor-header">
   <div class="d-flex justify-content-between">
     <div class="title-widget-container">
       <a
@@ -144,7 +144,7 @@
 </div>
 
 <!-- Tab panes -->
-<div *ngIf="widget.guiprops" class="tab-content">
+<div *ngIf="widget.guiprops" [@fadeInOut] class="tab-content">
   <div
     id="design"
     class="design-tab-fixed"
