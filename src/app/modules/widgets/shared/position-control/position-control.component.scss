@@ -22,17 +22,22 @@
 .position-control-item {
   width: 48px;
   height: 24px;
-  background: #F4F4F6;
+  background: #F1F1F1;
   border: 1px;
   border-radius: 2px;
   margin: 3px;
   cursor: pointer;
 
-  &:hover {
+  &:disabled {
+    cursor: default;
+    background: #F9F9F9;
+  }
+
+  &:not(:disabled):hover {
     background: lightblue;
   }
 
-  &.active {
+  &:not(:disabled).active {
     background: #4898A8;
   }
 }

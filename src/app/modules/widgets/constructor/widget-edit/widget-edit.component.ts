@@ -310,6 +310,10 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  public closeWidget(): void {
+    this.router.navigate(['/widgets/']);
+  }
+
   private checkWidgetRenameTitle() {
     ($('#renameWidgetBtn') as any).tooltip('destroy');
     if (this.widget?.name?.length > 35) {

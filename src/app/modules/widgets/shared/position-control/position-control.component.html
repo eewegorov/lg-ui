@@ -1,28 +1,13 @@
 <div class="position-control-container">
   <div class="position-control-selector">
-    <div class="position-control-row">
-      <div class="position-control-item" (click)="setNewPosition(positions[1])" [class.active]="currentPosition === positions[1]">
-      </div>
-      <div class="position-control-item" (click)="setNewPosition(positions[3])" [class.active]="currentPosition === positions[3]">
-      </div>
-      <div class="position-control-item" (click)="setNewPosition(positions[2])" [class.active]="currentPosition === positions[2]">
-      </div>
-    </div>
-    <div class="position-control-row">
-      <div class="position-control-item" (click)="setNewPosition(positions[8])" [class.active]="currentPosition === positions[8]">
-      </div>
-      <div class="position-control-item" (click)="setNewPosition(positions[0])" [class.active]="currentPosition === positions[0]">
-      </div>
-      <div class="position-control-item" (click)="setNewPosition(positions[7])" [class.active]="currentPosition === positions[7]">
-      </div>
-    </div>
-    <div class="position-control-row">
-      <div class="position-control-item" (click)="setNewPosition(positions[4])" [class.active]="currentPosition === positions[4]">
-      </div>
-      <div class="position-control-item" (click)="setNewPosition(positions[6])" [class.active]="currentPosition === positions[6]">
-      </div>
-      <div class="position-control-item" (click)="setNewPosition(positions[5])" [class.active]="currentPosition === positions[5]">
-      </div>
+    <div *ngFor="let i of [0, 3, 6]" class="position-control-row">
+      <button
+        *ngFor="let j of [0, 1, 2]"
+        class="position-control-item"
+        (click)="setNewPosition(positions[i + j])"
+        [class.active]="currentPosition === positions[i + j]"
+        [disabled]="!positions[i + j]"
+      ></button>
     </div>
   </div>
 
