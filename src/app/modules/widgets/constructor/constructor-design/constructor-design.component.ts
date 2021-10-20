@@ -96,6 +96,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public controls: Record<string, any>;
   public globalCouponObject: object;
   public currentPage = 'main';
+  public currentDevice: 'desktop' | 'mobile' = 'desktop';
   private typeImg = ['От края до края', 'От другого края'];
   private sizeSocBtn = ['Большой', 'Средний', 'Маленький'];
   private imageCustom = null;

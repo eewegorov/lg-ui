@@ -2,43 +2,62 @@
   <div *ngIf="widget.guiprops" class="row widget-style-wrapper">
     <div class="col-lg-3 widget-style-menu">
       <div class="elements-selector">
-        <div class="element" [class.active]="currentElement === 'settings'" (click)="currentElement = 'settings'">
-          <div class="before">
-            <div class="square"></div>
+        <div>
+          <div class="element" [class.active]="currentElement === 'settings'" (click)="currentElement = 'settings'">
+            <div class="before">
+              <div class="square"></div>
+            </div>
+            <div class="settings-icon-small icon"></div>
+            <span>Настройки</span>
+            <div class="after fade-in">
+              <div class="square"></div>
+            </div>
           </div>
-          <div class="settings-icon-small icon"></div>
-          <span>Настройки</span>
-          <div class="after fade-in">
-            <div class="square"></div>
+          <div
+            *ngFor="let element of widget.guiprops.elementsList"
+            class="element"
+            [class.active]="currentElement === element.name + ('#' + element.counter ?? '')"
+            (click)="currentElement = element.name + ('#' + element.counter ?? '')"
+          >
+            <div class="before fade-in">
+              <div class="square"></div>
+            </div>
+            <div [class]="element.name + '-icon-small icon'"></div>
+            <span>{{ getElementByName(element.name) }}</span> <span *ngIf="element.counter"> #{{ element.counter }}</span>
+            <div class="after fade-in">
+              <div class="square"></div>
+            </div>
+          </div>
+          <div
+            class="element"
+            [class.active]="currentElement === 'add-element'"
+            (click)="currentElement = 'add-element'"
+          >
+            <div class="before fade-in">
+              <div class="square"></div>
+            </div>
+            <div class="add-icon-small icon"></div>
+            <span class="add-element">Добавить элемент</span>
+            <div class="after fade-in">
+              <div class="square"></div>
+            </div>
           </div>
         </div>
-        <div
-          *ngFor="let element of widget.guiprops.elementsList"
-          class="element"
-          [class.active]="currentElement === element.name + ('#' + element.counter ?? '')"
-          (click)="currentElement = element.name + ('#' + element.counter ?? '')"
-        >
-          <div class="before fade-in">
-            <div class="square"></div>
+
+        <div class="device-selector">
+          <div
+            class="element"
+            [class.active]="currentDevice === 'desktop'"
+            (click)="currentDevice = 'desktop'"
+          >
+            <div class="desktop-icon-small icon"></div>
           </div>
-          <div [class]="element.name + '-icon-small icon'"></div>
-          <span>{{ getElementByName(element.name) }}</span> <span *ngIf="element.counter"> #{{ element.counter }}</span>
-          <div class="after fade-in">
-            <div class="square"></div>
-          </div>
-        </div>
-        <div
-          class="element"
-          [class.active]="currentElement === 'add-element'"
-          (click)="currentElement = 'add-element'"
-        >
-          <div class="before fade-in">
-            <div class="square"></div>
-          </div>
-          <div class="add-icon-small icon"></div>
-          <span class="add-element">Добавить элемент</span>
-          <div class="after fade-in">
-            <div class="square"></div>
+          <div
+            class="element"
+            [class.active]="currentDevice === 'mobile'"
+            (click)="currentDevice = 'mobile'"
+          >
+            <div class="mobile-icon-small icon"></div>
           </div>
         </div>
       </div>
@@ -888,8 +907,14 @@
             </div>
           </div>
           <div>
-            <button data-dismiss="modal" (click)="closeModalImg()" id="btnCloseImgM" class="btn btn-default pull-left"
-                    type="button">Отмена
+            <button
+              type="button"
+              id="btnCloseImgM"
+              data-dismiss="modal"
+              class="btn btn-default pull-left"
+              (click)="closeModalImg()"
+            >
+              Отмена
             </button>
             <button class="btn btn-info set-img-gal" (click)="updateFile()">Установить изображение</button>
           </div>

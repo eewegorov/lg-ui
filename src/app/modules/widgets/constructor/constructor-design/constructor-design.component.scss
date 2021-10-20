@@ -416,6 +416,9 @@ h6.title-h6-widget a:hover {
 }
 
 .elements-selector {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 60px;
   background: #F4F4F6;
 
@@ -514,10 +517,48 @@ h6.title-h6-widget a:hover {
   }
 }
 
+.device-selector {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 60px;
+  background: #F4F4F6;
+  margin-bottom: 110px;
+
+  .element {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 10px;
+    padding-top: 10px;
+    color: #505662;
+    text-align: center;
+    cursor: pointer;
+
+    &:not(.active):hover {
+      background-color: #D4D7DD;
+      z-index: 2;
+      transition: 0.4s;
+    }
+
+    &.active {
+      background: white;
+      color: #16181D;
+      transition: 0.4s;
+    }
+  }
+}
+
 .elements {
   width: calc(100% - 60px);
 }
 
+.desktop-icon-small,
+.mobile-icon-small,
 .settings-icon-small,
 .add-icon-small,
 .form-ext-element-icon-small,
@@ -541,6 +582,16 @@ h6.title-h6-widget a:hover {
 
 .add-icon-small {
   background-color: #4898A8;
+}
+
+.desktop-icon-small {
+  mask: url("~src/assets/images/widgets/desktop.svg") no-repeat center;
+  mask-size: contain;
+}
+
+.mobile-icon-small {
+  mask: url("~src/assets/images/widgets/mobile.svg") no-repeat center;
+  mask-size: contain;
 }
 
 .settings-icon-small {
