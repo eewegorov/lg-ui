@@ -172,47 +172,56 @@
 
                   <ng-container *ngIf="widgetType === 'optindot'">
                     <div class="border-item">
-                      <div class="row row-subitem mb-1">
+                      <div class="row row-subitem mt-3">
                         <div class="col-sm-12 row-subitem-padding">
-                          <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
+                          <h3 class="h4-element-title">Дизайн точки</h3>
+                        </div>
+                      </div>
+                      <div class="flex-column row-subitem pt-1">
+                        <div class="row justify-content-between mt-3 mb-3">
+                          <label class="control-label control-label-des">Основной цвет</label>
+                          <div class="text-right">
+                            <input
+                              [(colorPicker)]="widget.guiprops['dhVisual'].colorMain"
+                              [style.background]="widget.guiprops['dhVisual'].colorMain"
+                              [cpAlphaChannel]="'disabled'"
+                              [cpOutputFormat]="'hex'"
+                              cpPosition="left"
+                              class="color-picker-control"
+                            />
+                            <input
+                              [(ngModel)]="widget.guiprops['dhVisual'].colorMain"
+                              class="color-picker-input"
+                            />
+                          </div>
+                        </div>
+                        <div class="row justify-content-between mt-3 mb-3">
+                          <label class="control-label control-label-des">Цвет заливки</label>
+                          <div class="text-right">
+                            <input
+                              [(colorPicker)]="widget.guiprops['dhVisual'].colorBg"
+                              [style.background]="widget.guiprops['dhVisual'].colorBg"
+                              [cpAlphaChannel]="'disabled'"
+                              [cpOutputFormat]="'hex'"
+                              cpPosition="left"
+                              class="color-picker-control"
+                            />
+                            <input
+                              [(ngModel)]="widget.guiprops['dhVisual'].colorBg"
+                              class="color-picker-input"
+                            />
+                          </div>
                         </div>
                       </div>
                       <div class="row row-subitem mt-3">
                         <div class="col-sm-12 row-subitem-padding">
-                          <h4 class="h4-element-title">Дизайн точки</h4>
-                        </div>
-                      </div>
-                      <div class="row row-subitem">
-                        <div class="col-sm-5 row-subitem-padding mt-1 mr-3">
-                          <label class="control-label control-label-des">Основной цвет:</label>
-                          <input
-                            [(colorPicker)]="widget.guiprops['dhVisual'].colorMain"
-                            [style.background]="widget.guiprops['dhVisual'].colorMain"
-                            [cpAlphaChannel]="'disabled'"
-                            [cpOutputFormat]="'hex'"
-                            class="w-100"
-                          />
-                        </div>
-                        <div class="col-sm-6 row-subitem-padding mt-1">
-                          <label class="control-label control-label-des">Цвет заливки:</label>
-                          <input
-                            [(colorPicker)]="widget.guiprops['dhVisual'].colorBg"
-                            [style.background]="widget.guiprops['dhVisual'].colorBg"
-                            [cpAlphaChannel]="'disabled'"
-                            [cpOutputFormat]="'hex'"
-                            class="w-100"
-                          />
-                        </div>
-                      </div>
-                      <div class="row row-subitem mt-3">
-                        <div class="col-sm-12 row-subitem-padding">
-                          <h4 class="h4-text-tit control-label-des">Добавить иконку или изображение:</h4>
+                          <h4 class="h4-text-tit">Добавить иконку или изображение:</h4>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="flex-bl-for-radio-group">
+                        <div class="flex-bl-for-radio-group mt-1">
                           <div class="row-subitem-padding radio-group-item mr-4">
                             <div class="form-group widget-selector">
-                              <label class="non-bold">
+                              <label>
                                 <input
                                   type="radio"
                                   name="dhVisual"
@@ -238,18 +247,24 @@
                           </div>
                         </div>
                       </div>
-                      <div [hidden]="widget.guiprops.dhVisual?.iconOrImage !== 'useIcon'" class="row row-subitem">
-                        <div class="col-sm-12 row-subitem-padding">
+                      <div [hidden]="widget.guiprops.dhVisual?.iconOrImage !== 'useIcon'" class="row row-subitem align-items-center">
+                        <div class="row-subitem-padding mr-2 mt-1">
                           <h5 class="label-style-ic control-label-des">Иконка:</h5>
                         </div>
-                        <div class="icp-icon col-sm-12 row-subitem-padding">
+                        <div class="icp-icon row-subitem-padding">
                           <div class="btn-group">
-                            <button *ngIf="!widget.guiprops.dhVisual.selectedIcon" type="button"
-                                    class="btn btn-primary">
+                            <button
+                              type="button"
+                              *ngIf="!widget.guiprops.dhVisual.selectedIcon"
+                              class="btn btn-primary"
+                            >
                               <i [class]="'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"></i>
                             </button>
-                            <button *ngIf="widget.guiprops.dhVisual.selectedIcon" type="button"
-                                    class="btn btn-primary iconpicker-component">
+                            <button
+                              type="button"
+                              *ngIf="widget.guiprops.dhVisual.selectedIcon"
+                              class="btn btn-primary iconpicker-component"
+                            >
                               <i
                                 [class]="widget.guiprops.dhVisual.selectedIcon.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : 'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"
                               ></i>
@@ -268,40 +283,38 @@
                       </div>
                       <div *ngIf="widget.guiprops.dhVisual?.iconOrImage === 'useImg'">
                         <div class="row row-subitem">
-                          <div class="col-sm-12 row-subitem-padding mt-1">
+                          <div class="col-sm-12 row-subitem-padding mb-2">
                             <a (click)="listFile('dotIcon')" class="widget-download-img">
                               <i class="fa fa-image"></i> Установить или изменить изображение
                             </a>
                           </div>
                         </div>
                       </div>
-                      <div class="row row-subitem mt-2">
-                        <div class="col-sm-12 row-subitem-padding pt-1 d-flex">
+                      <div class="row row-subitem mt-3">
+                        <div class="d-flex justify-content-between w-100 row-subitem-padding pt-1">
+                          <label class="control-label switcher-label-xs control-label-des">Призыв к действию</label>
                           <ui-switch
                             size="small"
                             [(ngModel)]="widget.guiprops.dhVisual.enable"
                           ></ui-switch>
-                          <label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Показывать призыв к
-                            действию</label>
                         </div>
                       </div>
                       <div *ngIf="widget.guiprops.dhVisual?.enable">
-                        <div class="row row-subitem mt-2">
+                        <div class="row row-subitem mt-2 pt-1">
                           <div class="col-sm-12 row-subitem-padding">
-                            <label class="control-label control-label-des">Призыв к действию:</label>
                             <input type="text" class="form-control" [(ngModel)]="widget.guiprops['dhVisual'].title">
                             <span class="small">Например: Хотите, мы вам перезвоним?</span>
                           </div>
                         </div>
                       </div>
-                      <div class="row row-subitem mt-2">
-                        <div class="col-sm-12 row-subitem-padding pt-1 d-flex">
+                      <div class="row row-subitem mt-3">
+                        <div class="d-flex justify-content-between w-100 row-subitem-padding pt-1">
+                          <label class="control-label switcher-label-xs control-label-des">Убрать мерцание
+                            точки захвата</label>
                           <ui-switch
                             size="small"
                             [(ngModel)]="widget.guiprops.dhVisual.enableBlink"
                           ></ui-switch>
-                          <label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Убрать мерцание
-                            точки захвата</label>
                         </div>
                       </div>
                     </div>

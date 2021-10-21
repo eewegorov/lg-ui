@@ -9,7 +9,7 @@ h2 {
 }
 
 h3 {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   color: #16181D;
   margin-bottom: 0;
@@ -340,14 +340,18 @@ h4.h4-element-title a:hover .remove-sub-item {
 
 h4.h4-text-tit {
   font-size: 16px;
-  margin: 0;
+  margin-top: 10px;
   margin-bottom: 10px;
-  font-weight: 200;
+  font-weight: 600;
   color: #6a6c6f;
 }
 
 .form-control {
   font-size: 14px;
+}
+
+.form-group label {
+  font-size: 16px;
 }
 
 .form-control-font {
@@ -421,7 +425,7 @@ label.switcher-label {
 }
 
 label.switcher-label-xs {
-  font-weight: 400 !important;
+  font-weight: 600 !important;
 }
 
 .widget-small-text {
@@ -431,10 +435,10 @@ label.switcher-label-xs {
 }
 
 label.control-label {
-  font-weight: 700;
+  font-weight: 400;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  color: #6a6c6f;
+  font-size: 16px;
+  color: #505662;
   white-space: nowrap;
 }
 
@@ -443,9 +447,9 @@ span.control-label-des,
 h4.control-label-des,
 h5.control-label-des,
 b.control-label-des {
-  font-weight: 700 !important;
-  font-size: 12px;
-  color: #6a6c6f;
+  font-weight: 400;
+  font-size: 16px;
+  color: #505662;
 }
 
 .btn-default {
@@ -486,7 +490,8 @@ a.widget-download-img {
 }
 
 .widget-download-img {
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 23px;
 }
 
 .widget-download-img i {

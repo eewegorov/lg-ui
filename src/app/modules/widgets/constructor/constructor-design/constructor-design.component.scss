@@ -88,9 +88,9 @@ h3.widget-title-main {
 }
 
 h5.label-style-ic {
-  font-weight: 700;
+  font-weight: 400;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   color: #6a6c6f;
 }
 
@@ -587,6 +587,25 @@ h6.title-h6-widget a:hover {
 .desktop-icon-small {
   mask: url("~src/assets/images/widgets/desktop.svg") no-repeat center;
   mask-size: contain;
+}
+
+.color-picker-control {
+  width: 48px;
+  height: 32px;
+  border: 1px solid #D4D7DD;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.color-picker-input {
+  border: 1px solid #D4D7DD;
+  border-radius: 4px;
+  width: 68px;
+  height: 32px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #16181D;
+  padding: 0 3px;
 }
 
 .mobile-icon-small {

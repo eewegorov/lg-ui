@@ -619,7 +619,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.widget.guiprops.title = {
         enable: false,
         textSummer: '<p>Заголовок (выделите для редактирования)</p>',
-        font: this.systemFonts[0],
+        font: this.systemFonts?.[0],
         fontType: 'systemFont',
         fontName: '',
         fontSize: 22,
@@ -630,7 +630,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.widget.guiprops.exit = {
         enable: false,
         textSummer: '<span>Закрыть окно (выделите, что бы редактировать)</span>',
-        font: this.systemFonts[0],
+        font: this.systemFonts?.[0],
         fontType: 'systemFont',
         fontName: '',
         position: 'Слева',
@@ -638,7 +638,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         button: {
           enable: false,
           textSummer: '<span>Закрыть окно</span>',
-          font: this.systemFonts[0],
+          font: this.systemFonts?.[0],
           fontType: 'systemFont',
           fontName: '',
           fontSize: 20,
@@ -663,7 +663,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.widget.guiprops.thank = {
         enable: false,
         textSummer: '<p>Спасибо!</p>',
-        font: this.systemFonts[0],
+        font: this.systemFonts?.[0],
         fontType: 'systemFont',
         fontName: '',
         fontSize: 20
@@ -681,7 +681,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.widget.guiprops.desc = {
         enable: false,
         textSummer: '<p>Описание (выделите для редактирования)</p>',
-        font: this.systemFonts[0],
+        font: this.systemFonts?.[0],
         fontType: 'systemFont',
         fontName: '',
         fontSize: 18
@@ -728,7 +728,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.widget.guiprops.button = {
         enable: false,
         textSummer: '<span>Отправить</span>',
-        font: this.systemFonts[0],
+        font: this.systemFonts?.[0],
         fontType: 'systemFont',
         fontName: '',
         fontSize: 20,
