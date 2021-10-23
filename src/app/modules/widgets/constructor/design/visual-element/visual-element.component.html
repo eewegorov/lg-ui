@@ -1,70 +1,56 @@
 <div class="border-item main-settings-for-top-el-near">
   <div class="main-settings-for-top-el" id="elemScrNMainSetBl">
-    <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding">
-        <h4 class="h4-element-title">Контент виджета</h4>
-      </div>
-    </div>
-    <div class="row row-subitem mt-1">
-      <div class="col-sm-6 row-subitem-padding pr-3">
-        <div>
-          <label class="control-label control-label-des">Ширина контента:</label>
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{ widget.guiprops?.dhVisual?.widget_content_width }}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li
-                role="presentation"
-                *ngFor="let item of widgwidthBtn"
-                (click)="widget.guiprops.dhVisual.widget_content_width = item"
-              >
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div *ngIf="widget.guiprops?.dhVisual?.widget_content_width === 'Собственная'" class="pt-1 mt-2">
+    <h3>Контент виджета</h3>
+    <div class="row align-items-center justify-content-between mt-3 mb-1">
+      <label class="control-label control-label-des">Ширина</label>
+      <div class="row align-items-center">
+        <div
+          class="form-control form-control-font mr-2"
+          [class.disabled]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
+        >
           <input
             type="number"
             min="60"
-            class="form-control form-control-font form-cntrl-55w"
             [(ngModel)]="widget.guiprops.dhVisual.widget_content_widthpx"
+            [disabled]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
           />
-          <label class="control-label ml-1">px <span>ширина</span></label>
+          <label>px</label>
         </div>
+        <button
+          class="content-type-button"
+          [class.active]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
+          (click)="widget.guiprops.dhVisual.widget_content_width = (widget.guiprops.dhVisual.widget_content_width === widgwidthBtn[0] ? widgwidthBtn[1] : widgwidthBtn[0])"
+        >
+          AUTO
+        </button>
       </div>
-      <div class="col-sm-6 row-subitem-padding">
-        <div>
-          <label class="control-label control-label-des">Высота контента:</label>
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{ widget.guiprops?.dhVisual?.widget_content_height }}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li
-                role="presentation"
-                *ngFor="let item of widgwidthBtn"
-                (click)="widget.guiprops.dhVisual.widget_content_height = item"
-              >
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div *ngIf="widget.guiprops?.dhVisual?.widget_content_height === 'Собственная'" class="pt-1 mt-2">
+    </div>
+
+    <div class="row align-items-center justify-content-between mt-2">
+      <label class="control-label control-label-des">Высота</label>
+      <div class="row align-items-center">
+        <div
+          class="form-control form-control-font mr-2"
+          [class.disabled]="widget.guiprops?.dhVisual?.widget_content_height === 'Авто'"
+        >
           <input
             type="number"
             min="60"
-            class="form-control form-control-font form-cntrl-55w"
-            [(ngModel)]="widget.guiprops['dhVisual'].widget_content_heightpx"
+            [(ngModel)]="widget.guiprops.dhVisual.widget_content_heightpx"
+            [disabled]="widget.guiprops?.dhVisual?.widget_content_height === 'Авто'"
           />
-          <label class="control-label ml-1">px <span>высота</span></label>
+          <label>px</label>
         </div>
+        <button
+          class="content-type-button"
+          [class.active]="widget.guiprops?.dhVisual?.widget_content_height === 'Авто'"
+          (click)="widget.guiprops.dhVisual.widget_content_height = (widget.guiprops.dhVisual.widget_content_height === widgwidthBtn[0] ? widgwidthBtn[1] : widgwidthBtn[0])"
+        >
+          AUTO
+        </button>
       </div>
     </div>
+
     <div *ngIf="widget.guiprops?.dhVisual?.widget_content_height === 'Собственная'" class="row row-subitem mt-2">
       <div class="col-sm-6 row-subitem-padding pt-1">
         <label class="control-label control-label-des">Позиционирование контента:</label>

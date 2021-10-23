@@ -356,11 +356,28 @@ h4.h4-text-tit {
 
 .form-control-font {
   display: inline-block;
-  width: 36px;
-  text-align: center;
-  height: 26px;
-  padding: 4px 4px;
+  width: 76px;
+  height: 34px;
+  text-align: left;
+  padding: 5px 4px;
   font-size: 12px;
+  color: #16181D;
+
+  &.disabled {
+    background: #F4F4F6;
+    border: 1px solid #D4D7DD;
+    color: #A9AFBC;
+  }
+
+  input {
+    width: 75%;
+    border: none;
+
+    &:disabled {
+      background: #F4F4F6;
+      color: #A9AFBC;
+    }
+  }
 }
 
 input.form-cntrl-45w {
