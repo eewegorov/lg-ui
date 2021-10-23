@@ -46,13 +46,15 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     floor: 0,
     ceil: 50,
     step: 1,
-    animate: false
+    animate: false,
+    showSelectionBar: true
   };
   public optionsOpacity: Options = {
     floor: 0.00,
     ceil: 1.00,
     step: 0.1,
-    animate: false
+    animate: false,
+    showSelectionBar: true
   };
   public placePopup = [
     'Верхний левый угол',
@@ -72,7 +74,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public bgPositionTypesList = ['Растянуть', 'Замостить'];
   public tilesList = ['Замостить по X', 'Замостить по Y', 'Замостить по X+Y'];
   public maskTypeList = ['Вся площадь виджета', 'Только под контентом'];
-  public placeImg = ['Слева', 'Сверху', 'Справа', 'Снизу'];
+  public placeImg = ['', 'Сверху', '', 'Слева', '',  'Справа', '', 'Снизу', ''];
   public imageItemsType = ['Растянуть по ширине и высоте блока', 'Установить произвольные габариты'];
   public imageItemsAlign = ['По центру', 'По верхнему краю', 'По нижнему краю'];
   public orientInputForm = ['Вертикальная', 'Горизонтальная'];

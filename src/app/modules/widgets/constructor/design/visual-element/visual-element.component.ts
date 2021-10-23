@@ -25,21 +25,24 @@ export class VisualElementComponent implements OnInit {
     floor: 0.00,
     ceil: 1.00,
     step: 0.1,
-    animate: false
+    animate: false,
+    showSelectionBar: true
   };
 
   public optionsThickness: Options = {
     floor: 0.00,
     ceil: 10.00,
     step: 1,
-    animate: false
+    animate: false,
+    showSelectionBar: true
   };
 
   public optionsRound: Options = {
     floor: 0,
     ceil: 50,
     step: 1,
-    animate: false
+    animate: false,
+    showSelectionBar: true
   };
 
   constructor() { }

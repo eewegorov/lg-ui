@@ -24,7 +24,8 @@ export class CloselinkElementComponent implements OnInit {
     floor: 0,
     ceil: 50,
     step: 1,
-    animate: false
+    animate: false,
+    showSelectionBar: true
   };
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }

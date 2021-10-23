@@ -18,7 +18,8 @@ export class ExtendedTitleComponent implements OnInit, DoCheck, AfterViewInit {
     floor: 0.00,
     ceil: 1.00,
     step: 0.1,
-    animate: false
+    animate: false,
+    showSelectionBar: true
   };
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }

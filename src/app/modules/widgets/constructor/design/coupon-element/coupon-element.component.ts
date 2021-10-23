@@ -22,14 +22,16 @@ export class CouponElementComponent implements OnInit, AfterViewInit, OnChanges 
     floor: 0,
     ceil: 50,
     step: 1,
-    animate: false
+    animate: false,
+    showSelectionBar: true
   };
 
   public optionsOpacity: Options = {
     floor: 0.00,
     ceil: 1.00,
     step: 0.1,
-    animate: false
+    animate: false,
+    showSelectionBar: true
   };
 
   constructor(
