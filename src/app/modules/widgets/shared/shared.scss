@@ -20,6 +20,36 @@ h3.f-0 {
   color: #6a6c6f;
 }
 
+ui-switch {
+  line-height: 1;
+}
+
+.color-picker-control {
+  width: 48px;
+  height: 32px;
+  border: 1px solid #D4D7DD;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.picker-input {
+  border: 1px solid #D4D7DD;
+  border-radius: 4px;
+  height: 32px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #16181D;
+  padding: 0 3px;
+
+  &.color {
+    width: 68px;
+  }
+
+  &.slider {
+    width: 48px;
+  }
+}
+
 .title-main, .description {
   margin-bottom: 0;
 }
@@ -467,6 +497,7 @@ b.control-label-des {
   font-weight: 400;
   font-size: 16px;
   color: #505662;
+  line-height: 1.4;
 }
 
 .btn-default {
@@ -574,11 +605,6 @@ a.widget-download-img {
 .btn-coupon-chose .dropdown-menu li a {
   text-overflow: ellipsis;
   overflow: hidden;
-}
-
-h4.helper-title-3level {
-  padding-top: 15px;
-  font-size: 14px !important;
 }
 
 .widget-name-block-rel {
@@ -781,7 +807,6 @@ textarea.textar-iframe {
 .flex-bl-for-radio-group {
   display: flex;
   justify-content: flex-start;
-  padding-right: 15px;
 }
 
 .iconpicker-component {

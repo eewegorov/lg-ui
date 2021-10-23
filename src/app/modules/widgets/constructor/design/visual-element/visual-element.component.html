@@ -26,59 +26,62 @@
       </div>
     </div>
 
-    <div class="row align-items-center justify-content-between mt-2">
-      <label class="control-label control-label-des">Высота</label>
-      <div class="row align-items-center">
-        <div
-          class="form-control form-control-font mr-2"
-          [class.disabled]="widget.guiprops?.dhVisual?.widget_content_height === 'Авто'"
-        >
-          <input
-            type="number"
-            min="60"
-            [(ngModel)]="widget.guiprops.dhVisual.widget_content_heightpx"
-            [disabled]="widget.guiprops?.dhVisual?.widget_content_height === 'Авто'"
-          />
-          <label>px</label>
+    <div class="border-item">
+      <div class="row align-items-center justify-content-between mt-2">
+        <label class="control-label control-label-des">Высота</label>
+        <div class="row align-items-center">
+          <div
+            class="form-control form-control-font mr-2"
+            [class.disabled]="widget.guiprops?.dhVisual?.widget_content_height === 'Авто'"
+          >
+            <input
+              type="number"
+              min="60"
+              [(ngModel)]="widget.guiprops.dhVisual.widget_content_heightpx"
+              [disabled]="widget.guiprops?.dhVisual?.widget_content_height === 'Авто'"
+            />
+            <label>px</label>
+          </div>
+          <button
+            class="content-type-button"
+            [class.active]="widget.guiprops?.dhVisual?.widget_content_height === 'Авто'"
+            (click)="widget.guiprops.dhVisual.widget_content_height = (widget.guiprops.dhVisual.widget_content_height === widgwidthBtn[0] ? widgwidthBtn[1] : widgwidthBtn[0])"
+          >
+            AUTO
+          </button>
         </div>
-        <button
-          class="content-type-button"
-          [class.active]="widget.guiprops?.dhVisual?.widget_content_height === 'Авто'"
-          (click)="widget.guiprops.dhVisual.widget_content_height = (widget.guiprops.dhVisual.widget_content_height === widgwidthBtn[0] ? widgwidthBtn[1] : widgwidthBtn[0])"
-        >
-          AUTO
-        </button>
+      </div>
+
+      <div *ngIf="widget.guiprops?.dhVisual?.widget_content_height === 'Собственная'" class="row row-subitem mt-2">
+        <div class="row-subitem-padding pt-1">
+          <label class="control-label control-label-des">Позиционирование контента:</label>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+              {{ widget.guiprops.dhVisual.widget_content_height_orient }}
+              <span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu">
+              <li
+                role="presentation"
+                (click)="widget.guiprops.dhVisual.widget_content_height_orient = item"
+                *ngFor="let item of vertOrientDh"
+              >
+                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div *ngIf="widget.guiprops?.dhVisual?.widget_content_height === 'Собственная'" class="row row-subitem mt-2">
-      <div class="col-sm-6 row-subitem-padding pt-1">
-        <label class="control-label control-label-des">Позиционирование контента:</label>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{ widget.guiprops.dhVisual.widget_content_height_orient }}
-            <span class="caret"></span>
-          </button>
-          <ul role="menu" class="dropdown-menu">
-            <li
-              role="presentation"
-              (click)="widget.guiprops.dhVisual.widget_content_height_orient = item"
-              *ngFor="let item of vertOrientDh"
-            >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
     <!-- Page rule item -->
-    <div *ngIf="widget.guiprops.bg">
+    <div *ngIf="widget.guiprops.bg" class="border-item">
       <div class="row row-subitem mt-3">
         <div class="col-sm-12 row-subitem-padding">
-          <h4 class="h4-text-tit control-label-des">Фон контента:</h4>
+          <h4 class="h4-text-tit">Фон контента</h4>
         </div>
         <div class="clearfix"></div>
-        <div class="flex-bl-for-radio-group">
+        <div class="flex-bl-for-radio-group mt-2">
           <div class="row-subitem-padding radio-group-item">
             <div class="form-group widget-selector">
               <label>
@@ -132,7 +135,7 @@
           </div>
         </div>
 
-        <div class="row row-subitem mt-2">
+        <div class="row row-subitem mt-2 border-item">
           <div class="col-sm-6 row-subitem-padding pt-1 pr-3">
             <div>
               <label class="control-label control-label-des">Положение:</label>
@@ -177,10 +180,10 @@
       </div>
 
       <div *ngIf="widget.guiprops['bg'].fillorImg === 'useVideo'">
-        <div class="imaget-item-video-settings mb-3">
+        <div class="imaget-item-video-settings mb-3 border-item">
           <div class="row row-subitem">
-            <div class="col-sm-12 row-subitem-padding mt-2 mb-1">
-              <h4 class="h4-text-tit control-label-des helper-title-3level">Источник видео</h4>
+            <div class="col-sm-12 row-subitem-padding mb-1">
+              <h4 class="h4-text-tit control-label-des">Источник видео</h4>
             </div>
             <div class="col-sm-6 row-subitem-padding">
               <div class="form-group widget-selector">
@@ -242,32 +245,49 @@
 
       <div *ngIf="widget.guiprops['bg'].mask && ((widget.guiprops['bg'].fillorImg === 'useVideo') || (widget.guiprops['bg'].fillorImg === 'useImg'))">
         <div class="row row-subitem mt-3">
-          <div class="d-flex col-sm-12 row-subitem-padding pt-1">
+          <div class="d-flex justify-content-between w-100 row-subitem-padding pt-1">
+            <label class="control-label switcher-label-xs control-label-des">
+              Затемнить фон виджета маской
+            </label>
             <ui-switch
               size="small"
               [(ngModel)]="widget.guiprops['bg'].mask.enable"
-            ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Затемнить фон виджета маской</label>
+            ></ui-switch>
           </div>
         </div>
         <div *ngIf="widget.guiprops['bg'].mask.enable">
-          <div class="row row-subitem">
-            <div class="col-sm-6 row-subitem-padding pt-1">
-              <label class="control-label control-label-colorpc control-label-des">Цвет маски:</label>
+          <div class="row justify-content-between mt-3 mb-3">
+            <label class="control-label control-label-des">Цвет маски</label>
+            <div class="text-right">
               <input
                 [(colorPicker)]="widget.guiprops['bg'].mask.color"
                 [style.background]="widget.guiprops['bg'].mask.color"
                 [cpAlphaChannel]="'disabled'"
                 [cpOutputFormat]="'hex'"
+                cpPosition="left"
+                class="color-picker-control"
+              />
+              <input
+                [(ngModel)]="widget.guiprops['bg'].mask.color"
+                class="picker-input color"
               />
             </div>
-            <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
-              <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
+          </div>
+
+          <div class="row justify-content-between mt-3">
+            <h5 class="label-style-ic control-label-des">Прозрачность</h5>
+            <div class="row text-right side-ui-sm">
               <ngx-slider [(value)]="widget.guiprops['bg'].mask.opacity" [options]="optionsOpacity"></ngx-slider>
+              <input
+                [(ngModel)]="widget.guiprops['bg'].mask.opacity"
+                class="picker-input slider"
+              />
             </div>
           </div>
+
           <div class="row row-subitem">
-            <div class="col-sm-12 row-subitem-padding mt-1">
-              <label class="control-label control-label-colorpc control-label-des">Расположение маски:</label>
+            <div class="col-sm-12 row-subitem-padding mt-2">
+              <label class="control-label">Расположение маски</label>
               <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
                   {{ widget.guiprops.bg.mask.area }}
@@ -289,36 +309,48 @@
       </div>
 
       <div *ngIf="widget.guiprops['bg'].fillorImg === 'fill'">
-        <div class="row row-subitem mt-2">
-          <div class="col-sm-6 row-subitem-padding">
-            <label class="control-label control-label-colorpc control-label-des">Цвет фона:</label>
+        <div class="row justify-content-between mt-3 mb-3">
+          <label class="control-label control-label-des">Цвет фона</label>
+          <div class="text-right">
             <input
               [(colorPicker)]="widget.guiprops['bg'].colorBg"
               [style.background]="widget.guiprops['bg'].colorBg"
               [cpAlphaChannel]="'disabled'"
               [cpOutputFormat]="'hex'"
+              cpPosition="left"
+              class="color-picker-control"
+            />
+            <input
+              [(ngModel)]="widget.guiprops['bg'].colorBg"
+              class="picker-input color"
+            />
+          </div>
+        </div>
+
+        <div class="row justify-content-between mt-3">
+          <h5 class="label-style-ic control-label-des">Прозрачность</h5>
+          <div class="row text-right side-ui-sm">
+            <ngx-slider [(value)]="widget.guiprops['bg'].opacity" [options]="optionsOpacity"></ngx-slider>
+            <input
+              [(ngModel)]="widget.guiprops['bg'].opacity"
+              class="picker-input slider"
             />
           </div>
         </div>
       </div>
-
-      <div class="row row-subitem mt-2 pt-2">
-        <div class="col-sm-12 row-subitem-padding">
-          <h5 class="label-style-ic control-label-des">Прозрачность фона:</h5>
-        </div>
-        <div class="col-sm-12 row-subitem-padding side-ui-sm">
-          <ngx-slider [(value)]="widget.guiprops['bg'].opacity" [options]="optionsOpacity"></ngx-slider>
-        </div>
-      </div>
-
     </div>
 
     <div *ngIf="widget.guiprops.image" id="elemScrNIVBl" class="image-or-video-settings-bl">
-      <div class="d-flex mb-2">
-        <ui-switch
-          [(ngModel)]="widget.guiprops.image.enable"
-          size="small"
-        ></ui-switch><label class="control-label switcher-label control-label-des mt-1 ml-2">Добавить изображение, видео или отступ</label>
+      <div class="row row-subitem mt-3">
+        <div class="d-flex justify-content-between w-100 row-subitem-padding pt-1">
+          <label class="control-label switcher-label-xs control-label-des">
+            Добавить изображение, видео или отступ
+          </label>
+          <ui-switch
+            size="small"
+            [(ngModel)]="widget.guiprops.image.enable"
+          ></ui-switch>
+        </div>
       </div>
       <div class="clearfix"></div>
 
