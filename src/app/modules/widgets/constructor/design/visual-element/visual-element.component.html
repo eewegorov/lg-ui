@@ -663,10 +663,34 @@
       </div>
     </div>
 
+    <div *ngIf="widget.guiprops.bg" class="border-item mb-3">
+      <div class="d-flex row row-subitem justify-content-between w-100 row-subitem-padding">
+        <label class="control-label switcher-label-xs control-label-des">
+          Скругление углов
+        </label>
+        <ui-switch
+          size="small"
+          [checked]="widget.guiprops['bg'].borderRadius !== null"
+          (change)="setBorderRadius($event)"
+        ></ui-switch>
+      </div>
+
+      <div *ngIf="widget.guiprops['bg'].borderRadius === null" class="row justify-content-between mt-3">
+        <h5 class="label-style-ic control-label-des">Толщина</h5>
+        <div class="row text-right side-ui-sm">
+          <ngx-slider [(value)]="widget.guiprops['bg'].borderRadius" [options]="optionsRound"></ngx-slider>
+          <input
+            [(ngModel)]="widget.guiprops['bg'].borderRadius"
+            class="picker-input slider"
+          />
+        </div>
+      </div>
+    </div>
+
     <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.border" class="border-item mb-3">
       <div class="d-flex row row-subitem justify-content-between w-100 row-subitem-padding">
         <label class="control-label switcher-label-xs control-label-des">
-          Рамка
+          Обводка
         </label>
         <ui-switch
           size="small"
@@ -747,44 +771,35 @@
           </div>
         </div>
 
-        <div class="row row-subitem mt-1">
-          <div class="col-sm-5 row-subitem-padding pt-1 mr-3 d-flex flex-column">
-            <label class="control-label control-label-des">Сдвиг по горизонтали:</label>
+        <div class="col-lg-12 row justify-content-between mt-3 mb-3">
+          <label class="control-label control-label-des">Сдвиг</label>
+          <div>
+            <label class="control-label control-label-des mr-1 pr-1">X</label>
             <input
               type="number"
-              class="form-control form-control-font form-control-block form-cntrl-45w"
+              class="picker-input slider"
               [(ngModel)]="widget.guiprops['bg'].shadow.horiz"
             />
-          </div>
-          <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
-            <label class="control-label control-label-des">Сдвиг по вертикали:</label>
+            <label class="control-label control-label-des ml-3 pl-1 mr-1 pr-1">Y</label>
             <input
               type="number"
-              class="form-control form-control-font form-control-block form-cntrl-45w"
+              class="picker-input slider"
               [(ngModel)]="widget.guiprops['bg'].shadow.vertical"
             />
           </div>
         </div>
-        <div class="row row-subitem mt-1">
-          <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
-            <label class="control-label control-label-des">Резкость:</label>
+
+        <div class="row justify-content-between mt-3">
+          <label class="control-label control-label-des">Размытие</label>
+          <div class="row text-right side-ui-sm">
+            <ngx-slider [(value)]="widget.guiprops['bg'].shadow.blur" [options]="optionsSharpness"></ngx-slider>
             <input
               type="number"
-              class="form-control form-control-font form-control-block form-cntrl-45w"
               [(ngModel)]="widget.guiprops['bg'].shadow.blur"
+              class="picker-input slider"
             />
           </div>
         </div>
-      </div>
-    </div>
-
-    <div *ngIf="widget.guiprops.bg" class="row row-subitem mt-3">
-      <div class="col-sm-12 row-subitem-padding">
-        <h5 class="label-style-ic control-label-des">Углы виджета:</h5>
-      </div>
-      <div class="col-sm-12 row-subitem-padding side-ui-sm">
-        <ngx-slider [(value)]="widget.guiprops['bg'].borderRadius" [options]="optionsRound"></ngx-slider>
-        <label class="control-label control-label-ui ml-2 ml-2">Закругление углов в виджете</label>
       </div>
     </div>
   </div>

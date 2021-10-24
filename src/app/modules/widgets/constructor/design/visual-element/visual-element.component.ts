@@ -45,6 +45,14 @@ export class VisualElementComponent implements OnInit {
     showSelectionBar: true
   };
 
+  public optionsSharpness: Options = {
+    floor: 0,
+    ceil: 100,
+    step: 1,
+    animate: false,
+    showSelectionBar: true
+  };
+
   constructor() { }
 
   ngOnInit(): void {
@@ -56,6 +64,14 @@ export class VisualElementComponent implements OnInit {
 
   public listFile(place) {
     this.listFileItem.emit(place);
+  }
+
+  public setBorderRadius(value: boolean) {
+    this.widget.guiprops.bg.borderRadius = 0;
+
+    if (!value) {
+      this.widget.guiprops.bg.borderRadius = null;
+    }
   }
 
 }
