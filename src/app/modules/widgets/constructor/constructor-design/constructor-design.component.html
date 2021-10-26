@@ -85,10 +85,8 @@
               <div id="collapseFour" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingFour">
                 <div class="panel-body">
                   <div class="border-item">
-                    <div class="row row-subitem mb-1">
-                      <div class="col-sm-12 row-subitem-padding">
-                        <h3 class="marg-minus-bord-des">Расположение</h3>
-                      </div>
+                    <div class="d-flex row-subitem row-subitem-padding mb-3">
+                      <h3 class="marg-minus-bord-des">Расположение</h3>
                     </div>
 
                     <div *ngIf="widgetType === 'containerized'" class="row row-subitem row-static-widget-wrapper">
@@ -104,42 +102,37 @@
                         />
                       </div>
                     </div>
-                    <div *ngIf="widgetType === 'containerized'" class="row row-subitem row-static-widget-wrapper mb-1">
-                      <div class="col-sm-12 row-subitem-padding mt-2 widget-small-text">
-                        Установите этот код в месте на странице сайта, где вы хотите разместить виджет. Обратите
-                        внимание, что для всех виджетов в одном контейнере используется единый код установки. И если
-                        этот код уже установлен, то повторная его установка не требуется.
-                      </div>
+                    <div
+                      *ngIf="widgetType === 'containerized'"
+                      class="d-flex row-subitem row-subitem-padding mb-1 mt-2 widget-small-text"
+                    >
+                      Установите этот код в месте на странице сайта, где вы хотите разместить виджет. Обратите
+                      внимание, что для всех виджетов в одном контейнере используется единый код установки. И если
+                      этот код уже установлен, то повторная его установка не требуется.
                     </div>
 
-                    <div class="row row-subitem">
-                      <div class="col-sm-12 row-subitem-padding mt-2">
-                        <app-position-control
-                          *ngIf="widgetType === 'popup' || widgetType === 'optindot' || widgetType === 'label_widget' || widgetType === 'containerized'"
-                          [positions]="widgetType === 'popup' ? placePopup : widgetType === 'optindot' ? placeDh : widgetType === 'label_widget' ? placeLabel : staticWidgetAlign"
-                          [currentPosition]="widgetType === 'popup' ? widget.guiprops.popupMain?.place : widgetType === 'optindot' ? widget.guiprops.dhVisual?.place : widgetType === 'label_widget' ? widget.guiprops.labelMain?.place : widget.guiprops.staticMain?.position"
-                          (changePosition)="changePosition($event)"
-                        ></app-position-control>
-                      </div>
+                    <div class="d-flex row-subitem row-subitem-padding mt-">
+                      <app-position-control
+                        *ngIf="widgetType === 'popup' || widgetType === 'optindot' || widgetType === 'label_widget' || widgetType === 'containerized'"
+                        [positions]="widgetType === 'popup' ? placePopup : widgetType === 'optindot' ? placeDh : widgetType === 'label_widget' ? placeLabel : staticWidgetAlign"
+                        [currentPosition]="widgetType === 'popup' ? widget.guiprops.popupMain?.place : widgetType === 'optindot' ? widget.guiprops.dhVisual?.place : widgetType === 'label_widget' ? widget.guiprops.labelMain?.place : widget.guiprops.staticMain?.position"
+                        (changePosition)="changePosition($event)"
+                      ></app-position-control>
                     </div>
                   </div>
 
                   <ng-container *ngIf="widgetType === 'popup'">
                     <div class="border-item">
-                      <div class="row row-subitem mb-2">
-                        <div class="col-sm-12 row-subitem-padding">
-                          <h3 class="marg-minus-bord-des">Маска</h3>
-                        </div>
+                      <div class="d-flex row-subitem row-subitem-padding mb-2">
+                        <h3 class="marg-minus-bord-des">Маска</h3>
                       </div>
-                      <div class="row row-subitem mt-1">
-                        <div class="d-flex col-sm-12 row-subitem-padding pt-1">
-                          <ui-switch
-                            size="small"
-                            [(ngModel)]="widget.guiprops.popupMain?.shadow.enable"
-                          ></ui-switch>
-                          <label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Затемнять фон
-                            маской при показе виджета</label>
-                        </div>
+                      <div class="d-flex row-subitem-padding row-subitem mt-1 pt-1">
+                        <ui-switch
+                          size="small"
+                          [(ngModel)]="widget.guiprops.popupMain?.shadow.enable"
+                        ></ui-switch>
+                        <label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Затемнять фон
+                          маской при показе виджета</label>
                       </div>
                       <div *ngIf="widget.guiprops.popupMain?.shadow.enable == true">
                         <div class="row row-subitem">
@@ -163,19 +156,15 @@
                         </div>
                       </div>
                     </div>
-                    <div class="mt-3">
-                      <div class="col-sm-12 row-subitem-padding">
-                        <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
-                      </div>
+                    <div class="row-subitem-padding mt-3">
+                      <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
                     </div>
                   </ng-container>
 
                   <ng-container *ngIf="widgetType === 'optindot'">
                     <div class="border-item">
-                      <div class="row row-subitem mt-3">
-                        <div class="col-sm-12 row-subitem-padding">
-                          <h3>Дизайн точки</h3>
-                        </div>
+                      <div class="d-flex row-subitem row-subitem-padding mt-3">
+                        <h3>Дизайн точки</h3>
                       </div>
                       <div class="flex-column row-subitem pt-1">
                         <div class="row justify-content-between mt-3 mb-3">

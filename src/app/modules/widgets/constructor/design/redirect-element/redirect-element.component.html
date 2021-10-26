@@ -1,27 +1,23 @@
 <div *ngIf="widget.guiprops.formSet" class="border-item">
-  <div class="row row-subitem mb-2">
-    <div class="col-sm-12 row-subitem-padding">
-      <h3 class="marg-minus-bord-des">
-        {{ 'widgets.redirect.title' | translate }}
-        <a
-          data-toggle="tooltip"
-          data-placement="top"
-          data-container="#widgetStyle"
-          title=""
-          class="info-link info-link-wd"
+  <div class="d-flex row row-subitem justify-content-between w-100 row-subitem-padding">
+    <h3 class="marg-minus-bord-des">
+      {{ 'widgets.redirect.title' | translate }}
+      <a
+        data-toggle="tooltip"
+        data-placement="top"
+        data-container="#widgetStyle"
+        title=""
+        class="info-link info-link-wd"
 
-          [attr.data-original-title]="'widgets.redirect.tooltip' | translate"
-        >
-          <i class="fa fa-info-circle"></i>
-        </a>
-      </h3>
-    </div>
-  </div>
-  <div class="d-flex mt-3">
+        [attr.data-original-title]="'widgets.redirect.tooltip' | translate"
+      >
+        <i class="fa fa-info-circle"></i>
+      </a>
+    </h3>
     <ui-switch
       size="small"
       [(ngModel)]="widget.guiprops.formSet.redirect.enable"
-    ></ui-switch><label class="control-label switcher-label control-label-des mt-1 ml-2">{{ 'widgets.redirect.doOnClick' | translate }}</label>
+    ></ui-switch>
   </div>
   <div class="clearfix"></div>
   <!-- Page rule item -->

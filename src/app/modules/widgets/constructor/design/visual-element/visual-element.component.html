@@ -1,32 +1,33 @@
-<div class="border-item main-settings-for-top-el-near">
+<div class="main-settings-for-top-el-near">
   <div class="main-settings-for-top-el" id="elemScrNMainSetBl">
     <h3>Контент виджета</h3>
-    <div class="row align-items-center justify-content-between mt-3 mb-1">
-      <label class="control-label control-label-des">Ширина</label>
-      <div class="row align-items-center">
-        <div
-          class="form-control form-control-font mr-2"
-          [class.disabled]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
-        >
-          <input
-            type="number"
-            min="60"
-            [(ngModel)]="widget.guiprops.dhVisual.widget_content_widthpx"
-            [disabled]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
-          />
-          <label>px</label>
-        </div>
-        <button
-          class="content-type-button"
-          [class.active]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
-          (click)="widget.guiprops.dhVisual.widget_content_width = (widget.guiprops.dhVisual.widget_content_width === widgwidthBtn[0] ? widgwidthBtn[1] : widgwidthBtn[0])"
-        >
-          AUTO
-        </button>
-      </div>
-    </div>
 
     <div class="border-item">
+      <div class="row align-items-center justify-content-between mt-3 mb-1">
+        <label class="control-label control-label-des">Ширина</label>
+        <div class="row align-items-center">
+          <div
+            class="form-control form-control-font mr-2"
+            [class.disabled]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
+          >
+            <input
+              type="number"
+              min="60"
+              [(ngModel)]="widget.guiprops.dhVisual.widget_content_widthpx"
+              [disabled]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
+            />
+            <label>px</label>
+          </div>
+          <button
+            class="content-type-button"
+            [class.active]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
+            (click)="widget.guiprops.dhVisual.widget_content_width = (widget.guiprops.dhVisual.widget_content_width === widgwidthBtn[0] ? widgwidthBtn[1] : widgwidthBtn[0])"
+          >
+            AUTO
+          </button>
+        </div>
+      </div>
+
       <div class="row align-items-center justify-content-between mt-2">
         <label class="control-label control-label-des">Высота</label>
         <div class="row align-items-center">
@@ -346,27 +347,23 @@
     </div>
 
     <div *ngIf="widget.guiprops.image" id="elemScrNIVBl" class="image-or-video-settings-bl">
-      <div class="row row-subitem mt-3">
-        <div class="d-flex justify-content-between w-100 row-subitem-padding pt-1">
-          <label class="control-label switcher-label-xs control-label-des">
-            Изображение, видео или отступ
-          </label>
-          <ui-switch
-            size="small"
-            [(ngModel)]="widget.guiprops.image.enable"
-          ></ui-switch>
-        </div>
+      <div class="d-flex row-subitem justify-content-between row-subitem-padding pt-1 mt-3">
+        <label class="control-label switcher-label-xs control-label-des">
+          Изображение, видео или отступ
+        </label>
+        <ui-switch
+          size="small"
+          [(ngModel)]="widget.guiprops.image.enable"
+        ></ui-switch>
       </div>
       <div class="clearfix"></div>
 
       <!-- Page rule item -->
-      <div class="row row-subitem">
-        <div class="col-sm-12 row-subitem-padding widget-small-text">
-          Вы можете добавить изображение или видео и разместить его слева, справа, сверху или снизу от контента виджета.
-          Также вы можете добавить отступ. При добавлении отступа, фон виджета растягивается на всю ширину, включая
-          отступ. Обратите внимание, добавленный элемент скрывается на мобильных устройствах и работает только на
-          компьютерах и планшетах.
-        </div>
+      <div class="d-flex row-subitem row-subitem-padding widget-small-text">
+        Вы можете добавить изображение или видео и разместить его слева, справа, сверху или снизу от контента виджета.
+        Также вы можете добавить отступ. При добавлении отступа, фон виджета растягивается на всю ширину, включая
+        отступ. Обратите внимание, добавленный элемент скрывается на мобильных устройствах и работает только на
+        компьютерах и планшетах.
       </div>
 
       <div *ngIf="widget.guiprops['image'].enable == true">
@@ -670,12 +667,12 @@
         </label>
         <ui-switch
           size="small"
-          [checked]="widget.guiprops['bg'].borderRadius !== null"
+          [(ngModel)]="widget.guiprops.bg.borderRadiusEnable"
           (change)="setBorderRadius($event)"
         ></ui-switch>
       </div>
 
-      <div *ngIf="widget.guiprops['bg'].borderRadius === null" class="row justify-content-between mt-3">
+      <div *ngIf="widget.guiprops.bg.borderRadiusEnable" class="row justify-content-between mt-3">
         <h5 class="label-style-ic control-label-des">Толщина</h5>
         <div class="row text-right side-ui-sm">
           <ngx-slider [(value)]="widget.guiprops['bg'].borderRadius" [options]="optionsRound"></ngx-slider>

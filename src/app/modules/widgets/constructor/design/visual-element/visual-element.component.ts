@@ -56,6 +56,7 @@ export class VisualElementComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.widget.guiprops.bg.borderRadiusEnable = true;
   }
 
   public getVideoId(item) {
@@ -67,10 +68,8 @@ export class VisualElementComponent implements OnInit {
   }
 
   public setBorderRadius(value: boolean) {
-    this.widget.guiprops.bg.borderRadius = 0;
-
     if (!value) {
-      this.widget.guiprops.bg.borderRadius = null;
+      this.widget.guiprops.bg.borderRadius = 0;
     }
   }
 
