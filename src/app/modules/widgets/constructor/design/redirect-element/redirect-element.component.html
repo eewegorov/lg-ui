@@ -8,7 +8,6 @@
         data-container="#widgetStyle"
         title=""
         class="info-link info-link-wd"
-
         [attr.data-original-title]="'widgets.redirect.tooltip' | translate"
       >
         <i class="fa fa-info-circle"></i>
@@ -22,28 +21,20 @@
   <div class="clearfix"></div>
   <!-- Page rule item -->
   <div *ngIf="widget.guiprops['formSet'].redirect.enable === true">
-    <div class="row row-subitem">
-      <div
-        class="col-sm-12 row-subitem-padding pt-1 mt-2 widget-name-block-rel"
-        [ngClass]="(widget.guiprops['formSet'].redirect.url === '') ? 'is-invalid' : ''"
-      >
-        <label class="control-label">{{ 'widgets.redirect.onClickRedirect' | translate }}:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="widgetRedirectUrl"
-          (keyup)="validateRedirect($event)"
-          [(ngModel)]="widget.guiprops['formSet'].redirect.url"
-        />
-        <span class="input-down-sm-lab">{{ 'widgets.redirect.example' | translate }}: http://mywebsite.com</span>
-        <a (click)="removeWidgetRedirect($event)" class="remove-widget-name remove-widget-redirect" id="removeWidgetRedirect"></a>
-      </div>
-    </div>
-    <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding mt-2 widget-small-text">
-        {{ 'widgets.redirect.descriptionOld' | translate }}
-      </div>
-
+    <div
+      class="row-subitem row-subitem-padding pt-1 mt-2 widget-name-block-rel"
+      [ngClass]="(widget.guiprops['formSet'].redirect.url === '') ? 'is-invalid' : ''"
+    >
+      <label class="control-label text-wrap">{{ 'widgets.redirect.onClickRedirect' | translate }}:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="widgetRedirectUrl"
+        (keyup)="validateRedirect($event)"
+        [(ngModel)]="widget.guiprops['formSet'].redirect.url"
+        placeholder="http://"
+      />
+      <a (click)="removeWidgetRedirect($event)" class="remove-widget-name remove-widget-redirect" id="removeWidgetRedirect"></a>
     </div>
     <div class="row row-subitem mt-2">
       <div class="col-sm-12 row-subitem-padding pt-1">
@@ -56,7 +47,7 @@
             />
             <span class="checkmark"></span>
           </label>
-          {{ 'widgets.redirect.blank' | translate }}
+          <span class="form-check-text">{{ 'widgets.redirect.blank' | translate }}</span>
         </div>
       </div>
     </div>

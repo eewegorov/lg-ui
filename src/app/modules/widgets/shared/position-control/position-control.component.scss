@@ -31,6 +31,10 @@
   &:disabled {
     cursor: default;
     background: #F9F9F9;
+
+    &.white {
+      background: #FFFFFF;
+    }
   }
 
   &:not(:disabled):hover {

@@ -74,7 +74,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public bgPositionTypesList = ['Растянуть', 'Замостить'];
   public tilesList = ['Замостить по X', 'Замостить по Y', 'Замостить по X+Y'];
   public maskTypeList = ['Вся площадь виджета', 'Только под контентом'];
-  public placeImg = ['', 'Сверху', '', 'Слева', '',  'Справа', '', 'Снизу', ''];
+  public placeImg = [null, 'Сверху', null, 'Слева', '',  'Справа', null, 'Снизу', null];
   public imageItemsType = ['Растянуть по ширине и высоте блока', 'Установить произвольные габариты'];
   public imageItemsAlign = ['По центру', 'По верхнему краю', 'По нижнему краю'];
   public orientInputForm = ['Вертикальная', 'Горизонтальная'];
@@ -1769,24 +1769,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
 
   public wvBdLeft() {
     return this.widgetConstructorService.wvBdLeft(this.widget.guiprops.dhVisual);
-  }
-
-  public wvBLeft() {
-    if (!this.widget.guiprops.dhVisual) {
-      return;
-    }
-
-    let className = '';
-
-    if (this.widget.guiprops.dhVisual.place === 'Левый нижний угол') {
-      className = 'wv-b-left';
-    }
-
-    if (this.widget.guiprops.dhVisual.place === 'Правый нижний угол') {
-      className = 'wv-b-right';
-    }
-
-    return className;
   }
 
   public removeElementFromElementsList(index: number, elem?: Record<string, string>) {
