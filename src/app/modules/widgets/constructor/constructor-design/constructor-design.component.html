@@ -75,6 +75,13 @@
               <ng-container *ngIf="currentElement.split('#')[1] !== 'undefined'">
                 #{{ currentElement.split('#')[1] }}
               </ng-container>
+              <a
+                (click)="removeElementFromElementsList(+currentElement.split('#')[1], currentElement.split('#')[0])"
+                href="javascript:void(0);"
+              >
+                <i class="remove-sub-item far fa-trash-alt"></i>
+              </a>
+
             </ng-container>
           </h4>
         </div>
@@ -296,14 +303,17 @@
                           </div>
                         </div>
                       </div>
-                      <div class="row row-subitem mt-3">
-                        <div class="d-flex justify-content-between w-100 row-subitem-padding pt-1">
-                          <label class="control-label switcher-label-xs control-label-des">Убрать мерцание
-                            точки захвата</label>
-                          <ui-switch
-                            size="small"
-                            [(ngModel)]="widget.guiprops.dhVisual.enableBlink"
-                          ></ui-switch>
+                      <div class="row row-subitem row-subitem-padding pt-1 mt-3">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input
+                              type="checkbox"
+                              [(ngModel)]="widget.guiprops.dhVisual.enableBlink"
+                              class="form-check-input"
+                            />
+                            <span class="checkmark"></span>
+                          </label>
+                          <span class="form-check-text f-3">Убрать мерцание точки захвата</span>
                         </div>
                       </div>
                     </div>
@@ -537,10 +547,11 @@
             <div class="panel panel-default" id="1">
               <div id="collapseTwo" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingTwo">
                 <div *ngIf="widget.guiprops && widget.guiprops.elementsList" class="panel-body">
-
                   <div *ngFor="let item of widget.guiprops.elementsList; index as i" [id]="'elemScrN' + i">
-                    <div *ngIf="item.name === 'button-element'"
-                         [hidden]="currentElement !== 'button-element' + ('#' + item.counter ?? '')">
+                    <div
+                      *ngIf="item.name === 'button-element'"
+                      [hidden]="currentElement !== 'button-element' + ('#' + item.counter ?? '')"
+                    >
                       <app-button-element
                         [index]="i"
                         [widget]="widget"

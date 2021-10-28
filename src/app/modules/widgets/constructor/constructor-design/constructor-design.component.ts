@@ -1771,13 +1771,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     return this.widgetConstructorService.wvBdLeft(this.widget.guiprops.dhVisual);
   }
 
-  public removeElementFromElementsList(index: number, elem?: Record<string, string>) {
+  public removeElementFromElementsList(index: number, elem?: string) {
     if (elem) {
-      if (elem.name === 'form-element' || elem.name === 'button-element') {
+      if (elem === 'form-element' || elem === 'button-element') {
         this.widget.guiprops.form.enable = false;
         this.widget.guiprops.button.enable = false;
       }
-      if (elem.name === 'form-ext-element') {
+      if (elem === 'form-ext-element') {
         this.widget.guiprops.formExt.enable = false;
         this.widget.guiprops.formExt.model.list = [];
       }

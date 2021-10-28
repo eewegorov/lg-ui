@@ -229,17 +229,13 @@
 
 .remove-element-from-list-view {
   position: absolute;
-  right: -27px;
-  top: 25%;
-  transform: translateZ(19px);
-  width: 25px;
-  height: 25px;
+  top: -1px;
+  right: -19px;
   padding-left: 2px;
   padding-right: 2px;
   margin: 0;
   color: #fff;
   display: none;
-  background-color: rgba(52, 152, 219, 1);
   background-color: #4898A8;
   border-radius: 3px;
 }
@@ -260,19 +256,14 @@
   color: #ff0000;
 }
 
-.element-to-append-summernote {
-  transform-style: preserve-3d;
-  z-index: 99999;
-}
-
 .move-element-view {
   color: #fff;
   cursor: move;
   position: absolute;
-  width: 25px;
-  height: 25px;
-  top: 25%;
-  left: -27px;
+  width: 19px;
+  height: 19px;
+  top: -1px;
+  left: -19px;
   padding-left: 1px;
   padding-right: 1px;
   text-align: center;
