@@ -20,7 +20,7 @@
 
 .menu-fixed {
   width: 100%;
-  padding: 20px 0 10px 23px;
+  padding: 20px 25px 10px 23px;
   z-index: 10;
   color: #16181D;
 }
@@ -538,6 +538,16 @@ h6.title-h6-widget a:hover {
       transition: 0.4s;
     }
   }
+}
+
+.remove-sub-item {
+  display: block;
+  float: right;
+  width: 25px;
+  height: 25px;
+  mask: url("~src/assets/images/widgets/trash.svg") no-repeat center;
+  mask-size: contain;
+  background-color: #E25336;
 }
 
 .elements {
