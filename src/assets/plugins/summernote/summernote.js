@@ -9347,7 +9347,7 @@
                 this.$popover.css({
                   display: 'block',
                   right: 'auto',
-                  left: elementToAppend.offset().left + 110,
+                  left: '50%',
                   top: elementToAppend.offset().top + 15
                 });
               }
@@ -9360,7 +9360,7 @@
               this.$popover.css({
                 display: 'block',
                 right: 'auto',
-                left: elementToAppend.offset().left + 110,
+                left: '50%',
                 top: elementToAppend.offset().top + 15
               });
             }

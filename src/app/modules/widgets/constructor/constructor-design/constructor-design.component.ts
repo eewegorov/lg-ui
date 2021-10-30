@@ -1784,6 +1784,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       }
     }
     this.widget.guiprops.elementsList = this.widget.guiprops.elementsList.filter((_, i) => i !== index);
+
+    if (index === this.currentIndex) {
+      this.currentElement = 'settings';
+      this.currentIndex = 0;
+    }
   }
 
   public setBtnStyle(type: string, item: Record<string, string | number>): void {
