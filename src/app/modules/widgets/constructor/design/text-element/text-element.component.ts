@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { FullWidget } from '../../../../../core/models/widgets';
 import { WidgetConstructorService } from '../../../services/widget-constructor.service';
@@ -12,8 +12,6 @@ export class TextElementComponent implements OnInit, AfterViewInit {
   @Input() public index: number;
   @Input() public item: any;
   @Input() public widget: FullWidget;
-
-  @Output() private removeElement = new EventEmitter<number>();
 
   public optionsOpacity: Options = {
     floor: 0.00,
@@ -30,10 +28,6 @@ export class TextElementComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-  }
-
-  public removeElementFromElementsList(index: number): void {
-    this.removeElement.emit(index);
   }
 
   private initPicker() {

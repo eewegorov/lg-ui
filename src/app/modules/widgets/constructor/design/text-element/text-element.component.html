@@ -1,75 +1,69 @@
 <div class="border-item">
-  <div>
-    <h4 class="h4-element-title">
-      Текст &#35;{{ item.counter }} <a (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
-    </h4>
-    <div class="clearfix"></div>
-    <div class="row row-subitem pt-1">
-      <div class="col-sm-12 row-subitem-padding">
-        <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
-      </div>
-      <div class="col-sm-12 row-subitem-padding">
-        <input [id]="'font-picker' + index" type="text">
-      </div>
+  <div class="row row-subitem pt-1">
+    <div class="col-sm-12 row-subitem-padding">
+      <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
     </div>
+    <div class="col-sm-12 row-subitem-padding">
+      <input [id]="'font-picker' + index" type="text">
+    </div>
+  </div>
+  <div class="row row-subitem">
+    <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
+      <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
+      <label class="control-label ml-1">px <span>размер текста</span></label>
+    </div>
+  </div>
+  <div class="row row-subitem mt-2">
+    <div class="d-flex col-sm-12 row-subitem-padding pt-1">
+      <ui-switch
+        size="small"
+        [(ngModel)]="item.textShadow.enable"
+      ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Добавить тень</label>
+    </div>
+  </div>
+  <div *ngIf="item.textShadow.enable == true">
     <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
-        <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
-        <label class="control-label ml-1">px <span>размер текста</span></label>
+      <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
+        <label class="control-label control-label-colorpc control-label-des">Цвет тени:</label>
+        <input
+          [(colorPicker)]="item.textShadow.color"
+          [style.background]="item.textShadow.color"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          class="w-100"
+        />
+      </div>
+      <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
+        <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
+        <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod" [options]="optionsOpacity"></ngx-slider>
       </div>
     </div>
-    <div class="row row-subitem mt-2">
-      <div class="d-flex col-sm-12 row-subitem-padding pt-1">
-        <ui-switch
-          size="small"
-          [(ngModel)]="item.textShadow.enable"
-        ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Добавить тень</label>
+    <div class="row row-subitem mt-1">
+      <div class="col-sm-5 row-subitem-padding pt-1 mr-3 d-flex flex-column">
+        <label class="control-label control-label-des">Сдвиг по горизонтали:</label>
+        <input
+          type="number"
+          class="form-control form-control-font form-control-block form-cntrl-45w"
+          [(ngModel)]="item.textShadow.horiz"
+        />
+      </div>
+      <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
+        <label class="control-label control-label-des">Сдвиг по вертикали:</label>
+        <input
+          type="number"
+          class="form-control form-control-font form-control-block form-cntrl-45w"
+          [(ngModel)]="item.textShadow.vertical"
+        />
       </div>
     </div>
-    <div *ngIf="item.textShadow.enable == true">
-      <div class="row row-subitem">
-        <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
-          <label class="control-label control-label-colorpc control-label-des">Цвет тени:</label>
-          <input
-            [(colorPicker)]="item.textShadow.color"
-            [style.background]="item.textShadow.color"
-            [cpAlphaChannel]="'disabled'"
-            [cpOutputFormat]="'hex'"
-            class="w-100"
-          />
-        </div>
-        <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
-          <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
-          <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod" [options]="optionsOpacity"></ngx-slider>
-        </div>
-      </div>
-      <div class="row row-subitem mt-1">
-        <div class="col-sm-5 row-subitem-padding pt-1 mr-3 d-flex flex-column">
-          <label class="control-label control-label-des">Сдвиг по горизонтали:</label>
-          <input
-            type="number"
-            class="form-control form-control-font form-control-block form-cntrl-45w"
-            [(ngModel)]="item.textShadow.horiz"
-          />
-        </div>
-        <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
-          <label class="control-label control-label-des">Сдвиг по вертикали:</label>
-          <input
-            type="number"
-            class="form-control form-control-font form-control-block form-cntrl-45w"
-            [(ngModel)]="item.textShadow.vertical"
-          />
-        </div>
-      </div>
-      <div class="row row-subitem mt-1">
-        <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
-          <label class="control-label control-label-des">Резкость:</label>
-          <input
-            type="number"
-            class="form-control form-control-font form-control-block form-cntrl-45w"
-            [(ngModel)]="item.textShadow.blur"
-          />
-        </div>
+    <div class="row row-subitem mt-1">
+      <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
+        <label class="control-label control-label-des">Резкость:</label>
+        <input
+          type="number"
+          class="form-control form-control-font form-control-block form-cntrl-45w"
+          [(ngModel)]="item.textShadow.blur"
+        />
       </div>
     </div>
   </div>

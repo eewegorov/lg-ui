@@ -1,13 +1,34 @@
 <div class="border-item">
-  <div>
-    <h4 class="h4-element-title">
-      Купон &#35;{{ item.counter }} <a (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
-    </h4>
-    <div class="clearfix"></div>
+  <div *ngIf="!coupons.length" class="row row-subitem mt-2">
+    <div class="col-sm-12 row-subitem-padding pt-1 coupons-flex-wr">
+      <a href="../../../coupons/?enableCouponModal=true" target="_blank" class="btn btn-primary btn-coupon-add">Добавить купон</a>
+      <button
+        (click)="refreshCouponsList()"
+        class="btn btn-default refresh-coupons-element-btn"
+        data-toggle="tooltip"
+        data-container="body"
+        data-placement="top"
+        title=""
+        [attr.data-original-title]="'Обновить список купонов'"
+      ><i class="fas fa-sync"></i></button>
+    </div>
+  </div>
 
-    <div *ngIf="!coupons.length" class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 coupons-flex-wr">
-        <a href="../../../coupons/?enableCouponModal=true" target="_blank" class="btn btn-primary btn-coupon-add">Добавить купон</a>
+  <div *ngIf="coupons.length" class="row row-subitem mt-1">
+    <div class="col-sm-12 row-subitem-padding pt-1">
+      <label class="control-label control-label-des">Выберите купон:</label>
+      <div class="coupons-flex-wr">
+        <div class="dropdown btn-coupon-chose">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{ item.coupon.name }}
+            <span class="caret"></span>
+          </button>
+          <ul role="menu" class="dropdown-menu">
+            <li role="presentation" *ngFor="let itemCoupon of coupons" (click)="item.coupon = itemCoupon">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemCoupon.name }}</a>
+            </li>
+          </ul>
+        </div>
         <button
           (click)="refreshCouponsList()"
           class="btn btn-default refresh-coupons-element-btn"
@@ -15,256 +36,228 @@
           data-container="body"
           data-placement="top"
           title=""
-          [attr.data-original-title]="'Обновить список купонов'"
+          [attr.data-original-title]="'widgets.coupon.couponCallback.couponRefresh' | translate"
         ><i class="fas fa-sync"></i></button>
       </div>
     </div>
+  </div>
+  <div class="row row-subitem mt-1">
+    <div class="col-sm-12 row-subitem-padding widget-small-text underline-links blue-links hover-links">
+      Вы можете использовать в элементе один из ранее добавленных купонов. Если вы еще не добавили ни одного купона, вы можете добавить его на <a href="../../../coupons/" target="_blank">странице "Купоны"</a> и после этого вернуться к настройке элемента.
+    </div>
+  </div>
 
-    <div *ngIf="coupons.length" class="row row-subitem mt-1">
-      <div class="col-sm-12 row-subitem-padding pt-1">
-        <label class="control-label control-label-des">Выберите купон:</label>
-        <div class="coupons-flex-wr">
-          <div class="dropdown btn-coupon-chose">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{ item.coupon.name }}
-              <span class="caret"></span>
-            </button>
-            <ul role="menu" class="dropdown-menu">
-              <li role="presentation" *ngFor="let itemCoupon of coupons" (click)="item.coupon = itemCoupon">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemCoupon.name }}</a>
-              </li>
-            </ul>
-          </div>
-          <button
-            (click)="refreshCouponsList()"
-            class="btn btn-default refresh-coupons-element-btn"
-            data-toggle="tooltip"
-            data-container="body"
-            data-placement="top"
-            title=""
-            [attr.data-original-title]="'widgets.coupon.couponCallback.couponRefresh' | translate"
-          ><i class="fas fa-sync"></i></button>
-        </div>
+  <div class="mt-1">
+    <h4 class="h4-text-tit control-label-des helper-title-3level mb-0">Настройки дизайна</h4>
+  </div>
+
+  <div class="row row-subitem mt-2">
+    <div class="col-sm-6 row-subitem-padding pt-1">
+      <label class="control-label control-label-colorpc control-label-des">Цвет текста:</label>
+      <input
+        [(colorPicker)]="item.colorText"
+        [style.background]="item.colorText"
+        [cpAlphaChannel]="'disabled'"
+        [cpOutputFormat]="'hex'"
+      />
+    </div>
+    <div class="col-sm-6 row-subitem-padding pt-1">
+      <label class="control-label control-label-colorpc control-label-des">Цвет фона:</label>
+      <input
+        [(colorPicker)]="item.color"
+        [style.background]="item.color"
+        [cpAlphaChannel]="'disabled'"
+        [cpOutputFormat]="'hex'"
+        cpPosition="top"
+      />
+    </div>
+  </div>
+
+  <div class="row row-subitem mt-2 pt-2">
+    <div class="col-sm-12 row-subitem-padding side-ui-sm">
+      <ngx-slider [(value)]="item.opacity" [options]="optionsOpacity" style="margin-right: 18px"></ngx-slider>
+      <label class="control-label control-label-ui ml-2">Прозрачность фона</label>
+    </div>
+  </div>
+
+  <div class="row row-subitem mt-2 mb-2">
+    <div class="col-sm-12 row-subitem-padding side-ui-sm">
+      <ngx-slider [(value)]="item.borderRadius" [options]="optionsRound" style="margin-right: 18px"></ngx-slider>
+      <label class="control-label control-label-ui ml-2">Закругление углов</label>
+    </div>
+  </div>
+
+  <div class="row row-subitem pt-1">
+    <div class="col-sm-12 row-subitem-padding">
+      <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
+    </div>
+    <div class="col-sm-12 row-subitem-padding">
+      <input type="text" [id]="'font-picker' + index">
+    </div>
+  </div>
+  <div class="row row-subitem">
+    <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
+      <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
+      <label class="control-label ml-1">px <span>размер текста</span></label>
+    </div>
+  </div>
+
+  <div class="row row-subitem mt-2">
+    <div class="col-sm-6 row-subitem-padding pt-1 pr-3">
+      <label class="control-label control-label-des">Ширина элемента:</label>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+          {{ item.width_type }}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li role="presentation" *ngFor="let itemVisual of widthBtn" (click)="item.width_type = itemVisual">
+            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="row row-subitem mt-1">
-      <div class="col-sm-12 row-subitem-padding widget-small-text underline-links blue-links hover-links">
-        Вы можете использовать в элементе один из ранее добавленных купонов. Если вы еще не добавили ни одного купона, вы можете добавить его на <a href="../../../coupons/" target="_blank">странице "Купоны"</a> и после этого вернуться к настройке элемента.
+    <div class="col-sm-6 row-subitem-padding pt-1">
+      <label class="control-label control-label-des">Ориентация:</label>
+      <div class="dropdown">
+        <button
+          type="button"
+          class="btn btn-default dropdown-toggle"
+          [disabled]="item.width_type === 'От края до края'"
+          data-toggle="dropdown"
+          aria-expanded="true"
+        >
+          {{ item.position }}
+          <span class="caret"></span>
+        </button>
+        <ul role="menu" class="dropdown-menu">
+          <li role="presentation" *ngFor="let itemVisual of floatBtn" (click)="item.position = itemVisual">
+            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
+          </li>
+        </ul>
       </div>
     </div>
-
-    <div class="mt-1">
-      <h4 class="h4-text-tit control-label-des helper-title-3level mb-0">Настройки дизайна</h4>
+  </div>
+  <div *ngIf="item.width_type === 'Собственная'">
+    <div class="pt-1 mt-2">
+      <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthpx">
+      <label class="control-label ml-1">px <span class="ml-1">ширина элемента</span></label>
     </div>
+    <div class="clearfix"></div>
+  </div>
 
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-6 row-subitem-padding pt-1">
-        <label class="control-label control-label-colorpc control-label-des">Цвет текста:</label>
-        <input
-          [(colorPicker)]="item.colorText"
-          [style.background]="item.colorText"
-          [cpAlphaChannel]="'disabled'"
-          [cpOutputFormat]="'hex'"
-        />
-      </div>
-      <div class="col-sm-6 row-subitem-padding pt-1">
-        <label class="control-label control-label-colorpc control-label-des">Цвет фона:</label>
-        <input
-          [(colorPicker)]="item.color"
-          [style.background]="item.color"
-          [cpAlphaChannel]="'disabled'"
-          [cpOutputFormat]="'hex'"
-          cpPosition="top"
-        />
-      </div>
+  <div class="row row-subitem">
+    <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
+      <label class="control-label control-label-des">Текст при наведении:</label>
+      <input type="text" class="form-control" [(ngModel)]="item.hoverText" placeholder="">
     </div>
+  </div>
 
-    <div class="row row-subitem mt-2 pt-2">
-      <div class="col-sm-12 row-subitem-padding side-ui-sm">
-        <ngx-slider [(value)]="item.opacity" [options]="optionsOpacity" style="margin-right: 18px"></ngx-slider>
-        <label class="control-label control-label-ui ml-2">Прозрачность фона</label>
-      </div>
+  <div class="row row-subitem">
+    <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
+      <label class="control-label control-label-des">Текст при клике:</label>
+      <input type="text" class="form-control" [(ngModel)]="item.clickText" placeholder="">
     </div>
+  </div>
 
-    <div class="row row-subitem mt-2 mb-2">
-      <div class="col-sm-12 row-subitem-padding side-ui-sm">
-        <ngx-slider [(value)]="item.borderRadius" [options]="optionsRound" style="margin-right: 18px"></ngx-slider>
-        <label class="control-label control-label-ui ml-2">Закругление углов</label>
-      </div>
+  <div class="row row-subitem mt-3">
+    <div class="d-flex col-sm-12 row-subitem-padding pt-1">
+      <ui-switch
+        size="small"
+        [(ngModel)]="item.title.enable"
+      ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Добавить призыв к действию</label>
     </div>
+  </div>
 
+  <div [hidden]="!item.title.enable" class="mt-2">
     <div class="row row-subitem pt-1">
       <div class="col-sm-12 row-subitem-padding">
         <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
       </div>
       <div class="col-sm-12 row-subitem-padding">
-        <input type="text" [id]="'font-picker' + index">
+        <input type="text" [id]="'font-picker-title' + index">
       </div>
     </div>
     <div class="row row-subitem">
       <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
-        <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
+        <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.title.fontSize">
         <label class="control-label ml-1">px <span>размер текста</span></label>
       </div>
     </div>
-
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-6 row-subitem-padding pt-1 pr-3">
-        <label class="control-label control-label-des">Ширина элемента:</label>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{ item.width_type }}
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li role="presentation" *ngFor="let itemVisual of widthBtn" (click)="item.width_type = itemVisual">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-sm-6 row-subitem-padding pt-1">
-        <label class="control-label control-label-des">Ориентация:</label>
-        <div class="dropdown">
-          <button
-            type="button"
-            class="btn btn-default dropdown-toggle"
-            [disabled]="item.width_type === 'От края до края'"
-            data-toggle="dropdown"
-            aria-expanded="true"
-          >
-            {{ item.position }}
-            <span class="caret"></span>
-          </button>
-          <ul role="menu" class="dropdown-menu">
-            <li role="presentation" *ngFor="let itemVisual of floatBtn" (click)="item.position = itemVisual">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="item.width_type === 'Собственная'">
-      <div class="pt-1 mt-2">
-        <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthpx">
-        <label class="control-label ml-1">px <span class="ml-1">ширина элемента</span></label>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-
-    <div class="row row-subitem">
-      <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
-        <label class="control-label control-label-des">Текст при наведении:</label>
-        <input type="text" class="form-control" [(ngModel)]="item.hoverText" placeholder="">
-      </div>
-    </div>
-
-    <div class="row row-subitem">
-      <div class="col-sm-12 widget-name-block-rel row-subitem-padding pt-1 mt-2">
-        <label class="control-label control-label-des">Текст при клике:</label>
-        <input type="text" class="form-control" [(ngModel)]="item.clickText" placeholder="">
-      </div>
-    </div>
-
     <div class="row row-subitem mt-3">
-      <div class="d-flex col-sm-12 row-subitem-padding pt-1">
+      <div class="col-sm-12 row-subitem-padding pt-1">
         <ui-switch
           size="small"
-          [(ngModel)]="item.title.enable"
-        ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Добавить призыв к действию</label>
+          [(ngModel)]="item.title.textShadow.enable"
+        ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Добавить тень</label>
       </div>
     </div>
-
-    <div [hidden]="!item.title.enable" class="mt-2">
-      <div class="row row-subitem pt-1">
-        <div class="col-sm-12 row-subitem-padding">
-          <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
-        </div>
-        <div class="col-sm-12 row-subitem-padding">
-          <input type="text" [id]="'font-picker-title' + index">
-        </div>
-      </div>
+    <div *ngIf="item.title.textShadow.enable">
       <div class="row row-subitem">
-        <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
-          <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.title.fontSize">
-          <label class="control-label ml-1">px <span>размер текста</span></label>
+        <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
+          <label class="control-label control-label-colorpc control-label-des">Цвет тени:</label>
+          <input
+            [(colorPicker)]="item.title.textShadow.color"
+            [style.background]="item.title.textShadow.color"
+            [cpAlphaChannel]="'disabled'"
+            [cpOutputFormat]="'hex'"
+            class="w-100"
+          />
+        </div>
+        <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
+          <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
+          <ngx-slider [(value)]="item.title.textShadow.opacity" [options]="optionsOpacity" style="margin-right: 18px"></ngx-slider>
         </div>
       </div>
-      <div class="row row-subitem mt-3">
-        <div class="col-sm-12 row-subitem-padding pt-1">
-          <ui-switch
-            size="small"
-            [(ngModel)]="item.title.textShadow.enable"
-          ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Добавить тень</label>
+      <div class="row row-subitem mt-1">
+        <div class="col-sm-5 row-subitem-padding pt-1 mr-3 d-flex flex-column">
+          <label class="control-label control-label-des">Сдвиг по горизонтали:</label>
+          <input
+            type="number"
+            class="form-control form-control-font form-control-block form-cntrl-45w"
+            [(ngModel)]="item.title.textShadow.horiz"
+          />
+        </div>
+        <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
+          <label class="control-label control-label-des">Сдвиг по вертикали:</label>
+          <input
+            type="number"
+            class="form-control form-control-font form-control-block form-cntrl-45w"
+            [(ngModel)]="item.title.textShadow.vertical"
+          />
         </div>
       </div>
-      <div *ngIf="item.title.textShadow.enable">
-        <div class="row row-subitem">
-          <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
-            <label class="control-label control-label-colorpc control-label-des">Цвет тени:</label>
-            <input
-              [(colorPicker)]="item.title.textShadow.color"
-              [style.background]="item.title.textShadow.color"
-              [cpAlphaChannel]="'disabled'"
-              [cpOutputFormat]="'hex'"
-              class="w-100"
-            />
-          </div>
-          <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
-            <label class="control-label control-label-colorpc control-label-des">Прозрачность:</label>
-            <ngx-slider [(value)]="item.title.textShadow.opacity" [options]="optionsOpacity" style="margin-right: 18px"></ngx-slider>
-          </div>
-        </div>
-        <div class="row row-subitem mt-1">
-          <div class="col-sm-5 row-subitem-padding pt-1 mr-3 d-flex flex-column">
-            <label class="control-label control-label-des">Сдвиг по горизонтали:</label>
-            <input
-              type="number"
-              class="form-control form-control-font form-control-block form-cntrl-45w"
-              [(ngModel)]="item.title.textShadow.horiz"
-            />
-          </div>
-          <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
-            <label class="control-label control-label-des">Сдвиг по вертикали:</label>
-            <input
-              type="number"
-              class="form-control form-control-font form-control-block form-cntrl-45w"
-              [(ngModel)]="item.title.textShadow.vertical"
-            />
-          </div>
-        </div>
-        <div class="row row-subitem mt-1">
-          <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
-            <label class="control-label control-label-des">Резкость:</label>
-            <input
-              type="number"
-              class="form-control form-control-font form-control-block form-cntrl-45w"
-              [(ngModel)]="item.title.textShadow.blur"
-            />
-          </div>
+      <div class="row row-subitem mt-1">
+        <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
+          <label class="control-label control-label-des">Резкость:</label>
+          <input
+            type="number"
+            class="form-control form-control-font form-control-block form-cntrl-45w"
+            [(ngModel)]="item.title.textShadow.blur"
+          />
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="mt-1 mb-1">
-      <h4 class="h4-text-tit control-label-des helper-title-3level">
-        {{ 'widgets.coupon.setting.actions' | translate }}
-      </h4>
-    </div>
+  <div class="mt-1 mb-1">
+    <h4 class="h4-text-tit control-label-des helper-title-3level">
+      {{ 'widgets.coupon.setting.actions' | translate }}
+    </h4>
+  </div>
 
-    <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding pt-1">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input
-              type="checkbox"
-              [(ngModel)]="item.isCopyAction"
-              class="form-check-input"
-            />
-            <span class="checkmark"></span>
-          </label>
-          {{ 'widgets.coupon.setting.isCopyAction' | translate }}
-        </div>
+  <div class="row row-subitem">
+    <div class="col-sm-12 row-subitem-padding pt-1">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            type="checkbox"
+            [(ngModel)]="item.isCopyAction"
+            class="form-check-input"
+          />
+          <span class="checkmark"></span>
+        </label>
+        {{ 'widgets.coupon.setting.isCopyAction' | translate }}
       </div>
     </div>
   </div>

@@ -17,7 +17,6 @@ export class CloselinkElementComponent implements OnInit {
   @Input() public widthBtn: string[];
   @Input() public floatBtn: string[];
 
-  @Output() private removeElement = new EventEmitter<number>();
   @Output() private setBtn = new EventEmitter<{type: string, item: Record<string, string | number>}>();
 
   public optionsRound: Options = {
@@ -32,10 +31,6 @@ export class CloselinkElementComponent implements OnInit {
 
   ngOnInit(): void {
     this.initPicker();
-  }
-
-  public removeElementFromElementsList(index: number): void {
-    this.removeElement.emit(index);
   }
 
   public setBtnStyle(type: string, item: Record<string, string | number>): void {

@@ -25,7 +25,7 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
   @Input() public widthContentStyle: string;
   @Input() public heightContentStyle: string;
 
-  @Output() private removeElement = new EventEmitter<{index: number, elem: Record<string, string>}>();
+  @Output() private removeElement = new EventEmitter<{element: string, index: number}>();
   @Output() private scrollToElement = new EventEmitter<{id: string, elementName: string, elementCounter: number}>();
   @Output() private addNewElement = new EventEmitter<number>();
 
@@ -91,8 +91,8 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
     this.scrollToElement.emit({ id, elementName, elementCounter });
   }
 
-  public removeElementFromElementsList(index: number, elem: Record<string, string>): void {
-    this.removeElement.emit({index, elem});
+  public removeElementFromElementsList(element: string, index: number): void {
+    this.removeElement.emit({ element, index });
   }
 
   public addNewElementToContent(item?: number) {

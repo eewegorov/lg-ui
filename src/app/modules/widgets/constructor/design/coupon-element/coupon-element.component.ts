@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { Coupon } from '../../../../../core/models/coupons';
 import { CouponService } from '../../../../coupons/services/coupon.service';
@@ -15,8 +15,6 @@ export class CouponElementComponent implements OnInit, AfterViewInit, OnChanges 
   @Input() public item: Record<string, any>;
   @Input() public widthBtn: string[];
   @Input() public floatBtn: string[];
-
-  @Output() private removeElement = new EventEmitter<number>();
 
   public optionsRound: Options = {
     floor: 0,
@@ -53,10 +51,6 @@ export class CouponElementComponent implements OnInit, AfterViewInit, OnChanges 
       $('#font-picker' + this.index).trigger('setFont', this.item.font.name);
       $('#font-picker-title' + this.index).trigger('setFont', this.item.title.font.name);
     }
-  }
-
-  public removeElementFromElementsList(index: number): void {
-    this.removeElement.emit(index);
   }
 
   public refreshCouponsList() {

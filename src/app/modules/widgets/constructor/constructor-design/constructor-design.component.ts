@@ -91,6 +91,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public heightImageStyle = '';
   public staticWidgetInstallCode = '';
   public currentElement = 'settings';
+  public currentIndex = 0;
   public widgetType: WidgetTypeCode;
   public isThankShow = false;
   public addElemFromWidget = false;
@@ -1771,18 +1772,18 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     return this.widgetConstructorService.wvBdLeft(this.widget.guiprops.dhVisual);
   }
 
-  public removeElementFromElementsList(index: number, elem?: string) {
-    if (elem) {
-      if (elem === 'form-element' || elem === 'button-element') {
+  public removeCurrentElement(element: string, index: number): void {
+    if (element) {
+      if (element === 'form-element' || element === 'button-element') {
         this.widget.guiprops.form.enable = false;
         this.widget.guiprops.button.enable = false;
       }
-      if (elem === 'form-ext-element') {
+      if (element === 'form-ext-element') {
         this.widget.guiprops.formExt.enable = false;
         this.widget.guiprops.formExt.model.list = [];
       }
     }
-    this.widget.guiprops.elementsList = this.widget.guiprops.elementsList.filter((element, i) => i !== index);
+    this.widget.guiprops.elementsList = this.widget.guiprops.elementsList.filter((_, i) => i !== index);
   }
 
   public setBtnStyle(type: string, item: Record<string, string | number>): void {

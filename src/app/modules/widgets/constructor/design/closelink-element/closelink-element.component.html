@@ -1,28 +1,22 @@
 <div class="border-item">
-  <h4 class="h4-element-title">Ссылка / Кнопка закрытия <a
-    (click)="removeElementFromElementsList(index)" href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
-  </h4>
-  <div class="clearfix"></div>
-  <div class="mt-1">
-    <div class="row row-subitem pt-1 mb-2">
-      <div class="col-sm-12 row-subitem-padding">
-        <h4 class="h4-text-tit control-label-des">Выберите тип элемента:</h4>
+  <div class="row row-subitem mt-1 pt-1 mb-2">
+    <div class="col-sm-12 row-subitem-padding">
+      <h4 class="h4-text-tit control-label-des">Выберите тип элемента:</h4>
+    </div>
+    <div class="col-sm-6 row-subitem-padding">
+      <div class="form-group widget-selector mb-0">
+        <label>
+          <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops.exit.button.enable" [value]="false">
+          Ссылка закрытия
+        </label>
       </div>
-      <div class="col-sm-6 row-subitem-padding">
-        <div class="form-group widget-selector mb-0">
-          <label>
-            <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops.exit.button.enable" [value]="false">
-            Ссылка закрытия
-          </label>
-        </div>
-      </div>
-      <div class="col-sm-6 row-subitem-padding">
-        <div class="form-group widget-selector mb-0">
-          <label>
-            <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops.exit.button.enable" [value]="true">
-            Кнопка закрытия
-          </label>
-        </div>
+    </div>
+    <div class="col-sm-6 row-subitem-padding">
+      <div class="form-group widget-selector mb-0">
+        <label>
+          <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="widget.guiprops.exit.button.enable" [value]="true">
+          Кнопка закрытия
+        </label>
       </div>
     </div>
   </div>

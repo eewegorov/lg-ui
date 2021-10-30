@@ -11,17 +11,12 @@ export class VideoElementComponent implements OnInit {
   @Input() public widthHrType: string[];
   @Input() public floatBtn: string[];
 
-  @Output() private removeElement = new EventEmitter<number>();
   @Output() private getVideo = new EventEmitter<Record<string, string>>();
   @Output() private setVideoSize = new EventEmitter<Record<string, string>>();
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  public removeElementFromElementsList(index: number): void {
-    this.removeElement.emit(index);
   }
 
   public getVideoId(item) {

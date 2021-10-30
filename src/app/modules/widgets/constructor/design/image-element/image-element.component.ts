@@ -11,16 +11,11 @@ export class ImageElementComponent implements OnInit {
   @Input() public widthHrType: string[];
   @Input() public floatBtn: string[];
 
-  @Output() private removeElement = new EventEmitter<number>();
   @Output() private listFileItem = new EventEmitter<{place: string, item: any}>();
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  public removeElementFromElementsList(index: number): void {
-    this.removeElement.emit(index);
   }
 
   public listFile(place, item) {

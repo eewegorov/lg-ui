@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { TranslateService } from '@ngx-translate/core';
 import { FullWidget } from '../../../../../../core/models/widgets';
@@ -13,8 +13,6 @@ export class TimerElementComponent implements OnInit, OnChanges {
   @Input() public index: number;
   @Input() public item: any;
   @Input() public widget: FullWidget;
-
-  @Output() private removeElement = new EventEmitter<number>();
 
   public alignValues = [];
   public timerTypes = [];
@@ -66,10 +64,6 @@ export class TimerElementComponent implements OnInit, OnChanges {
         $('#font-picker-label-timer' + this.index).trigger('setFont', changes.item.currentValue.design.fontLabel.name);
       }
     }
-  }
-
-  public removeElementFromElementsList(index: number): void {
-    this.removeElement.emit(index);
   }
 
   public setNullData(key) {

@@ -1,12 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
-  Output,
   SimpleChanges
 } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
@@ -27,8 +25,6 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   @Input() public widget: FullWidget;
   @Input() public coupons: Coupon[];
   @Input() public placePopup: string[];
-
-  @Output() private removeElement = new EventEmitter<{index: number, elem: Record<string, string>}>();
 
   public optionsRound: Options = {
     floor: 0,
@@ -125,10 +121,6 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
         this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent!important';
       }
     }
-  }
-
-  public removeElementFromElementsList(index: number, elem: Record<string, string>): void {
-    this.removeElement.emit({index, elem});
   }
 
   public dragItemClass(item) {

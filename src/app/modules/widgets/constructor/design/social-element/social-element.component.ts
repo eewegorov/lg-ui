@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FullWidget } from '../../../../../core/models/widgets';
 import { WidgetConstructorService } from '../../../services/widget-constructor.service';
 import { Coupon } from '../../../../../core/models/coupons';
@@ -15,15 +15,9 @@ export class SocialElementComponent implements OnInit {
   @Input() public placePopup: string[];
   @Input() public floatBtn: string[];
 
-  @Output() private removeElement = new EventEmitter<number>();
-
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
   ngOnInit(): void {
-  }
-
-  public removeElementFromElementsList(index: number): void {
-    this.removeElement.emit(index);
   }
 
   public setSocialBtn(element, item) {

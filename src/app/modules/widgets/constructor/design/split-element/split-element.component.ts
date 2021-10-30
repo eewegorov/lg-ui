@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-split-element',
@@ -12,15 +12,9 @@ export class SplitElementComponent implements OnInit {
   @Input() public widthHrType: string[];
   @Input() public floatBtn: string[];
 
-  @Output() private removeElement = new EventEmitter<number>();
-
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  public removeElementFromElementsList(index: number): void {
-    this.removeElement.emit(index);
   }
 
 }

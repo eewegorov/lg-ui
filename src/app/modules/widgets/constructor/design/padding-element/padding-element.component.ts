@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-padding-element',
@@ -9,15 +9,9 @@ export class PaddingElementComponent implements OnInit {
   @Input() public index: number;
   @Input() public modelName: any;
 
-  @Output() private removeElement = new EventEmitter<number>();
-
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  public removeElementFromElementsList(index: number): void {
-    this.removeElement.emit(index);
   }
 
 }

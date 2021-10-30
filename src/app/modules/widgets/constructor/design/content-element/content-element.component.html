@@ -86,7 +86,7 @@
       >
         <div class="remove-element-from-list-view remove-sub-form-item">
           <a
-            (click)="removeElementFromElementsList(i, item); $event.stopPropagation();"
+            (click)="removeElementFromElementsList(item.name, i); $event.stopPropagation();"
             href="javascript:void(0);"
           ><i class="remove-sub-item far fa-trash-alt"></i></a>
         </div>

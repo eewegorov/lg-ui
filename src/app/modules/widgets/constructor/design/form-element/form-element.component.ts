@@ -20,7 +20,6 @@ export class FormElementComponent implements OnInit, AfterViewInit {
   @Input() public widthBtn: string[];
   @Input() public floatBtn: string[];
 
-  @Output() private removeElement = new EventEmitter<{index: number, elem: Record<string, string>}>();
   @Output() private setBtn = new EventEmitter<{type: string, item: Record<string, string | number>}>();
 
   public optionsRound: Options = {
@@ -68,10 +67,6 @@ export class FormElementComponent implements OnInit, AfterViewInit {
 
   public trackById(index, item) {
     return item.id;
-  }
-
-  public removeElementFromElementsList(index: number, elem: Record<string, string>): void {
-    this.removeElement.emit({index, elem});
   }
 
   public setBtnStyle(type: string, item: Record<string, string | number>): void {

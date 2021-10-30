@@ -14,10 +14,10 @@
             </div>
           </div>
           <div
-            *ngFor="let element of widget.guiprops.elementsList"
+            *ngFor="let element of widget.guiprops.elementsList; index as i"
             class="element"
             [class.active]="currentElement === element.name + ('#' + element.counter ?? '')"
-            (click)="currentElement = element.name + ('#' + element.counter ?? '')"
+            (click)="currentElement = element.name + ('#' + element.counter ?? ''); currentIndex = i"
           >
             <div class="before fade-in">
               <div class="square"></div>
@@ -76,12 +76,11 @@
                 #{{ currentElement.split('#')[1] }}
               </ng-container>
               <a
-                (click)="removeElementFromElementsList(+currentElement.split('#')[1], currentElement.split('#')[0])"
+                (click)="removeCurrentElement(currentElement, currentIndex)"
                 href="javascript:void(0);"
               >
                 <i class="remove-sub-item"></i>
               </a>
-
             </ng-container>
           </h4>
         </div>
@@ -558,7 +557,6 @@
                         [visualInputForm]="visualInputForm"
                         [widthBtn]="widthBtn"
                         [floatBtn]="floatBtn"
-                        (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
                         (setBtn)="setBtnStyle($event.type, $event.item)"
                       ></app-button-element>
                     </div>
@@ -572,7 +570,6 @@
                         [placePopup]="placePopup"
                         [widthBtn]="widthBtn"
                         [floatBtn]="floatBtn"
-                        (removeElement)="removeElementFromElementsList($event)"
                         (setBtn)="setBtnStyle($event.type, $event.item)"
                       ></app-closelink-element>
                     </div>
@@ -585,7 +582,6 @@
                         [item]="item"
                         [widthBtn]="widthBtn"
                         [floatBtn]="floatBtn"
-                        (removeElement)="removeElementFromElementsList($event)"
                       ></app-coupon-element>
                     </div>
 
@@ -601,7 +597,6 @@
                         [widthHrType]="widthHrType"
                         [widthBtn]="widthBtn"
                         [floatBtn]="floatBtn"
-                        (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
                         (setBtn)="setBtnStyle($event.type, $event.item)"
                       ></app-form-element>
                     </div>
@@ -614,7 +609,6 @@
                         [widthHrType]="widthHrType"
                         [widgwidthBtn]="widgwidthBtn"
                         [floatBtn]="floatBtn"
-                        (removeElement)="removeElementFromElementsList($event)"
                         (buildIframeElement)="buildIframeElement($event)"
                       ></app-iframe-element>
                     </div>
@@ -626,7 +620,6 @@
                         [modelName]="item"
                         [widthHrType]="widthHrType"
                         [floatBtn]="floatBtn"
-                        (removeElement)="removeElementFromElementsList($event)"
                         (listFileItem)="listFile($event.place, $event.item)"
                       ></app-image-element>
                     </div>
@@ -636,7 +629,6 @@
                       <app-padding-element
                         [index]="i"
                         [modelName]="item"
-                        (removeElement)="removeElementFromElementsList($event)"
                       ></app-padding-element>
                     </div>
 
@@ -648,7 +640,6 @@
                         [coupons]="coupons"
                         [placePopup]="placePopup"
                         [floatBtn]="floatBtn"
-                        (removeElement)="removeElementFromElementsList($event)"
                       ></app-social-element>
                     </div>
 
@@ -660,7 +651,6 @@
                         [typeClass]="typeClass"
                         [widthHrType]="widthHrType"
                         [floatBtn]="floatBtn"
-                        (removeElement)="removeElementFromElementsList($event)"
                       ></app-split-element>
                     </div>
 
@@ -670,7 +660,6 @@
                         [index]="i"
                         [item]="item"
                         [widget]="widget"
-                        (removeElement)="removeElementFromElementsList($event)"
                       ></app-text-element>
                     </div>
 
@@ -681,7 +670,6 @@
                         [modelName]="item"
                         [widthHrType]="widthHrType"
                         [floatBtn]="floatBtn"
-                        (removeElement)="removeElementFromElementsList($event)"
                         (getVideo)="getVideoId($event)"
                         (setVideoSize)="newVideoSize($event)"
                       ></app-video-element>
@@ -693,7 +681,6 @@
                         [index]="i"
                         [item]="item"
                         [widget]="widget"
-                        (removeElement)="removeElementFromElementsList($event)"
                       ></app-timer-element>
                     </div>
 
@@ -704,7 +691,6 @@
                         [widget]="widget"
                         [coupons]="coupons"
                         [placePopup]="placePopup"
-                        (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
                       ></app-form-extended>
                     </div>
                   </div>
@@ -784,7 +770,7 @@
                   [heightImageStyle]="heightImageStyle"
                   [widthContentStyle]="widthContentStyle"
                   [heightContentStyle]="heightContentStyle"
-                  (removeElement)="removeElementFromElementsList($event.index, $event.elem)"
+                  (removeElement)="removeCurrentElement($event.element, $event.index)"
                   (scrollToElement)="scrollToEl($event.id, $event.elementName, $event.elementCounter)"
                   (addNewElement)="addNewElementToContent($event)"
                   [hidden]="currentPage !== 'main'"

@@ -1,10 +1,4 @@
 <div *ngIf="widget" class="border-item">
-  <h4 class="h4-element-title">
-    {{ 'widgets.formExt.leftBlock.title' | translate }} <a
-    (click)="removeElementFromElementsList(index, {name: 'form-ext-element'})"
-    href="javascript:void(0);"><i class="remove-sub-item far fa-trash-alt"></i></a>
-  </h4>
-
   <ul
     *ngIf="widget.guiprops?.formExt?.model"
     class="form-ext-wrapper"
