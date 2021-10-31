@@ -70,7 +70,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public placeDh = ['', '', '', '', '', '', 'Левый нижний угол', '', 'Правый нижний угол'];
   public placeLabel = ['', '', '', 'Левая сторона браузера', '', 'Правая сторона браузера', 'Нижний левый угол', '', 'Нижний правый угол'];
   public staticWidgetAlign = ['', '', '', 'По левому краю', 'По центру', 'По правому краю', '', '', ''];
-  public vertOrientDh = ['От верхней границы', 'По центру виджета', 'От нижней границы'];
+  public vertOrientDh = ['', 'От верхней границы', '', '', 'По центру виджета', '', '', 'От нижней границы', ''];
   public bgPositionTypesList = ['Растянуть', 'Замостить'];
   public tilesList = ['Замостить по X', 'Замостить по Y', 'Замостить по X+Y'];
   public maskTypeList = ['Вся площадь виджета', 'Только под контентом'];

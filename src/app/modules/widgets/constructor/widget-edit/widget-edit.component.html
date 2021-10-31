@@ -11,10 +11,17 @@
         title=""
         class="title-widget-name-editable"
       >
-        <span>{{ getCroppedString(widget.name, 35, "…") }}</span><i class="fa fa-pencil ml-3"></i>
+        <span>{{ widget.name }}</span><i class="fa fa-pencil ml-3"></i>
       </a>
 
-      <div class="row" *ngIf="renamedWidget.id === widget.id">
+      <div
+        *ngIf="renamedWidget.id === widget.id"
+      >
+        <input type="text" class="widget-rename-control" [(ngModel)]="renamedWidget.name">
+        <i class="fa fa-check ml-3"></i>
+      </div>
+
+      <!--<div class="row" *ngIf="renamedWidget.id === widget.id">
         <div class="col-lg-12 p-0 title-widget-rename">
           <input type="text" class="form-control" [(ngModel)]="renamedWidget.name">
           <button
@@ -39,7 +46,7 @@
             <i class="fa fa-check"></i>
           </button>
         </div>
-      </div>
+      </div>-->
     </div>
 
     <!-- Nav tabs -->

@@ -53,23 +53,15 @@
         </div>
       </div>
 
-      <div *ngIf="widget.guiprops?.dhVisual?.widget_content_height === 'Собственная'" class="row row-subitem mt-2">
+      <div *ngIf="widget.guiprops?.dhVisual?.widget_content_height === 'Собственная'" class="row-subitem mt-2">
         <div class="row-subitem-padding pt-1">
-          <label class="control-label control-label-des">Позиционирование контента:</label>
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{ widget.guiprops.dhVisual.widget_content_height_orient }}
-              <span class="caret"></span>
-            </button>
-            <ul role="menu" class="dropdown-menu">
-              <li
-                role="presentation"
-                (click)="widget.guiprops.dhVisual.widget_content_height_orient = item"
-                *ngFor="let item of vertOrientDh"
-              >
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
-              </li>
-            </ul>
+          <h3>Позиционирование</h3>
+          <div class="row-subitem-padding mt-2">
+            <app-position-control
+              [positions]="vertOrientDh"
+              [currentPosition]="widget.guiprops.dhVisual.widget_content_height_orient"
+              (changePosition)="widget.guiprops.dhVisual.widget_content_height_orient = $event"
+            ></app-position-control>
           </div>
         </div>
       </div>
@@ -515,9 +507,9 @@
         </div>
 
         <div class="border-item">
-          <div class="row row-subitem mt-3">
+          <div class="row-subitem mt-3">
             <h4 class="h4-text-tit">Расположение блока</h4>
-            <div class="col-sm-12 row-subitem-padding mt-2">
+            <div class="row-subitem-padding mt-2">
               <app-position-control
                 [positions]="placeImg"
                 [currentPosition]="widget.guiprops.image.place"
