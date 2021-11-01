@@ -23,6 +23,7 @@
           [(ngModel)]="renamedWidget.name"
           maxlength="50"
           [style.width.ch]="renamedWidget.name.length + 1.45"
+          (blur)="renameWidget()"
         >
         <a
           class="widget-rename-button"

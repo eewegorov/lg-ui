@@ -14,6 +14,7 @@ import { SortablejsModule } from 'ngx-sortablejs';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgTempusdominusBootstrapModule } from 'ngx-tempusdominus-bootstrap';
+import { IconPickerModule } from 'ngx-icon-picker';
 import { SharedModule } from '../../shared/shared.module';
 import { WidgetsRoutingModule } from './widgets-routing.module';
 import { WidgetsListComponent } from './widgets-list/widgets-list.component';
@@ -75,7 +76,6 @@ import { ExtendedTitleComponent } from './constructor/design/form-extended/exten
 import { ExtendedVariantsComponent } from './constructor/design/form-extended/extended-variants/extended-variants.component';
 import { TimerElementComponent } from './constructor/design/timer-element/timer-element/timer-element.component';
 import { TimerDatepickerComponent } from './constructor/design/timer-element/timer-datepicker/timer-datepicker.component';
-import { IconPickerModule } from 'ngx-icon-picker';
 import { PositionControlComponent } from './shared/position-control/position-control.component';
 import { ElementsAddComponent } from './shared/elements-add/elements-add.component';
 
@@ -142,7 +142,7 @@ import { ElementsAddComponent } from './shared/elements-add/elements-add.compone
     TimerElementComponent,
     TimerDatepickerComponent,
     PositionControlComponent,
-    ElementsAddComponent,
+    ElementsAddComponent
   ],
   exports: [
     SmartpointsControlComponent,

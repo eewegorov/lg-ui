@@ -2151,3 +2151,15 @@ div.button-send.click-edit-cl .note-editor font span {
 .modal-body .small-pdn {
   padding: 5px !important;
 }
+
+.widgets-editor-header .switch:not(.checked) {
+  background: #E25336;
+
+  small {
+    background: white url('~src/assets/images/widgets/pause.svg') center no-repeat;
+  }
+}
+
+.widgets-editor-header .switch.checked small {
+  background: white url('~src/assets/images/widgets/play.svg') center no-repeat;
+}
