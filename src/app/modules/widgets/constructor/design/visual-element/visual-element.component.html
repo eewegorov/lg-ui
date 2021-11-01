@@ -131,24 +131,26 @@
 
         <div class="row row-subitem mt-2 border-item">
           <div class="col-sm-6 row-subitem-padding pt-1 pr-3">
-            <div>
-              <label class="control-label control-label-des">Положение:</label>
-              <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-                        aria-expanded="true">
-                  {{ widget.guiprops.bg.positionType }}
-                  <span class="caret"></span>
-                </button>
-                <ul role="menu" class="dropdown-menu">
-                  <li
-                    role="presentation"
-                    *ngFor="let item of bgPositionTypesList"
-                    (click)="widget.guiprops.bg.positionType = item"
-                  >
-                    <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
-                  </li>
-                </ul>
-              </div>
+            <label class="control-label control-label-des">Положение:</label>
+            <div class="dropdown">
+              <button
+                type="button"
+                class="btn btn-default dropdown-toggle"
+                data-toggle="dropdown"
+                aria-expanded="true"
+              >
+                {{ widget.guiprops.bg.positionType }}
+                <span class="caret"></span>
+              </button>
+              <ul role="menu" class="dropdown-menu">
+                <li
+                  role="presentation"
+                  *ngFor="let item of bgPositionTypesList"
+                  (click)="widget.guiprops.bg.positionType = item"
+                >
+                  <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
+                </li>
+              </ul>
             </div>
           </div>
           <div *ngIf="widget.guiprops['bg'].positionType === 'Замостить'" class="col-sm-6 row-subitem-padding pt-1">
@@ -665,7 +667,7 @@
       </div>
 
       <div *ngIf="widget.guiprops.bg.borderRadiusEnable" class="row justify-content-between mt-3">
-        <h5 class="label-style-ic control-label-des">Толщина</h5>
+        <h5 class="label-style-ic control-label-des">Радиус</h5>
         <div class="row text-right side-ui-sm">
           <ngx-slider [(value)]="widget.guiprops['bg'].borderRadius" [options]="optionsRound"></ngx-slider>
           <input

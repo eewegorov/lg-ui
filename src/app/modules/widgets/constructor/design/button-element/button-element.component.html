@@ -1,52 +1,70 @@
-<div class="border-item">
-  <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding">
-      <h4 class="h4-text-tit control-label-des">Шрифт:</h4>
+<div>
+  <div class="row-subitem">
+    <div class="row-subitem-padding mb-3">
+      <h3>Текст</h3>
     </div>
-    <div class="col-sm-12 row-subitem-padding">
+    <div class="row-subitem-padding">
       <input [id]="'font-picker' + index" type="text">
     </div>
   </div>
-  <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
-      <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="widget.guiprops['button'].fontSize">
-      <label class="control-label ml-1">px <span>размер текста</span></label>
-    </div>
-  </div>
-  <div class="row row-subitem mt-1 mb-2">
-    <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
-      <label class="control-label control-label-colorpc control-label-des">Цвет кнопки:</label>
-      <input
-        [(colorPicker)]="widget.guiprops['button'].colorBtn"
-        [style.background]="widget.guiprops['button'].colorBtn"
-        [cpAlphaChannel]="'disabled'"
-        [cpOutputFormat]="'hex'"
-        class="w-100"
-      />
-    </div>
-    <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
-      <label class="control-label control-label-colorpc control-label-des">Закругление углов</label>
-      <ngx-slider [(value)]="widget.guiprops['button'].borderRadiusBtn" [options]="optionsRound"></ngx-slider>
+
+  <div class="d-flex align-items-center justify-content-between mt-2 mb-3 border-item">
+    <label class="control-label control-label-des">Размер</label>
+    <div class="align-items-center">
+      <div class="form-control form-control-font">
+        <input
+          type="number"
+          [(ngModel)]="widget.guiprops['button'].fontSize"
+        />
+        <label>px</label>
+      </div>
     </div>
   </div>
 
-  <div class="row row-subitem mt-1 mb-2">
-    <div class="col-sm-12 row-subitem-padding">
-      <label class="control-label control-label-des">Вид кнопки:</label>
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-          {{ widget.guiprops.form.visual }}
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li
-            role="presentation"
-            *ngFor="let itemVisual of visualInputForm"
-            (click)="widget.guiprops.form.visual = itemVisual"
-          >
-            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
-          </li>
-        </ul>
+  <div class="row-subitem row-subitem-padding">
+    <h3 class="mb-3">Вид кнопки</h3>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+        {{ widget.guiprops.form.visual }}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li
+          role="presentation"
+          *ngFor="let itemVisual of visualInputForm"
+          (click)="widget.guiprops.form.visual = itemVisual"
+        >
+          <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3 mb-3">
+      <label class="control-label control-label-des">Цвет</label>
+      <div class="text-right">
+        <input
+          [(colorPicker)]="widget.guiprops['button'].colorBtn"
+          [style.background]="widget.guiprops['button'].colorBtn"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          cpPosition="left"
+          class="color-picker-control"
+        />
+        <input
+          [(ngModel)]="widget.guiprops['button'].colorBtn"
+          class="picker-input color"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-2">
+      <h5 class="label-style-ic control-label-des">Закругление углов</h5>
+      <div class="text-right side-ui-sm">
+        <ngx-slider [(value)]="widget.guiprops['button'].borderRadiusBtn" [options]="optionsRound"></ngx-slider>
+        <input
+          [(ngModel)]="widget.guiprops['button'].borderRadiusBtn"
+          class="picker-input slider"
+        />
       </div>
     </div>
   </div>
