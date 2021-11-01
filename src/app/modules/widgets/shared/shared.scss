@@ -488,6 +488,11 @@ b.control-label-des {
   font-size: 16px;
   color: #16181D;
   line-height: 1.4;
+  margin: 0;
+
+  &.disabled {
+    color: #d1d6de;
+  }
 }
 
 .btn-default {
@@ -853,6 +858,49 @@ input.icp {
 
   &.active {
     background-color: #4898A8;
+  }
+}
+
+.wide-button {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  mask: url("~src/assets/images/widgets/wide.svg") no-repeat;
+  mask-size: contain;
+  background-color: #7E889A;
+
+  &.active {
+    background-color: #4898A8;
+  }
+}
+
+.align-button {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  background-color: #7E889A;
+
+  &.icon-left {
+    mask: url("~src/assets/images/widgets/align-left.svg") no-repeat;
+    mask-size: contain;
+  }
+
+  &.icon-center {
+    mask: url("~src/assets/images/widgets/align-center.svg") no-repeat;
+    mask-size: contain;
+  }
+
+  &.icon-right {
+    mask: url("~src/assets/images/widgets/align-right.svg") no-repeat;
+    mask-size: contain;
+  }
+
+  &.active:not(:disabled) {
+    background-color: #4898A8;
+  }
+
+  &:disabled {
+    background-color: #d1d6de;
   }
 }
 

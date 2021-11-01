@@ -256,7 +256,7 @@
         <div *ngIf="widget.guiprops['bg'].mask.enable">
           <div class="d-flex justify-content-between mt-3">
             <label class="control-label control-label-des">Цвет маски</label>
-            <div class="text-right">
+            <div class="d-flex text-right">
               <input
                 [(colorPicker)]="widget.guiprops['bg'].mask.color"
                 [style.background]="widget.guiprops['bg'].mask.color"
@@ -274,7 +274,7 @@
 
           <div class="d-flex justify-content-between mt-3">
             <h5 class="label-style-ic control-label-des">Прозрачность</h5>
-            <div class="text-right side-ui-sm">
+            <div class="d-flex text-right side-ui-sm">
               <ngx-slider [(value)]="widget.guiprops['bg'].mask.opacity" [options]="optionsOpacity"></ngx-slider>
               <input
                 [(ngModel)]="widget.guiprops['bg'].mask.opacity"
@@ -310,7 +310,7 @@
       <div *ngIf="widget.guiprops['bg'].fillorImg === 'fill'">
         <div class="row justify-content-between mt-3 mb-3">
           <label class="control-label control-label-des">Цвет фона</label>
-          <div class="text-right">
+          <div class="d-flex text-right">
             <input
               [(colorPicker)]="widget.guiprops['bg'].colorBg"
               [style.background]="widget.guiprops['bg'].colorBg"
@@ -326,9 +326,9 @@
           </div>
         </div>
 
-        <div class="row justify-content-between mt-3">
+        <div class="d-flex justify-content-between mt-3">
           <h5 class="label-style-ic control-label-des">Прозрачность</h5>
-          <div class="row text-right side-ui-sm">
+          <div class="d-flex text-right side-ui-sm">
             <ngx-slider [(value)]="widget.guiprops['bg'].opacity" [options]="optionsOpacity"></ngx-slider>
             <input
               [(ngModel)]="widget.guiprops['bg'].opacity"
@@ -665,9 +665,9 @@
         ></ui-switch>
       </div>
 
-      <div *ngIf="widget.guiprops.bg.borderRadiusEnable" class="row justify-content-between mt-3">
+      <div *ngIf="widget.guiprops.bg.borderRadiusEnable" class="d-flex justify-content-between mt-3">
         <h5 class="label-style-ic control-label-des">Радиус</h5>
-        <div class="row text-right side-ui-sm">
+        <div class="d-flex text-right side-ui-sm">
           <ngx-slider [(value)]="widget.guiprops['bg'].borderRadius" [options]="optionsRound"></ngx-slider>
           <input
             [(ngModel)]="widget.guiprops['bg'].borderRadius"
@@ -691,7 +691,7 @@
       <div *ngIf="widget.guiprops.bg.border.enable">
         <div class="row justify-content-between mt-3 mb-3">
           <label class="control-label control-label-des">Цвет</label>
-          <div class="text-right">
+          <div class="d-flex text-right">
             <input
               [(colorPicker)]="widget.guiprops['bg'].border.color"
               [style.background]="widget.guiprops['bg'].border.color"
@@ -707,9 +707,9 @@
           </div>
         </div>
 
-        <div class="row justify-content-between mt-3">
+        <div class="d-flex justify-content-between mt-3">
           <h5 class="label-style-ic control-label-des">Толщина</h5>
-          <div class="row text-right side-ui-sm">
+          <div class="d-flex text-right side-ui-sm">
             <ngx-slider [(value)]="widget.guiprops['bg'].border.thickness" [options]="optionsThickness"></ngx-slider>
             <input
               [(ngModel)]="widget.guiprops['bg'].border.thickness"
@@ -734,7 +734,7 @@
       <div *ngIf="widget.guiprops.bg.shadow.enable">
         <div class="d-flex justify-content-between mt-3 mb-3">
           <label class="control-label control-label-des">Цвет</label>
-          <div class="text-right">
+          <div class="d-flex text-right">
             <input
               [(colorPicker)]="widget.guiprops['bg'].shadow.color"
               [style.background]="widget.guiprops['bg'].shadow.color"
