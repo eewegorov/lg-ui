@@ -826,6 +826,36 @@ input.icp {
   caret-color: transparent !important;
 }
 
+.content-type-button {
+  width: 31px;
+  height: 22px;
+  font-size: 7px;
+  font-weight: 700;
+  color: #7E889A;
+  border: 2px solid #7E889A;
+  border-radius: 5px;
+  background: transparent;
+
+  &.active {
+    background-color: #4898A8;
+    border-color: #4898A8;
+    color: #FFFFFF;
+  }
+}
+
+.wide-button {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  mask: url("~src/assets/images/widgets/wide.svg") no-repeat;
+  mask-size: contain;
+  background-color: #7E889A;
+
+  &.active {
+    background-color: #4898A8;
+  }
+}
+
 
 
 

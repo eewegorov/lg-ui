@@ -3,9 +3,9 @@
     <h3>Контент виджета</h3>
 
     <div class="border-item">
-      <div class="row align-items-center justify-content-between mt-3 mb-1">
+      <div class="d-flex align-items-center justify-content-between mt-3 mb-1">
         <label class="control-label control-label-des">Ширина</label>
-        <div class="row align-items-center">
+        <div class="d-flex align-items-center">
           <div
             class="form-control form-control-font mr-2"
             [class.disabled]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
@@ -242,20 +242,19 @@
       </div>
 
       <div
-        *ngIf="widget.guiprops['bg'].mask && ((widget.guiprops['bg'].fillorImg === 'useVideo') || (widget.guiprops['bg'].fillorImg === 'useImg'))">
-        <div class="row row-subitem mt-3">
-          <div class="d-flex justify-content-between w-100 row-subitem-padding pt-1">
-            <label class="control-label switcher-label-xs control-label-des">
-              Затемнить фон виджета маской
-            </label>
-            <ui-switch
-              size="small"
-              [(ngModel)]="widget.guiprops['bg'].mask.enable"
-            ></ui-switch>
-          </div>
+        *ngIf="widget.guiprops['bg'].mask && ((widget.guiprops['bg'].fillorImg === 'useVideo') || (widget.guiprops['bg'].fillorImg === 'useImg'))"
+      >
+        <div class="d-flex justify-content-between row-subitem row-subitem-padding pt-1 mt-3">
+          <label class="control-label switcher-label-xs control-label-des">
+            Затемнить фон виджета маской
+          </label>
+          <ui-switch
+            size="small"
+            [(ngModel)]="widget.guiprops['bg'].mask.enable"
+          ></ui-switch>
         </div>
         <div *ngIf="widget.guiprops['bg'].mask.enable">
-          <div class="row justify-content-between mt-3 mb-3">
+          <div class="d-flex justify-content-between mt-3">
             <label class="control-label control-label-des">Цвет маски</label>
             <div class="text-right">
               <input
@@ -273,9 +272,9 @@
             </div>
           </div>
 
-          <div class="row justify-content-between mt-3">
+          <div class="d-flex justify-content-between mt-3">
             <h5 class="label-style-ic control-label-des">Прозрачность</h5>
-            <div class="row text-right side-ui-sm">
+            <div class="text-right side-ui-sm">
               <ngx-slider [(value)]="widget.guiprops['bg'].mask.opacity" [options]="optionsOpacity"></ngx-slider>
               <input
                 [(ngModel)]="widget.guiprops['bg'].mask.opacity"

@@ -297,7 +297,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
             this.widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod
           )).toString();
       } else {
-        this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent!important';
+        this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent';
       }
     }
 
@@ -308,7 +308,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
           this.widget.guiprops.form.colorPod.opacityColorPod
         )).toString();
     } else {
-      this.widget.guiprops.form.colorPod.rgbaColorPod = 'transparent!important';
+      this.widget.guiprops.form.colorPod.rgbaColorPod = 'transparent';
     }
 
     if (this.widget.guiprops.form.bgInputForm && this.widget.guiprops.form.opacityBgInputForm) {
@@ -327,7 +327,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.widget.guiprops.popupMain.shadow.rgbaColor = (this.widgetConstructorService
         .hexToRgb(this.widget.guiprops.popupMain.shadow.color, this.widget.guiprops.popupMain.shadow.opacityColor)).toString();
     } else {
-      this.widget.guiprops.popupMain.shadow.rgbaColor = 'transparent!important';
+      this.widget.guiprops.popupMain.shadow.rgbaColor = 'transparent';
     }
 
     if (this.widget.guiprops.labelMain.colorLabel != null) {
@@ -404,7 +404,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
         (this.widgetConstructorService.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
     }
     else {
-      this.widget.guiprops.bg.mask.rgbaColor = 'transparent!important';
+      this.widget.guiprops.bg.mask.rgbaColor = 'transparent';
     }
 
     if (this.widget.guiprops.form.enable) {
