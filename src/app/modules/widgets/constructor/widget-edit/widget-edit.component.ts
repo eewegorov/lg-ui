@@ -209,6 +209,10 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
       id: widget.id,
       name: widget.name
     };
+
+    setTimeout(() => {
+      $('.widget-rename-control').trigger('focus');
+    }, 0);
   }
 
   public getCroppedString(str: string, count: number, addedSymbol: string): string {

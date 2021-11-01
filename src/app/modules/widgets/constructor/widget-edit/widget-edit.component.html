@@ -11,14 +11,29 @@
         title=""
         class="title-widget-name-editable"
       >
-        <span>{{ widget.name }}</span><i class="fa fa-pencil ml-3"></i>
+        <span>{{ widget.name }}</span><i class="fa fa-pencil ml-1"></i>
       </a>
 
       <div
         *ngIf="renamedWidget.id === widget.id"
       >
-        <input type="text" class="widget-rename-control" [(ngModel)]="renamedWidget.name">
-        <i class="fa fa-check ml-3"></i>
+        <input
+          type="text"
+          class="widget-rename-control"
+          [(ngModel)]="renamedWidget.name"
+          maxlength="50"
+          [style.width.ch]="renamedWidget.name.length + 1.45"
+        >
+        <a
+          class="widget-rename-button"
+          (click)="renameWidget()"
+          href="javascript:void(0);"
+          data-toggle="tooltip"
+          data-placement="top"
+          [title]="'widgetsList.widget.rename.tooltip' | translate"
+        >
+          <i class="fa fa-check ml-1"></i>
+        </a>
       </div>
 
       <!--<div class="row" *ngIf="renamedWidget.id === widget.id">
