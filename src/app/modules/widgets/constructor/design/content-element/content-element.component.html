@@ -195,7 +195,7 @@
               <div
                 class="click-edit-cl button-send button-alone"
                 [ngClass]="setBtnStyleClass(widget.guiprops.exit.button)"
-                [ngStyle]="{'font-size': widget.guiprops.exit.button.fontSize + 'px', 'font-family': widget.guiprops.exit.button.font.fontFamily, 'border-color': widget.guiprops.exit.button.colorBtn, 'background': widget.guiprops.exit.button.colorBtn, 'color': widget.guiprops.exit.button.colorTextBtn, 'border-radius': widget.guiprops.exit.button.borderRadiusBtn + 'px', 'width': widthExitBtnStyle}"
+                [ngStyle]="{'font-size': widget.guiprops.exit.button.fontSize + 'px', 'font-family': widget.guiprops.exit.button.font?.fontFamily, 'border-color': widget.guiprops.exit.button.colorBtn, 'background': widget.guiprops.exit.button.colorBtn, 'color': widget.guiprops.exit.button.colorTextBtn, 'border-radius': widget.guiprops.exit.button.borderRadiusBtn + 'px', 'width': widthExitBtnStyle}"
               >
                 <div [ngxSummernote]="optionsSummernote" [(ngModel)]="widget.guiprops.exit.button.textSummer"></div>
               </div>

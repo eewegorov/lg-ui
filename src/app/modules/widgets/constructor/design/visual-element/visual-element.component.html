@@ -54,9 +54,9 @@
       </div>
 
       <div *ngIf="widget.guiprops?.dhVisual?.widget_content_height === 'Собственная'" class="row-subitem mt-2">
-        <div class="row-subitem-padding pt-1">
+        <div class="row-subitem-padding pt-2">
           <h3>Позиционирование</h3>
-          <div class="row-subitem-padding mt-2">
+          <div class="row-subitem-padding mt-2 pt-1">
             <app-position-control
               [positions]="vertOrientDh"
               [currentPosition]="widget.guiprops.dhVisual.widget_content_height_orient"
