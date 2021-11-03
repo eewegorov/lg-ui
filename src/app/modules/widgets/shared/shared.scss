@@ -541,16 +541,27 @@ a.widget-download-img {
   font-size: 16px;
 }
 
-.radio-info input[type="radio"] + label::after {
-  background-color: #3498db
+input[type="radio"] {
+  /* remove standard background appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* create custom radiobutton appearance */
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  padding: 3px;
+  /* background-color only for content */
+  border: 2px solid #bbbbbb;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.radio-info input[type="radio"]:checked + label::before {
-  border-color: #3498db
-}
-
-.radio-info input[type="radio"]:checked + label::after {
-  background-color: #3498db
+/* appearance for checked radiobutton */
+input[type="radio"]:checked {
+  border: 5px solid #4898A8;
+  padding: 1px;
+  cursor: default;
 }
 
 .coupons-flex-wr {
