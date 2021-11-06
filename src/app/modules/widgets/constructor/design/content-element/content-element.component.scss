@@ -378,27 +378,27 @@
 }
 
 .widget1-hr-left {
-  text-align: left;
+  text-align: left !important;
 }
 
 .widget1-hr-center {
-  text-align: center;
+  text-align: center !important;
 }
 
 .widget1-hr-right {
-  text-align: right;
+  text-align: right !important;
 }
 
 .widget1-w-hr-left {
-  text-align: left;
+  text-align: left !important;
 }
 
 .widget1-w-hr-center {
-  text-align: center;
+  text-align: center !important;
 }
 
 .widget1-w-hr-right {
-  text-align: right;
+  text-align: right !important;
 }
 
 .widget1-hr-full-w hr,
@@ -455,7 +455,7 @@
 }
 
 .widget1-btn-exit {
-  margin-top: 0px;
+  margin-top: 0;
   text-align: center;
 }
 
