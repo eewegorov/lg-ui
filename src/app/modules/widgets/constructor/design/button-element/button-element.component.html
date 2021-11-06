@@ -211,7 +211,10 @@
       <div class="d-flex justify-content-between mt-3">
         <h5 class="label-style-ic control-label-des">Прозрачность</h5>
         <div class="d-flex text-right side-ui-sm">
-          <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod" [options]="optionsOpacity"></ngx-slider>
+          <ngx-slider
+            [(value)]="widget.guiprops['form'].colorPod.opacityColorPod"
+            [options]="optionsOpacity"
+          ></ngx-slider>
           <input
             [(ngModel)]="widget.guiprops['form'].colorPod.opacityColorPod"
             class="picker-input slider"

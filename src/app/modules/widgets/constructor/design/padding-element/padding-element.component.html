@@ -1,6 +1,12 @@
-<div class="border-item">
-  <div class="d-flex row-subitem row-subitem-padding pt-1">
-    <input type="number" min="15" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="modelName.padding">
-    <label class="control-label ml-1">px <span>размер отступа</span></label>
+<div class="d-flex justify-content-between">
+  <label class="control-label control-label-des">Ширина</label>
+  <div class="align-items-center">
+    <div class="form-control form-control-font">
+      <input
+        type="number"
+        [(ngModel)]="modelName.padding"
+      />
+      <label>px</label>
+    </div>
   </div>
 </div>
