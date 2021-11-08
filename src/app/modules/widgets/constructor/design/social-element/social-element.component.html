@@ -1,11 +1,8 @@
-<div class="border-item">
-  <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding mb-1">
-      <span class="input-down-sm-lab control-label-des">Выберите сервисы, которые вы хотите использовать</span>
-    </div>
-  </div>
-  <div class="row row-subitem pt-1 social-block-choose">
-    <div class="col-sm-4 row-subitem-padding">
+<div>
+  <h3>Выберите сервисы</h3>
+
+  <div class="d-flex row-subitem mt-1 social-block-choose border-item">
+    <div class="col-sm-6 row-subitem-padding">
       <div class="form-check">
         <label class="form-check-label">
           <input
@@ -17,7 +14,6 @@
           <span class="checkmark"></span>
           <span class="ml-1">Vkontakte</span>
         </label>
-
       </div>
 
       <div class="form-check">
@@ -31,7 +27,6 @@
           <span class="checkmark"></span>
           <span class="ml-1">Facebook</span>
         </label>
-
       </div>
 
       <div class="form-check">
@@ -45,7 +40,6 @@
           <span class="checkmark"></span>
           <span class="ml-1">Google plus</span>
         </label>
-
       </div>
 
       <div class="form-check">
@@ -86,8 +80,7 @@
           <span class="ml-1">Tumblr</span>
         </label>
       </div>
-    </div>
-    <div class="col-sm-4 row-subitem-padding">
+
       <div class="form-check">
         <label class="form-check-label">
           <input
@@ -126,7 +119,8 @@
           <span class="ml-1">Buffer</span>
         </label>
       </div>
-
+    </div>
+    <div class="col-sm-6 row-subitem-padding">
       <div class="form-check">
         <label class="form-check-label">
           <input
@@ -165,8 +159,7 @@
           <span class="ml-1">Print</span>
         </label>
       </div>
-    </div>
-    <div class="col-sm-4 row-subitem-padding">
+
       <div class="form-check">
         <label class="form-check-label">
           <input
@@ -247,9 +240,11 @@
     </div>
   </div>
 
-  <div class="row row-subitem pt-1 mt-2">
-    <div class="col-sm-12 row-subitem-padding pt-1">
-      <label class="control-label control-label-des">Дизайн кнопок:</label>
+  <div class="mt-3 pt-1">
+    <h3>Форма и выравнивание</h3>
+
+    <div class="d-flex justify-content-between row-subitem-padding mt-3">
+      <label class="control-label control-label-des">Форма</label>
       <div class="social-variable-bl">
         <div
           class="social-var-el social-var-1"
@@ -274,21 +269,27 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row row-subitem pt-1 mt-1">
-    <div class="col-sm-12 row-subitem-padding pt-1">
-      <label class="control-label control-label-des">Выравнивание:</label>
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-          {{ widget.guiprops['social'].position }}
-          <span class="caret"></span>
-        </button>
-        <ul role="menu" class="dropdown-menu">
-          <li role="presentation" *ngFor="let itemVisual of floatBtn" (click)="widget.guiprops['social'].position = itemVisual">
-            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
-          </li>
-        </ul>
+    <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3 pt-1 border-item">
+      <label class="control-label control-label-des">
+        Выравнивание
+      </label>
+      <div>
+        <button
+          class="align-button icon-left"
+          [class.active]="widget.guiprops['social'].position === floatBtn[0]"
+          (click)="widget.guiprops['social'].position = floatBtn[0]"
+        ></button>
+        <button
+          class="align-button icon-center"
+          [class.active]="widget.guiprops['social'].position === floatBtn[1]"
+          (click)="widget.guiprops['social'].position = floatBtn[1]"
+        ></button>
+        <button
+          class="align-button icon-right"
+          [class.active]="widget.guiprops['social'].position === floatBtn[2]"
+          (click)="widget.guiprops['social'].position = floatBtn[2]"
+        ></button>
       </div>
     </div>
   </div>
