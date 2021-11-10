@@ -589,6 +589,8 @@ input[type="radio"]:checked {
 .coupons-flex-wr .refresh-coupons-element-btn {
   max-width: calc(12% - 10px);
   flex-basis: calc(12% - 10px);
+  border: none;
+  font-size: 18px;
 }
 
 .coupons-flex-wr.loading-coupons .refresh-coupons-element-btn i.fa-sync {

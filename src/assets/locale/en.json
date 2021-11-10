@@ -776,11 +776,7 @@
 		"coupon": {
 			"autoresponder": "",
 			"couponCallback": {
-				"actionDesc1": {
-					"closeBtn": "",
-					"form": "",
-					"social": ""
-				},
+				"actionDesc1": "",
 				"actionDesc2": {
 					"closeBtn": "",
 					"form": "",
@@ -902,9 +898,6 @@
 						"title": ""
 					}
 				}
-			},
-			"leftBlock": {
-				"title": ""
 			},
 			"mainSettings": {
 				"buttonSettings": {
@@ -1046,8 +1039,6 @@
 		"redirect": {
 			"blank": "",
 			"description": "",
-			"descriptionOld": "",
-			"doOnClick": "",
 			"example": "",
 			"onClickRedirect": "",
 			"title": "",
@@ -1143,8 +1134,7 @@
 				"gmt": "",
 				"local": "",
 				"title": ""
-			},
-			"title": ""
+			}
 		},
 		"types": {
 			"static": {
@@ -1162,7 +1152,6 @@
 	"widgetsList": {
 		"add": {
 			"alt": "",
-			"alt2": "",
 			"chooseSite": "",
 			"chooseTemplate": {
 				"label": ""

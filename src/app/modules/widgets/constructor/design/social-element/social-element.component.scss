@@ -15,11 +15,10 @@
 }
 
 .social-var-el {
-  width: 58px;
-  height: 58px;
-  padding: 3px;
-  border: 1px solid transparent;
-  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid #7E889A;
+  margin: 0 5px 0 15px;
   cursor: pointer;
 }
 
@@ -28,29 +27,20 @@
   border-color: #4898A8;
 }
 
-.social-var-fill {
-  background-color: #a2a2a2;
-}
-
-.social-var-1 .social-var-fill {
+.social-var-1 {
   border-radius: 0;
-  width: 100%;
-  height: 100%;
 }
 
-.social-var-2 .social-var-fill {
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
+.social-var-2 {
+  border-radius: 6px;
 }
 
-.social-var-3 .social-var-fill {
+.social-var-3 {
   border-radius: 50%;
-  width: 100%;
-  height: 100%;
 }
 
-span.iframe-small-label {
+.iframe-small-label {
   font-size: 11px;
+  line-height: 14px;
   color: #8e8e8e;
 }

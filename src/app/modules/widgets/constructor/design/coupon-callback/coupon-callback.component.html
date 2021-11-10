@@ -1,24 +1,22 @@
 <div *ngIf="coupon">
-  <div class="row-subitem mt-2">
-    <div class="d-flex row-subitem-padding pt-1">
-      <ui-switch
-        size="small"
-        [(ngModel)]="coupon.enable"
-        (change)="onChangePayment($event)"
-      ></ui-switch>
-      <label *ngIf="coupon.elementType === 'form'" class="control-label switcher-label-xs control-label-des ml-2">
-        {{ 'widgets.coupon.couponCallback.actionDesc1.form' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
-      </label>
-      <label *ngIf="coupon.elementType === 'social'" class="control-label switcher-label-xs control-label-des ml-2">
-        {{ 'widgets.coupon.couponCallback.actionDesc1.social' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
-      </label>
-      <label *ngIf="coupon.elementType === 'closeBtn'" class="control-label switcher-label-xs control-label-des ml-2">
-        {{ 'widgets.coupon.couponCallback.actionDesc1.closeBtn' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
-      </label>
-    </div>
+  <div class="d-flex justify-content-between row-subitem row-subitem-padding pt-1 mt-3">
+    <label *ngIf="coupon.elementType === 'form'" class="control-label switcher-label-xs control-label-des">
+      {{ 'widgets.coupon.couponCallback.actionDesc1' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
+    </label>
+    <label *ngIf="coupon.elementType === 'social'" class="control-label switcher-label-xs control-label-des">
+      {{ 'widgets.coupon.couponCallback.actionDesc1' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
+    </label>
+    <label *ngIf="coupon.elementType === 'closeBtn'" class="control-label switcher-label-xs control-label-des">
+      {{ 'widgets.coupon.couponCallback.actionDesc1' | translate }}<span class="label label-warning tariff-info">окупаемый</span>
+    </label>
+    <ui-switch
+      size="small"
+      [(ngModel)]="coupon.enable"
+      (change)="onChangePayment($event)"
+    ></ui-switch>
   </div>
 
-  <div class="row-subitem mt-1">
+  <div class="row-subitem mt-2">
     <div *ngIf="coupon.elementType === 'form'" class="col-sm-12 row-subitem-padding widget-small-text">
       {{ 'widgets.coupon.couponCallback.actionDesc2.form' | translate }}
     </div>
@@ -30,7 +28,7 @@
     </div>
   </div>
 
-  <div *ngIf="coupon.enable">
+  <div><!--*ngIf="coupon.enable"-->
     <div *ngIf="!coupons.length" class="row-subitem mt-2">
       <div class="row-subitem-padding pt-1 coupons-flex-wr">
         <a href="../../../coupons/?enableCouponModal=true" target="_blank" class="btn btn-primary btn-coupon-add">
@@ -50,9 +48,9 @@
     </div>
 
     <div *ngIf="coupons.length" class="row-subitem mt-2">
-      <div class="row-subitem-padding pt-1">
-        <label class="control-label control-label-des">{{ 'widgets.coupon.couponCallback.couponChoose' | translate }}:</label>
-        <div class="coupons-flex-wr">
+      <div class="row-subitem-padding">
+        <h3>{{ 'widgets.coupon.couponCallback.couponChoose' | translate }}</h3>
+        <div class="coupons-flex-wr mt-1">
           <div class="dropdown btn-coupon-chose">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
               {{ coupon.coupon.coupon.name }}
@@ -82,37 +80,40 @@
         </div>
       </div>
     </div>
-    <div class="row-subitem mt-1">
+    <div class="row-subitem mt-1 border-item">
       <div
         class="row-subitem-padding widget-small-text underline-links blue-links hover-links"
         [innerHTML]="'widgets.coupon.couponCallback.desc' | translate"
       ></div>
     </div>
 
-    <div class="mt-1 mb-1">
-      <h4 class="h4-text-tit control-label-des helper-title-3level">
+    <div class="mt-3 pt-1">
+      <h3 class="h4-text-tit control-label-des helper-title-3level">
         {{ 'widgets.coupon.couponCallback.popupWindow.setting.title' | translate }}
-      </h4>
+      </h3>
     </div>
 
-    <div class="row-subitem mt-2">
-      <div class="row-subitem-padding pt-1 mt-1">
-        <label class="control-label control-label-des">{{ 'widgets.coupon.couponCallback.popupWindow.setting.position' | translate }}:</label>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{ coupon.coupon.positionPopup }}
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu dropd-scroll-sm" role="menu">
-            <li
-              role="presentation"
-              *ngFor="let item of placePopup"
-              (click)="coupon.coupon.positionPopup = item"
-            >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item }}</a>
-            </li>
-          </ul>
+    <!-- Coupon preview -->
+    <div class="row-subitem mt-3">
+      <div class="coupon-viewer-wr">
+        <div class="coupon-viewer-text1">{{ coupon.coupon.actionText }}</div>
+        <div class="element-coupon-wr" [ngStyle]="{'background-color': coupon.coupon.color, 'color': coupon.coupon.colorText}">
+          <div class="element-coupon-name">COUPON CODE</div>
+          <div class="element-coupon-hover">{{ coupon.coupon.hoverText }}</div>
         </div>
+        <div class="coupon-viewer-text2">{{ coupon.coupon.manualText }}</div>
+      </div>
+    </div>
+
+    <div class="row-subitem row-subitem-padding mt-3 pt-2">
+      <h3>{{ 'widgets.coupon.couponCallback.popupWindow.setting.position' | translate }}</h3>
+
+      <div class="row-subitem-padding mt-2 pt-1">
+        <app-position-control
+          [positions]="placePopup"
+          [currentPosition]="coupon.coupon.positionPopup"
+          (changePosition)="coupon.coupon.positionPopup = $event"
+        ></app-position-control>
       </div>
     </div>
 
@@ -162,18 +163,6 @@
         <h4 class="h4-text-tit control-label-des helper-title-3level">
           {{ 'widgets.coupon.couponCallback.popupWindow.setting.design' | translate }}
         </h4>
-      </div>
-    </div>
-
-    <!-- Coupon preview -->
-    <div class="row-subitem">
-      <div class="coupon-viewer-wr">
-        <div class="coupon-viewer-text1">{{ coupon.coupon.actionText }}</div>
-        <div class="element-coupon-wr" [ngStyle]="{'background-color': coupon.coupon.color, 'color': coupon.coupon.colorText}">
-          <div class="element-coupon-name">COUPON CODE</div>
-          <div class="element-coupon-hover">{{ coupon.coupon.hoverText }}</div>
-        </div>
-        <div class="coupon-viewer-text2">{{ coupon.coupon.manualText }}</div>
       </div>
     </div>
 
