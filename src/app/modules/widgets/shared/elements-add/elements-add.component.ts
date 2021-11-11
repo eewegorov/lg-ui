@@ -299,10 +299,10 @@ export class ElementsAddComponent implements OnInit {
   }
 
   public addCouponElement() {
-    if (!this.isPayment) {
+    /*if (!this.isPayment) {
       this.showPaymentDialog(this.sid, this.translate.instant('widgetsList.payment.features'));
       return;
-    }
+    }*/
 
     if (this.addElemFromWidget === false) {
       this.widget.guiprops.elementsList.push({ ...this.globalCouponObject });
@@ -319,21 +319,6 @@ export class ElementsAddComponent implements OnInit {
       this.widget.guiprops.elementsList.push({ ...timerModel });
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, { ...timerModel });
-    }
-
-    this.addElementModalHide();
-
-
-
-    if (!this.isPayment) {
-      this.showPaymentDialog(this.sid, this.translate.instant('widgetsList.payment.features'));
-      return;
-    }
-
-    if (this.addElemFromWidget === false) {
-      this.widget.guiprops.elementsList.push({ ...this.globalCouponObject });
-    } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, { ...this.globalCouponObject });
     }
 
     this.addElementModalHide();

@@ -29,55 +29,51 @@
   </div>
 
   <div *ngIf="coupon.enable">
-    <div *ngIf="!coupons.length" class="row-subitem mt-2">
-      <div class="row-subitem-padding pt-1 coupons-flex-wr">
-        <a href="../../../coupons/?enableCouponModal=true" target="_blank" class="btn btn-primary btn-coupon-add">
-          {{ 'widgets.coupon.couponCallback.couponAdd' | translate }}
-        </a>
+    <div *ngIf="!coupons.length" class="row-subitem row-subitem-padding coupons-flex-wr mt-2 pt-1">
+      <a href="../../../coupons/?enableCouponModal=true" target="_blank" class="btn btn-primary btn-coupon-add">
+        {{ 'widgets.coupon.couponCallback.couponAdd' | translate }}
+      </a>
+      <button
+        (click)="refreshCouponsList()"
+        class="btn btn-default refresh-coupons-element-btn"
+        data-toggle="tooltip"
+        data-container="body"
+        data-placement="top"
+        [attr.data-original-title]="'widgets.coupon.couponCallback.couponRefresh' | translate"
+      >
+        <i class="fas fa-sync"></i>
+      </button>
+    </div>
+
+    <div *ngIf="coupons.length" class="row-subitem row-subitem-padding mt-2 pt-1">
+      <h3>{{ 'widgets.coupon.couponCallback.couponChoose' | translate }}</h3>
+      <div class="coupons-flex-wr mt-1">
+        <div class="dropdown btn-coupon-chose">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {{ coupon.coupon.coupon.name }}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li
+              role="presentation"
+              *ngFor="let itemCoupon of coupons"
+              (click)="coupon.coupon.coupon = itemCoupon"
+            >
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemCoupon.name }}</a>
+            </li>
+          </ul>
+        </div>
         <button
           (click)="refreshCouponsList()"
           class="btn btn-default refresh-coupons-element-btn"
           data-toggle="tooltip"
           data-container="body"
           data-placement="top"
+          title=""
           [attr.data-original-title]="'widgets.coupon.couponCallback.couponRefresh' | translate"
         >
           <i class="fas fa-sync"></i>
         </button>
-      </div>
-    </div>
-
-    <div *ngIf="coupons.length" class="row-subitem mt-2">
-      <div class="row-subitem-padding">
-        <h3>{{ 'widgets.coupon.couponCallback.couponChoose' | translate }}</h3>
-        <div class="coupons-flex-wr mt-1">
-          <div class="dropdown btn-coupon-chose">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-              {{ coupon.coupon.coupon.name }}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li
-                role="presentation"
-                *ngFor="let itemCoupon of coupons"
-                (click)="coupon.coupon.coupon = itemCoupon"
-              >
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemCoupon.name }}</a>
-              </li>
-            </ul>
-          </div>
-          <button
-            (click)="refreshCouponsList()"
-            class="btn btn-default refresh-coupons-element-btn"
-            data-toggle="tooltip"
-            data-container="body"
-            data-placement="top"
-            title=""
-            [attr.data-original-title]="'widgets.coupon.couponCallback.couponRefresh' | translate"
-          >
-            <i class="fas fa-sync"></i>
-          </button>
-        </div>
       </div>
     </div>
     <div class="row-subitem mt-1 border-item">
