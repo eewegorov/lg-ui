@@ -1,41 +1,30 @@
-<div class="border-item timer-template-wrapper">
+<div class="timer-template-wrapper">
   <!-- SETTINGS -->
-  <div class="mb-1">
-    <h4 class="h4-text-tit control-label-des helper-title-3level">{{ 'widgets.timerDirective.settings.title' | translate }}</h4>
-  </div>
-
-  <div class="row row-subitem mt-2">
-    <div class="col-sm-12 row-subitem-padding pt-1">
-      <label class="control-label control-label-des">{{ 'widgets.timerDirective.countdown.title' | translate }}:</label>
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-          {{ item.type.label }}
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li role="presentation" *ngFor="let itemType of timerTypes" (click)="item.type = itemType">
-            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemType.label }}</a>
-          </li>
-        </ul>
-      </div>
+  <div class="row-subitem row-subitem-padding">
+    <h3>{{ 'widgets.timerDirective.countdown.title' | translate }}</h3>
+    <div class="dropdown mt-1">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+        {{ item.type.label }}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li role="presentation" *ngFor="let itemType of timerTypes" (click)="item.type = itemType">
+          <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemType.label }}</a>
+        </li>
+      </ul>
     </div>
   </div>
 
   <!-- to current date -->
   <div *ngIf="item.type.type === 0">
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding">
-        <app-timer-datepicker [item]="item"></app-timer-datepicker>
-      </div>
+    <div class="row-subitem row-subitem-padding mt-3 pt-1">
+      <app-timer-datepicker [item]="item"></app-timer-datepicker>
     </div>
 
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding">
-        <h4 class="h4-text-tit control-label-des">{{ 'widgets.timerDirective.timezone.title' | translate }}</h4>
-      </div>
-      <div class="clearfix"></div>
-      <div class="flex-bl-for-radio-group">
-        <div class="row-subitem-padding radio-group-item mr-3">
+    <div class="row-subitem mt-3 pt-1 border-item">
+      <h3>{{ 'widgets.timerDirective.timezone.title' | translate }}</h3>
+      <div class="flex-bl-for-radio-group mt-3">
+        <div class="row-subitem-padding radio-group-item mr-5">
           <div class="form-group widget-selector mb-0">
             <label>
               <input type="radio" class="radio radio-info radio-inline" [(ngModel)]="item.timezoneType" value="local">
@@ -57,25 +46,25 @@
 
   <!-- to interval -->
   <div *ngIf="item.type.type === 1">
-    <div class="type1-flexed-row row-subitem mt-1">
-      <div class="type1-flexed-row-item pt-1">
-        <label class="control-label control-label-des">{{ 'widgets.timerDirective.label.days' | translate }}:</label>
-        <input type="number" min="0" max="99" class="form-control form-control-font form-control-block form-cntrl-45w" [(ngModel)]="item.type1Model.d">
+    <div class="type1-flexed-row row-subitem mt-3 border-item">
+      <div class="type1-flexed-row-item pr-3">
+        <label class="control-label control-label-des switcher-label-xs pb-1">{{ 'widgets.timerDirective.label.days' | translate }}</label>
+        <input type="number" min="0" max="99" class="form-control form-control-font form-control-block" [(ngModel)]="item.type1Model.d">
       </div>
 
-      <div class="type1-flexed-row-item pt-1">
-        <label class="control-label control-label-des">{{ 'widgets.timerDirective.label.hours' | translate }}:</label>
-        <input type="number" min="0" max="24" class="form-control form-control-font form-control-block form-cntrl-45w" [(ngModel)]="item.type1Model.h">
+      <div class="type1-flexed-row-item pr-3">
+        <label class="control-label control-label-des switcher-label-xs pb-1">{{ 'widgets.timerDirective.label.hours' | translate }}</label>
+        <input type="number" min="0" max="24" class="form-control form-control-font form-control-block" [(ngModel)]="item.type1Model.h">
       </div>
 
-      <div class="type1-flexed-row-item pt-1">
-        <label class="control-label control-label-des">{{ 'widgets.timerDirective.label.mins' | translate }}:</label>
-        <input type="number" min="0" max="59" class="form-control form-control-font form-control-block form-cntrl-45w" [(ngModel)]="item.type1Model.m">
+      <div class="type1-flexed-row-item pr-3">
+        <label class="control-label control-label-des switcher-label-xs pb-1">{{ 'widgets.timerDirective.label.mins' | translate }}</label>
+        <input type="number" min="0" max="59" class="form-control form-control-font form-control-block" [(ngModel)]="item.type1Model.m">
       </div>
 
-      <div class="type1-flexed-row-item pt-1">
-        <label class="control-label control-label-des">{{ 'widgets.timerDirective.label.secs' | translate }}:</label>
-        <input type="number" min="0" max="59" class="form-control form-control-font form-control-block form-cntrl-45w" [(ngModel)]="item.type1Model.s">
+      <div class="type1-flexed-row-item">
+        <label class="control-label control-label-des switcher-label-xs pb-1">{{ 'widgets.timerDirective.label.secs' | translate }}</label>
+        <input type="number" min="0" max="59" class="form-control form-control-font form-control-block" [(ngModel)]="item.type1Model.s">
       </div>
     </div>
 

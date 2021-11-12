@@ -47,7 +47,7 @@ export class TimerDatepickerComponent implements OnInit {
   }
 
   public update() {
-    this.item.date = this.value.date._d;
+    this.item.date = this.value._d;
   }
 
   private addDays(date, days) {

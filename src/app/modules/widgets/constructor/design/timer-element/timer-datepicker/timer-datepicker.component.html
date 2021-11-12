@@ -1,4 +1,4 @@
-<div class="timer-datepicker">
+<div *ngIf="item" class="timer-datepicker">
   <div class="form-group">
     <div class="input-group date timer-datepicker-block" id="datetimepicker" data-target-input="nearest" NgTempusdominusBootstrap>
       <input
@@ -8,6 +8,7 @@
         [options]="options"
         NgTempusdominusBootstrapInput
         type="text" class="form-control datetimepicker-input"
+        placeholder="Выбрать дату и время"
       />
       <div class="input-group-append" NgTempusdominusBootstrapToggle>
         <div class="input-group-text" data-target="#datetimepicker"><i class="fa fa-calendar"></i></div>
