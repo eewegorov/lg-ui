@@ -420,6 +420,11 @@ h6.title-h6-widget a:hover {
     text-align: center;
     cursor: pointer;
 
+    &.coupon {
+      background-color: #FCECE9;
+      color: #E25336;
+    }
+
     &:not(.active):hover {
       background-color: #D4D7DD;
       z-index: 2;
@@ -576,6 +581,10 @@ h6.title-h6-widget a:hover {
   height: 21px;
   margin: 0 auto 5px;
   background-color: #7E889A;
+}
+
+.coupon-element-icon-small {
+  background-color: #E25336;
 }
 
 .add-icon-small {

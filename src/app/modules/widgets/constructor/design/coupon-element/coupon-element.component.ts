@@ -32,6 +32,14 @@ export class CouponElementComponent implements OnInit, AfterViewInit, OnChanges 
     showSelectionBar: true
   };
 
+  public optionsSharpness: Options = {
+    floor: 0,
+    ceil: 100,
+    step: 1,
+    animate: false,
+    showSelectionBar: true
+  };
+
   constructor(
     private couponService: CouponService,
     private widgetConstructorService: WidgetConstructorService

@@ -299,10 +299,10 @@ export class ElementsAddComponent implements OnInit {
   }
 
   public addCouponElement() {
-    /*if (!this.isPayment) {
+    if (!this.isPayment) {
       this.showPaymentDialog(this.sid, this.translate.instant('widgetsList.payment.features'));
       return;
-    }*/
+    }
 
     if (this.addElemFromWidget === false) {
       this.widget.guiprops.elementsList.push({ ...this.globalCouponObject });

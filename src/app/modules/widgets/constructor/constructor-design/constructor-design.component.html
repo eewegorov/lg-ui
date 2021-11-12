@@ -16,6 +16,7 @@
           <div
             *ngFor="let element of widget.guiprops.elementsList; index as i"
             class="element"
+            [class.coupon]="element.name === 'coupon-element'"
             [class.active]="currentElement === element.name + ('#' + element.counter ?? '')"
             (click)="currentElement = element.name + ('#' + element.counter ?? ''); currentIndex = i"
           >
