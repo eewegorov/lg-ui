@@ -145,129 +145,196 @@
   <!-- DESIGN -->
   <h3 class="mt-3">{{ 'widgets.timerDirective.design.title' | translate }}</h3>
 
-  <div class="row row-subitem pt-1">
-    <div class="col-sm-12 row-subitem-padding">
-      <h4 class="h4-text-tit control-label-des">{{ 'widgets.timerDirective.design.fontNumber' | translate }}:</h4>
+  <div class="d-flex align-items-center justify-content-between mt-2 pt-1">
+    <label class="control-label control-label-des">{{ 'widgets.timerDirective.design.bgWidth' | translate }}</label>
+    <div class="align-items-center">
+      <div class="form-control form-control-font">
+        <input
+          type="number"
+          [(ngModel)]="item.design.bgWidth"
+        />
+        <label>px</label>
+      </div>
     </div>
-    <div class="col-sm-12 row-subitem-padding">
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between mt-2 pt-1">
+    <label class="control-label control-label-des">{{ 'widgets.timerDirective.design.bgHeight' | translate }}</label>
+    <div class="align-items-center">
+      <div class="form-control form-control-font">
+        <input
+          type="number"
+          [(ngModel)]="item.design.bgHeight"
+        />
+        <label>px</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between mt-3">
+    <h5 class="label-style-ic control-label-des">Скругление углов</h5>
+    <div class="d-flex text-right side-ui-sm">
+      <ngx-slider [(value)]="item.design.radius" [options]="optionsRound"></ngx-slider>
+      <input
+        [(ngModel)]="item.design.radius"
+        class="picker-input slider"
+      />
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3 border-item">
+    <label class="control-label control-label-des">Выравнивание</label>
+    <div>
+      <button
+        class="align-button icon-left"
+        [class.active]="item.design.align.label === alignValues[0].label"
+        (click)="item.design.align = alignValues[0]"
+      ></button>
+      <button
+        class="align-button icon-center"
+        [class.active]="item.design.align.label === alignValues[1].label"
+        (click)="item.design.align = alignValues[1]"
+      ></button>
+      <button
+        class="align-button icon-right"
+        [class.active]="item.design.align.label === alignValues[2].label"
+        (click)="item.design.align = alignValues[2]"
+      ></button>
+    </div>
+  </div>
+
+  <div class="row-subitem mt-3">
+    <h3>{{ 'widgets.timerDirective.design.fontNumber' | translate }}</h3>
+    <div class="row-subitem-padding mt-3">
       <input type="text" [id]="'font-picker-number-timer' + index">
     </div>
   </div>
-  <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
-      <input type="number" class="form-control form-control-font form-cntrl-45w"
-             [(ngModel)]="item.design.fontNumberSize">
-      <label class="control-label ml-1">px <span>{{ 'widgets.font.textSize' | translate }}</span></label>
+  <div class="d-flex align-items-center justify-content-between mt-2 border-item">
+    <label class="control-label control-label-des">Размер</label>
+    <div class="row align-items-center">
+      <div class="form-control form-control-font">
+        <input
+          type="number"
+          [(ngModel)]="item.design.fontNumberSize"
+        />
+        <label>px</label>
+      </div>
     </div>
   </div>
 
-  <div class="row row-subitem pt-1 mt-2">
-    <div class="col-sm-12 row-subitem-padding">
-      <h4 class="h4-text-tit control-label-des">{{ 'widgets.timerDirective.design.fontLabel' | translate }}:</h4>
-    </div>
-    <div class="col-sm-12 row-subitem-padding">
+  <div class="row-subitem mt-3">
+    <h3>{{ 'widgets.timerDirective.design.fontLabel' | translate }}</h3>
+    <div class="row-subitem-padding mt-3">
       <input type="text" [id]="'font-picker-label-timer' + index">
     </div>
   </div>
-  <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
-      <input type="number" class="form-control form-control-font form-cntrl-45w"
-             [(ngModel)]="item.design.fontLabelSize">
-      <label class="control-label ml-1">px <span>{{ 'widgets.font.textSize' | translate }}</span></label>
-    </div>
-  </div>
-
-  <div class="row row-subitem mt-2">
-    <div class="col-sm-6 row-subitem-padding pt-1">
-      <label class="control-label control-label-des">{{ 'widgets.timerDirective.design.bgWidth' | translate }}:</label>
-      <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
-        <div>
-          <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.design.bgWidth">
-          <label class="control-label ml-1">px</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-sm-6 row-subitem-padding pt-1">
-      <label class="control-label control-label-des">{{ 'widgets.timerDirective.design.bgHeight' | translate }}:</label>
-      <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
-        <div>
-          <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.design.bgHeight">
-          <label class="control-label ml-1">px</label>
-        </div>
+  <div class="d-flex align-items-center justify-content-between mt-2 border-item">
+    <label class="control-label control-label-des">Размер</label>
+    <div class="row align-items-center">
+      <div class="form-control form-control-font">
+        <input
+          type="number"
+          [(ngModel)]="item.design.fontLabelSize"
+        />
+        <label>px</label>
       </div>
     </div>
   </div>
 
-  <div class="row row-subitem mt-2">
-    <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
-      <ngx-slider [(value)]="item.design.opacity" [options]="optionsOpacity"></ngx-slider>
-      <label
-        class="control-label control-label-ui ml-2 ">{{ 'widgets.timerDirective.design.bgOpacity' | translate }}</label>
+  <div class="mt-3 border-item">
+    <h3>Цвет</h3>
+
+    <div class="d-flex justify-content-between mt-3 pt-1">
+      <label class="control-label control-label-des">{{ 'widgets.timerDirective.design.colorText' | translate }}</label>
+      <div class="d-flex text-right">
+        <input
+          [(colorPicker)]="item.design.colorText"
+          [style.background]="item.design.colorText"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          cpPosition="left"
+          class="color-picker-control"
+        />
+        <input
+          [(ngModel)]="item.design.colorText"
+          class="picker-input color"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <label class="control-label control-label-des">{{ 'widgets.timerDirective.design.colorBG' | translate }}</label>
+      <div class="d-flex text-right">
+        <input
+          [(colorPicker)]="item.design.colorBG"
+          [style.background]="item.design.colorBG"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          cpPosition="left"
+          class="color-picker-control"
+        />
+        <input
+          [(ngModel)]="item.design.colorBG"
+          class="picker-input color"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <label class="control-label control-label-des">{{ 'widgets.timerDirective.design.colorDivider' | translate }}</label>
+      <div class="d-flex text-right">
+        <input
+          [(colorPicker)]="item.design.colorDivider"
+          [style.background]="item.design.colorDivider"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          cpPosition="left"
+          class="color-picker-control"
+        />
+        <input
+          [(ngModel)]="item.design.colorDivider"
+          class="picker-input color"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <label class="control-label control-label-des">{{ 'widgets.timerDirective.design.colorIntervalName' | translate }}</label>
+      <div class="d-flex text-right">
+        <input
+          [(colorPicker)]="item.design.colorIntervalName"
+          [style.background]="item.design.colorIntervalName"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          cpPosition="left"
+          class="color-picker-control"
+        />
+        <input
+          [(ngModel)]="item.design.colorIntervalName"
+          class="picker-input color"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <h5 class="label-style-ic control-label-des">Прозрачность</h5>
+      <div class="d-flex text-right side-ui-sm">
+        <ngx-slider
+          [(value)]="item.design.opacity"
+          [options]="optionsOpacity"
+        ></ngx-slider>
+        <input
+          [(ngModel)]="item.design.opacity"
+          class="picker-input slider"
+        />
+      </div>
     </div>
   </div>
 
-  <div class="row row-subitem mt-2 mb-2">
-    <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
-      <ngx-slider [(value)]="item.design.radius" [options]="optionsRound"></ngx-slider>
-      <label
-        class="control-label control-label-ui ml-2">{{ 'widgets.timerDirective.design.bgRadius' | translate }}</label>
-    </div>
-  </div>
 
-  <div class="row row-subitem">
-    <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
-      <label
-        class="control-label control-label-colorpc control-label-des">{{ 'widgets.timerDirective.design.colorText' | translate }}</label>
-      <input
-        [(colorPicker)]="item.design.colorText"
-        [style.background]="item.design.colorText"
-        [cpAlphaChannel]="'disabled'"
-        [cpOutputFormat]="'hex'"
-        cpPosition="top"
-        class="w-100"
-      />
-    </div>
-    <div class="col-sm-6 row-subitem-padding pt-1">
-      <label
-        class="control-label control-label-colorpc control-label-des">{{ 'widgets.timerDirective.design.colorBG' | translate }}</label>
-      <input
-        [(colorPicker)]="item.design.colorBG"
-        [style.background]="item.design.colorBG"
-        [cpAlphaChannel]="'disabled'"
-        [cpOutputFormat]="'hex'"
-        cpPosition="top"
-        class="w-100"
-      />
-    </div>
-  </div>
 
-  <div class="row row-subitem">
-    <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
-      <label
-        class="control-label control-label-colorpc control-label-des">{{ 'widgets.timerDirective.design.colorDivider' | translate }}</label>
-      <input
-        [(colorPicker)]="item.design.colorDivider"
-        [style.background]="item.design.colorDivider"
-        [cpAlphaChannel]="'disabled'"
-        [cpOutputFormat]="'hex'"
-        cpPosition="top"
-        class="w-100"
-      />
-    </div>
-    <div class="col-sm-6 row-subitem-padding pt-1">
-      <label
-        class="control-label control-label-colorpc control-label-des">{{ 'widgets.timerDirective.design.colorIntervalName' | translate }}</label>
-      <input
-        [(colorPicker)]="item.design.colorIntervalName"
-        [style.background]="item.design.colorIntervalName"
-        [cpAlphaChannel]="'disabled'"
-        [cpOutputFormat]="'hex'"
-        cpPosition="top"
-        class="w-100"
-      />
-    </div>
-  </div>
+
+
 
   <div class="row row-subitem mt-2 pt-1">
     <div class="col-sm-12 row-subitem-padding mb-1">
@@ -321,24 +388,6 @@
   <div class="row row-subitem mt-1">
     <div class="col-sm-12 row-subitem-padding widget-small-text">
       {{ 'widgets.timerDirective.design.nullData.desc' | translate }}
-    </div>
-  </div>
-
-  <div class="row row-subitem mt-2">
-    <div class="col-sm-12 row-subitem-padding pt-1">
-      <label
-        class="control-label control-label-des">{{ 'widgets.timerDirective.design.align.label' | translate }}</label>
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-          {{ item.design.align.label }}
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li role="presentation" *ngFor="let alignItem of alignValues" (click)="item.design.align = alignItem">
-            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ alignItem.label }}</a>
-          </li>
-        </ul>
-      </div>
     </div>
   </div>
 

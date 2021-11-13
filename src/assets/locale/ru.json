@@ -1116,13 +1116,12 @@
 					"type2": "По правому краю"
 				},
 				"bgHeight": "Высота фона",
-				"bgOpacity": "Прозрачность фона",
 				"bgRadius": "Закругление углов",
 				"bgWidth": "Ширина фона",
-				"colorBG": "Цвет фона:",
-				"colorDivider": "Цвет разделителя:",
-				"colorIntervalName": "Цвет названия интервала:",
-				"colorText": "Цвет цифр:",
+				"colorBG": "Фон",
+				"colorDivider": "Разделитель",
+				"colorIntervalName": "Интервалы",
+				"colorText": "Цифры",
 				"font": {
 					"choose": "Выберите шрифт"
 				},
