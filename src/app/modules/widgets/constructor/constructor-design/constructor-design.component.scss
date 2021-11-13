@@ -9,7 +9,7 @@
 
 .widget-style-menu .panel-group {
   position: relative;
-  height: calc(100% - 70px);
+  height: calc(100% - 80px);
   overflow: auto;
   border-radius: 4px;
 }
@@ -150,8 +150,6 @@ h6.title-h6-widget a:hover {
   height: 100%;
   width: 100%;
   position: relative;
-  padding-top: 60px;
-  padding-bottom: 55px;
   background: #C6CAD2;
 }
 
@@ -186,6 +184,7 @@ h6.title-h6-widget a:hover {
   left: 0;
   bottom: 0;
   right: 0;
+  height: 95%;
 }
 
 .max-h-100 .max-wh-over.ifr-sh-bg {
@@ -387,9 +386,9 @@ h6.title-h6-widget a:hover {
 
 .widget-visual-block {
   position: absolute;
-  top: 40%;
+  top: 10%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   width: auto;
   min-width: 500px;
   display: inline-block;

@@ -760,78 +760,78 @@
       </div>
       <div class="max-h-100" [ngClass]="(widget.guiprops.popupMain?.shadow?.enable === true) ? 'ifr-sh-bg' : ''">
         <div
-          class="max-wh-over"
-          [ngStyle]="{'background': this.widget.guiprops.popupMain.shadow.enable ? widget.guiprops['popupMain']?.shadow.rgbaColor : 'none'}"
-          (click)="scrollToEl('MainSetBl', 'main-w-element')"
-        >
-          <div class="popup-shadow popup-sh-pad">
-            <div class="max-h-1001">
-              <div class="widget-visual-block" [ngStyle]="{'width': 'auto'}">
-                <div *ngIf="!(disElementOrNotBtnCloseLink())" class="close-btn-x">
-                  <span></span>
-                </div>
-                <div class="clearfix"></div>
-                <app-content-element
-                  [widget]="widget"
-                  [bgStyle]="bgStyle"
-                  [widthImageStyle]="widthImageStyle"
-                  [heightImageStyle]="heightImageStyle"
-                  [widthContentStyle]="widthContentStyle"
-                  [heightContentStyle]="heightContentStyle"
-                  (removeElement)="removeCurrentElement($event.element, $event.index)"
-                  (scrollToElement)="scrollToEl($event.id, $event.elementName, $event.elementCounter)"
-                  (addNewElement)="addNewElementToContent($event)"
-                  [hidden]="currentPage !== 'main'"
-                ></app-content-element>
-                <app-thank-element
-                  [widget]="widget"
-                  [bgStyle]="bgStyle"
-                  [hidden]="currentPage !== 'thank'"
-                ></app-thank-element>
+            class="max-wh-over"
+            [ngStyle]="{'background': this.widget.guiprops.popupMain.shadow.enable ? widget.guiprops['popupMain']?.shadow.rgbaColor : 'none'}"
+            (click)="scrollToEl('MainSetBl', 'main-w-element')"
+          >
+            <div class="popup-shadow popup-sh-pad">
+              <div class="max-h-1001">
+                <div class="widget-visual-block" [ngStyle]="{'width': 'auto'}">
+                  <div *ngIf="!(disElementOrNotBtnCloseLink())" class="close-btn-x">
+                    <span></span>
+                  </div>
+                  <div class="clearfix"></div>
+                  <app-content-element
+                    [widget]="widget"
+                    [bgStyle]="bgStyle"
+                    [widthImageStyle]="widthImageStyle"
+                    [heightImageStyle]="heightImageStyle"
+                    [widthContentStyle]="widthContentStyle"
+                    [heightContentStyle]="heightContentStyle"
+                    (removeElement)="removeCurrentElement($event.element, $event.index)"
+                    (scrollToElement)="scrollToEl($event.id, $event.elementName, $event.elementCounter)"
+                    (addNewElement)="addNewElementToContent($event)"
+                    [hidden]="currentPage !== 'main'"
+                  ></app-content-element>
+                  <app-thank-element
+                    [widget]="widget"
+                    [bgStyle]="bgStyle"
+                    [hidden]="currentPage !== 'thank'"
+                  ></app-thank-element>
 
-                <div *ngIf="widgetType === 'optindot'" class="widget-visual-block-dot" [ngClass]="wvBdLeft()">
-                  <div class="widget2-main-bl">
-                    <div class="widget2-plashka" *ngIf="widget.guiprops['dhVisual'].enable == true">
-                      <span>{{ widget.guiprops.dhVisual.title }}</span>
-                    </div>
-                    <div
-                      *ngIf="widget.guiprops['dhVisual'].enableBlink == false"
-                      class="lg-wg-pulse1"
-                      [style]="'box-shadow: inset 0px 0px 15px 10px ' + widget.guiprops['dhVisual'].rgbaShadowForm1"
-                    ></div>
-                    <div
-                      *ngIf="widget.guiprops['dhVisual'].enableBlink == false"
-                      class="lg-wg-pulse2"
-                      [style]="'box-shadow:inset 0px 0px 12px 5px ' + widget.guiprops['dhVisual'].rgbaShadowForm2"
-                    ></div>
-                    <div class="widget2" [style]="'background: ' + widget.guiprops['dhVisual'].colorMain">
+                  <div *ngIf="widgetType === 'optindot'" class="widget-visual-block-dot" [ngClass]="wvBdLeft()">
+                    <div class="widget2-main-bl">
+                      <div class="widget2-plashka" *ngIf="widget.guiprops['dhVisual'].enable == true">
+                        <span>{{ widget.guiprops.dhVisual.title }}</span>
+                      </div>
                       <div
-                        *ngIf="((widget.guiprops['dhVisual'].enableBlink == false) && (widget.guiprops['dhVisual'].iconOrImage === 'useIcon'))"
-                        class="lg-wg-dot-circle-fill1"
-                        [style]="'background: ' + widget.guiprops['dhVisual'].colorBg"
+                        *ngIf="widget.guiprops['dhVisual'].enableBlink == false"
+                        class="lg-wg-pulse1"
+                        [style]="'box-shadow: inset 0px 0px 15px 10px ' + widget.guiprops['dhVisual'].rgbaShadowForm1"
                       ></div>
                       <div
-                        *ngIf="((widget.guiprops['dhVisual'].enableBlink == false) && (widget.guiprops['dhVisual'].iconOrImage === 'useIcon'))"
-                        class="lg-wg-dot-circle-fill2"
-                        [style]="'background: ' + widget.guiprops['dhVisual'].colorMain"></div>
-                      <i
-                        *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useIcon'"
-                        class="f30s"
-                        [class]="widget.guiprops.dhVisual.selectedIcon?.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : ('lgiconfont-' + widget.guiprops.dhVisual.selectIcon)"
-                        [style]="'color: ' + widget.guiprops['dhVisual'].colorBg"
-                      ></i>
-                      <div
-                        *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useImg'"
-                        class="lg-wg-dot-circle-img"
-                        [style]="'background-image: url(' + widget.guiprops['dhVisual'].url + ')'"
+                        *ngIf="widget.guiprops['dhVisual'].enableBlink == false"
+                        class="lg-wg-pulse2"
+                        [style]="'box-shadow:inset 0px 0px 12px 5px ' + widget.guiprops['dhVisual'].rgbaShadowForm2"
                       ></div>
+                      <div class="widget2" [style]="'background: ' + widget.guiprops['dhVisual'].colorMain">
+                        <div
+                          *ngIf="((widget.guiprops['dhVisual'].enableBlink == false) && (widget.guiprops['dhVisual'].iconOrImage === 'useIcon'))"
+                          class="lg-wg-dot-circle-fill1"
+                          [style]="'background: ' + widget.guiprops['dhVisual'].colorBg"
+                        ></div>
+                        <div
+                          *ngIf="((widget.guiprops['dhVisual'].enableBlink == false) && (widget.guiprops['dhVisual'].iconOrImage === 'useIcon'))"
+                          class="lg-wg-dot-circle-fill2"
+                          [style]="'background: ' + widget.guiprops['dhVisual'].colorMain"></div>
+                        <i
+                          *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useIcon'"
+                          class="f30s"
+                          [class]="widget.guiprops.dhVisual.selectedIcon?.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : ('lgiconfont-' + widget.guiprops.dhVisual.selectIcon)"
+                          [style]="'color: ' + widget.guiprops['dhVisual'].colorBg"
+                        ></i>
+                        <div
+                          *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useImg'"
+                          class="lg-wg-dot-circle-img"
+                          [style]="'background-image: url(' + widget.guiprops['dhVisual'].url + ')'"
+                        ></div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>

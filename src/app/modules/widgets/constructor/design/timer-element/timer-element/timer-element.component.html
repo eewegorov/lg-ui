@@ -331,21 +331,13 @@
     </div>
   </div>
 
-
-
-
-
-
-  <div class="row row-subitem mt-2 pt-1">
-    <div class="col-sm-12 row-subitem-padding mb-1">
-      <span
-        class="input-down-sm-lab control-label-des">{{ 'widgets.timerDirective.design.nullData.label' | translate }}</span>
-    </div>
+  <div class="row-subitem mt-3">
+    <h3>{{ 'widgets.timerDirective.design.nullData.label' | translate }}</h3>
   </div>
-  <div class="row-subitem pt-1 timer-null-data-block">
+  <div class="row-subitem mt-3 timer-null-data-block">
     <div class="d-flex row-subitem-padding">
-      <div class="form-check pl-2">
-        <label class="form-check-label">
+      <div class="form-check">
+        <label class="form-check-label mr-2">
           <input
             type="checkbox"
             [(ngModel)]="item.design.nullData.d"
@@ -354,11 +346,11 @@
           />
           <span class="checkmark"></span>
         </label>
-        {{ 'widgets.timerDirective.labelShort.days' | translate }}
+        <span class="f-3">{{ 'widgets.timerDirective.labelShort.days' | translate }}</span>
       </div>
 
-      <div class="form-check pl-2 ml-3">
-        <label class="form-check-label">
+      <div class="form-check ml-5 pl-4">
+        <label class="form-check-label mr-2">
           <input
             type="checkbox"
             [(ngModel)]="item.design.nullData.h"
@@ -367,11 +359,11 @@
           />
           <span class="checkmark"></span>
         </label>
-        {{ 'widgets.timerDirective.labelShort.hours' | translate }}
+        <span class="f-3">{{ 'widgets.timerDirective.labelShort.hours' | translate }}</span>
       </div>
 
-      <div class="form-check pl-2 ml-3">
-        <label class="form-check-label">
+      <div class="form-check ml-5 pl-4">
+        <label class="form-check-label mr-2">
           <input
             type="checkbox"
             [(ngModel)]="item.design.nullData.m"
@@ -380,62 +372,52 @@
           />
           <span class="checkmark"></span>
         </label>
-        {{ 'widgets.timerDirective.labelShort.mins' | translate }}
+        <span class="f-3">{{ 'widgets.timerDirective.labelShort.mins' | translate }}</span>
       </div>
     </div>
   </div>
 
-  <div class="row row-subitem mt-1">
-    <div class="col-sm-12 row-subitem-padding widget-small-text">
-      {{ 'widgets.timerDirective.design.nullData.desc' | translate }}
-    </div>
+  <div class="row-subitem row-subitem-padding widget-small-text mt-2 border-item">
+    {{ 'widgets.timerDirective.design.nullData.desc' | translate }}
   </div>
 
-  <div class="row row-subitem mt-3">
-    <div class="col-sm-12 row-subitem-padding pt-1 d-flex">
-      <ui-switch
-        size="small"
-        [(ngModel)]="item.design.tempInterval.enable"
-      ></ui-switch>
-      <label
-        class="control-label switcher-label-xs control-label-des mt-1 ml-2">{{ 'widgets.timerDirective.design.tempInterval.label' | translate }}</label>
-    </div>
+  <div class="d-flex row-subitem justify-content-between row-subitem-padding mt-3">
+    <label class="control-label switcher-label-xs control-label-des">
+      {{ 'widgets.timerDirective.design.tempInterval.label' | translate }}
+    </label>
+    <ui-switch
+      size="small"
+      [(ngModel)]="item.design.tempInterval.enable"
+    ></ui-switch>
   </div>
+
   <div *ngIf="item.design.tempInterval.enable">
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
-        <label
-          class="control-label control-label-des">{{ 'widgets.timerDirective.design.tempInterval.days' | translate }}
-          :</label>
-        <input type="text" class="form-control" [(ngModel)]="item.design.tempInterval.dText">
-      </div>
+    <div class="row-subitem row-subitem-padding pt-1 form-ext-item__item-input mt-2">
+      <label class="control-label control-label-des switcher-label-xs mb-1">
+        {{ 'widgets.timerDirective.design.tempInterval.days' | translate }}
+      </label>
+      <input type="text" class="form-control" [(ngModel)]="item.design.tempInterval.dText">
     </div>
 
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
-        <label
-          class="control-label control-label-des">{{ 'widgets.timerDirective.design.tempInterval.hours' | translate }}
-          :</label>
-        <input type="text" class="form-control" [(ngModel)]="item.design.tempInterval.hText">
-      </div>
+    <div class="row-subitem row-subitem-padding pt-1 form-ext-item__item-input mt-2">
+      <label class="control-label control-label-des switcher-label-xs mb-1">
+        {{ 'widgets.timerDirective.design.tempInterval.hours' | translate }}
+      </label>
+      <input type="text" class="form-control" [(ngModel)]="item.design.tempInterval.hText">
     </div>
 
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
-        <label
-          class="control-label control-label-des">{{ 'widgets.timerDirective.design.tempInterval.mins' | translate }}
-          :</label>
-        <input type="text" class="form-control" [(ngModel)]="item.design.tempInterval.mText">
-      </div>
+    <div class="row-subitem row-subitem-padding pt-1 form-ext-item__item-input mt-2">
+      <label class="control-label control-label-des switcher-label-xs mb-1">
+        {{ 'widgets.timerDirective.design.tempInterval.mins' | translate }}
+      </label>
+      <input type="text" class="form-control" [(ngModel)]="item.design.tempInterval.mText">
     </div>
 
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
-        <label
-          class="control-label control-label-des">{{ 'widgets.timerDirective.design.tempInterval.secs' | translate }}
-          :</label>
-        <input type="text" class="form-control" [(ngModel)]="item.design.tempInterval.sText">
-      </div>
+    <div class="row-subitem row-subitem-padding pt-1 form-ext-item__item-input mt-2 mb-3">
+      <label class="control-label control-label-des switcher-label-xs mb-1">
+        {{ 'widgets.timerDirective.design.tempInterval.secs' | translate }}
+      </label>
+      <input type="text" class="form-control" [(ngModel)]="item.design.tempInterval.sText">
     </div>
   </div>
 </div>

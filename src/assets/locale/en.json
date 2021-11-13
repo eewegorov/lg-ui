@@ -1076,14 +1076,11 @@
 			},
 			"design": {
 				"align": {
-					"label": "",
 					"type0": "",
 					"type1": "",
 					"type2": ""
 				},
 				"bgHeight": "",
-				"bgOpacity": "",
-				"bgRadius": "",
 				"bgWidth": "",
 				"colorBG": "",
 				"colorDivider": "",
@@ -1126,9 +1123,6 @@
 			"loop": {
 				"desc": "",
 				"label": ""
-			},
-			"settings": {
-				"title": ""
 			},
 			"timezone": {
 				"gmt": "",

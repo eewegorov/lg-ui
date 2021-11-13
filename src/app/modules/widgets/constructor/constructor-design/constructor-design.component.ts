@@ -28,7 +28,7 @@ import { WidgetService } from '../../services/widget.service';
   styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy, OnChanges {
+export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @ViewChild('flow') public flow: FlowDirective;
   @Input() public sid: string;
   @Input() public wid: string;
@@ -136,6 +136,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       this.isThankShow = this.isThankShouldShow();
       setTimeout(() => {
         this.changeModel();
+        this.checkChanges();
         this.changeColorPodAndSRC();
         this.initLabelMainPicker();
         this.loadListener();
@@ -284,8 +285,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
 
     this.loadListener();
   }
-
-  ngDoCheck(): void {}
 
   private initLabelMainPicker() {
     setTimeout(() => {
@@ -1304,8 +1303,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
       $('#disabledFuncAct').addClass('hide');
       $('.panel-group').removeClass('non-scroll');
     }
-
-    this.checkChanges();
   }
 
   private checkChanges(): void {
@@ -2044,9 +2041,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
   public showLastElement() {
     setTimeout(() => {
       const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
-      this.currentElement = currentElement.name + ('#' + currentElement.counter ?? '');
+      this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
       this.currentIndex = this.widget.guiprops.elementsList.length - 1;
-    }, 0);
+    }, 500);
   }
 
 
