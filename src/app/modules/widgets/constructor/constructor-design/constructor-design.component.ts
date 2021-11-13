@@ -285,261 +285,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     this.loadListener();
   }
 
-  ngDoCheck(): void {
-    if (!this.widget.guiprops) {
-      return;
-    }
-
-    if (this.widget.guiprops.formExt) {
-      if (this.widget.guiprops.formExt.model.mainSettings.colorPod.enable) {
-        this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod =
-          (this.widgetConstructorService.hexToRgb(
-            this.widget.guiprops.formExt.model.mainSettings.colorPod.color,
-            this.widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod
-          )).toString();
-      } else {
-        this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent';
-      }
-    }
-
-    if (this.widget.guiprops.form.colorPod.enable) {
-      this.widget.guiprops.form.colorPod.rgbaColorPod =
-        (this.widgetConstructorService.hexToRgb(
-          this.widget.guiprops.form.colorPod.color,
-          this.widget.guiprops.form.colorPod.opacityColorPod
-        )).toString();
-    } else {
-      this.widget.guiprops.form.colorPod.rgbaColorPod = 'transparent';
-    }
-
-    if (this.widget.guiprops.form.bgInputForm && this.widget.guiprops.form.opacityBgInputForm) {
-      this.widget.guiprops.form.rgbaInputForm = (this.widgetConstructorService
-        .hexToRgb(this.widget.guiprops.form.bgInputForm, this.widget.guiprops.form.opacityBgInputForm)).toString();
-    }
-
-    if (this.widget.guiprops.form.enable === true) {
-      this.widget.guiprops.button.enable = true;
-      if (this.widget.guiprops.button.enable === true) {
-        this.widget.guiprops.button.enable = true;
-      }
-    }
-
-    if (this.widget.guiprops.popupMain.shadow.enable) {
-      this.widget.guiprops.popupMain.shadow.rgbaColor = (this.widgetConstructorService
-        .hexToRgb(this.widget.guiprops.popupMain.shadow.color, this.widget.guiprops.popupMain.shadow.opacityColor)).toString();
-    } else {
-      this.widget.guiprops.popupMain.shadow.rgbaColor = 'transparent';
-    }
-
-    if (this.widget.guiprops.labelMain.colorLabel != null) {
-      this.widget.guiprops.labelMain.rgbaLabel = (this.widgetConstructorService
-        .hexToRgb(this.widget.guiprops.labelMain.colorLabel, this.widget.guiprops.labelMain.opacityBgLabel)).toString();
-    }
-
-    if (this.widget.guiprops.dhVisual.colorBg) {
-      this.widget.guiprops.dhVisual.rgbaShadowForm1 = (this.widgetConstructorService
-        .hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.6)).toString();
-      this.widget.guiprops.dhVisual.rgbaShadowForm2 = (this.widgetConstructorService
-        .hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.8)).toString();
-    }
-
-    if (this.widget.guiprops.dhVisual.widget_content_width === 'Собственная') {
-      let newWidth: string;
-
-      if (this.widget.guiprops.image.enable && ((this.widget.guiprops.image.place === 'Слева') || (this.widget.guiprops.image.place === 'Справа'))) {
-        newWidth = (+this.widget.guiprops.dhVisual.widget_content_widthpx - 45).toString();
-      } else {
-        newWidth = (+this.widget.guiprops.dhVisual.widget_content_widthpx - 60).toString();
-      }
-      this.widthContentStyle = newWidth + 'px';
-    } else {
-      this.widthContentStyle = 'auto';
-    }
-
-    if (this.widget.guiprops.dhVisual.widget_content_height === 'Собственная') {
-      const newHeight = (+this.widget.guiprops.dhVisual.widget_content_heightpx - 60).toString();
-      this.heightContentStyle = newHeight + 'px';
-    } else {
-      this.heightContentStyle = 'auto';
-    }
-
-    if (this.widget.guiprops.bg.fillorImg === 'useImg') {
-      if (this.widget.guiprops.bg.positionType === 'Растянуть') {
-        this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / cover no-repeat';
-      } else {
-        if (this.widget.guiprops.bg.tiles === 'Замостить по X') {
-          this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / auto repeat-x';
-        } else if (this.widget.guiprops.bg.tiles === 'Замостить по Y') {
-          this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / auto repeat-y';
-        } else {
-          this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / auto repeat';
-        }
-      }
-      this.widget.guiprops.bg.bgStyle = this.bgStyle;
-    } else if (this.widget.guiprops.bg.fillorImg === 'fill') {
-      this.bgStyle = this.widget.guiprops.bg.colorBg;
-      this.widget.guiprops.bg.bgStyle = this.bgStyle;
-    }
-
-    if (this.widget.guiprops.bg.border) {
-      if (!this.widget.guiprops.bg.border.enable) {
-        this.widget.guiprops.bg.border.style = '0px solid transparent';
-      } else {
-        this.widget.guiprops.bg.border.style =
-          this.widget.guiprops.bg.border.thickness + 'px solid ' + this.widget.guiprops.bg.border.color;
-      }
-    }
-
-    if (this.widget.guiprops.bg.shadow) {
-      if (!this.widget.guiprops.bg.shadow.enable) {
-        this.widget.guiprops.bg.shadow.style = '0px 0px 0px 0px rgba(0,0,0,0.25)';
-      } else {
-        this.widget.guiprops.bg.shadow.style =
-          this.widget.guiprops.bg.shadow.horiz + 'px ' + this.widget.guiprops.bg.shadow.vertical + 'px ' +
-          this.widget.guiprops.bg.shadow.blur + 'px ' + this.widgetConstructorService.getRGBAColor(this.widget.guiprops.bg.shadow);
-      }
-    }
-
-    if (this.widget.guiprops.bg.mask.enable) {
-      this.widget.guiprops.bg.mask.rgbaColor =
-        (this.widgetConstructorService.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
-    }
-    else {
-      this.widget.guiprops.bg.mask.rgbaColor = 'transparent';
-    }
-
-    if (this.widget.guiprops.form.enable) {
-      // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.widget.guiprops.formSet.items.length; i++) {
-        if (this.widget.guiprops.formSet.items[i].type === 'message' || this.widget.guiprops.formSet.items[i].type === 'phone') {
-          this.widget.sendCrm = true;
-          if (this.widget.sendCrm === true) {
-            this.widget.sendCrm = true;
-          }
-        }
-        if (!this.widget.sendCrm) {
-          this.widget.sendCrm = false;
-          if (this.widget.sendCrm === false) {
-            this.widget.sendCrm = false;
-          }
-        }
-      }
-    }
-
-    if (this.widget.guiprops.formExt) {
-      if (this.widget.guiprops.formExt.enable) {
-        this.widget.guiprops.formExt.model.list.forEach((item) => {
-          if (this.widgetConstructorService.isFormHasInputs(item)) {
-            this.widget.sendCrm = true;
-            if (this.widget.sendCrm === true) {
-              this.widget.sendCrm = true;
-            }
-          }
-          if (!this.widget.sendCrm) {
-            this.widget.sendCrm = false;
-            if (this.widget.sendCrm === false) {
-              this.widget.sendCrm = false;
-            }
-          }
-        });
-      }
-    }
-
-    const labelContent = $('.lab-content');
-    const labelElementWithText = $('.label-text-with-add');
-
-    if (this.widget.guiprops.labelMain.iconOrImage === 'useImg') {
-      setTimeout(() => {
-        let imageSize;
-        let margTopValue;
-
-        if (labelElementWithText.height() >= 24) {
-          imageSize = labelElementWithText.height() + 2;
-          margTopValue = (imageSize / 2) + 1;
-        } else {
-          imageSize = 25;
-          margTopValue = 14;
-        }
-
-        $('.lgiconfontImg').css({
-          width: imageSize + 'px',
-          height: imageSize + 'px',
-          'margin-top': -margTopValue + 'px'
-        });
-        labelContent.css({ 'padding-left': (imageSize + 10) + 'px' });
-
-        this.widget.guiprops.labelMain.imgWidth = imageSize;
-        this.widget.guiprops.labelMain.imgMargTop = margTopValue;
-      }, 0);
-    } else {
-      labelContent.css({ 'padding-left': '' });
-    }
-
-    let counterNewText = 0;
-    let counterNewImage = 0;
-    let counterNewVideo = 0;
-    let counterNewPadding = 0;
-    let counterNewSplit = 0;
-    let counterNewIframe = 0;
-    let counterNewCoupon = 0;
-    let counterNewTimer = 0;
-
-    for (const item of this.widget.guiprops.elementsList) {
-      if (item.name) {
-        if (item.name === 'title-element') {
-          counterNewText++;
-          item.counter = counterNewText;
-        }
-
-        if (item.name === 'image-element') {
-          counterNewImage++;
-          item.counter = counterNewImage;
-        }
-
-        if (item.name === 'iframe-element') {
-          counterNewIframe++;
-          item.counter = counterNewIframe;
-        }
-
-        if (item.name === 'video-element') {
-          counterNewVideo++;
-          item.counter = counterNewVideo;
-        }
-
-        if (item.name === 'padding-element') {
-          counterNewPadding++;
-          item.counter = counterNewPadding;
-        }
-
-        if (item.name === 'split-element') {
-          counterNewSplit++;
-          item.counter = counterNewSplit;
-        }
-
-        if (item.name === 'coupon-element') {
-          counterNewCoupon++;
-          item.counter = counterNewCoupon;
-        }
-
-        if (item.name === 'timer-element') {
-          counterNewTimer++;
-          item.counter = counterNewTimer;
-        }
-      }
-    }
-
-    for (const item of this.widget.guiprops.elementsList) {
-      if (item.name) {
-        if (item.name === 'iframe-element') {
-          this.buildIframeElement(item);
-        }
-
-        if (item.name === 'video-element') {
-          this.newVideoSize(item);
-        }
-      }
-    }
-  }
+  ngDoCheck(): void {}
 
   private initLabelMainPicker() {
     setTimeout(() => {
@@ -1557,6 +1303,264 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, DoChec
     } else {
       $('#disabledFuncAct').addClass('hide');
       $('.panel-group').removeClass('non-scroll');
+    }
+
+    this.checkChanges();
+  }
+
+  private checkChanges(): void {
+    if (!this.widget.guiprops) {
+      return;
+    }
+
+    if (this.widget.guiprops.formExt) {
+      if (this.widget.guiprops.formExt.model.mainSettings.colorPod.enable) {
+        this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod =
+          (this.widgetConstructorService.hexToRgb(
+            this.widget.guiprops.formExt.model.mainSettings.colorPod.color,
+            this.widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod
+          )).toString();
+      } else {
+        this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent';
+      }
+    }
+
+    if (this.widget.guiprops.form.colorPod.enable) {
+      this.widget.guiprops.form.colorPod.rgbaColorPod =
+        (this.widgetConstructorService.hexToRgb(
+          this.widget.guiprops.form.colorPod.color,
+          this.widget.guiprops.form.colorPod.opacityColorPod
+        )).toString();
+    } else {
+      this.widget.guiprops.form.colorPod.rgbaColorPod = 'transparent';
+    }
+
+    if (this.widget.guiprops.form.bgInputForm && this.widget.guiprops.form.opacityBgInputForm) {
+      this.widget.guiprops.form.rgbaInputForm = (this.widgetConstructorService
+        .hexToRgb(this.widget.guiprops.form.bgInputForm, this.widget.guiprops.form.opacityBgInputForm)).toString();
+    }
+
+    if (this.widget.guiprops.form.enable === true) {
+      this.widget.guiprops.button.enable = true;
+      if (this.widget.guiprops.button.enable === true) {
+        this.widget.guiprops.button.enable = true;
+      }
+    }
+
+    if (this.widget.guiprops.popupMain.shadow.enable) {
+      this.widget.guiprops.popupMain.shadow.rgbaColor = (this.widgetConstructorService
+        .hexToRgb(this.widget.guiprops.popupMain.shadow.color, this.widget.guiprops.popupMain.shadow.opacityColor)).toString();
+    } else {
+      this.widget.guiprops.popupMain.shadow.rgbaColor = 'transparent';
+    }
+
+    if (this.widget.guiprops.labelMain.colorLabel != null) {
+      this.widget.guiprops.labelMain.rgbaLabel = (this.widgetConstructorService
+        .hexToRgb(this.widget.guiprops.labelMain.colorLabel, this.widget.guiprops.labelMain.opacityBgLabel)).toString();
+    }
+
+    if (this.widget.guiprops.dhVisual.colorBg) {
+      this.widget.guiprops.dhVisual.rgbaShadowForm1 = (this.widgetConstructorService
+        .hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.6)).toString();
+      this.widget.guiprops.dhVisual.rgbaShadowForm2 = (this.widgetConstructorService
+        .hexToRgb(this.widget.guiprops.dhVisual.colorBg, 0.8)).toString();
+    }
+
+    if (this.widget.guiprops.dhVisual.widget_content_width === 'Собственная') {
+      let newWidth: string;
+
+      if (this.widget.guiprops.image.enable && ((this.widget.guiprops.image.place === 'Слева') || (this.widget.guiprops.image.place === 'Справа'))) {
+        newWidth = (+this.widget.guiprops.dhVisual.widget_content_widthpx - 45).toString();
+      } else {
+        newWidth = (+this.widget.guiprops.dhVisual.widget_content_widthpx - 60).toString();
+      }
+      this.widthContentStyle = newWidth + 'px';
+    } else {
+      this.widthContentStyle = 'auto';
+    }
+
+    if (this.widget.guiprops.dhVisual.widget_content_height === 'Собственная') {
+      const newHeight = (+this.widget.guiprops.dhVisual.widget_content_heightpx - 60).toString();
+      this.heightContentStyle = newHeight + 'px';
+    } else {
+      this.heightContentStyle = 'auto';
+    }
+
+    if (this.widget.guiprops.bg.fillorImg === 'useImg') {
+      if (this.widget.guiprops.bg.positionType === 'Растянуть') {
+        this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / cover no-repeat';
+      } else {
+        if (this.widget.guiprops.bg.tiles === 'Замостить по X') {
+          this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / auto repeat-x';
+        } else if (this.widget.guiprops.bg.tiles === 'Замостить по Y') {
+          this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / auto repeat-y';
+        } else {
+          this.bgStyle = 'url(' + this.widget.guiprops.bg.url + ') center center / auto repeat';
+        }
+      }
+      this.widget.guiprops.bg.bgStyle = this.bgStyle;
+    } else if (this.widget.guiprops.bg.fillorImg === 'fill') {
+      this.bgStyle = this.widget.guiprops.bg.colorBg;
+      this.widget.guiprops.bg.bgStyle = this.bgStyle;
+    }
+
+    if (this.widget.guiprops.bg.border) {
+      if (!this.widget.guiprops.bg.border.enable) {
+        this.widget.guiprops.bg.border.style = '0px solid transparent';
+      } else {
+        this.widget.guiprops.bg.border.style =
+          this.widget.guiprops.bg.border.thickness + 'px solid ' + this.widget.guiprops.bg.border.color;
+      }
+    }
+
+    if (this.widget.guiprops.bg.shadow) {
+      if (!this.widget.guiprops.bg.shadow.enable) {
+        this.widget.guiprops.bg.shadow.style = '0px 0px 0px 0px rgba(0,0,0,0.25)';
+      } else {
+        this.widget.guiprops.bg.shadow.style =
+          this.widget.guiprops.bg.shadow.horiz + 'px ' + this.widget.guiprops.bg.shadow.vertical + 'px ' +
+          this.widget.guiprops.bg.shadow.blur + 'px ' + this.widgetConstructorService.getRGBAColor(this.widget.guiprops.bg.shadow);
+      }
+    }
+
+    if (this.widget.guiprops.bg.mask.enable) {
+      this.widget.guiprops.bg.mask.rgbaColor =
+        (this.widgetConstructorService.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
+    }
+    else {
+      this.widget.guiprops.bg.mask.rgbaColor = 'transparent';
+    }
+
+    if (this.widget.guiprops.form.enable) {
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.widget.guiprops.formSet.items.length; i++) {
+        if (this.widget.guiprops.formSet.items[i].type === 'message' || this.widget.guiprops.formSet.items[i].type === 'phone') {
+          this.widget.sendCrm = true;
+          if (this.widget.sendCrm === true) {
+            this.widget.sendCrm = true;
+          }
+        }
+        if (!this.widget.sendCrm) {
+          this.widget.sendCrm = false;
+          if (this.widget.sendCrm === false) {
+            this.widget.sendCrm = false;
+          }
+        }
+      }
+    }
+
+    if (this.widget.guiprops.formExt) {
+      if (this.widget.guiprops.formExt.enable) {
+        this.widget.guiprops.formExt.model.list.forEach((item) => {
+          if (this.widgetConstructorService.isFormHasInputs(item)) {
+            this.widget.sendCrm = true;
+            if (this.widget.sendCrm === true) {
+              this.widget.sendCrm = true;
+            }
+          }
+          if (!this.widget.sendCrm) {
+            this.widget.sendCrm = false;
+            if (this.widget.sendCrm === false) {
+              this.widget.sendCrm = false;
+            }
+          }
+        });
+      }
+    }
+
+    const labelContent = $('.lab-content');
+    const labelElementWithText = $('.label-text-with-add');
+
+    if (this.widget.guiprops.labelMain.iconOrImage === 'useImg') {
+      setTimeout(() => {
+        let imageSize;
+        let margTopValue;
+
+        if (labelElementWithText.height() >= 24) {
+          imageSize = labelElementWithText.height() + 2;
+          margTopValue = (imageSize / 2) + 1;
+        } else {
+          imageSize = 25;
+          margTopValue = 14;
+        }
+
+        $('.lgiconfontImg').css({
+          width: imageSize + 'px',
+          height: imageSize + 'px',
+          'margin-top': -margTopValue + 'px'
+        });
+        labelContent.css({ 'padding-left': (imageSize + 10) + 'px' });
+
+        this.widget.guiprops.labelMain.imgWidth = imageSize;
+        this.widget.guiprops.labelMain.imgMargTop = margTopValue;
+      }, 0);
+    } else {
+      labelContent.css({ 'padding-left': '' });
+    }
+
+    let counterNewText = 0;
+    let counterNewImage = 0;
+    let counterNewVideo = 0;
+    let counterNewPadding = 0;
+    let counterNewSplit = 0;
+    let counterNewIframe = 0;
+    let counterNewCoupon = 0;
+    let counterNewTimer = 0;
+
+    for (const item of this.widget.guiprops.elementsList) {
+      if (item.name) {
+        if (item.name === 'title-element') {
+          counterNewText++;
+          item.counter = counterNewText;
+        }
+
+        if (item.name === 'image-element') {
+          counterNewImage++;
+          item.counter = counterNewImage;
+        }
+
+        if (item.name === 'iframe-element') {
+          counterNewIframe++;
+          item.counter = counterNewIframe;
+        }
+
+        if (item.name === 'video-element') {
+          counterNewVideo++;
+          item.counter = counterNewVideo;
+        }
+
+        if (item.name === 'padding-element') {
+          counterNewPadding++;
+          item.counter = counterNewPadding;
+        }
+
+        if (item.name === 'split-element') {
+          counterNewSplit++;
+          item.counter = counterNewSplit;
+        }
+
+        if (item.name === 'coupon-element') {
+          counterNewCoupon++;
+          item.counter = counterNewCoupon;
+        }
+
+        if (item.name === 'timer-element') {
+          counterNewTimer++;
+          item.counter = counterNewTimer;
+        }
+      }
+    }
+
+    for (const item of this.widget.guiprops.elementsList) {
+      if (item.name) {
+        if (item.name === 'iframe-element') {
+          this.buildIframeElement(item);
+        }
+
+        if (item.name === 'video-element') {
+          this.newVideoSize(item);
+        }
+      }
     }
   }
 
