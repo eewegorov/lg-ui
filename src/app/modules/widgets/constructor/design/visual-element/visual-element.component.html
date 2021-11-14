@@ -178,14 +178,14 @@
       </div>
 
       <div *ngIf="widget.guiprops['bg'].fillorImg === 'useVideo'">
-        <div class="imaget-item-video-settings mb-3 border-item">
-          <div class="row row-subitem">
-            <div class="col-sm-12 row-subitem-padding mb-1">
-              <h4 class="h4-text-tit control-label-des">Источник видео</h4>
-            </div>
+        <div class="imaget-item-video-settings mt-2 border-item">
+          <div class="row-subitem-padding mb-1">
+            <h4 class="h4-text-tit control-label-des">Источник видео</h4>
+          </div>
+          <div class="row-subitem d-flex position-relative mt-2">
             <div class="col-sm-6 row-subitem-padding">
               <div class="form-group widget-selector">
-                <label>
+                <label class="mb-1">
                   <input
                     type="radio"
                     name="video"
@@ -200,7 +200,7 @@
             </div>
             <div class="col-sm-6 row-subitem-padding">
               <div class="form-group widget-selector">
-                <label>
+                <label class="mb-1">
                   <input
                     type="radio"
                     name="video"
@@ -225,18 +225,16 @@
               <i class="fas fa-sync"></i>
             </button>
           </div>
-          <div class="row row-subitem">
-            <div class="col-sm-12 row-subitem-padding pt-1 widget-name-block-rel">
-              <input
-                type="text"
-                class="form-control widgetVideoUrl"
-                (blur)="getVideoId(widget.guiprops.bg.video)"
-                [(ngModel)]="widget.guiprops.bg.video.videoUrl"
-              />
-              <span class="input-down-sm-lab small">
-                {{ (widget.guiprops.bg.video.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253' }}
-              </span>
-            </div>
+          <div class="row-subitem row-subitem-padding mt-1 widget-name-block-rel">
+            <input
+              type="text"
+              class="form-control widgetVideoUrl"
+              (blur)="getVideoId(widget.guiprops.bg.video)"
+              [(ngModel)]="widget.guiprops.bg.video.videoUrl"
+            />
+            <span class="input-down-sm-lab small mt-1">
+              {{ (widget.guiprops.bg.video.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253' }}
+            </span>
           </div>
         </div>
       </div>

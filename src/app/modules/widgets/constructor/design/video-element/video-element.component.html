@@ -1,124 +1,130 @@
-<div class="border-item">
-  <div class="row row-subitem pt-1">
-    <div class="col-sm-6 row-subitem-padding">
-      <div class="form-group widget-selector mb-0">
-        <label>
-          <input
-            type="radio"
-            class="radio radio-info radio-inline"
-            (change)="getVideoId(modelName)"
-            [(ngModel)]="modelName.videoType"
-            value="youtube"
-            name="radio"
-          >
-          Youtube
-        </label>
-      </div>
-    </div>
-    <div class="col-sm-6 row-subitem-padding">
-      <div class="form-group widget-selector mb-0">
-        <label>
-          <input
-            type="radio"
-            class="radio radio-info radio-inline"
-            (change)="getVideoId(modelName)"
-            [(ngModel)]="modelName.videoType"
-            value="vimeo"
-            name="radio"
-          >
-          Vimeo
-        </label>
-      </div>
-    </div>
-    <button
-      (click)="getVideoId(modelName)"
-      class="btn btn-default refresh-video-element-btn"
-      data-toggle="tooltip"
-      data-container="body"
-      data-placement="top"
-      title=""
-      data-original-title="Обновить превью видео"
-    >
-      <i class="fas fa-sync"></i>
-    </button>
-  </div>
-  <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding pt-1 widget-name-block-rel">
-      <input type="text" class="form-control widgetVideoUrl" (blur)="getVideoId(modelName)" [(ngModel)]="modelName.videoUrl">
-      <span class="input-down-sm-lab small">
-          {{(modelName.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253'}}
-        </span>
+<h3>URL видео</h3>
+
+<div class="row-subitem d-flex position-relative mt-3">
+  <div class="col-sm-6 row-subitem-padding">
+    <div class="form-group widget-selector mb-0">
+      <label class="mb-1">
+        <input
+          type="radio"
+          name="video"
+          class="radio radio-info radio-inline"
+          (change)="getVideoId(modelName)"
+          [(ngModel)]="modelName.videoType"
+          value="youtube"
+        />
+        Youtube
+      </label>
     </div>
   </div>
-  <div class="row row-subitem mt-2">
-    <div class="col-sm-6 row-subitem-padding pt-1 pr-3">
-      <label class="control-label control-label-des">Ширина видео:</label>
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-          {{ modelName.width_type }}
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li
-            role="presentation"
-            *ngFor="let itemVisual of widthHrType"
-            (click)="changeWidthTypeOfVideo(modelName, itemVisual)"
-          >
-            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-sm-6 row-subitem-padding pt-1">
-      <label class="control-label control-label-des">Ориентация:</label>
-      <div class="dropdown">
-        <button
-          type="button"
-          [disabled]="modelName.width_type === 'От края до края'"
-          class="btn btn-default dropdown-toggle"
-          data-toggle="dropdown"
-          aria-expanded="true"
-        >
-          {{ modelName.position }}
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li
-            role="presentation"
-            *ngFor="let itemVisual of floatBtn"
-            (click)="modelName.position = itemVisual"
-          >
-            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
-          </li>
-        </ul>
-      </div>
+  <div class="col-sm-6 row-subitem-padding">
+    <div class="form-group widget-selector mb-0">
+      <label class="mb-1">
+        <input
+          type="radio"
+          name="video"
+          class="radio radio-info radio-inline"
+          (change)="getVideoId(modelName)"
+          [(ngModel)]="modelName.videoType"
+          value="vimeo"
+        />
+        Vimeo
+      </label>
     </div>
   </div>
-  <div *ngIf="modelName.width_type === 'Собственная'">
-    <div class="col-sm-12 pt-1 mt-2">
-      <input
-        type="number"
-        class="form-control form-control-font form-cntrl-55w"
-        (change)="goToResize(modelName)"
-        [(ngModel)]="modelName.widthpx"
+  <button
+    (click)="getVideoId(modelName)"
+    class="btn btn-default refresh-video-element-btn"
+    data-toggle="tooltip"
+    data-container="body"
+    data-placement="top"
+    title=""
+    data-original-title="Обновить превью видео"
+  >
+    <i class="fas fa-sync"></i>
+  </button>
+</div>
+
+<div class="row-subitem row-subitem-padding widget-name-block-rel mt-1 border-item">
+  <input
+    type="text"
+    class="form-control widgetVideoUrl"
+    (blur)="getVideoId(modelName)"
+    [(ngModel)]="modelName.videoUrl"
+  />
+  <span class="input-down-sm-lab small mt-1">
+    {{ (modelName.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253' }}
+  </span>
+</div>
+
+<div class="row-subitem mt-3 border-item">
+  <h3>Размер видео</h3>
+
+  <div class="d-flex align-items-center justify-content-between mt-2 pt-1">
+    <label class="control-label control-label-des">Ширина</label>
+    <div class="d-flex align-items-center">
+      <div
+        class="form-control form-control-font mr-2"
+        [class.disabled]="modelName.width_type !== widthHrType[1]"
       >
-      <label class="control-label ml-1">px <span class="ml-1">ширина видео</span></label>
-    </div>
-    <div class="clearfix"></div>
-  </div>
-  <div class="row-subitem mt-3">
-    <div class="d-flex row-subitem-padding pt-1">
-      <ui-switch
-        size="small"
-        [checked]="modelName.autoplay"
-      ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">Автоматически проигрывать видео</label>
-    </div>
-  </div>
-  <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding pt-1">
-      <div class="sm-video-text sm-video-text-act widget-small-text">
-        Видео будет автоматически воспроизводиться при показе виджета.
+        <input
+          type="number"
+          [(ngModel)]="modelName.widthpx"
+          (change)="goToResize(modelName)"
+          [disabled]="modelName.width_type !== widthHrType[1]"
+        />
+        <label>px</label>
       </div>
+      <button
+        class="wide-button"
+        [class.active]="modelName.width_type === widthHrType[0]"
+        (click)="changeWidthTypeOfVideo(modelName, modelName.width_type === widthHrType[0] ? widthHrType[1] : widthHrType[0])"
+      >
+      </button>
     </div>
+  </div>
+
+  <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3">
+    <label
+      class="control-label control-label-des"
+      [class.disabled]="modelName.width_type === widthHrType[0]"
+    >
+      Выравнивание
+    </label>
+    <div>
+      <button
+        class="align-button icon-left"
+        [class.active]="modelName.position === floatBtn[0]"
+        (click)="modelName.position = floatBtn[0]"
+        [disabled]="modelName.width_type === widthHrType[0]"
+      ></button>
+      <button
+        class="align-button icon-center"
+        [class.active]="modelName.position === floatBtn[1]"
+        (click)="modelName.position = floatBtn[1]"
+        [disabled]="modelName.width_type === widthHrType[0]"
+      ></button>
+      <button
+        class="align-button icon-right"
+        [class.active]="modelName.position === floatBtn[2]"
+        (click)="modelName.position = floatBtn[2]"
+        [disabled]="modelName.width_type === widthHrType[0]"
+      ></button>
+    </div>
+  </div>
+</div>
+
+<div class="row-subitem mt-3">
+  <h3>Воспроизведение видео</h3>
+
+  <div class="form-check mt-3">
+    <label class="form-check-label">
+      <input
+        type="checkbox"
+        [(ngModel)]="modelName.autoplay"
+        class="form-check-input"
+      />
+      <span class="checkmark"></span>
+    </label>
+    <span class="form-check-text f-3">Автоматически при показе виджета</span>
   </div>
 </div>

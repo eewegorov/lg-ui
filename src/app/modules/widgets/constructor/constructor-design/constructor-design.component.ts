@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  DoCheck,
   Input,
   OnChanges,
   OnDestroy,
@@ -2039,11 +2038,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public showLastElement() {
-    setTimeout(() => {
-      const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
-      this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
-      this.currentIndex = this.widget.guiprops.elementsList.length - 1;
-    }, 500);
+    this.checkChanges();
+    const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
+    this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
+    this.currentIndex = this.widget.guiprops.elementsList.length - 1;
   }
 
 
