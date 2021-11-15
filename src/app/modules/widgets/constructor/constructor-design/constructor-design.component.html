@@ -284,14 +284,13 @@
                           </div>
                         </div>
                       </div>
-                      <div *ngIf="widget.guiprops.dhVisual?.iconOrImage === 'useImg'">
-                        <div class="row row-subitem">
-                          <div class="col-sm-12 row-subitem-padding mb-2">
-                            <a (click)="listFile('dotIcon')" class="widget-download-img">
-                              <i class="fa fa-image"></i> Установить или изменить изображение
-                            </a>
-                          </div>
-                        </div>
+                      <div *ngIf="widget.guiprops.dhVisual?.iconOrImage === 'useImg'" class="mt-1">
+                        <button
+                          (click)="listFile('dotIcon')"
+                          class="widget-download-img"
+                        >
+                          <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение" /> Загрузить изображение
+                        </button>
                       </div>
                       <div class="row row-subitem mt-3">
                         <div class="d-flex justify-content-between w-100 row-subitem-padding pt-1">
@@ -511,23 +510,20 @@
                           </div>
                         </div>
                       </div>
-                      <div *ngIf="widget.guiprops.labelMain.iconOrImage === 'useImg'">
-                        <div class="row row-subitem">
-                          <div class="col-sm-12 row-subitem-padding mt-2 mb-1">
-                            <a (click)="listFile('labelIcon')" class="widget-download-img">
-                              <i class="fa fa-image"></i> Установить или изменить изображение
-                            </a>
-                          </div>
-                        </div>
+                      <div *ngIf="widget.guiprops.labelMain.iconOrImage === 'useImg'" class="mt-1">
+                        <button
+                          (click)="listFile('labelIcon')"
+                          class="widget-download-img"
+                        >
+                          <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение" /> Загрузить изображение
+                        </button>
                       </div>
                     </div>
                   </ng-container>
 
                   <ng-container *ngIf="widgetType === 'containerized'">
                     <div class="mt-3">
-                      <div class="col-sm-12 row-subitem-padding">
-                        <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
-                      </div>
+                      <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
                     </div>
                   </ng-container>
 

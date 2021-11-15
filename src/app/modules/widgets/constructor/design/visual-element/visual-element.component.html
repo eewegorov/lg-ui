@@ -121,13 +121,13 @@
         </div>
       </div>
 
-      <div *ngIf="widget.guiprops['bg'].fillorImg === 'useImg'">
-        <div class="row row-subitem">
-          <div class="col-sm-12 row-subitem-padding mt-2">
-            <a (click)="listFile('bg')" class="widget-download-img"><i class="fa fa-image"></i> Установить или изменить
-              изображение</a>
-          </div>
-        </div>
+      <div *ngIf="widget.guiprops['bg'].fillorImg === 'useImg'" class="mt-1">
+        <button
+          (click)="listFile('bg')"
+          class="widget-download-img"
+        >
+          <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение" /> Загрузить изображение
+        </button>
 
         <div class="row row-subitem mt-2 border-item">
           <div class="col-sm-6 row-subitem-padding pt-1 pr-3">
@@ -350,7 +350,7 @@
       <div class="clearfix"></div>
 
       <!-- Page rule item -->
-      <div class="d-flex row-subitem row-subitem-padding widget-small-text">
+      <div class="d-flex widget-small-text mt-1">
         Вы можете добавить изображение или видео и разместить его слева, справа, сверху или снизу от контента виджета.
         Также вы можете добавить отступ. При добавлении отступа, фон виджета растягивается на всю ширину, включая
         отступ. Обратите внимание, добавленный элемент скрывается на мобильных устройствах и работает только на
@@ -412,14 +412,15 @@
           </div>
 
           <div *ngIf="widget.guiprops['image'].typeBl == 'imageBl'" class="mt-2 mb-1">
-            <div class="row row-subitem">
-              <div class="col-sm-12 row-subitem-padding mb-1">
-                <h4 class="h4-text-tit">Настройка изображения</h4>
-              </div>
-              <div class="col-sm-12 row-subitem-padding">
-                <a (click)="listFile('imageSingle')" class="widget-download-img"><i class="fa fa-image"></i> Установить
-                  или изменить изображение</a>
-              </div>
+            <div class="mb-1">
+              <h4 class="h4-text-tit">Настройка изображения</h4>
+
+              <button
+                (click)="listFile('imageSingle')"
+                class="widget-download-img"
+              >
+                <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение" /> Загрузить изображение
+              </button>
             </div>
           </div>
 

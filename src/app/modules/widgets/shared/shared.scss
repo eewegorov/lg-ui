@@ -527,18 +527,25 @@ label.control-label-ui {
   font-weight: 400 !important;
 }
 
-a.widget-download-img {
-  color: #3b99fc;
-  text-decoration: underline;
-}
+button.widget-download-img {
+  font-size: 14px;
+  color: #4898A8;
+  background-color: transparent;
+  border: 1px dashed #D4D7DD;
+  border-radius: 4px;
+  padding: 5px 12px;
 
-.widget-download-img {
-  font-size: 16px;
-  line-height: 27px;
-}
+  img {
+    width: 20px;
+    height: 20px;
+    margin-top: -3px;
+    margin-right: 3px;
+  }
 
-.widget-download-img i {
-  font-size: 16px;
+  &:hover {
+    background-color: lighten(#4898A8, 47%);
+    transition: 0.3s;
+  }
 }
 
 input[type="radio"] {
