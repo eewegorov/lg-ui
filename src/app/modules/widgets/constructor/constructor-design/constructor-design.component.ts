@@ -1744,7 +1744,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       'timer-element',
       'form-ext-element',
     ].includes(elementName)) {
-        this.currentElement = elementName + ('#' + elementCounter ?? '');
+        this.currentElement = elementName + (elementCounter ? ('#' + elementCounter) : '');
     } else {
       this.currentElement = 'settings';
       const accordion = $('#accordion');
