@@ -252,7 +252,7 @@
                       </div>
                       <div [hidden]="widget.guiprops.dhVisual?.iconOrImage !== 'useIcon'" class="row row-subitem align-items-center">
                         <div class="row-subitem-padding mr-2 mt-1">
-                          <h5 class="label-style-ic control-label-des">Иконка:</h5>
+                          <h5 class="label-style-ic control-label-des">{{ 'widgets.formExt.button.icon.label' | translate }}:</h5>
                         </div>
                         <div class="icp-icon row-subitem-padding">
                           <div class="btn-group">
@@ -325,96 +325,102 @@
 
                   <ng-container *ngIf="widgetType === 'label_widget'">
                     <div class="border-item">
-                      <div class="row row-subitem mb-1">
-                        <div class="col-sm-12 row-subitem-padding">
-                          <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
+                      <div class="d-flex row-subitem row-subitem-padding mt-3">
+                        <h3>Дизайн ярлычка</h3>
+                      </div>
+                      <div class="row-subitem widget-name-block-rel mt-2">
+                        <label class="control-label control-label-des">Текст</label>
+                        <input
+                          type="text"
+                          class="form-control mt-1"
+                          id="widgetNameInp"
+                          [(ngModel)]="widget.guiprops.labelMain.text"
+                          placeholder="Введите название виджета"
+                        />
+                        <span class="small">Например: Оставьте нам сообщение!</span>
+                      </div>
+
+                      <label class="control-label control-label-des mt-3">Шрифт</label>
+
+                      <div class="row-subitem row-subitem-padding mt-1">
+                        <input id="fontPickerLabelMain" type="text">
+                      </div>
+
+                      <div class="d-flex align-items-center justify-content-between mt-2">
+                        <label class="control-label control-label-des">Размер</label>
+                        <div class="row align-items-center">
+                          <div class="form-control form-control-font">
+                            <input
+                              type="number"
+                              [(ngModel)]="widget.guiprops['labelMain'].fontSize"
+                            />
+                            <label>px</label>
+                          </div>
                         </div>
                       </div>
-                      <div class="row row-subitem mt-3">
-                        <div class="col-sm-12 row-subitem-padding">
-                          <h4 class="h4-element-title">Дизайн ярлычка</h4>
-                        </div>
-                      </div>
-                      <div class="row row-subitem pt-1">
-                        <div class="col-sm-12 widget-name-block-rel row-subitem-padding">
-                          <label class="control-label control-label-des">Текст на ярлычке:</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="widgetNameInp"
-                            [(ngModel)]="widget.guiprops.labelMain.text"
-                            placeholder="Введите название виджета"
-                          />
-                          <span class="small">Например: Оставьте нам сообщение!</span>
-                        </div>
-                      </div>
-                      <div class="row row-subitem pt-1">
-                        <div class="col-sm-12 row-subitem-padding">
-                          <h4 class="h4-text-tit control-label-des helper-title-3level">Шрифт</h4>
-                        </div>
-                        <div class="col-sm-12 row-subitem-padding">
-                          <input id="fontPickerLabelMain" type="text">
-                        </div>
-                      </div>
-                      <div class="row row-subitem">
-                        <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
-                          <input
-                            type="number"
-                            class="form-control form-control-font form-cntrl-45w"
-                            [(ngModel)]="widget.guiprops['labelMain'].fontSize"
-                          />
-                          <label class="control-label ml-1">px <span>размер текста</span></label>
-                        </div>
-                      </div>
-                      <div class="row row-subitem pt-1 mt-2">
-                        <div class="col-sm-12 row-subitem-padding">
-                          <h4 class="h4-text-tit control-label-des helper-title-3level">Настройка стиля</h4>
-                        </div>
-                      </div>
-                      <div class="row row-subitem">
-                        <div class="col-sm-5 row-subitem-padding mr-3">
-                          <label class="control-label control-label-colorpc control-label-des">Цвет ярлычка:</label>
+
+                      <div class="d-flex justify-content-between mt-3">
+                        <label class="control-label control-label-des">Цвет ярлычка</label>
+                        <div class="text-right">
                           <input
                             [(colorPicker)]="widget.guiprops['labelMain'].colorLabel"
                             [style.background]="widget.guiprops['labelMain'].colorLabel"
                             [cpAlphaChannel]="'disabled'"
                             [cpOutputFormat]="'hex'"
-                            cpPosition="top"
-                            class="w-100"
+                            cpPosition="left"
+                            class="color-picker-control"
+                          />
+                          <input
+                            [(ngModel)]="widget.guiprops['labelMain'].colorLabel"
+                            class="picker-input color"
                           />
                         </div>
-                        <div class="col-sm-6 row-subitem-padding">
-                          <label class="control-label control-label-colorpc control-label-des">Цвет текста:</label>
+                      </div>
+
+                      <div class="d-flex justify-content-between mt-3">
+                        <label class="control-label control-label-des">Цвет текста</label>
+                        <div class="text-right">
                           <input
                             [(colorPicker)]="widget.guiprops['labelMain'].colorText"
                             [style.background]="widget.guiprops['labelMain'].colorText"
                             [cpAlphaChannel]="'disabled'"
                             [cpOutputFormat]="'hex'"
-                            cpPosition="top"
-                            class="w-100"
+                            cpPosition="left"
+                            class="color-picker-control"
+                          />
+                          <input
+                            [(ngModel)]="widget.guiprops['labelMain'].colorText"
+                            class="picker-input color"
                           />
                         </div>
                       </div>
-                      <div class="row row-subitem mt-2">
-                        <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
-                          <ngx-slider [(value)]="widget.guiprops['labelMain'].opacityBgLabel"
-                                      [options]="optionsOpacity"></ngx-slider>
-                          <label class="control-label control-label-ui ml-2">Прозрачность</label>
+
+                      <div class="d-flex justify-content-between mt-3">
+                        <h5 class="label-style-ic control-label-des">Прозрачность</h5>
+                        <div class="d-flex text-right side-ui-sm">
+                          <ngx-slider [(value)]="widget.guiprops['labelMain'].opacityBgLabel" [options]="optionsOpacity"></ngx-slider>
+                          <input
+                            [(ngModel)]="widget.guiprops['labelMain'].opacityBgLabel"
+                            class="picker-input slider"
+                          />
                         </div>
                       </div>
-                      <div class="row row-subitem mt-2 mb-3">
-                        <div class="col-sm-12 row-subitem-padding pt-1 side-ui-sm">
-                          <ngx-slider [(value)]="widget.guiprops['labelMain'].borderRadiusLabel"
-                                      [options]="optionsRound"></ngx-slider>
-                          <label class="control-label control-label-ui ml-2">Закругление углов</label>
+
+                      <div class="d-flex justify-content-between mt-3">
+                        <h5 class="label-style-ic control-label-des">Скругление углов</h5>
+                        <div class="d-flex text-right side-ui-sm">
+                          <ngx-slider [(value)]="widget.guiprops['labelMain'].borderRadiusLabel" [options]="optionsRound"></ngx-slider>
+                          <input
+                            [(ngModel)]="widget.guiprops['labelMain'].borderRadiusLabel"
+                            class="picker-input slider"
+                          />
                         </div>
                       </div>
-                      <div class="row row-subitem mt-3">
-                        <div class="col-sm-12 row-subitem-padding">
-                          <h4 class="h4-text-tit control-label-des">Добавить иконку или изображение на ярлычок:</h4>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="flex-bl-for-radio-group">
+
+                      <div class="row-subitem mt-3">
+                        <h4 class="h4-text-tit control-label-des">Добавить иконку или изображение на ярлычок</h4>
+
+                        <div class="flex-bl-for-radio-group mt-1">
                           <div class="row-subitem-padding radio-group-item mr-3">
                             <div class="form-group widget-selector">
                               <label>
@@ -459,27 +465,30 @@
                           </div>
                         </div>
                       </div>
+
                       <div [hidden]="widget.guiprops.labelMain.iconOrImage !== 'useIcon'">
-                        <div class="row row-subitem">
-                          <div class="col-sm-6 row-subitem-padding">
-                            <label class="control-label control-label-colorpc control-label-des">Цвет иконки:</label>
+                        <div class="d-flex justify-content-between mt-2">
+                          <label class="control-label control-label-des">Цвет иконки</label>
+                          <div class="text-right">
                             <input
                               [(colorPicker)]="widget.guiprops['labelMain'].icon.color"
                               [style.background]="widget.guiprops['labelMain'].icon.color"
                               [cpAlphaChannel]="'disabled'"
                               [cpOutputFormat]="'hex'"
-                              cpPosition="top"
-                              class="w-100"
+                              cpPosition="left"
+                              class="color-picker-control"
+                            />
+                            <input
+                              [(ngModel)]="widget.guiprops['labelMain'].icon.color"
+                              class="picker-input color"
                             />
                           </div>
                         </div>
-                        <div class="row row-subitem mt-2">
-                          <div class="col-sm-12 row-subitem-padding mt-2">
-                            <h5
-                              class="label-style-ic control-label-des">{{ 'widgets.formExt.button.icon.label' | translate }}
-                              :</h5>
-                          </div>
-                          <div class="icp-icon col-sm-12 row-subitem-padding">
+
+                        <div class="d-flex row-subitem align-items-center mt-2">
+                          <h5 class="label-style-ic control-label-des mr-2">{{ 'widgets.formExt.button.icon.label' | translate }}:</h5>
+
+                          <div class="icp-icon row-subitem-padding">
                             <div class="btn-group">
                               <button
                                 *ngIf="!widget.guiprops.labelMain.icon.selectedIcon"
@@ -510,6 +519,7 @@
                           </div>
                         </div>
                       </div>
+
                       <div *ngIf="widget.guiprops.labelMain.iconOrImage === 'useImg'" class="mt-1">
                         <button
                           (click)="listFile('labelIcon')"

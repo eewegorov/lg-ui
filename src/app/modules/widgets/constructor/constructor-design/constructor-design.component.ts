@@ -125,6 +125,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         this.flow.upload();
       }
     });
+    this.initLabelMainPicker();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -137,7 +138,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         this.changeModel();
         this.checkChanges();
         this.changeColorPodAndSRC();
-        this.initLabelMainPicker();
         this.loadListener();
       }, 0);
     }
@@ -393,7 +393,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           colorBtn: '#000000',
           colorTextBtn: '#FFFFFF',
           borderRadiusBtn: 0,
-          btn_width: this.widthBtn[0],
+          btn_width: this.widthBtn?.[0],
           btn_widthpx: 200,
           position: this.floatBtn[0],
           styleType: 'Default'
