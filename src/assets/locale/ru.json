@@ -951,9 +951,9 @@
 					"width2": "От края до края",
 					"width3": "Собственная"
 				},
-				"colorBGField": "Цвет фона полей",
+				"colorBGField": "Цвет фона",
 				"colorBorder": "Цвет рамки",
-				"colorNameField": "Цвет названия полей",
+				"colorNameField": "Цвет текста",
 				"formDesign": "Дизайн формы",
 				"formField": {
 					"orientation": "Ориентация полей",
@@ -966,7 +966,7 @@
 					"example": "Может содержать символы A..Z, 0-9, :_-+/*%#@&",
 					"useOutsideCRM": "Передавать данные из поля во внешние сервисы"
 				},
-				"opacityBGField": "Прозрачность фона полей",
+				"opacityBGField": "Прозрачность",
 				"radiusCornerField": "Закругление углов полей",
 				"text": {
 					"shadow": {
