@@ -918,9 +918,7 @@
 					"width3": ""
 				},
 				"colorBGField": "",
-				"colorBorder": "",
 				"colorNameField": "",
-				"formDesign": "",
 				"formField": {
 					"orientation": "",
 					"orientation1": "",
@@ -933,7 +931,6 @@
 					"useOutsideCRM": ""
 				},
 				"opacityBGField": "",
-				"radiusCornerField": "",
 				"text": {
 					"shadow": {
 						"add": "",
@@ -945,21 +942,14 @@
 					}
 				},
 				"useBorderAroundFields": "",
-				"usePodBG": {
-					"color": "",
-					"opacity": "",
-					"title": ""
-				},
+				"usePodBG": "",
 				"visualField": "",
 				"visualField1": "",
 				"visualField2": "",
-				"widthAndPositionForm": "",
 				"widthForm": {
-					"orientation": "",
 					"orientation1": "",
 					"orientation2": "",
-					"orientation3": "",
-					"title": ""
+					"orientation3": ""
 				},
 				"widthForm1": "",
 				"widthForm2": ""

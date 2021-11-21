@@ -92,7 +92,10 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
       }
       this.widget.guiprops.formExt.model.list = [item1, item2];
     }
+
     this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
+
+    this.widget.guiprops.formExt.model.mainSettings.borderRadiusInputFormEnable = true;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -120,6 +123,12 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
       else {
         this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent';
       }
+    }
+  }
+
+  public setBorderRadius(value: boolean): void {
+    if (!value) {
+      this.widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm = 0;
     }
   }
 

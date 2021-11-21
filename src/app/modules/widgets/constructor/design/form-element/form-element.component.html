@@ -245,7 +245,7 @@
   <div class="row-subitem mt-3 border-item">
     <div class="d-flex row-subitem justify-content-between">
       <label class="control-label switcher-label-xs control-label-des">
-        Использовать рамку вокруг полей
+        {{ 'widgets.formExt.mainSettings.useBorderAroundFields' | translate }}
       </label>
       <ui-switch
         size="small"
@@ -255,7 +255,7 @@
 
     <div *ngIf="widget.guiprops['form'].border?.enable">
       <div class="d-flex justify-content-between mt-3">
-        <label class="control-label control-label-des">Цвет рамки</label>
+        <label class="control-label control-label-des">Цвет</label>
         <div class="d-flex text-right">
           <input
             [(colorPicker)]="widget.guiprops['form'].border.color"
@@ -274,11 +274,10 @@
     </div>
   </div>
 
-
   <div class="row-subitem mt-3 border-item">
     <div class="d-flex row-subitem justify-content-between">
       <label class="control-label switcher-label-xs control-label-des">
-        Использовать подложку под формой
+        {{ 'widgets.formExt.mainSettings.usePodBG' | translate }}
       </label>
       <ui-switch
         size="small"
@@ -288,7 +287,7 @@
 
     <div *ngIf="widget.guiprops['form'].colorPod?.enable">
       <div class="d-flex justify-content-between mt-3">
-        <label class="control-label control-label-des">Цвет подложки</label>
+        <label class="control-label control-label-des">Цвет</label>
         <div class="d-flex text-right">
           <input
             [(colorPicker)]="widget.guiprops['form'].colorPod.color"
@@ -429,9 +428,10 @@
   </div>
 </div>
 
-<div class="row-subitem mt-3 border-item">
+<div class="row-subitem mt-3 mb-3">
   <h3>Стиль кнопки</h3>
-  <div class="dropdown mt-3 mb-1">
+
+  <div class="dropdown mt-3 border-item">
     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
       {{ widget.guiprops.button.styleType }}
       <span class="caret"></span>
@@ -463,11 +463,11 @@
         >Border Style</a></li>
     </ul>
   </div>
-</div>
 
-<!-- Coupon settings -->
-<app-coupon-callback
-  [coupons]="coupons"
-  [coupon]="widget.guiprops.exit.couponCallback"
-  [placePopup]="placePopup"
-></app-coupon-callback>
+  <!-- Coupon settings -->
+  <app-coupon-callback
+    [coupons]="coupons"
+    [coupon]="widget.guiprops.exit.couponCallback"
+    [placePopup]="placePopup"
+  ></app-coupon-callback>
+</div>

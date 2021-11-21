@@ -978,12 +978,8 @@
 						"vert": "Сдвиг по вертикали"
 					}
 				},
-				"useBorderAroundFields": "Использовать рамку вокруг полей",
-				"usePodBG": {
-					"color": "Цвет подложки",
-					"opacity": "Прозрачность",
-					"title": "Использовать подложку под формой"
-				},
+				"useBorderAroundFields": "Обводка полей",
+				"usePodBG": "Подложка под формой",
 				"visualField": "Вид полей",
 				"visualField1": "Под контентом",
 				"visualField2": "На всю ширину",
