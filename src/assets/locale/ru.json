@@ -850,7 +850,7 @@
 			}
 		},
 		"formExt": {
-			"addAnotherElementToForm": "Добавить еще один элемент в форму",
+			"addAnotherElementToForm": "Добавить элемент формы",
 			"button": {
 				"bType": {
 					"label": "Тип кнопки"
