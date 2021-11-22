@@ -56,6 +56,9 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   public availMainWidthTypes = [];
   public availMainWidthOrientationTypes = [];
 
+  public currentItem: Record<string, any>;
+  public currentIndex = 0;
+
   private isCurrentDraggedWasClosed = false;
 
   private changeItemSub: SubscriptionLike;

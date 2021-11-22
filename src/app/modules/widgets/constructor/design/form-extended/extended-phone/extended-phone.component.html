@@ -1,152 +1,137 @@
-<div>
-  <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding pt-1">
-      <div class="item-placeholder-name">{{ item.placeholder }}</div>
+<div class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1">
+    <label class="control-label control-label-des">{{ 'widgets.formExt.choseTypeOfItem' | translate }}:</label>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+        {{ item.label }}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li role="presentation" *ngFor="let itemForm of availItemTypes" (click)="changeFormType(itemForm.type)">
+          <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding">
-      <div class="item-placeholder-type">{{ item.label }}</div>
-    </div>
-  </div>
+</div>
 
-  <div class="form-ext-item__toggled-wrapper">
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.choseTypeOfItem' | translate }}:</label>
+<div class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
+    <label class="control-label control-label-des">{{ 'widgets.formExt.email.placeholder1' | translate }}:</label>
+    <input type="text" class="form-control" [(ngModel)]="item.placeholder">
+  </div>
+</div>
+
+<div class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
+    <label class="control-label control-label-des">{{ 'widgets.formExt.email.service1' | translate }}:</label>
+    <input type="text" class="form-control" [(ngModel)]="item.service">
+    <span class="input-down-sm-lab">{{ 'widgets.formExt.email.service3' | translate }}</span>
+  </div>
+</div>
+
+<div class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
+    <label class="control-label control-label-des">{{ 'widgets.formExt.email.id1' | translate }}:</label>
+    <input type="text" appSelectOnClick readonly class="form-control not-readonly-hand" [(ngModel)]="item.idField">
+    <span class="input-down-sm-lab">{{ 'widgets.formExt.mainSettings.id.example' | translate }}</span>
+  </div>
+</div>
+<div class="row row-subitem">
+  <div
+    class="col-sm-12 row-subitem-padding mt-2 widget-small-text"
+    [innerHTML]="'widgets.formExt.mainSettings.id.description' | translate"
+  ></div>
+</div>
+<div class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1">
+    <div class="form-check">
+      <label class="form-check-label">
+        <input
+          type="checkbox"
+          [(ngModel)]="item.useOutsideCRM"
+          class="form-check-input"
+        />
+        <span class="checkmark"></span>
+      </label>
+      {{ 'widgets.formExt.mainSettings.id.useOutsideCRM' | translate }}
+    </div>
+  </div>
+</div>
+
+<div class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-mask">
+    <div class="mt-2 formReqBl d-flex">
+      <ui-switch
+        size="small"
+        [(ngModel)]="item.mask.enable"
+      ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">{{ 'widgets.form.phoneMask.titleSwitcher' | translate }}</label>
+    </div>
+    <div class="mt-2 formReqBl" *ngIf="item.mask.enable">
+      <label class="control-label">{{ 'widgets.form.phoneMask.titleInput' | translate }}</label>
+      <input type="text" class="form-control" (keyup)="blockedUnusedChars()" [(ngModel)]="item.mask.value">
+      <span class="small">{{ 'widgets.form.phoneMask.description' | translate }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1">
+    <label class="control-label control-label-des">{{ 'widgets.formExt.widthField1' | translate }}:</label>
+  </div>
+</div>
+<div class="row row-subitem">
+  <div class="col-sm-12 row-subitem-padding pt-1">
+    <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
+      <div>
+        <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthValue">
+      </div>
+
+      <div>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{ item.label }}
+            {{ item.widthType.label }}
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li role="presentation" *ngFor="let itemForm of availItemTypes" (click)="changeFormType(itemForm.type)">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
+            <li role="presentation" *ngFor="let itemWidth of availWidthTypes" (click)="item.widthType = itemWidth">
+              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemWidth.label }}</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.email.placeholder1' | translate }}:</label>
-        <input type="text" class="form-control" [(ngModel)]="item.placeholder">
-      </div>
+<div class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1">
+    <div class="form-check">
+      <label class="form-check-label">
+        <input
+          type="checkbox"
+          [(ngModel)]="item.required"
+          class="form-check-input"
+        />
+        <span class="checkmark"></span>
+      </label>
+      {{ 'widgets.formExt.enableRequire' | translate }}
     </div>
+  </div>
+</div>
 
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.email.service1' | translate }}:</label>
-        <input type="text" class="form-control" [(ngModel)]="item.service">
-        <span class="input-down-sm-lab">{{ 'widgets.formExt.email.service3' | translate }}</span>
-      </div>
-    </div>
-
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.email.id1' | translate }}:</label>
-        <input type="text" appSelectOnClick readonly class="form-control not-readonly-hand" [(ngModel)]="item.idField">
-        <span class="input-down-sm-lab">{{ 'widgets.formExt.mainSettings.id.example' | translate }}</span>
-      </div>
-    </div>
-    <div class="row row-subitem">
-      <div
-        class="col-sm-12 row-subitem-padding mt-2 widget-small-text"
-        [innerHTML]="'widgets.formExt.mainSettings.id.description' | translate"
-      ></div>
-    </div>
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input
-              type="checkbox"
-              [(ngModel)]="item.useOutsideCRM"
-              class="form-check-input"
-            />
-            <span class="checkmark"></span>
-          </label>
-          {{ 'widgets.formExt.mainSettings.id.useOutsideCRM' | translate }}
-        </div>
-      </div>
-    </div>
-
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-mask">
-        <div class="mt-2 formReqBl d-flex">
-          <ui-switch
-            size="small"
-            [(ngModel)]="item.mask.enable"
-          ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">{{ 'widgets.form.phoneMask.titleSwitcher' | translate }}</label>
-        </div>
-        <div class="mt-2 formReqBl" *ngIf="item.mask.enable">
-          <label class="control-label">{{ 'widgets.form.phoneMask.titleInput' | translate }}</label>
-          <input type="text" class="form-control" (keyup)="blockedUnusedChars()" [(ngModel)]="item.mask.value">
-          <span class="small">{{ 'widgets.form.phoneMask.description' | translate }}</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.widthField1' | translate }}:</label>
-      </div>
-    </div>
-    <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding pt-1">
-        <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
-          <div>
-            <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthValue">
-          </div>
-
-          <div>
-            <div class="dropdown">
-              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                {{ item.widthType.label }}
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <li role="presentation" *ngFor="let itemWidth of availWidthTypes" (click)="item.widthType = itemWidth">
-                  <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemWidth.label }}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input
-              type="checkbox"
-              [(ngModel)]="item.required"
-              class="form-check-input"
-            />
-            <span class="checkmark"></span>
-          </label>
-          {{ 'widgets.formExt.enableRequire' | translate }}
-        </div>
-      </div>
-    </div>
-
-    <div class="row row-subitem">
-      <div class="col-sm-12 row-subitem-padding pt-1">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input
-              type="checkbox"
-              [(ngModel)]="item.newLine"
-              class="form-check-input"
-            />
-            <span class="checkmark"></span>
-          </label>
-          {{ 'widgets.formExt.newLineField' | translate }}
-        </div>
-      </div>
+<div class="row row-subitem">
+  <div class="col-sm-12 row-subitem-padding pt-1">
+    <div class="form-check">
+      <label class="form-check-label">
+        <input
+          type="checkbox"
+          [(ngModel)]="item.newLine"
+          class="form-check-input"
+        />
+        <span class="checkmark"></span>
+      </label>
+      {{ 'widgets.formExt.newLineField' | translate }}
     </div>
   </div>
 </div>

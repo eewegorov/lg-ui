@@ -1,146 +1,130 @@
-<div>
-  <div class="row row-subitem">
-    <div class="col-sm-12 row-subitem-padding pt-1">
-      <div class="item-placeholder-name">{{ item.service }}</div>
+<div class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1">
+    <label class="control-label control-label-des">{{ 'widgets.formExt.choseTypeOfItem' | translate }}:</label>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+        {{ item.label }}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li
+          role="presentation"
+          *ngFor="let itemForm of availItemTypes"
+          (click)="changeFormType(itemForm.type)"
+        >
+          <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
+        </li>
+      </ul>
     </div>
   </div>
-  <div class="row row-subitem">
+</div>
+
+<div class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1">
+    <label class="control-label control-label-des">{{ 'widgets.formExt.hidden.fieldType.label' | translate }}:</label>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+        {{ item.fieldType.label }}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li
+          role="presentation"
+          *ngFor="let itemFieldType of fieldTypes"
+          (click)="selectFieldType(itemFieldType)"
+        >
+          <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemFieldType.label }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
+    <label class="control-label control-label-des">{{ 'widgets.formExt.email.service1' | translate }}:</label>
+    <input type="text" class="form-control" [(ngModel)]="item.service">
+    <span class="input-down-sm-lab">{{ 'widgets.formExt.email.service3' | translate }}</span>
+  </div>
+</div>
+
+<div class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
+    <label class="control-label control-label-des">{{ 'widgets.formExt.email.id1' | translate }}:</label>
+    <input type="text" class="form-control form-control-form-ext-id-field" (blur)="idFocusOut()" [(ngModel)]="item.idField">
+    <span class="input-down-sm-lab">{{ 'widgets.formExt.mainSettings.id.example' | translate }}</span>
+  </div>
+</div>
+<div class="row row-subitem">
+  <div
+    class="col-sm-12 row-subitem-padding mt-2 widget-small-text"
+    [innerHTML]="'widgets.formExt.mainSettings.id.description' | translate"
+  ></div>
+</div>
+
+
+<div *ngIf="isFieldUtmOrRef(item.fieldType.type)">
+  <div class="row row-subitem mt-2 pt-2">
     <div class="col-sm-12 row-subitem-padding">
-      <div class="item-placeholder-type">{{ item.label }}</div>
+      <h4 class="h4-text-tit control-label-des">{{ 'widgets.formExt.hidden.fieldUtm.radio.title' | translate }}</h4>
+    </div>
+    <div class="col-sm-6 row-subitem-padding">
+      <div class="form-group widget-selector mb-0">
+        <label class="non-bold">
+          <input
+            type="radio"
+            name="hidden"
+            class="radio radio-info radio-inline"
+            [(ngModel)]="item.utmRefPage.currentPage"
+            [value]="true"
+          />
+          {{ 'widgets.formExt.hidden.fieldUtm.radio.label1' | translate }}
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-6 row-subitem-padding">
+      <div class="form-group widget-selector mb-0">
+        <label class="non-bold">
+          <input
+            type="radio"
+            name="hidden"
+            class="radio radio-info radio-inline"
+            [(ngModel)]="item.utmRefPage.currentPage"
+            [value]="false"
+          />
+          {{ 'widgets.formExt.hidden.fieldUtm.radio.label2' | translate }}
+        </label>
+      </div>
     </div>
   </div>
 
-  <div class="form-ext-item__toggled-wrapper">
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.choseTypeOfItem' | translate }}:</label>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{ item.label }}
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li
-              role="presentation"
-              *ngFor="let itemForm of availItemTypes"
-              (click)="changeFormType(itemForm.type)"
-            >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+  <div class="row row-subitem mt-1">
+    <div class="col-sm-12 row-subitem-padding widget-small-text">
+      {{ (item.fieldType.type === 'referrer' ? 'widgets.formExt.hidden.fieldRef.desc' : 'widgets.formExt.hidden.fieldUtm.desc') | translate }}
     </div>
+  </div>
+</div>
 
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.hidden.fieldType.label' | translate }}:</label>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{ item.fieldType.label }}
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li
-              role="presentation"
-              *ngFor="let itemFieldType of fieldTypes"
-              (click)="selectFieldType(itemFieldType)"
-            >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemFieldType.label }}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+<div *ngIf="item.fieldType.type === 'custom_parameter'" class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
+    <label class="control-label control-label-des">{{ 'widgets.formExt.hidden.fieldUserParam.label' | translate }}</label>
+    <input type="text" class="form-control" [(ngModel)]="item.customParamValue">
+    <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldUserParam.desc' | translate }}</span>
+  </div>
+</div>
 
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.email.service1' | translate }}:</label>
-        <input type="text" class="form-control" [(ngModel)]="item.service">
-        <span class="input-down-sm-lab">{{ 'widgets.formExt.email.service3' | translate }}</span>
-      </div>
-    </div>
+<div *ngIf="item.fieldType.type === 'cookie'" class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
+    <label class="control-label control-label-des">{{ 'widgets.formExt.hidden.fieldCookies.label' | translate }}</label>
+    <input type="text" class="form-control" [(ngModel)]="item.cookieValue">
+    <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldCookies.desc' | translate }}</span>
+  </div>
+</div>
 
-    <div class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.email.id1' | translate }}:</label>
-        <input type="text" class="form-control form-control-form-ext-id-field" (blur)="idFocusOut()" [(ngModel)]="item.idField">
-        <span class="input-down-sm-lab">{{ 'widgets.formExt.mainSettings.id.example' | translate }}</span>
-      </div>
-    </div>
-    <div class="row row-subitem">
-      <div
-        class="col-sm-12 row-subitem-padding mt-2 widget-small-text"
-        [innerHTML]="'widgets.formExt.mainSettings.id.description' | translate"
-      ></div>
-    </div>
-
-
-    <div *ngIf="isFieldUtmOrRef(item.fieldType.type)">
-      <div class="row row-subitem mt-2 pt-2">
-        <div class="col-sm-12 row-subitem-padding">
-          <h4 class="h4-text-tit control-label-des">{{ 'widgets.formExt.hidden.fieldUtm.radio.title' | translate }}</h4>
-        </div>
-        <div class="col-sm-6 row-subitem-padding">
-          <div class="form-group widget-selector mb-0">
-            <label class="non-bold">
-              <input
-                type="radio"
-                name="hidden"
-                class="radio radio-info radio-inline"
-                [(ngModel)]="item.utmRefPage.currentPage"
-                [value]="true"
-              />
-              {{ 'widgets.formExt.hidden.fieldUtm.radio.label1' | translate }}
-            </label>
-          </div>
-        </div>
-        <div class="col-sm-6 row-subitem-padding">
-          <div class="form-group widget-selector mb-0">
-            <label class="non-bold">
-              <input
-                type="radio"
-                name="hidden"
-                class="radio radio-info radio-inline"
-                [(ngModel)]="item.utmRefPage.currentPage"
-                [value]="false"
-              />
-              {{ 'widgets.formExt.hidden.fieldUtm.radio.label2' | translate }}
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row row-subitem mt-1">
-        <div class="col-sm-12 row-subitem-padding widget-small-text">
-          {{ (item.fieldType.type === 'referrer' ? 'widgets.formExt.hidden.fieldRef.desc' : 'widgets.formExt.hidden.fieldUtm.desc') | translate }}
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="item.fieldType.type === 'custom_parameter'" class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.hidden.fieldUserParam.label' | translate }}</label>
-        <input type="text" class="form-control" [(ngModel)]="item.customParamValue">
-        <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldUserParam.desc' | translate }}</span>
-      </div>
-    </div>
-
-    <div *ngIf="item.fieldType.type === 'cookie'" class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.hidden.fieldCookies.label' | translate }}</label>
-        <input type="text" class="form-control" [(ngModel)]="item.cookieValue">
-        <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldCookies.desc' | translate }}</span>
-      </div>
-    </div>
-
-    <div *ngIf="item.fieldType.type === 'user_value'" class="row row-subitem mt-2">
-      <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
-        <label class="control-label control-label-des">{{ 'widgets.formExt.hidden.fieldUserValue.label' | translate }}</label>
-        <input type="text" class="form-control" [(ngModel)]="item.customUserValue">
-        <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldUserValue.desc' | translate }}</span>
-      </div>
-    </div>
-
+<div *ngIf="item.fieldType.type === 'user_value'" class="row row-subitem mt-2">
+  <div class="col-sm-12 row-subitem-padding pt-1 form-ext-item__item-input">
+    <label class="control-label control-label-des">{{ 'widgets.formExt.hidden.fieldUserValue.label' | translate }}</label>
+    <input type="text" class="form-control" [(ngModel)]="item.customUserValue">
+    <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldUserValue.desc' | translate }}</span>
   </div>
 </div>

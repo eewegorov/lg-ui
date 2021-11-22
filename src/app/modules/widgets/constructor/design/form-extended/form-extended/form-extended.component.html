@@ -1,4 +1,46 @@
-<div *ngIf="widget" class="mb-3">
+<ng-container *ngIf="currentItem">
+  <div *ngIf="currentItem.type === 'email'">
+    <app-extended-email [item]="currentItem" [index]="currentIndex"></app-extended-email>
+  </div>
+  <div *ngIf="currentItem.type === 'name'">
+    <app-extended-name [item]="currentItem" [index]="currentIndex"></app-extended-name>
+  </div>
+  <div *ngIf="currentItem.type === 'message'">
+    <app-extended-message [item]="currentItem" [index]="currentIndex"></app-extended-message>
+  </div>
+  <div *ngIf="currentItem.type === 'phone'">
+    <app-extended-phone [item]="currentItem" [index]="currentIndex"></app-extended-phone>
+  </div>
+  <div *ngIf="currentItem.type === 'text'">
+    <app-extended-text [item]="currentItem" [index]="currentIndex"></app-extended-text>
+  </div>
+  <div *ngIf="currentItem.type === 'rating'">
+    <app-extended-rating [item]="currentItem" [index]="currentIndex"></app-extended-rating>
+  </div>
+  <div *ngIf="currentItem.type === 'variants'">
+    <app-extended-variants [item]="currentItem" [index]="currentIndex"></app-extended-variants>
+  </div>
+  <div *ngIf="currentItem.type === 'dd'">
+    <app-extended-dd [item]="currentItem" [index]="currentIndex"></app-extended-dd>
+  </div>
+  <div *ngIf="currentItem.type === 'date'">
+    <app-extended-date [item]="currentItem" [index]="currentIndex"></app-extended-date>
+  </div>
+  <div *ngIf="currentItem.type === 'title'">
+    <app-extended-title [item]="currentItem" [index]="currentIndex"></app-extended-title>
+  </div>
+  <div *ngIf="currentItem.type === 'term'">
+    <app-extended-term [item]="currentItem" [index]="currentIndex"></app-extended-term>
+  </div>
+  <div *ngIf="currentItem.type === 'button'">
+    <app-extended-button [item]="currentItem" [containerId]="widget.containerId" [index]="currentIndex"></app-extended-button>
+  </div>
+  <div *ngIf="currentItem.type === 'hidden'">
+    <app-extended-hidden [item]="currentItem" [index]="currentIndex"></app-extended-hidden>
+  </div>
+</ng-container>
+
+<div *ngIf="widget && !currentItem" class="mb-3">
   <ul
     *ngIf="widget.guiprops?.formExt?.model"
     class="form-ext-wrapper"
@@ -11,73 +53,49 @@
         (click)="toggleItem($event, innerIndex, true)"
         (mouseover)="highlightContentOn(innerIndex, extItem.type)"
         (mouseleave)="highlightContentOff(innerIndex)"
-        [attr.data-to-ext]="innerIndex">
-      <div class="form-ext-item__header">
-        <div class="form-ext-item__header-l grab-form-ext-item">
+        [attr.data-to-ext]="innerIndex"
+    >
+      <div class="form-ext-item__header-l">
+        <div class="grab-form-ext-item">
           <i class="fa fa-bars"></i>
-        </div>
-        <div class="form-ext-item__header-r">
-          <div
-            *ngIf="!((innerIndex === 0) && (widget.guiprops.formExt.model.list.length === 1))"
-            class="form-ext-item__header-delete"
-            (click)="removeElementFromFormExtList($event, innerIndex)"
-          >
-            <i class="far fa-trash-alt"></i>
-          </div>
-          <div
-            *ngIf="!isUnclonable(extItem.type)"
-            class="form-ext-item__header-clone"
-            (click)="cloneElementFromFormExtList($event, innerIndex, extItem)"
-          >
-            <i class="fa fa-copy"></i>
-          </div>
-          <div class="form-ext-item__header-collapse form-ext-item__header-collapse-opened" (click)="toggleItem($event, innerIndex)">
-            <i class="fa fa-angle-up"></i>
-          </div>
-          <div class="form-ext-item__header-collapse form-ext-item__header-collapse-closed" (click)="toggleItem($event, innerIndex)">
-            <i class="fa fa-pencil"></i>
-          </div>
         </div>
       </div>
       <div class="form-ext-item__body">
-        <div *ngIf="extItem.type === 'email'">
-          <app-extended-email [item]="extItem" [index]="innerIndex"></app-extended-email>
+        <div *ngIf="extItem.type === 'button'" class="item-placeholder-name">{{ extItem['bType'].label }}</div>
+        <div
+          *ngIf="extItem.type === 'hidden' || extItem.type === 'rating' || extItem.type === 'variants'"
+          class="item-placeholder-name"
+        >
+          {{ extItem.service }}
         </div>
-        <div *ngIf="extItem.type === 'name'">
-          <app-extended-name [item]="extItem" [index]="innerIndex"></app-extended-name>
+        <div
+          *ngIf="extItem.type !== 'button' && extItem.type !== 'hidden' && extItem.type !== 'rating' && extItem.type !== 'variants'"
+          class="item-placeholder-name"
+        >
+          {{ extItem.placeholder }}
         </div>
-        <div *ngIf="extItem.type === 'message'">
-          <app-extended-message [item]="extItem" [index]="innerIndex"></app-extended-message>
+        <div class="item-placeholder-type">{{ extItem.label }}</div>
+      </div>
+      <div class="form-ext-item__header-r">
+        <div
+          *ngIf="!((innerIndex === 0) && (widget.guiprops.formExt.model.list.length === 1))"
+          class="form-ext-item__header-delete"
+          (click)="removeElementFromFormExtList($event, innerIndex)"
+        >
+          <i class="far fa-trash-alt"></i>
         </div>
-        <div *ngIf="extItem.type === 'phone'">
-          <app-extended-phone [item]="extItem" [index]="innerIndex"></app-extended-phone>
+        <div
+          *ngIf="!isUnclonable(extItem.type)"
+          class="form-ext-item__header-clone"
+          (click)="cloneElementFromFormExtList($event, innerIndex, extItem)"
+        >
+          <i class="fa fa-copy"></i>
         </div>
-        <div *ngIf="extItem.type === 'text'">
-          <app-extended-text [item]="extItem" [index]="innerIndex"></app-extended-text>
+        <div class="form-ext-item__header-collapse form-ext-item__header-collapse-opened" (click)="toggleItem($event, innerIndex)">
+          <i class="fa fa-angle-up"></i>
         </div>
-        <div *ngIf="extItem.type === 'rating'">
-          <app-extended-rating [item]="extItem" [index]="innerIndex"></app-extended-rating>
-        </div>
-        <div *ngIf="extItem.type === 'variants'">
-          <app-extended-variants [item]="extItem" [index]="innerIndex"></app-extended-variants>
-        </div>
-        <div *ngIf="extItem.type === 'dd'">
-          <app-extended-dd [item]="extItem" [index]="innerIndex"></app-extended-dd>
-        </div>
-        <div *ngIf="extItem.type === 'date'">
-          <app-extended-date [item]="extItem" [index]="innerIndex"></app-extended-date>
-        </div>
-        <div *ngIf="extItem.type === 'title'">
-          <app-extended-title [item]="extItem" [index]="innerIndex"></app-extended-title>
-        </div>
-        <div *ngIf="extItem.type === 'term'">
-          <app-extended-term [item]="extItem" [index]="innerIndex"></app-extended-term>
-        </div>
-        <div *ngIf="extItem.type === 'button'">
-          <app-extended-button [item]="extItem" [containerId]="widget.containerId" [index]="innerIndex"></app-extended-button>
-        </div>
-        <div *ngIf="extItem.type === 'hidden'">
-          <app-extended-hidden [item]="extItem" [index]="innerIndex"></app-extended-hidden>
+        <div class="form-ext-item__header-collapse form-ext-item__header-collapse-closed" (click)="toggleItem($event, innerIndex)">
+          <i class="fa fa-pencil"></i>
         </div>
       </div>
     </li>

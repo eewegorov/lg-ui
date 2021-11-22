@@ -1357,30 +1357,38 @@ span.underow-comment {
 // Form ext styles TODO: need to refactor later
 
 .form-ext-item {
-  margin-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  position: relative;
-  background-color: #f2f2f2;
-  border: 1px solid transparent;
-}
-.form-ext-item__header {
   display: flex;
   justify-content: space-between;
-  padding-top: 5px;
-  margin-left: -25px;
-  margin-right: -25px;
-  font-size: 15px;
+  position: relative;
+  background-color: #F4F4F6;
+  border: 1px solid transparent;
+  border-radius: 8px;
 }
+
 .form-ext-item__header-l {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+}
+
+.grab-form-ext-item {
   color: #aaaaaa;
   cursor: move;
 }
+
 .form-ext-item__header-r {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
   color: #34495e;
 }
+
+.form-ext-item__body {
+  width: 70%;
+}
+
 .form-ext-item__header-delete,
 .form-ext-item__header-clone,
 .form-ext-item__header-collapse {
@@ -1414,11 +1422,6 @@ span.underow-comment {
 
 ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   opacity: .4;
-}
-
-.form-ext-item__toggled-wrapper {
-  margin: 0 -15px;
-  padding: 0 15px;
 }
 
 .form-ext-item-closed .form-ext-item__toggled-wrapper {
