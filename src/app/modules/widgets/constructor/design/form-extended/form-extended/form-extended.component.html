@@ -83,11 +83,12 @@
           class="form-ext-item__header-copy"
           (click)="cloneElementFromFormExtList($event, innerIndex, extItem)"
         ></div>
-        <div
-          *ngIf="!((innerIndex === 0) && (widget.guiprops.formExt.model.list.length === 1))"
-          (click)="removeElementFromFormExtList($event, innerIndex)"
-        >
-          <button class="delete-element-button">
+        <div class="form-ext-item__header-delete">
+          <button
+            *ngIf="!((innerIndex === 0) && (widget.guiprops.formExt.model.list.length === 1))"
+            class="delete-element-button"
+            (click)="removeElementFromFormExtList($event, innerIndex)"
+          >
             &times;
           </button>
         </div>

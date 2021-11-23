@@ -159,7 +159,8 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private toggleElement(shouldToggle, index) {
-    this.widget.guiprops.formExt.model.list[index].isTabOpened = !this.widget.guiprops.formExt.model.list[index].isTabOpened;
+    this.currentItem = this.widget.guiprops.formExt.model.list[index];
+    /*this.widget.guiprops.formExt.model.list[index].isTabOpened = !this.widget.guiprops.formExt.model.list[index].isTabOpened;
     shouldToggle.slideToggle(500);
     this.closeInactive(shouldToggle);
 
@@ -171,7 +172,7 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
         const scrollTo = (shouldToggle.offset().top) - (accordionIn.offset().top) - 116;
         accordion.animate({scrollTop: scrollTo}, 200, 'swing');
       }, 800);
-    }
+    }*/
   }
 
   public highlightContentOn(index, type) {
@@ -208,13 +209,6 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
 
     this.widget.guiprops.formExt.model.list.splice(index + 1, 0, newElement);
     this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
-
-    setTimeout(() => {
-      const _this = $(event.currentTarget);
-      const parent = _this.parents('.form-ext-item');
-      const shouldToggle = parent.next().find('.form-ext-item__toggled-wrapper');
-      this.toggleElement(shouldToggle, index + 1);
-    }, 0);
   }
 
   public addItemToExtForm() {
