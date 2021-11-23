@@ -57,7 +57,7 @@
     >
       <div class="form-ext-item__header-l">
         <div class="grab-form-ext-item">
-          <i class="fa fa-bars"></i>
+          <img src="assets/images/widgets/move.svg" alt="Move" />
         </div>
       </div>
       <div class="form-ext-item__body">
@@ -77,25 +77,19 @@
         <div class="item-placeholder-type">{{ extItem.label }}</div>
       </div>
       <div class="form-ext-item__header-r">
-        <div
-          *ngIf="!((innerIndex === 0) && (widget.guiprops.formExt.model.list.length === 1))"
-          class="form-ext-item__header-delete"
-          (click)="removeElementFromFormExtList($event, innerIndex)"
-        >
-          <i class="far fa-trash-alt"></i>
-        </div>
+        <div class="form-ext-item__header-edit" (click)="toggleItem($event, innerIndex)"></div>
         <div
           *ngIf="!isUnclonable(extItem.type)"
-          class="form-ext-item__header-clone"
+          class="form-ext-item__header-copy"
           (click)="cloneElementFromFormExtList($event, innerIndex, extItem)"
+        ></div>
+        <div
+          *ngIf="!((innerIndex === 0) && (widget.guiprops.formExt.model.list.length === 1))"
+          (click)="removeElementFromFormExtList($event, innerIndex)"
         >
-          <i class="fa fa-copy"></i>
-        </div>
-        <div class="form-ext-item__header-collapse form-ext-item__header-collapse-opened" (click)="toggleItem($event, innerIndex)">
-          <i class="fa fa-angle-up"></i>
-        </div>
-        <div class="form-ext-item__header-collapse form-ext-item__header-collapse-closed" (click)="toggleItem($event, innerIndex)">
-          <i class="fa fa-pencil"></i>
+          <button class="delete-element-button">
+            &times;
+          </button>
         </div>
       </div>
     </li>

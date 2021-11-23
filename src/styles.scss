@@ -1363,61 +1363,8 @@ span.underow-comment {
   background-color: #F4F4F6;
   border: 1px solid transparent;
   border-radius: 8px;
-}
-
-.form-ext-item__header-l {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 10%;
-}
-
-.grab-form-ext-item {
-  color: #aaaaaa;
-  cursor: move;
-}
-
-.form-ext-item__header-r {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
-  color: #34495e;
-}
-
-.form-ext-item__body {
-  width: 70%;
-}
-
-.form-ext-item__header-delete,
-.form-ext-item__header-clone,
-.form-ext-item__header-collapse {
-  width: 13px;
-  cursor: pointer;
-}
-.form-ext-item__header-clone {
-  margin-right: 9px;
-}
-.form-ext-item__header-clone i {
-  font-size: 14px;
-}
-.form-ext-item__header-collapse .fa-angle-up {
-  font-size: 17px;
-}
-.form-ext-item__header-delete {
-  margin-right: 8px;
-}
-.form-ext-item__header-delete:hover {
-  color: #ff0000;
-}
-.form-ext-item__header-collapse-closed {
-  display: none;
-}
-.form-ext-item-closed .form-ext-item__header-collapse-opened {
-  display: none;
-}
-.form-ext-item-closed .form-ext-item__header-collapse-closed {
-  display: block;
+  margin-bottom: 20px;
+  padding: 15px 10px;
 }
 
 ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
@@ -1436,10 +1383,6 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 }
 .form-ext-item__width-settings .dropdown .btn {
   padding-right: 20px;
-}
-.item-placeholder-name {
-  color: #3b99fc;
-  font-size: 16px;
 }
 
 .form-ext-item.form-ext-item__alarm-class {
@@ -1912,7 +1855,7 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 }
 
 .add-form-ext-new-item {
-  padding: 10px 0;
+  padding: 0 0 10px 0;
 }
 #widgetStyle .add-form-ext-new-item button.widget-content-add-btn {
   padding: 5px 10px;
