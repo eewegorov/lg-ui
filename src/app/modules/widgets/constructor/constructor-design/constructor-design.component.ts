@@ -10,6 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
@@ -25,7 +26,14 @@ import { WidgetService } from '../../services/widget.service';
   selector: 'app-constructor-design',
   templateUrl: './constructor-design.component.html',
   styleUrls: ['../../shared/shared.scss', './constructor-design.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('slide', [
+      state('left', style({transform: 'translateX(0)'})),
+      state('right', style({transform: 'translateX(-50%'})),
+      transition('* => *', animate(300))
+    ])
+  ]
 })
 export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @ViewChild('flow') public flow: FlowDirective;
@@ -41,6 +49,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   @Input() private SP_widget: any;
 
   public isLoading = false;
+  public extendedElement: Record<string, any> = null;
+  public extendedIndex: number = null;
   public optionsRound: Options = {
     floor: 0,
     ceil: 50,
@@ -309,6 +319,12 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   public onDotIconPickerSelect(newIcon) {
     this.widget.guiprops.dhVisual.selectIcon = newIcon;
     this.widget.guiprops.dhVisual.selectedIcon = newIcon;
+  }
+
+  public setExtended(event: {element: Record<string, any>, index: number}): void {
+    console.log(event)
+    this.extendedElement = event.element;
+    this.extendedIndex = event.index;
   }
 
   private setNewFont(value, data) {

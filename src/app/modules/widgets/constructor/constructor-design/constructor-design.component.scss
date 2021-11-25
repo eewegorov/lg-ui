@@ -5,6 +5,7 @@
   z-index: 1;
   display: flex;
   padding-right: 0;
+  overflow: hidden;
 }
 
 .widget-style-menu .panel-group {
@@ -407,6 +408,7 @@ h6.title-h6-widget a:hover {
   justify-content: space-between;
   width: 60px;
   background: #F4F4F6;
+  z-index: 2;
 
   .element {
     position: relative;
@@ -555,7 +557,14 @@ h6.title-h6-widget a:hover {
 }
 
 .elements {
-  width: calc(100% - 60px);
+  display: flex;
+  height: 100%;
+  width: calc(200% - 120px);
+
+  .elements-default, .elements-extended {
+    flex: 1;
+    width: 450px;
+  }
 }
 
 .desktop-icon-small,
