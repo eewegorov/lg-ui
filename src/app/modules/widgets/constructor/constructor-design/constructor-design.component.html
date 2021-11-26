@@ -734,12 +734,13 @@
         <div class="elements-extended">
           <ng-container *ngIf="extendedElement">
             <div class="menu-fixed">
-              <h4 class="panel-title">
+              <h4 class="panel-title d-flex justify-content-between mr-3">
                 <a
                   (click)="backToRegularElement()"
                   href="javascript:void(0);"
+                  class="back-regular-element"
                 >
-                  <i class="remove-sub-item"></i>
+                  <i class="fas fa-arrow-left"></i>
                 </a>
                 {{ extendedElement.label }}
               </h4>

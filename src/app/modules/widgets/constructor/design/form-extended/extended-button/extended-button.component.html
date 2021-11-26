@@ -1,38 +1,34 @@
-<div class="row row-subitem mt-2">
-  <div class="col-sm-12 row-subitem-padding pt-1">
-    <label class="control-label control-label-des">{{ 'widgets.formExt.choseTypeOfItem' | translate }}:</label>
-    <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-        {{ item.label }}
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li
-          role="presentation"
-          *ngFor="let itemForm of availItemTypes"
-          (click)="changeFormType(itemForm.type)"
-        >
-          <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
-        </li>
-      </ul>
-    </div>
+<div class="row-subitem mt-2">
+  <label class="control-label control-label-des">{{ 'widgets.formExt.choseTypeOfItem' | translate }}:</label>
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+      {{ item.label }}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li
+        role="presentation"
+        *ngFor="let itemForm of availItemTypes"
+        (click)="changeFormType(itemForm.type)"
+      >
+        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
+      </li>
+    </ul>
   </div>
 </div>
 
-<div class="row row-subitem mt-2">
-  <div class="col-sm-12 row-subitem-padding pt-1">
-    <label class="control-label control-label-des">{{ 'widgets.formExt.button.bType.label' | translate }}:</label>
-    <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-        {{ item.bType.label }}
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li role="presentation" *ngFor="let itemBType of bTypes" (click)="item.bType = itemBType">
-          <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemBType.label }}</a>
-        </li>
-      </ul>
-    </div>
+<div class="row-subitem mt-2">
+  <label class="control-label control-label-des">{{ 'widgets.formExt.button.bType.label' | translate }}:</label>
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+      {{ item.bType.label }}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li role="presentation" *ngFor="let itemBType of bTypes" (click)="item.bType = itemBType">
+        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemBType.label }}</a>
+      </li>
+    </ul>
   </div>
 </div>
 

@@ -322,7 +322,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public setExtended(event: {element: Record<string, any>, index: number}): void {
-    console.log(event)
+    console.log(event);
     this.extendedElement = event.element;
     this.extendedIndex = event.index;
   }
@@ -1746,7 +1746,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
   public scrollToEl(id: string, elementName: string, elementCounter?: number) {
     this.backToRegularElement();
-    
+
     if ([
       'button-element',
       'closelink-element',
