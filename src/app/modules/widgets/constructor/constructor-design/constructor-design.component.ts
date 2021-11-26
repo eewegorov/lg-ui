@@ -1745,6 +1745,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public scrollToEl(id: string, elementName: string, elementCounter?: number) {
+    this.backToRegularElement();
+    
     if ([
       'button-element',
       'closelink-element',
@@ -2053,13 +2055,22 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     return false;
   }
 
-  public showLastElement() {
+  public showLastElement(): void {
     this.checkChanges();
     const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
     this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
     this.currentIndex = this.widget.guiprops.elementsList.length - 1;
   }
 
+  public setCurrentElement(elementName: string): void {
+    this.backToRegularElement();
+    this.currentElement = elementName;
+  }
+
+  public backToRegularElement(): void {
+    this.extendedElement = null;
+    this.extendedIndex = null;
+  }
 
   ngOnDestroy(): void {
     if (this.autoUploadSubscription) {

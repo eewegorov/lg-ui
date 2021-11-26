@@ -58,9 +58,6 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   public availMainWidthTypes = [];
   public availMainWidthOrientationTypes = [];
 
-  public currentItem: Record<string, any>;
-  public currentIndex = 0;
-
   private isCurrentDraggedWasClosed = false;
 
   private changeItemSub: SubscriptionLike;
@@ -161,8 +158,8 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private toggleElement(shouldToggle, index) {
-    this.currentItem = this.widget.guiprops.formExt.model.list[index];
-    this.setExtended.emit({ element: this.currentItem, index });
+    const currentItem = this.widget.guiprops.formExt.model.list[index];
+    this.setExtended.emit({ element: currentItem, index });
     /*this.widget.guiprops.formExt.model.list[index].isTabOpened = !this.widget.guiprops.formExt.model.list[index].isTabOpened;
     shouldToggle.slideToggle(500);
     this.closeInactive(shouldToggle);

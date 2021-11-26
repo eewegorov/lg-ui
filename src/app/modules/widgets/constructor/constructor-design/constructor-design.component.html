@@ -3,7 +3,7 @@
     <div class="col-lg-3 widget-style-menu">
       <div class="elements-selector">
         <div>
-          <div class="element" [class.active]="currentElement === 'settings'" (click)="currentElement = 'settings'">
+          <div class="element" [class.active]="currentElement === 'settings'" (click)="setCurrentElement('settings')">
             <div class="before">
               <div class="square"></div>
             </div>
@@ -18,7 +18,7 @@
             class="element"
             [class.coupon]="element.name === 'coupon-element'"
             [class.active]="currentElement === element.name + (element.counter ? ('#' + element.counter) : '')"
-            (click)="currentElement = element.name + (element.counter ? ('#' + element.counter) : ''); currentIndex = i"
+            (click)="setCurrentElement(element.name + (element.counter ? ('#' + element.counter) : '')); currentIndex = i"
           >
             <div class="before fade-in">
               <div class="square"></div>
@@ -32,7 +32,7 @@
           <div
             class="element"
             [class.active]="currentElement === 'add-element'"
-            (click)="currentElement = 'add-element'"
+            (click)="setCurrentElement('add-element')"
           >
             <div class="before fade-in">
               <div class="square"></div>
@@ -733,44 +733,57 @@
         </div>
         <div class="elements-extended">
           <ng-container *ngIf="extendedElement">
-            <div *ngIf="extendedElement.type === 'email'">
-              <app-extended-email [item]="extendedElement" [index]="extendedIndex"></app-extended-email>
+            <div class="menu-fixed">
+              <h4 class="panel-title">
+                <a
+                  (click)="backToRegularElement()"
+                  href="javascript:void(0);"
+                >
+                  <i class="remove-sub-item"></i>
+                </a>
+                {{ extendedElement.label }}
+              </h4>
             </div>
-            <div *ngIf="extendedElement.type === 'name'">
-              <app-extended-name [item]="extendedElement" [index]="extendedIndex"></app-extended-name>
-            </div>
-            <div *ngIf="extendedElement.type === 'message'">
-              <app-extended-message [item]="extendedElement" [index]="extendedIndex"></app-extended-message>
-            </div>
-            <div *ngIf="extendedElement.type === 'phone'">
-              <app-extended-phone [item]="extendedElement" [index]="extendedIndex"></app-extended-phone>
-            </div>
-            <div *ngIf="extendedElement.type === 'text'">
-              <app-extended-text [item]="extendedElement" [index]="extendedIndex"></app-extended-text>
-            </div>
-            <div *ngIf="extendedElement.type === 'rating'">
-              <app-extended-rating [item]="extendedElement" [index]="extendedIndex"></app-extended-rating>
-            </div>
-            <div *ngIf="extendedElement.type === 'variants'">
-              <app-extended-variants [item]="extendedElement" [index]="extendedIndex"></app-extended-variants>
-            </div>
-            <div *ngIf="extendedElement.type === 'dd'">
-              <app-extended-dd [item]="extendedElement" [index]="extendedIndex"></app-extended-dd>
-            </div>
-            <div *ngIf="extendedElement.type === 'date'">
-              <app-extended-date [item]="extendedElement" [index]="extendedIndex"></app-extended-date>
-            </div>
-            <div *ngIf="extendedElement.type === 'title'">
-              <app-extended-title [item]="extendedElement" [index]="extendedIndex"></app-extended-title>
-            </div>
-            <div *ngIf="extendedElement.type === 'term'">
-              <app-extended-term [item]="extendedElement" [index]="extendedIndex"></app-extended-term>
-            </div>
-            <div *ngIf="extendedElement.type === 'button'">
-              <app-extended-button [item]="extendedElement" [containerId]="widget.containerId" [index]="extendedIndex"></app-extended-button>
-            </div>
-            <div *ngIf="extendedElement.type === 'hidden'">
-              <app-extended-hidden [item]="extendedElement" [index]="extendedIndex"></app-extended-hidden>
+            <div class="extended-container">
+              <ng-container *ngIf="extendedElement.type === 'email'">
+                <app-extended-email [item]="extendedElement" [index]="extendedIndex"></app-extended-email>
+              </ng-container>
+              <ng-container *ngIf="extendedElement.type === 'name'">
+                <app-extended-name [item]="extendedElement" [index]="extendedIndex"></app-extended-name>
+              </ng-container>
+              <ng-container *ngIf="extendedElement.type === 'message'">
+                <app-extended-message [item]="extendedElement" [index]="extendedIndex"></app-extended-message>
+              </ng-container>
+              <ng-container *ngIf="extendedElement.type === 'phone'">
+                <app-extended-phone [item]="extendedElement" [index]="extendedIndex"></app-extended-phone>
+              </ng-container>
+              <ng-container *ngIf="extendedElement.type === 'text'">
+                <app-extended-text [item]="extendedElement" [index]="extendedIndex"></app-extended-text>
+              </ng-container>
+              <ng-container *ngIf="extendedElement.type === 'rating'">
+                <app-extended-rating [item]="extendedElement" [index]="extendedIndex"></app-extended-rating>
+              </ng-container>
+              <ng-container *ngIf="extendedElement.type === 'variants'">
+                <app-extended-variants [item]="extendedElement" [index]="extendedIndex"></app-extended-variants>
+              </ng-container>
+              <ng-container *ngIf="extendedElement.type === 'dd'">
+                <app-extended-dd [item]="extendedElement" [index]="extendedIndex"></app-extended-dd>
+              </ng-container>
+              <ng-container *ngIf="extendedElement.type === 'date'">
+                <app-extended-date [item]="extendedElement" [index]="extendedIndex"></app-extended-date>
+              </ng-container>
+              <ng-container *ngIf="extendedElement.type === 'title'">
+                <app-extended-title [item]="extendedElement" [index]="extendedIndex"></app-extended-title>
+              </ng-container>
+              <ng-container *ngIf="extendedElement.type === 'term'">
+                <app-extended-term [item]="extendedElement" [index]="extendedIndex"></app-extended-term>
+              </ng-container>
+              <ng-container *ngIf="extendedElement.type === 'button'">
+                <app-extended-button [item]="extendedElement" [containerId]="widget.containerId" [index]="extendedIndex"></app-extended-button>
+              </ng-container>
+              <ng-container *ngIf="extendedElement.type === 'hidden'">
+                <app-extended-hidden [item]="extendedElement" [index]="extendedIndex"></app-extended-hidden>
+              </ng-container>
             </div>
           </ng-container>
         </div>
