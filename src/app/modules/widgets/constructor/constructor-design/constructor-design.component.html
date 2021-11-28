@@ -558,7 +558,7 @@
 
               <div class="panel panel-default" id="1">
                 <div id="collapseTwo" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingTwo">
-                  <div *ngIf="widget.guiprops && widget.guiprops.elementsList" class="panel-body">
+                  <div *ngIf="widget.guiprops && widget.guiprops.elementsList" class="panel-body mb-5">
                     <div *ngFor="let item of widget.guiprops.elementsList; index as i" [id]="'elemScrN' + i">
                       <div
                         *ngIf="item.name === 'button-element'"
@@ -745,54 +745,58 @@
                 <span>{{ extendedElement.label }}</span>
               </h4>
             </div>
-            <div class="extended-container pt-3 border-item">
-              <ng-container *ngIf="extendedElement.type === 'email'">
-                <app-extended-email [item]="extendedElement" [index]="extendedIndex"></app-extended-email>
-              </ng-container>
-              <ng-container *ngIf="extendedElement.type === 'name'">
-                <app-extended-name [item]="extendedElement" [index]="extendedIndex"></app-extended-name>
-              </ng-container>
-              <ng-container *ngIf="extendedElement.type === 'message'">
-                <app-extended-message [item]="extendedElement" [index]="extendedIndex"></app-extended-message>
-              </ng-container>
-              <ng-container *ngIf="extendedElement.type === 'phone'">
-                <app-extended-phone [item]="extendedElement" [index]="extendedIndex"></app-extended-phone>
-              </ng-container>
-              <ng-container *ngIf="extendedElement.type === 'text'">
-                <app-extended-text [item]="extendedElement" [index]="extendedIndex"></app-extended-text>
-              </ng-container>
-              <ng-container *ngIf="extendedElement.type === 'rating'">
-                <app-extended-rating [item]="extendedElement" [index]="extendedIndex"></app-extended-rating>
-              </ng-container>
-              <ng-container *ngIf="extendedElement.type === 'variants'">
-                <app-extended-variants [item]="extendedElement" [index]="extendedIndex"></app-extended-variants>
-              </ng-container>
-              <ng-container *ngIf="extendedElement.type === 'dd'">
-                <app-extended-dd [item]="extendedElement" [index]="extendedIndex"></app-extended-dd>
-              </ng-container>
-              <ng-container *ngIf="extendedElement.type === 'date'">
-                <app-extended-date [item]="extendedElement" [index]="extendedIndex"></app-extended-date>
-              </ng-container>
-              <ng-container *ngIf="extendedElement.type === 'title'">
-                <app-extended-title [item]="extendedElement" [index]="extendedIndex"></app-extended-title>
-              </ng-container>
-              <ng-container *ngIf="extendedElement.type === 'term'">
-                <app-extended-term [item]="extendedElement" [index]="extendedIndex"></app-extended-term>
-              </ng-container>
-              <ng-container *ngIf="extendedElement.type === 'button'">
-                <app-extended-button [item]="extendedElement" [containerId]="widget.containerId" [index]="extendedIndex"></app-extended-button>
-              </ng-container>
-              <ng-container *ngIf="extendedElement.type === 'hidden'">
-                <app-extended-hidden [item]="extendedElement" [index]="extendedIndex"></app-extended-hidden>
-              </ng-container>
-            </div>
-            <div *ngIf="this.widget.guiprops.formExt.model.list.length > 1" class="mt-3">
-              <button
-                class="btn-default extended-remove-btn"
-                (click)="removeElementFromFormExtList($event, extendedIndex); $event.stopPropagation();"
-              >
-                <i class="remove-sub-item"></i> Удалить элемент
-              </button>
+            <div class="extended-container pt-3">
+              <div class="border-item">
+                <ng-container *ngIf="extendedElement.type === 'email'">
+                  <app-extended-email [item]="extendedElement" [index]="extendedIndex"></app-extended-email>
+                </ng-container>
+                <ng-container *ngIf="extendedElement.type === 'name'">
+                  <app-extended-name [item]="extendedElement" [index]="extendedIndex"></app-extended-name>
+                </ng-container>
+                <ng-container *ngIf="extendedElement.type === 'message'">
+                  <app-extended-message [item]="extendedElement" [index]="extendedIndex"></app-extended-message>
+                </ng-container>
+                <ng-container *ngIf="extendedElement.type === 'phone'">
+                  <app-extended-phone [item]="extendedElement" [index]="extendedIndex"></app-extended-phone>
+                </ng-container>
+                <ng-container *ngIf="extendedElement.type === 'text'">
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"></app-extended-text>
+                </ng-container>
+                <ng-container *ngIf="extendedElement.type === 'rating'">
+                  <app-extended-rating [item]="extendedElement" [index]="extendedIndex"></app-extended-rating>
+                </ng-container>
+                <ng-container *ngIf="extendedElement.type === 'variants'">
+                  <app-extended-variants [item]="extendedElement" [index]="extendedIndex"></app-extended-variants>
+                </ng-container>
+                <ng-container *ngIf="extendedElement.type === 'dd'">
+                  <app-extended-dd [item]="extendedElement" [index]="extendedIndex"></app-extended-dd>
+                </ng-container>
+                <ng-container *ngIf="extendedElement.type === 'date'">
+                  <app-extended-date [item]="extendedElement" [index]="extendedIndex"></app-extended-date>
+                </ng-container>
+                <ng-container *ngIf="extendedElement.type === 'title'">
+                  <app-extended-title [item]="extendedElement" [index]="extendedIndex"></app-extended-title>
+                </ng-container>
+                <ng-container *ngIf="extendedElement.type === 'term'">
+                  <app-extended-term [item]="extendedElement" [index]="extendedIndex"></app-extended-term>
+                </ng-container>
+                <ng-container *ngIf="extendedElement.type === 'button'">
+                  <app-extended-button [item]="extendedElement" [containerId]="widget.containerId" [index]="extendedIndex"></app-extended-button>
+                </ng-container>
+                <ng-container *ngIf="extendedElement.type === 'hidden'">
+                  <app-extended-hidden [item]="extendedElement" [index]="extendedIndex"></app-extended-hidden>
+                </ng-container>
+              </div>
+
+              <div *ngIf="this.widget.guiprops.formExt.model.list.length > 1" class="mt-3">
+                <button
+                  class="btn-default extended-remove-btn"
+                  (click)="removeElementFromFormExtList($event, extendedIndex); $event.stopPropagation();"
+                >
+                  <i class="remove-sub-item"></i> Удалить элемент
+                </button>
+              </div>
+              <div class="mb-5"></div>
             </div>
           </ng-container>
         </div>
