@@ -67,6 +67,10 @@ button.extended-remove-btn {
     width: 20px;
     height: 20px;
   }
+
+  &:hover {
+    background-color: lighten(#D4D7DD, 10%);
+  }
 }
 
 #widgetStyle {
@@ -612,7 +616,10 @@ h6.title-h6-widget a:hover {
   }
 
   .extended-container {
-    margin: 0 25px;
+    position: relative;
+    height: calc(100% - 75px);
+    padding: 0 25px;
+    overflow: auto;
   }
 }
 
