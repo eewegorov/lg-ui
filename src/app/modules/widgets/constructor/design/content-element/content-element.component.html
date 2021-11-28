@@ -342,7 +342,7 @@
                             *ngFor="let variant of itemExt['variants']"
                             [ngStyle]="{'font-size': itemExt.fontSize + 'px', 'font-family': itemExt.font.fontFamily, 'color': itemExt['colorText']}"
                           >{{ variant }}
-                            <div [style]="'background-color: ' + widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm + ';border-color: ' + widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm">
+                            <div [style]="'background-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm) + ';border-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm)">
                               <input [type]="itemExt['multiEnable'] ? 'checkbox' : 'radio'" [name]="itemExt['multiEnable'] ? '' : ('radio-' + itemExt.id)">
                               <span
                                 class="form-ext-checkbox-checkmark"
@@ -374,7 +374,7 @@
                       <div *ngSwitchCase="'termElement'" class="term-input-class">
                         <div class="form-ext-term-wrapper">
                           <div class="form-ext-term-checkbox-container" (click)="termClick($event)">
-                            <div class="form-ext-term-checkbox-container-help-cl" [style]="'background-color: ' + widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm + ';border-color: ' + widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm">
+                            <div class="form-ext-term-checkbox-container-help-cl" [style]="'background-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm) + '; border-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm)">
                               <input type="checkbox">
                               <span class="form-ext-term-checkbox-checkmark" [ngStyle]="{'background-color': widget.guiprops.formExt.model.mainSettings.rgbaInputForm, 'border-color': widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : 'transparent'}"></span>
                             </div>

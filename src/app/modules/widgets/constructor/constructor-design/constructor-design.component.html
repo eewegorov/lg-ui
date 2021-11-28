@@ -738,14 +738,14 @@
                 <a
                   (click)="backToRegularElement()"
                   href="javascript:void(0);"
-                  class="back-regular-element"
+                  class="back-regular-element mr-3"
                 >
                   <i class="fas fa-arrow-left"></i>
                 </a>
-                {{ extendedElement.label }}
+                <span>{{ extendedElement.label }}</span>
               </h4>
             </div>
-            <div class="extended-container">
+            <div class="extended-container mt-3 border-item">
               <ng-container *ngIf="extendedElement.type === 'email'">
                 <app-extended-email [item]="extendedElement" [index]="extendedIndex"></app-extended-email>
               </ng-container>
@@ -785,6 +785,14 @@
               <ng-container *ngIf="extendedElement.type === 'hidden'">
                 <app-extended-hidden [item]="extendedElement" [index]="extendedIndex"></app-extended-hidden>
               </ng-container>
+            </div>
+            <div *ngIf="this.widget.guiprops.formExt.model.list.length > 1" class="mt-3">
+              <button
+                class="btn-default extended-remove-btn"
+                (click)="removeElementFromFormExtList($event, extendedIndex); $event.stopPropagation();"
+              >
+                <i class="remove-sub-item"></i> Удалить элемент
+              </button>
             </div>
           </ng-container>
         </div>

@@ -9,7 +9,7 @@ export class ExtendedDdwComponent implements OnInit {
   @Input() public item: Record<string, any>;
   @Input() public st: Record<string, any>;
 
-  @ViewChild('element') element: ElementRef;
+  @ViewChild('element', { static: true }) element: ElementRef;
 
   constructor() { }
 

@@ -321,8 +321,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     this.widget.guiprops.dhVisual.selectedIcon = newIcon;
   }
 
+  public removeElementFromFormExtList(event, index) {
+    event.stopPropagation();
+    this.widget.guiprops.formExt.model.list = this.widgetConstructorService.removeFromArray(this.widget.guiprops.formExt.model.list, index);
+    this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
+    this.backToRegularElement();
+  }
+
   public setExtended(event: {element: Record<string, any>, index: number}): void {
-    console.log(event);
     this.extendedElement = event.element;
     this.extendedIndex = event.index;
   }

@@ -877,7 +877,7 @@
 				"placeholder2": "Выпадающий список"
 			},
 			"email": {
-				"id1": "Id поля",
+				"id1": "ID поля",
 				"placeholder1": "Название поля (Placeholder)",
 				"placeholder2": "Введите email",
 				"service1": "Служебное название поля",

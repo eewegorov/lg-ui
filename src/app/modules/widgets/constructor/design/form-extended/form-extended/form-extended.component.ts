@@ -78,7 +78,7 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
       item.widthType = this.widget.guiprops.formExt.model.list[index].widthType;
 
       this.widget.guiprops.formExt.model.list[index] = item;
-      this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
+      this.toggleElement(index);
     });
 
     this.visualTypesOfField = this.widgetConstructorService.getExtFormVisualTypeOfField();
@@ -154,12 +154,13 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
       event.stopPropagation();
     }
 
-    this.toggleElement(shouldToggle, index);
+    this.toggleElement(index);
   }
 
-  private toggleElement(shouldToggle, index) {
+  private toggleElement(index) {
     const currentItem = this.widget.guiprops.formExt.model.list[index];
     this.setExtended.emit({ element: currentItem, index });
+    this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
     /*this.widget.guiprops.formExt.model.list[index].isTabOpened = !this.widget.guiprops.formExt.model.list[index].isTabOpened;
     shouldToggle.slideToggle(500);
     this.closeInactive(shouldToggle);
