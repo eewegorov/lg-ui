@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<div class="row-subitem mt-3 form-ext-item__item-input">
+<div *ngIf="hasPlaceholder" class="row-subitem mt-3 form-ext-item__item-input">
   <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.placeholder1' | translate }}</label>
   <input type="text" class="form-control mt-1" [(ngModel)]="item.placeholder">
 </div>
@@ -105,7 +105,46 @@
   </div>
 </div>
 
-<div *ngIf="idEditable" class="row-subitem mt-3">
+<div *ngIf="hasRating">
+  <div class="row row-subitem mt-2">
+    <div class="col-sm-12 row-subitem-padding pt-1">
+      <label class="control-label control-label-des">{{ 'widgets.formExt.rating.numberOfStars' | translate }}:</label>
+    </div>
+  </div>
+  <div class="row row-subitem">
+    <div class="col-sm-12 row-subitem-padding pt-1">
+      <div class="form-ext-item__rating-stars-settings">
+        <input type="number" min="1" max="15" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.numberOfStars">
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-subitem mt-2">
+    <div class="col-sm-5 row-subitem-padding pt-1 mr-5">
+      <label class="control-label control-label-colorpc control-label-des label-for-picker">{{ 'widgets.formExt.rating.colorInactive' | translate }}:</label>
+      <input
+        [(colorPicker)]="item.colorInactive"
+        [style.background]="item.colorInactive"
+        [cpAlphaChannel]="'disabled'"
+        [cpOutputFormat]="'hex'"
+        class="w-100"
+      />
+    </div>
+    <div class="col-sm-5 row-subitem-padding pt-1 side-ui-dev">
+      <label class="control-label control-label-colorpc control-label-des label-for-picker">{{ 'widgets.formExt.rating.colorActive' | translate }}:</label>
+      <input
+        [(colorPicker)]="item.colorActive"
+        [style.background]="item.colorActive"
+        [cpAlphaChannel]="'disabled'"
+        [cpOutputFormat]="'hex'"
+        cpPosition="left"
+        class="w-100"
+      />
+    </div>
+  </div>
+</div>
+
+<div *ngIf="hasMultiline" class="row-subitem mt-3">
   <div class="form-check">
     <label class="form-check-label">
       <input
@@ -145,4 +184,19 @@
     </label>
     <span class="form-check-text f-3">{{ 'widgets.formExt.newLineField' | translate }}</span>
   </div>
+</div>
+
+<div *ngIf="hasSendForm" class="row-subitem mt-3">
+  <div class="form-check">
+    <label class="form-check-label">
+      <input
+        type="checkbox"
+        [(ngModel)]="item.sendFormIfAction"
+        class="form-check-input"
+      />
+      <span class="checkmark"></span>
+    </label>
+    <span class="form-check-text f-3">{{ 'widgets.formExt.sendFormIfAnyAction.title' | translate }}</span>
+  </div>
+  <span class="widget-small-text form-ext-if-action-desc">{{ 'widgets.formExt.sendFormIfAnyAction.desc' | translate }}</span>
 </div>

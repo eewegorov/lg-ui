@@ -748,22 +748,22 @@
             <div class="extended-container pt-3">
               <div class="border-item">
                 <ng-container *ngIf="extendedElement.type === 'email'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [hasPlaceholder]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'name'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [hasPlaceholder]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'message'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [hasPlaceholder]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'phone'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [hasPhoneBlock]="true"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [hasPhoneBlock]="true" [hasPlaceholder]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'text'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true" [hasPlaceholder]="true" [hasMultiline]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'rating'">
-                  <app-extended-rating [item]="extendedElement" [index]="extendedIndex"></app-extended-rating>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true" [hasSendForm]="true" [hasRating]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'variants'">
                   <app-extended-variants [item]="extendedElement" [index]="extendedIndex"></app-extended-variants>

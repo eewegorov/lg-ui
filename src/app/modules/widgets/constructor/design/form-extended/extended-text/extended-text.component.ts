@@ -11,6 +11,10 @@ export class ExtendedTextComponent implements OnInit {
   @Input() public item: Record<string, any>;
   @Input() public idEditable: boolean;
   @Input() public hasPhoneBlock: boolean;
+  @Input() public hasPlaceholder: boolean;
+  @Input() public hasMultiline: boolean;
+  @Input() public hasSendForm: boolean;
+  @Input() public hasRating: boolean;
 
   public availItemTypes = [];
   public availWidthTypes = [];
