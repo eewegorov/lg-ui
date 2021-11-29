@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExtendedNameComponent } from './extended-name.component';
+import { ExtendedNameMessageEmailComponent } from './extended-name-message-email.component';
 
 describe('ExtendedNameComponent', () => {
-  let component: ExtendedNameComponent;
-  let fixture: ComponentFixture<ExtendedNameComponent>;
+  let component: ExtendedNameMessageEmailComponent;
+  let fixture: ComponentFixture<ExtendedNameMessageEmailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExtendedNameComponent ]
+      declarations: [ ExtendedNameMessageEmailComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExtendedNameComponent);
+    fixture = TestBed.createComponent(ExtendedNameMessageEmailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

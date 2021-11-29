@@ -748,13 +748,13 @@
             <div class="extended-container pt-3">
               <div class="border-item">
                 <ng-container *ngIf="extendedElement.type === 'email'">
-                  <app-extended-email [item]="extendedElement" [index]="extendedIndex"></app-extended-email>
+                  <app-extended-name-message-email [item]="extendedElement" [index]="extendedIndex"></app-extended-name-message-email>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'name'">
-                  <app-extended-name [item]="extendedElement" [index]="extendedIndex"></app-extended-name>
+                  <app-extended-name-message-email [item]="extendedElement" [index]="extendedIndex"></app-extended-name-message-email>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'message'">
-                  <app-extended-message [item]="extendedElement" [index]="extendedIndex"></app-extended-message>
+                  <app-extended-name-message-email [item]="extendedElement" [index]="extendedIndex"></app-extended-name-message-email>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'phone'">
                   <app-extended-phone [item]="extendedElement" [index]="extendedIndex"></app-extended-phone>

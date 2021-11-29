@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { WidgetConstructorService } from '../../../../services/widget-constructor.service';
 
 @Component({
-  selector: 'app-extended-name',
-  templateUrl: './extended-name.component.html',
-  styleUrls: ['../../../../shared/shared.scss', './extended-name.component.scss']
+  selector: 'app-extended-name-message-email',
+  templateUrl: './extended-name-message-email.component.html',
+  styleUrls: ['../../../../shared/shared.scss', './extended-name-message-email.component.scss']
 })
-export class ExtendedNameComponent implements OnInit {
+export class ExtendedNameMessageEmailComponent implements OnInit {
   @Input() public index: number;
   @Input() public item: Record<string, any>;
 

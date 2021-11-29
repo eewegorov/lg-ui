@@ -64,10 +64,8 @@ import { ExtendedDateComponent } from './constructor/design/form-extended/extend
 import { ExtendedDatepickerComponent } from './constructor/design/form-extended/extended-datepicker/extended-datepicker.component';
 import { ExtendedDdComponent } from './constructor/design/form-extended/extended-dd/extended-dd.component';
 import { ExtendedDdwComponent } from './constructor/design/form-extended/extended-ddw/extended-ddw.component';
-import { ExtendedEmailComponent } from './constructor/design/form-extended/extended-email/extended-email.component';
 import { ExtendedHiddenComponent } from './constructor/design/form-extended/extended-hidden/extended-hidden.component';
-import { ExtendedMessageComponent } from './constructor/design/form-extended/extended-message/extended-message.component';
-import { ExtendedNameComponent } from './constructor/design/form-extended/extended-name/extended-name.component';
+import { ExtendedNameMessageEmailComponent } from './constructor/design/form-extended/extended-name-message-email/extended-name-message-email.component';
 import { ExtendedPhoneComponent } from './constructor/design/form-extended/extended-phone/extended-phone.component';
 import { ExtendedRatingComponent } from './constructor/design/form-extended/extended-rating/extended-rating.component';
 import { ExtendedTermComponent } from './constructor/design/form-extended/extended-term/extended-term.component';
@@ -129,10 +127,8 @@ import { ElementsAddComponent } from './shared/elements-add/elements-add.compone
     ExtendedDatepickerComponent,
     ExtendedDdComponent,
     ExtendedDdwComponent,
-    ExtendedEmailComponent,
     ExtendedHiddenComponent,
-    ExtendedMessageComponent,
-    ExtendedNameComponent,
+    ExtendedNameMessageEmailComponent,
     ExtendedPhoneComponent,
     ExtendedRatingComponent,
     ExtendedTermComponent,
