@@ -9,6 +9,7 @@ import { WidgetConstructorService } from '../../../../services/widget-constructo
 export class ExtendedNameMessageEmailComponent implements OnInit {
   @Input() public index: number;
   @Input() public item: Record<string, any>;
+  @Input() public hasPhoneBlock: boolean;
 
   public availItemTypes = [];
   public availWidthTypes = [];
@@ -24,6 +25,13 @@ export class ExtendedNameMessageEmailComponent implements OnInit {
 
   public changeFormType(type) {
     this.widgetConstructorService.changeItemFormType.next({ type, index: this.index });
+  }
+
+  public blockedUnusedChars() {
+    const value = this.item.mask.value;
+    const re = /[\\\/\|\[\]\{\}\.,`~@#$%^&?!;_="<>:'a-zA-Zа-яА-Я]/g;
+
+    this.item.mask.value = value.replace(re, '');
   }
 
 }

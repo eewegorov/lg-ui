@@ -757,7 +757,7 @@
                   <app-extended-name-message-email [item]="extendedElement" [index]="extendedIndex"></app-extended-name-message-email>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'phone'">
-                  <app-extended-phone [item]="extendedElement" [index]="extendedIndex"></app-extended-phone>
+                  <app-extended-name-message-email [item]="extendedElement" [index]="extendedIndex" [hasPhoneBlock]="true"></app-extended-name-message-email>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'text'">
                   <app-extended-text [item]="extendedElement" [index]="extendedIndex"></app-extended-text>

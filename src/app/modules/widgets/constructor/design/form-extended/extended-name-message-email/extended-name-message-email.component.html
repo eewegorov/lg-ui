@@ -48,6 +48,23 @@
   </div>
 </div>
 
+<div *ngIf="hasPhoneBlock" class="row-subitem mt-3 form-ext-item__item-mask border-item">
+  <div class="formReqBl d-flex justify-content-between">
+    <label class="control-label switcher-label-xs control-label-des mt-1">
+      {{ 'widgets.form.phoneMask.titleSwitcher' | translate }}
+    </label>
+    <ui-switch
+      size="small"
+      [(ngModel)]="item.mask.enable"
+    ></ui-switch>
+  </div>
+  <div class="mt-2 pt-1 formReqBl" *ngIf="item.mask.enable">
+    <label class="control-label">{{ 'widgets.form.phoneMask.titleInput' | translate }}</label>
+    <input type="text" class="form-control" (keyup)="blockedUnusedChars()" [(ngModel)]="item.mask.value">
+    <span class="widget-small-text">{{ 'widgets.form.phoneMask.description' | translate }}</span>
+  </div>
+</div>
+
 <div class="row-subitem mt-3">
   <h3>{{ 'widgets.formExt.widthField1' | translate }}</h3>
 </div>
