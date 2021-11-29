@@ -9,6 +9,8 @@ import { WidgetConstructorService } from '../../../../services/widget-constructo
 export class ExtendedTextComponent implements OnInit {
   @Input() public index: number;
   @Input() public item: Record<string, any>;
+  @Input() public idEditable: boolean;
+  @Input() public hasPhoneBlock: boolean;
 
   public availItemTypes = [];
   public availWidthTypes = [];
@@ -28,6 +30,13 @@ export class ExtendedTextComponent implements OnInit {
 
   public idFocusOut() {
     this.widgetConstructorService.formExtIdFieldFocusOut.next();
+  }
+
+  public blockedUnusedChars() {
+    const value = this.item.mask.value;
+    const re = /[\\\/\|\[\]\{\}\.,`~@#$%^&?!;_="<>:'a-zA-Zа-яА-Я]/g;
+
+    this.item.mask.value = value.replace(re, '');
   }
 
 }

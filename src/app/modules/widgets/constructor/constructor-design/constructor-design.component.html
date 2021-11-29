@@ -748,19 +748,19 @@
             <div class="extended-container pt-3">
               <div class="border-item">
                 <ng-container *ngIf="extendedElement.type === 'email'">
-                  <app-extended-name-message-email [item]="extendedElement" [index]="extendedIndex"></app-extended-name-message-email>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'name'">
-                  <app-extended-name-message-email [item]="extendedElement" [index]="extendedIndex"></app-extended-name-message-email>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'message'">
-                  <app-extended-name-message-email [item]="extendedElement" [index]="extendedIndex"></app-extended-name-message-email>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'phone'">
-                  <app-extended-name-message-email [item]="extendedElement" [index]="extendedIndex" [hasPhoneBlock]="true"></app-extended-name-message-email>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [hasPhoneBlock]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'text'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'rating'">
                   <app-extended-rating [item]="extendedElement" [index]="extendedIndex"></app-extended-rating>

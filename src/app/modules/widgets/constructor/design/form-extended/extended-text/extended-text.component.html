@@ -25,7 +25,21 @@
 
 <div class="row-subitem mt-3 form-ext-item__item-input">
   <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.id1' | translate }}</label>
-  <input type="text" class="form-control mt-1 form-control-form-ext-id-field" (blur)="idFocusOut()" [(ngModel)]="item.idField">
+  <input
+    *ngIf="idEditable"
+    type="text"
+    class="form-control mt-1 form-control-form-ext-id-field"
+    (blur)="idFocusOut()"
+    [(ngModel)]="item.idField"
+  />
+  <input
+    *ngIf="!idEditable"
+    type="text"
+    appSelectOnClick
+    readonly
+    class="form-control mt-1 not-readonly-hand"
+    [(ngModel)]="item.idField"
+  />
   <span class="input-down-sm-lab">{{ 'widgets.formExt.mainSettings.id.example' | translate }}</span>
 </div>
 
@@ -45,6 +59,23 @@
       <span class="checkmark"></span>
     </label>
     <span class="form-check-text f-3">{{ 'widgets.formExt.mainSettings.id.useOutsideCRM' | translate }}</span>
+  </div>
+</div>
+
+<div *ngIf="hasPhoneBlock" class="row-subitem mt-3 form-ext-item__item-mask border-item">
+  <div class="formReqBl d-flex justify-content-between">
+    <label class="control-label switcher-label-xs control-label-des mt-1">
+      {{ 'widgets.form.phoneMask.titleSwitcher' | translate }}
+    </label>
+    <ui-switch
+      size="small"
+      [(ngModel)]="item.mask.enable"
+    ></ui-switch>
+  </div>
+  <div class="mt-2 pt-1 formReqBl" *ngIf="item.mask.enable">
+    <label class="control-label">{{ 'widgets.form.phoneMask.titleInput' | translate }}</label>
+    <input type="text" class="form-control" (keyup)="blockedUnusedChars()" [(ngModel)]="item.mask.value">
+    <span class="widget-small-text">{{ 'widgets.form.phoneMask.description' | translate }}</span>
   </div>
 </div>
 
@@ -74,7 +105,7 @@
   </div>
 </div>
 
-<div class="row-subitem mt-3 pt-1">
+<div *ngIf="idEditable" class="row-subitem mt-3">
   <div class="form-check">
     <label class="form-check-label">
       <input
