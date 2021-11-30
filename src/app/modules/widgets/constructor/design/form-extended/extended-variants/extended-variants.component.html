@@ -43,47 +43,48 @@
   </div>
 </div>
 
-<div class="row row-subitem mt-2">
-  <div class="col-sm-12 row-subitem-padding pt-1">
-    <label class="control-label control-label-des">{{ 'widgets.formExt.variants.title' | translate }}:</label>
-  </div>
-</div>
-<div class="row row-subitem">
-  <div class="col-sm-12 row-subitem-padding pt-1">
-    <textarea type="text" [(ngModel)]="unmappedVariants" (blur)="unmappedValue()" class="form-control" rows="5"></textarea>
-    <span class="input-down-sm-lab">{{ 'widgets.formExt.variants.description' | translate }}</span>
-  </div>
+<h3 class="mt-3">{{ 'widgets.formExt.variants.title' | translate }}</h3>
+<div class="row-subitem mt-1 border-item">
+  <textarea type="text" [(ngModel)]="unmappedVariants" (blur)="unmappedValue()" class="form-control" rows="5"></textarea>
+  <span class="input-down-sm-lab">{{ 'widgets.formExt.variants.description' | translate }}</span>
 </div>
 
-<div class="row row-subitem mt-2">
-  <div class="col-sm-12 row-subitem-padding pt-1">
-    <label class="control-label control-label-des">{{ 'widgets.formExt.variants.design' | translate }}</label>
+<div class="row-subitem mt-3">
+  <div class="row-subitem-padding mb-3">
+    <h3>Текст</h3>
   </div>
-</div>
-
-<div class="row row-subitem pt-1 mt-1">
-  <div class="col-sm-12 row-subitem-padding">
-    <h4 class="h4-text-tit control-label-des">{{ 'widgets.font.title' | translate }}:</h4>
-  </div>
-  <div class="col-sm-12 row-subitem-padding">
+  <div class="row-subitem-padding">
     <input [id]="'font-picker-ext-form' + index" type="text">
   </div>
 </div>
-<div class="row row-subitem">
-  <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
-    <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
-    <label class="control-label ml-1">px <span>{{ 'widgets.font.textSize' | translate }}</span></label>
+
+<div class="d-flex align-items-center justify-content-between mt-2">
+  <label class="control-label control-label-des">Размер</label>
+  <div class="align-items-center">
+    <div class="form-control form-control-font">
+      <input
+        type="number"
+        [(ngModel)]="item.fontSize"
+      />
+      <label>px</label>
+    </div>
   </div>
 </div>
 
-<div class="row row-subitem mt-2">
-  <div class="col-sm-6 row-subitem-padding pt-1">
-    <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.coupon.couponCallback.popupWindow.setting.color' | translate }}:</label>
+<div class="d-flex justify-content-between mt-3 border-item">
+  <label class="control-label control-label-des">Цвет</label>
+  <div class="d-flex text-right">
     <input
       [(colorPicker)]="item.colorText"
       [style.background]="item.colorText"
       [cpAlphaChannel]="'disabled'"
       [cpOutputFormat]="'hex'"
+      cpPosition="left"
+      class="color-picker-control"
+    />
+    <input
+      [(ngModel)]="item.colorText"
+      class="picker-input color"
     />
   </div>
 </div>
