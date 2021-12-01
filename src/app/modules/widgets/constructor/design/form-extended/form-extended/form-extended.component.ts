@@ -161,19 +161,6 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     const currentItem = this.widget.guiprops.formExt.model.list[index];
     this.setExtended.emit({ element: currentItem, index });
     this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
-    /*this.widget.guiprops.formExt.model.list[index].isTabOpened = !this.widget.guiprops.formExt.model.list[index].isTabOpened;
-    shouldToggle.slideToggle(500);
-    this.closeInactive(shouldToggle);
-
-    if (this.widget.guiprops.formExt.model.list[index].isTabOpened) {
-      setTimeout(() => {
-        const accordion = $('#accordion');
-        const accordionIn = $('#accordionIn');
-
-        const scrollTo = (shouldToggle.offset().top) - (accordionIn.offset().top) - 116;
-        accordion.animate({scrollTop: scrollTo}, 200, 'swing');
-      }, 800);
-    }*/
   }
 
   public highlightContentOn(index, type) {
@@ -224,16 +211,6 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     this.widget.guiprops.formExt.model.list.push(item);
     this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
     this.closeAfterAdded();
-
-    setTimeout(() => {
-      const accordion = $('#accordion');
-      const accordionIn = $('#accordionIn');
-      const newElementDOM = $('.form-ext-wrapper').find(`[data-to-ext='${this.widget.guiprops.formExt.model.list.length - 1}']`);
-      const shouldToggle = newElementDOM.find('.form-ext-item__toggled-wrapper');
-
-      const scrollTo = (shouldToggle.offset().top) - (accordionIn.offset().top) - 116;
-      accordion.animate({scrollTop: scrollTo}, 200, 'swing');
-    }, 800);
   }
 
   public isFieldSettings() {

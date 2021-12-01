@@ -2,11 +2,12 @@
   <div class="input-group date timer-datepicker-block" id="datetimepicker" data-target-input="nearest" NgTempusdominusBootstrap>
     <input
       data-target="#datetimepicker"
-      [options]="options"
       NgTempusdominusBootstrapInput
+      NgTempusdominusBootstrapToggle
       type="text"
       class="form-control datetimepicker-input"
-      [style]="'background: ' + st.rgbaInputForm + ';color: ' + st.colorTitleInputForm + ';border-radius: ' + st.borderRadiusInputForm + 'px;border-color: ' + st.border.color + '!important'" />
+      (change)="change()"
+      [style]="'background: ' + st.rgbaInputForm + ';color: ' + st.colorTitleInputForm + ';border-radius: ' + st.borderRadiusInputForm + 'px;border-color: ' + st.border.color"
     />
     <label [style]="'color: ' + st.colorTitleInputForm">{{ item.placeholder }}</label>
   </div>
