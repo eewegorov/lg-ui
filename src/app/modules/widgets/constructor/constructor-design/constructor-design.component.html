@@ -778,7 +778,7 @@
                   <app-extended-title [item]="extendedElement" [index]="extendedIndex"></app-extended-title>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'term'">
-                  <app-extended-term [item]="extendedElement" [index]="extendedIndex"></app-extended-term>
+                  <app-extended-title [item]="extendedElement" [index]="extendedIndex" [isTerm]="true"></app-extended-title>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'button'">
                   <app-extended-button [item]="extendedElement" [containerId]="widget.containerId" [index]="extendedIndex"></app-extended-button>

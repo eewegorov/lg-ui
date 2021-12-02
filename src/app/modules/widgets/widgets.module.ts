@@ -64,7 +64,6 @@ import { ExtendedDatepickerComponent } from './constructor/design/form-extended/
 import { ExtendedDdComponent } from './constructor/design/form-extended/extended-dd/extended-dd.component';
 import { ExtendedDdwComponent } from './constructor/design/form-extended/extended-ddw/extended-ddw.component';
 import { ExtendedHiddenComponent } from './constructor/design/form-extended/extended-hidden/extended-hidden.component';
-import { ExtendedTermComponent } from './constructor/design/form-extended/extended-term/extended-term.component';
 import { ExtendedTextComponent } from './constructor/design/form-extended/extended-text/extended-text.component';
 import { ExtendedTitleComponent } from './constructor/design/form-extended/extended-title/extended-title.component';
 import { ExtendedVariantsComponent } from './constructor/design/form-extended/extended-variants/extended-variants.component';
@@ -123,7 +122,6 @@ import { ElementsAddComponent } from './shared/elements-add/elements-add.compone
     ExtendedDdComponent,
     ExtendedDdwComponent,
     ExtendedHiddenComponent,
-    ExtendedTermComponent,
     ExtendedTextComponent,
     ExtendedTitleComponent,
     ExtendedVariantsComponent,

@@ -10,6 +10,7 @@ import { WidgetConstructorService } from '../../../../services/widget-constructo
 export class ExtendedTitleComponent implements OnInit, DoCheck, AfterViewInit {
   @Input() public index: number;
   @Input() public item: Record<string, any>;
+  @Input() public isTerm: boolean;
 
   public availItemTypes = [];
   public availWidthTypes = [];
@@ -18,6 +19,14 @@ export class ExtendedTitleComponent implements OnInit, DoCheck, AfterViewInit {
     floor: 0.00,
     ceil: 1.00,
     step: 0.1,
+    animate: false,
+    showSelectionBar: true
+  };
+
+  public optionsSharpness: Options = {
+    floor: 0,
+    ceil: 100,
+    step: 1,
     animate: false,
     showSelectionBar: true
   };

@@ -1,119 +1,176 @@
-<div class="row row-subitem mt-2">
-  <div class="col-sm-12 row-subitem-padding pt-1">
-    <label class="control-label control-label-des">{{ 'widgets.formExt.choseTypeOfItem' | translate }}:</label>
-    <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-        {{ item.label }}
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li role="presentation" *ngFor="let itemForm of availItemTypes" (click)="changeFormType(itemForm.type)">
-          <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
-        </li>
-      </ul>
-    </div>
+<div class="row-subitem">
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+      {{ item.label }}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li role="presentation" *ngFor="let itemForm of availItemTypes" (click)="changeFormType(itemForm.type)">
+        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
+      </li>
+    </ul>
   </div>
 </div>
 
-<div class="row row-subitem pt-1 mt-2">
-  <div class="col-sm-12 row-subitem-padding">
-    <h4 class="h4-text-tit control-label-des">{{ 'widgets.font.title' | translate }}:</h4>
+<div class="row-subitem mt-3">
+  <div class="row-subitem-padding">
+    <h3>{{ 'widgets.font.title' | translate }}</h3>
   </div>
-  <div class="col-sm-12 row-subitem-padding">
+  <div class="row-subitem-padding mt-2">
     <input [id]="'font-picker-ext-form' + index" type="text">
   </div>
 </div>
-<div class="row row-subitem">
-  <div class="col-sm-12 row-subitem-padding pt-1 mt-2">
-    <input type="number" class="form-control form-control-font form-cntrl-45w" [(ngModel)]="item.fontSize">
-    <label class="control-label ml-1">px <span>{{ 'widgets.font.textSize' | translate }}</span></label>
+
+<div class="d-flex align-items-center justify-content-between mt-2 border-item">
+  <label class="control-label control-label-des">Размер</label>
+  <div class="align-items-center">
+    <div class="form-control form-control-font">
+      <input
+        type="number"
+        [(ngModel)]="item.fontSize"
+      />
+      <label>px</label>
+    </div>
   </div>
 </div>
 
-<div class="row row-subitem mt-2">
-  <div class="col-sm-12 row-subitem-padding pt-1 d-flex">
+<div class="border-item">
+  <div class="d-flex row-subitem justify-content-between w-100 mt-3">
+    <label class="control-label switcher-label-xs control-label-des">
+      Тень
+    </label>
     <ui-switch
       size="small"
       [(ngModel)]="item.textShadow.enable"
-    ></ui-switch><label class="control-label switcher-label-xs control-label-des mt-1 ml-2">{{ 'widgets.formExt.mainSettings.text.shadow.add' | translate }}</label>
+    ></ui-switch>
   </div>
-</div>
-<div *ngIf="item.textShadow.enable">
-  <div class="row row-subitem">
-    <div class="col-sm-5 row-subitem-padding pt-1 mr-3">
-      <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.text.shadow.color' | translate }}:</label>
-      <input
-        [(colorPicker)]="item.textShadow.color"
-        [style.background]="item.textShadow.color"
-        [cpAlphaChannel]="'disabled'"
-        [cpOutputFormat]="'hex'"
-        class="w-100"
-      />
-    </div>
-    <div class="col-sm-6 row-subitem-padding pt-1 side-ui-dev">
-      <label class="control-label control-label-colorpc control-label-des">{{ 'widgets.formExt.mainSettings.text.shadow.opacity' | translate }}:</label>
-      <ngx-slider [(value)]="item.textShadow.opacity" [options]="optionsOpacity"></ngx-slider>
-    </div>
-  </div>
-  <div class="row row-subitem mt-1">
-    <div class="col-sm-5 row-subitem-padding pt-1 mr-3 d-flex flex-column">
-      <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.text.shadow.horiz' | translate }}:</label>
-      <input type="number" class="form-control form-control-font form-control-block form-cntrl-45w" [(ngModel)]="item.textShadow.horiz">
-    </div>
-    <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
-      <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.text.shadow.vert' | translate }}:</label>
-      <input type="number" class="form-control form-control-font form-control-block form-cntrl-45w" [(ngModel)]="item.textShadow.vertical">
-    </div>
-  </div>
-  <div class="row row-subitem mt-1">
-    <div class="col-sm-6 row-subitem-padding pt-1 d-flex flex-column">
-      <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.text.shadow.blur' | translate }}:</label>
-      <input type="number" class="form-control form-control-font form-control-block form-cntrl-45w" [(ngModel)]="item.textShadow.blur">
-    </div>
-  </div>
-</div>
 
-<div class="row row-subitem mt-2">
-  <div class="col-sm-12 row-subitem-padding pt-1">
-    <label class="control-label control-label-des">{{ 'widgets.formExt.widthField1' | translate }}:</label>
-  </div>
-</div>
-<div class="row row-subitem">
-  <div class="col-sm-12 row-subitem-padding pt-1">
-    <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
-      <div>
-        <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthValue">
-      </div>
-
-      <div>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{ item.widthType.label }}
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li role="presentation" *ngFor="let itemWidth of availWidthTypes" (click)="item.widthType = itemWidth">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemWidth.label }}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row row-subitem mt-2">
-  <div class="col-sm-12 row-subitem-padding pt-1">
-    <div class="form-check">
-      <label class="form-check-label">
+  <div *ngIf="item.textShadow.enable">
+    <div class="d-flex justify-content-between mt-3 pt-1">
+      <label class="control-label control-label-des">Цвет</label>
+      <div class="text-right">
         <input
-          type="checkbox"
-          [(ngModel)]="item.newLine"
-          class="form-check-input"
+          [(colorPicker)]="item.textShadow.color"
+          [style.background]="item.textShadow.color"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          cpPosition="left"
+          class="color-picker-control"
         />
-        <span class="checkmark"></span>
-      </label>
-      {{ 'widgets.formExt.newLineField' | translate }}
+        <input
+          [(ngModel)]="item.textShadow.color"
+          class="picker-input color"
+        />
+      </div>
     </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <h5 class="label-style-ic control-label-des">Прозрачность</h5>
+      <div class="d-flex text-right side-ui-sm">
+        <ngx-slider [(value)]="item.textShadow.opacity" [options]="optionsOpacity"></ngx-slider>
+        <input
+          [(ngModel)]="item.textShadow.opacity"
+          class="picker-input slider"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <label class="control-label control-label-des">Сдвиг</label>
+      <div>
+        <label class="control-label control-label-des mr-1 pr-1">X</label>
+        <input
+          type="number"
+          class="picker-input slider"
+          [(ngModel)]="item.textShadow.horiz"
+        />
+        <label class="control-label control-label-des ml-3 pl-1 mr-1 pr-1">Y</label>
+        <input
+          type="number"
+          class="picker-input slider"
+          [(ngModel)]="item.textShadow.vertical"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <label class="control-label control-label-des">Размытие</label>
+      <div class="d-flex text-right side-ui-sm">
+        <ngx-slider [(value)]="item.textShadow.blur" [options]="optionsSharpness"></ngx-slider>
+        <input
+          type="number"
+          [(ngModel)]="item.textShadow.blur"
+          class="picker-input slider"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row-subitem mt-3">
+  <h3>{{ 'widgets.formExt.widthField1' | translate }}</h3>
+</div>
+
+<div class="row-subitem mt-3 border-item">
+  <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
+    <div>
+      <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthValue">
+    </div>
+
+    <div class="ml-2 w-100">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+          {{ item.widthType.label }}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li role="presentation" *ngFor="let itemWidth of availWidthTypes" (click)="item.widthType = itemWidth">
+            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemWidth.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row-subitem mt-3">
+  <div class="form-check">
+    <label class="form-check-label">
+      <input
+        type="checkbox"
+        [(ngModel)]="item.newLine"
+        class="form-check-input"
+      />
+      <span class="checkmark"></span>
+    </label>
+    <span class="form-check-text f-3">{{ 'widgets.formExt.newLineField' | translate }}</span>
+  </div>
+</div>
+
+<div *ngIf="isTerm" class="row-subitem mt-3">
+  <div class="form-check">
+    <label class="form-check-label">
+      <input
+        type="checkbox"
+        [(ngModel)]="item.required"
+        class="form-check-input"
+      />
+      <span class="checkmark"></span>
+    </label>
+    <span class="form-check-text f-3">{{ 'widgets.formExt.enableRequire' | translate }}</span>
+  </div>
+</div>
+
+<div *ngIf="isTerm" class="row-subitem mt-3">
+  <div class="form-check">
+    <label class="form-check-label">
+      <input
+        type="checkbox"
+        [(ngModel)]="item.checked"
+        class="form-check-input"
+      />
+      <span class="checkmark"></span>
+    </label>
+    <span class="form-check-text f-3">{{ 'widgets.formExt.checkedDefault' | translate }}</span>
   </div>
 </div>
