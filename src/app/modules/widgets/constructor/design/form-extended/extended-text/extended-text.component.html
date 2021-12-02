@@ -79,6 +79,25 @@
   </div>
 </div>
 
+<div *ngIf="hasDateBlock" class="row-subitem mt-3 border-item">
+  <h3>{{ 'widgets.formExt.date.type1' | translate }}</h3>
+  <div class="dropdown mt-2 pt-1">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+      {{ item.dateType.label }}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li
+        role="presentation"
+        *ngFor="let itemType of availItemDateTypes"
+        (click)="item.dateType = itemType"
+      >
+        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemType.label }}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
 <div class="row-subitem mt-3">
   <h3>{{ 'widgets.formExt.widthField1' | translate }}</h3>
 </div>

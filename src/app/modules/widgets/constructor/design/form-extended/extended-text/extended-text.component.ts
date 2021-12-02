@@ -15,9 +15,11 @@ export class ExtendedTextComponent implements OnInit {
   @Input() public hasMultiline: boolean;
   @Input() public hasSendForm: boolean;
   @Input() public hasRating: boolean;
+  @Input() public hasDateBlock: boolean;
 
   public availItemTypes = [];
   public availWidthTypes = [];
+  public availItemDateTypes = [];
 
   constructor(private widgetConstructorService: WidgetConstructorService) { }
 
@@ -26,6 +28,7 @@ export class ExtendedTextComponent implements OnInit {
       this.availItemTypes = this.widgetConstructorService.getAvailableTypes();
     });
     this.availWidthTypes = this.widgetConstructorService.getExtFormWidthTypes();
+    this.availItemDateTypes = this.widgetConstructorService.getExtFormDateTypes();
   }
 
   public changeFormType(type) {

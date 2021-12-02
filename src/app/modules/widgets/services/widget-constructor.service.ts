@@ -263,17 +263,17 @@ export class WidgetConstructorService {
       {
         type: 0,
         label: this.translate.instant('widgets.formExt.date.type2'),
-        value: 'dd/mm/yyyy'
+        value: 'DD.MM.YYYY'
       },
       {
         type: 1,
         label: this.translate.instant('widgets.formExt.date.type3'),
-        value: 'yyyy/mm/dd'
+        value: 'YYYY.MM.DD'
       },
       {
         type: 2,
         label: this.translate.instant('widgets.formExt.date.type4'),
-        value: 'mm/dd/yyyy'
+        value: 'MM.DD.YYYY'
       }
     ];
   }

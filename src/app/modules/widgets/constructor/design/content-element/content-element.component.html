@@ -388,7 +388,11 @@
                       <!-- FORM EXT DATE -->
                       <div *ngSwitchCase="'dateFElement'" class="date-f-input-class">
                         <div class="form-ext-date-wrapper" [ngClass]="formExtClassNameFormInput(itemExt)">
-                          <app-extended-datepicker [item]="itemExt" [st]="widget.guiprops.formExt.model.mainSettings"></app-extended-datepicker>
+                          <app-extended-datepicker
+                            [dateType]="itemExt['dateType'].value"
+                            [placeholder]="itemExt.placeholder"
+                            [st]="widget.guiprops.formExt.model.mainSettings"
+                          ></app-extended-datepicker>
                         </div>
                       </div>
 

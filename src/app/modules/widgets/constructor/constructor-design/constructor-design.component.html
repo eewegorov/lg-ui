@@ -772,7 +772,7 @@
                   <app-extended-dd [item]="extendedElement" [index]="extendedIndex"></app-extended-dd>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'date'">
-                  <app-extended-date [item]="extendedElement" [index]="extendedIndex"></app-extended-date>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true" [hasPlaceholder]="true" [hasDateBlock]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'title'">
                   <app-extended-title [item]="extendedElement" [index]="extendedIndex"></app-extended-title>

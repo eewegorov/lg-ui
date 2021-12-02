@@ -60,7 +60,6 @@ import { VisualElementComponent } from './constructor/design/visual-element/visu
 import { CouponCallbackComponent } from './constructor/design/coupon-callback/coupon-callback.component';
 import { FormExtendedComponent } from './constructor/design/form-extended/form-extended/form-extended.component';
 import { ExtendedButtonComponent } from './constructor/design/form-extended/extended-button/extended-button.component';
-import { ExtendedDateComponent } from './constructor/design/form-extended/extended-date/extended-date.component';
 import { ExtendedDatepickerComponent } from './constructor/design/form-extended/extended-datepicker/extended-datepicker.component';
 import { ExtendedDdComponent } from './constructor/design/form-extended/extended-dd/extended-dd.component';
 import { ExtendedDdwComponent } from './constructor/design/form-extended/extended-ddw/extended-ddw.component';
@@ -120,7 +119,6 @@ import { ElementsAddComponent } from './shared/elements-add/elements-add.compone
     CouponCallbackComponent,
     FormExtendedComponent,
     ExtendedButtonComponent,
-    ExtendedDateComponent,
     ExtendedDatepickerComponent,
     ExtendedDdComponent,
     ExtendedDdwComponent,
