@@ -1,12 +1,12 @@
 <div class="w-datepicker" [ngClass]="{'filled': isFilled}">
-  <div class="input-group date timer-datepicker-block" id="datetimepicker" data-target-input="nearest" NgTempusdominusBootstrap>
+  <div class="input-group date timer-datepicker-block" id="datetimepicker" data-target-input="nearest" NgTempusdominusBootstrap NgTempusdominusBootstrapToggle>
     <input
       data-target="#datetimepicker"
+      [options]="options"
+      [ngModel]="null"
       NgTempusdominusBootstrapInput
-      NgTempusdominusBootstrapToggle
-      type="text"
-      class="form-control datetimepicker-input"
-      (change)="change()"
+      type="text" class="form-control datetimepicker-input"
+      (ngModelChange)="change($event)"
       [style]="'background: ' + st.rgbaInputForm + ';color: ' + st.colorTitleInputForm + ';border-radius: ' + st.borderRadiusInputForm + 'px;border-color: ' + st.border.color"
     />
     <label [style]="'color: ' + st.colorTitleInputForm">{{ item.placeholder }}</label>

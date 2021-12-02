@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-extended-datepicker',
@@ -13,22 +12,22 @@ export class ExtendedDatepickerComponent implements OnInit {
   public isFilled = false;
 
   public options: object = {
-    widgetParent: '.max-h-100',
-    locale: moment.locale('ru'),
-    showClose: false
+    useCurrent: true,
+    format: 'DD.MM.YYYY',
+    locale: 'ru',
+    widgetPositioning: { vertical: 'bottom' },
+    widgetParent: '.widget-visual-block'
   };
 
   constructor() { }
 
   ngOnInit(): void {
-    this.options = {
-      ...this.options,
-      format: this.item.dateType.value
-    };
   }
 
-  public change(): void {
-    this.isFilled = true;
+  public change($event): void {
+    if ($event) {
+      this.isFilled = true;
+    }
   }
 
 }
