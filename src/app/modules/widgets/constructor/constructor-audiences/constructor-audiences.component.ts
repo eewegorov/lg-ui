@@ -43,8 +43,8 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
       revert: false,
       appendTo: '#audiences-item',
       drag(e, ui) {
-        ui.position.top = e.pageY - 70;
-        ui.position.left = e.pageX - 200;
+        ui.position.top = e.pageY - 30;
+        ui.position.left = e.pageX - 70;
       }
     });
 
