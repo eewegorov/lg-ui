@@ -437,8 +437,9 @@
         <div
           *ngIf="currentCategory === widgetSettingsCategories[2]"
           id="autoinvite"
+          class="d-flex"
         >
-          <ng-container>
+          <div class="col-lg-8">
             <div class="col-lg-12 mt-5">
               <h3>{{ 'widgetsList.editor.autoinvite.title' | translate }} <a
                 data-toggle="tooltip" data-placement="top"
@@ -639,7 +640,10 @@
                 class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}</h5>
             </div>
             <!-- End Autoinvite: sound -->
-          </ng-container>
+          </div>
+          <div class="col-lg-4">
+            <p class="mt-5 pt-2">Виджет будет показан посетителю автоматически, в зависимости от того, какие правила вы активируете и какую логику взаимодействия между ними вы выберете.</p>
+          </div>
         </div>
 
         <!-- Section Restrictions -->
