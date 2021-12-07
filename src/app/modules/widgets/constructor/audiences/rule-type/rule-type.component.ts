@@ -29,4 +29,8 @@ export class RuleTypeComponent implements OnInit {
     this.add.emit(item);
   }
 
+  public checkSelected(index: number): number {
+    return this.item.subitems.findIndex(subitem => subitem.value === index);
+  }
+
 }

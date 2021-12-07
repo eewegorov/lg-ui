@@ -1,38 +1,17 @@
-<div class="form-group filter-section">
-  <div *ngFor="let subitem of item.subitems; index as i" class="section-audience-row filterow">
-    <div *ngIf="i > 0" class="rule-subitem-text ml-3">{{ 'audience.rule.logic.or' | translate }}</div>
-    <div class="col-sm-12 mt-2 mb-2">
-      <div class="d-flex row-nomargined">
-        <div class="dropdown subitem-left">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{ vals.trafficTypes[subitem.value] }} <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-            <li
-              role="presentation"
-              *ngFor="let val of vals.trafficTypes; index as j"
-              (click)="subitem.value = j"
-            >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ val }}</a>
-            </li>
-          </ul>
-        </div>
-        <div class="remove-sub-item">
-          <a
-            (click)="removeSubItem(group.id, item.id, i)"
-            href="javascript:void(0);"
-          ><i class="remove-sub-item col-sm-1 pe-7s-close-circle"></i>
-          </a>
-        </div>
-      </div>
-      <div class="row small mt-1 underline-comment">
-        {{ 'audience.rule.type.underline' | translate }}
-      </div>
+<div class="filter-section">
+  <p class="mt-3">Показывать виджет пользователям, которые перешли</p>
+  <div>
+    <div *ngFor="let val of vals.trafficTypes; index as j" class="form-check">
+      <label class="form-check-label">
+        <input
+          type="checkbox"
+          [checked]="checkSelected(j) >= 0"
+          (click)="!(checkSelected(j) >= 0) ? addSubItem(item) : removeSubItem(group.id, item.id, checkSelected(j))"
+          class="form-check-input"
+        />
+        <span class="checkmark"></span>
+      </label>
+      <span class="form-check-text f-3">{{ val }}</span>
     </div>
-  </div>
-  <div *ngIf="item.subitems.length < vals.trafficTypes.length" class="text-center mt-3">
-    <a href="javascript:void(0);" (click)="addSubItem(item)">
-      {{ 'audience.variant.add' | translate }}
-    </a>
   </div>
 </div>
