@@ -51,8 +51,16 @@ h3 {
 }
 
 .rule-groups-text {
+  display: flex;
+  justify-content: center;
   font-size: 13px;
   padding: 10px 0px;
+
+  span {
+    border: 1px solid #D4D7DD;
+    border-radius: 12px;
+    padding: 0 10px;
+  }
 }
 
 .rule-block {

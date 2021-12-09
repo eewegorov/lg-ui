@@ -96,7 +96,7 @@
                   <h1 *ngSwitchDefault>ERROR!</h1>
                 </div>
               </div>
-              <div class="rule-groups-text">{{ 'audience.rule.logic.or' | translate }}</div>
+              <div class="rule-groups-text"><span>{{ 'audience.rule.logic.or' | translate }}</span></div>
             </div>
 
             <div
@@ -111,7 +111,7 @@
               </div>
             </div>
             <div *ngIf="i === widget.audience.groups.length - 1">
-              <div class="rule-groups-text rule-groups-text-ok">{{ 'audience.rule.logic.and' | translate }}</div>
+              <div class="rule-groups-text rule-groups-text-ok"><span>{{ 'audience.rule.logic.and' | translate }}</span></div>
               <div
                 class="rule-container rule-container-ok"
                 appDropContainer

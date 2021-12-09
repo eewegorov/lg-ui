@@ -297,6 +297,12 @@ button.widget-content-add-btn {
   }
 }
 
+.widget-content-add-btn {
+  width: auto !important;
+  margin: 0 !important;
+  padding: 7px 10px;
+}
+
 .widget-content-add-btn:hover {
   opacity: 0.9;
 }
