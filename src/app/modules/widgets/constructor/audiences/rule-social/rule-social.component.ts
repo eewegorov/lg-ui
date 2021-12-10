@@ -11,7 +11,7 @@ export class RuleSocialComponent implements OnInit {
   @Input() public item: AudienceGroupItem;
   @Input() public group: AudienceGroup;
 
-  @Output() private remove = new EventEmitter<{groupId: number, itemId: number, index: number}>();
+  @Output() private remove = new EventEmitter<{groupId: number, itemType: string, index: number}>();
   @Output() private add = new EventEmitter<AudienceGroupItem>();
 
   public vals = AUDIENCES_VALS;
@@ -21,8 +21,8 @@ export class RuleSocialComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public removeSubItem(groupId: number, itemId: number, index: number): void {
-    this.remove.emit({groupId, itemId, index});
+  public removeSubItem(groupId: number, itemType: string, index: number): void {
+    this.remove.emit({groupId, itemType, index});
   }
 
   public addSubItem(item: AudienceGroupItem): void {

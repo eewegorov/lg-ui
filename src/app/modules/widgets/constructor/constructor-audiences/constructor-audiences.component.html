@@ -41,7 +41,7 @@
                     *ngSwitchCase="'devices'"
                     [item]="item"
                     [group]="group"
-                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
                     (add)="addSubItem($event)"
                   ></app-rule-devices>
 
@@ -49,7 +49,7 @@
                     *ngSwitchCase="'refer'"
                     [item]="item"
                     [group]="group"
-                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
                     (add)="addSubItem($event)"
                   ></app-rule-refer>
 
@@ -57,7 +57,7 @@
                     *ngSwitchCase="'social'"
                     [item]="item"
                     [group]="group"
-                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
                     (add)="addSubItem($event)"
                   ></app-rule-social>
 
@@ -65,7 +65,7 @@
                     *ngSwitchCase="'type'"
                     [item]="item"
                     [group]="group"
-                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
                     (add)="addSubItem($event)"
                   ></app-rule-type>
 
@@ -73,7 +73,7 @@
                     *ngSwitchCase="'url'"
                     [item]="item"
                     [group]="group"
-                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
                     (add)="addSubItem($event)"
                   ></app-rule-url>
 
@@ -81,7 +81,7 @@
                     *ngSwitchCase="'visit'"
                     [item]="item"
                     [group]="group"
-                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
                     (add)="addSubItem($event)"
                   ></app-rule-visit>
 
@@ -89,7 +89,7 @@
                     *ngSwitchCase="'visitno'"
                     [item]="item"
                     [group]="group"
-                    (remove)="removeSubItem($event.groupId, $event.itemId, $event.index)"
+                    (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
                     (add)="addSubItem($event)"
                   ></app-rule-visit-no>
 

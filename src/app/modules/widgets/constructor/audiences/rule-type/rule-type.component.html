@@ -6,7 +6,7 @@
         <input
           type="checkbox"
           [checked]="checkSelected(j) >= 0"
-          (click)="!(checkSelected(j) >= 0) ? addSubItem(item, j) : removeSubItem(group.id, item.id, checkSelected(j))"
+          (click)="!(checkSelected(j) >= 0) ? addSubItem(item, j) : removeSubItem(group.id, item.type, checkSelected(j))"
           class="form-check-input"
         />
         <span class="checkmark"></span>

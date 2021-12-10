@@ -11,7 +11,7 @@ export class RuleVisitComponent implements OnInit {
   @Input() public item: AudienceGroupItem;
   @Input() public group: AudienceGroup;
 
-  @Output() private remove = new EventEmitter<{groupId: number, itemId: number, index: number}>();
+  @Output() private remove = new EventEmitter<{groupId: number, itemType: string, index: number}>();
   @Output() private add = new EventEmitter<AudienceGroupItem>();
 
   public vals = AUDIENCES_VALS;
@@ -21,12 +21,18 @@ export class RuleVisitComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public removeSubItem(groupId: number, itemId: number, index: number): void {
-    this.remove.emit({groupId, itemId, index});
+  public removeSubItem(groupId: number, itemType: string, index: number): void {
+    if (this.item.subitems.length <= 1) { return; }
+    this.remove.emit({groupId, itemType, index});
   }
 
-  public addSubItem(item: AudienceGroupItem): void {
+  public addSubItem(item: AudienceGroupItem, index: number): void {
     this.add.emit(item);
+    this.item.subitems[this.item.subitems.length - 1].value = index;
+  }
+
+  public checkSelected(index: number): number {
+    return this.item.subitems.findIndex(subitem => subitem.value === index);
   }
 
 }

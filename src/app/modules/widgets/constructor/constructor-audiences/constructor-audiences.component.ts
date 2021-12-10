@@ -78,12 +78,12 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public removeSubItem(groupId: number, itemId: number, index: number): void {
+  public removeSubItem(groupId: number, itemType: string, index: number): void {
     for (const item of this.widget.audience.groups) {
       if (item.id === groupId) {
 
         for (let j = 0; j < item.items.length; j++) {
-          if (item.items[j].id === itemId) {
+          if (item.items[j].type === itemType) {
             item.items[j].subitems =
               this.widgetConstructorService.removeFromArray(item.items[j].subitems, index);
 
