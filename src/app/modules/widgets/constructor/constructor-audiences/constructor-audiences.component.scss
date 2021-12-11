@@ -9,6 +9,11 @@
   margin-bottom: 20px;
 }
 
+.rules-container {
+  max-height: calc(100vh - 160px);
+  overflow: auto;
+}
+
 h3 {
   font-size: 24px;
   font-weight: bold;

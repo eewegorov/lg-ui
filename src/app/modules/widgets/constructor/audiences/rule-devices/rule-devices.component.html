@@ -1,38 +1,16 @@
-<div class="form-group filter-section">
-  <div *ngFor="let subitem of item.subitems; index as i" class="section-audience-row filterow">
-    <div *ngIf="i > 0" class="rule-subitem-text ml-3">{{ 'audience.rule.logic.or' | translate }}</div>
-    <div class="col-sm-12 mt-2 mb-2">
-      <div class="d-flex row-nomargined">
-        <div class="dropdown subitem-left">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{ vals.deviceList[subitem.value] }} <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-            <li
-              role="presentation"
-              *ngFor="let val of vals.deviceList; index as j"
-              (click)="subitem.value = j"
-            >
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ val }}</a>
-            </li>
-          </ul>
-        </div>
-        <div class="remove-sub-item">
-          <a
-            (click)="removeSubItem(group.id, item.type, i)"
-            href="javascript:void(0);"
-          ><i class="remove-sub-item col-sm-1 pe-7s-close-circle"></i>
-          </a>
-        </div>
-      </div>
-      <div class="row small mt-1 underline-comment">
-        {{ 'audience.rule.devices.underline' | translate }}
-      </div>
+<div class="filter-section">
+  <div class="d-flex justify-content-between w-75">
+    <div *ngFor="let val of vals.deviceList; index as j" class="form-check mt-4">
+      <label class="form-check-label">
+        <input
+          type="checkbox"
+          [checked]="checkSelected(j) >= 0"
+          (click)="!(checkSelected(j) >= 0) ? addSubItem(item, j) : removeSubItem(group.id, item.type, checkSelected(j))"
+          class="form-check-input"
+        />
+        <span class="checkmark"></span>
+      </label>
+      <span class="form-check-text">{{ val }}</span>
     </div>
-  </div>
-  <div *ngIf="item.subitems.length < vals.deviceList.length" class="text-center mt-3">
-    <a href="javascript:void(0);" (click)="addSubItem(item)">
-      {{ 'audience.variant.add' | translate }}
-    </a>
   </div>
 </div>
