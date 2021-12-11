@@ -59,7 +59,7 @@
               <input type="text" class="form-control" aria-label="" [(ngModel)]="subitem.value">
             </div>
             <div class="remove-sub-item">
-              <button class="delete-element-button" (click)="removeSubItem(group.id, item.type, i)">&times;</button>
+              <button class="delete-element-button" (click)="removeSubItem(group.id, item.type, i, $event)">&times;</button>
             </div>
           </div>
           <div class="d-flex justify-content-between small row-subitem-underline">

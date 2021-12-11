@@ -21,12 +21,18 @@ export class RuleSocialComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public removeSubItem(groupId: number, itemType: string, index: number): void {
+  public removeSubItem(groupId: number, itemType: string, index: number, event: Event): void {
+    if (this.item.subitems.length <= 1) { event.preventDefault(); return; }
     this.remove.emit({groupId, itemType, index});
   }
 
-  public addSubItem(item: AudienceGroupItem): void {
+  public addSubItem(item: AudienceGroupItem, index: number): void {
     this.add.emit(item);
+    this.item.subitems[this.item.subitems.length - 1].value = index;
+  }
+
+  public checkSelected(index: number): number {
+    return this.item.subitems.findIndex(subitem => subitem.value === index);
   }
 
 }

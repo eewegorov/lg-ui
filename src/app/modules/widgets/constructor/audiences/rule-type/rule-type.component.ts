@@ -21,9 +21,8 @@ export class RuleTypeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public removeSubItem(groupId: number, itemType: string, index: number): void {
-    if (this.item.subitems.length <= 1) { return; }
-
+  public removeSubItem(groupId: number, itemType: string, index: number, event: Event): void {
+    if (this.item.subitems.length <= 1) { event.preventDefault(); return; }
     this.remove.emit({groupId, itemType, index});
   }
 
