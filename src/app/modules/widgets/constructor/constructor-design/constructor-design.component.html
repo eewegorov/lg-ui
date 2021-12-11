@@ -916,7 +916,7 @@
       <div class="modal-content">
         <div class="modal-header justify-content-center">
           <h4>Добавить элемент</h4>
-          <button type="button" class="close" aria-label="Close" (click)="addElementModalHide()">
+          <button type="button" class="close" aria-label="Close" data-dismiss="modal" (click)="addElementModalHide()">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -954,12 +954,14 @@
     <div class="modal-dialog">
       <div class="dragAndDropFilter"></div>
       <div class="modal-content">
-        <div class="color-line"></div>
-        <div class="modal-header text-center">
-          <h4 class="modal-title">Мои изображения</h4>
+        <div class="modal-header justify-content-center">
+          <h4>Мои изображения</h4>
+          <button type="button" class="close" aria-label="Close" data-dismiss="modal" (click)="closeModalImg()">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
         <div class="modal-body">
-          <h4>Загруженные изображения</h4>
+          <h4 class="f-2">Загруженные изображения</h4>
           <div class="row row-nomargined">
             <div id="listImagesBlock" class="col-lg-12 mt-2"></div>
           </div>

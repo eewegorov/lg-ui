@@ -910,7 +910,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       this.addElemFromWidget = false;
     }
 
-    (this.controls.newElementModal as any).modal('show');
+    (this.controls.newElementModal as any).appendTo('body').modal('show');
     $('body').addClass('modal-open-h100');
   }
 
@@ -1621,10 +1621,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       this.imageCustom = false;
     }
 
-    const listUrl = `/imagestore${this.sid}`;
+    const listUrl = `sites/${this.sid}/images`;
     this.listFileToUrl(listUrl);
 
-    (this.controls.newModal as any).modal('show');
+    (this.controls.newModal as any).appendTo('body').modal('show');
     $('body').addClass('modal-open-h100');
   }
 
@@ -1635,13 +1635,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   private fillListImage(data) {
-    if (data[1].length === 0) {
+    if (data.images.length === 0) {
       $('#addNewWidgetListModal .modal-body').find('h4').html('У вас еще нет загруженных изображений');
     } else {
       $('#addNewWidgetListModal .modal-body').find('h4').html('Загруженные изображения');
     }
 
-    const response = data[1];
+    const response = data.images;
     $('#listImagesBlock').html('');
     for (const item of response) {
       const link = item.link.replace('imaginarium', 'imaginarium');
