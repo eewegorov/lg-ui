@@ -24,7 +24,7 @@ h5 {
 
 .settings-categories {
   width: 20%;
-  margin-right: 35px;
+  margin-right: 25px;
 }
 
 .settings-container {
@@ -162,4 +162,10 @@ input.radio-left {
 
 .row-subitem-padding {
   padding-right: 20px;
+}
+
+.round-button {
+  border-radius: 20px;
+  margin: 0 7px;
+  padding: 0 10px;
 }

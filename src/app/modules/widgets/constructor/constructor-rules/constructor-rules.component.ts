@@ -21,7 +21,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
 
   public weekDays = [];
   public loop = Array.from({length: 20}, (_, i) => i + 1);
-  public autoinviteVariants = ['при соблюдении ВСЕХ активированных правил', 'при соблюдении ЛЮБОГО ИЗ активированных правил'];
+  public autoinviteVariants = ['всех', 'любого из'];
   public restrictionsGaps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 18, 20, 24, 36, 48, 72];
   public units = {
     SEC: this.translate.instant('global.unit.seconds'),
