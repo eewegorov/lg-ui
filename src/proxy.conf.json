@@ -1,11 +1,11 @@
 {
   "/oauth/*": {
-    "target": "http://app.leadgenic.local",
+    "target": "http://app-dev.leadgenic.ru",
     "secure": false,
     "changeOrigin": true
   },
   "/api/*": {
-    "target": "http://app.leadgenic.local",
+    "target": "http://app-dev.leadgenic.ru",
     "secure": false,
     "changeOrigin": true
   }
