@@ -168,7 +168,8 @@
                   class="info-link"><i class="far fa-question-circle"></i></a>
               </h4>
 
-              <ui-switch size="small" [(ngModel)]="widget.rules['prevPages'].enable" (change)="onChangePayment"></ui-switch>
+              <ui-switch size="small" [(ngModel)]="widget.rules['prevPages'].enable"
+                         (change)="onChangePayment"></ui-switch>
             </div>
 
             <ng-container *ngIf="widget.rules['prevPages']?.enable">
@@ -364,7 +365,8 @@
             <div class="d-flex justify-content-between align-items-center">
               <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.days.header' | translate }} <span
                 class="label label-warning tariff-info">окупаемый</span> <a
-                data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.rules.days.title' | translate }}"
+                data-toggle="tooltip" data-placement="top"
+                title="{{ 'widgetsList.editor.rules.days.title' | translate }}"
                 class="info-link"><i class="far fa-question-circle"></i></a>
               </h4>
 
@@ -449,7 +451,8 @@
                 {{ 'widgetsList.editor.autoinvite.variants.title1' | translate }}
               </label>
               <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle round-button" type="button" data-toggle="dropdown" aria-expanded="true">
+                <button class="btn btn-default dropdown-toggle round-button" type="button" data-toggle="dropdown"
+                        aria-expanded="true">
                   {{ widget.autoinvite.ruleLogic }}
                   <span class="caret"></span>
                 </button>
@@ -475,7 +478,8 @@
                   <span class="label label-warning tariff-info ml-2">окупаемый</span>
                 </h4>
 
-                <ui-switch size="small" [(ngModel)]="widget.autoinvite.pages.enable" (change)="onChangePayment"></ui-switch>
+                <ui-switch size="small" [(ngModel)]="widget.autoinvite.pages.enable"
+                           (change)="onChangePayment"></ui-switch>
               </div>
 
               <div
@@ -503,7 +507,8 @@
             <!-- Autoinvite: seconds -->
             <div class="border-item mt-3">
               <div class="d-flex justify-content-between align-items-center">
-                <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}</h4>
+                <h4
+                  class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}</h4>
 
                 <ui-switch size="small" [(ngModel)]="widget.autoinvite.seconds.enable"></ui-switch>
               </div>
@@ -530,7 +535,8 @@
                   <span class="label label-warning tariff-info ml-2">окупаемый</span>
                 </h4>
 
-                <ui-switch size="small" [(ngModel)]="widget.autoinvite.inactive.enabled" (change)="onChangePayment"></ui-switch>
+                <ui-switch size="small" [(ngModel)]="widget.autoinvite.inactive.enabled"
+                           (change)="onChangePayment"></ui-switch>
               </div>
 
               <div
@@ -555,7 +561,8 @@
                   <span class="label label-warning tariff-info ml-2">окупаемый</span>
                 </h4>
 
-                <ui-switch size="small" [(ngModel)]="widget.autoinvite.percent.enable" (change)="onChangePayment"></ui-switch>
+                <ui-switch size="small" [(ngModel)]="widget.autoinvite.percent.enable"
+                           (change)="onChangePayment"></ui-switch>
               </div>
 
               <div
@@ -575,7 +582,8 @@
             <!-- Autoinvite: click -->
             <div class="border-item mt-3">
               <div class="d-flex justify-content-between align-items-center">
-                <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.click.enable' | translate }}</h4>
+                <h4
+                  class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.click.enable' | translate }}</h4>
 
                 <ui-switch size="small" [(ngModel)]="widget.autoinvite.click.enable"></ui-switch>
               </div>
@@ -656,7 +664,8 @@
             <!-- End Autoinvite: sound -->
           </div>
           <div class="col-lg-4">
-            <p class="mt-5 pt-2">Виджет будет показан посетителю автоматически, в зависимости от того, какие правила вы активируете и какую логику взаимодействия между ними вы выберете.</p>
+            <p class="mt-5 pt-2">Виджет будет показан посетителю автоматически, в зависимости от того, какие правила вы
+              активируете и какую логику взаимодействия между ними вы выберете.</p>
           </div>
         </div>
 
@@ -669,48 +678,50 @@
           <h1>{{ 'widgetsList.editor.section.block' | translate }}</h1>
 
           <h4 class="widgets-settings-subtitle pt-4">
-            {{ 'widgetsList.editor.restrictions.title' | translate }} <span class="label label-warning tariff-info ml-1">окупаемый</span>
+            {{ 'widgetsList.editor.restrictions.title' | translate }} <span
+            class="label label-warning tariff-info ml-2">окупаемый</span>
           </h4>
 
-          <div class="mt-3">
+          <div class="d-flex mt-3">
             <input
               type="radio"
-              class="radio-left"
+              class="radio-left mt-0"
               name="restrictions"
               [value]="1"
               [(ngModel)]="widget.restrictions.target.mode"
               (ngModelChange)="onRestrictionModeChange()"
             >
-            <label class="control-label switcher-label switcher-label-xs ml-1 mt-2">
+            <label class="control-label switcher-label ml-1">
               {{ 'widgetsList.editor.restrictions.disable.title' | translate }}
             </label>
           </div>
-          <div class="mt-1">
+          <div class="d-flex mt-2">
             <input
               type="radio"
-              class="radio-left"
+              class="radio-left mt-0"
               name="restrictions"
               [value]="2"
               [(ngModel)]="widget.restrictions.target.mode"
               (ngModelChange)="onRestrictionModeChange()"
             >
-            <label class="control-label switcher-label switcher-label-xs ml-1 mt-2">
+            <label class="control-label switcher-label ml-1">
               {{ 'widgetsList.editor.restrictions.enable.title' | translate }}
             </label>
           </div>
-          <div class="mt-1">
+          <div class="d-flex mt-2 border-item">
             <input
               type="radio"
-              class="radio-left"
+              class="radio-left mt-0"
               name="restrictions"
               [value]="0"
               [(ngModel)]="widget.restrictions.target.mode"
             >
-            <label class="control-label switcher-label switcher-label-xs ml-1 mt-2">
+            <label class="control-label switcher-label ml-1">
               {{ 'widgetsList.editor.restrictions.ontime.title' | translate }}
             </label>
           </div>
-          <div class="mt-2 mb-4 pb-4" *ngIf="widget.restrictions.target?.mode == 0">
+
+          <div class="mt-3" *ngIf="widget.restrictions.target?.mode == 0">
             <div class="time-settings-fromto">
               {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
             </div>
@@ -733,14 +744,14 @@
               {{ 'widgetsList.editor.restrictions.hours' | translate }}
             </div>
           </div>
-          <div class="col-lg-12 mt-3 pt-1">
+          <div class="mt-3">
             <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.restrictions.title2' | translate }} <a
               data-toggle="tooltip" data-placement="top"
               title="{{ 'widgetsList.editor.restrictions.autoinvite.tooltip' | translate }}"
               class="info-link"><i class="fa fa-info-circle"></i></a></h4>
           </div>
           <!-- Restrictions.autoinvite -->
-          <div class="col-lg-12 mt-2 pt-2 d-flex align-items-baseline">
+          <div class="d-flex align-items-baseline mt-3">
             <div class="form-check">
               <label class="form-check-label">
                 <input
@@ -757,7 +768,7 @@
               {{ 'widgetsList.editor.restrictions.autoinvite.text' | translate }}<br/>
             </h5>
           </div>
-          <div *ngIf="widget.restrictions.autoinvite?.enable" class="col-lg-12 mb-2 pb-5 width-900">
+          <div *ngIf="widget.restrictions.autoinvite?.enable" class="mt-3 width-900">
             <div class="time-settings-fromto">
               {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
             </div>
@@ -770,7 +781,7 @@
           <!-- End restrictions.autoinvite -->
 
           <!-- Restrictions.unique -->
-          <div *ngIf="widget.restrictions.unique" class="col-lg-12 mt-1 d-flex align-items-baseline">
+          <div *ngIf="widget.restrictions.unique" class="d-flex align-items-baseline mt-3">
             <div class="form-check">
               <label class="form-check-label">
                 <input
@@ -800,7 +811,7 @@
           <!-- END Restrictions.unique -->
 
           <!-- Restrictions.lockAfterAction -->
-          <div *ngIf="widget.restrictions.action" class="col-lg-12 mt-1 d-flex align-items-baseline">
+          <div *ngIf="widget.restrictions.action" class="d-flex align-items-baseline mt-3">
             <div class="form-check">
               <label class="form-check-label">
                 <input
@@ -819,7 +830,7 @@
               {{ 'widgets.settings.lockAfterAction.title' | translate }}<span class="label label-warning tariff-info">окупаемый</span><br/>
             </h5>
           </div>
-          <div *ngIf="widget.restrictions?.action?.enable" class="col-lg-12 mb-2 pb-5 width-900">
+          <div *ngIf="widget.restrictions?.action?.enable" class="width-900 mt-3">
             <div class="time-settings-fromto">
               {{ 'widgets.settings.lockAfterAction.lock1' | translate }}:
             </div>
@@ -832,7 +843,7 @@
           <!-- END Restrictions.lockAfterAction -->
 
           <!-- Restrictions.count -->
-          <div *ngIf="widget.restrictions.count" class="col-lg-12 mt-1 d-flex align-items-baseline">
+          <div *ngIf="widget.restrictions.count" class="d-flex align-items-baseline mt-3">
             <div class="form-check">
               <label class="form-check-label">
                 <input
@@ -852,7 +863,7 @@
               class="label label-warning tariff-info ">окупаемый</span><br/>
             </h5>
           </div>
-          <div *ngIf="widget.restrictions.count?.enable" class="col-lg-12 mb-2 pb-4">
+          <div *ngIf="widget.restrictions.count?.enable" class="mt-3">
             <div class="time-settings-fromto">
               {{ 'widgetsList.editor.restrictions.count.part1' | translate }}
             </div>
@@ -895,111 +906,105 @@
         *ngIf="(!isContainerized && (currentCategory === widgetSettingsCategories[4])) || (isContainerized && (currentCategory === widgetSettingsCategories[2]))"
         id="autoresponder"
       >
-        <ng-container>
-          <div class="col-lg-12 mt-4">
-            <h3>{{ 'widgetsList.editor.section.autoresponder' | translate }} <a
-              data-toggle="tooltip" data-placement="top"
-              title="{{ 'widgetsList.editor.autoresponder.tooltip' | translate }}"
-              class="info-link"><i class="fa fa-info-circle"></i></a>
-            </h3>
-          </div>
-          <div class="col-lg-12 d-flex mt-1">
-            <ui-switch size="small" [(ngModel)]="widget.autoresponder.enabled"
-            ></ui-switch>
-            <h5
-              class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.autoresponder.enable' | translate }}</h5>
-          </div>
-          <div *ngIf="widget.autoresponder?.enabled" class="col-lg-12 mt-1 mb-1">
-            <div
-              class="audience-tooolbar-desc underline-links blue-links hover-links"
-              [innerHTML]="'widgets.coupon.autoresponder' | translate"
-            ></div>
-          </div>
+        <h1>{{ 'widgetsList.editor.section.autoresponder' | translate }} <a
+          data-toggle="tooltip" data-placement="top"
+          title="{{ 'widgetsList.editor.autoresponder.tooltip' | translate }}"
+          class="info-link"><i class="fa fa-info-circle"></i></a>
+        </h1>
+        <div class="d-flex mt-1">
+          <ui-switch size="small" [(ngModel)]="widget.autoresponder.enabled"
+          ></ui-switch>
+          <h5
+            class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.section.autoresponder' | translate }}</h5>
+        </div>
+        <div *ngIf="widget.autoresponder?.enabled" class="mt-1 mb-1">
           <div
-            *ngIf="widget.autoresponder?.enabled"
-            class="col-lg-12 mt-2"
-            [ngClass]="(widget.autoresponder.subject?.toString().trim().length < 1) ? 'is-invalid' : ''"
-          >
-            <label class="control-label">{{ 'widgetsList.editor.autoresponder.subject' | translate }}:</label>
-            <input class="form-control width-900" [(ngModel)]="widget.autoresponder.subject">
-          </div>
-          <div
-            *ngIf="widget.autoresponder?.enabled"
-            class="col-lg-12 mt-2 width-900"
-            [ngClass]="(widget.autoresponder.text?.toString().trim().length < 1) ? 'is-invalid' : ''"
-          >
-            <label class="control-label">{{ 'widgetsList.editor.autoresponder.text' | translate }}:</label>
-            <angular-editor class="width-900" placeholder="" [(ngModel)]="widget.autoresponder.text"></angular-editor>
-          </div>
-          <!-- End autoresponder -->
-        </ng-container>
+            class="audience-tooolbar-desc underline-links blue-links hover-links"
+            [innerHTML]="'widgets.coupon.autoresponder' | translate"
+          ></div>
+        </div>
+        <div
+          *ngIf="widget.autoresponder?.enabled"
+          class="mt-2"
+          [ngClass]="(widget.autoresponder.subject?.toString().trim().length < 1) ? 'is-invalid' : ''"
+        >
+          <label class="control-label">{{ 'widgetsList.editor.autoresponder.subject' | translate }}:</label>
+          <input class="form-control width-900" [(ngModel)]="widget.autoresponder.subject">
+        </div>
+        <div
+          *ngIf="widget.autoresponder?.enabled"
+          class="mt-2 width-900"
+          [ngClass]="(widget.autoresponder.text?.toString().trim().length < 1) ? 'is-invalid' : ''"
+        >
+          <label class="control-label">{{ 'widgetsList.editor.autoresponder.text' | translate }}:</label>
+          <angular-editor class="width-900" placeholder="" [(ngModel)]="widget.autoresponder.text"></angular-editor>
+        </div>
       </div>
+      <!-- End autoresponder -->
 
       <!-- Section JS Code Actions -->
       <div
         *ngIf="(!isContainerized && (currentCategory === widgetSettingsCategories[5])) || (isContainerized && (currentCategory === widgetSettingsCategories[3]))"
         id="javascript"
       >
-        <ng-container>
-          <!-- JS Code Actions -->
-          <div class="col-lg-12 mt-3">
-            <h3>{{ 'widgets.settings.jscode.title' | translate }}</h3>
-          </div>
-          <div class="col-lg-12 mt-2">
-            <div class="audience-tooolbar-desc" [innerHTML]="'widgets.settings.jscode.desc' | translate"></div>
-          </div>
+        <h1>{{ 'widgets.settings.jscode.title' | translate }}</h1>
 
-          <div class="col-lg-12 d-flex mt-3">
-            <ui-switch
-              size="small"
-              [(ngModel)]="widget.jsInfo.onShowScript.enable"
-            ></ui-switch>
-            <h5 class="control-label switcher-label switcher-label-xs">{{ 'widgets.settings.jscode.onShowChecker' | translate }}</h5>
-          </div>
-          <div class="col-lg-12 mt-2" *ngIf="widget.jsInfo.onShowScript.enable">
+        <div class="mt-2">
+          <div class="audience-tooolbar-desc" [innerHTML]="'widgets.settings.jscode.desc' | translate"></div>
+        </div>
+
+        <div class="d-flex mt-3">
+          <ui-switch
+            size="small"
+            [(ngModel)]="widget.jsInfo.onShowScript.enable"
+          ></ui-switch>
+          <h5
+            class="control-label switcher-label switcher-label-xs">{{ 'widgets.settings.jscode.onShowChecker' | translate }}</h5>
+        </div>
+        <div class="mt-2" *ngIf="widget.jsInfo.onShowScript.enable">
             <textarea
               class="form-control textar-iframe cons-settings-js-textarea"
               [(ngModel)]="widget.jsInfo.onShowScript.script"
             ></textarea>
-          </div>
+        </div>
 
-          <div class="col-lg-12 d-flex mt-3">
-            <ui-switch
-              size="small"
-              [(ngModel)]="widget.jsInfo.onTargetScript.enable"
-            ></ui-switch>
-            <h5 class="control-label switcher-label switcher-label-xs">{{ 'widgets.settings.jscode.onActionChecker' | translate }}</h5>
+        <div class="d-flex mt-3">
+          <ui-switch
+            size="small"
+            [(ngModel)]="widget.jsInfo.onTargetScript.enable"
+          ></ui-switch>
+          <h5
+            class="control-label switcher-label switcher-label-xs">{{ 'widgets.settings.jscode.onActionChecker' | translate }}</h5>
+        </div>
+        <div *ngIf="widget.jsInfo.onTargetScript.enable">
+          <div class="mt-2">
+            <textarea
+              class="form-control textar-iframe cons-settings-js-textarea"
+              [(ngModel)]="widget.jsInfo.onTargetScript.script"
+            ></textarea>
           </div>
-          <div *ngIf="widget.jsInfo.onTargetScript.enable">
-            <div class="col-lg-12 mt-2">
-              <textarea
-                class="form-control textar-iframe cons-settings-js-textarea"
-                [(ngModel)]="widget.jsInfo.onTargetScript.script"
-              ></textarea>
+          <div class="mt-2 pt-2 d-flex align-items-baseline">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input
+                  #enablePlaceholding
+                  type="checkbox"
+                  id="enablePlaceholding"
+                  name="enablePlaceholding"
+                  [(ngModel)]="widget.jsInfo.enablePlaceholding"
+                  (change)="onChangePayment(enablePlaceholding.checked)"
+                  class="form-check-input"
+                />
+                <span class="checkmark"></span>
+              </label>
             </div>
-            <div class="col-lg-12 mt-2 pt-2 d-flex align-items-baseline">
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input
-                    #enablePlaceholding
-                    type="checkbox"
-                    id="enablePlaceholding"
-                    name="enablePlaceholding"
-                    [(ngModel)]="widget.jsInfo.enablePlaceholding"
-                    (change)="onChangePayment(enablePlaceholding.checked)"
-                    class="form-check-input"
-                  />
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <h5 class="control-label switcher-label switcher-label-xs">
-                {{ 'widgets.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
-              </h5>
-            </div>
+            <h5 class="control-label switcher-label switcher-label-xs">
+              {{ 'widgets.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
+            </h5>
           </div>
-          <!-- END JS Code Actions -->
-        </ng-container>
+        </div>
       </div>
+      <!-- END JS Code Actions -->
 
       <!-- Section Integrations -->
       <div

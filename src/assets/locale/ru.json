@@ -1451,7 +1451,7 @@
 			},
 			"section": {
 				"audience": "Аудитория",
-				"autoresponder": "График и автоответчик",
+				"autoresponder": "Автоответчик",
 				"block": "Блокировки и ограничения",
 				"integrations": "Интеграции",
 				"javascript": "Javascript и трекинг пиксели",
