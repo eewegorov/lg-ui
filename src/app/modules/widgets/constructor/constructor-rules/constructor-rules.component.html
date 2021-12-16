@@ -664,8 +664,10 @@
             <!-- End Autoinvite: sound -->
           </div>
           <div class="col-lg-4">
-            <p class="mt-5 pt-2">Виджет будет показан посетителю автоматически, в зависимости от того, какие правила вы
-              активируете и какую логику взаимодействия между ними вы выберете.</p>
+            <p class="mt-5 pt-2">
+              Виджет будет показан посетителю автоматически, в зависимости от того, какие правила вы
+              активируете и какую логику взаимодействия между ними вы выберете.
+            </p>
           </div>
         </div>
 
@@ -905,39 +907,48 @@
       <div
         *ngIf="(!isContainerized && (currentCategory === widgetSettingsCategories[4])) || (isContainerized && (currentCategory === widgetSettingsCategories[2]))"
         id="autoresponder"
+        class="d-flex"
       >
-        <h1>{{ 'widgetsList.editor.section.autoresponder' | translate }} <a
-          data-toggle="tooltip" data-placement="top"
-          title="{{ 'widgetsList.editor.autoresponder.tooltip' | translate }}"
-          class="info-link"><i class="fa fa-info-circle"></i></a>
-        </h1>
-        <div class="d-flex mt-1">
-          <ui-switch size="small" [(ngModel)]="widget.autoresponder.enabled"
-          ></ui-switch>
-          <h5
-            class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.section.autoresponder' | translate }}</h5>
-        </div>
-        <div *ngIf="widget.autoresponder?.enabled" class="mt-1 mb-1">
+        <div class="col-lg-8">
+          <h1>{{ 'widgetsList.editor.section.autoresponder' | translate }} <a
+            data-toggle="tooltip" data-placement="top"
+            title="{{ 'widgetsList.editor.autoresponder.tooltip' | translate }}"
+            class="info-link"><i class="fa fa-info-circle"></i></a>
+          </h1>
+          <div class="d-flex mt-1">
+            <ui-switch size="small" [(ngModel)]="widget.autoresponder.enabled"
+            ></ui-switch>
+            <h5
+              class="control-label switcher-label switcher-label-xs">{{ 'widgetsList.editor.section.autoresponder' | translate }}</h5>
+          </div>
+          <div *ngIf="widget.autoresponder?.enabled" class="mt-1 mb-1">
+            <div
+              class="audience-tooolbar-desc underline-links blue-links hover-links"
+              [innerHTML]="'widgets.coupon.autoresponder' | translate"
+            ></div>
+          </div>
           <div
-            class="audience-tooolbar-desc underline-links blue-links hover-links"
-            [innerHTML]="'widgets.coupon.autoresponder' | translate"
-          ></div>
+            *ngIf="widget.autoresponder?.enabled"
+            class="mt-2"
+            [ngClass]="(widget.autoresponder.subject?.toString().trim().length < 1) ? 'is-invalid' : ''"
+          >
+            <label class="control-label">{{ 'widgetsList.editor.autoresponder.subject' | translate }}:</label>
+            <input class="form-control width-900" [(ngModel)]="widget.autoresponder.subject">
+          </div>
+          <div
+            *ngIf="widget.autoresponder?.enabled"
+            class="mt-2 width-900"
+            [ngClass]="(widget.autoresponder.text?.toString().trim().length < 1) ? 'is-invalid' : ''"
+          >
+            <label class="control-label">{{ 'widgetsList.editor.autoresponder.text' | translate }}:</label>
+            <angular-editor class="width-900" placeholder="" [(ngModel)]="widget.autoresponder.text"></angular-editor>
+          </div>
         </div>
-        <div
-          *ngIf="widget.autoresponder?.enabled"
-          class="mt-2"
-          [ngClass]="(widget.autoresponder.subject?.toString().trim().length < 1) ? 'is-invalid' : ''"
-        >
-          <label class="control-label">{{ 'widgetsList.editor.autoresponder.subject' | translate }}:</label>
-          <input class="form-control width-900" [(ngModel)]="widget.autoresponder.subject">
-        </div>
-        <div
-          *ngIf="widget.autoresponder?.enabled"
-          class="mt-2 width-900"
-          [ngClass]="(widget.autoresponder.text?.toString().trim().length < 1) ? 'is-invalid' : ''"
-        >
-          <label class="control-label">{{ 'widgetsList.editor.autoresponder.text' | translate }}:</label>
-          <angular-editor class="width-900" placeholder="" [(ngModel)]="widget.autoresponder.text"></angular-editor>
+        <div class="col-lg-4">
+          <p class="mt-5 pt-2">
+            Вы можете настроить автоматическое письмо посетителю, отсылаемое после отправки формы в виджете.
+            Например, это может быть ссылка на электронную книгу, благодарственное письмо или коммерческое предложение.
+          </p>
         </div>
       </div>
       <!-- End autoresponder -->
@@ -946,62 +957,78 @@
       <div
         *ngIf="(!isContainerized && (currentCategory === widgetSettingsCategories[5])) || (isContainerized && (currentCategory === widgetSettingsCategories[3]))"
         id="javascript"
+        class="d-flex"
       >
-        <h1>{{ 'widgets.settings.jscode.title' | translate }}</h1>
+        <div class="col-lg-8">
+          <h1>{{ 'widgets.settings.jscode.title' | translate }}</h1>
 
-        <div class="mt-2">
-          <div class="audience-tooolbar-desc" [innerHTML]="'widgets.settings.jscode.desc' | translate"></div>
-        </div>
+          <div class="mt-2">
+            <div class="audience-tooolbar-desc" [innerHTML]="'widgets.settings.jscode.desc' | translate"></div>
+          </div>
 
-        <div class="d-flex mt-3">
-          <ui-switch
-            size="small"
-            [(ngModel)]="widget.jsInfo.onShowScript.enable"
-          ></ui-switch>
-          <h5
-            class="control-label switcher-label switcher-label-xs">{{ 'widgets.settings.jscode.onShowChecker' | translate }}</h5>
-        </div>
-        <div class="mt-2" *ngIf="widget.jsInfo.onShowScript.enable">
+          <div class="d-flex mt-3">
+            <ui-switch
+              size="small"
+              [(ngModel)]="widget.jsInfo.onShowScript.enable"
+            ></ui-switch>
+            <h5
+              class="control-label switcher-label switcher-label-xs">{{ 'widgets.settings.jscode.onShowChecker' | translate }}</h5>
+          </div>
+          <div class="mt-2" *ngIf="widget.jsInfo.onShowScript.enable">
             <textarea
               class="form-control textar-iframe cons-settings-js-textarea"
               [(ngModel)]="widget.jsInfo.onShowScript.script"
             ></textarea>
-        </div>
+          </div>
 
-        <div class="d-flex mt-3">
-          <ui-switch
-            size="small"
-            [(ngModel)]="widget.jsInfo.onTargetScript.enable"
-          ></ui-switch>
-          <h5
-            class="control-label switcher-label switcher-label-xs">{{ 'widgets.settings.jscode.onActionChecker' | translate }}</h5>
-        </div>
-        <div *ngIf="widget.jsInfo.onTargetScript.enable">
-          <div class="mt-2">
+          <div class="d-flex mt-3">
+            <ui-switch
+              size="small"
+              [(ngModel)]="widget.jsInfo.onTargetScript.enable"
+            ></ui-switch>
+            <h5
+              class="control-label switcher-label switcher-label-xs">{{ 'widgets.settings.jscode.onActionChecker' | translate }}</h5>
+          </div>
+          <div *ngIf="widget.jsInfo.onTargetScript.enable">
+            <div class="mt-2">
             <textarea
               class="form-control textar-iframe cons-settings-js-textarea"
               [(ngModel)]="widget.jsInfo.onTargetScript.script"
             ></textarea>
-          </div>
-          <div class="mt-2 pt-2 d-flex align-items-baseline">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input
-                  #enablePlaceholding
-                  type="checkbox"
-                  id="enablePlaceholding"
-                  name="enablePlaceholding"
-                  [(ngModel)]="widget.jsInfo.enablePlaceholding"
-                  (change)="onChangePayment(enablePlaceholding.checked)"
-                  class="form-check-input"
-                />
-                <span class="checkmark"></span>
-              </label>
             </div>
-            <h5 class="control-label switcher-label switcher-label-xs">
-              {{ 'widgets.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
-            </h5>
+            <div class="mt-2 pt-2 d-flex align-items-baseline">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    #enablePlaceholding
+                    type="checkbox"
+                    id="enablePlaceholding"
+                    name="enablePlaceholding"
+                    [(ngModel)]="widget.jsInfo.enablePlaceholding"
+                    (change)="onChangePayment(enablePlaceholding.checked)"
+                    class="form-check-input"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <h5 class="control-label switcher-label switcher-label-xs">
+                {{ 'widgets.settings.jscode.autochange' | translate }} <span class="label label-warning tariff-info">окупаемый</span>
+              </h5>
+            </div>
           </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="mt-5 pt-2">
+            Javascript код может быть выполнен как при показе виджета, так и при совершении целевого действия в нем
+            (отправка формы, шеринг или клик). Вы можете активировать поддержку автоматической подстановки значений
+            полей формы в Javascript код, выполняемый при совершении целевого действия, для этого используйте id поля,
+            заключив его в фигурные скобки:
+          </div>
+          <div>&#123;__email__&#125; — емейл;</div>
+          <div>&#123;__name__&#125; — имя;</div>
+          <div>&#123;__phone__&#125; — телефон;</div>
+          <p>&#123;__message__&#125; — сообщение.</p>
+          <p>И активируйте поддержку подстановки.</p>
         </div>
       </div>
       <!-- END JS Code Actions -->
