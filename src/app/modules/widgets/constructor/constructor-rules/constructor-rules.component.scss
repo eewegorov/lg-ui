@@ -157,8 +157,21 @@ label.extra-header {
 }
 
 .rule-disabled {
-  h4, a.info-link {
+  h4, h5, a.info-link, label.extra-header, .underline-comment span {
     color: #7E889A;
+  }
+
+  input.extra-header {
+    border: none;
+  }
+
+  .checkmark {
+    border-color: #eee;
+  }
+
+  .form-check:hover input ~ .checkmark {
+    cursor: default;
+    background-color: #fff;
   }
 }
 

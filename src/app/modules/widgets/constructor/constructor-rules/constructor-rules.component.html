@@ -40,7 +40,7 @@
             <!-- Page rule item -->
             <div class="border-item">
               <div
-                class="d-flex justify-content-between align-items-center"
+                class="d-flex justify-content-between align-items-center position-relative"
                 [ngClass]="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0) ? 'mb-2' : 'rule-disabled'"
               >
                 <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.pageTargeting.name' | translate }} <a
@@ -149,7 +149,7 @@
             <!-- Target to viewed pages -->
             <div class="border-item mt-3">
               <div
-                class="d-flex justify-content-between align-items-center"
+                class="d-flex justify-content-between align-items-center position-relative"
                 [ngClass]="(widget.rules['prevPages']?.enable && widget.rules['prevPages']?.items.length > 0) ? 'mb-2' : 'rule-disabled'"
               >
                 <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.pageVTargeting.title' | translate }}
@@ -238,7 +238,7 @@
             <!-- PageNo rule -->
             <div class="border-item mt-3">
               <div
-                class="d-flex justify-content-between align-items-center"
+                class="d-flex justify-content-between align-items-center position-relative"
                 [ngClass]="widget.rules['pageNo']?.enable ? 'mb-2' : 'rule-disabled'"
               >
                 <h4 class="widgets-settings-subtitle">
@@ -273,7 +273,7 @@
             <!-- Time options start -->
             <div class="border-item mt-3">
               <div
-                class="d-flex justify-content-between align-items-center"
+                class="d-flex justify-content-between align-items-center position-relative"
                 [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0) ? 'mb-2' : 'rule-disabled'"
               >
                 <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.dateTime.title' | translate }} <span
@@ -343,7 +343,7 @@
             <!-- Days options start -->
             <div class="border-item mt-3">
               <div
-                class="d-flex justify-content-between align-items-center"
+                class="d-flex justify-content-between align-items-center position-relative"
                 [ngClass]="widget.rules.days.enable ? 'mb-2' : 'rule-disabled'"
               >
                 <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.days.header' | translate }} <span
@@ -376,9 +376,9 @@
             <!-- End days options-->
 
             <!-- Date range -->
-            <div class="mt-3">
+            <div class="mt-3 mb-3">
               <div
-                class="d-flex justify-content-between align-items-center"
+                class="d-flex justify-content-between align-items-center position-relative"
                 [ngClass]="widget.rules.period.enable ? 'mb-2' : 'rule-disabled'"
               >
                 <h4 class="widgets-settings-subtitle">
@@ -430,218 +430,260 @@
               class="info-link ml-1"><i class="fa fa-info-circle"></i></a>
             </h1>
 
-            <div class="d-flex pt-3 flex-wrap border-item">
-              <label class="control-label control-label-des">
-                {{ 'widgetsList.editor.autoinvite.variants.title1' | translate }}
-              </label>
-              <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle round-button" type="button" data-toggle="dropdown"
-                        aria-expanded="true">
-                  {{ widget.autoinvite.ruleLogic }}
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li
-                    role="presentation"
-                    *ngFor="let itemLogic of autoinviteVariants"
-                    (click)="widget.autoinvite.ruleLogic = itemLogic"
-                  >
-                    <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ itemLogic }}</a>
-                  </li>
-                </ul>
-              </div>
-              <label class="control-label control-label-des">
-                {{ 'widgetsList.editor.autoinvite.variants.title2' | translate }}
-              </label>
-            </div>
-
-            <!-- Autoinvite: pages -->
-            <div class="border-item mt-3">
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex justify-content-between align-items-center">
-                  <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.pages.enable' | translate }}</h4>
-                  <div
-                    class="d-flex"
-                    [ngClass]="(widget.autoinvite.pages.value <= 0) ? 'is-invalid' : ''"
-                  >
-                    <input
-                      style="float: left; width: 70px;"
-                      class="form-control"
-                      type="number"
-                      min="1"
-                      [(ngModel)]="widget.autoinvite.pages.value"
-                    />
-                  </div>
-                  <h4 class="widgets-settings-subtitle ml-2">
-                    {{ 'widgetsList.editor.autoinvite.pages.suffix' | translate }}
-                    <span class="label label-warning tariff-info ml-2">окупаемый</span>
-                  </h4>
-                </div>
-
-                <ui-switch size="small" [(ngModel)]="widget.autoinvite.pages.enable"
-                           (change)="onChangePayment"></ui-switch>
-              </div>
-            </div>
-            <!-- END Autoinvite pages -->
-
-            <!-- Autoinvite: seconds -->
-            <div class="border-item mt-3">
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex justify-content-between align-items-center">
-                  <h4 class="widgets-settings-subtitle">
-                    {{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}
-                  </h4>
-                  <div
-                    class="d-flex"
-                    [ngClass]="(widget.autoinvite.seconds.value <= 0) ? 'is-invalid' : ''"
-                  >
-                    <input style="float: left; width: 70px;" class="form-control" type="number" min="1"
-                           [(ngModel)]="widget.autoinvite.seconds.value"/>
-                  </div>
-                  <h4 class="widgets-settings-subtitle ml-2">
-                    {{ 'widgetsList.editor.autoinvite.seconds.suffix' | translate }}
-                  </h4>
-                </div>
-
-                <ui-switch size="small" [(ngModel)]="widget.autoinvite.seconds.enable"></ui-switch>
-              </div>
-            </div>
-            <!-- End Autoinvite seconds -->
-
-            <!-- Autoinvite: inactive -->
-            <div class="border-item mt-3">
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex justify-content-between align-items-center">
-                  <h4 class="widgets-settings-subtitle">
-                    {{ 'widgetsList.editor.autoinvite.inactive.enabled' | translate }}
-                  </h4>
-                  <div
-                    class="d-flex mt-1"
-                    [ngClass]="(widget.autoinvite.inactive.value <= 0) ? 'is-invalid' : ''"
-                  >
-                    <input style="float: left; width: 70px;" class="form-control" type="number" min="1"
-                           [(ngModel)]="widget.autoinvite.inactive.value"/>
-                  </div>
-                  <h4 class="widgets-settings-subtitle ml-2">
-                    {{ 'widgetsList.editor.autoinvite.inactive.suffix' | translate }}
-                    <span class="label label-warning tariff-info ml-2">окупаемый</span>
-                  </h4>
-                </div>
-
-                <ui-switch size="small" [(ngModel)]="widget.autoinvite.inactive.enabled"
-                           (change)="onChangePayment"></ui-switch>
-              </div>
-            </div>
-            <!-- End Autoinvite: inactive -->
-
-            <!-- Autoinvite: percent -->
-            <div class="border-item mt-3">
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex justify-content-between align-items-center">
-                  <h4 class="widgets-settings-subtitle">
-                    {{ 'widgetsList.editor.autoinvite.percent.enable' | translate }}
-                  </h4>
-                  <div
-                    class="d-flex mt-1"
-                    [ngClass]="(widget.autoinvite.percent.value <= 0) ? 'is-invalid' : ''"
-                  >
-                    <input style="float: left; width: 70px;" class="form-control" type="number" min="1" max="100"
-                           [(ngModel)]="widget.autoinvite.percent.value"/>
-                  </div>
-                  <h4 class="widgets-settings-subtitle ml-2">
-                    {{ 'widgetsList.editor.autoinvite.percent.suffix' | translate }}
-                    <span class="label label-warning tariff-info ml-2">окупаемый</span>
-                  </h4>
-                </div>
-
-                <ui-switch size="small" [(ngModel)]="widget.autoinvite.percent.enable"
-                           (change)="onChangePayment"></ui-switch>
-              </div>
-            </div>
-            <!-- End Autoinvite: percent -->
-
-            <!-- Autoinvite: click -->
-            <div class="border-item mt-3">
-              <div class="d-flex justify-content-between align-items-center">
-                <h4
-                  class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.click.enable' | translate }}</h4>
-
-                <ui-switch size="small" [(ngModel)]="widget.autoinvite.click.enable"></ui-switch>
-              </div>
-
-              <div
-                class="d-flex flex-column pt-2"
-                [ngClass]="(widget.autoinvite.click.value.trim().length == 0) ? 'is-invalid' : ''"
-              >
-                <label class="control-label extra-header">
-                  {{ 'widgetsList.editor.autoinvite.click.title' | translate }}
+            <div class="rules-container">
+              <div class="d-flex flex-wrap border-item mt-3">
+                <label class="control-label control-label-des">
+                  {{ 'widgetsList.editor.autoinvite.variants.title1' | translate }}
                 </label>
-                <input class="form-control" type="text" [(ngModel)]="widget.autoinvite.click.value"/>
-                <div class="row small mt-1 underline-comment">
-                  <span [innerHTML]="'widgetsList.editor.autoinvite.click.comment' | translate"></span>
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle round-button" type="button" data-toggle="dropdown"
+                          aria-expanded="true">
+                    {{ widget.autoinvite.ruleLogic }}
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li
+                      role="presentation"
+                      *ngFor="let itemLogic of autoinviteVariants"
+                      (click)="widget.autoinvite.ruleLogic = itemLogic"
+                    >
+                      <a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ itemLogic }}</a>
+                    </li>
+                  </ul>
+                </div>
+                <label class="control-label control-label-des">
+                  {{ 'widgetsList.editor.autoinvite.variants.title2' | translate }}
+                </label>
+              </div>
+
+              <!-- Autoinvite: pages -->
+              <div class="border-item mt-3">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                    [class.rule-disabled]="!widget.autoinvite.pages.enable"
+                  >
+                    <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.pages.enable' | translate }}</h4>
+                    <div
+                      class="d-flex"
+                      [class.is-invalid]="widget.autoinvite.pages.value <= 0"
+                    >
+                      <input
+                        style="float: left; width: 70px;"
+                        class="form-control"
+                        type="number"
+                        min="1"
+                        [(ngModel)]="widget.autoinvite.pages.value"
+                        [disabled]="!widget.autoinvite.pages.enable"
+                      />
+                    </div>
+                    <h4 class="widgets-settings-subtitle ml-2">
+                      {{ 'widgetsList.editor.autoinvite.pages.suffix' | translate }}
+                      <span class="label label-warning tariff-info ml-2">окупаемый</span>
+                    </h4>
+                  </div>
+
+                  <ui-switch size="small" [(ngModel)]="widget.autoinvite.pages.enable"
+                             (change)="onChangePayment"></ui-switch>
                 </div>
               </div>
-            </div>
-            <!-- End Autoinvite seconds -->
+              <!-- END Autoinvite pages -->
 
-            <!-- Autoinvite: exit-intent -->
-            <div class="border-item mt-3">
-              <div class="d-flex justify-content-between align-items-center">
-                <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.exit.enable' | translate }}</h4>
+              <!-- Autoinvite: seconds -->
+              <div class="border-item mt-3">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                    [class.rule-disabled]="!widget.autoinvite.seconds.enable"
+                  >
+                    <h4 class="widgets-settings-subtitle">
+                      {{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}
+                    </h4>
+                    <div
+                      class="d-flex"
+                      [class.is-invalid]="widget.autoinvite.seconds.value <= 0"
+                    >
+                      <input
+                        style="float: left; width: 70px;"
+                        class="form-control"
+                        type="number"
+                        min="1"
+                        [(ngModel)]="widget.autoinvite.seconds.value"
+                        [disabled]="!widget.autoinvite.seconds.enable"
+                      />
+                    </div>
+                    <h4 class="widgets-settings-subtitle ml-2">
+                      {{ 'widgetsList.editor.autoinvite.seconds.suffix' | translate }}
+                    </h4>
+                  </div>
 
-                <ui-switch size="small" [(ngModel)]="widget.autoinvite.exit.enable"></ui-switch>
+                  <ui-switch size="small" [(ngModel)]="widget.autoinvite.seconds.enable"></ui-switch>
+                </div>
               </div>
+              <!-- End Autoinvite seconds -->
 
-              <div class="mt-2 d-flex">
-                <div class="form-check mt-1">
-                  <label class="form-check-label">
-                    <input
-                      type="checkbox"
-                      [(ngModel)]="widget.autoinvite.exit.desktopEnable"
-                      class="form-check-input"
-                    />
-                    <span class="checkmark"></span>
+              <!-- Autoinvite: inactive -->
+              <div class="border-item mt-3">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                    [class.rule-disabled]="!widget.autoinvite.inactive.enabled"
+                  >
+                    <h4 class="widgets-settings-subtitle">
+                      {{ 'widgetsList.editor.autoinvite.inactive.enabled' | translate }}
+                    </h4>
+                    <div
+                      class="d-flex mt-1"
+                      [class.is-invalid]="widget.autoinvite.inactive.value <= 0"
+                    >
+                      <input
+                        style="float: left; width: 70px;"
+                        class="form-control"
+                        type="number"
+                        min="1"
+                        [(ngModel)]="widget.autoinvite.inactive.value"
+                        [disabled]="!widget.autoinvite.inactive.enabled"
+                      />
+                    </div>
+                    <h4 class="widgets-settings-subtitle ml-2">
+                      {{ 'widgetsList.editor.autoinvite.inactive.suffix' | translate }}
+                      <span class="label label-warning tariff-info ml-2">окупаемый</span>
+                    </h4>
+                  </div>
+
+                  <ui-switch size="small" [(ngModel)]="widget.autoinvite.inactive.enabled"
+                             (change)="onChangePayment"></ui-switch>
+                </div>
+              </div>
+              <!-- End Autoinvite: inactive -->
+
+              <!-- Autoinvite: percent -->
+              <div class="border-item mt-3">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                    [class.rule-disabled]="!widget.autoinvite.percent.enable"
+                  >
+                    <h4 class="widgets-settings-subtitle">
+                      {{ 'widgetsList.editor.autoinvite.percent.enable' | translate }}
+                    </h4>
+                    <div
+                      class="d-flex mt-1"
+                      [class.is-invalid]="widget.autoinvite.percent.value <= 0"
+                    >
+                      <input
+                        style="float: left; width: 70px;"
+                        class="form-control"
+                        type="number"
+                        min="1"
+                        max="100"
+                        [(ngModel)]="widget.autoinvite.percent.value"
+                        [disabled]="!widget.autoinvite.percent.enable"
+                      />
+                    </div>
+                    <h4 class="widgets-settings-subtitle ml-2">
+                      {{ 'widgetsList.editor.autoinvite.percent.suffix' | translate }}
+                      <span class="label label-warning tariff-info ml-2">окупаемый</span>
+                    </h4>
+                  </div>
+
+                  <ui-switch size="small" [(ngModel)]="widget.autoinvite.percent.enable"
+                             (change)="onChangePayment"></ui-switch>
+                </div>
+              </div>
+              <!-- End Autoinvite: percent -->
+
+              <!-- Autoinvite: click -->
+              <div class="border-item mt-3" [class.rule-disabled]="!widget.autoinvite.click.enable">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4 class="widgets-settings-subtitle">
+                    {{ 'widgetsList.editor.autoinvite.click.enable' | translate }}
+                  </h4>
+
+                  <ui-switch size="small" [(ngModel)]="widget.autoinvite.click.enable"></ui-switch>
+                </div>
+
+                <div
+                  class="d-flex flex-column pt-2"
+                  [class.is-invalid]="widget.autoinvite.click.value.trim().length == 0"
+                >
+                  <label class="control-label extra-header">
+                    {{ 'widgetsList.editor.autoinvite.click.title' | translate }}
                   </label>
-                </div>
-                <h5 class="control-label switcher-label switcher-label-xs">
-                  {{ 'widgets.settings.exitIntent.desktop' | translate }}
-                </h5>
-              </div>
-              <div class="mt-2 d-flex">
-                <div class="form-check mt-1">
-                  <label class="form-check-label">
-                    <input
-                      type="checkbox"
-                      [(ngModel)]="widget.autoinvite.exit.mobileEnable"
-                      class="form-check-input"
-                    />
-                    <span class="checkmark"></span>
-                  </label>
-                </div>
-                <h5 class="control-label switcher-label switcher-label-xs">
-                  {{ 'widgets.settings.exitIntent.mobile' | translate }}
-                </h5>
-              </div>
-            </div>
-            <!-- End Autoinvite: exit-intent -->
-
-            <!-- Autoinvite: sound -->
-            <div class="d-flex mt-4">
-              <div class="form-check">
-                <label class="form-check-label">
                   <input
-                    type="checkbox"
-                    [(ngModel)]="widget.autoinvite.sound.enable"
-                    class="form-check-input"
+                    class="form-control extra-header"
+                    type="text"
+                    [(ngModel)]="widget.autoinvite.click.value"
+                    [disabled]="!widget.autoinvite.click.enable"
                   />
-                  <span class="checkmark"></span>
-                </label>
+                  <div class="row small mt-1 underline-comment">
+                    <span [innerHTML]="'widgetsList.editor.autoinvite.click.comment' | translate"></span>
+                  </div>
+                </div>
               </div>
-              <h4 class="widgets-settings-subtitle mt-0 ml-1">
-                {{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}
-              </h4>
+              <!-- End Autoinvite seconds -->
+
+              <!-- Autoinvite: exit-intent -->
+              <div class="border-item mt-3" [class.rule-disabled]="!widget.autoinvite.exit.enable">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.exit.enable' | translate }}</h4>
+
+                  <ui-switch size="small" [(ngModel)]="widget.autoinvite.exit.enable"></ui-switch>
+                </div>
+
+                <div class="mt-2 d-flex">
+                  <div class="form-check mt-1">
+                    <label class="form-check-label">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        [(ngModel)]="widget.autoinvite.exit.desktopEnable"
+                        [disabled]="!widget.autoinvite.exit.enable"
+                      />
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <h5 class="control-label switcher-label switcher-label-xs">
+                    {{ 'widgets.settings.exitIntent.desktop' | translate }}
+                  </h5>
+                </div>
+                <div class="mt-2 d-flex">
+                  <div class="form-check mt-1">
+                    <label class="form-check-label">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        [(ngModel)]="widget.autoinvite.exit.mobileEnable"
+                        [disabled]="!widget.autoinvite.exit.enable"
+                      />
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <h5 class="control-label switcher-label switcher-label-xs">
+                    {{ 'widgets.settings.exitIntent.mobile' | translate }}
+                  </h5>
+                </div>
+              </div>
+              <!-- End Autoinvite: exit-intent -->
+
+              <!-- Autoinvite: sound -->
+              <div class="d-flex mt-4 mb-3">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      type="checkbox"
+                      [(ngModel)]="widget.autoinvite.sound.enable"
+                      class="form-check-input"
+                    />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <h4 class="widgets-settings-subtitle mt-0 ml-1">
+                  {{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}
+                </h4>
+              </div>
+              <!-- End Autoinvite: sound -->
             </div>
-            <!-- End Autoinvite: sound -->
           </div>
           <div class="col-lg-4">
             <p class="mt-5 pt-2">
@@ -659,226 +701,228 @@
         >
           <h1>{{ 'widgetsList.editor.section.block' | translate }}</h1>
 
-          <h4 class="widgets-settings-subtitle pt-4">
-            {{ 'widgetsList.editor.restrictions.title' | translate }} <span
-            class="label label-warning tariff-info ml-2">окупаемый</span>
-          </h4>
+          <div class="rules-container">
+            <h4 class="widgets-settings-subtitle mt-3">
+              {{ 'widgetsList.editor.restrictions.title' | translate }} <span
+              class="label label-warning tariff-info ml-2">окупаемый</span>
+            </h4>
 
-          <div class="d-flex mt-3">
-            <input
-              type="radio"
-              class="radio-left mt-0"
-              name="restrictions"
-              [value]="1"
-              [(ngModel)]="widget.restrictions.target.mode"
-              (ngModelChange)="onRestrictionModeChange()"
-            >
-            <label class="control-label switcher-label ml-1">
-              {{ 'widgetsList.editor.restrictions.disable.title' | translate }}
-            </label>
-          </div>
-          <div class="d-flex mt-2">
-            <input
-              type="radio"
-              class="radio-left mt-0"
-              name="restrictions"
-              [value]="2"
-              [(ngModel)]="widget.restrictions.target.mode"
-              (ngModelChange)="onRestrictionModeChange()"
-            >
-            <label class="control-label switcher-label ml-1">
-              {{ 'widgetsList.editor.restrictions.enable.title' | translate }}
-            </label>
-          </div>
-          <div class="d-flex mt-2 border-item">
-            <input
-              type="radio"
-              class="radio-left mt-0"
-              name="restrictions"
-              [value]="0"
-              [(ngModel)]="widget.restrictions.target.mode"
-            >
-            <label class="control-label switcher-label ml-1">
-              {{ 'widgetsList.editor.restrictions.ontime.title' | translate }}
-            </label>
-          </div>
-
-          <div class="mt-3" *ngIf="widget.restrictions.target?.mode == 0">
-            <div class="time-settings-fromto">
-              {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
-            </div>
-            <div class="dropdown" style="float: left;">
-              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
-                      aria-expanded="true">
-                {{ widget.restrictions.target.gap }}
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
-                <li
-                  role="presentation"
-                  *ngFor="let timeItem of restrictionsGaps"
-                  (click)="widget.restrictions.target.gap = timeItem"
-                ><a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ timeItem }}</a>
-                </li>
-              </ul>
-            </div>
-            <div class="time-settings-fromto">
-              {{ 'widgetsList.editor.restrictions.hours' | translate }}
-            </div>
-          </div>
-          <div class="mt-3">
-            <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.restrictions.title2' | translate }} <a
-              data-toggle="tooltip" data-placement="top"
-              title="{{ 'widgetsList.editor.restrictions.autoinvite.tooltip' | translate }}"
-              class="info-link"><i class="fa fa-info-circle"></i></a></h4>
-          </div>
-          <!-- Restrictions.autoinvite -->
-          <div class="d-flex align-items-baseline mt-3">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input
-                  type="checkbox"
-                  id="autoinviteEnable"
-                  name="autoinviteEnable"
-                  [(ngModel)]="widget.restrictions.autoinvite.enable"
-                  class="form-check-input"
-                />
-                <span class="checkmark"></span>
+            <div class="d-flex mt-3">
+              <input
+                type="radio"
+                class="radio-left mt-0"
+                name="restrictions"
+                [value]="1"
+                [(ngModel)]="widget.restrictions.target.mode"
+                (ngModelChange)="onRestrictionModeChange()"
+              >
+              <label class="control-label switcher-label ml-1">
+                {{ 'widgetsList.editor.restrictions.disable.title' | translate }}
               </label>
             </div>
-            <h5 class="control-label switcher-label switcher-label-xs">
-              {{ 'widgetsList.editor.restrictions.autoinvite.text' | translate }}<br/>
-            </h5>
-          </div>
-          <div *ngIf="widget.restrictions.autoinvite?.enable" class="mt-3 width-900">
-            <div class="time-settings-fromto">
-              {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
-            </div>
-            <input class="form-control widgets-num-input" type="number" min="0" max="72"
-                   [(ngModel)]="widget.restrictions.autoinvite.gap"/>
-            <div class="time-settings-fromto">
-              {{ 'widgetsList.editor.restrictions.hours' | translate }}
-            </div>
-          </div>
-          <!-- End restrictions.autoinvite -->
-
-          <!-- Restrictions.unique -->
-          <div *ngIf="widget.restrictions.unique" class="d-flex align-items-baseline mt-3">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input
-                  type="checkbox"
-                  id="uniqueEnable"
-                  name="uniqueEnable"
-                  [(ngModel)]="widget.restrictions.unique.enable"
-                  class="form-check-input"
-                />
-                <span class="checkmark"></span>
+            <div class="d-flex mt-2">
+              <input
+                type="radio"
+                class="radio-left mt-0"
+                name="restrictions"
+                [value]="2"
+                [(ngModel)]="widget.restrictions.target.mode"
+                (ngModelChange)="onRestrictionModeChange()"
+              >
+              <label class="control-label switcher-label ml-1">
+                {{ 'widgetsList.editor.restrictions.enable.title' | translate }}
               </label>
             </div>
-            <h5 class="control-label switcher-label switcher-label-xs">
-              {{ 'widgetsList.editor.restrictions.unique.text' | translate }}<br/>
-            </h5>
-          </div>
-          <div *ngIf="widget.restrictions.unique?.enable" class="col-lg-12 mb-2 pb-5 width-900">
-            <div class="time-settings-fromto">
-              {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
-            </div>
-            <input class="form-control widgets-num-input" type="number" min="0"
-                   [(ngModel)]="widget.restrictions.unique.gap"/>
-            <div class="time-settings-fromto">
-              {{ 'widgetsList.editor.restrictions.hours' | translate }}
-            </div>
-          </div>
-          <!-- END Restrictions.unique -->
-
-          <!-- Restrictions.lockAfterAction -->
-          <div *ngIf="widget.restrictions.action" class="d-flex align-items-baseline mt-3">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input
-                  #actionEnable
-                  type="checkbox"
-                  id="actionEnable"
-                  name="actionEnable"
-                  [(ngModel)]="widget.restrictions.action.enable"
-                  (change)="onChangePayment(actionEnable.checked)"
-                  class="form-check-input"
-                />
-                <span class="checkmark"></span>
+            <div class="d-flex mt-2 border-item">
+              <input
+                type="radio"
+                class="radio-left mt-0"
+                name="restrictions"
+                [value]="0"
+                [(ngModel)]="widget.restrictions.target.mode"
+              >
+              <label class="control-label switcher-label ml-1">
+                {{ 'widgetsList.editor.restrictions.ontime.title' | translate }}
               </label>
             </div>
-            <h5 class="control-label switcher-label switcher-label-xs">
-              {{ 'widgets.settings.lockAfterAction.title' | translate }}<span class="label label-warning tariff-info">окупаемый</span><br/>
-            </h5>
-          </div>
-          <div *ngIf="widget.restrictions?.action?.enable" class="width-900 mt-3">
-            <div class="time-settings-fromto">
-              {{ 'widgets.settings.lockAfterAction.lock1' | translate }}:
-            </div>
-            <input class="form-control widgets-num-input" type="number" min="0"
-                   [(ngModel)]="widget.restrictions.action.gap"/>
-            <div class="time-settings-fromto">
-              {{ 'widgets.settings.lockAfterAction.lock2' | translate }}
-            </div>
-          </div>
-          <!-- END Restrictions.lockAfterAction -->
 
-          <!-- Restrictions.count -->
-          <div *ngIf="widget.restrictions.count" class="d-flex align-items-baseline mt-3">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input
-                  #countEnable
-                  type="checkbox"
-                  id="countEnable"
-                  name="countEnable"
-                  [(ngModel)]="widget.restrictions.count.enable"
-                  (change)="onChangePayment(countEnable.checked)"
-                  class="form-check-input"
-                />
-                <span class="checkmark"></span>
-              </label>
-            </div>
-            <h5 class="control-label switcher-label switcher-label-xs">
-              {{ 'widgetsList.editor.restrictions.count.text' | translate }} <span
-              class="label label-warning tariff-info ">окупаемый</span><br/>
-            </h5>
-          </div>
-          <div *ngIf="widget.restrictions.count?.enable" class="mt-3">
-            <div class="time-settings-fromto">
-              {{ 'widgetsList.editor.restrictions.count.part1' | translate }}
-            </div>
-            <input class="form-control widgets-num-input" type="number" min="0"
-                   [(ngModel)]="widget.restrictions.count.count"/>
-            <div class="time-settings-fromto">
-              {{ 'widgetsList.editor.restrictions.count.part2' | translate }}
-            </div>
-            <div class="float-left">
-              <input class="form-control widgets-num-input mr-1" type="number" min="0"
-                     [(ngModel)]="widget.restrictions.count.interval"/>
-              <div class="dropdown" style="display: inline;">
+            <div class="mt-3" *ngIf="widget.restrictions.target?.mode == 0">
+              <div class="time-settings-fromto">
+                {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
+              </div>
+              <div class="dropdown" style="float: left;">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
                         aria-expanded="true">
-                  {{ units[widget.restrictions.count.unit] }}
+                  {{ widget.restrictions.target.gap }}
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" role="menu">
+                <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
                   <li
                     role="presentation"
-                    *ngFor="let key of getUnitsKeys()"
-                    (click)="widget.restrictions.count.unit = key"
-                  >
-                    <a role="menuitem" class="dropdown-item" tabindex="-1"
-                       href="javascript:void(0)">{{ units[key] }}</a>
+                    *ngFor="let timeItem of restrictionsGaps"
+                    (click)="widget.restrictions.target.gap = timeItem"
+                  ><a role="menuitem" class="dropdown-item" tabindex="-1" href="javascript:void(0)">{{ timeItem }}</a>
                   </li>
                 </ul>
               </div>
+              <div class="time-settings-fromto">
+                {{ 'widgetsList.editor.restrictions.hours' | translate }}
+              </div>
             </div>
-            <div class="time-settings-fromto">
-              {{ 'widgetsList.editor.restrictions.count.part3' | translate }}
+            <div class="mt-3">
+              <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.restrictions.title2' | translate }} <a
+                data-toggle="tooltip" data-placement="top"
+                title="{{ 'widgetsList.editor.restrictions.autoinvite.tooltip' | translate }}"
+                class="info-link"><i class="fa fa-info-circle"></i></a></h4>
             </div>
-            <!-- END Restrictions.count -->
+            <!-- Restrictions.autoinvite -->
+            <div class="d-flex align-items-baseline mt-3">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    type="checkbox"
+                    id="autoinviteEnable"
+                    name="autoinviteEnable"
+                    [(ngModel)]="widget.restrictions.autoinvite.enable"
+                    class="form-check-input"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <h5 class="control-label switcher-label switcher-label-xs">
+                {{ 'widgetsList.editor.restrictions.autoinvite.text' | translate }}<br/>
+              </h5>
+            </div>
+            <div *ngIf="widget.restrictions.autoinvite?.enable" class="mt-3 width-900">
+              <div class="time-settings-fromto">
+                {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
+              </div>
+              <input class="form-control widgets-num-input" type="number" min="0" max="72"
+                     [(ngModel)]="widget.restrictions.autoinvite.gap"/>
+              <div class="time-settings-fromto">
+                {{ 'widgetsList.editor.restrictions.hours' | translate }}
+              </div>
+            </div>
+            <!-- End restrictions.autoinvite -->
+
+            <!-- Restrictions.unique -->
+            <div *ngIf="widget.restrictions.unique" class="d-flex align-items-baseline mt-3">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    type="checkbox"
+                    id="uniqueEnable"
+                    name="uniqueEnable"
+                    [(ngModel)]="widget.restrictions.unique.enable"
+                    class="form-check-input"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <h5 class="control-label switcher-label switcher-label-xs">
+                {{ 'widgetsList.editor.restrictions.unique.text' | translate }}<br/>
+              </h5>
+            </div>
+            <div *ngIf="widget.restrictions.unique?.enable" class="col-lg-12 mb-2 pb-5 width-900">
+              <div class="time-settings-fromto">
+                {{ 'widgetsList.editor.restrictions.disable.label' | translate }}:
+              </div>
+              <input class="form-control widgets-num-input" type="number" min="0"
+                     [(ngModel)]="widget.restrictions.unique.gap"/>
+              <div class="time-settings-fromto">
+                {{ 'widgetsList.editor.restrictions.hours' | translate }}
+              </div>
+            </div>
+            <!-- END Restrictions.unique -->
+
+            <!-- Restrictions.lockAfterAction -->
+            <div *ngIf="widget.restrictions.action" class="d-flex align-items-baseline mt-3">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    #actionEnable
+                    type="checkbox"
+                    id="actionEnable"
+                    name="actionEnable"
+                    [(ngModel)]="widget.restrictions.action.enable"
+                    (change)="onChangePayment(actionEnable.checked)"
+                    class="form-check-input"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <h5 class="control-label switcher-label switcher-label-xs">
+                {{ 'widgets.settings.lockAfterAction.title' | translate }}<span class="label label-warning tariff-info">окупаемый</span><br/>
+              </h5>
+            </div>
+            <div *ngIf="widget.restrictions?.action?.enable" class="width-900 mt-3">
+              <div class="time-settings-fromto">
+                {{ 'widgets.settings.lockAfterAction.lock1' | translate }}:
+              </div>
+              <input class="form-control widgets-num-input" type="number" min="0"
+                     [(ngModel)]="widget.restrictions.action.gap"/>
+              <div class="time-settings-fromto">
+                {{ 'widgets.settings.lockAfterAction.lock2' | translate }}
+              </div>
+            </div>
+            <!-- END Restrictions.lockAfterAction -->
+
+            <!-- Restrictions.count -->
+            <div *ngIf="widget.restrictions.count" class="d-flex align-items-baseline mt-3">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    #countEnable
+                    type="checkbox"
+                    id="countEnable"
+                    name="countEnable"
+                    [(ngModel)]="widget.restrictions.count.enable"
+                    (change)="onChangePayment(countEnable.checked)"
+                    class="form-check-input"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <h5 class="control-label switcher-label switcher-label-xs">
+                {{ 'widgetsList.editor.restrictions.count.text' | translate }} <span
+                class="label label-warning tariff-info ">окупаемый</span><br/>
+              </h5>
+            </div>
+            <div *ngIf="widget.restrictions.count?.enable" class="mt-3">
+              <div class="time-settings-fromto">
+                {{ 'widgetsList.editor.restrictions.count.part1' | translate }}
+              </div>
+              <input class="form-control widgets-num-input" type="number" min="0"
+                     [(ngModel)]="widget.restrictions.count.count"/>
+              <div class="time-settings-fromto">
+                {{ 'widgetsList.editor.restrictions.count.part2' | translate }}
+              </div>
+              <div class="float-left">
+                <input class="form-control widgets-num-input mr-1" type="number" min="0"
+                       [(ngModel)]="widget.restrictions.count.interval"/>
+                <div class="dropdown" style="display: inline;">
+                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                          aria-expanded="true">
+                    {{ units[widget.restrictions.count.unit] }}
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li
+                      role="presentation"
+                      *ngFor="let key of getUnitsKeys()"
+                      (click)="widget.restrictions.count.unit = key"
+                    >
+                      <a role="menuitem" class="dropdown-item" tabindex="-1"
+                         href="javascript:void(0)">{{ units[key] }}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="time-settings-fromto">
+                {{ 'widgetsList.editor.restrictions.count.part3' | translate }}
+              </div>
+              <!-- END Restrictions.count -->
+            </div>
           </div>
         </div>
       </div>
