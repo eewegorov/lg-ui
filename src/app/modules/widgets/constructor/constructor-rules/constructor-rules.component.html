@@ -51,11 +51,11 @@
             </div>
 
             <ng-container *ngIf="widget.rules.pages?.enable">
-              <div *ngFor="let item of widget.rules['pages'].items; index as i" class="d-flex row-subitem mt-2">
-                <div class="d-flex row-subitem-padding pt-1">
+              <div *ngFor="let item of widget.rules['pages'].items; index as i" class="d-flex align-items-center mt-2">
+                <div class="d-flex align-items-center">
                   <label class="control-label f-3">{{ 'widgetsList.editor.rules.widget' | translate }}</label>
-                  <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                  <div class="dropdown ml-2">
+                    <button class="d-flex btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
                             aria-expanded="true">
                       {{ getPageStateName(item) }}
                       <span class="caret"></span>
@@ -74,9 +74,9 @@
                     </ul>
                   </div>
                 </div>
-                <div class="d-flex row-subitem-padding pt-1">
+                <div class="d-flex flex-shrink-0 align-items-center ml-2">
                   <label class="control-label f-3">{{ 'widgetsList.editor.rules.pageTargeting.pageInfo' | translate }}</label>
-                  <div class="dropdown">
+                  <div class="dropdown ml-2">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                             aria-expanded="true">
                       {{ getPageCompareName(item) }}
@@ -111,7 +111,7 @@
                     </ul>
                   </div>
                 </div>
-                <div class="d-flex form-group row-subitem-padding pt-1">
+                <div class="d-flex align-items-center ml-2">
                   <div class="input-group" [ngClass]="(item.value.length == 0) ? 'is-invalid' : ''">
                     <div class="input-group-prepend">
                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
@@ -136,9 +136,11 @@
                   </div>
                 </div>
               </div>
-              <button class="btn-default widget-content-add-btn" (click)="addPageRuleItem()">
-                <img src="assets/images/widgets/plus.svg" alt="add element" /> Добавить страницу
-              </button>
+              <div class="mt-3">
+                <button class="btn-default widget-content-add-btn" (click)="addPageRuleItem()">
+                  <img src="assets/images/widgets/plus.svg" alt="add element" /> Добавить страницу
+                </button>
+              </div>
             </ng-container>
           </div>
           <!-- END Page rule item -->
@@ -163,9 +165,8 @@
 
             <ng-container *ngIf="widget.rules['prevPages']?.enable">
               <div *ngFor="let item of widget.rules['prevPages'].items; index as i"
-                   class="row row-subitem width-900 mt-2">
-                <div class="col-sm-6 row-subitem-padding pt-1">
-                  <label class="control-label">{{ 'widgetsList.editor.rules.pageVTargeting.user' | translate }}:</label>
+                   class="d-flex align-items-center mt-2">
+                <div class="d-flex align-items-center">
                   <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
                             aria-expanded="true">
@@ -196,11 +197,8 @@
                     </ul>
                   </div>
                 </div>
-                <div class="col-sm-6 form-group row-subitem-padding pt-1">
-                  <label class="control-label input-with-remove"
-                         style="display: block;">{{ 'widgetsList.editor.rules.pageTargeting.urlortitle' | translate }}
-                    :</label>
-                  <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0) ? 'is-invalid' : ''">
+                <div class="d-flex align-items-center ml-2">
+                  <div class="input-group" [ngClass]="(item.value.length == 0) ? 'is-invalid' : ''">
                     <div class="input-group-prepend">
                       <button
                         type="button"
@@ -222,19 +220,15 @@
                     </div>
                     <input type="text" class="form-control" [(ngModel)]="item.value">
                   </div>
-                  <div class="remove-sub-item-rules mr-2">
-                    <a (click)="addPrevPageRuleItem()" href="javascript:void(0);"><i
-                      class="remove-sub-item-rules colored-blue col-sm-1 pe-7s-plus"></i>
-                    </a>
+                  <div *ngIf="widget.rules['prevPages'].items.length > 1" class="remove-sub-item">
+                    <button class="delete-element-button" (click)="removePrevPageRuleItem(i)">&times;</button>
                   </div>
-                  <div *ngIf="widget.rules['prevPages'].items.length > 1" class="remove-sub-item-rules mr-2">
-                    <a (click)="removePrevPageRuleItem(i)" href="javascript:void(0);"><i
-                      class="remove-sub-item-rules colored-red col-sm-1 pe-7s-close-circle"></i>
-                    </a>
-                  </div>
-                  <span
-                    class="underow-comment combo-box-underow-comment-comment">{{ 'widgetsList.editor.rules.pageTargeting.url.tooltip' | translate }}</span>
                 </div>
+              </div>
+              <div class="mt-3">
+                <button class="btn-default widget-content-add-btn" (click)="addPrevPageRuleItem()">
+                  <img src="assets/images/widgets/plus.svg" alt="add element" /> Добавить страницу
+                </button>
               </div>
             </ng-container>
           </div>
