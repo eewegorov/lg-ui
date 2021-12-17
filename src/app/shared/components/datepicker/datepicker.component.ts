@@ -102,17 +102,17 @@ export class NgbdDatepickerI18n implements ControlValueAccessor {
   onChange = (date?: Date) => {};
 
   writeValue(value: Date) {
-    console.log(value)
-    this.selectedDate = value;
-
-    if (!value) {
-      return;
+    let preparedDate;
+    if (!value || (value && isNaN(value.getTime()))) {
+      preparedDate = new Date();
+    } else {
+      preparedDate = value;
     }
 
     this.selectedDate = {
-      year: value.getFullYear(),
-      month: value.getMonth() + 1,
-      day: value.getDate()
+      year: preparedDate.getFullYear(),
+      month: preparedDate.getMonth() + 1,
+      day: preparedDate.getDate()
     };
   }
 

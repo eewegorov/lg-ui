@@ -69,7 +69,7 @@ a.info-link {
   margin-left: -1px;
 }
 
-.is-invalid label.control-label, .underline-comment {
+.is-invalid label.control-label, .is-invalid .underline-comment {
   color: #a94442;
 }
 
@@ -149,4 +149,20 @@ input.radio-left {
 
 .dropdown button, .input-group button, .input-group input {
   font-size: 12px;
+}
+
+label.extra-header {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.rule-disabled {
+  h4, a.info-link {
+    color: #7E889A;
+  }
+}
+
+.rules-container {
+  height: calc(100vh - 135px);
+  overflow: auto;
 }
