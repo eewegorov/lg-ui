@@ -197,7 +197,7 @@
                     </ul>
                   </div>
                 </div>
-                <div class="d-flex align-items-center ml-2">
+                <div class="d-flex align-items-center flex-grow-1 ml-2">
                   <div class="input-group" [ngClass]="(item.value.length == 0) ? 'is-invalid' : ''">
                     <div class="input-group-prepend">
                       <button
@@ -250,10 +250,9 @@
 
             <div
               *ngIf="widget.rules.pageNo?.enable"
-              class="col-lg-12 mt-2 width-900"
+              class="mt-2"
               [ngClass]="(widget.rules.pageNo.items.length > 0) ? '' : 'is-invalid'"
             >
-              <label class="control-label">{{ 'widgetsList.editor.rules.pageNo.select.title' | translate }}:</label>
               <ng-select
                 id="widgetSelector"
                 bindValue="current"
@@ -284,17 +283,13 @@
               <ui-switch size="small" [(ngModel)]="widget.rules.time.enable" (change)="onChangePayment"></ui-switch>
             </div>
 
-            <ng-container *ngIf="widget.rules['time'].enable == true">
-              <div class="row col-lg-12 row-subitem width-400 mb-2"
-                   *ngFor="let item of widget.rules['time'].items; index as i">
-                <div class="col-lg-12">
-                  <label class="control-label">{{ 'widgetsList.editor.rules.time.title' | translate }}:</label>
-                </div>
-                <div class="col-sm-12 row-subitem-padding pt-1">
-                  <div class="time-settings-fromto">
-                    {{ 'widgetsList.editor.rules.time.from' | translate }}:
+            <ng-container *ngIf="widget.rules['time'].enable">
+              <div *ngFor="let item of widget.rules['time'].items; index as i" class="d-flex align-items-center mt-2">
+                <div class="d-flex align-items-center pt-1">
+                  <div class="f-2">
+                    {{ 'widgetsList.editor.rules.time.from' | translate }}
                   </div>
-                  <div class="dropdown" style="float: left;">
+                  <div class="dropdown ml-2" style="float: left;">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
                             aria-expanded="true">
                       {{ getStringFromTime(item.startTime) }}
@@ -308,10 +303,10 @@
                       </li>
                     </ul>
                   </div>
-                  <div class="time-settings-fromto">
-                    {{ 'widgetsList.editor.rules.time.to' | translate }}:
+                  <div class="ml-3 f-2">
+                    {{ 'widgetsList.editor.rules.time.to' | translate }}
                   </div>
-                  <div class="dropdown" style="float: left;">
+                  <div class="dropdown ml-2" style="float: left;">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
                             aria-expanded="true">
                       {{ getStringFromTime(item.endTime) }}
@@ -328,16 +323,15 @@
                       </li>
                     </ul>
                   </div>
-                  <div class="remove-sub-item-rules-time mr-2">
-                    <a (click)="addTimeRuleItem()" href="javascript:void(0);"><i
-                      class="remove-sub-item-rules-time colored-blue col-sm-1 pe-7s-plus"></i></a>
-                  </div>
-                  <div *ngIf="widget.rules['time'].items.length > 1" class="remove-sub-item-rules-time mr-2">
-                    <a (click)="removeTimeRuleItem(i)" href="javascript:void(0);">
-                      <i class="remove-sub-item-rules-time colored-red col-sm-1 pe-7s-close-circle"></i>
-                    </a>
+                  <div *ngIf="widget.rules['time'].items.length > 1" class="remove-sub-item">
+                    <button class="delete-element-button" (click)="removeTimeRuleItem(i)">&times;</button>
                   </div>
                 </div>
+              </div>
+              <div class="mt-3">
+                <button class="btn-default widget-content-add-btn" (click)="addTimeRuleItem()">
+                  <img src="assets/images/widgets/plus.svg" alt="add element" /> Добавить период
+                </button>
               </div>
             </ng-container>
           </div>
@@ -358,11 +352,9 @@
 
             <div
               *ngIf="widget.rules.days?.enable"
-              class="col-lg-12 mt-2 width-900"
+              class="mt-2"
               [ngClass]="(widget.rules.days.items.length > 0) ? '' : 'is-invalid'"
             >
-              <label class="control-label">{{ 'widgetsList.editor.rules.days.title' | translate }}:</label>
-
               <ng-select
                 id="daysSelector"
                 bindValue="id"
@@ -392,17 +384,17 @@
               <ui-switch size="small" [(ngModel)]="widget.rules.period.enable" (change)="onChangePayment"></ui-switch>
             </div>
 
-            <div *ngIf="widget.rules.period?.enable" class="col-lg-12 mt-2 width-900 d-flex ">
-              <div class="time-settings-fromto">
-                {{ 'widgetsList.editor.rules.time.from' | translate }}:
+            <div *ngIf="widget.rules.period?.enable" class="d-flex align-items-center mt-2">
+              <div class="f-2">
+                {{ 'widgetsList.editor.rules.time.from' | translate }}
               </div>
-              <div id="period-rule-start-date-picker" class="datepicker">
+              <div id="period-rule-start-date-picker" class="datepicker ml-2">
                 <ngbd-datepicker-i18n [(ngModel)]="widget.rules.period.startDate"></ngbd-datepicker-i18n>
               </div>
-              <div class="time-settings-fromto">
-                {{ 'widgetsList.editor.rules.time.to' | translate }}:
+              <div class="f-2 ml-3">
+                {{ 'widgetsList.editor.rules.time.to' | translate }}
               </div>
-              <div id="period-rule-end-date-picker" class="datepicker">
+              <div id="period-rule-end-date-picker" class="datepicker ml-2">
                 <ngbd-datepicker-i18n [(ngModel)]="widget.rules.period.endDate"></ngbd-datepicker-i18n>
               </div>
             </div>
@@ -457,32 +449,28 @@
             <!-- Autoinvite: pages -->
             <div class="border-item mt-3">
               <div class="d-flex justify-content-between align-items-center">
-                <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.pages.enable' | translate }}
-                  <span class="label label-warning tariff-info ml-2">окупаемый</span>
-                </h4>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.pages.enable' | translate }}</h4>
+                  <div
+                    class="d-flex"
+                    [ngClass]="(widget.autoinvite.pages.value <= 0) ? 'is-invalid' : ''"
+                  >
+                    <input
+                      style="float: left; width: 70px;"
+                      class="form-control"
+                      type="number"
+                      min="1"
+                      [(ngModel)]="widget.autoinvite.pages.value"
+                    />
+                  </div>
+                  <h4 class="widgets-settings-subtitle ml-2">
+                    {{ 'widgetsList.editor.autoinvite.pages.suffix' | translate }}
+                    <span class="label label-warning tariff-info ml-2">окупаемый</span>
+                  </h4>
+                </div>
 
                 <ui-switch size="small" [(ngModel)]="widget.autoinvite.pages.enable"
                            (change)="onChangePayment"></ui-switch>
-              </div>
-
-              <div
-                *ngIf="widget.autoinvite.pages?.enable"
-                class="d-flex mt-1"
-                [ngClass]="(widget.autoinvite.pages.value <= 0) ? 'is-invalid' : ''"
-              >
-                <div class="time-settings-fromto">
-                  {{ 'widgetsList.editor.autoinvite.pages.prefix' | translate }}
-                </div>
-                <input
-                  style="float: left; width: 70px;"
-                  class="form-control"
-                  type="number"
-                  min="1"
-                  [(ngModel)]="widget.autoinvite.pages.value"
-                />
-                <div class="time-settings-fromto">
-                  {{ 'widgetsList.editor.autoinvite.pages.suffix' | translate }}
-                </div>
               </div>
             </div>
             <!-- END Autoinvite pages -->
@@ -490,22 +478,23 @@
             <!-- Autoinvite: seconds -->
             <div class="border-item mt-3">
               <div class="d-flex justify-content-between align-items-center">
-                <h4
-                  class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}</h4>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4 class="widgets-settings-subtitle">
+                    {{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}
+                  </h4>
+                  <div
+                    class="d-flex"
+                    [ngClass]="(widget.autoinvite.seconds.value <= 0) ? 'is-invalid' : ''"
+                  >
+                    <input style="float: left; width: 70px;" class="form-control" type="number" min="1"
+                           [(ngModel)]="widget.autoinvite.seconds.value"/>
+                  </div>
+                  <h4 class="widgets-settings-subtitle ml-2">
+                    {{ 'widgetsList.editor.autoinvite.seconds.suffix' | translate }}
+                  </h4>
+                </div>
 
                 <ui-switch size="small" [(ngModel)]="widget.autoinvite.seconds.enable"></ui-switch>
-              </div>
-
-              <div
-                *ngIf="widget.autoinvite.seconds?.enable"
-                class="d-flex mt-1"
-                [ngClass]="(widget.autoinvite.seconds.value <= 0) ? 'is-invalid' : ''"
-              >
-                <input style="float: left; width: 70px;" class="form-control" type="number" min="1"
-                       [(ngModel)]="widget.autoinvite.seconds.value"/>
-                <div class="time-settings-fromto">
-                  {{ 'widgetsList.editor.autoinvite.seconds.suffix' | translate }}
-                </div>
               </div>
             </div>
             <!-- End Autoinvite seconds -->
@@ -513,25 +502,25 @@
             <!-- Autoinvite: inactive -->
             <div class="border-item mt-3">
               <div class="d-flex justify-content-between align-items-center">
-                <h4 class="widgets-settings-subtitle">
-                  {{ 'widgetsList.editor.autoinvite.inactive.enabled' | translate }}
-                  <span class="label label-warning tariff-info ml-2">окупаемый</span>
-                </h4>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4 class="widgets-settings-subtitle">
+                    {{ 'widgetsList.editor.autoinvite.inactive.enabled' | translate }}
+                  </h4>
+                  <div
+                    class="d-flex mt-1"
+                    [ngClass]="(widget.autoinvite.inactive.value <= 0) ? 'is-invalid' : ''"
+                  >
+                    <input style="float: left; width: 70px;" class="form-control" type="number" min="1"
+                           [(ngModel)]="widget.autoinvite.inactive.value"/>
+                  </div>
+                  <h4 class="widgets-settings-subtitle ml-2">
+                    {{ 'widgetsList.editor.autoinvite.inactive.suffix' | translate }}
+                    <span class="label label-warning tariff-info ml-2">окупаемый</span>
+                  </h4>
+                </div>
 
                 <ui-switch size="small" [(ngModel)]="widget.autoinvite.inactive.enabled"
                            (change)="onChangePayment"></ui-switch>
-              </div>
-
-              <div
-                *ngIf="widget.autoinvite.inactive?.enabled"
-                class="d-flex mt-1"
-                [ngClass]="(widget.autoinvite.inactive.value <= 0) ? 'is-invalid' : ''"
-              >
-                <input style="float: left; width: 70px;" class="form-control" type="number" min="1"
-                       [(ngModel)]="widget.autoinvite.inactive.value"/>
-                <div class="time-settings-fromto">
-                  {{ 'widgetsList.editor.autoinvite.inactive.suffix' | translate }}
-                </div>
               </div>
             </div>
             <!-- End Autoinvite: inactive -->
@@ -539,25 +528,25 @@
             <!-- Autoinvite: percent -->
             <div class="border-item mt-3">
               <div class="d-flex justify-content-between align-items-center">
-                <h4 class="widgets-settings-subtitle">
-                  {{ 'widgetsList.editor.autoinvite.percent.enable' | translate }}
-                  <span class="label label-warning tariff-info ml-2">окупаемый</span>
-                </h4>
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4 class="widgets-settings-subtitle">
+                    {{ 'widgetsList.editor.autoinvite.percent.enable' | translate }}
+                  </h4>
+                  <div
+                    class="d-flex mt-1"
+                    [ngClass]="(widget.autoinvite.percent.value <= 0) ? 'is-invalid' : ''"
+                  >
+                    <input style="float: left; width: 70px;" class="form-control" type="number" min="1" max="100"
+                           [(ngModel)]="widget.autoinvite.percent.value"/>
+                  </div>
+                  <h4 class="widgets-settings-subtitle ml-2">
+                    {{ 'widgetsList.editor.autoinvite.percent.suffix' | translate }}
+                    <span class="label label-warning tariff-info ml-2">окупаемый</span>
+                  </h4>
+                </div>
 
                 <ui-switch size="small" [(ngModel)]="widget.autoinvite.percent.enable"
                            (change)="onChangePayment"></ui-switch>
-              </div>
-
-              <div
-                *ngIf="widget.autoinvite.percent?.enable"
-                class="d-flex mt-1"
-                [ngClass]="(widget.autoinvite.percent.value <= 0) ? 'is-invalid' : ''"
-              >
-                <input style="float: left; width: 70px;" class="form-control" type="number" min="1" max="100"
-                       [(ngModel)]="widget.autoinvite.percent.value"/>
-                <div class="time-settings-fromto">
-                  {{ 'widgetsList.editor.autoinvite.percent.suffix' | translate }}
-                </div>
               </div>
             </div>
             <!-- End Autoinvite: percent -->
