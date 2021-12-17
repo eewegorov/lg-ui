@@ -18,7 +18,7 @@
     <div class="pb-5">
       <!-- Section Audience -->
       <div
-        *ngIf="currentCategory === widgetSettingsCategories[0]"
+        [hidden]="currentCategory !== widgetSettingsCategories[0]"
         id="audience"
       >
         <app-constructor-audiences
@@ -29,7 +29,7 @@
 
       <!-- Section Targeting -->
       <div
-        *ngIf="currentCategory === widgetSettingsCategories[1]"
+        [hidden]="currentCategory !== widgetSettingsCategories[1]"
         id="targeting"
         class="d-flex"
       >
@@ -51,9 +51,9 @@
             </div>
 
             <ng-container *ngIf="widget.rules.pages?.enable">
-              <div *ngFor="let item of widget.rules['pages'].items; index as i" class="row row-subitem width-900 mt-2">
-                <div class="col-sm-3 row-subitem-padding pt-1">
-                  <label class="control-label">{{ 'widgetsList.editor.rules.widget' | translate }}:</label>
+              <div *ngFor="let item of widget.rules['pages'].items; index as i" class="d-flex row-subitem mt-2">
+                <div class="d-flex row-subitem-padding pt-1">
+                  <label class="control-label f-3">{{ 'widgetsList.editor.rules.widget' | translate }}</label>
                   <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
                             aria-expanded="true">
@@ -74,9 +74,8 @@
                     </ul>
                   </div>
                 </div>
-                <div class="col-sm-3 row-subitem-padding pt-1">
-                  <label class="control-label">{{ 'widgetsList.editor.rules.pageTargeting.pageInfo' | translate }}
-                    :</label>
+                <div class="d-flex row-subitem-padding pt-1">
+                  <label class="control-label f-3">{{ 'widgetsList.editor.rules.pageTargeting.pageInfo' | translate }}</label>
                   <div class="dropdown">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                             aria-expanded="true">
@@ -112,11 +111,8 @@
                     </ul>
                   </div>
                 </div>
-                <div class="col-sm-6 form-group row-subitem-padding pt-1">
-                  <label class="control-label input-with-remove" style="display: block;">
-                    {{ 'widgetsList.editor.rules.pageTargeting.urlortitle' | translate }}:
-                  </label>
-                  <div class="input-group input-with-remove" [ngClass]="(item.value.length == 0) ? 'is-invalid' : ''">
+                <div class="d-flex form-group row-subitem-padding pt-1">
+                  <div class="input-group" [ngClass]="(item.value.length == 0) ? 'is-invalid' : ''">
                     <div class="input-group-prepend">
                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                               aria-haspopup="true" aria-expanded="false">
@@ -135,21 +131,14 @@
                     </div>
                     <input type="text" class="form-control" [(ngModel)]="item.value">
                   </div>
-                  <div class="remove-sub-item-rules mr-2">
-                    <a (click)="addPageRuleItem()" href="javascript:void(0);">
-                      <i class="remove-sub-item-rules colored-blue ml-2 pe-7s-plus"></i>
-                    </a>
+                  <div *ngIf="widget.rules['pages'].items.length > 1" class="remove-sub-item">
+                    <button class="delete-element-button" (click)="removePageRuleItem(i)">&times;</button>
                   </div>
-                  <div *ngIf="widget.rules['pages'].items.length > 1" class="remove-sub-item-rules mr-2">
-                    <a (click)="removePageRuleItem(i)" href="javascript:void(0);">
-                      <i class="remove-sub-item-rules colored-red ml-2 pe-7s-close-circle"></i>
-                    </a>
-                  </div>
-                  <span class="underow-comment combo-box-underow-comment-comment">
-              {{ 'widgetsList.editor.rules.pageTargeting.url.tooltip' | translate }}
-            </span>
                 </div>
               </div>
+              <button class="btn-default widget-content-add-btn" (click)="addPageRuleItem()">
+                <img src="assets/images/widgets/plus.svg" alt="add element" /> Добавить страницу
+              </button>
             </ng-container>
           </div>
           <!-- END Page rule item -->
@@ -432,10 +421,10 @@
         </div>
       </div>
 
-      <div *ngIf="!isContainerized">
+      <div [hidden]="isContainerized">
         <!-- Section Autoinvite -->
         <div
-          *ngIf="currentCategory === widgetSettingsCategories[2]"
+          [hidden]="currentCategory !== widgetSettingsCategories[2]"
           id="autoinvite"
           class="d-flex"
         >
@@ -673,7 +662,7 @@
 
         <!-- Section Restrictions -->
         <div
-          *ngIf="currentCategory === widgetSettingsCategories[3]"
+          [hidden]="currentCategory !== widgetSettingsCategories[3]"
           id="restrictions"
           class="col-lg-8"
         >
@@ -905,7 +894,7 @@
 
       <!-- Section Autoresponder -->
       <div
-        *ngIf="(!isContainerized && (currentCategory === widgetSettingsCategories[4])) || (isContainerized && (currentCategory === widgetSettingsCategories[2]))"
+        [hidden]="(!isContainerized && (currentCategory !== widgetSettingsCategories[4])) || (isContainerized && (currentCategory !== widgetSettingsCategories[2]))"
         id="autoresponder"
         class="d-flex"
       >
@@ -955,7 +944,7 @@
 
       <!-- Section JS Code Actions -->
       <div
-        *ngIf="(!isContainerized && (currentCategory === widgetSettingsCategories[5])) || (isContainerized && (currentCategory === widgetSettingsCategories[3]))"
+        [hidden]="(!isContainerized && (currentCategory !== widgetSettingsCategories[5])) || (isContainerized && (currentCategory !== widgetSettingsCategories[3]))"
         id="javascript"
         class="d-flex"
       >
@@ -1035,7 +1024,7 @@
 
       <!-- Section Integrations -->
       <div
-        *ngIf="(!isContainerized && (currentCategory === widgetSettingsCategories[6])) || (isContainerized && (currentCategory === widgetSettingsCategories[4]))"
+        [hidden]="(!isContainerized && (currentCategory !== widgetSettingsCategories[6])) || (isContainerized && (currentCategory !== widgetSettingsCategories[4]))"
         id="integrations"
       >
         <app-constructor-integrations

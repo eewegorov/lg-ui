@@ -165,7 +165,7 @@
   </div>
 
   <div
-    [hidden]="!isCurrentActiveTab('rules')"
+    *ngIf="isCurrentActiveTab('rules')"
     id="rules"
     [ngClass]="{ active: isCurrentActiveTab('rules') }"
   >
