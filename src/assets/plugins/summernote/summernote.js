@@ -5318,7 +5318,9 @@
 
             this.lineHeight = this.wrapCommand(function (value) {
               _this.style.stylePara(_this.getLastRange(), {
-                lineHeight: value
+                lineHeight: value,
+                marginTop: (-value + 1) * 5 + 'px',
+                marginBottom: (-value + 1) * 5 + 'px'
               });
             });
             /**
