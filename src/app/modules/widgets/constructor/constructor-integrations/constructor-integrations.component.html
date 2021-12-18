@@ -1,136 +1,119 @@
 <div class="widgets-settings-container flex-column col-lg-8">
   <h1>{{ 'widgetsList.editor.integrations.title' | translate }}</h1>
 
-  <div class="integrations-switcher-component-item">
-    <div class="toolbar-content p-0 pt-4">
-      <div class="row w-100 mb-3">
-        <div class="audience-tooolbar-switcher">
-          <ui-switch
-            [(ngModel)]="widget.sendCrm"
-            class="mt-1 mr-2 float-left"
-          ></ui-switch><h3 class="mt-1">{{ 'widgetsList.editor.integrations.crmSwitcher.title' | translate }}</h3>
-        </div>
-      </div>
+  <div class="integrations-switcher-component-item mt-1 border-item">
+    <div class="d-flex justify-content-between align-items-center">
+      <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.integrations.crmSwitcher.title' | translate }}</h4>
+      <ui-switch size="small" [(ngModel)]="widget.sendCrm"></ui-switch>
     </div>
+
     <div
-      class="audience-tooolbar-desc integration-tooolbar-desc"
+      class="audience-tooolbar-desc mt-2 mb-2"
       [innerHTML]="'widgetsList.editor.integrations.crmSwitcher.desc' | translate"
     ></div>
   </div>
 
-  <div class="integrations-switcher-component-item">
-    <div class="toolbar-content p-0 pt-4">
-      <div class="row w-100 mb-3">
-        <div class="audience-tooolbar-switcher">
-          <ui-switch
-            [(ngModel)]="widget.useCustomIntegrationsList"
-            class="mt-1 mr-2 float-left"
-          ></ui-switch><h3 class="mt-1">{{ 'widgetsList.editor.integrations.mainSwitcher' | translate }}</h3>
-        </div>
-      </div>
+  <div class="integrations-switcher-component-item mt-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.integrations.mainSwitcher' | translate }}</h4>
+      <ui-switch size="small" [(ngModel)]="widget.useCustomIntegrationsList"></ui-switch>
     </div>
+
     <div
-      class="audience-tooolbar-desc integration-tooolbar-desc"
+      class="audience-tooolbar-desc mt-2"
       [innerHTML]="'widgetsList.editor.integrations.description' | translate"
     ></div>
   </div>
 
-  <div *ngIf="widget.useCustomIntegrationsList" class="pt-4 pb-3 intagrations-container">
+  <div *ngIf="widget.useCustomIntegrationsList" class="integrations-container">
     <!-- Integration item -->
-    <div *ngFor="let item of wIntegrations; index as i" class="row row-subitem width-900 mt-2">
-      <div class="col-sm-9 row-subitem-padding pt-1 integration-item-wr">
-        <div class="integration-item__main integration-item__main-list">
-          <div class="integration-item__icon_wr">
-            <div class="integration-item__icon integration-item__icon--{{ item.type }}"></div>
-          </div>
-          <div class="integration-item__name">{{ item.name }}</div>
+    <div *ngFor="let item of wIntegrations; index as i" class="mt-3">
+      <div class="integration-item__main integration-item__main-list">
+        <div class="integration-item__icon_wr">
+          <div class="integration-item__icon integration-item__icon--{{ item.type }}"></div>
         </div>
-        <div class="integration-item__extra">
-          <div class="remove-sub-item-integration">
-            <a
-              (click)="removeIntegrationItem(i)"
-              href="javascript:void(0);"
-              data-container="body" data-toggle="tooltip" data-placement="top"
-              title="{{ 'settings.site.tabs.integration.tooltip.remove' | translate }}"
-            >
-              <i class="colored-red col-sm-1 pe-7s-close-circle"></i>
-            </a>
-          </div>
+        <div class="integration-item__name">{{ item.name }}</div>
+      </div>
+      <div class="integration-item__extra">
+        <div class="remove-sub-item-integration">
+          <a
+            (click)="removeIntegrationItem(i)"
+            href="javascript:void(0);"
+            data-container="body" data-toggle="tooltip" data-placement="top"
+            title="{{ 'settings.site.tabs.integration.tooltip.remove' | translate }}"
+          >
+            <i class="colored-red col-sm-1 pe-7s-close-circle"></i>
+          </a>
         </div>
       </div>
     </div>
 
-    <div class="row row-subitem width-900 mt-2">
-      <div class="col-sm-9 pt-1 integration-item-wr">
-        <div class="integration-item__main">
-          <div class="dropdown integration-selector dropup">
-            <button
-              type="button"
-              class="btn btn-default dropdown-toggle"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="true"
+    <div class="mt-3">
+      <div class="integration-item__main">
+        <div class="dropdown integration-selector dropdown">
+          <button
+            type="button"
+            class="btn btn-default dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="true"
+          >
+            <span *ngIf="!currentIntegrationToAdd.type" class="dropdown-selected-cropp">
+              {{ defIntegrationToAddTitle }}
+            </span>
+            <span
+              *ngIf="currentIntegrationToAdd.type"
+              class="dropdown-selected-cropp integration-selector-item {{ currentIntegrationToAdd.type }}"
             >
-              <span *ngIf="!currentIntegrationToAdd.type" class="dropdown-selected-cropp">
-                {{ defIntegrationToAddTitle }}
-              </span>
-              <span
-                *ngIf="currentIntegrationToAdd.type"
-                class="dropdown-selected-cropp integration-selector-item {{ currentIntegrationToAdd.type }}"
-              >
-                {{ currentIntegrationToAdd.name }}
-              </span>
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu dropdown-integration-max-240h">
-              <span *ngIf="integrationsAvailableMailing.length" class="integration-selector-group">
-                {{ 'settings.site.newIntegration.group.mailing' | translate }}
-              </span>
-              <li *ngFor="let item of integrationsAvailableMailing" (click)="changeIntegrationToAdd(item)">
-                <a class="integration-selector-item {{ item.type }}"
-                >{{ item.name || defIntegrationToAddTitle }} <span
-                  *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
-                </a>
-              </li>
-              <span *ngIf="integrationsAvailableCRM.length" class="integration-selector-group">
-                {{ 'settings.site.newIntegration.group.crm' | translate }}
-              </span>
-              <li *ngFor="let item of integrationsAvailableCRM" (click)="changeIntegrationToAdd(item)">
-                <a class="integration-selector-item {{ item.type }}"
-                >{{ item.name || defIntegrationToAddTitle }} <span
-                  *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
-                </a>
-              </li>
-              <span *ngIf="integrationsAvailableNotifications.length" class="integration-selector-group">
-                {{'settings.site.newIntegration.group.notification' | translate }}
-              </span>
-              <li *ngFor="let item of integrationsAvailableNotifications" (click)="changeIntegrationToAdd(item)">
-                <a class="integration-selector-item {{ item.type }}"
-                >{{ item.name || defIntegrationToAddTitle }} <span
-                  *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
-                </a>
-              </li>
-              <span *ngIf="integrationsAvailableOthers.length" class="integration-selector-group">
-                {{ 'settings.site.newIntegration.group.others' | translate }}
-              </span>
-              <li *ngFor="let item of integrationsAvailableOthers" (click)="changeIntegrationToAdd(item)">
-                <a class="integration-selector-item {{item.type}}"
-                >{{ item.name || defIntegrationToAddTitle }} <span
-                  *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+              {{ currentIntegrationToAdd.name }}
+            </span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-integration-max-240h">
+            <span *ngIf="integrationsAvailableMailing.length" class="integration-selector-group">
+              {{ 'settings.site.newIntegration.group.mailing' | translate }}
+            </span>
+            <li *ngFor="let item of integrationsAvailableMailing" (click)="changeIntegrationToAdd(item)">
+              <a class="integration-selector-item {{ item.type }}"
+              >{{ item.name || defIntegrationToAddTitle }} <span
+                *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+              </a>
+            </li>
+            <span *ngIf="integrationsAvailableCRM.length" class="integration-selector-group">
+              {{ 'settings.site.newIntegration.group.crm' | translate }}
+            </span>
+            <li *ngFor="let item of integrationsAvailableCRM" (click)="changeIntegrationToAdd(item)">
+              <a class="integration-selector-item {{ item.type }}"
+              >{{ item.name || defIntegrationToAddTitle }} <span
+                *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+              </a>
+            </li>
+            <span *ngIf="integrationsAvailableNotifications.length" class="integration-selector-group">
+              {{'settings.site.newIntegration.group.notification' | translate }}
+            </span>
+            <li *ngFor="let item of integrationsAvailableNotifications" (click)="changeIntegrationToAdd(item)">
+              <a class="integration-selector-item {{ item.type }}"
+              >{{ item.name || defIntegrationToAddTitle }} <span
+                *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+              </a>
+            </li>
+            <span *ngIf="integrationsAvailableOthers.length" class="integration-selector-group">
+              {{ 'settings.site.newIntegration.group.others' | translate }}
+            </span>
+            <li *ngFor="let item of integrationsAvailableOthers" (click)="changeIntegrationToAdd(item)">
+              <a class="integration-selector-item {{item.type}}"
+              >{{ item.name || defIntegrationToAddTitle }} <span
+                *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+              </a>
+            </li>
+          </ul>
         </div>
-
-      </div>
     </div>
-    <div class="row row-subitem width-900">
-      <div class="col-sm-9 row-subitem-padding integration-constructor-new-one-btn">
-        <a (click)="openModalForCreatingNewIntegration()" href="javascript:void(0);">
-          <i class="fa fa-plus colored-green"></i> {{ 'widgetsList.editor.integrations.createNewIntegration' | translate }}
-        </a>
-      </div>
+    </div>
+    <div class="mt-3">
+      <button class="btn-default widget-content-add-btn" (click)="openModalForCreatingNewIntegration()">
+        <img src="assets/images/widgets/plus.svg" alt="add element" /> {{ 'widgetsList.editor.integrations.createNewIntegration' | translate }}
+      </button>
     </div>
     <!-- END Integration item -->
   </div>
