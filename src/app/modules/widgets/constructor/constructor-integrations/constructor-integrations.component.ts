@@ -1,11 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Integration } from '../../../../core/models/sites';
 import { FullWidget } from '../../../../core/models/widgets';
 import { SitesService } from '../../../sites/services/sites.service';
-import { WidgetService } from '../../services/widget.service';
 import { IntegrationAddComponent } from '../../../sites/integration-add/integration-add.component';
 
 @Component({
@@ -25,19 +23,14 @@ export class ConstructorIntegrationsComponent implements OnInit, OnDestroy {
   public currentIntegrationToAdd: Integration = {} as Integration;
   public defIntegrationToAddTitle: string;
 
-  private loadWidgetToControllerSub: SubscriptionLike;
-
   constructor(
     private translate: TranslateService,
     private modalService: NgbModal,
-    private sitesService: SitesService,
-    private widgetService: WidgetService
+    private sitesService: SitesService
   ) { }
 
   ngOnInit(): void {
-    this.loadWidgetToControllerSub = this.widgetService.loadWidgetToController.subscribe(() => {
-      this.getIntegrations();
-    });
+    this.getIntegrations();
 
     this.translate.get('widgetsList.editor.integrations.defSelectTitle').subscribe((translatedValue: string) => {
       this.defIntegrationToAddTitle = translatedValue;

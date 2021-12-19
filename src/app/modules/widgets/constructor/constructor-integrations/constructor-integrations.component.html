@@ -53,16 +53,16 @@
         <div class="dropdown integration-selector dropdown">
           <button
             type="button"
-            class="btn btn-default dropdown-toggle"
+            class="btn btn-default dropdown-toggle d-flex justify-content-between pt-1"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="true"
           >
-            <span *ngIf="!currentIntegrationToAdd.type" class="dropdown-selected-cropp">
+            <span *ngIf="!currentIntegrationToAdd?.type" class="dropdown-selected-cropp">
               {{ defIntegrationToAddTitle }}
             </span>
             <span
-              *ngIf="currentIntegrationToAdd.type"
+              *ngIf="currentIntegrationToAdd?.type"
               class="dropdown-selected-cropp integration-selector-item {{ currentIntegrationToAdd.type }}"
             >
               {{ currentIntegrationToAdd.name }}
@@ -108,7 +108,7 @@
             </li>
           </ul>
         </div>
-    </div>
+      </div>
     </div>
     <div class="mt-3">
       <button class="btn-default widget-content-add-btn" (click)="openModalForCreatingNewIntegration()">
