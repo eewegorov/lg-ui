@@ -45,65 +45,63 @@
     </div>
 
     <div class="mt-3">
-      <div class="integration-item__main">
-        <div class="dropdown integration-selector dropdown">
-          <button
-            type="button"
-            class="btn btn-default dropdown-toggle d-flex justify-content-between pt-1"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="true"
-          >
+      <div class="dropdown integration-selector dropdown">
+        <button
+          type="button"
+          class="btn btn-default dropdown-toggle d-flex justify-content-between pt-1"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="true"
+        >
             <span *ngIf="!currentIntegrationToAdd?.type" class="dropdown-selected-cropp">
               {{ defIntegrationToAddTitle }}
             </span>
-            <span
-              *ngIf="currentIntegrationToAdd?.type"
-              class="dropdown-selected-cropp integration-selector-item {{ currentIntegrationToAdd.type }}"
-            >
+          <span
+            *ngIf="currentIntegrationToAdd?.type"
+            class="dropdown-selected-cropp integration-selector-item {{ currentIntegrationToAdd.type }}"
+          >
               {{ currentIntegrationToAdd.name }}
             </span>
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu dropdown-integration-max-240h">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-integration-max-240h">
             <span *ngIf="integrationsAvailableMailing.length" class="integration-selector-group">
               {{ 'settings.site.newIntegration.group.mailing' | translate }}
             </span>
-            <li *ngFor="let item of integrationsAvailableMailing" (click)="changeIntegrationToAdd(item)">
-              <a class="integration-selector-item {{ item.type }}"
-              >{{ item.name || defIntegrationToAddTitle }} <span
-                *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
-              </a>
-            </li>
-            <span *ngIf="integrationsAvailableCRM.length" class="integration-selector-group">
+          <li *ngFor="let item of integrationsAvailableMailing" (click)="changeIntegrationToAdd(item)">
+            <a class="integration-selector-item {{ item.type }}"
+            >{{ item.name || defIntegrationToAddTitle }} <span
+              *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+            </a>
+          </li>
+          <span *ngIf="integrationsAvailableCRM.length" class="integration-selector-group">
               {{ 'settings.site.newIntegration.group.crm' | translate }}
             </span>
-            <li *ngFor="let item of integrationsAvailableCRM" (click)="changeIntegrationToAdd(item)">
-              <a class="integration-selector-item {{ item.type }}"
-              >{{ item.name || defIntegrationToAddTitle }} <span
-                *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
-              </a>
-            </li>
-            <span *ngIf="integrationsAvailableNotifications.length" class="integration-selector-group">
+          <li *ngFor="let item of integrationsAvailableCRM" (click)="changeIntegrationToAdd(item)">
+            <a class="integration-selector-item {{ item.type }}"
+            >{{ item.name || defIntegrationToAddTitle }} <span
+              *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+            </a>
+          </li>
+          <span *ngIf="integrationsAvailableNotifications.length" class="integration-selector-group">
               {{'settings.site.newIntegration.group.notification' | translate }}
             </span>
-            <li *ngFor="let item of integrationsAvailableNotifications" (click)="changeIntegrationToAdd(item)">
-              <a class="integration-selector-item {{ item.type }}"
-              >{{ item.name || defIntegrationToAddTitle }} <span
-                *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
-              </a>
-            </li>
-            <span *ngIf="integrationsAvailableOthers.length" class="integration-selector-group">
+          <li *ngFor="let item of integrationsAvailableNotifications" (click)="changeIntegrationToAdd(item)">
+            <a class="integration-selector-item {{ item.type }}"
+            >{{ item.name || defIntegrationToAddTitle }} <span
+              *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+            </a>
+          </li>
+          <span *ngIf="integrationsAvailableOthers.length" class="integration-selector-group">
               {{ 'settings.site.newIntegration.group.others' | translate }}
             </span>
-            <li *ngFor="let item of integrationsAvailableOthers" (click)="changeIntegrationToAdd(item)">
-              <a class="integration-selector-item {{item.type}}"
-              >{{ item.name || defIntegrationToAddTitle }} <span
-                *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+          <li *ngFor="let item of integrationsAvailableOthers" (click)="changeIntegrationToAdd(item)">
+            <a class="integration-selector-item {{item.type}}"
+            >{{ item.name || defIntegrationToAddTitle }} <span
+              *ngIf="item.isPayment" class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="mt-3">

@@ -18,6 +18,14 @@
   display: flex;
 }
 
+.integration-selector {
+  max-width: 60%;
+
+  button {
+    width: 100%;
+  }
+}
+
 .integration-item__name {
   line-height: 30px;
   margin-left: 10px;
