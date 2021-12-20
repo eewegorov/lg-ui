@@ -27,23 +27,19 @@
 
   <div *ngIf="widget.useCustomIntegrationsList" class="integrations-container">
     <!-- Integration item -->
-    <div *ngFor="let item of wIntegrations; index as i" class="mt-3">
-      <div class="integration-item__main integration-item__main-list">
+    <div
+      *ngFor="let item of wIntegrations; index as i"
+      class="d-flex justify-content-between align-content-center integration-item__main mt-3"
+    >
+      <div class="d-flex">
         <div class="integration-item__icon_wr">
           <div class="integration-item__icon integration-item__icon--{{ item.type }}"></div>
         </div>
         <div class="integration-item__name">{{ item.name }}</div>
       </div>
       <div class="integration-item__extra">
-        <div class="remove-sub-item-integration">
-          <a
-            (click)="removeIntegrationItem(i)"
-            href="javascript:void(0);"
-            data-container="body" data-toggle="tooltip" data-placement="top"
-            title="{{ 'settings.site.tabs.integration.tooltip.remove' | translate }}"
-          >
-            <i class="colored-red col-sm-1 pe-7s-close-circle"></i>
-          </a>
+        <div class="remove-sub-item">
+          <button class="delete-element-button" (click)="removeIntegrationItem(i)">&times;</button>
         </div>
       </div>
     </div>
