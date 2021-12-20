@@ -186,6 +186,11 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     return Object.keys(this.units);
   }
 
+  public changeExitIntent(value: boolean): void {
+    this.widget.autoinvite.exit.desktopEnable = value;
+    this.widget.autoinvite.exit.mobileEnable = value;
+  }
+
   private validator() {
     const errors = [];
     const TAB_ID = 'rules';
