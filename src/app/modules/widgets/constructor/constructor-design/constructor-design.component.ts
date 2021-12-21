@@ -18,7 +18,7 @@ import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
 import { Coupon } from '../../../../core/models/coupons';
 import { environment } from '../../../../../environments/environment';
-import { FullWidget, Image, WidgetType, WidgetTypeCode } from '../../../../core/models/widgets';
+import { FullWidget, Image, Images, WidgetType, WidgetTypeCode } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
 import { WidgetService } from '../../services/widget.service';
@@ -134,6 +134,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   ngAfterViewInit(): void {
     this.autoUploadSub = this.flow?.events$.subscribe(event => {
       if (event.type === 'filesSubmitted') {
+        this.isLoading = true;
         this.widgetConstructorService.uploadImage(this.sid, event.event[0][0]).subscribe(() => {
           if (this.imagesSub) {
             this.imagesSub.unsubscribe();
@@ -1631,23 +1632,22 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   private getImages(sid: string): void {
-    this.imagesSub = this.widgetConstructorService.getImages(sid).subscribe((data: Image[]) => {
-      this.fillListImage(data);
+    this.imagesSub = this.widgetConstructorService.getImages(sid).subscribe((data: Images) => {
+      this.fillListImage(data.images);
     });
   }
 
-  private fillListImage(data) {
-    if (data.length === 0) {
+  private fillListImage(images: Image[]) {
+    if (images.length === 0) {
       $('#addNewWidgetListModal .modal-body').find('h4').html('У вас еще нет загруженных изображений');
     } else {
       $('#addNewWidgetListModal .modal-body').find('h4').html('Загруженные изображения');
     }
 
-    const images = data;
     $('#listImagesBlock').html('');
     for (const item of images) {
       const link = item.link.replace('imaginarium', 'imaginarium');
-      const name = item.name;
+      const name = item.filename;
       $('#listImagesBlock').append('<div class="imageGlItem" data-link="' + link + '" data-id="' + name + '"><div class="imageGlItemIn"><div class="imageItem" style="background: url(' + link + ') center no-repeat; background-size:cover"></div></div><div class="delete-cur-img-btn" data-del="' + name + '"><span></span></div></div>');
     }
 
@@ -1671,7 +1671,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     $('.delete-cur-img-btn').on('click', function() {
       const delUrl = $(this).parent('.imageGlItem').data('link');
       scope.nameImage = $(this).data('del');
-      const listUrl = `imagestore/${scope.sid}/${scope.nameImage}/`;
 
       if (delUrl === scope.widget.guiprops.image.url) {
         if (scope.widget.guiprops.image.enable === true) {
@@ -1679,7 +1678,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           return false;
         } else {
           scope.widget.guiprops.image.url = 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg';
-          scope.deleteFileToUrl(listUrl, scope.nameImage);
+          scope.deleteImage(scope.sid, scope.nameImage);
           return false;
         }
       } else if (delUrl === scope.widget.guiprops.dhVisual.url) {
@@ -1688,7 +1687,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           return false;
         } else {
           scope.widget.guiprops.dhVisual.url = 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg';
-          scope.deleteFileToUrl(listUrl, scope.nameImage);
+          scope.deleteImage(scope.sid, scope.nameImage);
           return false;
         }
       } else if (delUrl === scope.widget.guiprops.labelMain.url) {
@@ -1697,7 +1696,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           return false;
         } else {
           scope.widget.guiprops.labelMain.url = 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg';
-          scope.deleteFileToUrl(listUrl, scope.nameImage);
+          scope.deleteImage(scope.sid, scope.nameImage);
           return false;
         }
       } else if (delUrl === scope.widget.guiprops.bg.url) {
@@ -1706,24 +1705,19 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           return false;
         } else {
           scope.widget.guiprops.bg.url = 'https://static.leadgenic.com/lg_widgets_l11/img/land.jpg';
-          scope.deleteFileToUrl(listUrl, scope.nameImage);
+          scope.deleteImage(scope.sid, scope.nameImage);
           return false;
         }
       } else {
-        scope.deleteFileToUrl(listUrl, scope.nameImage);
+        scope.deleteImage(scope.sid, scope.nameImage);
       }
     });
   }
 
-  private deleteFileToUrl(deleteFileUrl, name) {
-    this.widgetConstructorService.deleteFileToUrl(deleteFileUrl, name).subscribe(() => {
-      this.listFileIfOpen();
+  private deleteImage(siteId: string, filename: string): void {
+    this.widgetConstructorService.deleteImage(siteId, filename).subscribe(() => {
+      this.getImages(siteId);
     });
-  }
-
-  private listFileIfOpen() {
-    const listUrl = `imagestore/${this.sid}`;
-    this.getImages(listUrl);
   }
 
   private updateFileDB() {

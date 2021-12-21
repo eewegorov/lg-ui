@@ -4,7 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { ApiResponse } from '../../../core/models/api';
-import { Image, ImagesResponse, ImageUploadResponse } from '../../../core/models/widgets';
+import { Image, Images, ImagesResponse, ImageUploadResponse } from '../../../core/models/widgets';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { UtilsService } from '../../../core/services/utils.service';
 import { WidgetApiService } from './widget-api.service';
@@ -27,9 +27,9 @@ export class WidgetConstructorService {
   ) {
   }
 
-  public getImages(siteId: string): Observable<Image[]> {
+  public getImages(siteId: string): Observable<Images> {
     return this.widgetApiService.getImages(siteId).pipe(
-      map((response: ImagesResponse) => response.images),
+      map((response: ImagesResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }
@@ -44,8 +44,8 @@ export class WidgetConstructorService {
     );
   }
 
-  public deleteFileToUrl(deleteFileUrl, name): Observable<boolean> {
-    return this.widgetApiService.deleteFileToUrl(deleteFileUrl, name).pipe(
+  public deleteImage(siteId: string, filename: string): Observable<boolean> {
+    return this.widgetApiService.deleteImage(siteId, filename).pipe(
       map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
     );

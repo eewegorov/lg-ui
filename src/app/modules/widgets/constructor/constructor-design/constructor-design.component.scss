@@ -306,61 +306,6 @@ h6.title-h6-widget a:hover {
   background-size: contain;
 }
 
-#listImagesBlock .imageGlItem {
-  display: inline-block;
-  margin: 10px 10px 0 0;
-  border: 1px solid transparent;
-  padding: 5px;
-  cursor: pointer;
-  position: relative;
-}
-
-#listImagesBlock .imageGlItem .delete-cur-img-btn {
-  position: absolute;
-  opacity: 0;
-  top: -6px;
-  right: -6px;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  z-index: 2;
-}
-
-#listImagesBlock .imageGlItem .delete-cur-img-btn span {
-  display: block;
-  width: 24px;
-  height: 24px;
-  background: url("~src/assets/images/widgets/delete_img_ic.png") center no-repeat;
-  background-size: contain;
-}
-
-#listImagesBlock .imageGlItem:hover .delete-cur-img-btn {
-  opacity: 1;
-}
-
-#listImagesBlock .imageItem {
-  width: 108px;
-  height: 108px;
-}
-
-#listImagesBlock .imageGlItemIn {
-  border: 3px solid transparent;
-  position: relative;
-  z-index: 1;
-}
-
-#listImagesBlock .imageGlItemIn.active {
-  background: #e5e5e5;
-  border-color: #4898A8;
-}
-
-.modal #listImagesBlock {
-  overflow: auto;
-  max-height: 275px;
-  padding-left: 0;
-  padding-right: 0;
-}
-
 .img-set-foot1 {
   padding: 15px 30px;
   border-bottom: 1px solid #e5e5e5;

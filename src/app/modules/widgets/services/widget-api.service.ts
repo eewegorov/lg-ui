@@ -146,7 +146,7 @@ export class WidgetApiService {
     return this.http.post<ImageUploadResponse>(`${ environment.url }/sites/${siteId}/images`, formData);
   }
 
-  public deleteFileToUrl(deleteFileUrl, name): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${ environment.url }/${deleteFileUrl}/${name}`);
+  public deleteImage(siteId: string, filename: string): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(`${ environment.url }/sites/${siteId}/images/${filename}`);
   }
 }
