@@ -1525,7 +1525,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     let counterNewCoupon = 0;
     let counterNewTimer = 0;
 
-    for (const item of this.widget.guiprops.elementsList) {
+    this.widget.guiprops.elementsList.forEach((item, index) => {
       if (item.name) {
         if (item.name === 'title-element') {
           counterNewText++;
@@ -1566,20 +1566,16 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           counterNewTimer++;
           item.counter = counterNewTimer;
         }
-      }
-    }
 
-    for (const item of this.widget.guiprops.elementsList) {
-      if (item.name) {
         if (item.name === 'iframe-element') {
-          this.buildIframeElement(item);
+          this.buildIframeElement(item, index, false);
         }
 
         if (item.name === 'video-element') {
           this.newVideoSize(item);
         }
       }
-    }
+    });
   }
 
   public closeModalImg() {
@@ -1916,21 +1912,23 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     });
   }
 
-  public buildIframeElement(item) {
+  public buildIframeElement(item, index: number, rebuild: boolean): void {
     setTimeout(() => {
       const elementToRemove = document.getElementById('idFrame' + item.counter);
+      const oldIndex = elementToRemove.getAttribute('index');
+
+      const iframeBlock = document.getElementById('elementIframeBlock' + item.counter);
+
+      if (!iframeBlock || (+oldIndex === index && !rebuild)) {
+        return;
+      }
 
       const ifrm = document.createElement('iframe');
       ifrm.setAttribute('src', 'about:blank');
       ifrm.setAttribute('frameBorder', '0');
       ifrm.setAttribute('id', 'idFrame' + item.counter);
       ifrm.setAttribute('style', 'position:relative!important;width:100%!important;height:100%!important;border:none!important');
-
-      const iframeBlock = document.getElementById('elementIframeBlock' + item.counter);
-
-      if (!iframeBlock) {
-        return;
-      }
+      ifrm.setAttribute('index', index.toString());
 
       iframeBlock.replaceChild(ifrm, elementToRemove);
 
