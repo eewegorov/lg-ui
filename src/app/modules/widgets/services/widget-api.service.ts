@@ -6,15 +6,24 @@ import { ApiResponse } from '../../../core/models/api';
 import {
   CompaniesResponse,
   CompanyRequest,
-  CompanyResponse, DeleteCompanyRequest, FullWidget, MockupGroupsResponse, MockupResponse, MockupsResponse,
+  CompanyResponse,
+  DeleteCompanyRequest,
+  FullWidget,
+  ImagesResponse, ImageUploadResponse,
+  MockupGroupsResponse,
+  MockupResponse,
+  MockupsResponse,
   SmartPointEnableRequest,
   SmartPointTypes,
   SmartPointUpdateRequest,
   WidgetChangeCompanyRequest,
   WidgetCloneRequest,
   WidgetCloneResponse,
-  WidgetConversionResponse, WidgetCreateRequest, WidgetCreateResponse,
-  WidgetRename, WidgetResponse,
+  WidgetConversionResponse,
+  WidgetCreateRequest,
+  WidgetCreateResponse,
+  WidgetRename,
+  WidgetResponse,
   WidgetsResponse,
   WidgetSwapRequest,
   WidgetTemplatesResponse,
@@ -129,8 +138,12 @@ export class WidgetApiService {
     return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/companies`, company);
   }
 
-  public listFileToUrl(listUrl) {
-    return this.http.get(`${ environment.url }/${listUrl}`);
+  public getImages(siteId: string): Observable<ImagesResponse> {
+    return this.http.get<ImagesResponse>(`${ environment.url }/sites/${siteId}/images`);
+  }
+
+  public uploadImage(siteId: string, formData: FormData): Observable<ImageUploadResponse> {
+    return this.http.post<ImageUploadResponse>(`${ environment.url }/sites/${siteId}/images`, formData);
   }
 
   public deleteFileToUrl(deleteFileUrl, name): Observable<ApiResponse> {

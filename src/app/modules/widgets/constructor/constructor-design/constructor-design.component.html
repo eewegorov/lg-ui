@@ -942,7 +942,7 @@
     </div>
   </div>
 
-  <ng-container #flowBasic="flow" [flowConfig]="{target: 'imagestore/' + sid}"></ng-container>
+  <ng-container #flowBasic="flow" [flowConfig]="{singleFile: true}"></ng-container>
 
   <div
     class="modal fade"
@@ -968,7 +968,7 @@
         </div>
         <div class="modal-footer p-0 flex-column">
           <div class="img-set-foot1">
-            <div class="dragDropBl">
+            <div class="dragDropBl drop-area" flowDrop [flow]="flowBasic.flowJs">
               <div class="upload-drag-icon"><i class="fa fa-upload"></i></div>
               <button
                 flowButton
@@ -981,13 +981,7 @@
                 <span class="ladda-label">Загрузить изображение</span>
               </button>
 
-              <div
-                class="drop-area"
-                flowDrop
-                [flow]="flowBasic.flowJs"
-              >
-                <span class="dragOr">или перетащите изображение сюда</span>
-              </div>
+              <span class="dragOr">или перетащите изображение сюда</span>
             </div>
           </div>
           <div class="d-flex justify-content-between w-100 p-2 pl-4 pr-4">

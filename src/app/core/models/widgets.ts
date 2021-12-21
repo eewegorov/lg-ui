@@ -347,4 +347,25 @@ export enum WidgetTypeCode {
   LabelWidget = 'label_widget'
 }
 
+export interface ImagesResponse {
+  images: Image[];
+  limits: ImageLimits;
+}
+
+export interface ImageUploadResponse extends ApiResponse {
+  data: Image;
+}
+
+export interface Image {
+  filename: string;
+  link: string;
+  size: number;
+}
+
+export interface ImageLimits {
+  storageMaxSize: number;
+  perImageSize: number;
+  maxImagesCount: number;
+}
+
 

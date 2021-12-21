@@ -17,7 +17,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
 import { Coupon } from '../../../../core/models/coupons';
-import { FullWidget, WidgetType, WidgetTypeCode } from '../../../../core/models/widgets';
+import { environment } from '../../../../../environments/environment';
+import { FullWidget, Image, WidgetType, WidgetTypeCode } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
 import { WidgetService } from '../../services/widget.service';
@@ -36,18 +37,18 @@ import { WidgetService } from '../../services/widget.service';
   ]
 })
 export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
-  @ViewChild('flow') public flow: FlowDirective;
+  @ViewChild('flowBasic') public flow: FlowDirective;
   @Input() public sid: string;
   @Input() public wid: string;
   @Input() public isPayment: boolean;
   @Input() public widget: FullWidget;
-  @Input() public image: any;
   @Input() public coupons: Coupon[];
   @Input() public isMockup: boolean;
   @Input() public isContainerized: boolean;
   @Input() private currentActiveTab: string;
   @Input() private SP_widget: any;
 
+  public environment = environment;
   public isLoading = false;
   public extendedElement: Record<string, any> = null;
   public extendedIndex: number = null;
@@ -117,7 +118,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   private blocks = [];
   private linkDetectArr = [];
 
-  private autoUploadSubscription: SubscriptionLike;
+  private autoUploadSub: SubscriptionLike;
+  private imagesSub: SubscriptionLike;
 
   constructor(
     private router: Router,
@@ -130,9 +132,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngAfterViewInit(): void {
-    this.autoUploadSubscription = this.flow?.events$.subscribe(event => {
+    this.autoUploadSub = this.flow?.events$.subscribe(event => {
       if (event.type === 'filesSubmitted') {
-        this.flow.upload();
+        this.widgetConstructorService.uploadImage(this.sid, event.event[0][0]).subscribe(() => {
+          if (this.imagesSub) {
+            this.imagesSub.unsubscribe();
+          }
+          this.getImages(this.sid);
+        });
       }
     });
     this.initLabelMainPicker();
@@ -1617,29 +1624,28 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       this.imageCustom = false;
     }
 
-    const listUrl = `sites/${this.sid}/images`;
-    this.listFileToUrl(listUrl);
+    this.getImages(this.sid);
 
     (this.controls.newModal as any).appendTo('body').modal('show');
     $('body').addClass('modal-open-h100');
   }
 
-  private listFileToUrl(listUrl) {
-    this.widgetConstructorService.listFileToUrl(listUrl).subscribe((data) => {
+  private getImages(sid: string): void {
+    this.imagesSub = this.widgetConstructorService.getImages(sid).subscribe((data: Image[]) => {
       this.fillListImage(data);
     });
   }
 
   private fillListImage(data) {
-    if (data.images.length === 0) {
+    if (data.length === 0) {
       $('#addNewWidgetListModal .modal-body').find('h4').html('У вас еще нет загруженных изображений');
     } else {
       $('#addNewWidgetListModal .modal-body').find('h4').html('Загруженные изображения');
     }
 
-    const response = data.images;
+    const images = data;
     $('#listImagesBlock').html('');
-    for (const item of response) {
+    for (const item of images) {
       const link = item.link.replace('imaginarium', 'imaginarium');
       const name = item.name;
       $('#listImagesBlock').append('<div class="imageGlItem" data-link="' + link + '" data-id="' + name + '"><div class="imageGlItemIn"><div class="imageItem" style="background: url(' + link + ') center no-repeat; background-size:cover"></div></div><div class="delete-cur-img-btn" data-del="' + name + '"><span></span></div></div>');
@@ -1717,7 +1723,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
   private listFileIfOpen() {
     const listUrl = `imagestore/${this.sid}`;
-    this.listFileToUrl(listUrl);
+    this.getImages(listUrl);
   }
 
   private updateFileDB() {
@@ -2077,8 +2083,12 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngOnDestroy(): void {
-    if (this.autoUploadSubscription) {
-      this.autoUploadSubscription.unsubscribe();
+    if (this.autoUploadSub) {
+      this.autoUploadSub.unsubscribe();
+    }
+
+    if (this.imagesSub) {
+      this.imagesSub.unsubscribe();
     }
   }
 

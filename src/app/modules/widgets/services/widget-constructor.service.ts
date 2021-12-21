@@ -4,6 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { ApiResponse } from '../../../core/models/api';
+import { Image, ImagesResponse, ImageUploadResponse } from '../../../core/models/widgets';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { UtilsService } from '../../../core/services/utils.service';
 import { WidgetApiService } from './widget-api.service';
@@ -26,9 +27,19 @@ export class WidgetConstructorService {
   ) {
   }
 
-  public listFileToUrl(listUrl) {
-    return this.widgetApiService.listFileToUrl(listUrl).pipe(
-      map((response: any) => response.data),
+  public getImages(siteId: string): Observable<Image[]> {
+    return this.widgetApiService.getImages(siteId).pipe(
+      map((response: ImagesResponse) => response.images),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public uploadImage(siteId: string, image: any): Observable<Image> {
+    const formData = new FormData();
+    formData.append('file', image.file);
+
+    return this.widgetApiService.uploadImage(siteId, formData).pipe(
+      map((response: ImageUploadResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }
