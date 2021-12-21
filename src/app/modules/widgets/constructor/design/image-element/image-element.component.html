@@ -1,10 +1,21 @@
 <div class="row-subitem border-item">
   <button
+    *ngIf="isDefault(modelName.imageUrl)"
     (click)="listFile('image', modelName)"
     class="widget-download-img"
   >
     <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение" /> Загрузить изображение
   </button>
+
+  <div *ngIf="!isDefault(modelName.imageUrl)" class="image-container">
+    <img [src]="modelName.imageUrl" alt="image" />
+    <div class="d-flex justify-content-between align-items-center">
+      <p>{{ modelName.imageUrl.split('/').pop() }}</p>
+      <div class="remove-sub-item">
+        <button class="delete-element-button" (click)="removeImage()">&times;</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row-subitem mt-3">

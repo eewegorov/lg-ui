@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+const IMAGE_DEF = 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg';
+
 @Component({
   selector: 'app-image-element',
   templateUrl: './image-element.component.html',
@@ -18,8 +20,16 @@ export class ImageElementComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public listFile(place, item) {
+  public listFile(place, item): void {
     this.listFileItem.emit({ place, item });
+  }
+
+  public isDefault(url: string): boolean {
+    return url === IMAGE_DEF;
+  }
+
+  public removeImage(): void {
+    this.modelName.imageUrl = IMAGE_DEF;
   }
 
 }
