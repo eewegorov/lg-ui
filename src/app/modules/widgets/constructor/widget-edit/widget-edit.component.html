@@ -1,6 +1,6 @@
 <div *ngIf="widget.guiprops" [@fadeInOut] class="widgets-editor-header">
-  <div class="d-flex justify-content-between">
-    <div class="title-widget-container">
+  <div class="d-flex justify-content-between title-and-tabs-container">
+    <div class="title-widget-container mw-60">
       <a
         id="renameWidgetBtn"
         (click)="startRenameWidget(widget)"
@@ -14,9 +14,7 @@
         <span>{{ widget.name }}</span><i class="fa fa-pencil ml-1"></i>
       </a>
 
-      <div
-        *ngIf="renamedWidget.id === widget.id"
-      >
+      <div *ngIf="renamedWidget.id === widget.id" class="widget-rename-edited">
         <input
           type="text"
           class="widget-rename-control"
@@ -111,7 +109,7 @@
       ></ui-switch>
     </div>
 
-    <ng-container *ngIf="isDesigner">
+    <div *ngIf="isDesigner">
       <button
         type="button"
         *ngIf="!isMockup"
@@ -122,20 +120,22 @@
       >
         <span class="ladda-label"><i class="fa fa-save"></i>Сохранить</span>
       </button>
-    </ng-container>
+    </div>
 
-    <button
-      type="button"
-      id="saveWidget"
-      class="ladda-button btn btn-success"
-      data-style="slide-down"
-      [ladda]="isLoading"
-      (click)="saveWidget()"
-    >
-      <span class="ladda-label">
-        <i><img src="/assets/images/widgets/save.svg" alt="save"></i> <span>Сохранить</span>
-      </span>
-    </button>
+    <div>
+      <button
+        type="button"
+        id="saveWidget"
+        class="ladda-button btn btn-success"
+        data-style="slide-down"
+        [ladda]="isLoading"
+        (click)="saveWidget()"
+      >
+        <span class="ladda-label">
+          <i><img src="/assets/images/widgets/save.svg" alt="save"></i> <span>Сохранить</span>
+        </span>
+      </button>
+    </div>
 
     <button class="close-widget-button" (click)="closeWidget()">
       &times;

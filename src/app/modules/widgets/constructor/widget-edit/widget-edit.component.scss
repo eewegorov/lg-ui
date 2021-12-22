@@ -20,17 +20,23 @@ a {
   min-width: 1090px;
 }
 
+.title-and-tabs-container {
+  max-width: 60%
+}
+
 .title-widget-container {
   position: relative;
   min-height: 50px;
-  margin: -5px 80px 10px 0;
+  margin: -5px 0 10px 0;
+  min-width: 60%;
 }
 
 .widget-editor-tabs {
   position: relative;
   margin-left: 30px;
   margin-top: -10px;
-  width: 400px;
+  min-width: 400px;
+  max-width: 40%;
 }
 
 .tab-content, #rules {
@@ -39,6 +45,11 @@ a {
 
 .controls-group {
   position: relative;
+  display: flex;
+  justify-content: flex-end;
+  width: 40%;
+  align-items: center;
+  margin-top: -15px;
 
   .btn-group {
     margin-right: 30px;
@@ -109,7 +120,8 @@ h3.widget-title-main {
 .title-widget-name-editable {
   padding-right: 20px;
   padding-left: 10px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   max-width: 100%;
   text-decoration: none;
   font-size: 24px;
@@ -117,9 +129,12 @@ h3.widget-title-main {
   font-weight: bold;
   position: relative;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   top: 5px;
+}
+
+.widget-rename-edited {
+  display: flex;
+  margin-top: 3px;
 }
 
 .title-widget-name-editable .fa {
@@ -134,7 +149,11 @@ h3.widget-title-main {
 }
 
 .title-widget-name-editable span {
-  padding: 2px 8px;
+  display: inline-block;
+  padding: 0 8px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .title-widget-name-editable:hover span {
@@ -151,14 +170,14 @@ h3.widget-title-main {
 
 .widget-rename-control {
   position: relative;
-  top: 4px;
+  top: 2px;
   margin-left: 10px;
   padding-left: 8px;
   border-radius: 4px;
   border: none;
   font-size: 24px;
   font-family: 'Noto Sans Mono', monospace;
-  height: 32.5px;
+  height: 36px;
   font-weight: bold;
   background: #D4D7DD;
   color: #6a6c6f;
