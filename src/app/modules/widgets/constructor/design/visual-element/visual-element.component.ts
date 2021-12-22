@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
+import { IMAGE_DEF } from '../../../../../configs/urls';
 import { FullWidget } from '../../../../../core/models/widgets';
 
 @Component({
@@ -70,6 +71,18 @@ export class VisualElementComponent implements OnInit {
   public setBorderRadius(value: boolean) {
     if (!value) {
       this.widget.guiprops.bg.borderRadius = 0;
+    }
+  }
+
+  public isDefault(url: string): boolean {
+    return url === IMAGE_DEF;
+  }
+
+  public removeImage(isBg: boolean): void {
+    if (isBg) {
+      this.widget.guiprops.bg.url = IMAGE_DEF;
+    } else {
+      this.widget.guiprops.image.url = IMAGE_DEF;
     }
   }
 

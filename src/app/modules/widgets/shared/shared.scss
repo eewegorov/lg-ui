@@ -966,6 +966,25 @@ input.icp {
   color: #16181D;
 }
 
+.image-container {
+  width: 100%;
+
+  img {
+    width: 80%;
+    margin-bottom: 5px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 15px;
+    color: #16181D;
+  }
+
+  .delete-element-button {
+    font-size: 28px;
+  }
+}
+
 
 
 

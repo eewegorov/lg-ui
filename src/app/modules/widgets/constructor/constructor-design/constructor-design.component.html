@@ -81,7 +81,7 @@
                   (click)="removeCurrentElement(currentElement, currentIndex)"
                   href="javascript:void(0);"
                 >
-                  <i class="remove-sub-item"></i>
+                  <i class="remove-item"></i>
                 </a>
               </ng-container>
             </h4>
@@ -287,11 +287,22 @@
                         </div>
                         <div *ngIf="widget.guiprops.dhVisual?.iconOrImage === 'useImg'" class="mt-1">
                           <button
+                            *ngIf="isDefault(widget.guiprops.dhVisual.url)"
                             (click)="listFile('dotIcon')"
                             class="widget-download-img"
                           >
                             <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение" /> Загрузить изображение
                           </button>
+
+                          <div *ngIf="!isDefault(widget.guiprops.dhVisual.url)" class="image-container">
+                            <img [src]="widget.guiprops.dhVisual.url" alt="image" />
+                            <div class="d-flex justify-content-between align-items-center">
+                              <p>{{ widget.guiprops.dhVisual.url.split('/').pop() }}</p>
+                              <div class="remove-sub-item">
+                                <button class="delete-element-button" (click)="removeImage(true)">&times;</button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <div class="row row-subitem mt-3">
                           <div class="d-flex justify-content-between w-100 row-subitem-padding pt-1">
@@ -523,11 +534,22 @@
 
                         <div *ngIf="widget.guiprops.labelMain.iconOrImage === 'useImg'" class="mt-1">
                           <button
+                            *ngIf="isDefault(widget.guiprops.labelMain.url)"
                             (click)="listFile('labelIcon')"
                             class="widget-download-img"
                           >
                             <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение" /> Загрузить изображение
                           </button>
+
+                          <div *ngIf="!isDefault(widget.guiprops.labelMain.url)" class="image-container">
+                            <img [src]="widget.guiprops.labelMain.url" alt="image" />
+                            <div class="d-flex justify-content-between align-items-center">
+                              <p>{{ widget.guiprops.labelMain.url.split('/').pop() }}</p>
+                              <div class="remove-sub-item">
+                                <button class="delete-element-button" (click)="removeImage(false)">&times;</button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </ng-container>
@@ -793,7 +815,7 @@
                   class="btn-default extended-remove-btn"
                   (click)="removeElementFromFormExtList($event, extendedIndex); $event.stopPropagation();"
                 >
-                  <i class="remove-sub-item"></i> Удалить элемент
+                  <i class="remove-item"></i> Удалить элемент
                 </button>
               </div>
               <div class="mb-5"></div>

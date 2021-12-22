@@ -123,11 +123,22 @@
 
       <div *ngIf="widget.guiprops['bg'].fillorImg === 'useImg'" class="mt-1">
         <button
+          *ngIf="isDefault(widget.guiprops.bg.url)"
           (click)="listFile('bg')"
           class="widget-download-img"
         >
           <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение" /> Загрузить изображение
         </button>
+
+        <div *ngIf="!isDefault(widget.guiprops.bg.url)" class="image-container">
+          <img [src]="widget.guiprops.bg.url" alt="image" />
+          <div class="d-flex justify-content-between align-items-center">
+            <p>{{ widget.guiprops.bg.url.split('/').pop() }}</p>
+            <div class="remove-sub-item">
+              <button class="delete-element-button" (click)="removeImage(true)">&times;</button>
+            </div>
+          </div>
+        </div>
 
         <div class="row row-subitem mt-2 border-item">
           <div class="col-sm-6 row-subitem-padding pt-1 pr-3">
@@ -416,11 +427,22 @@
               <h4 class="h4-text-tit">Настройка изображения</h4>
 
               <button
+                *ngIf="isDefault(widget.guiprops.image.url)"
                 (click)="listFile('imageSingle')"
                 class="widget-download-img"
               >
                 <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение" /> Загрузить изображение
               </button>
+
+              <div *ngIf="!isDefault(widget.guiprops.image.url)" class="image-container">
+                <img [src]="widget.guiprops.image.url" alt="image" />
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>{{ widget.guiprops.image.url.split('/').pop() }}</p>
+                  <div class="remove-sub-item">
+                    <button class="delete-element-button" (click)="removeImage(false)">&times;</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

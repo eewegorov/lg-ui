@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
-const IMAGE_DEF = 'https://static.leadgenic.com/lg_widgets_l11/img/image_def.jpg';
+import { IMAGE_DEF } from '../../../../../configs/urls';
 
 @Component({
   selector: 'app-image-element',

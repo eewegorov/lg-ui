@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
+import { IMAGE_DEF } from '../../../../configs/urls';
 import { Coupon } from '../../../../core/models/coupons';
 import { environment } from '../../../../../environments/environment';
 import { FullWidget, Image, Images, WidgetType, WidgetTypeCode } from '../../../../core/models/widgets';
@@ -1629,6 +1630,18 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
     (this.controls.newModal as any).appendTo('body').modal('show');
     $('body').addClass('modal-open-h100');
+  }
+
+  public isDefault(url: string): boolean {
+    return url === IMAGE_DEF;
+  }
+
+  public removeImage(isDot: boolean): void {
+    if (isDot) {
+      this.widget.guiprops.dhVisual.url = IMAGE_DEF;
+    } else {
+      this.widget.guiprops.labelMain.url = IMAGE_DEF;
+    }
   }
 
   private getImages(sid: string): void {
