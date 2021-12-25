@@ -1,17 +1,14 @@
 <div *ngIf="widget.guiprops" [@fadeInOut] class="widgets-editor-header">
   <div class="d-flex justify-content-between title-and-tabs-container">
-    <div class="title-widget-container mw-60">
+    <div class="title-widget-container">
       <a
         id="renameWidgetBtn"
         (click)="startRenameWidget(widget)"
         *ngIf="widget.name && renamedWidget.id !== widget.id"
         href="javascript:void(0);"
-        data-toggle="tooltip"
-        data-placement="top"
-        title=""
         class="title-widget-name-editable"
       >
-        <span>{{ widget.name }}</span><i class="fa fa-pencil ml-1"></i>
+        <span data-toggle="tooltip" [title]="widget.name">{{ widget.name }}</span><i class="fa fa-pencil ml-1"></i>
       </a>
 
       <div *ngIf="renamedWidget.id === widget.id" class="widget-rename-edited">
@@ -27,9 +24,6 @@
           class="widget-rename-button"
           (click)="renameWidget()"
           href="javascript:void(0);"
-          data-toggle="tooltip"
-          data-placement="top"
-          [title]="'widgetsList.widget.rename.tooltip' | translate"
         >
           <i class="fa fa-check ml-1"></i>
         </a>
@@ -71,7 +65,7 @@
           class="tab-text">{{ 'widgetsList.editor.tab.rules' | translate }}</span> <span
           *ngIf="isTabHasError('rules')" data-toggle="tooltip"
           data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
-          class="info-link badge badge-pill badge-danger">!</span>
+          class="info-link badge badge-pill badge-danger"></span>
           <div class="after fade-in">
             <div class="square fade-in"></div>
           </div>

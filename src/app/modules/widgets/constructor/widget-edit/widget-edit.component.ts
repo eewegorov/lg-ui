@@ -109,7 +109,9 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     this.loadGroups();
 
     ($('[data-toggle="tooltip"]') as any).tooltip('hide');
-    ($('.start-widget-btn, .stop-widget-btn') as any).tooltip({ trigger : 'hover' });
+    setTimeout(() => {
+      ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
+    }, 1000);
 
     this.widgetService.onChangePayment.subscribe((value: boolean) => {
       this.onChangePayment(value);
@@ -205,6 +207,8 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   public startRenameWidget(widget) {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+
     this.renamedWidget = {
       id: widget.id,
       name: widget.name
@@ -280,6 +284,10 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   public renameWidget() {
+    setTimeout(() => {
+      ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
+    }, 0);
+
     this.widget.name = this.renamedWidget.name;
     this.resetRenaming();
     this.checkWidgetRenameTitle();
