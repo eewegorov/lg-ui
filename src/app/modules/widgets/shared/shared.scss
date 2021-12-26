@@ -985,6 +985,17 @@ input.icp {
   }
 }
 
+.badge {
+  position: relative;
+  top: -10px;
+  margin-left: 2px;
+  padding: 4px;
+
+  &:empty {
+    display: inline-block;
+  }
+}
+
 
 
 

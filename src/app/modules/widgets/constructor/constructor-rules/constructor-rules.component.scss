@@ -33,6 +33,8 @@ h5 {
 }
 
 .settings-category {
+  display: flex;
+  justify-content: space-between;
   padding: 10px;
 
   &.active {
@@ -44,6 +46,11 @@ h5 {
 
   span {
     cursor: pointer;
+
+    &.badge {
+      height: 8px;
+      top: 6px;
+    }
   }
 }
 

@@ -1855,16 +1855,21 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 }
 
 .add-form-ext-new-item {
+  display: flex;
+  justify-content: center;
   padding: 0 0 10px 0;
 }
+
 #widgetStyle .add-form-ext-new-item button.widget-content-add-btn {
   padding: 5px 10px;
   width: auto;
   cursor: pointer;
 }
+
 .form-ext-element-wr {
   position: relative;
 }
+
 .form-ext-element-highlighted-context {
   z-index: -1;
   position: absolute;

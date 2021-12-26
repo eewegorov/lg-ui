@@ -17,8 +17,6 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   @Input() public sid: string;
   @Input() private runValidators: () => any[];
 
-  @Output() private addValidator = new EventEmitter<() => void>();
-
   public weekDays = [];
   public loop = Array.from({length: 20}, (_, i) => i + 1);
   public autoinviteVariants = ['всех', 'любого из'];
@@ -74,10 +72,10 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     }, 1000);
   }
 
-  public isTabHasError(tabId) {
+  public isTabHasError(category) {
     const errors = this.runValidators();
     for (const item of errors) {
-      if ((typeof item !== 'undefined') && item.id === tabId) {
+      if ((typeof item !== 'undefined') && item.category === category) {
         return true;
       }
     }
@@ -202,7 +200,11 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.widget.rules.pages.items.length; i++) {
         if (this.widget.rules.pages.items[i].value.trim().length === 0) {
-          errors.push({id: TAB_ID, message: 'Empty page target'});
+          errors.push({
+            id: TAB_ID,
+            category: this.translate.instant('widgetsList.editor.section.targeting'),
+            message: 'Empty page target'
+          });
         }
       }
     }
@@ -211,56 +213,92 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.widget.rules.prevPages.items.length; i++) {
         if (this.widget.rules.prevPages.items[i].value.trim().length === 0) {
-          errors.push({id: TAB_ID, message: 'Empty previous page target'});
+          errors.push({
+            id: TAB_ID,
+            category: this.translate.instant('widgetsList.editor.section.targeting'),
+            message: 'Empty previous page target'
+          });
         }
       }
     }
 
     if (this.widget.rules.pageNo?.enable) {
       if (this.widget.rules.pageNo.items.length === 0) {
-        errors.push({id: TAB_ID, message: 'Empty pageno'});
+        errors.push({
+          id: TAB_ID,
+          category: this.translate.instant('widgetsList.editor.section.targeting'),
+          message: 'Empty pageno'
+        });
       }
     }
 
     if (this.widget.rules.days?.enable) {
       if (this.widget.rules.days.items.length === 0) {
-        errors.push({id: TAB_ID, message: 'Empty days list'});
+        errors.push({
+          id: TAB_ID,
+          category: this.translate.instant('widgetsList.editor.section.targeting'),
+          message: 'Empty days list'
+        });
       }
     }
 
     if (this.widget.rules.period?.enable) {
       if (this.widget.rules.period.startDate == null || this.widget.rules.period.endDate == null) {
-        errors.push({id: TAB_ID, message: 'Infinity period range'});
+        errors.push({
+          id: TAB_ID,
+          category: this.translate.instant('widgetsList.editor.section.targeting'),
+          message: 'Infinity period range'
+        });
       }
     }
 
     if (this.widget.autoinvite.pages?.enable) {
       if (this.widget.autoinvite.pages.value <= 0) {
-        errors.push({id: TAB_ID, message: 'Autoinvite. Pages. Pages less or equal the 0'});
+        errors.push({
+          id: TAB_ID,
+          category: this.translate.instant('widgetsList.editor.section.showing'),
+          message: 'Autoinvite. Pages. Pages less or equal the 0'
+        });
       }
     }
 
     if (this.widget.autoinvite.seconds?.enable) {
       if (this.widget.autoinvite.seconds.value <= 0) {
-        errors.push({id: TAB_ID, message: 'Autoinvite. Seconds. Seconds less or equal the 0'});
+        errors.push({
+          id: TAB_ID,
+          category: this.translate.instant('widgetsList.editor.section.showing'),
+          message: 'Autoinvite. Seconds. Seconds less or equal the 0'
+        });
       }
     }
 
     if (this.widget.autoinvite.inactive?.enable) {
       if (this.widget.autoinvite.inactive.value <= 0) {
-        errors.push({id: TAB_ID, message: 'Autoinvite. Inactive. Seconds less or equal the 0'});
+        errors.push({
+          id: TAB_ID,
+          category: this.translate.instant('widgetsList.editor.section.showing'),
+          message: 'Autoinvite. Inactive. Seconds less or equal the 0'
+        });
       }
     }
 
     if (this.widget.autoinvite.percent?.enable) {
       if (this.widget.autoinvite.percent.value <= 0 || this.widget.autoinvite.percent.value > 100) {
-        errors.push({id: TAB_ID, message: 'Autoinvite. Percent. Value less or equal the 0 or great then 100'});
+        errors.push({
+          id: TAB_ID,
+          category: this.translate.instant('widgetsList.editor.section.showing'),
+          message: 'Autoinvite. Percent. Value less or equal the 0 or great then 100'
+        });
       }
     }
 
     if (this.widget.autoinvite.click?.enable) {
       if (this.widget.autoinvite.click.value.trim().length === 0) {
-        errors.push({id: TAB_ID, message: 'Autoinvite. Click. Empty selector'});
+        errors.push({
+          id: TAB_ID,
+          category: this.translate.instant('widgetsList.editor.section.showing'),
+          message: 'Autoinvite. Click. Empty selector'
+        });
       }
     }
 
