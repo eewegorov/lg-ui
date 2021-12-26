@@ -591,8 +591,26 @@ h6.title-h6-widget a:hover {
   background-color: #7E889A;
 }
 
-.coupon-element-icon-small {
-  background-color: #E25336;
+.error {
+  .desktop-icon-small,
+  .mobile-icon-small,
+  .settings-icon-small,
+  .add-icon-small,
+  .form-ext-element-icon-small,
+  .form-element-icon-small,
+  .closelink-element-icon-small,
+  .button-element-icon-small,
+  .title-element-icon-small,
+  .social-element-icon-small,
+  .split-element-icon-small,
+  .video-element-icon-small,
+  .image-element-icon-small,
+  .iframe-element-icon-small,
+  .padding-element-icon-small,
+  .coupon-element-icon-small,
+  .timer-element-icon-small {
+    background-color: #E25336 !important;
+  }
 }
 
 .add-icon-small {
