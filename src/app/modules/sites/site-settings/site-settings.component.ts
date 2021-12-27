@@ -97,8 +97,8 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
         this.site.needHideLogo = false;
         this.site.logoRefLink = false;
         this.tariffsService.checkTariffPlans(this.siteId,
-          this.translate.instant('sitelist.tariff.title'),
-          this.translate.instant('settings.site.integration.paymentLabel', { siteName: this.site.name }));
+          this.translate.instant('sitelist.tariff.improve'),
+          this.translate.instant('settings.site.integration.paymentLabel', this.site.name));
       }, 500);
     }
   }

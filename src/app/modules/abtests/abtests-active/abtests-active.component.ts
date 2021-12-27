@@ -559,8 +559,8 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
 
   private showPaymentDialog(siteId, description) {
     this.tariffsService.checkTariffPlans(siteId,
-      this.translate.instant('sitelist.tariff.title'),
-      description, {siteName: this.getSiteName(siteId)}
+      this.translate.instant('sitelist.tariff.improve'),
+      description, this.getSiteName(siteId)
     );
   }
 

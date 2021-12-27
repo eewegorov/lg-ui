@@ -92,7 +92,11 @@ export class SitesListComponent implements OnInit {
   }
 
   public improvePlan() {
-    this.tariffsService.checkTariffPlans(this.item.id, this.translate.instant('sitelist.tariff.improvement'), undefined, this.item.name);
+    this.tariffsService.checkTariffPlans(
+      this.item.id,
+      this.translate.instant('sitelist.tariff.improvement'),
+      undefined,
+      this.item.name);
   }
 
   private getSiteDates(data) {

@@ -173,8 +173,8 @@ export class WidgetItemComponent implements OnInit {
     // TODO: Check if it's payment query
     if (this.sitesService.isSiteHasExpTariff(currentSite)) {
       this.tariffsService.checkTariffPlans(this.currentSiteId,
-        this.translate.instant('sitelist.tariff.title'),
-        this.translate.instant('widgetsList.payment.abtest', {siteName: currentSite.name}));
+        this.translate.instant('sitelist.tariff.improve'),
+        this.translate.instant('widgetsList.payment.abtest', currentSite.name));
     } else {
       const modalRef = this.modalService.open(AbtestAddComponent, {
         size: 'lg',

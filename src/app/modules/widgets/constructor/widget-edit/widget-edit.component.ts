@@ -685,8 +685,8 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
   private showPaymentDialog(siteId, description) {
     this.tariffsService.checkTariffPlans(siteId,
-      this.translate.instant('sitelist.tariff.title'),
-      description, {siteName: this.coreSitesService.getSiteById(siteId).name}
+      this.translate.instant('sitelist.tariff.improve'),
+      description, this.coreSitesService.getSiteById(siteId).name
     );
   }
 

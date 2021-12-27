@@ -39,7 +39,7 @@ export class PaymentModalComponent implements OnInit {
     this.plan = this.plans[0];
     this.firstPrice = this.plan.prices[0];
     this.activePriceId = this.firstPrice.id;
-    this.title = this.title || this.translate.instant('sitelist.tariff.title');
+    this.title = this.title || this.translate.instant('sitelist.tariff.improve');
     this.subscription = this.subscription || null;
     this.siteName = this.siteName ? this.siteName : this.coreSitesService.getSiteById(this.siteId).name;
 
