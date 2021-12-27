@@ -2,7 +2,7 @@
   <div *ngIf="widget.guiprops" class="row widget-style-wrapper">
     <div class="col-lg-3 widget-style-menu">
       <div class="elements-selector">
-        <div>
+        <div *ngIf="widget.guiprops.elementsList">
           <div class="element" [class.active]="currentElement === 'settings'" (click)="setCurrentElement('settings')">
             <div class="before">
               <div class="square"></div>
@@ -16,7 +16,7 @@
           <div
             *ngFor="let element of widget.guiprops.elementsList; index as i"
             class="element"
-            [class.error]="isTabHasError(element.name, element.counter)"
+            [class.error]="isElementHasError(element.name, element.counter)"
             [class.active]="currentElement === element.name + (element.counter ? ('#' + element.counter) : '')"
             (click)="setCurrentElement(element.name + (element.counter ? ('#' + element.counter) : '')); currentIndex = i"
           >

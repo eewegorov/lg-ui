@@ -235,6 +235,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   public isTabHasError(tabId) {
+    this.mapFormExtFieldId();
     const errors = this.runValidators();
     for (const item of errors) {
       if ((typeof item !== 'undefined') && item.id === tabId) {
@@ -260,7 +261,6 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
   public goToTest(widget) {
     this.router.navigate([`/abtests/active`], { queryParams: { testIdNum: widget.abtestInfo.id } }).then();
-
   }
 
   public saveAsMockup() {
@@ -499,7 +499,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     return _.enable && _.couponCallback && _.couponCallback.enable;
   }
 
-  private mapFormExtFieldId() {
+  public mapFormExtFieldId() {
     if (!this.widget.guiprops.formExt) {
       return;
     }
@@ -568,25 +568,25 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     this.formExtNeedButton = isFormHasInputsFLAG && ifFormHasSpecWithoutActionORNot && !isFormHasActionButtonFLAG;
   }
 
-  private isButtonRedirectAndEmpty(item) {
+  public isButtonRedirectAndEmpty(item) {
     return item.type === 'button' && (item.redirect.type.type === 1 || item.redirect.type.type === 3) && !item.redirect.url;
   }
 
-  private isFormHasSpecElements(item) {
+  public isFormHasSpecElements(item) {
     return item.type === 'rating' || item.type === 'dd' || item.type === 'variants';
   }
 
-  private isFormHasSendIfAction(item) {
+  public isFormHasSendIfAction(item) {
     return (item.type === 'rating' && item.sendFormIfAction) ||
       (item.type === 'dd' && item.sendFormIfAction) ||
       (item.type === 'variants' && item.sendFormIfAction);
   }
 
-  private isFormHasButtonWithAction(item) {
+  public isFormHasButtonWithAction(item) {
     return item.type === 'button' && (item.redirect.type.type === 0 || item.redirect.type.type === 1);
   }
 
-  private isFieldIdUnique(id) {
+  public isFieldIdUnique(id) {
     return id !== 'email' && id !== 'name' && id !== 'message' && id !== 'phone' && this.formExtIdsCached.indexOf(id) === -1;
   }
 

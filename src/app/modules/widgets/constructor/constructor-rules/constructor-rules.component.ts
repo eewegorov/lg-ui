@@ -15,7 +15,6 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   @Input() public isContainerized: boolean;
   @Input() public isMockup: boolean;
   @Input() public sid: string;
-  @Input() private runValidators: () => any[];
 
   public weekDays = [];
   public loop = Array.from({length: 20}, (_, i) => i + 1);
@@ -73,7 +72,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   }
 
   public isTabHasError(category) {
-    const errors = this.runValidators();
+    const errors = this.validator();
     for (const item of errors) {
       if ((typeof item !== 'undefined') && item.category === category) {
         return true;

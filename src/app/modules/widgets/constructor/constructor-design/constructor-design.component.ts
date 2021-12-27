@@ -23,7 +23,6 @@ import { FullWidget, Image, Images, WidgetType, WidgetTypeCode } from '../../../
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
 import { WidgetService } from '../../services/widget.service';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-constructor-design',
@@ -49,7 +48,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   @Input() public isContainerized: boolean;
   @Input() private currentActiveTab: string;
   @Input() private SP_widget: any;
-  @Input() private runValidators: () => any[];
+  @Input() private isTabHasErrorForFormExt: () => boolean;
+  @Input() private mapFormExtFieldId: () => any;
+  @Input() private isFieldIdUnique: (id: any) => boolean;
+  @Input() private isButtonRedirectAndEmpty: (item: any) => boolean;
+  @Input() private isFormHasSpecElements: (item: any) => boolean;
+  @Input() private isFormHasSendIfAction: (item: any) => boolean;
+  @Input() private isFormHasButtonWithAction: (item: any) => boolean;
+
 
   public environment = environment;
   public isLoading = false;
@@ -374,10 +380,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     mainBlock.style.height = $(window).height() - 70 + 'px';
   }
 
-  public isTabHasError(elementName: string, elementCounter: number) {
-    const errors = this.runValidators();
+  public isElementHasError(elementName: string, elementCounter: number) {
+    this.mapFormExtFieldId();
+    const errors = this.validator();
     for (const item of errors) {
-      if ((typeof item !== 'undefined') && item.element === elementName && item.counter === elementCounter) {
+      if ((typeof item !== 'undefined') &&
+        (((item.element === elementName) && (item.counter === elementCounter)) || (!item.counter && item.element === elementName))
+      ) {
         return true;
       }
     }
@@ -400,6 +409,15 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           element: el.name,
           counter: el.counter,
           message: 'No coupon'
+        });
+      }
+
+      if (el.name === 'form-ext-element' && this.isTabHasErrorForFormExt()) {
+        errors.push({
+          id: TAB_ID,
+          element: el.name,
+          counter: el.counter,
+          message: 'No action for form-ext'
         });
       }
     });

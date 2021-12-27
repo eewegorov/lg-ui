@@ -41,7 +41,7 @@
           </div>
           <div class="design-icon"></div> <span
           class="tab-text">{{ 'widgetsList.editor.tab.design' | translate }}</span> <span
-          *ngIf="isTabHasErrorForFormExt() || isTabHasError('design')"
+          *ngIf="isTabHasError('design')"
           data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
           class="info-link badge badge-pill badge-danger"></span>
           <div class="after fade-in">
@@ -155,7 +155,13 @@
       [isContainerized]="isContainerized"
       [currentActiveTab]="currentActiveTab"
       [SP_widget]="SP_widget"
-      [runValidators]="runValidators"
+      [isTabHasErrorForFormExt]="isTabHasErrorForFormExt"
+      [mapFormExtFieldId]="mapFormExtFieldId"
+      [isFieldIdUnique]="isFieldIdUnique"
+      [isButtonRedirectAndEmpty]="isButtonRedirectAndEmpty"
+      [isFormHasSpecElements]="isFormHasSpecElements"
+      [isFormHasSendIfAction]="isFormHasSendIfAction"
+      [isFormHasButtonWithAction]="isFormHasButtonWithAction"
     ></app-constructor-design>
   </div>
 
@@ -169,7 +175,6 @@
       [isContainerized]="isContainerized"
       [isMockup]="isMockup"
       [sid]="sid"
-      [runValidators]="runValidators"
     ></app-constructor-rules>
   </div>
 </div>
