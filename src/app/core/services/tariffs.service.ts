@@ -24,15 +24,7 @@ export class TariffsService {
   public checkTariffPlans(siteId, title, subscription, siteName?, expTime?) {
     this.getTariffPlans().subscribe((response: TariffPlan[]) => {
       if (response.length) {
-        const inputs = {
-          plans: response,
-          siteId,
-          siteName,
-          title,
-          subscription,
-          expTime
-        };
-        this.showTariffPlansModal(inputs);
+        this.showTariffPlansModal(response, siteId, title, subscription, siteName, expTime);
       } else {
         this.toastr.error(this.translate.instant('billing.notify.noPlans'));
       }
@@ -45,8 +37,14 @@ export class TariffsService {
     );
   }
 
-  private showTariffPlansModal(inputs) {
+  private showTariffPlansModal(plans, siteId, title, subscription, siteName?, expTime?) {
     const modalRef = this.modalService.open(PaymentModalComponent);
-    modalRef.componentInstance.inputs = inputs;
+    modalRef.componentInstance.plans = plans;
+    modalRef.componentInstance.siteId = siteId;
+    modalRef.componentInstance.siteName = siteName;
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.subscription = subscription;
+    modalRef.componentInstance.expTime = expTime;
+
   }
 }

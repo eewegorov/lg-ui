@@ -199,13 +199,13 @@ h3.widget-title-main {
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
   border: 1px solid #e4e5e7;
-  border-bottom-color: transparent
+  border-bottom-color: transparent;
 }
 
 .nav-tabs {
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid #e4e5e7
+  border: none;
 }
 
 .widget-editor-tab span.tab-text {

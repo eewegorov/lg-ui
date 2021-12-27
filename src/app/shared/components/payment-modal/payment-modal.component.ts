@@ -32,6 +32,13 @@ export class PaymentModalComponent implements OnInit {
     private coreSitesService: CoreSitesService,
     private billingService: BillingService
   ) {
+
+  }
+
+  ngOnInit(): void {
+    this.plan = this.plans[0];
+    this.firstPrice = this.plan.prices[0];
+    this.activePriceId = this.firstPrice.id;
     this.title = this.title || this.translate.instant('sitelist.tariff.title');
     this.subscription = this.subscription || null;
     this.siteName = this.siteName ? this.siteName : this.coreSitesService.getSiteById(this.siteId).name;
@@ -42,12 +49,6 @@ export class PaymentModalComponent implements OnInit {
       payDescription: this.getPayDescription(this.firstPrice.name, this.firstPrice.desc),
       currentPrice: this.firstPrice.price
     };
-  }
-
-  ngOnInit(): void {
-    this.plan = this.plans[0];
-    this.firstPrice = this.plan.prices[0];
-    this.activePriceId = this.firstPrice.id;
   }
 
   public changePrice(price) {
