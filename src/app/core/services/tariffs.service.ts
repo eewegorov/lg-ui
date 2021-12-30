@@ -38,7 +38,10 @@ export class TariffsService {
   }
 
   private showTariffPlansModal(plans, siteId, title, subscription, siteName?, expTime?) {
-    const modalRef = this.modalService.open(PaymentModalComponent);
+    const modalRef = this.modalService.open(PaymentModalComponent, {
+      size: 'lg',
+      windowClass: 'animate__animated animate__slideInDown animate__faster'
+    });
     modalRef.componentInstance.plans = plans;
     modalRef.componentInstance.siteId = siteId;
     modalRef.componentInstance.siteName = siteName;

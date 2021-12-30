@@ -1,6 +1,11 @@
-<div class="modal-header text-center">
-  <h4 *ngIf="title" class="modal-title">{{ title }}</h4>
-  <h5 *ngIf="subscription" class="paymentSubscription" [innerHTML]="subscription"></h5>
+<div class="modal-header justify-content-center">
+  <div class="d-flex flex-column">
+    <h4 *ngIf="title" class="modal-title">{{ title }}</h4>
+    <h5 *ngIf="subscription" class="paymentSubscription mt-2 pr-5" [innerHTML]="subscription"></h5>
+  </div>
+  <button type="button" class="close" aria-label="Close" data-dismiss="modal" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
 
 <div class="modal-body">
@@ -17,46 +22,39 @@
     </form>
   </div>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <h4>{{ planLabels.activationLabel }}</h4>
-      <h4>{{ planLabels.activationDateLabel }}</h4>
+  <div class="d-flex flex-column">
+    <h4>{{ planLabels.activationLabel }}</h4>
+    <h4>{{ planLabels.activationDateLabel }}</h4>
 
-      <div class="row">
-        <div class="col-lg-4">
-          <h4>{{ 'sitelist.tariff.length' | translate }}</h4>
-        </div>
-        <div class="col-lg-8">
-          <div class="tariff-btns btn-group" data-toggle="buttons">
-            <label
-              *ngFor="let price of plan.prices"
-              class="btn btn-default"
-              (click)="changePrice(price)"
-              [ngClass]="{'active': (activePriceId === price.id)}"
-            >
-              <input
-                type="radio"
-                name="options"
-                id="option1"
-                autocomplete="off"
-              >{{ price.name }}<span class="btn-comment">{{ price.desc }}</span>
-            </label>
-          </div>
+    <div class="row mt-3 align-items-center">
+      <div class="col-lg-4">
+        <h4>{{ 'sitelist.tariff.length' | translate }}</h4>
+      </div>
+      <div class="col-lg-8">
+        <div class="tariff-btns btn-group" data-toggle="buttons">
+          <label
+            *ngFor="let price of plan.prices"
+            class="btn btn-default"
+            (click)="changePrice(price)"
+            [ngClass]="{'active': (activePriceId === price.id)}"
+          >
+            {{ price.name }}<span class="btn-comment">{{ price.desc }}</span>
+          </label>
         </div>
       </div>
-      <div class="row payinfo">
-        <div class="col-lg-4">
-          <h2>{{ 'billing.modal.paysum.label' | translate }}</h2>
-        </div>
-        <div class="col-lg-3">
-          <h2 class="paySum">{{ planLabels.currentPrice }} {{ 'global.currency.ruble' | translate }}</h2>
-          <span class="payDesc">{{ planLabels.payDescription }}</span>
-        </div>
-        <div class="col-lg-4">
-          <button (click)="activatePlan()" class="btn btn-lg btn-success btn-activate-plan">
-            {{ 'billing.modal.paysum.btn' | translate }}
-          </button>
-        </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-lg-4">
+        <h2 class="sum-desc">{{ 'billing.modal.paysum.label' | translate }}</h2>
+      </div>
+      <div class="col-lg-3 pr-0">
+        <h2 class="pay-sum">{{ planLabels.currentPrice }} {{ 'global.currency.ruble' | translate }}</h2>
+        <span class="pay-desc">{{ planLabels.payDescription }}</span>
+      </div>
+      <div class="col-lg-5">
+        <button (click)="activatePlan()" class="btn btn-lg btn-success btn-activate-plan">
+          {{ 'billing.modal.paysum.btn' | translate }}
+        </button>
       </div>
     </div>
   </div>

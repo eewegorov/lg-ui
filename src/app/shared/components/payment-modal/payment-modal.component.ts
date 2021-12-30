@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Order } from '../../../core/models/payment';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
 import { BillingService } from '../../../core/services/billing.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-payment-modal',
@@ -28,6 +29,7 @@ export class PaymentModalComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
+    private activeModal: NgbActiveModal,
     private datePipe: DatePipe,
     private coreSitesService: CoreSitesService,
     private billingService: BillingService
@@ -49,6 +51,10 @@ export class PaymentModalComponent implements OnInit {
       payDescription: this.getPayDescription(this.firstPrice.name, this.firstPrice.desc),
       currentPrice: this.firstPrice.price
     };
+  }
+
+  public closeModal(): void {
+    this.activeModal.close();
   }
 
   public changePrice(price) {
@@ -82,7 +88,7 @@ export class PaymentModalComponent implements OnInit {
   }
 
   private getPayDescription(payTerm, payDiscount) {
-    return this.translate.instant('global.for') + ' ' + payTerm + ', ' + (payDiscount || '0%') + ' ' + this.translate.instant('global.discount');
+    return this.translate.instant('global.for') + ' ' + payTerm + ', ' + (payDiscount.replace('-', '').trim() || '0%') + ' ' + this.translate.instant('global.discount');
   }
 
   private getDatesLabel(days?) {
