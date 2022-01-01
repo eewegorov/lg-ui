@@ -973,28 +973,28 @@ h6.title-h6-widget a:hover {
 
 @-webkit-keyframes pulsejg1 {
   0% {
-    -webkit-transform: scale(.6);
+    -webkit-transform: scale(0.6);
     opacity: 0;
   }
 
   50% {
-    -webkit-transform: scale(.6);
+    -webkit-transform: scale(0.6);
     opacity: 0;
   }
 
   60% {
-    -webkit-transform: scale(.9);
-    opacity: .2;
+    -webkit-transform: scale(0.9);
+    opacity: 0.2;
   }
 
   70% {
     -webkit-transform: scale(1.1);
-    opacity: .35;
+    opacity: 0.35;
   }
 
   80% {
     -webkit-transform: scale(1.25);
-    opacity: .2;
+    opacity: 0.2;
   }
 
   100% {
@@ -1005,28 +1005,28 @@ h6.title-h6-widget a:hover {
 
 @-moz-keyframes pulsejg1 {
   0% {
-    -moz-transform: scale(.6);
+    -moz-transform: scale(0.6);
     opacity: 0;
   }
 
   50% {
-    -moz-transform: scale(.6);
+    -moz-transform: scale(0.6);
     opacity: 0;
   }
 
   60% {
-    -moz-transform: scale(.9);
-    opacity: .2;
+    -moz-transform: scale(0.9);
+    opacity: 0.2;
   }
 
   70% {
     -moz-transform: scale(1.1);
-    opacity: .35;
+    opacity: 0.35;
   }
 
   80% {
     -moz-transform: scale(1.25);
-    opacity: .2;
+    opacity: 0.2;
   }
 
   100% {
@@ -1037,28 +1037,28 @@ h6.title-h6-widget a:hover {
 
 @keyframes pulsejg1 {
   0% {
-    transform: scale(.6);
+    transform: scale(0.6);
     opacity: 0;
   }
 
   50% {
-    transform: scale(.6);
+    transform: scale(0.6);
     opacity: 0;
   }
 
   60% {
-    transform: scale(.9);
-    opacity: .1;
+    transform: scale(0.9);
+    opacity: 0.1;
   }
 
   70% {
     transform: scale(1.1);
-    opacity: .25;
+    opacity: 0.25;
   }
 
   80% {
     transform: scale(1.25);
-    opacity: .1;
+    opacity: 0.1;
   }
 
   100% {
@@ -1069,28 +1069,28 @@ h6.title-h6-widget a:hover {
 
 @-webkit-keyframes pulsejg2 {
   0% {
-    -webkit-transform: scale(.6);
+    -webkit-transform: scale(0.6);
     opacity: 0;
   }
 
   40% {
-    -webkit-transform: scale(.8);
-    opacity: .05;
+    -webkit-transform: scale(0.8);
+    opacity: 0.05;
   }
 
   50% {
     -webkit-transform: scale(1);
-    opacity: .1;
+    opacity: 0.1;
   }
 
   60% {
     -webkit-transform: scale(1.1);
-    opacity: .3;
+    opacity: 0.3;
   }
 
   80% {
     -webkit-transform: scale(1.2);
-    opacity: .1;
+    opacity: 0.1;
   }
 
   100% {
@@ -1101,28 +1101,28 @@ h6.title-h6-widget a:hover {
 
 @-moz-keyframes pulsejg2 {
   0% {
-    -moz-transform: scale(.6);
+    -moz-transform: scale(0.6);
     opacity: 0;
   }
 
   40% {
-    -moz-transform: scale(.8);
-    opacity: .05;
+    -moz-transform: scale(0.8);
+    opacity: 0.05;
   }
 
   50% {
     -moz-transform: scale(1);
-    opacity: .1;
+    opacity: 0.1;
   }
 
   60% {
     -moz-transform: scale(1.1);
-    opacity: .3;
+    opacity: 0.3;
   }
 
   80% {
     -moz-transform: scale(1.2);
-    opacity: .1;
+    opacity: 0.1;
   }
 
   100% {
@@ -1133,28 +1133,28 @@ h6.title-h6-widget a:hover {
 
 @keyframes pulsejg2 {
   0% {
-    transform: scale(.6);
+    transform: scale(0.6);
     opacity: 0;
   }
 
   40% {
-    transform: scale(.8);
-    opacity: .05;
+    transform: scale(0.8);
+    opacity: 0.05;
   }
 
   50% {
     transform: scale(1);
-    opacity: .1;
+    opacity: 0.1;
   }
 
   60% {
     transform: scale(1.1);
-    opacity: .3;
+    opacity: 0.3;
   }
 
   80% {
     transform: scale(1.2);
-    opacity: .1;
+    opacity: 0.1;
   }
 
   100% {
@@ -1162,3 +1162,4 @@ h6.title-h6-widget a:hover {
     opacity: 0;
   }
 }
+
