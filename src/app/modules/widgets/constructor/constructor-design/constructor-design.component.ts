@@ -293,23 +293,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       }
     };
 
-    setInterval(pulse, 5000);
-
-    function pulse() {
-
-      function pulseGreen() {
-        $('.lg-wg-dot-circle-fill1').toggleClass('lg-wg-dot-circle-fill1-animate');
-      }
-      function pulseWhite() {
-        $('.lg-wg-dot-circle-fill2').toggleClass('lg-wg-dot-circle-fill2-animate');
-      }
-
-      setTimeout(pulseGreen, 500);
-      setTimeout(pulseGreen, 1550);
-      setTimeout(pulseWhite, 1000);
-      setTimeout(pulseWhite, 2050);
-    }
-
     this.loadListener();
   }
 

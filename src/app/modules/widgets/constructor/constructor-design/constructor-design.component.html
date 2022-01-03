@@ -899,23 +899,14 @@
                     <div
                       *ngIf="widget.guiprops['dhVisual'].enableBlink == false"
                       class="point__signal second"
-                      [style]="'box-shadow:inset 0px 0px 12px 5px ' + widget.guiprops['dhVisual'].rgbaShadowForm2"
+                      [style]="'box-shadow: inset 0px 0px 12px 5px ' + widget.guiprops['dhVisual'].rgbaShadowForm2"
                     ></div>
                     <div
                       *ngIf="widget.guiprops['dhVisual'].enableBlink == false"
                       class="point__signal third"
-                      [style]="'box-shadow:inset 0px 0px 12px 5px ' + widget.guiprops['dhVisual'].rgbaShadowForm2"
+                      [style]="'box-shadow: inset 0px 0px 12px 5px ' + widget.guiprops['dhVisual'].rgbaShadowForm2"
                     ></div>
                     <div class="widget2" [style]="'background: ' + widget.guiprops['dhVisual'].colorMain">
-                      <div
-                        *ngIf="((widget.guiprops['dhVisual'].enableBlink == false) && (widget.guiprops['dhVisual'].iconOrImage === 'useIcon'))"
-                        class="lg-wg-dot-circle-fill1"
-                        [style]="'background: ' + widget.guiprops['dhVisual'].colorBg"
-                      ></div>
-                      <div
-                        *ngIf="((widget.guiprops['dhVisual'].enableBlink == false) && (widget.guiprops['dhVisual'].iconOrImage === 'useIcon'))"
-                        class="lg-wg-dot-circle-fill2"
-                        [style]="'background: ' + widget.guiprops['dhVisual'].colorMain"></div>
                       <i
                         *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useIcon'"
                         class="f30s"
