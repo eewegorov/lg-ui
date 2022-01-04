@@ -1,7 +1,7 @@
 <div class="w-datepicker" [ngClass]="{'filled': isFilled}">
-  <div class="input-group date timer-datepicker-block" id="datetimepicker" data-target-input="nearest" NgTempusdominusBootstrap NgTempusdominusBootstrapToggle>
+  <div class="input-group date timer-datepicker-block" [id]="'datetimepicker' + index" data-target-input="nearest" NgTempusdominusBootstrap NgTempusdominusBootstrapToggle>
     <input
-      data-target="#datetimepicker"
+      [attr.data-target]="'#datetimepicker' + index"
       [options]="options"
       [ngModel]="null"
       NgTempusdominusBootstrapInput

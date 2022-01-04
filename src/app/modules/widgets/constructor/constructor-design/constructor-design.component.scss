@@ -777,6 +777,16 @@ h6.title-h6-widget a:hover {
   white-space: nowrap;
 }
 
+.point__signal {
+  opacity: 0.5 !important;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
 .point__signal.first {
   animation: 5s linear 5s infinite normal none running point__signal__1;
 }

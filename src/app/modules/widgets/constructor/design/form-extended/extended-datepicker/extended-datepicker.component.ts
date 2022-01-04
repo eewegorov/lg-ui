@@ -1,13 +1,14 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-extended-datepicker',
   templateUrl: './extended-datepicker.component.html',
   styleUrls: ['../../../../shared/shared.scss', './extended-datepicker.component.scss']
 })
-export class ExtendedDatepickerComponent implements OnInit, OnChanges {
+export class ExtendedDatepickerComponent implements AfterViewInit, OnInit, OnChanges {
   @Input() public dateType: string;
   @Input() public placeholder: string;
+  @Input() public index: number;
   @Input() public st: Record<string, any>;
 
   public isFilled = false;
@@ -17,7 +18,7 @@ export class ExtendedDatepickerComponent implements OnInit, OnChanges {
     format: 'DD.MM.YYYY',
     locale: 'ru',
     widgetPositioning: { vertical: 'bottom' },
-    widgetParent: '.widget-visual-block'
+    widgetParent: 'body'
   };
 
   constructor() { }
@@ -25,10 +26,13 @@ export class ExtendedDatepickerComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
-  public change($event): void {
-    if ($event) {
-      this.isFilled = true;
-    }
+  ngAfterViewInit(): void {
+    $('#datetimepicker' + this.index).on('click', (event) => {
+      $('.bootstrap-datetimepicker-widget').css({
+        top: $('#datetimepicker' + this.index).offset().top + 50,
+        left: $('#datetimepicker' + this.index).offset().left
+      });
+    });
   }
 
   ngOnChanges(): void {
@@ -36,6 +40,12 @@ export class ExtendedDatepickerComponent implements OnInit, OnChanges {
       ...this.options,
       format: this.dateType
     };
+  }
+
+  public change($event): void {
+    if ($event) {
+      this.isFilled = true;
+    }
   }
 
 }
