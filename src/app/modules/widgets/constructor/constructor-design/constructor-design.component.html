@@ -879,6 +879,7 @@
                   (scrollToElement)="scrollToEl($event.id, $event.elementName, $event.elementCounter)"
                   (addNewElement)="addNewElementToContent($event)"
                   [hidden]="currentPage !== 'main'"
+                  style="display: block; width: max-content"
                 ></app-content-element>
                 <app-thank-element
                   [widget]="widget"
@@ -892,30 +893,36 @@
                       <span>{{ widget.guiprops.dhVisual.title }}</span>
                     </div>
                     <div
-                      *ngIf="widget.guiprops['dhVisual'].enableBlink == false"
+                      *ngIf="!widget.guiprops['dhVisual'].enableBlink"
                       class="point__signal first"
                       [style]="'color: ' + widget.guiprops['dhVisual'].rgbaShadowForm1"
                     ></div>
                     <div
-                      *ngIf="widget.guiprops['dhVisual'].enableBlink == false"
+                      *ngIf="!widget.guiprops['dhVisual'].enableBlink"
                       class="point__signal second"
                       [style]="'color: ' + widget.guiprops['dhVisual'].rgbaShadowForm2"
                     ></div>
                     <div
-                      *ngIf="widget.guiprops['dhVisual'].enableBlink == false"
+                      *ngIf="!widget.guiprops['dhVisual'].enableBlink"
                       class="point__signal third"
                       [style]="'color: ' + widget.guiprops['dhVisual'].rgbaShadowForm2"
                     ></div>
-                    <div class="widget2" [style]="'background: ' + widget.guiprops['dhVisual'].colorMain">
+                    <div
+                      class="widget2"
+                      [class.widget-dot-anim]="!widget.guiprops['dhVisual'].enableBlink"
+                      [style]="'background: ' + widget.guiprops['dhVisual'].colorMain"
+                    >
                       <i
                         *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useIcon'"
                         class="f30s"
+                        [class.ico-anim]="!widget.guiprops['dhVisual'].enableBlink"
                         [class]="widget.guiprops.dhVisual.selectedIcon?.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : ('lgiconfont-' + widget.guiprops.dhVisual.selectIcon)"
                         [style]="'color: ' + widget.guiprops['dhVisual'].colorBg"
                       ></i>
                       <div
                         *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useImg'"
                         class="lg-wg-dot-circle-img"
+                        [class.ico-anim]="!widget.guiprops['dhVisual'].enableBlink"
                         [style]="'background-image: url(' + widget.guiprops['dhVisual'].url + ')'"
                       ></div>
                     </div>

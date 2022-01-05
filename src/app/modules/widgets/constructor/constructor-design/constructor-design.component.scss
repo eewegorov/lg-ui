@@ -279,12 +279,12 @@ h6.title-h6-widget a:hover {
 
 .close-btn-x {
   position: absolute;
-  top: 15px;
-  right: 55px;
+  top: 3px;
+  right: 80px;
   font-size: 26px;
   overflow: hidden;
-  border: 1px solid #999;
-  background: rgba(204, 204, 204, 0.3);
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 1);
   text-align: center;
   color: #999;
   border-radius: 50%;
@@ -292,7 +292,13 @@ h6.title-h6-widget a:hover {
   width: 35px;
   height: 35px;
   cursor: pointer;
-  z-index: 5;
+  z-index: 999999;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);
+  transition: 0.2s transform linear;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 }
 
 .close-btn-x span {
@@ -376,7 +382,6 @@ h6.title-h6-widget a:hover {
   left: 50%;
   transform: translate(-50%, 0);
   width: auto;
-  min-width: 500px;
   display: inline-block;
   padding-bottom: 100px;
   padding-right: 100px;
@@ -731,9 +736,12 @@ h6.title-h6-widget a:hover {
   -moz-transition: all 0.8s ease;
   transition: all 0.8s ease;
   overflow: hidden;
-  -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
-  -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
-  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.25);
+  -webkit-box-shadow: 0 1px 5px 0 rgba(0,0,0,0.25);
+  -moz-box-shadow: 0 1px 5px 0 rgba(0,0,0,0.25);
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.25);
+}
+
+.widget-dot-anim {
   animation: 5s ease 4s infinite normal none running point;
 }
 
@@ -744,7 +752,6 @@ h6.title-h6-widget a:hover {
   text-align: center;
   position: relative;
   z-index: 5;
-  animation: 5s ease 4s infinite normal none running point__ico;
 }
 
 .lg-wg-dot-circle-img {
@@ -758,6 +765,9 @@ h6.title-h6-widget a:hover {
   background-repeat: no-repeat;
   background-position: center;
   z-index: 5;
+}
+
+.ico-anim {
   animation: 5s ease 4s infinite normal none running point__ico;
 }
 

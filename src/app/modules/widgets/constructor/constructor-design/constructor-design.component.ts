@@ -2099,6 +2099,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       return;
     }
 
+    if (this.widgetType === WidgetTypeCode.Optindot) {
+      return true;
+    }
+
     for (const item of this.widget.guiprops.elementsList) {
       if (item.name === 'closelink-element' ||
         (this.widget.guiprops.formExt && this.widget.guiprops.formExt.enable &&
