@@ -17,7 +17,7 @@ export class PaymentModalComponent implements OnInit {
   @Input() public subscription;
   @Input() private plans;
   @Input() private siteId;
-  @Input() private siteName;
+  @Input() public siteName;
   @Input() private expTime;
 
   public planLabels;
@@ -88,7 +88,8 @@ export class PaymentModalComponent implements OnInit {
   }
 
   private getPayDescription(payTerm, payDiscount) {
-    return this.translate.instant('global.for') + ' ' + payTerm + ', ' + (payDiscount.replace('-', '').trim() || '0%') + ' ' + this.translate.instant('global.discount');
+    return this.translate.instant('global.for') + ' ' + payTerm + ', ' + (payDiscount.replace('-', '').trim() || '0%')
+      + ' ' + this.translate.instant('global.discount');
   }
 
   private getDatesLabel(days?) {

@@ -193,7 +193,7 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
     if (this.sitesService.isSiteHasExpTariff(this.currentSite) && this.getWidgetsCount() >= 3) {
       this.tariffsService.checkTariffPlans(this.currentSite.id,
         this.translate.instant('sitelist.tariff.improve'),
-        this.translate.instant('widgetsList.payment.limit', this.currentSite.name));
+        this.translate.instant('widgetsList.payment.limit', { siteName: this.currentSite.name }));
     } else {
       const modalRef = this.modalService.open(WidgetAddComponent, {
         size: 'xl',

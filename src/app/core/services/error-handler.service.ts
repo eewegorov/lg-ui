@@ -34,27 +34,27 @@ export class ErrorHandlerService {
     if (type === Payment.WIDGETS_LIMIT) {
       this.tariffsService.checkTariffPlans(siteId,
         this.translate.instant('sitelist.tariff.improve'),
-        this.translate.instant('widgetsList.payment.limit', this.coreSitesService.getSiteById(siteId).name));
+        this.translate.instant('widgetsList.payment.limit', { siteName: this.coreSitesService.getSiteById(siteId).name }));
     } else if (type === Payment.CONTAINER_WIDGETS_LIMIT) {
       this.tariffsService.checkTariffPlans(siteId,
         this.translate.instant('sitelist.tariff.improve'),
-        this.translate.instant('widgetsList.payment.limit.container', this.coreSitesService.getSiteById(siteId).name));
+        this.translate.instant('widgetsList.payment.limit.container', { siteName: this.coreSitesService.getSiteById(siteId).name }));
     } else if (type === Payment.INTEGRATION_PAYMENT) {
       this.tariffsService.checkTariffPlans(siteId,
         this.translate.instant('sitelist.tariff.improve'),
-        this.translate.instant('settings.site.integration.paymentLabel', this.coreSitesService.getSiteById(siteId).name));
+        this.translate.instant('settings.site.integration.paymentLabel', { siteName: this.coreSitesService.getSiteById(siteId).name }));
     } else if (type === Payment.WIDGET_HAS_PAYMENT_OPTIONS) {
       this.tariffsService.checkTariffPlans(siteId,
         this.translate.instant('sitelist.tariff.improve'),
-        this.translate.instant('widgetsList.payment.options', this.coreSitesService.getSiteById(siteId).name));
+        this.translate.instant('widgetsList.payment.options', { siteName: this.coreSitesService.getSiteById(siteId).name }));
     } else if (type === Payment.PAYMENT_SETTINGS) {
       this.tariffsService.checkTariffPlans(siteId,
         this.translate.instant('sitelist.tariff.improve'),
-        this.translate.instant('settings.site.update.paymentLabel', this.coreSitesService.getSiteById(siteId).name));
+        this.translate.instant('settings.site.update.paymentLabel', { siteName: this.coreSitesService.getSiteById(siteId).name }));
     } else if (type === Payment.MAX_LEADS_SHOW_REACHED) {
       this.tariffsService.checkTariffPlans(siteId,
         this.translate.instant('sitelist.tariff.improve'),
-        this.translate.instant('settings.site.update.crm.paymentLabel', this.coreSitesService.getSiteById(siteId).name));
+        this.translate.instant('settings.site.update.crm.paymentLabel', { siteName: this.coreSitesService.getSiteById(siteId).name }));
     }
   }
 }

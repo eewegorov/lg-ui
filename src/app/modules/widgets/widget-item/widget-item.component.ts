@@ -174,7 +174,7 @@ export class WidgetItemComponent implements OnInit {
     if (this.sitesService.isSiteHasExpTariff(currentSite)) {
       this.tariffsService.checkTariffPlans(this.currentSiteId,
         this.translate.instant('sitelist.tariff.improve'),
-        this.translate.instant('widgetsList.payment.abtest', currentSite.name));
+        this.translate.instant('widgetsList.payment.abtest', { siteName: currentSite.name }));
     } else {
       const modalRef = this.modalService.open(AbtestAddComponent, {
         size: 'lg',
