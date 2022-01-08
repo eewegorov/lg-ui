@@ -388,6 +388,10 @@ h6.title-h6-widget a:hover {
 
   &.mobile {
     background-image: url('~src/assets/images/widgets/iphone.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 400px;
+    height: 900px;
   }
 }
 
