@@ -863,7 +863,7 @@
         >
           <div class="popup-shadow popup-sh-pad">
             <div class="max-h-1001">
-              <div class="widget-visual-block" [ngStyle]="{'width': 'auto'}">
+              <div class="widget-visual-block" [class.mobile]="currentDevice === 'mobile'" [ngStyle]="{'width': 'auto'}">
                 <div *ngIf="!(disElementOrNotBtnCloseLink())" class="close-btn-x">
                   <span></span>
                 </div>
