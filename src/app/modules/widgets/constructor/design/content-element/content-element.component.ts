@@ -24,6 +24,7 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
   @Input() public heightImageStyle: string;
   @Input() public widthContentStyle: string;
   @Input() public heightContentStyle: string;
+  @Input() public isMobile: boolean;
 
   @Output() private removeElement = new EventEmitter<{element: string, index: number}>();
   @Output() private scrollToElement = new EventEmitter<{id: string, elementName: string, elementCounter: number}>();

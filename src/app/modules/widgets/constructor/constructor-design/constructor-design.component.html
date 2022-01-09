@@ -863,7 +863,7 @@
         >
           <div class="popup-shadow popup-sh-pad">
             <div class="max-h-1001">
-              <div class="widget-visual-block" [class.mobile]="currentDevice === 'mobile'" [ngStyle]="{'width': 'auto'}">
+              <div class="widget-visual-block" [class.mobile]="currentDevice === 'mobile'">
                 <div *ngIf="!(disElementOrNotBtnCloseLink())" class="close-btn-x">
                   <span></span>
                 </div>
@@ -875,6 +875,7 @@
                   [heightImageStyle]="heightImageStyle"
                   [widthContentStyle]="widthContentStyle"
                   [heightContentStyle]="heightContentStyle"
+                  [isMobile]="currentDevice === 'mobile'"
                   (removeElement)="removeCurrentElement($event.element, $event.index)"
                   (scrollToElement)="scrollToEl($event.id, $event.elementName, $event.elementCounter)"
                   (addNewElement)="addNewElementToContent($event)"

@@ -391,7 +391,14 @@ h6.title-h6-widget a:hover {
     background-size: contain;
     background-repeat: no-repeat;
     width: 400px;
-    height: 900px;
+    height: 800px;
+    top: 5%;
+    padding: 0;
+
+    .close-btn-x {
+      top: 10%;
+      right: 180px;
+    }
   }
 }
 

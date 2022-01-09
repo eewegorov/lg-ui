@@ -2,6 +2,7 @@
   *ngIf="widget.guiprops.bg"
   id="mainBlockWidget"
   class="widget1 block-widget-show active"
+  [class.mobile]="isMobile"
   [ngStyle]="{'border': widget.guiprops.bg.border?.style, 'border-radius': widget.guiprops.bg.borderRadius + 'px', 'box-shadow': widget.guiprops.bg.shadow?.style}"
 >
   <div
