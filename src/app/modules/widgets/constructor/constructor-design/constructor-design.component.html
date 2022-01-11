@@ -890,7 +890,7 @@
 
                 <div *ngIf="widgetType === 'optindot'" class="widget-visual-block-dot" [ngClass]="wvBdLeft()">
                   <div class="widget2-main-bl">
-                    <div class="widget2-plashka" *ngIf="widget.guiprops['dhVisual'].enable == true">
+                    <div class="widget2-plashka" *ngIf="widget.guiprops['dhVisual'].enable && currentDevice !== 'mobile'">
                       <span>{{ widget.guiprops.dhVisual.title }}</span>
                     </div>
                     <div
