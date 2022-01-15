@@ -880,6 +880,81 @@ h6.title-h6-widget a:hover {
   margin-top: -9.9px;
 }
 
+#labelMain {
+  display: inline-block;
+  background: #000;
+  min-width: 80px;
+  min-height: 30px;
+  position: absolute;
+  bottom: 0;
+  padding: 5px 14px 2px 14px;
+  margin-left: 0;
+  margin-right: 0;
+
+  display: flex;
+  align-items: center;
+  padding: 7px 12px 4px 14px;
+}
+
+#labelMain .lab-content {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+#labelMain.wlb-bot-left {
+  left: 15px;
+  right: auto;
+}
+
+#labelMain.wlb-bot-right {
+  left: auto;
+  right: 35px;
+}
+
+#labelMain.wlb-right {
+  left: auto;
+  right: 0;
+  bottom: auto;
+  top: 40%;
+  -webkit-transform: rotate(-90deg) translate3d(0,0,0);
+  -moz-transform: rotate(-90deg) translate3d(0,0,0);
+  transform: rotate(-90deg) translate3d(0,0,0);
+}
+
+#labelMain.wlb-left {
+  left: 0;
+  right: auto;
+  bottom: auto;
+  top: 40%;
+  -webkit-transform: rotate(90deg) translate3d(0,0,0);
+  -moz-transform: rotate(90deg) translate3d(0,0,0);
+  transform: rotate(90deg) translate3d(0,0,0);
+}
+
+#labelMain .flabels {
+  margin-left: -3px;
+  margin-right: -2px;
+}
+
+#labelMain .font-awe {
+  margin-left: -3px;
+}
+
+#labelMain .lgwg-label-line-text-in {
+  position: relative;
+  top: -2px;
+}
+
+#labelMain.wlb-left .lgwg-label-line-text-in, #labelMain.wlb-right .lgwg-label-line-text-in {
+  -webkit-font-smoothing: antialiased !important;
+}
+
+#labelMain .lab-content span {
+  white-space: nowrap;
+  line-height: 1.2em;
+}
+
 .modal-dialog {
   max-width: 760px;
 }

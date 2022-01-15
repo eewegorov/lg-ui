@@ -166,6 +166,28 @@ export class WidgetConstructorService {
     return className;
   }
 
+  public wvLabelPos(labelSettings) {
+    let className = '';
+
+    if (labelSettings.place === 'Нижний левый угол') {
+      className = 'wlb-bot-left';
+    }
+
+    if (labelSettings.place === 'Нижний правый угол') {
+      className = 'wlb-bot-right';
+    }
+
+    if (labelSettings.place === 'Левая сторона браузера') {
+      className = 'wlb-left';
+    }
+
+    if (labelSettings.place === 'Правая сторона браузера') {
+      className = 'wlb-right';
+    }
+
+    return className;
+  }
+
   public getDefaultTimerSettings() {
     return {
       enable: false,

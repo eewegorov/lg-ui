@@ -1843,6 +1843,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     return this.widgetConstructorService.wvBdLeft(this.widget.guiprops.dhVisual);
   }
 
+  public wvLabelPos() {
+    return this.widgetConstructorService.wvLabelPos(this.widget.guiprops.labelMain);
+  }
+
   public removeCurrentElement(element: string, index: number): void {
     if (element) {
       if (element === 'form-element' || element === 'button-element') {

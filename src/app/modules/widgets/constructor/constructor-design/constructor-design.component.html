@@ -857,6 +857,36 @@
       </div>
       <div class="max-h-100" [ngClass]="(widget.guiprops.popupMain?.shadow?.enable === true) ? 'ifr-sh-bg' : ''">
         <div
+          [ngClass]="wvLabelPos()"
+          id="labelMain"
+          [ngStyle]="{'background': widget.guiprops['labelMain'].rgbaLabel, 'border-top-left-radius': widget.guiprops['labelMain'].borderRadiusLabel + 'px', 'border-top-right-radius': widget.guiprops['labelMain'].borderRadiusLabel+'px', 'z-index': '120'}"
+        >
+          <div class="lab-content">
+            <div
+              *ngIf="widget.guiprops['labelMain'].iconOrImage === 'useImg'"
+              [style.background-image]="'url(' + widget.guiprops['labelMain'].url + ')'"
+              class="lgiconfontImg"
+            ></div>
+            <span
+              class="label-text-with-add"
+              [ngStyle]="{'font-family': widget.guiprops['labelMain'].font.fontFamily, 'font-size': widget.guiprops['labelMain'].fontSize + 'px', 'color': widget.guiprops['labelMain'].colorText}"
+            >
+              <i
+                *ngIf="widget.guiprops['labelMain'].iconOrImage === 'useIcon' && !widget.guiprops.labelMain.icon.selectedIcon"
+                [class]="'lgiconfont-' + widget.guiprops['labelMain'].icon.selectIcon + ' flabels'"
+                [ngStyle]="{'color': widget.guiprops['labelMain'].icon.color}"
+              ></i>
+              <i
+                *ngIf="widget.guiprops['labelMain'].iconOrImage === 'useIcon' && widget.guiprops.labelMain.icon.selectedIcon"
+                [class]="widget.guiprops['labelMain'].icon.selectedIcon + ' font-awe'"
+                [ngStyle]="{'color': widget.guiprops['labelMain'].icon.color}"
+              ></i>
+              {{widget.guiprops.labelMain.text}}
+            </span>
+          </div>
+        </div>
+
+        <div
           class="max-wh-over"
           [ngStyle]="{'background': this.widget.guiprops.popupMain.shadow.enable ? widget.guiprops['popupMain']?.shadow.rgbaColor : 'none'}"
           (click)="scrollToEl('MainSetBl', 'main-w-element')"
