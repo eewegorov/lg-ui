@@ -2,7 +2,7 @@
   <div *ngIf="widget.guiprops" class="row widget-style-wrapper">
     <div class="col-lg-3 widget-style-menu">
       <div class="elements-selector">
-        <div *ngIf="widget.guiprops.elementsList">
+        <div *ngIf="widget.guiprops.elementsList" class="elements-selector-top">
           <div class="element" [class.active]="currentElement === 'settings'" (click)="setCurrentElement('settings')">
             <div class="before">
               <div class="square"></div>
@@ -45,7 +45,7 @@
           </div>
         </div>
 
-        <div class="device-selector">
+        <!--<div class="device-selector">
           <div
             class="element"
             [class.active]="currentDevice === 'desktop'"
@@ -60,7 +60,7 @@
           >
             <div class="mobile-icon-small icon"></div>
           </div>
-        </div>
+        </div>-->
       </div>
       <div class="elements" [@slide]="!extendedElement ? 'left' : 'right'">
         <div class="elements-default">
