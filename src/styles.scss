@@ -362,33 +362,37 @@ button.hovered-btn-blue:hover {
 #toast-container > .ngx-toastr {
   background-image: none !important;
   border-radius: 8px;
+  width: 360px;
+  padding: 12px 5px 15px;
 }
 
 #toast-container > .ngx-toastr:before {
   position: fixed;
   font-family: FontAwesome;
   font-size: 24px;
-  line-height: 18px;
   float: left;
   color: #FFF;
-  padding-right: 0.5em;
-  background: green;
-  height: 80px;
-  margin-top: -20px;
-  margin-left: -20px;
+  padding: 20px 15px;
+  height: 78px;
+  margin-top: -12px;
+  margin-left: -5px;
   border-radius: 8px 0 0 8px;
 }
 #toast-container > .toast-warning:before {
   content: "\f003";
 }
 #toast-container > .toast-error:before {
-  content: "\f001";
+  background: rgba(#E25336, 20%);
+  content: url("~src/assets/images/widgets/error.svg");
+  color: #E25336;
 }
 #toast-container > .toast-info:before {
   content: "\f005";
 }
 #toast-container > .toast-success:before {
-  content: "\f002";
+  background: rgba(#62cb31, 30%);
+  content: "\f00c";
+  color: #4898A8;
 }
 
 #toast-container > div {
@@ -399,6 +403,19 @@ button.hovered-btn-blue:hover {
   opacity: 1;
 }
 
+.toast-title, .toast-message {
+  margin-left: 70px;
+}
+
+.toast-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.toast-message {
+  margin-top: 4px;
+  font-size: 15px;
+}
 
 #toast-container > div:hover {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -412,6 +429,10 @@ button.hovered-btn-blue:hover {
 
 .toast-success {
   border: 1px solid #62cb31;
+
+  .toast-title {
+    color: #62cb31;
+  }
 }
 
 .toast-warning {
@@ -420,6 +441,10 @@ button.hovered-btn-blue:hover {
 
 .toast-error {
   border: 1px solid #E25336;
+
+  .toast-title {
+    color: #E25336;
+  }
 }
 
 .toast-info {
