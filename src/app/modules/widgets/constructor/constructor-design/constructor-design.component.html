@@ -859,7 +859,7 @@
         <div
           [ngClass]="wvLabelPos()"
           id="labelMain"
-          [ngStyle]="{'background': widget.guiprops['labelMain'].rgbaLabel, 'border-top-left-radius': widget.guiprops['labelMain'].borderRadiusLabel + 'px', 'border-top-right-radius': widget.guiprops['labelMain'].borderRadiusLabel+'px', 'z-index': '120'}"
+          [ngStyle]="{'background': widget.guiprops['labelMain'].rgbaLabel, 'border-top-left-radius': widget.guiprops['labelMain'].borderRadiusLabel + 'px', 'border-top-right-radius': widget.guiprops['labelMain'].borderRadiusLabel + 'px', 'z-index': '120'}"
         >
           <div class="lab-content">
             <div
@@ -872,12 +872,12 @@
               [ngStyle]="{'font-family': widget.guiprops['labelMain'].font.fontFamily, 'font-size': widget.guiprops['labelMain'].fontSize + 'px', 'color': widget.guiprops['labelMain'].colorText}"
             >
               <i
-                *ngIf="widget.guiprops['labelMain'].iconOrImage === 'useIcon' && !widget.guiprops.labelMain.icon.selectedIcon"
+                *ngIf="widget.guiprops['labelMain'].iconOrImage === 'useIcon' && !widget.guiprops.dhVisual.selectedIcon?.includes('fa ')"
                 [class]="'lgiconfont-' + widget.guiprops['labelMain'].icon.selectIcon + ' flabels'"
                 [ngStyle]="{'color': widget.guiprops['labelMain'].icon.color}"
               ></i>
               <i
-                *ngIf="widget.guiprops['labelMain'].iconOrImage === 'useIcon' && widget.guiprops.labelMain.icon.selectedIcon"
+                *ngIf="widget.guiprops['labelMain'].iconOrImage === 'useIcon' && widget.guiprops.dhVisual.selectedIcon?.includes('fa ')"
                 [class]="widget.guiprops['labelMain'].icon.selectedIcon + ' font-awe'"
                 [ngStyle]="{'color': widget.guiprops['labelMain'].icon.color}"
               ></i>
