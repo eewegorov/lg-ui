@@ -359,11 +359,36 @@ button.hovered-btn-blue:hover {
   margin: 10px auto 0;
 }
 
-#toast-container > .toast-info,
-#toast-container > .toast-error,
-#toast-container > .toast-warning,
-#toast-container > .toast-success{
-  background-image: none;
+#toast-container > .ngx-toastr {
+  background-image: none !important;
+  border-radius: 8px;
+}
+
+#toast-container > .ngx-toastr:before {
+  position: fixed;
+  font-family: FontAwesome;
+  font-size: 24px;
+  line-height: 18px;
+  float: left;
+  color: #FFF;
+  padding-right: 0.5em;
+  background: green;
+  height: 80px;
+  margin-top: -20px;
+  margin-left: -20px;
+  border-radius: 8px 0 0 8px;
+}
+#toast-container > .toast-warning:before {
+  content: "\f003";
+}
+#toast-container > .toast-error:before {
+  content: "\f001";
+}
+#toast-container > .toast-info:before {
+  content: "\f005";
+}
+#toast-container > .toast-success:before {
+  content: "\f002";
 }
 
 #toast-container > div {
@@ -379,29 +404,26 @@ button.hovered-btn-blue:hover {
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.toast-close-button {
-  color: #000000;
-  opacity: 0.2;
-}
-
-.toast-info {
-  background: #fff;
-  border-left: 6px solid #3498db;
+.toast-top-right {
+  top: 60px;
+  right: 20px;
+  border-radius: 8px;
 }
 
 .toast-success {
-  background: #fff;
-  border-left: 6px solid #62cb31;
+  border: 1px solid #62cb31;
 }
 
 .toast-warning {
-  background: #fff;
-  border-left: 6px solid #ffb606;
+  border: 1px solid #ffb606;
 }
 
 .toast-error {
-  background: #fff;
-  border-left: 6px solid #e74c3c;
+  border: 1px solid #E25336;
+}
+
+.toast-info {
+  border: 1px solid #3498db;
 }
 
 .toast-progress {

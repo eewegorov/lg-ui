@@ -440,7 +440,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
       this.widgetService.updateWidget(this.sid, this.wid, widgetUpdatedData).subscribe((response: boolean) => {
         if (response) {
-          this.toastr.success(this.translate.instant('widgetsList.editor.save.done.desc', this.translate.instant('widgetsList.editor.save.done.title')));
+          this.toastr.success(this.translate.instant('widgetsList.editor.save.done.desc'), this.translate.instant('widgetsList.editor.save.done.title'));
         }
         setTimeout(() => {
           this.isLoading = false;

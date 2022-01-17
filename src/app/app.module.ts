@@ -35,13 +35,12 @@ import { AppComponent } from './app.component';
       },
     }),
     ToastrModule.forRoot({
-      closeButton: true,
       newestOnTop: false,
       progressBar: false,
-      positionClass: 'toast-top-center',
+      positionClass: 'toast-top-right',
       preventDuplicates: false,
-      timeOut: 5000,
-      extendedTimeOut: 1000,
+      timeOut: 5000000,
+      extendedTimeOut: 5000000,
     }),
     CoreModule,
     SharedModule
