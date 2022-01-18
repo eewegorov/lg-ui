@@ -15,6 +15,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   @Input() public isContainerized: boolean;
   @Input() public isMockup: boolean;
   @Input() public sid: string;
+  @Input() public showErrors: boolean;
 
   public weekDays = [];
   public loop = Array.from({length: 20}, (_, i) => i + 1);
@@ -36,6 +37,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     this.translate.instant('widgetsList.editor.section.integrations')
   ];
   public currentCategory = this.widgetSettingsCategories[0];
+
 
   private ONE_MINUTE = 1000 * 60;
   private ONE_HOUR   = this.ONE_MINUTE * 60;
@@ -195,6 +197,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     if (typeof this.widget.rules === 'undefined') {
       return;
     }
+
     if (this.widget.rules.pages?.enable) {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.widget.rules.pages.items.length; i++) {

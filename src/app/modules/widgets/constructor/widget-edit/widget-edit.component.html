@@ -41,7 +41,7 @@
           </div>
           <div class="design-icon"></div> <span
           class="tab-text">{{ 'widgetsList.editor.tab.design' | translate }}</span> <span
-          *ngIf="isTabHasError('design')"
+          *ngIf="isTabHasError('design') && showErrors"
           data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
           class="info-link badge badge-pill badge-danger"></span>
           <div class="after fade-in">
@@ -63,7 +63,7 @@
           </div>
           <div class="rules-icon"></div> <span
           class="tab-text">{{ 'widgetsList.editor.tab.rules' | translate }}</span> <span
-          *ngIf="isTabHasError('rules')" data-toggle="tooltip"
+          *ngIf="isTabHasError('rules') && showErrors" data-toggle="tooltip"
           data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
           class="info-link badge badge-pill badge-danger"></span>
           <div class="after fade-in">
@@ -175,6 +175,7 @@
       [isContainerized]="isContainerized"
       [isMockup]="isMockup"
       [sid]="sid"
+      [showErrors]="showErrors"
     ></app-constructor-rules>
   </div>
 </div>

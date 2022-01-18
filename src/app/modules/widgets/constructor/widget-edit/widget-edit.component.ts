@@ -55,6 +55,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   public coupons = [];
   public isLoading = false;
   public SP_widget = {} as any;
+  public showErrors = false;
 
   private couponsErrorFlag = false;
   private couponsId = [];
@@ -299,6 +300,8 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   public saveWidget() {
+    this.showErrors = true;
+
     if (this.isMockup) {
       this.saveMockupItem();
     } else {

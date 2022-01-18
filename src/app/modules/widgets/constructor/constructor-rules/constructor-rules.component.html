@@ -8,7 +8,7 @@
     >
       <span>{{ category }}</span>
       <span
-        *ngIf="isTabHasError(category)" data-toggle="tooltip" data-placement="top"
+        *ngIf="isTabHasError(category) && showErrors" data-toggle="tooltip" data-placement="top"
         title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
         class="info-link badge badge-pill badge-danger"
       ></span>
@@ -113,7 +113,7 @@
                     </div>
                   </div>
                   <div class="d-flex align-items-center ml-2">
-                    <div class="input-group" [ngClass]="(item.value.length == 0) ? 'is-invalid' : ''">
+                    <div class="input-group" [ngClass]="(item.value.length == 0 && showErrors) ? 'is-invalid' : ''">
                       <div class="input-group-prepend">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
@@ -199,7 +199,7 @@
                     </div>
                   </div>
                   <div class="d-flex align-items-center flex-grow-1 ml-2">
-                    <div class="input-group" [ngClass]="(item.value.length == 0) ? 'is-invalid' : ''">
+                    <div class="input-group" [ngClass]="(item.value.length == 0 && showErrors) ? 'is-invalid' : ''">
                       <div class="input-group-prepend">
                         <button
                           type="button"
@@ -254,7 +254,7 @@
 
               <div
                 *ngIf="widget.rules.pageNo?.enable"
-                [ngClass]="(widget.rules.pageNo.items.length > 0) ? '' : 'is-invalid'"
+                [ngClass]="(widget.rules.pageNo.items.length > 0 || !showErrors) ? '' : 'is-invalid'"
               >
                 <ng-select
                   id="widgetSelector"
@@ -358,7 +358,7 @@
 
               <div
                 *ngIf="widget.rules.days?.enable"
-                [ngClass]="(widget.rules.days.items.length > 0) ? '' : 'is-invalid'"
+                [ngClass]="(widget.rules.days.items.length > 0 || !showErrors) ? '' : 'is-invalid'"
               >
                 <ng-select
                   id="daysSelector"
@@ -962,7 +962,7 @@
           <div
             *ngIf="widget.autoresponder?.enabled"
             class="mt-3"
-            [ngClass]="(widget.autoresponder.subject?.toString().trim().length < 1) ? 'is-invalid' : ''"
+            [ngClass]="(widget.autoresponder.subject?.toString().trim().length < 1 && showErrors) ? 'is-invalid' : ''"
           >
             <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoresponder.subject' | translate }}</h4>
             <input class="form-control" [(ngModel)]="widget.autoresponder.subject">
@@ -970,7 +970,7 @@
           <div
             *ngIf="widget.autoresponder?.enabled"
             class="mt-3"
-            [ngClass]="(widget.autoresponder.text?.toString().trim().length < 1) ? 'is-invalid' : ''"
+            [ngClass]="(widget.autoresponder.text?.toString().trim().length < 1 && showErrors) ? 'is-invalid' : ''"
           >
             <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoresponder.text' | translate }}</h4>
             <angular-editor class="d-flex" placeholder="" [(ngModel)]="widget.autoresponder.text"></angular-editor>
