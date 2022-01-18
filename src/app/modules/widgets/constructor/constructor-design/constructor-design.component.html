@@ -16,7 +16,7 @@
           <div
             *ngFor="let element of widget.guiprops.elementsList; index as i"
             class="element"
-            [class.error]="isElementHasError(element.name, element.counter)"
+            [class.error]="isElementHasError(element.name, element.counter) && showErrors"
             [class.active]="currentElement === element.name + (element.counter ? ('#' + element.counter) : '')"
             (click)="setCurrentElement(element.name + (element.counter ? ('#' + element.counter) : '')); currentIndex = i"
           >

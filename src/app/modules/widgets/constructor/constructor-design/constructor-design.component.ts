@@ -46,6 +46,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   @Input() public coupons: Coupon[];
   @Input() public isMockup: boolean;
   @Input() public isContainerized: boolean;
+  @Input() public showErrors: boolean;
   @Input() private currentActiveTab: string;
   @Input() private SP_widget: any;
   @Input() private isTabHasErrorForFormExt: () => boolean;
