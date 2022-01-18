@@ -39,8 +39,8 @@ import { AppComponent } from './app.component';
       progressBar: false,
       positionClass: 'toast-top-right',
       preventDuplicates: false,
-      timeOut: 5000000,
-      extendedTimeOut: 5000000,
+      timeOut: 3000,
+      extendedTimeOut: 1000,
     }),
     CoreModule,
     SharedModule
