@@ -338,15 +338,14 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   private saveMockupItem() {
-    let errorsList = this.runValidators();
+    const errorsList = this.runValidators();
     this.isLoading = true;
 
-    this.widgetService.validators.forEach(validator => {
-      errorsList = errorsList.concat(validator.call(this));
-    });
-
     if (errorsList.length !== 0) {
-      this.toastr.error(this.translate.instant('widgetsList.editor.save.validation.desc'), this.translate.instant('widgetsList.editor.save.validation.title'));
+      this.toastr.error(
+        errorsList.length === 1 && errorsList[0].message ? errorsList[0].message : this.translate.instant('widgetsList.editor.save.validation.desc'),
+        this.translate.instant('widgetsList.editor.save.validation.title')
+      );
       this.isLoading = false;
     } else {
       const savedInstance = {
@@ -398,16 +397,10 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     this.addCouponsId();
     this.mapFormExtFieldId();
 
-    let errorsList = this.runValidators();
+    const errorsList = this.runValidators();
     this.isLoading = true;
-    this.widgetService.validators.forEach(validator => {
-      errorsList = errorsList.concat(validator.call(this));
-    });
 
-    if (errorsList.length !== 0) {
-      this.toastr.error(this.translate.instant('widgetsList.editor.save.validation.desc'), this.translate.instant('widgetsList.editor.save.validation.title'));
-      this.isLoading = false;
-    } else if (this.couponsErrorFlag) {
+    if (this.couponsErrorFlag) {
       this.toastr.error(this.translate.instant('widgets.coupon.saveError'), this.translate.instant('widgetsList.editor.save.validation.title'));
       this.isLoading = false;
     } else if (this.formExtIdsErrorFlag) {
@@ -421,6 +414,12 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
       this.isLoading = false;
     } else if (this.widget.useCustomIntegrationsList && !this.widget.integrations.length) {
       this.toastr.error(this.translate.instant('widgets.integration.saveError'), this.translate.instant('widgetsList.editor.save.validation.title'));
+      this.isLoading = false;
+    } else if (errorsList.length !== 0) {
+      this.toastr.error(
+        errorsList.length === 1 && errorsList[0].message ? errorsList[0].message : this.translate.instant('widgetsList.editor.save.validation.desc'),
+        this.translate.instant('widgetsList.editor.save.validation.title')
+      );
       this.isLoading = false;
     } else {
       this.widget.jsInfo.onShowScript.script = this.widget.jsInfo.onShowScript.script || null;
