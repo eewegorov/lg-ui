@@ -1651,6 +1651,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public listFile(place, item?) {
+    console.log('aaa')
     this.linkImage = '';
     if (place === 'image') {
       this.imageCustom = item;
