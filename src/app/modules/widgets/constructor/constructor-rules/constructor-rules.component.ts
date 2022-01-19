@@ -205,7 +205,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
           errors.push({
             id: TAB_ID,
             category: this.translate.instant('widgetsList.editor.section.targeting'),
-            message: 'Empty page target'
+            message: 'Укажите URL страницы'
           });
         }
       }
@@ -218,7 +218,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
           errors.push({
             id: TAB_ID,
             category: this.translate.instant('widgetsList.editor.section.targeting'),
-            message: 'Empty previous page target'
+            message: 'Укажите URL страницы'
           });
         }
       }
@@ -229,7 +229,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
         errors.push({
           id: TAB_ID,
           category: this.translate.instant('widgetsList.editor.section.targeting'),
-          message: 'Empty pageno'
+          message: 'Укажите номер страницы'
         });
       }
     }
@@ -239,7 +239,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
         errors.push({
           id: TAB_ID,
           category: this.translate.instant('widgetsList.editor.section.targeting'),
-          message: 'Empty days list'
+          message: 'Укажите дни недели'
         });
       }
     }
@@ -249,7 +249,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
         errors.push({
           id: TAB_ID,
           category: this.translate.instant('widgetsList.editor.section.targeting'),
-          message: 'Infinity period range'
+          message: 'Укажите период'
         });
       }
     }
@@ -259,7 +259,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
         errors.push({
           id: TAB_ID,
           category: this.translate.instant('widgetsList.editor.section.showing'),
-          message: 'Autoinvite. Pages. Pages less or equal the 0'
+          message: 'Укажите количество страниц'
         });
       }
     }
@@ -269,7 +269,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
         errors.push({
           id: TAB_ID,
           category: this.translate.instant('widgetsList.editor.section.showing'),
-          message: 'Autoinvite. Seconds. Seconds less or equal the 0'
+          message: 'Укажите количество секунд'
         });
       }
     }
@@ -279,7 +279,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
         errors.push({
           id: TAB_ID,
           category: this.translate.instant('widgetsList.editor.section.showing'),
-          message: 'Autoinvite. Inactive. Seconds less or equal the 0'
+          message: 'Укажите количество секунд'
         });
       }
     }
@@ -289,7 +289,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
         errors.push({
           id: TAB_ID,
           category: this.translate.instant('widgetsList.editor.section.showing'),
-          message: 'Autoinvite. Percent. Value less or equal the 0 or great then 100'
+          message: 'Укажите процент высоты страницы'
         });
       }
     }
@@ -299,7 +299,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
         errors.push({
           id: TAB_ID,
           category: this.translate.instant('widgetsList.editor.section.showing'),
-          message: 'Autoinvite. Click. Empty selector'
+          message: 'Укажите CSS селектор'
         });
       }
     }
