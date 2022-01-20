@@ -143,14 +143,22 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
   ngAfterViewInit(): void {
     this.autoUploadSub = this.flow?.events$.subscribe(event => {
-      if (event.type === 'filesSubmitted') {
-        this.isLoading = true;
-        this.widgetConstructorService.uploadImage(this.sid, event.event[0][0]).subscribe(() => {
-          if (this.imagesSub) {
-            this.imagesSub.unsubscribe();
+      if (event.type === 'filesSubmitted' && event?.event[0][0]) {
+        if (event.event[0][0].file.size > 2000000) {
+          this.toastr.error('Размер слишком большой', 'Ошибка!');
+        } else {
+          if (event.event[0][0].file.type !== 'image/jpeg' && event.event[0][0].file.type !== 'image/png' && event.event[0][0].file.type !== 'image/gif') {
+            this.toastr.error('Допустимые форматы .png, .jpg и .gif', 'Ошибка!');
+          } else {
+            this.isLoading = true;
+            this.widgetConstructorService.uploadImage(this.sid, event.event[0][0]).subscribe(() => {
+              if (this.imagesSub) {
+                this.imagesSub.unsubscribe();
+              }
+              this.getImages(this.sid);
+            });
           }
-          this.getImages(this.sid);
-        });
+        }
       }
     });
     this.initLabelMainPicker();
@@ -1651,7 +1659,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public listFile(place, item?) {
-    console.log('aaa')
     this.linkImage = '';
     if (place === 'image') {
       this.imageCustom = item;
