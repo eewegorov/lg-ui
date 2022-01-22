@@ -79,8 +79,7 @@
       </div>
       <li
         *ngFor="let item of widget.guiprops.elementsList; index as i"
-        [class]="'element-to-append-summernote margin-if-' + item.name"
-        [ngClass]="addExtraClassForFullWidth(i)"
+        [class]="'element-to-append-summernote margin-if-' + item.name + ' ' + addExtraClassForFullWidth(i)"
         [attr.data-to]="'elemScrN' + i"
         (click)="scrollToEl(i.toString(), item.name, item.counter); $event.stopPropagation();"
         [ngStyle]="{'z-index': 100 - i}"
@@ -245,12 +244,12 @@
                       >{{ getInputFormPhoneMask() }}</span>
                     </div>
                     <div *ngSwitchCase="'textarEl'" class="text-input-class text-input-area-class">
-                      <textarea
-                        [id]="'elementid' + item.type"
-                        [ngClass]="classNameFormInput(item.type)"
-                        class="form-control form-widget-cntrl"
-                        [style]="'background: ' + widget.guiprops['form'].rgbaInputForm + ';color: ' + widget.guiprops['form'].colorTitleInputForm + ';border-radius: ' + widget.guiprops['form'].borderRadiusInputForm + 'px;border-color: ' + widget.guiprops['form'].border.color + '!important'"
-                      ></textarea>
+                    <textarea
+                      [id]="'elementid' + item.type"
+                      [ngClass]="classNameFormInput(item.type)"
+                      class="form-control form-widget-cntrl"
+                      [style]="'background: ' + widget.guiprops['form'].rgbaInputForm + ';color: ' + widget.guiprops['form'].colorTitleInputForm + ';border-radius: ' + widget.guiprops['form'].borderRadiusInputForm + 'px;border-color: ' + widget.guiprops['form'].border.color + '!important'"
+                    ></textarea>
                       <label
                         [for]="'elementid' + item.type"
                         class="form-widget-cntrl-label"
@@ -305,13 +304,13 @@
 
                       <!-- FORM EXT TEXTAREA -->
                       <div *ngSwitchCase="'textareaElement'" class="text-input-class text-input-area-class text-input-class-form-ext">
-                      <textarea
-                        [id]="'elementid' + itemExt.type"
-                        type="text"
-                        [ngClass]="formExtClassNameFormInput(itemExt)"
-                        class="form-control form-widget-cntrl"
-                        [style]="'background: ' + widget.guiprops.formExt.model.mainSettings.rgbaInputForm + ';color: ' + widget.guiprops.formExt.model.mainSettings.colorTitleInputForm + ';border-radius: ' + widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm + 'px;border-color: ' + widget.guiprops.formExt.model.mainSettings.border.color + '!important'"
-                      ></textarea>
+                    <textarea
+                      [id]="'elementid' + itemExt.type"
+                      type="text"
+                      [ngClass]="formExtClassNameFormInput(itemExt)"
+                      class="form-control form-widget-cntrl"
+                      [style]="'background: ' + widget.guiprops.formExt.model.mainSettings.rgbaInputForm + ';color: ' + widget.guiprops.formExt.model.mainSettings.colorTitleInputForm + ';border-radius: ' + widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm + 'px;border-color: ' + widget.guiprops.formExt.model.mainSettings.border.color + '!important'"
+                    ></textarea>
                         <label
                           [for]="'elementid' + itemExt.type"
                           class="form-widget-cntrl-label"

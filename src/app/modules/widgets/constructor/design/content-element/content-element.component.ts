@@ -116,15 +116,11 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
   }
 
   public addExtraClassForFullWidth(index) {
-    if (!this.widget.guiprops.formExt) {
-      return;
-    }
-
     const indexValue = (100 - index);
     const indexValueForm = this.widget.guiprops.formExt.enable ? $('.margin-if-form-ext-element').css('z-index') : $('.margin-if-form-element').css('z-index');
     const indexValueButton = $('.margin-if-button-element').css('z-index');
 
-    if (!indexValueForm || !indexValueButton) {
+    if (!indexValueForm && !indexValueButton) {
       return;
     }
 

@@ -1178,7 +1178,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
               }, 220);
               // Размер ЗАДАН
               if (this.widget.guiprops.image.img_width === 'Собственная') {
-                console.log('FULL WIDTH LR 2', $('.color-pod'));
                 let mainBlHeight;
                 setTimeout(() => {
                   mainBlockW.css({ width: this.widthImageStyle });

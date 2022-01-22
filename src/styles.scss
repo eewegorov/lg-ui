@@ -1875,6 +1875,16 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   line-height: 13px;
 }
 
+.widget1-btn-bl div.button-send {
+  display: inline-block;
+  text-align: center;
+  margin: 15px 0 0;
+  padding: 5px 20px;
+  min-height: 42px;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased!important;
+}
+
 .widget1-btn-bl div.button-send.form-ext-btn-el {
   display: block;
   margin-left: 0;
