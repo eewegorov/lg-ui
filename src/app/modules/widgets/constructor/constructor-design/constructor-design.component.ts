@@ -161,6 +161,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         }
       }
     });
+
     this.initLabelMainPicker();
   }
 
@@ -175,6 +176,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         this.checkChanges();
         this.changeColorPodAndSRC();
         this.loadListener();
+
       }, 0);
     }
   }

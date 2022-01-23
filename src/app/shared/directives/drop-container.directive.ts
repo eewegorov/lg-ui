@@ -21,7 +21,6 @@ export class DropContainerDirective {
 
         if (this.type === 'AND') {
           this.audience.groups.push({
-            name: 'testgroup',
             items: [this.getItemTemplate(rule)]
           });
         } else {
@@ -33,7 +32,6 @@ export class DropContainerDirective {
 
   private getItemTemplate(rule) {
     const baseObj = {
-      name: rule.attr('title'),
       type: rule.attr('data-code'),
       subitems: []
     };
@@ -45,21 +43,21 @@ export class DropContainerDirective {
   private getSubItemTemplate(type) {
     const subObj = {} as any;
 
-    if (type === 'url') {
+    if (type === 'URL') {
       subObj.condition        = 0;
       subObj.paramCompareType = 0;
       subObj.param = '';
       subObj.valueCompareType = 0;
       subObj.value = '';
-    } else if (type === 'refer' || type === 'search') {
+    } else if (type === 'REFER' || type === 'SEARCH') {
       subObj.valueCompareType = 0;
       subObj.value = '';
-    } else if (type === 'type' || type === 'visit') {
+    } else if (type === 'TYPE' || type === 'VISIT') {
       subObj.value = 0;
-    } else if (type === 'visitno') {
+    } else if (type === 'VISITNO') {
       subObj.valueCompareType = 0;
       subObj.value = 1;
-    } else if (type === 'devices' || type === 'social') {
+    } else if (type === 'DEVICES' || type === 'SOCIAL') {
       subObj.value = 0;
     }
     return subObj;

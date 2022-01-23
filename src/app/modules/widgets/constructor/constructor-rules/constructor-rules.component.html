@@ -466,7 +466,7 @@
                     <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.pages.enable' | translate }}</h4>
                     <div
                       class="d-flex"
-                      [class.is-invalid]="widget.autoinvite.pages.value <= 0"
+                      [class.is-invalid]="widget.autoinvite.pages.value <= 0 && showErrors"
                     >
                       <input
                         style="float: left; width: 70px;"
@@ -501,7 +501,7 @@
                     </h4>
                     <div
                       class="d-flex"
-                      [class.is-invalid]="widget.autoinvite.seconds.value <= 0"
+                      [class.is-invalid]="widget.autoinvite.seconds.value <= 0 && showErrors"
                     >
                       <input
                         style="float: left; width: 70px;"
@@ -534,7 +534,7 @@
                     </h4>
                     <div
                       class="d-flex mt-1"
-                      [class.is-invalid]="widget.autoinvite.inactive.value <= 0"
+                      [class.is-invalid]="widget.autoinvite.inactive.value <= 0 && showErrors"
                     >
                       <input
                         style="float: left; width: 70px;"
@@ -569,7 +569,7 @@
                     </h4>
                     <div
                       class="d-flex mt-1"
-                      [class.is-invalid]="widget.autoinvite.percent.value <= 0"
+                      [class.is-invalid]="widget.autoinvite.percent.value <= 0 && showErrors"
                     >
                       <input
                         style="float: left; width: 70px;"
@@ -605,7 +605,7 @@
 
                 <div
                   class="d-flex flex-column pt-2"
-                  [class.is-invalid]="widget.autoinvite.click.value.trim().length == 0"
+                  [class.is-invalid]="widget.autoinvite.click.value.trim().length == 0 && showErrors"
                 >
                   <label class="control-label extra-header">
                     {{ 'widgetsList.editor.autoinvite.click.title' | translate }}
