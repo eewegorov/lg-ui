@@ -1,5 +1,6 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { Audience } from '../../core/models/widgets';
+import { AUDIENCES_VALS } from '../../configs/audiences';
 
 declare var require: any;
 const $ = require('jquery');
@@ -44,22 +45,27 @@ export class DropContainerDirective {
     const subObj = {} as any;
 
     if (type === 'URL') {
-      subObj.condition        = 0;
-      subObj.paramCompareType = 0;
+      subObj.condition        = AUDIENCES_VALS.conditionsEnum[0];
+      subObj.paramCompareType = AUDIENCES_VALS.compareTypesEnum[0];
       subObj.param = '';
-      subObj.valueCompareType = 0;
+      subObj.valueCompareType = AUDIENCES_VALS.compareTypesEnum[0];
       subObj.value = '';
     } else if (type === 'REFER' || type === 'SEARCH') {
-      subObj.valueCompareType = 0;
+      subObj.valueCompareType = AUDIENCES_VALS.compareTypesEnum[0];
       subObj.value = '';
-    } else if (type === 'TYPE' || type === 'VISIT') {
-      subObj.value = 0;
+    } else if (type === 'TYPE') {
+      subObj.value = AUDIENCES_VALS.trafficTypesEnum[0];
+    } else if (type === 'VISIT') {
+      subObj.value = AUDIENCES_VALS.visitsTypeEnum[0];
     } else if (type === 'VISITNO') {
-      subObj.valueCompareType = 0;
+      subObj.valueCompareType = AUDIENCES_VALS.arifmethicEnum[0];
       subObj.value = 1;
-    } else if (type === 'DEVICES' || type === 'SOCIAL') {
-      subObj.value = 0;
+    } else if (type === 'DEVICES') {
+      subObj.value = AUDIENCES_VALS.deviceListEnum[0];
+    } else if (type === 'SOCIAL') {
+      subObj.value = AUDIENCES_VALS.socialNetsEnum[0];
     }
+
     return subObj;
   }
 

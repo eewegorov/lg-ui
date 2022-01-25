@@ -27,8 +27,8 @@
           </div>
         </div>
 
-        <ng-container *ngIf="widget.audiencesEnabled">
-          <div *ngFor="let group of widget.audience.groups; index as i" class="rules-container">
+        <div *ngIf="widget.audiencesEnabled" class="rules-container">
+          <ng-container *ngFor="let group of widget.audience.groups; index as i">
             <div *ngIf="i !== 0" class="rule-groups-text">{{ 'audience.rule.logic.and' | translate }}</div>
             <div *ngFor="let item of group.items; index as j">
               <div class="rule-block">
@@ -123,8 +123,8 @@
                 </div>
               </div>
             </div>
-          </div>
-        </ng-container>
+          </ng-container>
+        </div>
       </div>
       <div class="col-lg-4 rules-templates-list">
         <h3 class="control-label">{{ 'audience.rules' | translate }}</h3>

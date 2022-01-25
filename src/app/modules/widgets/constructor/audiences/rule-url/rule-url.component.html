@@ -5,13 +5,13 @@
     <div class="mt-2">
       <div class="dropdown w-25" data-val="true" data-field="present">
         <button class="btn btn-default dropdown-toggle w-100" type="button" data-toggle="dropdown" aria-expanded="true">
-          {{ vals.conditions[subitem.condition] }} <span class="caret"></span>
+          {{ vals.conditions[vals.conditionsEnum.indexOf(subitem.condition)] }} <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
           <li
             role="presentation"
             *ngFor="let val of vals.conditions; index as j"
-            (click)="subitem.condition = j"
+            (click)="subitem.condition = vals.conditionsEnum[j]"
           >
             <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ val }}</a>
           </li>
@@ -23,10 +23,10 @@
           <div class="input-group" [ngClass]="(subitem.param.trim().length == 0) ? 'is-invalid' : ''">
             <div class="input-group-prepend">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                {{ vals.compareTypes[subitem.paramCompareType] }} <span class="caret"></span>
+                {{ vals.compareTypes[vals.compareTypesEnum.indexOf(subitem.paramCompareType)] }} <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" role="menu">
-                <li *ngFor="let val of vals.compareTypes; index as k" (click)="subitem.paramCompareType = k">
+                <li *ngFor="let val of vals.compareTypes; index as k" (click)="subitem.paramCompareType = vals.compareTypesEnum[k]">
                   <a href="javascript:void(0)" class="dropdown-item">{{ val }}</a>
                 </li>
               </ul>
@@ -45,12 +45,12 @@
             <div class="input-group subitem-left" [ngClass]="(subitem.value.trim().length == 0) ? 'is-invalid' : ''">
               <div class="input-group-prepend">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  {{ vals.compareTypes[subitem.valueCompareType] }} <span class="caret"></span>
+                  {{ vals.compareTypes[vals.compareTypesEnum.indexOf(subitem.valueCompareType)] }} <span class="caret"></span>
                 </button>
                 <ul role="menu" class="dropdown-menu">
                   <li
                     *ngFor="let val of vals.compareTypes; index as l"
-                    (click)="subitem.valueCompareType = l"
+                    (click)="subitem.valueCompareType = vals.compareTypesEnum[l]"
                   >
                     <a href="javascript:void(0)" class="dropdown-item">{{ val }}</a>
                   </li>

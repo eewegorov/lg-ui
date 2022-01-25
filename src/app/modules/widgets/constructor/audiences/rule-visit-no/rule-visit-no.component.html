@@ -5,13 +5,13 @@
       <div class="col-sm-6 row-subitem-padding mr-2">
         <div class="dropdown" data-val="true" data-field="present">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-            {{ vals.arifmethic[subitem.valueCompareType] }} <span class="caret"></span>
+            {{ vals.arifmethic[vals.arifmethicEnum.indexOf(subitem.valueCompareType)] }} <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
             <li
               role="presentation"
               *ngFor="let val of vals.arifmethic; index as j"
-              (click)="subitem.valueCompareType = j"
+              (click)="subitem.valueCompareType = vals.arifmethicEnum[j]"
             >
               <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ val }}</a>
             </li>

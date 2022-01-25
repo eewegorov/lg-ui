@@ -26,13 +26,13 @@ export class RuleVisitComponent implements OnInit {
     this.remove.emit({groupId, itemType, index});
   }
 
-  public addSubItem(item: AudienceGroupItem, index: number): void {
+  public addSubItem(item: AudienceGroupItem, value: string): void {
     this.add.emit(item);
-    this.item.subitems[this.item.subitems.length - 1].value = index;
+    this.item.subitems[this.item.subitems.length - 1].value = value;
   }
 
-  public checkSelected(index: number): number {
-    return this.item.subitems.findIndex(subitem => subitem.value === index);
+  public checkSelected(value: string): number {
+    return this.item.subitems.findIndex(subitem => subitem.value === value);
   }
 
 }

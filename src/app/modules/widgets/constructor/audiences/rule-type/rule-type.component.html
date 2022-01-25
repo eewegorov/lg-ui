@@ -5,8 +5,8 @@
       <label class="form-check-label">
         <input
           type="checkbox"
-          [checked]="checkSelected(j) >= 0"
-          (click)="!(checkSelected(j) >= 0) ? addSubItem(item, j) : removeSubItem(group.id, item.type, checkSelected(j), $event)"
+          [checked]="checkSelected(vals.trafficTypesEnum[j]) >= 0"
+          (click)="!(checkSelected(vals.trafficTypesEnum[j]) >= 0) ? addSubItem(item, vals.trafficTypesEnum[j]) : removeSubItem(group.id, item.type, checkSelected(vals.trafficTypesEnum[j]), $event)"
           class="form-check-input"
         />
         <span class="checkmark"></span>

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Audience, AudienceGroup, AudienceGroupItem, FullWidget } from '../../../../core/models/widgets';
+import { AudienceGroup, AudienceGroupItem, FullWidget } from '../../../../core/models/widgets';
+import { AUDIENCES_VALS } from '../../../../configs/audiences';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
 
@@ -111,23 +112,28 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
   private getSubItemTemplate(type) {
     const subObj = {} as any;
 
-    if (type === 'url') {
-      subObj.condition        = 0;
-      subObj.paramCompareType = 0;
+    if (type === 'URL') {
+      subObj.condition        = AUDIENCES_VALS.conditionsEnum[0];
+      subObj.paramCompareType = AUDIENCES_VALS.compareTypesEnum[0];
       subObj.param = '';
-      subObj.valueCompareType = 0;
+      subObj.valueCompareType = AUDIENCES_VALS.compareTypesEnum[0];
       subObj.value = '';
-    } else if (type === 'refer' || type === 'search') {
-      subObj.valueCompareType = 0;
+    } else if (type === 'REFER' || type === 'SEARCH') {
+      subObj.valueCompareType = AUDIENCES_VALS.compareTypesEnum[0];
       subObj.value = '';
-    } else if (type === 'type' || type === 'visit') {
-      subObj.value = 0;
-    } else if (type === 'visitno') {
-      subObj.valueCompareType = 0;
+    } else if (type === 'TYPE') {
+      subObj.value = AUDIENCES_VALS.trafficTypesEnum[0];
+    } else if (type === 'VISIT') {
+      subObj.value = AUDIENCES_VALS.visitsTypeEnum[0];
+    } else if (type === 'VISITNO') {
+      subObj.valueCompareType = AUDIENCES_VALS.arifmethicEnum[0];
       subObj.value = 1;
-    } else if (type === 'devices' || type === 'social') {
-      subObj.value = 0;
+    } else if (type === 'DEVICES') {
+      subObj.value = AUDIENCES_VALS.deviceListEnum[0];
+    } else if (type === 'SOCIAL') {
+      subObj.value = AUDIENCES_VALS.socialNetsEnum[0];
     }
+
     return subObj;
   }
 
