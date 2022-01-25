@@ -2,7 +2,7 @@
   <div *ngFor="let subitem of item.subitems; index as i" class="mt-3 filterow">
     <div *ngIf="i > 0" class="rule-subitem-text ml-3">{{ 'audience.rule.logic.or' | translate }}</div>
     <div class="d-flex row-subitem mt-2">
-      <div class="col-sm-6 row-subitem-padding mr-2">
+      <div class="col-sm-7 row-subitem-padding mr-2">
         <div class="dropdown" data-val="true" data-field="present">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
             {{ vals.arifmethic[vals.arifmethicEnum.indexOf(subitem.valueCompareType)] }} <span class="caret"></span>

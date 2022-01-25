@@ -86,7 +86,7 @@
                   ></app-rule-visit>
 
                   <app-rule-visit-no
-                    *ngSwitchCase="'VISITNO'"
+                    *ngSwitchCase="'VISIT_NO'"
                     [item]="item"
                     [group]="group"
                     (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
@@ -188,7 +188,7 @@
         <div
           class="audience-rule"
           [class.disabled]="!widget.audiencesEnabled"
-          data-code="VISITNO"
+          data-code="VISIT_NO"
           data-title="{{ 'audience.rule.visitno.title' | translate }}"
         >
           <span><img src="assets/images/widgets/move.svg" alt="Move" /> {{ 'audience.rule.visitno.title' | translate }}</span> <a

@@ -125,7 +125,7 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
       subObj.value = AUDIENCES_VALS.trafficTypesEnum[0];
     } else if (type === 'VISIT') {
       subObj.value = AUDIENCES_VALS.visitsTypeEnum[0];
-    } else if (type === 'VISITNO') {
+    } else if (type === 'VISIT_NO') {
       subObj.valueCompareType = AUDIENCES_VALS.arifmethicEnum[0];
       subObj.value = 1;
     } else if (type === 'DEVICES') {
