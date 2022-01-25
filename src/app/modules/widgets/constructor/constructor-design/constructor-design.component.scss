@@ -885,19 +885,23 @@ h6.title-h6-widget a:hover {
 }
 
 #labelMain {
-  display: inline-block;
-  background: #000;
-  min-width: 80px;
-  min-height: 30px;
   position: absolute;
-  bottom: 75px;
-  padding: 5px 14px 2px 14px;
-  margin-left: 0;
-  margin-right: 0;
-
   display: flex;
   align-items: center;
-  padding: 7px 12px 4px 14px;
+  min-width: 80px;
+  min-height: 30px;
+  bottom: 95px;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 8px 12px 8px 14px;
+  background: #000;
+  border-radius: 10px !important;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 #labelMain .lab-content {

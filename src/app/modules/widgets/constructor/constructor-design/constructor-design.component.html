@@ -857,8 +857,9 @@
       </div>
       <div class="max-h-100" [ngClass]="(widget.guiprops.popupMain?.shadow?.enable === true) ? 'ifr-sh-bg' : ''">
         <div
-          [ngClass]="wvLabelPos()"
+          *ngIf="widgetType === 'label_widget'"
           id="labelMain"
+          [ngClass]="wvLabelPos()"
           [ngStyle]="{'background': widget.guiprops['labelMain'].rgbaLabel, 'border-top-left-radius': widget.guiprops['labelMain'].borderRadiusLabel + 'px', 'border-top-right-radius': widget.guiprops['labelMain'].borderRadiusLabel + 'px', 'z-index': '120'}"
         >
           <div class="lab-content">
