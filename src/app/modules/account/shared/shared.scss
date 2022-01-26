@@ -85,14 +85,14 @@ input::placeholder {
 }
 
 .btn-success {
-  background-color: #62cb31;
-  border-color: #62cb31;
+  background-color: #4898A8;
+  border-color: #4898A8;
   color: #FFFFFF;
 }
 
 .btn-success:hover {
-  background-color: #82D85A;
-  border-color: #82D85A;
+  background-color: darken(#4898A8, 10%);
+  border-color: darken(#4898A8, 10%);
 }
 
 .btn-block {

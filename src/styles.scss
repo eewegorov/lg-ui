@@ -804,7 +804,7 @@ button.widget-item-view-btns .btn:hover {
 }
 
 button.start-widget-btn.active {
-  color: #62cb31;
+  color: #4898A8;
 }
 
 button.stop-widget-btn.active {
@@ -886,7 +886,7 @@ button.stop-widget-btn.active {
 }
 
 .ab-widget-btn.in-work:before {
-  background-color: #62cb31;
+  background-color: #4898A8;
 }
 
 .ab-widget-btn.in-pause:before {
@@ -1206,7 +1206,7 @@ span.underow-comment {
 }
 
 .ab-test-footer button.btn i.fa-plus {
-  color: #62cb31;
+  color: #4898A8;
 }
 
 .ab-test-footer button.btn-test-var:hover {
@@ -2246,4 +2246,8 @@ div.button-send.click-edit-cl .note-editor font span {
   max-height: 275px;
   padding-left: 0;
   padding-right: 0;
+}
+
+.switch.checked {
+  background: #4898A8;
 }
