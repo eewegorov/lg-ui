@@ -71,12 +71,13 @@ export class PaymentModalComponent implements OnInit {
       form.setAttribute('target', '_blank');
       form.setAttribute('action', 'https://wl.walletone.com/checkout/checkout/Index');
 
-      for (const key in order) {
-        if (order.hasOwnProperty(key)) {
+      const orderParams = order.billingParams;
+      for (const key in orderParams) {
+        if (orderParams.hasOwnProperty(key)) {
           const hiddenField = document.createElement('input');
           hiddenField.setAttribute('type', 'hidden');
           hiddenField.setAttribute('name', key);
-          hiddenField.setAttribute('value', order[key]);
+          hiddenField.setAttribute('value', orderParams[key]);
 
           form.appendChild(hiddenField);
         }
