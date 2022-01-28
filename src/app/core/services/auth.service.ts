@@ -13,9 +13,9 @@ import { AuthRequest } from '../models/account';
   providedIn: 'root'
 })
 export class AuthService {
+  public loggedUser: string;
   private readonly ACCESS_TOKEN = 'ACCESS_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-  private loggedUser: string;
 
   constructor(
     private router: Router,

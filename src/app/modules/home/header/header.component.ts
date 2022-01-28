@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { UiService } from '../../../core/services/ui.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private uiService: UiService
+    private uiService: UiService,
+    private authService: AuthService
   ) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
@@ -26,7 +28,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.facebookInit();
-    this.login = 'eevegorov@yandex.ru';
+    this.login = this.authService.loggedUser;
   }
 
   private facebookInit(): void {

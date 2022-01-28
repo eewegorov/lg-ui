@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SubscriptionLike } from 'rxjs';
+import { EMPTY, SubscriptionLike } from 'rxjs';
 import { OAuthResponse, RegistrationObject, RegistrationResponse } from '../../../core/models/account';
 import { AccountService } from '../services/account.service';
+import { switchMap } from 'rxjs/operators';
 
 
 
@@ -35,12 +36,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService
-  ) {
-    this.autoRegister = this.route.snapshot.queryParams.registrationtype === 'autoreg';
-    this.registrationEmail = this.route.snapshot.queryParams.registrationemail;
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.autoRegister = this.route.snapshot.queryParams.registrationtype === 'autoreg';
+    this.registrationEmail = this.route.snapshot.queryParams.registrationemail;
+
     this.autoReg();
   }
 
@@ -50,33 +51,24 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.errorLogin = '';
     this.errorPassword = '';
     this.loading = true;
-    this.regSub = this.accountService.handleRegistration(form.value).subscribe((response: RegistrationResponse) => {
-      this.loading = false;
+    this.regSub = this.accountService.handleRegistration(form.value).pipe(
+      switchMap((registrationResponse: RegistrationResponse) => {
+        this.loading = false;
 
-      if (response['success']) {
-        const authData = {
-          username: form.value.login,
-          password: form.value.password
-        };
-        this.accountService.handleAuth(authData).subscribe((loginResponse: boolean) => {
-          if (loginResponse) {
-            this.router.navigate([ '/' ]);
-          }
-        });
-      }
-      /*response.rows.forEach(item => {
-        if (item.code === 400) {
-          if (item.context === 'login') {
-            this.invalidLogin = true;
-            this.errorLogin = item.message;
-          } else {
-            this.invalidPassword = true;
-            this.errorPassword = item.message;
-          }
-        } else if (item.code === 201) {
-          this.loginForm.nativeElement.submit();
+        if (registrationResponse.success) {
+          const authData = {
+            username: form.value.login,
+            password: form.value.password
+          };
+          return this.accountService.handleAuth(authData);
+        } else {
+          return EMPTY;
         }
-      });*/
+      })
+    ).subscribe((loginResponse: boolean) => {
+      if (loginResponse) {
+        this.router.navigate([ '/' ]);
+      }
     });
   }
 
@@ -101,35 +93,26 @@ export class RegisterComponent implements OnInit, OnDestroy {
       this.password.nativeElement.focus();
     } else if (this.autoRegister && this.registrationEmail) {
       this.autoRegisterLoadingPanel = true;
-      setTimeout(() => {
-        this.regSub = this.accountService.handleRegistration(this.regForm.value).subscribe((response: RegistrationResponse) => {
-          let newUserName: string;
-          let newUserPwd: string;
-          this.autoRegisterLoadingPanel = false;
-          for (const item of response.rows) {
-            if (item.code === 400) {
-              this.autoRegisterError = true;
-              this.autoRegisterErrorMessage = item.message;
-            } else if (item.code === 201) {
-              if (item.message === 'created') {
-                newUserName = (item.object as RegistrationObject).login ;
-              }
-              if (item.message === 'password') {
-                newUserPwd = item.object as string;
-              }
-              if (newUserName && newUserPwd) {
-                this.autoRegisterError = false;
-                this.autoRegisterPanel = true;
-                setTimeout(() => {
-                  this.registrationEmail = newUserName;
-                  this.registrationPassword = newUserPwd;
-                  this.loginForm.nativeElement.submit();
-                }, 2000);
-              }
-            }
+
+      this.regSub = this.accountService.handleRegistration(this.regForm.value).pipe(
+        switchMap((registrationResponse: RegistrationResponse) => {
+          this.loading = false;
+
+          if (registrationResponse.success) {
+            const authData = {
+              username: this.regForm.value.login,
+              password: registrationResponse.data.password
+            };
+            return this.accountService.handleAuth(authData);
+          } else {
+            return EMPTY;
           }
-        });
-      }, 50);
+        })
+      ).subscribe((loginResponse: boolean) => {
+        if (loginResponse) {
+          this.router.navigate([ '/' ]);
+        }
+      });
     }
   }
 

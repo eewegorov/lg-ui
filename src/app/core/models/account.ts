@@ -24,15 +24,13 @@ export interface RegistrationRequest {
   password: string;
 }
 
-export interface RegistrationResponse {
-  rows: [ RegistrationResponseRow ];
+export interface RegistrationResponse extends ApiResponse {
+  data: RegistrationData;
 }
 
-export interface RegistrationResponseRow {
-  code: number;
-  context: string;
-  message: string;
-  object: RegistrationObject | string;
+export interface RegistrationData {
+  id: string;
+  password: string;
 }
 
 export interface RegistrationObject {
