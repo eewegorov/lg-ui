@@ -3,7 +3,7 @@ import { ApiResponse } from './api';
 export interface AuthRequest {
   username: string;
   password: string;
-  grant_type: string;
+  grant_type?: string;
 }
 
 export interface OAuthRequest {

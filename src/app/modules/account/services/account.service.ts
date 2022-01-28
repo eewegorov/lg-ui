@@ -32,7 +32,7 @@ export class AccountService {
   }
 
   public handleAuth(data: AuthRequest): Observable<boolean> {
-    const preparedData = {
+    const preparedData: AuthRequest = {
       ...data,
       grant_type: 'password'
     };

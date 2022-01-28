@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SubscriptionLike } from 'rxjs';
 import { OAuthResponse, RegistrationObject, RegistrationResponse } from '../../../core/models/account';
 import { AccountService } from '../services/account.service';
@@ -33,10 +33,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private accountService: AccountService
   ) {
-    this.autoRegister = this.route.snapshot.queryParams['registrationtype'] === 'autoreg';
-    this.registrationEmail = this.route.snapshot.queryParams['registrationemail'];
+    this.autoRegister = this.route.snapshot.queryParams.registrationtype === 'autoreg';
+    this.registrationEmail = this.route.snapshot.queryParams.registrationemail;
   }
 
   ngOnInit(): void {
@@ -51,19 +52,31 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.regSub = this.accountService.handleRegistration(form.value).subscribe((response: RegistrationResponse) => {
       this.loading = false;
-      for (let i = 0; i < response.rows.length; i++) {
-        if (response.rows[i].code === 400) {
-          if (response.rows[i].context === 'login') {
+
+      if (response['success']) {
+        const authData = {
+          username: form.value.login,
+          password: form.value.password
+        };
+        this.accountService.handleAuth(authData).subscribe((loginResponse: boolean) => {
+          if (loginResponse) {
+            this.router.navigate([ '/' ]);
+          }
+        });
+      }
+      /*response.rows.forEach(item => {
+        if (item.code === 400) {
+          if (item.context === 'login') {
             this.invalidLogin = true;
-            this.errorLogin = response.rows[i].message;
+            this.errorLogin = item.message;
           } else {
             this.invalidPassword = true;
-            this.errorPassword = response.rows[i].message;
+            this.errorPassword = item.message;
           }
-        } else if (response.rows[i].code === 201) {
+        } else if (item.code === 201) {
           this.loginForm.nativeElement.submit();
         }
-      }
+      });*/
     });
   }
 
