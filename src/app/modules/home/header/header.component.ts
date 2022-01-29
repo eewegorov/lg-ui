@@ -1,34 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { SubscriptionLike } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { UiService } from '../../../core/services/ui.service';
-import { AuthService } from '../../../core/services/auth.service';
+import { UserService } from '../../user/services/user.service';
+import { User } from '../../../core/models/user';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   public login: string;
   public yandexRef = false;
   public isPartnerPage = false;
 
+  private routerSub: SubscriptionLike;
+  private userSub: SubscriptionLike;
+
   constructor(
     private router: Router,
     private uiService: UiService,
-    private authService: AuthService
+    private userService: UserService
   ) {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.isPartnerPage = event.url === '/user/partner';
-    });
   }
 
   ngOnInit(): void {
     this.facebookInit();
-    this.login = this.authService.loggedUser;
+
+    this.routerSub = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.isPartnerPage = event.url === '/user/partner';
+    });
+
+    this.userSub = this.userService.getMeInfo().subscribe((response: User) => {
+      this.login = response.login;
+    });
   }
 
   private facebookInit(): void {
@@ -46,5 +55,15 @@ export class HeaderComponent implements OnInit {
   public handleMinimalizeSidebar(event: Event): void {
     event.preventDefault();
     this.uiService.toggleSidebar();
+  }
+
+  ngOnDestroy(): void {
+    if (this.routerSub) {
+      this.routerSub.unsubscribe();
+    }
+
+    if (this.userSub) {
+      this.userSub.unsubscribe();
+    }
   }
 }

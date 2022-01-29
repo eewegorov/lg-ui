@@ -104,8 +104,12 @@ export class AuthService {
   }
 
   private storeTokens(token: Token) {
-    localStorage.setItem(this.ACCESS_TOKEN, token.access_token);
-    localStorage.setItem(this.REFRESH_TOKEN, token.refresh_token);
+    if (token?.access_token) {
+      localStorage.setItem(this.ACCESS_TOKEN, token.access_token);
+    }
+    if (token?.refresh_token) {
+      localStorage.setItem(this.REFRESH_TOKEN, token.refresh_token);
+    }
   }
 
   private removeTokens() {

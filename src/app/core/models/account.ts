@@ -21,7 +21,7 @@ export interface OAuthResponse extends ApiResponse {
 
 export interface RegistrationRequest {
   login: string;
-  password: string;
+  password?: string;
 }
 
 export interface RegistrationResponse extends ApiResponse {

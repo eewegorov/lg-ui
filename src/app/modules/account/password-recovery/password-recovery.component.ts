@@ -28,13 +28,13 @@ export class PasswordRecoveryComponent implements OnInit, OnDestroy {
     this.invalidLogin = false;
     this.resetSub = this.accountService.handleReset(form.value).subscribe((response: RegistrationResponse) => {
       this.loading = false;
-      for (let i = 0; i < response.rows.length; i++) {
+      /*for (let i = 0; i < response.rows.length; i++) {
         if (response.rows[i].code == 400) {
           this.invalidLogin = true;
         } else if (response.rows[i].code == 202) {
           this.resetDone = true;
         }
-      }
+      }*/
     });
   }
 

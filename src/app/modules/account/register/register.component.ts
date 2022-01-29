@@ -94,13 +94,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
     } else if (this.autoRegister && this.registrationEmail) {
       this.autoRegisterLoadingPanel = true;
 
-      this.regSub = this.accountService.handleRegistration(this.regForm.value).pipe(
+      const regData: RegistrationObject = {
+        login: this.registrationEmail
+      };
+
+      this.regSub = this.accountService.handleRegistration(regData).pipe(
         switchMap((registrationResponse: RegistrationResponse) => {
           this.loading = false;
 
           if (registrationResponse.success) {
             const authData = {
-              username: this.regForm.value.login,
+              username: regData.login,
               password: registrationResponse.data.password
             };
             return this.accountService.handleAuth(authData);
