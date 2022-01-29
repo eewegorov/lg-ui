@@ -30,9 +30,6 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError(error => {
         if (error instanceof HttpErrorResponse && error.status === 401) {
-          if (this.isRefreshing) {
-            this.router.navigate(['/logout']);
-          }
           return this.handle401Error(request, next);
         } else {
           return throwError(error);
