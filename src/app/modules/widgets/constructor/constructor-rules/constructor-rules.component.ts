@@ -60,7 +60,6 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.widgetService.addValidator(this.validator);
-    this.widgetService.addOnWidgetLoadListener(this.loadListener);
     this.loadListener();
 
     this.widgetSettingsCategories = this.widgetSettingsCategories

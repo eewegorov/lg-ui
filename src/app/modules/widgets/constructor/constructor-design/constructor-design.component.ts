@@ -176,7 +176,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         this.checkChanges();
         this.changeColorPodAndSRC();
         this.loadListener();
-
       }, 0);
     }
   }
@@ -189,7 +188,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     }, 1000);
 
     this.widgetService.addValidator(this.validator);
-    this.widgetService.addOnWidgetLoadListener(this.loadListener);
 
     this.downUpInit();
 
@@ -474,7 +472,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           borderRadiusBtn: 0,
           btn_width: this.widthBtn?.[0],
           btn_widthpx: 200,
-          position: this.floatBtn[0],
+          position: this.floatBtn?.[0],
           styleType: 'Default'
         },
         couponCallback: {

@@ -654,9 +654,6 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   private loadMockup() {
     this.widgetService.getMockup(this.wid).subscribe((data: MockupShort) => {
       this.widget = data as unknown as FullWidget;
-      this.widgetService.loadWidgetListeners.forEach(item => {
-        item.call(this);
-      });
       this.checkWidgetRenameTitle();
       this.widgetService.loadWidgetToController.next();
     },
@@ -668,9 +665,6 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     this.widgetService.getWidgetById(this.sid, this.wid).subscribe((response: FullWidget) => {
       this.widget = response as unknown as FullWidget;
       this.widget.id = this.wid;
-      this.widgetService.loadWidgetListeners.forEach(item => {
-        item.call({...this.constructorDesignComponent, ...this.constructorRulesComponent});
-      });
       this.isContainerized = !!this.widget.containerId;
       this.checkWidgetRenameTitle();
       this.widgetService.loadWidgetToController.next();

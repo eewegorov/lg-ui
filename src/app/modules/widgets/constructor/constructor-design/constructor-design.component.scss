@@ -922,7 +922,7 @@ h6.title-h6-widget a:hover {
 
 #labelMain.wlb-right {
   left: auto;
-  right: 0;
+  right: -90px;
   bottom: auto;
   top: 40%;
   -webkit-transform: rotate(-90deg) translate3d(0,0,0);
@@ -931,7 +931,7 @@ h6.title-h6-widget a:hover {
 }
 
 #labelMain.wlb-left {
-  left: 0;
+  left: -100px;
   right: auto;
   bottom: auto;
   top: 40%;

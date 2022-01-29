@@ -50,8 +50,6 @@ export class WidgetService {
   public openCloneWidgetModal = new Subject<{data: WidgetInfo; containerId: string}>();
   public loadWidgetToController = new Subject();
   public onChangePayment = new Subject<boolean>();
-
-  public loadWidgetListeners = [];
   public validators = [];
 
   private currentCompanies = [];
@@ -278,10 +276,6 @@ export class WidgetService {
     return companies.find((item) => {
       return item.id === companyId;
     });
-  }
-
-  public addOnWidgetLoadListener(listener) {
-    this.loadWidgetListeners.push(listener);
   }
 
   public addValidator(callbackFunc) {
