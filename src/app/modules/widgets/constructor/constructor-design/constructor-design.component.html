@@ -860,7 +860,7 @@
           *ngIf="widgetType === 'label_widget'"
           id="labelMain"
           [ngClass]="wvLabelPos()"
-          [ngStyle]="{'background': widget.guiprops['labelMain'].rgbaLabel, 'border-top-left-radius': widget.guiprops['labelMain'].borderRadiusLabel + 'px', 'border-top-right-radius': widget.guiprops['labelMain'].borderRadiusLabel + 'px', 'z-index': '120'}"
+          [ngStyle]="{'background': widget.guiprops['labelMain'].rgbaLabel, 'border-radius': widget.guiprops['labelMain'].borderRadiusLabel + 'px', 'z-index': '120'}"
         >
           <div class="lab-content">
             <div
