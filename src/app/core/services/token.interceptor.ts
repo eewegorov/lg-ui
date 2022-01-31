@@ -7,7 +7,7 @@ import {
   HttpInterceptor, HttpErrorResponse
 } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, filter, switchMap, take } from 'rxjs/operators';
+import { catchError, filter, switchMap, take, tap } from 'rxjs/operators';
 import { Token } from '../models/token';
 import { AuthService } from './auth.service';
 
@@ -59,6 +59,11 @@ export class TokenInterceptor implements HttpInterceptor {
       );
     } else {
       return this.refreshTokenSubject.pipe(
+        tap(token => {
+          if (!token) {
+            this.router.navigate(['/logout']);
+          }
+        }),
         filter(token => token != null),
         take(1),
         switchMap(jwt => {
