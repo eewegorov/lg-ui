@@ -13,7 +13,7 @@ import {
   UserEmail
 } from '../../../core/models/partner';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
-import { CoreApiService } from '../../../core/services/core-api.service';
+import { UserApiService } from '../../user/services/user-api.service';
 import { PartnerApiService } from './partner-api.service';
 
 
@@ -24,7 +24,7 @@ export class PartnerService {
 
   constructor(
     private errorHandlerService: ErrorHandlerService,
-    private coreApiService: CoreApiService,
+    private userApiService: UserApiService,
     private partnerApiService: PartnerApiService
   ) { }
 
@@ -66,7 +66,7 @@ export class PartnerService {
 
   public setWallet(walletValue: string): Observable<boolean> {
     const wallet: Wallet = { value: walletValue };
-    return this.coreApiService.setWallet(wallet).pipe(
+    return this.userApiService.setWallet(wallet).pipe(
       map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
     );

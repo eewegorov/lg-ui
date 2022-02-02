@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import { SiteShort } from '../../../../core/models/sites';
 import { Coupon } from '../../../../core/models/coupons';
-import { User } from '../../../../core/models/user';
+import { User, UserRole } from '../../../../core/models/user';
 import {
   FullWidget,
   MockupGroup,
@@ -95,11 +95,11 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     this.initTypes();
 
     this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
-      if (response.roles.includes('ROLE_DESIGNER')) {
+      if (response.roles.includes(UserRole.ROLE_DESIGNER)) {
         this.isDesigner = true;
       }
 
-      if (response.roles.includes('ROLE_ADMIN')) {
+      if (response.roles.includes(UserRole.ROLE_ADMIN)) {
         this.isMockup = true;
         this.loadMockup();
       } else {

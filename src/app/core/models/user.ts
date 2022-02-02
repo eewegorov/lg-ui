@@ -1,16 +1,29 @@
 import { ApiResponse } from './api';
 
-export interface UserResponse extends ApiResponse{
+export interface UserResponse extends ApiResponse {
   data: User;
 }
 
-export interface User {
+export interface UserRequest {
+  phone: string;
+  email: string;
+  timeZone: string;
+  notificated: boolean;
+  needStatsNotifications: boolean;
+}
+
+export interface User extends UserRequest {
   login: string;
   id: string;
-  timeZone: string;
-  phone: string;
   wallet: string;
-  roles: string[];
+  roles: UserRole[];
+}
+
+export enum UserRole {
+  ROLE_USER = 'ROLE_USER',
+  ROLE_TESTER = 'ROLE_TESTER',
+  ROLE_DESIGNER = 'ROLE_DESIGNER',
+  ROLE_ADMIN = 'ROLE_ADMIN'
 }
 
 export interface Phone {
@@ -19,4 +32,9 @@ export interface Phone {
 
 export interface Wallet {
   value: string;
+}
+
+export interface PasswordRequest {
+  oldPassword: string;
+  newPassword: string;
 }
