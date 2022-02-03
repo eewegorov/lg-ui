@@ -7,9 +7,9 @@ export interface UserResponse extends ApiResponse {
 export interface UserRequest {
   phone: string;
   email: string;
-  timeZone: string;
   notificated: boolean;
   needStatsNotifications: boolean;
+  timeZone: string;
 }
 
 export interface User extends UserRequest {

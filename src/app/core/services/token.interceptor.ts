@@ -52,6 +52,10 @@ export class TokenInterceptor implements HttpInterceptor {
       this.refreshTokenSubject.next(null);
       return this.authService.refreshToken().pipe(
         switchMap((token: Token) => {
+          if (!token) {
+            this.router.navigate(['/logout']);
+          }
+
           this.isRefreshing = false;
           this.refreshTokenSubject.next(token.access_token);
           return next.handle(this.addToken(request, token.access_token));
@@ -59,11 +63,6 @@ export class TokenInterceptor implements HttpInterceptor {
       );
     } else {
       return this.refreshTokenSubject.pipe(
-        tap(token => {
-          if (!token) {
-            this.router.navigate(['/logout']);
-          }
-        }),
         filter(token => token != null),
         take(1),
         switchMap(jwt => {

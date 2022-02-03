@@ -27,6 +27,7 @@
           id="saveGeneral"
           class="btn btn-success"
           (click)="saveGeneral()"
+          [disabled]="saveGeneralDisabled"
         >
           {{ 'userInfo.saveGeneral' | translate }}
         </button>
@@ -43,14 +44,14 @@
       <div class="form-group panelcontent">
         <div class="form-group panelcontent" data-item="oldpas">
           <label for="oldpas" class="control-label">{{ 'userInfo.passwordOld' | translate }}:</label>
-          <input type="password" class="form-control" id="oldpas">
+          <input type="password" id="oldpas" class="form-control" [(ngModel)]="oldPassword" name="oldPassword">
           <span class="validate"></span>
         </div>
         <div class="form-group panelcontent" data-item="newpas">
           <label for="newpas" class="control-label">{{ 'userInfo.passwordNew' | translate }}:</label>
           <div class="row">
             <div class="col-lg-11">
-              <input type="password" class="form-control" id="newpas" #password>
+              <input type="password" id="newpas" class="form-control" [(ngModel)]="newPassword" name="newPassword" #password>
             </div>
             <div
               class="col-lg-1"
@@ -67,6 +68,7 @@
             id="changePas"
             class="btn btn-success"
             (click)="changePassword()"
+            [disabled]="changePasswordDisabled"
           >
             {{ 'userInfo.passwordChange' | translate }}
           </button>

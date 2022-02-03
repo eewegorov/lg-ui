@@ -1,75 +1,95 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { SubscriptionLike } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
+import { PasswordRequest, User, UserRequest } from '../../../core/models/user';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
   @ViewChild('password', { static: true }) private password: ElementRef;
-  public user = {
+
+  public user: UserRequest = {
+    phone: '',
+    email: '',
     notificated: true,
     needStatsNotifications: true,
-    phone: '21414234234',
-    email: 'aaa@aaa.com'
+    timeZone: ''
   };
+  public saveGeneralDisabled = false;
 
-  constructor(private userService: UserService) { }
+  public oldPassword = '';
+  public newPassword = '';
+  public changePasswordDisabled = false;
+
+  private meInfoSub: SubscriptionLike;
+
+  constructor(
+    private translate: TranslateService,
+    private toastr: ToastrService,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
+    this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
+      this.user = {
+        phone: response.phone,
+        email: response.email,
+        notificated: response.notificated,
+        needStatsNotifications: response.needStatsNotifications,
+        timeZone: response.timeZone
+      };
+    });
   }
 
   public saveGeneral() {
-    /*const settings = {};
-    settings.phone = this.user.phone.trim();
-    settings.email = $("input#email").val().trim();
-    settings.notifications = controls.notifications.checked;
-    settings.isNeedStatsNotifications = controls.isNeedStatsNotifications.checked;
-    $(this).prop("disabled", "true");
+    this.saveGeneralDisabled = true;
+    this.user.phone = this.user.phone.trim();
+    this.user.email = this.user.email.trim();
 
-    $.post(openapi.getUrl("user/generalsave"), settings, function(response) {
-      if (response != null && response.rows.length > 0) {
-        $("#saveGeneral").removeAttr("disabled");
-        if (response.rows[0].code == 200) {
-          swal({
-            title: $("#locale-settings").val(),
-            text: "",
-            type: "success"
-          });
-        } else {
-          validate(response.rows[0]);
-        }
+    this.userService.updateMeInfo(this.user).subscribe((response: boolean) => {
+      this.saveGeneralDisabled = false;
+
+      if (response) {
+        this.toastr.success(this.translate.instant('userInfo.settingsChanged'), this.translate.instant('global.done'));
+      } else {
+        this.toastr.error(this.translate.instant('settings.site.newIntegration.create.error'), this.translate.instant('global.error'));
       }
-    });*/
+    });
   }
 
   public changePassword() {
-    /*var pass = {};
-    pass.oldpas = $("input#oldpas").val();
-    pass.newpas = $("input#newpas").val();
-    $(this).prop("disabled", "true");
+    this.changePasswordDisabled = true;
+    const passwords: PasswordRequest = {
+      oldPassword: this.oldPassword,
+      newPassword: this.newPassword
+    };
 
-    $.post(openapi.getUrl("user/passchange"), pass, function(response) {
-      if (response != null && response.rows.length > 0) {
-        $("#changePas").removeAttr("disabled");
-        if (response.rows[0].code == 200) {
-          $("input#oldpas").val("");
-          $("input#newpas").val("");
-          swal({
-            title: $("#locale-pass1").val(),
-            text: "",
-            type: "success"
-          });
-        } else {
-          validate(response.rows[0]);
-        }
+    this.userService.updatePassword(passwords).subscribe((response: boolean) => {
+      this.changePasswordDisabled = false;
+
+      if (response) {
+        this.toastr.success(this.translate.instant('userInfo.settingsChanged'), this.translate.instant('global.done'));
+        this.oldPassword = '';
+        this.newPassword = '';
+      } else {
+        this.toastr.error(this.translate.instant('settings.site.newIntegration.create.error'), this.translate.instant('global.error'));
       }
-    });*/
+    });
   }
 
   public togglePasswordVisibility(type: 'password' | 'text') {
     this.password.nativeElement.setAttribute('type', type);
+  }
+
+  ngOnDestroy(): void {
+    if (this.meInfoSub) {
+      this.meInfoSub.unsubscribe();
+    }
   }
 
 }
