@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SubscriptionLike } from 'rxjs';
-import { RegistrationResponse } from '../../../core/models/account';
 import { AccountService } from '../services/account.service';
 
 
@@ -26,15 +25,14 @@ export class PasswordRecoveryComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.resetDone = false;
     this.invalidLogin = false;
-    this.resetSub = this.accountService.handleReset(form.value).subscribe((response: RegistrationResponse) => {
+    this.resetSub = this.accountService.handleReset(form.value).subscribe((response: boolean) => {
       this.loading = false;
-      /*for (let i = 0; i < response.rows.length; i++) {
-        if (response.rows[i].code == 400) {
-          this.invalidLogin = true;
-        } else if (response.rows[i].code == 202) {
-          this.resetDone = true;
-        }
-      }*/
+
+      if (response) {
+        this.resetDone = true;
+      } else {
+        this.invalidLogin = true;
+      }
     });
   }
 

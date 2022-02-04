@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { ApiResponse } from '../../../core/models/api';
 import {
   AuthRequest,
   OAuthRequest,
@@ -8,6 +10,7 @@ import {
   RegistrationResponse,
   ResetData
 } from '../../../core/models/account';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { AccountApiService } from './account-api.service';
 
@@ -18,6 +21,7 @@ import { AccountApiService } from './account-api.service';
 export class AccountService {
 
   constructor(
+    private errorHandlerService: ErrorHandlerService,
     private authService: AuthService,
     private accountApiService: AccountApiService
   ) { }
@@ -43,9 +47,10 @@ export class AccountService {
     return this.accountApiService.postRegistration(data);
   }
 
-  public handleReset(data: ResetData): Observable<RegistrationResponse> {
-    const formData: FormData = new FormData();
-    formData.append('email', data.email);
-    return this.accountApiService.postReset(formData);
+  public handleReset(data: ResetData): Observable<boolean> {
+    return this.accountApiService.postReset(data).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
   }
 }

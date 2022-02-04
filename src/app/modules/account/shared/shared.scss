@@ -90,7 +90,7 @@ input::placeholder {
   color: #FFFFFF;
 }
 
-.btn-success:hover {
+.btn-success:hover:not[disabled] {
   background-color: darken(#4898A8, 10%);
   border-color: darken(#4898A8, 10%);
 }
