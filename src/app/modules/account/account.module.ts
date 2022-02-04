@@ -6,6 +6,7 @@ import { AccountRoutingModule } from './account-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { AccountComponent } from './account/account.component';
 
 
@@ -14,6 +15,7 @@ import { AccountComponent } from './account/account.component';
     LoginComponent,
     RegisterComponent,
     PasswordRecoveryComponent,
+    PasswordResetComponent,
     AccountComponent
   ],
   imports: [

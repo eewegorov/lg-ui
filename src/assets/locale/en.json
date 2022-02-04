@@ -78,8 +78,7 @@
 			"anddroppable": "",
 			"devices": {
 				"desc": "",
-				"title": "",
-				"underline": ""
+				"title": ""
 			},
 			"droppable": "",
 			"logic": {
@@ -90,18 +89,15 @@
 			"ordroppable": "",
 			"refer": {
 				"desc": "",
-				"title": "",
-				"underline": ""
+				"title": ""
 			},
 			"social": {
 				"desc": "",
-				"title": "",
-				"underline": ""
+				"title": ""
 			},
 			"type": {
 				"desc": "",
-				"title": "",
-				"underline": ""
+				"title": ""
 			},
 			"url": {
 				"desc": "",
@@ -117,8 +113,7 @@
 			},
 			"visit": {
 				"desc": "",
-				"title": "",
-				"underline": ""
+				"title": ""
 			},
 			"visit_no": {
 				"desc": "",
@@ -371,9 +366,14 @@
 		"register_title": "",
 		"remember_checkbox": "",
 		"remember_note": "",
+		"resPass": {
+			"not_success": "",
+			"success": ""
+		},
 		"unique_login": "",
 		"unique_password": "",
-		"user": ""
+		"user": "",
+		"want_back": ""
 	},
 	"partner": {
 		"add": {
@@ -808,7 +808,6 @@
 			}
 		},
 		"font": {
-			"textSize": "",
 			"title": ""
 		},
 		"form": {
@@ -828,12 +827,10 @@
 				"bType2": "",
 				"bType3": "",
 				"icon": {
-					"color": "",
 					"label": ""
 				}
 			},
 			"checkedDefault": "",
-			"choseTypeOfItem": "",
 			"date": {
 				"placeholder2": "",
 				"service2": "",
@@ -902,9 +899,7 @@
 			"mainSettings": {
 				"buttonSettings": {
 					"actions": "",
-					"color": "",
 					"isBtnAction": "",
-					"radiusCorner": "",
 					"redirect": {
 						"action": "",
 						"action1": "",
@@ -931,16 +926,6 @@
 					"useOutsideCRM": ""
 				},
 				"opacityBGField": "",
-				"text": {
-					"shadow": {
-						"add": "",
-						"blur": "",
-						"color": "",
-						"horiz": "",
-						"opacity": "",
-						"vert": ""
-					}
-				},
 				"useBorderAroundFields": "",
 				"usePodBG": "",
 				"visualField": "",
@@ -1003,7 +988,6 @@
 			"typeVariants": "",
 			"variants": {
 				"description": "",
-				"design": "",
 				"every": "",
 				"multi": "",
 				"service2": "",
@@ -1041,7 +1025,6 @@
 			},
 			"jscode": {
 				"autochange": "",
-				"desc": "",
 				"onActionChecker": "",
 				"onShowChecker": "",
 				"title": ""
@@ -1247,7 +1230,6 @@
 				},
 				"pages": {
 					"enable": "",
-					"prefix": "",
 					"suffix": ""
 				},
 				"percent": {
@@ -1261,14 +1243,14 @@
 				"sound": {
 					"enable": ""
 				},
-				"subtitle": "",
-				"subtitle2": "",
 				"title": "",
 				"tooltip": "",
-				"variants": ""
+				"variants": {
+					"title1": "",
+					"title2": ""
+				}
 			},
 			"autoresponder": {
-				"enable": "",
 				"subject": "",
 				"text": "",
 				"tooltip": ""
@@ -1293,6 +1275,7 @@
 					"part1": "",
 					"part2": "",
 					"part3": "",
+					"part4": "",
 					"text": ""
 				},
 				"disable": {
@@ -1318,7 +1301,6 @@
 					"title": ""
 				},
 				"days": {
-					"enable": "",
 					"header": "",
 					"select": {
 						"placeholder": ""
@@ -1326,7 +1308,6 @@
 					"title": ""
 				},
 				"pageNo": {
-					"enable": "",
 					"select": {
 						"placeholder": "",
 						"title": ""
@@ -1335,7 +1316,6 @@
 				},
 				"pageTargeting": {
 					"contain": "",
-					"enable": "",
 					"ends": "",
 					"equals": "",
 					"hide": "",
@@ -1347,26 +1327,19 @@
 					"title": "",
 					"tooltip": "",
 					"url": {
-						"title": "",
-						"tooltip": ""
-					},
-					"urlortitle": ""
+						"title": ""
+					}
 				},
 				"pageVTargeting": {
-					"enable": "",
-					"title": "",
-					"tooltip": "",
-					"user": ""
-				},
-				"period": {
-					"header": "",
 					"title": "",
 					"tooltip": ""
 				},
+				"period": {
+					"header": "",
+					"tooltip": ""
+				},
 				"time": {
-					"enable": "",
 					"from": "",
-					"title": "",
 					"to": ""
 				},
 				"widget": ""
@@ -1452,9 +1425,6 @@
 				"title": "",
 				"tooltip": "",
 				"up": ""
-			},
-			"rename": {
-				"tooltip": ""
 			},
 			"settings": "",
 			"show": {
