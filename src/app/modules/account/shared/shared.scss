@@ -115,6 +115,27 @@ input::placeholder {
   cursor: default;
 }
 
+.positiveActivate {
+  display: block;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 54px;
+  height: 52px;
+  margin: 25px auto 0 auto;
+}
+
+.positivetrue {
+  background-image: url("~src/assets/images/account/post.png");
+}
+
+.messageCenterReset {
+  text-align: center;
+  margin: 15px auto 0 auto;
+  height: 64px;
+}
+
 
 
 @media (max-width: 419px) {

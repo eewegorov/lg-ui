@@ -4,11 +4,12 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
 import {
+  ConfirmResetData,
   OAuthRequest,
   OAuthResponse,
   RegistrationRequest,
   RegistrationResponse,
-  ResetData
+  RequestResetData
 } from '../../../core/models/account';
 
 
@@ -27,7 +28,11 @@ export class AccountApiService {
     return this.http.post<RegistrationResponse>(`${ environment.url }/users`, data);
   }
 
-  public postReset(data: ResetData): Observable<ApiResponse> {
+  public postRequestReset(data: RequestResetData): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(`${ environment.url }/users/resetPassword`, data);
+  }
+
+  public postConfirmReset(data: ConfirmResetData): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${ environment.url }/users/resetPassword/confirm`, data);
   }
 }

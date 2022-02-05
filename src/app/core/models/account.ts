@@ -37,6 +37,10 @@ export interface RegistrationObject {
   login: string;
 }
 
-export interface ResetData {
+export interface RequestResetData {
   email: string;
+}
+
+export interface ConfirmResetData {
+  code: string;
 }

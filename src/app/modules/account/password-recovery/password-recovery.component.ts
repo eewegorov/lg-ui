@@ -21,11 +21,11 @@ export class PasswordRecoveryComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  public reset(form: NgForm) {
+  public requestReset(form: NgForm) {
     this.loading = true;
     this.resetDone = false;
     this.invalidLogin = false;
-    this.resetSub = this.accountService.handleReset(form.value).subscribe((response: boolean) => {
+    this.resetSub = this.accountService.requestReset(form.value).subscribe((response: boolean) => {
       this.loading = false;
 
       if (response) {

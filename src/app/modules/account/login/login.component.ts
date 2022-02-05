@@ -22,10 +22,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private accountService: AccountService
   ) {
-    this.error = this.route.snapshot.queryParams.error === '';
   }
 
   ngOnInit(): void {
+    this.error = this.route.snapshot.queryParams.error === '';
+    
     this.initIchecks();
     this.resetForm();
   }

@@ -3,12 +3,12 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ApiResponse } from '../../../core/models/api';
 import {
-  AuthRequest,
+  AuthRequest, ConfirmResetData,
   OAuthRequest,
   OAuthResponse,
   RegistrationRequest,
   RegistrationResponse,
-  ResetData
+  RequestResetData
 } from '../../../core/models/account';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { AuthService } from '../../../core/services/auth.service';
@@ -47,8 +47,17 @@ export class AccountService {
     return this.accountApiService.postRegistration(data);
   }
 
-  public handleReset(data: ResetData): Observable<boolean> {
-    return this.accountApiService.postReset(data).pipe(
+  public requestReset(data: RequestResetData): Observable<boolean> {
+    return this.accountApiService.postRequestReset(data).pipe(
+      map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public confirmReset(code: string): Observable<boolean> {
+    const resetData: ConfirmResetData = { code };
+
+    return this.accountApiService.postConfirmReset(resetData).pipe(
       map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
     );
