@@ -893,7 +893,7 @@ h6.title-h6-widget a:hover {
   bottom: 95px;
   margin-left: 0;
   margin-right: 0;
-  padding: 8px 12px 8px 14px;
+  padding: 10px 16px;
   background: #000;
   transition: all 0.3s;
   cursor: pointer;
@@ -907,6 +907,10 @@ h6.title-h6-widget a:hover {
   display: flex;
   align-items: center;
   position: relative;
+
+  i {
+    padding-right: 7px;
+  }
 }
 
 #labelMain.wlb-bot-left {
@@ -937,15 +941,6 @@ h6.title-h6-widget a:hover {
   -webkit-transform: rotate(90deg) translate3d(0,0,0);
   -moz-transform: rotate(90deg) translate3d(0,0,0);
   transform: rotate(90deg) translate3d(0,0,0);
-}
-
-#labelMain .flabels {
-  margin-left: -3px;
-  margin-right: -2px;
-}
-
-#labelMain .font-awe {
-  margin-left: -3px;
 }
 
 #labelMain .lgwg-label-line-text-in {
