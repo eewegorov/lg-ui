@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.error = this.route.snapshot.queryParams.error === '';
-    
+
     this.initIchecks();
     this.resetForm();
   }
