@@ -3,6 +3,16 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import 'metismenu';
 
+declare var UE;
+
+(window as any)._ues = {
+  host: 'leadgenic.userecho.com',
+  forum: '1',
+  lang: 'ru',
+  chat: { channel: null },
+  chat_tab_show: false,
+  tab_show: false
+};
 
 @Component({
   selector: 'app-sidebar',
@@ -23,17 +33,24 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     $(this.menu.nativeElement).metisMenu();
-    this.loadScript('https://cdn.leadgenic.ru/production/lg_widgets_l11/popup/lgwg_popup_frame.js');
+    this.loadScript('http://cdn.userecho.com/js/widget-1.4.gz.js');
   }
 
   private loadScript(url: string): void {
-    const body = document.body as HTMLDivElement;
     const script = document.createElement('script');
-    script.innerHTML = '';
+    script.type = 'text/javascript';
     script.src = url;
-    script.async = false;
-    script.defer = true;
-    body.appendChild(script);
+    script.async = true;
+    const s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(script, s);
+  }
+
+  public preloadBanner(): void {
+    UE.Popin.preload();
+  }
+
+  public showBanner(): void {
+    UE.Popin.show();
   }
 
 }
