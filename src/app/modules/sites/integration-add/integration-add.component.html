@@ -229,6 +229,12 @@
                 <div class="small">{{ 'settings.site.newIntegration.create.webhook.desc' | translate }}</div>
               </div>
             </div>
+            <div class="integration-tab-item mr-3">
+              <label for="bitrixParamsUserNo"
+                     class="control-label">{{ 'settings.site.newIntegration.create.userNo' | translate }}</label>
+              <input type="number" min="1" id="bitrixParamsUserNo" [(ngModel)]="bitrixWebhookParams.userNo" class="form-control"
+                     name="bitrixParamsUserNo">
+            </div>
           </div>
 
           <!-- BITRIX API PARAMS -->
@@ -802,6 +808,12 @@
                      class="form-control" name="editBitrixParamsWebhook">
               <div class="small">{{ 'settings.site.newIntegration.create.webhook.desc' | translate }}</div>
             </div>
+          </div>
+          <div class="integration-tab-item mr-3">
+            <label for="editBitrixParamsUserNo"
+                   class="control-label">{{ 'settings.site.newIntegration.create.userNo' | translate }}</label>
+            <input type="number" min="1" id="editBitrixParamsUserNo" [(ngModel)]="editableIntegration.params.userNo"
+                   class="form-control" name="editBitrixParamsUserNo">
           </div>
         </div>
 

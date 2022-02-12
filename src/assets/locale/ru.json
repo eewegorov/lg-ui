@@ -542,6 +542,7 @@
 						"desc": "Например, myportal.amocrm.ru",
 						"title": "Поддомен портала"
 					},
+					"userNo": "Номер пользователя",
 					"webhook": {
 						"desc": "Например, 9kdlth1f7cr84df",
 						"title": "Код веб-хука"
