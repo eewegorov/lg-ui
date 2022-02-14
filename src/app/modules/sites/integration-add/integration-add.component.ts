@@ -52,7 +52,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public getResponseParams = { code: '', campaignId: '' };
   public mailchimpUniParams = { code: '', listId: '' };
   public sendPBParams = { id: '', secret: '', book: '' };
-  public bitrixWebhookParams = { url: '', hash: '', userNo: 1 };
+  public bitrixWebhookParams = { url: '', hash: '', userId: 1 };
   public bitrixApiParams = { host: '', login: '', password: '' };
   public amoParams: AmoParams = {
     subdomain: '', clientId: '', clientSecret: '', code: '', accessToken: '', refreshToken: '',
@@ -388,7 +388,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
             integration.params = {
               url: this.bitrixWebhookParams.url,
               hash: this.bitrixWebhookParams.hash,
-              userNo: this.bitrixWebhookParams.userNo
+              userId: this.bitrixWebhookParams.userId
             };
 
             integration.customFieldsMapping = this.integrationFieldsIds.reduce(
@@ -455,7 +455,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
           if (this.bitrixConnectionType === BitrixConnectionTypes.Api) {
             return !this.bitrixApiParams.host || !this.bitrixApiParams.login || !this.bitrixApiParams.password;
           } else {
-            return !this.bitrixWebhookParams.url || !this.bitrixWebhookParams.hash || !this.bitrixWebhookParams.userNo;
+            return !this.bitrixWebhookParams.url || !this.bitrixWebhookParams.hash || !this.bitrixWebhookParams.userId;
           }
         case IntegrationTypes.AMOCRM:
           return !this.amoParams.subdomain || !this.amoParams.clientId || !this.amoParams.clientSecret
@@ -524,7 +524,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
           return !this.editableIntegration.params.host || !this.editableIntegration.params.login
             || !this.editableIntegration.params.password;
         } else {
-          return !this.editableIntegration.params.url || !this.editableIntegration.params.hash || !this.editableIntegration.params.userNo;
+          return !this.editableIntegration.params.url || !this.editableIntegration.params.hash || !this.editableIntegration.params.userId;
         }
       case IntegrationTypes.AMOCRM:
         return !this.editableIntegration.params.subdomain || !this.editableIntegration.params.clientId
