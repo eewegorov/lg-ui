@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   url: '/api/rest/v1',
+  stat: '/api/public',
   oauthUrl: '/oauth',
 };
 
