@@ -89,7 +89,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
   }
 
   private initSites() {
-    this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
+    this.sitesService.getSites().subscribe((response: SiteShort[]) => {
       this.coreSitesService.sites = response;
       this.sites = this.sites.concat(response);
       this.currSite = this.sites[0].id;

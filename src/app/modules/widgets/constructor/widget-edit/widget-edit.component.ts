@@ -625,7 +625,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   private initSites() {
-    this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
+    this.sitesService.getSites().subscribe((response: SiteShort[]) => {
       this.getCoupons();
       if (response) {
         this.coreSitesService.sites = response;

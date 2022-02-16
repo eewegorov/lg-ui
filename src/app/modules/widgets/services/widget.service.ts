@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
   CompaniesResponse,
@@ -10,7 +10,6 @@ import {
   Entities,
   FullWidget,
   Mockup,
-  MockupCategory,
   MockupGroup,
   MockupGroupsResponse,
   MockupResponse,

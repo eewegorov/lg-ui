@@ -202,7 +202,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
         name: translation
       }];
       this.sitesIds = [this.ALL_SITE_ID];
-      this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
+      this.sitesService.getSites().subscribe((response: SiteShort[]) => {
         this.allSites = this.allSites.concat(response);
         this.getBestSites();
       });

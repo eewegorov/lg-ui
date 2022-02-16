@@ -29,12 +29,12 @@ export class SitesApiService {
 
   constructor(private http: HttpClient) { }
 
-  public getSites(): Observable<SitesResponse> {
+  public getOldSites(): Observable<SitesResponse> {
     return this.http.get<SitesResponse>(`${ environment.url }/sites/statistics`);
   }
 
-  public getSitesShort(): Observable<SitesShortResponse> {
-    return this.http.get<SitesShortResponse>(`${ environment.url }/sites/short`);
+  public getSites(): Observable<SitesShortResponse> {
+    return this.http.get<SitesShortResponse>(`${ environment.url }/sites`);
   }
 
   public createSite(data: CreateSiteRequest): Observable<CreateSiteResponse> {

@@ -45,15 +45,15 @@ export class SitesService {
   ) {
   }
 
-  public getSites(): Observable<Site[]> {
-    return this.sitesApiService.getSites().pipe(
+  public getOldSites(): Observable<Site[]> {
+    return this.sitesApiService.getOldSites().pipe(
       map((response: SitesResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }
 
-  public getSitesShort(): Observable<SiteShort[]> {
-    return this.sitesApiService.getSitesShort().pipe(
+  public getSites(): Observable<SiteShort[]> {
+    return this.sitesApiService.getSites().pipe(
       map((response: SitesShortResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );

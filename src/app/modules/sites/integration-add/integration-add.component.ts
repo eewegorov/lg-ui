@@ -160,7 +160,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public setIntegrationType(newTab) {
     this.tab = newTab;
     if (newTab === 'COPY') {
-      this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
+      this.sitesService.getSites().subscribe((response: SiteShort[]) => {
         this.coreSitesService.sites = response;
         this.sites = response.filter((item: SiteShort) => {
           return item.id !== this.siteId;

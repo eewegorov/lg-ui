@@ -166,7 +166,7 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
         this.siteInfo.isFree = this.sitesService.isSiteHasExpTariff(this.siteInfo) || this.siteInfo.trial;
         this.siteInfo.isNotPayment = this.sitesService.isSiteHasExpTariff(this.siteInfo) && !this.siteInfo.trial;
       });
-      this.sitesService.getSitesShort().subscribe((responseSites: SiteShort[]) => {
+      this.sitesService.getSites().subscribe((responseSites: SiteShort[]) => {
         this.coreSitesService.sites = responseSites;
       });
     });

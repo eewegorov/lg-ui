@@ -108,7 +108,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
         name: translation
       }];
       this.sitesIds = [this.ALL_SITE_ID];
-      this.sitesService.getSitesShort().subscribe((response: SiteShort[]) => {
+      this.sitesService.getSites().subscribe((response: SiteShort[]) => {
         this.coreSitesService.sites = response;
         if (notificationOffCookie !== this.userId && this.isTrialSites(response)) {
           this.isNotificationEnable = true;

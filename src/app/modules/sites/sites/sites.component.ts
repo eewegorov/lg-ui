@@ -58,7 +58,7 @@ export class SitesComponent implements OnInit, OnDestroy {
   }
 
   private getSites(): void {
-    this.sitesSub = this.sitesService.getSites().subscribe((response: Site[]) => {
+    this.sitesSub = this.sitesService.getOldSites().subscribe((response: Site[]) => {
       this.isSitesListLoaded = true;
       this.sites = this.coreSitesService.sites = response;
       if (this.sites.length) {
