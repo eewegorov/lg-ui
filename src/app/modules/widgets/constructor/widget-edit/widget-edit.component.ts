@@ -25,6 +25,7 @@ import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
 import { ConstructorDesignComponent } from '../constructor-design/constructor-design.component';
 import { ConstructorRulesComponent } from '../constructor-rules/constructor-rules.component';
+import { cloneDeep, isEqual, isEmpty, isObject, transform } from 'lodash-es';
 
 @Component({
   selector: 'app-widget-edit',
@@ -45,6 +46,7 @@ import { ConstructorRulesComponent } from '../constructor-rules/constructor-rule
 export class WidgetEditComponent implements OnInit, OnDestroy {
   public renamedWidget = { id: '', name: '' };
   public widget = {} as FullWidget;
+  public oldWidget = {} as FullWidget;
   public isDesigner = false;
   public isMockup = false;
   public sid: string;
@@ -326,7 +328,30 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   public closeWidget(): void {
-    this.router.navigate(['/widgets/']);
+    const difference = this.difference(this.oldWidget, this.widget);
+    delete difference.sendCrm;
+
+    if (isEmpty(difference)) {
+      this.router.navigate(['/widgets/']);
+    } else {
+      const exitConfirm = confirm(this.translate.instant('widgetsList.widget.error'));
+
+      if (exitConfirm) {
+        this.router.navigate(['/widgets/']);
+      }
+    }
+  }
+
+  private difference(object: FullWidget, base: FullWidget): Partial<FullWidget> {
+    // tslint:disable-next-line:no-shadowed-variable
+    function changes(object, base) {
+      return transform(object, (result, value, key) => {
+        if (!isEqual(value, base[key])) {
+          result[key] = (isObject(value) && isObject(base[key])) ? changes(value, base[key]) : value;
+        }
+      });
+    }
+    return changes(object, base);
   }
 
   private checkWidgetRenameTitle() {
@@ -663,7 +688,12 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
   private loadWidget() {
     this.widgetService.getWidgetById(this.sid, this.wid).subscribe((response: FullWidget) => {
-      this.widget = response as unknown as FullWidget;
+      this.widget = response;
+
+      setTimeout(() => {
+        this.oldWidget = cloneDeep(response);
+      }, 3000);
+
       this.widget.id = this.wid;
       this.isContainerized = !!this.widget.containerId;
       this.checkWidgetRenameTitle();
