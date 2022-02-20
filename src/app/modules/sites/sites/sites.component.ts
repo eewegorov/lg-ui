@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SiteAddComponent } from '../site-add/site-add.component';
-import { Site } from '../../../core/models/sites';
+import { SiteShort } from '../../../core/models/sites';
 import { User } from '../../../core/models/user';
 import { UserService } from '../../user/services/user.service';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
@@ -14,7 +14,7 @@ import { SitesService } from '../services/sites.service';
   styleUrls: ['./sites.component.scss']
 })
 export class SitesComponent implements OnInit, OnDestroy {
-  public sites: Site[] = [];
+  public sites: SiteShort[] = [];
   public timezone: string;
   public isSitesListLoaded = false;
   private hidePhoneFieldInModal = false;
@@ -58,7 +58,7 @@ export class SitesComponent implements OnInit, OnDestroy {
   }
 
   private getSites(): void {
-    this.sitesSub = this.sitesService.getOldSites().subscribe((response: Site[]) => {
+    this.sitesSub = this.sitesService.getSites().subscribe((response: SiteShort[]) => {
       this.isSitesListLoaded = true;
       this.sites = this.coreSitesService.sites = response;
       if (this.sites.length) {

@@ -29,10 +29,6 @@ export class SitesApiService {
 
   constructor(private http: HttpClient) { }
 
-  public getOldSites(): Observable<SitesResponse> {
-    return this.http.get<SitesResponse>(`${ environment.url }/sites/statistics`);
-  }
-
   public getSites(): Observable<SitesShortResponse> {
     return this.http.get<SitesShortResponse>(`${ environment.url }/sites`);
   }

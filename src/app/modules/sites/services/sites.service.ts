@@ -18,12 +18,10 @@ import {
   IntegrationService,
   IntegrationsResponse,
   IntegrationTypes,
-  Site,
   SiteSettings,
   SiteSettingsResponse,
   SiteShort,
   SiteShortResponse,
-  SitesResponse,
   SitesShortResponse,
   Smartpoints,
   SmartpointsResponse,
@@ -43,13 +41,6 @@ export class SitesService {
     private errorHandlerService: ErrorHandlerService,
     private sitesApiService: SitesApiService
   ) {
-  }
-
-  public getOldSites(): Observable<Site[]> {
-    return this.sitesApiService.getOldSites().pipe(
-      map((response: SitesResponse) => response.data),
-      catchError(this.errorHandlerService.handleError)
-    );
   }
 
   public getSites(): Observable<SiteShort[]> {
