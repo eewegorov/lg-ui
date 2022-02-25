@@ -22,7 +22,7 @@ import {
   SiteSettingsResponse,
   SiteShort,
   SiteShortResponse,
-  SitesShortResponse,
+  SitesShortResponse, SitesStatisticsResponse, SiteStatistics,
   Smartpoints,
   SmartpointsResponse,
   UpdateIntegrationRequest
@@ -60,6 +60,13 @@ export class SitesService {
   public deleteSite(id: string): Observable<boolean> {
     return this.sitesApiService.deleteSite(id).pipe(
       map((response: ApiResponse) => response.success),
+      catchError(this.errorHandlerService.handleError)
+    );
+  }
+
+  public getSitesStatistics(id: string): Observable<SiteStatistics[]> {
+    return this.sitesApiService.getSitesStatistics(id).pipe(
+      map((response: SitesStatisticsResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }

@@ -17,7 +17,7 @@ import {
   CloneIntegrationRequest,
   CreateIntegrationRequest,
   SmartpointsResponse,
-  AmoAuthResponse, AmoFunnelResponse, AmoAuthByCodeRequest, AmoAuthByRefreshTokenRequest
+  AmoAuthResponse, AmoFunnelResponse, AmoAuthByCodeRequest, AmoAuthByRefreshTokenRequest, SitesStatisticsResponse
 } from '../../../core/models/sites';
 
 
@@ -39,6 +39,10 @@ export class SitesApiService {
 
   public deleteSite(id: string): Observable<ApiResponse> {
     return this.http.delete<ApiResponse>(`${ environment.url }/sites/${id}`);
+  }
+
+  public getSitesStatistics(id: string): Observable<SitesStatisticsResponse> {
+    return this.http.get<SitesStatisticsResponse>(`${ environment.stat }/sites/${id}`);
   }
 
   public getSiteSettings(id: string): Observable<SiteSettingsResponse> {

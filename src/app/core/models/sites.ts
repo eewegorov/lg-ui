@@ -32,6 +32,17 @@ export interface SiteShort {
   trial: boolean;
 }
 
+export interface SitesStatisticsResponse extends ApiResponse {
+  data: SiteStatistics[];
+}
+
+export interface SiteStatistics {
+  date: Date;
+  actions: number;
+  emails: number;
+  leads: number;
+}
+
 export interface DayStat {
   date: number;
   value: number;
