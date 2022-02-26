@@ -45,37 +45,44 @@
         </div>
       </div>
       <div class="col-lg-6 chartcontainer">
-        <div class="flex-column-site-wr" *ngIf="actionsStatsWeekCount > 0 || leadsStatsWeekCount > 0 || mailStatsWeekCount > 0">
-          <div class="chartlegend-container mb-1">
-            <div class="chartlegend" *ngIf="actionsStatsWeekCount > 0">
-              <div class="charticon targetlegend"></div>
-              <h5>{{ 'sitelist.chartLegend.widgets' | translate }}</h5>
-            </div>
-            <div class="chartlegend" *ngIf="leadsStatsWeekCount > 0">
-              <div class="charticon bluebg"></div>
-              <h5>{{ 'sitelist.chartLegend.leads' | translate }}</h5>
-            </div>
-            <div class="chartlegend" *ngIf="mailStatsWeekCount > 0">
-              <div class="charticon orangebg"></div><h5>{{ 'sitelist.chartLegend.emails' | translate }}</h5>
-            </div>
+        <div *ngIf="isLoading" class="flex-column-site-wr align-items-center justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
           </div>
-          <canvas
-            id="line"
-            baseChart
-            chartType="line"
-            height="100"
-            style="max-height: 200px"
-            [data]="data"
-            [labels]="labels"
-            [colors]="colors"
-            [options]="options"
-            [legend]="false"
-          >
-          </canvas>
         </div>
-        <div class="no-data-graph-title" *ngIf="actionsStatsWeekCount <= 0 && leadsStatsWeekCount <= 0 && mailStatsWeekCount <= 0">
-          <div>{{ 'global.noData' | translate }}</div>
-        </div>
+        <ng-container *ngIf="!isLoading">
+          <div class="flex-column-site-wr" *ngIf="actionsStatsWeekCount > 0 || leadsStatsWeekCount > 0 || mailStatsWeekCount > 0">
+            <div class="chartlegend-container mb-1">
+              <div class="chartlegend" *ngIf="actionsStatsWeekCount > 0">
+                <div class="charticon targetlegend"></div>
+                <h5>{{ 'sitelist.chartLegend.widgets' | translate }}</h5>
+              </div>
+              <div class="chartlegend" *ngIf="leadsStatsWeekCount > 0">
+                <div class="charticon bluebg"></div>
+                <h5>{{ 'sitelist.chartLegend.leads' | translate }}</h5>
+              </div>
+              <div class="chartlegend" *ngIf="mailStatsWeekCount > 0">
+                <div class="charticon orangebg"></div><h5>{{ 'sitelist.chartLegend.emails' | translate }}</h5>
+              </div>
+            </div>
+            <canvas
+              id="line"
+              baseChart
+              chartType="line"
+              height="100"
+              style="max-height: 200px"
+              [data]="data"
+              [labels]="labels"
+              [colors]="colors"
+              [options]="options"
+              [legend]="false"
+            >
+            </canvas>
+          </div>
+          <div class="no-data-graph-title" *ngIf="actionsStatsWeekCount <= 0 && leadsStatsWeekCount <= 0 && mailStatsWeekCount <= 0">
+            <div>{{ 'global.noData' | translate }}</div>
+          </div>
+        </ng-container>
       </div>
       <div class="col-lg-12 site-item-notification" *ngIf="!item.isFree && item.tariffExpLeftMs < 604800000">
         <div class="notify-text">{{ 'sitelist.notification.payment' | translate }}</div>

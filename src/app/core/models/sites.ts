@@ -32,12 +32,12 @@ export interface SiteShort {
   trial: boolean;
 }
 
-export interface SitesStatisticsResponse extends ApiResponse {
+export interface SiteStatisticsResponse extends ApiResponse {
   data: SiteStatistics[];
 }
 
 export interface SiteStatistics {
-  date: Date;
+  date: string;
   actions: number;
   emails: number;
   leads: number;
