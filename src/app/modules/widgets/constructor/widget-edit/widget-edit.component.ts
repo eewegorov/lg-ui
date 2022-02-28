@@ -103,10 +103,9 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
 
       if (response.roles.includes(UserRole.ROLE_ADMIN)) {
         this.isMockup = true;
-        this.loadMockup();
-      } else {
-        this.loadWidget();
       }
+
+      this.loadWidget();
     });
 
     this.loadGroups();
