@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Abtest } from '../../../../core/models/abtests';
-import { Company, Container, WidgetConversion, WidgetInfo } from '../../../../core/models/widgets';
+import { Company, Container, WidgetStatistics, WidgetInfo } from '../../../../core/models/widgets';
 import { TariffsService } from '../../../../core/services/tariffs.service';
 import { AbtestsService } from '../../../abtests/services/abtests.service';
 import { CoreSitesService } from '../../../../core/services/core-sites.service';
@@ -65,7 +65,7 @@ export class ContainerizedItemComponent implements OnInit {
 
     this.widgetCurrentCompany = this.widgetService.getCompanyById(this.item.companyId, this.widgetService.getCurrentCompanies());
 
-    this.widgetService.getWidgetConversion(this.siteId, this.item.id).subscribe((response: WidgetConversion) => {
+    this.widgetService.getWidgetStatistics(this.item.id).subscribe((response: WidgetStatistics) => {
       if (response) {
         this.item.widgetConversion = response;
       }
@@ -73,7 +73,7 @@ export class ContainerizedItemComponent implements OnInit {
   }
 
   public getCConversion() {
-    return (this.decimalPipe.transform(((100 * this.item.widgetConversion.target) / this.item.widgetConversion.shows), '1.0-2')) + '%';
+    return (this.decimalPipe.transform(((100 * this.item.widgetConversion.targets) / this.item.widgetConversion.shows), '1.0-2')) + '%';
   }
 
   public updateCWidget(data) {

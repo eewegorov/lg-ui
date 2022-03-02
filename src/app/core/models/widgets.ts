@@ -156,7 +156,7 @@ export interface WidgetInfo extends WidgetInfoShort {
   template: string;
   active: boolean;
   abtestInfo: AbtestInfo;
-  widgetConversion?: WidgetConversion;
+  widgetConversion?: WidgetStatistics;
   containerId?: string;
   guiprops?: Record<string, any>;
 }
@@ -260,13 +260,13 @@ export interface WidgetTemplate {
   active: boolean;
 }
 
-export interface WidgetConversionResponse extends ApiResponse {
-  data: WidgetConversion;
+export interface WidgetStatisticsResponse extends ApiResponse {
+  data: WidgetStatistics;
 }
 
-export interface WidgetConversion {
+export interface WidgetStatistics {
   shows: number;
-  target: number;
+  targets: number;
 }
 
 export interface WidgetSwapRequest {

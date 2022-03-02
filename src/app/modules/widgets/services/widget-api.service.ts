@@ -19,7 +19,7 @@ import {
   WidgetChangeCompanyRequest,
   WidgetCloneRequest,
   WidgetCloneResponse,
-  WidgetConversionResponse,
+  WidgetStatisticsResponse,
   WidgetCreateRequest,
   WidgetCreateResponse,
   WidgetRename,
@@ -86,8 +86,8 @@ export class WidgetApiService {
     return this.http.put<ApiResponse>(`${ environment.url }/mockups/${id}`, mockup);
   }
 
-  public getWidgetConversion(siteId: string, widgetId: string): Observable<WidgetConversionResponse> {
-    return this.http.get<WidgetConversionResponse>(`${ environment.url }/sites/${siteId}/widgets/${widgetId}/conversion`);
+  public getWidgetStatistics(widgetId: string): Observable<WidgetStatisticsResponse> {
+    return this.http.get<WidgetStatisticsResponse>(`${ environment.stat }/widgets/${widgetId}`);
   }
 
   public deleteWidget(siteId: string, widgetId: string): Observable<ApiResponse> {

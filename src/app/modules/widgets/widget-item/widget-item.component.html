@@ -133,7 +133,7 @@
         <div class="col-sm-4 border-right p-0 text-center">
           <div class="contact-stat">
             <span>{{ 'widgetsList.widget.show.all' | translate }}</span>
-            <span *ngIf="widgetConversion" class="stat">{{widgetConversion.shows | thousandSuffix:2}}</span>
+            <span *ngIf="widgetConversion" class="stat">{{ widgetConversion.shows | thousandSuffix:2 }}</span>
             <span *ngIf="!widgetConversion" class="reports-emails-preloader"></span>
           </div>
         </div>
@@ -141,7 +141,7 @@
         <div class="col-sm-4 border-right p-0 text-center">
           <div class="contact-stat">
             <span>{{ 'widgetsList.widget.show.actions' | translate }}</span>
-            <span *ngIf="widgetConversion" class="stat">{{widgetConversion.target | thousandSuffix:2}}</span>
+            <span *ngIf="widgetConversion" class="stat">{{ widgetConversion.targets | thousandSuffix:2 }}</span>
             <span *ngIf="!widgetConversion" class="reports-emails-preloader"></span>
           </div>
         </div>

@@ -22,8 +22,8 @@ import {
   WidgetCloned,
   WidgetCloneRequest,
   WidgetCloneResponse,
-  WidgetConversion,
-  WidgetConversionResponse,
+  WidgetStatistics,
+  WidgetStatisticsResponse,
   WidgetCreated,
   WidgetCreateRequest,
   WidgetCreateResponse,
@@ -125,9 +125,9 @@ export class WidgetService {
     );
   }
 
-  public getWidgetConversion(siteId: string, widgetId: string): Observable<WidgetConversion> {
-    return this.widgetApiService.getWidgetConversion(siteId, widgetId).pipe(
-      map((response: WidgetConversionResponse) => response.data),
+  public getWidgetStatistics(widgetId: string): Observable<WidgetStatistics> {
+    return this.widgetApiService.getWidgetStatistics(widgetId).pipe(
+      map((response: WidgetStatisticsResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
   }

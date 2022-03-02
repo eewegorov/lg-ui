@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Abtest } from '../../../core/models/abtests';
-import { WidgetConversion, WidgetInfo, WidgetInfoShort } from '../../../core/models/widgets';
+import { WidgetStatistics, WidgetInfo, WidgetInfoShort } from '../../../core/models/widgets';
 import { TariffsService } from '../../../core/services/tariffs.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
@@ -27,11 +27,11 @@ export class WidgetItemComponent implements OnInit {
   @Input() private prev: WidgetInfo;
   @Input() private next: WidgetInfo;
   public widgetCurrentCompany: WidgetInfoShort;
-  public widgetConversion: WidgetConversion;
+  public widgetConversion: WidgetStatistics;
   public isConversionLoaded = false;
   public changeCompanyWidget = {} as WidgetInfoShort;
   public widgetType;
-  private currentSiteId;
+  private currentSiteId: string;
 
   constructor(
     private router: Router,
@@ -45,10 +45,11 @@ export class WidgetItemComponent implements OnInit {
     private abtestsService: AbtestsService,
     private widgetService: WidgetService
   ) {
-    this.currentSiteId = this.sitesService.getCurrentSiteId();
   }
 
   ngOnInit(): void {
+    this.currentSiteId = this.sitesService.getCurrentSiteId();
+
     if (!this.isConversionLoaded) {
       this.loadConversion();
     }
@@ -84,7 +85,7 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public getConversion() {
-    return (this.decimalPipe.transform(((100 * this.widgetConversion.target) / this.widgetConversion.shows), '1.0-2')) + '%';
+    return (this.decimalPipe.transform(((100 * this.widgetConversion.targets) / this.widgetConversion.shows), '1.0-2')) + '%';
   }
 
   public updateWidgetName(data) {
@@ -215,7 +216,7 @@ export class WidgetItemComponent implements OnInit {
   private loadConversion() {
     this.isConversionLoaded = true;
 
-    this.widgetService.getWidgetConversion(this.currentSiteId, this.widget.id).subscribe((response: WidgetConversion) => {
+    this.widgetService.getWidgetStatistics(this.widget.id).subscribe((response: WidgetStatistics) => {
       if (response) {
         this.widgetConversion = response;
       }

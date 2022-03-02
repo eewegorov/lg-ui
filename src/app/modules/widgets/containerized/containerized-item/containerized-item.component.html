@@ -45,8 +45,8 @@
       </div>
     </div>
   </div>
-  <div *ngIf="item.widgetConversion" class="ab-grid__item--shows">{{item.widgetConversion.shows | thousandSuffix:2}}</div>
-  <div *ngIf="item.widgetConversion" class="ab-grid__item--targets">{{item.widgetConversion.target | thousandSuffix:2}}</div>
+  <div *ngIf="item.widgetConversion" class="ab-grid__item--shows">{{ item.widgetConversion.shows | thousandSuffix:2 }}</div>
+  <div *ngIf="item.widgetConversion" class="ab-grid__item--targets">{{ item.widgetConversion.targets | thousandSuffix:2 }}</div>
   <div *ngIf="item.widgetConversion" class="ab-grid__item--conv" [innerHTML]="(item.widgetConversion.shows !== 0) ? getCConversion() : '0.00%'"></div>
 
   <div *ngIf="!item.widgetConversion" class="ab-grid__item--shows reports-emails-preloader"></div>
