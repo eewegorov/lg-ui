@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -50,9 +50,11 @@ export class WidgetItemComponent implements OnInit {
   ngOnInit(): void {
     this.currentSiteId = this.sitesService.getCurrentSiteId();
 
-    if (!this.isConversionLoaded) {
-      this.loadConversion();
-    }
+    $(window).on('resize scroll', () => {
+      if (this.isScrolledIntoView() && !this.isConversionLoaded) {
+        this.loadConversion();
+      }
+    });
 
     const abTests = this.abtestsService.getListOfABTests();
     if (this.widget.abtestInfo) {
@@ -221,6 +223,16 @@ export class WidgetItemComponent implements OnInit {
         this.widgetConversion = response;
       }
     });
+  }
+
+  private isScrolledIntoView() {
+    const docViewTop = $(window).scrollTop();
+    const docViewBottom = docViewTop + $(window).height();
+
+    const elemTop = $(`#${this.widget.id}`).offset().top;
+    const elemBottom = elemTop + $(`#${this.widget.id}`).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
   }
 
 }
