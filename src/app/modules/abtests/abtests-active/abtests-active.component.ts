@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,6 +16,7 @@ import { SitesService } from '../../sites/services/sites.service';
 import { WidgetService } from '../../widgets/services/widget.service';
 import { ContainerizedWidgetService } from '../../widgets/services/containerized-widget.service';
 import { AbtestsService } from '../services/abtests.service';
+import { SubscriptionLike } from 'rxjs';
 
 
 @Component({
@@ -23,7 +24,7 @@ import { AbtestsService } from '../services/abtests.service';
   templateUrl: './abtests-active.component.html',
   styleUrls: ['../shared/shared.scss', './abtests-active.component.scss']
 })
-export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
+export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestroy {
   public currSite = '';
   public sites = [{ id: 'allsitesid', name: 'Все сайты' }];
   public showWhat = 'ALL';
@@ -56,6 +57,9 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
     '#9a2e22', '#2a3a4b', '#ffeb3b'];
   private templates: WidgetTemplate[] = [];
 
+  private widgetsTemplatesSub: SubscriptionLike;
+  private widgetsTypesSub: SubscriptionLike;
+
   constructor(
     private router: Router,
     private location: Location,
@@ -72,11 +76,11 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit(): void {
-    this.widgetService.getWidgetsTemplates().subscribe((response: WidgetTemplate[]) => {
+    this.widgetsTemplatesSub = this.widgetService.getWidgetsTemplates().subscribe((response: WidgetTemplate[]) => {
       this.templates = response;
     });
 
-    this.widgetService.getWidgetsTypes().subscribe((responseTypes: WidgetType[]) => {
+    this.widgetsTypesSub = this.widgetService.getWidgetsTypes().subscribe((responseTypes: WidgetType[]) => {
       this.widgetTypes = responseTypes;
       this.initTests();
     });
@@ -653,6 +657,16 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
       return item.type === type;
     });
     return filteredArray[0].id;
+  }
+
+  ngOnDestroy(): void {
+    if (this.widgetsTypesSub) {
+      this.widgetsTypesSub.unsubscribe();
+    }
+
+    if (this.widgetsTemplatesSub) {
+      this.widgetsTemplatesSub.unsubscribe();
+    }
   }
 
 }

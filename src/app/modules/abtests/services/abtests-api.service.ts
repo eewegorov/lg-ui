@@ -32,7 +32,7 @@ export class AbtestsApiService {
   }
 
   public getStatistics(id: string): Observable<AbtestStatisticsResponse> {
-    return this.http.get<AbtestStatisticsResponse>(`${ environment.stat }/abtests/${id}`);
+    return this.http.get<AbtestStatisticsResponse>(`${ environment.stat }/abtests/${id}/widgets`);
   }
 
   public start(id: string): Observable<ApiResponse> {
