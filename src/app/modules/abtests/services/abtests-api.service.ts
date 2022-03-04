@@ -31,8 +31,8 @@ export class AbtestsApiService {
     return this.http.post<AbtestCreateResponse>(`${ environment.url }/abtests`, test);
   }
 
-  public getConversion(id: string): Observable<AbtestStatisticsResponse> {
-    return this.http.get<AbtestStatisticsResponse>(`${ environment.url }/abtests/${id}/statistics`);
+  public getStatistics(id: string): Observable<AbtestStatisticsResponse> {
+    return this.http.get<AbtestStatisticsResponse>(`${ environment.stat }/abtests/${id}`);
   }
 
   public start(id: string): Observable<ApiResponse> {

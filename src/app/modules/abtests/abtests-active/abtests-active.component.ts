@@ -120,7 +120,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked {
 
   private getConversions(itemNumber: number, testsLength: number) {
     if (itemNumber < testsLength) {
-      this.abTestsService.getConversion(this.abTests[itemNumber].id).subscribe((response: AbtestStatistics[]) => {
+      this.abTestsService.getStatistics(this.abTests[itemNumber].id).subscribe((response: AbtestStatistics[]) => {
         if (response) {
           this.abTests[itemNumber].variants = response;
           this.abTests[itemNumber].chartData = [];

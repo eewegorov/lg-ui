@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -55,6 +55,10 @@ export class WidgetItemComponent implements OnInit {
         this.loadConversion();
       }
     });
+
+    if (this.first && !this.isConversionLoaded) {
+      this.loadConversion();
+    }
 
     const abTests = this.abtestsService.getListOfABTests();
     if (this.widget.abtestInfo) {

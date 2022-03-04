@@ -39,8 +39,8 @@ export class AbtestsService {
     );
   }
 
-  public getConversion(id: string): Observable<AbtestStatistics[]> {
-    return this.abtestsApiService.getConversion(id).pipe(
+  public getStatistics(id: string): Observable<AbtestStatistics[]> {
+    return this.abtestsApiService.getStatistics(id).pipe(
       map((response: AbtestStatisticsResponse) => response.data),
       catchError(this.errorHandlerService.handleError)
     );
