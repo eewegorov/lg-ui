@@ -24,14 +24,14 @@ export class CampaignDeleteComponent implements OnInit {
     private sitesService: SitesService,
     private widgetService: WidgetService
   ) {
+  }
+
+  ngOnInit(): void {
     this.companies = this.companies.filter((item) => {
       return item.id !== this.deletedCompany.id && !item.default;
     });
 
     this.currentCompany = this.companies[0];
-  }
-
-  ngOnInit(): void {
   }
 
   public changeCompany(company) {
@@ -45,9 +45,9 @@ export class CampaignDeleteComponent implements OnInit {
     };
 
     this.widgetService.deleteCompany(this.sitesService.getCurrentSiteId(), this.deletedCompany.id, deletedCompany)
-      .subscribe((response: CompanyShort) => {
+      .subscribe((response: boolean) => {
         if (response) {
-          this.toastr.success(this.translate.instant('widgetsList.company.add.desc'), this.translate.instant('global.done'));
+          this.toastr.success(this.translate.instant('widgetsList.company.delete.desc'), this.translate.instant('global.done'));
           this.activeModal.close(this.deletedCompany.id);
         } else {
           this.toastr.error(this.translate.instant('widgetsList.company.delete.error'), '');

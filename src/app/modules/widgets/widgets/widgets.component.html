@@ -35,7 +35,7 @@
             </div>
 
             <button
-              (click)="newCompany.on = true"
+              (click)="addNewCompany()"
               class="btn btn-default btn-inline ml-1"
               data-container="body"
               data-toggle="tooltip"
@@ -56,8 +56,8 @@
               <i class="fa fa-trash"></i>
             </button>
           </div>
-          <div class="no-padding mt-2" *ngIf="newCompany.on">
-            <div class="floated-left" [ngClass]="(newCompany.name.trim().length === 0) ? 'is-invalid' : ''">
+          <div class="p-0 d-flex" *ngIf="newCompany.on">
+            <div class="mr-2" [ngClass]="(newCompany.name.trim().length === 0) ? 'is-invalid' : ''">
               <input
                 type="text"
                 class="form-control"
@@ -66,7 +66,7 @@
                 placeholder="{{ 'widgetsList.clone.company.add.label' | translate }}"
               >
             </div>
-            <div class="floated-right mr-3">
+            <div class="mr-3">
               <button
                 class="btn btn-default btn-inline"
                 data-container="body"

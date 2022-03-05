@@ -223,9 +223,9 @@ export class WidgetService {
     );
   }
 
-  public deleteCompany(siteId: string, companyId: string, company: DeleteCompanyRequest): Observable<CompanyShort> {
+  public deleteCompany(siteId: string, companyId: string, company: DeleteCompanyRequest): Observable<boolean> {
     return this.widgetApiService.deleteCompany(siteId, companyId, company).pipe(
-      map((response: CompanyResponse) => response.data),
+      map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
     );
   }

@@ -135,7 +135,7 @@ export class WidgetApiService {
   }
 
   public deleteCompany(siteId: string, companyId: string, company: DeleteCompanyRequest): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/companies`, company);
+    return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/companies/${companyId}/delete`, company);
   }
 
   public getImages(siteId: string): Observable<ImagesResponse> {

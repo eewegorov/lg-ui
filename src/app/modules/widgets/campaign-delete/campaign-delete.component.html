@@ -1,8 +1,8 @@
-<div class="modal-header text-center">
+<div class="modal-header text-center flex-column">
   <h4 class="modal-title">{{ 'widgetsList.company.delete.title' | translate }}</h4>
   <h5>{{ deletedCompany.name }}</h5>
 </div>
-<div class="modal-body">
+<div class="modal-body ml-3 mr-3">
   <div class="row">
     <div class="col-lg-12" *ngIf="!companies.length">
       <div class="row mb-3 ml-0 select-site-title">
@@ -20,14 +20,14 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-          <li *ngFor="let company of companies" (click)="changeCompany(company)"><a>{{ company.name }}</a>
+          <li *ngFor="let company of companies" (click)="changeCompany(company)" class="dropdown-item"><a>{{ company.name }}</a>
           </li>
         </ul>
       </div>
     </div>
   </div>
 </div>
-<div class="modal-footer">
+<div class="modal-footer justify-content-between ml-3 mr-3">
   <button id="deleteCompany1" *ngIf="companies.length" (click)="performDeleteCompany('MOVE_WIDGETS')" type="button" class="btn btn-primary floated-left">{{ 'widgetsList.company.delete.move' | translate }}</button>
   <button id="deleteCompany2" (click)="performDeleteCompany('DELETE_WIDGETS')" type="button" class="btn btn-danger floated-right">{{ 'widgetsList.company.delete.remove' | translate }}</button>
 </div>

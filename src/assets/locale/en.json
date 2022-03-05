@@ -1199,6 +1199,7 @@
 				"tooltip": ""
 			},
 			"delete": {
+				"desc": "",
 				"error": "",
 				"move": "",
 				"one": {

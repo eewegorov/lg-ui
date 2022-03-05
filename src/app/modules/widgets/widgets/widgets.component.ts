@@ -127,6 +127,8 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
   }
 
   public deleteCompany() {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+
     const modalRef = this.modalService.open(CampaignDeleteComponent, {
       size: 'lg',
       windowClass: 'animate__animated animate__slideInDown animate__faster'
@@ -208,6 +210,13 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  public addNewCompany(): void {
+    console.log(this.companies);
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+
+    this.newCompany.on = true;
+  }
+
   public changeCurrentSite(site): void {
     this.currentSite = site;
     this.setCurrentSite();
@@ -218,6 +227,8 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
   }
 
   public saveNewCompany() {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+
     this.widgetService.createCompany(this.sitesService.getCurrentSiteId(), this.newCompany.name).subscribe((response: CompanyShort) => {
       if (response) {
         this.companies.push(response);
@@ -280,6 +291,8 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
   }
 
   public resetNewCompany() {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+
     this.newCompany = {
       on: false,
       name: ''
