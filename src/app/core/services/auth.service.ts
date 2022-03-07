@@ -60,6 +60,7 @@ export class AuthService {
   }
 
   public refreshToken() {
+    localStorage.removeItem(this.ACCESS_TOKEN);
     return this.http.post<any>(`${ environment.oauthUrl }/token`, null, {
       headers: new HttpHeaders({
         Authorization: `Basic ${btoa('ui:ui')}`
