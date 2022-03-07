@@ -43,16 +43,16 @@ export interface AbtestShort {
   variantId: string;
 }
 
+export interface AbtestVariantsResponse extends ApiResponse {
+  data: Variant[];
+}
+
 export interface AbtestStatisticsResponse extends ApiResponse {
-  data: AbtestStatistics[];
+  data: AbtestStatistics;
 }
 
 export interface AbtestStatistics {
-  id: string;
-  name: string;
-  conversions: AbtestConversion[];
-  active: boolean;
-  etalon: boolean;
+  [variantId: string]: AbtestConversion[];
 }
 
 export interface AbtestConversion {

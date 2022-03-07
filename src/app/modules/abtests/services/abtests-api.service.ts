@@ -12,7 +12,7 @@ import {
   AbtestCreateRequest,
   AbtestCreateResponse,
   AbtestVariantRequest,
-  AbtestVariantResponse
+  AbtestVariantResponse, AbtestVariantsResponse
 } from '../../../core/models/abtests';
 
 
@@ -29,6 +29,10 @@ export class AbtestsApiService {
 
   public createTest(test: AbtestCreateRequest): Observable<AbtestCreateResponse> {
     return this.http.post<AbtestCreateResponse>(`${ environment.url }/abtests`, test);
+  }
+
+  public getVariants(id: string): Observable<AbtestVariantsResponse> {
+    return this.http.get<AbtestVariantsResponse>(`${ environment.url }/abtests/${id}/variants`);
   }
 
   public getStatistics(id: string): Observable<AbtestStatisticsResponse> {

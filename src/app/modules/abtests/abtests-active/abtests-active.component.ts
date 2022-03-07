@@ -17,6 +17,7 @@ import { WidgetService } from '../../widgets/services/widget.service';
 import { ContainerizedWidgetService } from '../../widgets/services/containerized-widget.service';
 import { AbtestsService } from '../services/abtests.service';
 import { SubscriptionLike } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -124,7 +125,12 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
 
   private getConversions(itemNumber: number, testsLength: number) {
     if (itemNumber < testsLength) {
-      this.abTestsService.getStatistics(this.abTests[itemNumber].id).subscribe((response: AbtestStatistics[]) => {
+      this.abTestsService.getVariants(this.abTests[itemNumber].id).pipe(
+        switchMap((variants: Variant[]) => {
+          console.log(variants);
+          return this.abTestsService.getStatistics(this.abTests[itemNumber].id);
+        })
+      ).subscribe((response: AbtestStatistics) => {
         if (response) {
           this.abTests[itemNumber].variants = response;
           this.abTests[itemNumber].chartData = [];
