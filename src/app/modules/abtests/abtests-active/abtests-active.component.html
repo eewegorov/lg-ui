@@ -140,7 +140,7 @@
                 </div>
                 <div class="ab-grid__item--shows">{{item.convInfo.n | thousandSuffix:2}} / {{item.convInfo.s | thousandSuffix:2}}</div>
                 <div class="ab-grid__item--conv">{{ item.convInfo.conversion }}</div>
-                <div class="ab-grid__item--update" [ngClass]="getClassForBetterTo(item)" [innerHTML]="showBetterToValue(item)"></div>
+                <div *ngIf="item.convInfo" class="ab-grid__item--update" [ngClass]="getClassForBetterTo(item)" [innerHTML]="showBetterToValue(item)"></div>
                 <div class="ab-grid__item--onoff"><ui-switch size="small" [checked]="item.active" (change)="changeVariantState(item, test)"></ui-switch></div>
                 <div class="ab-grid__item--actions">
                   <div class="btn-group edit-btns" [ngClass]="item.etalon ? 'margined-right-76' : 'margined-right-14'">

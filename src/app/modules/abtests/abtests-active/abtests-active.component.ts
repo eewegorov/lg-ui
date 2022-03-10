@@ -127,18 +127,23 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     if (itemNumber < testsLength) {
       this.abTestsService.getVariants(this.abTests[itemNumber].id).pipe(
         switchMap((variants: Variant[]) => {
+          this.abTests[itemNumber].variants = variants;
           console.log(variants);
           return this.abTestsService.getStatistics(this.abTests[itemNumber].id);
         })
       ).subscribe((response: AbtestStatistics) => {
         if (response) {
-          this.abTests[itemNumber].variants = response;
           this.abTests[itemNumber].chartData = [];
           this.abTests[itemNumber].chartLabels = [];
           this.abTests[itemNumber].chartSeries = [];
           this.abTests[itemNumber].chartColors = [];
           this.abTests[itemNumber].variants.forEach((variant, i) => {
+            variant.conversions = response[variant.id];
+            variant.etalon = variant.abtestInfo.type === 'ETALON';
             this.addMoreDataToVariant(variant, i, this.abTests[itemNumber]);
+            setTimeout(() => {
+              variant = { ...variant };
+            }, 1000);
           });
           this.getConversions(itemNumber + 1, testsLength);
 
@@ -228,7 +233,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
         conversionMap: {},
         totals: {
           shows: null,
-          target: null
+          targets: null
         }
       };
       // tslint:disable-next-line:prefer-for-of
@@ -246,9 +251,9 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
           range.max = date;
         }
         widgetsMap[i].totals.shows = (widgetsMap[i].totals.shows == null) ? item.shows : widgetsMap[i].totals.shows + item.shows;
-        widgetsMap[i].totals.target = (widgetsMap[i].totals.target == null) ? item.target : widgetsMap[i].totals.target + item.target;
+        widgetsMap[i].totals.targets = (widgetsMap[i].totals.targets == null) ? item.targets : widgetsMap[i].totals.targets + item.targets;
         widgetsMap[i].conversionMap[`${item.day}.${item.month}.${item.year}`] =
-          (widgetsMap[i].totals.target * 100 / widgetsMap[i].totals.shows).toFixed(2);
+          (widgetsMap[i].totals.targets * 100 / widgetsMap[i].totals.shows).toFixed(2);
       }
     }
 
@@ -343,10 +348,10 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     if (item.convInfo.n === 0) {
       return '-';
     }
-    if (item.convInfo.betterTo > 0) {
+    if (item.convInfo.betterTo && item.convInfo.betterTo > 0) {
       return '+' + item.convInfo.betterTo + '%';
     }
-    return item.convInfo.betterTo + '%';
+    return item.convInfo.betterTo !== undefined ? (item.convInfo.betterTo + '%') : '-';
   }
 
   public cloneVariant(test, variant, index, parentIndex) {
@@ -612,7 +617,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     }
     let total = 0;
     variant.conversions.forEach((item) => {
-      total += item.target;
+      total += item.targets;
     });
     return total;
   }
