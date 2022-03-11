@@ -10,7 +10,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { SitesRoutingModule } from './sites-routing.module';
 import { SiteAddComponent } from './site-add/site-add.component';
 import { SiteSettingsComponent } from './site-settings/site-settings.component';
-import { SitesListComponent } from './sites-list/sites-list.component';
+import { SiteItemComponent } from './site-item/site-item.component';
 import { SitesComponent } from './sites/sites.component';
 import { IntegrationAddComponent } from './integration-add/integration-add.component';
 import { IntegrationItemComponent } from './integration-item/integration-item.component';
@@ -22,7 +22,7 @@ import { WidgetsModule } from '../widgets/widgets.module';
   declarations: [
     SiteAddComponent,
     SiteSettingsComponent,
-    SitesListComponent,
+    SiteItemComponent,
     SitesComponent,
     IntegrationAddComponent,
     IntegrationItemComponent

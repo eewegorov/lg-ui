@@ -11,15 +11,16 @@
 
   <div *ngIf="!isSitesListLoaded" class="widget-page-preloader-all-inner"></div>
 
-  <div *ngIf="isSitesListLoaded" class="content">
+  <div *ngIf="isSitesListLoaded" class="content mb-5">
     <div *ngIf="!sites.length" class="col-lg-12 mt-5">
       <h3 class="f-0 text-center">{{ 'sitelist.empty.title' | translate }}</h3>
       <h4 class="f-2 text-center">{{ 'sitelist.empty.subtitle' | translate }}</h4>
     </div>
-    <app-sites-list
-      *ngFor="let site of sites"
+    <app-site-item
+      *ngFor="let site of sites; index as i"
       [item]="site"
       [timezone]="timezone"
-    ></app-sites-list>
+      [index]="i"
+    ></app-site-item>
   </div>
 </div>

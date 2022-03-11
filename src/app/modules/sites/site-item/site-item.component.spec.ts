@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { SitesListComponent } from './sites-list.component';
+import { SiteItemComponent } from './site-item.component';
 
 describe('SitesListComponent', () => {
-  let component: SitesListComponent;
-  let fixture: ComponentFixture<SitesListComponent>;
+  let component: SiteItemComponent;
+  let fixture: ComponentFixture<SiteItemComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SitesListComponent ]
+      declarations: [ SiteItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SitesListComponent);
+    fixture = TestBed.createComponent(SiteItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

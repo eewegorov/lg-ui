@@ -10,15 +10,16 @@ import { SitesService } from '../services/sites.service';
 import { Site, SiteStatistics } from '../../../core/models/sites';
 
 @Component({
-  selector: 'app-sites-list',
-  templateUrl: './sites-list.component.html',
-  styleUrls: ['./sites-list.component.scss'],
+  selector: 'app-site-item',
+  templateUrl: './site-item.component.html',
+  styleUrls: ['./site-item.component.scss'],
   providers: [DatePipe]
 })
-export class SitesListComponent implements OnInit, OnDestroy {
+export class SiteItemComponent implements OnInit, OnDestroy {
   @Input() public item: Site & { isFree: boolean; tariffExpTime: string; tariffExpLeftMs: number;
     hasCrmSyncErrors: boolean; hasMailSyncErrors: boolean; };
   @Input() public timezone = '';
+  @Input() private index: number;
   public actionsStatsWeekCount: number;
   public leadsStatsWeekCount: number;
   public mailStatsWeekCount: number;
@@ -27,6 +28,7 @@ export class SitesListComponent implements OnInit, OnDestroy {
   public labels;
   public options;
   public isLoading = true;
+  public isStatisticsLoaded = false;
 
   private siteStatisticsSub: SubscriptionLike;
 
@@ -55,6 +57,30 @@ export class SitesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    $(window).on('resize scroll', () => {
+      if (this.isScrolledIntoView() && !this.isStatisticsLoaded) {
+        this.loadStatistics();
+      }
+    });
+
+    if ((this.index === 0 || this.index === 1 || this.index === 2) && !this.isStatisticsLoaded) {
+      this.loadStatistics();
+    }
+  }
+
+  private isScrolledIntoView() {
+    const docViewTop = $(window).scrollTop();
+    const docViewBottom = docViewTop + $(window).height();
+
+    const elemTop = $(`#${this.item.id}`).offset().top;
+    const elemBottom = elemTop + $(`#${this.item.id}`).height();
+
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+  }
+
+  private loadStatistics(): void {
+    this.isStatisticsLoaded = true;
+
     this.siteStatisticsSub = this.sitesService.getSiteStatistics(this.item.id).subscribe((statistics: SiteStatistics[]) => {
       this.isLoading = false;
       this.labels = this.getSiteDates(statistics);
