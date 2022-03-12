@@ -69,6 +69,10 @@ export class SiteItemComponent implements OnInit, OnDestroy {
   }
 
   private isScrolledIntoView() {
+    if (!$(`#${this.item.id}`).length) {
+      return;
+    }
+
     const docViewTop = $(window).scrollTop();
     const docViewBottom = docViewTop + $(window).height();
 

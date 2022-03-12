@@ -230,6 +230,10 @@ export class WidgetItemComponent implements OnInit {
   }
 
   private isScrolledIntoView() {
+    if (!$(`#${this.widget.id}`).length) {
+      return;
+    }
+
     const docViewTop = $(window).scrollTop();
     const docViewBottom = docViewTop + $(window).height();
 
