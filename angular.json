@@ -144,8 +144,21 @@
               "devServerTarget": "lg-ui:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
-    }},
-  "defaultProject": "lg-ui"
+    }
+  },
+  "defaultProject": "lg-ui",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
