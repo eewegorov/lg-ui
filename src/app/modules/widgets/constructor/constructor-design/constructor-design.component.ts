@@ -1504,7 +1504,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     }
 
     if (this.widget.guiprops.form.enable) {
-      // tslint:disable-next-line:prefer-for-of
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for (let i = 0; i < this.widget.guiprops.formSet.items.length; i++) {
         if (this.widget.guiprops.formSet.items[i].type === 'message' || this.widget.guiprops.formSet.items[i].type === 'phone') {
           this.widget.sendCrm = true;

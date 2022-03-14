@@ -249,7 +249,7 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
     if (this.widgets) {
       const types = Object.keys(this.widgets);
       for (const item of types) {
-        // tslint:disable-next-line:prefer-for-of
+        // eslint-disable-next-line @typescript-eslint/prefer-for-of
         for (let j = 0; j < this.widgets[item].length; j++) {
           if (this.currentCompany.id === this.widgetService.getDefaultCompany(this.companies).id ||
             this.widgets[item][j].companyId === this.currentCompany.id) {

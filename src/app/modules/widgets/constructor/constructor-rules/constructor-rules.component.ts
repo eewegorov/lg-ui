@@ -198,7 +198,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     }
 
     if (this.widget.rules.pages?.enable) {
-      // tslint:disable-next-line:prefer-for-of
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for (let i = 0; i < this.widget.rules.pages.items.length; i++) {
         if (this.widget.rules.pages.items[i].value.trim().length === 0) {
           errors.push({
@@ -211,7 +211,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     }
 
     if (this.widget.rules.prevPages?.enable) {
-      // tslint:disable-next-line:prefer-for-of
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for (let i = 0; i < this.widget.rules.prevPages.items.length; i++) {
         if (this.widget.rules.prevPages.items[i].value.trim().length === 0) {
           errors.push({

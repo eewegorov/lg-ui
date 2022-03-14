@@ -74,7 +74,7 @@ export class FormElementComponent implements OnInit, AfterViewInit {
   }
 
   public getItemT(item, itemType) {
-    // tslint:disable-next-line:prefer-for-of
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.widget.guiprops.formSet.items.length; i++) {
       if (item.type !== itemType.type && this.widget.guiprops.formSet.items[i].type === itemType.type) {
         return false;
@@ -117,7 +117,7 @@ export class FormElementComponent implements OnInit, AfterViewInit {
   public addPageInputItem() {
     const helpArr = [...this.itemVariable];
 
-    // tslint:disable-next-line:prefer-for-of
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < this.widget.guiprops.formSet.items.length; i++) {
       for (let j = 0; j < helpArr.length; j++) {
         if ((this.widget.guiprops.formSet.items[i].type === helpArr[j].type)) {

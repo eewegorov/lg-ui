@@ -243,7 +243,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
       });
 
       response.forEach((stat: EmailsStatistics) => {
-        // tslint:disable-next-line:forin
+        // eslint-disable-next-line guard-for-in
         for (const key in stat.items) {
           this.allSitesStats.forEach((item) => {
             if (item.id === key) {
@@ -290,7 +290,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
     let mailStatistics: EmailsStatisticsView[] = [];
     response.forEach((stat: EmailsStatistics) => {
       let count = 0;
-      // tslint:disable-next-line:forin
+      // eslint-disable-next-line guard-for-in
       for (const key in stat.items) {
         count += stat.items[key];
       }

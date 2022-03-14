@@ -80,7 +80,7 @@ export function padNumber(value: number) {
 }
 
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngbd-datepicker-i18n',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
@@ -95,7 +95,7 @@ export function padNumber(value: number) {
     }
     ]
 })
-// tslint:disable-next-line:component-class-suffix
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class NgbdDatepickerI18n implements ControlValueAccessor {
   public selectedDate;
   private today = new Date();

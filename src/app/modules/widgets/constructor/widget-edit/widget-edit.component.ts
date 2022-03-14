@@ -342,7 +342,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   private difference(object: FullWidget, base: FullWidget): Partial<FullWidget> {
-    // tslint:disable-next-line:no-shadowed-variable
+    // eslint-disable-next-line @typescript-eslint/no-shadow
     function changes(object, base) {
       return transform(object, (result, value, key) => {
         if (!isEqual(value, base[key])) {

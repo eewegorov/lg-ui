@@ -236,7 +236,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
           targets: null
         }
       };
-      // tslint:disable-next-line:prefer-for-of
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for (let j = 0; j < incoming[i].conversions.length; j++) {
         const item = incoming[i].conversions[j];
         item.day = this.timeConverter(item.date).day;
@@ -390,7 +390,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
   public setWinner(testId, variantId, parentIndex) {
     Swal.fire({
       title: 'Вы уверены?',
-      // tslint:disable-next-line:max-line-length
+      // eslint-disable-next-line max-len
       text: 'При выборе, все настройки и дизайн варианта-победителя будут скопированы в виджет, а тест будет остановлен и перемещен в архив',
       icon: 'warning',
       showCancelButton: true,
