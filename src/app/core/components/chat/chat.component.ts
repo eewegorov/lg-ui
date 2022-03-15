@@ -15,7 +15,7 @@ export class ChatComponent implements OnInit {
 
   private chatInit(): void {
     ((d, w, c) => {
-      w.ChatraID = 'yPvYHpZ5e7hfvJAg6';
+      (w as any).ChatraID = 'yPvYHpZ5e7hfvJAg6';
       const s = d.createElement('script');
       w[c] = w[c] || ((args) => {
         (w[c].q = w[c].q || []).push(...args);
