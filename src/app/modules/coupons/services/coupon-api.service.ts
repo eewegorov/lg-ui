@@ -20,23 +20,23 @@ export class CouponApiService {
   constructor(private http: HttpClient) { }
 
   public getCouponsList(): Observable<CouponsResponse> {
-    return this.http.get<CouponsResponse>(`${ environment.url }/coupons`);
+    return this.http.get<CouponsResponse>(`${ environment.prov }/coupons`);
   }
 
   public getCouponById(couponId: string): Observable<CouponByIdResponse> {
-    return this.http.get<CouponByIdResponse>(`${ environment.url }/coupons/${couponId}`);
+    return this.http.get<CouponByIdResponse>(`${ environment.prov }/coupons/${couponId}`);
   }
 
   public createCoupon(coupon: CreateCoupon): Observable<CreateCouponResponse> {
-    return this.http.post<CreateCouponResponse>(`${ environment.url }/coupons`, coupon);
+    return this.http.post<CreateCouponResponse>(`${ environment.prov }/coupons`, coupon);
   }
 
   public updateCoupon(couponId: string, coupon: UpdateCoupon): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${ environment.url }/coupons/${couponId}`, coupon);
+    return this.http.put<ApiResponse>(`${ environment.prov }/coupons/${couponId}`, coupon);
   }
 
   public deleteCoupon(couponId: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${ environment.url }/coupons/${couponId}`);
+    return this.http.delete<ApiResponse>(`${ environment.prov }/coupons/${couponId}`);
   }
 
 }

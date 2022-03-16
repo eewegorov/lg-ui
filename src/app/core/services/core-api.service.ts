@@ -14,11 +14,11 @@ export class CoreApiService {
   constructor(private http: HttpClient) { }
 
   public getTariffPlans(): Observable<TariffPlansResponse> {
-    return this.http.get<TariffPlansResponse>(`${ environment.url }/plans`);
+    return this.http.get<TariffPlansResponse>(`${ environment.prov }/plans`);
   }
 
   public createOrder(data: OrderRequest): Observable<OrderResponse> {
-    return this.http.post<OrderResponse>(`${ environment.url }/billing/orders`, data);
+    return this.http.post<OrderResponse>(`${ environment.prov }/billing/orders`, data);
   }
 
 }

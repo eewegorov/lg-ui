@@ -20,25 +20,25 @@ export class CrmApiService {
   constructor(private http: HttpClient) { }
 
   public getLeadList(filterParams): Observable<LeadsResponse> {
-    return this.http.get<LeadsResponse>(`${ environment.url }/leads`, {
+    return this.http.get<LeadsResponse>(`${ environment.prov }/leads`, {
       params: filterParams
     });
   }
 
   public getLeadById(leadId: string): Observable<LeadByIdResponse> {
-    return this.http.get<LeadByIdResponse>(`${ environment.url }/leads/${leadId}`);
+    return this.http.get<LeadByIdResponse>(`${ environment.prov }/leads/${leadId}`);
   }
 
   public updateLeadState(leadId: string, state: UpdateState): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${ environment.url }/leads/${leadId}/state`, state);
+    return this.http.put<ApiResponse>(`${ environment.prov }/leads/${leadId}/state`, state);
   }
 
   public updateLeadComment(leadId: string, comment: UpdateComment): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${ environment.url }/leads/${leadId}/userComment`, comment);
+    return this.http.put<ApiResponse>(`${ environment.prov }/leads/${leadId}/userComment`, comment);
   }
 
   public getLeadsFilters(): Observable<LeadsWidgetsResponse> {
-    return this.http.get<LeadsWidgetsResponse>(`${ environment.url }/leads/filters`);
+    return this.http.get<LeadsWidgetsResponse>(`${ environment.prov }/leads/filters`);
   }
 
 }

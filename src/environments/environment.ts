@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  url: '/api/rest/v1',
+  prov: '/api/rest/v1',
+  oauth: '/oauth',
   stat: '/api/public',
-  oauthUrl: '/oauth',
 };
 
 /*

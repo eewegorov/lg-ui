@@ -1,0 +1,5 @@
+{
+  "prov": "/api/rest/v1",
+  "oauth": "/oauth",
+  "stat": "/api/public"
+}

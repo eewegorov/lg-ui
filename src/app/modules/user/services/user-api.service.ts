@@ -14,22 +14,22 @@ export class UserApiService {
   constructor(private http: HttpClient) { }
 
   public getMeInfo(): Observable<UserResponse> {
-    return this.http.get<UserResponse>(`${ environment.url }/me`);
+    return this.http.get<UserResponse>(`${ environment.prov }/me`);
   }
 
   public updateMeInfo(user: UserRequest): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${ environment.url }/me`, user);
+    return this.http.put<ApiResponse>(`${ environment.prov }/me`, user);
   }
 
   public updatePassword(password: PasswordRequest): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${ environment.url }/me/changePassword`, password);
+    return this.http.put<ApiResponse>(`${ environment.prov }/me/changePassword`, password);
   }
 
   public savePhone(data: Phone): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${ environment.url }/me/phone`, data);
+    return this.http.post<ApiResponse>(`${ environment.prov }/me/phone`, data);
   }
 
   public setWallet(wallet: Wallet): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${ environment.url }/me/wallet`, wallet);
+    return this.http.put<ApiResponse>(`${ environment.prov }/me/wallet`, wallet);
   }
 }

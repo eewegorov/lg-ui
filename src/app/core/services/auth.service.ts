@@ -23,7 +23,7 @@ export class AuthService {
   ) {}
 
   public login(data: AuthRequest): Observable<boolean> {
-    return this.http.post<Token>(`${ environment.oauthUrl }/token`,
+    return this.http.post<Token>(`${ environment.oauth }/token`,
       null, {
         headers: new HttpHeaders({
           Authorization: `Basic ${btoa('ui:ui')}`
@@ -47,7 +47,7 @@ export class AuthService {
   public logout() {
     this.doLogoutUser();
 
-    return this.http.post<ApiResponse>(`${environment.url}/auth/logout`, null).pipe(
+    return this.http.post<ApiResponse>(`${environment.prov}/auth/logout`, null).pipe(
       mapTo(true),
       catchError(error => {
         console.log(error);
@@ -61,7 +61,7 @@ export class AuthService {
 
   public refreshToken() {
     localStorage.removeItem(this.ACCESS_TOKEN);
-    return this.http.post<any>(`${ environment.oauthUrl }/token`, null, {
+    return this.http.post<any>(`${ environment.oauth }/token`, null, {
       headers: new HttpHeaders({
         Authorization: `Basic ${btoa('ui:ui')}`
       }),

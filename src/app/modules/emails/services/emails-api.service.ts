@@ -14,24 +14,24 @@ export class EmailsApiService {
   constructor(private http: HttpClient) { }
 
   public getEmailList(filterParams): Observable<EmailsResponse> {
-    return this.http.get<EmailsResponse>(`${ environment.url }/emails`, {
+    return this.http.get<EmailsResponse>(`${ environment.prov }/emails`, {
       params: filterParams
     });
   }
 
   public getEmailStatistic(filterParams): Observable<EmailsStatisticsResponse> {
-    return this.http.get<EmailsStatisticsResponse>(`${ environment.url }/emails/statistics`, {
+    return this.http.get<EmailsStatisticsResponse>(`${ environment.prov }/emails/statistics`, {
       params: filterParams
     });
   }
 
   public downloadEmailList(filterParams) {
-    return this.http.get<EmailsStatisticsResponse>(`${ environment.url }/emails/export`, {
+    return this.http.get<EmailsStatisticsResponse>(`${ environment.prov }/emails/export`, {
       params: filterParams
     });
   }
 
   public clearEmail(filterParams: ClearEmailsRequest): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${ environment.url }/emails/clear`, filterParams);
+    return this.http.post<ApiResponse>(`${ environment.prov }/emails/clear`, filterParams);
   }
 }

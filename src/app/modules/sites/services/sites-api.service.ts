@@ -30,15 +30,15 @@ export class SitesApiService {
   constructor(private http: HttpClient) { }
 
   public getSites(): Observable<SitesShortResponse> {
-    return this.http.get<SitesShortResponse>(`${ environment.url }/sites`);
+    return this.http.get<SitesShortResponse>(`${ environment.prov }/sites`);
   }
 
   public createSite(data: CreateSiteRequest): Observable<CreateSiteResponse> {
-    return this.http.post<CreateSiteResponse>(`${ environment.url }/sites`, data);
+    return this.http.post<CreateSiteResponse>(`${ environment.prov }/sites`, data);
   }
 
   public deleteSite(id: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${ environment.url }/sites/${id}`);
+    return this.http.delete<ApiResponse>(`${ environment.prov }/sites/${id}`);
   }
 
   public getSiteStatistics(id: string): Observable<SiteStatisticsResponse> {
@@ -46,48 +46,48 @@ export class SitesApiService {
   }
 
   public getSiteSettings(id: string): Observable<SiteSettingsResponse> {
-    return this.http.get<SiteSettingsResponse>(`${ environment.url }/sites/${id}/settings`);
+    return this.http.get<SiteSettingsResponse>(`${ environment.prov }/sites/${id}/settings`);
   }
 
   public getSiteShortInfo(id: string): Observable<SiteShortResponse> {
-    return this.http.get<SiteShortResponse>(`${ environment.url }/sites/${id}/short`);
+    return this.http.get<SiteShortResponse>(`${ environment.prov }/sites/${id}/short`);
   }
 
   public updateSiteSettings(id: string, settings: SiteSettings): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${ environment.url }/sites/${id}/settings`, settings);
+    return this.http.put<ApiResponse>(`${ environment.prov }/sites/${id}/settings`, settings);
   }
 
   public getSiteIntegrations(id: string): Observable<IntegrationsResponse> {
-    return this.http.get<IntegrationsResponse>(`${ environment.url }/sites/${id}/integrations`);
+    return this.http.get<IntegrationsResponse>(`${ environment.prov }/sites/${id}/integrations`);
   }
 
   public getSiteIntegration(siteId: string, integrationId: string): Observable<IntegrationResponse> {
-    return this.http.get<IntegrationResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}`);
+    return this.http.get<IntegrationResponse>(`${ environment.prov }/sites/${siteId}/integrations/${integrationId}`);
   }
 
   public createSiteIntegration(siteId: string, integration: CreateIntegrationRequest) {
-    return this.http.post<IntegrationResponse>(`${ environment.url }/sites/${siteId}/integrations`, integration);
+    return this.http.post<IntegrationResponse>(`${ environment.prov }/sites/${siteId}/integrations`, integration);
   }
 
   public cloneSiteIntegration(siteId: string, integrationId: string, data: CloneIntegrationRequest): Observable<IntegrationResponse> {
-    return this.http.post<IntegrationResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}/clone`, data);
+    return this.http.post<IntegrationResponse>(`${ environment.prov }/sites/${siteId}/integrations/${integrationId}/clone`, data);
   }
 
   public updateSiteIntegration(siteId: string, integrationId: string, integration: UpdateIntegrationRequest): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}`, integration);
+    return this.http.put<ApiResponse>(`${ environment.prov }/sites/${siteId}/integrations/${integrationId}`, integration);
   }
 
   public startStopSiteIntegration(siteId: string, integrationId: string, isStart: boolean): Observable<ApiResponse> {
     const type = isStart ? 'start' : 'pause';
-    return this.http.post<ApiResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}/${type}`, null);
+    return this.http.post<ApiResponse>(`${ environment.prov }/sites/${siteId}/integrations/${integrationId}/${type}`, null);
   }
 
   public deleteSiteIntegration(siteId: string, integrationId: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${ environment.url }/sites/${siteId}/integrations/${integrationId}`);
+    return this.http.delete<ApiResponse>(`${ environment.prov }/sites/${siteId}/integrations/${integrationId}`);
   }
 
   public getSiteSmartpointsList(siteId: string): Observable<SmartpointsResponse> {
-    return this.http.get<SmartpointsResponse>(`${ environment.url }/sites/${siteId}/smartpoints`);
+    return this.http.get<SmartpointsResponse>(`${ environment.prov }/sites/${siteId}/smartpoints`);
   }
 
   public getAmoTokens(subdomain: string, amoRequest: AmoAuthByCodeRequest | AmoAuthByRefreshTokenRequest): Observable<AmoAuthResponse> {

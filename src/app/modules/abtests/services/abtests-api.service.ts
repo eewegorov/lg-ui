@@ -24,15 +24,15 @@ export class AbtestsApiService {
   constructor(private http: HttpClient) { }
 
   public getTests(): Observable<AbtestsResponse> {
-    return this.http.get<AbtestsResponse>(`${ environment.url }/abtests`);
+    return this.http.get<AbtestsResponse>(`${ environment.prov }/abtests`);
   }
 
   public createTest(test: AbtestCreateRequest): Observable<AbtestCreateResponse> {
-    return this.http.post<AbtestCreateResponse>(`${ environment.url }/abtests`, test);
+    return this.http.post<AbtestCreateResponse>(`${ environment.prov }/abtests`, test);
   }
 
   public getVariants(id: string): Observable<AbtestVariantsResponse> {
-    return this.http.get<AbtestVariantsResponse>(`${ environment.url }/abtests/${id}/variants`);
+    return this.http.get<AbtestVariantsResponse>(`${ environment.prov }/abtests/${id}/variants`);
   }
 
   public getStatistics(id: string): Observable<AbtestStatisticsResponse> {
@@ -40,46 +40,46 @@ export class AbtestsApiService {
   }
 
   public start(id: string): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${ environment.url }/abtests/${id}/activate`, null);
+    return this.http.post<ApiResponse>(`${ environment.prov }/abtests/${id}/activate`, null);
   }
 
   public pause(id: string): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${ environment.url }/abtests/${id}/pause`, null);
+    return this.http.post<ApiResponse>(`${ environment.prov }/abtests/${id}/pause`, null);
   }
 
   public deleteTest(id: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${ environment.url }/abtests/${id}`);
+    return this.http.delete<ApiResponse>(`${ environment.prov }/abtests/${id}`);
   }
 
   public update(id: string, test: UpdateAbtest): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${ environment.url }/abtests/${id}`, test);
+    return this.http.put<ApiResponse>(`${ environment.prov }/abtests/${id}`, test);
   }
 
   public createVariant(testId: string, test: AbtestVariantRequest): Observable<AbtestVariantResponse> {
-    return this.http.post<AbtestVariantResponse>(`${ environment.url }/abtests/${testId}/variants`, test);
+    return this.http.post<AbtestVariantResponse>(`${ environment.prov }/abtests/${testId}/variants`, test);
   }
 
   public cloneVariant(testId: string, variantId: string): Observable<CloneVariantResponse> {
-    return this.http.post<CloneVariantResponse>(`${ environment.url }/abtests/${testId}/variants/${variantId}/clone`, null);
+    return this.http.post<CloneVariantResponse>(`${ environment.prov }/abtests/${testId}/variants/${variantId}/clone`, null);
   }
 
   public deleteVariant(testId: string, variantId: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${ environment.url }/abtests/${testId}/variants/${variantId}`);
+    return this.http.delete<ApiResponse>(`${ environment.prov }/abtests/${testId}/variants/${variantId}`);
   }
 
   public chooseWinner(testId: string, variantId: string): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${ environment.url }/abtests/${testId}/variants/${variantId}/winner`, null);
+    return this.http.post<ApiResponse>(`${ environment.prov }/abtests/${testId}/variants/${variantId}/winner`, null);
   }
 
   public resetStats(id: string): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${ environment.url }/abtests/${id}/clear`, null);
+    return this.http.post<ApiResponse>(`${ environment.prov }/abtests/${id}/clear`, null);
   }
 
   public getArchTests(): Observable<AbtestsArchiveResponse> {
-    return this.http.get<AbtestsArchiveResponse>(`${ environment.url }/abtestsarchives`);
+    return this.http.get<AbtestsArchiveResponse>(`${ environment.prov }/abtestsarchives`);
   }
 
   public deleteArchTest(id: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${ environment.url }/abtestsarchives/${id}`);
+    return this.http.delete<ApiResponse>(`${ environment.prov }/abtestsarchives/${id}`);
   }
 }

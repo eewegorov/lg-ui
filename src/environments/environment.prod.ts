@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  url: '/api/rest/v1',
+  prov: '/api/rest/v1',
+  oauth: '/oauth',
   stat: 'http://stat-labs.leadgenic.ru/api/public',
-  oauthUrl: '/oauth',
 };
