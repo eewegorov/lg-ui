@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
 import { ApiResponse } from '../../../core/models/api';
 import { PasswordRequest, Phone, UserRequest, UserResponse, Wallet } from '../../../core/models/user';
+import { ConfigService } from '../../../core/services/config.service';
 
 
 @Injectable({
@@ -11,25 +11,28 @@ import { PasswordRequest, Phone, UserRequest, UserResponse, Wallet } from '../..
 })
 export class UserApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigService
+  ) { }
 
   public getMeInfo(): Observable<UserResponse> {
-    return this.http.get<UserResponse>(`${ environment.prov }/me`);
+    return this.http.get<UserResponse>(`${this.configService.config.prov}/me`);
   }
 
   public updateMeInfo(user: UserRequest): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${ environment.prov }/me`, user);
+    return this.http.put<ApiResponse>(`${this.configService.config.prov}/me`, user);
   }
 
   public updatePassword(password: PasswordRequest): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${ environment.prov }/me/changePassword`, password);
+    return this.http.put<ApiResponse>(`${this.configService.config.prov}/me/changePassword`, password);
   }
 
   public savePhone(data: Phone): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${ environment.prov }/me/phone`, data);
+    return this.http.post<ApiResponse>(`${this.configService.config.prov}/me/phone`, data);
   }
 
   public setWallet(wallet: Wallet): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${ environment.prov }/me/wallet`, wallet);
+    return this.http.put<ApiResponse>(`${this.configService.config.prov}/me/wallet`, wallet);
   }
 }

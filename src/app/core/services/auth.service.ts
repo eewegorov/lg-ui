@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
 import { Token } from '../models/token';
 import { ApiResponse } from '../models/api';
 import { AuthRequest } from '../models/account';
+import { ConfigService } from './config.service';
 
 
 @Injectable({
@@ -19,11 +19,12 @@ export class AuthService {
 
   constructor(
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private configService: ConfigService
   ) {}
 
   public login(data: AuthRequest): Observable<boolean> {
-    return this.http.post<Token>(`${ environment.oauth }/token`,
+    return this.http.post<Token>(`${this.configService.config.oauth}/token`,
       null, {
         headers: new HttpHeaders({
           Authorization: `Basic ${btoa('ui:ui')}`
@@ -45,10 +46,9 @@ export class AuthService {
   }
 
   public logout() {
-    this.doLogoutUser();
-
-    return this.http.post<ApiResponse>(`${environment.prov}/auth/logout`, null).pipe(
+    return this.http.post<ApiResponse>(`${this.configService.config.prov}/auth/logout`, null).pipe(
       mapTo(true),
+      tap(() => this.doLogoutUser()),
       catchError(error => {
         console.log(error);
         return of(false);
@@ -61,7 +61,7 @@ export class AuthService {
 
   public refreshToken() {
     localStorage.removeItem(this.ACCESS_TOKEN);
-    return this.http.post<any>(`${ environment.oauth }/token`, null, {
+    return this.http.post<any>(`${this.configService.config.oauth}/token`, null, {
       headers: new HttpHeaders({
         Authorization: `Basic ${btoa('ui:ui')}`
       }),
@@ -93,7 +93,7 @@ export class AuthService {
   private doLogoutUser() {
     this.loggedUser = null;
     this.removeTokens();
-    this.router.navigate(['/logout']);
+    this.router.navigate(['/']);
   }
 
   private getRefreshToken() {

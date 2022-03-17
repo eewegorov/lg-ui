@@ -46,7 +46,6 @@ export class UtilsService {
   }
 
   private getEmailHash(email) {
-    const md5 = new Md5();
     let emailHash;
     // check if md5 for passed email is already calculated
     if (this.md5Cache.hasOwnProperty(email)) {

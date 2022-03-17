@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { TariffPlansResponse } from '../models/tariffPlans';
 import { OrderRequest, OrderResponse } from '../models/payment';
+import { ConfigService } from './config.service';
 
 
 @Injectable({
@@ -11,14 +11,17 @@ import { OrderRequest, OrderResponse } from '../models/payment';
 })
 export class CoreApiService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigService
+  ) { }
 
   public getTariffPlans(): Observable<TariffPlansResponse> {
-    return this.http.get<TariffPlansResponse>(`${ environment.prov }/plans`);
+    return this.http.get<TariffPlansResponse>(`${this.configService.config.prov}/plans`);
   }
 
   public createOrder(data: OrderRequest): Observable<OrderResponse> {
-    return this.http.post<OrderResponse>(`${ environment.prov }/billing/orders`, data);
+    return this.http.post<OrderResponse>(`${this.configService.config.prov}/billing/orders`, data);
   }
 
 }

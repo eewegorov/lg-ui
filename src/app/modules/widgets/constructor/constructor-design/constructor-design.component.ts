@@ -18,7 +18,6 @@ import { Options } from '@angular-slider/ngx-slider';
 import { FlowDirective } from '@flowjs/ngx-flow';
 import { IMAGE_DEF } from '../../../../configs/urls';
 import { Coupon } from '../../../../core/models/coupons';
-import { environment } from '../../../../../environments/environment';
 import { FullWidget, Image, Images, WidgetType, WidgetTypeCode } from '../../../../core/models/widgets';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
@@ -56,9 +55,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   @Input() private isFormHasSpecElements: (item: any) => boolean;
   @Input() private isFormHasSendIfAction: (item: any) => boolean;
   @Input() private isFormHasButtonWithAction: (item: any) => boolean;
-
-
-  public environment = environment;
+  
   public isLoading = false;
   public extendedElement: Record<string, any> = null;
   public extendedIndex: number = null;
