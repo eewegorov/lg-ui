@@ -285,6 +285,12 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     };
   }
 
+  public checkKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      this.renameWidget();
+    }
+  }
+
   public renameWidget() {
     setTimeout(() => {
       ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });

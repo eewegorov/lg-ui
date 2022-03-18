@@ -19,6 +19,7 @@
           maxlength="50"
           [style.width.ch]="renamedWidget.name.length + 1.45"
           (blur)="renameWidget()"
+          (keydown)="checkKeyDown($event)"
         >
         <a
           class="widget-rename-button"

@@ -2,7 +2,7 @@
   font-family: 'Noto Sans Mono';
   src: url('~src/assets/fonts/noto-sans-mono/NotoSansMono.woff2') format('woff2'),
   url('~src/assets/fonts/noto-sans-mono/NotoSansMono.woff') format('woff');
-  font-weight: normal;
+  font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
@@ -122,8 +122,8 @@ h3.widget-title-main {
   font-size: 25px !important;
   font-weight: 300;
   line-height: 25px;
-  margin-bottom: 0px !important;
-  margin-top: 0px !important;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
 }
 
 .title-widget-name-editable {
