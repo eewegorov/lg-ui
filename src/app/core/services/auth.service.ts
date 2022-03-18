@@ -51,6 +51,7 @@ export class AuthService {
       tap(() => this.doLogoutUser()),
       catchError(error => {
         console.log(error);
+        this.doLogoutUser();
         return of(false);
       }));
   }
