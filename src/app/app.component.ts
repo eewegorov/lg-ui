@@ -21,12 +21,10 @@ export class AppComponent implements AfterViewInit {
 
   constructor(
     private cd: ChangeDetectorRef,
-    private translateService: TranslateService,
-    private configService: ConfigService
+    private translateService: TranslateService
   ) {
     this.translateService.use(defaultLocale);
     this.setBodySmall();
-    console.log('config', configService.config);
   }
 
   ngAfterViewInit(): void {

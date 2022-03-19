@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { cloneDeep, isEqual, isEmpty, isObject, transform } from 'lodash-es';
 import * as moment from 'moment';
 import { SiteShort } from '../../../../core/models/sites';
 import { Coupon } from '../../../../core/models/coupons';
@@ -25,7 +26,6 @@ import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
 import { ConstructorDesignComponent } from '../constructor-design/constructor-design.component';
 import { ConstructorRulesComponent } from '../constructor-rules/constructor-rules.component';
-import { cloneDeep, isEqual, isEmpty, isObject, transform } from 'lodash-es';
 
 @Component({
   selector: 'app-widget-edit',
@@ -34,7 +34,7 @@ import { cloneDeep, isEqual, isEmpty, isObject, transform } from 'lodash-es';
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [   // :enter is alias to 'void => *'
-        style({opacity: 0}),
+        style({ opacity: 0 }),
         animate(1000, style({ opacity: 1 }))
       ]),
       transition(':leave', [   // :leave is alias to '* => void'
@@ -43,7 +43,7 @@ import { cloneDeep, isEqual, isEmpty, isObject, transform } from 'lodash-es';
     ])
   ]
 })
-export class WidgetEditComponent implements OnInit, OnDestroy {
+export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy {
   public renamedWidget = { id: '', name: '' };
   public widget = {} as FullWidget;
   public oldWidget = {} as FullWidget;
@@ -88,6 +88,16 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
   ) {
+  }
+
+  ngAfterViewChecked(): void {
+    if ($('#renameWidgetBtn span') && $('#renameWidgetBtn span')[0]) {
+      if ($('#renameWidgetBtn span')[0].scrollWidth > $('#renameWidgetBtn span').innerWidth() + 0.4) {
+        ($('#renameWidgetBtn span') as any).tooltip({ trigger: 'hover' });
+      } else {
+        ($('#renameWidgetBtn span') as any).tooltip('hide');
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -209,6 +219,7 @@ export class WidgetEditComponent implements OnInit, OnDestroy {
   }
 
   public startRenameWidget(widget) {
+    ($('#renameWidgetBtn span') as any).tooltip('hide');
     ($('[data-toggle="tooltip"]') as any).tooltip('hide');
 
     this.renamedWidget = {

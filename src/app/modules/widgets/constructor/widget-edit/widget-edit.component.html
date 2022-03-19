@@ -8,7 +8,7 @@
         href="javascript:void(0);"
         class="title-widget-name-editable"
       >
-        <span data-toggle="tooltip" [title]="widget.name">{{ widget.name }}</span><i class="fa fa-pencil ml-1"></i>
+        <span [title]="widget.name">{{ widget.name }}</span><i class="fa fa-pencil ml-1"></i>
       </a>
 
       <div *ngIf="renamedWidget.id === widget.id" class="widget-rename-edited">
