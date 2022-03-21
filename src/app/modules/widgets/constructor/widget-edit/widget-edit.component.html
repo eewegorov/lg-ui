@@ -128,12 +128,16 @@
         (click)="saveWidget()"
       >
         <span class="ladda-label">
-          <i><img src="/assets/images/widgets/save.svg" alt="save"></i> <span>Сохранить</span>
+          <i><img src="/assets/images/widgets/save.svg" alt="save"></i> <span>{{ 'global.save' | translate }}</span>
         </span>
       </button>
     </div>
 
-    <button class="close-widget-button" (click)="closeWidget()">
+    <button
+      class="close-widget-button"
+      (click)="closeWidget()"
+      data-toggle="tooltip" data-placement="bottom" title="{{ 'widgetsList.editor.close' | translate }}"
+    >
       &times;
     </button>
   </div>
