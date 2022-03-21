@@ -95,7 +95,8 @@
       <i class="pe-7s-tools mr-2"></i> {{ 'widgetsList.add.alt2' | translate }}
     </a>-->
 
-    <div class="btn-group play-btns" *ngIf="!isMockup">
+    <!--<div class="btn-group play-btns" *ngIf="!isMockup">-->
+    <div class="btn-group play-btns">
       <p>Статус</p>
       <ui-switch
         [(ngModel)]="widget.active"
@@ -104,7 +105,7 @@
       ></ui-switch>
     </div>
 
-    <div *ngIf="isDesigner">
+    <!--<div *ngIf="isDesigner">
       <button
         type="button"
         *ngIf="!isMockup"
@@ -115,7 +116,7 @@
       >
         <span class="ladda-label"><i class="fa fa-save"></i>Сохранить</span>
       </button>
-    </div>
+    </div>-->
 
     <div>
       <button
@@ -152,7 +153,6 @@
       [isPayment]="isPayment"
       [widget]="widget"
       [coupons]="coupons"
-      [isMockup]="isMockup"
       [isContainerized]="isContainerized"
       [showErrors]="showErrors"
       [currentActiveTab]="currentActiveTab"
@@ -175,7 +175,6 @@
     <app-constructor-rules
       [widget]="widget"
       [isContainerized]="isContainerized"
-      [isMockup]="isMockup"
       [sid]="sid"
       [showErrors]="showErrors"
     ></app-constructor-rules>

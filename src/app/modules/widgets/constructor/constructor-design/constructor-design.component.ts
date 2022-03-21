@@ -43,7 +43,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   @Input() public isPayment: boolean;
   @Input() public widget: FullWidget;
   @Input() public coupons: Coupon[];
-  @Input() public isMockup: boolean;
   @Input() public isContainerized: boolean;
   @Input() public showErrors: boolean;
   @Input() private currentActiveTab: string;

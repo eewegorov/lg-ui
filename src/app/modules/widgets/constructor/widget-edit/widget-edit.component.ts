@@ -47,8 +47,8 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   public renamedWidget = { id: '', name: '' };
   public widget = {} as FullWidget;
   public oldWidget = {} as FullWidget;
-  public isDesigner = false;
-  public isMockup = false;
+  /*public isDesigner = false;*/
+  /*public isMockup = false;*/
   public sid: string;
   public wid: string;
   public isPayment = false;
@@ -107,13 +107,13 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     this.initTypes();
 
     this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
-      if (response.roles.includes(UserRole.ROLE_DESIGNER)) {
+      /*if (response.roles.includes(UserRole.ROLE_DESIGNER)) {
         this.isDesigner = true;
       }
 
       if (response.roles.includes(UserRole.ROLE_ADMIN)) {
         this.isMockup = true;
-      }
+      }*/
 
       this.loadWidget();
     });
@@ -276,7 +276,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     this.router.navigate([`/abtests/active`], { queryParams: { testIdNum: widget.abtestInfo.id } }).then();
   }
 
-  public saveAsMockup() {
+  /*public saveAsMockup() {
     let errorsList = this.runValidators();
     this.widgetService.validators.forEach(validator => {
       errorsList = errorsList.concat(validator.call(this));
@@ -287,7 +287,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     } else {
       ($('#saveAsMockupModal') as any).modal('show');
     }
-  }
+  }*/
 
   public resetRenaming() {
     this.renamedWidget = {
@@ -320,11 +320,13 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   public saveWidget() {
     this.showErrors = true;
 
-    if (this.isMockup) {
+    /*if (this.isMockup) {
       this.saveMockupItem();
     } else {
       this.saveWidgetItem();
-    }
+    }*/
+
+    this.saveWidgetItem();
   }
 
   public switchWidget(widget, newValue) {
@@ -378,7 +380,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     }
   }
 
-  private saveMockupItem() {
+  /*private saveMockupItem() {
     const errorsList = this.runValidators();
     this.isLoading = true;
 
@@ -418,7 +420,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
         }
       );
     }
-  }
+  }*/
 
   private saveWidgetItem() {
     this.widget.guiprops.dhVisual.lastModifiedDate = new Date().toString();
@@ -692,7 +694,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     }
   }
 
-  private loadMockup() {
+  /*private loadMockup() {
     this.widgetService.getMockup(this.wid).subscribe((data: MockupShort) => {
       this.widget = data as unknown as FullWidget;
       this.checkWidgetRenameTitle();
@@ -700,7 +702,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     },
       () => this.router.navigate(['/widgets/'])
     );
-  }
+  }*/
 
   private loadWidget() {
     this.widgetService.getWidgetById(this.sid, this.wid).subscribe((response: FullWidget) => {

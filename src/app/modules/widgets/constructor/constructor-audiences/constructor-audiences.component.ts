@@ -5,7 +5,7 @@ import { AUDIENCES_VALS } from '../../../../configs/audiences';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
 
-declare var require: any;
+declare let require: any;
 const $ = require('jquery');
 import 'jquery-ui/ui/widgets/draggable.js';
 
@@ -17,7 +17,6 @@ import 'jquery-ui/ui/widgets/draggable.js';
 })
 export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
   @Input() public widget: FullWidget;
-  @Input() public isMockup: boolean;
 
   constructor(
     private router: Router,
