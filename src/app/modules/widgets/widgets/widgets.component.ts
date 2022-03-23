@@ -62,6 +62,11 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit(): void {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+    setTimeout(() => {
+      ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
+    }, 1000);
+    
     const selectedSite = localStorage.getItem('currentSite');
 
     this.translate.get('widgetsList.defCompany').subscribe((translatedValue: string) => {
