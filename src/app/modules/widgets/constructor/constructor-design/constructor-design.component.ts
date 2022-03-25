@@ -181,7 +181,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
     setInterval(() => {
       this.widgetConstructorService.updateWidget.next();
-    }, 400);
+    }, 300);
 
     this.widgetService.addValidator(this.validator);
 
