@@ -876,6 +876,9 @@ input.icp {
 }
 
 .content-type-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 31px;
   height: 22px;
   font-size: 7px;
@@ -1020,7 +1023,7 @@ input.icp {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?68335443#fontello') format('svg');
+    src: url('../font/fontello-demo1.svg?68335443#fontello') format('svg');
   }
 }
 */
