@@ -24,7 +24,8 @@
               <div class="square"></div>
             </div>
             <div [class]="element.name + '-icon-small icon'"></div>
-            <span>{{ getElementByName(element.name) }}</span> <span *ngIf="element.counter"> #{{ element.counter }}</span>
+            <span>{{ getElementByName(element.name) }}</span> <span
+            *ngIf="element.counter"> #{{ element.counter }}</span>
             <div class="after fade-in">
               <div class="square"></div>
             </div>
@@ -90,7 +91,8 @@
             <div id="disabledFuncAct" class="hide"></div>
             <div id="accordionIn">
               <div [hidden]="currentElement !== 'settings'" class="panel panel-default" id="0">
-                <div id="collapseFour" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingFour">
+                <div id="collapseFour" class="panel-collapse collapse show" role="tabpanel"
+                     aria-labelledby="headingFour">
                   <div class="panel-body">
                     <div class="border-item mb-3">
                       <div class="d-flex row-subitem row-subitem-padding mb-3">
@@ -151,6 +153,7 @@
                                 [cpOutputFormat]="'hex'"
                                 cpPosition="left"
                                 class="color-picker-control"
+                                readonly
                               />
                               <input
                                 [(ngModel)]="widget.guiprops['popupMain'].shadow.color"
@@ -192,6 +195,7 @@
                                 [cpOutputFormat]="'hex'"
                                 cpPosition="left"
                                 class="color-picker-control"
+                                readonly
                               />
                               <input
                                 [(ngModel)]="widget.guiprops['dhVisual'].colorMain"
@@ -209,6 +213,7 @@
                                 [cpOutputFormat]="'hex'"
                                 cpPosition="left"
                                 class="color-picker-control"
+                                readonly
                               />
                               <input
                                 [(ngModel)]="widget.guiprops['dhVisual'].colorBg"
@@ -251,9 +256,12 @@
                             </div>
                           </div>
                         </div>
-                        <div [hidden]="widget.guiprops.dhVisual?.iconOrImage !== 'useIcon'" class="row row-subitem align-items-center">
+                        <div [hidden]="widget.guiprops.dhVisual?.iconOrImage !== 'useIcon'"
+                             class="row row-subitem align-items-center">
                           <div class="row-subitem-padding mr-2 mt-1">
-                            <h5 class="label-style-ic control-label-des">{{ 'widgets.formExt.button.icon.label' | translate }}:</h5>
+                            <h5
+                              class="label-style-ic control-label-des">{{ 'widgets.formExt.button.icon.label' | translate }}
+                              :</h5>
                           </div>
                           <div class="icp-icon row-subitem-padding">
                             <div class="btn-group">
@@ -291,11 +299,12 @@
                             (click)="listFile('dotIcon')"
                             class="widget-download-img"
                           >
-                            <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение" /> Загрузить изображение
+                            <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение"/> Загрузить
+                            изображение
                           </button>
 
                           <div *ngIf="!isDefault(widget.guiprops.dhVisual.url)" class="image-container">
-                            <img [src]="widget.guiprops.dhVisual.url" alt="image" />
+                            <img [src]="widget.guiprops.dhVisual.url" alt="image"/>
                             <div class="d-flex justify-content-between align-items-center">
                               <p>{{ widget.guiprops.dhVisual.url.split('/').pop() }}</p>
                               <div class="remove-sub-item">
@@ -381,6 +390,7 @@
                               [cpOutputFormat]="'hex'"
                               cpPosition="left"
                               class="color-picker-control"
+                              readonly
                             />
                             <input
                               [(ngModel)]="widget.guiprops['labelMain'].colorLabel"
@@ -399,6 +409,7 @@
                               [cpOutputFormat]="'hex'"
                               cpPosition="left"
                               class="color-picker-control"
+                              readonly
                             />
                             <input
                               [(ngModel)]="widget.guiprops['labelMain'].colorText"
@@ -410,7 +421,8 @@
                         <div class="d-flex justify-content-between mt-3">
                           <h5 class="label-style-ic control-label-des">Прозрачность</h5>
                           <div class="d-flex text-right side-ui-sm">
-                            <ngx-slider [(value)]="widget.guiprops['labelMain'].opacityBgLabel" [options]="optionsOpacity"></ngx-slider>
+                            <ngx-slider [(value)]="widget.guiprops['labelMain'].opacityBgLabel"
+                                        [options]="optionsOpacity"></ngx-slider>
                             <input
                               [(ngModel)]="widget.guiprops['labelMain'].opacityBgLabel"
                               class="picker-input slider"
@@ -421,7 +433,8 @@
                         <div class="d-flex justify-content-between mt-3">
                           <h5 class="label-style-ic control-label-des">Скругление углов</h5>
                           <div class="d-flex text-right side-ui-sm">
-                            <ngx-slider [(value)]="widget.guiprops['labelMain'].borderRadiusLabel" [options]="optionsRound"></ngx-slider>
+                            <ngx-slider [(value)]="widget.guiprops['labelMain'].borderRadiusLabel"
+                                        [options]="optionsRound"></ngx-slider>
                             <input
                               [(ngModel)]="widget.guiprops['labelMain'].borderRadiusLabel"
                               class="picker-input slider"
@@ -489,6 +502,7 @@
                                 [cpOutputFormat]="'hex'"
                                 cpPosition="left"
                                 class="color-picker-control"
+                                readonly
                               />
                               <input
                                 [(ngModel)]="widget.guiprops['labelMain'].icon.color"
@@ -498,7 +512,9 @@
                           </div>
 
                           <div class="d-flex row-subitem align-items-center mt-2">
-                            <h5 class="label-style-ic control-label-des mr-2">{{ 'widgets.formExt.button.icon.label' | translate }}:</h5>
+                            <h5
+                              class="label-style-ic control-label-des mr-2">{{ 'widgets.formExt.button.icon.label' | translate }}
+                              :</h5>
 
                             <div class="icp-icon row-subitem-padding">
                               <div class="btn-group">
@@ -538,11 +554,12 @@
                             (click)="listFile('labelIcon')"
                             class="widget-download-img"
                           >
-                            <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение" /> Загрузить изображение
+                            <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение"/> Загрузить
+                            изображение
                           </button>
 
                           <div *ngIf="!isDefault(widget.guiprops.labelMain.url)" class="image-container">
-                            <img [src]="widget.guiprops.labelMain.url" alt="image" />
+                            <img [src]="widget.guiprops.labelMain.url" alt="image"/>
                             <div class="d-flex justify-content-between align-items-center">
                               <p>{{ widget.guiprops.labelMain.url.split('/').pop() }}</p>
                               <div class="remove-sub-item">
@@ -770,22 +787,28 @@
             <div class="extended-container pt-3">
               <div class="border-item">
                 <ng-container *ngIf="extendedElement.type === 'email'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [hasPlaceholder]="true"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"
+                                     [hasPlaceholder]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'name'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [hasPlaceholder]="true"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"
+                                     [hasPlaceholder]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'message'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [hasPlaceholder]="true"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"
+                                     [hasPlaceholder]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'phone'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [hasPhoneBlock]="true" [hasPlaceholder]="true"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [hasPhoneBlock]="true"
+                                     [hasPlaceholder]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'text'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true" [hasPlaceholder]="true" [hasMultiline]="true"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true"
+                                     [hasPlaceholder]="true" [hasMultiline]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'rating'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true" [hasSendForm]="true" [hasRating]="true"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true"
+                                     [hasSendForm]="true" [hasRating]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'variants'">
                   <app-extended-variants [item]="extendedElement" [index]="extendedIndex"></app-extended-variants>
@@ -794,16 +817,19 @@
                   <app-extended-dd [item]="extendedElement" [index]="extendedIndex"></app-extended-dd>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'date'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true" [hasPlaceholder]="true" [hasDateBlock]="true"></app-extended-text>
+                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true"
+                                     [hasPlaceholder]="true" [hasDateBlock]="true"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'title'">
                   <app-extended-title [item]="extendedElement" [index]="extendedIndex"></app-extended-title>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'term'">
-                  <app-extended-title [item]="extendedElement" [index]="extendedIndex" [isTerm]="true"></app-extended-title>
+                  <app-extended-title [item]="extendedElement" [index]="extendedIndex"
+                                      [isTerm]="true"></app-extended-title>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'button'">
-                  <app-extended-button [item]="extendedElement" [containerId]="widget.containerId" [index]="extendedIndex"></app-extended-button>
+                  <app-extended-button [item]="extendedElement" [containerId]="widget.containerId"
+                                       [index]="extendedIndex"></app-extended-button>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'hidden'">
                   <app-extended-hidden [item]="extendedElement" [index]="extendedIndex"></app-extended-hidden>
@@ -921,7 +947,8 @@
 
                 <div *ngIf="widgetType === 'optindot'" class="widget-visual-block-dot" [ngClass]="wvBdLeft()">
                   <div class="widget2-main-bl">
-                    <div class="widget2-plashka" *ngIf="widget.guiprops['dhVisual'].enable && currentDevice !== 'mobile'">
+                    <div class="widget2-plashka"
+                         *ngIf="widget.guiprops['dhVisual'].enable && currentDevice !== 'mobile'">
                       <span>{{ widget.guiprops.dhVisual.title }}</span>
                     </div>
                     <div
