@@ -9,14 +9,16 @@
       {{ 'widgets.types.static.step1.desc' | translate }}
     </p>
     <div class="form-group col-lg-12">
-      <textarea appSelectOnClick [(ngModel)]="codeSiteId" class="form-control not-readonly-hand" width="80%" rows="5" readonly></textarea>
+      <textarea [(ngModel)]="codeSiteId" appSelectOnClick class="form-control not-readonly-hand" readonly rows="5"
+                width="80%"></textarea>
     </div>
     <p class="ml-3 small mt-3">
       <b>{{ 'widgets.types.static.step2.title' | translate }}: </b>
       {{ 'widgets.types.static.step2.desc' | translate }}
     </p>
     <div class="col-lg-12" data-context="url">
-      <input appSelectOnClick [(ngModel)]="codeContainerId" type="text" readonly name="name" class="form-control not-readonly-hand">
+      <input [(ngModel)]="codeContainerId" appSelectOnClick class="form-control not-readonly-hand" name="name" readonly
+             type="text">
     </div>
     <div class="clearfix"></div>
   </div>
@@ -25,7 +27,7 @@
 
 <div class="modal-footer">
   <div class="text-right">
-    <a class="btn btn-default float-right" (click)="closeModal(false)">
+    <a (click)="closeModal(false)" class="btn btn-default float-right">
       {{ 'global.close' | translate }}
     </a>
   </div>

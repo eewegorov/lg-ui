@@ -14,7 +14,6 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -62,7 +61,8 @@ import { AppComponent } from './app.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');

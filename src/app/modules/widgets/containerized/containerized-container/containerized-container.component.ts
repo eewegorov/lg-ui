@@ -85,7 +85,9 @@ export class ContainerizedContainerComponent implements OnInit {
   public getAllCount(type) {
     let allValue = 0;
     this.container.widgets.forEach((item: WidgetInfo) => {
-      if (!item.widgetConversion) { return; }
+      if (!item.widgetConversion) {
+        return;
+      }
       allValue = allValue + item.widgetConversion[type];
     });
     return allValue;

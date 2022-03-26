@@ -11,12 +11,12 @@ export class SmartpointsControlComponent implements OnInit {
   @Input() public siteId: string;
 
   public smWidgets = {
-    CALLBACK: {enabled: true, autoinvite: true, pos: 'RIGHT_DOWN', type: 'CALLBACK'},
-    INVITE: {enabled: true, autoinvite: true, pos: 'RIGHT_DOWN', type: 'INVITE'},
-    INSTANT_POPUP: {enabled: false, autoinvite: true, pos: 'RIGHT_DOWN', type: 'INSTANT_POPUP'},
-    POPUP: {enabled: false, autoinvite: true, pos: 'RIGHT_DOWN', type: 'POPUP'},
-    EXIT_INTENT: {enabled: false, autoinvite: true, pos: 'RIGHT_DOWN', type: 'EXIT_INTENT'},
-    MOBILE: {enabled: true, autoinvite: true, pos: 'RIGHT_DOWN', type: 'MOBILE'}
+    CALLBACK: { enabled: true, autoinvite: true, pos: 'RIGHT_DOWN', type: 'CALLBACK' },
+    INVITE: { enabled: true, autoinvite: true, pos: 'RIGHT_DOWN', type: 'INVITE' },
+    INSTANT_POPUP: { enabled: false, autoinvite: true, pos: 'RIGHT_DOWN', type: 'INSTANT_POPUP' },
+    POPUP: { enabled: false, autoinvite: true, pos: 'RIGHT_DOWN', type: 'POPUP' },
+    EXIT_INTENT: { enabled: false, autoinvite: true, pos: 'RIGHT_DOWN', type: 'EXIT_INTENT' },
+    MOBILE: { enabled: true, autoinvite: true, pos: 'RIGHT_DOWN', type: 'MOBILE' }
   };
 
   public positions = [
@@ -38,7 +38,16 @@ export class SmartpointsControlComponent implements OnInit {
     }
   ];
 
-  constructor(private widgetService: WidgetService) { }
+  constructor(private widgetService: WidgetService) {
+  }
+
+  @Input() set smartPoints(smartPoints: Smartpoints) {
+    if (smartPoints && smartPoints.list.length) {
+      smartPoints.list.forEach((item: Smartpoint) => {
+        this.smWidgets[item.type] = item;
+      });
+    }
+  }
 
   ngOnInit(): void {
   }
@@ -64,14 +73,6 @@ export class SmartpointsControlComponent implements OnInit {
   public setPosition(smartpoint, position) {
     smartpoint.pos = position;
     this.prepareSmartpointForSave(smartpoint);
-  }
-
-  @Input() set smartPoints(smartPoints: Smartpoints) {
-    if (smartPoints && smartPoints.list.length) {
-      smartPoints.list.forEach((item: Smartpoint) => {
-        this.smWidgets[item.type] = item;
-      });
-    }
   }
 
 

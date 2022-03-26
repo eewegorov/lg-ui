@@ -532,6 +532,10 @@ h6.title-h6-widget a:hover {
 
 .elements-selector-top {
   width: 60px;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 25px;
 }
 
 .device-selector {

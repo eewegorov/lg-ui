@@ -2,13 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {
-  Company,
-  CompanyShort,
-  NewContainerizedWidgetInfo,
-  WidgetCreated,
-  WidgetCreateRequest
-} from '../../../../core/models/widgets';
+import { Company, CompanyShort, NewContainerizedWidgetInfo, WidgetCreated, WidgetCreateRequest } from '../../../../core/models/widgets';
 import { WidgetService } from '../../services/widget.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 
@@ -34,7 +28,8 @@ export class ContainerizedAddComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.companies = this.widgetService.getCurrentCompanies();
@@ -110,7 +105,9 @@ export class ContainerizedAddComponent implements OnInit {
   }
 
   public addWidget() {
-    if (!this.editableCW.templateId && !this.editableCW.mockupId) { return false; }
+    if (!this.editableCW.templateId && !this.editableCW.mockupId) {
+      return false;
+    }
 
     if (this.newCWidgetInfo.companyMode === 0) {
       this.editableCW.companyId = this.newCWidgetInfo.companyId;

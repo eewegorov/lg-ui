@@ -5,45 +5,47 @@
         <div class="form-check">
           <label class="form-check-label">
             <input
-              type="checkbox"
-              [(ngModel)]="smWidgets.CALLBACK.enabled"
               (ngModelChange)="prepareSmartpointForSave(smWidgets.CALLBACK)"
+              [(ngModel)]="smWidgets.CALLBACK.enabled"
               class="form-check-input"
+              type="checkbox"
             />
             <span class="checkmark"></span>
           </label>
         </div>
         {{ 'settings.widgets.callback.title' | translate }} <span
-        data-toggle="tooltip" data-placement="top"
+        class="pl-1 info-link" data-placement="top"
         data-title="{{ 'settings.widgets.callback.tooltip' | translate }}"
-        class="pl-1 info-link"><i class="fa fa-info-circle"></i></span>
+        data-toggle="tooltip"><i class="fa fa-info-circle"></i></span>
       </div>
     </div>
     <div *ngIf="smWidgets.CALLBACK.enabled">
       <div class="form-group">
         <label class="font-weight-bold mb-1">{{ 'settings.widgets.invite.positions' | translate }}:</label>
         <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+          <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
             {{ getPositionText(smWidgets.CALLBACK.pos) | translate }}
           </button>
           <ul class="dropdown-menu" role="menu">
             <ng-container *ngFor="let item of positions; let isEven = even">
-              <li *ngIf="isEven" (click)="setPosition(smWidgets.CALLBACK, item.pos)">
-                <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item.text | translate }}</a>
+              <li (click)="setPosition(smWidgets.CALLBACK, item.pos)" *ngIf="isEven">
+                <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
+                   tabindex="-1">{{ item.text | translate }}</a>
               </li>
             </ng-container>
           </ul>
         </div>
       </div>
       <div class="form-group d-flex align-items-center">
-        <ui-switch size="small" [checked]="smWidgets.CALLBACK.autoinvite" (change)="prepareSmartpointForSave(smWidgets.CALLBACK)"></ui-switch>
+        <ui-switch (change)="prepareSmartpointForSave(smWidgets.CALLBACK)" [checked]="smWidgets.CALLBACK.autoinvite"
+                   size="small"></ui-switch>
         <label class="control-label mt-2 ml-2">
           {{ 'settings.widgets.autoinvite.title' | translate }}
-          <span data-toggle="tooltip"
+          <span class="pl-1 info-link"
                 data-container="body"
                 data-placement="top"
                 data-title="{{ 'settings.widgets.autoinvite.tooltip' | translate }}"
-                class="pl-1 info-link"><i class="fa fa-info-circle"></i></span>
+                data-toggle="tooltip"><i class="fa fa-info-circle"></i></span>
         </label>
       </div>
     </div>
@@ -54,43 +56,45 @@
         <div class="form-check">
           <label class="form-check-label">
             <input
-              type="checkbox"
-              [(ngModel)]="smWidgets.INVITE.enabled"
               (ngModelChange)="prepareSmartpointForSave(smWidgets.INVITE)"
+              [(ngModel)]="smWidgets.INVITE.enabled"
               class="form-check-input"
+              type="checkbox"
             />
             <span class="checkmark"></span>
           </label>
         </div>
         {{ 'settings.widgets.invite.title' | translate }} <span
-        data-toggle="tooltip" data-placement="top"
+        class="pl-1 info-link" data-placement="top"
         data-title="{{ 'settings.widgets.invite.tooltip' | translate }}"
-        class="pl-1 info-link"><i class="fa fa-info-circle"></i></span>
+        data-toggle="tooltip"><i class="fa fa-info-circle"></i></span>
       </div>
     </div>
     <div *ngIf="smWidgets.INVITE.enabled">
       <div class="form-group" data-position-for="wdgInvite" data-sm-type="1">
         <label class="font-weight-bold mb-1">{{ 'settings.widgets.invite.positions' | translate }}:</label>
         <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+          <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
             {{ getPositionText(smWidgets.INVITE.pos) | translate }}
           </button>
           <ul class="dropdown-menu" role="menu">
-            <li *ngFor="let item of positions" (click)="setPosition(smWidgets.INVITE, item.pos)">
-              <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ item.text | translate }}</a>
+            <li (click)="setPosition(smWidgets.INVITE, item.pos)" *ngFor="let item of positions">
+              <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
+                 tabindex="-1">{{ item.text | translate }}</a>
             </li>
           </ul>
         </div>
       </div>
       <div class="form-group d-flex align-items-center">
-        <ui-switch size="small" [checked]="smWidgets.INVITE.autoinvite" (change)="prepareSmartpointForSave(smWidgets.INVITE)"></ui-switch>
+        <ui-switch (change)="prepareSmartpointForSave(smWidgets.INVITE)" [checked]="smWidgets.INVITE.autoinvite"
+                   size="small"></ui-switch>
         <label class="control-label mt-2 ml-2">
           {{ 'settings.widgets.autoinvite.title' | translate }}
-          <span data-toggle="tooltip"
+          <span class="pl-1 info-link"
                 data-container="body"
                 data-placement="top"
                 data-title="{{ 'settings.widgets.autoinvite.tooltip' | translate }}"
-                class="pl-1 info-link"><i class="fa fa-info-circle"></i></span>
+                data-toggle="tooltip"><i class="fa fa-info-circle"></i></span>
         </label>
       </div>
     </div>
@@ -100,17 +104,17 @@
       <div class="d-flex">
         <label class="form-check">
           <input
-            type="checkbox"
-            [(ngModel)]="smWidgets.INSTANT_POPUP.enabled"
             (ngModelChange)="prepareSmartpointForSave(smWidgets.INSTANT_POPUP)"
+            [(ngModel)]="smWidgets.INSTANT_POPUP.enabled"
             class="form-check-input"
+            type="checkbox"
           />
           <span class="checkmark"></span>
         </label>
         {{ 'settings.widgets.instant.title' | translate }} <span
-        data-toggle="tooltip" data-placement="top"
+        class="pl-1 info-link" data-placement="top"
         data-title="{{ 'settings.widgets.instant.tooltip' | translate }}"
-        class="pl-1 info-link"><i class="fa fa-info-circle"></i></span>
+        data-toggle="tooltip"><i class="fa fa-info-circle"></i></span>
       </div>
     </div>
     <div class="form-group widget-selector">
@@ -118,18 +122,18 @@
         <div class="form-check">
           <label class="form-check-label">
             <input
-              type="checkbox"
-              [(ngModel)]="smWidgets.POPUP.enabled"
               (ngModelChange)="prepareSmartpointForSave(smWidgets.POPUP)"
+              [(ngModel)]="smWidgets.POPUP.enabled"
               class="form-check-input"
+              type="checkbox"
             />
             <span class="checkmark"></span>
           </label>
         </div>
         {{ 'settings.widgets.smart.title' | translate }} <span
-        data-toggle="tooltip" data-placement="top"
+        class="pl-1 info-link" data-placement="top"
         data-title="{{ 'settings.widgets.smart.tooltip' | translate }}"
-        class="pl-1 info-link"><i class="fa fa-info-circle"></i></span>
+        data-toggle="tooltip"><i class="fa fa-info-circle"></i></span>
       </div>
     </div>
     <div class="form-group widget-selector">
@@ -137,18 +141,18 @@
         <div class="form-check">
           <label class="form-check-label">
             <input
-              type="checkbox"
-              [(ngModel)]="smWidgets.MOBILE.enabled"
               (ngModelChange)="prepareSmartpointForSave(smWidgets.MOBILE)"
+              [(ngModel)]="smWidgets.MOBILE.enabled"
               class="form-check-input"
+              type="checkbox"
             />
             <span class="checkmark"></span>
           </label>
         </div>
         {{ 'settings.widgets.mobile.title' | translate }} <span
-        data-toggle="tooltip" data-placement="top"
+        class="pl-1 info-link" data-placement="top"
         data-title="{{ 'settings.widgets.mobile.tooltip' | translate }}"
-        class="pl-1 info-link"><i class="fa fa-info-circle"></i></span>
+        data-toggle="tooltip"><i class="fa fa-info-circle"></i></span>
       </div>
     </div>
     <div class="form-group widget-selector">
@@ -156,18 +160,18 @@
         <div class="form-check">
           <label class="form-check-label">
             <input
-              type="checkbox"
-              [(ngModel)]="smWidgets.EXIT_INTENT.enabled"
               (ngModelChange)="prepareSmartpointForSave(smWidgets.EXIT_INTENT)"
+              [(ngModel)]="smWidgets.EXIT_INTENT.enabled"
               class="form-check-input"
+              type="checkbox"
             />
             <span class="checkmark"></span>
           </label>
         </div>
         {{ 'settings.widgets.exitintent.title' | translate }} <span
-        data-toggle="tooltip" data-placement="top"
+        class="pl-1 info-link" data-placement="top"
         data-title="{{ 'settings.widgets.exitintent.tooltip' | translate }}"
-        class="pl-1 info-link"><i class="fa fa-info-circle"></i></span>
+        data-toggle="tooltip"><i class="fa fa-info-circle"></i></span>
       </div>
     </div>
   </div>

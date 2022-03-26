@@ -8,9 +8,9 @@ describe('SmartpointsControlComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SmartpointsControlComponent ]
+      declarations: [SmartpointsControlComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

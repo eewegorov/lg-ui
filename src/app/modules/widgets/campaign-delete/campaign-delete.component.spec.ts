@@ -8,9 +8,9 @@ describe('CompanyDeleteComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CampaignDeleteComponent ]
+      declarations: [CampaignDeleteComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

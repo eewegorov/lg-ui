@@ -8,9 +8,9 @@ describe('ContainerizedAddComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContainerizedAddComponent ]
+      declarations: [ContainerizedAddComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

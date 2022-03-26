@@ -9,17 +9,17 @@ import { ContainerizedWidgetService } from '../../services/containerized-widget.
   styleUrls: ['./container-code.component.scss']
 })
 export class ContainerCodeComponent implements OnInit {
-  @Input() private currentSiteId: string;
-  @Input() private containerId: string;
-
   public codeSiteId: string;
   public codeContainerId: string;
+  @Input() private currentSiteId: string;
+  @Input() private containerId: string;
 
   constructor(
     private activeModal: NgbActiveModal,
     private sitesService: SitesService,
     private containerizedWidgetService: ContainerizedWidgetService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.codeSiteId = this.sitesService.generatePath(this.currentSiteId, true);

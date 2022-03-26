@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Abtest } from '../../../../core/models/abtests';
-import { Company, Container, WidgetStatistics, WidgetInfo } from '../../../../core/models/widgets';
+import { Company, Container, WidgetInfo, WidgetStatistics } from '../../../../core/models/widgets';
 import { TariffsService } from '../../../../core/services/tariffs.service';
 import { AbtestsService } from '../../../abtests/services/abtests.service';
 import { CoreSitesService } from '../../../../core/services/core-sites.service';
@@ -25,18 +25,16 @@ export class ContainerizedItemComponent implements OnInit {
   @Input() public item: WidgetInfo;
   @Input() public first: boolean;
   @Input() public last: boolean;
-  @Input() private containerId = '';
-  @Input() private siteId = '';
-  @Input() private prev: WidgetInfo;
-  @Input() private next: WidgetInfo;
-
   public widgetCurrentCompany = {} as Company;
-
   public changeCompanyWidget = {
     id: '',
     name: '',
     companyId: ''
   };
+  @Input() private containerId = '';
+  @Input() private siteId = '';
+  @Input() private prev: WidgetInfo;
+  @Input() private next: WidgetInfo;
 
   constructor(
     private router: Router,

@@ -660,6 +660,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public setCurrentElement(elementName: string): void {
+    console.log($('.widget-style-menu .panel-group'));
+    $('.widget-style-menu .panel-group')[0].scrollTop = 0;
     this.backToRegularElement();
     this.currentElement = elementName;
   }
@@ -667,16 +669,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   public backToRegularElement(): void {
     this.extendedElement = null;
     this.extendedIndex = null;
-  }
-
-  ngOnDestroy(): void {
-    if (this.autoUploadSub) {
-      this.autoUploadSub.unsubscribe();
-    }
-
-    if (this.imagesSub) {
-      this.imagesSub.unsubscribe();
-    }
   }
 
   private initLabelMainPicker() {
@@ -2144,6 +2136,16 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         $(this).removeClass('dropup');
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.autoUploadSub) {
+      this.autoUploadSub.unsubscribe();
+    }
+
+    if (this.imagesSub) {
+      this.imagesSub.unsubscribe();
+    }
   }
 
 }

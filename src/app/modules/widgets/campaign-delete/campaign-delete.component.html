@@ -4,23 +4,25 @@
 </div>
 <div class="modal-body ml-3 mr-3">
   <div class="row">
-    <div class="col-lg-12" *ngIf="!companies.length">
+    <div *ngIf="!companies.length" class="col-lg-12">
       <div class="row mb-3 ml-0 select-site-title">
         <h5 style="text-align: center">{{ 'widgetsList.company.delete.one.company' | translate }}</h5>
       </div>
     </div>
-    <div class="col-lg-12" *ngIf="companies.length">
+    <div *ngIf="companies.length" class="col-lg-12">
       <div class="row mb-3 ml-0 select-site-title">
         <h5>{{ 'widgetsList.company.delete.move' | translate }}:</h5>
       </div>
 
       <div class="dropdown site-selector">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                type="button">
           <span class="dropdown-selected-cropp" style="max-width: 90%!important;">{{ currentCompany.name }}</span>
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-          <li *ngFor="let company of companies" (click)="changeCompany(company)" class="dropdown-item"><a>{{ company.name }}</a>
+          <li (click)="changeCompany(company)" *ngFor="let company of companies" class="dropdown-item">
+            <a>{{ company.name }}</a>
           </li>
         </ul>
       </div>
@@ -28,6 +30,8 @@
   </div>
 </div>
 <div class="modal-footer justify-content-between ml-3 mr-3">
-  <button id="deleteCompany1" *ngIf="companies.length" (click)="performDeleteCompany('MOVE_WIDGETS')" type="button" class="btn btn-primary floated-left">{{ 'widgetsList.company.delete.move' | translate }}</button>
-  <button id="deleteCompany2" (click)="performDeleteCompany('DELETE_WIDGETS')" type="button" class="btn btn-danger floated-right">{{ 'widgetsList.company.delete.remove' | translate }}</button>
+  <button (click)="performDeleteCompany('MOVE_WIDGETS')" *ngIf="companies.length" class="btn btn-primary floated-left" id="deleteCompany1"
+          type="button">{{ 'widgetsList.company.delete.move' | translate }}</button>
+  <button (click)="performDeleteCompany('DELETE_WIDGETS')" class="btn btn-danger floated-right" id="deleteCompany2"
+          type="button">{{ 'widgetsList.company.delete.remove' | translate }}</button>
 </div>

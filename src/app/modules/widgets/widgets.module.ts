@@ -155,4 +155,5 @@ import { ElementsAddComponent } from './shared/elements-add/elements-add.compone
     IconPickerModule
   ]
 })
-export class WidgetsModule { }
+export class WidgetsModule {
+}

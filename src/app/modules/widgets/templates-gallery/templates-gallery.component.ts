@@ -11,14 +11,11 @@ import { WidgetService } from '../services/widget.service';
 })
 export class TemplatesGalleryComponent implements OnInit {
   @Input() public types = [];
-  @Input() private typeId = '';
-
-  @Output() private chooseWidget = new EventEmitter<Mockup>();
-
   public groups = [];
   public mockups = [];
   public isLoaderActive = false;
-
+  @Input() private typeId = '';
+  @Output() private chooseWidget = new EventEmitter<Mockup>();
   private ALL_TYPES;
   private tab: number;
   private startItem;
@@ -51,7 +48,7 @@ export class TemplatesGalleryComponent implements OnInit {
     }
   }
 
-  public isTabsActive(tabLabel){
+  public isTabsActive(tabLabel) {
     return this.tab === tabLabel;
   }
 

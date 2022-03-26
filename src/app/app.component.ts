@@ -2,7 +2,6 @@ import { AfterViewInit, ChangeDetectorRef, Component, HostListener } from '@angu
 import { TranslateService } from '@ngx-translate/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { defaultLocale } from './configs/languages';
-import { ConfigService } from './core/services/config.service';
 
 @Component({
   selector: 'app-root',
