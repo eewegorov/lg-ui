@@ -6,20 +6,21 @@
       <div class="formItem">
         <div class="col-sm-12 mt-2 greyFormBg">
           <label class="control-label">Введите название поля</label>
-          <input type="text" class="form-control" [(ngModel)]="item.placeholder">
+          <input [(ngModel)]="item.placeholder" class="form-control" type="text">
 
           <span class="small">Например: Введите email</span>
           <div class="typeInputRBtn mt-2">
             <div class="form-add-title-type">Тип:</div>
             <div *ngFor="let itemType of itemVariable; index as j" class="form-rbtn-line">
-              <label *ngIf="getItemT(item, itemType)" class="d-flex align-items-center" (click)="getPlaceholderFrom(item, i)">
+              <label (click)="getPlaceholderFrom(item, i)" *ngIf="getItemT(item, itemType)"
+                     class="d-flex align-items-center">
                 <input
-                  type="radio"
-                  class="radio radio-info radio-inline mr-1"
                   (click)="(item.type === 'message') ? addFirstInput(item, i) : ''"
                   [(ngModel)]="item.type"
-                  [value]="itemType.type"
                   [name]="'form' + i"
+                  [value]="itemType.type"
+                  class="radio radio-info radio-inline mr-1"
+                  type="radio"
                 />
                 {{ itemType.value }}
               </label>
@@ -27,16 +28,16 @@
           </div>
           <div class="mt-2 formReqBl d-flex">
             <ui-switch
-              size="small"
               [(ngModel)]="item.required"
+              size="small"
             ></ui-switch>
             <label class="switcher-label-xs ml-2 mb-0 font-normal">Поле обязательно к заполнению</label>
           </div>
 
-          <div class="mt-2 formReqBl d-flex" *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask">
+          <div *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask" class="mt-2 formReqBl d-flex">
             <ui-switch
-              size="small"
               [(ngModel)]="widget.guiprops.formSet.phoneMask.enable"
+              size="small"
             ></ui-switch>
             <label class="switcher-label-xs ml-2 mb-0 font-normal">
               {{ 'widgets.form.phoneMask.titleSwitcher' | translate }}
@@ -44,8 +45,8 @@
           </div>
           <div *ngIf="item.type === 'phone' && widget.guiprops.formSet?.phoneMask?.enable" class="mt-2 formReqBl">
             <label class="control-label">{{ 'widgets.form.phoneMask.titleInput' | translate }}</label>
-            <input type="text" class="form-control" (keyup)="blockedUnusedChars()"
-                   [(ngModel)]="widget.guiprops.formSet.phoneMask.maskValue">
+            <input (keyup)="blockedUnusedChars()" [(ngModel)]="widget.guiprops.formSet.phoneMask.maskValue" class="form-control"
+                   type="text">
             <span class="small">{{ 'widgets.form.phoneMask.description' | translate }}</span>
           </div>
 
@@ -57,8 +58,8 @@
 
         <div class="add-sub-form-item mt-2">
           <a
-            *ngIf="widget.guiprops.formSet?.items.length < 4"
             (click)="addPageInputItem()"
+            *ngIf="widget.guiprops.formSet?.items.length < 4"
             href="javascript:void(0);"
           >Добавить еще одно поле<i class="remove-sub-item col-sm-1 fa fa-plus"></i></a>
         </div>
@@ -74,20 +75,20 @@
       <label class="control-label control-label-des">Ширина</label>
       <div class="d-flex align-items-center">
         <div
-          class="form-control form-control-font mr-2"
           [class.disabled]="widget.guiprops.form.form_width_type !== widthHrType[1]"
+          class="form-control form-control-font mr-2"
         >
           <input
-            type="number"
             [(ngModel)]="widget.guiprops.form.form_widthpx"
             [disabled]="widget.guiprops.form.form_width_type !== widthHrType[1]"
+            type="number"
           />
           <label>px</label>
         </div>
         <button
-          class="wide-button"
-          [class.active]="widget.guiprops.form.form_width_type === widthHrType[0]"
           (click)="widget.guiprops.form.form_width_type = (widget.guiprops.form.form_width_type === widthHrType[0] ? widthHrType[1] : widthHrType[0])"
+          [class.active]="widget.guiprops.form.form_width_type === widthHrType[0]"
+          class="wide-button"
         >
         </button>
       </div>
@@ -95,29 +96,29 @@
 
     <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3">
       <label
-        class="control-label control-label-des"
         [class.disabled]="widget.guiprops.form.form_width_type === widthHrType[0]"
+        class="control-label control-label-des"
       >
         Выравнивание
       </label>
       <div>
         <button
-          class="align-button icon-left"
-          [class.active]="widget.guiprops.form.form_position === floatBtn[0]"
           (click)="widget.guiprops.form.form_position = floatBtn[0]"
+          [class.active]="widget.guiprops.form.form_position === floatBtn[0]"
           [disabled]="widget.guiprops.form.form_width_type === widthHrType[0]"
+          class="align-button icon-left"
         ></button>
         <button
-          class="align-button icon-center"
-          [class.active]="widget.guiprops.form.form_position === floatBtn[1]"
           (click)="widget.guiprops.form.form_position = floatBtn[1]"
+          [class.active]="widget.guiprops.form.form_position === floatBtn[1]"
           [disabled]="widget.guiprops.form.form_width_type === widthHrType[0]"
+          class="align-button icon-center"
         ></button>
         <button
-          class="align-button icon-right"
-          [class.active]="widget.guiprops.form.form_position === floatBtn[2]"
           (click)="widget.guiprops.form.form_position = floatBtn[2]"
+          [class.active]="widget.guiprops.form.form_position === floatBtn[2]"
           [disabled]="widget.guiprops.form.form_width_type === widthHrType[0]"
+          class="align-button icon-right"
         ></button>
       </div>
     </div>
@@ -127,14 +128,14 @@
     <div class="row-subitem-padding mt-3">
       <h3>Вид полей</h3>
       <div class="dropdown mt-1 pt-1">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+        <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
           {{ widget.guiprops.form.visual }}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li role="presentation" *ngFor="let itemVisual of visualInputForm"
-              (click)="widget.guiprops.form.visual = itemVisual">
-            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemVisual }}</a>
+          <li (click)="widget.guiprops.form.visual = itemVisual" *ngFor="let itemVisual of visualInputForm"
+              role="presentation">
+            <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemVisual }}</a>
           </li>
         </ul>
       </div>
@@ -145,20 +146,20 @@
     <label class="control-label control-label-des">Ширина поля</label>
     <div class="d-flex align-items-center">
       <div
-        class="form-control form-control-font mr-2"
         [class.disabled]="widget.guiprops['form'].width_type !== widthHrType[1]"
+        class="form-control form-control-font mr-2"
       >
         <input
-          type="number"
           [(ngModel)]="widget.guiprops['form'].widthpx"
           [disabled]="widget.guiprops['form'].width_type !== widthHrType[1]"
+          type="number"
         />
         <label>px</label>
       </div>
       <button
-        class="wide-button"
-        [class.active]="widget.guiprops['form'].width_type === widthHrType[0]"
         (click)="widget.guiprops['form'].width_type = (widget.guiprops['form'].width_type === widthHrType[0] ? widthHrType[1] : widthHrType[0])"
+        [class.active]="widget.guiprops['form'].width_type === widthHrType[0]"
+        class="wide-button"
       >
       </button>
     </div>
@@ -168,14 +169,14 @@
     <div class="row-subitem-padding">
       <label class="control-label control-label-des">Ориентация полей</label>
       <div class="dropdown mt-1">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+        <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
           {{ widget.guiprops.form.orient }}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li role="presentation" *ngFor="let itemOrient of orientInputForm"
-              (click)="widget.guiprops.form['orient'] = itemOrient">
-            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemOrient }}</a>
+          <li (click)="widget.guiprops.form['orient'] = itemOrient" *ngFor="let itemOrient of orientInputForm"
+              role="presentation">
+            <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemOrient }}</a>
           </li>
         </ul>
       </div>
@@ -200,12 +201,12 @@
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="widget.guiprops['form'].bgInputForm"
-        [style.background]="widget.guiprops['form'].bgInputForm"
         [cpAlphaChannel]="'disabled'"
         [cpOutputFormat]="'hex'"
-        cpPosition="left"
+        [style.background]="widget.guiprops['form'].bgInputForm"
         class="color-picker-control"
-readonly
+        cpPosition="left"
+        readonly
       />
       <input
         [(ngModel)]="widget.guiprops['form'].bgInputForm"
@@ -226,16 +227,17 @@ readonly
   </div>
 
   <div class="d-flex justify-content-between mt-2 mt-1 border-item">
-    <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.colorNameField' | translate }}</label>
+    <label
+      class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.colorNameField' | translate }}</label>
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="widget.guiprops['form'].colorTitleInputForm"
-        [style.background]="widget.guiprops['form'].colorTitleInputForm"
         [cpAlphaChannel]="'disabled'"
         [cpOutputFormat]="'hex'"
-        cpPosition="left"
+        [style.background]="widget.guiprops['form'].colorTitleInputForm"
         class="color-picker-control"
-readonly
+        cpPosition="left"
+        readonly
       />
       <input
         [(ngModel)]="widget.guiprops['form'].colorTitleInputForm"
@@ -250,8 +252,8 @@ readonly
         {{ 'widgets.formExt.mainSettings.useBorderAroundFields' | translate }}
       </label>
       <ui-switch
-        size="small"
         [(ngModel)]="widget.guiprops.form.border.enable"
+        size="small"
       ></ui-switch>
     </div>
 
@@ -261,12 +263,12 @@ readonly
         <div class="d-flex text-right">
           <input
             [(colorPicker)]="widget.guiprops['form'].border.color"
-            [style.background]="widget.guiprops['form'].border.color"
             [cpAlphaChannel]="'disabled'"
             [cpOutputFormat]="'hex'"
-            cpPosition="left"
+            [style.background]="widget.guiprops['form'].border.color"
             class="color-picker-control"
-readonly
+            cpPosition="left"
+            readonly
           />
           <input
             [(ngModel)]="widget.guiprops['form'].border.color"
@@ -283,8 +285,8 @@ readonly
         {{ 'widgets.formExt.mainSettings.usePodBG' | translate }}
       </label>
       <ui-switch
-        size="small"
         [(ngModel)]="widget.guiprops.form.colorPod.enable"
+        size="small"
       ></ui-switch>
     </div>
 
@@ -294,12 +296,12 @@ readonly
         <div class="d-flex text-right">
           <input
             [(colorPicker)]="widget.guiprops['form'].colorPod.color"
-            [style.background]="widget.guiprops['form'].colorPod.color"
             [cpAlphaChannel]="'disabled'"
             [cpOutputFormat]="'hex'"
-            cpPosition="left"
+            [style.background]="widget.guiprops['form'].colorPod.color"
             class="color-picker-control"
-readonly
+            cpPosition="left"
+            readonly
           />
           <input
             [(ngModel)]="widget.guiprops['form'].colorPod.color"
@@ -311,7 +313,8 @@ readonly
       <div class="d-flex justify-content-between mt-2 pt-1">
         <h5 class="label-style-ic control-label-des">Прозрачность</h5>
         <div class="d-flex text-right side-ui-sm">
-          <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod" [options]="optionsOpacity"></ngx-slider>
+          <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod"
+                      [options]="optionsOpacity"></ngx-slider>
           <input
             [(ngModel)]="widget.guiprops['form'].colorPod.opacityColorPod"
             class="picker-input slider"
@@ -335,8 +338,8 @@ readonly
     <div class="align-items-center">
       <div class="form-control form-control-font">
         <input
-          type="number"
           [(ngModel)]="widget.guiprops['button'].fontSize"
+          type="number"
         />
         <label>px</label>
       </div>
@@ -348,12 +351,12 @@ readonly
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="widget.guiprops['button'].colorBtn"
-        [style.background]="widget.guiprops['button'].colorBtn"
         [cpAlphaChannel]="'disabled'"
         [cpOutputFormat]="'hex'"
-        cpPosition="left"
+        [style.background]="widget.guiprops['button'].colorBtn"
         class="color-picker-control"
-readonly
+        cpPosition="left"
+        readonly
       />
       <input
         [(ngModel)]="widget.guiprops['button'].colorBtn"
@@ -377,27 +380,27 @@ readonly
     <label class="control-label control-label-des">Ширина</label>
     <div class="d-flex align-items-center">
       <div
-        class="form-control form-control-font mr-2"
         [class.disabled]="widget.guiprops.button.btn_width !== widthBtn[2]"
+        class="form-control form-control-font mr-2"
       >
         <input
-          type="number"
           [(ngModel)]="widget.guiprops['button'].btn_widthpx"
           [disabled]="widget.guiprops.button.btn_width !== widthBtn[2]"
+          type="number"
         />
         <label>px</label>
       </div>
       <button
-        class="content-type-button"
-        [class.active]="widget.guiprops.button.btn_width === widthBtn[0]"
         (click)="widget.guiprops.button.btn_width = (widget.guiprops.button.btn_width === widthBtn[0] ? widthBtn[2] : widthBtn[0])"
+        [class.active]="widget.guiprops.button.btn_width === widthBtn[0]"
+        class="content-type-button"
       >
         AUTO
       </button>
       <button
-        class="wide-button"
-        [class.active]="widget.guiprops.button.btn_width === widthBtn[1]"
         (click)="widget.guiprops.button.btn_width = (widget.guiprops.button.btn_width === widthBtn[1] ? widthBtn[2] : widthBtn[1])"
+        [class.active]="widget.guiprops.button.btn_width === widthBtn[1]"
+        class="wide-button"
       >
       </button>
     </div>
@@ -405,29 +408,29 @@ readonly
 
   <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-2 pt-1 border-item">
     <label
-      class="control-label control-label-des"
       [class.disabled]="widget.guiprops.button.btn_width === widthBtn[1]"
+      class="control-label control-label-des"
     >
       Выравнивание
     </label>
     <div>
       <button
-        class="align-button icon-left"
-        [class.active]="widget.guiprops.button.position === floatBtn[0]"
         (click)="widget.guiprops.button.position = floatBtn[0]"
+        [class.active]="widget.guiprops.button.position === floatBtn[0]"
         [disabled]="widget.guiprops.button.btn_width === widthBtn[1]"
+        class="align-button icon-left"
       ></button>
       <button
-        class="align-button icon-center"
-        [class.active]="widget.guiprops.button.position === floatBtn[1]"
         (click)="widget.guiprops.button.position = floatBtn[1]"
+        [class.active]="widget.guiprops.button.position === floatBtn[1]"
         [disabled]="widget.guiprops.button.btn_width === widthBtn[1]"
+        class="align-button icon-center"
       ></button>
       <button
-        class="align-button icon-right"
-        [class.active]="widget.guiprops.button.position === floatBtn[2]"
         (click)="widget.guiprops.button.position = floatBtn[2]"
+        [class.active]="widget.guiprops.button.position === floatBtn[2]"
         [disabled]="widget.guiprops.button.btn_width === widthBtn[1]"
+        class="align-button icon-right"
       ></button>
     </div>
   </div>
@@ -437,33 +440,33 @@ readonly
   <h3>Стиль кнопки</h3>
 
   <div class="dropdown mt-3 border-item">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
       {{ widget.guiprops.button.styleType }}
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu dropdown-with-btn-styles" role="menu">
-      <li role="presentation" (click)="setBtnStyle('Default', widget.guiprops.button)">
+      <li (click)="setBtnStyle('Default', widget.guiprops.button)" role="presentation">
         <a
-          class="dropdown-item btn-var-styles btn-var-styles__default"
           [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'background': widget.guiprops['button'].colorBtn}"
+          class="dropdown-item btn-var-styles btn-var-styles__default"
           href="javascript:void(0)"
         >Default</a></li>
-      <li role="presentation" (click)="setBtnStyle('Material', widget.guiprops.button)">
+      <li (click)="setBtnStyle('Material', widget.guiprops.button)" role="presentation">
         <a
-          class="dropdown-item btn-var-styles btn-var-styles__material"
           [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'background': widget.guiprops['button'].colorBtn}"
+          class="dropdown-item btn-var-styles btn-var-styles__material"
           href="javascript:void(0)"
         >Material</a></li>
-      <li role="presentation" (click)="setBtnStyle('Flat', widget.guiprops.button)">
+      <li (click)="setBtnStyle('Flat', widget.guiprops.button)" role="presentation">
         <a
-          class="dropdown-item btn-var-styles btn-var-styles__flat"
           [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'background': widget.guiprops['button'].colorBtn}"
+          class="dropdown-item btn-var-styles btn-var-styles__flat"
           href="javascript:void(0)"
         >Flat</a></li>
-      <li role="presentation" (click)="setBtnStyle('Border Style', widget.guiprops.button)">
+      <li (click)="setBtnStyle('Border Style', widget.guiprops.button)" role="presentation">
         <a
-          class="dropdown-item btn-var-styles btn-var-styles__border-style"
           [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'border-color': widget.guiprops['button'].colorBtn}"
+          class="dropdown-item btn-var-styles btn-var-styles__border-style"
           href="javascript:void(0)"
         >Border Style</a></li>
     </ul>
@@ -471,8 +474,8 @@ readonly
 
   <!-- Coupon settings -->
   <app-coupon-callback
-    [coupons]="coupons"
     [coupon]="widget.guiprops.exit.couponCallback"
+    [coupons]="coupons"
     [placePopup]="placePopup"
   ></app-coupon-callback>
 </div>

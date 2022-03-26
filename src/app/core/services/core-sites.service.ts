@@ -7,7 +7,8 @@ import { Site, SiteShort } from '../models/sites';
 export class CoreSitesService {
   public sites: Site[] | SiteShort[] = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   public getSiteById(siteId) {
     for (const item of this.sites) {

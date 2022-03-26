@@ -99,7 +99,7 @@ export interface AbtestArchive {
   variants: VariantArchiveExtended[];
 }
 
-export interface AbtestArchiveExtended extends AbtestArchive{
+export interface AbtestArchiveExtended extends AbtestArchive {
   etalonConversion: number;
 }
 

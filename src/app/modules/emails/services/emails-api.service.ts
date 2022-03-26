@@ -14,7 +14,8 @@ export class EmailsApiService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService
-  ) { }
+  ) {
+  }
 
   public getEmailList(filterParams): Observable<EmailsResponse> {
     return this.http.get<EmailsResponse>(`${this.configService.config.prov}/emails`, {

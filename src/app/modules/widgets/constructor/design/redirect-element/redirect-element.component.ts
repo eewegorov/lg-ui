@@ -9,7 +9,8 @@ import { FullWidget } from '../../../../../core/models/widgets';
 export class RedirectElementComponent implements OnInit, AfterViewInit {
   @Input() public widget: FullWidget;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     if (this.widget.guiprops.button.enable === true && this.widget.guiprops.form.enable === false) {
@@ -26,8 +27,7 @@ export class RedirectElementComponent implements OnInit, AfterViewInit {
     const widgetNameBtnDel = $('#removeWidgetRedirect');
     if (widgetInput === '') {
       widgetNameBtnDel.addClass('hide');
-    }
-    else {
+    } else {
       widgetNameBtnDel.removeClass('hide');
     }
   }

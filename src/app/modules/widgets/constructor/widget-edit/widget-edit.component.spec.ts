@@ -8,9 +8,9 @@ describe('WidgetEditComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ WidgetEditComponent ]
+      declarations: [WidgetEditComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

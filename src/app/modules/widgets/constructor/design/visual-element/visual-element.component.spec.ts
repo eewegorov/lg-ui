@@ -8,9 +8,9 @@ describe('VisualElementComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VisualElementComponent ]
+      declarations: [VisualElementComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

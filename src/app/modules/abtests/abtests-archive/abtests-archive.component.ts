@@ -1,9 +1,5 @@
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
-import {
-  AbtestArchive,
-  AbtestArchiveExtended,
-  VariantArchiveExtended
-} from '../../../core/models/abtests';
+import { AbtestArchive, AbtestArchiveExtended, VariantArchiveExtended } from '../../../core/models/abtests';
 import { SiteShort } from '../../../core/models/sites';
 import { BinsDataService } from '../services/bins-data.service';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
@@ -18,7 +14,7 @@ import { AbtestsService } from '../services/abtests.service';
 })
 export class AbtestsArchiveComponent implements OnInit, AfterViewChecked {
   public abTests: AbtestArchiveExtended[] = [];
-  public sites =  [{ id: 'allsitesid', name: 'Все сайты' }];
+  public sites = [{ id: 'allsitesid', name: 'Все сайты' }];
   public showWhat = 'ALL';
   public allABTests = [];
   public isLoad = false;
@@ -30,7 +26,8 @@ export class AbtestsArchiveComponent implements OnInit, AfterViewChecked {
     private coreSitesService: CoreSitesService,
     private sitesService: SitesService,
     private abTestsService: AbtestsService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.initSites();
@@ -39,55 +36,6 @@ export class AbtestsArchiveComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked(): void {
     ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
-  }
-
-  private initSites() {
-    this.sitesService.getSites().subscribe((response: SiteShort[]) => {
-
-    this.coreSitesService.sites = response;
-    this.sites = this.sites.concat(response);
-    this.currSite = this.sites[0].id;
-    });
-  }
-
-  private initTests() {
-    this.abTestsService.getArchTests().subscribe((response: AbtestArchive[]) => {
-      this.allABTests = response;
-      this.abTests = this.allABTests;
-      this.isLoad = true;
-      this.getConversions();
-    });
-  }
-
-  private getConversions() {
-    this.abTests.forEach((test: AbtestArchiveExtended) => {
-      test.variants.forEach((variant: VariantArchiveExtended) => {
-        variant.conversion = this.getConvItem(variant);
-        variant.convNumber = this.getConvNumber(variant);
-
-        if (variant.etalon) {
-          test.etalonConversion = variant.convNumber;
-        }
-        if (typeof test.etalonConversion !== 'undefined') {
-          variant.betterTo =
-            test.etalonConversion !== 0 ? (((variant.convNumber - test.etalonConversion) / test.etalonConversion) * 100) : 0;
-          variant.betterTo = Math.round(variant.betterTo * 100) / 100;
-        }
-      });
-    });
-  }
-
-  private getConvItem(item) {
-    const conv = this.binsDataService.distRound(item.target / item.shows);
-    return item.shows !== 0 ? conv : '0%';
-  }
-
-  private getConvNumber(item) {
-    if (item.shows !== 0) {
-      return item.target / item.shows;
-    } else {
-      return 0;
-    }
   }
 
   public setCurrSite(site) {
@@ -137,17 +85,6 @@ export class AbtestsArchiveComponent implements OnInit, AfterViewChecked {
     return '';
   }
 
-  private getTestsById() {
-    this.showWhat = 'ALL';
-    if (this.currSite === 'allsitesid') {
-      this.abTests = this.allABTests;
-    } else {
-      this.abTests = this.allABTests.filter((item) => {
-        return item.siteId === this.currSite;
-      });
-    }
-  }
-
   public getSiteName(siteId: string): string {
     const site = this.getSiteById(siteId);
     if (site != null) {
@@ -162,6 +99,66 @@ export class AbtestsArchiveComponent implements OnInit, AfterViewChecked {
       return str.substring(0, count) + addedSymbol;
     }
     return str;
+  }
+
+  private initSites() {
+    this.sitesService.getSites().subscribe((response: SiteShort[]) => {
+
+      this.coreSitesService.sites = response;
+      this.sites = this.sites.concat(response);
+      this.currSite = this.sites[0].id;
+    });
+  }
+
+  private initTests() {
+    this.abTestsService.getArchTests().subscribe((response: AbtestArchive[]) => {
+      this.allABTests = response;
+      this.abTests = this.allABTests;
+      this.isLoad = true;
+      this.getConversions();
+    });
+  }
+
+  private getConversions() {
+    this.abTests.forEach((test: AbtestArchiveExtended) => {
+      test.variants.forEach((variant: VariantArchiveExtended) => {
+        variant.conversion = this.getConvItem(variant);
+        variant.convNumber = this.getConvNumber(variant);
+
+        if (variant.etalon) {
+          test.etalonConversion = variant.convNumber;
+        }
+        if (typeof test.etalonConversion !== 'undefined') {
+          variant.betterTo =
+            test.etalonConversion !== 0 ? (((variant.convNumber - test.etalonConversion) / test.etalonConversion) * 100) : 0;
+          variant.betterTo = Math.round(variant.betterTo * 100) / 100;
+        }
+      });
+    });
+  }
+
+  private getConvItem(item) {
+    const conv = this.binsDataService.distRound(item.target / item.shows);
+    return item.shows !== 0 ? conv : '0%';
+  }
+
+  private getConvNumber(item) {
+    if (item.shows !== 0) {
+      return item.target / item.shows;
+    } else {
+      return 0;
+    }
+  }
+
+  private getTestsById() {
+    this.showWhat = 'ALL';
+    if (this.currSite === 'allsitesid') {
+      this.abTests = this.allABTests;
+    } else {
+      this.abTests = this.allABTests.filter((item) => {
+        return item.siteId === this.currSite;
+      });
+    }
   }
 
   private getSiteById(siteId) {

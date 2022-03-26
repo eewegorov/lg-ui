@@ -16,10 +16,11 @@ import { Site, SiteStatistics } from '../../../core/models/sites';
   providers: [DatePipe]
 })
 export class SiteItemComponent implements OnInit, OnDestroy {
-  @Input() public item: Site & { isFree: boolean; tariffExpTime: string; tariffExpLeftMs: number;
-    hasCrmSyncErrors: boolean; hasMailSyncErrors: boolean; };
+  @Input() public item: Site & {
+    isFree: boolean; tariffExpTime: string; tariffExpLeftMs: number;
+    hasCrmSyncErrors: boolean; hasMailSyncErrors: boolean;
+  };
   @Input() public timezone = '';
-  @Input() private index: number;
   public actionsStatsWeekCount: number;
   public leadsStatsWeekCount: number;
   public mailStatsWeekCount: number;
@@ -29,7 +30,7 @@ export class SiteItemComponent implements OnInit, OnDestroy {
   public options;
   public isLoading = true;
   public isStatisticsLoaded = false;
-
+  @Input() private index: number;
   private siteStatisticsSub: SubscriptionLike;
 
   constructor(
@@ -49,7 +50,11 @@ export class SiteItemComponent implements OnInit, OnDestroy {
         yAxes: [{
           ticks: {
             beginAtZero: true,
-            callback: (value) => { if (value % 1 === 0) { return value; }}
+            callback: (value) => {
+              if (value % 1 === 0) {
+                return value;
+              }
+            }
           }
         }]
       }
@@ -65,6 +70,24 @@ export class SiteItemComponent implements OnInit, OnDestroy {
 
     if ((this.index === 0 || this.index === 1 || this.index === 2) && !this.isStatisticsLoaded) {
       this.loadStatistics();
+    }
+  }
+
+  public goToSiteSettings() {
+    this.router.navigate(['/site/settings/' + this.item.id]);
+  }
+
+  public improvePlan() {
+    this.tariffsService.checkTariffPlans(
+      this.item.id,
+      this.translate.instant('sitelist.tariff.improvement'),
+      undefined,
+      this.item.name);
+  }
+
+  ngOnDestroy(): void {
+    if (this.siteStatisticsSub) {
+      this.siteStatisticsSub.unsubscribe();
     }
   }
 
@@ -126,18 +149,6 @@ export class SiteItemComponent implements OnInit, OnDestroy {
     });
   }
 
-  public goToSiteSettings() {
-    this.router.navigate(['/site/settings/' + this.item.id]);
-  }
-
-  public improvePlan() {
-    this.tariffsService.checkTariffPlans(
-      this.item.id,
-      this.translate.instant('sitelist.tariff.improvement'),
-      undefined,
-      this.item.name);
-  }
-
   private getSiteDates(data) {
     return data.map((item) => {
       return this.datePipe.transform(moment.tz(item.date, this.timezone).format(), 'dd.MM');
@@ -165,12 +176,6 @@ export class SiteItemComponent implements OnInit, OnDestroy {
   private removeGraphFromChart(index) {
     this.colors.splice(index, 1);
     this.data.splice(index, 1);
-  }
-
-  ngOnDestroy(): void {
-    if (this.siteStatisticsSub) {
-      this.siteStatisticsSub.unsubscribe();
-    }
   }
 
 }

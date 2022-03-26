@@ -3,46 +3,47 @@
     <h3 class="marg-minus-bord-des">
       {{ 'widgets.redirect.title' | translate }}
       <a
-        data-toggle="tooltip"
-        data-placement="top"
-        data-container="#widgetStyle"
-        title=""
-        class="info-link info-link-wd"
         [attr.data-original-title]="'widgets.redirect.tooltip' | translate"
+        class="info-link info-link-wd"
+        data-container="#widgetStyle"
+        data-placement="top"
+        data-toggle="tooltip"
+        title=""
       >
         <i class="fa fa-info-circle"></i>
       </a>
     </h3>
     <ui-switch
-      size="small"
       [(ngModel)]="widget.guiprops.formSet.redirect.enable"
+      size="small"
     ></ui-switch>
   </div>
   <div class="clearfix"></div>
   <!-- Page rule item -->
   <div *ngIf="widget.guiprops['formSet'].redirect.enable === true">
     <div
-      class="row-subitem row-subitem-padding pt-1 mt-2 widget-name-block-rel"
       [ngClass]="(widget.guiprops['formSet'].redirect.url === '') ? 'is-invalid' : ''"
+      class="row-subitem row-subitem-padding pt-1 mt-2 widget-name-block-rel"
     >
       <label class="control-label text-wrap">{{ 'widgets.redirect.onClickRedirect' | translate }}:</label>
       <input
-        type="text"
-        class="form-control"
-        id="widgetRedirectUrl"
         (keyup)="validateRedirect($event)"
         [(ngModel)]="widget.guiprops['formSet'].redirect.url"
+        class="form-control"
+        id="widgetRedirectUrl"
         placeholder="http://"
+        type="text"
       />
-      <a (click)="removeWidgetRedirect($event)" class="remove-widget-name remove-widget-redirect" id="removeWidgetRedirect"></a>
+      <a (click)="removeWidgetRedirect($event)" class="remove-widget-name remove-widget-redirect"
+         id="removeWidgetRedirect"></a>
     </div>
     <div class="row-subitem row-subitem-padding pt-1 mt-2">
       <div class="form-check">
         <label class="form-check-label">
           <input
-            type="checkbox"
             [(ngModel)]="widget.guiprops.formSet.redirect.blank"
             class="form-check-input"
+            type="checkbox"
           />
           <span class="checkmark"></span>
         </label>

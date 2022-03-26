@@ -6,12 +6,13 @@
       <div class="selector">
         <div class="row select-site-title"><h5>{{ 'widgetsList.selectSite' | translate }}:</h5></div>
         <div class="row dropdown site-selector">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                  type="button">
             <span class="dropdown-selected-cropp">{{ currentSite.name }}</span>
             <span class="caret"></span>
           </button>
           <ul class="dropdown-menu">
-            <li *ngFor="let site of sites" (click)="changeCurrentSite(site)">
+            <li (click)="changeCurrentSite(site)" *ngFor="let site of sites">
               <a class="dropdown-item">{{ site.name }}</a>
             </li>
           </ul>
@@ -23,12 +24,14 @@
         <div class="row">
           <div *ngIf="!newCompany.on" class="d-flex">
             <div class="dropdown site-selector floated-left" style="min-width: 260px!important; width: 260px;">
-              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <span class="dropdown-selected-cropp" style="max-width: 215px!important;">{{ currentCompany.name || defCompanyName }}</span>
+              <button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                      type="button">
+                <span class="dropdown-selected-cropp"
+                      style="max-width: 215px!important;">{{ currentCompany.name || defCompanyName }}</span>
                 <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" *ngIf="companies.length">
-                <li *ngFor="let company of companies" (click)="changeCurrentCompany(company)">
+              <ul *ngIf="companies.length" class="dropdown-menu">
+                <li (click)="changeCurrentCompany(company)" *ngFor="let company of companies">
                   <a class="dropdown-item">{{ company.name || defCompanyName }}</a>
                 </li>
               </ul>
@@ -38,9 +41,9 @@
               (click)="addNewCompany()"
               class="btn btn-default btn-inline ml-1"
               data-container="body"
-              data-toggle="tooltip"
               data-placement="top"
               data-title="{{ 'widgetsList.company.add.tooltip' | translate }}"
+              data-toggle="tooltip"
             >
               <i class="fa fa-plus"></i>
             </button>
@@ -49,42 +52,42 @@
               *ngIf="!currentCompany.default"
               class="btn btn-default btn-inline ml-1"
               data-container="body"
-              data-toggle="tooltip"
               data-placement="top"
               data-title="{{ 'widgetsList.company.delete.tooltip' | translate }}"
+              data-toggle="tooltip"
             >
               <i class="fa fa-trash"></i>
             </button>
           </div>
-          <div class="p-0 d-flex" *ngIf="newCompany.on">
-            <div class="mr-2" [ngClass]="(newCompany.name.trim().length === 0) ? 'is-invalid' : ''">
+          <div *ngIf="newCompany.on" class="p-0 d-flex">
+            <div [ngClass]="(newCompany.name.trim().length === 0) ? 'is-invalid' : ''" class="mr-2">
               <input
-                type="text"
-                class="form-control"
                 [(ngModel)]="newCompany.name"
-                style="width: 245px;"
+                class="form-control"
                 placeholder="{{ 'widgetsList.clone.company.add.label' | translate }}"
+                style="width: 245px;"
+                type="text"
               >
             </div>
             <div class="mr-3">
               <button
+                (click)="resetNewCompany()"
                 class="btn btn-default btn-inline"
                 data-container="body"
-                data-toggle="tooltip"
                 data-placement="top"
+                data-toggle="tooltip"
                 title="{{ 'global.cancel' | translate }}"
-                (click)="resetNewCompany()"
               >
                 <i class="fa fa-times"></i>
               </button>
               <button
+                (click)="saveNewCompany()"
                 [disabled]="newCompany.name.trim().length === 0"
                 class="btn btn-success btn-inline ml-1"
                 data-container="body"
-                data-toggle="tooltip"
                 data-placement="top"
+                data-toggle="tooltip"
                 title="{{ 'widgetsList.company.add.tooltip' | translate }}"
-                (click)="saveNewCompany()"
               >
                 <i class="fa fa-check"></i>
               </button>
@@ -97,12 +100,13 @@
       <div>
         <button
           (click)="createNewWidget()"
-          type="button"
           class="btn btn-lg w-xs btn-success"
+          type="button"
         ><i class="fa fa-plus-circle"></i> {{ 'widgetsList.add.title' | translate }}
         </button>
       </div>
-      <div id="buyWidgetDevelopmentContainer" class="ng-binding"><a id="buyWidgetDevelopment">{{ 'widgetsList.add.alt' | translate }}</a></div>
+      <div class="ng-binding" id="buyWidgetDevelopmentContainer"><a
+        id="buyWidgetDevelopment">{{ 'widgetsList.add.alt' | translate }}</a></div>
     </div>
   </div>
 
@@ -110,33 +114,33 @@
 
 
 <!-- smart points settings -->
-<div class="widgets-site-settings" *ngIf="sites.length > 0 && smartPoints">
+<div *ngIf="sites.length > 0 && smartPoints" class="widgets-site-settings">
   <div class="row col-lg-12">
     <ui-switch
-      [(ngModel)]="smartPoints.enabled"
       (change)="enableDisableSP()"
+      [(ngModel)]="smartPoints.enabled"
       class="mr-2"
     ></ui-switch>
     <h3 class="f-0">
       {{ 'widgetsList.site.default.title' | translate }} <a
-      data-toggle="tooltip" data-placement="bottom"
-      title="{{ 'widgetsList.site.default.tooltip' | translate }}"
-      class="info-link"><i class="fa fa-info-circle"></i></a>
+      class="info-link" data-placement="bottom"
+      data-toggle="tooltip"
+      title="{{ 'widgetsList.site.default.tooltip' | translate }}"><i class="fa fa-info-circle"></i></a>
     </h3>
   </div>
   <div *ngIf="smartPoints.enabled" class="column ml-5 mr-5 pl-2 widget-page__smaptpoint-container">
     <span class="widget-page__smaptpoint-container-title">{{ 'settings.widgets.select' | translate }}:</span>
-    <app-smartpoints-control [smartPoints]="smartPoints" [siteId]="currentSite.id"></app-smartpoints-control>
+    <app-smartpoints-control [siteId]="currentSite.id" [smartPoints]="smartPoints"></app-smartpoints-control>
   </div>
 </div>
 <!-- End smart points settings -->
 
 
-<div id="myWidgets" class="row col-lg-12 no-animate">
-  <div class="col-lg-12 mt-3" *ngIf="isHasWidgets() || filteredContainers().length">
+<div class="row col-lg-12 no-animate" id="myWidgets">
+  <div *ngIf="isHasWidgets() || filteredContainers().length" class="col-lg-12 mt-3">
     <h3 class="f-0">{{ 'widgetsList.listTitle' | translate }}</h3>
   </div>
-  <div class="col-lg-12 mt-3" *ngIf="!sites.length">
+  <div *ngIf="!sites.length" class="col-lg-12 mt-3">
     <h3 class="f-0 text-center">{{ 'widgetsList.sitePlaceholder' | translate }}</h3>
     <h4 class="f-2 text-center underline-links blue-links hover-links">
       <span>{{ 'widgetsList.sitePlaceholder2' | translate }}</span>
@@ -146,20 +150,20 @@
   </div>
 
   <!-- Static widgets -->
-  <div class="col-lg-12 mt-3" *ngIf="containers.length && filteredContainers().length">
+  <div *ngIf="containers.length && filteredContainers().length" class="col-lg-12 mt-3">
     <h4 class="f-1 no-bold">{{ 'containerized.title' | translate }}:</h4>
   </div>
   <div *ngIf="containers.length" style="width: 100%">
     <app-containerized-container
       *ngFor="let container of filteredContainers()"
       [container]="container"
-      [site]="currentSite"
       [currentCompany]="currentCompany"
+      [site]="currentSite"
     ></app-containerized-container>
   </div>
   <!-- End Static widgets -->
 
-  <div class="col-lg-12 mt-3" *ngIf="!isHasWidgets() && !filteredContainers().length && sites.length">
+  <div *ngIf="!isHasWidgets() && !filteredContainers().length && sites.length" class="col-lg-12 mt-3">
     <div *ngIf="currentCompany.default">
       <h3 class="f-0 text-center">{{ 'widgetsList.listPlaceholder' | translate }}</h3>
       <h4 class="f-2 text-center">{{ 'widgetsList.listPlaceholder2' | translate }}</h4>
@@ -169,15 +173,15 @@
     </div>
   </div>
 
-  <div class="mt-3 col-lg-4 mw-100 mb-5" *ngFor="let wdgTypes of getTypesWithCompanyFilter()">
+  <div *ngFor="let wdgTypes of getTypesWithCompanyFilter()" class="mt-3 col-lg-4 mw-100 mb-5">
     <h4 class="f-1 no-bold mt-3">{{ getTypeItem(wdgTypes)?.name }}:</h4>
-    <div class="row" *ngFor="let widget of getFilteredWidgets(wdgTypes); index as i">
+    <div *ngFor="let widget of getFilteredWidgets(wdgTypes); index as i" class="row">
       <app-widget-item
-        [widget]="widget"
         [first]="i === 0"
         [last]="i === getFilteredWidgets(wdgTypes).length - 1"
+        [next]="getFilteredWidgets(wdgTypes)[i + 1]"
         [prev]="getFilteredWidgets(wdgTypes)[i - 1]"
-        [next]="getFilteredWidgets(wdgTypes)[i + 1]">
+        [widget]="widget">
       </app-widget-item>
     </div>
   </div>

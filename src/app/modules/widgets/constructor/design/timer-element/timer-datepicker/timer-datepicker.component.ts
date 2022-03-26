@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-timer-datepicker',
@@ -15,12 +14,13 @@ export class TimerDatepickerComponent implements OnInit {
     locale: 'ru',
     minDate: new Date(),
     maxDate: this.addDays(new Date(), 99),
-    widgetPositioning: {vertical: 'bottom'}
+    widgetPositioning: { vertical: 'bottom' }
   };
 
   public value: any;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     ($.fn as any).datetimepicker.Constructor.Default = $.extend({}, ($.fn as any).datetimepicker.Constructor.Default, {

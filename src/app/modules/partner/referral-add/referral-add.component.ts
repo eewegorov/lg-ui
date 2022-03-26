@@ -13,7 +13,8 @@ export class ReferralAddComponent implements OnInit {
   constructor(
     private activeModal: NgbActiveModal,
     private partnerService: PartnerService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }

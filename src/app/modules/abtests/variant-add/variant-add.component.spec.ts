@@ -8,9 +8,9 @@ describe('VariantAddComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ VariantAddComponent ]
+      declarations: [VariantAddComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

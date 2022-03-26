@@ -14,7 +14,8 @@ export class ExtendedDdComponent implements OnInit {
   public availWidthTypes = [];
   public unmappedVariants = [];
 
-  constructor(private widgetConstructorService: WidgetConstructorService) { }
+  constructor(private widgetConstructorService: WidgetConstructorService) {
+  }
 
   ngOnInit(): void {
     this.widgetConstructorService.changeArrayOfFormExtTypes.subscribe(() => {

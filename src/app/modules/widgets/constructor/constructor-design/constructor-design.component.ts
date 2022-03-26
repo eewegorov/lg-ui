@@ -30,8 +30,8 @@ import { WidgetService } from '../../services/widget.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('slide', [
-      state('left', style({transform: 'translateX(0)'})),
-      state('right', style({transform: 'translateX(-50%'})),
+      state('left', style({ transform: 'translateX(0)' })),
+      state('right', style({ transform: 'translateX(-50%' })),
       transition('* => *', animate(300))
     ])
   ]
@@ -45,16 +45,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   @Input() public coupons: Coupon[];
   @Input() public isContainerized: boolean;
   @Input() public showErrors: boolean;
-  @Input() private currentActiveTab: string;
-  @Input() private SP_widget: any;
-  @Input() private isTabHasErrorForFormExt: () => boolean;
-  @Input() private mapFormExtFieldId: () => any;
-  @Input() private isFieldIdUnique: (id: any) => boolean;
-  @Input() private isButtonRedirectAndEmpty: (item: any) => boolean;
-  @Input() private isFormHasSpecElements: (item: any) => boolean;
-  @Input() private isFormHasSendIfAction: (item: any) => boolean;
-  @Input() private isFormHasButtonWithAction: (item: any) => boolean;
-  
   public isLoading = false;
   public extendedElement: Record<string, any> = null;
   public extendedIndex: number = null;
@@ -90,7 +80,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   public bgPositionTypesList = ['Растянуть', 'Замостить'];
   public tilesList = ['Замостить по X', 'Замостить по Y', 'Замостить по X+Y'];
   public maskTypeList = ['Вся площадь виджета', 'Только под контентом'];
-  public placeImg = [null, 'Сверху', null, 'Слева', '',  'Справа', null, 'Снизу', null];
+  public placeImg = [null, 'Сверху', null, 'Слева', '', 'Справа', null, 'Снизу', null];
   public imageItemsType = ['Растянуть по ширине и высоте блока', 'Установить произвольные габариты'];
   public imageItemsAlign = ['По центру', 'По верхнему краю', 'По нижнему краю'];
   public orientInputForm = ['Вертикальная', 'Горизонтальная'];
@@ -116,6 +106,15 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   public globalCouponObject: object;
   public currentPage = 'main';
   public currentDevice: 'desktop' | 'mobile' = 'desktop';
+  @Input() private currentActiveTab: string;
+  @Input() private SP_widget: any;
+  @Input() private isTabHasErrorForFormExt: () => boolean;
+  @Input() private mapFormExtFieldId: () => any;
+  @Input() private isFieldIdUnique: (id: any) => boolean;
+  @Input() private isButtonRedirectAndEmpty: (item: any) => boolean;
+  @Input() private isFormHasSpecElements: (item: any) => boolean;
+  @Input() private isFormHasSendIfAction: (item: any) => boolean;
+  @Input() private isFormHasButtonWithAction: (item: any) => boolean;
   private typeImg = ['От края до края', 'От другого края'];
   private sizeSocBtn = ['Большой', 'Средний', 'Маленький'];
   private imageCustom = null;
@@ -258,7 +257,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
     this.globalCouponObject = {
       name: 'coupon-element',
-      coupon: this.coupons.length ? this.coupons[0] : {id: null, name: 'Какой купон хотите использовать?'},
+      coupon: this.coupons.length ? this.coupons[0] : { id: null, name: 'Какой купон хотите использовать?' },
       font: this.systemFonts[0],
       fontType: 'systemFont',
       fontName: '',
@@ -301,21 +300,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     this.loadListener();
   }
 
-  private initLabelMainPicker() {
-    setTimeout(() => {
-      ($('#fontPickerLabelMain') as any).fontselect({
-        placeholder: 'Выберите шрифт',
-        placeholderSearch: 'Поиск...',
-        systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
-        googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
-      }).on('change', (change) => {
-        this.setNewFont(change.target.value, this.widget.guiprops.labelMain.font);
-      });
-
-      $('#fontPickerLabelMain').trigger('setFont', this.widget.guiprops.labelMain.font.name);
-    }, 500);
-  }
-
   // TODO: leave selectIcon or selectedIcon, no need 2 props
   public onLabelIconPickerSelect(newIcon) {
     this.widget.guiprops.labelMain.icon.selectIcon = newIcon;
@@ -334,9 +318,380 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     this.backToRegularElement();
   }
 
-  public setExtended(event: {element: Record<string, any>, index: number}): void {
+  public setExtended(event: { element: Record<string, any>, index: number }): void {
     this.extendedElement = event.element;
     this.extendedIndex = event.index;
+  }
+
+  public isElementHasError(elementName: string, elementCounter: number) {
+    this.mapFormExtFieldId();
+    const errors = this.validator();
+    for (const item of errors) {
+      if ((typeof item !== 'undefined') &&
+        (((item.element === elementName) && (item.counter === elementCounter)) || (!item.counter && item.element === elementName))
+      ) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public addNewElementToContent(item?) {
+    if (typeof item !== 'undefined') {
+      this.addElemFromWidget = item;
+    } else {
+      this.addElemFromWidget = false;
+    }
+
+    (this.controls.newElementModal as any).appendTo('body').modal('show');
+    $('body').addClass('modal-open-h100');
+  }
+
+  public closeModalImg() {
+    $('body').removeClass('modal-open-h100');
+  }
+
+  public updateFile() {
+    if (this.linkImage === '') {
+      this.toastr.error('Пожалуйста, выберите изображение.', 'Ошибка!');
+    } else {
+      (this.controls.newModal as any).modal('hide');
+      $('body').removeClass('modal-open-h100');
+
+      if (this.imageCustom === 'imageSingle') {
+        this.widget.guiprops.image.url = this.linkImage;
+      } else if (this.imageCustom === 'dotIcon') {
+        this.widget.guiprops.dhVisual.url = this.linkImage;
+      } else if (this.imageCustom === 'labelIcon') {
+        this.widget.guiprops.labelMain.url = this.linkImage;
+      } else if (!this.imageCustom) {
+        this.widget.guiprops.bg.url = this.linkImage;
+      } else {
+        this.imageCustom.imageUrl = this.linkImage;
+      }
+    }
+  }
+
+  public listFile(place, item?) {
+    this.linkImage = '';
+    if (place === 'image') {
+      this.imageCustom = item;
+    } else if (place === 'imageSingle') {
+      this.imageCustom = 'imageSingle';
+    } else if (place === 'dotIcon') {
+      this.imageCustom = 'dotIcon';
+    } else if (place === 'labelIcon') {
+      this.imageCustom = 'labelIcon';
+    } else {
+      this.imageCustom = false;
+    }
+
+    this.getImages(this.sid);
+
+    (this.controls.newModal as any).appendTo('body').modal('show');
+    $('body').addClass('modal-open-h100');
+  }
+
+  public isDefault(url: string): boolean {
+    return url === IMAGE_DEF;
+  }
+
+  public removeImage(isDot: boolean): void {
+    if (isDot) {
+      this.widget.guiprops.dhVisual.url = IMAGE_DEF;
+    } else {
+      this.widget.guiprops.labelMain.url = IMAGE_DEF;
+    }
+  }
+
+  public isThankShouldShow() {
+    if (!this.widget.guiprops) {
+      return;
+    }
+
+    return (this.widget.guiprops.form?.enable && !this.widget.guiprops.formSet?.redirect.enable) ||
+      (this.widget.guiprops?.formExt?.enable &&
+        this.widgetConstructorService.isFormHasCurrentTypeOfActions(this.widget.guiprops.formExt.model.list, 0));
+  }
+
+  public scrollToEl(id: string, elementName: string, elementCounter?: number) {
+    this.backToRegularElement();
+
+    if ([
+      'button-element',
+      'closelink-element',
+      'coupon-element',
+      'form-element',
+      'iframe-element',
+      'image-element',
+      'padding-element',
+      'social-element',
+      'split-element',
+      'title-element',
+      'video-element',
+      'timer-element',
+      'form-ext-element',
+    ].includes(elementName)) {
+      this.currentElement = elementName + (elementCounter ? ('#' + elementCounter) : '');
+    } else {
+      this.currentElement = 'settings';
+      const accordion = $('#accordion');
+      const accordionIn = $('#accordionIn');
+      const target = $('#elemScrN' + id);
+
+      const scrollTo = (target.offset().top) - (accordionIn.offset().top) - 40;
+      if (((target.offset().top - accordion.offset().top - 42) <= 10) && ((target.offset().top - accordion.offset().top - 42) >= -10)) {
+        return;
+      }
+
+      accordion.animate({ scrollTop: scrollTo }, 500, 'swing', () => {
+      });
+      target.addClass('border-active-element');
+      setTimeout(() => {
+        target.removeClass('border-active-element');
+      }, 1500);
+    }
+
+    if (elementName === 'title-element' || elementName === 'form-element' || elementName === 'button-element' || elementName === 'closelink-element') {
+      this.downUpInitAir();
+    }
+  }
+
+  public wvBdLeft() {
+    return this.widgetConstructorService.wvBdLeft(this.widget.guiprops.dhVisual);
+  }
+
+  public wvLabelPos() {
+    return this.widgetConstructorService.wvLabelPos(this.widget.guiprops.labelMain);
+  }
+
+  public removeCurrentElement(element: string, index: number): void {
+    if (element) {
+      if (element === 'form-element' || element === 'button-element') {
+        this.widget.guiprops.form.enable = false;
+        this.widget.guiprops.button.enable = false;
+      }
+      if (element === 'form-ext-element') {
+        this.widget.guiprops.formExt.enable = false;
+        this.widget.guiprops.formExt.model.list = [];
+      }
+    }
+    this.widget.guiprops.elementsList = this.widget.guiprops.elementsList.filter((_, i) => i !== index);
+
+    if (index === this.currentIndex) {
+      this.currentElement = 'settings';
+      this.currentIndex = 0;
+    }
+  }
+
+  public setBtnStyle(type: string, item: Record<string, string | number>): void {
+    if (type === 'Default') {
+      item.styleType = 'Default';
+      item.borderRadiusBtn = 0;
+    } else if (type === 'Material') {
+      item.styleType = 'Material';
+      item.borderRadiusBtn = 2;
+    } else if (type === 'Flat') {
+      item.styleType = 'Flat';
+      item.borderRadiusBtn = 3;
+    } else if (type === 'Border Style') {
+      item.styleType = 'Border Style';
+      item.borderRadiusBtn = 0;
+    }
+  }
+
+  public buildIframeElement(item, index: number, rebuild: boolean): void {
+    setTimeout(() => {
+      const elementToRemove = document.getElementById('idFrame' + item.counter);
+      const oldIndex = elementToRemove.getAttribute('index');
+
+      const iframeBlock = document.getElementById('elementIframeBlock' + item.counter);
+
+      if (!iframeBlock || (+oldIndex === index && !rebuild)) {
+        return;
+      }
+
+      const ifrm = document.createElement('iframe');
+      ifrm.setAttribute('src', 'about:blank');
+      ifrm.setAttribute('frameBorder', '0');
+      ifrm.setAttribute('id', 'idFrame' + item.counter);
+      ifrm.setAttribute('style', 'position:relative!important;width:100%!important;height:100%!important;border:none!important');
+      ifrm.setAttribute('index', index.toString());
+
+      iframeBlock.replaceChild(ifrm, elementToRemove);
+
+      const doc = ifrm.contentWindow.document;
+      doc.open().write('<body>' + '<style>body{margin:0!important;}' + item.css_value + '</style>' + item.html_value + '</body>');
+      doc.close();
+    }, 0);
+  }
+
+  public getVideoId(item) {
+    if (!item.videoUrl) {
+      item.videoUrl = 'https://';
+    }
+
+    let result = '';
+    if (item.videoType === 'youtube') {
+      const regYExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+      const match = item.videoUrl.match(regYExp);
+      result = (match && match[7].length === 11) ? match[7] : false;
+      if (result) {
+        if (item.isVideoBG) {
+          item.videoPreview = 'https://img.youtube.com/vi/' + result + '/hqdefault.jpg';
+          result = result +
+            '?controls=0&iv_load_policy=3&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&modestbranding=1&disablekb=1&playlist=' + result;
+        }
+        item.videoUrl = 'https://www.youtube.com/embed/' + result;
+      }
+    } else {
+      const regVExp = /^.+vimeo.com\/(.*\/)?([^#\?]*)/;
+      const parseUrl = item.videoUrl.match(regVExp);
+      result = (parseUrl && parseUrl[2].length === 9) ? parseUrl[2] : false;
+      result += '';
+      if (result) {
+        if (item.isVideoBG) {
+          item.videoPreview = 'https://i.vimeocdn.com/video/' + result + '.png';
+          result = result + '?background=1';
+        }
+        item.videoUrl = 'https://player.vimeo.com/video/' + result;
+      }
+    }
+
+    item.videoId = result;
+    this.newVideoSize(item);
+  }
+
+  public newVideoSize(item) {
+    setTimeout(() => {
+      if (item.typeBl) {
+        $('#idImageVideoFrame').attr('src', item.videoUrl);
+      } else if (item.counter) {
+        $('#idVideoFrame' + item.counter).attr('src', item.videoUrl);
+      } else if (item.isVideoBG) {
+        $('#idBgVideoFrame').attr('src', item.videoUrl);
+        $('#idBgVideoFrameThank').attr('src', item.videoUrl);
+      }
+
+      if (item.width_type) {
+        if (item.width_type === 'От края до края') {
+          $('#idVideoFrame' + item.counter).css({ width: '100%' });
+        } else {
+          $('#idVideoFrame' + item.counter).css({ width: (item.widthpx + 'px') });
+        }
+        $('#idVideoFrame' + item.counter).css({ height: ($('#idVideoFrame' + item.counter).innerWidth() / 1.666) + 'px' });
+      }
+    }, 0);
+  }
+
+  public changePosition(position: string): void {
+    if (this.widgetType === 'popup') {
+      this.widget.guiprops.popupMain.place = position;
+    } else if (this.widgetType === 'optindot') {
+      this.widget.guiprops.dhVisual.place = position;
+    } else if (this.widgetType === 'label_widget') {
+      this.widget.guiprops.labelMain.place = position;
+    } else {
+      this.widget.guiprops.staticMain.position = position;
+    }
+  }
+
+  public getElementByName(name: string): string {
+    switch (name) {
+      case 'button-element':
+        return 'Кнопка';
+      case 'closelink-element':
+        return 'Кнопка закрытия';
+      case 'coupon-element':
+        return 'Купон';
+      case 'form-element':
+        return 'Форма и кнопки';
+      case 'iframe-element':
+        return 'HTML / JS / Iframe';
+      case 'image-element':
+        return 'Картинка';
+      case 'padding-element':
+        return 'Отступ';
+      case 'social-element':
+        return 'Соц. кнопки';
+      case 'split-element':
+        return 'Разделитель';
+      case 'title-element':
+        return 'Текст';
+      case 'video-element':
+        return 'Видео';
+      case 'timer-element':
+        return 'Обратный отсчёт';
+      case 'form-ext-element':
+        return 'Форма Ext';
+    }
+  }
+
+  public addElementModalHide() {
+    (this.controls.newElementModal as any).modal('hide');
+    $('body').removeClass('modal-open-h100');
+  }
+
+  public disElementOrNotBtnCloseLink() {
+    if (!this.widget.guiprops) {
+      return;
+    }
+
+    if (this.widgetType === WidgetTypeCode.Optindot) {
+      return true;
+    }
+
+    for (const item of this.widget.guiprops.elementsList) {
+      if (item.name === 'closelink-element' ||
+        (this.widget.guiprops.formExt && this.widget.guiprops.formExt.enable &&
+          this.widgetConstructorService.isFormHasCurrentTypeButtons(this.widget.guiprops.formExt.model.list, 2))) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public showLastElement(): void {
+    this.checkChanges();
+    const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
+    this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
+    this.currentIndex = this.widget.guiprops.elementsList.length - 1;
+  }
+
+  public setCurrentElement(elementName: string): void {
+    this.backToRegularElement();
+    this.currentElement = elementName;
+  }
+
+  public backToRegularElement(): void {
+    this.extendedElement = null;
+    this.extendedIndex = null;
+  }
+
+  ngOnDestroy(): void {
+    if (this.autoUploadSub) {
+      this.autoUploadSub.unsubscribe();
+    }
+
+    if (this.imagesSub) {
+      this.imagesSub.unsubscribe();
+    }
+  }
+
+  private initLabelMainPicker() {
+    setTimeout(() => {
+      ($('#fontPickerLabelMain') as any).fontselect({
+        placeholder: 'Выберите шрифт',
+        placeholderSearch: 'Поиск...',
+        systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
+        googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
+      }).on('change', (change) => {
+        this.setNewFont(change.target.value, this.widget.guiprops.labelMain.font);
+      });
+
+      $('#fontPickerLabelMain').trigger('setFont', this.widget.guiprops.labelMain.font.name);
+    }, 500);
   }
 
   private setNewFont(value, data) {
@@ -366,20 +721,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     }
 
     mainBlock.style.height = $(window).height() - 70 + 'px';
-  }
-
-  public isElementHasError(elementName: string, elementCounter: number) {
-    this.mapFormExtFieldId();
-    const errors = this.validator();
-    for (const item of errors) {
-      if ((typeof item !== 'undefined') &&
-        (((item.element === elementName) && (item.counter === elementCounter)) || (!item.counter && item.element === elementName))
-      ) {
-        return true;
-      }
-    }
-
-    return false;
   }
 
   private validator() {
@@ -954,17 +1295,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     }
   }
 
-  public addNewElementToContent(item?) {
-    if (typeof item !== 'undefined') {
-      this.addElemFromWidget = item;
-    } else {
-      this.addElemFromWidget = false;
-    }
-
-    (this.controls.newElementModal as any).appendTo('body').modal('show');
-    $('body').addClass('modal-open-h100');
-  }
-
   private changeModel() {
     const mainBlockW = $('.widget-image');
     const mainBl = $('#mainBlockWidget');
@@ -1494,8 +1824,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     if (this.widget.guiprops.bg.mask.enable) {
       this.widget.guiprops.bg.mask.rgbaColor =
         (this.widgetConstructorService.hexToRgb(this.widget.guiprops.bg.mask.color, this.widget.guiprops.bg.mask.opacity)).toString();
-    }
-    else {
+    } else {
       this.widget.guiprops.bg.mask.rgbaColor = 'transparent';
     }
 
@@ -1628,63 +1957,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     });
   }
 
-  public closeModalImg() {
-    $('body').removeClass('modal-open-h100');
-  }
-
-  public updateFile() {
-    if (this.linkImage === '') {
-      this.toastr.error('Пожалуйста, выберите изображение.', 'Ошибка!');
-    } else {
-      (this.controls.newModal as any).modal('hide');
-      $('body').removeClass('modal-open-h100');
-
-      if (this.imageCustom === 'imageSingle') {
-        this.widget.guiprops.image.url = this.linkImage;
-      } else if (this.imageCustom === 'dotIcon') {
-        this.widget.guiprops.dhVisual.url = this.linkImage;
-      } else if (this.imageCustom === 'labelIcon') {
-        this.widget.guiprops.labelMain.url = this.linkImage;
-      } else if (!this.imageCustom) {
-        this.widget.guiprops.bg.url = this.linkImage;
-      } else {
-        this.imageCustom.imageUrl = this.linkImage;
-      }
-    }
-  }
-
-  public listFile(place, item?) {
-    this.linkImage = '';
-    if (place === 'image') {
-      this.imageCustom = item;
-    } else if (place === 'imageSingle') {
-      this.imageCustom = 'imageSingle';
-    } else if (place === 'dotIcon') {
-      this.imageCustom = 'dotIcon';
-    } else if (place === 'labelIcon') {
-      this.imageCustom = 'labelIcon';
-    } else {
-      this.imageCustom = false;
-    }
-
-    this.getImages(this.sid);
-
-    (this.controls.newModal as any).appendTo('body').modal('show');
-    $('body').addClass('modal-open-h100');
-  }
-
-  public isDefault(url: string): boolean {
-    return url === IMAGE_DEF;
-  }
-
-  public removeImage(isDot: boolean): void {
-    if (isDot) {
-      this.widget.guiprops.dhVisual.url = IMAGE_DEF;
-    } else {
-      this.widget.guiprops.labelMain.url = IMAGE_DEF;
-    }
-  }
-
   private getImages(sid: string): void {
     this.imagesSub = this.widgetConstructorService.getImages(sid).subscribe((data: Images) => {
       this.fillListImage(data.images);
@@ -1790,102 +2062,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     $('#btnCloseImgM').click();
   }
 
-  public isThankShouldShow() {
-    if (!this.widget.guiprops) {
-      return;
-    }
-
-    return (this.widget.guiprops.form?.enable && !this.widget.guiprops.formSet?.redirect.enable) ||
-      (this.widget.guiprops?.formExt?.enable &&
-        this.widgetConstructorService.isFormHasCurrentTypeOfActions(this.widget.guiprops.formExt.model.list, 0));
-  }
-
-  public scrollToEl(id: string, elementName: string, elementCounter?: number) {
-    this.backToRegularElement();
-
-    if ([
-      'button-element',
-      'closelink-element',
-      'coupon-element',
-      'form-element',
-      'iframe-element',
-      'image-element',
-      'padding-element',
-      'social-element',
-      'split-element',
-      'title-element',
-      'video-element',
-      'timer-element',
-      'form-ext-element',
-    ].includes(elementName)) {
-        this.currentElement = elementName + (elementCounter ? ('#' + elementCounter) : '');
-    } else {
-      this.currentElement = 'settings';
-      const accordion = $('#accordion');
-      const accordionIn = $('#accordionIn');
-      const target = $('#elemScrN' + id);
-
-      const scrollTo = (target.offset().top) - (accordionIn.offset().top) - 40;
-      if (((target.offset().top - accordion.offset().top - 42) <= 10) && ((target.offset().top - accordion.offset().top - 42) >= -10)) {
-        return;
-      }
-
-      accordion.animate({ scrollTop: scrollTo }, 500, 'swing', () => {
-      });
-      target.addClass('border-active-element');
-      setTimeout(() => {
-        target.removeClass('border-active-element');
-      }, 1500);
-    }
-
-    if (elementName === 'title-element' || elementName === 'form-element' || elementName === 'button-element' || elementName === 'closelink-element') {
-      this.downUpInitAir();
-    }
-  }
-
-  public wvBdLeft() {
-    return this.widgetConstructorService.wvBdLeft(this.widget.guiprops.dhVisual);
-  }
-
-  public wvLabelPos() {
-    return this.widgetConstructorService.wvLabelPos(this.widget.guiprops.labelMain);
-  }
-
-  public removeCurrentElement(element: string, index: number): void {
-    if (element) {
-      if (element === 'form-element' || element === 'button-element') {
-        this.widget.guiprops.form.enable = false;
-        this.widget.guiprops.button.enable = false;
-      }
-      if (element === 'form-ext-element') {
-        this.widget.guiprops.formExt.enable = false;
-        this.widget.guiprops.formExt.model.list = [];
-      }
-    }
-    this.widget.guiprops.elementsList = this.widget.guiprops.elementsList.filter((_, i) => i !== index);
-
-    if (index === this.currentIndex) {
-      this.currentElement = 'settings';
-      this.currentIndex = 0;
-    }
-  }
-
-  public setBtnStyle(type: string, item: Record<string, string | number>): void {
-    if (type === 'Default') {
-      item.styleType = 'Default';
-      item.borderRadiusBtn = 0;
-    } else if (type === 'Material') {
-      item.styleType = 'Material';
-      item.borderRadiusBtn = 2;
-    } else if (type === 'Flat') {
-      item.styleType = 'Flat';
-      item.borderRadiusBtn = 3;
-    } else if (type === 'Border Style') {
-      item.styleType = 'Border Style';
-      item.borderRadiusBtn = 0;
-    }
-  }
-
   private changeColorPodAndSRC() {
     setTimeout(() => {
       // PODLOZHKA settings
@@ -1901,7 +2077,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           this.setTopForColorPod(mainBl, colorFormPod, widgetFormBlM, widgetButtonBlM, widgetFormExtBlM, offsetPadding);
         }, 100);
         setTimeout(() => {
-          this.setTopForColorPod(mainBl, colorFormPod, widgetFormBlM, widgetButtonBlM, widgetFormExtBlM, offsetPadding, );
+          this.setTopForColorPod(mainBl, colorFormPod, widgetFormBlM, widgetButtonBlM, widgetFormExtBlM, offsetPadding,);
         }, 200);
       }
     }, 0);
@@ -1968,184 +2144,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         $(this).removeClass('dropup');
       }
     });
-  }
-
-  public buildIframeElement(item, index: number, rebuild: boolean): void {
-    setTimeout(() => {
-      const elementToRemove = document.getElementById('idFrame' + item.counter);
-      const oldIndex = elementToRemove.getAttribute('index');
-
-      const iframeBlock = document.getElementById('elementIframeBlock' + item.counter);
-
-      if (!iframeBlock || (+oldIndex === index && !rebuild)) {
-        return;
-      }
-
-      const ifrm = document.createElement('iframe');
-      ifrm.setAttribute('src', 'about:blank');
-      ifrm.setAttribute('frameBorder', '0');
-      ifrm.setAttribute('id', 'idFrame' + item.counter);
-      ifrm.setAttribute('style', 'position:relative!important;width:100%!important;height:100%!important;border:none!important');
-      ifrm.setAttribute('index', index.toString());
-
-      iframeBlock.replaceChild(ifrm, elementToRemove);
-
-      const doc = ifrm.contentWindow.document;
-      doc.open().write('<body>' + '<style>body{margin:0!important;}' + item.css_value + '</style>' + item.html_value + '</body>');
-      doc.close();
-    }, 0);
-  }
-
-  public getVideoId(item) {
-    if (!item.videoUrl) {
-      item.videoUrl = 'https://';
-    }
-
-    let result = '';
-    if (item.videoType === 'youtube') {
-      const regYExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-      const match = item.videoUrl.match(regYExp);
-      result = (match && match[7].length === 11) ? match[7] : false;
-      if (result) {
-        if (item.isVideoBG) {
-          item.videoPreview = 'https://img.youtube.com/vi/' + result + '/hqdefault.jpg';
-          result = result +
-            '?controls=0&iv_load_policy=3&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&modestbranding=1&disablekb=1&playlist=' + result;
-        }
-        item.videoUrl = 'https://www.youtube.com/embed/' + result;
-      }
-    } else {
-      const regVExp = /^.+vimeo.com\/(.*\/)?([^#\?]*)/;
-      const parseUrl = item.videoUrl.match(regVExp);
-      result = (parseUrl && parseUrl[2].length === 9) ? parseUrl[2] : false;
-      result += '';
-      if (result) {
-        if (item.isVideoBG) {
-          item.videoPreview = 'https://i.vimeocdn.com/video/' + result + '.png';
-          result = result + '?background=1';
-        }
-        item.videoUrl = 'https://player.vimeo.com/video/' + result;
-      }
-    }
-
-    item.videoId = result;
-    this.newVideoSize(item);
-  }
-
-  public newVideoSize(item) {
-    setTimeout(() => {
-      if (item.typeBl) {
-        $('#idImageVideoFrame').attr('src', item.videoUrl);
-      } else if (item.counter) {
-        $('#idVideoFrame' + item.counter).attr('src', item.videoUrl);
-      } else if (item.isVideoBG) {
-        $('#idBgVideoFrame').attr('src', item.videoUrl);
-        $('#idBgVideoFrameThank').attr('src', item.videoUrl);
-      }
-
-      if (item.width_type) {
-        if (item.width_type === 'От края до края') {
-          $('#idVideoFrame' + item.counter).css({ width: '100%' });
-        } else {
-          $('#idVideoFrame' + item.counter).css({ width: (item.widthpx + 'px') });
-        }
-        $('#idVideoFrame' + item.counter).css({ height: ($('#idVideoFrame' + item.counter).innerWidth() / 1.666) + 'px' });
-      }
-    }, 0);
-  }
-
-  public changePosition(position: string): void {
-    if (this.widgetType === 'popup') {
-      this.widget.guiprops.popupMain.place = position;
-    } else if (this.widgetType === 'optindot') {
-      this.widget.guiprops.dhVisual.place = position;
-    } else if (this.widgetType === 'label_widget') {
-      this.widget.guiprops.labelMain.place = position;
-    } else {
-      this.widget.guiprops.staticMain.position = position;
-    }
-  }
-
-  public getElementByName(name: string): string {
-    switch (name) {
-      case 'button-element':
-        return 'Кнопка';
-      case 'closelink-element':
-        return 'Кнопка закрытия';
-      case 'coupon-element':
-        return 'Купон';
-      case 'form-element':
-        return 'Форма и кнопки';
-      case 'iframe-element':
-        return 'HTML / JS / Iframe';
-      case 'image-element':
-        return 'Картинка';
-      case 'padding-element':
-        return 'Отступ';
-      case 'social-element':
-        return 'Соц. кнопки';
-      case 'split-element':
-        return 'Разделитель';
-      case 'title-element':
-        return 'Текст';
-      case 'video-element':
-        return 'Видео';
-      case 'timer-element':
-        return 'Обратный отсчёт';
-      case 'form-ext-element':
-        return 'Форма Ext';
-    }
-  }
-
-  public addElementModalHide() {
-    (this.controls.newElementModal as any).modal('hide');
-    $('body').removeClass('modal-open-h100');
-  }
-
-  public disElementOrNotBtnCloseLink() {
-    if (!this.widget.guiprops) {
-      return;
-    }
-
-    if (this.widgetType === WidgetTypeCode.Optindot) {
-      return true;
-    }
-
-    for (const item of this.widget.guiprops.elementsList) {
-      if (item.name === 'closelink-element' ||
-        (this.widget.guiprops.formExt && this.widget.guiprops.formExt.enable &&
-          this.widgetConstructorService.isFormHasCurrentTypeButtons(this.widget.guiprops.formExt.model.list, 2))) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public showLastElement(): void {
-    this.checkChanges();
-    const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
-    this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
-    this.currentIndex = this.widget.guiprops.elementsList.length - 1;
-  }
-
-  public setCurrentElement(elementName: string): void {
-    this.backToRegularElement();
-    this.currentElement = elementName;
-  }
-
-  public backToRegularElement(): void {
-    this.extendedElement = null;
-    this.extendedIndex = null;
-  }
-
-  ngOnDestroy(): void {
-    if (this.autoUploadSub) {
-      this.autoUploadSub.unsubscribe();
-    }
-
-    if (this.imagesSub) {
-      this.imagesSub.unsubscribe();
-    }
   }
 
 }

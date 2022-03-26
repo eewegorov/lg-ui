@@ -13,7 +13,6 @@ import { CouponMultipleComponent } from './coupon-multiple/coupon-multiple.compo
 import { CouponUniqueComponent } from './coupon-unique/coupon-unique.component';
 
 
-
 @NgModule({
   declarations: [
     CouponsComponent,
@@ -32,4 +31,5 @@ import { CouponUniqueComponent } from './coupon-unique/coupon-unique.component';
     CouponsRoutingModule
   ]
 })
-export class CouponsModule { }
+export class CouponsModule {
+}

@@ -8,9 +8,9 @@ describe('PositionControlComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PositionControlComponent ]
+      declarations: [PositionControlComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

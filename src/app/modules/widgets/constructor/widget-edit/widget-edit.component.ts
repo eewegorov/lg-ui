@@ -4,18 +4,12 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import Swal from 'sweetalert2';
-import { cloneDeep, isEqual, isEmpty, isObject, transform } from 'lodash-es';
+import { cloneDeep, isEmpty, isEqual, isObject, transform } from 'lodash-es';
 import * as moment from 'moment';
 import { SiteShort } from '../../../../core/models/sites';
 import { Coupon } from '../../../../core/models/coupons';
-import { User, UserRole } from '../../../../core/models/user';
-import {
-  FullWidget,
-  MockupGroup,
-  MockupShort,
-  WidgetType
-} from '../../../../core/models/widgets';
+import { User } from '../../../../core/models/user';
+import { FullWidget, MockupGroup, WidgetType } from '../../../../core/models/widgets';
 import { TariffsService } from '../../../../core/services/tariffs.service';
 import { CoreSitesService } from '../../../../core/services/core-sites.service';
 import { SitesService } from '../../../sites/services/sites.service';
@@ -58,7 +52,8 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   public isLoading = false;
   public SP_widget = {} as any;
   public showErrors = false;
-
+  @ViewChild(ConstructorDesignComponent) constructorDesignComponent: ConstructorDesignComponent;
+  @ViewChild(ConstructorDesignComponent) constructorRulesComponent: ConstructorRulesComponent;
   private couponsErrorFlag = false;
   private couponsId = [];
   private customFields = [];
@@ -68,11 +63,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   private formExtNeedButton = false;
   private formExtRedirectFieldEmpty = false;
   private defaultCoupon = { id: null, name: 'Какой купон хотите использовать?' };
-
   private meInfoSub: SubscriptionLike;
-
-  @ViewChild(ConstructorDesignComponent) constructorDesignComponent: ConstructorDesignComponent;
-  @ViewChild(ConstructorDesignComponent) constructorRulesComponent: ConstructorRulesComponent;
 
   constructor(
     private router: Router,
@@ -331,15 +322,21 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
 
   public switchWidget(widget, newValue) {
     $('[role="tooltip"]').remove();
-    if (widget.active === newValue) { return false; }
+    if (widget.active === newValue) {
+      return false;
+    }
     if (this.isContainerized) {
       this.containerizedWidgetService.switch(this.sid, widget.id, newValue).subscribe((response: boolean) => {
-        if (!response) { return false; }
+        if (!response) {
+          return false;
+        }
         this.widget.active = newValue;
       });
     } else {
       this.widgetService.switch(this.sid, widget.id, newValue).subscribe((response: boolean) => {
-        if (!response) { return false; }
+        if (!response) {
+          return false;
+        }
         this.widget.active = newValue;
       });
     }
@@ -360,24 +357,77 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     }
   }
 
-  private difference(object: FullWidget, base: FullWidget): Partial<FullWidget> {
-    // eslint-disable-next-line @typescript-eslint/no-shadow
-    function changes(object, base) {
-      return transform(object, (result, value, key) => {
-        if (!isEqual(value, base[key])) {
-          result[key] = (isObject(value) && isObject(base[key])) ? changes(value, base[key]) : value;
+  public mapFormExtFieldId() {
+    if (!this.widget.guiprops.formExt) {
+      return;
+    }
+
+    this.formExtIdsErrorFlag = false;
+    this.formExtNeedButton = false;
+    this.formExtRedirectFieldEmpty = false;
+    this.formExtIdsCached = [];
+    this.customFields = [];
+    const listOfBodies = $('#collapseTwo').find('.form-ext-item');
+    listOfBodies.each((index, item) => {
+      $(item).removeClass('form-ext-item__alarm-class');
+    });
+
+    this.widget.guiprops.formExt.model.list.forEach((item, index) => {
+      // Map identifier of elements in form
+      if (this.widgetConstructorService.isItemMultiAndHasId(item.type)) {
+        if (this.isFieldIdUnique(item.idField)) {
+          const formExtEnumType = {
+            text: 'TEXT',
+            date: 'DATE',
+            rating: 'RATING',
+            dd: 'LISTBOX',
+            variants: 'COMBOBOX'
+          };
+
+          this.customFields.push({
+            id: item.id,
+            integrationTag: item.idField,
+            name: item.service || item.label,
+            type: formExtEnumType[item.type]
+          });
+        } else {
+          $(listOfBodies[index]).addClass('form-ext-item__alarm-class');
+          this.formExtIdsErrorFlag = true;
         }
+        this.formExtIdsCached.push(item.idField);
+      }
+    });
+
+    this.formExtRedirectFieldEmpty = this.widget.guiprops.formExt.model.list.some((item) => {
+      return this.isButtonRedirectAndEmpty(item);
+    });
+
+    let isFormHasSendIfActionFLAG;
+    const isFormHasInputsFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
+      return this.widgetConstructorService.isFormHasInputs(item);
+    });
+
+    const isFormHasSpecElementsFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
+      return this.isFormHasSpecElements(item);
+    });
+
+    if (isFormHasSpecElementsFLAG) {
+      isFormHasSendIfActionFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
+        return this.isFormHasSendIfAction(item);
       });
     }
-    return changes(object, base);
+
+    const isFormHasActionButtonFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
+      return this.isFormHasButtonWithAction(item);
+    });
+
+    const ifFormHasSpecWithoutActionORNot = (typeof isFormHasSendIfActionFLAG !== 'undefined' && !isFormHasSendIfActionFLAG)
+      || typeof isFormHasSendIfActionFLAG === 'undefined';
+    this.formExtNeedButton = isFormHasInputsFLAG && ifFormHasSpecWithoutActionORNot && !isFormHasActionButtonFLAG;
   }
 
-  private checkWidgetRenameTitle() {
-    ($('#renameWidgetBtn') as any).tooltip('destroy');
-    if (this.widget?.name?.length > 35) {
-      ($('#renameWidgetBtn') as any).attr('title', this.widget.name);
-      ($('#renameWidgetBtn') as any).tooltip({ trigger: 'hover' });
-    }
+  public isButtonRedirectAndEmpty(item) {
+    return item.type === 'button' && (item.redirect.type.type === 1 || item.redirect.type.type === 3) && !item.redirect.url;
   }
 
   /*private saveMockupItem() {
@@ -422,11 +472,56 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     }
   }*/
 
+  public isFormHasSpecElements(item) {
+    return item.type === 'rating' || item.type === 'dd' || item.type === 'variants';
+  }
+
+  public isFormHasSendIfAction(item) {
+    return (item.type === 'rating' && item.sendFormIfAction) ||
+      (item.type === 'dd' && item.sendFormIfAction) ||
+      (item.type === 'variants' && item.sendFormIfAction);
+  }
+
+  public isFormHasButtonWithAction(item) {
+    return item.type === 'button' && (item.redirect.type.type === 0 || item.redirect.type.type === 1);
+  }
+
+  public isFieldIdUnique(id) {
+    return id !== 'email' && id !== 'name' && id !== 'message' && id !== 'phone' && this.formExtIdsCached.indexOf(id) === -1;
+  }
+
+  ngOnDestroy(): void {
+    if (this.meInfoSub) {
+      this.meInfoSub.unsubscribe();
+    }
+  }
+
+  private difference(object: FullWidget, base: FullWidget): Partial<FullWidget> {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    function changes(object, base) {
+      return transform(object, (result, value, key) => {
+        if (!isEqual(value, base[key])) {
+          result[key] = (isObject(value) && isObject(base[key])) ? changes(value, base[key]) : value;
+        }
+      });
+    }
+
+    return changes(object, base);
+  }
+
+  private checkWidgetRenameTitle() {
+    ($('#renameWidgetBtn') as any).tooltip('destroy');
+    if (this.widget?.name?.length > 35) {
+      ($('#renameWidgetBtn') as any).attr('title', this.widget.name);
+      ($('#renameWidgetBtn') as any).tooltip({ trigger: 'hover' });
+    }
+  }
+
   private saveWidgetItem() {
     this.widget.guiprops.dhVisual.lastModifiedDate = new Date().toString();
-    this.widget.guiprops.dhVisual.widget_width_all   = this.SP_widget.widget_width_all;
-    this.widget.guiprops.dhVisual.widget_height_all  = this.SP_widget.widget_height_all;
-    this.widget.guiprops.dhVisual.widget_width_nopx  = this.SP_widget.widget_width_nopx;
+    this.widget.guiprops.dhVisual.widget_width_all = this.SP_widget.widget_width_all;
+    this.widget.guiprops.dhVisual.widget_height_all = this.SP_widget.widget_height_all;
+    this.widget.guiprops.dhVisual.widget_width_nopx = this.SP_widget.widget_width_nopx;
     this.widget.guiprops.dhVisual.widget_height_nopx = this.SP_widget.widget_height_nopx;
     this.widget.guiprops.dhVisual.widget_ul_width_nopx = this.SP_widget.widget_ul_width_nopx;
     this.widget.guiprops.dhVisual.CP_width = this.SP_widget.widget_CP_width;
@@ -544,97 +639,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     return _.enable && _.couponCallback && _.couponCallback.enable;
   }
 
-  public mapFormExtFieldId() {
-    if (!this.widget.guiprops.formExt) {
-      return;
-    }
-
-    this.formExtIdsErrorFlag = false;
-    this.formExtNeedButton = false;
-    this.formExtRedirectFieldEmpty = false;
-    this.formExtIdsCached = [];
-    this.customFields = [];
-    const listOfBodies = $('#collapseTwo').find('.form-ext-item');
-    listOfBodies.each((index, item) => {
-      $(item).removeClass('form-ext-item__alarm-class');
-    });
-
-    this.widget.guiprops.formExt.model.list.forEach((item, index) => {
-      // Map identifier of elements in form
-      if (this.widgetConstructorService.isItemMultiAndHasId(item.type)) {
-        if (this.isFieldIdUnique(item.idField)) {
-          const formExtEnumType = {
-            text: 'TEXT',
-            date: 'DATE',
-            rating: 'RATING',
-            dd: 'LISTBOX',
-            variants: 'COMBOBOX'
-          };
-
-          this.customFields.push({
-            id: item.id,
-            integrationTag: item.idField,
-            name: item.service || item.label,
-            type: formExtEnumType[item.type]
-          });
-        } else {
-          $(listOfBodies[index]).addClass('form-ext-item__alarm-class');
-          this.formExtIdsErrorFlag = true;
-        }
-        this.formExtIdsCached.push(item.idField);
-      }
-    });
-
-    this.formExtRedirectFieldEmpty = this.widget.guiprops.formExt.model.list.some((item) => {
-      return this.isButtonRedirectAndEmpty(item);
-    });
-
-    let isFormHasSendIfActionFLAG;
-    const isFormHasInputsFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
-      return this.widgetConstructorService.isFormHasInputs(item);
-    });
-
-    const isFormHasSpecElementsFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
-      return this.isFormHasSpecElements(item);
-    });
-
-    if (isFormHasSpecElementsFLAG) {
-      isFormHasSendIfActionFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
-        return this.isFormHasSendIfAction(item);
-      });
-    }
-
-    const isFormHasActionButtonFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
-      return this.isFormHasButtonWithAction(item);
-    });
-
-    const ifFormHasSpecWithoutActionORNot = (typeof isFormHasSendIfActionFLAG !== 'undefined' && !isFormHasSendIfActionFLAG)
-      || typeof isFormHasSendIfActionFLAG === 'undefined';
-    this.formExtNeedButton = isFormHasInputsFLAG && ifFormHasSpecWithoutActionORNot && !isFormHasActionButtonFLAG;
-  }
-
-  public isButtonRedirectAndEmpty(item) {
-    return item.type === 'button' && (item.redirect.type.type === 1 || item.redirect.type.type === 3) && !item.redirect.url;
-  }
-
-  public isFormHasSpecElements(item) {
-    return item.type === 'rating' || item.type === 'dd' || item.type === 'variants';
-  }
-
-  public isFormHasSendIfAction(item) {
-    return (item.type === 'rating' && item.sendFormIfAction) ||
-      (item.type === 'dd' && item.sendFormIfAction) ||
-      (item.type === 'variants' && item.sendFormIfAction);
-  }
-
-  public isFormHasButtonWithAction(item) {
-    return item.type === 'button' && (item.redirect.type.type === 0 || item.redirect.type.type === 1);
-  }
-
-  public isFieldIdUnique(id) {
-    return id !== 'email' && id !== 'name' && id !== 'message' && id !== 'phone' && this.formExtIdsCached.indexOf(id) === -1;
-  }
-
   private initTypes() {
     this.widgetService.getWidgetsTypes().subscribe((response: WidgetType[]) => {
       this.initSites();
@@ -685,15 +689,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     });
   }
 
-  private checkCouponsCallback(callbackModel) {
-    const isItExist = this.coupons.find((coupon) => {
-      return coupon.id === callbackModel.coupon.id;
-    });
-    if (!isItExist) {
-      callbackModel.coupon = { ...this.defaultCoupon };
-    }
-  }
-
   /*private loadMockup() {
     this.widgetService.getMockup(this.wid).subscribe((data: MockupShort) => {
       this.widget = data as unknown as FullWidget;
@@ -704,19 +699,28 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     );
   }*/
 
+  private checkCouponsCallback(callbackModel) {
+    const isItExist = this.coupons.find((coupon) => {
+      return coupon.id === callbackModel.coupon.id;
+    });
+    if (!isItExist) {
+      callbackModel.coupon = { ...this.defaultCoupon };
+    }
+  }
+
   private loadWidget() {
     this.widgetService.getWidgetById(this.sid, this.wid).subscribe((response: FullWidget) => {
-      this.widget = response;
+        this.widget = response;
 
-      setTimeout(() => {
-        this.oldWidget = cloneDeep(response);
-      }, 3000);
+        setTimeout(() => {
+          this.oldWidget = cloneDeep(response);
+        }, 3000);
 
-      this.widget.id = this.wid;
-      this.isContainerized = !!this.widget.containerId;
-      this.checkWidgetRenameTitle();
-      this.widgetService.loadWidgetToController.next();
-    },
+        this.widget.id = this.wid;
+        this.isContainerized = !!this.widget.containerId;
+        this.checkWidgetRenameTitle();
+        this.widgetService.loadWidgetToController.next();
+      },
       () => this.router.navigate(['/widgets/'])
     );
   }
@@ -732,12 +736,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
       this.translate.instant('sitelist.tariff.improve'),
       description, this.coreSitesService.getSiteById(siteId).name
     );
-  }
-
-  ngOnDestroy(): void {
-    if (this.meInfoSub) {
-      this.meInfoSub.unsubscribe();
-    }
   }
 
 }

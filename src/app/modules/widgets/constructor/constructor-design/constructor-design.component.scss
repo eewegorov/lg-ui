@@ -106,7 +106,7 @@ label.title-lab {
 }
 
 .title-lab .tooltip.top {
-  left: -10px!important;
+  left: -10px !important;
 }
 
 h3.widget-title-main {
@@ -123,7 +123,7 @@ h3.widget-title-main {
   margin-top: -45px;
 }
 
-.widget-editor-tabs li>a {
+.widget-editor-tabs li > a {
   padding-top: 15px !important;
   padding-bottom: 18px !important;
   font-size: 15px;
@@ -489,7 +489,7 @@ h6.title-h6-widget a:hover {
         }
       }
 
-      +:hover {
+      + :hover {
         border-radius: 0 12px 0 0;
         transition: all 0.4s, border-radius 0s;
       }
@@ -769,9 +769,9 @@ h6.title-h6-widget a:hover {
   -moz-transition: all 0.8s ease;
   transition: all 0.8s ease;
   overflow: hidden;
-  -webkit-box-shadow: 0 1px 5px 0 rgba(0,0,0,0.25);
-  -moz-box-shadow: 0 1px 5px 0 rgba(0,0,0,0.25);
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.25);
+  -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.25);
 }
 
 .widget-dot-anim {
@@ -942,9 +942,9 @@ h6.title-h6-widget a:hover {
   right: -90px;
   bottom: auto;
   top: 40%;
-  -webkit-transform: rotate(-90deg) translate3d(0,0,0);
-  -moz-transform: rotate(-90deg) translate3d(0,0,0);
-  transform: rotate(-90deg) translate3d(0,0,0);
+  -webkit-transform: rotate(-90deg) translate3d(0, 0, 0);
+  -moz-transform: rotate(-90deg) translate3d(0, 0, 0);
+  transform: rotate(-90deg) translate3d(0, 0, 0);
 }
 
 #labelMain.wlb-left {
@@ -952,9 +952,9 @@ h6.title-h6-widget a:hover {
   right: auto;
   bottom: auto;
   top: 40%;
-  -webkit-transform: rotate(90deg) translate3d(0,0,0);
-  -moz-transform: rotate(90deg) translate3d(0,0,0);
-  transform: rotate(90deg) translate3d(0,0,0);
+  -webkit-transform: rotate(90deg) translate3d(0, 0, 0);
+  -moz-transform: rotate(90deg) translate3d(0, 0, 0);
+  transform: rotate(90deg) translate3d(0, 0, 0);
 }
 
 #labelMain .lgwg-label-line-text-in {

@@ -22,14 +22,15 @@ import {
   WidgetCloned,
   WidgetCloneRequest,
   WidgetCloneResponse,
-  WidgetStatistics,
-  WidgetStatisticsResponse,
   WidgetCreated,
   WidgetCreateRequest,
   WidgetCreateResponse,
   WidgetInfo,
-  WidgetRename, WidgetResponse,
+  WidgetRename,
+  WidgetResponse,
   WidgetsResponse,
+  WidgetStatistics,
+  WidgetStatisticsResponse,
   WidgetTemplate,
   WidgetTemplatesResponse,
   WidgetType,
@@ -46,7 +47,7 @@ import { ApiResponse } from '../../../core/models/api';
 export class WidgetService {
   public updateWidgetsList = new Subject<string>();
   public updateCurrentContainer = new Subject<string>();
-  public openCloneWidgetModal = new Subject<{data: WidgetInfo; containerId: string}>();
+  public openCloneWidgetModal = new Subject<{ data: WidgetInfo; containerId: string }>();
   public loadWidgetToController = new Subject();
   public onChangePayment = new Subject<boolean>();
   public validators = [];

@@ -3,7 +3,8 @@
   <div>
     <div *ngIf="allSites.length <= 1" class="col-lg-12 mt-5">
       <h3 class="f-0 text-center">{{ 'reports.sitePlaceholder' | translate }}</h3>
-      <h4 class="f-2 text-center underline-links blue-links hover-links" [innerHTML]="'reports.sitePlaceholder2' | translate"></h4>
+      <h4 [innerHTML]="'reports.sitePlaceholder2' | translate"
+          class="f-2 text-center underline-links blue-links hover-links"></h4>
     </div>
 
     <div *ngIf="allSites.length > 1" class="hpanel">
@@ -16,41 +17,41 @@
           <div class="filter-flexed__item">
             <h5 class="font-normal">{{ 'sidebar.sites' | translate }}:</h5>
             <ng-select
-              id="siteSelector"
-              bindValue="id"
-              bindLabel="name"
-              multiple="true"
-              appendTo="body"
-              [items]="allSites"
-              [placeholder]="'widgetsList.add.chooseSite' | translate"
-              [(ngModel)]="sitesIds"
               (add)="checkFilters($event)"
               (change)="timeoutFiltering()"
+              [(ngModel)]="sitesIds"
+              [items]="allSites"
+              [placeholder]="'widgetsList.add.chooseSite' | translate"
+              appendTo="body"
+              bindLabel="name"
+              bindValue="id"
+              id="siteSelector"
+              multiple="true"
             ></ng-select>
           </div>
           <div class="filter-flexed__item">
             <h5 class="font-normal">{{ 'crm.page.filter.period' | translate }}:</h5>
             <div
-              class="btn-group btn-group-toggle btn-group__period-selector"
-              ngbRadioGroup
-              name="radioBasic"
-              [(ngModel)]="periodType"
               (ngModelChange)="changePeriod($event)"
+              [(ngModel)]="periodType"
+              class="btn-group btn-group-toggle btn-group__period-selector"
+              name="radioBasic"
+              ngbRadioGroup
             >
-              <label ngbButtonLabel class="btn btn-default">
-                <input ngbButton type="radio" [value]="'TODAY'"> {{ 'reports.emails.period.today' | translate }}
+              <label class="btn btn-default" ngbButtonLabel>
+                <input [value]="'TODAY'" ngbButton type="radio"> {{ 'reports.emails.period.today' | translate }}
               </label>
-              <label ngbButtonLabel class="btn btn-default">
-                <input ngbButton type="radio" [value]="'YESTERDAY'"> {{ 'reports.emails.period.yesterday' | translate }}
+              <label class="btn btn-default" ngbButtonLabel>
+                <input [value]="'YESTERDAY'" ngbButton type="radio"> {{ 'reports.emails.period.yesterday' | translate }}
               </label>
-              <label ngbButtonLabel class="btn btn-default">
-                <input ngbButton type="radio" [value]="'WEEK'"> {{ 'reports.emails.period.week' | translate }}
+              <label class="btn btn-default" ngbButtonLabel>
+                <input [value]="'WEEK'" ngbButton type="radio"> {{ 'reports.emails.period.week' | translate }}
               </label>
-              <label ngbButtonLabel class="btn btn-default">
-                <input ngbButton type="radio" [value]="'DECADE'"> {{ 'reports.emails.period.decade' | translate }}
+              <label class="btn btn-default" ngbButtonLabel>
+                <input [value]="'DECADE'" ngbButton type="radio"> {{ 'reports.emails.period.decade' | translate }}
               </label>
-              <label ngbButtonLabel class="btn btn-default">
-                <input ngbButton type="radio" [value]="'MONTH'"> {{ 'reports.emails.period.month' | translate }}
+              <label class="btn btn-default" ngbButtonLabel>
+                <input [value]="'MONTH'" ngbButton type="radio"> {{ 'reports.emails.period.month' | translate }}
               </label>
               <ng-template #popContent>
                 <div id="custom-period-container-template">
@@ -69,20 +70,21 @@
                     </div>
                   </div>
                   <div class="text-right mt-3">
-                    <button id="periodApply" (click)="periodApply()" type="button" class="btn w-xs btn-success">{{ 'global.period.start' | translate }}</button>
+                    <button (click)="periodApply()" class="btn w-xs btn-success" id="periodApply"
+                            type="button">{{ 'global.period.start' | translate }}</button>
                   </div>
                 </div>
               </ng-template>
               <button
-                type="button"
-                id="periods-custom"
-                class="btn btn-default"
+                #p="ngbPopover"
+                [autoClose]="'outside'"
                 [ngClass]="(periodType === 'USER') ? 'active' : ''"
                 [ngbPopover]="popContent"
-                [autoClose]="'outside'"
+                class="btn btn-default"
                 container="body"
+                id="periods-custom"
                 placement="{{ innerWidth < 850 ? 'bottom' : 'left' }}"
-                #p="ngbPopover"
+                type="button"
               >
                 {{ 'reports.emails.period.user' | translate }}
               </button>
@@ -110,14 +112,14 @@
               <div class="row">
                 <div class="reports-emails-chart">
                   <canvas
-                    id="line"
-                    baseChart
-                    chartType="line"
+                    [colors]="colors"
                     [data]="data"
                     [labels]="labels"
-                    [colors]="colors"
-                    [options]="options"
                     [legend]="false"
+                    [options]="options"
+                    baseChart
+                    chartType="line"
+                    id="line"
                   >
                   </canvas>
                 </div>
@@ -128,12 +130,12 @@
                       <small>{{ 'reports.emails.stat.overall' | translate }}</small>
                       <div class="download-btn">
                         <button
-                          class="btn btn-default hovered-btn-blue tooltiped"
                           (click)="downloadCsv()"
-                          data-toggle="tooltip"
-                          data-placement="top"
+                          class="btn btn-default hovered-btn-blue tooltiped"
                           data-container="body"
+                          data-placement="top"
                           data-title="{{ 'reports.emails.stat.download.tooltip' | translate }}"
+                          data-toggle="tooltip"
                         ><i class="fa fa-download"></i> {{ 'reports.emails.stat.download.btn' | translate }}</button>
                       </div>
                     </div>
@@ -142,20 +144,22 @@
                       <small>{{ 'reports.emails.stat.period.title' | translate }}</small>
                       <div class="download-btn">
                         <button
-                          class="btn btn-default hovered-btn-blue tooltiped"
                           (click)="downloadCsv(periodStart, getTomorrowCopyDate(periodEnd))"
-                          data-toggle="tooltip"
-                          data-placement="top"
+                          class="btn btn-default hovered-btn-blue tooltiped"
                           data-container="body"
+                          data-placement="top"
                           data-title="{{ 'reports.emails.stat.download.tooltip' | translate }}"
-                        ><i class="fa fa-download"></i> {{ 'reports.emails.stat.download.btn' | translate }}</button></div>
+                          data-toggle="tooltip"
+                        ><i class="fa fa-download"></i> {{ 'reports.emails.stat.download.btn' | translate }}</button>
+                      </div>
                     </div>
                     <div class="list-item">
                       <h3 class="m-0 font-weight-bold">{{overallStats.periodAvg | number:'0.2'}}</h3>
                       <small>{{ 'reports.emails.stat.period.avg' | translate }}</small>
                     </div>
                   </div>
-                  <button class="btn btn-default mt-3 pull-right hovered-btn-red" (click)="clearStats()"><i class="pe-7s-trash mr-1"></i> {{ 'reports.emails.remove.btn' | translate }}</button>
+                  <button (click)="clearStats()" class="btn btn-default mt-3 pull-right hovered-btn-red"><i
+                    class="pe-7s-trash mr-1"></i> {{ 'reports.emails.remove.btn' | translate }}</button>
                 </div>
               </div>
             </div>
@@ -178,8 +182,9 @@
             <div class="list">
               <div class="list-item-container report-email-last-container">
                 <div class="list-item">
-                  <div class="list-item" *ngFor="let item of lastEmails | orderBy:['-date']; trackBy: trackById">
-                    <div class="report-email-last-logo report-email-user-icon" [ngStyle]="{'background-image': 'url(' + item.gravatarUrl + ')'}"></div>
+                  <div *ngFor="let item of lastEmails | orderBy:['-date']; trackBy: trackById" class="list-item">
+                    <div [ngStyle]="{'background-image': 'url(' + item.gravatarUrl + ')'}"
+                         class="report-email-last-logo report-email-user-icon"></div>
                     <div class="report-email-last-name">
                       <h5 class="m-0 font-weight-bold">{{ item.name }}</h5>
                       <h5 class="m-0">{{ item.email }}</h5>
@@ -194,33 +199,34 @@
 
       <div *ngIf="allSites.length > 1" class="col-lg-8">
         <div class="hpanel">
-            <div class="panel-heading">
-              <span class="panelTitle">{{ 'reports.emails.best' | translate }}</span>
-            </div>
-            <div class="panel-body">
-              <div class="reports-emails-preloader reports-emails-preloader-best"></div>
-              <div class="row report-email-sites-sites-header">
-                <div class="col-sm-5 report-email-sites-sites-header">
-                  {{ 'reports.emails.sites.sites' | translate }}
-                </div>
-                <div class="col-sm-7 report-email-sites-value-header">
-                  {{ 'reports.emails.sites.value' | translate }}
-                </div>
+          <div class="panel-heading">
+            <span class="panelTitle">{{ 'reports.emails.best' | translate }}</span>
+          </div>
+          <div class="panel-body">
+            <div class="reports-emails-preloader reports-emails-preloader-best"></div>
+            <div class="row report-email-sites-sites-header">
+              <div class="col-sm-5 report-email-sites-sites-header">
+                {{ 'reports.emails.sites.sites' | translate }}
               </div>
-              <div class="list">
-                <div class="report-email-sites-sites-rows list-item-container">
-                  <div class="row report-email-sites-sites-row list-item" *ngFor="let site of allSitesStats | orderBy:['-count'] | slice:0:5; trackBy: trackById">
-                    <div class="col-sm-5 report-email-sites-sites">
-                      {{ site.name }}
-                    </div>
-                    <div class="col-sm-7 report-email-sites-values">
-                      {{ site.count }}
-                    </div>
+              <div class="col-sm-7 report-email-sites-value-header">
+                {{ 'reports.emails.sites.value' | translate }}
+              </div>
+            </div>
+            <div class="list">
+              <div class="report-email-sites-sites-rows list-item-container">
+                <div *ngFor="let site of allSitesStats | orderBy:['-count'] | slice:0:5; trackBy: trackById"
+                     class="row report-email-sites-sites-row list-item">
+                  <div class="col-sm-5 report-email-sites-sites">
+                    {{ site.name }}
+                  </div>
+                  <div class="col-sm-7 report-email-sites-values">
+                    {{ site.count }}
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>

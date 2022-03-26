@@ -8,9 +8,9 @@ describe('CloselinkElementComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CloselinkElementComponent ]
+      declarations: [CloselinkElementComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

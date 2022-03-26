@@ -21,4 +21,5 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule
   ]
 })
-export class HomeModule { }
+export class HomeModule {
+}

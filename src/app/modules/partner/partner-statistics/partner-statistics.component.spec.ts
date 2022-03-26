@@ -8,9 +8,9 @@ describe('PartnerStatisticsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PartnerStatisticsComponent ]
+      declarations: [PartnerStatisticsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -7,10 +7,14 @@
           <div class="panel-body">
             <div class="tabs-left">
               <ul class="nav nav-tabs">
-                <li [ngClass]="{'active' : tab === 0}"><a (click)="setTab(0)">{{ 'header.settings' | translate }}</a></li>
-                <li [ngClass]="{'active' : tab === 1}"><a (click)="setTab(1)">{{ 'settings.site.tabs.integrations.title' | translate }}</a></li>
-                <li [ngClass]="{'active' : tab === 2}"><a (click)="setTab(2)">{{ 'settings.site.tabs.analytics' | translate }}</a></li>
-                <li [ngClass]="{'active' : tab === 3}"><a (click)="setTab(3)">{{ 'settings.script.title' | translate }}</a></li>
+                <li [ngClass]="{'active' : tab === 0}"><a (click)="setTab(0)">{{ 'header.settings' | translate }}</a>
+                </li>
+                <li [ngClass]="{'active' : tab === 1}"><a
+                  (click)="setTab(1)">{{ 'settings.site.tabs.integrations.title' | translate }}</a></li>
+                <li [ngClass]="{'active' : tab === 2}"><a
+                  (click)="setTab(2)">{{ 'settings.site.tabs.analytics' | translate }}</a></li>
+                <li [ngClass]="{'active' : tab === 3}"><a
+                  (click)="setTab(3)">{{ 'settings.script.title' | translate }}</a></li>
               </ul>
 
               <div class="tab-content">
@@ -21,20 +25,23 @@
                       <h4 class="site-settings-h4-text">{{ 'global.general' | translate }}:</h4>
                     </div>
                     <div class="validable form-group" data-context="name">
-                      <label for="sitename" class="control-label">{{ 'sitelist.form.name' | translate }}</label>
-                      <input id="sitename" type="text" name="name" class="form-control" [(ngModel)]="site.name">
+                      <label class="control-label" for="sitename">{{ 'sitelist.form.name' | translate }}</label>
+                      <input [(ngModel)]="site.name" class="form-control" id="sitename" name="name" type="text">
                     </div>
                     <div class="validable form-group" data-context="url">
-                      <label for="domain" class="control-label">{{ 'settings.site.settings.domain.title' | translate }}</label>
-                      <input id="domain" type="text" name="name" class="form-control" [(ngModel)]="site.url">
+                      <label class="control-label"
+                             for="domain">{{ 'settings.site.settings.domain.title' | translate }}</label>
+                      <input [(ngModel)]="site.url" class="form-control" id="domain" name="name" type="text">
                     </div>
-                    <button type="button" (click)="deleteSite()" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> {{ 'settings.site.settings.removeSite' | translate }}</button>
+                    <button (click)="deleteSite()" class="btn btn-sm btn-danger" type="button"><i
+                      class="far fa-trash-alt"></i> {{ 'settings.site.settings.removeSite' | translate }}</button>
 
                     <div class="pt-1">
-                      <h4 class="site-settings-h4-text">{{ 'settings.site.settings.notification.title' | translate }}:</h4>
+                      <h4 class="site-settings-h4-text">{{ 'settings.site.settings.notification.title' | translate }}
+                        :</h4>
                     </div>
                     <div class="form-group d-flex">
-                      <ui-switch size="small" [checked]="site.needLeadNotification"></ui-switch>
+                      <ui-switch [checked]="site.needLeadNotification" size="small"></ui-switch>
                       <label class="control-label ml-2 pt-1">
                         {{ 'settings.site.settings.notification.send' | translate }}
                       </label>
@@ -44,14 +51,14 @@
                       <h4 class="site-settings-h4-text">{{ 'settings.site.settings.stats.title' | translate }}:</h4>
                     </div>
                     <div class="form-group d-flex">
-                      <ui-switch size="small" [checked]="site.needEmailSubscriptions"></ui-switch>
+                      <ui-switch [checked]="site.needEmailSubscriptions" size="small"></ui-switch>
                       <label class="control-label ml-2">
                         {{ 'settings.site.settings.stats.email' | translate }}
                         <a
-                          data-toggle="tooltip"
+                          class="info-link"
                           data-placement="top"
-                          title="{{ 'settings.site.settings.stats.tooltip' | translate }}"
-                          class="info-link"><i class="fa fa-info-circle"></i>
+                          data-toggle="tooltip"
+                          title="{{ 'settings.site.settings.stats.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
                         </a>
                       </label>
                     </div>
@@ -60,7 +67,8 @@
                       <h4 class="site-settings-h4-text">{{ 'settings.site.settings.lglinks.title' | translate }}:</h4>
                     </div>
                     <div class="form-group d-flex">
-                      <ui-switch size="small" [checked]="site.needHideLogo" (change)="onChangePaymentLogo()"></ui-switch>
+                      <ui-switch (change)="onChangePaymentLogo()" [checked]="site.needHideLogo"
+                                 size="small"></ui-switch>
                       <label class="control-label ml-2 pt-1">
                         {{ 'settings.site.settings.lglinks.link1' | translate }}<span
                         class="label label-warning tariff-info"
@@ -68,14 +76,14 @@
                       </label>
                     </div>
                     <div class="form-group d-flex">
-                      <ui-switch size="small" [checked]="site.logoRefLink" (change)="onChangePaymentLogo()"></ui-switch>
+                      <ui-switch (change)="onChangePaymentLogo()" [checked]="site.logoRefLink" size="small"></ui-switch>
                       <label class="control-label ml-2">
                         {{ 'settings.site.settings.lglinks.link2' | translate }}
                         <a
-                          data-toggle="tooltip"
+                          class="info-link"
                           data-placement="top"
-                          title="{{ 'settings.site.settings.lglinks.tooltip' | translate }}"
-                          class="info-link"><i class="fa fa-info-circle"></i>
+                          data-toggle="tooltip"
+                          title="{{ 'settings.site.settings.lglinks.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
                         </a><span
                         class="label label-warning tariff-info"
                         style="background-color: red">{{ 'global.payment' | translate }}</span>
@@ -89,72 +97,76 @@
                     <div class="integration-tab-flex">
                       <h3>{{ 'settings.site.tabs.integrations.title' | translate }}</h3>
                       <button
-                        type="button"
-                        class="btn btn-sm btn-success"
                         (click)="openModalForCreatingNewIntegration()"
-                      ><i class="fa fa-plus-circle"></i> {{ 'settings.site.tabs.integrations.addIntegration' | translate }} </button>
+                        class="btn btn-sm btn-success"
+                        type="button"
+                      ><i
+                        class="fa fa-plus-circle"></i> {{ 'settings.site.tabs.integrations.addIntegration' | translate }}
+                      </button>
                     </div>
 
                     <div class="tab-wrap">
-                      <div class="col-lg-12 mt-5 mb-5" *ngIf="!integrations.length">
-                        <h3 class="f-0 text-center">{{ 'settings.site.settings.integrations.not.title' | translate }}</h3>
-                        <h4 class="f-2 text-center">{{ 'settings.site.settings.integrations.not.desc' | translate }}</h4>
+                      <div *ngIf="!integrations.length" class="col-lg-12 mt-5 mb-5">
+                        <h3
+                          class="f-0 text-center">{{ 'settings.site.settings.integrations.not.title' | translate }}</h3>
+                        <h4
+                          class="f-2 text-center">{{ 'settings.site.settings.integrations.not.desc' | translate }}</h4>
                       </div>
 
-                      <div class="tab-wrap__crm" *ngIf="integrationsCRM.length">
+                      <div *ngIf="integrationsCRM.length" class="tab-wrap__crm">
                         <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.crm' | translate }}</h4>
                         <div class="integration-rowed">
-                          <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsCRM">
+                          <div *ngFor="let item of integrationsCRM" class="col-md-6 integration-item-wr">
                             <app-integration-item
-                              class="integration-item__100"
-                              [widget]="item"
-                              [siteId]="siteId"
                               (updateIntegrations)="getSiteIntegrations()"
+                              [siteId]="siteId"
+                              [widget]="item"
+                              class="integration-item__100"
                             >
                             </app-integration-item>
                           </div>
                         </div>
                       </div>
 
-                      <div class="tab-wrap__crm" *ngIf="integrationsMailing.length">
+                      <div *ngIf="integrationsMailing.length" class="tab-wrap__crm">
                         <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.email' | translate }}</h4>
                         <div class="integration-rowed">
-                          <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsMailing">
+                          <div *ngFor="let item of integrationsMailing" class="col-md-6 integration-item-wr">
                             <app-integration-item
-                              class="integration-item__100"
-                              [widget]="item"
-                              [siteId]="siteId"
                               (updateIntegrations)="getSiteIntegrations()"
+                              [siteId]="siteId"
+                              [widget]="item"
+                              class="integration-item__100"
                             >
                             </app-integration-item>
                           </div>
                         </div>
                       </div>
 
-                      <div class="tab-wrap__crm" *ngIf="integrationsNotifications.length">
+                      <div *ngIf="integrationsNotifications.length" class="tab-wrap__crm">
                         <h4 class="f-1 mt-3">{{ 'settings.site.settings.notification.title' | translate }}</h4>
                         <div class="integration-rowed">
-                          <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsNotifications">
+                          <div *ngFor="let item of integrationsNotifications" class="col-md-6 integration-item-wr">
                             <app-integration-item
-                              class="integration-item__100"
-                              [widget]="item"
-                              [siteId]="siteId"
                               (updateIntegrations)="getSiteIntegrations()"
+                              [siteId]="siteId"
+                              [widget]="item"
+                              class="integration-item__100"
                             >
                             </app-integration-item>
                           </div>
                         </div>
                       </div>
 
-                      <div class="tab-wrap__crm" *ngIf="integrationsOthers.length">
+                      <div *ngIf="integrationsOthers.length" class="tab-wrap__crm">
                         <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.other' | translate }}</h4>
                         <div class="integration-rowed">
-                          <div class="col-md-6 integration-item-wr" *ngFor="let item of integrationsOthers">
+                          <div *ngFor="let item of integrationsOthers" class="col-md-6 integration-item-wr">
                             <app-integration-item
-                              class="integration-item__100"
-                              [widget]="item"
-                              [siteId]="siteId"
                               (updateIntegrations)="getSiteIntegrations()"
+                              [siteId]="siteId"
+                              [widget]="item"
+                              class="integration-item__100"
                             >
                             </app-integration-item>
                           </div>
@@ -171,8 +183,8 @@
                     <div class="integration-rowed">
                       <!-- YMetrika -->
                       <div
-                        id="crmsync-ymetrika"
                         class="col-lg-6 analyticssync-sync-panel-wrapper"
+                        id="crmsync-ymetrika"
                       >
                         <div class="mail-sync-panel">
                           <a
@@ -180,27 +192,27 @@
                             href="https://metrika.yandex.ru/"
                             target="_blank"
                           >
-                            <img src="https://static.leadgenic.com/crmimages/metrika.gif" alt="yandex-metrica" />
+                            <img alt="yandex-metrica" src="https://static.leadgenic.com/crmimages/metrika.gif"/>
                           </a>
                           <div class="row m-0 mb-2" style="max-height: 72px;">
                             <div class="col-lg-12" data-context="ymetrika-counter">
                               <label
-                                for="name"
                                 class="control-label"
+                                for="name"
                               >
                                 {{ 'settings.site.settings.integrations.ymetrika.counter.title' | translate }}
                               </label>
                               <input
-                                type="text"
+                                [(ngModel)]="site.yandexAnalyticsCounter"
+                                class="form-control"
                                 id="name"
                                 name="name"
-                                class="form-control"
-                                [(ngModel)]="site.yandexAnalyticsCounter"
+                                type="text"
                               >
                               <span
+                                [innerHTML]="'settings.site.settings.integrations.ymetrika.counter.span' | translate"
                                 class="help-text"
                                 style="display: block; margin-top: 20px;"
-                                [innerHTML]="'settings.site.settings.integrations.ymetrika.counter.span' | translate"
                               ></span>
                             </div>
                           </div>
@@ -208,8 +220,8 @@
                       </div>
                       <!-- Google analytics -->
                       <div
-                        id="crmsync-ganalytics"
                         class="col-lg-6 analyticssync-sync-panel-wrapper"
+                        id="crmsync-ganalytics"
                       >
                         <div class="mail-sync-panel">
                           <a
@@ -217,34 +229,36 @@
                             href="https://www.google.com/analytics/"
                             target="_blank"
                           >
-                            <img src="https://static.leadgenic.com/crmimages/ga.jpg" alt="google-analytics"/>
+                            <img alt="google-analytics" src="https://static.leadgenic.com/crmimages/ga.jpg"/>
                           </a>
                           <div class="row m-0 mb-2" style="max-height: 72px;">
                             <div class="col-lg-12" data-context="ganalytics-service">
-                              <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
+                              <label
+                                class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
                               <div class="dropdown site-selector">
                                 <button
-                                  class="btn btn-default dropdown-toggle"
-                                  type="button"
-                                  data-toggle="dropdown"
-                                  aria-haspopup="true"
                                   aria-expanded="true"
+                                  aria-haspopup="true"
+                                  class="btn btn-default dropdown-toggle"
+                                  data-toggle="dropdown"
+                                  type="button"
                                 >
-                                  <span class="dropdown-selected-cropp" style="max-width:90%">{{ site.googleAnalyticsService }}</span>
+                                  <span class="dropdown-selected-cropp"
+                                        style="max-width:90%">{{ site.googleAnalyticsService }}</span>
                                 </button>
                                 <ul class="dropdown-menu">
                                   <li
-                                    *ngFor="let item of googleAnalyticsServices"
                                     (click)="changeAnalyticGService(item.value)"
+                                    *ngFor="let item of googleAnalyticsServices"
                                   >
                                     <a class="dropdown-item">{{ item.name }}</a>
                                   </li>
                                 </ul>
                               </div>
                               <span
+                                [innerHTML]="'settings.site.settings.integrations.ganalytics.service' | translate"
                                 class="help-text"
                                 style="display: block; margin-top: 20px;"
-                                [innerHTML]="'settings.site.settings.integrations.ganalytics.service' | translate"
                               ></span>
                             </div>
                           </div>
@@ -263,29 +277,29 @@
                     <div class="form-group mb-0">
                       <textarea
                         [(ngModel)]="codeSiteScript"
-                        class="form-control not-readonly-hand"
-                        rows="5"
                         appSelectOnClick
+                        class="form-control not-readonly-hand"
                         readonly
+                        rows="5"
                       ></textarea>
                     </div>
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <strong>
                       {{ 'settings.script.apicode.title' | translate }} <a
-                      data-toggle="tooltip"
+                      class="info-link"
                       data-placement="top"
-                      title="{{ 'settings.script.apicode.tooltip' | translate }}"
-                      class="info-link"><i class="fa fa-info-circle"></i></a>
+                      data-toggle="tooltip"
+                      title="{{ 'settings.script.apicode.tooltip' | translate }}"><i class="fa fa-info-circle"></i></a>
                     </strong>
                     <div class="form-group mb-0" data-context="url">
                       <input
-                        type="text"
-                        class="form-control not-readonly-hand"
-                        name="name"
                         [(ngModel)]="siteId"
                         appSelectOnClick
+                        class="form-control not-readonly-hand"
+                        name="name"
                         readonly
+                        type="text"
                       />
                     </div>
                     <p class="small">{{ 'settings.script.apicode.desc' | translate }}</p>
@@ -295,15 +309,15 @@
 
               <div class="d-flex justify-content-between mt-3 mb-2 buttons">
                 <button
-                  type="button"
-                  class="btn btn-sm btn-default"
                   (click)="goBack()"
+                  class="btn btn-sm btn-default"
+                  type="button"
                 >{{ 'settings.site.global.backButton' | translate }}</button>
                 <button
-                  type="button"
-                  class="btn btn-sm btn-success"
                   (click)="saveSite()"
                   [disabled]="!site.name || !site.url"
+                  class="btn btn-sm btn-success"
+                  type="button"
                 ><i class="fa fa-save"></i> {{ 'settings.site.global.saveButton' | translate }}</button>
               </div>
             </div>

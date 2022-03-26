@@ -1,30 +1,30 @@
 <div id="header">
   <div
-    routerLink="/"
-    id="logo"
+    [class.default]="!yandexRef"
+    [class.yandex]="yandexRef"
     class="light-version logo-svg__menu"
-    [class.default]="!yandexRef" [class.yandex]="yandexRef"
+    id="logo" routerLink="/"
   >
   </div>
-  <nav role="navigation" class="main-nav-head">
+  <nav class="main-nav-head" role="navigation">
     <div
-      class="header-link"
       (click)="handleMinimalizeSidebar($event)"
+      class="header-link"
     >
       <i class="fa fa-bars"></i>
     </div>
     <div
-      routerLink="/"
       class="small-logo"
+      routerLink="/"
     >
       <span class="text-primary">LeadGenic</span>
     </div>
 
     <a routerLink="/site/list">
       <button
-        id="goCabinet"
-        class="btn btn-notselected saveButton-toolbar"
         [class.btn-default]="!isPartnerPage"
+        class="btn btn-notselected saveButton-toolbar"
+        id="goCabinet"
       >
         {{ 'header.cabinet' | translate }}
       </button>
@@ -32,8 +32,8 @@
 
     <a routerLink="/user/partner">
       <button
-        id="goPartner"
         class="btn btn-notselected saveButton-toolbar"
+        id="goPartner"
         routerLinkActive="btn-default"
       >
         {{ 'header.partner' | translate }}
@@ -46,8 +46,8 @@
       target="_blank"
     >
       <button
-        id="goYandex"
         class="btn btn-notselected saveButton-toolbar"
+        id="goYandex"
       >
         {{ 'header.yandex' | translate }}
       </button>
@@ -62,11 +62,11 @@
           <div id="fb-root"></div>
           <div
             class="fb-like"
+            data-action="like"
             data-href="https://leadgenic.com/"
             data-layout="button_count"
-            data-action="like"
-            data-show-faces="false"
             data-share="false"
+            data-show-faces="false"
           ></div>
         </li>
         <li class="dropdown">

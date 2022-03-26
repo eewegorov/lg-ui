@@ -8,9 +8,9 @@ describe('LeadInfoComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ LeadInfoComponent ]
+      declarations: [LeadInfoComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

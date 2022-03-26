@@ -3,20 +3,20 @@
   <h3 *ngIf="isEditIntegration" class="modal-title">{{ 'settings.site.newIntegration.edit' | translate }}</h3>
 </div>
 <div class="modal-body">
-  <div class="integration-switcher-wr" *ngIf="!isEditIntegration">
+  <div *ngIf="!isEditIntegration" class="integration-switcher-wr">
     <h5>{{ 'settings.site.newIntegration.description' | translate }}</h5>
     <div class="btn-group">
       <span
-        class="btn btn-default"
-        [class.active]="tab ==='NEW'"
         (click)="setIntegrationType('NEW')"
+        [class.active]="tab ==='NEW'"
+        class="btn btn-default"
       >
         {{ 'settings.site.newIntegration.tabs.new' | translate }}
       </span>
       <span
-        class="btn btn-default"
-        [class.active]="tab ==='COPY'"
         (click)="setIntegrationType('COPY')"
+        [class.active]="tab ==='COPY'"
+        class="btn btn-default"
       >
         {{ 'settings.site.newIntegration.tabs.copy' | translate }}
       </span>
@@ -30,12 +30,12 @@
           <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
           <div class="dropdown integration-selector">
             <button
-              type="button"
-              class="btn btn-default dropdown-toggle"
-              data-toggle="dropdown"
-              data-display="static"
-              aria-haspopup="true"
               aria-expanded="true"
+              aria-haspopup="true"
+              class="btn btn-default dropdown-toggle"
+              data-display="static"
+              data-toggle="dropdown"
+              type="button"
             >
               <span
                 *ngIf="!currentIntegrationService.type"
@@ -49,8 +49,8 @@
             <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
               <span class="integration-selector-group">{{ 'settings.site.tabs.group.email' | translate }}</span>
               <li
-                *ngFor="let item of integrationServices | filterBy: { group: 'mailing' }"
                 (click)="changeCurrentIntegrationService(item)"
+                *ngFor="let item of integrationServices | filterBy: { group: 'mailing' }"
               >
                 <a class="dropdown-item integration-selector-item {{item.type}}">
                   {{item.name || defIntegrationServiceName}} <span
@@ -60,8 +60,8 @@
               </li>
               <span class="integration-selector-group">{{ 'settings.site.tabs.group.crm' | translate }}</span>
               <li
-                *ngFor="let item of integrationServices | filterBy: { group: 'CRM' }"
                 (click)="changeCurrentIntegrationService(item)"
+                *ngFor="let item of integrationServices | filterBy: { group: 'CRM' }"
               >
                 <a class="dropdown-item integration-selector-item {{item.type}}">
                   {{item.name || defIntegrationServiceName}} <span
@@ -72,8 +72,8 @@
               <span
                 class="integration-selector-group">{{ 'settings.site.settings.notification.title' | translate }}</span>
               <li
-                *ngFor="let item of integrationServices | filterBy: { group: 'notification' }"
                 (click)="changeCurrentIntegrationService(item)"
+                *ngFor="let item of integrationServices | filterBy: { group: 'notification' }"
               >
                 <a class="dropdown-item integration-selector-item {{item.type}}">
                   {{item.name || defIntegrationServiceName}} <span
@@ -83,8 +83,8 @@
               </li>
               <span class="integration-selector-group">{{ 'settings.site.newIntegration.others' | translate }}</span>
               <li
-                *ngFor="let item of integrationServices | filterBy: { group: 'others' }"
                 (click)="changeCurrentIntegrationService(item)"
+                *ngFor="let item of integrationServices | filterBy: { group: 'others' }"
               >
                 <a class="dropdown-item integration-selector-item {{item.type}}">
                   {{item.name || defIntegrationServiceName}} <span
@@ -98,8 +98,8 @@
         <a
           *ngIf="currentIntegrationService.type"
           [href]="currentIntegrationService.helpUrl"
-          target="_blank"
           class="integration-help-link"
+          target="_blank"
         >{{ 'settings.site.newIntegration.instruction' | translate }}</a>
 
         <div
@@ -121,52 +121,52 @@
             <label class="control-label">{{ 'settings.site.newIntegration.connection.title' | translate }}</label>
             <div class="d-flex align-items-center">
               <input
-                type="radio"
-                id="bitrix-webhook"
-                class="mr-2"
-                name="bitrix"
-                [value]="BitrixTypes.Webhook"
                 [(ngModel)]="bitrixConnectionType"
-              /><label for="bitrix-webhook"
-                       class="pt-1">{{ 'settings.site.newIntegration.connection.webhook' | translate }}</label>
+                [value]="BitrixTypes.Webhook"
+                class="mr-2"
+                id="bitrix-webhook"
+                name="bitrix"
+                type="radio"
+              /><label class="pt-1"
+                       for="bitrix-webhook">{{ 'settings.site.newIntegration.connection.webhook' | translate }}</label>
             </div>
             <div class="d-flex align-items-center">
               <input
-                type="radio"
-                id="bitrix-api"
-                class="mr-2"
-                name="bitrix"
-                [value]="BitrixTypes.Api"
                 [(ngModel)]="bitrixConnectionType"
-              /><label for="bitrix-api"
-                       class="pt-1">{{ 'settings.site.newIntegration.connection.api' | translate }}</label>
+                [value]="BitrixTypes.Api"
+                class="mr-2"
+                id="bitrix-api"
+                name="bitrix"
+                type="radio"
+              /><label class="pt-1"
+                       for="bitrix-api">{{ 'settings.site.newIntegration.connection.api' | translate }}</label>
             </div>
           </div>
 
           <div
-            class="integration-tab-item mt-3"
             [class.mr-3]="currentIntegrationService.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Webhook
             || currentIntegrationService.type === IntegrationTypes.AMOCRM"
+            class="integration-tab-item mt-3"
           >
-            <label for="getResponseName"
-                   class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>
-            <input type="text" id="getResponseName" [(ngModel)]="newCurrentIntegration.name" class="form-control"
-                   name="getResponseName">
+            <label class="control-label"
+                   for="getResponseName">{{ 'settings.site.newIntegration.name' | translate }}</label>
+            <input [(ngModel)]="newCurrentIntegration.name" class="form-control" id="getResponseName" name="getResponseName"
+                   type="text">
           </div>
 
           <!-- GETRESPONSE PARAMS -->
           <div *ngIf="currentIntegrationService.type === IntegrationTypes.GETRESPONSE">
             <div class="integration-tab-item">
-              <label for="getResponseCode"
-                     class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
-              <input type="text" id="getResponseCode" [(ngModel)]="getResponseParams.code" class="form-control"
-                     name="getResponseCode">
+              <label class="control-label"
+                     for="getResponseCode">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+              <input [(ngModel)]="getResponseParams.code" class="form-control" id="getResponseCode" name="getResponseCode"
+                     type="text">
             </div>
             <div class="integration-tab-item">
-              <label for="getResponseCampaignId"
-                     class="control-label">{{ 'settings.site.newIntegration.create.campaignId' | translate }}</label>
-              <input type="text" id="getResponseCampaignId" [(ngModel)]="getResponseParams.campaignId"
-                     class="form-control" name="getResponseCampaignId">
+              <label class="control-label"
+                     for="getResponseCampaignId">{{ 'settings.site.newIntegration.create.campaignId' | translate }}</label>
+              <input [(ngModel)]="getResponseParams.campaignId" class="form-control" id="getResponseCampaignId"
+                     name="getResponseCampaignId" type="text">
             </div>
           </div>
 
@@ -174,16 +174,16 @@
           <div
             *ngIf="currentIntegrationService.type === IntegrationTypes.MAILCHIMP || currentIntegrationService.type === IntegrationTypes.UNISENDER">
             <div class="integration-tab-item">
-              <label for="mailchimpCode"
-                     class="control-label">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
-              <input type="text" id="mailchimpCode" [(ngModel)]="mailchimpUniParams.code" class="form-control"
-                     name="mailchimpCode">
+              <label class="control-label"
+                     for="mailchimpCode">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+              <input [(ngModel)]="mailchimpUniParams.code" class="form-control" id="mailchimpCode" name="mailchimpCode"
+                     type="text">
             </div>
             <div class="integration-tab-item">
-              <label for="mailchimpListId"
-                     class="control-label">{{ 'settings.site.newIntegration.create.listId' | translate }}</label>
-              <input type="text" id="mailchimpListId" [(ngModel)]="mailchimpUniParams.listId" class="form-control"
-                     name="mailchimpListId">
+              <label class="control-label"
+                     for="mailchimpListId">{{ 'settings.site.newIntegration.create.listId' | translate }}</label>
+              <input [(ngModel)]="mailchimpUniParams.listId" class="form-control" id="mailchimpListId" name="mailchimpListId"
+                     type="text">
             </div>
           </div>
 
@@ -191,22 +191,22 @@
           <div
             *ngIf="currentIntegrationService.type === IntegrationTypes.SENDPULSE || currentIntegrationService.type === IntegrationTypes.SENDBOX">
             <div class="integration-tab-item">
-              <label for="sendPBParamsId"
-                     class="control-label">{{ 'settings.site.newIntegration.create.id' | translate }}</label>
-              <input type="text" id="sendPBParamsId" [(ngModel)]="sendPBParams.id" class="form-control"
-                     name="sendPBParamsId">
+              <label class="control-label"
+                     for="sendPBParamsId">{{ 'settings.site.newIntegration.create.id' | translate }}</label>
+              <input [(ngModel)]="sendPBParams.id" class="form-control" id="sendPBParamsId" name="sendPBParamsId"
+                     type="text">
             </div>
             <div class="integration-tab-item">
-              <label for="sendPBParamsSecret"
-                     class="control-label">{{ 'settings.site.newIntegration.create.secret' | translate }}</label>
-              <input type="text" id="sendPBParamsSecret" [(ngModel)]="sendPBParams.secret" class="form-control"
-                     name="sendPBParamsSecret">
+              <label class="control-label"
+                     for="sendPBParamsSecret">{{ 'settings.site.newIntegration.create.secret' | translate }}</label>
+              <input [(ngModel)]="sendPBParams.secret" class="form-control" id="sendPBParamsSecret" name="sendPBParamsSecret"
+                     type="text">
             </div>
             <div class="integration-tab-item">
-              <label for="sendPBParamsBook"
-                     class="control-label">{{ 'settings.site.newIntegration.create.book' | translate }}</label>
-              <input type="text" id="sendPBParamsBook" [(ngModel)]="sendPBParams.book" class="form-control"
-                     name="sendPBParamsBook">
+              <label class="control-label"
+                     for="sendPBParamsBook">{{ 'settings.site.newIntegration.create.book' | translate }}</label>
+              <input [(ngModel)]="sendPBParams.book" class="form-control" id="sendPBParamsBook" name="sendPBParamsBook"
+                     type="text">
             </div>
           </div>
 
@@ -215,25 +215,26 @@
             *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Webhook">
             <div class="d-flex">
               <div class="w-50 pr-4 mr-1 integration-tab-item">
-                <label for="bitrixParamsUrl"
-                       class="control-label">{{ 'settings.site.newIntegration.create.address.title' | translate }}</label>
-                <input type="text" id="bitrixParamsUrl" [(ngModel)]="bitrixWebhookParams.url"
-                       class="form-control" name="bitrixParamsAddress">
+                <label class="control-label"
+                       for="bitrixParamsUrl">{{ 'settings.site.newIntegration.create.address.title' | translate }}</label>
+                <input [(ngModel)]="bitrixWebhookParams.url" class="form-control" id="bitrixParamsUrl"
+                       name="bitrixParamsAddress" type="text">
                 <div class="small">{{ 'settings.site.newIntegration.create.address.desc' | translate }}</div>
               </div>
               <div class="w-50 ml-1 mr-3 integration-tab-item">
-                <label for="bitrixParamsHash"
-                       class="control-label">{{ 'settings.site.newIntegration.create.webhook.title' | translate }}</label>
-                <input type="text" id="bitrixParamsHash" [(ngModel)]="bitrixWebhookParams.hash"
-                       class="form-control" name="bitrixParamsWebhook">
+                <label class="control-label"
+                       for="bitrixParamsHash">{{ 'settings.site.newIntegration.create.webhook.title' | translate }}</label>
+                <input [(ngModel)]="bitrixWebhookParams.hash" class="form-control" id="bitrixParamsHash"
+                       name="bitrixParamsWebhook" type="text">
                 <div class="small">{{ 'settings.site.newIntegration.create.webhook.desc' | translate }}</div>
               </div>
             </div>
             <div class="integration-tab-item mr-3">
-              <label for="bitrixParamsuserId"
-                     class="control-label">{{ 'settings.site.newIntegration.create.userId' | translate }}</label>
-              <input type="number" min="1" id="bitrixParamsuserId" [(ngModel)]="bitrixWebhookParams.userId" class="form-control"
-                     name="bitrixParamsuserId">
+              <label class="control-label"
+                     for="bitrixParamsuserId">{{ 'settings.site.newIntegration.create.userId' | translate }}</label>
+              <input [(ngModel)]="bitrixWebhookParams.userId" class="form-control" id="bitrixParamsuserId" min="1"
+                     name="bitrixParamsuserId"
+                     type="number">
             </div>
           </div>
 
@@ -241,21 +242,21 @@
           <div
             *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Api">
             <div class="integration-tab-item">
-              <label for="bitrixParamsHost"
-                     class="control-label">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
-              <input type="text" id="bitrixParamsHost" [(ngModel)]="bitrixApiParams.host" class="form-control"
-                     name="bitrixParamsHost">
+              <label class="control-label"
+                     for="bitrixParamsHost">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
+              <input [(ngModel)]="bitrixApiParams.host" class="form-control" id="bitrixParamsHost" name="bitrixParamsHost"
+                     type="text">
             </div>
             <div class="integration-tab-item">
-              <label for="bitrixParamsLogin"
-                     class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
-              <input type="text" id="bitrixParamsLogin" [(ngModel)]="bitrixApiParams.login" class="form-control"
-                     name="bitrixParamsLogin">
+              <label class="control-label"
+                     for="bitrixParamsLogin">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
+              <input [(ngModel)]="bitrixApiParams.login" class="form-control" id="bitrixParamsLogin" name="bitrixParamsLogin"
+                     type="text">
             </div>
             <div class="integration-tab-item">
-              <label for="bitrixParamsPassword" class="control-label">{{ 'login.password' | translate }}</label>
-              <input type="password" id="bitrixParamsPassword" [(ngModel)]="bitrixApiParams.password"
-                     class="form-control" name="bitrixParamsPassword">
+              <label class="control-label" for="bitrixParamsPassword">{{ 'login.password' | translate }}</label>
+              <input [(ngModel)]="bitrixApiParams.password" class="form-control" id="bitrixParamsPassword"
+                     name="bitrixParamsPassword" type="password">
             </div>
           </div>
 
@@ -264,46 +265,47 @@
             <div class="d-flex">
               <div class="w-50 pr-4 mr-1 integration-tab-item">
                 <div>
-                  <label for="amoParamsSubdomain"
-                         class="control-label">{{ 'settings.site.newIntegration.create.urlExtra.title' | translate }}</label>
-                  <input type="text" id="amoParamsSubdomain" [(ngModel)]="amoParams.subdomain" class="form-control"
-                         name="amoParamsSubdomain">
+                  <label class="control-label"
+                         for="amoParamsSubdomain">{{ 'settings.site.newIntegration.create.urlExtra.title' | translate }}</label>
+                  <input [(ngModel)]="amoParams.subdomain" class="form-control" id="amoParamsSubdomain" name="amoParamsSubdomain"
+                         type="text">
                   <div class="small">{{ 'settings.site.newIntegration.create.urlExtra.desc' | translate }}</div>
                 </div>
               </div>
               <div class="w-50 ml-1 mr-3 integration-tab-item">
                 <div>
-                  <label for="amoParamsClientId"
-                         class="control-label">{{ 'settings.site.newIntegration.create.integrationId' | translate }}</label>
-                  <input type="text" id="amoParamsClientId" [(ngModel)]="amoParams.clientId" class="form-control"
-                         name="amoParamsClientId">
+                  <label class="control-label"
+                         for="amoParamsClientId">{{ 'settings.site.newIntegration.create.integrationId' | translate }}</label>
+                  <input [(ngModel)]="amoParams.clientId" class="form-control" id="amoParamsClientId" name="amoParamsClientId"
+                         type="text">
                 </div>
               </div>
             </div>
             <div class="d-flex">
               <div class="w-50 pr-4 mr-1 integration-tab-item">
                 <div>
-                  <label for="amoParamsClientSecret"
-                         class="control-label">{{ 'settings.site.newIntegration.create.secretKey' | translate }}</label>
-                  <input type="text" id="amoParamsClientSecret" [(ngModel)]="amoParams.clientSecret" class="form-control"
-                         name="amoParamsClientSecret">
+                  <label class="control-label"
+                         for="amoParamsClientSecret">{{ 'settings.site.newIntegration.create.secretKey' | translate }}</label>
+                  <input [(ngModel)]="amoParams.clientSecret" class="form-control" id="amoParamsClientSecret"
+                         name="amoParamsClientSecret"
+                         type="text">
                 </div>
               </div>
               <div class="w-50 ml-1 mr-3 integration-tab-item">
                 <div>
-                  <label for="amoParamsCode"
-                         class="control-label">{{ 'settings.site.newIntegration.create.code' | translate }}</label>
-                  <input type="text" id="amoParamsCode" [(ngModel)]="amoParams.code" class="form-control"
-                         name="amoParamsCode">
+                  <label class="control-label"
+                         for="amoParamsCode">{{ 'settings.site.newIntegration.create.code' | translate }}</label>
+                  <input [(ngModel)]="amoParams.code" class="form-control" id="amoParamsCode" name="amoParamsCode"
+                         type="text">
                 </div>
               </div>
             </div>
 
             <button
-              *ngIf="!isAmoActivated"
-              class="btn btn-default mt-2 mb-4"
               (click)="activateIntegration(AmoGrantTypes.AuthCode)"
+              *ngIf="!isAmoActivated"
               [disabled]="disableActivation()"
+              class="btn btn-default mt-2 mb-4"
             >
               <i class="fas fa-power-off mr-2"></i> {{ 'settings.site.newIntegration.activate' | translate }}
             </button>
@@ -319,10 +321,10 @@
           <!-- EMAIL PARAMS -->
           <div *ngIf="currentIntegrationService.type === IntegrationTypes.EMAIL">
             <div class="integration-tab-item">
-              <label for="emailParamsEmail"
-                     class="control-label">{{ 'settings.site.newIntegration.create.email' | translate }}</label>
-              <input type="text" id="emailParamsEmail" [(ngModel)]="emailParams.email" class="form-control"
-                     name="emailParamsEmail">
+              <label class="control-label"
+                     for="emailParamsEmail">{{ 'settings.site.newIntegration.create.email' | translate }}</label>
+              <input [(ngModel)]="emailParams.email" class="form-control" id="emailParamsEmail" name="emailParamsEmail"
+                     type="text">
             </div>
           </div>
 
@@ -330,23 +332,23 @@
           <div
             *ngIf="currentIntegrationService.type === IntegrationTypes.ROISTAT || currentIntegrationService.type === IntegrationTypes.WEBHOOK">
             <div class="integration-tab-item">
-              <label for="roistatParamsUrl"
-                     class="control-label">{{ 'settings.site.newIntegration.create.url' | translate }}</label>
-              <input type="text" id="roistatParamsUrl" [(ngModel)]="roistatParams.url" class="form-control"
-                     name="roistatParamsUrl">
+              <label class="control-label"
+                     for="roistatParamsUrl">{{ 'settings.site.newIntegration.create.url' | translate }}</label>
+              <input [(ngModel)]="roistatParams.url" class="form-control" id="roistatParamsUrl" name="roistatParamsUrl"
+                     type="text">
             </div>
           </div>
 
           <div class="integration-tab-item mb-0">
             <div class="d-flex">
-              <ui-switch size="small" [checked]="newCurrentIntegration.default"></ui-switch>
+              <ui-switch [checked]="newCurrentIntegration.default" size="small"></ui-switch>
               <label class="control-label ml-2">
                 {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
-                <a data-toggle="tooltip"
-                   data-placement="top"
+                <a class="info-link"
                    data-container="body"
-                   title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
-                   class="info-link"><i class="fa fa-info-circle"></i>
+                   data-placement="top"
+                   data-toggle="tooltip"
+                   title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
                 </a>
               </label>
             </div>
@@ -358,9 +360,9 @@
               <strong>{{ 'settings.site.newIntegration.funnel.title' | translate }}</strong>
             </h5>
             <button
-              class="btn btn-default mt-2 mb-3"
               (click)="loadIntegration()"
               [disabled]="disableActivation() || !this.amoParams.accessToken"
+              class="btn btn-default mt-2 mb-3"
             >
               <i class="fas fa-sync mr-2"></i> {{ 'settings.site.newIntegration.funnel.button' | translate }}
             </button>
@@ -369,13 +371,13 @@
                 <label class="control-label">{{ 'settings.site.newIntegration.funnel.name' | translate }}</label>
                 <div class="dropdown integration-selector">
                   <button
-                    type="button"
-                    class="btn btn-default dropdown-toggle"
-                    data-toggle="dropdown"
-                    data-display="static"
-                    aria-haspopup="true"
-                    aria-expanded="true"
                     [disabled]="!pipelines.length"
+                    aria-expanded="true"
+                    aria-haspopup="true"
+                    class="btn btn-default dropdown-toggle"
+                    data-display="static"
+                    data-toggle="dropdown"
+                    type="button"
                   >
                     <span
                       class="dropdown-selected-cropp"
@@ -383,8 +385,8 @@
                   </button>
                   <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                     <li
-                      *ngFor="let item of pipelines"
                       (click)="changeCurrentFunnelId(item.id.toString(), item.name)"
+                      *ngFor="let item of pipelines"
                     >
                       <a class="dropdown-item">{{ item.name }}</a>
                     </li>
@@ -396,13 +398,13 @@
                 <label class="control-label">{{ 'settings.site.newIntegration.funnel.status' | translate }}</label>
                 <div class="dropdown integration-selector">
                   <button
-                    type="button"
-                    class="btn btn-default dropdown-toggle"
-                    data-toggle="dropdown"
-                    data-display="static"
-                    aria-haspopup="true"
-                    aria-expanded="true"
                     [disabled]="!pipelines.length"
+                    aria-expanded="true"
+                    aria-haspopup="true"
+                    class="btn btn-default dropdown-toggle"
+                    data-display="static"
+                    data-toggle="dropdown"
+                    type="button"
                   >
                   <span
                     class="dropdown-selected-cropp"
@@ -410,8 +412,8 @@
                   </button>
                   <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                     <li
-                      *ngFor="let item of leadStates"
                       (click)="changeCurrentFunnelLeadStateId(item.id.toString(), item.name)"
+                      *ngFor="let item of leadStates"
                     >
                       <a class="dropdown-item">{{ item.name }}</a>
                     </li>
@@ -421,22 +423,22 @@
             </div>
             <div class="integration-tab-item mr-3">
               <label class="control-label">{{ 'settings.site.newIntegration.funnel.check.title' | translate }}</label>
-              <a data-toggle="tooltip"
-                 data-placement="bottom"
+              <a class="info-link ml-1 mt-1"
                  data-container="body"
-                 title="{{ 'settings.site.newIntegration.funnel.check.tooltip' | translate }}"
-                 class="info-link ml-1 mt-1"><i class="fa fa-info-circle"></i>
+                 data-placement="bottom"
+                 data-toggle="tooltip"
+                 title="{{ 'settings.site.newIntegration.funnel.check.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
               </a>
 
               <div class="dropdown integration-selector">
                 <button
-                  type="button"
-                  class="btn btn-default dropdown-toggle"
-                  data-toggle="dropdown"
-                  data-display="static"
-                  aria-haspopup="true"
-                  aria-expanded="true"
                   [disabled]="!pipelines.length"
+                  aria-expanded="true"
+                  aria-haspopup="true"
+                  class="btn btn-default dropdown-toggle"
+                  data-display="static"
+                  data-toggle="dropdown"
+                  type="button"
                 >
                 <span
                   class="dropdown-selected-cropp"
@@ -444,8 +446,8 @@
                 </button>
                 <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                   <li
-                    *ngFor="let item of funnelCheckDuplicates | keyvalue : returnZero"
                     (click)="changeCurrentFunnelCheckDuplicates(item.key)"
+                    *ngFor="let item of funnelCheckDuplicates | keyvalue : returnZero"
                   >
                     <a class="dropdown-item">{{ item.value }}</a>
                   </li>
@@ -464,11 +466,11 @@
               <h5 class="mt-2">
                 <strong>{{ 'settings.site.newIntegration.fields.title' | translate }}</strong>
               </h5>
-              <a data-toggle="tooltip"
-                 data-placement="bottom"
+              <a class="info-link ml-1 mt-1"
                  data-container="body"
-                 title="{{ 'settings.site.newIntegration.fields.tooltip' | translate }}"
-                 class="info-link ml-1 mt-1"><i class="fa fa-info-circle"></i>
+                 data-placement="bottom"
+                 data-toggle="tooltip"
+                 title="{{ 'settings.site.newIntegration.fields.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
               </a>
             </div>
             <div class="d-flex flex-column mt-2">
@@ -488,27 +490,27 @@
                 <div class="d-flex mb-2">
                   <div class="w-50 mr-3">
                     <input
-                      type="text"
-                      [id]="'leadgenicFieldId' + i"
                       [(ngModel)]="integrationField.leadGenicId"
-                      pattern="[0-9a-zA-Z_\-]{1,50}"
-                      class="form-control leadgenic-field"
                       [class.field-error]=
                         "integrationField.leadGenicId === 'email' ||
                         integrationField.leadGenicId === 'phone' ||
                         integrationField.leadGenicId === 'message' ||
                         integrationField.leadGenicId === 'name'"
+                      [id]="'leadgenicFieldId' + i"
+                      class="form-control leadgenic-field"
                       name="'leadgenicFieldId' + i"
+                      pattern="[0-9a-zA-Z_\-]{1,50}"
+                      type="text"
                     >
                   </div>
                   <div class="w-50 ml-3 mr-3">
                     <input
-                      type="text"
-                      [id]="'crmFieldId' + i"
                       [(ngModel)]="integrationField.crmId"
-                      pattern="^.{1,50}$"
+                      [id]="'crmFieldId' + i"
                       class="form-control"
                       name="'crmFieldId' + i"
+                      pattern="^.{1,50}$"
+                      type="text"
                     >
                   </div>
                   <a (click)="deleteIntegrationField(i)"><i class="fa fa-trash integration-field-delete mr-2"></i></a>
@@ -525,7 +527,7 @@
               </ng-container>
 
             </div>
-            <a class="integration-field-add" (click)="addIntegrationField()">
+            <a (click)="addIntegrationField()" class="integration-field-add">
               <i class="fa fa-plus integration-field-add-icon"></i>
               {{ 'settings.site.newIntegration.fields.add' | translate }}
             </a>
@@ -534,33 +536,33 @@
       </div>
 
       <div *ngIf="tab ==='COPY'">
-        <div class="integration-tab-item p-5" *ngIf="!sites.length">
+        <div *ngIf="!sites.length" class="integration-tab-item p-5">
           <h4 class="f-2 text-center">{{ 'settings.site.newIntegration.create.copy.noSites' | translate }}</h4>
         </div>
 
         <div *ngIf="sites.length" class="integration-tab-item">
-          <label for="currentIntegrationSiteServiceCloneName" class="control-label">
+          <label class="control-label" for="currentIntegrationSiteServiceCloneName">
             {{ 'settings.site.newIntegration.name' | translate }}
           </label>
           <input
-            type="text"
-            id="currentIntegrationSiteServiceCloneName"
             [(ngModel)]="currentIntegrationSiteServiceClone.name"
             class="form-control"
+            id="currentIntegrationSiteServiceCloneName"
             name="currentIntegrationSiteServiceCloneName"
+            type="text"
           >
         </div>
 
         <div *ngIf="sites.length" class="integration-tab-item">
           <label class="control-label">{{ 'settings.site.newIntegration.donorSite' | translate }}</label>
           <div class="dropdown site-selector">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="true">
+            <button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                    type="button">
               <span class="dropdown-selected-cropp"
                     style="max-width:90%">{{ currentIntegrationSite.name || defIntegrationSiteName }}</span>
             </button>
             <ul class="dropdown-menu dropdown-integration-max-240h">
-              <li *ngFor="let site of sites" (click)="changeCurrentIntegrationSite(site)">
+              <li (click)="changeCurrentIntegrationSite(site)" *ngFor="let site of sites">
                 <a class="dropdown-item">{{site.name}}</a>
               </li>
             </ul>
@@ -571,11 +573,11 @@
           <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
           <div class="dropdown integration-selector">
             <button
-              type="button"
+              aria-expanded="true"
+              aria-haspopup="true"
               class="btn btn-default dropdown-toggle"
               data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="true"
+              type="button"
             >
               <span
                 *ngIf="!currentIntegrationSiteService.type"
@@ -598,8 +600,8 @@
                 {{ 'settings.site.tabs.group.crm' | translate }}
               </span>
               <li
-                *ngFor="let item of integrationSiteServicesCRM"
                 (click)="changeCurrentIntegrationSiteService(item)"
+                *ngFor="let item of integrationSiteServicesCRM"
               >
                 <a class="dropdown-item integration-selector-item {{ item.type }}">
                   {{ item.name || defIntegrationServiceName }} <span
@@ -614,8 +616,8 @@
                 {{ 'settings.site.tabs.group.email' | translate }}
               </span>
               <li
-                *ngFor="let item of integrationSiteServicesMailing"
                 (click)="changeCurrentIntegrationSiteService(item)"
+                *ngFor="let item of integrationSiteServicesMailing"
               >
                 <a class="dropdown-item integration-selector-item {{ item.type }}">
                   {{ item.name || defIntegrationServiceName }} <span
@@ -630,8 +632,8 @@
                 {{ 'settings.site.settings.notification.title' | translate }}
               </span>
               <li
-                *ngFor="let item of integrationSiteServicesNotifications"
                 (click)="changeCurrentIntegrationSiteService(item)"
+                *ngFor="let item of integrationSiteServicesNotifications"
               >
                 <a class="dropdown-item integration-selector-item {{ item.type }}">
                   {{ item.name || defIntegrationServiceName }} <span
@@ -646,8 +648,8 @@
                 {{ 'settings.site.newIntegration.others' | translate }}
               </span>
               <li
-                *ngFor="let item of integrationSiteServicesOthers"
                 (click)="changeCurrentIntegrationSiteService(item)"
+                *ngFor="let item of integrationSiteServicesOthers"
               >
                 <a class="dropdown-item integration-selector-item {{ item.type }}">
                   {{ item.name || defIntegrationServiceName }} <span
@@ -660,14 +662,14 @@
         </div>
         <div *ngIf="currentIntegrationSiteService.type" class="integration-tab-item mb-0">
           <div class="d-flex">
-            <ui-switch size="small" [checked]="currentIntegrationSiteService.default"></ui-switch>
+            <ui-switch [checked]="currentIntegrationSiteService.default" size="small"></ui-switch>
             <label class="control-label ml-2">
               {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
-              <a data-toggle="tooltip"
-                 data-placement="top"
+              <a class="info-link"
                  data-container="body"
-                 title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
-                 class="info-link"><i class="fa fa-info-circle"></i>
+                 data-placement="top"
+                 data-toggle="tooltip"
+                 title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
               </a>
             </label>
           </div>
@@ -681,41 +683,41 @@
             class="integration-edit-service {{ editableIntegration.type }}">{{ editableIntegrationServiceName }}</div>
         </div>
         <div class="integration-tab-item">
-          <label for="editableIntegrationName"
-                 class="control-label">{{ 'settings.site.newIntegration.name' | translate }}</label>
+          <label class="control-label"
+                 for="editableIntegrationName">{{ 'settings.site.newIntegration.name' | translate }}</label>
           <input
-            type="text"
-            id="editableIntegrationName"
             [(ngModel)]="editableIntegration.name"
             class="form-control"
+            id="editableIntegrationName"
             name="editableIntegrationName"
+            type="text"
           >
         </div>
 
         <!-- GETRESPONSE PARAMS -->
         <div *ngIf="editableIntegration.type === IntegrationTypes.GETRESPONSE">
           <div class="integration-tab-item">
-            <label for="editGetResponseCode" class="control-label">
+            <label class="control-label" for="editGetResponseCode">
               {{ 'settings.site.newIntegration.apikey' | translate }}
             </label>
             <input
-              type="text"
-              id="editGetResponseCode"
               [(ngModel)]="editableIntegration.params.code"
               class="form-control"
+              id="editGetResponseCode"
               name="editGetResponseCode"
+              type="text"
             >
           </div>
           <div class="integration-tab-item">
-            <label for="editGetResponseCampaignId" class="control-label">
+            <label class="control-label" for="editGetResponseCampaignId">
               {{ 'settings.site.newIntegration.create.campaignId' | translate }}
             </label>
             <input
-              type="text"
-              id="editGetResponseCampaignId"
               [(ngModel)]="editableIntegration.params.campaignId"
               class="form-control"
+              id="editGetResponseCampaignId"
               name="editGetResponseCampaignId"
+              type="text"
             >
           </div>
         </div>
@@ -724,27 +726,27 @@
         <div
           *ngIf="editableIntegration.type === IntegrationTypes.MAILCHIMP || editableIntegration.type === IntegrationTypes.UNISENDER">
           <div class="integration-tab-item">
-            <label for="editMailchimpCode" class="control-label">
+            <label class="control-label" for="editMailchimpCode">
               {{ 'settings.site.newIntegration.apikey' | translate }}
             </label>
             <input
-              type="text"
-              id="editMailchimpCode"
               [(ngModel)]="editableIntegration.params.code"
               class="form-control"
+              id="editMailchimpCode"
               name="editMailchimpCode"
+              type="text"
             >
           </div>
           <div class="integration-tab-item">
-            <label for="editMailchimpListId" class="control-label">
+            <label class="control-label" for="editMailchimpListId">
               {{ 'settings.site.newIntegration.create.listId' | translate }}
             </label>
             <input
-              type="text"
-              id="editMailchimpListId"
               [(ngModel)]="editableIntegration.params.listId"
               class="form-control"
+              id="editMailchimpListId"
               name="editMailchimpListId"
+              type="text"
             >
           </div>
         </div>
@@ -753,39 +755,39 @@
         <div
           *ngIf="editableIntegration.type === IntegrationTypes.SENDPULSE || editableIntegration.type === IntegrationTypes.SENDBOX">
           <div class="integration-tab-item">
-            <label for="editSendPBParamsId" class="control-label">
+            <label class="control-label" for="editSendPBParamsId">
               {{ 'settings.site.newIntegration.create.id' | translate }}
             </label>
             <input
-              type="text"
-              id="editSendPBParamsId"
               [(ngModel)]="editableIntegration.params.id"
               class="form-control"
+              id="editSendPBParamsId"
               name="editSendPBParamsId"
+              type="text"
             >
           </div>
           <div class="integration-tab-item">
-            <label for="editSendPBParamsSecret" class="control-label">
+            <label class="control-label" for="editSendPBParamsSecret">
               {{ 'settings.site.newIntegration.create.secret' | translate }}
             </label>
             <input
-              type="text"
-              id="editSendPBParamsSecret"
               [(ngModel)]="editableIntegration.params.secret"
               class="form-control"
+              id="editSendPBParamsSecret"
               name="editSendPBParamsSecret"
+              type="text"
             >
           </div>
           <div class="integration-tab-item">
-            <label for="editSendPBParamsBook" class="control-label">
+            <label class="control-label" for="editSendPBParamsBook">
               {{ 'settings.site.newIntegration.create.book' | translate }}
             </label>
             <input
-              type="text"
-              id="editSendPBParamsBook"
               [(ngModel)]="editableIntegration.params.book"
               class="form-control"
+              id="editSendPBParamsBook"
               name="editSendPBParamsBook"
+              type="text"
             >
           </div>
         </div>
@@ -795,25 +797,25 @@
           *ngIf="editableIntegration.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Webhook">
           <div class="d-flex">
             <div class="w-50 pr-4 mr-1 integration-tab-item">
-              <label for="editBitrixParamsAddress"
-                     class="control-label">{{ 'settings.site.newIntegration.create.address.title' | translate }}</label>
-              <input type="text" id="editBitrixParamsAddress" [(ngModel)]="editableIntegration.params.url"
-                     class="form-control" name="editBitrixParamsAddress">
+              <label class="control-label"
+                     for="editBitrixParamsAddress">{{ 'settings.site.newIntegration.create.address.title' | translate }}</label>
+              <input [(ngModel)]="editableIntegration.params.url" class="form-control" id="editBitrixParamsAddress"
+                     name="editBitrixParamsAddress" type="text">
               <div class="small">{{ 'settings.site.newIntegration.create.address.desc' | translate }}</div>
             </div>
             <div class="w-50 ml-1 mr-3 integration-tab-item">
-              <label for="editBitrixParamsWebhook"
-                     class="control-label">{{ 'settings.site.newIntegration.create.webhook.title' | translate }}</label>
-              <input type="text" id="editBitrixParamsWebhook" [(ngModel)]="editableIntegration.params.hash"
-                     class="form-control" name="editBitrixParamsWebhook">
+              <label class="control-label"
+                     for="editBitrixParamsWebhook">{{ 'settings.site.newIntegration.create.webhook.title' | translate }}</label>
+              <input [(ngModel)]="editableIntegration.params.hash" class="form-control" id="editBitrixParamsWebhook"
+                     name="editBitrixParamsWebhook" type="text">
               <div class="small">{{ 'settings.site.newIntegration.create.webhook.desc' | translate }}</div>
             </div>
           </div>
           <div class="integration-tab-item mr-3">
-            <label for="editBitrixParamsuserId"
-                   class="control-label">{{ 'settings.site.newIntegration.create.userId' | translate }}</label>
-            <input type="number" min="1" id="editBitrixParamsuserId" [(ngModel)]="editableIntegration.params.userId"
-                   class="form-control" name="editBitrixParamsuserId">
+            <label class="control-label"
+                   for="editBitrixParamsuserId">{{ 'settings.site.newIntegration.create.userId' | translate }}</label>
+            <input [(ngModel)]="editableIntegration.params.userId" class="form-control" id="editBitrixParamsuserId" min="1"
+                   name="editBitrixParamsuserId" type="number">
           </div>
         </div>
 
@@ -822,21 +824,23 @@
           *ngIf="editableIntegration.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Api"
         >
           <div class="integration-tab-item">
-            <label for="editBitrixParamsHost"
-                   class="control-label">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
-            <input type="text" id="editBitrixParamsHost" [(ngModel)]="editableIntegration.params.host" class="form-control"
-                   name="editBitrixParamsHost">
+            <label class="control-label"
+                   for="editBitrixParamsHost">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
+            <input [(ngModel)]="editableIntegration.params.host" class="form-control" id="editBitrixParamsHost"
+                   name="editBitrixParamsHost"
+                   type="text">
           </div>
           <div class="integration-tab-item">
-            <label for="editBitrixParamsLogin"
-                   class="control-label">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
-            <input type="text" id="editBitrixParamsLogin" [(ngModel)]="editableIntegration.params.login" class="form-control"
-                   name="editBitrixParamsLogin">
+            <label class="control-label"
+                   for="editBitrixParamsLogin">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
+            <input [(ngModel)]="editableIntegration.params.login" class="form-control" id="editBitrixParamsLogin"
+                   name="editBitrixParamsLogin"
+                   type="text">
           </div>
           <div class="integration-tab-item">
-            <label for="editBitrixParamsPassword" class="control-label">{{ 'login.password' | translate }}</label>
-            <input type="password" id="editBitrixParamsPassword" [(ngModel)]="editableIntegration.params.password"
-                   class="form-control" name="editBitrixParamsPassword">
+            <label class="control-label" for="editBitrixParamsPassword">{{ 'login.password' | translate }}</label>
+            <input [(ngModel)]="editableIntegration.params.password" class="form-control" id="editBitrixParamsPassword"
+                   name="editBitrixParamsPassword" type="password">
           </div>
         </div>
 
@@ -845,46 +849,50 @@
           <div class="d-flex">
             <div class="w-50 pr-4 mr-1 integration-tab-item">
               <div>
-                <label for="editAmoParamsSubdomain"
-                       class="control-label">{{ 'settings.site.newIntegration.create.urlExtra.title' | translate }}</label>
-                <input type="text" id="editAmoParamsSubdomain" [(ngModel)]="editableIntegration.params.subdomain" class="form-control"
-                       name="editAmoParamsSubdomain">
+                <label class="control-label"
+                       for="editAmoParamsSubdomain">{{ 'settings.site.newIntegration.create.urlExtra.title' | translate }}</label>
+                <input [(ngModel)]="editableIntegration.params.subdomain" class="form-control" id="editAmoParamsSubdomain"
+                       name="editAmoParamsSubdomain"
+                       type="text">
                 <div class="small">{{ 'settings.site.newIntegration.create.urlExtra.desc' | translate }}</div>
               </div>
             </div>
             <div class="w-50 ml-1 mr-3 integration-tab-item">
               <div>
-                <label for="editAmoParamsClientId"
-                       class="control-label">{{ 'settings.site.newIntegration.create.integrationId' | translate }}</label>
-                <input type="text" id="editAmoParamsClientId" [(ngModel)]="editableIntegration.params.clientId" class="form-control"
-                       name="editAmoParamsClientId">
+                <label class="control-label"
+                       for="editAmoParamsClientId">{{ 'settings.site.newIntegration.create.integrationId' | translate }}</label>
+                <input [(ngModel)]="editableIntegration.params.clientId" class="form-control" id="editAmoParamsClientId"
+                       name="editAmoParamsClientId"
+                       type="text">
               </div>
             </div>
           </div>
           <div class="d-flex">
             <div class="w-50 pr-4 mr-1 integration-tab-item">
               <div>
-                <label for="editAmoParamsClientSecret"
-                       class="control-label">{{ 'settings.site.newIntegration.create.secretKey' | translate }}</label>
-                <input type="text" id="editAmoParamsClientSecret" [(ngModel)]="editableIntegration.params.clientSecret" class="form-control"
-                       name="editAmoParamsClientSecret">
+                <label class="control-label"
+                       for="editAmoParamsClientSecret">{{ 'settings.site.newIntegration.create.secretKey' | translate }}</label>
+                <input [(ngModel)]="editableIntegration.params.clientSecret" class="form-control" id="editAmoParamsClientSecret"
+                       name="editAmoParamsClientSecret"
+                       type="text">
               </div>
             </div>
             <div class="w-50 ml-1 mr-3 integration-tab-item">
               <div>
-                <label for="editAmoParamsCode"
-                       class="control-label">{{ 'settings.site.newIntegration.create.code' | translate }}</label>
-                <input type="text" id="editAmoParamsCode" [(ngModel)]="editableIntegration.params.code" class="form-control"
-                       name="editAmoParamsCode">
+                <label class="control-label"
+                       for="editAmoParamsCode">{{ 'settings.site.newIntegration.create.code' | translate }}</label>
+                <input [(ngModel)]="editableIntegration.params.code" class="form-control" id="editAmoParamsCode"
+                       name="editAmoParamsCode"
+                       type="text">
               </div>
             </div>
           </div>
 
           <button
-            *ngIf="!isAmoActivated"
-            class="btn btn-default mt-2 mb-4"
             (click)="activateIntegration(AmoGrantTypes.AuthCode)"
+            *ngIf="!isAmoActivated"
             [disabled]="disableEditingActivation()"
+            class="btn btn-default mt-2 mb-4"
           >
             <i class="fas fa-power-off mr-2"></i> {{ 'settings.site.newIntegration.activate' | translate }}
           </button>
@@ -900,15 +908,15 @@
         <!-- EMAIL PARAMS -->
         <div *ngIf="editableIntegration.type === IntegrationTypes.EMAIL">
           <div class="integration-tab-item">
-            <label for="editEmailParamsEmail" class="control-label">
+            <label class="control-label" for="editEmailParamsEmail">
               {{ 'settings.site.newIntegration.create.email' | translate }}
             </label>
             <input
-              type="text"
-              id="editEmailParamsEmail"
               [(ngModel)]="editableIntegration.params.email"
               class="form-control"
+              id="editEmailParamsEmail"
               name="editEmailParamsEmail"
+              type="text"
             >
           </div>
         </div>
@@ -917,29 +925,29 @@
         <div
           *ngIf="editableIntegration.type === IntegrationTypes.ROISTAT || editableIntegration.type === IntegrationTypes.WEBHOOK">
           <div class="integration-tab-item">
-            <label for="editRoistatParamsUrl" class="control-label">
+            <label class="control-label" for="editRoistatParamsUrl">
               {{ 'settings.site.newIntegration.create.url' | translate }}
             </label>
             <input
-              type="text"
-              id="editRoistatParamsUrl"
               [(ngModel)]="editableIntegration.params.url"
               class="form-control"
+              id="editRoistatParamsUrl"
               name="editRoistatParamsUrl"
+              type="text"
             >
           </div>
         </div>
 
         <div class="integration-tab-item mb-0">
           <div class="d-flex">
-            <ui-switch size="small" [(ngModel)]="editableIntegration.default"></ui-switch>
+            <ui-switch [(ngModel)]="editableIntegration.default" size="small"></ui-switch>
             <label class="control-label ml-2">
               {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
-              <a data-toggle="tooltip"
-                 data-placement="top"
+              <a class="info-link"
                  data-container="body"
-                 title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"
-                 class="info-link"><i class="fa fa-info-circle"></i>
+                 data-placement="top"
+                 data-toggle="tooltip"
+                 title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
               </a>
             </label>
           </div>
@@ -951,9 +959,9 @@
             <strong>{{ 'settings.site.newIntegration.funnel.title' | translate }}</strong>
           </h5>
           <button
-            class="btn btn-default mt-2 mb-3"
             (click)="loadIntegration()"
             [disabled]="disableEditingActivation() || !this.editableIntegration.params.accessToken"
+            class="btn btn-default mt-2 mb-3"
           >
             <i class="fas fa-sync mr-2"></i> {{ 'settings.site.newIntegration.funnel.button' | translate }}
           </button>
@@ -962,13 +970,13 @@
               <label class="control-label">{{ 'settings.site.newIntegration.funnel.name' | translate }}</label>
               <div class="dropdown integration-selector">
                 <button
-                  type="button"
-                  class="btn btn-default dropdown-toggle"
-                  data-toggle="dropdown"
-                  data-display="static"
-                  aria-haspopup="true"
-                  aria-expanded="true"
                   [disabled]="!pipelines.length"
+                  aria-expanded="true"
+                  aria-haspopup="true"
+                  class="btn btn-default dropdown-toggle"
+                  data-display="static"
+                  data-toggle="dropdown"
+                  type="button"
                 >
                   <span
                     class="dropdown-selected-cropp"
@@ -976,8 +984,8 @@
                 </button>
                 <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                   <li
-                    *ngFor="let item of pipelines"
                     (click)="changeCurrentFunnelId(item.id.toString(), item.name)"
+                    *ngFor="let item of pipelines"
                   >
                     <a class="dropdown-item">{{ item.name }}</a>
                   </li>
@@ -989,13 +997,13 @@
               <label class="control-label">{{ 'settings.site.newIntegration.funnel.status' | translate }}</label>
               <div class="dropdown integration-selector">
                 <button
-                  type="button"
-                  class="btn btn-default dropdown-toggle"
-                  data-toggle="dropdown"
-                  data-display="static"
-                  aria-haspopup="true"
-                  aria-expanded="true"
                   [disabled]="!pipelines.length"
+                  aria-expanded="true"
+                  aria-haspopup="true"
+                  class="btn btn-default dropdown-toggle"
+                  data-display="static"
+                  data-toggle="dropdown"
+                  type="button"
                 >
                   <span
                     class="dropdown-selected-cropp"
@@ -1003,8 +1011,8 @@
                 </button>
                 <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                   <li
-                    *ngFor="let item of leadStates"
                     (click)="changeCurrentFunnelLeadStateId(item.id.toString(), item.name)"
+                    *ngFor="let item of leadStates"
                   >
                     <a class="dropdown-item">{{ item.name }}</a>
                   </li>
@@ -1014,22 +1022,22 @@
           </div>
           <div class="integration-tab-item mr-3">
             <label class="control-label">{{ 'settings.site.newIntegration.funnel.check.title' | translate }}</label>
-            <a data-toggle="tooltip"
-               data-placement="bottom"
+            <a class="info-link ml-1 mt-1"
                data-container="body"
-               title="{{ 'settings.site.newIntegration.funnel.check.tooltip' | translate }}"
-               class="info-link ml-1 mt-1"><i class="fa fa-info-circle"></i>
+               data-placement="bottom"
+               data-toggle="tooltip"
+               title="{{ 'settings.site.newIntegration.funnel.check.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
             </a>
 
             <div class="dropdown integration-selector">
               <button
-                type="button"
-                class="btn btn-default dropdown-toggle"
-                data-toggle="dropdown"
-                data-display="static"
-                aria-haspopup="true"
-                aria-expanded="true"
                 [disabled]="!pipelines.length"
+                aria-expanded="true"
+                aria-haspopup="true"
+                class="btn btn-default dropdown-toggle"
+                data-display="static"
+                data-toggle="dropdown"
+                type="button"
               >
                 <span
                   class="dropdown-selected-cropp"
@@ -1037,8 +1045,8 @@
               </button>
               <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
                 <li
-                  *ngFor="let item of funnelCheckDuplicates | keyvalue : returnZero"
                   (click)="changeCurrentFunnelCheckDuplicates(item.key)"
+                  *ngFor="let item of funnelCheckDuplicates | keyvalue : returnZero"
                 >
                   <a class="dropdown-item">{{ item.value }}</a>
                 </li>
@@ -1057,11 +1065,11 @@
             <h5 class="mt-2">
               <strong>{{ 'settings.site.newIntegration.fields.title' | translate }}</strong>
             </h5>
-            <a data-toggle="tooltip"
-               data-placement="bottom"
+            <a class="info-link ml-1 mt-1"
                data-container="body"
-               title="{{ 'settings.site.newIntegration.fields.tooltip' | translate }}"
-               class="info-link ml-1 mt-1"><i class="fa fa-info-circle"></i>
+               data-placement="bottom"
+               data-toggle="tooltip"
+               title="{{ 'settings.site.newIntegration.fields.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
             </a>
           </div>
           <div class="d-flex flex-column mt-2">
@@ -1081,27 +1089,27 @@
               <div class="d-flex mb-2">
                 <div class="w-50 mr-3">
                   <input
-                    type="text"
-                    [id]="'editLeadgenicFieldId' + i"
                     [(ngModel)]="integrationField.leadGenicId"
-                    pattern="[0-9a-zA-Z_\-]{1,50}"
-                    class="form-control leadgenic-field"
                     [class.field-error]=
                       "integrationField.leadGenicId === 'email' ||
                         integrationField.leadGenicId === 'phone' ||
                         integrationField.leadGenicId === 'message' ||
                         integrationField.leadGenicId === 'name'"
+                    [id]="'editLeadgenicFieldId' + i"
+                    class="form-control leadgenic-field"
                     name="'leadgenicFieldId' + i"
+                    pattern="[0-9a-zA-Z_\-]{1,50}"
+                    type="text"
                   >
                 </div>
                 <div class="w-50 ml-3 mr-3">
                   <input
-                    type="text"
-                    [id]="'editCrmFieldId' + i"
                     [(ngModel)]="integrationField.crmId"
-                    pattern="^.{1,50}$"
+                    [id]="'editCrmFieldId' + i"
                     class="form-control"
                     name="'crmFieldId' + i"
+                    pattern="^.{1,50}$"
+                    type="text"
                   >
                 </div>
                 <a (click)="deleteIntegrationField(i)"><i class="fa fa-trash integration-field-delete mr-2"></i></a>
@@ -1118,7 +1126,7 @@
             </ng-container>
 
           </div>
-          <a class="integration-field-add" (click)="addIntegrationField()">
+          <a (click)="addIntegrationField()" class="integration-field-add">
             <i class="fa fa-plus integration-field-add-icon"></i>
             {{ 'settings.site.newIntegration.fields.add' | translate }}
           </a>
@@ -1130,26 +1138,26 @@
 
 <div class="modal-footer d-flex justify-content-between mt-1">
   <button
-    class="btn btn-default"
     (click)="closeModal()"
+    class="btn btn-default"
   >
     {{ 'global.cancel' | translate }}
   </button>
 
   <button
-    *ngIf="!editableIntegration"
-    class="btn btn-success"
     (click)="createIntegration()"
+    *ngIf="!editableIntegration"
     [disabled]="disableCreation()"
+    class="btn btn-success"
   >
     {{ 'settings.site.newIntegration.add' | translate }}
   </button>
 
   <button
-    *ngIf="editableIntegration"
-    class="btn btn-success"
     (click)="updateIntegration()"
+    *ngIf="editableIntegration"
     [disabled]="disableUpdation()"
+    class="btn btn-success"
   >
     {{ 'global.save' | translate }}
   </button>

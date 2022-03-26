@@ -2,9 +2,9 @@
   <div class="row col-lg-12 pr-0 justify-content-between">
     <h1 class="title-main">{{ 'sidebar.sites' | translate }}</h1>
     <button
-      type="button"
-      class="btn btn-lg btn-success"
       (click)="openModalForCreatingNewSite()"
+      class="btn btn-lg btn-success"
+      type="button"
     ><i class="fa fa-plus-circle"></i> {{ 'sitelist.addSite' | translate }}
     </button>
   </div>
@@ -18,9 +18,9 @@
     </div>
     <app-site-item
       *ngFor="let site of sites; index as i"
+      [index]="i"
       [item]="site"
       [timezone]="timezone"
-      [index]="i"
     ></app-site-item>
   </div>
 </div>

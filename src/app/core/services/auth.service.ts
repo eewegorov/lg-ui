@@ -21,7 +21,8 @@ export class AuthService {
     private router: Router,
     private http: HttpClient,
     private configService: ConfigService
-  ) {}
+  ) {
+  }
 
   public login(data: AuthRequest): Observable<boolean> {
     return this.http.post<Token>(`${this.configService.config.oauth}/token`,

@@ -25,7 +25,8 @@ export class IntegrationItemComponent implements OnInit, AfterViewChecked {
     private modalService: NgbModal,
     private toastr: ToastrService,
     private sitesService: SitesService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
@@ -78,7 +79,8 @@ export class IntegrationItemComponent implements OnInit, AfterViewChecked {
         this.updateIntegrations.emit(true);
       }
     })
-      .catch(() => {});
+      .catch(() => {
+      });
   }
 
   public removeItem() {

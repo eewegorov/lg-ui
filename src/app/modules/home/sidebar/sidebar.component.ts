@@ -36,6 +36,14 @@ export class SidebarComponent implements OnInit {
     this.loadScript('http://cdn.userecho.com/js/widget-1.4.gz.js');
   }
 
+  public preloadBanner(): void {
+    UE.Popin.preload();
+  }
+
+  public showBanner(): void {
+    UE.Popin.show();
+  }
+
   private loadScript(url: string): void {
     const script = document.createElement('script');
     script.type = 'text/javascript';
@@ -43,14 +51,6 @@ export class SidebarComponent implements OnInit {
     script.async = true;
     const s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(script, s);
-  }
-
-  public preloadBanner(): void {
-    UE.Popin.preload();
-  }
-
-  public showBanner(): void {
-    UE.Popin.show();
   }
 
 }

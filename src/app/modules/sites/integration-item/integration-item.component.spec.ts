@@ -8,9 +8,9 @@ describe('IntegrationItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IntegrationItemComponent ]
+      declarations: [IntegrationItemComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

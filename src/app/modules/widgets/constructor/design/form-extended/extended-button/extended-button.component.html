@@ -1,27 +1,28 @@
 <div class="row-subitem">
   <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
       {{ item.label }}
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
-      <li role="presentation" *ngFor="let itemForm of availItemTypes" (click)="changeFormType(itemForm.type)">
-        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
+      <li (click)="changeFormType(itemForm.type)" *ngFor="let itemForm of availItemTypes" role="presentation">
+        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemForm.label }}</a>
       </li>
     </ul>
   </div>
 </div>
 
 <div class="row-subitem mt-3 border-item">
-  <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.button.bType.label' | translate }}</label>
+  <label
+    class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.button.bType.label' | translate }}</label>
   <div class="dropdown mt-1">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
       {{ item.bType.label }}
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
-      <li role="presentation" *ngFor="let itemBType of bTypes" (click)="item.bType = itemBType">
-        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemBType.label }}</a>
+      <li (click)="item.bType = itemBType" *ngFor="let itemBType of bTypes" role="presentation">
+        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemBType.label }}</a>
       </li>
     </ul>
   </div>
@@ -36,12 +37,12 @@
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="item.icon.color"
-        [style.background]="item.icon.color"
         [cpAlphaChannel]="'disabled'"
         [cpOutputFormat]="'hex'"
-        cpPosition="left"
+        [style.background]="item.icon.color"
         class="color-picker-control"
-readonly
+        cpPosition="left"
+        readonly
       />
       <input
         [(ngModel)]="item.icon.color"
@@ -56,16 +57,16 @@ readonly
     </div>
     <div class="icp-icon row-subitem-padding">
       <div class="btn-group">
-        <button type="button" class="btn btn-primary iconpicker-component">
+        <button class="btn btn-primary iconpicker-component" type="button">
           <i [class]="item.icon.selectedIcon"></i>
         </button>
         <input
-          [iconPicker]="item.icon.selectedIcon"
-          ipPosition="top"
-          [ipIconPack]="['fa']"
           (iconPickerSelect)="onLabelIconPickerSelect($event)"
-          id="icon-picker-label"
+          [iconPicker]="item.icon.selectedIcon"
+          [ipIconPack]="['fa']"
           class="icp btn btn-primary dropdown-toggle"
+          id="icon-picker-label"
+          ipPosition="top"
         />
         <span class="caret"></span>
       </div>
@@ -77,8 +78,8 @@ readonly
     <div class="align-items-center">
       <div class="form-control form-control-font">
         <input
-          type="number"
           [(ngModel)]="item.fontSize"
+          type="number"
         />
         <label>px</label>
       </div>
@@ -103,8 +104,8 @@ readonly
     <div class="align-items-center">
       <div class="form-control form-control-font">
         <input
-          type="number"
           [(ngModel)]="item.fontSize"
+          type="number"
         />
         <label>px</label>
       </div>
@@ -121,12 +122,12 @@ readonly
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="item.colorBtn"
-        [style.background]="item.colorBtn"
         [cpAlphaChannel]="'disabled'"
         [cpOutputFormat]="'hex'"
-        cpPosition="left"
+        [style.background]="item.colorBtn"
         class="color-picker-control"
-readonly
+        cpPosition="left"
+        readonly
       />
       <input
         [(ngModel)]="item.colorBtn"
@@ -150,9 +151,9 @@ readonly
     <div class="form-check">
       <label class="form-check-label">
         <input
-          type="checkbox"
           [(ngModel)]="item.newLine"
           class="form-check-input"
+          type="checkbox"
         />
         <span class="checkmark"></span>
       </label>
@@ -168,18 +169,18 @@ readonly
 <div class="row-subitem mt-3 border-item">
   <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
     <div>
-      <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthValue">
+      <input [(ngModel)]="item.widthValue" class="form-control form-control-font form-cntrl-55w" type="number">
     </div>
 
     <div class="ml-2 w-100">
       <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+        <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
           {{ item.widthType.label }}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li role="presentation" *ngFor="let itemWidth of availWidthTypes" (click)="item.widthType = itemWidth">
-            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemWidth.label }}</a>
+          <li (click)="item.widthType = itemWidth" *ngFor="let itemWidth of availWidthTypes" role="presentation">
+            <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemWidth.label }}</a>
           </li>
         </ul>
       </div>
@@ -190,46 +191,46 @@ readonly
 <div class="row-subitem mt-3 border-item">
   <h3>{{ 'widgets.formExt.mainSettings.buttonSettings.style' | translate }}</h3>
   <div class="dropdown mt-3">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
       {{ item.styleType }}
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu dropdown-with-btn-styles" role="menu">
-      <li role="presentation"
-          (click)="setBtnStyle('Default', item)">
+      <li (click)="setBtnStyle('Default', item)"
+          role="presentation">
         <a
-          class="dropdown-item btn-var-styles btn-var-styles__default"
           [ngStyle]="{'font-family':item.font.fontFamily, 'background':item.colorBtn}"
+          class="dropdown-item btn-var-styles btn-var-styles__default"
           href="javascript:void(0)"
         >
           Default
         </a>
       </li>
-      <li role="presentation"
-          (click)="setBtnStyle('Material', item)">
+      <li (click)="setBtnStyle('Material', item)"
+          role="presentation">
         <a
-          class="dropdown-item btn-var-styles btn-var-styles__material"
           [ngStyle]="{'font-family':item.font.fontFamily, 'background':item.colorBtn}"
+          class="dropdown-item btn-var-styles btn-var-styles__material"
           href="javascript:void(0)"
         >
           Material
         </a>
       </li>
-      <li role="presentation"
-          (click)="setBtnStyle('Flat', item)">
+      <li (click)="setBtnStyle('Flat', item)"
+          role="presentation">
         <a
-          class="dropdown-item btn-var-styles btn-var-styles__flat"
           [ngStyle]="{'font-family':item.font.fontFamily, 'background':item.colorBtn}"
+          class="dropdown-item btn-var-styles btn-var-styles__flat"
           href="javascript:void(0)"
         >
           Flat
         </a>
       </li>
-      <li role="presentation"
-          (click)="setBtnStyle('Border Style', item)">
+      <li (click)="setBtnStyle('Border Style', item)"
+          role="presentation">
         <a
-          class="dropdown-item btn-var-styles btn-var-styles__border-style"
           [ngStyle]="{'font-family':item.font.fontFamily, 'border-color':item.colorBtn}"
+          class="dropdown-item btn-var-styles btn-var-styles__border-style"
           href="javascript:void(0)"
         >
           Border Style
@@ -242,26 +243,27 @@ readonly
 <div class="row-subitem mt-3">
   <h3>{{ 'widgets.formExt.mainSettings.buttonSettings.redirect.action' | translate }}</h3>
   <div class="dropdown mt-3">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
       {{ item.redirect.type.label }}
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
-      <li role="presentation" *ngFor="let itemR of redirectAvail" (click)="item.redirect.type = itemR">
-        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemR.label }}</a>
+      <li (click)="item.redirect.type = itemR" *ngFor="let itemR of redirectAvail" role="presentation">
+        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemR.label }}</a>
       </li>
     </ul>
   </div>
 
   <div *ngIf="item.redirect.type.type === 1 || item.redirect.type.type === 3">
     <div
-      class="row-subitem mt-3 widget-name-block-rel"
       [ngClass]="(item.redirect.url === '') ? 'is-invalid' : ''"
+      class="row-subitem mt-3 widget-name-block-rel"
     >
       <label class="control-label">{{ 'widgets.redirect.onClickRedirect' | translate }}:</label>
-      <input type="text" class="form-control" [(ngModel)]="item.redirect.url" placeholder="http://">
+      <input [(ngModel)]="item.redirect.url" class="form-control" placeholder="http://" type="text">
       <span class="input-down-sm-lab">{{ 'widgets.redirect.example' | translate }}: http://mywebsite.com</span>
-      <a *ngIf="item.redirect.url" (click)="item.redirect.url = ''" class="remove-widget-name remove-widget-redirect"></a>
+      <a (click)="item.redirect.url = ''" *ngIf="item.redirect.url"
+         class="remove-widget-name remove-widget-redirect"></a>
     </div>
     <div class="row-subitem mt-2 widget-small-text">
       {{ 'widgets.redirect.description' | translate }}
@@ -270,9 +272,9 @@ readonly
       <div class="form-check">
         <label class="form-check-label">
           <input
-            type="checkbox"
             [(ngModel)]="item.redirect.blank"
             class="form-check-input"
+            type="checkbox"
           />
           <span class="checkmark"></span>
         </label>
@@ -288,13 +290,14 @@ readonly
       <div class="form-check">
         <label class="form-check-label">
           <input
-            type="checkbox"
             [(ngModel)]="item.targetAction"
             class="form-check-input"
+            type="checkbox"
           />
           <span class="checkmark"></span>
         </label>
-        <span class="form-check-text f-3">{{ 'widgets.formExt.mainSettings.buttonSettings.isBtnAction' | translate }}</span>
+        <span
+          class="form-check-text f-3">{{ 'widgets.formExt.mainSettings.buttonSettings.isBtnAction' | translate }}</span>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-<div class="hpanel" [ngClass]="(widget.active) ? 'hgreen' : 'hred'">
+<div [ngClass]="(widget.active) ? 'hgreen' : 'hred'" class="hpanel">
   <div class="integration-item__body">
     <div class="row">
       <div class="col-lg-12">
@@ -8,7 +8,8 @@
               <div class="integration-item__icon integration-item__icon--{{widget.type}}"></div>
             </div>
             <div class="integration-item__type-name">{{widget.serviceName}}</div>
-            <span *ngIf="widget.isPayment" class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
+            <span *ngIf="widget.isPayment"
+                  class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
           </div>
           <div class="widget-item-view-btns text-right">
             <div class="btn-group">
@@ -16,7 +17,7 @@
                 (click)="startStopItem(true)"
                 [class.active]="widget.active"
                 class="btn btn-sm btn-default start-widget-btn"
-                data-container="body" data-toggle="tooltip" data-placement="top"
+                data-container="body" data-placement="top" data-toggle="tooltip"
                 title="{{ 'settings.site.tabs.integration.tooltip.start' | translate }}"
               ><i class="fa fa-play"></i></button>
 
@@ -24,7 +25,7 @@
                 (click)="startStopItem(false)"
                 [class.active]="!widget.active"
                 class="btn btn-sm btn-default stop-widget-btn"
-                data-container="body" data-toggle="tooltip" data-placement="top"
+                data-container="body" data-placement="top" data-toggle="tooltip"
                 title="{{ 'settings.site.tabs.integration.tooltip.stop' | translate }}"
               ><i class="fa fa-pause"></i></button>
             </div>
@@ -33,14 +34,14 @@
               <button
                 (click)="setupItem()"
                 class="btn btn-sm btn-default"
-                data-container="body" data-toggle="tooltip" data-placement="top"
+                data-container="body" data-placement="top" data-toggle="tooltip"
                 title="{{ 'settings.site.tabs.integration.tooltip.settings' | translate }}"
               ><i class="fa fa-cogs"></i></button>
 
               <button
                 (click)="removeItem()"
                 class="btn btn-sm btn-default"
-                data-container="body"  data-toggle="tooltip" data-placement="top"
+                data-container="body" data-placement="top" data-toggle="tooltip"
                 title="{{ 'settings.site.tabs.integration.tooltip.remove' | translate }}"
               ><i class="fa fa-trash"></i></button>
             </div>
@@ -48,11 +49,11 @@
         </div>
         <div class="widget-item-view-header">
           <cool-inline-edit-field
-            class="long-text"
-            name="name"
-            [(ngModel)]="widget.name"
             (editStarted)="fixOldWidgetName($event)"
             (saved)="updateWidgetName($event)"
+            [(ngModel)]="widget.name"
+            class="long-text"
+            name="name"
           >
           </cool-inline-edit-field>
         </div>

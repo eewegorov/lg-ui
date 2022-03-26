@@ -21,7 +21,8 @@ export class ExtendedDatepickerComponent implements AfterViewInit, OnInit, OnCha
     widgetParent: 'body'
   };
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

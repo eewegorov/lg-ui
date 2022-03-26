@@ -8,9 +8,9 @@ describe('PromotionalComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PromotionalComponent ]
+      declarations: [PromotionalComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -8,7 +8,8 @@ import {
   CompanyResponse,
   DeleteCompanyRequest,
   FullWidget,
-  ImagesResponse, ImageUploadResponse,
+  ImagesResponse,
+  ImageUploadResponse,
   MockupGroupsResponse,
   MockupResponse,
   MockupsResponse,
@@ -18,12 +19,12 @@ import {
   WidgetChangeCompanyRequest,
   WidgetCloneRequest,
   WidgetCloneResponse,
-  WidgetStatisticsResponse,
   WidgetCreateRequest,
   WidgetCreateResponse,
   WidgetRename,
   WidgetResponse,
   WidgetsResponse,
+  WidgetStatisticsResponse,
   WidgetSwapRequest,
   WidgetTemplatesResponse,
   WidgetTypesResponse
@@ -39,7 +40,8 @@ export class WidgetApiService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService
-  ) { }
+  ) {
+  }
 
   public getWidgetsList(siteId: string): Observable<WidgetsResponse> {
     return this.http.get<WidgetsResponse>(`${this.configService.config.prov}/sites/${siteId}/widgets`);

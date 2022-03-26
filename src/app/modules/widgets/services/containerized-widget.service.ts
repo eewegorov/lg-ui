@@ -6,11 +6,17 @@ import { ApiResponse } from '../../../core/models/api';
 import {
   Container,
   ContainerInfoResponse,
-  ContainerizedWidgetCloneRequest, ContainerRequest,
+  ContainerizedWidgetCloneRequest,
+  ContainerRequest,
   ContainerResponse,
   ContainerShort,
-  ContainersResponse, WidgetChangeCompanyRequest, WidgetCloned, WidgetCloneRequest,
-  WidgetCloneResponse, WidgetCreated, WidgetCreateRequest, WidgetCreateResponse,
+  ContainersResponse,
+  WidgetChangeCompanyRequest,
+  WidgetCloned,
+  WidgetCloneResponse,
+  WidgetCreated,
+  WidgetCreateRequest,
+  WidgetCreateResponse,
   WidgetRename
 } from '../../../core/models/widgets';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
@@ -28,7 +34,8 @@ export class ContainerizedWidgetService {
     private errorHandlerService: ErrorHandlerService,
     private sitesService: SitesService,
     private containerizedWidgetApiService: ContainerizedWidgetApiService
-  ) { }
+  ) {
+  }
 
   public getWContainers(siteId: string): Observable<ContainerShort[]> {
     return this.containerizedWidgetApiService.getWContainers(siteId).pipe(

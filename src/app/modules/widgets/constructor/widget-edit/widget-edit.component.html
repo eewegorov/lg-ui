@@ -2,28 +2,28 @@
   <div class="d-flex justify-content-between title-and-tabs-container">
     <div class="title-widget-container">
       <a
-        id="renameWidgetBtn"
         (click)="startRenameWidget(widget)"
         *ngIf="widget.name && renamedWidget.id !== widget.id"
-        href="javascript:void(0);"
         class="title-widget-name-editable"
+        href="javascript:void(0);"
+        id="renameWidgetBtn"
       >
         <span [title]="widget.name">{{ widget.name }}</span><i class="fa fa-pencil ml-1"></i>
       </a>
 
       <div *ngIf="renamedWidget.id === widget.id" class="widget-rename-edited">
         <input
-          type="text"
-          class="widget-rename-control"
-          [(ngModel)]="renamedWidget.name"
-          maxlength="50"
-          [style.width.ch]="renamedWidget.name.length + 1.45"
           (blur)="renameWidget()"
           (keydown)="checkKeyDown($event)"
+          [(ngModel)]="renamedWidget.name"
+          [style.width.ch]="renamedWidget.name.length + 1.45"
+          class="widget-rename-control"
+          maxlength="50"
+          type="text"
         >
         <a
-          class="widget-rename-button"
           (click)="renameWidget()"
+          class="widget-rename-button"
           href="javascript:void(0);"
         >
           <i class="fa fa-check ml-1"></i>
@@ -33,18 +33,19 @@
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs widget-editor-tabs" role="tablist">
-      <li role="presentation" class="widget-editor-tab" [ngClass]="{ active: isCurrentActiveTab('design') }">
+      <li [ngClass]="{ active: isCurrentActiveTab('design') }" class="widget-editor-tab" role="presentation">
         <a
           (click)="setActiveTab('design')"
         >
           <div class="before fade-in">
             <div class="square"></div>
           </div>
-          <div class="design-icon"></div> <span
-          class="tab-text">{{ 'widgetsList.editor.tab.design' | translate }}</span> <span
+          <div class="design-icon"></div>
+          <span
+            class="tab-text">{{ 'widgetsList.editor.tab.design' | translate }}</span> <span
           *ngIf="isTabHasError('design') && showErrors"
-          data-toggle="tooltip" data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
-          class="info-link badge badge-pill badge-danger"></span>
+          class="info-link badge badge-pill badge-danger" data-placement="top" data-toggle="tooltip"
+          title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"></span>
           <div class="after fade-in">
             <div class="square"></div>
           </div>
@@ -52,9 +53,9 @@
       </li>
 
       <li
-        role="presentation"
-        class="widget-editor-tab"
         [ngClass]="{ active: isCurrentActiveTab('rules') }"
+        class="widget-editor-tab"
+        role="presentation"
       >
         <a
           (click)="setActiveTab('rules')"
@@ -62,11 +63,12 @@
           <div class="before fade-in">
             <div class="square fade-in"></div>
           </div>
-          <div class="rules-icon"></div> <span
-          class="tab-text">{{ 'widgetsList.editor.tab.rules' | translate }}</span> <span
-          *ngIf="isTabHasError('rules') && showErrors" data-toggle="tooltip"
-          data-placement="top" title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
-          class="info-link badge badge-pill badge-danger"></span>
+          <div class="rules-icon"></div>
+          <span
+            class="tab-text">{{ 'widgetsList.editor.tab.rules' | translate }}</span> <span
+          *ngIf="isTabHasError('rules') && showErrors" class="info-link badge badge-pill badge-danger"
+          data-placement="top" data-toggle="tooltip"
+          title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"></span>
           <div class="after fade-in">
             <div class="square fade-in"></div>
           </div>
@@ -78,10 +80,10 @@
   <!-- Controls -->
   <div class="controls-group" id="save-widget-panel">
     <button
-      type="button"
-      *ngIf="widget?.abtestInfo && (widget?.abtestInfo.type === 'VARIANT')"
       (click)="goToTest(widget)"
+      *ngIf="widget?.abtestInfo && (widget?.abtestInfo.type === 'VARIANT')"
       class="btn gototest-widget-btn"
+      type="button"
     >
       <i class="pe-7s-back mr-1"></i> Перейти к A/B тесту
     </button>
@@ -99,8 +101,8 @@
     <div class="btn-group play-btns">
       <p>Статус</p>
       <ui-switch
-        [(ngModel)]="widget.active"
         (change)="switchWidget(widget, !widget.active)"
+        [(ngModel)]="widget.active"
         class="ml-2 mr-2 float-left"
       ></ui-switch>
     </div>
@@ -120,23 +122,23 @@
 
     <div>
       <button
-        type="button"
-        id="saveWidget"
+        (click)="saveWidget()"
+        [ladda]="isLoading"
         class="ladda-button btn btn-success"
         data-style="slide-down"
-        [ladda]="isLoading"
-        (click)="saveWidget()"
+        id="saveWidget"
+        type="button"
       >
         <span class="ladda-label">
-          <i><img src="/assets/images/widgets/save.svg" alt="save"></i> <span>{{ 'global.save' | translate }}</span>
+          <i><img alt="save" src="/assets/images/widgets/save.svg"></i> <span>{{ 'global.save' | translate }}</span>
         </span>
       </button>
     </div>
 
     <button
-      class="close-widget-button"
       (click)="closeWidget()"
-      data-toggle="tooltip" data-placement="bottom" title="{{ 'widgetsList.editor.close' | translate }}"
+      class="close-widget-button"
+      data-placement="bottom" data-toggle="tooltip" title="{{ 'widgetsList.editor.close' | translate }}"
     >
       &times;
     </button>
@@ -146,41 +148,41 @@
 <!-- Tab panes -->
 <div *ngIf="widget.guiprops" [@fadeInOut] class="tab-content">
   <div
-    id="design"
-    class="design-tab-fixed"
     [hidden]="!isCurrentActiveTab('design')"
     [ngClass]="{ active: isCurrentActiveTab('design') }"
+    class="design-tab-fixed"
+    id="design"
   >
     <app-constructor-design
-      [sid]="sid"
-      [wid]="wid"
-      [isPayment]="isPayment"
-      [widget]="widget"
-      [coupons]="coupons"
-      [isContainerized]="isContainerized"
-      [showErrors]="showErrors"
-      [currentActiveTab]="currentActiveTab"
       [SP_widget]="SP_widget"
+      [coupons]="coupons"
+      [currentActiveTab]="currentActiveTab"
+      [isButtonRedirectAndEmpty]="isButtonRedirectAndEmpty"
+      [isContainerized]="isContainerized"
+      [isFieldIdUnique]="isFieldIdUnique"
+      [isFormHasButtonWithAction]="isFormHasButtonWithAction"
+      [isFormHasSendIfAction]="isFormHasSendIfAction"
+      [isFormHasSpecElements]="isFormHasSpecElements"
+      [isPayment]="isPayment"
       [isTabHasErrorForFormExt]="isTabHasErrorForFormExt"
       [mapFormExtFieldId]="mapFormExtFieldId"
-      [isFieldIdUnique]="isFieldIdUnique"
-      [isButtonRedirectAndEmpty]="isButtonRedirectAndEmpty"
-      [isFormHasSpecElements]="isFormHasSpecElements"
-      [isFormHasSendIfAction]="isFormHasSendIfAction"
-      [isFormHasButtonWithAction]="isFormHasButtonWithAction"
+      [showErrors]="showErrors"
+      [sid]="sid"
+      [wid]="wid"
+      [widget]="widget"
     ></app-constructor-design>
   </div>
 
   <div
     *ngIf="isCurrentActiveTab('rules')"
-    id="rules"
     [ngClass]="{ active: isCurrentActiveTab('rules') }"
+    id="rules"
   >
     <app-constructor-rules
-      [widget]="widget"
       [isContainerized]="isContainerized"
-      [sid]="sid"
       [showErrors]="showErrors"
+      [sid]="sid"
+      [widget]="widget"
     ></app-constructor-rules>
   </div>
 </div>

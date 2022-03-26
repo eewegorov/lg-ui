@@ -11,7 +11,8 @@ export class PositionControlComponent implements OnInit {
 
   @Output() changePosition = new EventEmitter<string>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

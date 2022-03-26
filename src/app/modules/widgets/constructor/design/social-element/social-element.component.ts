@@ -15,7 +15,8 @@ export class SocialElementComponent implements OnInit {
   @Input() public placePopup: string[];
   @Input() public floatBtn: string[];
 
-  constructor(private widgetConstructorService: WidgetConstructorService) { }
+  constructor(private widgetConstructorService: WidgetConstructorService) {
+  }
 
   ngOnInit(): void {
   }

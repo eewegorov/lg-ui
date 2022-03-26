@@ -44,4 +44,5 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     OrderByPipe
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

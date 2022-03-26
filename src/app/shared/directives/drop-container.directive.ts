@@ -1,10 +1,10 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { Audience } from '../../core/models/widgets';
 import { AUDIENCES_VALS } from '../../configs/audiences';
+import 'jquery-ui/ui/widgets/droppable.js';
 
 declare var require: any;
 const $ = require('jquery');
-import 'jquery-ui/ui/widgets/droppable.js';
 
 @Directive({
   selector: '[appDropContainer]'
@@ -45,7 +45,7 @@ export class DropContainerDirective {
     const subObj = {} as any;
 
     if (type === 'URL') {
-      subObj.condition        = AUDIENCES_VALS.conditionsEnum[0];
+      subObj.condition = AUDIENCES_VALS.conditionsEnum[0];
       subObj.paramCompareType = AUDIENCES_VALS.compareTypesEnum[0];
       subObj.param = '';
       subObj.valueCompareType = AUDIENCES_VALS.compareTypesEnum[0];

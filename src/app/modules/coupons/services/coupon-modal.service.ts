@@ -11,7 +11,8 @@ export class CouponModalService {
   constructor(
     private modalService: NgbModal,
     private couponService: CouponService
-  ) { }
+  ) {
+  }
 
   public openCouponModal(coupon?) {
     const modalRef = this.modalService.open(CouponAddComponent, {
@@ -24,6 +25,7 @@ export class CouponModalService {
         this.couponService.updateCouponsList.next();
       }
     })
-      .catch(() => {});
+      .catch(() => {
+      });
   }
 }

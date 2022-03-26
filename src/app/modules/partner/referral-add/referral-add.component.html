@@ -5,21 +5,21 @@
   <div>{{ 'partner.add.modal.description' | translate }}</div>
   <div id="partner-reg-container">
     <label class="control-label" for="refMail">{{ 'partner.add.modal.field' | translate }}:</label>
-    <input type="text" id="refMail" name="partneremail" [(ngModel)]="refMail" class="form-control">
+    <input [(ngModel)]="refMail" class="form-control" id="refMail" name="partneremail" type="text">
   </div>
 </div>
 <div class="modal-footer justify-content-between">
-    <button
-      class="btn btn-default floated-left"
-      (click)="closeModal()"
-    >
-      {{ 'global.cancel' | translate }}
-    </button>
-    <button
-      class="btn btn-success"
-      (click)="createRef()"
-      [disabled]="!refMail"
-    >
-      {{ 'partner.add.modal.button' | translate }}
-    </button>
+  <button
+    (click)="closeModal()"
+    class="btn btn-default floated-left"
+  >
+    {{ 'global.cancel' | translate }}
+  </button>
+  <button
+    (click)="createRef()"
+    [disabled]="!refMail"
+    class="btn btn-success"
+  >
+    {{ 'partner.add.modal.button' | translate }}
+  </button>
 </div>

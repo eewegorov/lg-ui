@@ -16,7 +16,8 @@ export class ErrorHandlerService {
     private translate: TranslateService,
     private coreSitesService: CoreSitesService,
     private tariffsService: TariffsService
-  ) { }
+  ) {
+  }
 
   public handleError(error: ApiResponse) {
     if (error.message) {

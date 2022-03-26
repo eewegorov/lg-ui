@@ -8,9 +8,9 @@ describe('ExtendedHiddenComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExtendedHiddenComponent ]
+      declarations: [ExtendedHiddenComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

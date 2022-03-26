@@ -30,7 +30,7 @@ export class OrderByPipe implements PipeTransform {
     }
 
     if (Array.isArray(config) === false) {
-      config = <string[]>[config];
+      config = <string[]> [config];
     }
 
     // As soon as a or b is smaller/greater than the other, we can immediately return

@@ -1,12 +1,14 @@
 <div>
   <div class="d-flex row-subitem row-subitem-padding row-tune-split">
     <div class="dropdown w-100">
-      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+      <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
         <hr [class]="'style' + modelName.type">
       </button>
       <ul class="dropdown-menu" role="menu">
-        <li role="presentation" *ngFor="let itemVisual of typeClass" (click)="modelName.type = itemVisual">
-          <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item"><hr [class]="'style' + itemVisual"></a>
+        <li (click)="modelName.type = itemVisual" *ngFor="let itemVisual of typeClass" role="presentation">
+          <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">
+            <hr [class]="'style' + itemVisual">
+          </a>
         </li>
       </ul>
     </div>
@@ -17,12 +19,12 @@
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="modelName.color"
-        [style.background]="modelName.color"
         [cpAlphaChannel]="'disabled'"
         [cpOutputFormat]="'hex'"
-        cpPosition="left"
+        [style.background]="modelName.color"
         class="color-picker-control"
-readonly
+        cpPosition="left"
+        readonly
       />
       <input
         [(ngModel)]="modelName.color"
@@ -35,20 +37,20 @@ readonly
     <label class="control-label control-label-des">Ширина</label>
     <div class="d-flex align-items-center">
       <div
-        class="form-control form-control-font mr-2"
         [class.disabled]="modelName.width_type !== widthHrType[1]"
+        class="form-control form-control-font mr-2"
       >
         <input
-          type="number"
           [(ngModel)]="modelName.widthpx"
           [disabled]="modelName.width_type !== widthHrType[1]"
+          type="number"
         />
         <label>px</label>
       </div>
       <button
-        class="wide-button"
-        [class.active]="modelName.width_type === widthHrType[0]"
         (click)="modelName.width_type = (modelName.width_type === widthHrType[0] ? widthHrType[1] : widthHrType[0])"
+        [class.active]="modelName.width_type === widthHrType[0]"
+        class="wide-button"
       >
       </button>
     </div>
@@ -56,29 +58,29 @@ readonly
 
   <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3 pt-1 border-item">
     <label
-      class="control-label control-label-des"
       [class.disabled]="modelName.width_type === widthHrType[0]"
+      class="control-label control-label-des"
     >
       Выравнивание
     </label>
     <div>
       <button
-        class="align-button icon-left"
-        [class.active]="modelName.position === floatBtn[0]"
         (click)="modelName.position = floatBtn[0]"
+        [class.active]="modelName.position === floatBtn[0]"
         [disabled]="modelName.width_type === widthHrType[0]"
+        class="align-button icon-left"
       ></button>
       <button
-        class="align-button icon-center"
-        [class.active]="modelName.position === floatBtn[1]"
         (click)="modelName.position = floatBtn[1]"
+        [class.active]="modelName.position === floatBtn[1]"
         [disabled]="modelName.width_type === widthHrType[0]"
+        class="align-button icon-center"
       ></button>
       <button
-        class="align-button icon-right"
-        [class.active]="modelName.position === floatBtn[2]"
         (click)="modelName.position = floatBtn[2]"
+        [class.active]="modelName.position === floatBtn[2]"
         [disabled]="modelName.width_type === widthHrType[0]"
+        class="align-button icon-right"
       ></button>
     </div>
   </div>

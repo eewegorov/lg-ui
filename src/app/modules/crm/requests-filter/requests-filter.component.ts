@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestsFilterComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

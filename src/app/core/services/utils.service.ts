@@ -11,7 +11,8 @@ export class UtilsService {
   private md5Cache = {};
   private gravatarUrl404 = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public useGravatarIfExists(email) {
     return email ? this.getAvatarInfoPromise(this.buildGravatarUrl(email)) : EMPTY;
@@ -39,7 +40,9 @@ export class UtilsService {
   }
 
   private buildGravatarUrl(email) {
-    if (!email) { return; }
+    if (!email) {
+      return;
+    }
     const gravatarAvatarUrl = 'https://www.gravatar.com/avatar/';
     const url = gravatarAvatarUrl + this.getEmailHash(email) + '?s=256&d=mm';
     return url;

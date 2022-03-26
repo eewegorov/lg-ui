@@ -8,9 +8,9 @@ describe('CloneWidgetComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CloneWidgetComponent ]
+      declarations: [CloneWidgetComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

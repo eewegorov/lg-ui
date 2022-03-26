@@ -9,7 +9,8 @@ export class ConfigService {
 
   public config: Config;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   loadConfig() {
     return this.http

@@ -8,9 +8,9 @@ describe('PartnerBalanceComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PartnerBalanceComponent ]
+      declarations: [PartnerBalanceComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

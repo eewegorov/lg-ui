@@ -1,60 +1,62 @@
 <div class="row-subitem">
   <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
       {{ item.label }}
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
-      <li role="presentation" *ngFor="let itemForm of availItemTypes" (click)="changeFormType(itemForm.type)">
-        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
+      <li (click)="changeFormType(itemForm.type)" *ngFor="let itemForm of availItemTypes" role="presentation">
+        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemForm.label }}</a>
       </li>
     </ul>
   </div>
 </div>
 
 <div *ngIf="hasPlaceholder" class="row-subitem mt-3 form-ext-item__item-input">
-  <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.placeholder1' | translate }}</label>
-  <input type="text" class="form-control mt-1" [(ngModel)]="item.placeholder">
+  <label
+    class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.placeholder1' | translate }}</label>
+  <input [(ngModel)]="item.placeholder" class="form-control mt-1" type="text">
 </div>
 
 <div class="row-subitem mt-3 form-ext-item__item-input">
-  <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.service1' | translate }}</label>
-  <input type="text" class="form-control mt-1" [(ngModel)]="item.service">
+  <label
+    class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.service1' | translate }}</label>
+  <input [(ngModel)]="item.service" class="form-control mt-1" type="text">
   <span class="input-down-sm-lab">{{ 'widgets.formExt.email.service3' | translate }}</span>
 </div>
 
 <div class="row-subitem mt-3 form-ext-item__item-input">
   <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.id1' | translate }}</label>
   <input
-    *ngIf="idEditable"
-    type="text"
-    class="form-control mt-1 form-control-form-ext-id-field"
     (blur)="idFocusOut()"
+    *ngIf="idEditable"
     [(ngModel)]="item.idField"
+    class="form-control mt-1 form-control-form-ext-id-field"
+    type="text"
   />
   <input
     *ngIf="!idEditable"
-    type="text"
-    appSelectOnClick
-    readonly
-    class="form-control mt-1 not-readonly-hand"
     [(ngModel)]="item.idField"
+    appSelectOnClick
+    class="form-control mt-1 not-readonly-hand"
+    readonly
+    type="text"
   />
   <span class="input-down-sm-lab">{{ 'widgets.formExt.mainSettings.id.example' | translate }}</span>
 </div>
 
 <div
-  class="row-subitem mt-2 widget-small-text"
   [innerHTML]="'widgets.formExt.mainSettings.id.description' | translate"
+  class="row-subitem mt-2 widget-small-text"
 ></div>
 
 <div class="row-subitem mt-3 pt-1 border-item">
   <div class="form-check">
     <label class="form-check-label">
       <input
-        type="checkbox"
         [(ngModel)]="item.useOutsideCRM"
         class="form-check-input"
+        type="checkbox"
       />
       <span class="checkmark"></span>
     </label>
@@ -68,13 +70,13 @@
       {{ 'widgets.form.phoneMask.titleSwitcher' | translate }}
     </label>
     <ui-switch
-      size="small"
       [(ngModel)]="item.mask.enable"
+      size="small"
     ></ui-switch>
   </div>
-  <div class="mt-2 pt-1 formReqBl" *ngIf="item.mask.enable">
+  <div *ngIf="item.mask.enable" class="mt-2 pt-1 formReqBl">
     <label class="control-label">{{ 'widgets.form.phoneMask.titleInput' | translate }}</label>
-    <input type="text" class="form-control" (keyup)="blockedUnusedChars()" [(ngModel)]="item.mask.value">
+    <input (keyup)="blockedUnusedChars()" [(ngModel)]="item.mask.value" class="form-control" type="text">
     <span class="widget-small-text">{{ 'widgets.form.phoneMask.description' | translate }}</span>
   </div>
 </div>
@@ -82,17 +84,17 @@
 <div *ngIf="hasDateBlock" class="row-subitem mt-3 border-item">
   <h3>{{ 'widgets.formExt.date.type1' | translate }}</h3>
   <div class="dropdown mt-2 pt-1">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
       {{ item.dateType.label }}
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
       <li
-        role="presentation"
-        *ngFor="let itemType of availItemDateTypes"
         (click)="item.dateType = itemType"
+        *ngFor="let itemType of availItemDateTypes"
+        role="presentation"
       >
-        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemType.label }}</a>
+        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemType.label }}</a>
       </li>
     </ul>
   </div>
@@ -105,18 +107,18 @@
 <div class="row-subitem mt-3 border-item">
   <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
     <div>
-      <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthValue">
+      <input [(ngModel)]="item.widthValue" class="form-control form-control-font form-cntrl-55w" type="number">
     </div>
 
     <div class="ml-2 w-100">
       <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+        <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
           {{ item.widthType.label }}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li role="presentation" *ngFor="let itemWidth of availWidthTypes" (click)="item.widthType = itemWidth">
-            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemWidth.label }}</a>
+          <li (click)="item.widthType = itemWidth" *ngFor="let itemWidth of availWidthTypes" role="presentation">
+            <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemWidth.label }}</a>
           </li>
         </ul>
       </div>
@@ -128,7 +130,8 @@
   <div class="d-flex justify-content-between row-subitem mt-3">
     <label class="control-label control-label-des">{{ 'widgets.formExt.rating.numberOfStars' | translate }}</label>
     <div class="form-ext-item__rating-stars-settings">
-      <input type="number" min="1" max="15" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.numberOfStars">
+      <input [(ngModel)]="item.numberOfStars" class="form-control form-control-font form-cntrl-55w" max="15" min="1"
+             type="number">
     </div>
   </div>
 
@@ -137,12 +140,12 @@
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="item.colorInactive"
-        [style.background]="item.colorInactive"
         [cpAlphaChannel]="'disabled'"
         [cpOutputFormat]="'hex'"
-        cpPosition="left"
+        [style.background]="item.colorInactive"
         class="color-picker-control"
-readonly
+        cpPosition="left"
+        readonly
       />
       <input
         [(ngModel)]="item.colorInactive"
@@ -156,12 +159,12 @@ readonly
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="item.colorActive"
-        [style.background]="item.colorActive"
         [cpAlphaChannel]="'disabled'"
         [cpOutputFormat]="'hex'"
-        cpPosition="left"
+        [style.background]="item.colorActive"
         class="color-picker-control"
-readonly
+        cpPosition="left"
+        readonly
       />
       <input
         [(ngModel)]="item.colorActive"
@@ -175,9 +178,9 @@ readonly
   <div class="form-check">
     <label class="form-check-label">
       <input
-        type="checkbox"
         [(ngModel)]="item.multiLine"
         class="form-check-input"
+        type="checkbox"
       />
       <span class="checkmark"></span>
     </label>
@@ -189,9 +192,9 @@ readonly
   <div class="form-check">
     <label class="form-check-label">
       <input
-        type="checkbox"
         [(ngModel)]="item.required"
         class="form-check-input"
+        type="checkbox"
       />
       <span class="checkmark"></span>
     </label>
@@ -203,9 +206,9 @@ readonly
   <div class="form-check">
     <label class="form-check-label">
       <input
-        type="checkbox"
         [(ngModel)]="item.newLine"
         class="form-check-input"
+        type="checkbox"
       />
       <span class="checkmark"></span>
     </label>
@@ -217,13 +220,14 @@ readonly
   <div class="form-check">
     <label class="form-check-label">
       <input
-        type="checkbox"
         [(ngModel)]="item.sendFormIfAction"
         class="form-check-input"
+        type="checkbox"
       />
       <span class="checkmark"></span>
     </label>
     <span class="form-check-text f-3">{{ 'widgets.formExt.sendFormIfAnyAction.title' | translate }}</span>
   </div>
-  <span class="widget-small-text form-ext-if-action-desc">{{ 'widgets.formExt.sendFormIfAnyAction.desc' | translate }}</span>
+  <span
+    class="widget-small-text form-ext-if-action-desc">{{ 'widgets.formExt.sendFormIfAnyAction.desc' | translate }}</span>
 </div>

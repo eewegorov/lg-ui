@@ -12,9 +12,10 @@ export class ImageElementComponent implements OnInit {
   @Input() public widthHrType: string[];
   @Input() public floatBtn: string[];
 
-  @Output() private listFileItem = new EventEmitter<{place: string, item: any}>();
+  @Output() private listFileItem = new EventEmitter<{ place: string, item: any }>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

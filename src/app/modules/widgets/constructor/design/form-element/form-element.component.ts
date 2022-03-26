@@ -19,9 +19,6 @@ export class FormElementComponent implements OnInit, AfterViewInit {
   @Input() public widthHrType: string[];
   @Input() public widthBtn: string[];
   @Input() public floatBtn: string[];
-
-  @Output() private setBtn = new EventEmitter<{type: string, item: Record<string, string | number>}>();
-
   public optionsRound: Options = {
     floor: 0,
     ceil: 50,
@@ -29,7 +26,6 @@ export class FormElementComponent implements OnInit, AfterViewInit {
     animate: false,
     showSelectionBar: true
   };
-
   public optionsOpacity: Options = {
     floor: 0.00,
     ceil: 1.00,
@@ -37,7 +33,6 @@ export class FormElementComponent implements OnInit, AfterViewInit {
     animate: false,
     showSelectionBar: true
   };
-
   public itemVariable = [{
     type: 'email',
     value: 'email',
@@ -55,8 +50,10 @@ export class FormElementComponent implements OnInit, AfterViewInit {
     value: 'сообщение',
     inpPlace: 'Введите Ваше сообщение'
   }];
+  @Output() private setBtn = new EventEmitter<{ type: string, item: Record<string, string | number> }>();
 
-  constructor(private widgetConstructorService: WidgetConstructorService) { }
+  constructor(private widgetConstructorService: WidgetConstructorService) {
+  }
 
   ngAfterViewInit(): void {
     this.initPicker();
@@ -70,7 +67,7 @@ export class FormElementComponent implements OnInit, AfterViewInit {
   }
 
   public setBtnStyle(type: string, item: Record<string, string | number>): void {
-    this.setBtn.emit({type, item});
+    this.setBtn.emit({ type, item });
   }
 
   public getItemT(item, itemType) {

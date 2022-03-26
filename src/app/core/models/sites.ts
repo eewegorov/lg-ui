@@ -53,7 +53,7 @@ export interface CreateSiteRequest {
   url: string;
 }
 
-export interface CreateSiteResponse extends ApiResponse{
+export interface CreateSiteResponse extends ApiResponse {
   data: CreateSiteData;
 }
 

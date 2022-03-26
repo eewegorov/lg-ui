@@ -21,7 +21,8 @@ export class ExtendedTextComponent implements OnInit {
   public availWidthTypes = [];
   public availItemDateTypes = [];
 
-  constructor(private widgetConstructorService: WidgetConstructorService) { }
+  constructor(private widgetConstructorService: WidgetConstructorService) {
+  }
 
   ngOnInit(): void {
     this.widgetConstructorService.changeArrayOfFormExtTypes.subscribe(() => {

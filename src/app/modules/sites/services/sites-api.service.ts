@@ -3,22 +3,25 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../../core/models/api';
 import {
+  AmoAuthByCodeRequest,
+  AmoAuthByRefreshTokenRequest,
+  AmoAuthResponse,
+  AmoFunnelResponse,
+  CloneIntegrationRequest,
+  CreateIntegrationRequest,
   CreateSiteRequest,
   CreateSiteResponse,
-  UpdateIntegrationRequest,
   IntegrationResponse,
   IntegrationsResponse,
   SiteSettings,
   SiteSettingsResponse,
   SiteShortResponse,
   SitesShortResponse,
-  CloneIntegrationRequest,
-  CreateIntegrationRequest,
+  SiteStatisticsResponse,
   SmartpointsResponse,
-  AmoAuthResponse, AmoFunnelResponse, AmoAuthByCodeRequest, AmoAuthByRefreshTokenRequest, SiteStatisticsResponse
+  UpdateIntegrationRequest
 } from '../../../core/models/sites';
 import { ConfigService } from '../../../core/services/config.service';
-
 
 
 @Injectable({
@@ -29,7 +32,8 @@ export class SitesApiService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService
-  ) { }
+  ) {
+  }
 
   public getSites(): Observable<SitesShortResponse> {
     return this.http.get<SitesShortResponse>(`${this.configService.config.prov}/sites`);

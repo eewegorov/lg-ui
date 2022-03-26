@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ApiResponse } from '../../../core/models/api';
 import {
-  AmoAuthByCodeRequest, AmoAuthByRefreshTokenRequest,
+  AmoAuthByCodeRequest,
+  AmoAuthByRefreshTokenRequest,
   AmoAuthRequest,
   AmoAuthResponse,
   AmoFunnelResponse,
@@ -22,7 +23,9 @@ import {
   SiteSettingsResponse,
   SiteShort,
   SiteShortResponse,
-  SitesShortResponse, SiteStatisticsResponse, SiteStatistics,
+  SitesShortResponse,
+  SiteStatistics,
+  SiteStatisticsResponse,
   Smartpoints,
   SmartpointsResponse,
   UpdateIntegrationRequest
@@ -248,10 +251,6 @@ export class SitesService {
     return type === 'ROISTAT' || type === 'WEBHOOK';
   }
 
-  private isSiteHasFreeTariff(site): boolean {
-    return (!site.tariffExp && !site.tariffName) || site.tariffName === 'Бесплатный';
-  }
-
   public getIntegrationServicesList(): IntegrationService[] {
     return [
       {
@@ -325,6 +324,10 @@ export class SitesService {
         isPayment: true
       }
     ];
+  }
+
+  private isSiteHasFreeTariff(site): boolean {
+    return (!site.tariffExp && !site.tariffName) || site.tariffName === 'Бесплатный';
   }
 
 }

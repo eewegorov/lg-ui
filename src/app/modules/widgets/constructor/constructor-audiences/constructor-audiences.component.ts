@@ -4,10 +4,10 @@ import { AudienceGroup, AudienceGroupItem, FullWidget } from '../../../../core/m
 import { AUDIENCES_VALS } from '../../../../configs/audiences';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
+import 'jquery-ui/ui/widgets/draggable.js';
 
 declare let require: any;
 const $ = require('jquery');
-import 'jquery-ui/ui/widgets/draggable.js';
 
 
 @Component({
@@ -112,7 +112,7 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
     const subObj = {} as any;
 
     if (type === 'URL') {
-      subObj.condition        = AUDIENCES_VALS.conditionsEnum[0];
+      subObj.condition = AUDIENCES_VALS.conditionsEnum[0];
       subObj.paramCompareType = AUDIENCES_VALS.compareTypesEnum[0];
       subObj.param = '';
       subObj.valueCompareType = AUDIENCES_VALS.compareTypesEnum[0];

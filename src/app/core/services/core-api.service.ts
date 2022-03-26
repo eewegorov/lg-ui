@@ -14,7 +14,8 @@ export class CoreApiService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService
-  ) { }
+  ) {
+  }
 
   public getTariffPlans(): Observable<TariffPlansResponse> {
     return this.http.get<TariffPlansResponse>(`${this.configService.config.prov}/plans`);

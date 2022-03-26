@@ -18,14 +18,7 @@ import { AbtestsService } from '../services/abtests.service';
 })
 export class VariantAddComponent implements OnInit {
   @Input() public step = 0;
-  @Input() private abTests;
-  @Input() private currentVariantsLength;
-  @Input() private currentSiteId;
-  @Input() private currentTestId;
-  @Input() private currentTestIndex;
-  @Input() private abtTypeWidget;
   @Input() public editableAB;
-
   public isLoaderActive = false;
   public mockups = [];
   public groups = [];
@@ -43,6 +36,12 @@ export class VariantAddComponent implements OnInit {
       title: 'Выбрать один из готовых шаблонов в галерее'
     }
   ];
+  @Input() private abTests;
+  @Input() private currentVariantsLength;
+  @Input() private currentSiteId;
+  @Input() private currentTestId;
+  @Input() private currentTestIndex;
+  @Input() private abtTypeWidget;
   private colorsArray = ['#34495e', '#9b59b6', '#3498db', '#62cb31', '#ffb606', '#e67e22', '#e74c3c',
     '#c0392b', '#58b62c', '#e43725', '#2a7aaf', '#7c4792', '#4ea227', '#b8651b',
     '#9a2e22', '#2a3a4b', '#ffeb3b'];
@@ -60,7 +59,8 @@ export class VariantAddComponent implements OnInit {
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private abTestsService: AbtestsService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
@@ -136,8 +136,8 @@ export class VariantAddComponent implements OnInit {
       if (isContainerized) {
         this.containerizedWidgetService
           .rename(this.currentSiteId, response.value, 'Вариант ' + this.currentVariantsLength).subscribe(() => {
-            this.updateVariantAfterCreating(response.value);
-          });
+          this.updateVariantAfterCreating(response.value);
+        });
       } else {
         this.widgetService.rename(this.currentSiteId, response.value, 'Вариант ' + this.currentVariantsLength).subscribe(() => {
           this.updateVariantAfterCreating(response.value);

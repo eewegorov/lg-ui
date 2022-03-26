@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { FullWidget } from '../../../../core/models/widgets';
@@ -18,7 +18,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   @Input() public showErrors: boolean;
 
   public weekDays = [];
-  public loop = Array.from({length: 20}, (_, i) => i + 1);
+  public loop = Array.from({ length: 20 }, (_, i) => i + 1);
   public autoinviteVariants = ['всех', 'любого из'];
   public restrictionsGaps = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 18, 20, 24, 36, 48, 72];
   public units = {
@@ -40,7 +40,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
 
 
   private ONE_MINUTE = 1000 * 60;
-  private ONE_HOUR   = this.ONE_MINUTE * 60;
+  private ONE_HOUR = this.ONE_MINUTE * 60;
 
   constructor(
     private translate: TranslateService,
@@ -159,7 +159,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     const timeList = [];
     const TIMER_THRESHOLD = this.ONE_MINUTE * 30;
 
-    for (let  i = 0; i < this.ONE_HOUR * 24; i += TIMER_THRESHOLD) {
+    for (let i = 0; i < this.ONE_HOUR * 24; i += TIMER_THRESHOLD) {
       timeList.push({
         name: this.getStringFromTime(i),
         value: i
@@ -359,7 +359,7 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
       };
     }
 
-    if (typeof  this.widget.rules.days === 'undefined') {
+    if (typeof this.widget.rules.days === 'undefined') {
       this.widget.rules.days = {
         enable: false,
         items: []

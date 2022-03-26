@@ -1,16 +1,17 @@
 <div *ngIf="item" class="timer-datepicker">
   <div class="form-group">
-    <div class="input-group date timer-datepicker-block" id="datetimepicker" data-target-input="nearest" NgTempusdominusBootstrap>
+    <div NgTempusdominusBootstrap class="input-group date timer-datepicker-block" data-target-input="nearest"
+         id="datetimepicker">
       <input
-        data-target="#datetimepicker"
-        [(ngModel)]="value"
         (ngModelChange)="update()"
-        [options]="options"
         NgTempusdominusBootstrapInput
-        type="text" class="form-control datetimepicker-input"
-        placeholder="Выбрать дату и время"
+        [(ngModel)]="value"
+        [options]="options"
+        class="form-control datetimepicker-input"
+        data-target="#datetimepicker" placeholder="Выбрать дату и время"
+        type="text"
       />
-      <div class="input-group-append" NgTempusdominusBootstrapToggle>
+      <div NgTempusdominusBootstrapToggle class="input-group-append">
         <div class="input-group-text" data-target="#datetimepicker"><i class="fa fa-calendar"></i></div>
       </div>
     </div>

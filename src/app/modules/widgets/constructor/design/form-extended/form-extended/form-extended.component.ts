@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
-  Component, EventEmitter,
+  Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
-  OnInit, Output,
+  OnInit,
+  Output,
   SimpleChanges
 } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
@@ -25,9 +27,6 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   @Input() public widget: FullWidget;
   @Input() public coupons: Coupon[];
   @Input() public placePopup: string[];
-
-  @Output() private setExtended = new EventEmitter<{element: Record<string, any>, index: number}>();
-
   public optionsRound: Options = {
     floor: 0,
     ceil: 50,
@@ -35,7 +34,6 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     animate: false,
     showSelectionBar: true
   };
-
   public optionsOpacity: Options = {
     floor: 0.00,
     ceil: 1.00,
@@ -43,7 +41,6 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     animate: false,
     showSelectionBar: true
   };
-
   public onDrDr = {
     group: 'ng',
     animated: 100,
@@ -52,12 +49,11 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     onStart: this.onStarting.bind(this),
     onEnd: this.onEnding.bind(this)
   };
-
   public orientationTypesOfField = [];
   public visualTypesOfField = [];
   public availMainWidthTypes = [];
   public availMainWidthOrientationTypes = [];
-
+  @Output() private setExtended = new EventEmitter<{ element: Record<string, any>, index: number }>();
   private isCurrentDraggedWasClosed = false;
 
   private changeItemSub: SubscriptionLike;
@@ -65,10 +61,11 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     private utilsService: UtilsService,
     private widgetConstructorService: WidgetConstructorService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
-    this.changeItemSub = this.widgetConstructorService.changeItemFormType.subscribe(({type, index}) => {
+    this.changeItemSub = this.widgetConstructorService.changeItemFormType.subscribe(({ type, index }) => {
       const item = this.widgetConstructorService.getItemFormByType(type);
       if (this.widgetConstructorService.isItemMultiAndHasId(item.type)) {
         item.idField = item.idField + this.getIdField(item, index);
@@ -121,8 +118,7 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
             this.widget.guiprops.formExt.model.mainSettings.colorPod.color,
             this.widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod
           )).toString();
-      }
-      else {
+      } else {
         this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod = 'transparent';
       }
     }
@@ -155,12 +151,6 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     this.toggleElement(index);
-  }
-
-  private toggleElement(index) {
-    const currentItem = this.widget.guiprops.formExt.model.list[index];
-    this.setExtended.emit({ element: currentItem, index });
-    this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
   }
 
   public highlightContentOn(index, type) {
@@ -224,6 +214,18 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     return this.widgetConstructorService.isThatElementUnclonable(type);
   }
 
+  ngOnDestroy(): void {
+    if (this.changeItemSub) {
+      this.changeItemSub.unsubscribe();
+    }
+  }
+
+  private toggleElement(index) {
+    const currentItem = this.widget.guiprops.formExt.model.list[index];
+    this.setExtended.emit({ element: currentItem, index });
+    this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
+  }
+
   private getIdField(item, index) {
     return item.type === 'hidden' ? item.fieldType.type : index;
   }
@@ -271,12 +273,6 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
         this.widget.guiprops.formExt.model.list[index].isTabOpened = false;
       }
     });
-  }
-
-  ngOnDestroy(): void {
-    if (this.changeItemSub) {
-      this.changeItemSub.unsubscribe();
-    }
   }
 
 }

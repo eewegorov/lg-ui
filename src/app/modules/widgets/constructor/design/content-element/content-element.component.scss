@@ -47,7 +47,7 @@
   top: 0;
   left: 0;
   width: 163px;
-  height: 100%!important;
+  height: 100% !important;
 }
 
 .widget-image-left-all {
@@ -62,7 +62,7 @@
   top: 0;
   right: 0;
   width: 163px;
-  height: 100%!important;
+  height: 100% !important;
 }
 
 .widget-image-right-all {
@@ -76,14 +76,14 @@
 .widget-image-top {
   top: 0;
   left: 0;
-  width: 100%!important;
+  width: 100% !important;
   height: 130px;
 }
 
 .widget-image-bottom {
   bottom: 0;
   left: 0;
-  width: 100%!important;
+  width: 100% !important;
   height: 130px;
 }
 
@@ -102,15 +102,15 @@
   top: 0;
   left: 0;
   display: block;
-  width: 100%!important;
-  height: 100%!important;
+  width: 100% !important;
+  height: 100% !important;
   z-index: -1;
 }
 
 .widget-image-has-full-wh .widget-image-item-block,
 .widget-image-has-full-wh .widget-video-item-block {
-  width: 100%!important;
-  height: 100%!important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .widget-image-has-center-orient {
@@ -128,15 +128,15 @@
 .widget-main-img-left {
   margin-left: 188px;
   padding-left: 15px;
-  margin-top: 0!important;
-  margin-bottom: 0!important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .widget-main-img-right {
   margin-right: 188px;
   padding-right: 15px;
-  margin-top: 0!important;
-  margin-bottom: 0!important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .widget-input-left {
@@ -295,7 +295,7 @@
 
 .btn-add-on-elem,
 .btn-copy-on-elem {
-  display: none!important;
+  display: none !important;
   cursor: pointer;
   position: absolute;
   z-index: 999;
@@ -371,7 +371,7 @@
 }
 
 .no-text-shadow-imp {
-  text-shadow: none!important;
+  text-shadow: none !important;
 }
 
 .tooltip-inner {
@@ -517,7 +517,7 @@
 }
 
 .widget1 .widget1-hr-full-w .widget-inp-bl {
-  width: 98%!important;
+  width: 98% !important;
 }
 
 .widget1-form-bl {
@@ -535,11 +535,11 @@
 }
 
 .widget1 .widget1-hr-full-w .widget-input-gorizontal {
-  width: 48%!important;
+  width: 48% !important;
 }
 
 .widget1 .widget-input-gorizontal-textar {
-  width: 98%!important;
+  width: 98% !important;
   margin-left: 1%;
   margin-right: 1%;
   display: block;
@@ -609,7 +609,7 @@
 .widget1 input:focus ~ label,
 .widget1 input.masked ~ label,
 .widget1 textarea.filled ~ label,
-.widget1 textarea:focus ~ label{
+.widget1 textarea:focus ~ label {
   font-size: 0.6em;
   top: -8px;
 }
@@ -643,7 +643,8 @@
   height: 20px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  border-radius: 3px; }
+  border-radius: 3px;
+}
 
 .webicon.large {
   width: 48px;
@@ -780,6 +781,7 @@
   flex-direction: column;
   justify-content: space-around;
 }
+
 .timer-items_dots > div {
   width: 5px;
   height: 5px;
@@ -799,12 +801,12 @@
 }
 
 .widget-btn-style__material {
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26)!important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26) !important;
 }
 
 .widget-btn-style__flat {
-  box-shadow: inset 0px -3px 0px 0px rgba(0,0,0,0.25);
-  border-bottom: none!important;
+  box-shadow: inset 0px -3px 0px 0px rgba(0, 0, 0, 0.25);
+  border-bottom: none !important;
 }
 
 .widget-btn-border-style-none-bg {
@@ -819,6 +821,7 @@
 .wigdet-main-wr ul.widget-flex-dis {
   width: 100%;
 }
+
 .wigdet-main-wr ul {
   list-style: none;
   margin: 0;
@@ -832,6 +835,7 @@
   /*align-items: flex-start;*/
   /*justify-content: flex-start;*/
 }
+
 .wigdet-main-wr ul.widget-main-ul-bottom {
   justify-content: flex-end;
   /*align-content: flex-end;*/
@@ -839,6 +843,7 @@
   /*align-items: flex-end;*/
   /*justify-content: flex-end;*/
 }
+
 .wigdet-main-wr ul.widget-main-ul-center {
   justify-content: center;
   /*align-content: center;*/
@@ -846,6 +851,7 @@
   /*align-items: center;*/
   /*justify-content: center;*/
 }
+
 .wigdet-main-wr ul li {
   display: block;
   width: 100%;
@@ -855,26 +861,33 @@
   padding-bottom: 15px;
   transition: margin 0.1s ease;
 }
+
 .wigdet-main-wr ul li:first-child {
   margin-top: 0;
 }
+
 .wigdet-main-wr ul li:last-child {
   margin-bottom: -5px;
   padding-bottom: 5px;
 }
+
 .wigdet-main-wr ul li.margin-if-split-element {
   /*margin-top: 5px;*/
   margin-bottom: 5px;
 }
+
 .wigdet-main-wr ul li.margin-if-iframe-element .widget1-hrh-user-w {
   margin-bottom: -4px;
 }
+
 .wigdet-main-wr ul li.margin-if-iframe-element .widget1-hrh-full-w {
   margin-bottom: -8px;
 }
+
 .wigdet-main-wr ul li:hover {
   border-color: #4898A8;
 }
+
 .wigdet-main-wr ul li.help-block-add-if-not-sel:hover {
   border-color: transparent;
 }

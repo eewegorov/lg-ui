@@ -10,7 +10,6 @@ import { SettingsPasswordComponent } from './settings-password/settings-password
 import { SettingsModalComponent } from './settings-modal/settings-modal.component';
 
 
-
 @NgModule({
   declarations: [
     SettingsComponent,
@@ -26,4 +25,5 @@ import { SettingsModalComponent } from './settings-modal/settings-modal.componen
     UserRoutingModule
   ]
 })
-export class UserModule { }
+export class UserModule {
+}

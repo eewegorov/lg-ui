@@ -3,7 +3,7 @@
     <div class="col-lg-3 widget-style-menu">
       <div class="elements-selector">
         <div *ngIf="widget.guiprops.elementsList" class="elements-selector-top">
-          <div class="element" [class.active]="currentElement === 'settings'" (click)="setCurrentElement('settings')">
+          <div (click)="setCurrentElement('settings')" [class.active]="currentElement === 'settings'" class="element">
             <div class="before">
               <div class="square"></div>
             </div>
@@ -14,11 +14,11 @@
             </div>
           </div>
           <div
-            *ngFor="let element of widget.guiprops.elementsList; index as i"
-            class="element"
-            [class.error]="isElementHasError(element.name, element.counter) && showErrors"
-            [class.active]="currentElement === element.name + (element.counter ? ('#' + element.counter) : '')"
             (click)="setCurrentElement(element.name + (element.counter ? ('#' + element.counter) : '')); currentIndex = i"
+            *ngFor="let element of widget.guiprops.elementsList; index as i"
+            [class.active]="currentElement === element.name + (element.counter ? ('#' + element.counter) : '')"
+            [class.error]="isElementHasError(element.name, element.counter) && showErrors"
+            class="element"
           >
             <div class="before fade-in">
               <div class="square"></div>
@@ -31,9 +31,9 @@
             </div>
           </div>
           <div
-            class="element"
-            [class.active]="currentElement === 'add-element'"
             (click)="setCurrentElement('add-element')"
+            [class.active]="currentElement === 'add-element'"
+            class="element"
           >
             <div class="before fade-in">
               <div class="square"></div>
@@ -63,7 +63,7 @@
           </div>
         </div>-->
       </div>
-      <div class="elements" [@slide]="!extendedElement ? 'left' : 'right'">
+      <div [@slide]="!extendedElement ? 'left' : 'right'" class="elements">
         <div class="elements-default">
           <div class="menu-fixed">
             <h4 class="panel-title" id="menu-select">
@@ -87,12 +87,12 @@
               </ng-container>
             </h4>
           </div>
-          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div id="disabledFuncAct" class="hide"></div>
+          <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+            <div class="hide" id="disabledFuncAct"></div>
             <div id="accordionIn">
               <div [hidden]="currentElement !== 'settings'" class="panel panel-default" id="0">
-                <div id="collapseFour" class="panel-collapse collapse show" role="tabpanel"
-                     aria-labelledby="headingFour">
+                <div aria-labelledby="headingFour" class="panel-collapse collapse show" id="collapseFour"
+                     role="tabpanel">
                   <div class="panel-body">
                     <div class="border-item mb-3">
                       <div class="d-flex row-subitem row-subitem-padding mb-3">
@@ -103,12 +103,12 @@
                         <div class="col-sm-12 row-subitem-padding mt-2">
                           <label class="control-label">Код установки виджета:</label>
                           <input
-                            type="text"
-                            appSelectOnClick
                             [(ngModel)]="staticWidgetInstallCode"
-                            readonly
+                            appSelectOnClick
                             class="form-control not-readonly-hand"
                             name="name"
+                            readonly
+                            type="text"
                           />
                         </div>
                       </div>
@@ -123,10 +123,10 @@
 
                       <div class="d-flex row-subitem row-subitem-padding">
                         <app-position-control
-                          *ngIf="widgetType === 'popup' || widgetType === 'optindot' || widgetType === 'label_widget' || widgetType === 'containerized'"
-                          [positions]="widgetType === 'popup' ? placePopup : widgetType === 'optindot' ? placeDh : widgetType === 'label_widget' ? placeLabel : staticWidgetAlign"
-                          [currentPosition]="widgetType === 'popup' ? widget.guiprops.popupMain?.place : widgetType === 'optindot' ? widget.guiprops.dhVisual?.place : widgetType === 'label_widget' ? widget.guiprops.labelMain?.place : widget.guiprops.staticMain?.position"
                           (changePosition)="changePosition($event)"
+                          *ngIf="widgetType === 'popup' || widgetType === 'optindot' || widgetType === 'label_widget' || widgetType === 'containerized'"
+                          [currentPosition]="widgetType === 'popup' ? widget.guiprops.popupMain?.place : widgetType === 'optindot' ? widget.guiprops.dhVisual?.place : widgetType === 'label_widget' ? widget.guiprops.labelMain?.place : widget.guiprops.staticMain?.position"
+                          [positions]="widgetType === 'popup' ? placePopup : widgetType === 'optindot' ? placeDh : widgetType === 'label_widget' ? placeLabel : staticWidgetAlign"
                         ></app-position-control>
                       </div>
                     </div>
@@ -138,8 +138,8 @@
                             Затемнять фон страницы маской
                           </label>
                           <ui-switch
-                            size="small"
                             [(ngModel)]="widget.guiprops.popupMain.shadow.enable"
+                            size="small"
                           ></ui-switch>
                         </div>
                         <div *ngIf="widget.guiprops.popupMain?.shadow.enable">
@@ -148,11 +148,11 @@
                             <div class="text-right">
                               <input
                                 [(colorPicker)]="widget.guiprops['popupMain'].shadow.color"
-                                [style.background]="widget.guiprops['popupMain'].shadow.color"
                                 [cpAlphaChannel]="'disabled'"
                                 [cpOutputFormat]="'hex'"
-                                cpPosition="left"
+                                [style.background]="widget.guiprops['popupMain'].shadow.color"
                                 class="color-picker-control"
+                                cpPosition="left"
                                 readonly
                               />
                               <input
@@ -190,11 +190,11 @@
                             <div class="text-right">
                               <input
                                 [(colorPicker)]="widget.guiprops['dhVisual'].colorMain"
-                                [style.background]="widget.guiprops['dhVisual'].colorMain"
                                 [cpAlphaChannel]="'disabled'"
                                 [cpOutputFormat]="'hex'"
-                                cpPosition="left"
+                                [style.background]="widget.guiprops['dhVisual'].colorMain"
                                 class="color-picker-control"
+                                cpPosition="left"
                                 readonly
                               />
                               <input
@@ -208,11 +208,11 @@
                             <div class="text-right">
                               <input
                                 [(colorPicker)]="widget.guiprops['dhVisual'].colorBg"
-                                [style.background]="widget.guiprops['dhVisual'].colorBg"
                                 [cpAlphaChannel]="'disabled'"
                                 [cpOutputFormat]="'hex'"
-                                cpPosition="left"
+                                [style.background]="widget.guiprops['dhVisual'].colorBg"
                                 class="color-picker-control"
+                                cpPosition="left"
                                 readonly
                               />
                               <input
@@ -232,10 +232,10 @@
                               <div class="form-group widget-selector">
                                 <label>
                                   <input
-                                    type="radio"
-                                    name="dhVisual"
+                                    [(ngModel)]="widget.guiprops.dhVisual.iconOrImage"
                                     class="radio radio-info radio-inline"
-                                    [(ngModel)]="widget.guiprops.dhVisual.iconOrImage" value="useIcon"
+                                    name="dhVisual"
+                                    type="radio" value="useIcon"
                                   >
                                   Иконку
                                 </label>
@@ -245,10 +245,10 @@
                               <div class="form-group widget-selector">
                                 <label class="non-bold">
                                   <input
-                                    type="radio"
-                                    name="dhVisual"
+                                    [(ngModel)]="widget.guiprops.dhVisual.iconOrImage"
                                     class="radio radio-info radio-inline"
-                                    [(ngModel)]="widget.guiprops.dhVisual.iconOrImage" value="useImg"
+                                    name="dhVisual"
+                                    type="radio" value="useImg"
                                   >
                                   Изображение
                                 </label>
@@ -266,28 +266,28 @@
                           <div class="icp-icon row-subitem-padding">
                             <div class="btn-group">
                               <button
-                                type="button"
                                 *ngIf="!widget.guiprops.dhVisual.selectedIcon"
                                 class="btn btn-primary"
+                                type="button"
                               >
                                 <i [class]="'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"></i>
                               </button>
                               <button
-                                type="button"
                                 *ngIf="widget.guiprops.dhVisual.selectedIcon"
                                 class="btn btn-primary iconpicker-component"
+                                type="button"
                               >
                                 <i
                                   [class]="widget.guiprops.dhVisual.selectedIcon.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : 'lgiconfont-' + widget.guiprops.dhVisual.selectIcon"
                                 ></i>
                               </button>
                               <input
-                                [iconPicker]="widget.guiprops.dhVisual.selectIcon"
                                 (iconPickerSelect)="onDotIconPickerSelect($event)"
+                                [iconPicker]="widget.guiprops.dhVisual.selectIcon"
                                 [ipIconPack]="['fa']"
-                                ipPosition="top"
-                                id="icon-picker-dot"
                                 class="icp btn btn-primary dropdown-toggle"
+                                id="icon-picker-dot"
+                                ipPosition="top"
                               />
                               <span class="caret"></span>
                             </div>
@@ -295,11 +295,11 @@
                         </div>
                         <div *ngIf="widget.guiprops.dhVisual?.iconOrImage === 'useImg'" class="mt-1">
                           <button
-                            *ngIf="isDefault(widget.guiprops.dhVisual.url)"
                             (click)="listFile('dotIcon')"
+                            *ngIf="isDefault(widget.guiprops.dhVisual.url)"
                             class="widget-download-img"
                           >
-                            <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение"/> Загрузить
+                            <img alt="Загрузить изображение" src="assets/images/widgets/upload.svg"/> Загрузить
                             изображение
                           </button>
 
@@ -308,7 +308,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                               <p>{{ widget.guiprops.dhVisual.url.split('/').pop() }}</p>
                               <div class="remove-sub-item">
-                                <button class="delete-element-button" (click)="removeImage(true)">&times;</button>
+                                <button (click)="removeImage(true)" class="delete-element-button">&times;</button>
                               </div>
                             </div>
                           </div>
@@ -317,14 +317,14 @@
                           <div class="d-flex justify-content-between w-100 row-subitem-padding pt-1">
                             <label class="control-label switcher-label-xs control-label-des">Призыв к действию</label>
                             <ui-switch
-                              size="small"
                               [(ngModel)]="widget.guiprops.dhVisual.enable"
+                              size="small"
                             ></ui-switch>
                           </div>
                         </div>
                         <div *ngIf="widget.guiprops.dhVisual?.enable">
                           <div class="row-subitem mt-2 pt-1">
-                            <input type="text" class="form-control" [(ngModel)]="widget.guiprops['dhVisual'].title">
+                            <input [(ngModel)]="widget.guiprops['dhVisual'].title" class="form-control" type="text">
                             <span class="small">Например: Хотите, мы вам перезвоним?</span>
                           </div>
                         </div>
@@ -332,9 +332,9 @@
                           <div class="form-check">
                             <label class="form-check-label">
                               <input
-                                type="checkbox"
                                 [(ngModel)]="widget.guiprops.dhVisual.enableBlink"
                                 class="form-check-input"
+                                type="checkbox"
                               />
                               <span class="checkmark"></span>
                             </label>
@@ -352,11 +352,11 @@
                         <div class="row-subitem widget-name-block-rel mt-2">
                           <label class="control-label control-label-des">Текст</label>
                           <input
-                            type="text"
+                            [(ngModel)]="widget.guiprops.labelMain.text"
                             class="form-control mt-1"
                             id="widgetNameInp"
-                            [(ngModel)]="widget.guiprops.labelMain.text"
                             placeholder="Введите название виджета"
+                            type="text"
                           />
                           <span class="small">Например: Оставьте нам сообщение!</span>
                         </div>
@@ -372,8 +372,8 @@
                           <div class="row align-items-center">
                             <div class="form-control form-control-font">
                               <input
-                                type="number"
                                 [(ngModel)]="widget.guiprops['labelMain'].fontSize"
+                                type="number"
                               />
                               <label>px</label>
                             </div>
@@ -385,11 +385,11 @@
                           <div class="text-right">
                             <input
                               [(colorPicker)]="widget.guiprops['labelMain'].colorLabel"
-                              [style.background]="widget.guiprops['labelMain'].colorLabel"
                               [cpAlphaChannel]="'disabled'"
                               [cpOutputFormat]="'hex'"
-                              cpPosition="left"
+                              [style.background]="widget.guiprops['labelMain'].colorLabel"
                               class="color-picker-control"
+                              cpPosition="left"
                               readonly
                             />
                             <input
@@ -404,11 +404,11 @@
                           <div class="text-right">
                             <input
                               [(colorPicker)]="widget.guiprops['labelMain'].colorText"
-                              [style.background]="widget.guiprops['labelMain'].colorText"
                               [cpAlphaChannel]="'disabled'"
                               [cpOutputFormat]="'hex'"
-                              cpPosition="left"
+                              [style.background]="widget.guiprops['labelMain'].colorText"
                               class="color-picker-control"
+                              cpPosition="left"
                               readonly
                             />
                             <input
@@ -450,10 +450,10 @@
                               <div class="form-group widget-selector">
                                 <label>
                                   <input
-                                    type="radio"
-                                    name="label"
-                                    class="radio radio-info radio-inline"
                                     [(ngModel)]="widget.guiprops.labelMain.iconOrImage"
+                                    class="radio radio-info radio-inline"
+                                    name="label"
+                                    type="radio"
                                     value="useIcon"
                                   />
                                   Иконку
@@ -464,10 +464,10 @@
                               <div class="form-group widget-selector">
                                 <label>
                                   <input
-                                    type="radio"
-                                    name="label"
-                                    class="radio radio-info radio-inline"
                                     [(ngModel)]="widget.guiprops.labelMain.iconOrImage"
+                                    class="radio radio-info radio-inline"
+                                    name="label"
+                                    type="radio"
                                     value="useImg"
                                   />
                                   Изображение
@@ -478,10 +478,10 @@
                               <div class="form-group widget-selector">
                                 <label>
                                   <input
-                                    type="radio"
-                                    name="label"
-                                    class="radio radio-info radio-inline"
                                     [(ngModel)]="widget.guiprops.labelMain.iconOrImage"
+                                    class="radio radio-info radio-inline"
+                                    name="label"
+                                    type="radio"
                                     value="useNone"
                                   />
                                   Не добавлять
@@ -497,11 +497,11 @@
                             <div class="text-right">
                               <input
                                 [(colorPicker)]="widget.guiprops['labelMain'].icon.color"
-                                [style.background]="widget.guiprops['labelMain'].icon.color"
                                 [cpAlphaChannel]="'disabled'"
                                 [cpOutputFormat]="'hex'"
-                                cpPosition="left"
+                                [style.background]="widget.guiprops['labelMain'].icon.color"
                                 class="color-picker-control"
+                                cpPosition="left"
                                 readonly
                               />
                               <input
@@ -520,27 +520,27 @@
                               <div class="btn-group">
                                 <button
                                   *ngIf="!widget.guiprops.labelMain.icon.selectedIcon"
-                                  type="button"
                                   class="btn btn-primary"
+                                  type="button"
                                 >
                                   <i [class]="'lgiconfont-' + widget.guiprops.labelMain.icon.selectIcon"></i>
                                 </button>
                                 <button
                                   *ngIf="widget.guiprops.labelMain.icon.selectedIcon"
-                                  type="button"
                                   class="btn btn-primary iconpicker-component"
+                                  type="button"
                                 >
                                   <i
                                     [class]="widget.guiprops.labelMain.icon.selectedIcon.includes('fa ') ? widget.guiprops.labelMain.icon.selectedIcon : 'lgiconfont-' + widget.guiprops.labelMain.icon.selectIcon"
                                   ></i>
                                 </button>
                                 <input
-                                  [iconPicker]="widget.guiprops.labelMain.icon.selectIcon"
-                                  ipPosition="top"
-                                  [ipIconPack]="['fa']"
                                   (iconPickerSelect)="onLabelIconPickerSelect($event)"
-                                  id="icon-picker-label"
+                                  [iconPicker]="widget.guiprops.labelMain.icon.selectIcon"
+                                  [ipIconPack]="['fa']"
                                   class="icp btn btn-primary dropdown-toggle"
+                                  id="icon-picker-label"
+                                  ipPosition="top"
                                 />
                                 <span class="caret"></span>
                               </div>
@@ -550,11 +550,11 @@
 
                         <div *ngIf="widget.guiprops.labelMain.iconOrImage === 'useImg'" class="mt-1">
                           <button
-                            *ngIf="isDefault(widget.guiprops.labelMain.url)"
                             (click)="listFile('labelIcon')"
+                            *ngIf="isDefault(widget.guiprops.labelMain.url)"
                             class="widget-download-img"
                           >
-                            <img src="assets/images/widgets/upload.svg" alt="Загрузить изображение"/> Загрузить
+                            <img alt="Загрузить изображение" src="assets/images/widgets/upload.svg"/> Загрузить
                             изображение
                           </button>
 
@@ -563,7 +563,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                               <p>{{ widget.guiprops.labelMain.url.split('/').pop() }}</p>
                               <div class="remove-sub-item">
-                                <button class="delete-element-button" (click)="removeImage(false)">&times;</button>
+                                <button (click)="removeImage(false)" class="delete-element-button">&times;</button>
                               </div>
                             </div>
                           </div>
@@ -578,17 +578,17 @@
                     </ng-container>
 
                     <app-visual-element
-                      [widget]="widget"
-                      [widgwidthBtn]="widgwidthBtn"
-                      [vertOrientDh]="vertOrientDh"
-                      [bgPositionTypesList]="bgPositionTypesList"
-                      [tilesList]="tilesList"
-                      [maskTypeList]="maskTypeList"
-                      [placeImg]="placeImg"
-                      [imageItemsType]="imageItemsType"
-                      [imageItemsAlign]="imageItemsAlign"
                       (getVideo)="getVideoId($event)"
                       (listFileItem)="listFile($event)"
+                      [bgPositionTypesList]="bgPositionTypesList"
+                      [imageItemsAlign]="imageItemsAlign"
+                      [imageItemsType]="imageItemsType"
+                      [maskTypeList]="maskTypeList"
+                      [placeImg]="placeImg"
+                      [tilesList]="tilesList"
+                      [vertOrientDh]="vertOrientDh"
+                      [widget]="widget"
+                      [widgwidthBtn]="widgwidthBtn"
                     ></app-visual-element>
                     <app-redirect-element [widget]="widget"></app-redirect-element>
                   </div>
@@ -596,7 +596,7 @@
               </div>
 
               <div class="panel panel-default" id="1">
-                <div id="collapseTwo" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingTwo">
+                <div aria-labelledby="headingTwo" class="panel-collapse collapse show" id="collapseTwo" role="tabpanel">
                   <div *ngIf="widget.guiprops && widget.guiprops.elementsList" class="panel-body mb-5">
                     <div *ngFor="let item of widget.guiprops.elementsList; index as i" [id]="'elemScrN' + i">
                       <div
@@ -604,75 +604,75 @@
                         [hidden]="currentElement !== 'button-element' + (item.counter ? ('#' + item.counter) : '')"
                       >
                         <app-button-element
-                          [index]="i"
-                          [widget]="widget"
-                          [visualInputForm]="visualInputForm"
-                          [widthBtn]="widthBtn"
-                          [floatBtn]="floatBtn"
                           (setBtn)="setBtnStyle($event.type, $event.item)"
+                          [floatBtn]="floatBtn"
+                          [index]="i"
+                          [visualInputForm]="visualInputForm"
+                          [widget]="widget"
+                          [widthBtn]="widthBtn"
                         ></app-button-element>
                       </div>
 
                       <div *ngIf="item.name === 'closelink-element'"
                            [hidden]="currentElement !== 'closelink-element' + (item.counter ? ('#' + item.counter) : '')">
                         <app-closelink-element
-                          [index]="i"
-                          [widget]="widget"
-                          [coupons]="coupons"
-                          [placePopup]="placePopup"
-                          [widthBtn]="widthBtn"
-                          [floatBtn]="floatBtn"
                           (setBtn)="setBtnStyle($event.type, $event.item)"
+                          [coupons]="coupons"
+                          [floatBtn]="floatBtn"
+                          [index]="i"
+                          [placePopup]="placePopup"
+                          [widget]="widget"
+                          [widthBtn]="widthBtn"
                         ></app-closelink-element>
                       </div>
 
                       <div *ngIf="item.name === 'coupon-element'"
                            [hidden]="currentElement !== 'coupon-element' + (item.counter ? ('#' + item.counter) : '')">
                         <app-coupon-element
-                          [index]="i"
                           [coupons]="coupons"
+                          [floatBtn]="floatBtn"
+                          [index]="i"
                           [item]="item"
                           [widthBtn]="widthBtn"
-                          [floatBtn]="floatBtn"
                         ></app-coupon-element>
                       </div>
 
                       <div *ngIf="item.name === 'form-element'"
                            [hidden]="currentElement !== 'form-element' + (item.counter ? ('#' + item.counter) : '')">
                         <app-form-element
-                          [index]="i"
-                          [widget]="widget"
-                          [coupons]="coupons"
-                          [placePopup]="placePopup"
-                          [orientInputForm]="orientInputForm"
-                          [visualInputForm]="visualInputForm"
-                          [widthHrType]="widthHrType"
-                          [widthBtn]="widthBtn"
-                          [floatBtn]="floatBtn"
                           (setBtn)="setBtnStyle($event.type, $event.item)"
+                          [coupons]="coupons"
+                          [floatBtn]="floatBtn"
+                          [index]="i"
+                          [orientInputForm]="orientInputForm"
+                          [placePopup]="placePopup"
+                          [visualInputForm]="visualInputForm"
+                          [widget]="widget"
+                          [widthBtn]="widthBtn"
+                          [widthHrType]="widthHrType"
                         ></app-form-element>
                       </div>
 
                       <div *ngIf="item.name === 'iframe-element'"
                            [hidden]="currentElement !== 'iframe-element' + (item.counter ? ('#' + item.counter) : '')">
                         <app-iframe-element
+                          (buildIframeElement)="buildIframeElement($event, i, true)"
+                          [floatBtn]="floatBtn"
                           [index]="i"
                           [modelName]="item"
-                          [widthHrType]="widthHrType"
                           [widgwidthBtn]="widgwidthBtn"
-                          [floatBtn]="floatBtn"
-                          (buildIframeElement)="buildIframeElement($event, i, true)"
+                          [widthHrType]="widthHrType"
                         ></app-iframe-element>
                       </div>
 
                       <div *ngIf="item.name === 'image-element'"
                            [hidden]="currentElement !== 'image-element' + (item.counter ? ('#' + item.counter) : '')">
                         <app-image-element
+                          (listFileItem)="listFile($event.place, $event.item)"
+                          [floatBtn]="floatBtn"
                           [index]="i"
                           [modelName]="item"
                           [widthHrType]="widthHrType"
-                          [floatBtn]="floatBtn"
-                          (listFileItem)="listFile($event.place, $event.item)"
                         ></app-image-element>
                       </div>
 
@@ -687,22 +687,22 @@
                       <div *ngIf="item.name === 'social-element'"
                            [hidden]="currentElement !== 'social-element' + (item.counter ? ('#' + item.counter) : '')">
                         <app-social-element
-                          [index]="i"
-                          [widget]="widget"
                           [coupons]="coupons"
-                          [placePopup]="placePopup"
                           [floatBtn]="floatBtn"
+                          [index]="i"
+                          [placePopup]="placePopup"
+                          [widget]="widget"
                         ></app-social-element>
                       </div>
 
                       <div *ngIf="item.name === 'split-element'"
                            [hidden]="currentElement !== 'split-element' + (item.counter ? ('#' + item.counter) : '')">
                         <app-split-element
+                          [floatBtn]="floatBtn"
                           [index]="i"
                           [modelName]="item"
                           [typeClass]="typeClass"
                           [widthHrType]="widthHrType"
-                          [floatBtn]="floatBtn"
                         ></app-split-element>
                       </div>
 
@@ -718,12 +718,12 @@
                       <div *ngIf="item.name === 'video-element'"
                            [hidden]="currentElement !== 'video-element' + (item.counter ? ('#' + item.counter) : '')">
                         <app-video-element
+                          (getVideo)="getVideoId($event)"
+                          (setVideoSize)="newVideoSize($event)"
+                          [floatBtn]="floatBtn"
                           [index]="i"
                           [modelName]="item"
                           [widthHrType]="widthHrType"
-                          [floatBtn]="floatBtn"
-                          (getVideo)="getVideoId($event)"
-                          (setVideoSize)="newVideoSize($event)"
                         ></app-video-element>
                       </div>
 
@@ -739,30 +739,30 @@
                       <div *ngIf="item.name === 'form-ext-element'"
                            [hidden]="currentElement !== 'form-ext-element' + (item.counter ? ('#' + item.counter) : '')">
                         <app-form-extended
-                          [index]="i"
-                          [widget]="widget"
-                          [coupons]="coupons"
-                          [placePopup]="placePopup"
                           (setExtended)="setExtended($event)"
+                          [coupons]="coupons"
+                          [index]="i"
+                          [placePopup]="placePopup"
+                          [widget]="widget"
                         ></app-form-extended>
                       </div>
                     </div>
 
                     <app-elements-add
-                      [hidden]="currentElement !== 'add-element'"
-                      [widget]="widget"
-                      [isContainerized]="isContainerized"
-                      [sid]="sid"
-                      [typeClass]="typeClass"
-                      [floatBtn]="floatBtn"
-                      [widthHrType]="widthHrType"
-                      [isPayment]="isPayment"
+                      (addElement)="showLastElement()"
                       [addElemFromWidget]="addElemFromWidget"
                       [controls]="controls"
+                      [floatBtn]="floatBtn"
                       [globalCouponObject]="globalCouponObject"
+                      [hidden]="currentElement !== 'add-element'"
+                      [isContainerized]="isContainerized"
+                      [isPayment]="isPayment"
+                      [sid]="sid"
                       [systemFonts]="systemFonts"
+                      [typeClass]="typeClass"
+                      [widget]="widget"
                       [widgwidthBtn]="widgwidthBtn"
-                      (addElement)="showLastElement()"
+                      [widthHrType]="widthHrType"
                     ></app-elements-add>
                   </div>
                 </div>
@@ -776,8 +776,8 @@
               <h4 class="panel-title d-flex justify-content-between mr-3">
                 <a
                   (click)="backToRegularElement()"
-                  href="javascript:void(0);"
                   class="back-regular-element mr-3"
+                  href="javascript:void(0);"
                 >
                   <i class="fas fa-arrow-left"></i>
                 </a>
@@ -787,59 +787,59 @@
             <div class="extended-container pt-3">
               <div class="border-item">
                 <ng-container *ngIf="extendedElement.type === 'email'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"
-                                     [hasPlaceholder]="true"></app-extended-text>
+                  <app-extended-text [hasPlaceholder]="true" [index]="extendedIndex"
+                                     [item]="extendedElement"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'name'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"
-                                     [hasPlaceholder]="true"></app-extended-text>
+                  <app-extended-text [hasPlaceholder]="true" [index]="extendedIndex"
+                                     [item]="extendedElement"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'message'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex"
-                                     [hasPlaceholder]="true"></app-extended-text>
+                  <app-extended-text [hasPlaceholder]="true" [index]="extendedIndex"
+                                     [item]="extendedElement"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'phone'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [hasPhoneBlock]="true"
-                                     [hasPlaceholder]="true"></app-extended-text>
+                  <app-extended-text [hasPhoneBlock]="true" [hasPlaceholder]="true" [index]="extendedIndex"
+                                     [item]="extendedElement"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'text'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true"
-                                     [hasPlaceholder]="true" [hasMultiline]="true"></app-extended-text>
+                  <app-extended-text [hasMultiline]="true" [hasPlaceholder]="true" [idEditable]="true"
+                                     [index]="extendedIndex" [item]="extendedElement"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'rating'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true"
-                                     [hasSendForm]="true" [hasRating]="true"></app-extended-text>
+                  <app-extended-text [hasRating]="true" [hasSendForm]="true" [idEditable]="true"
+                                     [index]="extendedIndex" [item]="extendedElement"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'variants'">
-                  <app-extended-variants [item]="extendedElement" [index]="extendedIndex"></app-extended-variants>
+                  <app-extended-variants [index]="extendedIndex" [item]="extendedElement"></app-extended-variants>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'dd'">
-                  <app-extended-dd [item]="extendedElement" [index]="extendedIndex"></app-extended-dd>
+                  <app-extended-dd [index]="extendedIndex" [item]="extendedElement"></app-extended-dd>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'date'">
-                  <app-extended-text [item]="extendedElement" [index]="extendedIndex" [idEditable]="true"
-                                     [hasPlaceholder]="true" [hasDateBlock]="true"></app-extended-text>
+                  <app-extended-text [hasDateBlock]="true" [hasPlaceholder]="true" [idEditable]="true"
+                                     [index]="extendedIndex" [item]="extendedElement"></app-extended-text>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'title'">
-                  <app-extended-title [item]="extendedElement" [index]="extendedIndex"></app-extended-title>
+                  <app-extended-title [index]="extendedIndex" [item]="extendedElement"></app-extended-title>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'term'">
-                  <app-extended-title [item]="extendedElement" [index]="extendedIndex"
-                                      [isTerm]="true"></app-extended-title>
+                  <app-extended-title [index]="extendedIndex" [isTerm]="true"
+                                      [item]="extendedElement"></app-extended-title>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'button'">
-                  <app-extended-button [item]="extendedElement" [containerId]="widget.containerId"
-                                       [index]="extendedIndex"></app-extended-button>
+                  <app-extended-button [containerId]="widget.containerId" [index]="extendedIndex"
+                                       [item]="extendedElement"></app-extended-button>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'hidden'">
-                  <app-extended-hidden [item]="extendedElement" [index]="extendedIndex"></app-extended-hidden>
+                  <app-extended-hidden [index]="extendedIndex" [item]="extendedElement"></app-extended-hidden>
                 </ng-container>
               </div>
 
               <div *ngIf="this.widget.guiprops.formExt.model.list.length > 1" class="mt-3">
                 <button
-                  class="btn-default extended-remove-btn"
                   (click)="removeElementFromFormExtList($event, extendedIndex); $event.stopPropagation();"
+                  class="btn-default extended-remove-btn"
                 >
                   <i class="remove-item"></i> Удалить элемент
                 </button>
@@ -853,10 +853,10 @@
     <div class="col-lg-9 main-frame">
       <div class="widget-select-mode btn-group">
         <button
-          class="frame-button"
-          [class.active]="currentPage === 'main'"
-          data-widget="mainBlockWidget"
           (click)="$event.stopPropagation(); currentPage = 'main'"
+          [class.active]="currentPage === 'main'"
+          class="frame-button"
+          data-widget="mainBlockWidget"
         >
           Основной экран
           <!--<i class="fas fa-ellipsis-v"></i>-->
@@ -866,27 +866,27 @@
             <i class="fas fa-angle-right"></i>
           </div>
           <button
-            class="frame-button"
-            [class.active]="currentPage === 'thank'"
-            data-widget="thankWidget"
             (click)="$event.stopPropagation(); currentPage = 'thank'"
-            data-toggle="tooltip"
-            data-placement="top"
+            [class.active]="currentPage === 'thank'"
+            class="frame-button"
             data-container="body"
-            title=""
             data-original-title="Сообщение, которое видит посетитель после совершения целевого действия. Ваше сообщение благодарности будет показано посетителю, если в виджете отключена ссылка на LeadGenic, отключить ссылку можно в настройках сайта. В случае, если ссылка включена, посетителю будет показано сообщение благодарности LeadGenic."
+            data-placement="top"
+            data-toggle="tooltip"
+            data-widget="thankWidget"
+            title=""
           >
             Страница благодарности
             <!--<i class="fas fa-ellipsis-v"></i>-->
           </button>
         </ng-container>
       </div>
-      <div class="max-h-100" [ngClass]="(widget.guiprops.popupMain?.shadow?.enable === true) ? 'ifr-sh-bg' : ''">
+      <div [ngClass]="(widget.guiprops.popupMain?.shadow?.enable === true) ? 'ifr-sh-bg' : ''" class="max-h-100">
         <div
           *ngIf="widgetType === 'label_widget'"
-          id="labelMain"
           [ngClass]="wvLabelPos()"
           [ngStyle]="{'background': widget.guiprops['labelMain'].rgbaLabel, 'border-radius': widget.guiprops['labelMain'].borderRadiusLabel + 'px', 'z-index': '120'}"
+          id="labelMain"
         >
           <div class="lab-content">
             <div
@@ -895,8 +895,8 @@
               class="lgiconfontImg"
             ></div>
             <span
-              class="label-text-with-add"
               [ngStyle]="{'font-family': widget.guiprops['labelMain'].font.fontFamily, 'font-size': widget.guiprops['labelMain'].fontSize + 'px', 'color': widget.guiprops['labelMain'].colorText}"
+              class="label-text-with-add"
             >
               <i
                 *ngIf="widget.guiprops['labelMain'].iconOrImage === 'useIcon' && !widget.guiprops['labelMain'].icon?.selectedIcon?.includes('fa ')"
@@ -914,75 +914,75 @@
         </div>
 
         <div
-          class="max-wh-over"
-          [ngStyle]="{'background': this.widget.guiprops.popupMain.shadow.enable ? widget.guiprops['popupMain']?.shadow.rgbaColor : 'none'}"
           (click)="scrollToEl('MainSetBl', 'main-w-element')"
+          [ngStyle]="{'background': this.widget.guiprops.popupMain.shadow.enable ? widget.guiprops['popupMain']?.shadow.rgbaColor : 'none'}"
+          class="max-wh-over"
         >
           <div class="popup-shadow popup-sh-pad">
             <div class="max-h-1001">
-              <div class="widget-visual-block" [class.mobile]="currentDevice === 'mobile'">
+              <div [class.mobile]="currentDevice === 'mobile'" class="widget-visual-block">
                 <div *ngIf="!(disElementOrNotBtnCloseLink())" class="close-btn-x">
                   <span></span>
                 </div>
                 <div class="clearfix"></div>
                 <app-content-element
-                  [widget]="widget"
-                  [bgStyle]="bgStyle"
-                  [widthImageStyle]="widthImageStyle"
-                  [heightImageStyle]="heightImageStyle"
-                  [widthContentStyle]="widthContentStyle"
-                  [heightContentStyle]="heightContentStyle"
-                  [isMobile]="currentDevice === 'mobile'"
+                  (addNewElement)="addNewElementToContent($event)"
                   (removeElement)="removeCurrentElement($event.element, $event.index)"
                   (scrollToElement)="scrollToEl($event.id, $event.elementName, $event.elementCounter)"
-                  (addNewElement)="addNewElementToContent($event)"
+                  [bgStyle]="bgStyle"
+                  [heightContentStyle]="heightContentStyle"
+                  [heightImageStyle]="heightImageStyle"
                   [hidden]="currentPage !== 'main'"
+                  [isMobile]="currentDevice === 'mobile'"
+                  [widget]="widget"
+                  [widthContentStyle]="widthContentStyle"
+                  [widthImageStyle]="widthImageStyle"
                   style="display: block; width: max-content"
                 ></app-content-element>
                 <app-thank-element
-                  [widget]="widget"
                   [bgStyle]="bgStyle"
                   [hidden]="currentPage !== 'thank'"
+                  [widget]="widget"
                 ></app-thank-element>
 
-                <div *ngIf="widgetType === 'optindot'" class="widget-visual-block-dot" [ngClass]="wvBdLeft()">
+                <div *ngIf="widgetType === 'optindot'" [ngClass]="wvBdLeft()" class="widget-visual-block-dot">
                   <div class="widget2-main-bl">
-                    <div class="widget2-plashka"
-                         *ngIf="widget.guiprops['dhVisual'].enable && currentDevice !== 'mobile'">
+                    <div *ngIf="widget.guiprops['dhVisual'].enable && currentDevice !== 'mobile'"
+                         class="widget2-plashka">
                       <span>{{ widget.guiprops.dhVisual.title }}</span>
                     </div>
                     <div
                       *ngIf="!widget.guiprops['dhVisual'].enableBlink"
-                      class="point__signal first"
                       [style]="'color: ' + widget.guiprops['dhVisual'].rgbaShadowForm1"
+                      class="point__signal first"
                     ></div>
                     <div
                       *ngIf="!widget.guiprops['dhVisual'].enableBlink"
+                      [style]="'color: ' + widget.guiprops['dhVisual'].rgbaShadowForm2"
                       class="point__signal second"
-                      [style]="'color: ' + widget.guiprops['dhVisual'].rgbaShadowForm2"
                     ></div>
                     <div
                       *ngIf="!widget.guiprops['dhVisual'].enableBlink"
-                      class="point__signal third"
                       [style]="'color: ' + widget.guiprops['dhVisual'].rgbaShadowForm2"
+                      class="point__signal third"
                     ></div>
                     <div
-                      class="widget2"
                       [class.widget-dot-anim]="!widget.guiprops['dhVisual'].enableBlink"
                       [style]="'background: ' + widget.guiprops['dhVisual'].colorMain"
+                      class="widget2"
                     >
                       <i
                         *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useIcon'"
-                        class="f30s"
                         [class.ico-anim]="!widget.guiprops['dhVisual'].enableBlink"
                         [class]="widget.guiprops.dhVisual.selectedIcon?.includes('fa ') ? widget.guiprops.dhVisual.selectedIcon : ('lgiconfont-' + widget.guiprops.dhVisual.selectIcon)"
                         [style]="'color: ' + widget.guiprops['dhVisual'].colorBg"
+                        class="f30s"
                       ></i>
                       <div
                         *ngIf="widget.guiprops['dhVisual'].iconOrImage === 'useImg'"
-                        class="lg-wg-dot-circle-img"
                         [class.ico-anim]="!widget.guiprops['dhVisual'].enableBlink"
                         [style]="'background-image: url(' + widget.guiprops['dhVisual'].url + ')'"
+                        class="lg-wg-dot-circle-img"
                       ></div>
                     </div>
                   </div>
@@ -995,31 +995,31 @@
     </div>
   </div>
 
-  <div class="modal fade" id="addNewElementListModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div aria-hidden="true" class="modal fade" id="addNewElementListModal" role="dialog" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header justify-content-center">
           <h4>Добавить элемент</h4>
-          <button type="button" class="close" aria-label="Close" data-dismiss="modal" (click)="addElementModalHide()">
+          <button (click)="addElementModalHide()" aria-label="Close" class="close" data-dismiss="modal" type="button">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
         <div class="modal-body">
           <app-elements-add
-            [widget]="widget"
-            [isContainerized]="isContainerized"
-            [sid]="sid"
-            [typeClass]="typeClass"
-            [floatBtn]="floatBtn"
-            [widthHrType]="widthHrType"
-            [isPayment]="isPayment"
+            (addElement)="showLastElement()"
             [addElemFromWidget]="addElemFromWidget"
             [controls]="controls"
+            [floatBtn]="floatBtn"
             [globalCouponObject]="globalCouponObject"
+            [isContainerized]="isContainerized"
+            [isPayment]="isPayment"
+            [sid]="sid"
             [systemFonts]="systemFonts"
+            [typeClass]="typeClass"
+            [widget]="widget"
             [widgwidthBtn]="widgwidthBtn"
-            (addElement)="showLastElement()"
+            [widthHrType]="widthHrType"
           ></app-elements-add>
         </div>
       </div>
@@ -1029,37 +1029,37 @@
   <ng-container #flowBasic="flow" [flowConfig]="{singleFile: true}"></ng-container>
 
   <div
+    aria-hidden="true"
     class="modal fade"
     id="addNewWidgetListModal"
-    tabindex="-1"
     role="dialog"
-    aria-hidden="true"
+    tabindex="-1"
   >
     <div class="modal-dialog">
       <div class="dragAndDropFilter"></div>
       <div class="modal-content">
         <div class="modal-header justify-content-center">
           <h4>Мои изображения</h4>
-          <button type="button" class="close" aria-label="Close" data-dismiss="modal" (click)="closeModalImg()">
+          <button (click)="closeModalImg()" aria-label="Close" class="close" data-dismiss="modal" type="button">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <h4 class="f-2">Загруженные изображения</h4>
           <div class="row row-nomargined">
-            <div id="listImagesBlock" class="col-lg-12 mt-2"></div>
+            <div class="col-lg-12 mt-2" id="listImagesBlock"></div>
           </div>
         </div>
         <div class="modal-footer p-0 flex-column">
           <div class="img-set-foot1">
-            <div class="dragDropBl drop-area" flowDrop [flow]="flowBasic.flowJs">
+            <div [flow]="flowBasic.flowJs" class="dragDropBl drop-area" flowDrop>
               <div class="upload-drag-icon"><i class="fa fa-upload"></i></div>
               <button
-                flowButton
                 [flow]="flowBasic.flowJs"
                 [ladda]="isLoading"
                 class="load-img-gal btn btn-success ladda-button"
                 data-style="slide-down"
+                flowButton
               >
                 <span class="ladda-label">Загрузить изображение</span>
               </button>
@@ -1069,15 +1069,15 @@
           </div>
           <div class="d-flex justify-content-between w-100 p-2 pl-4 pr-4">
             <button
-              type="button"
-              id="btnCloseImgM"
-              data-dismiss="modal"
-              class="btn btn-default pull-left"
               (click)="closeModalImg()"
+              class="btn btn-default pull-left"
+              data-dismiss="modal"
+              id="btnCloseImgM"
+              type="button"
             >
               Отмена
             </button>
-            <button class="btn btn-info set-img-gal" (click)="updateFile()">Установить изображение</button>
+            <button (click)="updateFile()" class="btn btn-info set-img-gal">Установить изображение</button>
           </div>
         </div>
       </div>

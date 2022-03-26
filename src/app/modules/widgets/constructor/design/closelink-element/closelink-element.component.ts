@@ -16,9 +16,6 @@ export class CloselinkElementComponent implements OnInit {
   @Input() public placePopup: string[];
   @Input() public widthBtn: string[];
   @Input() public floatBtn: string[];
-
-  @Output() private setBtn = new EventEmitter<{type: string, item: Record<string, string | number>}>();
-
   public optionsRound: Options = {
     floor: 0,
     ceil: 50,
@@ -26,15 +23,17 @@ export class CloselinkElementComponent implements OnInit {
     animate: false,
     showSelectionBar: true
   };
+  @Output() private setBtn = new EventEmitter<{ type: string, item: Record<string, string | number> }>();
 
-  constructor(private widgetConstructorService: WidgetConstructorService) { }
+  constructor(private widgetConstructorService: WidgetConstructorService) {
+  }
 
   ngOnInit(): void {
     this.initPicker();
   }
 
   public setBtnStyle(type: string, item: Record<string, string | number>): void {
-    this.setBtn.emit({type, item});
+    this.setBtn.emit({ type, item });
   }
 
   private initPicker() {

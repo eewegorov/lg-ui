@@ -15,19 +15,20 @@ export class CloneWidgetComponent implements OnInit {
   @Input() public sites;
   @Input() public currentSite;
   @Input() public companies;
-  @Input() private widget;
-  @Input() private containerId;
   public clonable;
   public allContainers;
   public currentContainer;
   public clonabledSiteId;
+  @Input() private widget;
+  @Input() private containerId;
 
   constructor(
     private translate: TranslateService,
     private activeModal: NgbActiveModal,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.companies = this.widgetService.getUndefaultCompanies(this.companies);
@@ -87,10 +88,10 @@ export class CloneWidgetComponent implements OnInit {
     if (this.clonable.companyMode === 1) {
       this.widgetService.createCompany(this.clonable.targetSiteId || this.clonable.recipientSiteId, this.clonable.companyName)
         .subscribe((response: CompanyShort) => {
-        if (response) {
-          this.cloneWidget(response.id);
-        }
-      });
+          if (response) {
+            this.cloneWidget(response.id);
+          }
+        });
     } else {
       this.cloneWidget(this.clonable.companyId);
     }

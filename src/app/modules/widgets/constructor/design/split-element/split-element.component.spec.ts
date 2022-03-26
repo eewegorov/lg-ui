@@ -8,9 +8,9 @@ describe('SplitElementComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SplitElementComponent ]
+      declarations: [SplitElementComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

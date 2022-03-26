@@ -13,7 +13,8 @@ export class ExtendedHiddenComponent implements OnInit {
   public availItemTypes = [];
   public fieldTypes = [];
 
-  constructor(private widgetConstructorService: WidgetConstructorService) { }
+  constructor(private widgetConstructorService: WidgetConstructorService) {
+  }
 
   ngOnInit(): void {
     this.widgetConstructorService.changeArrayOfFormExtTypes.subscribe(() => {

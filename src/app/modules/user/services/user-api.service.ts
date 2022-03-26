@@ -14,7 +14,8 @@ export class UserApiService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService
-  ) { }
+  ) {
+  }
 
   public getMeInfo(): Observable<UserResponse> {
     return this.http.get<UserResponse>(`${this.configService.config.prov}/me`);

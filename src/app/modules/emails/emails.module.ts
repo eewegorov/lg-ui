@@ -33,4 +33,5 @@ import { EmailsComponent } from './emails/emails.component';
     EmailsRoutingModule
   ]
 })
-export class EmailsModule { }
+export class EmailsModule {
+}

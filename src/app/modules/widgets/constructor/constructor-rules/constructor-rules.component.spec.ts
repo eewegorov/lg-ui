@@ -8,9 +8,9 @@ describe('ConstructorRulesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConstructorRulesComponent ]
+      declarations: [ConstructorRulesComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

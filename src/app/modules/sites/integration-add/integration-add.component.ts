@@ -30,8 +30,6 @@ import { SitesService } from '../services/sites.service';
   styleUrls: ['./integration-add.component.scss']
 })
 export class IntegrationAddComponent implements OnInit, AfterViewChecked {
-  @Input() private siteId: string;
-  @Input() private integrationId: string;
   public IntegrationTypes = IntegrationTypes;
   public BitrixTypes = BitrixConnectionTypes;
   public AmoGrantTypes = AmoGrantTypes;
@@ -72,7 +70,8 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public pipelines: AmoFunnel[] = [];
   public leadStates: AmoStatus[] = [];
   public isAmoActivated = false;
-
+  @Input() private siteId: string;
+  @Input() private integrationId: string;
 
   constructor(
     private translate: TranslateService,

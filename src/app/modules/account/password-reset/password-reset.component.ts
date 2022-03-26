@@ -16,7 +16,8 @@ export class PasswordResetComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private accountService: AccountService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     const code = this.route.snapshot.queryParams.code;

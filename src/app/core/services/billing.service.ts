@@ -10,7 +10,8 @@ import { CoreApiService } from './core-api.service';
 })
 export class BillingService {
 
-  constructor(private coreApiService: CoreApiService) { }
+  constructor(private coreApiService: CoreApiService) {
+  }
 
   public createOrder(siteId: string, priceId: string): Observable<Order> {
     const order: OrderRequest = { siteId, priceId };

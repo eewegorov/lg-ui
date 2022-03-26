@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CouponService } from '../services/coupon.service';
 import { Coupon } from '../../../core/models/coupons';
 import { Location } from '@angular/common';

@@ -8,9 +8,9 @@ describe('DatepickerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NgbdDatepickerI18n ]
+      declarations: [NgbdDatepickerI18n]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -33,4 +33,5 @@ import { WidgetsModule } from '../widgets/widgets.module';
     WidgetsModule
   ]
 })
-export class AbtestsModule { }
+export class AbtestsModule {
+}

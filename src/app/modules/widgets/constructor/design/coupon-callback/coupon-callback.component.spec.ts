@@ -8,9 +8,9 @@ describe('CouponCallbackComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CouponCallbackComponent ]
+      declarations: [CouponCallbackComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

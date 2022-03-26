@@ -1,33 +1,33 @@
 <div class="hpanel">
   <h3>{{ 'global.general' | translate }}</h3>
   <div class="panel-body">
-    <input type="hidden" id="locale-pass1" value="{{ 'userInfo.passwordChanged' | translate }}" />
-    <input type="hidden" id="locale-settings" value="{{ 'userInfo.settingsChanged' | translate }}" />
+    <input id="locale-pass1" type="hidden" value="{{ 'userInfo.passwordChanged' | translate }}"/>
+    <input id="locale-settings" type="hidden" value="{{ 'userInfo.settingsChanged' | translate }}"/>
     <form class="form-horizontal">
       <div class="form-group panelcontent" data-item="phone">
-        <label for="phone" class="control-label">{{ 'userInfo.phone' | translate }}:</label>
-        <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="user.phone">
+        <label class="control-label" for="phone">{{ 'userInfo.phone' | translate }}:</label>
+        <input [(ngModel)]="user.phone" class="form-control" id="phone" name="phone" type="text">
         <span class="validate"></span>
       </div>
       <div class="form-group panelcontent" data-item="email">
-        <label for="email" class="control-label">{{ 'userInfo.email' | translate }}:</label>
-        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email">
+        <label class="control-label" for="email">{{ 'userInfo.email' | translate }}:</label>
+        <input [(ngModel)]="user.email" class="form-control" id="email" name="email" type="email">
         <span class="validate"></span>
       </div>
       <div class="form-group d-flex" data-item="ntEnabled">
-        <ui-switch size="small" [checked]="user.notificated"></ui-switch>
+        <ui-switch [checked]="user.notificated" size="small"></ui-switch>
         <label class="control-label ml-2 pt-1">{{ 'userInfo.notifications' | translate }}</label>
       </div>
       <div class="form-group d-flex" data-item="ntEnabled">
-        <ui-switch size="small" [checked]="user.needStatsNotifications"></ui-switch>
+        <ui-switch [checked]="user.needStatsNotifications" size="small"></ui-switch>
         <label class="control-label ml-2 pt-1">{{ 'userInfo.isNeedStatsNotificationss' | translate }}</label>
       </div>
       <div class="text-right">
         <button
-          id="saveGeneral"
-          class="btn btn-success"
           (click)="saveGeneral()"
           [disabled]="saveGeneralDisabled"
+          class="btn btn-success"
+          id="saveGeneral"
         >
           {{ 'userInfo.saveGeneral' | translate }}
         </button>
@@ -43,32 +43,33 @@
     <form class="form-horizontal">
       <div class="form-group panelcontent">
         <div class="form-group panelcontent" data-item="oldpas">
-          <label for="oldpas" class="control-label">{{ 'userInfo.passwordOld' | translate }}:</label>
-          <input type="password" id="oldpas" class="form-control" [(ngModel)]="oldPassword" name="oldPassword">
+          <label class="control-label" for="oldpas">{{ 'userInfo.passwordOld' | translate }}:</label>
+          <input [(ngModel)]="oldPassword" class="form-control" id="oldpas" name="oldPassword" type="password">
           <span class="validate"></span>
         </div>
         <div class="form-group panelcontent" data-item="newpas">
-          <label for="newpas" class="control-label">{{ 'userInfo.passwordNew' | translate }}:</label>
+          <label class="control-label" for="newpas">{{ 'userInfo.passwordNew' | translate }}:</label>
           <div class="row">
             <div class="col-lg-11">
-              <input type="password" id="newpas" class="form-control" [(ngModel)]="newPassword" name="newPassword" #password>
+              <input #password [(ngModel)]="newPassword" class="form-control" id="newpas" name="newPassword"
+                     type="password">
             </div>
             <div
-              class="col-lg-1"
-              (mouseover)="togglePasswordVisibility('text')"
               (mouseleave)="togglePasswordVisibility('password')"
+              (mouseover)="togglePasswordVisibility('text')"
+              class="col-lg-1"
             >
-              <i id="showPass" class="pe-7s-look fa-3x"></i>
+              <i class="pe-7s-look fa-3x" id="showPass"></i>
             </div>
           </div>
           <span class="validate"></span>
         </div>
         <div class="text-right">
           <button
-            id="changePas"
-            class="btn btn-success"
             (click)="changePassword()"
             [disabled]="changePasswordDisabled"
+            class="btn btn-success"
+            id="changePas"
           >
             {{ 'userInfo.passwordChange' | translate }}
           </button>

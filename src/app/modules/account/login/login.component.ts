@@ -12,9 +12,9 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['../shared/shared.scss', './login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  @ViewChild('ichecks', { static: true }) private ichecks: ElementRef;
   public loginForm: FormGroup;
   public error: boolean;
+  @ViewChild('ichecks', { static: true }) private ichecks: ElementRef;
   private authSub: SubscriptionLike;
 
   constructor(
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public submitAuth() {
     this.authSub = this.accountService.handleAuth(this.loginForm.value).subscribe((response: boolean) => {
       if (response) {
-        this.router.navigate([ '/' ]);
+        this.router.navigate(['/']);
       }
     });
   }
@@ -48,6 +48,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngOnDestroy(): void {
+    if (this.authSub) {
+      this.authSub.unsubscribe();
+    }
+  }
+
   private initIchecks() {
     ($(this.ichecks.nativeElement) as any).iCheck({
       checkboxClass: 'icheckbox_square-green',
@@ -57,15 +63,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private resetForm() {
     this.loginForm = new FormGroup({
-      username: new FormControl('', [ Validators.required ]),
-      password: new FormControl('', [ Validators.required ])
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
     });
-  }
-
-  ngOnDestroy(): void {
-    if (this.authSub) {
-      this.authSub.unsubscribe();
-    }
   }
 
 }

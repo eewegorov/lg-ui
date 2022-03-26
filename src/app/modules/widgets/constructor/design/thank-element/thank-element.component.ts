@@ -26,7 +26,8 @@ export class ThankElementComponent implements OnInit {
     }
   };
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

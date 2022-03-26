@@ -4,31 +4,33 @@
 <div class="modal-body">
   <div class="tab-content">
     <div *ngIf="tab === 1" class="p-3">
-      <form [formGroup]="newSiteForm" (ngSubmit)="createSite()">
+      <form (ngSubmit)="createSite()" [formGroup]="newSiteForm">
         <div class="row">
           <div class="col-lg-12">
             <div class="row">
               <div class="form-group col-lg-12">
-                <label for="name" class="control-label">{{ 'sitelist.form.name' | translate }}</label>
-                <input type="text" id="name" class="form-control" formControlName="name" required>
-                <span class="small" [innerHTML]="'sitelist.form.start.desc1' | translate"></span>
+                <label class="control-label" for="name">{{ 'sitelist.form.name' | translate }}</label>
+                <input class="form-control" formControlName="name" id="name" required type="text">
+                <span [innerHTML]="'sitelist.form.start.desc1' | translate" class="small"></span>
               </div>
-              <div class="form-group col-lg-12" [ngClass]="{ 'is-invalid': isUrlInvalid }">
-                <label for="url" class="control-label">{{ 'sitelist.form.url' | translate }}</label>
-                <input type="text" id="url" class="form-control" formControlName="url" (change)="enableTyping()" required>
-                <span class="small" [innerHTML]="'sitelist.form.start.desc2' | translate">.</span>
+              <div [ngClass]="{ 'is-invalid': isUrlInvalid }" class="form-group col-lg-12">
+                <label class="control-label" for="url">{{ 'sitelist.form.url' | translate }}</label>
+                <input (change)="enableTyping()" class="form-control" formControlName="url" id="url" required
+                       type="text">
+                <span [innerHTML]="'sitelist.form.start.desc2' | translate" class="small">.</span>
               </div>
-              <div class="form-group col-lg-12" id="phoneContainer" *ngIf="!hidePhone">
-                <label for="phone" class="control-label">{{ 'sitelist.form.phone.title' | translate }}</label>
-                <input type="text" id="phone" class="form-control" formControlName="phone">
+              <div *ngIf="!hidePhone" class="form-group col-lg-12" id="phoneContainer">
+                <label class="control-label" for="phone">{{ 'sitelist.form.phone.title' | translate }}</label>
+                <input class="form-control" formControlName="phone" id="phone" type="text">
                 <span class="small">{{ 'sitelist.form.phone.desc' | translate }}</span>
               </div>
             </div>
           </div>
         </div>
         <div class="d-flex justify-content-between mt-2 mb-2">
-          <button class="btn btn-lg btn-default" (click)="closeModal()">{{ 'global.cancel' | translate }}</button>
-          <button type="submit" class="btn btn-lg btn-success" [disabled]="!newSiteForm.valid"> {{ 'sitelist.form.save' | translate }}</button>
+          <button (click)="closeModal()" class="btn btn-lg btn-default">{{ 'global.cancel' | translate }}</button>
+          <button [disabled]="!newSiteForm.valid" class="btn btn-lg btn-success"
+                  type="submit"> {{ 'sitelist.form.save' | translate }}</button>
         </div>
       </form>
     </div>
@@ -40,12 +42,12 @@
         <div class="mt-1">
           <div class="form-group">
             <textarea
-              id="siteLink"
-              class="form-control not-readonly-hand"
-              appSelectOnClick
               [(ngModel)]="createdSite.link"
-              rows="5"
+              appSelectOnClick
+              class="form-control not-readonly-hand"
+              id="siteLink"
               readonly
+              rows="5"
             ></textarea>
           </div>
         </div>
@@ -53,22 +55,22 @@
           <div class="text-left">
             <strong>
               {{ 'settings.script.apicode.title' | translate }} <a
-              data-container="body" data-toggle="tooltip" data-placement="top"
+              class="info-link" data-container="body" data-placement="top"
               data-title="{{ 'settings.script.apicode.tooltip' | translate }}"
-              class="info-link"><i class="fa fa-info-circle"></i></a>
+              data-toggle="tooltip"><i class="fa fa-info-circle"></i></a>
             </strong>
           </div>
         </div>
         <div class="mt-1">
           <div class="form-group" data-context="url">
             <input
-              type="text"
-              id="siteId"
-              class="form-control not-readonly-hand"
-              appSelectOnClick
               [(ngModel)]="createdSite.id"
+              appSelectOnClick
+              class="form-control not-readonly-hand"
+              id="siteId"
               name="name"
               readonly
+              type="text"
             >
           </div>
         </div>
@@ -78,8 +80,8 @@
       </div>
       <div class="text-center mt-2">
         <button
-          class="btn btn-lg btn-success"
           (click)="setTab(3)"
+          class="btn btn-lg btn-success"
           style="width: 310px;"
         >
           {{ 'sitelist.form.gotopoints' | translate }}
@@ -101,7 +103,7 @@
       </div>
 
       <div class="row widgets-options-container">
-        <app-smartpoints-control [smartPoints]="smartPoints" [siteId]="createdSite.id"></app-smartpoints-control>
+        <app-smartpoints-control [siteId]="createdSite.id" [smartPoints]="smartPoints"></app-smartpoints-control>
       </div>
 
       <div class="row mt-3">
@@ -110,7 +112,7 @@
         </div>
       </div>
       <div class="text-center mt-3 mb-3">
-        <a class="btn btn-lg btn-success next" (click)="goToCreateOwnWidgets()" style="width: 425px;">
+        <a (click)="goToCreateOwnWidgets()" class="btn btn-lg btn-success next" style="width: 425px;">
           {{ 'sitelist.form.gotowidgets' | translate }}
         </a>
       </div>

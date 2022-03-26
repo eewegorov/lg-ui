@@ -46,14 +46,15 @@ export class PartnerComponent implements OnInit, OnDestroy {
     private uiService: UiService,
     private userService: UserService,
     private partnerService: PartnerService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.uiService.toggleSidebar(true);
 
     this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
-        this.partnerUrl = MAIN_URL + '?refid=' + response.id;
-        this.walletId = response.wallet;
+      this.partnerUrl = MAIN_URL + '?refid=' + response.id;
+      this.walletId = response.wallet;
     });
 
     this.earnedMoneySub = this.partnerService.getEarnedMoney().subscribe((response: IncomeBalance) => {
@@ -123,7 +124,8 @@ export class PartnerComponent implements OnInit, OnDestroy {
         }
       }, 100);
     })
-      .catch(() => {});
+      .catch(() => {
+      });
   }
 
   public setWallet() {
@@ -142,18 +144,6 @@ export class PartnerComponent implements OnInit, OnDestroy {
 
   public trackById(index, item) {
     return item.id;
-  }
-
-  private getTransactions(params) {
-    this.loadingTransaction = true;
-    this.transactionsSub = this.partnerService.getTransactions(params).subscribe((response: Transaction[]) => {
-      this.transactions = this.transactions.concat(response);
-      if (response.length < 10) {
-        this.allTransactionsLoaded = true;
-      }
-      this.transactionsParams.offset += response.length;
-      this.loadingTransaction = false;
-    });
   }
 
   ngOnDestroy(): void {
@@ -176,6 +166,18 @@ export class PartnerComponent implements OnInit, OnDestroy {
     if (this.walletSub) {
       this.walletSub.unsubscribe();
     }
+  }
+
+  private getTransactions(params) {
+    this.loadingTransaction = true;
+    this.transactionsSub = this.partnerService.getTransactions(params).subscribe((response: Transaction[]) => {
+      this.transactions = this.transactions.concat(response);
+      if (response.length < 10) {
+        this.allTransactionsLoaded = true;
+      }
+      this.transactionsParams.offset += response.length;
+      this.loadingTransaction = false;
+    });
   }
 
 }

@@ -1,20 +1,20 @@
 <h3>{{ 'login.register_title' | translate }}</h3>
-<div id="registerPanel" class="hpanel" [class.valid]="autoRegister">
+<div [class.valid]="autoRegister" class="hpanel" id="registerPanel">
   <div class="panel-body">
-    <form id="formRegister" (ngSubmit)="reg(f)" #f="ngForm">
+    <form #f="ngForm" (ngSubmit)="reg(f)" id="formRegister">
       <div class="form-group">
         <label class="control-label" for="usernameReg">{{ 'login.user' | translate }}:</label>
         <input
-          type="email"
-          placeholder="example@gmail.com"
-          autocomplete="off"
-          name="login"
-          id="usernameReg"
-          class="form-control"
           [(ngModel)]="registrationEmail"
+          autocomplete="off"
+          class="form-control"
+          id="usernameReg"
+          name="login"
+          placeholder="example@gmail.com"
           required
+          type="email"
         >
-        <span class="errorMessage small" [class.valid]="!invalidLogin">
+        <span [class.valid]="!invalidLogin" class="errorMessage small">
           {{ errorLogin ? errorLogin : 'login.error' | translate }}
         </span>
         <span class="help-block small">{{ 'login.unique_login' | translate }}</span>
@@ -22,35 +22,35 @@
       <div class="form-group">
         <label class="control-label" for="passwordReg">{{ 'login.password_new' | translate }}:</label>
         <input
-          type="password"
-          placeholder="********"
-          autocomplete="off"
-          name="password"
-          id="passwordReg"
-          class="form-control"
-          (focus)="togglePasswordFocus($event, '')"
-          (blur)="togglePasswordFocus($event, '********')"
-          [(ngModel)]="registrationPassword"
-          required
           #password
+          (blur)="togglePasswordFocus($event, '********')"
+          (focus)="togglePasswordFocus($event, '')"
+          [(ngModel)]="registrationPassword"
+          autocomplete="off"
+          class="form-control"
+          id="passwordReg"
+          name="password"
+          placeholder="********"
+          required
+          type="password"
         >
-        <span class="errorMessage small" [class.valid]="!invalidPassword">
+        <span [class.valid]="!invalidPassword" class="errorMessage small">
           {{ errorPassword ? errorPassword : 'login.error_password' | translate }}
         </span>
         <span
+          (mouseleave)="togglePasswordVisibility('password')"
+          (mouseover)="togglePasswordVisibility('text')"
           class="help-block small help-block-pwds"
           id="showPassLog"
-          (mouseover)="togglePasswordVisibility('text')"
-          (mouseleave)="togglePasswordVisibility('password')"
         >
           <i class="pe-7s-look fa-3x pointer showPassLog"></i>Показать пароль
         </span>
       </div>
       <button
-        type="submit"
+        [disabled]="!f.valid || loading"
         class="btn btn-success btn-block"
         id="buttonRegister"
-        [disabled]="!f.valid || loading"
+        type="submit"
       >
         {{ 'login.register' | translate }}
       </button>
@@ -61,23 +61,23 @@
       </span>
       <span class="help-block small help-block_label">ИЛИ</span>
       <button
+        (click)="regYandex($event)"
         class="btn btn-warning btn-block"
         data-auth="REG"
         style="background-color: #ffdb4dd9;margin-bottom: 30px;"
-        (click)="regYandex($event)"
       >
         Зарегистрируйтесь через <span style="color:#f00;">Я</span>ндекс
       </button>
 
       <span class="help-block small">Уже есть аккаунт?</span>
-      <button routerLink="/account/login" type="button" class="btn btn-default btn-block" data-action="loginLayer">
+      <button class="btn btn-default btn-block" data-action="loginLayer" routerLink="/account/login" type="button">
         {{ 'login.login' | translate }}
       </button>
     </form>
   </div>
 </div>
 
-<div *ngIf="autoRegister && autoRegisterPanel" id="autoRegisterPanel" class="hpanel">
+<div *ngIf="autoRegister && autoRegisterPanel" class="hpanel" id="autoRegisterPanel">
   <div class="panel-body">
     <span class="errorMessage"></span>
     <div class="messageCenterReset" style="height: auto;">
@@ -86,34 +86,34 @@
     </div>
   </div>
 </div>
-<div *ngIf="autoRegister && autoRegisterError" id="autoRegisterErrorPanel" class="hpanel">
+<div *ngIf="autoRegister && autoRegisterError" class="hpanel" id="autoRegisterErrorPanel">
   <div class="panel-body">
     <span class="errorMessage">
       {{ autoRegisterErrorMessage ? autoRegisterErrorMessage : 'login.error' | translate }}
     </span>
   </div>
 </div>
-<div *ngIf="autoRegister && autoRegisterLoadingPanel" id="autoRegisterLoadingPanel" class="hpanel">
+<div *ngIf="autoRegister && autoRegisterLoadingPanel" class="hpanel" id="autoRegisterLoadingPanel">
   <div class="panel-loading"></div>
 </div>
 
-<form id="formLogin" class="valid" method="post" action="/account/login" #loginForm>
+<form #loginForm action="/account/login" class="valid" id="formLogin" method="post">
   <input
-    type="text"
-    placeholder="example@gmail.com"
-    autocomplete="off"
-    name="j_username"
-    id="username"
-    class="form-control"
     [(ngModel)]="registrationEmail"
+    autocomplete="off"
+    class="form-control"
+    id="username"
+    name="j_username"
+    placeholder="example@gmail.com"
+    type="text"
   >
   <input
-    type="password"
-    placeholder="********"
-    autocomplete="off"
-    name="j_password"
-    id="password"
-    class="form-control"
     [(ngModel)]="registrationPassword"
+    autocomplete="off"
+    class="form-control"
+    id="password"
+    name="j_password"
+    placeholder="********"
+    type="password"
   >
 </form>

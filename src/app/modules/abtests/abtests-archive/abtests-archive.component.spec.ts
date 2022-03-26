@@ -8,9 +8,9 @@ describe('AbtestsArchiveComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AbtestsArchiveComponent ]
+      declarations: [AbtestsArchiveComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

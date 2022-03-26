@@ -6,8 +6,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from 'ngx-filter-pipe';
 import {
   CompanyShort,
-  ContainerShort, Mockup,
-  NewWidgetInfo, SiteForWidget,
+  ContainerShort,
+  Mockup,
+  NewWidgetInfo,
+  SiteForWidget,
   WidgetCreated,
   WidgetCreateRequest
 } from '../../../core/models/widgets';
@@ -133,7 +135,9 @@ export class WidgetAddComponent implements OnInit {
   }
 
   public addWidget() {
-    if (!this.editableWidget.templateId && !this.editableWidget.mockupId) { return false; }
+    if (!this.editableWidget.templateId && !this.editableWidget.mockupId) {
+      return false;
+    }
 
     const newWidget: WidgetCreateRequest = {
       name: this.editableWidget.name

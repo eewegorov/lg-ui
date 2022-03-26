@@ -10,13 +10,14 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['../shared/shared.scss', './password-recovery.component.scss']
 })
 export class PasswordRecoveryComponent implements OnInit, OnDestroy {
-  @ViewChild('f') private regForm: NgForm;
   public loading = false;
   public resetDone = false;
   public invalidLogin = false;
+  @ViewChild('f') private regForm: NgForm;
   private resetSub: SubscriptionLike;
 
-  constructor(private accountService: AccountService) { }
+  constructor(private accountService: AccountService) {
+  }
 
   ngOnInit(): void {
   }

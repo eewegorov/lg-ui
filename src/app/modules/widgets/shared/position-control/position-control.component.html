@@ -2,12 +2,12 @@
   <div class="position-control-selector">
     <div *ngFor="let i of [0, 3, 6]" class="position-control-row">
       <button
-        *ngFor="let j of [0, 1, 2]"
-        class="position-control-item"
         (click)="setNewPosition(positions[i + j])"
+        *ngFor="let j of [0, 1, 2]"
         [class.active]="currentPosition === positions[i + j]"
         [class.white]="positions[i + j] === null"
         [disabled]="!positions[i + j]"
+        class="position-control-item"
       ></button>
     </div>
   </div>

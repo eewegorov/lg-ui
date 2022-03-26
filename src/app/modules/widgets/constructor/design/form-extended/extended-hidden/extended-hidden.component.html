@@ -1,12 +1,12 @@
 <div class="row-subitem">
   <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
       {{ item.label }}
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
-      <li role="presentation" *ngFor="let itemForm of availItemTypes" (click)="changeFormType(itemForm.type)">
-        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
+      <li (click)="changeFormType(itemForm.type)" *ngFor="let itemForm of availItemTypes" role="presentation">
+        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemForm.label }}</a>
       </li>
     </ul>
   </div>
@@ -16,37 +16,39 @@
 
 <div class="row-subitem mt-1">
   <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
       {{ item.fieldType.label }}
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
       <li
-        role="presentation"
-        *ngFor="let itemFieldType of fieldTypes"
         (click)="selectFieldType(itemFieldType)"
+        *ngFor="let itemFieldType of fieldTypes"
+        role="presentation"
       >
-        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemFieldType.label }}</a>
+        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemFieldType.label }}</a>
       </li>
     </ul>
   </div>
 </div>
 
 <div class="row-subitem mt-3 form-ext-item__item-input">
-  <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.service1' | translate }}</label>
-  <input type="text" class="form-control mt-1" [(ngModel)]="item.service">
+  <label
+    class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.service1' | translate }}</label>
+  <input [(ngModel)]="item.service" class="form-control mt-1" type="text">
   <span class="input-down-sm-lab">{{ 'widgets.formExt.email.service3' | translate }}</span>
 </div>
 
 <div class="row-subitem mt-3 form-ext-item__item-input">
   <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.id1' | translate }}</label>
-  <input type="text" class="form-control mt-1 form-control-form-ext-id-field" (blur)="idFocusOut()" [(ngModel)]="item.idField"/>
+  <input (blur)="idFocusOut()" [(ngModel)]="item.idField" class="form-control mt-1 form-control-form-ext-id-field"
+         type="text"/>
   <span class="input-down-sm-lab">{{ 'widgets.formExt.mainSettings.id.example' | translate }}</span>
 </div>
 
 <div
-  class="row-subitem mt-2 widget-small-text"
   [innerHTML]="'widgets.formExt.mainSettings.id.description' | translate"
+  class="row-subitem mt-2 widget-small-text"
 ></div>
 
 <div *ngIf="isFieldUtmOrRef(item.fieldType.type)" class="mt-3">
@@ -56,11 +58,11 @@
       <div class="form-group widget-selector mb-0">
         <label class="non-bold">
           <input
-            type="radio"
-            name="hidden"
-            class="radio radio-info radio-inline"
             [(ngModel)]="item.utmRefPage.currentPage"
             [value]="true"
+            class="radio radio-info radio-inline"
+            name="hidden"
+            type="radio"
           />
           {{ 'widgets.formExt.hidden.fieldUtm.radio.label1' | translate }}
         </label>
@@ -70,11 +72,11 @@
       <div class="form-group widget-selector mb-0">
         <label class="non-bold">
           <input
-            type="radio"
-            name="hidden"
-            class="radio radio-info radio-inline"
             [(ngModel)]="item.utmRefPage.currentPage"
             [value]="false"
+            class="radio radio-info radio-inline"
+            name="hidden"
+            type="radio"
           />
           {{ 'widgets.formExt.hidden.fieldUtm.radio.label2' | translate }}
         </label>
@@ -88,19 +90,22 @@
 </div>
 
 <div *ngIf="item.fieldType.type === 'custom_parameter'" class="row-subitem mt-3 form-ext-item__item-input">
-  <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldUserParam.label' | translate }}</label>
-  <input type="text" class="form-control mt-1" [(ngModel)]="item.customParamValue"/>
+  <label
+    class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldUserParam.label' | translate }}</label>
+  <input [(ngModel)]="item.customParamValue" class="form-control mt-1" type="text"/>
   <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldUserParam.desc' | translate }}</span>
 </div>
 
 <div *ngIf="item.fieldType.type === 'cookie'" class="row-subitem mt-3 form-ext-item__item-input">
-  <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldCookies.label' | translate }}</label>
-  <input type="text" class="form-control mt-1" [(ngModel)]="item.cookieValue"/>
+  <label
+    class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldCookies.label' | translate }}</label>
+  <input [(ngModel)]="item.cookieValue" class="form-control mt-1" type="text"/>
   <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldCookies.desc' | translate }}</span>
 </div>
 
 <div *ngIf="item.fieldType.type === 'user_value'" class="row-subitem mt-3 form-ext-item__item-input">
-  <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldUserValue.label' | translate }}</label>
-  <input type="text" class="form-control mt-1" [(ngModel)]="item.customUserValue"/>
+  <label
+    class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldUserValue.label' | translate }}</label>
+  <input [(ngModel)]="item.customUserValue" class="form-control mt-1" type="text"/>
   <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldUserValue.desc' | translate }}</span>
 </div>

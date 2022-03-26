@@ -8,9 +8,9 @@ describe('ExtendedDdComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExtendedDdComponent ]
+      declarations: [ExtendedDdComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

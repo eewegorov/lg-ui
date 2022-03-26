@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ApiResponse } from '../../../core/models/api';
 import {
-  AuthRequest, ConfirmResetData,
+  AuthRequest,
+  ConfirmResetData,
   OAuthRequest,
   OAuthResponse,
   RegistrationRequest,
@@ -24,7 +25,8 @@ export class AccountService {
     private errorHandlerService: ErrorHandlerService,
     private authService: AuthService,
     private accountApiService: AccountApiService
-  ) { }
+  ) {
+  }
 
   public handleYandex(event: Event, action: 'AUTH' | 'REG'): Observable<OAuthResponse> {
     (event.target as HTMLButtonElement).disabled = true;

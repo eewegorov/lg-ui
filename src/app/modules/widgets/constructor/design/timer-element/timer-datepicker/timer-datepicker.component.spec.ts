@@ -8,9 +8,9 @@ describe('TimerDatepickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TimerDatepickerComponent ]
+      declarations: [TimerDatepickerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

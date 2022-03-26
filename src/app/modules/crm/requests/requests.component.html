@@ -11,42 +11,42 @@
           <div class="filter-flexed__item">
             <h5 class="font-normal">{{ 'sidebar.sites' | translate }}:</h5>
             <ng-select
-              id="siteSelector"
-              bindValue="id"
-              bindLabel="name"
-              multiple="true"
-              appendTo="body"
-              [items]="allSites"
-              [placeholder]="'widgetsList.add.chooseSite' | translate"
-              [(ngModel)]="sitesIds"
               (add)="checkFilters($event, 'sites')"
               (change)="timeoutFiltering(false)"
+              [(ngModel)]="sitesIds"
+              [items]="allSites"
+              [placeholder]="'widgetsList.add.chooseSite' | translate"
+              appendTo="body"
+              bindLabel="name"
+              bindValue="id"
+              id="siteSelector"
+              multiple="true"
             ></ng-select>
           </div>
 
           <div class="filter-flexed__item">
             <h5 class="font-normal">{{ 'crm.page.filter.period' | translate }}:</h5>
             <div
-              class="btn-group btn-group-toggle btn-group__period-selector"
-              ngbRadioGroup
-              name="radioBasic"
-              [(ngModel)]="periodType"
               (ngModelChange)="changePeriod($event)"
+              [(ngModel)]="periodType"
+              class="btn-group btn-group-toggle btn-group__period-selector"
+              name="radioBasic"
+              ngbRadioGroup
             >
-              <label ngbButtonLabel class="btn btn-default">
-                <input ngbButton type="radio" [value]="'TODAY'"> {{ 'reports.emails.period.today' | translate }}
+              <label class="btn btn-default" ngbButtonLabel>
+                <input [value]="'TODAY'" ngbButton type="radio"> {{ 'reports.emails.period.today' | translate }}
               </label>
-              <label ngbButtonLabel class="btn btn-default">
-                <input ngbButton type="radio" [value]="'YESTERDAY'"> {{ 'reports.emails.period.yesterday' | translate }}
+              <label class="btn btn-default" ngbButtonLabel>
+                <input [value]="'YESTERDAY'" ngbButton type="radio"> {{ 'reports.emails.period.yesterday' | translate }}
               </label>
-              <label ngbButtonLabel class="btn btn-default">
-                <input ngbButton type="radio" [value]="'WEEK'"> {{ 'reports.emails.period.week' | translate }}
+              <label class="btn btn-default" ngbButtonLabel>
+                <input [value]="'WEEK'" ngbButton type="radio"> {{ 'reports.emails.period.week' | translate }}
               </label>
-              <label ngbButtonLabel class="btn btn-default">
-                <input ngbButton type="radio" [value]="'DECADE'"> {{ 'reports.emails.period.decade' | translate }}
+              <label class="btn btn-default" ngbButtonLabel>
+                <input [value]="'DECADE'" ngbButton type="radio"> {{ 'reports.emails.period.decade' | translate }}
               </label>
-              <label ngbButtonLabel class="btn btn-default">
-                <input ngbButton type="radio" [value]="'MONTH'"> {{ 'reports.emails.period.month' | translate }}
+              <label class="btn btn-default" ngbButtonLabel>
+                <input [value]="'MONTH'" ngbButton type="radio"> {{ 'reports.emails.period.month' | translate }}
               </label>
               <ng-template #popContent>
                 <div id="custom-period-container-template">
@@ -65,20 +65,21 @@
                     </div>
                   </div>
                   <div class="text-right mt-3">
-                    <button id="periodApply" (click)="periodApply()" type="button" class="btn w-xs btn-success">{{ 'global.period.start' | translate }}</button>
+                    <button (click)="periodApply()" class="btn w-xs btn-success" id="periodApply"
+                            type="button">{{ 'global.period.start' | translate }}</button>
                   </div>
                 </div>
               </ng-template>
               <button
-                type="button"
-                id="periods-custom"
-                class="btn btn-default"
+                #p="ngbPopover"
+                [autoClose]="'outside'"
                 [ngClass]="(periodType === 'USER') ? 'active' : ''"
                 [ngbPopover]="popContent"
-                [autoClose]="'outside'"
+                class="btn btn-default"
                 container="body"
+                id="periods-custom"
                 placement="{{ innerWidth < 850 ? 'bottom' : 'left' }}"
-                #p="ngbPopover"
+                type="button"
               >
                 {{ 'reports.emails.period.user' | translate }}
               </button>
@@ -94,32 +95,32 @@
           <div class="filter-flexed__item">
             <h5 class="font-normal">{{ 'sidebar.widgets' | translate }}:</h5>
             <ng-select
-              id="widgetsSelector"
-              bindValue="id"
-              bindLabel="name"
-              appendTo="body"
-              multiple="true"
-              [items]="allWidgets"
-              [placeholder]="'crm.page.filter.widgets.placeholder' | translate"
-              [(ngModel)]="widgetsIds"
               (add)="checkFilters($event, 'widgets')"
               (change)="timeoutFiltering(false)"
+              [(ngModel)]="widgetsIds"
+              [items]="allWidgets"
+              [placeholder]="'crm.page.filter.widgets.placeholder' | translate"
+              appendTo="body"
+              bindLabel="name"
+              bindValue="id"
+              id="widgetsSelector"
+              multiple="true"
             ></ng-select>
           </div>
 
           <div class="filter-flexed__item">
             <h5 class="font-normal">{{ 'crm.page.filter.states.title' | translate }}:</h5>
             <ng-select
-              id="statesSelector"
-              bindValue="id"
-              bindLabel="name"
-              appendTo="body"
-              multiple="true"
-              [items]="states"
-              [placeholder]="'crm.page.filter.states.placeholder' | translate"
-              [(ngModel)]="statesIds"
               (add)="checkFilters($event, 'states')"
               (change)="timeoutFiltering(false)"
+              [(ngModel)]="statesIds"
+              [items]="states"
+              [placeholder]="'crm.page.filter.states.placeholder' | translate"
+              appendTo="body"
+              bindLabel="name"
+              bindValue="id"
+              id="statesSelector"
+              multiple="true"
             ></ng-select>
           </div>
         </div>
@@ -127,11 +128,12 @@
     </div>
   </div>
 
-  <div class="crm-notification-container" *ngIf="isNotificationEnable">
+  <div *ngIf="isNotificationEnable" class="crm-notification-container">
     <div class="crm-notification-block">
       <div class="crm-notification-icon"></div>
       <div class="crm-notification-text">{{ 'crm.page.notification.text' | translate }}</div>
-      <button class="btn btn-default" (click)="notificationCookieSet()">{{ 'crm.page.notification.btn' | translate }}</button>
+      <button (click)="notificationCookieSet()"
+              class="btn btn-default">{{ 'crm.page.notification.btn' | translate }}</button>
     </div>
   </div>
 
@@ -145,46 +147,48 @@
         <div *ngIf="!initTables" class="crm-table__loader"></div>
         <div *ngIf="initTables" class="crm-table-pos">
           <button
-            class="btn btn-info update-crm-table"
             (click)="timeoutFiltering(false)"
+            class="btn btn-info update-crm-table"
           ><i class="fas fa-sync"></i> {{ 'crm.page.table.refresh' | translate }}</button>
           <table class="table table-striped table-bordered hover">
             <thead>
-              <tr>
-                <th>{{ 'crm.page.table.th1' | translate }}</th>
-                <th>{{ 'crm.page.table.th2' | translate }}</th>
-                <th class="dtable-max-220">{{ 'crm.page.table.th3' | translate }}</th>
-                <th>{{ 'crm.page.table.th4' | translate }}</th>
-                <th
-                  class="dtable-max-160 sorting"
-                  (click)="changeDateSorting()"
-                >
-                  {{ 'crm.page.table.th5' | translate }}
-                  <i
-                    class="fas float-right pt-1"
-                    [ngClass]="sortingDesc ? 'fa-sort-amount-up' : 'fa-sort-amount-down'"
-                  ></i>
-                </th>
-              </tr>
+            <tr>
+              <th>{{ 'crm.page.table.th1' | translate }}</th>
+              <th>{{ 'crm.page.table.th2' | translate }}</th>
+              <th class="dtable-max-220">{{ 'crm.page.table.th3' | translate }}</th>
+              <th>{{ 'crm.page.table.th4' | translate }}</th>
+              <th
+                (click)="changeDateSorting()"
+                class="dtable-max-160 sorting"
+              >
+                {{ 'crm.page.table.th5' | translate }}
+                <i
+                  [ngClass]="sortingDesc ? 'fa-sort-amount-up' : 'fa-sort-amount-down'"
+                  class="fas float-right pt-1"
+                ></i>
+              </th>
+            </tr>
             </thead>
             <tbody>
-              <tr
-                *ngFor="let item of leads; index as i"
-                class="clickable-row-info"
-                [ngClass]="{'active-row': currentOpenedRow === i}"
-                (click)="openLeadInfo(item, i)"
-              >
-                <td
-                  class="crm-table-widget-name"
-                  data-container=".table-container"
-                  data-toggle="tooltip"
-                  data-placement="top"
-                  data-title="{{ 'crm.page.table.tooltip' | translate }}">{{ item.widgetName }}</td>
-                <td><span class="long-text" style="max-width: 200px">{{ item.siteName }}</span></td>
-                <td class="crm-table-site-url dtable-max-220"><span class="long-text">{{ item.pageUrl }}</span></td>
-                <td><span class="lead-state-container label font-normal-size crm-table-state__{{ item.state }}">{{ item.status }}</span></td>
-                <td class="dtable-max-160">{{ item.date | date : "dd.MM.y, HH:mm" }}</td>
-              </tr>
+            <tr
+              (click)="openLeadInfo(item, i)"
+              *ngFor="let item of leads; index as i"
+              [ngClass]="{'active-row': currentOpenedRow === i}"
+              class="clickable-row-info"
+            >
+              <td
+                class="crm-table-widget-name"
+                data-container=".table-container"
+                data-placement="top"
+                data-title="{{ 'crm.page.table.tooltip' | translate }}"
+                data-toggle="tooltip">{{ item.widgetName }}</td>
+              <td><span class="long-text" style="max-width: 200px">{{ item.siteName }}</span></td>
+              <td class="crm-table-site-url dtable-max-220"><span class="long-text">{{ item.pageUrl }}</span></td>
+              <td><span
+                class="lead-state-container label font-normal-size crm-table-state__{{ item.state }}">{{ item.status }}</span>
+              </td>
+              <td class="dtable-max-160">{{ item.date | date : "dd.MM.y, HH:mm" }}</td>
+            </tr>
             </tbody>
           </table>
 
@@ -192,25 +196,25 @@
             <div class="site-list-table__onpage">
               <label>{{ 'sitelist.table.onPage' | translate }}</label>
               <ng-select
-                id="limitSelector"
-                appendTo="body"
-                bindLabel="value"
+                (change)="timeoutFiltering(false)"
+                [(ngModel)]="searchParams.limit"
                 [clearable]="false"
                 [items]="limitOptions"
-                [(ngModel)]="searchParams.limit"
-                (change)="timeoutFiltering(false)"
+                appendTo="body"
+                bindLabel="value"
+                id="limitSelector"
               ></ng-select>
             </div>
             <div class="site-list-arrows btn-group">
               <button
-                class="btn btn-default"
                 (click)="prevList()"
                 [disabled]="searchParams.offset === 0"
+                class="btn btn-default"
               ><i class="fa fa-chevron-left"></i></button>
               <button
-                class="btn btn-default"
                 (click)="nextList()"
                 [disabled]="leads.length < searchParams.limit.value"
+                class="btn btn-default"
               ><i class="fa fa-chevron-right"></i></button>
             </div>
           </div>

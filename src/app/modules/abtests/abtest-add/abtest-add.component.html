@@ -1,41 +1,44 @@
-<div class="modal-header text-center justify-content-center" *ngIf="newABTestInfo.step === 0 || newABTestInfo.step === 1">
+<div *ngIf="newABTestInfo.step === 0 || newABTestInfo.step === 1"
+     class="modal-header text-center justify-content-center">
   <h3 class="modal-title">{{ 'abtests.modal.newAB.title' | translate }}</h3>
 </div>
 
 <div class="modal-body">
-  <div id="step1" class="p-2 max-w-868" *ngIf="newABTestInfo.step === 0">
+  <div *ngIf="newABTestInfo.step === 0" class="p-2 max-w-868" id="step1">
     <div class="row">
       <div class="col-lg-12">
-        <label class="row mb-2 ml-0 select-site-title control-label">{{ 'abtests.modal.variant.title' | translate }}</label>
-        <input type="text" class="form-control" [(ngModel)]="editableAB.name">
+        <label
+          class="row mb-2 ml-0 select-site-title control-label">{{ 'abtests.modal.variant.title' | translate }}</label>
+        <input [(ngModel)]="editableAB.name" class="form-control" type="text">
         <span class="underow-comment">{{ 'abtests.modal.variant.comment' | translate }}</span>
       </div>
 
       <div class="col-lg-12">
-        <label class="row mt-2 mb-2 ml-0 select-site-title control-label">{{ 'abtests.modal.variant.description' | translate }}</label>
-        <textarea class="form-control" [(ngModel)]="editableAB.description" rows="3"></textarea>
+        <label
+          class="row mt-2 mb-2 ml-0 select-site-title control-label">{{ 'abtests.modal.variant.description' | translate }}</label>
+        <textarea [(ngModel)]="editableAB.description" class="form-control" rows="3"></textarea>
       </div>
 
       <div class="col-lg-12 mt-5">
         <button (click)="closeModal()"
                 class="btn btn-lg btn-default float-left">{{ 'global.cancel' | translate }}</button>
-        <button [disabled]="editableAB.name.trim().length === 0"
-                (click)="goToABType()"
-                type="button"
-                class="btn btn-lg btn-success float-right">{{ 'abtests.modal.variant.create' | translate }}</button>
+        <button (click)="goToABType()"
+                [disabled]="editableAB.name.trim().length === 0"
+                class="btn btn-lg btn-success float-right"
+                type="button">{{ 'abtests.modal.variant.create' | translate }}</button>
       </div>
     </div>
   </div>
-  <div id="step2" class="p-2 max-w-868" *ngIf="newABTestInfo.step === 1">
+  <div *ngIf="newABTestInfo.step === 1" class="p-2 max-w-868" id="step2">
     <div class="sub-text-extra-create-new-test">{{ 'abtests.modal.newAB.chooseVariant' | translate }}</div>
     <div class="row">
-      <div class="col-lg-4 widget-type-view" *ngFor="let type of newABTestInfo.ABTypes" (click)="setABType(type)">
+      <div (click)="setABType(type)" *ngFor="let type of newABTestInfo.ABTypes" class="col-lg-4 widget-type-view">
         <div class="ab-type-icon-{{ type.type }}"></div>
         <div class="view-name text-center">{{ type.title }}</div>
       </div>
     </div>
   </div>
-  <div id="step3" class="active" *ngIf="newABTestInfo.step === 2">
+  <div *ngIf="newABTestInfo.step === 2" class="active" id="step3">
     <div class="create-widget-m" style="padding-top: 0">
       <div class="filters-loader"></div>
       <div class="container-for-loader">
@@ -46,7 +49,8 @@
           <span class="sub-text">{{ 'widgetsList.add.modal.gallery.desc' | translate }}</span>
         </div>
 
-        <app-templates-gallery [typeId]="newABTestInfo.abtTypeWidget" (chooseWidget)="chooseTemplateWidget($event)"></app-templates-gallery>
+        <app-templates-gallery (chooseWidget)="chooseTemplateWidget($event)"
+                               [typeId]="newABTestInfo.abtTypeWidget"></app-templates-gallery>
       </div>
     </div>
   </div>

@@ -17,7 +17,8 @@ export class UserService {
   constructor(
     private errorHandlerService: ErrorHandlerService,
     private userApiService: UserApiService
-  ) { }
+  ) {
+  }
 
   public getMeInfo(): Observable<User> {
     if (this.getMeSub) {

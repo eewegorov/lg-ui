@@ -7,7 +7,9 @@ import {
   LeadById,
   LeadByIdResponse,
   LeadByIdWithIndex,
-  LeadsResponse, LeadsWidgetsResponse, LeadWidgets,
+  LeadsResponse,
+  LeadsWidgetsResponse,
+  LeadWidgets,
   StateWithIndex,
   UpdateComment,
   UpdateState
@@ -15,7 +17,6 @@ import {
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { CrmApiService } from './crm-api.service';
 import { ApiResponse } from '../../../core/models/api';
-
 
 
 @Injectable({
@@ -29,7 +30,8 @@ export class CrmService {
     private translate: TranslateService,
     private errorHandlerService: ErrorHandlerService,
     private crmApiService: CrmApiService
-  ) { }
+  ) {
+  }
 
   public getLeadList(filterParams): Observable<Lead[]> {
     return this.crmApiService.getLeadList(filterParams).pipe(

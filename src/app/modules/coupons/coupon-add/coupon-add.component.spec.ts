@@ -8,9 +8,9 @@ describe('CouponAddComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CouponAddComponent ]
+      declarations: [CouponAddComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

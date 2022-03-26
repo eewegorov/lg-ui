@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { CouponsComponent } from './coupons/coupons.component';
 
 
@@ -12,4 +12,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CouponsRoutingModule { }
+export class CouponsRoutingModule {
+}

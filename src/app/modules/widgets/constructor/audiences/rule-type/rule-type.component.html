@@ -4,10 +4,10 @@
     <div *ngFor="let val of vals.trafficTypes; index as j" class="form-check">
       <label class="form-check-label">
         <input
-          type="checkbox"
-          [checked]="checkSelected(vals.trafficTypesEnum[j]) >= 0"
           (click)="!(checkSelected(vals.trafficTypesEnum[j]) >= 0) ? addSubItem(item, vals.trafficTypesEnum[j]) : removeSubItem(group.id, item.type, checkSelected(vals.trafficTypesEnum[j]), $event)"
+          [checked]="checkSelected(vals.trafficTypesEnum[j]) >= 0"
           class="form-check-input"
+          type="checkbox"
         />
         <span class="checkmark"></span>
       </label>

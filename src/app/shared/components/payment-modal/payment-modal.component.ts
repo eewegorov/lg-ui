@@ -15,16 +15,14 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class PaymentModalComponent implements OnInit {
   @Input() public title;
   @Input() public subscription;
-  @Input() private plans;
-  @Input() private siteId;
   @Input() public siteName;
-  @Input() private expTime;
-
   public planLabels;
   public price;
   public plan;
   public activePriceId;
-
+  @Input() private plans;
+  @Input() private siteId;
+  @Input() private expTime;
   private firstPrice;
 
   constructor(
@@ -46,7 +44,7 @@ export class PaymentModalComponent implements OnInit {
     this.siteName = this.siteName ? this.siteName : this.coreSitesService.getSiteById(this.siteId).name;
 
     this.planLabels = {
-      activationLabel: this.translate.instant('sitelist.tariff.activation', {tariffName: this.plan.name, siteName: this.siteName}),
+      activationLabel: this.translate.instant('sitelist.tariff.activation', { tariffName: this.plan.name, siteName: this.siteName }),
       activationDateLabel: this.getDatesLabel(),
       payDescription: this.getPayDescription(this.firstPrice.name, this.firstPrice.desc),
       currentPrice: this.firstPrice.price
@@ -96,7 +94,7 @@ export class PaymentModalComponent implements OnInit {
   private getDatesLabel(days?) {
     const expectedTime = this.expTime ? parseFloat(this.expTime) : null;
     const startDate = expectedTime ? new Date(expectedTime) : new Date();
-    const endDate   = new Date(startDate.getTime() + 1000 * 60 * 60 * 24 * (days || this.firstPrice.days));
+    const endDate = new Date(startDate.getTime() + 1000 * 60 * 60 * 24 * (days || this.firstPrice.days));
 
     return this.translate.instant('sitelist.tariff.activationDate', {
       startDate: this.datePipe.transform(startDate, 'dd.MM.yy'),

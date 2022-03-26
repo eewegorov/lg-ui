@@ -8,9 +8,9 @@ describe('ConstructorIntegrationsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConstructorIntegrationsComponent ]
+      declarations: [ConstructorIntegrationsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

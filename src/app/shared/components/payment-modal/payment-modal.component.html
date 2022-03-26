@@ -1,24 +1,24 @@
 <div class="modal-header justify-content-center">
   <div class="d-flex flex-column">
     <h4 *ngIf="title" class="modal-title">{{ title }}</h4>
-    <h5 *ngIf="subscription" class="paymentSubscription mt-2 pr-5" [innerHTML]="subscription"></h5>
+    <h5 *ngIf="subscription" [innerHTML]="subscription" class="paymentSubscription mt-2 pr-5"></h5>
   </div>
-  <button type="button" class="close" aria-label="Close" data-dismiss="modal" (click)="closeModal()">
+  <button (click)="closeModal()" aria-label="Close" class="close" data-dismiss="modal" type="button">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 
 <div class="modal-body">
-  <div id="paymentForm" style="display: none;" accept-charset="UTF-8">
+  <div accept-charset="UTF-8" id="paymentForm" style="display: none;">
     <form action="https://wl.walletone.com/checkout/checkout/Index" method="POST" target="_blank">
-      <input name="WMI_MERCHANT_ID"    value=""/><br/>
+      <input name="WMI_MERCHANT_ID" value=""/><br/>
       <input name="WMI_PAYMENT_AMOUNT" value=""/><br/>
-      <input name="WMI_CURRENCY_ID"    value=""/><br/>
-      <input name="WMI_DESCRIPTION"    value=""/><br/>
-      <input name="WMI_SUCCESS_URL"    value=""/><br/>
-      <input name="WMI_FAIL_URL"       value=""/><br/>
-      <input name="WMI_PAYMENT_NO"     value=""/><br/>
-      <input name="WMI_SIGNATURE"      value=""/><br/>
+      <input name="WMI_CURRENCY_ID" value=""/><br/>
+      <input name="WMI_DESCRIPTION" value=""/><br/>
+      <input name="WMI_SUCCESS_URL" value=""/><br/>
+      <input name="WMI_FAIL_URL" value=""/><br/>
+      <input name="WMI_PAYMENT_NO" value=""/><br/>
+      <input name="WMI_SIGNATURE" value=""/><br/>
     </form>
   </div>
 
@@ -33,10 +33,10 @@
       <div class="col-lg-8">
         <div class="tariff-btns btn-group" data-toggle="buttons">
           <label
-            *ngFor="let price of plan.prices"
-            class="btn btn-default"
             (click)="changePrice(price)"
+            *ngFor="let price of plan.prices"
             [ngClass]="{'active': (activePriceId === price.id)}"
+            class="btn btn-default"
           >
             {{ price.name }}<span class="btn-comment">{{ price.desc }}</span>
           </label>
@@ -61,5 +61,5 @@
 </div>
 
 <div class="modal-footer justify-content-center">
-  <div class="payment-form-footer-text" [innerHTML]="'billing.modal.footer' | translate"></div>
+  <div [innerHTML]="'billing.modal.footer' | translate" class="payment-form-footer-text"></div>
 </div>

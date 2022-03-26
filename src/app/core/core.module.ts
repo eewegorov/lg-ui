@@ -9,7 +9,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
-  declarations: [ ChatComponent, PreloaderComponent, LogoutComponent ],
+  declarations: [ChatComponent, PreloaderComponent, LogoutComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,
@@ -21,4 +21,5 @@ import { LogoutComponent } from './components/logout/logout.component';
     ChatComponent
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+}

@@ -1,20 +1,20 @@
 <div class="row-panel-fl">
   <div class="row-panel-item small-pdn">
     <div
-      class="newElementItem"
       (click)="addFormExtButtonElement(disElementOrNotBtn())"
       [ngClass]="(disElementOrNotBtn()) ? 'disable-new-element-btn' : ''"
+      class="newElementItem"
     >
       <div class="element-form-new-icon"></div>
       <span>Форма+кнопки (новый)</span>
     </div>
   </div>
 
-  <div class="row-panel-item small-pdn" *ngIf="!isContainerized">
+  <div *ngIf="!isContainerized" class="row-panel-item small-pdn">
     <div
-      class="newElementItem"
       (click)="addCloseLinkElement(disElementOrNotBtnCloseLink())"
       [ngClass]="(disElementOrNotBtnCloseLink()) ? 'disable-new-element-btn' : ''"
+      class="newElementItem"
     >
       <div class="element-dismiss-icon"></div>
       <span>Ссылка/Кнопка закрытия</span>
@@ -23,9 +23,9 @@
 
   <div class="row-panel-item small-pdn">
     <div
-      class="newElementItem"
       (click)="addButtonElement(disElementOrNotBtn())"
       [ngClass]="(disElementOrNotBtn()) ? 'disable-new-element-btn' : ''"
+      class="newElementItem"
     >
       <div class="element-button-icon"></div>
       <span>Кнопка</span>
@@ -33,7 +33,7 @@
   </div>
 
   <div class="row-panel-item small-pdn">
-    <div class="newElementItem" (click)="addTextElement()">
+    <div (click)="addTextElement()" class="newElementItem">
       <div class="element-text-icon"></div>
       <span>Текст</span>
     </div>
@@ -41,9 +41,9 @@
 
   <div class="row-panel-item small-pdn">
     <div
-      class="newElementItem"
       (click)="addSocialElement(disElementOrNotBtnSocial())"
       [ngClass]="(disElementOrNotBtnSocial()) ? 'disable-new-element-btn' : ''"
+      class="newElementItem"
     >
       <div class="element-social-icon"></div>
       <span>Социальные кнопки</span>
@@ -51,42 +51,42 @@
   </div>
 
   <div class="row-panel-item small-pdn">
-    <div class="newElementItem" (click)="addSplitElement()">
+    <div (click)="addSplitElement()" class="newElementItem">
       <div class="element-divider-icon"></div>
       <span>Разделитель</span>
     </div>
   </div>
 
   <div class="row-panel-item small-pdn">
-    <div class="newElementItem" (click)="addVideoElement()">
+    <div (click)="addVideoElement()" class="newElementItem">
       <div class="element-video-icon"></div>
       <span>Видео</span>
     </div>
   </div>
 
   <div class="row-panel-item small-pdn">
-    <div class="newElementItem" (click)="addImageElement()">
+    <div (click)="addImageElement()" class="newElementItem">
       <div class="element-image-icon"></div>
       <span>Изображение</span>
     </div>
   </div>
 
   <div class="row-panel-item small-pdn">
-    <div class="newElementItem" (click)="addPaddingElement()">
+    <div (click)="addPaddingElement()" class="newElementItem">
       <div class="element-padding-icon"></div>
       <span>Отступ</span>
     </div>
   </div>
 
   <div class="row-panel-item small-pdn">
-    <div class="newElementItem" (click)="addIframeElement()">
+    <div (click)="addIframeElement()" class="newElementItem">
       <div class="element-iframe-icon"></div>
       <span>HTML / JS / Iframe</span>
     </div>
   </div>
 
   <div class="row-panel-item small-pdn">
-    <div class="newElementItem" (click)="addCouponElement()">
+    <div (click)="addCouponElement()" class="newElementItem">
       <span class="payment-modal-icon label label-warning tariff-info">окупаемый</span>
       <div class="element-coupon-icon"></div>
       <span>Купон</span>
@@ -94,7 +94,7 @@
   </div>
 
   <div class="row-panel-item small-pdn">
-    <div class="newElementItem" (click)="addTimerElement()">
+    <div (click)="addTimerElement()" class="newElementItem">
       <div class="element-countdown-icon"></div>
       <span>Таймер</span>
     </div>

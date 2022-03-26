@@ -23,7 +23,8 @@ export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
     private toastr: ToastrService,
     private couponModalService: CouponModalService,
     private couponService: CouponService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }

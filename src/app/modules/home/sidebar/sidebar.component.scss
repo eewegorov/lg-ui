@@ -101,6 +101,7 @@ a {
   font-weight: normal;
   font-style: normal;
 }
+
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 /*
@@ -111,8 +112,7 @@ a {
   }
 }
 */
-.fontello-demo1-icon
-{
+.fontello-demo1-icon {
   font-family: "fontello-demo1";
   font-style: normal;
   font-weight: normal;
@@ -146,12 +146,40 @@ a {
   margin-right: 7px;
 }
 
-.icon-ic_menu_support:before { content: '\e800'; } /* '' */
-.icon-ic_menu_sites:before { content: '\e801'; } /* '' */
-.icon-ic_menu_widgets:before { content: '\e802'; } /* '' */
-.icon-ic_menu_ab_tests:before { content: '\e803'; } /* '' */
-.icon-ic_menu_coupons:before { content: '\e804'; } /* '' */
-.icon-ic_menu_leads:before { content: '\e805'; } /* '' */
-.icon-ic_menu_mail:before { content: '\e806'; } /* '' */
+.icon-ic_menu_support:before {
+  content: '\e800';
+}
+
+/* '' */
+.icon-ic_menu_sites:before {
+  content: '\e801';
+}
+
+/* '' */
+.icon-ic_menu_widgets:before {
+  content: '\e802';
+}
+
+/* '' */
+.icon-ic_menu_ab_tests:before {
+  content: '\e803';
+}
+
+/* '' */
+.icon-ic_menu_coupons:before {
+  content: '\e804';
+}
+
+/* '' */
+.icon-ic_menu_leads:before {
+  content: '\e805';
+}
+
+/* '' */
+.icon-ic_menu_mail:before {
+  content: '\e806';
+}
+
+/* '' */
 
 

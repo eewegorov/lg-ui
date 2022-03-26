@@ -8,9 +8,9 @@ describe('PartnerBannerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PartnerBannerComponent ]
+      declarations: [PartnerBannerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

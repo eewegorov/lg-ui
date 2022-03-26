@@ -30,42 +30,14 @@ export class ConstructorIntegrationsComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private modalService: NgbModal,
     private sitesService: SitesService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.getIntegrations();
 
     this.translate.get('widgetsList.editor.integrations.defSelectTitle').subscribe((translatedValue: string) => {
       this.defIntegrationToAddTitle = translatedValue;
-    });
-  }
-
-  private getIntegrations(responseIntegration?) {
-    this.getIntegrationSub = this.sitesService.getSiteIntegrations(this.sid).subscribe((response: Integration[]) => {
-      this.wIntegrations = response.filter((item: Integration) => {
-        return this.widget.integrations.some((wItemId: string) => item.id === wItemId);
-      });
-
-      const integrationsAvailable = response.filter((item: Integration) => {
-        return !this.wIntegrations.some((wItem: Integration) => item.id === wItem.id);
-      });
-
-      this.integrationsAvailableCRM = integrationsAvailable.filter((item: Integration) => {
-        return this.sitesService.isIntegrationCRM(item.type);
-      });
-      this.integrationsAvailableMailing = integrationsAvailable.filter((item: Integration) => {
-        return this.sitesService.isIntegrationMailing(item.type);
-      });
-      this.integrationsAvailableNotifications = integrationsAvailable.filter((item: Integration) => {
-        return this.sitesService.isIntegrationNotification(item.type);
-      });
-      this.integrationsAvailableOthers = integrationsAvailable.filter((item: Integration) => {
-        return this.sitesService.isIntegrationOthers(item.type);
-      });
-
-      if (responseIntegration) {
-        this.changeIntegrationToAdd(responseIntegration);
-      }
     });
   }
 
@@ -97,13 +69,43 @@ export class ConstructorIntegrationsComponent implements OnInit, OnDestroy {
         this.getIntegrations(result);
       }
     })
-      .catch(() => {});
+      .catch(() => {
+      });
   }
 
   ngOnDestroy(): void {
     if (this.getIntegrationSub) {
       this.getIntegrationSub.unsubscribe();
     }
+  }
+
+  private getIntegrations(responseIntegration?) {
+    this.getIntegrationSub = this.sitesService.getSiteIntegrations(this.sid).subscribe((response: Integration[]) => {
+      this.wIntegrations = response.filter((item: Integration) => {
+        return this.widget.integrations.some((wItemId: string) => item.id === wItemId);
+      });
+
+      const integrationsAvailable = response.filter((item: Integration) => {
+        return !this.wIntegrations.some((wItem: Integration) => item.id === wItem.id);
+      });
+
+      this.integrationsAvailableCRM = integrationsAvailable.filter((item: Integration) => {
+        return this.sitesService.isIntegrationCRM(item.type);
+      });
+      this.integrationsAvailableMailing = integrationsAvailable.filter((item: Integration) => {
+        return this.sitesService.isIntegrationMailing(item.type);
+      });
+      this.integrationsAvailableNotifications = integrationsAvailable.filter((item: Integration) => {
+        return this.sitesService.isIntegrationNotification(item.type);
+      });
+      this.integrationsAvailableOthers = integrationsAvailable.filter((item: Integration) => {
+        return this.sitesService.isIntegrationOthers(item.type);
+      });
+
+      if (responseIntegration) {
+        this.changeIntegrationToAdd(responseIntegration);
+      }
+    });
   }
 
 }

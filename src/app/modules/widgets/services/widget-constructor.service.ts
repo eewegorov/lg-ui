@@ -16,7 +16,7 @@ export class WidgetConstructorService {
   public arrayOfUsedItems = [];
   public formExtIdFieldFocusOut = new Subject();
   public changeArrayOfFormExtTypes = new Subject();
-  public changeItemFormType = new Subject<{type: string; index: number}>();
+  public changeItemFormType = new Subject<{ type: string; index: number }>();
   public updateWidget = new Subject();
 
   constructor(
@@ -68,10 +68,10 @@ export class WidgetConstructorService {
   public getAvailableTypes() {
     return this.getItemFormTypes().filter((_) => {
       return ((_.type !== 'email') &&
-        (_.type !== 'name') &&
-        (_.type !== 'phone') &&
-        (_.type !== 'message') &&
-        (_.type !== 'term')) ||
+          (_.type !== 'name') &&
+          (_.type !== 'phone') &&
+          (_.type !== 'message') &&
+          (_.type !== 'term')) ||
         (_.type === 'email' && !this.isFormExtListAlreadyHas(_.type)) ||
         (_.type === 'name' && !this.isFormExtListAlreadyHas(_.type)) ||
         (_.type === 'phone' && !this.isFormExtListAlreadyHas(_.type)) ||
@@ -281,10 +281,6 @@ export class WidgetConstructorService {
     return list.some((_) => {
       return (_.type === 'button' && _.redirect.type.type === currentType) || this.isItemSendFormIfAction(_);
     });
-  }
-
-  private isItemSendFormIfAction(item) {
-    return (item.type === 'dd' || item.type === 'variants' || item.type === 'rating') && item.sendFormIfAction;
   }
 
   public getExtFormBtnRedirectTypesForContainerized() {
@@ -657,10 +653,6 @@ export class WidgetConstructorService {
     } : null);
   }
 
-  private ruleImageLeftOrRight(imagePlace) {
-    return imagePlace === 'Слева' || imagePlace === 'Справа';
-  }
-
   public getExtFormMainFieldsOrientationType() {
     return [
       {
@@ -766,6 +758,14 @@ export class WidgetConstructorService {
         label: this.translate.instant('widgets.timerDirective.design.align.type2')
       }
     ];
+  }
+
+  private isItemSendFormIfAction(item) {
+    return (item.type === 'dd' || item.type === 'variants' || item.type === 'rating') && item.sendFormIfAction;
+  }
+
+  private ruleImageLeftOrRight(imagePlace) {
+    return imagePlace === 'Слева' || imagePlace === 'Справа';
   }
 
   private getItemFormTypes() {

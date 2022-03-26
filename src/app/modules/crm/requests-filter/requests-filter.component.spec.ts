@@ -8,9 +8,9 @@ describe('RequestsFilterComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ RequestsFilterComponent ]
+      declarations: [RequestsFilterComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

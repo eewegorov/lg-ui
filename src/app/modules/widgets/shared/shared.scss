@@ -71,7 +71,7 @@ label.big-label {
 }
 
 .is-invalid label.big-label, .is-invalid label.control-label, .is-invalid .underline-comment {
-  color: #a94442 ;
+  color: #a94442;
 }
 
 .is-invalid .form-control, .is-invalid .ng-select-container {
@@ -110,7 +110,7 @@ label.big-label {
 }
 
 .widget-normal__body form.editable-wrap .editable-input.editable-has-buttons {
-  width: calc(100% - 95px)!important;
+  width: calc(100% - 95px) !important;
 }
 
 .card-footer .reports-emails-preloader {
@@ -184,7 +184,7 @@ label.big-label {
 }
 
 .priority-btns i {
-  font-size:    18px;
+  font-size: 18px;
   margin-right: 10px;
 }
 
@@ -440,14 +440,14 @@ input.form-cntrl-55w {
 
 .dropdown-with-btn-styles li a.btn-var-styles__material {
   color: #fff;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
   border-radius: 2px;
 }
 
 .dropdown-with-btn-styles li a.btn-var-styles__flat {
   color: #fff;
-  box-shadow: inset 0px -2px 0px 0px rgba(0,0,0,0.25);
-  border-bottom: none!important;
+  box-shadow: inset 0px -2px 0px 0px rgba(0, 0, 0, 0.25);
+  border-bottom: none !important;
   border-radius: 3px;
 }
 
@@ -531,7 +531,7 @@ h4.widgets-settings-subtitle {
 
 i.fa-plus {
   float: left;
-  font-size: 18px!important;
+  font-size: 18px !important;
   color: #4898A8;
   margin-right: 1px;
   margin-top: 3px;
@@ -1005,8 +1005,6 @@ input.icp {
 }
 
 
-
-
 @font-face {
   font-family: 'fontello';
   src: url('~src/assets/fonts/fontello/fontello.eot?68335443');
@@ -1017,6 +1015,7 @@ input.icp {
   font-weight: normal;
   font-style: normal;
 }
+
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 /*
@@ -1063,59 +1062,266 @@ input.icp {
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.lgiconfont-gift:before { content: '\e800'; } /* '' */
-.lgiconfont-user-plus:before { content: '\e801'; } /* '' */
-.lgiconfont-ok:before { content: '\e802'; } /* '' */
-.lgiconfont-gamepad:before { content: '\e803'; } /* '' */
-.lgiconfont-heart:before { content: '\e804'; } /* '' */
-.lgiconfont-flag:before { content: '\e805'; } /* '' */
-.lgiconfont-star:before { content: '\e806'; } /* '' */
-.lgiconfont-info:before { content: '\e807'; } /* '' */
-.lgiconfont-flag-checkered:before { content: '\e808'; } /* '' */
-.lgiconfont-thumbs-up:before { content: '\e809'; } /* '' */
-.lgiconfont-tags:before { content: '\e80a'; } /* '' */
-.lgiconfont-book:before { content: '\e80b'; } /* '' */
-.lgiconfont-phone:before { content: '\e80c'; } /* '' */
-.lgiconfont-cart-plus:before { content: '\e80d'; } /* '' */
-.lgiconfont-award:before { content: '\e80e'; } /* '' */
-.lgiconfont-paper-plane-empty:before { content: '\e80f'; } /* '' */
-.lgiconfont-briefcase:before { content: '\e810'; } /* '' */
-.lgiconfont-off:before { content: '\e811'; } /* '' */
-.lgiconfont-mail-1:before { content: '\e812'; } /* '' */
-.lgiconfont-rocket:before { content: '\e813'; } /* '' */
-.lgiconfont-bug:before { content: '\e814'; } /* '' */
-.lgiconfont-users:before { content: '\e815'; } /* '' */
-.lgiconfont-comment-1:before { content: '\e816'; } /* '' */
-.lgiconfont-bullseye:before { content: '\e817'; } /* '' */
-.lgiconfont-paw:before { content: '\e818'; } /* '' */
-.lgiconfont-lifebuoy:before { content: '\e819'; } /* '' */
-.lgiconfont-angellist:before { content: '\e81a'; } /* '' */
-.lgiconfont-user-add:before { content: '\e81b'; } /* '' */
-.lgiconfont-target:before { content: '\e81d'; } /* '' */
-.lgiconfont-plus-1:before { content: '\e81e'; } /* '' */
-.lgiconfont-tag:before { content: '\e81f'; } /* '' */
-.lgiconfont-award-1:before { content: '\e820'; } /* '' */
-.lgiconfont-fire:before { content: '\e821'; } /* '' */
-.lgiconfont-emo-happy:before { content: '\e822'; } /* '' */
-.lgiconfont-bell:before { content: '\e824'; } /* '' */
-.lgiconfont-attention-alt:before { content: '\e825'; } /* '' */
-.lgiconfont-alert:before { content: '\e826'; } /* '' */
-.lgiconfont-cloud:before { content: '\e828'; } /* '' */
-.lgiconfont-bullhorn:before { content: '\e829'; } /* '' */
-.lgiconfont-download:before { content: '\e82a'; } /* '' */
-.lgiconfont-basket:before { content: '\e82b'; } /* '' */
-.lgiconfont-stop:before { content: '\e82c'; } /* '' */
-.lgiconfont-hash:before { content: '\e82d'; } /* '' */
-.lgiconfont-at:before { content: '\e82e'; } /* '' */
-.lgiconfont-help-1:before { content: '\e82f'; } /* '' */
-.lgiconfont-barcode:before { content: '\e830'; } /* '' */
-.lgiconfont-coffee:before { content: '\e831'; } /* '' */
-.lgiconfont-diamond:before { content: '\e832'; } /* '' */
-.lgiconfont-quote:before { content: '\e833'; } /* '' */
-.lgiconfont-attention-1:before { content: '\e834'; } /* '' */
-.lgiconfont-comment-alt:before { content: '\e835'; } /* '' */
-.lgiconfont-tags-1:before { content: '\e836'; } /* '' */
+.lgiconfont-gift:before {
+  content: '\e800';
+}
 
+/* '' */
+.lgiconfont-user-plus:before {
+  content: '\e801';
+}
+
+/* '' */
+.lgiconfont-ok:before {
+  content: '\e802';
+}
+
+/* '' */
+.lgiconfont-gamepad:before {
+  content: '\e803';
+}
+
+/* '' */
+.lgiconfont-heart:before {
+  content: '\e804';
+}
+
+/* '' */
+.lgiconfont-flag:before {
+  content: '\e805';
+}
+
+/* '' */
+.lgiconfont-star:before {
+  content: '\e806';
+}
+
+/* '' */
+.lgiconfont-info:before {
+  content: '\e807';
+}
+
+/* '' */
+.lgiconfont-flag-checkered:before {
+  content: '\e808';
+}
+
+/* '' */
+.lgiconfont-thumbs-up:before {
+  content: '\e809';
+}
+
+/* '' */
+.lgiconfont-tags:before {
+  content: '\e80a';
+}
+
+/* '' */
+.lgiconfont-book:before {
+  content: '\e80b';
+}
+
+/* '' */
+.lgiconfont-phone:before {
+  content: '\e80c';
+}
+
+/* '' */
+.lgiconfont-cart-plus:before {
+  content: '\e80d';
+}
+
+/* '' */
+.lgiconfont-award:before {
+  content: '\e80e';
+}
+
+/* '' */
+.lgiconfont-paper-plane-empty:before {
+  content: '\e80f';
+}
+
+/* '' */
+.lgiconfont-briefcase:before {
+  content: '\e810';
+}
+
+/* '' */
+.lgiconfont-off:before {
+  content: '\e811';
+}
+
+/* '' */
+.lgiconfont-mail-1:before {
+  content: '\e812';
+}
+
+/* '' */
+.lgiconfont-rocket:before {
+  content: '\e813';
+}
+
+/* '' */
+.lgiconfont-bug:before {
+  content: '\e814';
+}
+
+/* '' */
+.lgiconfont-users:before {
+  content: '\e815';
+}
+
+/* '' */
+.lgiconfont-comment-1:before {
+  content: '\e816';
+}
+
+/* '' */
+.lgiconfont-bullseye:before {
+  content: '\e817';
+}
+
+/* '' */
+.lgiconfont-paw:before {
+  content: '\e818';
+}
+
+/* '' */
+.lgiconfont-lifebuoy:before {
+  content: '\e819';
+}
+
+/* '' */
+.lgiconfont-angellist:before {
+  content: '\e81a';
+}
+
+/* '' */
+.lgiconfont-user-add:before {
+  content: '\e81b';
+}
+
+/* '' */
+.lgiconfont-target:before {
+  content: '\e81d';
+}
+
+/* '' */
+.lgiconfont-plus-1:before {
+  content: '\e81e';
+}
+
+/* '' */
+.lgiconfont-tag:before {
+  content: '\e81f';
+}
+
+/* '' */
+.lgiconfont-award-1:before {
+  content: '\e820';
+}
+
+/* '' */
+.lgiconfont-fire:before {
+  content: '\e821';
+}
+
+/* '' */
+.lgiconfont-emo-happy:before {
+  content: '\e822';
+}
+
+/* '' */
+.lgiconfont-bell:before {
+  content: '\e824';
+}
+
+/* '' */
+.lgiconfont-attention-alt:before {
+  content: '\e825';
+}
+
+/* '' */
+.lgiconfont-alert:before {
+  content: '\e826';
+}
+
+/* '' */
+.lgiconfont-cloud:before {
+  content: '\e828';
+}
+
+/* '' */
+.lgiconfont-bullhorn:before {
+  content: '\e829';
+}
+
+/* '' */
+.lgiconfont-download:before {
+  content: '\e82a';
+}
+
+/* '' */
+.lgiconfont-basket:before {
+  content: '\e82b';
+}
+
+/* '' */
+.lgiconfont-stop:before {
+  content: '\e82c';
+}
+
+/* '' */
+.lgiconfont-hash:before {
+  content: '\e82d';
+}
+
+/* '' */
+.lgiconfont-at:before {
+  content: '\e82e';
+}
+
+/* '' */
+.lgiconfont-help-1:before {
+  content: '\e82f';
+}
+
+/* '' */
+.lgiconfont-barcode:before {
+  content: '\e830';
+}
+
+/* '' */
+.lgiconfont-coffee:before {
+  content: '\e831';
+}
+
+/* '' */
+.lgiconfont-diamond:before {
+  content: '\e832';
+}
+
+/* '' */
+.lgiconfont-quote:before {
+  content: '\e833';
+}
+
+/* '' */
+.lgiconfont-attention-1:before {
+  content: '\e834';
+}
+
+/* '' */
+.lgiconfont-comment-alt:before {
+  content: '\e835';
+}
+
+/* '' */
+.lgiconfont-tags-1:before {
+  content: '\e836';
+}
+
+/* '' */
 
 
 @font-face {
@@ -1129,6 +1335,7 @@ input.icp {
   font-weight: normal;
   font-style: normal;
 }
+
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 /*
@@ -1175,95 +1382,463 @@ input.icp {
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.lgiconfont-share:before { content: '\e800'; } /* '' */
-.lgiconfont-camera:before { content: '\e801'; } /* '' */
-.lgiconfont-download-alt:before { content: '\e802'; } /* '' */
-.lgiconfont-cogs:before { content: '\e803'; } /* '' */
-.lgiconfont-wrench:before { content: '\e804'; } /* '' */
-.lgiconfont-volume-up:before { content: '\e805'; } /* '' */
-.lgiconfont-lightbulb:before { content: '\e806'; } /* '' */
-.lgiconfont-play:before { content: '\e807'; } /* '' */
-.lgiconfont-gauge:before { content: '\e808'; } /* '' */
-.lgiconfont-asl:before { content: '\e809'; } /* '' */
-.lgiconfont-video:before { content: '\e80a'; } /* '' */
-.lgiconfont-signal:before { content: '\e80b'; } /* '' */
-.lgiconfont-flash:before { content: '\e80c'; } /* '' */
-.lgiconfont-chart-bar:before { content: '\e80d'; } /* '' */
-.lgiconfont-vkontakte:before { content: '\e80e'; } /* '' */
-.lgiconfont-youtube-play:before { content: '\e80f'; } /* '' */
-.lgiconfont-note-beamed:before { content: '\e810'; } /* '' */
-.lgiconfont-gplus-1:before { content: '\e811'; } /* '' */
-.lgiconfont-quote-right:before { content: '\e812'; } /* '' */
-.lgiconfont-phone:before { content: '\e813'; } /* '' */
-.lgiconfont-gift:before { content: '\e814'; } /* '' */
-.lgiconfont-chart-line:before { content: '\e815'; } /* '' */
-.lgiconfont-ok:before { content: '\e816'; } /* '' */
-.lgiconfont-heart:before { content: '\e817'; } /* '' */
-.lgiconfont-flag:before { content: '\e818'; } /* '' */
-.lgiconfont-star:before { content: '\e819'; } /* '' */
-.lgiconfont-info:before { content: '\e81a'; } /* '' */
-.lgiconfont-thumbs-up:before { content: '\e81b'; } /* '' */
-.lgiconfont-dollar-1:before { content: '\e81c'; } /* '' */
-.lgiconfont-videocam:before { content: '\e81d'; } /* '' */
-.lgiconfont-emo-wink:before { content: '\e81e'; } /* '' */
-.lgiconfont-tags:before { content: '\e81f'; } /* '' */
-.lgiconfont-book:before { content: '\e820'; } /* '' */
-.lgiconfont-award:before { content: '\e821'; } /* '' */
-.lgiconfont-briefcase:before { content: '\e822'; } /* '' */
-.lgiconfont-off:before { content: '\e823'; } /* '' */
-.lgiconfont-email:before { content: '\e824'; } /* '' */
-.lgiconfont-users:before { content: '\e825'; } /* '' */
-.lgiconfont-comment:before { content: '\e826'; } /* '' */
-.lgiconfont-user-add:before { content: '\e827'; } /* '' */
-.lgiconfont-target:before { content: '\e828'; } /* '' */
-.lgiconfont-plus:before { content: '\e829'; } /* '' */
-.lgiconfont-tag:before { content: '\e82a'; } /* '' */
-.lgiconfont-reddit:before { content: '\e82b'; } /* '' */
-.lgiconfont-award-1:before { content: '\e82c'; } /* '' */
-.lgiconfont-fire:before { content: '\e82d'; } /* '' */
-.lgiconfont-emo-happy:before { content: '\e82e'; } /* '' */
-.lgiconfont-bell:before { content: '\e82f'; } /* '' */
-.lgiconfont-alert:before { content: '\e830'; } /* '' */
-.lgiconfont-cloud:before { content: '\e831'; } /* '' */
-.lgiconfont-bullhorn:before { content: '\e832'; } /* '' */
-.lgiconfont-download:before { content: '\e833'; } /* '' */
-.lgiconfont-basket:before { content: '\e834'; } /* '' */
-.lgiconfont-stop:before { content: '\e835'; } /* '' */
-.lgiconfont-at:before { content: '\e836'; } /* '' */
-.lgiconfont-help:before { content: '\e837'; } /* '' */
-.lgiconfont-barcode:before { content: '\e838'; } /* '' */
-.lgiconfont-attention:before { content: '\e839'; } /* '' */
-.lgiconfont-comment-alt:before { content: '\e83a'; } /* '' */
-.lgiconfont-hash:before { content: '\f029'; } /* '' */
-.lgiconfont-twitter:before { content: '\f099'; } /* '' */
-.lgiconfont-facebook:before { content: '\f09a'; } /* '' */
-.lgiconfont-linkedin:before { content: '\f0e1'; } /* '' */
-.lgiconfont-coffee:before { content: '\f0f4'; } /* '' */
-.lgiconfont-food:before { content: '\f0f5'; } /* '' */
-.lgiconfont-gamepad:before { content: '\f11b'; } /* '' */
-.lgiconfont-flag-checkered:before { content: '\f11e'; } /* '' */
-.lgiconfont-attention-alt:before { content: '\f12a'; } /* '' */
-.lgiconfont-rocket:before { content: '\f135'; } /* '' */
-.lgiconfont-bullseye:before { content: '\f140'; } /* '' */
-.lgiconfont-ticket:before { content: '\f145'; } /* '' */
-.lgiconfont-euro:before { content: '\f153'; } /* '' */
-.lgiconfont-dollar:before { content: '\f155'; } /* '' */
-.lgiconfont-rouble:before { content: '\f158'; } /* '' */
-.lgiconfont-instagram:before { content: '\f16d'; } /* '' */
-.lgiconfont-bug:before { content: '\f188'; } /* '' */
-.lgiconfont-stumbleupon:before { content: '\f1a4'; } /* '' */
-.lgiconfont-digg:before { content: '\f1a6'; } /* '' */
-.lgiconfont-paw:before { content: '\f1b0'; } /* '' */
-.lgiconfont-lifebuoy:before { content: '\f1cd'; } /* '' */
-.lgiconfont-paper-plane-empty:before { content: '\f1d9'; } /* '' */
-.lgiconfont-bomb:before { content: '\f1e2'; } /* '' */
-.lgiconfont-angellist:before { content: '\f209'; } /* '' */
-.lgiconfont-sellsy:before { content: '\f213'; } /* '' */
-.lgiconfont-cart-plus:before { content: '\f217'; } /* '' */
-.lgiconfont-diamond:before { content: '\f219'; } /* '' */
-.lgiconfont-pinterest:before { content: '\f231'; } /* '' */
-.lgiconfont-user-plus:before { content: '\f234'; } /* '' */
-.lgiconfont-odnoklassniki:before { content: '\f263'; } /* '' */
-.lgiconfont-get-pocket:before { content: '\f265'; } /* '' */
-.lgiconfont-shopping-bag:before { content: '\f290'; } /* '' */
-.lgiconfont-shopping-basket:before { content: '\f291'; } /* '' */
+.lgiconfont-share:before {
+  content: '\e800';
+}
+
+/* '' */
+.lgiconfont-camera:before {
+  content: '\e801';
+}
+
+/* '' */
+.lgiconfont-download-alt:before {
+  content: '\e802';
+}
+
+/* '' */
+.lgiconfont-cogs:before {
+  content: '\e803';
+}
+
+/* '' */
+.lgiconfont-wrench:before {
+  content: '\e804';
+}
+
+/* '' */
+.lgiconfont-volume-up:before {
+  content: '\e805';
+}
+
+/* '' */
+.lgiconfont-lightbulb:before {
+  content: '\e806';
+}
+
+/* '' */
+.lgiconfont-play:before {
+  content: '\e807';
+}
+
+/* '' */
+.lgiconfont-gauge:before {
+  content: '\e808';
+}
+
+/* '' */
+.lgiconfont-asl:before {
+  content: '\e809';
+}
+
+/* '' */
+.lgiconfont-video:before {
+  content: '\e80a';
+}
+
+/* '' */
+.lgiconfont-signal:before {
+  content: '\e80b';
+}
+
+/* '' */
+.lgiconfont-flash:before {
+  content: '\e80c';
+}
+
+/* '' */
+.lgiconfont-chart-bar:before {
+  content: '\e80d';
+}
+
+/* '' */
+.lgiconfont-vkontakte:before {
+  content: '\e80e';
+}
+
+/* '' */
+.lgiconfont-youtube-play:before {
+  content: '\e80f';
+}
+
+/* '' */
+.lgiconfont-note-beamed:before {
+  content: '\e810';
+}
+
+/* '' */
+.lgiconfont-gplus-1:before {
+  content: '\e811';
+}
+
+/* '' */
+.lgiconfont-quote-right:before {
+  content: '\e812';
+}
+
+/* '' */
+.lgiconfont-phone:before {
+  content: '\e813';
+}
+
+/* '' */
+.lgiconfont-gift:before {
+  content: '\e814';
+}
+
+/* '' */
+.lgiconfont-chart-line:before {
+  content: '\e815';
+}
+
+/* '' */
+.lgiconfont-ok:before {
+  content: '\e816';
+}
+
+/* '' */
+.lgiconfont-heart:before {
+  content: '\e817';
+}
+
+/* '' */
+.lgiconfont-flag:before {
+  content: '\e818';
+}
+
+/* '' */
+.lgiconfont-star:before {
+  content: '\e819';
+}
+
+/* '' */
+.lgiconfont-info:before {
+  content: '\e81a';
+}
+
+/* '' */
+.lgiconfont-thumbs-up:before {
+  content: '\e81b';
+}
+
+/* '' */
+.lgiconfont-dollar-1:before {
+  content: '\e81c';
+}
+
+/* '' */
+.lgiconfont-videocam:before {
+  content: '\e81d';
+}
+
+/* '' */
+.lgiconfont-emo-wink:before {
+  content: '\e81e';
+}
+
+/* '' */
+.lgiconfont-tags:before {
+  content: '\e81f';
+}
+
+/* '' */
+.lgiconfont-book:before {
+  content: '\e820';
+}
+
+/* '' */
+.lgiconfont-award:before {
+  content: '\e821';
+}
+
+/* '' */
+.lgiconfont-briefcase:before {
+  content: '\e822';
+}
+
+/* '' */
+.lgiconfont-off:before {
+  content: '\e823';
+}
+
+/* '' */
+.lgiconfont-email:before {
+  content: '\e824';
+}
+
+/* '' */
+.lgiconfont-users:before {
+  content: '\e825';
+}
+
+/* '' */
+.lgiconfont-comment:before {
+  content: '\e826';
+}
+
+/* '' */
+.lgiconfont-user-add:before {
+  content: '\e827';
+}
+
+/* '' */
+.lgiconfont-target:before {
+  content: '\e828';
+}
+
+/* '' */
+.lgiconfont-plus:before {
+  content: '\e829';
+}
+
+/* '' */
+.lgiconfont-tag:before {
+  content: '\e82a';
+}
+
+/* '' */
+.lgiconfont-reddit:before {
+  content: '\e82b';
+}
+
+/* '' */
+.lgiconfont-award-1:before {
+  content: '\e82c';
+}
+
+/* '' */
+.lgiconfont-fire:before {
+  content: '\e82d';
+}
+
+/* '' */
+.lgiconfont-emo-happy:before {
+  content: '\e82e';
+}
+
+/* '' */
+.lgiconfont-bell:before {
+  content: '\e82f';
+}
+
+/* '' */
+.lgiconfont-alert:before {
+  content: '\e830';
+}
+
+/* '' */
+.lgiconfont-cloud:before {
+  content: '\e831';
+}
+
+/* '' */
+.lgiconfont-bullhorn:before {
+  content: '\e832';
+}
+
+/* '' */
+.lgiconfont-download:before {
+  content: '\e833';
+}
+
+/* '' */
+.lgiconfont-basket:before {
+  content: '\e834';
+}
+
+/* '' */
+.lgiconfont-stop:before {
+  content: '\e835';
+}
+
+/* '' */
+.lgiconfont-at:before {
+  content: '\e836';
+}
+
+/* '' */
+.lgiconfont-help:before {
+  content: '\e837';
+}
+
+/* '' */
+.lgiconfont-barcode:before {
+  content: '\e838';
+}
+
+/* '' */
+.lgiconfont-attention:before {
+  content: '\e839';
+}
+
+/* '' */
+.lgiconfont-comment-alt:before {
+  content: '\e83a';
+}
+
+/* '' */
+.lgiconfont-hash:before {
+  content: '\f029';
+}
+
+/* '' */
+.lgiconfont-twitter:before {
+  content: '\f099';
+}
+
+/* '' */
+.lgiconfont-facebook:before {
+  content: '\f09a';
+}
+
+/* '' */
+.lgiconfont-linkedin:before {
+  content: '\f0e1';
+}
+
+/* '' */
+.lgiconfont-coffee:before {
+  content: '\f0f4';
+}
+
+/* '' */
+.lgiconfont-food:before {
+  content: '\f0f5';
+}
+
+/* '' */
+.lgiconfont-gamepad:before {
+  content: '\f11b';
+}
+
+/* '' */
+.lgiconfont-flag-checkered:before {
+  content: '\f11e';
+}
+
+/* '' */
+.lgiconfont-attention-alt:before {
+  content: '\f12a';
+}
+
+/* '' */
+.lgiconfont-rocket:before {
+  content: '\f135';
+}
+
+/* '' */
+.lgiconfont-bullseye:before {
+  content: '\f140';
+}
+
+/* '' */
+.lgiconfont-ticket:before {
+  content: '\f145';
+}
+
+/* '' */
+.lgiconfont-euro:before {
+  content: '\f153';
+}
+
+/* '' */
+.lgiconfont-dollar:before {
+  content: '\f155';
+}
+
+/* '' */
+.lgiconfont-rouble:before {
+  content: '\f158';
+}
+
+/* '' */
+.lgiconfont-instagram:before {
+  content: '\f16d';
+}
+
+/* '' */
+.lgiconfont-bug:before {
+  content: '\f188';
+}
+
+/* '' */
+.lgiconfont-stumbleupon:before {
+  content: '\f1a4';
+}
+
+/* '' */
+.lgiconfont-digg:before {
+  content: '\f1a6';
+}
+
+/* '' */
+.lgiconfont-paw:before {
+  content: '\f1b0';
+}
+
+/* '' */
+.lgiconfont-lifebuoy:before {
+  content: '\f1cd';
+}
+
+/* '' */
+.lgiconfont-paper-plane-empty:before {
+  content: '\f1d9';
+}
+
+/* '' */
+.lgiconfont-bomb:before {
+  content: '\f1e2';
+}
+
+/* '' */
+.lgiconfont-angellist:before {
+  content: '\f209';
+}
+
+/* '' */
+.lgiconfont-sellsy:before {
+  content: '\f213';
+}
+
+/* '' */
+.lgiconfont-cart-plus:before {
+  content: '\f217';
+}
+
+/* '' */
+.lgiconfont-diamond:before {
+  content: '\f219';
+}
+
+/* '' */
+.lgiconfont-pinterest:before {
+  content: '\f231';
+}
+
+/* '' */
+.lgiconfont-user-plus:before {
+  content: '\f234';
+}
+
+/* '' */
+.lgiconfont-odnoklassniki:before {
+  content: '\f263';
+}
+
+/* '' */
+.lgiconfont-get-pocket:before {
+  content: '\f265';
+}
+
+/* '' */
+.lgiconfont-shopping-bag:before {
+  content: '\f290';
+}
+
+/* '' */
+.lgiconfont-shopping-basket:before {
+  content: '\f291';
+}
+
+/* '' */

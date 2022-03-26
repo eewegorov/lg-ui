@@ -8,9 +8,9 @@ describe('RuleUrlComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RuleUrlComponent ]
+      declarations: [RuleUrlComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

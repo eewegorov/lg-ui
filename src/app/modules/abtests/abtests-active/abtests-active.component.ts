@@ -93,198 +93,6 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
   }
 
-  private initSites() {
-    this.sitesService.getSites().subscribe((response: SiteShort[]) => {
-      this.coreSitesService.sites = response;
-      this.sites = this.sites.concat(response);
-      this.currSite = this.sites[0].id;
-    });
-  }
-
-  private initTests() {
-    this.abTestsService.getTests().subscribe((response: Abtest[]) => {
-      this.allABTests = this.mapABTests(response);
-      this.abTests = this.allABTests;
-      const testsLength = this.abTests.length;
-      this.getConversions(0, testsLength);
-    });
-  }
-
-  private mapABTests(tests) {
-    return tests.map((test) => {
-      test.containerized = this.getCurrentType(test.type).containerized;
-      return test;
-    });
-  }
-
-  private getCurrentType(typeId) {
-    return this.widgetTypes.find((type) => {
-      return type.id === typeId;
-    });
-  }
-
-  private getConversions(itemNumber: number, testsLength: number) {
-    if (itemNumber < testsLength) {
-      this.abTestsService.getVariants(this.abTests[itemNumber].id).pipe(
-        switchMap((variants: Variant[]) => {
-          this.abTests[itemNumber].variants = variants;
-          console.log(variants);
-          return this.abTestsService.getStatistics(this.abTests[itemNumber].id);
-        })
-      ).subscribe((response: AbtestStatistics) => {
-        if (response) {
-          this.abTests[itemNumber].chartData = [];
-          this.abTests[itemNumber].chartLabels = [];
-          this.abTests[itemNumber].chartSeries = [];
-          this.abTests[itemNumber].chartColors = [];
-          this.abTests[itemNumber].variants.forEach((variant, i) => {
-            variant.conversions = response[variant.id];
-            variant.etalon = variant.abtestInfo.type === 'ETALON';
-            this.addMoreDataToVariant(variant, i, this.abTests[itemNumber]);
-            setTimeout(() => {
-              variant = { ...variant };
-            }, 1000);
-          });
-          this.getConversions(itemNumber + 1, testsLength);
-
-          const dateArr = this.chartGetLegend(this.abTests[itemNumber].variants);
-
-          if (dateArr) {
-            const chartDataBuild = this.getChartDataArray(this.chartGetLegend(this.abTests[itemNumber].variants));
-            const chartLabelBuild = Object.keys(this.chartGetLegend(this.abTests[itemNumber].variants));
-            if (chartDataBuild[0].length === 1) {
-              chartLabelBuild.push('');
-            }
-
-            this.abTests[itemNumber].chartData = chartDataBuild;
-            this.abTests[itemNumber].chartLabels = chartLabelBuild;
-          }
-        } else {
-          this.getConversions(itemNumber + 1, testsLength);
-        }
-      });
-    } else {
-      this.isLoad = true;
-      this.startScrollToTest();
-    }
-  }
-
-  private chartGetLegend(incoming) {
-    const chart = {};
-    const data = this.prepareData(incoming);
-
-    let prevKey = null;
-
-    if (data.range.min === null) {
-      return null;
-    }
-    if (data.range.min === data.range.max) {
-      const dayOne = data.range.min;
-      const keyOne = `${dayOne.getDate()}.${dayOne.getMonth() + 1}.${dayOne.getFullYear()}`;
-      this.fillCharts(data, chart, prevKey, keyOne);
-      return chart;
-    }
-
-    for (const day = data.range.min; day <= data.range.max; day.setDate(day.getDate() + 1)) {
-      const key = `${day.getDate()}.${day.getMonth() + 1}.${day.getFullYear()}`;
-      this.fillCharts(data, chart, prevKey, key);
-      prevKey = key;
-    }
-    return chart;
-  }
-
-  private getChartDataArray(chartObj) {
-    if (!chartObj) {
-      return [];
-    }
-    const chartAr = [];
-    for (const key in chartObj) {
-      if (chartObj[key]) {
-        const dayData = chartObj[key];
-        chartAr.push(dayData);
-      }
-    }
-    return unzip(chartAr);
-  }
-
-  private startScrollToTest() {
-    const getUrlStr = this.location.path();
-    const getPosOfId = getUrlStr.indexOf('testIdNum=');
-    if (getPosOfId > -1) {
-      const newStrGet = getUrlStr.substring(getPosOfId);
-      const body = $('html, body');
-      setTimeout(() => {
-        const target = $('#' + newStrGet.replace('=', '-')).offset().top - 80;
-        body.animate({ scrollTop: target }, 500, 'swing');
-      }, 100);
-    }
-  }
-
-  private prepareData(incoming) {
-    const range = {
-      min: null,
-      max: null
-    };
-    const widgetsMap = [];
-    for (let i = 0; i < incoming.length; i++) {
-      widgetsMap[i] = {
-        id: incoming[i].id,
-        name: incoming[i].name,
-        conversionMap: {},
-        totals: {
-          shows: null,
-          targets: null
-        }
-      };
-      // eslint-disable-next-line @typescript-eslint/prefer-for-of
-      for (let j = 0; j < incoming[i].conversions.length; j++) {
-        const item = incoming[i].conversions[j];
-        item.day = this.timeConverter(item.date).day;
-        item.month = this.timeConverter(item.date).month;
-        item.year = this.timeConverter(item.date).year;
-        const date = new Date(item.year, (item.month - 1), item.day);
-
-        if (range.min == null || date < range.min) {
-          range.min = date;
-        }
-        if (range.max == null || date > range.max) {
-          range.max = date;
-        }
-        widgetsMap[i].totals.shows = (widgetsMap[i].totals.shows == null) ? item.shows : widgetsMap[i].totals.shows + item.shows;
-        widgetsMap[i].totals.targets = (widgetsMap[i].totals.targets == null) ? item.targets : widgetsMap[i].totals.targets + item.targets;
-        widgetsMap[i].conversionMap[`${item.day}.${item.month}.${item.year}`] =
-          (widgetsMap[i].totals.targets * 100 / widgetsMap[i].totals.shows).toFixed(2);
-      }
-    }
-
-    return {
-      range,
-      widgetsMap
-    };
-  }
-
-  private timeConverter(unixTimestamp) {
-    const a = new Date(unixTimestamp);
-    const year = a.getFullYear();
-    const month = a.getMonth() + 1;
-    const day = a.getDate();
-
-    return { year, month, day };
-  }
-
-  private fillCharts(data, chart, prevKey, key) {
-    chart[key] = [];
-    for (let i = 0; i < data.widgetsMap.length; i++) {
-      if (key in data.widgetsMap[i].conversionMap) {
-        chart[key].push(data.widgetsMap[i].conversionMap[key]);
-      } else if (prevKey != null) {
-        chart[key].push(chart[prevKey][i]);
-      } else {
-        chart[key].push(null);
-      }
-    }
-  }
-
   public fixOldTest(test) {
     this.fixedTest = test;
   }
@@ -557,6 +365,208 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     }
   }
 
+  ngOnDestroy(): void {
+    if (this.widgetsTypesSub) {
+      this.widgetsTypesSub.unsubscribe();
+    }
+
+    if (this.widgetsTemplatesSub) {
+      this.widgetsTemplatesSub.unsubscribe();
+    }
+  }
+
+  private initSites() {
+    this.sitesService.getSites().subscribe((response: SiteShort[]) => {
+      this.coreSitesService.sites = response;
+      this.sites = this.sites.concat(response);
+      this.currSite = this.sites[0].id;
+    });
+  }
+
+  private initTests() {
+    this.abTestsService.getTests().subscribe((response: Abtest[]) => {
+      this.allABTests = this.mapABTests(response);
+      this.abTests = this.allABTests;
+      const testsLength = this.abTests.length;
+      this.getConversions(0, testsLength);
+    });
+  }
+
+  private mapABTests(tests) {
+    return tests.map((test) => {
+      test.containerized = this.getCurrentType(test.type).containerized;
+      return test;
+    });
+  }
+
+  private getCurrentType(typeId) {
+    return this.widgetTypes.find((type) => {
+      return type.id === typeId;
+    });
+  }
+
+  private getConversions(itemNumber: number, testsLength: number) {
+    if (itemNumber < testsLength) {
+      this.abTestsService.getVariants(this.abTests[itemNumber].id).pipe(
+        switchMap((variants: Variant[]) => {
+          this.abTests[itemNumber].variants = variants;
+          console.log(variants);
+          return this.abTestsService.getStatistics(this.abTests[itemNumber].id);
+        })
+      ).subscribe((response: AbtestStatistics) => {
+        if (response) {
+          this.abTests[itemNumber].chartData = [];
+          this.abTests[itemNumber].chartLabels = [];
+          this.abTests[itemNumber].chartSeries = [];
+          this.abTests[itemNumber].chartColors = [];
+          this.abTests[itemNumber].variants.forEach((variant, i) => {
+            variant.conversions = response[variant.id];
+            variant.etalon = variant.abtestInfo.type === 'ETALON';
+            this.addMoreDataToVariant(variant, i, this.abTests[itemNumber]);
+            setTimeout(() => {
+              variant = { ...variant };
+            }, 1000);
+          });
+          this.getConversions(itemNumber + 1, testsLength);
+
+          const dateArr = this.chartGetLegend(this.abTests[itemNumber].variants);
+
+          if (dateArr) {
+            const chartDataBuild = this.getChartDataArray(this.chartGetLegend(this.abTests[itemNumber].variants));
+            const chartLabelBuild = Object.keys(this.chartGetLegend(this.abTests[itemNumber].variants));
+            if (chartDataBuild[0].length === 1) {
+              chartLabelBuild.push('');
+            }
+
+            this.abTests[itemNumber].chartData = chartDataBuild;
+            this.abTests[itemNumber].chartLabels = chartLabelBuild;
+          }
+        } else {
+          this.getConversions(itemNumber + 1, testsLength);
+        }
+      });
+    } else {
+      this.isLoad = true;
+      this.startScrollToTest();
+    }
+  }
+
+  private chartGetLegend(incoming) {
+    const chart = {};
+    const data = this.prepareData(incoming);
+
+    let prevKey = null;
+
+    if (data.range.min === null) {
+      return null;
+    }
+    if (data.range.min === data.range.max) {
+      const dayOne = data.range.min;
+      const keyOne = `${dayOne.getDate()}.${dayOne.getMonth() + 1}.${dayOne.getFullYear()}`;
+      this.fillCharts(data, chart, prevKey, keyOne);
+      return chart;
+    }
+
+    for (const day = data.range.min; day <= data.range.max; day.setDate(day.getDate() + 1)) {
+      const key = `${day.getDate()}.${day.getMonth() + 1}.${day.getFullYear()}`;
+      this.fillCharts(data, chart, prevKey, key);
+      prevKey = key;
+    }
+    return chart;
+  }
+
+  private getChartDataArray(chartObj) {
+    if (!chartObj) {
+      return [];
+    }
+    const chartAr = [];
+    for (const key in chartObj) {
+      if (chartObj[key]) {
+        const dayData = chartObj[key];
+        chartAr.push(dayData);
+      }
+    }
+    return unzip(chartAr);
+  }
+
+  private startScrollToTest() {
+    const getUrlStr = this.location.path();
+    const getPosOfId = getUrlStr.indexOf('testIdNum=');
+    if (getPosOfId > -1) {
+      const newStrGet = getUrlStr.substring(getPosOfId);
+      const body = $('html, body');
+      setTimeout(() => {
+        const target = $('#' + newStrGet.replace('=', '-')).offset().top - 80;
+        body.animate({ scrollTop: target }, 500, 'swing');
+      }, 100);
+    }
+  }
+
+  private prepareData(incoming) {
+    const range = {
+      min: null,
+      max: null
+    };
+    const widgetsMap = [];
+    for (let i = 0; i < incoming.length; i++) {
+      widgetsMap[i] = {
+        id: incoming[i].id,
+        name: incoming[i].name,
+        conversionMap: {},
+        totals: {
+          shows: null,
+          targets: null
+        }
+      };
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
+      for (let j = 0; j < incoming[i].conversions.length; j++) {
+        const item = incoming[i].conversions[j];
+        item.day = this.timeConverter(item.date).day;
+        item.month = this.timeConverter(item.date).month;
+        item.year = this.timeConverter(item.date).year;
+        const date = new Date(item.year, (item.month - 1), item.day);
+
+        if (range.min == null || date < range.min) {
+          range.min = date;
+        }
+        if (range.max == null || date > range.max) {
+          range.max = date;
+        }
+        widgetsMap[i].totals.shows = (widgetsMap[i].totals.shows == null) ? item.shows : widgetsMap[i].totals.shows + item.shows;
+        widgetsMap[i].totals.targets = (widgetsMap[i].totals.targets == null) ? item.targets : widgetsMap[i].totals.targets + item.targets;
+        widgetsMap[i].conversionMap[`${item.day}.${item.month}.${item.year}`] =
+          (widgetsMap[i].totals.targets * 100 / widgetsMap[i].totals.shows).toFixed(2);
+      }
+    }
+
+    return {
+      range,
+      widgetsMap
+    };
+  }
+
+  private timeConverter(unixTimestamp) {
+    const a = new Date(unixTimestamp);
+    const year = a.getFullYear();
+    const month = a.getMonth() + 1;
+    const day = a.getDate();
+
+    return { year, month, day };
+  }
+
+  private fillCharts(data, chart, prevKey, key) {
+    chart[key] = [];
+    for (let i = 0; i < data.widgetsMap.length; i++) {
+      if (key in data.widgetsMap[i].conversionMap) {
+        chart[key].push(data.widgetsMap[i].conversionMap[key]);
+      } else if (prevKey != null) {
+        chart[key].push(chart[prevKey][i]);
+      } else {
+        chart[key].push(null);
+      }
+    }
+  }
+
   private getTestsById() {
     this.showWhat = 'ALL';
     this.showOnlyIfNoTestsForCurrentSite = false;
@@ -668,16 +678,6 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
       return item.type === type;
     });
     return filteredArray[0].id;
-  }
-
-  ngOnDestroy(): void {
-    if (this.widgetsTypesSub) {
-      this.widgetsTypesSub.unsubscribe();
-    }
-
-    if (this.widgetsTemplatesSub) {
-      this.widgetsTemplatesSub.unsubscribe();
-    }
   }
 
 }

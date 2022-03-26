@@ -31,4 +31,5 @@ import { LeadInfoComponent } from './lead-info/lead-info.component';
     CrmRoutingModule
   ]
 })
-export class CrmModule { }
+export class CrmModule {
+}

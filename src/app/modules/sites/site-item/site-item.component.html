@@ -8,21 +8,26 @@
         <div class="row justify-content-between align-items-center">
           <h3>{{ item.url }}</h3>
           <button
-            type="button"
-            class="btn btn-default editItem"
             (click)="goToSiteSettings()"
-            [id]="item.id + '_button'"><i class="fa fa-cogs"></i> {{ 'header.settings' | translate }}
+            [id]="item.id + '_button'"
+            class="btn btn-default editItem"
+            type="button"><i class="fa fa-cogs"></i> {{ 'header.settings' | translate }}
           </button>
         </div>
         <div class="row mt-2">
           <div class="tariff">
             <h5 *ngIf="item.isFree">
-              {{ 'sitelist.tariff.title' | translate }}: <b>{{ 'sitelist.tariff.free' | translate }}</b> <button
-              (click)="improvePlan()" class="improve2 btn btn-danger btn-xs">{{ 'sitelist.improve' | translate }}</button>
+              {{ 'sitelist.tariff.title' | translate }}: <b>{{ 'sitelist.tariff.free' | translate }}</b>
+              <button
+                (click)="improvePlan()"
+                class="improve2 btn btn-danger btn-xs">{{ 'sitelist.improve' | translate }}</button>
             </h5>
             <h5 *ngIf="!item.isFree">
-              {{ 'sitelist.tariff.title' | translate }}: <b>{{ item.tariffName }}</b> ( {{ 'global.until' | translate }} {{ item.tariffExpTime }} ) <button
-              (click)="improvePlan()" class="improve2 btn btn-success btn-xs">{{ 'sitelist.extend' | translate }}</button>
+              {{ 'sitelist.tariff.title' | translate }}: <b>{{ item.tariffName }}</b>
+              ( {{ 'global.until' | translate }} {{ item.tariffExpTime }} )
+              <button
+                (click)="improvePlan()"
+                class="improve2 btn btn-success btn-xs">{{ 'sitelist.extend' | translate }}</button>
             </h5>
           </div>
         </div>
@@ -32,15 +37,15 @@
         <div class="row justify-content-between mb-3">
           <div class="site-item-week-info">
             <div class="week-value">{{ actionsStatsWeekCount | thousandSuffix:2 }}</div>
-            <div class="week-data-name" [innerHTML]="'sitelist.weekinfo.actions' | translate"></div>
+            <div [innerHTML]="'sitelist.weekinfo.actions' | translate" class="week-data-name"></div>
           </div>
           <div class="site-item-week-info">
             <div class="week-value">{{ leadsStatsWeekCount | thousandSuffix:2 }}</div>
-            <div class="week-data-name" [innerHTML]="'sitelist.weekinfo.leads' | translate"></div>
+            <div [innerHTML]="'sitelist.weekinfo.leads' | translate" class="week-data-name"></div>
           </div>
           <div class="site-item-week-info">
             <div class="week-value">{{ mailStatsWeekCount | thousandSuffix:2 }}</div>
-            <div class="week-data-name" [innerHTML]="'sitelist.weekinfo.mails' | translate"></div>
+            <div [innerHTML]="'sitelist.weekinfo.mails' | translate" class="week-data-name"></div>
           </div>
         </div>
       </div>
@@ -51,46 +56,49 @@
           </div>
         </div>
         <ng-container *ngIf="!isLoading">
-          <div class="flex-column-site-wr" *ngIf="actionsStatsWeekCount > 0 || leadsStatsWeekCount > 0 || mailStatsWeekCount > 0">
+          <div *ngIf="actionsStatsWeekCount > 0 || leadsStatsWeekCount > 0 || mailStatsWeekCount > 0"
+               class="flex-column-site-wr">
             <div class="chartlegend-container mb-1">
-              <div class="chartlegend" *ngIf="actionsStatsWeekCount > 0">
+              <div *ngIf="actionsStatsWeekCount > 0" class="chartlegend">
                 <div class="charticon targetlegend"></div>
                 <h5>{{ 'sitelist.chartLegend.widgets' | translate }}</h5>
               </div>
-              <div class="chartlegend" *ngIf="leadsStatsWeekCount > 0">
+              <div *ngIf="leadsStatsWeekCount > 0" class="chartlegend">
                 <div class="charticon bluebg"></div>
                 <h5>{{ 'sitelist.chartLegend.leads' | translate }}</h5>
               </div>
-              <div class="chartlegend" *ngIf="mailStatsWeekCount > 0">
-                <div class="charticon orangebg"></div><h5>{{ 'sitelist.chartLegend.emails' | translate }}</h5>
+              <div *ngIf="mailStatsWeekCount > 0" class="chartlegend">
+                <div class="charticon orangebg"></div>
+                <h5>{{ 'sitelist.chartLegend.emails' | translate }}</h5>
               </div>
             </div>
             <canvas
-              id="line"
+              [colors]="colors"
+              [data]="data"
+              [labels]="labels"
+              [legend]="false"
+              [options]="options"
               baseChart
               chartType="line"
               height="100"
+              id="line"
               style="max-height: 200px"
-              [data]="data"
-              [labels]="labels"
-              [colors]="colors"
-              [options]="options"
-              [legend]="false"
             >
             </canvas>
           </div>
-          <div class="no-data-graph-title" *ngIf="actionsStatsWeekCount <= 0 && leadsStatsWeekCount <= 0 && mailStatsWeekCount <= 0">
+          <div *ngIf="actionsStatsWeekCount <= 0 && leadsStatsWeekCount <= 0 && mailStatsWeekCount <= 0"
+               class="no-data-graph-title">
             <div>{{ 'global.noData' | translate }}</div>
           </div>
         </ng-container>
       </div>
-      <div class="col-lg-12 site-item-notification" *ngIf="!item.isFree && item.tariffExpLeftMs < 604800000">
+      <div *ngIf="!item.isFree && item.tariffExpLeftMs < 604800000" class="col-lg-12 site-item-notification">
         <div class="notify-text">{{ 'sitelist.notification.payment' | translate }}</div>
       </div>
-      <div class="col-lg-12 site-item-notification" *ngIf="item.hasCrmSyncErrors">
+      <div *ngIf="item.hasCrmSyncErrors" class="col-lg-12 site-item-notification">
         <div class="notify-text">{{ 'sitelist.notification.crm' | translate }}</div>
       </div>
-      <div class="col-lg-12 site-item-notification" *ngIf="item.hasMailSyncErrors">
+      <div *ngIf="item.hasMailSyncErrors" class="col-lg-12 site-item-notification">
         <div class="notify-text">{{ 'sitelist.notification.mail' | translate }}</div>
       </div>
     </div>

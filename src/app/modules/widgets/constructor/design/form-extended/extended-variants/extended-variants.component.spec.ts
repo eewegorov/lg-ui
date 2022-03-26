@@ -8,9 +8,9 @@ describe('ExtendedVariantsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExtendedVariantsComponent ]
+      declarations: [ExtendedVariantsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

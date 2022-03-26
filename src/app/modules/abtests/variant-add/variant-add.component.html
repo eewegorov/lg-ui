@@ -2,17 +2,17 @@
   <h3 class="modal-title">{{ 'abtests.modal.variant.add' | translate }}</h3>
 </div>
 
-<div id="newABTabs" class="modal-body tab-content">
-  <div *ngIf="step === 0" id="step1" class="p-2">
+<div class="modal-body tab-content" id="newABTabs">
+  <div *ngIf="step === 0" class="p-2" id="step1">
     <div class="row">
-      <div class="col-lg-4 widget-type-view" *ngFor="let type of ABTypes" (click)="setABType(type)">
+      <div (click)="setABType(type)" *ngFor="let type of ABTypes" class="col-lg-4 widget-type-view">
         <div class="ab-type-icon-{{ type.type }}"></div>
         <div class="view-name text-center">{{ type.title }}</div>
       </div>
     </div>
   </div>
-  <div id="step2" class="active" *ngIf="step == 1">
-    <div class="create-widget-m" style="padding-top: 0" [ngClass]="{'main-content-container-loader': isLoaderActive}">
+  <div *ngIf="step == 1" class="active" id="step2">
+    <div [ngClass]="{'main-content-container-loader': isLoaderActive}" class="create-widget-m" style="padding-top: 0">
       <div class="filters-loader"></div>
       <div class="container-for-loader">
         <div class="header-modal">
@@ -29,14 +29,14 @@
                   <h5 [ngClass]="(i !== 0) ? 'mt-3' : ''">
                     {{ grp.name }}
                   </h5>
-                  <div class="left-category-item" *ngFor="let cat of grp.categories">
+                  <div *ngFor="let cat of grp.categories" class="left-category-item">
                     <div class="left-panel-filter-categories-category">
                       <label class="form-check">
                         <input
-                          type="checkbox"
-                          [(ngModel)]="cat.checked"
                           (ngModelChange)="filterByCat(cat.checked, cat.id)"
+                          [(ngModel)]="cat.checked"
                           class="form-check-input"
+                          type="checkbox"
                         />
                         <span class="form-check-text">{{ cat.name }}</span>
                         <span class="checkmark"></span>
@@ -48,20 +48,20 @@
             </div>
           </div>
           <div class="panel-widgets-list">
-            <div class="alert-if-empty" *ngIf="mockups.length === 0">
+            <div *ngIf="mockups.length === 0" class="alert-if-empty">
               <h3>{{ 'abtests.modal.noWidgets' | translate }}</h3>
             </div>
             <div
+              (scrolled)="loadMore()"
+              [fromRoot]="true"
+              [infiniteScrollContainer]="'.panel-widgets-list'"
               class="test-scroll-inf"
               infiniteScroll
-              [infiniteScrollContainer]="'.panel-widgets-list'"
-              [fromRoot]="true"
-              (scrolled)="loadMore()"
             >
-              <div class="mockup-selector-categories-mockups-item-container" *ngFor="let mckp of mockups">
+              <div *ngFor="let mckp of mockups" class="mockup-selector-categories-mockups-item-container">
                 <div class="mockup-selector-categories-mockups-item">
                   <div class="mockup-selector-categories-mockups-item-hover">
-                    <button (click)="setMockupABT(mckp)" type="button" class="btn btn-success">
+                    <button (click)="setMockupABT(mckp)" class="btn btn-success" type="button">
                       <i class="fa fa-check"></i> {{ 'widgetsList.add.params.select' | translate }}
                     </button>
                   </div>

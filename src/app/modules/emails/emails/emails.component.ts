@@ -77,11 +77,6 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
     ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
   }
 
-  @HostListener('window:resize', ['$event'])
-  private onResize(event) {
-    this.innerWidth = event.target.innerWidth;
-  }
-
   public periodApply() {
     const prevPeriodType = this.periodType;
     this.periodType = 'USER';
@@ -195,6 +190,11 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
     return tomorrowDate;
   }
 
+  @HostListener('window:resize', ['$event'])
+  private onResize(event) {
+    this.innerWidth = event.target.innerWidth;
+  }
+
   private getSites() {
     this.translate.get('crm.page.filter.sites').subscribe((translation: string) => {
       this.allSites = [{
@@ -287,21 +287,21 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
 
   private getEmailStatistics(params) {
     this.emailsService.getEmailStatistic(params).subscribe((response: EmailsStatistics[]) => {
-    let mailStatistics: EmailsStatisticsView[] = [];
-    response.forEach((stat: EmailsStatistics) => {
-      let count = 0;
-      // eslint-disable-next-line guard-for-in
-      for (const key in stat.items) {
-        count += stat.items[key];
-      }
-      mailStatistics.push({ date: stat.date, value: count });
-    });
-    mailStatistics = this.orderBy.transform(mailStatistics, ['date']);
-    this.reloadChart(mailStatistics);
+      let mailStatistics: EmailsStatisticsView[] = [];
+      response.forEach((stat: EmailsStatistics) => {
+        let count = 0;
+        // eslint-disable-next-line guard-for-in
+        for (const key in stat.items) {
+          count += stat.items[key];
+        }
+        mailStatistics.push({ date: stat.date, value: count });
+      });
+      mailStatistics = this.orderBy.transform(mailStatistics, ['date']);
+      this.reloadChart(mailStatistics);
 
-    setTimeout(() => {
-      $('.reports-emails-preloader-main').hide();
-    }, 0);
+      setTimeout(() => {
+        $('.reports-emails-preloader-main').hide();
+      }, 0);
     });
   }
 

@@ -8,9 +8,9 @@ describe('ConstructorAudiencesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConstructorAudiencesComponent ]
+      declarations: [ConstructorAudiencesComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

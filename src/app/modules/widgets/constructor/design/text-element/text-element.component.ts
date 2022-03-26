@@ -29,7 +29,8 @@ export class TextElementComponent implements OnInit, AfterViewInit {
     showSelectionBar: true
   };
 
-  constructor(private widgetConstructorService: WidgetConstructorService) { }
+  constructor(private widgetConstructorService: WidgetConstructorService) {
+  }
 
   ngAfterViewInit(): void {
     this.initPicker();

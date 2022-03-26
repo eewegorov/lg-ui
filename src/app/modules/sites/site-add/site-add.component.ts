@@ -16,12 +16,12 @@ import { SitesService } from '../services/sites.service';
 })
 export class SiteAddComponent implements OnInit, AfterViewChecked {
   @Input() public hidePhone: boolean;
-  @Output() private updateSites = new EventEmitter<boolean>();
   public newSiteForm: FormGroup;
   public createdSite = {} as CreateSiteData;
   public tab = 1;
   public isUrlInvalid = false;
   public smartPoints = {} as Smartpoints;
+  @Output() private updateSites = new EventEmitter<boolean>();
   private createSiteSub: SubscriptionLike;
 
   constructor(

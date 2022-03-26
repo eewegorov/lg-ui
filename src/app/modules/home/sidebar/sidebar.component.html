@@ -1,7 +1,7 @@
 <app-modal></app-modal>
 <aside id="menu">
   <div id="navigation">
-    <ul class="nav" id="side-menu" #menu>
+    <ul #menu class="nav" id="side-menu">
 
       <li routerLinkActive="active mm-active">
         <a routerLink="/site/list">
@@ -18,11 +18,11 @@
       </li>
 
       <li [class.active]="abtestsMenuExpanded" [class.mm-active]="abtestsMenuExpanded">
-        <a class="has-arrow" [attr.aria-expanded]="abtestsMenuExpanded">
+        <a [attr.aria-expanded]="abtestsMenuExpanded" class="has-arrow">
           <i class="fontello-demo1-icon icon-ic_menu_ab_tests icons-for-sidemenu"></i>
           <span class="nav-label">{{ 'sidebar.abtests' | translate }}</span>
         </a>
-        <ul class="nav nav-second-level" [class.mm-show]="abtestsMenuExpanded">
+        <ul [class.mm-show]="abtestsMenuExpanded" class="nav nav-second-level">
           <li routerLinkActive="active mm-active">
             <a routerLink="/abtests/active/">{{ 'sidebar.abtests-active' | translate }}</a>
           </li>
@@ -54,12 +54,12 @@
       </li>
 
       <li>
-        <a target="_blank" href="http://leadgenic.userecho.com/">
+        <a href="http://leadgenic.userecho.com/" target="_blank">
           <i class="fontello-demo1-icon icon-ic_menu_support icons-for-sidemenu"></i>
           <span class="nav-label">{{ 'sidebar.help' | translate }}</span>
         </a>
       </li>
     </ul>
   </div>
-  <div class="lg-sidebar-banner" (mouseover)="preloadBanner()" (click)="showBanner()"></div>
+  <div (click)="showBanner()" (mouseover)="preloadBanner()" class="lg-sidebar-banner"></div>
 </aside>

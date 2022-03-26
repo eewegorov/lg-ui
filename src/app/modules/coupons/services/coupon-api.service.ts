@@ -2,13 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../../core/models/api';
-import {
-  CouponByIdResponse,
-  CouponsResponse,
-  CreateCoupon,
-  CreateCouponResponse,
-  UpdateCoupon
-} from '../../../core/models/coupons';
+import { CouponByIdResponse, CouponsResponse, CreateCoupon, CreateCouponResponse, UpdateCoupon } from '../../../core/models/coupons';
 import { ConfigService } from '../../../core/services/config.service';
 
 
@@ -20,7 +14,8 @@ export class CouponApiService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService
-  ) { }
+  ) {
+  }
 
   public getCouponsList(): Observable<CouponsResponse> {
     return this.http.get<CouponsResponse>(`${this.configService.config.prov}/coupons`);

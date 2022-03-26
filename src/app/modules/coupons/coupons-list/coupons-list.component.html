@@ -1,11 +1,11 @@
-<div class="ab-grid__item" [class.bg-for-line-grid]="isColoredRow">
+<div [class.bg-for-line-grid]="isColoredRow" class="ab-grid__item">
   <div class="ab-grid__item--name-coupon font-weight-bold">
     <cool-inline-edit-field
-      name="name"
-      class="long-text"
-      [(ngModel)]="coupon.name"
       (editStarted)="fixOldCoupon($event)"
       (saved)="updateCoupon($event)"
+      [(ngModel)]="coupon.name"
+      class="long-text"
+      name="name"
     >
     </cool-inline-edit-field>
   </div>
@@ -14,8 +14,8 @@
       (click)="copyCouponCode()"
       [innerHTML]="couponCodeToPaste"
       data-container="body"
-      data-toggle="tooltip"
       data-placement="top"
+      data-toggle="tooltip"
       title="{{ 'coupons.coupon.copied.tooltip' | translate }}"
     >
     </span>
@@ -30,7 +30,7 @@
       <button
         (click)="openEditableCouponModal()"
         class="btn btn-sm btn-default"
-        data-container="body" data-toggle="tooltip" data-placement="top"
+        data-container="body" data-placement="top" data-toggle="tooltip"
         title="{{ 'coupons.coupon.edit.tooltip' | translate }}"
       ><i class="fa fa-cogs"></i>
       </button>
@@ -38,7 +38,7 @@
       <button
         (click)="removeCoupon()"
         class="btn btn-sm btn-default"
-        data-container="body" data-toggle="tooltip" data-placement="top"
+        data-container="body" data-placement="top" data-toggle="tooltip"
         title="{{ 'coupons.coupon.delete.tooltip' | translate }}"
       ><i class="fa fa-trash"></i>
       </button>

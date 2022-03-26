@@ -8,9 +8,9 @@ describe('PartnerShowComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PartnerShowComponent ]
+      declarations: [PartnerShowComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

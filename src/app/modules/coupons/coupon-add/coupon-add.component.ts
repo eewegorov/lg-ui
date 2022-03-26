@@ -22,7 +22,8 @@ export class CouponAddComponent implements OnInit, AfterViewChecked {
     private activeModal: NgbActiveModal,
     private utilsService: UtilsService,
     private couponService: CouponService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     if (this.currentCoupon) {

@@ -14,7 +14,8 @@ export class VideoElementComponent implements OnInit {
   @Output() private getVideo = new EventEmitter<Record<string, string>>();
   @Output() private setVideoSize = new EventEmitter<Record<string, string>>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

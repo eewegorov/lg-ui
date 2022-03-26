@@ -21,7 +21,8 @@ export class AccountApiService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService
-  ) { }
+  ) {
+  }
 
   public postOAuth(data: OAuthRequest): Observable<OAuthResponse> {
     return this.http.post<OAuthResponse>(`${this.configService.config.prov}/auth/external/redirect`, data);

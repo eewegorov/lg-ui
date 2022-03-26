@@ -8,9 +8,9 @@ describe('PartnerLinkComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PartnerLinkComponent ]
+      declarations: [PartnerLinkComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

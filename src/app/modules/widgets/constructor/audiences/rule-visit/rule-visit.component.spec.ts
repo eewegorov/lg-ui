@@ -8,9 +8,9 @@ describe('RuleVisitComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RuleVisitComponent ]
+      declarations: [RuleVisitComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

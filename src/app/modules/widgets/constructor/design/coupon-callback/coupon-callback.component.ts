@@ -16,7 +16,8 @@ export class CouponCallbackComponent implements OnInit {
   constructor(
     private couponService: CouponService,
     private widgetService: WidgetService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }

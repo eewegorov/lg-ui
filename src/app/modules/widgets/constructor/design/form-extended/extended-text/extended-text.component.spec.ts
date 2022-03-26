@@ -8,9 +8,9 @@ describe('ExtendedTextComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExtendedTextComponent ]
+      declarations: [ExtendedTextComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

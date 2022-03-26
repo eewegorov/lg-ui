@@ -2,9 +2,9 @@
   <div class="row col-lg-12 pr-0 justify-content-between">
     <h1 class="title-main">{{ 'sidebar.coupons' | translate }}</h1>
     <button
-      type="button"
-      class="btn btn-lg btn-success"
       (click)="openCouponModal()"
+      class="btn btn-lg btn-success"
+      type="button"
     ><i class="fa fa-plus-circle"></i> {{ 'coupons.addCoupon' | translate }}
     </button>
   </div>
@@ -14,10 +14,11 @@
       <div *ngIf="!coupons.length" class="col-lg-12 mt-5">
         <h3 class="f-0 text-center">{{ 'coupons.empty.title' | translate }}</h3>
         <h4 class="f-2 text-center">{{ 'coupons.empty.subtitle' | translate }}</h4>
-        <h5 class="f-3 text-center underline-links blue-links hover-links" [innerHTML]="'coupons.empty.help' | translate"></h5>
+        <h5 [innerHTML]="'coupons.empty.help' | translate"
+            class="f-3 text-center underline-links blue-links hover-links"></h5>
       </div>
 
-      <div class="col-lg-12 coupons-wrapper-scr" *ngIf="coupons.length">
+      <div *ngIf="coupons.length" class="col-lg-12 coupons-wrapper-scr">
         <div class="coupons-items-block test-item">
           <div class="ab-content">
             <div class="ab-grid">
@@ -30,8 +31,8 @@
               <div class="ab-grid__body">
                 <app-coupons-list
                   *ngFor="let coupon of coupons; trackBy: trackById; let isOdd = odd"
-                  [isColoredRow]="isOdd"
                   [coupon]="coupon"
+                  [isColoredRow]="isOdd"
                 >
                 </app-coupons-list>
               </div>

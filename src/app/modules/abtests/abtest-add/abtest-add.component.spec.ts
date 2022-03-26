@@ -8,9 +8,9 @@ describe('AbtestAddComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AbtestAddComponent ]
+      declarations: [AbtestAddComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

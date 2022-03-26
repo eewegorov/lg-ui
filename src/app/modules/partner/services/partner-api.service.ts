@@ -14,7 +14,8 @@ export class PartnerApiService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService
-  ) { }
+  ) {
+  }
 
   public getTransactions(filterParams): Observable<TransactionsResponse> {
     return this.http.get<TransactionsResponse>(`${this.configService.config.prov}/partner/transactions`, {

@@ -8,9 +8,9 @@ describe('WidgetCardComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ WidgetCardComponent ]
+      declarations: [WidgetCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

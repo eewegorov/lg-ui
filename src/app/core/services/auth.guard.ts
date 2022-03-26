@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanLoad, UrlTree, Router } from '@angular/router';
+import { CanActivate, CanLoad, Router, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate, CanLoad {
 
   canLoad(): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.authService.isAuthenticated()) {
-      this.router.navigate([ '/account/login' ]);
+      this.router.navigate(['/account/login']);
       return false;
     }
     return true;

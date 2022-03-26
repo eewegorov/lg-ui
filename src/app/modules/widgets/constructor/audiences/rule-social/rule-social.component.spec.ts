@@ -8,9 +8,9 @@ describe('RuleSocialComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RuleSocialComponent ]
+      declarations: [RuleSocialComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

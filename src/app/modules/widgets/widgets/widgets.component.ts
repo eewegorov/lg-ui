@@ -6,15 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Abtest } from '../../../core/models/abtests';
 import { SiteShort } from '../../../core/models/sites';
-import {
-  Company,
-  CompanyShort,
-  Entities,
-  SiteForWidget,
-  WidgetInfo,
-  WidgetTemplate,
-  WidgetType
-} from '../../../core/models/widgets';
+import { Company, CompanyShort, Entities, SiteForWidget, WidgetInfo, WidgetTemplate, WidgetType } from '../../../core/models/widgets';
 import { TariffsService } from '../../../core/services/tariffs.service';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
 import { SitesService } from '../../sites/services/sites.service';
@@ -66,7 +58,7 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
     setTimeout(() => {
       ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
     }, 1000);
-    
+
     const selectedSite = localStorage.getItem('currentSite');
 
     this.translate.get('widgetsList.defCompany').subscribe((translatedValue: string) => {
@@ -118,13 +110,6 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
     ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
   }
 
-  private setCurrentSite() {
-    localStorage.setItem('currentSite', this.currentSite.id);
-    this.sitesService.setCurrentSiteId(this.currentSite.id);
-    this.getAllWidgetsForSite(this.currentSite.id);
-    this.resetNewCompany();
-  }
-
   public getTypeItem(typeId: string): WidgetType {
     return this.types.find((item: WidgetType) => {
       return item.id === typeId;
@@ -169,32 +154,6 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  private getAllWidgetsForSite(siteId, stayCompany?) {
-    this.abtestsService.getTests().pipe(
-      switchMap((responseTests: Abtest[]) => {
-        this.abtestsService.setListOfABTests(responseTests);
-        return this.widgetService.getWidgetsList(siteId);
-      })
-    ).subscribe((response: Entities) => {
-      this.companies = response.companies;
-      this.widgetService.setCurrentCompanies(response.companies);
-
-      if (!stayCompany) {
-        this.currentCompany = this.widgetService.getDefaultCompany(this.companies);
-      }
-      this.containers = response.containers;
-      this.widgetService.setContainers(this.containers);
-      this.smartPoints = response.smartPoints;
-      this.widgets = response.widgets as unknown as Record<string, WidgetInfo[]>;
-      if (this.enableWidgetsModal) {
-        this.enableWidgetsModal = false;
-        setTimeout(() => {
-          this.createNewWidget();
-        }, 500);
-      }
-    });
-  }
-
   public createNewWidget() {
     // TODO: Check tariffExp
     if (this.sitesService.isSiteHasExpTariff(this.currentSite) && this.getWidgetsCount() >= 3) {
@@ -211,7 +170,8 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
       modalRef.componentInstance.currentCompany = this.currentCompany;
       modalRef.result.then((result) => {
         // TODO: Implement logic when close modal. Don't forget "result"
-      }).catch(() => {});
+      }).catch(() => {
+      });
     }
   }
 
@@ -278,6 +238,48 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  public resetNewCompany() {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+
+    this.newCompany = {
+      on: false,
+      name: ''
+    };
+  }
+
+  private setCurrentSite() {
+    localStorage.setItem('currentSite', this.currentSite.id);
+    this.sitesService.setCurrentSiteId(this.currentSite.id);
+    this.getAllWidgetsForSite(this.currentSite.id);
+    this.resetNewCompany();
+  }
+
+  private getAllWidgetsForSite(siteId, stayCompany?) {
+    this.abtestsService.getTests().pipe(
+      switchMap((responseTests: Abtest[]) => {
+        this.abtestsService.setListOfABTests(responseTests);
+        return this.widgetService.getWidgetsList(siteId);
+      })
+    ).subscribe((response: Entities) => {
+      this.companies = response.companies;
+      this.widgetService.setCurrentCompanies(response.companies);
+
+      if (!stayCompany) {
+        this.currentCompany = this.widgetService.getDefaultCompany(this.companies);
+      }
+      this.containers = response.containers;
+      this.widgetService.setContainers(this.containers);
+      this.smartPoints = response.smartPoints;
+      this.widgets = response.widgets as unknown as Record<string, WidgetInfo[]>;
+      if (this.enableWidgetsModal) {
+        this.enableWidgetsModal = false;
+        setTimeout(() => {
+          this.createNewWidget();
+        }, 500);
+      }
+    });
+  }
+
   private getWidgetsCount(): number {
     const keys = Object.keys(this.widgets);
     let count = 0;
@@ -293,15 +295,6 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
       count += container.widgets.length;
     });
     return count;
-  }
-
-  public resetNewCompany() {
-    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
-
-    this.newCompany = {
-      on: false,
-      name: ''
-    };
   }
 
 }

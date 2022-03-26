@@ -28,7 +28,8 @@ export class ExtendedButtonComponent implements OnInit, AfterViewInit, DoCheck {
 
   private changeExtTypesSub: SubscriptionLike;
 
-  constructor(private widgetConstructorService: WidgetConstructorService) { }
+  constructor(private widgetConstructorService: WidgetConstructorService) {
+  }
 
   ngAfterViewInit(): void {
     this.initPicker();
@@ -66,6 +67,10 @@ export class ExtendedButtonComponent implements OnInit, AfterViewInit, DoCheck {
     item.styleType = type;
   }
 
+  public onLabelIconPickerSelect(newIcon: string) {
+    this.item.icon.selectedIcon = newIcon;
+  }
+
   private initPicker() {
     setTimeout(() => {
       ($('#font-picker-ext-form' + this.index) as any).fontselect({
@@ -90,9 +95,5 @@ export class ExtendedButtonComponent implements OnInit, AfterViewInit, DoCheck {
 
     data.name = fontFamily;
     data.fontFamily = '\'' + fontFamily + '\'';
-  }
-
-  public onLabelIconPickerSelect(newIcon: string) {
-    this.item.icon.selectedIcon = newIcon;
   }
 }

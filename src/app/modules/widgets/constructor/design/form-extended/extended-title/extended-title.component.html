@@ -1,12 +1,12 @@
 <div class="row-subitem">
   <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
       {{ item.label }}
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
-      <li role="presentation" *ngFor="let itemForm of availItemTypes" (click)="changeFormType(itemForm.type)">
-        <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemForm.label }}</a>
+      <li (click)="changeFormType(itemForm.type)" *ngFor="let itemForm of availItemTypes" role="presentation">
+        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemForm.label }}</a>
       </li>
     </ul>
   </div>
@@ -26,8 +26,8 @@
   <div class="align-items-center">
     <div class="form-control form-control-font">
       <input
-        type="number"
         [(ngModel)]="item.fontSize"
+        type="number"
       />
       <label>px</label>
     </div>
@@ -40,8 +40,8 @@
       Тень
     </label>
     <ui-switch
-      size="small"
       [(ngModel)]="item.textShadow.enable"
+      size="small"
     ></ui-switch>
   </div>
 
@@ -51,12 +51,12 @@
       <div class="text-right">
         <input
           [(colorPicker)]="item.textShadow.color"
-          [style.background]="item.textShadow.color"
           [cpAlphaChannel]="'disabled'"
           [cpOutputFormat]="'hex'"
-          cpPosition="left"
+          [style.background]="item.textShadow.color"
           class="color-picker-control"
-readonly
+          cpPosition="left"
+          readonly
         />
         <input
           [(ngModel)]="item.textShadow.color"
@@ -81,15 +81,15 @@ readonly
       <div>
         <label class="control-label control-label-des mr-1 pr-1">X</label>
         <input
-          type="number"
-          class="picker-input slider"
           [(ngModel)]="item.textShadow.horiz"
+          class="picker-input slider"
+          type="number"
         />
         <label class="control-label control-label-des ml-3 pl-1 mr-1 pr-1">Y</label>
         <input
-          type="number"
-          class="picker-input slider"
           [(ngModel)]="item.textShadow.vertical"
+          class="picker-input slider"
+          type="number"
         />
       </div>
     </div>
@@ -99,9 +99,9 @@ readonly
       <div class="d-flex text-right side-ui-sm">
         <ngx-slider [(value)]="item.textShadow.blur" [options]="optionsSharpness"></ngx-slider>
         <input
-          type="number"
           [(ngModel)]="item.textShadow.blur"
           class="picker-input slider"
+          type="number"
         />
       </div>
     </div>
@@ -115,18 +115,18 @@ readonly
 <div class="row-subitem mt-3 border-item">
   <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
     <div>
-      <input type="number" class="form-control form-control-font form-cntrl-55w" [(ngModel)]="item.widthValue">
+      <input [(ngModel)]="item.widthValue" class="form-control form-control-font form-cntrl-55w" type="number">
     </div>
 
     <div class="ml-2 w-100">
       <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+        <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
           {{ item.widthType.label }}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li role="presentation" *ngFor="let itemWidth of availWidthTypes" (click)="item.widthType = itemWidth">
-            <a role="menuitem" tabindex="-1" href="javascript:void(0)" class="dropdown-item">{{ itemWidth.label }}</a>
+          <li (click)="item.widthType = itemWidth" *ngFor="let itemWidth of availWidthTypes" role="presentation">
+            <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemWidth.label }}</a>
           </li>
         </ul>
       </div>
@@ -138,9 +138,9 @@ readonly
   <div class="form-check">
     <label class="form-check-label">
       <input
-        type="checkbox"
         [(ngModel)]="item.newLine"
         class="form-check-input"
+        type="checkbox"
       />
       <span class="checkmark"></span>
     </label>
@@ -152,9 +152,9 @@ readonly
   <div class="form-check">
     <label class="form-check-label">
       <input
-        type="checkbox"
         [(ngModel)]="item.required"
         class="form-check-input"
+        type="checkbox"
       />
       <span class="checkmark"></span>
     </label>
@@ -166,9 +166,9 @@ readonly
   <div class="form-check">
     <label class="form-check-label">
       <input
-        type="checkbox"
         [(ngModel)]="item.checked"
         class="form-check-input"
+        type="checkbox"
       />
       <span class="checkmark"></span>
     </label>

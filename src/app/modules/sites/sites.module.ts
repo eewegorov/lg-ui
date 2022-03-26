@@ -17,7 +17,6 @@ import { IntegrationItemComponent } from './integration-item/integration-item.co
 import { WidgetsModule } from '../widgets/widgets.module';
 
 
-
 @NgModule({
   declarations: [
     SiteAddComponent,
@@ -41,4 +40,5 @@ import { WidgetsModule } from '../widgets/widgets.module';
     WidgetsModule
   ]
 })
-export class SitesModule { }
+export class SitesModule {
+}

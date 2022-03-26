@@ -9,7 +9,8 @@ export class PaddingElementComponent implements OnInit {
   @Input() public index: number;
   @Input() public modelName: any;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

@@ -1,6 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NgbDate, NgbDateParserFormatter, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 const I18N_VALUES = {
   ru: {
@@ -28,9 +28,11 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
   getWeekdayShortName(weekday: number): string {
     return I18N_VALUES[this._i18n.language].weekdays[weekday - 1];
   }
+
   getMonthShortName(month: number): string {
     return I18N_VALUES[this._i18n.language].months[month - 1];
   }
+
   getMonthFullName(month: number): string {
     return this.getMonthShortName(month);
   }
@@ -46,11 +48,11 @@ export class NgbDateCustomParserFormatter extends NgbDateParserFormatter {
     if (value) {
       const dateParts = value.trim().split('.');
       if (dateParts.length === 1 && isNumber(dateParts[0])) {
-        return {day: toInteger(dateParts[0]), month: null, year: null};
+        return { day: toInteger(dateParts[0]), month: null, year: null };
       } else if (dateParts.length === 2 && isNumber(dateParts[0]) && isNumber(dateParts[1])) {
-        return {day: toInteger(dateParts[0]), month: toInteger(dateParts[1]), year: null};
+        return { day: toInteger(dateParts[0]), month: toInteger(dateParts[1]), year: null };
       } else if (dateParts.length === 3 && isNumber(dateParts[0]) && isNumber(dateParts[1]) && isNumber(dateParts[2])) {
-        return {day: toInteger(dateParts[0]), month: toInteger(dateParts[1]), year: toInteger(dateParts[2])};
+        return { day: toInteger(dateParts[0]), month: toInteger(dateParts[1]), year: toInteger(dateParts[2]) };
       }
     }
     return null;
@@ -93,13 +95,14 @@ export function padNumber(value: number) {
       useExisting: NgbdDatepickerI18n,
       multi: true
     }
-    ]
+  ]
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class NgbdDatepickerI18n implements ControlValueAccessor {
   public selectedDate;
   private today = new Date();
-  onChange = (date?: Date) => {};
+  onChange = (date?: Date) => {
+  };
 
   writeValue(value: Date) {
     let preparedDate;
@@ -120,7 +123,8 @@ export class NgbdDatepickerI18n implements ControlValueAccessor {
     this.onChange = fn;
   }
 
-  registerOnTouched(): void { }
+  registerOnTouched(): void {
+  }
 
   onDateChange(value: any) {
     this.onChange(new Date(value.year, value.month - 1, value.day));
@@ -130,5 +134,5 @@ export class NgbdDatepickerI18n implements ControlValueAccessor {
     return date.day == this.today.getDate() &&
       date.month == this.today.getMonth() + 1 &&
       date.year == this.today.getFullYear();
-  }
+  };
 }

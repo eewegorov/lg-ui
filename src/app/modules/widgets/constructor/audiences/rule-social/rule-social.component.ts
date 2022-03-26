@@ -10,20 +10,22 @@ import { AUDIENCES_VALS } from '../../../../../configs/audiences';
 export class RuleSocialComponent implements OnInit {
   @Input() public item: AudienceGroupItem;
   @Input() public group: AudienceGroup;
-
-  @Output() private remove = new EventEmitter<{groupId: number, itemType: string, index: number}>();
+  public vals = AUDIENCES_VALS;
+  @Output() private remove = new EventEmitter<{ groupId: number, itemType: string, index: number }>();
   @Output() private add = new EventEmitter<AudienceGroupItem>();
 
-  public vals = AUDIENCES_VALS;
-
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
   public removeSubItem(groupId: number, itemType: string, index: number, event: Event): void {
-    if (this.item.subitems.length <= 1) { event.preventDefault(); return; }
-    this.remove.emit({groupId, itemType, index});
+    if (this.item.subitems.length <= 1) {
+      event.preventDefault();
+      return;
+    }
+    this.remove.emit({ groupId, itemType, index });
   }
 
   public addSubItem(item: AudienceGroupItem, value: string): void {

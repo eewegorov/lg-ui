@@ -9,7 +9,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class PartnerShowComponent implements OnInit {
   @Input() public refCode: string;
 
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor(private activeModal: NgbActiveModal) {
+  }
 
   ngOnInit(): void {
   }

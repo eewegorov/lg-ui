@@ -8,9 +8,9 @@ describe('SocialElementComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SocialElementComponent ]
+      declarations: [SocialElementComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

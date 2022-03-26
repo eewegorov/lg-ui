@@ -14,7 +14,6 @@ import { PartnerBannerComponent } from './partner-banner/partner-banner.componen
 import { PartnerShowComponent } from './partner-show/partner-show.component';
 
 
-
 @NgModule({
   declarations: [
     PartnerComponent,
@@ -34,4 +33,5 @@ import { PartnerShowComponent } from './partner-show/partner-show.component';
     PartnerRoutingModule
   ]
 })
-export class PartnerModule { }
+export class PartnerModule {
+}

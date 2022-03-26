@@ -11,7 +11,8 @@ export class ExtendedDdwComponent implements OnInit {
 
   @ViewChild('element', { static: true }) element: ElementRef;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     $(this.element.nativeElement).bind('click', (event) => {

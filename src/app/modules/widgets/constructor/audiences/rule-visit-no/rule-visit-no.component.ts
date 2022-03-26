@@ -10,19 +10,18 @@ import { AUDIENCES_VALS } from '../../../../../configs/audiences';
 export class RuleVisitNoComponent implements OnInit {
   @Input() public item: AudienceGroupItem;
   @Input() public group: AudienceGroup;
-
-  @Output() private remove = new EventEmitter<{groupId: number, itemType: string, index: number}>();
+  public vals = AUDIENCES_VALS;
+  @Output() private remove = new EventEmitter<{ groupId: number, itemType: string, index: number }>();
   @Output() private add = new EventEmitter<AudienceGroupItem>();
 
-  public vals = AUDIENCES_VALS;
-
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
   public removeSubItem(groupId: number, itemType: string, index: number): void {
-    this.remove.emit({groupId, itemType, index});
+    this.remove.emit({ groupId, itemType, index });
   }
 
   public addSubItem(item: AudienceGroupItem): void {

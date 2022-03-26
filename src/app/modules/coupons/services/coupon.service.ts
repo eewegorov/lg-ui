@@ -24,7 +24,8 @@ export class CouponService {
   constructor(
     private errorHandlerService: ErrorHandlerService,
     private couponApiService: CouponApiService
-  ) { }
+  ) {
+  }
 
   public getCouponsList(): Observable<Coupon[]> {
     return this.couponApiService.getCouponsList().pipe(

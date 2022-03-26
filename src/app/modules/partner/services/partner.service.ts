@@ -26,7 +26,8 @@ export class PartnerService {
     private errorHandlerService: ErrorHandlerService,
     private userApiService: UserApiService,
     private partnerApiService: PartnerApiService
-  ) { }
+  ) {
+  }
 
   public getTransactions(filterParams): Observable<Transaction[]> {
     return this.partnerApiService.getTransactions(filterParams).pipe(

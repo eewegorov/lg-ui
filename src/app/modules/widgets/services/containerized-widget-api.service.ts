@@ -3,17 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../../core/models/api';
 import {
-  ContainerRequest,
+  ContainerInfoResponse,
   ContainerizedWidgetCloneRequest,
+  ContainerRequest,
   ContainerResponse,
   ContainersResponse,
-  WidgetCloneResponse,
-  WidgetRename,
-  WidgetSwapRequest,
-  ContainerInfoResponse,
   WidgetChangeCompanyRequest,
+  WidgetCloneResponse,
   WidgetCreateRequest,
-  WidgetCreateResponse
+  WidgetCreateResponse,
+  WidgetRename,
+  WidgetSwapRequest
 } from '../../../core/models/widgets';
 import { ConfigService } from '../../../core/services/config.service';
 
@@ -26,7 +26,8 @@ export class ContainerizedWidgetApiService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService
-  ) { }
+  ) {
+  }
 
   public getWContainers(siteId: string): Observable<ContainersResponse> {
     return this.http.get<ContainersResponse>(`${this.configService.config.prov}/sites/${siteId}/containers`);

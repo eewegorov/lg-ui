@@ -8,9 +8,9 @@ describe('PaddingElementComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaddingElementComponent ]
+      declarations: [PaddingElementComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -8,9 +8,9 @@ describe('EmailsStatisticsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmailsStatisticsComponent ]
+      declarations: [EmailsStatisticsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

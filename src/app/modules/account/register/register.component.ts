@@ -7,16 +7,12 @@ import { AccountService } from '../services/account.service';
 import { switchMap } from 'rxjs/operators';
 
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['../shared/shared.scss', './register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-  @ViewChild('password', { static: true }) private password: ElementRef;
-  @ViewChild('f', { static: true }) private regForm: NgForm;
-  @ViewChild('loginForm') private loginForm: ElementRef;
   public autoRegister = false;
   public autoRegisterPanel = false;
   public autoRegisterLoadingPanel = false;
@@ -29,6 +25,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
   public registrationEmail = '';
   public registrationPassword = '';
   public autoRegisterErrorMessage = '';
+  @ViewChild('password', { static: true }) private password: ElementRef;
+  @ViewChild('f', { static: true }) private regForm: NgForm;
+  @ViewChild('loginForm') private loginForm: ElementRef;
   private regSub: SubscriptionLike;
   private regYandexSub: SubscriptionLike;
 
@@ -36,7 +35,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.autoRegister = this.route.snapshot.queryParams.registrationtype === 'autoreg';
@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       })
     ).subscribe((loginResponse: boolean) => {
       if (loginResponse) {
-        this.router.navigate([ '/' ]);
+        this.router.navigate(['/']);
       }
     });
   }
@@ -86,6 +86,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   public togglePasswordFocus(event: Event, text: '********' | '') {
     (event.target as HTMLInputElement).placeholder = text;
+  }
+
+  ngOnDestroy(): void {
+    if (this.regSub) {
+      this.regSub.unsubscribe();
+    }
+    if (this.regYandexSub) {
+      this.regYandexSub.unsubscribe();
+    }
   }
 
   private autoReg() {
@@ -114,18 +123,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
         })
       ).subscribe((loginResponse: boolean) => {
         if (loginResponse) {
-          this.router.navigate([ '/' ]);
+          this.router.navigate(['/']);
         }
       });
-    }
-  }
-
-  ngOnDestroy(): void {
-    if (this.regSub) {
-      this.regSub.unsubscribe();
-    }
-    if (this.regYandexSub) {
-      this.regYandexSub.unsubscribe();
     }
   }
 

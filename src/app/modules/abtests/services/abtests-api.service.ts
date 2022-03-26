@@ -3,15 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../../core/models/api';
 import {
-  AbtestsResponse,
-  UpdateAbtest,
-  CloneVariantResponse,
-  AbtestStatisticsResponse,
-  AbtestsArchiveResponse,
   AbtestCreateRequest,
   AbtestCreateResponse,
+  AbtestsArchiveResponse,
+  AbtestsResponse,
+  AbtestStatisticsResponse,
   AbtestVariantRequest,
-  AbtestVariantResponse, AbtestVariantsResponse
+  AbtestVariantResponse,
+  AbtestVariantsResponse,
+  CloneVariantResponse,
+  UpdateAbtest
 } from '../../../core/models/abtests';
 import { ConfigService } from '../../../core/services/config.service';
 
@@ -24,7 +25,8 @@ export class AbtestsApiService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService
-  ) { }
+  ) {
+  }
 
   public getTests(): Observable<AbtestsResponse> {
     return this.http.get<AbtestsResponse>(`${this.configService.config.prov}/abtests`);

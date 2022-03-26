@@ -32,9 +32,6 @@ export class RequestsComponent implements OnInit, OnDestroy {
   public widgetsIds = [];
   public statesIds = [];
   public leads: Lead[] = [];
-  private ALL_SITE_ID = '0000000000000000';
-  private ONE_DAY = 86400000;
-  private filterTimeout: ReturnType<typeof setTimeout>;
   public limitOptions = [{ value: 10 }, { value: 25 }, { value: 50 }, { value: 100 }];
   public searchParams = {
     offset: 0,
@@ -42,12 +39,14 @@ export class RequestsComponent implements OnInit, OnDestroy {
   };
   public initTables = false;
   public sortingDesc = true;
-
+  public isNotificationEnable = false;
+  public currentOpenedRow = null;
+  private ALL_SITE_ID = '0000000000000000';
+  private ONE_DAY = 86400000;
+  private filterTimeout: ReturnType<typeof setTimeout>;
   private defaultName;
   private defaultExtraName;
   private userId;
-  public isNotificationEnable = false;
-  public currentOpenedRow = null;
   private meInfoSub: SubscriptionLike;
   private updateLeadInfo: SubscriptionLike;
 
@@ -87,58 +86,6 @@ export class RequestsComponent implements OnInit, OnDestroy {
     });
   }
 
-  @HostListener('window:resize', ['$event'])
-  private onResize(event) {
-    this.innerWidth = event.target.innerWidth;
-  }
-
-  private initStats() {
-    this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
-      this.userId = response.id;
-      this.getSites();
-      this.getFilters();
-    });
-  }
-
-  private getSites() {
-    const notificationOffCookie = this.cookieService.get('lgwg-notification-off');
-    this.translate.get('crm.page.filter.sites').subscribe((translation: string) => {
-      this.allSites = [{
-        id: this.ALL_SITE_ID,
-        name: translation
-      }];
-      this.sitesIds = [this.ALL_SITE_ID];
-      this.sitesService.getSites().subscribe((response: SiteShort[]) => {
-        this.coreSitesService.sites = response;
-        if (notificationOffCookie !== this.userId && this.isTrialSites(response)) {
-          this.isNotificationEnable = true;
-        }
-      });
-    });
-  }
-
-  private getFilters() {
-    this.translate.get('crm.page.filter.widgets.all').subscribe((translation: string) => {
-      this.allWidgets = [{
-        id: this.ALL_SITE_ID,
-        name: translation
-      }];
-      this.widgetsIds = [this.ALL_SITE_ID];
-      this.crmService.getLeadsFilters().subscribe((response: LeadWidgets[]) => {
-        this.allSites = this.allSites.concat(response);
-        response.forEach(site =>
-          site.widgets.forEach(widget => this.allWidgets.push(widget))
-        );
-      });
-    });
-  }
-
-  private isTrialSites(sites: SiteShort[]): boolean {
-    return sites.some((item) => {
-      return item.trial;
-    });
-  }
-
   public changePeriod(value: string) {
     if (value === Periods.TODAY) {
       this.periodStart = new Date();
@@ -160,10 +107,6 @@ export class RequestsComponent implements OnInit, OnDestroy {
     }
 
     this.timeoutFiltering(false);
-  }
-
-  private getToday(): Date {
-    return new Date(new Date().setHours(0, 0, 0, 0));
   }
 
   public periodApply() {
@@ -238,6 +181,71 @@ export class RequestsComponent implements OnInit, OnDestroy {
     }
     this.searchParams.offset = this.searchParams.offset + this.searchParams.limit.value;
     this.timeoutFiltering(true);
+  }
+
+  ngOnDestroy(): void {
+    if (this.meInfoSub) {
+      this.meInfoSub.unsubscribe();
+    }
+    if (this.updateLeadInfo) {
+      this.updateLeadInfo.unsubscribe();
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  private onResize(event) {
+    this.innerWidth = event.target.innerWidth;
+  }
+
+  private initStats() {
+    this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
+      this.userId = response.id;
+      this.getSites();
+      this.getFilters();
+    });
+  }
+
+  private getSites() {
+    const notificationOffCookie = this.cookieService.get('lgwg-notification-off');
+    this.translate.get('crm.page.filter.sites').subscribe((translation: string) => {
+      this.allSites = [{
+        id: this.ALL_SITE_ID,
+        name: translation
+      }];
+      this.sitesIds = [this.ALL_SITE_ID];
+      this.sitesService.getSites().subscribe((response: SiteShort[]) => {
+        this.coreSitesService.sites = response;
+        if (notificationOffCookie !== this.userId && this.isTrialSites(response)) {
+          this.isNotificationEnable = true;
+        }
+      });
+    });
+  }
+
+  private getFilters() {
+    this.translate.get('crm.page.filter.widgets.all').subscribe((translation: string) => {
+      this.allWidgets = [{
+        id: this.ALL_SITE_ID,
+        name: translation
+      }];
+      this.widgetsIds = [this.ALL_SITE_ID];
+      this.crmService.getLeadsFilters().subscribe((response: LeadWidgets[]) => {
+        this.allSites = this.allSites.concat(response);
+        response.forEach(site =>
+          site.widgets.forEach(widget => this.allWidgets.push(widget))
+        );
+      });
+    });
+  }
+
+  private isTrialSites(sites: SiteShort[]): boolean {
+    return sites.some((item) => {
+      return item.trial;
+    });
+  }
+
+  private getToday(): Date {
+    return new Date(new Date().setHours(0, 0, 0, 0));
   }
 
   private getLeads() {
@@ -315,14 +323,5 @@ export class RequestsComponent implements OnInit, OnDestroy {
 
   private getUNIXTime(time) {
     return moment(time).unix() * 1000;
-  }
-
-  ngOnDestroy(): void {
-    if (this.meInfoSub) {
-      this.meInfoSub.unsubscribe();
-    }
-    if (this.updateLeadInfo) {
-      this.updateLeadInfo.unsubscribe();
-    }
   }
 }

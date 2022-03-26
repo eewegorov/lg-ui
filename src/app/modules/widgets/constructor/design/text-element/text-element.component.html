@@ -8,8 +8,8 @@
     <div class="row align-items-center">
       <div class="form-control form-control-font">
         <input
-          type="number"
           [(ngModel)]="item.fontSize"
+          type="number"
         />
         <label>px</label>
       </div>
@@ -21,8 +21,8 @@
       Тень
     </label>
     <ui-switch
-      size="small"
       [(ngModel)]="item.textShadow.enable"
+      size="small"
     ></ui-switch>
   </div>
 
@@ -33,12 +33,12 @@
       <div class="text-right">
         <input
           [(colorPicker)]="item.textShadow.color"
-          [style.background]="item.textShadow.color"
           [cpAlphaChannel]="'disabled'"
           [cpOutputFormat]="'hex'"
-          cpPosition="left"
+          [style.background]="item.textShadow.color"
           class="color-picker-control"
-readonly
+          cpPosition="left"
+          readonly
         />
         <input
           [(ngModel)]="item.textShadow.color"
@@ -50,7 +50,8 @@ readonly
     <div class="d-flex justify-content-between mt-3">
       <h5 class="label-style-ic control-label-des">Прозрачность</h5>
       <div class="d-flex text-right side-ui-sm">
-        <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod" [options]="optionsOpacity"></ngx-slider>
+        <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod"
+                    [options]="optionsOpacity"></ngx-slider>
         <input
           [(ngModel)]="widget.guiprops['form'].colorPod.opacityColorPod"
           class="picker-input slider"
@@ -63,15 +64,15 @@ readonly
       <div>
         <label class="control-label control-label-des mr-1 pr-1">X</label>
         <input
-          type="number"
-          class="picker-input slider"
           [(ngModel)]="item.textShadow.horiz"
+          class="picker-input slider"
+          type="number"
         />
         <label class="control-label control-label-des ml-3 pl-1 mr-1 pr-1">Y</label>
         <input
-          type="number"
-          class="picker-input slider"
           [(ngModel)]="item.textShadow.vertical"
+          class="picker-input slider"
+          type="number"
         />
       </div>
     </div>
@@ -81,9 +82,9 @@ readonly
       <div class="d-flex text-right side-ui-sm">
         <ngx-slider [(value)]="item.textShadow.blur" [options]="optionsSharpness"></ngx-slider>
         <input
-          type="number"
           [(ngModel)]="item.textShadow.blur"
           class="picker-input slider"
+          type="number"
         />
       </div>
     </div>

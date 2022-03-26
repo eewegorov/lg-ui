@@ -2,9 +2,19 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
-  Abtest, AbtestArchive, AbtestCreateRequest, AbtestCreateResponse, AbtestsArchiveResponse, AbtestShort,
-  AbtestsResponse, AbtestStatistics,
-  AbtestStatisticsResponse, AbtestVariant, AbtestVariantRequest, AbtestVariantResponse, AbtestVariantsResponse,
+  Abtest,
+  AbtestArchive,
+  AbtestCreateRequest,
+  AbtestCreateResponse,
+  AbtestsArchiveResponse,
+  AbtestShort,
+  AbtestsResponse,
+  AbtestStatistics,
+  AbtestStatisticsResponse,
+  AbtestVariant,
+  AbtestVariantRequest,
+  AbtestVariantResponse,
+  AbtestVariantsResponse,
   CloneVariantResponse,
   UpdateAbtest,
   Variant
@@ -23,7 +33,8 @@ export class AbtestsService {
   constructor(
     private errorHandlerService: ErrorHandlerService,
     private abtestsApiService: AbtestsApiService
-  ) { }
+  ) {
+  }
 
   public getTests(): Observable<Abtest[]> {
     return this.abtestsApiService.getTests().pipe(

@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Abtest } from '../../../core/models/abtests';
-import { WidgetStatistics, WidgetInfo, WidgetInfoShort } from '../../../core/models/widgets';
+import { WidgetInfo, WidgetInfoShort, WidgetStatistics } from '../../../core/models/widgets';
 import { TariffsService } from '../../../core/services/tariffs.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
@@ -24,13 +24,13 @@ export class WidgetItemComponent implements OnInit {
   @Input() public widget: WidgetInfo;
   @Input() public first: boolean;
   @Input() public last: boolean;
-  @Input() private prev: WidgetInfo;
-  @Input() private next: WidgetInfo;
   public widgetCurrentCompany: WidgetInfoShort;
   public widgetConversion: WidgetStatistics;
   public isConversionLoaded = false;
   public changeCompanyWidget = {} as WidgetInfoShort;
   public widgetType;
+  @Input() private prev: WidgetInfo;
+  @Input() private next: WidgetInfo;
   private currentSiteId: string;
 
   constructor(
@@ -143,7 +143,7 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public duplicateItem() {
-    this.widgetService.openCloneWidgetModal.next({data: this.widget, containerId: null});
+    this.widgetService.openCloneWidgetModal.next({ data: this.widget, containerId: null });
   }
 
   public removeItem() {

@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.chatInit();
@@ -23,7 +24,9 @@ export class ChatComponent implements OnInit {
       s.async = true;
       s.src = (d.location.protocol === 'https:' ? 'https:' : 'http:')
         + '//call.chatra.io/chatra.js';
-      if (d.head) { d.head.appendChild(s); }
+      if (d.head) {
+        d.head.appendChild(s);
+      }
     })(document, window, 'Chatra');
   }
 

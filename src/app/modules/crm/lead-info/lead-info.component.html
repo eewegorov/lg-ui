@@ -1,55 +1,56 @@
 <div
-  id="right-sidebar"
-  class="lead-info-sidebar animate__animated animate__fadeInRight"
-  [ngClass]="{ 'sidebar-open': isOpen }"
   (clickOutside)="closeLeadInfo()"
+  [ngClass]="{ 'sidebar-open': isOpen }"
+  class="lead-info-sidebar animate__animated animate__fadeInRight"
+  id="right-sidebar"
 >
   <div class="sidebar-body">
     <button
-      class="lead-info-sidebar__close btn btn-default mb-2"
       (click)="closeLeadInfo()"
+      class="lead-info-sidebar__close btn btn-default mb-2"
     ><i class="pe pe-7s-close"></i></button>
     <div class="sidebar-title">
       <h5 id="crm-details-title">
         {{ leadInfo.title }} {{ 'global.from' | translate }} {{ leadInfo.createDate | date : "dd.MM.y, HH:mm" }}
       </h5>
     </div>
-    <div id="detailsContent" class="lead-info-card-wrapper">
-      <div id="detailsInfo" class="lead-info-card pt-3 pb-3">
+    <div class="lead-info-card-wrapper" id="detailsContent">
+      <div class="lead-info-card pt-3 pb-3" id="detailsInfo">
         <div class="lead-info-card__status">
           <div>{{ 'crm.page.table.th4' | translate }}</div>
           <div
-            class="btn-group btn-group-toggle btn-group__status-selector"
-            ngbRadioGroup
-            name="radioBasic"
-            [(ngModel)]="status"
             (ngModelChange)=updateState($event)
+            [(ngModel)]="status"
+            class="btn-group btn-group-toggle btn-group__status-selector"
+            name="radioBasic"
+            ngbRadioGroup
           >
-            <label ngbButtonLabel class="btn btn-default btn-status-new">
-              <input ngbButton type="radio" [value]="'NEW'"> {{ 'crm.page.card.status.new' | translate }}
+            <label class="btn btn-default btn-status-new" ngbButtonLabel>
+              <input [value]="'NEW'" ngbButton type="radio"> {{ 'crm.page.card.status.new' | translate }}
             </label>
-            <label ngbButtonLabel class="btn btn-default btn-status-inwork">
-              <input ngbButton type="radio" [value]="'INWORK'"> {{ 'crm.page.card.status.onWork' | translate }}
+            <label class="btn btn-default btn-status-inwork" ngbButtonLabel>
+              <input [value]="'INWORK'" ngbButton type="radio"> {{ 'crm.page.card.status.onWork' | translate }}
             </label>
-            <label ngbButtonLabel class="btn btn-default btn-status-invalid">
-              <input ngbButton type="radio" [value]="'INVALID'"> {{ 'crm.page.card.status.bad' | translate }}
+            <label class="btn btn-default btn-status-invalid" ngbButtonLabel>
+              <input [value]="'INVALID'" ngbButton type="radio"> {{ 'crm.page.card.status.bad' | translate }}
             </label>
-            <label ngbButtonLabel class="btn btn-default btn-status-success">
-              <input ngbButton type="radio" [value]="'SUCCESS'"> {{ 'crm.page.card.status.success' | translate }}
+            <label class="btn btn-default btn-status-success" ngbButtonLabel>
+              <input [value]="'SUCCESS'" ngbButton type="radio"> {{ 'crm.page.card.status.success' | translate }}
             </label>
           </div>
         </div>
 
         <div class="lead-info-card__data lead-info-card__data-notes">
-          <label for="detailsInfoComment">{{ 'crm.page.card.status.notes' | translate }} <span *ngIf="isUserCommentUpdated"><i class="fa fa-check"></i></span></label>
+          <label for="detailsInfoComment">{{ 'crm.page.card.status.notes' | translate }} <span
+            *ngIf="isUserCommentUpdated"><i class="fa fa-check"></i></span></label>
           <div>
             <textarea
-              type="text"
+              (blur)="updateComment()"
+              [(ngModel)]="leadInfo.userComment"
+              class="form-control"
               id="detailsInfoComment"
               rows="3"
-              class="form-control"
-              [(ngModel)]="leadInfo.userComment"
-              (blur)="updateComment()"
+              type="text"
             ></textarea>
           </div>
         </div>
@@ -58,27 +59,28 @@
           <h4 class="colored-dark-blue">{{ 'crm.page.card.details' | translate }}</h4>
         </div>
 
-        <div class="lead-info-card__data lead-info-card__data-colored" *ngIf="leadInfo.firstName">
+        <div *ngIf="leadInfo.firstName" class="lead-info-card__data lead-info-card__data-colored">
           <label>{{ 'crm.page.card.status.name' | translate }}</label>
           <div>{{ leadInfo.firstName }}</div>
         </div>
 
-        <div class="lead-info-card__data" *ngIf="leadInfo.emails.length">
+        <div *ngIf="leadInfo.emails.length" class="lead-info-card__data">
           <label>{{ 'crm.page.card.status.email' | translate }}</label>
           <div><a href="mailto:{{ leadInfo.emails[0] }}">{{ leadInfo.emails[0] }}</a></div>
         </div>
 
-        <div class="lead-info-card__data" *ngIf="leadInfo.phones.length">
+        <div *ngIf="leadInfo.phones.length" class="lead-info-card__data">
           <label>{{ 'crm.page.card.status.phone' | translate }}</label>
           <div><a href="tel:{{ leadInfo.phones[0] }}">{{ leadInfo.phones[0] }}</a></div>
         </div>
 
-        <div class="lead-info-card__data lead-info-card__data-colored" *ngFor="let field of leadInfo.fieldsValues">
+        <div *ngFor="let field of leadInfo.fieldsValues" class="lead-info-card__data lead-info-card__data-colored">
           <label>{{ field.name }}</label>
           <div>{{ field.value }}</div>
         </div>
 
-        <div class="lead-info-card__data lead-info-card__data-colored lead-info-card__data-commented" *ngIf="leadInfo.comment">
+        <div *ngIf="leadInfo.comment"
+             class="lead-info-card__data lead-info-card__data-colored lead-info-card__data-commented">
           <label>{{ 'crm.page.card.status.message' | translate }}</label>
           <div>{{ leadInfo.comment }}</div>
         </div>
@@ -115,7 +117,7 @@
       <div class="lead-info-card__history-wrapper">
         <label class="colored-dark-blue">{{ 'crm.page.card.visitHistory.title' | translate }}</label>
         <div class="lead-info-card__history v-timeline2 vertical-container">
-          <div class="vertical-timeline-block" *ngFor="let history of leadInfo.history | orderBy:['-serverDate']">
+          <div *ngFor="let history of leadInfo.history | orderBy:['-serverDate']" class="vertical-timeline-block">
             <div class="vertical-timeline-icon">
               <i class="fa fa-eye"></i>
             </div>
@@ -125,9 +127,9 @@
                   <i
                     *ngIf="index === 0"
                     class="fa fa-flag-checkered"
-                    data-toggle="tooltip"
                     data-placement="top"
                     data-title="{{ 'crm.page.card.source.linkDesc' | translate }}"
+                    data-toggle="tooltip"
                   ></i>
                   <small>{{ history.serverDate | date : "dd.MM.y, HH:mm" }}</small>
                 </span>

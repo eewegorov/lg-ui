@@ -14,7 +14,8 @@ export class IframeElementComponent implements OnInit {
 
   @Output() private buildIframeElement = new EventEmitter<any>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

@@ -15,11 +15,11 @@ import { AbtestsService } from '../services/abtests.service';
   styleUrls: ['./abtest-add.component.scss']
 })
 export class AbtestAddComponent implements OnInit {
+  public editableAB;
+  public newABTestInfo;
   @Input() private currentSite: SiteShort;
   @Input() private widget: WidgetInfo;
   @Input() private isContainerized: boolean;
-  public editableAB;
-  public newABTestInfo;
 
   constructor(
     private router: Router,
@@ -28,7 +28,8 @@ export class AbtestAddComponent implements OnInit {
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private abTestsService: AbtestsService
-  ) { }
+  ) {
+  }
 
 
   ngOnInit(): void {

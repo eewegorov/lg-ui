@@ -14,7 +14,8 @@ export class ExtendedVariantsComponent implements OnInit, AfterViewInit, DoCheck
   public availWidthTypes = [];
   public unmappedVariants = [];
 
-  constructor(private widgetConstructorService: WidgetConstructorService) { }
+  constructor(private widgetConstructorService: WidgetConstructorService) {
+  }
 
   ngAfterViewInit(): void {
     this.initPicker();

@@ -5,12 +5,13 @@
       <div class="wrapper-test-filter-sites">
         <div class="row ml-0"><h5>{{ 'abtests.show' | translate }}:</h5></div>
         <div class="dropdown site-selector">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                  type="button">
             <span *ngIf="currSite.trim().length==0">{{ 'widgetsList.add.chooseSite' | translate }}</span>
             {{ getCroppedString(getSiteName(currSite), 30, '…') }}
           </button>
           <ul class="dropdown-menu">
-            <li *ngFor="let site of sites" (click)="setCurrSite(site)">
+            <li (click)="setCurrSite(site)" *ngFor="let site of sites">
               <a class="dropdown-item">{{ site.name }}</a>
             </li>
           </ul>
@@ -18,30 +19,31 @@
       </div>
     </div>
 
-    <div class="main-content-container-ab-loader" *ngIf="!isLoad"></div>
+    <div *ngIf="!isLoad" class="main-content-container-ab-loader"></div>
 
     <div *ngIf="!abTests.length && isLoad" class="mt-4">
       <h3 class="f-0 text-center">{{ 'abtests.archive.completed' | translate }}</h3>
     </div>
     <ng-container *ngIf="isLoad">
-      <div class="test-item" *ngFor="let test of abTests; index as i" [id]="'testIdNum-' + test.id">
+      <div *ngFor="let test of abTests; index as i" [id]="'testIdNum-' + test.id" class="test-item">
         <div class="test-item-header">
           <div class="test-item-left">
             <div class="max-edit-text-bl">
               <span class="test-item-name">{{ test.name || ('abtests.archive.noTitle' | translate) }}</span>
             </div>
             <div class="max-edit-text-bl">
-              <span class="test-item-desc">{{ test.description || ('abtests.archive.noDescription' | translate) }}</span>
+              <span
+                class="test-item-desc">{{ test.description || ('abtests.archive.noDescription' | translate) }}</span>
             </div>
           </div>
           <div class="test-item-right">
             <div class="btn-group">
               <button
-                class="btn btn-sm btn-default"
                 (click)="deleteArchTest(test.id, i)"
+                class="btn btn-sm btn-default"
                 data-container="body"
-                data-toggle="tooltip"
                 data-placement="top"
+                data-toggle="tooltip"
                 title="{{ 'abtests.archive.delete' | translate }}"
               >
                 <i class="fa fa-trash"></i>
@@ -59,11 +61,12 @@
               <div class="ab-grid__header--update">{{ 'abtests.improvement' | translate }}</div>
             </div>
             <div class="ab-grid__body">
-              <div class="ab-grid__item" *ngFor="let item of test.variants">
+              <div *ngFor="let item of test.variants" class="ab-grid__item">
                 <div class="ab-grid__item--name"><span class="long-text">{{item.name || 'empty'}}</span></div>
                 <div class="ab-grid__item--shows">{{ item.shows }} / {{ item.target }}</div>
                 <div class="ab-grid__item--conv">{{ item.conversion }}</div>
-                <div class="ab-grid__item--update" [ngClass]="getClassForBetterTo(item)" [innerHTML]="showBetterToValue(item)"></div>
+                <div [innerHTML]="showBetterToValue(item)" [ngClass]="getClassForBetterTo(item)"
+                     class="ab-grid__item--update"></div>
               </div>
             </div>
           </div>

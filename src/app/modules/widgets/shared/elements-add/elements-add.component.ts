@@ -31,7 +31,8 @@ export class ElementsAddComponent implements OnInit {
     private coreSitesService: CoreSitesService,
     private tariffsService: TariffsService,
     private widgetConstructorService: WidgetConstructorService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }

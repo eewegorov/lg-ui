@@ -11,8 +11,6 @@ import { PasswordRequest, User, UserRequest } from '../../../core/models/user';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit, OnDestroy {
-  @ViewChild('password', { static: true }) private password: ElementRef;
-
   public user: UserRequest = {
     phone: '',
     email: '',
@@ -21,18 +19,18 @@ export class SettingsComponent implements OnInit, OnDestroy {
     timeZone: ''
   };
   public saveGeneralDisabled = false;
-
   public oldPassword = '';
   public newPassword = '';
   public changePasswordDisabled = false;
-
+  @ViewChild('password', { static: true }) private password: ElementRef;
   private meInfoSub: SubscriptionLike;
 
   constructor(
     private translate: TranslateService,
     private toastr: ToastrService,
     private userService: UserService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {

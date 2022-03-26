@@ -1,62 +1,63 @@
 <h3>{{ 'login.enter' | translate }}</h3>
 <div class="hpanel">
   <div class="panel-body">
-    <form id="formLogin" method="post" [formGroup]="loginForm" (ngSubmit)="submitAuth()">
+    <form (ngSubmit)="submitAuth()" [formGroup]="loginForm" id="formLogin" method="post">
       <div class="form-group">
         <label class="col-form-label" for="username">{{ 'login.user' | translate }}:</label>
         <input
-          type="text"
-          id="username"
-          class="form-control"
-          placeholder="example@gmail.com"
           autocomplete="off"
-          name="j_username"
+          class="form-control"
           formControlName="username"
+          id="username"
+          name="j_username"
+          placeholder="example@gmail.com"
           required
+          type="text"
         >
         <span *ngIf="error" class="errorMessage errorMessageLogin small">{{ 'login.error' | translate }}</span>
       </div>
       <div class="form-group">
         <label class="col-form-label" for="password">{{ 'login.password' | translate }}:</label>
         <input
-          type="password"
-          placeholder="********"
           autocomplete="off"
-          name="j_password"
+          class="form-control"
           formControlName="password"
           id="password"
-          class="form-control"
+          name="j_password"
+          placeholder="********"
           required
+          type="password"
         >
         <span *ngIf="error" class="errorMessage errorMessageLogin small">{{ 'login.error' | translate }}</span>
         <span class="help-block small">{{ 'login.unique_password' | translate }}</span>
       </div>
       <div class="checkbox">
-        <input type="checkbox" class="i-checks" name="remember-me" id="checkRemember" checked #ichecks>
+        <input #ichecks checked class="i-checks" id="checkRemember" name="remember-me" type="checkbox">
         {{ 'login.remember_checkbox' | translate }}
         <p class="help-block small">({{ 'login.remember_note' | translate }})</p>
       </div>
 
       <button
-        type="submit"
         class="btn btn-success btn-block"
         id="buttonLogin"
+        type="submit"
       >
         {{ 'login.login' | translate }}
       </button>
       <span class="help-block small help-block_label">ИЛИ</span>
       <button
+        (click)="authYandex($event)"
         class="btn btn-warning btn-block"
         style="background-color: #ffdb4dd9; margin-bottom: 30px;"
-        (click)="authYandex($event)"
       >
         Войти через <span style="color:#f00;">Я</span>ндекс
       </button>
       <span class="help-block small">Еще не зарегистрированы?</span>
-      <button routerLink="/account/register" type="button" class="btn btn-default btn-block" data-action="registerLayer">
+      <button class="btn btn-default btn-block" data-action="registerLayer" routerLink="/account/register"
+              type="button">
         {{ 'login.register' | translate }}
       </button>
-      <a routerLink="/account/forgot" class="forgotPass" data-action="passwordLayer">
+      <a class="forgotPass" data-action="passwordLayer" routerLink="/account/forgot">
         {{ 'login.forgot_password' | translate }}
       </a>
     </form>

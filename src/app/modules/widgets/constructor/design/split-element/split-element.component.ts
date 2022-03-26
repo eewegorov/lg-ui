@@ -12,7 +12,8 @@ export class SplitElementComponent implements OnInit {
   @Input() public widthHrType: string[];
   @Input() public floatBtn: string[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

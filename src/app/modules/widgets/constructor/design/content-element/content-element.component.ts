@@ -1,14 +1,4 @@
-import {
-  AfterContentInit,
-  Component,
-  DoCheck,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
+import { AfterContentInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FullWidget } from '../../../../../core/models/widgets';
 import { WidgetConstructorService } from '../../../services/widget-constructor.service';
 
@@ -25,13 +15,7 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
   @Input() public widthContentStyle: string;
   @Input() public heightContentStyle: string;
   @Input() public isMobile: boolean;
-
-  @Output() private removeElement = new EventEmitter<{element: string, index: number}>();
-  @Output() private scrollToElement = new EventEmitter<{id: string, elementName: string, elementCounter: number}>();
-  @Output() private addNewElement = new EventEmitter<number>();
-
   @ViewChild('videoBg') videoBg: ElementRef;
-
   public showAddButtonOnWidget = true;
   public optionsSummernote = {
     airMode: true,
@@ -48,13 +32,16 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
       ]
     }
   };
-
   public widthBtnStyle = '';
   public widthBtnFormStyle = '';
   public widthExitBtnStyle = '';
   public videoBgClass = '';
+  @Output() private removeElement = new EventEmitter<{ element: string, index: number }>();
+  @Output() private scrollToElement = new EventEmitter<{ id: string, elementName: string, elementCounter: number }>();
+  @Output() private addNewElement = new EventEmitter<number>();
 
-  constructor(private widgetConstructorService: WidgetConstructorService) { }
+  constructor(private widgetConstructorService: WidgetConstructorService) {
+  }
 
   ngDoCheck(): void {
     if (this.widget.guiprops?.button?.btn_width === 'Собственная') {
@@ -86,7 +73,8 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
     }, 0);
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   public scrollToEl(id: string, elementName: string, elementCounter?: number) {
     this.scrollToElement.emit({ id, elementName, elementCounter });
@@ -278,12 +266,10 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
     if (this.widget.guiprops.form.orient === 'Горизонтальная') {
       if (item.type === 'message') {
         className = 'widget-input-gorizontal-textar';
-      }
-      else {
+      } else {
         className = 'widget-input-gorizontal';
       }
-    }
-    else {
+    } else {
       if (item.type === 'message') {
         className = 'widget-input-vert-textar';
       }
@@ -297,8 +283,7 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
 
     if (item.type === 'message') {
       elementName = 'textarEl';
-    }
-    else {
+    } else {
       elementName = 'inputEl';
     }
 
@@ -483,6 +468,75 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
     this.hoverStars(item.serviceData.cacheWidth, _this);
   }
 
+  public termClick(event) {
+    const _this = $(event.target);
+    const parent = _this.parents('.note-editable');
+    if (parent.length) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+
+  public isTimerTypeShown(item, type) {
+    return Boolean(item.design.nullData[type] || item.type1Model[type]);
+  }
+
+  public getInputFormPhoneMask() {
+    return this.widget.guiprops.formSet.phoneMask.maskValue.replace(/\*/g, '_');
+  }
+
+  public getRGBAColor(item) {
+    return this.widgetConstructorService.getRGBAColor(item);
+  }
+
+  public classNameImg() {
+    return this.widgetConstructorService
+      .classNameImg(this.widget.guiprops.image, this.widget.guiprops.form, this.widget.guiprops.formExt?.model?.mainSettings);
+  }
+
+  public classNameImgMain() {
+    return this.widgetConstructorService.classNameImgMain(this.widget.guiprops.image);
+  }
+
+  public classNameVerticalOrient() {
+    return this.widgetConstructorService.classNameVerticalOrient(this.widget.guiprops.dhVisual);
+  }
+
+  public getRGBAColorItems(color, opacity) {
+    return (this.widgetConstructorService.hexToRgb(color, opacity)).toString();
+  }
+
+  public setVideoBGStyle() {
+    if (!this.videoBg || !this.videoBg.nativeElement) {
+      return '';
+    }
+    if (($(this.videoBg.nativeElement).width() !== 0) && ($(this.videoBg.nativeElement).height() !== 0)) {
+      if (($(this.videoBg.nativeElement).width() / $(this.videoBg.nativeElement).height()) >= (16 / 9)) {
+        return 'wide-video-bg-ext';
+      } else {
+        return 'narrow-video-bg-ext';
+      }
+    }
+    return '';
+  }
+
+  public colorPodStyles() {
+    return {
+      background: this.widget.guiprops?.formExt?.enable
+        ? this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod
+        : this.widget.guiprops.form.colorPod.rgbaColorPod,
+      'border-bottom-left-radius': this.getColorPodBorderRadius(),
+      'border-bottom-right-radius': this.getColorPodBorderRadius()
+    };
+  }
+
+  public getTimerLabelItem(item, type, index) {
+    if (item.type.type === 0) {
+      return '1';
+    }
+    return this.prepareItemTime(item.type1Model[type])[index];
+  }
+
   private getPosition(e, target) {
     return e.pageX - target.offset().left;
   }
@@ -537,93 +591,20 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
     stars.css('width', w);
   }
 
-  public termClick(event) {
-    const _this = $(event.target);
-    const parent = _this.parents('.note-editable');
-    if (parent.length) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-  }
-
-  public isTimerTypeShown(item, type) {
-    return Boolean(item.design.nullData[type] || item.type1Model[type]);
-  }
-
-  public getInputFormPhoneMask() {
-    return this.widget.guiprops.formSet.phoneMask.maskValue.replace(/\*/g, '_');
-  }
-
-  public getRGBAColor(item) {
-    return this.widgetConstructorService.getRGBAColor(item);
-  }
-
-  public classNameImg() {
-    return this.widgetConstructorService
-      .classNameImg(this.widget.guiprops.image, this.widget.guiprops.form, this.widget.guiprops.formExt?.model?.mainSettings);
-  }
-
-  public classNameImgMain() {
-    return this.widgetConstructorService.classNameImgMain(this.widget.guiprops.image);
-  }
-
-  public classNameVerticalOrient() {
-    return this.widgetConstructorService.classNameVerticalOrient(this.widget.guiprops.dhVisual);
-  }
-
-  public getRGBAColorItems(color, opacity) {
-    return (this.widgetConstructorService.hexToRgb(color, opacity)).toString();
-  }
-
-  public setVideoBGStyle() {
-    if (! this.videoBg || !this.videoBg.nativeElement) {
-      return '';
-    }
-    if (($(this.videoBg.nativeElement).width() !== 0) && ($(this.videoBg.nativeElement).height() !== 0)) {
-      if (($(this.videoBg.nativeElement).width() / $(this.videoBg.nativeElement).height()) >= (16 / 9)) {
-        return 'wide-video-bg-ext';
-      } else {
-        return 'narrow-video-bg-ext';
-      }
-    }
-    return '';
-  }
-
-  public colorPodStyles() {
-    return {
-      background: this.widget.guiprops?.formExt?.enable
-        ? this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod
-        : this.widget.guiprops.form.colorPod.rgbaColorPod,
-      'border-bottom-left-radius': this.getColorPodBorderRadius(),
-      'border-bottom-right-radius': this.getColorPodBorderRadius()
-    };
-  }
-
-  public getTimerLabelItem(item, type, index) {
-    if (item.type.type === 0) {
-      return '1';
-    }
-    return this.prepareItemTime(item.type1Model[type])[index];
-  }
-
   private prepareItemTime(data) {
     return ('0' + data).slice(-2);
   }
 
   private getColorPodBorderRadius() {
     if (this.widget.guiprops.formExt?.model?.mainSettings?.visual?.type === 1 ||
-      this.widget.guiprops.form.visual === 'На всю ширину' || this.widget.guiprops.image.enable === false)
-    {
+      this.widget.guiprops.form.visual === 'На всю ширину' || this.widget.guiprops.image.enable === false) {
       if ((this.widget.guiprops.image.place === 'Слева') || (this.widget.guiprops.image.place === 'Справа') ||
-        (this.widget.guiprops.image.place === 'Сверху') || !this.widget.guiprops.image.enable)
-      {
+        (this.widget.guiprops.image.place === 'Сверху') || !this.widget.guiprops.image.enable) {
         return this.widget.guiprops.bg.borderRadius;
-      }
-      else {
+      } else {
         return '0';
       }
-    }
-    else {
+    } else {
       return '0';
     }
   }

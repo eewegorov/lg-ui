@@ -25,7 +25,8 @@ export class SitesComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private coreSitesService: CoreSitesService,
     private sitesService: SitesService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.getMeInfo();
@@ -33,13 +34,19 @@ export class SitesComponent implements OnInit, OnDestroy {
 
   public openModalForCreatingNewSite(): void {
     const modalRef = this.modalService.open(SiteAddComponent, {
-        size: 'lg',
-        windowClass: 'animate__animated animate__slideInDown animate__faster'
-      });
+      size: 'lg',
+      windowClass: 'animate__animated animate__slideInDown animate__faster'
+    });
     modalRef.componentInstance.hidePhone = this.hidePhoneFieldInModal;
     modalRef.componentInstance.updateSites.subscribe(() => {
       this.getSites();
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.sitesSub) {
+      this.sitesSub.unsubscribe();
+    }
   }
 
   private getMeInfo() {
@@ -69,12 +76,6 @@ export class SitesComponent implements OnInit, OnDestroy {
         this.openModalForCreatingNewSite();
       }
     });
-  }
-
-  ngOnDestroy(): void {
-    if (this.sitesSub) {
-      this.sitesSub.unsubscribe();
-    }
   }
 
 }

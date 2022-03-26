@@ -5,20 +5,20 @@
     <label class="control-label control-label-des">Ширина</label>
     <div class="d-flex align-items-center">
       <div
-        class="form-control form-control-font mr-2"
         [class.disabled]="modelName.width_type !== widthHrType[1]"
+        class="form-control form-control-font mr-2"
       >
         <input
-          type="number"
           [(ngModel)]="modelName.widthpx"
           [disabled]="modelName.width_type !== widthHrType[1]"
+          type="number"
         />
         <label>px</label>
       </div>
       <button
-        class="wide-button"
-        [class.active]="modelName.width_type === widthHrType[0]"
         (click)="modelName.width_type = (modelName.width_type === widthHrType[0] ? widthHrType[1] : widthHrType[0])"
+        [class.active]="modelName.width_type === widthHrType[0]"
+        class="wide-button"
       >
       </button>
     </div>
@@ -26,29 +26,29 @@
 
   <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3 pt-1">
     <label
-      class="control-label control-label-des"
       [class.disabled]="modelName.width_type === widthHrType[0]"
+      class="control-label control-label-des"
     >
       Выравнивание
     </label>
     <div>
       <button
-        class="align-button icon-left"
-        [class.active]="modelName.position === floatBtn[0]"
         (click)="modelName.position = floatBtn[0]"
+        [class.active]="modelName.position === floatBtn[0]"
         [disabled]="modelName.width_type === widthHrType[0]"
+        class="align-button icon-left"
       ></button>
       <button
-        class="align-button icon-center"
-        [class.active]="modelName.position === floatBtn[1]"
         (click)="modelName.position = floatBtn[1]"
+        [class.active]="modelName.position === floatBtn[1]"
         [disabled]="modelName.width_type === widthHrType[0]"
+        class="align-button icon-center"
       ></button>
       <button
-        class="align-button icon-right"
-        [class.active]="modelName.position === floatBtn[2]"
         (click)="modelName.position = floatBtn[2]"
+        [class.active]="modelName.position === floatBtn[2]"
         [disabled]="modelName.width_type === widthHrType[0]"
+        class="align-button icon-right"
       ></button>
     </div>
   </div>
@@ -57,21 +57,21 @@
     <label class="control-label control-label-des">Высота</label>
     <div class="d-flex align-items-center">
       <div
-        class="form-control form-control-font mr-2"
         [class.disabled]="modelName.height_type === 'Авто'"
+        class="form-control form-control-font mr-2"
       >
         <input
-          type="number"
-          min="60"
           [(ngModel)]="modelName.heightpx"
           [disabled]="modelName.height_type === 'Авто'"
+          min="60"
+          type="number"
         />
         <label>px</label>
       </div>
       <button
-        class="content-type-button"
-        [class.active]="modelName.height_type === 'Авто'"
         (click)="modelName.height_type = (modelName.height_type === widgwidthBtn[0] ? widgwidthBtn[1] : widgwidthBtn[0])"
+        [class.active]="modelName.height_type === 'Авто'"
+        class="content-type-button"
       >
         AUTO
       </button>
@@ -80,16 +80,17 @@
 
   <div class="row-subitem row-subitem-padding mt-3 pt-1 position-relative">
     <h3 class="mb-1">HTML или JAVASCRIPT код</h3>
-    <textarea class="form-control textar-iframe" (blur)="getCodeForIframe(modelName)" [(ngModel)]="modelName.html_value"></textarea>
+    <textarea (blur)="getCodeForIframe(modelName)" [(ngModel)]="modelName.html_value"
+              class="form-control textar-iframe"></textarea>
     <span class="small">Также вы можете использовать iframe, если нужно.</span>
     <button
       (click)="getCodeForIframe(modelName)"
       class="btn btn-default refresh-iframe-element-btn"
-      data-toggle="tooltip"
       data-container="body"
-      data-placement="top"
-      title=""
       data-original-title="Обновить превью виджета"
+      data-placement="top"
+      data-toggle="tooltip"
+      title=""
     >
       <i class="fas fa-sync"></i>
     </button>
@@ -97,7 +98,8 @@
 
   <div class="row-subitem row-subitem-padding mt-3">
     <h3 class="mb-1">CSS стиль</h3>
-    <textarea class="form-control textar-iframe" (blur)="getCodeForIframe(modelName)" [(ngModel)]="modelName.css_value"></textarea>
+    <textarea (blur)="getCodeForIframe(modelName)" [(ngModel)]="modelName.css_value"
+              class="form-control textar-iframe"></textarea>
     <span class="small">Можно оставить пустым. Применяется только к элементу</span>
   </div>
 </div>

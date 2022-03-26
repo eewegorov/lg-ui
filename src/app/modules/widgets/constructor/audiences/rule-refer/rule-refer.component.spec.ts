@@ -8,9 +8,9 @@ describe('RuleReferComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RuleReferComponent ]
+      declarations: [RuleReferComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

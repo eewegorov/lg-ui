@@ -19,7 +19,8 @@ export class TariffsService {
     private toastr: ToastrService,
     private modalService: NgbModal,
     private coreApiService: CoreApiService
-  ) { }
+  ) {
+  }
 
   public checkTariffPlans(siteId, title, subscription, siteName?, expTime?) {
     this.getTariffPlans().subscribe((response: TariffPlan[]) => {

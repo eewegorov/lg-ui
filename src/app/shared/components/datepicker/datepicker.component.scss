@@ -17,14 +17,17 @@
   display: inline-block;
   width: 2rem;
 }
+
 .custom-day:hover, .custom-day.focused {
   background-color: #e6e6e6;
 }
+
 .today {
   background-color: #f0ad4e;
   border-radius: 1rem;
   color: white;
 }
+
 .hidden {
   display: none;
 }

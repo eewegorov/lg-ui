@@ -18,10 +18,6 @@ export class VisualElementComponent implements OnInit {
   @Input() public placeImg: string[];
   @Input() public imageItemsType: string[];
   @Input() public imageItemsAlign: string[];
-
-  @Output() private getVideo = new EventEmitter<Record<string, string>>();
-  @Output() private listFileItem = new EventEmitter<string>();
-
   public optionsOpacity: Options = {
     floor: 0.00,
     ceil: 1.00,
@@ -29,7 +25,6 @@ export class VisualElementComponent implements OnInit {
     animate: false,
     showSelectionBar: true
   };
-
   public optionsThickness: Options = {
     floor: 0.00,
     ceil: 10.00,
@@ -37,7 +32,6 @@ export class VisualElementComponent implements OnInit {
     animate: false,
     showSelectionBar: true
   };
-
   public optionsRound: Options = {
     floor: 0,
     ceil: 50,
@@ -45,7 +39,6 @@ export class VisualElementComponent implements OnInit {
     animate: false,
     showSelectionBar: true
   };
-
   public optionsSharpness: Options = {
     floor: 0,
     ceil: 100,
@@ -53,8 +46,11 @@ export class VisualElementComponent implements OnInit {
     animate: false,
     showSelectionBar: true
   };
+  @Output() private getVideo = new EventEmitter<Record<string, string>>();
+  @Output() private listFileItem = new EventEmitter<string>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.widget.guiprops.bg.borderRadiusEnable = true;

@@ -8,9 +8,9 @@ describe('SiteSettingsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SiteSettingsComponent ]
+      declarations: [SiteSettingsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

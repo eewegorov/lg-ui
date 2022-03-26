@@ -2,13 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../../../core/models/api';
-import {
-  LeadByIdResponse,
-  LeadsResponse,
-  LeadsWidgetsResponse,
-  UpdateComment,
-  UpdateState
-} from '../../../core/models/crm';
+import { LeadByIdResponse, LeadsResponse, LeadsWidgetsResponse, UpdateComment, UpdateState } from '../../../core/models/crm';
 import { ConfigService } from '../../../core/services/config.service';
 
 
@@ -20,7 +14,8 @@ export class CrmApiService {
   constructor(
     private http: HttpClient,
     private configService: ConfigService
-  ) { }
+  ) {
+  }
 
   public getLeadList(filterParams): Observable<LeadsResponse> {
     return this.http.get<LeadsResponse>(`${this.configService.config.prov}/leads`, {

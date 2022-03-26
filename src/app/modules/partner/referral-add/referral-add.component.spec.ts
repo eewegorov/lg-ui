@@ -8,9 +8,9 @@ describe('ReferralAddComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReferralAddComponent ]
+      declarations: [ReferralAddComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
