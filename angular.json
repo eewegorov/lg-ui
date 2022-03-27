@@ -159,6 +159,9 @@
   },
   "defaultProject": "lg-ui",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "defaultCollection": "@angular-eslint/schematics",
+    "cache": {
+      "enabled": false
+    }
   }
 }

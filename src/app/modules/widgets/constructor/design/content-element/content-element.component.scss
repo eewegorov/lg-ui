@@ -251,9 +251,9 @@
 }
 
 .remove-element-from-list-view .remove-sub-item {
-  font-size: 18px;
+  font-size: 15px;
   width: 15px;
-  padding: 0;
+  padding: 0 0 0 1px;
   float: none;
   color: #fff;
 }
@@ -336,6 +336,7 @@
   float: none;
   color: #fff;
   margin: 0;
+  font-size: 16px;
 }
 
 .btn-add-on-elem .tooltip,
