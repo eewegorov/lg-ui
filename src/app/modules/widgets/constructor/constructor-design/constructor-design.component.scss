@@ -279,8 +279,8 @@ h6.title-h6-widget a:hover {
 
 .close-btn-x {
   position: absolute;
-  top: 3px;
-  right: 80px;
+  top: 7px;
+  right: 85px;
   font-size: 26px;
   overflow: hidden;
   border: 1px solid transparent;
@@ -289,23 +289,23 @@ h6.title-h6-widget a:hover {
   color: #999;
   border-radius: 50%;
   line-height: 30px;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
   z-index: 999999;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5);
-  transition: 0.2s transform linear;
+  transition: all .1s ease;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 }
 
 .close-btn-x span {
   display: block;
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 6px;
+  left: 6px;
   width: 16px;
   height: 16px;
   background: url('~src/assets/images/widgets/dot_close.svg') center no-repeat;

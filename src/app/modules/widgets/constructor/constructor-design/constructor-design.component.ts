@@ -162,6 +162,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes.widget && !changes.widget.isFirstChange()) {
+      ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
+
       this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item: WidgetType) => item.id === this.widget.type).code;
       this.staticWidgetInstallCode =
         this.isContainerized ? this.containerizedWidgetService.getContainerInstallCode(this.widget.containerId) : '';
@@ -467,6 +469,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public removeCurrentElement(element: string, index: number): void {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+
     if (element) {
       if (element === 'form-element' || element === 'button-element') {
         this.widget.guiprops.form.enable = false;
@@ -660,7 +664,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public setCurrentElement(elementName: string): void {
-    console.log($('.widget-style-menu .panel-group'));
     $('.widget-style-menu .panel-group')[0].scrollTop = 0;
     this.backToRegularElement();
     this.currentElement = elementName;

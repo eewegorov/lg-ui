@@ -6,7 +6,7 @@
   id="mainBlockWidget"
 >
   <div
-    [ngClass]="(widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
+    [ngClass]="(bgStyle && widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
     [ngStyle]="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity}"
     class="absolute-bg-content"
   >
