@@ -7474,11 +7474,11 @@
                         var $currentButton = $button.closest('.note-color').find('.note-current-color-button');
                         if (actionName === 'apply' && key === 'background-color') {
                           _this.context.invoke('restoreRange');
-                          var $inputBack = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()('.' + className).find('#customBackColor');
+                          var $inputBack = $button.parent().find('#customBackColor');
                           value = $inputBack.val();
                         } else if (actionName === 'apply' && key === 'color') {
                           _this.context.invoke('restoreRange');
-                          var $inputFore = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default()('.' + className).find('#customForeColor');
+                          var $inputFore = $button.parent().find('#customForeColor');
                           value = $inputFore.val();
                         }
                         $color.css(key, value);
