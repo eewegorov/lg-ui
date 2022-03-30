@@ -1,4 +1,15 @@
-import { AfterContentInit, Component, DoCheck, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  Component,
+  DoCheck,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { FullWidget } from '../../../../../core/models/widgets';
 import { WidgetConstructorService } from '../../../services/widget-constructor.service';
 
@@ -7,7 +18,7 @@ import { WidgetConstructorService } from '../../../services/widget-constructor.s
   templateUrl: './content-element.component.html',
   styleUrls: ['../../../shared/shared.scss', './content-element.component.scss']
 })
-export class ContentElementComponent implements OnInit, DoCheck, AfterContentInit {
+export class ContentElementComponent implements OnInit, DoCheck, AfterContentChecked {
   @Input() public widget: FullWidget;
   @Input() public bgStyle: string;
   @Input() public widthImageStyle: string;
@@ -67,7 +78,7 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentIni
     }
   }
 
-  ngAfterContentInit(): void {
+  ngAfterContentChecked(): void {
     setTimeout(() => {
       this.videoBgClass = this.setVideoBGStyle();
     }, 0);
