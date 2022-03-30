@@ -1,6 +1,5 @@
 import {
   AfterContentChecked,
-  AfterContentInit,
   Component,
   DoCheck,
   ElementRef,

@@ -196,7 +196,7 @@
           <div class="row-subitem d-flex position-relative mt-2">
             <div class="col-sm-6 row-subitem-padding">
               <div class="form-group widget-selector">
-                <label class="mb-1">
+                <label class="mb-0">
                   <input
                     (change)="getVideoId(widget.guiprops.bg.video)"
                     [(ngModel)]="widget.guiprops.bg.video.videoType"
@@ -211,7 +211,7 @@
             </div>
             <div class="col-sm-6 row-subitem-padding">
               <div class="form-group widget-selector">
-                <label class="mb-1">
+                <label class="mb-0">
                   <input
                     (change)="getVideoId(widget.guiprops.bg.video)"
                     [(ngModel)]="widget.guiprops.bg.video.videoType"
@@ -243,7 +243,7 @@
               class="form-control widgetVideoUrl"
               type="text"
             />
-            <span class="input-down-sm-lab small mt-1">
+            <span class="input-down-sm-lab small mt-2">
               {{ (widget.guiprops.bg.video.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253' }}
             </span>
           </div>
@@ -455,7 +455,7 @@
               </div>
               <div class="col-sm-6 row-subitem-padding">
                 <div class="form-group widget-selector">
-                  <label>
+                  <label class="mb-0">
                     <input
                       (change)="getVideoId(widget.guiprops.image)"
                       [(ngModel)]="widget.guiprops.image.videoType"
@@ -470,7 +470,7 @@
               </div>
               <div class="col-sm-6 row-subitem-padding">
                 <div class="form-group widget-selector">
-                  <label>
+                  <label class="mb-0">
                     <input
                       (change)="getVideoId(widget.guiprops.image)"
                       [(ngModel)]="widget.guiprops.image.videoType"
@@ -503,7 +503,7 @@
                   class="form-control widgetVideoUrl"
                   type="text"
                 />
-                <span class="input-down-sm-lab small">
+                <span class="input-down-sm-lab small mt-2">
                 {{(widget.guiprops.image.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253'}}
               </span>
               </div>
