@@ -158,6 +158,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     });
 
     this.initLabelMainPicker();
+
+    $(this.controls.newModal as any).on('hidden.bs.modal', (e)=> e.currentTarget.remove());
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -193,7 +195,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       newElementModal: $('#addNewElementListModal')
     };
 
-    $('#addNewElementListModal').on('hide.bs.modal', (e) => {
+    $(this.controls.newElementModal).on('hide.bs.modal', (e) => {
       $('body').removeClass('modal-open-h100');
     });
 
@@ -1959,6 +1961,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   private fillListImage(images: Image[]) {
+    console.log(images);
     if (images.length === 0) {
       $('#addNewWidgetListModal .modal-body').find('h4').html('У вас еще нет загруженных изображений');
     } else {
