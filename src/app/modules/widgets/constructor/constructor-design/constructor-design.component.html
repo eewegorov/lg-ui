@@ -721,7 +721,7 @@
                            [hidden]="currentElement !== 'video-element' + (item.counter ? ('#' + item.counter) : '')">
                         <app-video-element
                           (getVideo)="getVideoId($event)"
-                          (setVideoSize)="newVideoSize($event)"
+                          (setVideoSize)="newVideoSize($event, true)"
                           [floatBtn]="floatBtn"
                           [index]="i"
                           [modelName]="item"

@@ -216,6 +216,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       this.newVideoSize(this.widget.guiprops.bg.video);
     }
 
+    if (this.widget.guiprops.image.enable && this.widget.guiprops.image.typeBl && (this.widget.guiprops.image.typeBl === 'videoBl')) {
+      this.newVideoSize(this.widget.guiprops.image.videoUrl);
+    }
+
     $('[data-detect]').each((index) => {
       this.linkDetectArr[index] = $(this).data('detect');
     });
@@ -569,12 +573,16 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     this.newVideoSize(item);
   }
 
-  public newVideoSize(item) {
+  public newVideoSize(item, rebuild?: boolean) {
     setTimeout(() => {
       if (item.typeBl) {
         $('#idImageVideoFrame').attr('src', item.videoUrl);
       } else if (item.counter) {
-        $('#idVideoFrame' + item.counter).attr('src', item.videoUrl);
+        const videoBlock = document.getElementById('idVideoFrame' + item.counter);
+        if (!videoBlock || (videoBlock.getAttribute('src') && !rebuild)) {
+          return;
+        }
+        videoBlock.setAttribute('src', item.videoUrl);
       } else if (item.isVideoBG) {
         $('#idBgVideoFrame').attr('src', item.videoUrl);
         $('#idBgVideoFrameThank').attr('src', item.videoUrl);
@@ -1306,9 +1314,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       mainBlockW.removeClass('hide-image-bl-for-rebuild');
     }, 300);*/
 
-    if (this.widget.guiprops.image.enable && this.widget.guiprops.image.typeBl && (this.widget.guiprops.image.typeBl === 'videoBl')) {
-      $('#idImageVideoFrame').attr('src', this.widget.guiprops.image.videoUrl);
-    }
+
 
     if (((this.widget.guiprops.image.place === 'Слева') || (this.widget.guiprops.image.place === 'Справа'))) {
       if (this.widget.guiprops.image.img_width === 'Собственная') {
@@ -1948,7 +1954,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         }
 
         if (item.name === 'video-element') {
-          this.newVideoSize(item);
+          this.newVideoSize(item, false);
         }
       }
     });
