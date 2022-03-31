@@ -489,7 +489,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     }
     this.widget.guiprops.elementsList = this.widget.guiprops.elementsList.filter((_, i) => i !== index);
 
-    if (index === this.currentIndex) {
+    if (index <= this.currentIndex) {
       this.currentElement = 'settings';
       this.currentIndex = 0;
     }
