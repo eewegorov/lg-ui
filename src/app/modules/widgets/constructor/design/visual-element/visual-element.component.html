@@ -507,22 +507,17 @@
               </div>
             </div>
 
-            <div class="row row-subitem mt-3">
-              <div class="d-flex justify-content-between w-100 row-subitem-padding pt-1">
-                <label class="control-label switcher-label-xs control-label-des">
-                  Автоматически проигрывать видео
+            <div class="d-flex row-subitem mt-3">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    [(ngModel)]="widget.guiprops.image.autoplay"
+                    class="form-check-input"
+                    type="checkbox"
+                  />
+                  <span class="checkmark"></span>
                 </label>
-                <ui-switch
-                  [(ngModel)]="widget.guiprops.image.autoplay"
-                  size="small"
-                ></ui-switch>
-              </div>
-            </div>
-            <div class="row row-subitem">
-              <div class="col-sm-12 row-subitem-padding">
-                <div class="sm-video-text sm-video-text-act widget-small-text">Видео будет автоматически
-                  воспроизводиться при показе виджета.
-                </div>
+                <span class="form-check-text f-3">Автоматически вопроизводить при показе</span>
               </div>
             </div>
           </div>
