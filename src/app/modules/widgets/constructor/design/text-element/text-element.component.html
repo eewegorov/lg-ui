@@ -1,5 +1,6 @@
 <div>
-  <div class="row-subitem row-subitem-padding">
+  <div class="d-flex align-items-center w-100 row-subitem row-subitem-padding">
+    <label class="control-label control-label-des w-75">Шрифт</label>
     <input [id]="'font-picker' + index" type="text">
   </div>
 
@@ -50,10 +51,10 @@
     <div class="d-flex justify-content-between mt-3">
       <h5 class="label-style-ic control-label-des">Прозрачность</h5>
       <div class="d-flex text-right side-ui-sm">
-        <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod"
+        <ngx-slider [(value)]="item.textShadow.opacity"
                     [options]="optionsOpacity"></ngx-slider>
         <input
-          [(ngModel)]="widget.guiprops['form'].colorPod.opacityColorPod"
+          [(ngModel)]="item.textShadow.opacity"
           class="picker-input slider"
         />
       </div>
