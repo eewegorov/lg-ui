@@ -931,6 +931,7 @@
                   (addNewElement)="addNewElementToContent($event)"
                   (removeElement)="removeCurrentElement($event.element, $event.index)"
                   (scrollToElement)="scrollToEl($event.id, $event.elementName, $event.elementCounter)"
+                  (updateElementIndex)="updateIndex($event)"
                   [bgStyle]="bgStyle"
                   [heightContentStyle]="heightContentStyle"
                   [heightImageStyle]="heightImageStyle"

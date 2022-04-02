@@ -66,7 +66,7 @@
       *ngIf="widget.guiprops.elementsList"
       [ngClass]="classNameVerticalOrient()"
       [ngStyle]="{'height': heightContentStyle}"
-      [sortablejsOptions]="{ animation: 100, handle: '.grab-handle-element' }"
+      [sortablejsOptions]="optionsSortable"
       [sortablejs]="widget.guiprops.elementsList"
       class="widget-flex-dis"
       id="mainElListUl"

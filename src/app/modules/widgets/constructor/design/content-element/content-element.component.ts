@@ -42,6 +42,11 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentChe
       ]
     }
   };
+  public optionsSortable = {
+    animation: 100,
+    handle: '.grab-handle-element',
+    onUpdate: event => { this.updateIndex(event); }
+  };
   public widthBtnStyle = '';
   public widthBtnFormStyle = '';
   public widthExitBtnStyle = '';
@@ -49,6 +54,7 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentChe
   @Output() private removeElement = new EventEmitter<{ element: string, index: number }>();
   @Output() private scrollToElement = new EventEmitter<{ id: string, elementName: string, elementCounter: number }>();
   @Output() private addNewElement = new EventEmitter<number>();
+  @Output() private updateElementIndex = new EventEmitter<number>();
 
   constructor(private widgetConstructorService: WidgetConstructorService) {
   }
@@ -92,6 +98,10 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentChe
 
   public removeElementFromElementsList(element: string, index: number): void {
     this.removeElement.emit({ element, index });
+  }
+
+  public updateIndex(event): void {
+    this.updateElementIndex.emit(event.newIndex);
   }
 
   public addNewElementToContent(item?: number) {

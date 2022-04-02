@@ -679,6 +679,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     this.currentElement = elementName;
   }
 
+  public updateIndex(index: number): void {
+    this.currentIndex = index;
+  }
+
   public backToRegularElement(): void {
     this.extendedElement = null;
     this.extendedIndex = null;
@@ -1967,7 +1971,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   private fillListImage(images: Image[]) {
-    console.log(images);
     if (images.length === 0) {
       $('#addNewWidgetListModal .modal-body').find('h4').html('У вас еще нет загруженных изображений');
     } else {
