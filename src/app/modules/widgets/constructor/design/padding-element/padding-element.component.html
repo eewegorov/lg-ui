@@ -1,10 +1,11 @@
 <div class="d-flex justify-content-between">
-  <label class="control-label control-label-des">Ширина</label>
+    <label class="control-label control-label-des">Высота отступа</label>
   <div class="align-items-center">
     <div class="form-control form-control-font">
       <input
         [(ngModel)]="modelName.padding"
         type="number"
+        min="0"
       />
       <label>px</label>
     </div>
