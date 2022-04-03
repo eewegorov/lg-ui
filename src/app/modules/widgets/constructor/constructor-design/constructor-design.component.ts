@@ -963,7 +963,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       this.widget.guiprops.image.videoType = 'youtube';
     }
     if (typeof this.widget.guiprops.exit.position === 'undefined') {
-      this.widget.guiprops.exit.position = 'Слева';
+      this.widget.guiprops.exit.position = this.floatBtn[1];
     }
     if (typeof this.widget.guiprops.form.form_width_type === 'undefined') {
       this.widget.guiprops.form.form_width_type = this.widthHrType[0];
