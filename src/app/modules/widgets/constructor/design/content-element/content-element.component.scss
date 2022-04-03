@@ -426,6 +426,37 @@
   display: inline-block;
 }
 
+hr {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+hr.style1 {
+  border-top: 1px solid #8c8b8b;
+}
+
+hr.style2 {
+  border-top: 3px double #8c8b8b;
+}
+
+hr.style3 {
+  border-top: 1px dashed #8c8b8b;
+}
+
+hr.style4 {
+  border-top: 1px dotted #8c8b8b;
+}
+
+hr.style5 {
+  background-color: #fff;
+  border-top: 2px dashed #8c8b8b;
+}
+
+hr.style6 {
+  background-color: #fff;
+  border-top: 2px dotted #8c8b8b;
+}
+
 .element-video-block iframe {
   position: relative;
   z-index: -1;
