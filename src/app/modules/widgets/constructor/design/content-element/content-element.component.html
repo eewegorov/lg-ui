@@ -130,7 +130,10 @@
 
         <div *ngIf="item.name == 'split-element'" class="social-block-pd">
           <div [ngClass]="hrPosSel(item)" class="split-element-block">
-            <hr [ngStyle]="{'border-color': item.color, 'width': item.widthpx + 'px'}" class="style{{item.type}}">
+            <hr
+              [ngStyle]="{'border-color': item.color, 'width': item.widthpx + 'px', 'border-top-width': item.thickness + 'px'}"
+              class="style{{item.type}}"
+            >
           </div>
         </div>
 

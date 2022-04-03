@@ -204,6 +204,7 @@ export class ElementsAddComponent implements OnInit {
       color: '#000000',
       width_type: this.widthHrType[0],
       widthpx: 200,
+      thickness: 1,
       counter: 0,
       position: this.floatBtn[0]
     };

@@ -36,9 +36,9 @@
 
   <div class="d-flex align-items-center justify-content-between mt-3">
     <label class="control-label control-label-des">Толщина</label>
-    <div class="d-flex text-right side-ui-sm">
+    <div class="d-flex text-right side-ui-sm align-items-center">
       <ngx-slider [(value)]="modelName.thickness" [options]="optionsThickness"></ngx-slider>
-      <div class="form-control form-control-font">
+      <div class="form-control form-control-font ml-2">
         <input
           [(ngModel)]="modelName.thickness"
           type="number"
