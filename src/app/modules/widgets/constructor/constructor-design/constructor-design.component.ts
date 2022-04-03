@@ -638,7 +638,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       case 'timer-element':
         return 'Обратный отсчёт';
       case 'form-ext-element':
-        return 'Форма Ext';
+        return 'Форма и кнопки';
     }
   }
 
