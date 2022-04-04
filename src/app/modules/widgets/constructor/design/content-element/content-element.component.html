@@ -180,7 +180,8 @@
           <div [ngClass]="hrPosSel(item)">
             <div [ngClass]="heightIfrmPosSel(item)">
               <div [id]="'elementIframeBlock' +  item.counter" [ngStyle]="{'width': item.widthpx + 'px', 'height': item.heightpx + 'px'}"
-                   class="element-iframe-block">
+                   class="element-iframe-block" style="position: relative;">
+                <div class="iframe-before" (click)="scrollToEl(i.toString(), item.name, item.counter); $event.stopPropagation();"></div>
                 <iframe [id]="'idFrame' + item.counter">
                   <!DOCTYPE html>
                   <html lang="en">
