@@ -16,7 +16,7 @@
   </div>
 
   <!-- to current date -->
-  <div *ngIf="item.type.type === 0">
+  <ng-container *ngIf="item.type.type === 0">
     <div class="row-subitem row-subitem-padding mt-3 pt-1">
       <app-timer-datepicker [item]="item"></app-timer-datepicker>
     </div>
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 
   <!-- to interval -->
   <div *ngIf="item.type.type === 1">

@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-timer-datepicker',
   templateUrl: './timer-datepicker.component.html',
   styleUrls: ['./timer-datepicker.component.scss']
 })
-export class TimerDatepickerComponent implements OnInit {
+export class TimerDatepickerComponent implements OnInit, AfterViewInit {
   @Input() public item: any;
 
   public options: object = {
@@ -44,6 +44,14 @@ export class TimerDatepickerComponent implements OnInit {
       date: this.value,
       allowInputToggle: true
     };
+  }
+
+  ngAfterViewInit(): void {
+    $('#datepickertimer').on('click', (event) => {
+      $('.bootstrap-datetimepicker-widget').css({
+        top: $('#datepickertimer').offset().top - 170
+      });
+    });
   }
 
   public update() {
