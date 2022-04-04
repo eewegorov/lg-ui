@@ -1204,6 +1204,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       };
     }
 
+    if (typeof this.widget.guiprops.social.type === 'undefined') {
+      this.widget.guiprops.social.type = 'style-2';
+    }
+
+    if (typeof this.widget.guiprops.social.linkForShare === 'undefined') {
+      this.widget.guiprops.social.linkForShare = 'site';
+    }
+
     if (typeof this.widget.guiprops.social.couponCallback === 'undefined') {
       this.widget.guiprops.social.couponCallback = {
         enable: false,

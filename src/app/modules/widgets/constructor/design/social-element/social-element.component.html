@@ -7,7 +7,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].vkontakte, 'vkontakte')"
-            [checked]="widget.guiprops['social'].vkontakte === 'vkontakte'"
+            [(ngModel)]="widget.guiprops['social'].vkontakte"
+            value="vkontakte"
             class="form-check-input"
             type="checkbox"
           />
@@ -20,7 +21,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].facebook, 'facebook')"
-            [checked]="widget.guiprops['social'].facebook === 'facebook'"
+            [(ngModel)]="widget.guiprops['social'].facebook"
+            value="facebook"
             class="form-check-input"
             type="checkbox"
           />
@@ -33,7 +35,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].googleplus, 'googleplus')"
-            [checked]="widget.guiprops['social'].googleplus === 'googleplus'"
+            [(ngModel)]="widget.guiprops['social'].googleplus"
+            value="googleplus"
             class="form-check-input"
             type="checkbox"
           />
@@ -46,7 +49,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].digg, 'digg')"
-            [checked]="widget.guiprops['social'].digg === 'digg'"
+            [(ngModel)]="widget.guiprops['social'].digg"
+            value="digg"
             class="form-check-input"
             type="checkbox"
           />
@@ -59,7 +63,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].pinterest, 'pinterest')"
-            [checked]="widget.guiprops['social'].pinterest === 'pinterest'"
+            [(ngModel)]="widget.guiprops['social'].pinterest"
+            value="pinterest"
             class="form-check-input"
             type="checkbox"
           />
@@ -72,7 +77,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].tumblr, 'tumblr')"
-            [checked]="widget.guiprops['social'].tumblr === 'tumblr'"
+            [(ngModel)]="widget.guiprops['social'].tumblr"
+            value="tumblr"
             class="form-check-input"
             type="checkbox"
           />
@@ -85,7 +91,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].twitter, 'twitter')"
-            [checked]="widget.guiprops['social'].twitter === 'twitter'"
+            [(ngModel)]="widget.guiprops['social'].twitter"
+            value="twitter"
             class="form-check-input"
             type="checkbox"
           />
@@ -98,7 +105,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].mail, 'mail')"
-            [checked]="widget.guiprops['social'].mail === 'mail'"
+            [(ngModel)]="widget.guiprops['social'].mail"
+            value="mail"
             class="form-check-input"
             type="checkbox"
           />
@@ -111,7 +119,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].buffer, 'buffer')"
-            [checked]="widget.guiprops['social'].buffer === 'buffer'"
+            [(ngModel)]="widget.guiprops['social'].buffer"
+            value="buffer"
             class="form-check-input"
             type="checkbox"
           />
@@ -125,7 +134,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].pocket, 'pocket')"
-            [checked]="widget.guiprops['social'].pocket === 'pocket'"
+            [(ngModel)]="widget.guiprops['social'].pocket"
+            value="pocket"
             class="form-check-input"
             type="checkbox"
           />
@@ -138,7 +148,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].xing, 'xing')"
-            [checked]="widget.guiprops['social'].xing === 'xing'"
+            [(ngModel)]="widget.guiprops['social'].xing"
+            value="xing"
             class="form-check-input"
             type="checkbox"
           />
@@ -151,7 +162,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].print, 'print')"
-            [checked]="widget.guiprops['social'].print === 'print'"
+            [(ngModel)]="widget.guiprops['social'].print"
+            value="print"
             class="form-check-input"
             type="checkbox"
           />
@@ -164,7 +176,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].linkedin, 'linkedin')"
-            [checked]="widget.guiprops['social'].linkedin === 'linkedin'"
+            [(ngModel)]="widget.guiprops['social'].linkedin"
+            value="linkedin"
             class="form-check-input"
             type="checkbox"
           />
@@ -177,7 +190,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].reddit, 'reddit')"
-            [checked]="widget.guiprops['social'].reddit === 'reddit'"
+            [(ngModel)]="widget.guiprops['social'].reddit"
+            value="reddit"
             class="form-check-input"
             type="checkbox"
           />
@@ -190,7 +204,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].stumbleupon, 'stumbleupon')"
-            [checked]="widget.guiprops['social'].stumbleupon === 'stumbleupon'"
+            [(ngModel)]="widget.guiprops['social'].stumbleupon"
+            value="stumbleupon"
             class="form-check-input"
             type="checkbox"
           />
@@ -203,7 +218,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].odnoklassniki, 'odnoklassniki')"
-            [checked]="widget.guiprops['social'].odnoklassniki === 'odnoklassniki'"
+            [(ngModel)]="widget.guiprops['social'].odnoklassniki"
+            value="odnoklassniki"
             class="form-check-input"
             type="checkbox"
           />
@@ -216,7 +232,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].blogger, 'blogger')"
-            [checked]="widget.guiprops['social'].blogger === 'blogger'"
+            [(ngModel)]="widget.guiprops['social'].blogger"
+            value="blogger"
             class="form-check-input"
             type="checkbox"
           />
@@ -229,7 +246,8 @@
         <label class="form-check-label">
           <input
             (change)="setSocialBtn(widget.guiprops['social'].yummly, 'yummly')"
-            [checked]="widget.guiprops['social'].yummly === 'yummly'"
+            [(ngModel)]="widget.guiprops['social'].yummly"
+            value="yummly"
             class="form-check-input"
             type="checkbox"
           />

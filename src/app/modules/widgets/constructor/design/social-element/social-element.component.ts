@@ -30,7 +30,7 @@ export class SocialElementComponent implements OnInit {
       }
     } else {
       this.widget.guiprops.social.items.push({
-        name: element
+        name: item
       });
     }
   }
