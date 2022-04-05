@@ -1211,6 +1211,8 @@
 			}
 		},
 		"defCompany": "",
+		"delete": "",
+		"edit": "",
 		"editor": {
 			"audiences": {
 				"desc1": "",

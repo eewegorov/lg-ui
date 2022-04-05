@@ -87,11 +87,11 @@
         ></ui-switch>
       </div>
 
-      <div *ngIf="item.loop.enable">
-        <div class="row-subitem row-subitem-padding widget-small-text mt-1">
-          {{ 'widgets.timerDirective.loop.desc' | translate }}
-        </div>
+      <div class="row-subitem row-subitem-padding widget-small-text mt-1">
+        {{ 'widgets.timerDirective.loop.desc' | translate }}
+      </div>
 
+      <div *ngIf="item.loop.enable">
         <div class="type1-flexed-row row-subitem mt-3">
           <div class="type1-flexed-row-item pr-3">
             <label

@@ -6,8 +6,7 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  Output,
-  SimpleChanges
+  Output
 } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { Options } from '@angular-slider/ngx-slider';
@@ -97,7 +96,7 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     this.widget.guiprops.formExt.model.mainSettings.borderRadiusInputFormEnable = true;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.widget.guiprops.formExt.model.mainSettings.bgInputForm && this.widget.guiprops.formExt.model.mainSettings.opacityBgInputForm) {
       this.widget.guiprops.formExt.model.mainSettings.rgbaInputForm =
         (this.widgetConstructorService.hexToRgb(
@@ -137,12 +136,7 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public toggleItem(event, index, isPanelClick?) {
-    const _this = $(event.currentTarget);
-    const parent = _this.parents('.form-ext-item');
-    let shouldToggle = parent.find('.form-ext-item__toggled-wrapper');
-
     if (isPanelClick) {
-      shouldToggle = _this.find('.form-ext-item__toggled-wrapper');
       if (this.widget.guiprops.formExt.model.list[index].isTabOpened) {
         return;
       }
@@ -170,6 +164,7 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
 
   public removeElementFromFormExtList(event, index) {
     event.stopPropagation();
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
     this.widget.guiprops.formExt.model.list = this.widgetConstructorService.removeFromArray(this.widget.guiprops.formExt.model.list, index);
     this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
   }
@@ -187,6 +182,10 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
 
     this.widget.guiprops.formExt.model.list.splice(index + 1, 0, newElement);
     this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
+
+    setTimeout(() => {
+      this.toggleElement(index + 1);
+    }, 0);
   }
 
   public addItemToExtForm() {
@@ -201,6 +200,10 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     this.widget.guiprops.formExt.model.list.push(item);
     this.widgetConstructorService.setArrayOfUsedItems(this.widget.guiprops.formExt.model.list);
     this.closeAfterAdded();
+
+    setTimeout(() => {
+      this.toggleElement(this.widget.guiprops.formExt.model.list.length - 1);
+    }, 0);
   }
 
   public isFieldSettings() {

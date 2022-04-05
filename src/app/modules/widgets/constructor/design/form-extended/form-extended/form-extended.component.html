@@ -18,7 +18,7 @@
           <img alt="Move" src="assets/images/widgets/move.svg"/>
         </div>
       </div>
-      <div class="form-ext-item__body">
+      <div class="form-ext-item__body" (click)="toggleItem($event, innerIndex)">
         <div *ngIf="extItem.type === 'button'" class="item-placeholder-name">{{ extItem['bType'].label }}</div>
         <div
           *ngIf="extItem.type === 'hidden' || extItem.type === 'rating' || extItem.type === 'variants'"
@@ -35,17 +35,23 @@
         <div class="item-placeholder-type">{{ extItem.label }}</div>
       </div>
       <div class="form-ext-item__header-r">
-        <div (click)="toggleItem($event, innerIndex)" class="form-ext-item__header-edit"></div>
         <div
-          (click)="cloneElementFromFormExtList($event, innerIndex, extItem)"
+          class="form-ext-item__header-edit"
+          (click)="toggleItem($event, innerIndex)"
+          data-placement="bottom" data-toggle="tooltip" title="{{ 'widgetsList.edit' | translate }}"
+        ></div>
+        <div
           *ngIf="!isUnclonable(extItem.type)"
           class="form-ext-item__header-copy"
+          (click)="cloneElementFromFormExtList($event, innerIndex, extItem)"
+          data-placement="bottom" data-toggle="tooltip" title="{{ 'widgetsList.clone.next' | translate }}"
         ></div>
         <div class="form-ext-item__header-delete">
           <button
-            (click)="removeElementFromFormExtList($event, innerIndex)"
             *ngIf="!((innerIndex === 0) && (widget.guiprops.formExt.model.list.length === 1))"
             class="delete-element-button"
+            (click)="removeElementFromFormExtList($event, innerIndex)"
+            data-placement="bottom" data-toggle="tooltip" title="{{ 'widgetsList.delete' | translate }}"
           >
             &times;
           </button>
