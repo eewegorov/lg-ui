@@ -146,7 +146,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
           this.widget.rules.pageNo.enable = false;
         }
 
-        if (this.widget.rules.prevPages.action) {
+        if (this.widget.rules.prevPages?.action) {
           this.widget.rules.prevPages.enable = false;
         }
 
@@ -205,7 +205,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
         }
 
         this.showPaymentDialog(this.sid, this.translate.instant('widgetsList.payment.features'));
-      }, 1000);
+      }, 0);
     }
   }
 
