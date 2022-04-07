@@ -30,9 +30,10 @@ import { WidgetService } from '../../services/widget.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('slide', [
-      state('left', style({ transform: 'translateX(0)' })),
-      state('right', style({ transform: 'translateX(-50%' })),
-      transition('* => *', animate(300))
+      state('right', style({ transform: 'translateX(-50%)' })),
+      state('left', style({ transform: 'translateX(0%)' })),
+      transition('right => left', animate(300)),
+      transition('left => right', animate(300))
     ])
   ]
 })
