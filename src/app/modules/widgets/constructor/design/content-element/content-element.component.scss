@@ -646,6 +646,34 @@ hr.style6 {
   padding-top: 13px;
 }
 
+.widget1 .form-ext-date-wrapper.widget-input-border input {
+  border: 2px solid #eee;
+  padding-bottom: 4px;
+  padding-top: 12px;
+}
+
+.widget1 .form-ext-dropdown-wrapper.widget-input-border button {
+  border: 2px solid #eee;
+  padding-bottom: 4px;
+  padding-top: 12px;
+}
+
+.form-ext-dropdown-wrapper.widget-input-border .dropdown button.dropdown-toggle label {
+  padding: 8px 10px;
+}
+
+#widgetStyle .form-ext-dropdown-wrapper.widget-input-border .dropdown .btn-default .caret {
+  top: 18px;
+  right: 8px;
+}
+
+.widget-form-ext-wrapper input.widget-input-border,
+.widget-form-ext-wrapper textarea.widget-input-border {
+  border: 2px solid #eee;
+  padding-top: 12px;
+  padding-bottom: 4px;
+}
+
 .text-input-class label {
   cursor: text;
   display: block;

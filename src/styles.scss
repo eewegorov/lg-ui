@@ -1817,23 +1817,6 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   color: #6a6c6f;
   font-weight: 200!important;
 }
-.widget1 .form-ext-date-wrapper.widget-input-border input {
-  border: 2px solid #eee;
-  padding-bottom: 4px;
-  padding-top: 12px;
-}
-.widget1 .form-ext-dropdown-wrapper.widget-input-border button {
-  border: 2px solid #eee;
-  padding-bottom: 4px;
-  padding-top: 12px;
-}
-.form-ext-dropdown-wrapper.widget-input-border .dropdown button.dropdown-toggle label {
-  padding: 8px 10px;
-}
-#widgetStyle .form-ext-dropdown-wrapper.widget-input-border .dropdown .btn-default .caret {
-  top: 18px;
-  right: 8px;
-}
 
 .form-ext-date-wrapper .w-datepicker label {
   cursor: text;
@@ -1846,9 +1829,9 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   font-size: 1.1em;
   font-weight: normal;
   line-height: 1.6em;
-  font-weight: normal;
   white-space: nowrap;
 }
+
 .form-ext-date-wrapper .w-datepicker input:focus ~ label,
 .form-ext-date-wrapper .w-datepicker.filled label {
   font-size: 0.6em;
@@ -1897,13 +1880,6 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 }
 .widget1 .widget-form-ext-wrapper .text-input-class-form-ext {
   height: 90px;
-}
-
-.widget-form-ext-wrapper input.widget-input-border,
-.widget-form-ext-wrapper textarea.widget-input-border {
-  border: 2px solid #eee;
-  padding-top: 12px;
-  padding-bottom: 4px;
 }
 
 .add-form-ext-new-item {
