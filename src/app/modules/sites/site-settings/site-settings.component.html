@@ -1,4 +1,4 @@
-<div class="flex-column toolbar-content">
+<div *ngIf="site" class="flex-column toolbar-content">
   <h1 class="title-main">{{ 'settings.title' | translate }} &laquo;{{site.name}}&raquo;</h1>
   <div class="content">
     <div class="row">

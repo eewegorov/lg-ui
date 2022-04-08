@@ -192,6 +192,10 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
           this.widget.guiprops.form.couponCallback.enable = false;
         }
 
+        if (this.widget.guiprops.formExt.couponCallback) {
+          this.widget.guiprops.formExt.couponCallback.enable = false;
+        }
+
         if (this.widget.guiprops.exit.couponCallback) {
           this.widget.guiprops.exit.couponCallback.enable = false;
         }

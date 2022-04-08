@@ -105,13 +105,13 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
         )).toString();
     }
 
-    if (this.widget.guiprops.formExt.model.mainSettings.colorPod.color &&
-      this.widget.guiprops.formExt.model.mainSettings.colorPod.opacityColorPod &&
-      this.widget.guiprops.formExt.model.mainSettings.colorPod.enable &&
+    if (this.widget.guiprops.formExt.model.mainSettings.colorPod?.color &&
+      this.widget.guiprops.formExt.model.mainSettings.colorPod?.opacityColorPod &&
+      this.widget.guiprops.formExt.model.mainSettings.colorPod?.enable &&
       this.widget.guiprops.formExt.enable &&
-      this.widget.guiprops.formExt.model.mainSettings.button.enable
+      this.widget.guiprops.formExt.model.mainSettings.button?.enable
     ) {
-      if (this.widget.guiprops.formExt.model.mainSettings.colorPod.enable) {
+      if (this.widget.guiprops.formExt.model.mainSettings.colorPod?.enable) {
         this.widget.guiprops.formExt.model.mainSettings.colorPod.rgbaColorPod =
           (this.widgetConstructorService.hexToRgb(
             this.widget.guiprops.formExt.model.mainSettings.colorPod.color,

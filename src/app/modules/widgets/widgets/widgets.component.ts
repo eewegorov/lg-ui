@@ -15,6 +15,7 @@ import { WidgetService } from '../services/widget.service';
 import { CampaignDeleteComponent } from '../campaign-delete/campaign-delete.component';
 import { CloneWidgetComponent } from '../clone-widget/clone-widget.component';
 import { WidgetAddComponent } from '../widget-add/widget-add.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -41,6 +42,7 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
 
   constructor(
     private location: Location,
+    private route: ActivatedRoute,
     private translate: TranslateService,
     private modalService: NgbModal,
     private toastr: ToastrService,
@@ -59,7 +61,11 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
       ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
     }, 1000);
 
-    const selectedSite = localStorage.getItem('currentSite');
+    const urlParams = this.location.path().split('=');
+
+    const selectedSite = this.enableWidgetsModal ?
+      urlParams[urlParams.length - 1] :
+      localStorage.getItem('currentSite');
 
     this.translate.get('widgetsList.defCompany').subscribe((translatedValue: string) => {
       this.defCompanyName = translatedValue;
