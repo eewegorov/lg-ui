@@ -882,6 +882,7 @@
 			"dropdown": {
 				"placeholder2": "Выпадающий список"
 			},
+			"element": "Элемент",
 			"email": {
 				"id1": "ID поля",
 				"placeholder1": "Название поля (Placeholder)",

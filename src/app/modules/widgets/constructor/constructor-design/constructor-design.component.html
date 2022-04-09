@@ -788,6 +788,9 @@
             </div>
             <div class="extended-container pt-3">
               <div class="border-item">
+                <label class="control-label control-label-des switcher-label-xs mb-1">
+                  {{ 'widgets.formExt.element' | translate }}
+                </label>
                 <ng-container *ngIf="extendedElement.type === 'email'">
                   <app-extended-text [hasPlaceholder]="true" [index]="extendedIndex"
                                      [item]="extendedElement"></app-extended-text>
