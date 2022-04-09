@@ -1,4 +1,4 @@
-<div *ngIf="widget.guiprops" [@fadeInOut] class="widgets-editor-header">
+<div *ngIf="widget?.guiprops" [@fadeInOut] class="widgets-editor-header">
   <div class="d-flex justify-content-between title-and-tabs-container">
     <div class="title-widget-container">
       <a
@@ -146,7 +146,7 @@
 </div>
 
 <!-- Tab panes -->
-<div *ngIf="widget.guiprops" [@fadeInOut] class="tab-content">
+<div *ngIf="widget?.guiprops" [@fadeInOut] class="tab-content">
   <div
     [hidden]="!isCurrentActiveTab('design')"
     [ngClass]="{ active: isCurrentActiveTab('design') }"

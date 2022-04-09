@@ -327,7 +327,7 @@ export class SitesService {
   }
 
   private isSiteHasFreeTariff(site): boolean {
-    return (!site.tariffExp && !site.tariffName) || site.tariffName === 'Бесплатный';
+    return (!site?.tariffExp && !site?.tariffName) || site?.tariffName === 'Бесплатный';
   }
 
 }

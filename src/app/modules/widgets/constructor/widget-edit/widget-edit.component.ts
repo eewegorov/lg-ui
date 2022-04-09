@@ -661,7 +661,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   }
 
   private getCoupons() {
-    if (!this.widget.guiprops) {
+    if (!this.widget?.guiprops) {
       return;
     }
 
@@ -720,8 +720,10 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
           this.oldWidget = cloneDeep(response);
         }, 3000);
 
-        this.widget.id = this.wid;
-        this.isContainerized = !!this.widget.containerId;
+        if (this.widget) {
+          this.widget.id = this.wid;
+        }
+        this.isContainerized = !!this.widget?.containerId;
         this.checkWidgetRenameTitle();
         this.widgetService.loadWidgetToController.next();
       },
