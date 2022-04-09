@@ -1511,10 +1511,6 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   justify-content: flex-end;
 }
 
-.widget1 .widget1-form-ext-bl .text-input-area-class textarea.form-control {
-  height: 90px;
-}
-
 .widget-form-ext-button-wr {
   flex-grow: 1;
   padding-left: 1%;
@@ -1878,9 +1874,6 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 .widget1-btn-bl div.button-send:hover {
   transform: scale(1.01);
 }
-.widget1 .widget-form-ext-wrapper .text-input-class-form-ext {
-  height: 90px;
-}
 
 .add-form-ext-new-item {
   display: flex;
@@ -1935,12 +1928,6 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
 #wrapper .form-ext-term-wrapper .note-editor .note-editing-area .note-editable span {
   margin: 0!important;
   line-height: normal;
-}
-
-.form-ext-element-wr .text-input-class label,
-.form-ext-element-wr .text-input-class input.form-control,
-.form-ext-element-wr .text-input-class textarea.form-control {
-  text-overflow: ellipsis;
 }
 
 app-form-extended .color-picker, app-coupon-callback .color-picker {
