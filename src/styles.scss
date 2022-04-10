@@ -1756,6 +1756,7 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   top: 0;
   left: 12px;
 }
+
 .form-ext-dropdown-wrapper .dropdown button.dropdown-toggle label {
   cursor: text;
   position: absolute;
@@ -1772,11 +1773,13 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .form-ext-dropdown-wrapper .dropdown button.dropdown-toggle.filled label {
   font-size: 0.6em;
   top: -8px;
   left: -3px;
 }
+
 .form-ext-dropdown-wrapper .dropdown button.dropdown-toggle div {
   position: absolute;
   top: 3px;
@@ -2145,6 +2148,7 @@ div.button-send.click-edit-cl .note-editor font span {
 
 .bootstrap-datetimepicker-widget {
   position: absolute;
+  font-size: 14px;
 }
 
 #listImagesBlock .imageGlItem {
