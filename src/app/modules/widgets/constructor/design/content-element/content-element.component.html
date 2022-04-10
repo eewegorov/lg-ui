@@ -388,8 +388,10 @@
                       <!-- FORM EXT DROPDOWN -->
                       <div *ngSwitchCase="'ddElement'" class="dd-input-class">
                         <div [ngClass]="formExtClassNameFormInput(itemExt)" class="form-ext-dropdown-wrapper">
-                          <app-extended-ddw [item]="itemExt"
-                                            [st]="widget.guiprops.formExt.model.mainSettings"></app-extended-ddw>
+                          <app-extended-ddw
+                            [item]="itemExt"
+                            [st]="widget.guiprops.formExt.model.mainSettings"
+                          ></app-extended-ddw>
                         </div>
                       </div>
 

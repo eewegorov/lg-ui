@@ -1,18 +1,19 @@
-<div #element [ngClass]="{'open': item.serviceData.isOpen}" class="dropdown">
+<div #element [ngClass]="{'show': item.serviceData.isOpen}" class="dropdown">
   <button
     (click)="item.serviceData.isOpen = !item.serviceData.isOpen"
     [ngClass]="{'filled': item.serviceData.extraLabel}"
-    aria-expanded="true"
-    class="btn btn-default dropdown-toggle" style="'background: ' + st.rgbaInputForm + ';color: ' + st.colorTitleInputForm + ';border-radius: ' + st.borderRadiusInputForm + ' px;border-color: ' + st.border.color + '!important'"
+    class="btn btn-default dropdown-toggle"
+    [style]="'background: ' + st.rgbaInputForm + ';color: ' + st.colorTitleInputForm + ';border-radius: ' + st.borderRadiusInputForm + ' px;border-color: ' + st.border.color + '!important'"
     type="button"
+    data-toggle="dropdown"
+    aria-expanded="true"
   >
     <label [style]="'color: ' + st.colorTitleInputForm">{{ item.placeholder }}</label>
     <div *ngIf="item.serviceData.extraLabel">{{ item.serviceData.extraLabel }}</div>
-    <span class="caret"></span>
   </button>
-  <ul aria-labelledby="dropdownMenu1" class="dropdown-menu" role="menu">
+  <ul class="dropdown-menu" [ngClass]="{'show': item.serviceData.isOpen}" role="menu" aria-labelledby="dropdownMenu1">
     <li (click)="setFormExtDDState(item, variant)" *ngFor="let variant of item.variants" role="presentation">
-      <a class="dropdown-item" href="javascript:void(0)" tabindex="-1">{{ variant }}</a>
+      <a class="dropdown-item" href="javascript:void(0)" tabindex="-1" role="menuitem">{{ variant }}</a>
     </li>
   </ul>
 </div>

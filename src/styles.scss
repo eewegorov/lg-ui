@@ -1751,9 +1751,10 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   position: relative;
   border-width: 0;
 }
-#widgetStyle .form-ext-dropdown-wrapper .dropdown .btn-default .caret {
+#widgetStyle .form-ext-dropdown-wrapper .dropdown .btn-default:after {
   margin-top: 0;
-  top: 20px;
+  top: 0;
+  left: 12px;
 }
 .form-ext-dropdown-wrapper .dropdown button.dropdown-toggle label {
   cursor: text;
@@ -1763,15 +1764,13 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   left: 0;
   width: 100%;
   color: #6a6c6f;
-  font-size: 1.1em;
+  font-size: 15px;
   font-weight: normal;
   line-height: 1.6em;
-  padding: 10px 12px;
-  font-weight: normal;
+  padding: 10px 20px 10px 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-right: 20px;
 }
 .form-ext-dropdown-wrapper .dropdown button.dropdown-toggle.filled label {
   font-size: 0.6em;
