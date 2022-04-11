@@ -110,6 +110,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   @Input() private currentActiveTab: string;
   @Input() private SP_widget: any;
   @Input() private isTabHasErrorForFormExt: () => boolean;
+  @Input() private validateFormExtElements: () => string;
   @Input() private mapFormExtFieldId: () => any;
   @Input() private isFieldIdUnique: (id: any) => boolean;
   @Input() private isButtonRedirectAndEmpty: (item: any) => boolean;
@@ -757,6 +758,16 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           element: el.name,
           counter: el.counter,
           message: 'No action for form-ext'
+        });
+      }
+
+      const formExtValidation = this.validateFormExtElements();
+
+      if (el.name === 'form-ext-element' && formExtValidation) {
+        errors.push({
+          id: TAB_ID,
+          element: el.name,
+          message: formExtValidation
         });
       }
     });

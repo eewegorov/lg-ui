@@ -267,6 +267,25 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     return this.formExtIdsErrorFlag || this.formExtNeedButton || this.formExtRedirectFieldEmpty;
   }
 
+  public validateFormExtElements(): string {
+    let error = '';
+    this.widget.guiprops.formExt.model.list.forEach(element => {
+      if (element.placeholder === '') {
+        error = 'Не заполнено поле placeholder'
+      }
+
+      if (element.service === '') {
+        error = 'Не заполнено служебное название поля'
+      }
+
+      if (element.idField === '') {
+        error = 'Не заполнено ID поля'
+      }
+    });
+
+    return error;
+  }
+
   public goToTest(widget) {
     this.router.navigate([`/abtests/active`], { queryParams: { testIdNum: widget.abtestInfo.id } }).then();
   }
