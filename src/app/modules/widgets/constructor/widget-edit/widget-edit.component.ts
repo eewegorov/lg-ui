@@ -604,6 +604,11 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
       this.widgetService.updateWidget(this.sid, this.wid, widgetUpdatedData).subscribe((response: boolean) => {
         if (response) {
           this.toastr.success(this.translate.instant('widgetsList.editor.save.done.desc'), this.translate.instant('widgetsList.editor.save.done.title'));
+        } else {
+          this.toastr.error(
+            errorsList.length === 1 && errorsList[0].message ? errorsList[0].message : this.translate.instant('widgetsList.editor.save.check'),
+            this.translate.instant('widgetsList.editor.save.validation.title')
+          );
         }
         setTimeout(() => {
           this.isLoading = false;

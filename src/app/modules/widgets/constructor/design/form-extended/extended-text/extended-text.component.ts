@@ -47,4 +47,8 @@ export class ExtendedTextComponent implements OnInit {
     this.item.mask.value = value.replace(re, '');
   }
 
+  public checkIdField(text: string): boolean {
+    return /^[0-9A-Za-z:_\-+/*%#@&]+$/.test(text);
+  }
+
 }
