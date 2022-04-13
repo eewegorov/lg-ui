@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<div class="row-subitem mt-3 border-item">
+<div *ngIf="item.bType" class="row-subitem mt-3 border-item">
   <label
     class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.button.bType.label' | translate }}</label>
   <div class="dropdown mt-1">
@@ -29,7 +29,7 @@
 </div>
 
 <!-- ICON SETTINGS -->
-<div [hidden]="!(item.bType.type === 1 || item.bType.type === 2)" class="border-item mt-3">
+<div *ngIf="item.icon" [hidden]="!(item.bType?.type === 1 || item.bType?.type === 2)" class="border-item mt-3">
   <h3>Иконка</h3>
 
   <div class="d-flex justify-content-between mt-3">
@@ -89,7 +89,7 @@
 <!-- END ICON SETTINGS -->
 
 <!-- FONT SETTINGS -->
-<div [hidden]="!(item.bType.type === 0 || item.bType.type === 1)" class="border-item mt-3">
+<div *ngIf="item.bType" [hidden]="!(item.bType.type === 0 || item.bType.type === 1)" class="border-item mt-3">
   <div class="row-subitem">
     <div class="row-subitem-padding mb-3">
       <h3>Текст</h3>
@@ -190,7 +190,7 @@
 
 <div class="row-subitem mt-3 border-item">
   <h3>{{ 'widgets.formExt.mainSettings.buttonSettings.style' | translate }}</h3>
-  <div class="dropdown mt-3">
+  <div *ngIf="item.font" class="dropdown mt-3">
     <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
       {{ item.styleType }}
       <span class="caret"></span>
@@ -199,7 +199,7 @@
       <li (click)="setBtnStyle('Default', item)"
           role="presentation">
         <a
-          [ngStyle]="{'font-family':item.font.fontFamily, 'background':item.colorBtn}"
+          [ngStyle]="{'font-family': item.font.fontFamily, 'background': item.colorBtn}"
           class="dropdown-item btn-var-styles btn-var-styles__default"
           href="javascript:void(0)"
         >
@@ -209,7 +209,7 @@
       <li (click)="setBtnStyle('Material', item)"
           role="presentation">
         <a
-          [ngStyle]="{'font-family':item.font.fontFamily, 'background':item.colorBtn}"
+          [ngStyle]="{'font-family': item.font.fontFamily, 'background': item.colorBtn}"
           class="dropdown-item btn-var-styles btn-var-styles__material"
           href="javascript:void(0)"
         >
@@ -219,7 +219,7 @@
       <li (click)="setBtnStyle('Flat', item)"
           role="presentation">
         <a
-          [ngStyle]="{'font-family':item.font.fontFamily, 'background':item.colorBtn}"
+          [ngStyle]="{'font-family': item.font.fontFamily, 'background': item.colorBtn}"
           class="dropdown-item btn-var-styles btn-var-styles__flat"
           href="javascript:void(0)"
         >
@@ -229,7 +229,7 @@
       <li (click)="setBtnStyle('Border Style', item)"
           role="presentation">
         <a
-          [ngStyle]="{'font-family':item.font.fontFamily, 'border-color':item.colorBtn}"
+          [ngStyle]="{'font-family': item.font.fontFamily, 'border-color': item.colorBtn}"
           class="dropdown-item btn-var-styles btn-var-styles__border-style"
           href="javascript:void(0)"
         >
@@ -240,7 +240,7 @@
   </div>
 </div>
 
-<div class="row-subitem mt-3">
+<div *ngIf="item.redirect" class="row-subitem mt-3">
   <h3>{{ 'widgets.formExt.mainSettings.buttonSettings.redirect.action' | translate }}</h3>
   <div class="dropdown mt-3">
     <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { WidgetConstructorService } from '../../../../services/widget-constructor.service';
 
@@ -7,7 +7,7 @@ import { WidgetConstructorService } from '../../../../services/widget-constructo
   templateUrl: './extended-title.component.html',
   styleUrls: ['../../../../shared/shared.scss', './extended-title.component.scss']
 })
-export class ExtendedTitleComponent implements OnInit, DoCheck, AfterViewInit {
+export class ExtendedTitleComponent implements OnInit, AfterViewInit {
   @Input() public index: number;
   @Input() public item: Record<string, any>;
   @Input() public isTerm: boolean;
@@ -45,12 +45,6 @@ export class ExtendedTitleComponent implements OnInit, DoCheck, AfterViewInit {
     this.availWidthTypes = this.widgetConstructorService.getExtFormWidthTypes();
   }
 
-  ngDoCheck(): void {
-    if (this.item.font.name) {
-      $('#font-picker-ext-form' + this.index).trigger('setFont', this.item.font.name);
-    }
-  }
-
   public changeFormType(type) {
     this.widgetConstructorService.changeItemFormType.next({ type, index: this.index });
   }
@@ -63,7 +57,7 @@ export class ExtendedTitleComponent implements OnInit, DoCheck, AfterViewInit {
         systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
         googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
       }).on('change', (change) => {
-        this.setNewFont(change.target.value, this.item.font.name);
+        this.setNewFont(change.target.value, this.item.font);
       });
 
       $('#font-picker-ext-form' + this.index).trigger('setFont', this.item.font.name);

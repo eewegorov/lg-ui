@@ -42,4 +42,8 @@ export class ExtendedHiddenComponent implements OnInit {
       type === 'utm_term' || type === 'utm_content' || type === 'referrer';
   }
 
+  public checkIdField(text: string): boolean {
+    return /^[0-9A-Za-z:_\-+/*%#@&]+$/.test(text);
+  }
+
 }

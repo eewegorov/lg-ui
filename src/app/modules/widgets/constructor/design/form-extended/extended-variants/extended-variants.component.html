@@ -12,14 +12,20 @@
   </div>
 </div>
 
-<div class="row-subitem mt-3 form-ext-item__item-input">
+<div
+  class="row-subitem mt-3 form-ext-item__item-input"
+  [ngClass]="(item.service?.length === 0) ? 'is-invalid' : ''"
+>
   <label
     class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.service1' | translate }}</label>
   <input [(ngModel)]="item.service" class="form-control mt-1" type="text">
   <span class="input-down-sm-lab">{{ 'widgets.formExt.email.service3' | translate }}</span>
 </div>
 
-<div class="row-subitem mt-3 form-ext-item__item-input">
+<div
+  class="row-subitem mt-3 form-ext-item__item-input"
+  [ngClass]="(item.idField?.length === 0 || !checkIdField(item.idField)) ? 'is-invalid' : ''"
+>
   <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.id1' | translate }}</label>
   <input (blur)="idFocusOut()" [(ngModel)]="item.idField" class="form-control mt-1 form-control-form-ext-id-field"
          type="text"/>

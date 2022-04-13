@@ -14,7 +14,7 @@
 
 <h3 class="mt-3">{{ 'widgets.formExt.hidden.fieldType.label' | translate }}</h3>
 
-<div class="row-subitem mt-1">
+<div *ngIf="item.fieldType" class="row-subitem mt-1">
   <div class="dropdown">
     <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
       {{ item.fieldType.label }}
@@ -32,14 +32,20 @@
   </div>
 </div>
 
-<div class="row-subitem mt-3 form-ext-item__item-input">
+<div
+  class="row-subitem mt-3 form-ext-item__item-input"
+  [ngClass]="(item.service?.length === 0) ? 'is-invalid' : ''"
+>
   <label
     class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.service1' | translate }}</label>
   <input [(ngModel)]="item.service" class="form-control mt-1" type="text">
   <span class="input-down-sm-lab">{{ 'widgets.formExt.email.service3' | translate }}</span>
 </div>
 
-<div class="row-subitem mt-3 form-ext-item__item-input">
+<div
+  class="row-subitem mt-3 form-ext-item__item-input"
+  [ngClass]="(item.idField?.length === 0 || !checkIdField(item.idField)) ? 'is-invalid' : ''"
+>
   <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.id1' | translate }}</label>
   <input (blur)="idFocusOut()" [(ngModel)]="item.idField" class="form-control mt-1 form-control-form-ext-id-field"
          type="text"/>
@@ -51,7 +57,7 @@
   class="row-subitem mt-2 widget-small-text"
 ></div>
 
-<div *ngIf="isFieldUtmOrRef(item.fieldType.type)" class="mt-3">
+<div *ngIf="isFieldUtmOrRef(item.fieldType?.type)" class="mt-3">
   <h3>{{ 'widgets.formExt.hidden.fieldUtm.radio.title' | translate }}</h3>
   <div class="d-flex mt-2">
     <div class="col-sm-6 row-subitem-padding">
@@ -85,25 +91,25 @@
   </div>
 
   <div class="widget-small-text">
-    {{ (item.fieldType.type === 'referrer' ? 'widgets.formExt.hidden.fieldRef.desc' : 'widgets.formExt.hidden.fieldUtm.desc') | translate }}
+    {{ (item.fieldType?.type === 'referrer' ? 'widgets.formExt.hidden.fieldRef.desc' : 'widgets.formExt.hidden.fieldUtm.desc') | translate }}
   </div>
 </div>
 
-<div *ngIf="item.fieldType.type === 'custom_parameter'" class="row-subitem mt-3 form-ext-item__item-input">
+<div *ngIf="item.fieldType?.type === 'custom_parameter'" class="row-subitem mt-3 form-ext-item__item-input">
   <label
     class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldUserParam.label' | translate }}</label>
   <input [(ngModel)]="item.customParamValue" class="form-control mt-1" type="text"/>
   <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldUserParam.desc' | translate }}</span>
 </div>
 
-<div *ngIf="item.fieldType.type === 'cookie'" class="row-subitem mt-3 form-ext-item__item-input">
+<div *ngIf="item.fieldType?.type === 'cookie'" class="row-subitem mt-3 form-ext-item__item-input">
   <label
     class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldCookies.label' | translate }}</label>
   <input [(ngModel)]="item.cookieValue" class="form-control mt-1" type="text"/>
   <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldCookies.desc' | translate }}</span>
 </div>
 
-<div *ngIf="item.fieldType.type === 'user_value'" class="row-subitem mt-3 form-ext-item__item-input">
+<div *ngIf="item.fieldType?.type === 'user_value'" class="row-subitem mt-3 form-ext-item__item-input">
   <label
     class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldUserValue.label' | translate }}</label>
   <input [(ngModel)]="item.customUserValue" class="form-control mt-1" type="text"/>

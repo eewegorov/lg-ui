@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { WidgetConstructorService } from '../../../../services/widget-constructor.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { WidgetConstructorService } from '../../../../services/widget-constructo
   templateUrl: './extended-variants.component.html',
   styleUrls: ['../../../../shared/shared.scss', './extended-variants.component.scss']
 })
-export class ExtendedVariantsComponent implements OnInit, AfterViewInit, DoCheck {
+export class ExtendedVariantsComponent implements OnInit, AfterViewInit {
   @Input() public index: number;
   @Input() public item: Record<string, any>;
 
@@ -29,9 +29,6 @@ export class ExtendedVariantsComponent implements OnInit, AfterViewInit, DoCheck
     this.unmappedVariants = this.mappedCoupons(this.item.variants);
   }
 
-  ngDoCheck(): void {
-  }
-
   public changeFormType(type) {
     this.widgetConstructorService.changeItemFormType.next({ type, index: this.index });
   }
@@ -45,11 +42,11 @@ export class ExtendedVariantsComponent implements OnInit, AfterViewInit, DoCheck
   }
 
   private unmappedCoupons(list) {
-    return list.split('\n');
+    return list?.split('\n');
   }
 
   private mappedCoupons(list) {
-    return list.join('\n');
+    return list?.join('\n');
   }
 
   private initPicker() {
@@ -76,6 +73,10 @@ export class ExtendedVariantsComponent implements OnInit, AfterViewInit, DoCheck
 
     data.name = fontFamily;
     data.fontFamily = '\'' + fontFamily + '\'';
+  }
+
+  public checkIdField(text: string): boolean {
+    return /^[0-9A-Za-z:_\-+/*%#@&]+$/.test(text);
   }
 
 }

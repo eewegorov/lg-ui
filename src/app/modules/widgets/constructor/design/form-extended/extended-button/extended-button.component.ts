@@ -48,11 +48,7 @@ export class ExtendedButtonComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    if (this.item.font.name) {
-      $('#font-picker-ext-form' + this.index).trigger('setFont', this.item.font.name);
-    }
-
-    if (this.item.redirect.types) {
+    if (this.item?.redirect?.types) {
       if (this.item.redirect.type.type === 0 || this.item.redirect.type.type === 1) {
         this.item.targetAction = false;
       }
@@ -79,7 +75,7 @@ export class ExtendedButtonComponent implements OnInit, AfterViewInit, DoCheck {
         systemFonts: this.widgetConstructorService.getSystemFontListPicker(),
         googleFonts: this.widgetConstructorService.getGoogleFontListPicker()
       }).on('change', (change) => {
-        this.setNewFont(change.target.value, this.item.font.name);
+        this.setNewFont(change.target.value, this.item.font);
       });
 
       $('#font-picker-ext-form' + this.index).trigger('setFont', this.item.font.name);

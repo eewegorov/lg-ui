@@ -38,11 +38,11 @@ export class ExtendedDdComponent implements OnInit {
   }
 
   private unmappedCoupons(list) {
-    return list.split('\n');
+    return list?.split('\n');
   }
 
   private mappedCoupons(list) {
-    return list.join('\n');
+    return list?.join('\n');
   }
 
 }
