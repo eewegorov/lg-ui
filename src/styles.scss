@@ -1703,20 +1703,19 @@ ul.form-ext-wrapper[ng-sortable] li.form-ext-item.sortable-ghost {
   transform: rotate(45deg);
 }
 
-.form-ext-term-wrapper {
-}
 .form-ext-term-wrapper .form-ext-term-checkbox-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   padding-left: 0;
 }
+
 .form-ext-term-wrapper .form-ext-term-checkbox-container-help-cl {
   position: relative;
   width: 24px;
-
-  margin-right: 6px;
+  margin-right: 12px;
 }
+
 .form-ext-term-wrapper .form-ext-term-checkbox-checkmark {
   top: -12px;
 }

@@ -51,6 +51,7 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentChe
   public widthBtnFormStyle = '';
   public widthExitBtnStyle = '';
   public videoBgClass = '';
+  public selected: any = '';
   @Output() private removeElement = new EventEmitter<{ element: string, index: number }>();
   @Output() private scrollToElement = new EventEmitter<{ id: string, elementName: string, elementCounter: number }>();
   @Output() private addNewElement = new EventEmitter<number>();

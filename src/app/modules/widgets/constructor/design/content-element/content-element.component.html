@@ -372,9 +372,13 @@
                             class="form-ext-checkbox-container"
                           >{{ variant }}
                             <div
+                              (click)="selected = variant"
                               [style]="'background-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm) + ';border-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm)">
                               <input [name]="itemExt['multiEnable'] ? '' : ('radio-' + itemExt.id)"
-                                     [type]="itemExt['multiEnable'] ? 'checkbox' : 'radio'">
+                                     [attr.type]="itemExt['multiEnable'] ? 'checkbox' : 'radio'"
+                                     [value]="variant"
+                                     [checked]="selected === variant"
+                              >
                               <span
                                 [ngClass]="itemExt['multiEnable'] ? 'form-ext-checkbox-checkmark' : 'form-ext-checkbox-checkmark-radio'"
                                 [ngStyle]="{'background-color': widget.guiprops.formExt.model.mainSettings.rgbaInputForm, 'border-color': widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : 'transparent'}"
@@ -410,8 +414,10 @@
                         <div class="form-ext-term-wrapper">
                           <div (click)="termClick($event)" class="form-ext-term-checkbox-container">
                             <div [style]="'background-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm) + '; border-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm)"
-                                 class="form-ext-term-checkbox-container-help-cl">
-                              <input type="checkbox">
+                                 class="form-ext-term-checkbox-container-help-cl"
+                                 (click)="selected = !selected"
+                            >
+                              <input type="checkbox" [checked]="selected || itemExt.checked">
                               <span [ngStyle]="{'background-color': widget.guiprops.formExt.model.mainSettings.rgbaInputForm, 'border-color': widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : 'transparent'}"
                                     class="form-ext-term-checkbox-checkmark"></span>
                             </div>

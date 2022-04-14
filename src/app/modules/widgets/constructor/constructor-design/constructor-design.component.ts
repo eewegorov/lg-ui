@@ -426,6 +426,10 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public scrollToEl(id: string, elementName: string, elementCounter?: number) {
+    if (this.currentElement === 'form-ext-element' && elementName === 'form-ext-element') {
+      return;
+    }
+    
     this.backToRegularElement();
 
     if ([
