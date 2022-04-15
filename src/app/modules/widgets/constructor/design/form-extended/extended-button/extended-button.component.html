@@ -256,7 +256,7 @@
 
   <div *ngIf="item.redirect.type.type === 1 || item.redirect.type.type === 3">
     <div
-      [ngClass]="(item.redirect.url === '') ? 'is-invalid' : ''"
+      [ngClass]="(item.redirect.url === '' && showErrors) ? 'is-invalid' : ''"
       class="row-subitem mt-3 widget-name-block-rel"
     >
       <label class="control-label">{{ 'widgets.redirect.onClickRedirect' | translate }}:</label>
@@ -268,6 +268,9 @@
     <div class="row-subitem mt-2 widget-small-text">
       {{ 'widgets.redirect.description' | translate }}
     </div>
+    <div class="row-subitem widget-small-text">
+      {{ 'widgets.redirect.description2' | translate }}
+    </div>
     <div class="row-subitem mt-3">
       <div class="form-check">
         <label class="form-check-label">
@@ -278,7 +281,7 @@
           />
           <span class="checkmark"></span>
         </label>
-        <span class="form-check-text f-3">{{ 'widgets.redirect.blank' | translate }}</span>
+        <span class="form-check-text">{{ 'widgets.redirect.blank' | translate }}</span>
       </div>
     </div>
   </div>
@@ -297,7 +300,7 @@
           <span class="checkmark"></span>
         </label>
         <span
-          class="form-check-text f-3">{{ 'widgets.formExt.mainSettings.buttonSettings.isBtnAction' | translate }}</span>
+          class="form-check-text">{{ 'widgets.formExt.mainSettings.buttonSettings.isBtnAction' | translate }}</span>
       </div>
     </div>
   </div>

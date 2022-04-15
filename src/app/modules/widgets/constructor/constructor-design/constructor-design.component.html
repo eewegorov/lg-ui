@@ -834,7 +834,7 @@
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'button'">
                   <app-extended-button [containerId]="widget.containerId" [index]="extendedIndex"
-                                       [item]="extendedElement"></app-extended-button>
+                                       [item]="extendedElement" [showErrors]="showErrors"></app-extended-button>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'hidden'">
                   <app-extended-hidden [index]="extendedIndex" [item]="extendedElement"></app-extended-hidden>

@@ -12,6 +12,7 @@ export class ExtendedButtonComponent implements OnInit, AfterViewInit, DoCheck {
   @Input() public index: number;
   @Input() public containerId: string;
   @Input() public item: Record<string, any>;
+  @Input() public showErrors: boolean;
 
   public optionsRound: Options = {
     floor: 0,
