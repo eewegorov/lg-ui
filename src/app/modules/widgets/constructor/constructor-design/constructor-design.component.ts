@@ -186,7 +186,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
     setInterval(() => {
       this.widgetConstructorService.updateWidget.next();
-    }, 300);
+    }, 200);
 
     this.widgetService.addValidator(this.validator);
 
@@ -429,7 +429,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     if (this.currentElement === 'form-ext-element' && elementName === 'form-ext-element') {
       return;
     }
-    
+
     this.backToRegularElement();
 
     if ([
@@ -1900,28 +1900,26 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     const labelElementWithText = $('.label-text-with-add');
 
     if (this.widget.guiprops.labelMain.iconOrImage === 'useImg') {
-      setTimeout(() => {
-        let imageSize;
-        let margTopValue;
+      let imageSize;
+      let margTopValue;
 
-        if (labelElementWithText.height() >= 24) {
-          imageSize = labelElementWithText.height() + 2;
-          margTopValue = (imageSize / 2) + 1;
-        } else {
-          imageSize = 25;
-          margTopValue = 14;
-        }
+      if (labelElementWithText.height() >= 24) {
+        imageSize = labelElementWithText.height() + 2;
+        margTopValue = (imageSize / 2) + 1;
+      } else {
+        imageSize = 25;
+        margTopValue = 14;
+      }
 
-        $('.lgiconfontImg').css({
-          width: imageSize + 'px',
-          height: imageSize + 'px',
-          'margin-top': -margTopValue + 'px'
-        });
-        labelContent.css({ 'padding-left': (imageSize + 10) + 'px' });
+      $('.lgiconfontImg').css({
+        width: imageSize + 'px',
+        height: imageSize + 'px',
+        'margin-top': -margTopValue + 'px'
+      });
+      labelContent.css({ 'padding-left': (imageSize + 10) + 'px' });
 
-        this.widget.guiprops.labelMain.imgWidth = imageSize;
-        this.widget.guiprops.labelMain.imgMargTop = margTopValue;
-      }, 0);
+      this.widget.guiprops.labelMain.imgWidth = imageSize;
+      this.widget.guiprops.labelMain.imgMargTop = margTopValue;
     } else {
       labelContent.css({ 'padding-left': '' });
     }

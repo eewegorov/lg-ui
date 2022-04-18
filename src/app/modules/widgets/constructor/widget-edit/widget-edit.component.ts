@@ -269,7 +269,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
 
   public validateFormExtElements(): string {
     let error = '';
-    this.widget.guiprops.formExt.model.list.forEach(element => {
+    this.widget.guiprops.formExt?.model?.list?.forEach(element => {
       if (element.placeholder === '') {
         error = 'Не заполнено поле placeholder'
       }

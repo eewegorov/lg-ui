@@ -976,6 +976,19 @@ h6.title-h6-widget a:hover {
   line-height: 1.2em;
 }
 
+.lgiconfontImg {
+  width: 37px;
+  height: 37px;
+  display: inline-block;
+  border-radius: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  left: 0;
+  top: 50%;
+}
+
 .modal-dialog {
   max-width: 760px;
 }
