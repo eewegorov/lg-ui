@@ -16,19 +16,9 @@
   </div>
   <div class="settings-container">
     <div class="pb-5">
-      <!-- Section Audience -->
-      <div
-        [hidden]="currentCategory !== widgetSettingsCategories[0]"
-        id="audience"
-      >
-        <app-constructor-audiences
-          [widget]="widget"
-        ></app-constructor-audiences>
-      </div>
-
       <!-- Section Targeting -->
       <div
-        [hidden]="currentCategory !== widgetSettingsCategories[1]"
+        [hidden]="currentCategory !== widgetSettingsCategories[0]"
         class="d-flex"
         id="targeting"
       >
@@ -416,6 +406,16 @@
         <div class="col-lg-4">
           <p class="mt-5 pt-2">Таргетинг позволяет настроить страницы на которых будет отображаться виджет.</p>
         </div>
+      </div>
+
+      <!-- Section Audience -->
+      <div
+        [hidden]="currentCategory !== widgetSettingsCategories[1]"
+        id="audience"
+      >
+        <app-constructor-audiences
+          [widget]="widget"
+        ></app-constructor-audiences>
       </div>
 
       <div [hidden]="isContainerized">

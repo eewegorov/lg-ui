@@ -28,8 +28,8 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     DAY: this.translate.instant('global.unit.days')
   };
   public widgetSettingsCategories = [
-    this.translate.instant('widgetsList.editor.section.audience'),
     this.translate.instant('widgetsList.editor.section.targeting'),
+    this.translate.instant('widgetsList.editor.section.audience'),
     this.translate.instant('widgetsList.editor.section.showing'),
     this.translate.instant('widgetsList.editor.section.block'),
     this.translate.instant('widgetsList.editor.section.autoresponder'),
