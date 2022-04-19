@@ -402,7 +402,6 @@
             <!-- End Date range -->
           </div>
         </div>
-
         <div class="col-lg-4">
           <p class="mt-5 pt-2">Настройте время и выберите страницы, на которых будет показан виджет.</p>
           <p>Вы можете активировать несколько разных опций таргетинга, и они будут дополнять друг
@@ -712,239 +711,252 @@
         <!-- Section Restrictions -->
         <div
           [hidden]="currentCategory !== widgetSettingsCategories[3]"
-          class="col-lg-8"
+          class="d-flex"
           id="restrictions"
         >
-          <h1>{{ 'widgetsList.editor.section.block' | translate }}</h1>
+          <div class="col-lg-8">
+            <h1>{{ 'widgetsList.editor.section.block' | translate }}</h1>
 
-          <div class="rules-container">
-            <h4 class="widgets-settings-subtitle mt-3">
-              {{ 'widgetsList.editor.restrictions.title' | translate }} <span
-              class="label label-warning tariff-info ml-2">окупаемый</span>
-            </h4>
+            <div class="rules-container">
+              <h4 class="widgets-settings-subtitle mt-3">
+                {{ 'widgetsList.editor.restrictions.title' | translate }} <span
+                class="label label-warning tariff-info ml-2">окупаемый</span>
+              </h4>
 
-            <div class="d-flex mt-4">
-              <input
-                (ngModelChange)="onRestrictionModeChange()"
-                [(ngModel)]="widget.restrictions.target.mode"
-                [value]="1"
-                class="radio-left mt-0"
-                name="restrictions"
-                type="radio"
-              >
-              <label class="control-label switcher-label ml-1">
-                {{ 'widgetsList.editor.restrictions.disable.title' | translate }}
-              </label>
-            </div>
-            <div class="d-flex mt-3">
-              <input
-                (ngModelChange)="onRestrictionModeChange()"
-                [(ngModel)]="widget.restrictions.target.mode"
-                [value]="2"
-                class="radio-left mt-0"
-                name="restrictions"
-                type="radio"
-              >
-              <label class="control-label switcher-label ml-1">
-                {{ 'widgetsList.editor.restrictions.enable.title' | translate }}
-              </label>
-            </div>
-            <div class="border-item">
-              <div class="d-flex mt-3">
+              <div class="d-flex mt-4">
                 <input
+                  (ngModelChange)="onRestrictionModeChange()"
                   [(ngModel)]="widget.restrictions.target.mode"
-                  [value]="0"
+                  [value]="1"
                   class="radio-left mt-0"
                   name="restrictions"
                   type="radio"
                 >
                 <label class="control-label switcher-label ml-1">
-                  {{ 'widgetsList.editor.restrictions.ontime.title' | translate }}
+                  {{ 'widgetsList.editor.restrictions.disable.title' | translate }}
                 </label>
               </div>
+              <div class="d-flex mt-3">
+                <input
+                  (ngModelChange)="onRestrictionModeChange()"
+                  [(ngModel)]="widget.restrictions.target.mode"
+                  [value]="2"
+                  class="radio-left mt-0"
+                  name="restrictions"
+                  type="radio"
+                >
+                <label class="control-label switcher-label ml-1">
+                  {{ 'widgetsList.editor.restrictions.enable.title' | translate }}
+                </label>
+              </div>
+              <div class="border-item">
+                <div class="d-flex mt-3">
+                  <input
+                    [(ngModel)]="widget.restrictions.target.mode"
+                    [value]="0"
+                    class="radio-left mt-0"
+                    name="restrictions"
+                    type="radio"
+                  >
+                  <label class="control-label switcher-label ml-1">
+                    {{ 'widgetsList.editor.restrictions.ontime.title' | translate }}
+                  </label>
+                </div>
 
-              <div *ngIf="widget.restrictions.target?.mode == 0" class="d-flex align-items-center mt-2">
+                <div *ngIf="widget.restrictions.target?.mode == 0" class="d-flex align-items-center mt-2">
+                  <div class="f-3">
+                    {{ 'widgetsList.editor.restrictions.disable.label' | translate }}
+                  </div>
+                  <div class="dropdown ml-2" style="float: left;">
+                    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                            type="button">
+                      {{ widget.restrictions.target.gap }}
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
+                      <li
+                        (click)="widget.restrictions.target.gap = timeItem"
+                        *ngFor="let timeItem of restrictionsGaps"
+                        role="presentation"
+                      ><a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ timeItem }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="f-3 ml-2">
+                    {{ 'widgetsList.editor.restrictions.hours' | translate }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-3">
+                <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.restrictions.title2' | translate }}</h4>
+              </div>
+              <!-- Restrictions.autoinvite -->
+              <div class="d-flex mt-4">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      [(ngModel)]="widget.restrictions.autoinvite.enable"
+                      class="form-check-input"
+                      id="autoinviteEnable"
+                      name="autoinviteEnable"
+                      type="checkbox"
+                    />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <label class="control-label switcher-label">
+                  {{ 'widgetsList.editor.restrictions.autoinvite.text' | translate }}<br/>
+                </label>
+              </div>
+              <div *ngIf="widget.restrictions.autoinvite?.enable" class="d-flex align-items-center mt-2 ml-4 pl-1">
                 <div class="f-3">
                   {{ 'widgetsList.editor.restrictions.disable.label' | translate }}
                 </div>
-                <div class="dropdown ml-2" style="float: left;">
-                  <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                          type="button">
-                    {{ widget.restrictions.target.gap }}
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
-                    <li
-                      (click)="widget.restrictions.target.gap = timeItem"
-                      *ngFor="let timeItem of restrictionsGaps"
-                      role="presentation"
-                    ><a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ timeItem }}</a>
-                    </li>
-                  </ul>
-                </div>
+                <input [(ngModel)]="widget.restrictions.autoinvite.gap" class="form-control widgets-num-input ml-2" max="72" min="0"
+                       type="number"/>
                 <div class="f-3 ml-2">
                   {{ 'widgetsList.editor.restrictions.hours' | translate }}
                 </div>
               </div>
-            </div>
+              <!-- End restrictions.autoinvite -->
 
-            <div class="mt-3">
-              <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.restrictions.title2' | translate }}</h4>
-            </div>
-            <!-- Restrictions.autoinvite -->
-            <div class="d-flex mt-4">
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input
-                    [(ngModel)]="widget.restrictions.autoinvite.enable"
-                    class="form-check-input"
-                    id="autoinviteEnable"
-                    name="autoinviteEnable"
-                    type="checkbox"
-                  />
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <label class="control-label switcher-label">
-                {{ 'widgetsList.editor.restrictions.autoinvite.text' | translate }}<br/>
-              </label>
-            </div>
-            <div *ngIf="widget.restrictions.autoinvite?.enable" class="d-flex align-items-center mt-2 ml-4 pl-1">
-              <div class="f-3">
-                {{ 'widgetsList.editor.restrictions.disable.label' | translate }}
-              </div>
-              <input [(ngModel)]="widget.restrictions.autoinvite.gap" class="form-control widgets-num-input ml-2" max="72" min="0"
-                     type="number"/>
-              <div class="f-3 ml-2">
-                {{ 'widgetsList.editor.restrictions.hours' | translate }}
-              </div>
-            </div>
-            <!-- End restrictions.autoinvite -->
-
-            <!-- Restrictions.unique -->
-            <div *ngIf="widget.restrictions.unique" class="d-flex mt-4">
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input
-                    [(ngModel)]="widget.restrictions.unique.enable"
-                    class="form-check-input"
-                    id="uniqueEnable"
-                    name="uniqueEnable"
-                    type="checkbox"
-                  />
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <label class="control-label switcher-label">
-                {{ 'widgetsList.editor.restrictions.unique.text' | translate }}<br/>
-              </label>
-            </div>
-            <div *ngIf="widget.restrictions.unique?.enable" class="d-flex align-items-center mt-2 ml-4 pl-1">
-              <div class="f-3">
-                {{ 'widgetsList.editor.restrictions.disable.label' | translate }}
-              </div>
-              <input [(ngModel)]="widget.restrictions.unique.gap" class="form-control widgets-num-input ml-2" min="0"
-                     type="number"/>
-              <div class="f-3 ml-2">
-                {{ 'widgetsList.editor.restrictions.hours' | translate }}
-              </div>
-            </div>
-            <!-- END Restrictions.unique -->
-
-            <!-- Restrictions.lockAfterAction -->
-            <div *ngIf="widget.restrictions.action" class="d-flex mt-4">
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input
-                    #actionEnable
-                    (change)="onChangePayment(actionEnable.checked)"
-                    [(ngModel)]="widget.restrictions.action.enable"
-                    class="form-check-input"
-                    id="actionEnable"
-                    name="actionEnable"
-                    type="checkbox"
-                  />
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <label class="control-label switcher-label">
-                {{ 'widgets.settings.lockAfterAction.title' | translate }}<span
-                class="label label-warning tariff-info ml-2">окупаемый</span><br/>
-              </label>
-            </div>
-            <div *ngIf="widget.restrictions?.action?.enable" class="d-flex align-items-center mt-2 ml-4 pl-1">
-              <div class="f-3">
-                {{ 'widgets.settings.lockAfterAction.lock1' | translate }}
-              </div>
-              <input [(ngModel)]="widget.restrictions.action.gap" class="form-control widgets-num-input ml-2" min="0"
-                     type="number"/>
-              <div class="f-3 ml-2">
-                {{ 'widgets.settings.lockAfterAction.lock2' | translate }}
-              </div>
-            </div>
-            <!-- END Restrictions.lockAfterAction -->
-
-            <!-- Restrictions.count -->
-            <div *ngIf="widget.restrictions.count" class="d-flex mt-4">
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input
-                    #countEnable
-                    (change)="onChangePayment(countEnable.checked)"
-                    [(ngModel)]="widget.restrictions.count.enable"
-                    class="form-check-input"
-                    id="countEnable"
-                    name="countEnable"
-                    type="checkbox"
-                  />
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <label class="control-label switcher-label">
-                {{ 'widgetsList.editor.restrictions.count.text' | translate }} <span
-                class="label label-warning tariff-info ml-2">окупаемый</span><br/>
-              </label>
-            </div>
-            <div *ngIf="widget.restrictions.count?.enable" class="ml-4 pl-1">
-              <div class="d-flex align-items-center mt-2">
-                <div class="f-3">
-                  {{ 'widgetsList.editor.restrictions.count.part1' | translate }}
+              <!-- Restrictions.unique -->
+              <div *ngIf="widget.restrictions.unique" class="d-flex mt-4">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      [(ngModel)]="widget.restrictions.unique.enable"
+                      class="form-check-input"
+                      id="uniqueEnable"
+                      name="uniqueEnable"
+                      type="checkbox"
+                    />
+                    <span class="checkmark"></span>
+                  </label>
                 </div>
-                <input [(ngModel)]="widget.restrictions.count.count" class="form-control widgets-num-input ml-2" min="0"
+                <label class="control-label switcher-label">
+                  {{ 'widgetsList.editor.restrictions.unique.text' | translate }}<br/>
+                </label>
+              </div>
+              <div *ngIf="widget.restrictions.unique?.enable" class="d-flex align-items-center mt-2 ml-4 pl-1">
+                <div class="f-3">
+                  {{ 'widgetsList.editor.restrictions.disable.label' | translate }}
+                </div>
+                <input [(ngModel)]="widget.restrictions.unique.gap" class="form-control widgets-num-input ml-2" min="0"
                        type="number"/>
                 <div class="f-3 ml-2">
-                  {{ 'widgetsList.editor.restrictions.count.part2' | translate }}
+                  {{ 'widgetsList.editor.restrictions.hours' | translate }}
                 </div>
               </div>
-              <div class="d-flex align-items-center mt-2">
+              <!-- END Restrictions.unique -->
+
+              <!-- Restrictions.lockAfterAction -->
+              <div *ngIf="widget.restrictions.action" class="d-flex mt-4">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      #actionEnable
+                      (change)="onChangePayment(actionEnable.checked)"
+                      [(ngModel)]="widget.restrictions.action.enable"
+                      class="form-check-input"
+                      id="actionEnable"
+                      name="actionEnable"
+                      type="checkbox"
+                    />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <label class="control-label switcher-label">
+                  {{ 'widgets.settings.lockAfterAction.title' | translate }}<span
+                  class="label label-warning tariff-info ml-2">окупаемый</span><br/>
+                </label>
+              </div>
+              <div *ngIf="widget.restrictions?.action?.enable" class="d-flex align-items-center mt-2 ml-4 pl-1">
                 <div class="f-3">
-                  {{ 'widgetsList.editor.restrictions.count.part3' | translate }}
+                  {{ 'widgets.settings.lockAfterAction.lock1' | translate }}
                 </div>
-                <input [(ngModel)]="widget.restrictions.count.interval" class="form-control widgets-num-input ml-2" min="0"
+                <input [(ngModel)]="widget.restrictions.action.gap" class="form-control widgets-num-input ml-2" min="0"
                        type="number"/>
-                <div class="dropdown ml-1" style="display: inline;">
-                  <button aria-expanded="true" class="btn btn-default dropdown-toggle f-3" data-toggle="dropdown"
-                          type="button">
-                    {{ units[widget.restrictions.count.unit] }}
-                    <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu" role="menu">
-                    <li
-                      (click)="widget.restrictions.count.unit = key"
-                      *ngFor="let key of getUnitsKeys()"
-                      role="presentation"
-                    >
-                      <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
-                         tabindex="-1">{{ units[key] }}</a>
-                    </li>
-                  </ul>
-                </div>
                 <div class="f-3 ml-2">
-                  {{ 'widgetsList.editor.restrictions.count.part4' | translate }}
+                  {{ 'widgets.settings.lockAfterAction.lock2' | translate }}
                 </div>
               </div>
-              <!-- END Restrictions.count -->
+              <!-- END Restrictions.lockAfterAction -->
+
+              <!-- Restrictions.count -->
+              <div *ngIf="widget.restrictions.count" class="d-flex mt-4">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      #countEnable
+                      (change)="onChangePayment(countEnable.checked)"
+                      [(ngModel)]="widget.restrictions.count.enable"
+                      class="form-check-input"
+                      id="countEnable"
+                      name="countEnable"
+                      type="checkbox"
+                    />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <label class="control-label switcher-label">
+                  {{ 'widgetsList.editor.restrictions.count.text' | translate }} <span
+                  class="label label-warning tariff-info ml-2">окупаемый</span><br/>
+                </label>
+              </div>
+              <div *ngIf="widget.restrictions.count?.enable" class="ml-4 pl-1">
+                <div class="d-flex align-items-center mt-2">
+                  <div class="f-3">
+                    {{ 'widgetsList.editor.restrictions.count.part1' | translate }}
+                  </div>
+                  <input [(ngModel)]="widget.restrictions.count.count" class="form-control widgets-num-input ml-2" min="0"
+                         type="number"/>
+                  <div class="f-3 ml-2">
+                    {{ 'widgetsList.editor.restrictions.count.part2' | translate }}
+                  </div>
+                </div>
+                <div class="d-flex align-items-center mt-2">
+                  <div class="f-3">
+                    {{ 'widgetsList.editor.restrictions.count.part3' | translate }}
+                  </div>
+                  <input [(ngModel)]="widget.restrictions.count.interval" class="form-control widgets-num-input ml-2" min="0"
+                         type="number"/>
+                  <div class="dropdown ml-1" style="display: inline;">
+                    <button aria-expanded="true" class="btn btn-default dropdown-toggle f-3" data-toggle="dropdown"
+                            type="button">
+                      {{ units[widget.restrictions.count.unit] }}
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li
+                        (click)="widget.restrictions.count.unit = key"
+                        *ngFor="let key of getUnitsKeys()"
+                        role="presentation"
+                      >
+                        <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
+                           tabindex="-1">{{ units[key] }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="f-3 ml-2">
+                    {{ 'widgetsList.editor.restrictions.count.part4' | translate }}
+                  </div>
+                </div>
+                <!-- END Restrictions.count -->
+              </div>
             </div>
+          </div>
+          <div class="col-lg-4">
+            <p class="mt-5 pt-2">
+              Ограничения на показ виджета влияют только на показ окна виджета. Если вы настраиваете виджет формата
+              "Ярлычок" или "Точка захвата", то ярлычок и точка будут видны на странице, вне зависимости от настроек
+              ограничений показов.
+            </p>
+            <p>
+              При настройке ограничений показов для виджета формата "всплывающее окно" и срабатывании правил, окно
+              виджета показано посетителю не будет.
+            </p>
           </div>
         </div>
       </div>
