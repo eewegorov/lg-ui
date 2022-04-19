@@ -189,6 +189,10 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     this.widget.autoinvite.exit.mobileEnable = value;
   }
 
+  public prepareRuleLogic(rule: string): string {
+    return rule.includes(this.autoinviteVariants[0]) ? this.autoinviteVariants[0] : this.autoinviteVariants[1];
+  }
+
   private validator() {
     const errors = [];
     const TAB_ID = 'rules';
