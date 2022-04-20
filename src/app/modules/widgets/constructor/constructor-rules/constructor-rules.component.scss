@@ -179,6 +179,11 @@ label.extra-header {
   height: calc(100vh - 135px);
   overflow: auto;
   padding: 0 13px 0 3px;
+
+  label.f-3 {
+    line-height: normal;
+    margin-top: -4px;
+  }
 }
 
 .text-addition {
