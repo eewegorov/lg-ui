@@ -971,7 +971,7 @@
           <h1>{{ 'widgetsList.editor.section.autoresponder' | translate }}</h1>
 
           <div class="d-flex justify-content-between align-items-center mt-3 pt-1">
-            <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.section.autoresponder' | translate }}</h4>
+            <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoresponder.enable' | translate }}</h4>
             <ui-switch [(ngModel)]="widget.autoresponder.enabled" size="small"></ui-switch>
           </div>
 
@@ -1000,8 +1000,7 @@
         </div>
         <div class="col-lg-4">
           <p class="mt-5 pt-1">
-            Вы можете настроить автоматическое письмо посетителю, отсылаемое после отправки формы в виджете.
-            Например, это может быть ссылка на электронную книгу, благодарственное письмо или коммерческое предложение.
+            {{ 'widgetsList.editor.autoresponder.desc' | translate }}
           </p>
         </div>
       </div>
