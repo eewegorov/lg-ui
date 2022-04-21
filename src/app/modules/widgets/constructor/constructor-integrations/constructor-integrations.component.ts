@@ -1,11 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Integration } from '../../../../core/models/sites';
 import { FullWidget } from '../../../../core/models/widgets';
 import { SitesService } from '../../../sites/services/sites.service';
 import { IntegrationAddComponent } from '../../../sites/integration-add/integration-add.component';
-import { SubscriptionLike } from 'rxjs';
 
 @Component({
   selector: 'app-constructor-integrations',

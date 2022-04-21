@@ -22,6 +22,7 @@ import {
 } from '../../../core/models/sites';
 import { CoreSitesService } from '../../../core/services/core-sites.service';
 import { SitesService } from '../services/sites.service';
+import { TariffsService } from '../../../core/services/tariffs.service';
 
 
 @Component({
@@ -70,6 +71,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   public pipelines: AmoFunnel[] = [];
   public leadStates: AmoStatus[] = [];
   public isAmoActivated = false;
+  public isFree = true;
   @Input() private siteId: string;
   @Input() private integrationId: string;
 
@@ -77,6 +79,7 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
     private translate: TranslateService,
     private activeModal: NgbActiveModal,
     private toastr: ToastrService,
+    private tariffsService: TariffsService,
     private coreSitesService: CoreSitesService,
     private sitesService: SitesService
   ) {
@@ -84,6 +87,9 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     this.isEditIntegration = !!this.integrationId;
+
+    this.isFree = this.sitesService.isSiteHasExpTariff(this.coreSitesService.getSiteById(this.siteId));
+
     this.defIntegrationServiceName = this.translate.instant('settings.site.newIntegration.choseIntegrationService');
     this.defIntegrationSiteName = this.translate.instant('widgetsList.add.chooseSite');
 
@@ -91,64 +97,45 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
     if (this.isEditIntegration) {
       this.tab = 'EDIT';
       this.editableIntegration = {};
-      /*this.sitesService.getSiteIntegration(this.siteId, this.integrationId).subscribe((response: IntegrationItem) => {*/
-      const response: IntegrationItem = {
-        id: '8330be13431534c0f3808286ea145a9e',
-        name: 'Bitrix integrations',
-        active: false,
-        type: 'AMOCRM',
-        params: {
-          subdomain: 'dfggdgd',
-          clientId: 'ytitit',
-          clientSecret: 'yututyut',
-          accessToken: 'rthrtyrty',
-          refreshToken: 'rghgfhgfh',
-          funnelId: 'ryrtyrty',
-          leadStateId: 'ttyutu',
-          checkDuplicate: 'EMAIL'
-        },
-        customFieldsMapping: {},
-        default: false
-      };
+      this.sitesService.getSiteIntegration(this.siteId, this.integrationId).subscribe((response: IntegrationItem) => {
+        this.editableIntegration = response;
 
-      this.editableIntegration = response;
-
-      if (response.type === IntegrationTypes.BITRIX) {
-        this.bitrixConnectionType = response.params.login ? BitrixConnectionTypes.Api : BitrixConnectionTypes.Webhook;
-      }
-
-      if (response.type === IntegrationTypes.AMOCRM) {
-        if (response.params.funnelId) {
-          this.pipelines.push({ id: response.params.funnelId, name: response.params.funnelId } as AmoFunnel);
-
-          this.editableIntegration.params = {
-            ...this.editableIntegration.params,
-            funnelName: response.params.funnelId
-          };
+        if (response.type === IntegrationTypes.BITRIX) {
+          this.bitrixConnectionType = response.params.login ? BitrixConnectionTypes.Api : BitrixConnectionTypes.Webhook;
         }
 
-        if (response.params.leadStateId) {
-          this.leadStates.push({ id: response.params.leadStateId, name: response.params.leadStateId } as AmoStatus);
+        if (response.type === IntegrationTypes.AMOCRM) {
+          if (response.params.funnelId) {
+            this.pipelines.push({ id: response.params.funnelId, name: response.params.funnelId } as AmoFunnel);
 
-          this.editableIntegration.params = {
-            ...this.editableIntegration.params,
-            leadStateName: response.params.leadStateId
-          };
+            this.editableIntegration.params = {
+              ...this.editableIntegration.params,
+              funnelName: response.params.funnelId
+            };
+          }
+
+          if (response.params.leadStateId) {
+            this.leadStates.push({ id: response.params.leadStateId, name: response.params.leadStateId } as AmoStatus);
+
+            this.editableIntegration.params = {
+              ...this.editableIntegration.params,
+              leadStateName: response.params.leadStateId
+            };
+          }
+
+          Object.entries(response.customFieldsMapping).forEach((value) => {
+            this.integrationFieldsIds.push({ leadGenicId: value[0], crmId: value[1] as string });
+          });
+
+          if (this.integrationFieldsIds.length > 1) {
+            this.integrationFieldsIds.shift();
+          }
+
+          this.activateIntegration(AmoGrantTypes.RefreshToken);
         }
 
-        Object.entries(response.customFieldsMapping).forEach((value) => {
-          this.integrationFieldsIds.push({ leadGenicId: value[0], crmId: value[1] as string });
-        });
-
-        if (this.integrationFieldsIds.length > 1) {
-          this.integrationFieldsIds.shift();
-        }
-
-        this.activateIntegration(AmoGrantTypes.RefreshToken);
-      }
-
-      this.editableIntegrationServiceName = this.sitesService.getCorrectNameByType(response.type);
-      /*});*/
+        this.editableIntegrationServiceName = this.sitesService.getCorrectNameByType(response.type);
+      });
     }
   }
 
@@ -169,6 +156,15 @@ export class IntegrationAddComponent implements OnInit, AfterViewChecked {
   }
 
   public changeCurrentIntegrationService(service) {
+    if (service.isPayment && this.isFree) {
+      this.tariffsService.checkTariffPlans(this.siteId,
+        this.translate.instant('sitelist.tariff.improve'),
+        undefined, this.coreSitesService.getSiteById(this.siteId).name
+      );
+
+      return;
+    }
+
     this.currentIntegrationService = service;
   }
 
