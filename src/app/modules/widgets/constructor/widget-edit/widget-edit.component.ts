@@ -146,7 +146,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
           this.widget.rules.pageNo.enable = false;
         }
 
-        if (this.widget.rules.prevPages?.action) {
+        if (this.widget.rules.prevPages) {
           this.widget.rules.prevPages.enable = false;
         }
 

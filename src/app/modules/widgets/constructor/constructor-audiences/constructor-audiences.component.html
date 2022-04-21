@@ -8,7 +8,7 @@
           <h1>{{ 'widgetsList.editor.audiences.title' | translate }}<span
             class="label label-warning tariff-info biggest">окупаемый</span></h1>
           <ui-switch
-            (change)="onChangePayment"
+            (change)="onChangePayment($event)"
             [(ngModel)]="widget.audiencesEnabled"
             class="mt-1 mr-2 float-left"
           ></ui-switch>

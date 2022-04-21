@@ -151,7 +151,7 @@
                     title="{{ 'widgetsList.editor.rules.pageVTargeting.tooltip' | translate }}"><i class="far fa-question-circle"></i></a>
                 </h4>
 
-                <ui-switch (change)="onChangePayment" [(ngModel)]="widget.rules['prevPages'].enable"
+                <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.rules['prevPages'].enable"
                            size="small"></ui-switch>
               </div>
 
@@ -241,7 +241,7 @@
                     title="{{ 'widgetsList.editor.rules.pageNo.select.title' | translate }}"><i class="far fa-question-circle"></i></a>
                 </h4>
 
-                <ui-switch (change)="onChangePayment" [(ngModel)]="widget.rules.pageNo.enable" size="small"></ui-switch>
+                <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.rules.pageNo.enable" size="small"></ui-switch>
               </div>
 
               <div
@@ -275,7 +275,7 @@
                   title="{{ 'widgetsList.editor.rules.dateTime.placeholder' | translate }}"><i class="far fa-question-circle"></i></a>
                 </h4>
 
-                <ui-switch (change)="onChangePayment" [(ngModel)]="widget.rules.time.enable" size="small"></ui-switch>
+                <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.rules.time.enable" size="small"></ui-switch>
               </div>
 
               <ng-container *ngIf="widget.rules['time'].enable">
@@ -345,7 +345,7 @@
                   title="{{ 'widgetsList.editor.rules.days.title' | translate }}"><i class="far fa-question-circle"></i></a>
                 </h4>
 
-                <ui-switch (change)="onChangePayment" [(ngModel)]="widget.rules.days.enable" size="small"></ui-switch>
+                <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.rules.days.enable" size="small"></ui-switch>
               </div>
 
               <div
@@ -381,7 +381,7 @@
                   title="{{ 'widgetsList.editor.rules.period.tooltip' | translate }}"><i class="far fa-question-circle"></i></a>
                 </h4>
 
-                <ui-switch (change)="onChangePayment" [(ngModel)]="widget.rules.period.enable" size="small"></ui-switch>
+                <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.rules.period.enable" size="small"></ui-switch>
               </div>
 
               <div *ngIf="widget.rules.period?.enable" class="d-flex align-items-center">
@@ -486,7 +486,7 @@
                     </h4>
                   </div>
 
-                  <ui-switch (change)="onChangePayment" [(ngModel)]="widget.autoinvite.pages.enable"
+                  <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.autoinvite.pages.enable"
                              size="small"></ui-switch>
                 </div>
               </div>
@@ -554,7 +554,7 @@
                     </h4>
                   </div>
 
-                  <ui-switch (change)="onChangePayment" [(ngModel)]="widget.autoinvite.inactive.enabled"
+                  <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.autoinvite.inactive.enabled"
                              size="small"></ui-switch>
                 </div>
               </div>
@@ -590,7 +590,7 @@
                     </h4>
                   </div>
 
-                  <ui-switch (change)="onChangePayment" [(ngModel)]="widget.autoinvite.percent.enable"
+                  <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.autoinvite.percent.enable"
                              size="small"></ui-switch>
                 </div>
               </div>
