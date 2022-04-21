@@ -725,7 +725,7 @@
 
               <div class="d-flex mt-4">
                 <input
-                  (ngModelChange)="onRestrictionModeChange()"
+                  (change)="onRestrictionModeChange()"
                   [(ngModel)]="widget.restrictions.target.mode"
                   [value]="1"
                   class="radio-left mt-0"
@@ -738,7 +738,7 @@
               </div>
               <div class="d-flex mt-3">
                 <input
-                  (ngModelChange)="onRestrictionModeChange()"
+                  (change)="onRestrictionModeChange()"
                   [(ngModel)]="widget.restrictions.target.mode"
                   [value]="2"
                   class="radio-left mt-0"
@@ -752,6 +752,7 @@
               <div class="border-item">
                 <div class="d-flex mt-3">
                   <input
+                    (change)="onRestrictionModeChange()"
                     [(ngModel)]="widget.restrictions.target.mode"
                     [value]="0"
                     class="radio-left mt-0"
