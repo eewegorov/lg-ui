@@ -25,7 +25,8 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError(error => {
-        if (error instanceof HttpErrorResponse && error.status === 401) {
+        console.log(error);
+        if (error instanceof HttpErrorResponse && error.status === 401 && !error.url.includes('auth')) {
           return this.handle401Error(request, next);
         } else {
           return throwError(error);
@@ -43,10 +44,6 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    if (request.url === '/oauth/token') {
-      this.router.navigate(['/logout']);
-    }
-
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);

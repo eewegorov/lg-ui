@@ -17,6 +17,7 @@ const $ = require('jquery');
 })
 export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
   @Input() public widget: FullWidget;
+  @Input() public showErrors: boolean;
 
   constructor(
     private router: Router,

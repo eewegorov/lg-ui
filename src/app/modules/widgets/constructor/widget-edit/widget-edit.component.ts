@@ -64,6 +64,10 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   private formExtRedirectFieldEmpty = false;
   private defaultCoupon = { id: null, name: 'Какой купон хотите использовать?' };
   private meInfoSub: SubscriptionLike;
+  private paymentSub: SubscriptionLike;
+  private updateCouponsList: SubscriptionLike;
+  private updateWidget: SubscriptionLike;
+  private formExtIdFieldFocusOut: SubscriptionLike;
 
   constructor(
     private router: Router,
@@ -116,7 +120,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
       ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
     }, 1000);
 
-    this.widgetService.onChangePayment.subscribe((value: boolean) => {
+    this.paymentSub = this.widgetService.onChangePayment.subscribe((value: boolean) => {
       this.onChangePayment(value);
     });
 
@@ -513,12 +517,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     return id !== 'email' && id !== 'name' && id !== 'message' && id !== 'phone' && this.formExtIdsCached.indexOf(id) === -1;
   }
 
-  ngOnDestroy(): void {
-    if (this.meInfoSub) {
-      this.meInfoSub.unsubscribe();
-    }
-  }
-
   private difference(object: FullWidget, base: FullWidget): Partial<FullWidget> {
     // eslint-disable-next-line @typescript-eslint/no-shadow
     function changes(object, base) {
@@ -766,6 +764,28 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
       this.translate.instant('sitelist.tariff.improve'),
       description, this.coreSitesService.getSiteById(siteId).name
     );
+  }
+
+  ngOnDestroy(): void {
+    if (this.meInfoSub) {
+      this.meInfoSub.unsubscribe();
+    }
+
+    if (this.paymentSub) {
+      this.paymentSub.unsubscribe();
+    }
+
+    if (this.updateCouponsList) {
+      this.updateCouponsList.unsubscribe();
+    }
+
+    if (this.updateWidget) {
+      this.updateWidget.unsubscribe();
+    }
+
+    if (this.formExtIdFieldFocusOut) {
+      this.formExtIdFieldFocusOut.unsubscribe();
+    }
   }
 
 }

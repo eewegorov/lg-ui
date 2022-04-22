@@ -40,57 +40,59 @@
 
                 <div [ngSwitch]="item.type" class="rule-body">
                   <app-rule-devices
+                    *ngSwitchCase="'DEVICES'"
                     (add)="addSubItem($event)"
                     (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
-                    *ngSwitchCase="'DEVICES'"
                     [group]="group"
                     [item]="item"
                   ></app-rule-devices>
 
                   <app-rule-refer
+                    *ngSwitchCase="'REFER'"
                     (add)="addSubItem($event)"
                     (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
-                    *ngSwitchCase="'REFER'"
                     [group]="group"
                     [item]="item"
+                    [showErrors]="showErrors"
                   ></app-rule-refer>
 
                   <app-rule-social
+                    *ngSwitchCase="'SOCIAL'"
                     (add)="addSubItem($event)"
                     (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
-                    *ngSwitchCase="'SOCIAL'"
                     [group]="group"
                     [item]="item"
                   ></app-rule-social>
 
                   <app-rule-type
+                    *ngSwitchCase="'TYPE'"
                     (add)="addSubItem($event)"
                     (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
-                    *ngSwitchCase="'TYPE'"
                     [group]="group"
                     [item]="item"
                   ></app-rule-type>
 
                   <app-rule-url
+                    *ngSwitchCase="'URL'"
                     (add)="addSubItem($event)"
                     (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
-                    *ngSwitchCase="'URL'"
                     [group]="group"
                     [item]="item"
+                    [showErrors]="showErrors"
                   ></app-rule-url>
 
                   <app-rule-visit
+                    *ngSwitchCase="'VISIT'"
                     (add)="addSubItem($event)"
                     (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
-                    *ngSwitchCase="'VISIT'"
                     [group]="group"
                     [item]="item"
                   ></app-rule-visit>
 
                   <app-rule-visit-no
+                    *ngSwitchCase="'VISIT_NO'"
                     (add)="addSubItem($event)"
                     (remove)="removeSubItem($event.groupId, $event.itemType, $event.index)"
-                    *ngSwitchCase="'VISIT_NO'"
                     [group]="group"
                     [item]="item"
                   ></app-rule-visit-no>

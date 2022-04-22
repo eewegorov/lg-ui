@@ -1,7 +1,11 @@
 <div class="filter-section mt-4">
   <div *ngFor="let subitem of item.subitems; index as i" class="filterow">
     <div *ngIf="i > 0" class="rule-subitem-text">{{ 'audience.rule.logic.or' | translate }}</div>
-    <div [ngClass]="(subitem.value.trim().length == 0) ? 'is-invalid' : ''" class="mt-2 mb-2">
+    <div
+      class="mt-2 mb-2"
+      [class.is-invalid]="subitem.value.trim().length === 0 && showErrors"
+
+    >
       <div class="d-flex row-nomargined">
         <div class="input-group subitem-left">
           <div class="input-group-prepend">

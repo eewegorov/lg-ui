@@ -10,9 +10,12 @@ import { AUDIENCES_VALS } from '../../../../../configs/audiences';
 export class RuleReferComponent implements OnInit {
   @Input() public item: AudienceGroupItem;
   @Input() public group: AudienceGroup;
-  public vals = AUDIENCES_VALS;
+  @Input() public showErrors: boolean;
+
   @Output() private remove = new EventEmitter<{ groupId: number, itemType: string, index: number }>();
   @Output() private add = new EventEmitter<AudienceGroupItem>();
+
+  public vals = AUDIENCES_VALS;
 
   constructor() {
   }

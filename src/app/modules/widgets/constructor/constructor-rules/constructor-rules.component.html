@@ -389,13 +389,13 @@
                   {{ 'widgetsList.editor.rules.time.from' | translate }}
                 </div>
                 <div class="datepicker ml-2" id="period-rule-start-date-picker">
-                  <ngbd-datepicker-i18n [(ngModel)]="widget.rules.period.startDate"></ngbd-datepicker-i18n>
+                  <ngbd-datepicker-i18n [(ngModel)]="widget.rules.period.start_Date"></ngbd-datepicker-i18n>
                 </div>
                 <div class="f-2 ml-3">
                   {{ 'widgetsList.editor.rules.time.to' | translate }}
                 </div>
                 <div class="datepicker ml-2" id="period-rule-end-date-picker">
-                  <ngbd-datepicker-i18n [(ngModel)]="widget.rules.period.endDate"></ngbd-datepicker-i18n>
+                  <ngbd-datepicker-i18n [(ngModel)]="widget.rules.period.end_Date"></ngbd-datepicker-i18n>
                 </div>
               </div>
             </div>
@@ -418,6 +418,7 @@
       >
         <app-constructor-audiences
           [widget]="widget"
+          [showErrors]="showErrors"
         ></app-constructor-audiences>
       </div>
 

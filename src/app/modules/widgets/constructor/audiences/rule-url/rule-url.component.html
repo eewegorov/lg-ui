@@ -19,7 +19,10 @@
       <div class="d-flex justify-content-between mt-2 pt-1">
         <div class="mr-3">
           <h3>{{ 'audience.rule.url.value.upline' | translate }}</h3>
-          <div [ngClass]="(subitem.param.trim().length == 0) ? 'is-invalid' : ''" class="input-group">
+          <div
+            class="input-group"
+            [class.is-invalid]="subitem.param.trim().length === 0 && showErrors"
+          >
             <div class="input-group-prepend">
               <button aria-expanded="false" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                       type="button">
@@ -36,7 +39,7 @@
             <input [(ngModel)]="subitem.param" aria-label="" class="form-control" type="text">
           </div>
           <div class="d-flex justify-content-between small row-subitem-underline">
-            <div [ngClass]="(subitem.param.trim().length == 0) ? 'is-invalid' : ''">
+            <div [class.is-invalid]="subitem.param.trim().length === 0 && showErrors">
               <span class="underline-comment">{{ 'audience.rule.url.param.underline' | translate }}</span>
             </div>
           </div>
@@ -44,7 +47,10 @@
         <div>
           <h3>{{ 'audience.rule.url.param.upline' | translate }}</h3>
           <div class="d-flex">
-            <div [ngClass]="(subitem.value.trim().length == 0) ? 'is-invalid' : ''" class="input-group subitem-left">
+            <div
+              class="input-group subitem-left"
+              [class.is-invalid]="subitem.value.trim().length === 0 && showErrors"
+            >
               <div class="input-group-prepend">
                 <button aria-expanded="false" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                         type="button">
@@ -68,7 +74,10 @@
             </div>
           </div>
           <div class="d-flex justify-content-between small row-subitem-underline">
-            <div [ngClass]="(subitem.value.trim().length == 0) ? 'is-invalid' : ''" class="p-0">
+            <div
+              class="p-0"
+              [class.is-invalid]="subitem.value.trim().length === 0 && showErrors"
+            >
               <span class="underline-comment">{{ 'audience.rule.url.value.underline' | translate }}</span>
             </div>
           </div>
