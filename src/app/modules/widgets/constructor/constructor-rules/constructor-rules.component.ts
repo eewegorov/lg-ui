@@ -227,6 +227,23 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
       }
     }
 
+    if (this.widget.audiencesEnabled) {
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
+      for (let i = 0; i < this.widget.audience?.groups?.length; i++) {
+        for (let j = 0; j < this.widget.audience?.groups?.[i]?.items?.length; j++) {
+          for (let k = 0; k < this.widget.audience?.groups?.[i]?.items?.[j]?.subitems?.length; k++) {
+            if (this.widget.audience?.groups?.[i]?.items?.[j]?.subitems?.[k]?.value?.trim().length === 0) {
+              errors.push({
+                id: TAB_ID,
+                category: this.translate.instant('widgetsList.editor.section.audience'),
+                message: 'Укажите URL страницы'
+              });
+            }
+          }
+        }
+      }
+    }
+
     if (this.widget.rules.pageNo?.enable) {
       if (this.widget.rules.pageNo.items.length === 0) {
         errors.push({
