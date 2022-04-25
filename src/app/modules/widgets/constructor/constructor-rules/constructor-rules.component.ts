@@ -232,8 +232,8 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
       for (let i = 0; i < this.widget.audience?.groups?.length; i++) {
         for (let j = 0; j < this.widget.audience?.groups?.[i]?.items?.length; j++) {
           for (let k = 0; k < this.widget.audience?.groups?.[i]?.items?.[j]?.subitems?.length; k++) {
-            if ((this.widget.audience?.groups?.[i]?.items?.[j]?.subitems?.[k].type === 'REFER' ||
-                this.widget.audience?.groups?.[i]?.items?.[j]?.subitems?.[k].type === 'URL') &&
+            if ((this.widget.audience?.groups?.[i]?.items?.[j].type === 'REFER' ||
+                this.widget.audience?.groups?.[i]?.items?.[j].type === 'URL') &&
               this.widget.audience?.groups?.[i]?.items?.[j]?.subitems?.[k]?.value?.trim().length === 0
             ) {
               errors.push({
