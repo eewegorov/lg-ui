@@ -89,7 +89,7 @@
 </div>
 
 <div class="d-flex justify-content-between mt-3">
-  <h5 class="label-style-ic control-label-des">Прозрачность</h5>
+  <label class="control-label">Прозрачность</label>
   <div class="d-flex text-right side-ui-sm">
     <ngx-slider
       [(value)]="item.opacity"
@@ -103,7 +103,7 @@
 </div>
 
 <div class="d-flex justify-content-between mt-3 border-item">
-  <h5 class="label-style-ic control-label-des">Скругление углов</h5>
+  <label class="control-label">Скругление углов</label>
   <div class="d-flex text-right side-ui-sm">
     <ngx-slider [(value)]="item.borderRadius" [options]="optionsRound"></ngx-slider>
     <input
@@ -123,7 +123,7 @@
 </div>
 
 <div class="d-flex align-items-center justify-content-between mt-2">
-  <label class="control-label control-label-des">Размер</label>
+  <label class="control-label">Размер</label>
   <div class="align-items-center">
     <div class="form-control form-control-font">
       <input
@@ -136,7 +136,7 @@
 </div>
 
 <div class="d-flex align-items-center justify-content-between mt-3">
-  <label class="control-label control-label-des">Ширина</label>
+  <label class="control-label">Ширина</label>
   <div class="d-flex align-items-center">
     <div
       [class.disabled]="item.width_type !== widthBtn[2]"
@@ -226,7 +226,7 @@
     </div>
 
     <div class="d-flex align-items-center justify-content-between mt-2 mb-3 border-item">
-      <label class="control-label control-label-des">Размер</label>
+      <label class="control-label">Размер</label>
       <div class="align-items-center">
         <div class="form-control form-control-font">
           <input
@@ -250,7 +250,7 @@
 
     <div *ngIf="item.title.textShadow.enable">
       <div class="d-flex justify-content-between mt-3">
-        <label class="control-label control-label-des">Цвет</label>
+        <label class="control-label">Цвет</label>
         <div class="d-flex text-right">
           <input
             [(colorPicker)]="item.title.textShadow.color"
@@ -269,7 +269,7 @@
       </div>
 
       <div class="d-flex justify-content-between mt-3">
-        <h5 class="label-style-ic control-label-des">Прозрачность</h5>
+        <label class="control-label">Прозрачность</label>
         <div class="d-flex text-right side-ui-sm">
           <ngx-slider [(value)]="item.title.textShadow.opacity" [options]="optionsOpacity"></ngx-slider>
           <input
@@ -280,15 +280,15 @@
       </div>
 
       <div class="d-flex justify-content-between mt-3">
-        <label class="control-label control-label-des">Сдвиг</label>
+        <label class="control-label">Сдвиг</label>
         <div>
-          <label class="control-label control-label-des mr-1 pr-1">X</label>
+          <label class="control-label mr-1 pr-1">X</label>
           <input
             [(ngModel)]="item.title.textShadow.horiz"
             class="picker-input slider"
             type="number"
           />
-          <label class="control-label control-label-des ml-3 pl-1 mr-1 pr-1">Y</label>
+          <label class="control-label ml-3 pl-1 mr-1 pr-1">Y</label>
           <input
             [(ngModel)]="item.title.textShadow.vertical"
             class="picker-input slider"
@@ -298,7 +298,7 @@
       </div>
 
       <div class="d-flex justify-content-between mt-3">
-        <label class="control-label control-label-des">Размытие</label>
+        <label class="control-label">Размытие</label>
         <div class="d-flex text-right side-ui-sm">
           <ngx-slider [(value)]="item.title.textShadow.blur" [options]="optionsSharpness"></ngx-slider>
           <input

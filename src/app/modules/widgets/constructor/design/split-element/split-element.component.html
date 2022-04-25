@@ -1,6 +1,6 @@
 <div>
   <div class="d-flex align-items-center row-subitem row-subitem-padding row-tune-split">
-    <label class="control-label control-label-des w-75">Вид</label>
+    <label class="control-label w-75">Вид</label>
     <div class="dropdown w-100">
       <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
         <hr [class]="'style' + modelName.type">
@@ -16,7 +16,7 @@
   </div>
 
   <div class="d-flex justify-content-between mt-3">
-    <label class="control-label control-label-des">Цвет</label>
+    <label class="control-label">Цвет</label>
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="modelName.color"
@@ -35,7 +35,7 @@
   </div>
 
   <div class="d-flex align-items-center justify-content-between mt-3">
-    <label class="control-label control-label-des">Толщина</label>
+    <label class="control-label">Толщина</label>
     <div class="d-flex text-right side-ui-sm align-items-center">
       <ngx-slider [(value)]="modelName.thickness" [options]="optionsThickness"></ngx-slider>
       <div class="form-control form-control-font ml-2">
@@ -49,7 +49,7 @@
   </div>
 
   <div class="d-flex align-items-center justify-content-between mt-3">
-    <label class="control-label control-label-des">Ширина</label>
+    <label class="control-label">Ширина</label>
     <div class="d-flex align-items-center">
       <div
         [class.disabled]="modelName.width_type !== widthHrType[1]"

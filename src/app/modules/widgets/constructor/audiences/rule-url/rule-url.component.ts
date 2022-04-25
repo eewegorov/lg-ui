@@ -11,7 +11,7 @@ export class RuleUrlComponent implements OnInit {
   @Input() public item: AudienceGroupItem;
   @Input() public group: AudienceGroup;
   @Input() public showErrors: boolean;
-  
+
   @Output() private remove = new EventEmitter<{ groupId: number, itemType: string, index: number }>();
   @Output() private add = new EventEmitter<AudienceGroupItem>();
 

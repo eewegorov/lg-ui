@@ -36,7 +36,7 @@
   class="row-subitem mt-3 form-ext-item__item-input"
   [ngClass]="(item.idField?.length === 0 || !checkIdField(item.idField)) ? 'is-invalid' : ''"
 >
-  <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.id1' | translate }}</label>
+  <label class="control-label switcher-label-xs">{{ 'widgets.formExt.email.id1' | translate }}</label>
   <input
     (blur)="idFocusOut()"
     *ngIf="idEditable"
@@ -138,7 +138,7 @@
 
 <div *ngIf="hasRating" class="border-item">
   <div class="d-flex justify-content-between row-subitem mt-3">
-    <label class="control-label control-label-des">{{ 'widgets.formExt.rating.numberOfStars' | translate }}</label>
+    <label class="control-label">{{ 'widgets.formExt.rating.numberOfStars' | translate }}</label>
     <div class="form-ext-item__rating-stars-settings">
       <input [(ngModel)]="item.numberOfStars" class="form-control form-control-font form-cntrl-55w" max="15" min="1"
              type="number">
@@ -146,7 +146,7 @@
   </div>
 
   <div class="d-flex justify-content-between mt-3">
-    <label class="control-label control-label-des">{{ 'widgets.formExt.rating.colorInactive' | translate }}</label>
+    <label class="control-label">{{ 'widgets.formExt.rating.colorInactive' | translate }}</label>
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="item.colorInactive"
@@ -165,7 +165,7 @@
   </div>
 
   <div class="d-flex justify-content-between mt-3">
-    <label class="control-label control-label-des">{{ 'widgets.formExt.rating.colorActive' | translate }}</label>
+    <label class="control-label">{{ 'widgets.formExt.rating.colorActive' | translate }}</label>
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="item.colorActive"

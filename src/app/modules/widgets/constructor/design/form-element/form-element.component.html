@@ -72,7 +72,7 @@
     <h3>Вид формы</h3>
 
     <div class="d-flex align-items-center justify-content-between mt-3">
-      <label class="control-label control-label-des">Ширина</label>
+      <label class="control-label">Ширина</label>
       <div class="d-flex align-items-center">
         <div
           [class.disabled]="widget.guiprops.form.form_width_type !== widthHrType[1]"
@@ -143,7 +143,7 @@
   </div>
 
   <div class="d-flex align-items-center justify-content-between mt-2 pt-1">
-    <label class="control-label control-label-des">Ширина поля</label>
+    <label class="control-label">Ширина поля</label>
     <div class="d-flex align-items-center">
       <div
         [class.disabled]="widget.guiprops['form'].width_type !== widthHrType[1]"
@@ -167,7 +167,7 @@
 
   <div class="row-subitem w-100 mt-2 pt-1">
     <div class="row-subitem-padding">
-      <label class="control-label control-label-des">Ориентация полей</label>
+      <label class="control-label">Ориентация полей</label>
       <div class="dropdown mt-1">
         <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
           {{ widget.guiprops.form.orient }}
@@ -184,7 +184,7 @@
   </div>
 
   <div class="d-flex justify-content-between mt-3 border-item">
-    <h5 class="label-style-ic control-label-des">Скругление углов</h5>
+    <label class="control-label">Скругление углов</label>
     <div class="d-flex text-right side-ui-sm">
       <ngx-slider [(value)]="widget.guiprops['form'].borderRadiusInputForm" [options]="optionsRound"></ngx-slider>
       <input
@@ -197,7 +197,7 @@
   <h3 class="mt-3">Цвет полей</h3>
 
   <div class="d-flex justify-content-between mt-3">
-    <label class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.colorBGField' | translate }}</label>
+    <label class="control-label">{{ 'widgets.formExt.mainSettings.colorBGField' | translate }}</label>
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="widget.guiprops['form'].bgInputForm"
@@ -216,7 +216,7 @@
   </div>
 
   <div class="d-flex justify-content-between mt-2 pt-1">
-    <h5 class="label-style-ic control-label-des">{{ 'widgets.formExt.mainSettings.opacityBGField' | translate }}</h5>
+    <label class="control-label">{{ 'widgets.formExt.mainSettings.opacityBGField' | translate }}</label>
     <div class="d-flex text-right side-ui-sm">
       <ngx-slider [(value)]="widget.guiprops['form'].opacityBgInputForm" [options]="optionsOpacity"></ngx-slider>
       <input
@@ -227,8 +227,7 @@
   </div>
 
   <div class="d-flex justify-content-between mt-2 mt-1 border-item">
-    <label
-      class="control-label control-label-des">{{ 'widgets.formExt.mainSettings.colorNameField' | translate }}</label>
+    <label class="control-label">{{ 'widgets.formExt.mainSettings.colorNameField' | translate }}</label>
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="widget.guiprops['form'].colorTitleInputForm"
@@ -259,7 +258,7 @@
 
     <div *ngIf="widget.guiprops['form'].border?.enable">
       <div class="d-flex justify-content-between mt-3">
-        <label class="control-label control-label-des">Цвет</label>
+        <label class="control-label">Цвет</label>
         <div class="d-flex text-right">
           <input
             [(colorPicker)]="widget.guiprops['form'].border.color"
@@ -292,7 +291,7 @@
 
     <div *ngIf="widget.guiprops['form'].colorPod?.enable">
       <div class="d-flex justify-content-between mt-3">
-        <label class="control-label control-label-des">Цвет</label>
+        <label class="control-label">Цвет</label>
         <div class="d-flex text-right">
           <input
             [(colorPicker)]="widget.guiprops['form'].colorPod.color"
@@ -311,7 +310,7 @@
       </div>
 
       <div class="d-flex justify-content-between mt-2 pt-1">
-        <h5 class="label-style-ic control-label-des">Прозрачность</h5>
+        <label class="control-label">Прозрачность</label>
         <div class="d-flex text-right side-ui-sm">
           <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod"
                       [options]="optionsOpacity"></ngx-slider>
@@ -328,13 +327,13 @@
 <div class="mt-4">
   <h3>Вид кнопки</h3>
 
-  <label class="control-label control-label-des mt-3">Шрифт</label>
+  <label class="control-label mt-3">Шрифт</label>
   <div class="row-subitem-padding mt-1">
     <input [id]="'font-picker' + index" type="text">
   </div>
 
   <div class="d-flex align-items-center justify-content-between mt-2">
-    <label class="control-label control-label-des">Размер</label>
+    <label class="control-label">Размер</label>
     <div class="align-items-center">
       <div class="form-control form-control-font">
         <input
@@ -347,7 +346,7 @@
   </div>
 
   <div class="d-flex justify-content-between mt-3">
-    <label class="control-label control-label-des">Цвет кнопки</label>
+    <label class="control-label">Цвет кнопки</label>
     <div class="d-flex text-right">
       <input
         [(colorPicker)]="widget.guiprops['button'].colorBtn"
@@ -366,7 +365,7 @@
   </div>
 
   <div class="d-flex justify-content-between mt-2 pt-1">
-    <h5 class="label-style-ic control-label-des">Скругление углов</h5>
+    <label class="control-label">Скругление углов</label>
     <div class="d-flex text-right side-ui-sm">
       <ngx-slider [(value)]="widget.guiprops['button'].borderRadiusBtn" [options]="optionsRound"></ngx-slider>
       <input
@@ -377,7 +376,7 @@
   </div>
 
   <div class="d-flex align-items-center justify-content-between mt-2 pt-1">
-    <label class="control-label control-label-des">Ширина</label>
+    <label class="control-label">Ширина</label>
     <div class="d-flex align-items-center">
       <div
         [class.disabled]="widget.guiprops.button.btn_width !== widthBtn[2]"

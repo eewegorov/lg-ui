@@ -9,7 +9,7 @@
   </div>
 
   <div class="d-flex align-items-center justify-content-between mt-2 border-item">
-    <label class="control-label control-label-des">Размер</label>
+    <label class="control-label">Размер</label>
     <div class="align-items-center">
       <div class="form-control form-control-font">
         <input
@@ -40,7 +40,7 @@
     </div>
 
     <div class="d-flex justify-content-between mt-3">
-      <label class="control-label control-label-des">Цвет</label>
+      <label class="control-label">Цвет</label>
       <div class="d-flex text-right">
         <input
           [(colorPicker)]="widget.guiprops['button'].colorBtn"
@@ -59,7 +59,7 @@
     </div>
 
     <div class="d-flex justify-content-between mt-3">
-      <h5 class="label-style-ic control-label-des">Скругление углов</h5>
+      <label class="control-label">Скругление углов</label>
       <div class="d-flex text-right side-ui-sm">
         <ngx-slider [(value)]="widget.guiprops['button'].borderRadiusBtn" [options]="optionsRound"></ngx-slider>
         <input
@@ -70,7 +70,7 @@
     </div>
 
     <div class="d-flex align-items-center justify-content-between mt-3">
-      <label class="control-label control-label-des">Ширина</label>
+      <label class="control-label">Ширина</label>
       <div class="d-flex align-items-center">
         <div
           [class.disabled]="widget.guiprops.button.btn_width !== widthBtn[2]"
@@ -192,7 +192,7 @@
 
     <div *ngIf="widget.guiprops['form'].colorPod.enable">
       <div class="d-flex justify-content-between mt-3">
-        <label class="control-label control-label-des">Цвет</label>
+        <label class="control-label">Цвет</label>
         <div class="d-flex text-right">
           <input
             [(colorPicker)]="widget.guiprops['form'].colorPod.color"
@@ -211,7 +211,7 @@
       </div>
 
       <div class="d-flex justify-content-between mt-3">
-        <h5 class="label-style-ic control-label-des">Прозрачность</h5>
+        <label class="control-label">Прозрачность</label>
         <div class="d-flex text-right side-ui-sm">
           <ngx-slider
             [(value)]="widget.guiprops['form'].colorPod.opacityColorPod"

@@ -26,7 +26,7 @@
   class="row-subitem mt-3 form-ext-item__item-input"
   [ngClass]="(item.idField?.length === 0 || !checkIdField(item.idField)) ? 'is-invalid' : ''"
 >
-  <label class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.id1' | translate }}</label>
+  <label class="control-label switcher-label-xs">{{ 'widgets.formExt.email.id1' | translate }}</label>
   <input (blur)="idFocusOut()" [(ngModel)]="item.idField" class="form-control mt-1 form-control-form-ext-id-field"
          type="text"/>
   <span class="input-down-sm-lab">{{ 'widgets.formExt.mainSettings.id.example' | translate }}</span>
@@ -68,7 +68,7 @@
 </div>
 
 <div class="d-flex align-items-center justify-content-between mt-2">
-  <label class="control-label control-label-des">Размер</label>
+  <label class="control-label">Размер</label>
   <div class="align-items-center">
     <div class="form-control form-control-font">
       <input
@@ -81,7 +81,7 @@
 </div>
 
 <div class="d-flex justify-content-between mt-3 border-item">
-  <label class="control-label control-label-des">Цвет</label>
+  <label class="control-label">Цвет</label>
   <div class="d-flex text-right">
     <input
       [(colorPicker)]="item.colorText"

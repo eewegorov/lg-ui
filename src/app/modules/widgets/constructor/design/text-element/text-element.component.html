@@ -1,11 +1,11 @@
 <div>
   <div class="d-flex align-items-center w-100 row-subitem row-subitem-padding">
-    <label class="control-label control-label-des w-75">Шрифт</label>
+    <label class="control-label w-75">Шрифт</label>
     <input [id]="'font-picker' + index" type="text">
   </div>
 
   <div class="d-flex align-items-center justify-content-between mt-2 mb-3 border-item">
-    <label class="control-label control-label-des">Размер</label>
+    <label class="control-label">Размер</label>
     <div class="row align-items-center">
       <div class="form-control form-control-font">
         <input
@@ -30,7 +30,7 @@
 
   <div *ngIf="item.textShadow.enable">
     <div class="d-flex justify-content-between mt-3">
-      <label class="control-label control-label-des">Цвет</label>
+      <label class="control-label">Цвет</label>
       <div class="text-right">
         <input
           [(colorPicker)]="item.textShadow.color"
@@ -49,7 +49,7 @@
     </div>
 
     <div class="d-flex justify-content-between mt-3">
-      <h5 class="label-style-ic control-label-des">Прозрачность</h5>
+      <label class="control-label">Прозрачность</label>
       <div class="d-flex text-right side-ui-sm">
         <ngx-slider [(value)]="item.textShadow.opacity"
                     [options]="optionsOpacity"></ngx-slider>
@@ -61,15 +61,15 @@
     </div>
 
     <div class="d-flex justify-content-between mt-3">
-      <label class="control-label control-label-des">Сдвиг</label>
+      <label class="control-label">Сдвиг</label>
       <div>
-        <label class="control-label control-label-des mr-1 pr-1">X</label>
+        <label class="control-label mr-1 pr-1">X</label>
         <input
           [(ngModel)]="item.textShadow.horiz"
           class="picker-input slider"
           type="number"
         />
-        <label class="control-label control-label-des ml-3 pl-1 mr-1 pr-1">Y</label>
+        <label class="control-label ml-3 pl-1 mr-1 pr-1">Y</label>
         <input
           [(ngModel)]="item.textShadow.vertical"
           class="picker-input slider"
@@ -79,7 +79,7 @@
     </div>
 
     <div class="d-flex justify-content-between mt-3">
-      <label class="control-label control-label-des">Размытие</label>
+      <label class="control-label">Размытие</label>
       <div class="d-flex text-right side-ui-sm">
         <ngx-slider [(value)]="item.textShadow.blur" [options]="optionsSharpness"></ngx-slider>
         <input

@@ -328,7 +328,7 @@ button.widget-content-add-btn {
 
 .border-item {
   position: relative;
-  padding-bottom: 15px;
+  padding-bottom: 25px;
   background: white;
   border-bottom: 1px solid #eee;
   border-top: none;
@@ -492,6 +492,8 @@ label.control-label {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   color: #505662;
+  line-height: 1.4;
+  margin-bottom: 0;
 }
 
 label.control-label-des,
