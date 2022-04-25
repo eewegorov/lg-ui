@@ -193,6 +193,24 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     return rule.includes(this.autoinviteVariants[0]) ? this.autoinviteVariants[0] : this.autoinviteVariants[1];
   }
 
+  public checkExitIntent(value: boolean, isDesktop: boolean): void {
+    if (value) {
+      return;
+    }
+
+    if (isDesktop && !this.widget.autoinvite.exit.mobileEnable) {
+      setTimeout(() => {
+        this.widget.autoinvite.exit.desktopEnable = true;
+      }, 0);
+    }
+
+    if (!isDesktop && !this.widget.autoinvite.exit.desktopEnable) {
+      setTimeout(() => {
+        this.widget.autoinvite.exit.mobileEnable = true;
+      }, 0);
+    }
+  }
+
   private validator() {
     const errors = [];
     const TAB_ID = 'rules';
