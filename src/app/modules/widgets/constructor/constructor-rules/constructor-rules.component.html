@@ -138,7 +138,7 @@
             <!-- END Page rule item -->
 
             <!-- Target to viewed pages -->
-            <div class="border-item mt-3">
+            <div class="border-item mt-4">
               <div
                 [ngClass]="(widget.rules['prevPages']?.enable && widget.rules['prevPages']?.items.length > 0) ? 'mb-2' : 'rule-disabled'"
                 class="d-flex justify-content-between align-items-center position-relative"
@@ -227,7 +227,7 @@
             <!-- END Target to viewed pages -->
 
             <!-- PageNo rule -->
-            <div class="border-item mt-3">
+            <div class="border-item mt-4">
               <div
                 [ngClass]="widget.rules['pageNo']?.enable ? 'mb-2' : 'rule-disabled'"
                 class="d-flex justify-content-between align-items-center position-relative"
@@ -263,7 +263,7 @@
             <!-- End Page No rule -->
 
             <!-- Time options start -->
-            <div class="border-item mt-3">
+            <div class="border-item mt-4">
               <div
                 [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0) ? 'mb-2' : 'rule-disabled'"
                 class="d-flex justify-content-between align-items-center position-relative"
@@ -333,7 +333,7 @@
             <!-- End Time options -->
 
             <!-- Days options start -->
-            <div class="border-item mt-3">
+            <div class="border-item mt-4">
               <div
                 [ngClass]="widget.rules.days.enable ? 'mb-2' : 'rule-disabled'"
                 class="d-flex justify-content-between align-items-center position-relative"
@@ -433,7 +433,7 @@
             <h1>{{ 'widgetsList.editor.autoinvite.title' | translate }}</h1>
 
             <div class="rules-container pb-3">
-              <div class="d-flex flex-wrap border-item mt-3">
+              <div class="d-flex flex-wrap border-item mt-4">
                 <label class="control-label">
                   {{ 'widgetsList.editor.autoinvite.variants.title1' | translate }}
                 </label>
@@ -460,7 +460,7 @@
               </div>
 
               <!-- Autoinvite: pages -->
-              <div class="border-item mt-3">
+              <div class="border-item mt-4">
                 <div class="d-flex justify-content-between align-items-center">
                   <div
                     [class.rule-disabled]="!widget.autoinvite.pages.enable"
@@ -494,7 +494,7 @@
               <!-- END Autoinvite pages -->
 
               <!-- Autoinvite: seconds -->
-              <div class="border-item mt-3">
+              <div class="border-item mt-4">
                 <div class="d-flex justify-content-between align-items-center">
                   <div
                     [class.rule-disabled]="!widget.autoinvite.seconds.enable"
@@ -527,7 +527,7 @@
               <!-- End Autoinvite seconds -->
 
               <!-- Autoinvite: inactive -->
-              <div class="border-item mt-3">
+              <div class="border-item mt-4">
                 <div class="d-flex justify-content-between align-items-center">
                   <div
                     [class.rule-disabled]="!widget.autoinvite.inactive.enabled"
@@ -562,7 +562,7 @@
               <!-- End Autoinvite: inactive -->
 
               <!-- Autoinvite: percent -->
-              <div class="border-item mt-3">
+              <div class="border-item mt-4">
                 <div class="d-flex justify-content-between align-items-center">
                   <div
                     [class.rule-disabled]="!widget.autoinvite.percent.enable"
@@ -598,7 +598,7 @@
               <!-- End Autoinvite: percent -->
 
               <!-- Autoinvite: click -->
-              <div [class.rule-disabled]="!widget.autoinvite.click.enable" class="border-item mt-3">
+              <div [class.rule-disabled]="!widget.autoinvite.click.enable" class="border-item mt-4">
                 <div class="d-flex justify-content-between align-items-center">
                   <h4 class="widgets-settings-subtitle">
                     {{ 'widgetsList.editor.autoinvite.click.enable' | translate }}
@@ -628,7 +628,7 @@
               <!-- End Autoinvite seconds -->
 
               <!-- Autoinvite: exit-intent -->
-              <div [class.rule-disabled]="!widget.autoinvite.exit.enable" class="border-item mt-3">
+              <div [class.rule-disabled]="!widget.autoinvite.exit.enable" class="border-item mt-4">
                 <div class="d-flex justify-content-between align-items-center">
                   <h4
                     class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.exit.enable' | translate }}</h4>
