@@ -601,6 +601,8 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
 
       this.widgetService.updateWidget(this.sid, this.wid, widgetUpdatedData).subscribe((response: boolean) => {
         if (response) {
+          this.oldWidget = cloneDeep(this.widget);
+
           this.toastr.success(this.translate.instant('widgetsList.editor.save.done.desc'), this.translate.instant('widgetsList.editor.save.done.title'));
         } else {
           this.toastr.error(
