@@ -11,6 +11,7 @@ import { ThousandSuffixPipe } from './pipes/thousand-suffix.pipe';
 import { ModalComponent } from './components/modal/modal.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
+import { PreloaderComponent } from './components/preloader/preloader.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     NgbdDatepickerI18n,
     ModalComponent,
     DropdownComponent,
-    PaymentModalComponent
+    PaymentModalComponent,
+    PreloaderComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     NgbdDatepickerI18n,
     ModalComponent,
     DropdownComponent,
-    PaymentModalComponent
+    PaymentModalComponent,
+    PreloaderComponent
   ],
   providers: [
     OrderByPipe
