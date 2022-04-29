@@ -329,9 +329,9 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     this.resetRenaming();
     this.checkWidgetRenameTitle();
     if (this.widget.containerId) {
-      this.containerizedWidgetService.rename(this.sid, this.widget.id, this.widget.name);
+      this.containerizedWidgetService.rename(this.sid, this.widget.id, this.widget.name).subscribe();
     } else {
-      this.widgetService.rename(this.sid, this.widget.id, this.widget.name);
+      this.widgetService.rename(this.sid, this.widget.id, this.widget.name).subscribe();
     }
   }
 
