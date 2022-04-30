@@ -5,6 +5,7 @@ a {
 }
 
 #menu {
+  margin-left: -$sideBarWidth;
   width: $sideBarWidth;
   bottom: 0;
   float: left;

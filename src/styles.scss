@@ -33,6 +33,7 @@ a:link, a:hover, a:visited {
 
 html {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
   position: relative;
@@ -40,37 +41,24 @@ html {
 }
 
 body {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", 'Inter', Helvetica, Arial, sans-serif;
   background-color: #fff;
   font-size: 13px;
   color: #6a6c6f;
-  margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
 }
 
-body.hide-sidebar #menu {
-  margin-left: -$sideBarWidth;
-}
-
-body.hide-sidebar .wrapper {
-  margin-left: 0;
-}
-
-body.page-small #menu {
-  margin-left: -$sideBarWidth;
-}
-
-body.page-small .wrapper {
-  margin-left: 0;
-}
-
-body.page-small.show-sidebar #menu {
-  margin-left: 0;
-}
-
-body.page-small.show-sidebar .wrapper {
-  margin-left: $sideBarWidth;
+body{
+  &.show-sidebar {
+    .wrapper {
+      margin-left: $sideBarWidth;
+    }
+    #menu {
+      margin-left: 0;
+    }
+  }
 }
 
 .content {

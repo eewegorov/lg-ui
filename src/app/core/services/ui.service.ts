@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { fromEvent, Observable, Subject } from "rxjs";
-import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
+import { BehaviorSubject, fromEvent, Observable, Subject } from "rxjs";
+import { combineLatest, debounceTime, distinctUntilChanged, map} from "rxjs/operators";
 import { Breakpoint } from "../enums/breakpoint/breakpoint";
 
 @Injectable({
@@ -10,34 +10,24 @@ export class UiService {
   public readonly uiBreakpoint$: Observable<Breakpoint>;
 
   private readonly _uiBreakpoint$: Subject<Breakpoint>;
+  private readonly _sidebarState$: BehaviorSubject<boolean>;
   private readonly sidebarClassName: 'show-sidebar' | 'hide-sidebar';
-  private readonly isMobile: boolean;
 
   constructor() {
     this._uiBreakpoint$ = new Subject<Breakpoint>();
     this.uiBreakpoint$ = this._uiBreakpoint$.asObservable();
-
-    this.isMobile = window.innerWidth < 769;
-    this.sidebarClassName = this.isMobile ? 'show-sidebar' : 'hide-sidebar';
+    this._sidebarState$ = new BehaviorSubject<boolean>(window.innerWidth >= 768);
+    this.sidebarClassName = 'show-sidebar';
 
     this.watchWindowSizes();
+    this.watchSidebarState();
   }
 
   public toggleSidebar(show?: boolean): void {
-    if (show === undefined) {
-      $('body').toggleClass(this.sidebarClassName);
-    } else if (show) {
-      if (this.isMobile) {
-        $('body').removeClass(this.sidebarClassName);
-      } else {
-        $('body').addClass(this.sidebarClassName);
-      }
+    if (show === true || show === false) {
+      this._sidebarState$.next(show);
     } else {
-      if (this.isMobile) {
-        $('body').addClass(this.sidebarClassName);
-      } else {
-        $('body').removeClass(this.sidebarClassName);
-      }
+      this._sidebarState$.next(!this._sidebarState$.getValue());
     }
   }
 
@@ -65,5 +55,20 @@ export class UiService {
         }
       });
     window.dispatchEvent(new Event('resize'));
+  }
+
+  private watchSidebarState(): void {
+    this._sidebarState$
+      .pipe(
+        combineLatest<boolean, Breakpoint>(this._uiBreakpoint$),
+        distinctUntilChanged()
+      )
+      .subscribe(([show, breakpoint]: [boolean, Breakpoint]) => {
+      if (show && breakpoint >= 768 ) {
+          $('body').addClass(this.sidebarClassName);
+      } else {
+          $('body').removeClass(this.sidebarClassName);
+      }
+    })
   }
 }

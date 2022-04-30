@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userSub();
   }
 
-  public handleMinimalizeSidebar(event: Event): void {
+  public toggleSidebar(event: Event): void {
     event.preventDefault();
     this.uiService.toggleSidebar();
   }

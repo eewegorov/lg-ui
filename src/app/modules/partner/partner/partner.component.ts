@@ -50,7 +50,7 @@ export class PartnerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.uiService.toggleSidebar(true);
+    this.uiService.toggleSidebar(false);
 
     this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
       this.partnerUrl = MAIN_URL + '?refid=' + response.id;
@@ -147,7 +147,7 @@ export class PartnerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.uiService.toggleSidebar(false);
+    this.uiService.toggleSidebar(true);
     if (this.meInfoSub) {
       this.meInfoSub.unsubscribe();
     }
