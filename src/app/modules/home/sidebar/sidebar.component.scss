@@ -1,16 +1,20 @@
+@import "../../../../_vars.scss";
+
 a {
   transition: .1s linear;
 }
 
 #menu {
-  width: 180px;
+  width: $sideBarWidth;
   bottom: 0;
   float: left;
   left: 0;
   position: fixed;
   overflow: auto;
-  top: 55px;
+  top: $headerHeight;
   transition: all 0.4s ease 0s;
+  box-shadow: $box-shadow;
+  z-index: 7;
 }
 
 #side-menu {
@@ -24,10 +28,6 @@ a {
   font-size: 14px;
   display: flex;
   align-items: center;
-}
-
-#side-menu li:first-child {
-  border-top: 1px solid #e4e5e7;
 }
 
 #side-menu li.active a, #side-menu li:hover a {

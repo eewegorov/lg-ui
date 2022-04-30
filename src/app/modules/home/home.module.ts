@@ -6,6 +6,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../../shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { InlineSVGModule } from "ng-inline-svg-2";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     SharedModule,
     HomeRoutingModule,
-    TranslateModule
+    TranslateModule,
+    InlineSVGModule
   ]
 })
 export class HomeModule {

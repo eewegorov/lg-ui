@@ -46,6 +46,7 @@
     "metismenu": "^3.0.7",
     "moment": "^2.29.1",
     "ng-click-outside": "^9.0.0",
+    "ng-inline-svg-2": "^14.0.1",
     "ng2-charts": "^2.4.2",
     "ngx-color-picker": "^12.0.1",
     "ngx-cookie-service": "^13.1.2",

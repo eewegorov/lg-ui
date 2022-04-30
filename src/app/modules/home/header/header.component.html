@@ -1,92 +1,86 @@
-<div id="header">
-  <div
-    [class.default]="!yandexRef"
-    [class.yandex]="yandexRef"
-    class="light-version logo-svg__menu"
-    id="logo" routerLink="/"
-  >
-  </div>
-  <nav class="main-nav-head" role="navigation">
+<header id="header">
+  <ng-container *ngIf="(isMobile$ | async) === false">
     <div
-      (click)="handleMinimalizeSidebar($event)"
-      class="header-link"
-    >
-      <i class="fa fa-bars"></i>
-    </div>
-    <div
-      class="small-logo"
+      [class.default]="!yandexRef"
+      [class.yandex]="yandexRef"
+      class="logo logo-svg__menu"
+      id="logo"
       routerLink="/"
-    >
-      <span class="text-primary">LeadGenic</span>
-    </div>
-
-    <a routerLink="/site/list">
-      <button
-        [class.btn-default]="!isPartnerPage"
-        class="btn btn-notselected saveButton-toolbar"
-        id="goCabinet"
-      >
-        {{ 'header.cabinet' | translate }}
-      </button>
-    </a>
-
-    <a routerLink="/user/partner">
-      <button
-        class="btn btn-notselected saveButton-toolbar"
-        id="goPartner"
-        routerLinkActive="btn-default"
-      >
-        {{ 'header.partner' | translate }}
-      </button>
-    </a>
-
-    <a
-      *ngIf="yandexRef"
-      href="https://kassa.yandex.ru/"
-      target="_blank"
-    >
-      <button
-        class="btn btn-notselected saveButton-toolbar"
-        id="goYandex"
-      >
-        {{ 'header.yandex' | translate }}
-      </button>
-    </a>
-
-    <div class="navbar-right">
-      <ul class="nav navbar-nav mr-auto">
-        <li class="toolbar-text-like">
-          <span class="lg-like">{{ 'header.like' | translate }}</span>
-        </li>
-        <li class="toolbar-fb-like">
-          <div id="fb-root"></div>
-          <div
-            class="fb-like"
-            data-action="like"
-            data-href="https://leadgenic.com/"
-            data-layout="button_count"
-            data-share="false"
-            data-show-faces="false"
-          ></div>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle label-menu-corner" data-toggle="dropdown">
-            <i class="pe-7s-user"></i><span class="userinfo">{{ login }}</span>
-          </a>
-          <ul class="dropdown-menu hdropdown animate__animated animate__flipInX">
-            <li>
-              <a routerLink="/user/"><i class="fa fa-cogs"></i>
-                {{ 'header.settings' | translate }}
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a routerLink="/logout">
-            <i class="pe-7s-upload"></i>
+    ></div>
+  </ng-container>
+  <nav class="main-nav-head" role="navigation">
+    <ul class="navbar-left">
+      <li>
+        <button (click)="handleMinimalizeSidebar($event)" class="menu-button">
+          <span inlineSVG="./assets/images/core/header-menu-button.svg"></span>
+        </button>
+      </li>
+      <ng-container *ngIf="isMobile$ | async">
+        <li>
+          <a class="small-logo" routerLink="/">
+            <span class="text-primary">LeadGenic</span>
           </a>
         </li>
-      </ul>
-    </div>
+      </ng-container>
+      <li>
+        <a routerLink="/site/list" routerLinkActive="active-link" id="goCabinet">
+          <span>{{ 'header.cabinet' | translate }}</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/user/partner" routerLinkActive="active-link" id="goPartner">
+          <span>{{ 'header.partner' | translate }}</span>
+        </a>
+      </li>
+      <ng-container *ngIf="yandexRef">
+        <li>
+          <a
+            href="https://kassa.yandex.ru/"
+            target="_blank"
+            id="goYandex"
+            class="active-link"
+          >
+            <span >{{ 'header.yandex' | translate }}</span>
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+
+    <ul class="navbar-right">
+      <li>
+        <div class="like">
+          <span>{{ 'header.like' | translate }}</span>
+          <span class="toolbar-fb-like">
+            <span id="fb-root"></span>
+            <span
+              class="fb-like"
+              data-action="like"
+              data-href="https://leadgenic.com/"
+              data-layout="button_count"
+              data-share="false"
+              data-show-faces="false"
+            ></span>
+          </span>
+        </div>
+      </li>
+      <li class="dropdown">
+        <button class="dropdown-toggle" data-toggle="dropdown">
+          <i class="pe-7s-user"></i><span class="userinfo">{{ login }}</span>
+        </button>
+        <ul class="dropdown-menu hdropdown animate__animated animate__flipInX">
+          <li>
+            <a routerLink="/user/" class="settings">
+              <i class="fa fa-cogs"></i>
+              <span>{{ 'header.settings' | translate }}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a routerLink="/logout">
+          <i class="pe-7s-upload"></i>
+        </a>
+      </li>
+    </ul>
   </nav>
-</div>
+</header>

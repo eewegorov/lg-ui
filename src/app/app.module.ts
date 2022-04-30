@@ -12,6 +12,7 @@ import { TokenInterceptor } from './core/services/token.interceptor';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
+import { InlineSVGModule } from "ng-inline-svg-2";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    InlineSVGModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

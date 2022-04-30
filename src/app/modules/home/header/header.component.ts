@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { SubscriptionLike } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable, Subscription, SubscriptionLike } from 'rxjs';
 import { UiService } from '../../../core/services/ui.service';
 import { UserService } from '../../user/services/user.service';
 import { User } from '../../../core/models/user';
@@ -12,32 +10,23 @@ import { User } from '../../../core/models/user';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  public readonly isMobile$: Observable<boolean>;
   public login: string;
   public yandexRef = false;
-  public isPartnerPage = false;
 
-  private routerSub: SubscriptionLike;
-  private userSub: SubscriptionLike;
+  private readonly sub: Subscription;
 
   constructor(
-    private router: Router,
-    private uiService: UiService,
-    private userService: UserService
+    private readonly uiService: UiService,
+    private readonly userService: UserService
   ) {
+    this.sub = new Subscription();
+    this.isMobile$ = uiService.isMobile$;
   }
 
   ngOnInit(): void {
     this.facebookInit();
-
-    this.routerSub = this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.isPartnerPage = event.url === '/user/partner';
-    });
-
-    this.userSub = this.userService.getMeInfo().subscribe((response: User) => {
-      this.login = response.login;
-    });
+    this.userSub();
   }
 
   public handleMinimalizeSidebar(event: Event): void {
@@ -45,18 +34,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.uiService.toggleSidebar();
   }
 
-  ngOnDestroy(): void {
-    if (this.routerSub) {
-      this.routerSub.unsubscribe();
-    }
-
-    if (this.userSub) {
-      this.userSub.unsubscribe();
-    }
-  }
-
   private facebookInit(): void {
-    ((d, s, id) => {
+    ((d: Document, s: string, id: string) => {
       let js = d.getElementsByTagName(s)[0] as HTMLScriptElement;
       const fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {
@@ -67,5 +46,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
       js.src = '//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=631167713613990';
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
+  }
+
+  private userSub(): void {
+    const userSub: SubscriptionLike = this.userService.getMeInfo().subscribe((response: User) => {
+      this.login = response.login;
+    });
+    this.sub.add(userSub)
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
