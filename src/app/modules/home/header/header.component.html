@@ -1,5 +1,5 @@
 <header id="header">
-  <ng-container *ngIf="(isMobile$ | async) === false">
+  <ng-container *ngIf="(uiBreakpoint$ | async) > breakpoint.MD">
     <div
       [class.default]="!yandexRef"
       [class.yandex]="yandexRef"
@@ -15,7 +15,7 @@
           <span inlineSVG="./assets/images/core/header-menu-button.svg"></span>
         </button>
       </li>
-      <ng-container *ngIf="isMobile$ | async">
+      <ng-container *ngIf="(uiBreakpoint$ | async) <= breakpoint.MD">
         <li>
           <a class="small-logo" routerLink="/">
             <span class="text-primary">LeadGenic</span>
@@ -46,9 +46,9 @@
       </ng-container>
     </ul>
 
-    <ul class="navbar-right">
-      <li>
-        <div class="like">
+    <ng-container *ngIf="(uiBreakpoint$ | async) >= breakpoint.SM">
+      <ul class="navbar-right">
+        <li class="like">
           <span>{{ 'header.like' | translate }}</span>
           <span class="toolbar-fb-like">
             <span id="fb-root"></span>
@@ -61,26 +61,26 @@
               data-show-faces="false"
             ></span>
           </span>
-        </div>
-      </li>
-      <li class="dropdown">
-        <button class="dropdown-toggle" data-toggle="dropdown">
-          <i class="pe-7s-user"></i><span class="userinfo">{{ login }}</span>
-        </button>
-        <ul class="dropdown-menu hdropdown animate__animated animate__flipInX">
-          <li>
-            <a routerLink="/user/" class="settings">
-              <i class="fa fa-cogs"></i>
-              <span>{{ 'header.settings' | translate }}</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a routerLink="/logout">
-          <i class="pe-7s-upload"></i>
-        </a>
-      </li>
-    </ul>
+        </li>
+        <li class="dropdown">
+          <button class="dropdown-toggle" data-toggle="dropdown">
+            <i class="pe-7s-user"></i><span class="userinfo">{{ login }}</span>
+          </button>
+          <ul class="dropdown-menu hdropdown animate__animated animate__flipInX">
+            <li>
+              <a routerLink="/user/" class="settings">
+                <i class="fa fa-cogs"></i>
+                <span>{{ 'header.settings' | translate }}</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a routerLink="/logout">
+            <i class="pe-7s-upload"></i>
+          </a>
+        </li>
+      </ul>
+    </ng-container>
   </nav>
 </header>

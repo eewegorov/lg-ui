@@ -23,8 +23,12 @@ header {
   width: 100%;
   box-shadow: $box-shadow;
 
-  @media (max-width: 768px) {
+  @media (max-width: 991px) {
     padding: 0 15px;
+  }
+
+  @media (max-width: 767px) {
+    padding: 0 5px;
   }
 
   .logo {
@@ -78,18 +82,20 @@ header {
       justify-content: flex-start;
 
       .small-logo {
-        display: block;
-        text-align: center;
-        padding-top: 18px;
         font-size: 14px;
         font-weight: 800;
         cursor: pointer;
-        margin-right: 25px;
       }
     }
 
     .navbar-right {
       justify-content: flex-end;
+
+      @media (max-width: 1440px) {
+        .like {
+          display: none;
+        }
+      }
     }
 
     a, button, .like {
@@ -102,14 +108,23 @@ header {
       background-color: transparent;
       border-radius: $borderRadius;
       transition: all 0.2s linear;
+      white-space: nowrap;
+
+      @media (max-width: 991px) {
+        font-size: 14px;
+      }
     }
 
     a, button {
       margin: 0 23px;
       padding: 14px;
 
-      @media (max-width: 768px) {
+      @media (max-width: 1199px) {
         margin: 0;
+      }
+
+      @media (max-width: 767px) {
+        padding: 7px;
       }
 
       &.active-link {
@@ -141,11 +156,14 @@ header {
       border: none;
 
       &.menu-button {
-        padding: 14px;
         color: $fontColor;
 
         &:hover {
           color: $activeFontColor;
+        }
+
+        @media (max-width: 767px) {
+          padding: 0;
         }
       }
 
@@ -177,59 +195,11 @@ span.userinfo {
 .dropdown-menu {
   top: auto !important;
   left: auto !important;
-  text-align: center;
   right: 0;
-  transition: height 1s ease;
 }
 
 @media (max-width: 1440px) {
   .like {
-    display: none;
-  }
-}
-
-@media (max-width: 1050px) {
-  .userinfo {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .logo {
-    display: none;
-  }
-
-  .nav {
-    white-space: nowrap;
-    overflow: hidden;
-  }
-}
-
-@media (max-width: 625px) {
-  .small-logo {
-    margin: 0 5px;
-  }
-
-  .navbar-nav > li > a {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-}
-
-@media (max-width: 500px) {
-  #goPartner {
-    width: 100px;
-  }
-}
-
-@media (max-width: 380px) {
-  .small-logo {
-    margin: 0 2px;
-  }
-}
-
-@media (max-width: 358px) {
-  .navbar-right {
     display: none;
   }
 }

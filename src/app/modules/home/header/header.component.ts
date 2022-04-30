@@ -3,6 +3,7 @@ import { Observable, Subscription, SubscriptionLike } from 'rxjs';
 import { UiService } from '../../../core/services/ui.service';
 import { UserService } from '../../user/services/user.service';
 import { User } from '../../../core/models/user';
+import { Breakpoint } from "../../../core/enums/breakpoint/breakpoint";
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,8 @@ import { User } from '../../../core/models/user';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  public readonly isMobile$: Observable<boolean>;
+  public readonly uiBreakpoint$: Observable<Breakpoint>;
+  public readonly breakpoint = Breakpoint;
   public login: string;
   public yandexRef = false;
 
@@ -21,7 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private readonly userService: UserService
   ) {
     this.sub = new Subscription();
-    this.isMobile$ = uiService.isMobile$;
+    this.uiBreakpoint$ = uiService.uiBreakpoint$;
   }
 
   ngOnInit(): void {

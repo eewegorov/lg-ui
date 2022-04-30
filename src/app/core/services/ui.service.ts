@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { fromEvent, Observable, Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
+import { Breakpoint } from "../enums/breakpoint/breakpoint";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UiService {
-  public readonly isMobile$: Observable<boolean>;
+  public readonly uiBreakpoint$: Observable<Breakpoint>;
 
-  private readonly _isMobile$: Subject<boolean>;
+  private readonly _uiBreakpoint$: Subject<Breakpoint>;
   private readonly sidebarClassName: 'show-sidebar' | 'hide-sidebar';
   private readonly isMobile: boolean;
 
   constructor() {
-    this._isMobile$ = new Subject<boolean>();
-    this.isMobile$ = this._isMobile$.asObservable();
+    this._uiBreakpoint$ = new Subject<Breakpoint>();
+    this.uiBreakpoint$ = this._uiBreakpoint$.asObservable();
 
     this.isMobile = window.innerWidth < 769;
     this.sidebarClassName = this.isMobile ? 'show-sidebar' : 'hide-sidebar';
@@ -43,12 +44,26 @@ export class UiService {
   private watchWindowSizes(): void {
     fromEvent<Event>(window, 'resize')
       .pipe(
-        debounceTime(10),
-        distinctUntilChanged(),
+        debounceTime(50),
         map<Event, Window>((event: Event) => <Window>event.target),
-        map<Window, number>((window: Window) => <number>window.innerWidth)
+        map<Window, number>((window: Window) => <number>window.innerWidth),
+        distinctUntilChanged(),
       )
-      .subscribe((width: number) => this._isMobile$.next(width < 769));
+      .subscribe((width: number) => {
+        if (width >= Breakpoint.XXL) {
+          this._uiBreakpoint$.next(Breakpoint.XXL);
+        } else if (width >= Breakpoint.XL && width < Breakpoint.XXL) {
+          this._uiBreakpoint$.next(Breakpoint.XL);
+        } else if (width >= Breakpoint.LG && width < Breakpoint.XL) {
+          this._uiBreakpoint$.next(Breakpoint.LG);
+        } else if (width >= Breakpoint.MD && width < Breakpoint.LG) {
+          this._uiBreakpoint$.next(Breakpoint.MD);
+        } else if (width >= Breakpoint.SM && width < Breakpoint.MD) {
+          this._uiBreakpoint$.next(Breakpoint.SM);
+        } else if (width < Breakpoint.SM) {
+          this._uiBreakpoint$.next(Breakpoint.XS);
+        }
+      });
     window.dispatchEvent(new Event('resize'));
   }
 }
