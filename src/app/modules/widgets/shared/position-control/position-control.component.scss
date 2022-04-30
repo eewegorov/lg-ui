@@ -19,8 +19,7 @@
   display: flex;
 }
 
-.position-control-item {
-  width: 48px;
+.position-control-item, .position-control-big {
   height: 24px;
   background: #F1F1F1;
   border: 1px;
@@ -44,4 +43,12 @@
   &:not(:disabled).active {
     background: #4898A8;
   }
+}
+
+.position-control-item {
+  width: 48px;
+}
+
+.position-control-big {
+  width: 150px;
 }

@@ -89,6 +89,12 @@
 
 .widget-video-item-block {
   position: relative;
+  overflow: hidden;
+  width: 100%;
+  /* Keep it the right aspect-ratio */
+  aspect-ratio: 16/9;
+  /* No clicking/hover effects */
+  pointer-events: none;
 }
 
 .widget-video-item-block img {
@@ -98,13 +104,11 @@
 }
 
 .widget-video-item-block iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-  z-index: -1;
+  /* Extend it beyond the viewport... */
+  width: 300%;
+  height: 100%;
+  /* ...and bring it back again */
+  margin-left: -100%;
 }
 
 .widget-image-has-full-wh .widget-image-item-block,

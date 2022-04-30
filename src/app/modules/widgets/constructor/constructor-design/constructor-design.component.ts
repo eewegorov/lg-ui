@@ -554,11 +554,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       const match = item.videoUrl.match(regYExp);
       result = (match && match[7].length === 11) ? match[7] : false;
       if (result) {
-        if (item.isVideoBG) {
           item.videoPreview = 'https://img.youtube.com/vi/' + result + '/hqdefault.jpg';
           result = result +
             '?controls=0&iv_load_policy=3&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&modestbranding=1&disablekb=1&playlist=' + result;
-        }
         item.videoUrl = 'https://www.youtube.com/embed/' + result;
       }
     } else {
