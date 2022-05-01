@@ -15,7 +15,13 @@
       "es2018",
       "dom"
     ],
-    "types": ["node", "jquery", "jasmine", "jasminewd2"]
+    "types": ["node", "jquery", "jasmine", "jasminewd2"],
+    "paths": {
+      "@env": ["src/environments/environment"],
+      "@core/*": ["src/app/core/*"],
+      "@modules/*": ["src/app/modules/*"],
+      "@shared/*": ["src/app/shared/*"],
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

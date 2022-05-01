@@ -1,5 +1,5 @@
 <aside id="menu">
-  <div id="navigation">
+  <nav id="navigation">
     <ul #menu class="nav" id="side-menu">
 
       <li routerLinkActive="active mm-active">
@@ -17,7 +17,7 @@
       </li>
 
       <li [class.active]="abtestsMenuExpanded" [class.mm-active]="abtestsMenuExpanded">
-        <a [attr.aria-expanded]="abtestsMenuExpanded" class="has-arrow">
+        <a [attr.aria-expanded]="abtestsMenuExpanded" class="has-arrow" routerLink="">
           <i class="fontello-demo1-icon icon-ic_menu_ab_tests icons-for-sidemenu"></i>
           <span class="nav-label">{{ 'sidebar.abtests' | translate }}</span>
         </a>
@@ -59,6 +59,11 @@
         </a>
       </li>
     </ul>
-  </div>
-  <div (click)="showBanner()" (mouseover)="preloadBanner()" class="lg-sidebar-banner"></div>
+  </nav>
+  <button
+    (click)="showBanner()"
+    (mouseover)="preloadBanner()"
+    class="lg-sidebar-banner"
+    inlineSVG="./assets/images/banners/banner.svg"
+  ></button>
 </aside>

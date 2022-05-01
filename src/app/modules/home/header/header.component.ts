@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription, SubscriptionLike } from 'rxjs';
-import { UiService } from '../../../core/services/ui.service';
-import { UserService } from '../../user/services/user.service';
-import { User } from '../../../core/models/user';
-import { Breakpoint } from "../../../core/enums/breakpoint/breakpoint";
+import { UiService } from '@core/services/ui.service';
+import { SidebarService } from '@core/services/sidebar/sidebar.service';
+import { User } from '@core/models/user';
+import { Breakpoint } from '@core/enums/ui/breakpoint';
+import { UserService } from '@modules/user/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -20,10 +21,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly uiService: UiService,
+    private readonly sidebarService: SidebarService,
     private readonly userService: UserService
   ) {
     this.sub = new Subscription();
     this.uiBreakpoint$ = uiService.uiBreakpoint$;
+    window.dispatchEvent(new Event('resize'));
   }
 
   ngOnInit(): void {
@@ -31,9 +34,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userSub();
   }
 
-  public toggleSidebar(event: Event): void {
-    event.preventDefault();
-    this.uiService.toggleSidebar();
+  public toggleSidebar(): void {
+    this.sidebarService.toggleSidebar();
   }
 
   private facebookInit(): void {
@@ -54,7 +56,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const userSub: SubscriptionLike = this.userService.getMeInfo().subscribe((response: User) => {
       this.login = response.login;
     });
-    this.sub.add(userSub)
+    this.sub.add(userSub);
   }
 
   ngOnDestroy(): void {

@@ -1,32 +1,32 @@
-@import "../../../../_vars.scss";
+@import '../../../../_vars.scss';
 
-$fontColor: #A4A4A4;
+$fontColor: #a4a4a4;
 
 header {
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  background-color: #fff;
+  background-color: #ffffff;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: $headerHeight;
   margin: 0;
-  padding: 0;
+  padding-right: 15px;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9;
   width: 100%;
-  box-shadow: $box-shadow;
+  box-shadow: $boxShadow;
 
   @media (max-width: 991px) {
     padding: 0 15px;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 424px) {
     padding: 0 5px;
   }
 
@@ -39,6 +39,10 @@ header {
     height: 100%;
     cursor: pointer;
     margin-right: 20px;
+
+    @media (max-width: 1199px) {
+      margin-right: 0;
+    }
 
     &.logo-svg__menu {
       padding: 0;
@@ -71,7 +75,8 @@ header {
       margin: 0;
     }
 
-    .navbar-left, .navbar-right {
+    .navbar-left,
+    .navbar-right {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -97,7 +102,9 @@ header {
       }
     }
 
-    a, button, .like {
+    a,
+    button,
+    .like {
       user-select: none;
       display: flex;
       flex-direction: row;
@@ -112,11 +119,20 @@ header {
       @media (max-width: 991px) {
         font-size: 14px;
       }
+
+      @media (max-width: 374px) {
+        white-space: break-spaces;
+      }
     }
 
-    a, button {
+    a,
+    button {
       margin: 0 23px;
       padding: 14px;
+
+      &:last-child {
+        margin-right: 0;
+      }
 
       @media (max-width: 1199px) {
         margin: 0;
@@ -126,8 +142,9 @@ header {
         padding: 7px;
       }
 
-      &.active-link {
-        color: $activeFontColor;
+      &.active-link,
+      &.active-link span.settings {
+        color: $fontPrimaryColor;
       }
 
       &.settings {
@@ -137,13 +154,36 @@ header {
         transition: initial;
       }
 
-      &:hover, &:focus-visible {
+      &:hover,
+      &:focus-visible {
         background-color: $activeElementBG;
       }
 
       span {
         display: block;
         text-align: center;
+
+        &.settings {
+          position: relative;
+          width: 25px;
+          height: 25px;
+          color: $fontColor;
+
+          /*
+           it might be not the best solution, but placing this code, specific to the header component,
+           into the general style.scss file is not a good idea as well
+          */
+          ::ng-deep {
+            svg {
+              width: 25px;
+              height: 25px;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            }
+          }
+        }
       }
 
       i {
@@ -158,11 +198,7 @@ header {
         color: $fontColor;
 
         &:hover {
-          color: $activeFontColor;
-        }
-
-        @media (max-width: 767px) {
-          padding: 0;
+          color: $fontPrimaryColor;
         }
       }
 

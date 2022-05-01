@@ -6,12 +6,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PartnerShowComponent } from '../partner-show/partner-show.component';
 import { ReferralAddComponent } from '../referral-add/referral-add.component';
 import { MAIN_URL } from '../../../configs/urls';
-import { User } from '../../../core/models/user';
-import { IncomeBalance, Registrations, Transaction } from '../../../core/models/partner';
-import { UiService } from '../../../core/services/ui.service';
-import { UserService } from '../../user/services/user.service';
+import { User } from "@core/models/user";
+import { IncomeBalance, Registrations, Transaction } from "@core/models/partner";
+import { SidebarService } from "@core/services/sidebar/sidebar.service";
+import { UserService } from '@modules/user/services/user.service';
 import { PartnerService } from '../services/partner.service';
-
 
 @Component({
   selector: 'app-partner',
@@ -43,14 +42,13 @@ export class PartnerComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    private uiService: UiService,
+    private sidebarService: SidebarService,
     private userService: UserService,
     private partnerService: PartnerService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.uiService.toggleSidebar(false);
+    this.sidebarService.hideSidebar();
 
     this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
       this.partnerUrl = MAIN_URL + '?refid=' + response.id;
@@ -83,22 +81,20 @@ export class PartnerComponent implements OnInit, OnDestroy {
   }
 
   public fbLink(): void {
-    const newWin =
-      window.open(
-        'https://www.facebook.com/sharer.php?u=' + this.partnerUrl,
-        'Facebook',
-        'width=420,height=230,resizable=yes,scrollbars=yes,status=yes'
-      );
+    const newWin = window.open(
+      'https://www.facebook.com/sharer.php?u=' + this.partnerUrl,
+      'Facebook',
+      'width=420,height=230,resizable=yes,scrollbars=yes,status=yes'
+    );
     newWin.focus();
   }
 
   public vkLink(): void {
-    const newWin =
-      window.open(
-        'https://vk.com/share.php?url=' + this.partnerUrl + '&image=https://static.leadgenic.com/ads/200.jpg',
-        'VK',
-        'width=420,height=230,resizable=yes,scrollbars=yes,status=yes'
-      );
+    const newWin = window.open(
+      'https://vk.com/share.php?url=' + this.partnerUrl + '&image=https://static.leadgenic.com/ads/200.jpg',
+      'VK',
+      'width=420,height=230,resizable=yes,scrollbars=yes,status=yes'
+    );
     newWin.focus();
   }
 
@@ -117,15 +113,15 @@ export class PartnerComponent implements OnInit, OnDestroy {
       size: 'lg'
     });
 
-    modalRef.result.then((result) => {
-      setTimeout(() => {
-        if (result && result.success) {
-          this.toastr.success(this.translate.instant('partner.add.done'), this.translate.instant('global.done'));
-        }
-      }, 100);
-    })
-      .catch(() => {
-      });
+    modalRef.result
+      .then(result => {
+        setTimeout(() => {
+          if (result && result.success) {
+            this.toastr.success(this.translate.instant('partner.add.done'), this.translate.instant('global.done'));
+          }
+        }, 100);
+      })
+      .catch(() => {});
   }
 
   public setWallet() {
@@ -133,7 +129,10 @@ export class PartnerComponent implements OnInit, OnDestroy {
       if (response) {
         this.toastr.success(this.translate.instant('partner.wallet.save'), this.translate.instant('global.done'));
       } else {
-        this.toastr.error(this.translate.instant('partner.wallet.error.yandex'), this.translate.instant('global.error'));
+        this.toastr.error(
+          this.translate.instant('partner.wallet.error.yandex'),
+          this.translate.instant('global.error')
+        );
       }
     });
   }
@@ -147,7 +146,7 @@ export class PartnerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.uiService.toggleSidebar(true);
+    this.sidebarService.showSidebar();
     if (this.meInfoSub) {
       this.meInfoSub.unsubscribe();
     }
@@ -179,5 +178,4 @@ export class PartnerComponent implements OnInit, OnDestroy {
       this.loadingTransaction = false;
     });
   }
-
 }

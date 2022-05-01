@@ -23,4 +23,20 @@
   position: absolute;
   min-height: calc(100% - #{$headerHeight});
   overflow-y: auto;
+
+  @media (max-width: 991px) {
+    padding: 37px 30px;
+  }
+
+  @media (max-width: 767px) {
+    padding: 30px 23px;
+  }
+
+  @media (max-width: 575px) {
+    padding: 23px 16px;
+  }
+
+  @media (max-width: 374px) {
+    padding: 16px 9px;
+  }
 }

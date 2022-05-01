@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ApiResponse } from '../../../core/models/api';
+import { ApiResponse } from '@core/models/api';
 import {
   AuthRequest,
   ConfirmResetData,
@@ -10,23 +10,20 @@ import {
   RegistrationRequest,
   RegistrationResponse,
   RequestResetData
-} from '../../../core/models/account';
-import { ErrorHandlerService } from '../../../core/services/error-handler.service';
-import { AuthService } from '../../../core/services/auth.service';
+} from '@core/models/account';
+import { ErrorHandlerService } from '@core/services/error-handler.service';
+import { AuthService } from '@core/services/auth.service';
 import { AccountApiService } from './account-api.service';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-
   constructor(
     private errorHandlerService: ErrorHandlerService,
     private authService: AuthService,
     private accountApiService: AccountApiService
-  ) {
-  }
+  ) {}
 
   public handleYandex(event: Event, action: 'AUTH' | 'REG'): Observable<OAuthResponse> {
     (event.target as HTMLButtonElement).disabled = true;

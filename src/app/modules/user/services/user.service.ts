@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map, share } from 'rxjs/operators';
-import { ApiResponse } from '../../../core/models/api';
-import { PasswordRequest, Phone, User, UserRequest, UserResponse } from '../../../core/models/user';
-import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { ApiResponse } from "@core/models/api";
+import { PasswordRequest, Phone, User, UserRequest, UserResponse } from "@core/models/user";
+import { ErrorHandlerService } from "@core/services/error-handler.service";
 import { UserApiService } from './user-api.service';
 
 

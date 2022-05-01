@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ApiResponse } from '../../../core/models/api';
-import { Wallet } from '../../../core/models/user';
+import { ApiResponse } from '@core/models/api';
+import { Wallet } from '@core/models/user';
 import {
   IncomeBalance,
   IncomeBalanceResponse,
@@ -11,23 +11,20 @@ import {
   Transaction,
   TransactionsResponse,
   UserEmail
-} from '../../../core/models/partner';
-import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+} from '@core/models/partner';
+import { ErrorHandlerService } from '@core/services/error-handler.service';
 import { UserApiService } from '../../user/services/user-api.service';
 import { PartnerApiService } from './partner-api.service';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class PartnerService {
-
   constructor(
     private errorHandlerService: ErrorHandlerService,
     private userApiService: UserApiService,
     private partnerApiService: PartnerApiService
-  ) {
-  }
+  ) {}
 
   public getTransactions(filterParams): Observable<Transaction[]> {
     return this.partnerApiService.getTransactions(filterParams).pipe(
@@ -72,5 +69,4 @@ export class PartnerService {
       catchError(this.errorHandlerService.handleError)
     );
   }
-
 }

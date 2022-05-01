@@ -48,14 +48,12 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-}
 
-body{
   &.show-sidebar {
     .wrapper {
       margin-left: $sideBarWidth;
     }
-    #menu {
+    app-sidebar {
       margin-left: 0;
     }
   }
