@@ -3,7 +3,12 @@
     <div class="col-lg-3 widget-style-menu">
       <div class="elements-selector">
         <div *ngIf="widget.guiprops.elementsList" class="elements-selector-top">
-          <div (click)="setCurrentElement('settings')" [class.active]="currentElement === 'settings'" class="element">
+          <div
+            (click)="setCurrentElement('settings')"
+            [class.active]="currentElement === 'settings'"
+            [class.error]="isElementHasError('settings', 0) && showErrors"
+            class="element"
+          >
             <div class="before">
               <div class="square"></div>
             </div>
@@ -588,7 +593,7 @@
                       [widget]="widget"
                       [widgwidthBtn]="widgwidthBtn"
                     ></app-visual-element>
-                    <app-redirect-element [widget]="widget"></app-redirect-element>
+                    <app-redirect-element [widget]="widget" [showErrors]="showErrors"></app-redirect-element>
                   </div>
                 </div>
               </div>
