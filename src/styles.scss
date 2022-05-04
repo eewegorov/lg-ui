@@ -296,28 +296,59 @@ a.info-link {
 }
 
 .btn-success, {
-  background-color: #4898A8;
-  border-color: #4898A8;
+  background-color: $successColor;
+  border-color: $successColor;
   color: #FFFFFF;
   font-size: 18px;
   transition: none;
 }
 
+.btn-danger {
+  background: $dangerColor;
+  border-color: $dangerColor;
+  color: #FFFFFF;
+}
+
+.btn-danger.btn-outline {
+  color: $dangerColor;
+}
+
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
+  background-color: darken($dangerColor, 10%);
+  border-color: darken($dangerColor, 10%);
+  box-shadow: none;
+  color: #FFFFFF;
+}
+
+.btn-danger:active, .btn-danger:active:focus, .btn-danger:not(:disabled):not(.disabled):active:focus, .btn-danger:not(:disabled):not(.disabled):active, .open .dropdown-toggle.btn-danger {
+  background-color: darken($dangerColor, 10%);
+  border-color: darken($dangerColor, 10%);
+  box-shadow: 0 0 0 0.2rem $dangerColor;
+  background-image: none;
+}
+
+.btn-danger.disabled, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled:active, .btn-danger.disabled.active, .btn-danger[disabled], .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled]:active, .btn-danger.active[disabled], fieldset[disabled] .btn-danger, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger:active, fieldset[disabled] .btn-danger.active {
+  background-color: #D4D7DD;
+  border-color: #D4D7DD;
+  color: #A9AFBC !important;
+  box-shadow: none;
+}
+
 .btn-success.btn-outline {
-  color: #4898A8;
+  color: $successColor;
 }
 
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
-  background-color: darken(#4898A8, 10%);
-  border-color: darken(#4898A8, 10%);
+  background-color: darken($successColor, 10%);
+  border-color: darken($successColor, 10%);
   box-shadow: none;
   color: #FFFFFF;
 }
 
 .btn-success:active, .btn-success:active:focus, .btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled):active, .open .dropdown-toggle.btn-success {
-  background-color: darken(#4898A8, 10%);
-  border-color: darken(#4898A8, 10%);
-  box-shadow: 0 0 0 0.2rem #4898A8;
+  background-color: darken($successColor, 10%);
+  border-color: darken($successColor, 10%);
+  box-shadow: 0 0 0 0.2rem $successColor;
   background-image: none;
 }
 
@@ -335,14 +366,18 @@ button.hovered-btn-red:hover {
 }
 
 button.hovered-btn-blue:hover {
-  background-color: #4898A8 !important;
-  border-color: #4898A8 !important;
+  background-color: $successColor !important;
+  border-color: $successColor !important;
   color: #FFFFFF !important;
 }
 
 .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary.active[disabled], fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
   background-color: #293a4a;
   border-color: #293a4a
+}
+
+.switch.checked {
+  background: $successColor;
 }
 
 #toast-container.toast-bottom-center > div, #toast-container.toast-top-center > div {
@@ -383,7 +418,7 @@ button.hovered-btn-blue:hover {
 #toast-container > .toast-success:before {
   background: rgba(#62cb31, 30%);
   content: "\f00c";
-  color: #4898A8;
+  color: $successColor;
 }
 
 #toast-container > div {
@@ -447,7 +482,7 @@ button.hovered-btn-blue:hover {
 }
 
 .toast-info .toast-progress {
-  background-color: #4898A8;
+  background-color: $successColor;
 }
 
 .toast-success .toast-progress {
@@ -794,7 +829,7 @@ button.widget-item-view-btns .btn:hover {
 }
 
 button.start-widget-btn.active {
-  color: #4898A8;
+  color: $successColor;
 }
 
 button.stop-widget-btn.active {
@@ -876,7 +911,7 @@ button.stop-widget-btn.active {
 }
 
 .ab-widget-btn.in-work:before {
-  background-color: #4898A8;
+  background-color: $successColor;
 }
 
 .ab-widget-btn.in-pause:before {
@@ -1199,7 +1234,7 @@ span.underow-comment {
 }
 
 .ab-test-footer button.btn i.fa-plus {
-  color: #4898A8;
+  color: $successColor;
 }
 
 .ab-test-footer button.btn-test-var:hover {
@@ -1284,7 +1319,7 @@ span.underow-comment {
 
 /* When the checkbox is checked, add a blue background */
 .form-check input:checked ~ .checkmark {
-  background-color: #4898A8;
+  background-color: $successColor;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -1371,7 +1406,7 @@ span.underow-comment {
 }
 
 .ngx-slider .ngx-slider-selection {
-  background: #4898A8 !important;
+  background: $successColor !important;
 }
 
 .ngx-slider-bubble {
@@ -1951,7 +1986,7 @@ app-form-extended .color-picker, app-coupon-callback .color-picker {
 
 .note-air-popover.popover {
   border-radius: 0!important;
-  background-color: #4898A8;
+  background-color: $successColor;
   /*left: auto!important;*/
   /*right: -1px!important;*/
   /*top: -54px!important;*/
@@ -1959,18 +1994,18 @@ app-form-extended .color-picker, app-coupon-callback .color-picker {
 
 .note-air-popover.popover .btn-default {
   color: #fff!important;
-  background-color: #4898A8!important;
+  background-color: $successColor!important;
   border-color: #fff!important;
 }
 
 .note-air-popover.popover .btn-default.active,
 .note-air-popover.popover .btn-default:hover {
-  color: #4898A8!important;
+  color: $successColor!important;
   background-color: #fff!important;
 }
 
 .note-air-popover.popover .dropdown-menu {
-  background-color: #4898A8!important;
+  background-color: $successColor!important;
 }
 
 .note-air-popover.popover .popover-content .note-color .dropdown-menu .btn-group .note-palette-title {
@@ -2184,7 +2219,7 @@ div.button-send.click-edit-cl .note-editor font span {
 
 #listImagesBlock .imageGlItemIn.active {
   background: #e5e5e5;
-  border-color: #4898A8;
+  border-color: $successColor;
 }
 
 #listImagesBlock {
