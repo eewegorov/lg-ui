@@ -2,14 +2,13 @@ import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { IntegrationAddComponent } from '../integration-add/integration-add.component';
+import { IntegrationAddComponent } from '../../components/integration-add/integration-add.component';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { Integration, SiteSettings, SiteShort } from '../../../core/models/sites';
-import { TariffsService } from '../../../core/services/tariffs.service';
-import { SitesService } from '../services/sites.service';
-import { CoreSitesService } from '../../../core/services/core-sites.service';
-
+import { Integration, SiteSettings, SiteShort } from '@core/models/sites';
+import { TariffsService } from '@core/services/tariffs.service';
+import { SitesService } from '../../services/sites.service';
+import { CoreSitesService } from '@core/services/core-sites.service';
 
 @Component({
   selector: 'app-site-settings',
@@ -73,8 +72,8 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
       confirmButtonText: this.translate.instant('sitelist.delete.confirm'),
-      cancelButtonText: this.translate.instant('global.cancel'),
-    }).then((isConfirm) => {
+      cancelButtonText: this.translate.instant('global.cancel')
+    }).then(isConfirm => {
       if (isConfirm) {
         this.sitesService.deleteSite(this.siteId).subscribe(() => {
           Swal.fire(
@@ -96,9 +95,11 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
       setTimeout(() => {
         this.site.needHideLogo = false;
         this.site.logoRefLink = false;
-        this.tariffsService.checkTariffPlans(this.siteId,
+        this.tariffsService.checkTariffPlans(
+          this.siteId,
           this.translate.instant('sitelist.tariff.improve'),
-          this.translate.instant('settings.site.integration.paymentLabel', { siteName: this.site.name }));
+          this.translate.instant('settings.site.integration.paymentLabel', { siteName: this.site.name })
+        );
       }, 500);
     }
   }
@@ -111,13 +112,13 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
     modalRef.componentInstance.siteId = this.siteId;
     modalRef.componentInstance.integrationId = null;
 
-    modalRef.result.then((result) => {
-      if (result) {
-        this.getSiteIntegrations();
-      }
-    })
-      .catch(() => {
-      });
+    modalRef.result
+      .then(result => {
+        if (result) {
+          this.getSiteIntegrations();
+        }
+      })
+      .catch(() => {});
   }
 
   public changeAnalyticGService(value) {
@@ -143,16 +144,16 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
         item.isPayment = this.sitesService.getPaymentByType(item.type);
         return item;
       });
-      this.integrationsCRM = this.integrations.filter((item) => {
+      this.integrationsCRM = this.integrations.filter(item => {
         return this.sitesService.isIntegrationCRM(item.type);
       });
-      this.integrationsMailing = this.integrations.filter((item) => {
+      this.integrationsMailing = this.integrations.filter(item => {
         return this.sitesService.isIntegrationMailing(item.type);
       });
-      this.integrationsNotifications = this.integrations.filter((item) => {
+      this.integrationsNotifications = this.integrations.filter(item => {
         return this.sitesService.isIntegrationNotification(item.type);
       });
-      this.integrationsOthers = this.integrations.filter((item) => {
+      this.integrationsOthers = this.integrations.filter(item => {
         return this.sitesService.isIntegrationOthers(item.type);
       });
     });
@@ -171,5 +172,4 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
       });
     });
   }
-
 }

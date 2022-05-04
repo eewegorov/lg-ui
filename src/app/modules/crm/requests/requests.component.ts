@@ -5,14 +5,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import * as moment from 'moment';
-import { SiteShort } from '../../../core/models/sites';
-import { User } from '../../../core/models/user';
-import { Lead, LeadById, LeadRequest, LeadWidgets, Periods, StateWithIndex } from '../../../core/models/crm';
-import { CoreSitesService } from '../../../core/services/core-sites.service';
+import { SiteShort } from '@core/models/sites';
+import { User } from '@core/models/user';
+import { Lead, LeadById, LeadRequest, LeadWidgets, Periods, StateWithIndex } from '@core/models/crm';
+import { CoreSitesService } from '@core/services/core-sites.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { UserService } from '../../user/services/user.service';
 import { CrmService } from '../services/crm.service';
-
 
 @Component({
   selector: 'app-requests',
@@ -57,17 +56,18 @@ export class RequestsComponent implements OnInit, OnDestroy {
     private sitesService: SitesService,
     private userService: UserService,
     private crmService: CrmService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.initStats();
     this.changePeriod(this.periodType);
     this.translate.get('crm.page.filter.states.all').subscribe((translation: string) => {
-      this.states = [{
-        id: this.ALL_SITE_ID,
-        name: translation
-      }];
+      this.states = [
+        {
+          id: this.ALL_SITE_ID,
+          name: translation
+        }
+      ];
       this.statesIds = [this.ALL_SITE_ID];
       this.states = this.states.concat(this.crmService.getStates());
     });
@@ -198,7 +198,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
   }
 
   private initStats() {
-    this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
+    this.meInfoSub = this.userService.user$.subscribe((response: User) => {
       this.userId = response.id;
       this.getSites();
       this.getFilters();
@@ -208,10 +208,12 @@ export class RequestsComponent implements OnInit, OnDestroy {
   private getSites() {
     const notificationOffCookie = this.cookieService.get('lgwg-notification-off');
     this.translate.get('crm.page.filter.sites').subscribe((translation: string) => {
-      this.allSites = [{
-        id: this.ALL_SITE_ID,
-        name: translation
-      }];
+      this.allSites = [
+        {
+          id: this.ALL_SITE_ID,
+          name: translation
+        }
+      ];
       this.sitesIds = [this.ALL_SITE_ID];
       this.sitesService.getSites().subscribe((response: SiteShort[]) => {
         this.coreSitesService.sites = response;
@@ -224,22 +226,22 @@ export class RequestsComponent implements OnInit, OnDestroy {
 
   private getFilters() {
     this.translate.get('crm.page.filter.widgets.all').subscribe((translation: string) => {
-      this.allWidgets = [{
-        id: this.ALL_SITE_ID,
-        name: translation
-      }];
+      this.allWidgets = [
+        {
+          id: this.ALL_SITE_ID,
+          name: translation
+        }
+      ];
       this.widgetsIds = [this.ALL_SITE_ID];
       this.crmService.getLeadsFilters().subscribe((response: LeadWidgets[]) => {
         this.allSites = this.allSites.concat(response);
-        response.forEach(site =>
-          site.widgets.forEach(widget => this.allWidgets.push(widget))
-        );
+        response.forEach(site => site.widgets.forEach(widget => this.allWidgets.push(widget)));
       });
     });
   }
 
   private isTrialSites(sites: SiteShort[]): boolean {
-    return sites.some((item) => {
+    return sites.some(item => {
       return item.trial;
     });
   }
@@ -268,9 +270,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
       });
     } else {
       this.allWidgets = this.allWidgets.slice(0, 1);
-      this.allSites.slice(1).forEach(site =>
-        site.widgets.forEach(widget => this.allWidgets.push(widget))
-      );
+      this.allSites.slice(1).forEach(site => site.widgets.forEach(widget => this.allWidgets.push(widget)));
     }
 
     if (this.statesIds.length && this.statesIds[0] !== this.ALL_SITE_ID) {
@@ -281,16 +281,17 @@ export class RequestsComponent implements OnInit, OnDestroy {
       params.widgetName = this.widgetsIds.join(',');
     }
 
-    this.crmService.getLeadList(params).pipe(
-      timeout(500)
-    ).subscribe((response: Lead[]) => {
-      this.leads = response.map((item: Lead) => {
-        item.status = this.setStatusByState(item.state);
-        item.widgetName = this.setExtraName(item.widgetName);
-        return item;
+    this.crmService
+      .getLeadList(params)
+      .pipe(timeout(500))
+      .subscribe((response: Lead[]) => {
+        this.leads = response.map((item: Lead) => {
+          item.status = this.setStatusByState(item.state);
+          item.widgetName = this.setExtraName(item.widgetName);
+          return item;
+        });
+        this.initTables = true;
       });
-      this.initTables = true;
-    });
   }
 
   private setStatusByState(state) {

@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription, SubscriptionLike } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { UiService } from '@core/services/ui.service';
 import { SidebarService } from '@core/services/sidebar/sidebar.service';
 import { User } from '@core/models/user';
@@ -11,27 +11,24 @@ import { UserService } from '@modules/user/services/user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
   public readonly uiBreakpoint$: Observable<Breakpoint>;
+  public readonly user$: Observable<User>;
   public readonly breakpoint = Breakpoint;
   public login: string;
   public yandexRef = false;
-
-  private readonly sub: Subscription;
 
   constructor(
     private readonly uiService: UiService,
     private readonly sidebarService: SidebarService,
     private readonly userService: UserService
   ) {
-    this.sub = new Subscription();
     this.uiBreakpoint$ = uiService.uiBreakpoint$;
-    window.dispatchEvent(new Event('resize'));
+    this.user$ = this.userService.user$;
   }
 
   ngOnInit(): void {
     this.facebookInit();
-    this.userSub();
   }
 
   public toggleSidebar(): void {
@@ -50,16 +47,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
       js.src = '//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=631167713613990';
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
-  }
-
-  private userSub(): void {
-    const userSub: SubscriptionLike = this.userService.getMeInfo().subscribe((response: User) => {
-      this.login = response.login;
-    });
-    this.sub.add(userSub);
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
   }
 }

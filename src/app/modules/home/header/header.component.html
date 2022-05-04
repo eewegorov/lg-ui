@@ -75,7 +75,7 @@
         <ng-container *ngIf="currentBreakpoint > breakpoint.MD">
           <li class="dropdown">
             <button class="dropdown-toggle" data-toggle="dropdown">
-              <i class="pe-7s-user"></i><span class="userinfo">{{ login }}</span>
+              <i class="pe-7s-user"></i><span class="userinfo" *ngIf="(user$ | async) as user">{{ user.login }}</span>
             </button>
             <ul class="dropdown-menu hdropdown animate__animated animate__flipInX">
 

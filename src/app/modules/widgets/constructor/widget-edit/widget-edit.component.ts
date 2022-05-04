@@ -27,11 +27,13 @@ import { ConstructorRulesComponent } from '../constructor-rules/constructor-rule
   styleUrls: ['../../shared/shared.scss', './widget-edit.component.scss'],
   animations: [
     trigger('fadeInOut', [
-      transition(':enter', [   // :enter is alias to 'void => *'
+      transition(':enter', [
+        // :enter is alias to 'void => *'
         style({ opacity: 0 }),
         animate(1000, style({ opacity: 1 }))
       ]),
-      transition(':leave', [   // :leave is alias to '* => void'
+      transition(':leave', [
+        // :leave is alias to '* => void'
         animate(1000, style({ opacity: 0 }))
       ])
     ])
@@ -82,8 +84,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
-  ) {
-  }
+  ) {}
 
   ngAfterViewChecked(): void {
     if ($('#renameWidgetBtn span') && $('#renameWidgetBtn span')[0]) {
@@ -101,7 +102,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
 
     this.initTypes();
 
-    this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
+    this.meInfoSub = this.userService.user$.subscribe((response: User) => {
       /*if (response.roles.includes(UserRole.ROLE_DESIGNER)) {
         this.isDesigner = true;
       }
@@ -142,7 +143,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   }
 
   public onChangePayment(value) {
-    const val = (value || typeof value === 'undefined');
+    const val = value || typeof value === 'undefined';
 
     if (val && !this.isPayment) {
       setTimeout(() => {
@@ -250,7 +251,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     this.mapFormExtFieldId();
     const errors = this.runValidators();
     for (const item of errors) {
-      if ((typeof item !== 'undefined') && item.id === tabId) {
+      if (typeof item !== 'undefined' && item.id === tabId) {
         return true;
       }
     }
@@ -275,15 +276,15 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     let error = '';
     this.widget.guiprops.formExt?.model?.list?.forEach(element => {
       if (element.placeholder === '') {
-        error = 'Не заполнено поле placeholder'
+        error = 'Не заполнено поле placeholder';
       }
 
       if (element.service === '') {
-        error = 'Не заполнено служебное название поля'
+        error = 'Не заполнено служебное название поля';
       }
 
       if (element.idField === '') {
-        error = 'Не заполнено ID поля'
+        error = 'Не заполнено ID поля';
       }
     });
 
@@ -425,36 +426,39 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
       }
     });
 
-    this.formExtRedirectFieldEmpty = this.widget.guiprops.formExt.model.list.some((item) => {
+    this.formExtRedirectFieldEmpty = this.widget.guiprops.formExt.model.list.some(item => {
       return this.isButtonRedirectAndEmpty(item);
     });
 
     let isFormHasSendIfActionFLAG;
-    const isFormHasInputsFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
+    const isFormHasInputsFLAG = this.widget.guiprops.formExt.model.list.some(item => {
       return this.widgetConstructorService.isFormHasInputs(item);
     });
 
-    const isFormHasSpecElementsFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
+    const isFormHasSpecElementsFLAG = this.widget.guiprops.formExt.model.list.some(item => {
       return this.isFormHasSpecElements(item);
     });
 
     if (isFormHasSpecElementsFLAG) {
-      isFormHasSendIfActionFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
+      isFormHasSendIfActionFLAG = this.widget.guiprops.formExt.model.list.some(item => {
         return this.isFormHasSendIfAction(item);
       });
     }
 
-    const isFormHasActionButtonFLAG = this.widget.guiprops.formExt.model.list.some((item) => {
+    const isFormHasActionButtonFLAG = this.widget.guiprops.formExt.model.list.some(item => {
       return this.isFormHasButtonWithAction(item);
     });
 
-    const ifFormHasSpecWithoutActionORNot = (typeof isFormHasSendIfActionFLAG !== 'undefined' && !isFormHasSendIfActionFLAG)
-      || typeof isFormHasSendIfActionFLAG === 'undefined';
+    const ifFormHasSpecWithoutActionORNot =
+      (typeof isFormHasSendIfActionFLAG !== 'undefined' && !isFormHasSendIfActionFLAG) ||
+      typeof isFormHasSendIfActionFLAG === 'undefined';
     this.formExtNeedButton = isFormHasInputsFLAG && ifFormHasSpecWithoutActionORNot && !isFormHasActionButtonFLAG;
   }
 
   public isButtonRedirectAndEmpty(item) {
-    return item.type === 'button' && (item.redirect.type.type === 1 || item.redirect.type.type === 3) && !item.redirect.url;
+    return (
+      item.type === 'button' && (item.redirect.type.type === 1 || item.redirect.type.type === 3) && !item.redirect.url
+    );
   }
 
   /*private saveMockupItem() {
@@ -504,9 +508,11 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   }
 
   public isFormHasSendIfAction(item) {
-    return (item.type === 'rating' && item.sendFormIfAction) ||
+    return (
+      (item.type === 'rating' && item.sendFormIfAction) ||
       (item.type === 'dd' && item.sendFormIfAction) ||
-      (item.type === 'variants' && item.sendFormIfAction);
+      (item.type === 'variants' && item.sendFormIfAction)
+    );
   }
 
   public isFormHasButtonWithAction(item) {
@@ -514,7 +520,9 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   }
 
   public isFieldIdUnique(id) {
-    return id !== 'email' && id !== 'name' && id !== 'message' && id !== 'phone' && this.formExtIdsCached.indexOf(id) === -1;
+    return (
+      id !== 'email' && id !== 'name' && id !== 'message' && id !== 'phone' && this.formExtIdsCached.indexOf(id) === -1
+    );
   }
 
   private difference(object: FullWidget, base: FullWidget): Partial<FullWidget> {
@@ -522,7 +530,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     function changes(object, base) {
       return transform(object, (result, value, key) => {
         if (!isEqual(value, base[key])) {
-          result[key] = (isObject(value) && isObject(base[key])) ? changes(value, base[key]) : value;
+          result[key] = isObject(value) && isObject(base[key]) ? changes(value, base[key]) : value;
         }
       });
     }
@@ -552,7 +560,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     this.widget.rules.period.startDate = moment(this.widget.rules.period.startDate).format('DD.MM.YYYY');
     this.widget.rules.period.endDate = moment(this.widget.rules.period.endDate).format('DD.MM.YYYY');
 
-
     this.addCouponsId();
     this.mapFormExtFieldId();
 
@@ -560,23 +567,40 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     this.isLoading = true;
 
     if (this.couponsErrorFlag) {
-      this.toastr.error(this.translate.instant('widgets.coupon.saveError'), this.translate.instant('widgetsList.editor.save.validation.title'));
+      this.toastr.error(
+        this.translate.instant('widgets.coupon.saveError'),
+        this.translate.instant('widgetsList.editor.save.validation.title')
+      );
       this.isLoading = false;
     } else if (this.formExtIdsErrorFlag) {
-      this.toastr.error(this.translate.instant('widgets.formExtId.saveError'), this.translate.instant('widgetsList.editor.save.validation.title'));
+      this.toastr.error(
+        this.translate.instant('widgets.formExtId.saveError'),
+        this.translate.instant('widgetsList.editor.save.validation.title')
+      );
       this.isLoading = false;
     } else if (this.formExtNeedButton) {
-      this.toastr.error(this.translate.instant('widgets.formExtId.actionButton.saveError'), this.translate.instant('widgetsList.editor.save.validation.title'));
+      this.toastr.error(
+        this.translate.instant('widgets.formExtId.actionButton.saveError'),
+        this.translate.instant('widgetsList.editor.save.validation.title')
+      );
       this.isLoading = false;
     } else if (this.formExtRedirectFieldEmpty) {
-      this.toastr.error(this.translate.instant('widgets.formExtId.redirectError'), this.translate.instant('widgetsList.editor.save.validation.title'));
+      this.toastr.error(
+        this.translate.instant('widgets.formExtId.redirectError'),
+        this.translate.instant('widgetsList.editor.save.validation.title')
+      );
       this.isLoading = false;
     } else if (this.widget.useCustomIntegrationsList && !this.widget.integrations.length) {
-      this.toastr.error(this.translate.instant('widgets.integration.saveError'), this.translate.instant('widgetsList.editor.save.validation.title'));
+      this.toastr.error(
+        this.translate.instant('widgets.integration.saveError'),
+        this.translate.instant('widgetsList.editor.save.validation.title')
+      );
       this.isLoading = false;
     } else if (errorsList.length !== 0) {
       this.toastr.error(
-        errorsList.length === 1 && errorsList[0].message ? errorsList[0].message : this.translate.instant('widgetsList.editor.save.validation.desc'),
+        errorsList.length === 1 && errorsList[0].message
+          ? errorsList[0].message
+          : this.translate.instant('widgetsList.editor.save.validation.desc'),
         this.translate.instant('widgetsList.editor.save.validation.title')
       );
       this.isLoading = false;
@@ -601,10 +625,15 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
 
       this.widgetService.updateWidget(this.sid, this.wid, widgetUpdatedData).subscribe((response: boolean) => {
         if (response) {
-          this.toastr.success(this.translate.instant('widgetsList.editor.save.done.desc'), this.translate.instant('widgetsList.editor.save.done.title'));
+          this.toastr.success(
+            this.translate.instant('widgetsList.editor.save.done.desc'),
+            this.translate.instant('widgetsList.editor.save.done.title')
+          );
         } else {
           this.toastr.error(
-            errorsList.length === 1 && errorsList[0].message ? errorsList[0].message : this.translate.instant('widgetsList.editor.save.check'),
+            errorsList.length === 1 && errorsList[0].message
+              ? errorsList[0].message
+              : this.translate.instant('widgetsList.editor.save.check'),
             this.translate.instant('widgetsList.editor.save.validation.title')
           );
         }
@@ -642,7 +671,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
       }
     }
 
-    this.widget.guiprops.elementsList.forEach((item) => {
+    this.widget.guiprops.elementsList.forEach(item => {
       if (item.name && item.name === 'coupon-element') {
         if (item.coupon.id) {
           this.couponsId.push(item.coupon.id);
@@ -702,7 +731,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
           this.checkCouponsCallback(this.widget.guiprops.form.couponCallback.coupon);
         }
 
-        this.widget.guiprops.elementsList.forEach((item) => {
+        this.widget.guiprops.elementsList.forEach(item => {
           if (item.name && item.name === 'coupon-element') {
             if (item.coupon.id) {
               this.checkCouponsCallback(item);
@@ -726,7 +755,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   }*/
 
   private checkCouponsCallback(callbackModel) {
-    const isItExist = this.coupons.find((coupon) => {
+    const isItExist = this.coupons.find(coupon => {
       return coupon.id === callbackModel.coupon.id;
     });
     if (!isItExist) {
@@ -735,7 +764,8 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   }
 
   private loadWidget() {
-    this.widgetService.getWidgetById(this.sid, this.wid).subscribe((response: FullWidget) => {
+    this.widgetService.getWidgetById(this.sid, this.wid).subscribe(
+      (response: FullWidget) => {
         this.widget = response;
 
         setTimeout(() => {
@@ -760,9 +790,11 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   }
 
   private showPaymentDialog(siteId, description) {
-    this.tariffsService.checkTariffPlans(siteId,
+    this.tariffsService.checkTariffPlans(
+      siteId,
       this.translate.instant('sitelist.tariff.improve'),
-      description, this.coreSitesService.getSiteById(siteId).name
+      description,
+      this.coreSitesService.getSiteById(siteId).name
     );
   }
 
@@ -787,5 +819,4 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
       this.formExtIdFieldFocusOut.unsubscribe();
     }
   }
-
 }

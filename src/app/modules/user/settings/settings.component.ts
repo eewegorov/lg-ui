@@ -3,7 +3,7 @@ import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
-import { PasswordRequest, User, UserRequest } from '../../../core/models/user';
+import { PasswordRequest, User, UserRequest } from '@core/models/user';
 
 @Component({
   selector: 'app-settings',
@@ -25,21 +25,16 @@ export class SettingsComponent implements OnInit, OnDestroy {
   @ViewChild('password', { static: true }) private password: ElementRef;
   private meInfoSub: SubscriptionLike;
 
-  constructor(
-    private translate: TranslateService,
-    private toastr: ToastrService,
-    private userService: UserService
-  ) {
-  }
+  constructor(private translate: TranslateService, private toastr: ToastrService, private userService: UserService) {}
 
   ngOnInit(): void {
-    this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
+    this.meInfoSub = this.userService.user$.subscribe((user: User) => {
       this.user = {
-        phone: response.phone,
-        email: response.email,
-        notificated: response.notificated,
-        needStatsNotifications: response.needStatsNotifications,
-        timeZone: response.timeZone
+        phone: user.phone,
+        email: user.email,
+        notificated: user.notificated,
+        needStatsNotifications: user.needStatsNotifications,
+        timeZone: user.timeZone
       };
     });
   }
@@ -55,7 +50,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
       if (response) {
         this.toastr.success(this.translate.instant('userInfo.settingsChanged'), this.translate.instant('global.done'));
       } else {
-        this.toastr.error(this.translate.instant('settings.site.newIntegration.create.error'), this.translate.instant('global.error'));
+        this.toastr.error(
+          this.translate.instant('settings.site.newIntegration.create.error'),
+          this.translate.instant('global.error')
+        );
       }
     });
   }
@@ -75,7 +73,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
         this.oldPassword = '';
         this.newPassword = '';
       } else {
-        this.toastr.error(this.translate.instant('settings.site.newIntegration.create.error'), this.translate.instant('global.error'));
+        this.toastr.error(
+          this.translate.instant('settings.site.newIntegration.create.error'),
+          this.translate.instant('global.error')
+        );
       }
     });
   }
@@ -89,5 +90,4 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.meInfoSub.unsubscribe();
     }
   }
-
 }

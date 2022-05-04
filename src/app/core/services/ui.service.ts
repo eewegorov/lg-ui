@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { fromEvent, Observable, Subject } from 'rxjs';
+import { fromEvent, Observable, ReplaySubject } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
 import { Breakpoint } from '@core/enums/ui/breakpoint';
 
@@ -9,10 +9,10 @@ import { Breakpoint } from '@core/enums/ui/breakpoint';
 export class UiService {
   public readonly uiBreakpoint$: Observable<Breakpoint>;
 
-  private readonly _uiBreakpoint$: Subject<Breakpoint>;
+  private readonly _uiBreakpoint$: ReplaySubject<Breakpoint>;
 
   constructor() {
-    this._uiBreakpoint$ = new Subject<Breakpoint>();
+    this._uiBreakpoint$ = new ReplaySubject<Breakpoint>(1);
     this.uiBreakpoint$ = this._uiBreakpoint$.asObservable();
     this.watchWindowSizes();
   }

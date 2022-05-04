@@ -2,10 +2,10 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Integration } from '../../../../core/models/sites';
-import { FullWidget } from '../../../../core/models/widgets';
+import { Integration } from '@core/models/sites';
+import { FullWidget } from '@core/models/widgets';
 import { SitesService } from '../../../sites/services/sites.service';
-import { IntegrationAddComponent } from '../../../sites/integration-add/integration-add.component';
+import { IntegrationAddComponent } from '../../../sites/components/integration-add/integration-add.component';
 
 @Component({
   selector: 'app-constructor-integrations',
@@ -30,8 +30,7 @@ export class ConstructorIntegrationsComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private modalService: NgbModal,
     private sitesService: SitesService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getIntegrations();
@@ -63,14 +62,14 @@ export class ConstructorIntegrationsComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.siteId = this.sid;
     modalRef.componentInstance.integrationId = null;
 
-    modalRef.result.then((result) => {
-      if (result && result.id) {
-        this.getIntegrationSub.unsubscribe();
-        this.getIntegrations(result);
-      }
-    })
-      .catch(() => {
-      });
+    modalRef.result
+      .then(result => {
+        if (result && result.id) {
+          this.getIntegrationSub.unsubscribe();
+          this.getIntegrations(result);
+        }
+      })
+      .catch(() => {});
   }
 
   ngOnDestroy(): void {
@@ -107,5 +106,4 @@ export class ConstructorIntegrationsComponent implements OnInit, OnDestroy {
       }
     });
   }
-
 }

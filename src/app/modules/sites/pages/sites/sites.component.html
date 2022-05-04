@@ -1,0 +1,34 @@
+<div class="page-title">
+  <h1 class="title-main">{{ 'sidebar.sites' | translate }}</h1>
+  <button
+    (click)="openModalForCreatingNewSite()"
+    class="btn btn-lg btn-success title-button"
+    type="button"
+  >
+    <span class="icon" inlineSVG="./assets/images/core/plus.svg"></span>
+    <span>{{ 'sitelist.addSite' | translate }}</span>
+  </button>
+</div>
+
+<ng-container *ngIf="!isSitesListLoaded; else loaded">
+  <div class="widget-page-preloader-all-inner"></div>
+</ng-container>
+
+<ng-template #loaded>
+  <div *ngIf="!sites.length" class="col-lg-12 mt-5">
+    <h3 class="f-0 text-center">{{ 'sitelist.empty.title' | translate }}</h3>
+    <h4 class="f-2 text-center">{{ 'sitelist.empty.subtitle' | translate }}</h4>
+  </div>
+  <ng-container *ngFor="let site of sites; index as i">
+    <section [id]="site.id">
+      <h2 class="site-name">{{ site.name }}</h2>
+      <app-card>
+        <app-site-item
+          [index]="i"
+          [item]="site"
+          [timezone]="timezone"
+        ></app-site-item>
+      </app-card>
+    </section>
+  </ng-container>
+</ng-template>

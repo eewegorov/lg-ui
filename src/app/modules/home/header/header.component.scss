@@ -1,6 +1,5 @@
-@import '../../../../_vars.scss';
-
-$fontColor: #a4a4a4;
+@import '../../../../scss/vars';
+@import '../../../../scss/mixins';
 
 header {
   font-style: normal;
@@ -169,20 +168,7 @@ header {
           height: 25px;
           color: $fontColor;
 
-          /*
-           it might be not the best solution, but placing this code, specific to the header component,
-           into the general style.scss file is not a good idea as well
-          */
-          ::ng-deep {
-            svg {
-              width: 25px;
-              height: 25px;
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-            }
-          }
+          @include svg-position();
         }
       }
 

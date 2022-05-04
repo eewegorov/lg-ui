@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ApiResponse } from '../../../core/models/api';
+import { ApiResponse } from '@core/models/api';
 import {
   AmoAuthByCodeRequest,
   AmoAuthByRefreshTokenRequest,
@@ -29,10 +29,9 @@ import {
   Smartpoints,
   SmartpointsResponse,
   UpdateIntegrationRequest
-} from '../../../core/models/sites';
-import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+} from '@core/models/sites';
+import { ErrorHandlerService } from '@core/services/error-handler.service';
 import { SitesApiService } from './sites-api.service';
-
 
 @Injectable({
   providedIn: 'root'
@@ -40,11 +39,7 @@ import { SitesApiService } from './sites-api.service';
 export class SitesService {
   private currentSiteId: string;
 
-  constructor(
-    private errorHandlerService: ErrorHandlerService,
-    private sitesApiService: SitesApiService
-  ) {
-  }
+  constructor(private errorHandlerService: ErrorHandlerService, private sitesApiService: SitesApiService) {}
 
   public getSites(): Observable<SiteShort[]> {
     return this.sitesApiService.getSites().pipe(
@@ -117,7 +112,11 @@ export class SitesService {
   }
 
   public cloneSiteIntegration(
-    siteId: string, integrationId: string, newIntegrationName: string, recipientSiteId: string, isDefault: boolean
+    siteId: string,
+    integrationId: string,
+    newIntegrationName: string,
+    recipientSiteId: string,
+    isDefault: boolean
   ): Observable<IntegrationItem> {
     const data = {
       name: newIntegrationName,
@@ -130,7 +129,11 @@ export class SitesService {
     );
   }
 
-  public updateSiteIntegration(siteId: string, integrationId: string, integration: UpdateIntegrationRequest): Observable<boolean> {
+  public updateSiteIntegration(
+    siteId: string,
+    integrationId: string,
+    integration: UpdateIntegrationRequest
+  ): Observable<boolean> {
     return this.sitesApiService.updateSiteIntegration(siteId, integrationId, integration).pipe(
       map((response: ApiResponse) => response.success),
       catchError(this.errorHandlerService.handleError)
@@ -159,7 +162,11 @@ export class SitesService {
   }
 
   public getAmoTokens(
-    subdomain: string, clientId: string, clientSecret: string, grantType: AmoGrantTypes, credentials: string
+    subdomain: string,
+    clientId: string,
+    clientSecret: string,
+    grantType: AmoGrantTypes,
+    credentials: string
   ): Observable<AmoAuthResponse> {
     const amoCredentials: AmoAuthRequest = {
       client_id: clientId,
@@ -190,7 +197,7 @@ export class SitesService {
   }
 
   public getCorrectNameByType(type: string) {
-    const correctItem = this.getIntegrationServicesList().find((item) => {
+    const correctItem = this.getIntegrationServicesList().find(item => {
       return item.type === type;
     });
     if (correctItem) {
@@ -199,7 +206,7 @@ export class SitesService {
   }
 
   public getPaymentByType(type) {
-    const correctItem = this.getIntegrationServicesList().find((item) => {
+    const correctItem = this.getIntegrationServicesList().find(item => {
       return item.type === type;
     });
     if (correctItem) {
@@ -211,7 +218,7 @@ export class SitesService {
     let scriptPath = '<!-- BEGIN LEADGENIC CODE {literal} -->\r\n';
     scriptPath += '<!-- Put this script tag before the </body> tag of your page -->';
     scriptPath += '\r\n<script type="text/javascript" charset="UTF-8" async src="';
-    scriptPath += needUrl ? ('https://gate.leadgenic.ru/getscript?site=' + path) : path;
+    scriptPath += needUrl ? 'https://gate.leadgenic.ru/getscript?site=' + path : path;
     scriptPath += '"></script>\r\n';
     scriptPath += '<!-- {/literal} END LEADGENIC CODE -->';
     return scriptPath;
@@ -240,7 +247,13 @@ export class SitesService {
   }
 
   public isIntegrationMailing(type) {
-    return type === 'MAILCHIMP' || type === 'GETRESPONSE' || type === 'SENDPULSE' || type === 'SENDBOX' || type === 'UNISENDER';
+    return (
+      type === 'MAILCHIMP' ||
+      type === 'GETRESPONSE' ||
+      type === 'SENDPULSE' ||
+      type === 'SENDBOX' ||
+      type === 'UNISENDER'
+    );
   }
 
   public isIntegrationNotification(type) {
@@ -329,5 +342,4 @@ export class SitesService {
   private isSiteHasFreeTariff(site): boolean {
     return (!site?.tariffExp && !site?.tariffName) || site?.tariffName === 'Бесплатный';
   }
-
 }

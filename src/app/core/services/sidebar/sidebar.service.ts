@@ -50,13 +50,10 @@ export class SidebarService {
 
   private watchSidebarState(): void {
     this._sidebarState$.subscribe((state: SidebarState) => {
-      switch (state) {
-        case SidebarState.SHOWN:
-          this.document.body.classList.add(this.sidebarClassName);
-          break;
-        case SidebarState.HIDDEN:
-          this.document.body.classList.remove(this.sidebarClassName);
-          break;
+      if (state === SidebarState.SHOWN) {
+        this.document.body.classList.add(this.sidebarClassName);
+      } else {
+        this.document.body.classList.remove(this.sidebarClassName);
       }
     });
   }

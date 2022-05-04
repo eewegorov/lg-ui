@@ -4,9 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { IntegrationAddComponent } from '../integration-add/integration-add.component';
 import Swal from 'sweetalert2';
-import { IntegrationItem } from '../../../core/models/sites';
-import { SitesService } from '../services/sites.service';
-
+import { IntegrationItem } from '@core/models/sites';
+import { SitesService } from '../../services/sites.service';
 
 @Component({
   selector: 'app-integration-item',
@@ -25,11 +24,9 @@ export class IntegrationItemComponent implements OnInit, AfterViewChecked {
     private modalService: NgbModal,
     private toastr: ToastrService,
     private sitesService: SitesService
-  ) {
-  }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewChecked(): void {
     ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
@@ -74,13 +71,13 @@ export class IntegrationItemComponent implements OnInit, AfterViewChecked {
     modalRef.componentInstance.siteId = this.siteId;
     modalRef.componentInstance.integrationId = this.widget.id;
 
-    modalRef.result.then((result) => {
-      if (result && result.success) {
-        this.updateIntegrations.emit(true);
-      }
-    })
-      .catch(() => {
-      });
+    modalRef.result
+      .then(result => {
+        if (result && result.success) {
+          this.updateIntegrations.emit(true);
+        }
+      })
+      .catch(() => {});
   }
 
   public removeItem() {
@@ -91,17 +88,19 @@ export class IntegrationItemComponent implements OnInit, AfterViewChecked {
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
       confirmButtonText: this.translate.instant('widgetsList.widget.delete.confirm'),
-      cancelButtonText: this.translate.instant('widgetsList.widget.delete.cancel'),
-    }).then((isConfirm) => {
+      cancelButtonText: this.translate.instant('widgetsList.widget.delete.cancel')
+    }).then(isConfirm => {
       if (isConfirm) {
         this.sitesService.deleteSiteIntegration(this.siteId, this.widget.id).subscribe((response: boolean) => {
           if (response) {
-            this.toastr.success(this.translate.instant('settings.site.integration.deleted'), this.translate.instant('global.done'));
+            this.toastr.success(
+              this.translate.instant('settings.site.integration.deleted'),
+              this.translate.instant('global.done')
+            );
             this.updateIntegrations.emit(true);
           }
         });
       }
     });
   }
-
 }

@@ -689,6 +689,7 @@
 	},
 	"sitelist": {
 		"addSite": "",
+    "label": "Site",
 		"chartLegend": {
 			"emails": "",
 			"leads": "",
@@ -704,7 +705,7 @@
 			"subtitle": "",
 			"title": ""
 		},
-		"extend": "",
+		"extend": "Extend",
 		"form": {
 			"code": {
 				"desc1": ""

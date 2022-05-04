@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiResponse } from '../../../core/models/api';
+import { ApiResponse } from '@core/models/api';
 import {
   AmoAuthByCodeRequest,
   AmoAuthByRefreshTokenRequest,
@@ -20,20 +20,14 @@ import {
   SiteStatisticsResponse,
   SmartpointsResponse,
   UpdateIntegrationRequest
-} from '../../../core/models/sites';
-import { ConfigService } from '../../../core/services/config.service';
-
+} from '@core/models/sites';
+import { ConfigService } from '@core/services/config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SitesApiService {
-
-  constructor(
-    private http: HttpClient,
-    private configService: ConfigService
-  ) {
-  }
+  constructor(private http: HttpClient, private configService: ConfigService) {}
 
   public getSites(): Observable<SitesShortResponse> {
     return this.http.get<SitesShortResponse>(`${this.configService.config.prov}/sites`);
@@ -68,35 +62,62 @@ export class SitesApiService {
   }
 
   public getSiteIntegration(siteId: string, integrationId: string): Observable<IntegrationResponse> {
-    return this.http.get<IntegrationResponse>(`${this.configService.config.prov}/sites/${siteId}/integrations/${integrationId}`);
+    return this.http.get<IntegrationResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/integrations/${integrationId}`
+    );
   }
 
   public createSiteIntegration(siteId: string, integration: CreateIntegrationRequest) {
-    return this.http.post<IntegrationResponse>(`${this.configService.config.prov}/sites/${siteId}/integrations`, integration);
+    return this.http.post<IntegrationResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/integrations`,
+      integration
+    );
   }
 
-  public cloneSiteIntegration(siteId: string, integrationId: string, data: CloneIntegrationRequest): Observable<IntegrationResponse> {
-    return this.http.post<IntegrationResponse>(`${this.configService.config.prov}/sites/${siteId}/integrations/${integrationId}/clone`, data);
+  public cloneSiteIntegration(
+    siteId: string,
+    integrationId: string,
+    data: CloneIntegrationRequest
+  ): Observable<IntegrationResponse> {
+    return this.http.post<IntegrationResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/integrations/${integrationId}/clone`,
+      data
+    );
   }
 
-  public updateSiteIntegration(siteId: string, integrationId: string, integration: UpdateIntegrationRequest): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${this.configService.config.prov}/sites/${siteId}/integrations/${integrationId}`, integration);
+  public updateSiteIntegration(
+    siteId: string,
+    integrationId: string,
+    integration: UpdateIntegrationRequest
+  ): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/integrations/${integrationId}`,
+      integration
+    );
   }
 
   public startStopSiteIntegration(siteId: string, integrationId: string, isStart: boolean): Observable<ApiResponse> {
     const type = isStart ? 'start' : 'pause';
-    return this.http.post<ApiResponse>(`${this.configService.config.prov}/sites/${siteId}/integrations/${integrationId}/${type}`, null);
+    return this.http.post<ApiResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/integrations/${integrationId}/${type}`,
+      null
+    );
   }
 
   public deleteSiteIntegration(siteId: string, integrationId: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${this.configService.config.prov}/sites/${siteId}/integrations/${integrationId}`);
+    return this.http.delete<ApiResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/integrations/${integrationId}`
+    );
   }
 
   public getSiteSmartpointsList(siteId: string): Observable<SmartpointsResponse> {
     return this.http.get<SmartpointsResponse>(`${this.configService.config.prov}/sites/${siteId}/smartpoints`);
   }
 
-  public getAmoTokens(subdomain: string, amoRequest: AmoAuthByCodeRequest | AmoAuthByRefreshTokenRequest): Observable<AmoAuthResponse> {
+  public getAmoTokens(
+    subdomain: string,
+    amoRequest: AmoAuthByCodeRequest | AmoAuthByRefreshTokenRequest
+  ): Observable<AmoAuthResponse> {
     return this.http.post<AmoAuthResponse>(`http://${subdomain}/oauth2/access_token`, amoRequest);
   }
 
@@ -107,5 +128,4 @@ export class SitesApiService {
       }
     });
   }
-
 }

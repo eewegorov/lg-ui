@@ -1,0 +1,24 @@
+@import "../../../../scss/vars";
+
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 30px;
+
+  @media (max-width: 991px) {
+    padding: 20px;
+  }
+
+  @media (max-width: 575px) {
+    padding: 10px;
+  }
+}

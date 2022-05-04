@@ -6,16 +6,16 @@ import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
 import { ChartsModule } from 'ng2-charts';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { FilterPipeModule } from 'ngx-filter-pipe';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { SitesRoutingModule } from './sites-routing.module';
-import { SiteAddComponent } from './site-add/site-add.component';
-import { SiteSettingsComponent } from './site-settings/site-settings.component';
-import { SiteItemComponent } from './site-item/site-item.component';
-import { SitesComponent } from './sites/sites.component';
-import { IntegrationAddComponent } from './integration-add/integration-add.component';
-import { IntegrationItemComponent } from './integration-item/integration-item.component';
+import { SiteAddComponent } from './components/site-add/site-add.component';
+import { SiteSettingsComponent } from './pages/site-settings/site-settings.component';
+import { SiteItemComponent } from './components/site-item/site-item.component';
+import { SitesComponent } from './pages/sites/sites.component';
+import { IntegrationAddComponent } from './components/integration-add/integration-add.component';
+import { IntegrationItemComponent } from './components/integration-item/integration-item.component';
 import { WidgetsModule } from '../widgets/widgets.module';
-
+import { InlineSVGModule } from 'ng-inline-svg-2';
 
 @NgModule({
   declarations: [
@@ -37,8 +37,8 @@ import { WidgetsModule } from '../widgets/widgets.module';
     FilterPipeModule,
     SharedModule,
     SitesRoutingModule,
-    WidgetsModule
+    WidgetsModule,
+    InlineSVGModule
   ]
 })
-export class SitesModule {
-}
+export class SitesModule {}

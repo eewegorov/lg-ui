@@ -4,10 +4,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { of, SubscriptionLike } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { CreateSiteData, Smartpoints } from '../../../core/models/sites';
-import { UserService } from '../../user/services/user.service';
-import { SitesService } from '../services/sites.service';
-
+import { CreateSiteData, Smartpoints } from '@core/models/sites';
+import { UserService } from '../../../user/services/user.service';
+import { SitesService } from '../../services/sites.service';
 
 @Component({
   selector: 'app-site-add',
@@ -29,8 +28,7 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
     private activeModal: NgbActiveModal,
     private userService: UserService,
     private sitesService: SitesService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.resetForm();
@@ -43,12 +41,13 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
   public createSite() {
     const newSiteData = Object.assign({}, this.newSiteForm.getRawValue());
     delete newSiteData.phone;
-    this.createSiteSub = this.sitesService.createSite(newSiteData).pipe(
-      switchMap(
-        (response: CreateSiteData) => {
+    this.createSiteSub = this.sitesService
+      .createSite(newSiteData)
+      .pipe(
+        switchMap((response: CreateSiteData) => {
           this.createdSite = {
             id: response.id,
-            link: this.sitesService.generatePath(response.link),
+            link: this.sitesService.generatePath(response.link)
           };
           if (this.newSiteForm.controls.phone.value) {
             return this.userService.savePhone({ phone: this.newSiteForm.controls.phone.value });
@@ -56,16 +55,17 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
             return of(null);
           }
         })
-    ).subscribe(
-      () => {
-        this.tab = 2;
-        this.updateSites.emit(true);
-      },
-      error => {
-        console.log(error);
-        this.isUrlInvalid = true;
-      }
-    );
+      )
+      .subscribe(
+        () => {
+          this.tab = 2;
+          this.updateSites.emit(true);
+        },
+        error => {
+          console.log(error);
+          this.isUrlInvalid = true;
+        }
+      );
   }
 
   public enableTyping(): void {
@@ -77,9 +77,9 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
   }
 
   public goToCreateOwnWidgets() {
-    this.router.navigate(['widgets'], { queryParams: { enableModal: true, selected: this.createdSite.id } }).then(
-      () => this.closeModal()
-    );
+    this.router
+      .navigate(['widgets'], { queryParams: { enableModal: true, selected: this.createdSite.id } })
+      .then(() => this.closeModal());
   }
 
   public setTab(newTab) {
@@ -100,5 +100,4 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
       phone: new FormControl('')
     });
   }
-
 }

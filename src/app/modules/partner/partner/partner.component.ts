@@ -6,9 +6,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PartnerShowComponent } from '../partner-show/partner-show.component';
 import { ReferralAddComponent } from '../referral-add/referral-add.component';
 import { MAIN_URL } from '../../../configs/urls';
-import { User } from "@core/models/user";
-import { IncomeBalance, Registrations, Transaction } from "@core/models/partner";
-import { SidebarService } from "@core/services/sidebar/sidebar.service";
+import { User } from '@core/models/user';
+import { IncomeBalance, Registrations, Transaction } from '@core/models/partner';
+import { SidebarService } from '@core/services/sidebar/sidebar.service';
 import { UserService } from '@modules/user/services/user.service';
 import { PartnerService } from '../services/partner.service';
 
@@ -50,7 +50,7 @@ export class PartnerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sidebarService.hideSidebar();
 
-    this.meInfoSub = this.userService.getMeInfo().subscribe((response: User) => {
+    this.meInfoSub = this.userService.user$.subscribe((response: User) => {
       this.partnerUrl = MAIN_URL + '?refid=' + response.id;
       this.walletId = response.wallet;
     });

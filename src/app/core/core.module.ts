@@ -4,22 +4,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CoreRoutingModule } from './core-routing.module';
 import { ChatComponent } from './components/chat/chat.component';
 import { PreloaderComponent } from './components/preloader/preloader.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { LogoutComponent } from './components/logout/logout.component';
-
 
 @NgModule({
   declarations: [ChatComponent, PreloaderComponent, LogoutComponent],
-  imports: [
-    CommonModule,
-    CoreRoutingModule,
-    TranslateModule,
-    SharedModule
-  ],
-  exports: [
-    CoreRoutingModule,
-    ChatComponent
-  ]
+  imports: [CommonModule, CoreRoutingModule, TranslateModule, SharedModule],
+  exports: [CoreRoutingModule, ChatComponent, PreloaderComponent]
 })
-export class CoreModule {
-}
+export class CoreModule {}

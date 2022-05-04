@@ -11,7 +11,7 @@ import { ThousandSuffixPipe } from './pipes/thousand-suffix.pipe';
 import { ModalComponent } from './components/modal/modal.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
-
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +22,10 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     NgbdDatepickerI18n,
     ModalComponent,
     DropdownComponent,
-    PaymentModalComponent
+    PaymentModalComponent,
+    CardComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    TranslateModule,
-    NgbDatepickerModule
-  ],
+  imports: [CommonModule, FormsModule, TranslateModule, NgbDatepickerModule],
   exports: [
     SelectOnClickDirective,
     DropContainerDirective,
@@ -38,11 +34,9 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
     NgbdDatepickerI18n,
     ModalComponent,
     DropdownComponent,
-    PaymentModalComponent
+    PaymentModalComponent,
+    CardComponent
   ],
-  providers: [
-    OrderByPipe
-  ]
+  providers: [OrderByPipe]
 })
-export class SharedModule {
-}
+export class SharedModule {}
