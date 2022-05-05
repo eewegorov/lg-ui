@@ -22,6 +22,7 @@ export class VideoElementComponent implements OnInit {
 
   public getVideoId(item) {
     this.getVideo.emit(item);
+    this.newVideoSize(item);
   }
 
   public changeWidthTypeOfVideo(item, newValue) {

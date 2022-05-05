@@ -547,6 +547,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public getVideoId(item) {
+    console.log(item);
     if (!item.videoUrl) {
       item.videoUrl = 'https://';
     }

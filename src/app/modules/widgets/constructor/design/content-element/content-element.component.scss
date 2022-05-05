@@ -104,11 +104,13 @@
 }
 
 .widget-video-item-block iframe {
-  /* Extend it beyond the viewport... */
-  width: 300%;
-  height: 100%;
-  /* ...and bring it back again */
-  margin-left: -100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: -1;
 }
 
 .widget-image-has-full-wh .widget-image-item-block,
