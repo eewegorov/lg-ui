@@ -41,7 +41,7 @@
   >
     <div
       *ngIf="((widget.guiprops.image.typeBl == 'imageBl') || (widget.guiprops.image.typeBl !== 'videoBl')) && (widget.guiprops.image.typeBl !== 'paddingBl')"
-      [ngStyle]="{'background':'url(' + widget.guiprops.image.url + ') center no-repeat', 'background-size':'cover', 'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
+      [ngStyle]="{'background-image': 'url(' + widget.guiprops.image.url + ')', 'background-repeat': 'no-repeat', 'background-position': 'center', 'background-size': 'cover', 'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
       class="widget-image-item-block"
     ></div>
     <div
