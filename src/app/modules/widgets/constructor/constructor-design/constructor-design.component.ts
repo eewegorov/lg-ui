@@ -544,6 +544,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public getVideoId(item) {
+    console.log(item);
     if (!item.videoUrl) {
       item.videoUrl = 'https://';
     }
@@ -552,18 +553,24 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     if (item.videoType === 'youtube') {
       const regYExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
       const match = item.videoUrl.match(regYExp);
-      result = (match && match[7].length === 11) ? match[7] : false;
+      result = match ? match[7] : false;
       if (result) {
-          item.videoPreview = 'https://img.youtube.com/vi/' + result + '/hqdefault.jpg';
-          result = result +
-            '?controls=0&iv_load_policy=3&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&modestbranding=1&disablekb=1&playlist=' + result;
+        item.videoPreview = 'https://img.youtube.com/vi/' + result + '/hqdefault.jpg';
+        result = result +
+          '?controls=0&iv_load_policy=3&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&modestbranding=1&disablekb=1&playlist=' + result;
         item.videoUrl = 'https://www.youtube.com/embed/' + result;
+      } else {
+        item.videoUrl = 'https://www.youtube.com/embed/FFu-JFifX28';
       }
     } else {
       const regVExp = /^.+vimeo.com\/(.*\/)?([^#\?]*)/;
       const parseUrl = item.videoUrl.match(regVExp);
-      result = (parseUrl && parseUrl[2].length === 9) ? parseUrl[2] : false;
+      result = (parseUrl && parseUrl[2].length === 9) ? parseUrl[2] : '207763253';
       result += '';
+
+      if (!result) {
+        result = '207763253';
+      }
       if (result) {
         if (item.isVideoBG) {
           item.videoPreview = 'https://i.vimeocdn.com/video/' + result + '.png';
