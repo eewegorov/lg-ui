@@ -425,8 +425,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         this.widgetConstructorService.isFormHasCurrentTypeOfActions(this.widget.guiprops.formExt.model.list, 0));
   }
 
-  public scrollToEl(id: string, elementName: string, elementCounter?: number) {
-    if (this.currentElement === 'form-ext-element' && elementName === 'form-ext-element') {
+  public scrollToEl(element: string, index: number | string, elementCounter?: number) {
+    if (this.currentElement === 'form-ext-element' && element === 'form-ext-element') {
       return;
     }
 
@@ -446,28 +446,31 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       'video-element',
       'timer-element',
       'form-ext-element',
-    ].includes(elementName)) {
-      this.currentElement = elementName + (elementCounter ? ('#' + elementCounter) : '');
+    ].includes(element)) {
+      this.currentElement = element + (elementCounter ? ('#' + elementCounter) : '');
+      this.currentIndex = +index;
     } else {
       this.currentElement = 'settings';
-      const accordion = $('#accordion');
-      const accordionIn = $('#accordionIn');
-      const target = $('#elemScrN' + id);
+      this.currentIndex = 0;
+      if (index) {
+        const accordion = $('#accordion');
+        const accordionIn = $('#accordionIn');
+        const target = $('#elemScrN' + index);
 
-      const scrollTo = (target.offset().top) - (accordionIn.offset().top) - 40;
-      if (((target.offset().top - accordion.offset().top - 42) <= 10) && ((target.offset().top - accordion.offset().top - 42) >= -10)) {
-        return;
+        const scrollTo = (target.offset().top) - (accordionIn.offset().top) - 40;
+        if (((target.offset().top - accordion.offset().top - 42) <= 10) && ((target.offset().top - accordion.offset().top - 42) >= -10)) {
+          return;
+        }
+        accordion.animate({ scrollTop: scrollTo }, 500, 'swing', () => {
+        });
+        target.addClass('border-active-element');
+        setTimeout(() => {
+          target.removeClass('border-active-element');
+        }, 1500);
       }
-
-      accordion.animate({ scrollTop: scrollTo }, 500, 'swing', () => {
-      });
-      target.addClass('border-active-element');
-      setTimeout(() => {
-        target.removeClass('border-active-element');
-      }, 1500);
     }
 
-    if (elementName === 'title-element' || elementName === 'form-element' || elementName === 'button-element' || elementName === 'closelink-element') {
+    if (element === 'title-element' || element === 'form-element' || element === 'button-element' || element === 'closelink-element') {
       this.downUpInitAir();
     }
   }
@@ -544,7 +547,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public getVideoId(item) {
-    console.log(item);
     if (!item.videoUrl) {
       item.videoUrl = 'https://';
     }
@@ -568,16 +570,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       result = (parseUrl && parseUrl[2].length === 9) ? parseUrl[2] : '207763253';
       result += '';
 
-      if (!result) {
-        result = '207763253';
+      if (item.isVideoBG) {
+        item.videoPreview = 'https://i.vimeocdn.com/video/' + result + '.png';
+        result = result + '?background=1';
       }
-      if (result) {
-        if (item.isVideoBG) {
-          item.videoPreview = 'https://i.vimeocdn.com/video/' + result + '.png';
-          result = result + '?background=1';
-        }
-        item.videoUrl = 'https://player.vimeo.com/video/' + result;
-      }
+      item.videoUrl = 'https://player.vimeo.com/video/' + result;
     }
 
     item.videoId = result;

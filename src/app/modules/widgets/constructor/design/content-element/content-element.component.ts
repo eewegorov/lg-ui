@@ -53,7 +53,7 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentChe
   public videoBgClass = '';
   public selected: any = '';
   @Output() private removeElement = new EventEmitter<{ element: string, index: number }>();
-  @Output() private scrollToElement = new EventEmitter<{ id: string, elementName: string, elementCounter: number }>();
+  @Output() private scrollToElement = new EventEmitter<{ element: string, index: number | string, elementCounter: number }>();
   @Output() private addNewElement = new EventEmitter<number>();
   @Output() private updateElementIndex = new EventEmitter<number>();
 
@@ -93,8 +93,8 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentChe
   ngOnInit(): void {
   }
 
-  public scrollToEl(id: string, elementName: string, elementCounter?: number) {
-    this.scrollToElement.emit({ id, elementName, elementCounter });
+  public scrollToEl(element: string, index: number | string, elementCounter?: number) {
+    this.scrollToElement.emit({ element, index, elementCounter });
   }
 
   public removeElementFromElementsList(element: string, index: number): void {

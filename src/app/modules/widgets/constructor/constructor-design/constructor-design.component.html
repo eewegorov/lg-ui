@@ -920,7 +920,7 @@
         </div>
 
         <div
-          (click)="scrollToEl('MainSetBl', 'main-w-element')"
+          (click)="scrollToEl('main-w-element', 'MainSetBl')"
           [ngStyle]="{'background': this.widget.guiprops.popupMain.shadow.enable ? widget.guiprops['popupMain']?.shadow.rgbaColor : 'none'}"
           class="max-wh-over"
         >
@@ -934,7 +934,7 @@
                 <app-content-element
                   (addNewElement)="addNewElementToContent($event)"
                   (removeElement)="removeCurrentElement($event.element, $event.index)"
-                  (scrollToElement)="scrollToEl($event.id, $event.elementName, $event.elementCounter)"
+                  (scrollToElement)="scrollToEl($event.element, $event.index, $event.elementCounter)"
                   (updateElementIndex)="updateIndex($event)"
                   [bgStyle]="bgStyle"
                   [heightContentStyle]="heightContentStyle"

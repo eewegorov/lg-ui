@@ -33,7 +33,7 @@
   ></div>
 
   <div
-    (click)="scrollToEl('IVBl', 'i-or-v-element'); $event.stopPropagation();"
+    (click)="scrollToEl('i-or-v-element', 'IVBl'); $event.stopPropagation();"
     *ngIf="widget.guiprops.image?.enable"
     [ngClass]="classNameImg()"
     [ngStyle]="{'width': widthImageStyle, 'height': heightImageStyle}"
@@ -85,7 +85,7 @@
         </div>
       </div>
       <li
-        (click)="scrollToEl(i.toString(), item.name, item.counter); $event.stopPropagation();"
+        (click)="scrollToEl(item.name, i, item.counter); $event.stopPropagation();"
         *ngFor="let item of widget.guiprops.elementsList; index as i"
         [attr.data-to]="'elemScrN' + i"
         [class]="'element-to-append-summernote margin-if-' + item.name + ' ' + addExtraClassForFullWidth(i)"
@@ -181,7 +181,7 @@
             <div [ngClass]="heightIfrmPosSel(item)">
               <div [id]="'elementIframeBlock' +  item.counter" [ngStyle]="{'width': item.widthpx + 'px', 'height': item.heightpx + 'px'}"
                    class="element-iframe-block" style="position: relative;">
-                <div class="iframe-before" (click)="scrollToEl(i.toString(), item.name, item.counter); $event.stopPropagation();"></div>
+                <div class="iframe-before" (click)="scrollToEl(item.name, i, item.counter); $event.stopPropagation();"></div>
                 <iframe [id]="'idFrame' + item.counter">
                   <!DOCTYPE html>
                   <html lang="en">
