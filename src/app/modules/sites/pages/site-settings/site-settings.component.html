@@ -97,7 +97,8 @@
           <div class="integration-tab-flex">
             <h3>{{ 'settings.site.tabs.integrations.title' | translate }}</h3>
             <button (click)="openModalForCreatingNewIntegration()" class="btn btn-sm btn-success" type="button">
-              <span inlineSVG="./assets/images/core/plus.svg"></span> {{ 'settings.site.tabs.integrations.addIntegration' | translate }}
+              <span inlineSVG="./assets/images/core/plus.svg"></span> {{
+              'settings.site.tabs.integrations.addIntegration' | translate }}
             </button>
           </div>
 
@@ -139,12 +140,12 @@
 
             <ng-container *ngIf="integrationsOthers.length">
               <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.other' | translate }}</h4>
-                <app-integration-item
-                  *ngFor="let item of integrationsOthers"
-                  (updateIntegrations)="getSiteIntegrations()"
-                  [siteId]="siteId"
-                  [widget]="item"
-                ></app-integration-item>
+              <app-integration-item
+                *ngFor="let item of integrationsOthers"
+                (updateIntegrations)="getSiteIntegrations()"
+                [siteId]="siteId"
+                [widget]="item"
+              ></app-integration-item>
             </ng-container>
           </div>
         </div>
@@ -159,7 +160,7 @@
             <div class="analyticssync-sync-panel-wrapper" id="crmsync-ymetrika">
               <div class="mail-sync-panel">
                 <a class="mailsync-logo" href="https://metrika.yandex.ru/" target="_blank">
-                  <img alt="yandex-metrica" src="https://static.leadgenic.com/crmimages/metrika.gif" />
+                  <img alt="yandex-metrica" src="./assets/images/sites/metrika.png" />
                 </a>
                 <div class="row m-0 mb-2" style="max-height: 72px">
                   <div class="col-lg-12" data-context="ymetrika-counter">
@@ -176,7 +177,6 @@
                     <span
                       [innerHTML]="'settings.site.settings.integrations.ymetrika.counter.span' | translate"
                       class="help-text"
-                      style="display: block; margin-top: 20px"
                     ></span>
                   </div>
                 </div>
@@ -186,7 +186,7 @@
             <div class="analyticssync-sync-panel-wrapper" id="crmsync-ganalytics">
               <div class="mail-sync-panel">
                 <a class="mailsync-logo" href="https://www.google.com/analytics/" target="_blank">
-                  <img alt="google-analytics" src="https://static.leadgenic.com/crmimages/ga.jpg" />
+                  <img alt="google-analytics" src="./assets/images/sites/google-analytics.png" />
                 </a>
                 <div class="row m-0 mb-2" style="max-height: 72px">
                   <div class="col-lg-12" data-context="ganalytics-service">
@@ -212,7 +212,6 @@
                     <span
                       [innerHTML]="'settings.site.settings.integrations.ganalytics.service' | translate"
                       class="help-text"
-                      style="display: block; margin-top: 20px"
                     ></span>
                   </div>
                 </div>
@@ -225,8 +224,8 @@
       <ng-container *ngIf="tab === 3">
         <div class="panel-body">
           <h3>{{ 'settings.script.title' | translate }}</h3>
-          <p class="small mt-3 mb-1">
-            <strong [innerHTML]="'sitelist.form.code.desc1' | translate"></strong>
+          <p>
+            <span [innerHTML]="'sitelist.form.code.desc1' | translate"></span>
           </p>
           <div class="form-group mb-0">
             <textarea
@@ -239,17 +238,18 @@
           </div>
           <br />
           <br />
-          <strong>
-            {{ 'settings.script.apicode.title' | translate }}
-            <a
-              class="info-link"
-              data-placement="top"
-              data-toggle="tooltip"
-              title="{{ 'settings.script.apicode.tooltip' | translate }}"
-              ><i class="fa fa-info-circle"></i
-            ></a>
-          </strong>
-          <div class="form-group mb-0" data-context="url">
+          <p>
+            <span>
+              {{ 'settings.script.apicode.title' | translate }}
+              <a
+                class="info-link"
+                data-placement="top"
+                data-toggle="tooltip"
+                title="{{ 'settings.script.apicode.tooltip' | translate }}"
+              ><i inlineSVG="./assets/images/core/question.svg"></i></a>
+            </span>
+          </p>
+          <div class="form-group mb-0 site-id-field" data-context="url">
             <input
               [(ngModel)]="siteId"
               appSelectOnClick

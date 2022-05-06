@@ -579,7 +579,7 @@
 				"instruction": "Инструкция по настройке интеграции",
 				"name": "Название интеграции",
 				"others": "Другие",
-				"service": "Сервис",
+				"service": "Кампания",
 				"settings": "Настройка интеграции",
 				"tabs": {
 					"copy": "Скопировать с другого сайта",
@@ -603,7 +603,7 @@
 					"ymetrika": {
 						"counter": {
 							"span": "Узнать больше о интеграции с Яндекс Метрикой вы сможете в <a class=\"text-decoration-underline\" target=\"_blank\" href=\"http://leadgenic.userecho.com/topics/220-nastrojka-integratsii-s-yandeks-metrikoj-i-otslezhivanie-dostizheniya-tselej/\">этой статье</a>.",
-							"title": "Номер счетчика"
+							"title": "Название купона"
 						}
 					}
 				},

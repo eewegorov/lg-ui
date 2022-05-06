@@ -72,13 +72,36 @@
         position: static;
         width: 100%;
 
+        p {
+          margin: 35px 0 10px 0;
+
+          &.small {
+            margin-top: 10px;
+          }
+
+          span {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+          }
+        }
+
+        textarea, .site-id-field input {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 22px;
+          color: #505662;
+          background-color: #F4F4F6;
+        }
+
         h3 {
           font-style: normal;
           font-weight: 700;
           font-size: 28px;
           line-height: 36px;
         }
-
 
         .btn {
           font-style: normal;
@@ -288,10 +311,54 @@ p.small {
 
 .mailsync-logo {
   display: block;
-  margin: 10px auto;
+  margin: 0 auto 10px auto;
   text-align: center;
+  height: 101px;
+
+  img {
+    width: 100%;
+    max-width: 373px;
+    object-fit: contain;
+  }
 }
 
-//.mailsync-logo img {
-//  height: 50px;
-//}
+.control-label {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  margin-bottom: 10px;
+}
+
+.site-selector {
+
+  button {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #7E889A;
+    padding: 0 14px !important;
+    height: 38px !important;
+  }
+
+  ul {
+    display: none !important;
+  }
+
+  &.show {
+    ul {
+      display: flex !important;
+    }
+  }
+}
+
+.help-text {
+  display: block;
+  margin: 10px 0 15px 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
