@@ -19,7 +19,7 @@
     </ul>
 
     <div class="tab-content">
-      <div *ngIf="tab === 0" class="tab-pane active">
+      <ng-container *ngIf="tab === 0">
         <div class="panel-body">
           <h3>{{ 'header.settings' | translate }}</h3>
           <div class="pt-1">
@@ -90,14 +90,14 @@
             </label>
           </div>
         </div>
-      </div>
+      </ng-container>
 
-      <div *ngIf="tab === 1" class="tab-pane active">
+      <ng-container *ngIf="tab === 1">
         <div class="panel-body">
           <div class="integration-tab-flex">
             <h3>{{ 'settings.site.tabs.integrations.title' | translate }}</h3>
             <button (click)="openModalForCreatingNewIntegration()" class="btn btn-sm btn-success" type="button">
-              <i class="fa fa-plus-circle"></i> {{ 'settings.site.tabs.integrations.addIntegration' | translate }}
+              <span inlineSVG="./assets/images/core/plus.svg"></span> {{ 'settings.site.tabs.integrations.addIntegration' | translate }}
             </button>
           </div>
 
@@ -107,76 +107,56 @@
               <h4 class="f-2 text-center">{{ 'settings.site.settings.integrations.not.desc' | translate }}</h4>
             </div>
 
-            <div *ngIf="integrationsCRM.length" class="tab-wrap__crm">
+            <ng-container *ngIf="integrationsCRM.length">
               <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.crm' | translate }}</h4>
-              <div class="integration-rowed">
-                <div *ngFor="let item of integrationsCRM" class="col-md-6 integration-item-wr">
-                  <app-integration-item
-                    (updateIntegrations)="getSiteIntegrations()"
-                    [siteId]="siteId"
-                    [widget]="item"
-                    class="integration-item__100"
-                  >
-                  </app-integration-item>
-                </div>
-              </div>
-            </div>
+              <app-integration-item
+                *ngFor="let item of integrationsCRM"
+                (updateIntegrations)="getSiteIntegrations()"
+                [siteId]="siteId"
+                [widget]="item"
+              ></app-integration-item>
+            </ng-container>
 
-            <div *ngIf="integrationsMailing.length" class="tab-wrap__crm">
+            <ng-container *ngIf="integrationsMailing.length">
               <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.email' | translate }}</h4>
-              <div class="integration-rowed">
-                <div *ngFor="let item of integrationsMailing" class="col-md-6 integration-item-wr">
-                  <app-integration-item
-                    (updateIntegrations)="getSiteIntegrations()"
-                    [siteId]="siteId"
-                    [widget]="item"
-                    class="integration-item__100"
-                  >
-                  </app-integration-item>
-                </div>
-              </div>
-            </div>
+              <app-integration-item
+                *ngFor="let item of integrationsMailing"
+                (updateIntegrations)="getSiteIntegrations()"
+                [siteId]="siteId"
+                [widget]="item"
+              ></app-integration-item>
+            </ng-container>
 
-            <div *ngIf="integrationsNotifications.length" class="tab-wrap__crm">
+            <ng-container *ngIf="integrationsNotifications.length">
               <h4 class="f-1 mt-3">{{ 'settings.site.settings.notification.title' | translate }}</h4>
-              <div class="integration-rowed">
-                <div *ngFor="let item of integrationsNotifications" class="col-md-6 integration-item-wr">
-                  <app-integration-item
-                    (updateIntegrations)="getSiteIntegrations()"
-                    [siteId]="siteId"
-                    [widget]="item"
-                    class="integration-item__100"
-                  >
-                  </app-integration-item>
-                </div>
-              </div>
-            </div>
+              <app-integration-item
+                *ngFor="let item of integrationsNotifications"
+                (updateIntegrations)="getSiteIntegrations()"
+                [siteId]="siteId"
+                [widget]="item"
+              ></app-integration-item>
+            </ng-container>
 
-            <div *ngIf="integrationsOthers.length" class="tab-wrap__crm">
+            <ng-container *ngIf="integrationsOthers.length">
               <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.other' | translate }}</h4>
-              <div class="integration-rowed">
-                <div *ngFor="let item of integrationsOthers" class="col-md-6 integration-item-wr">
-                  <app-integration-item
-                    (updateIntegrations)="getSiteIntegrations()"
-                    [siteId]="siteId"
-                    [widget]="item"
-                    class="integration-item__100"
-                  >
-                  </app-integration-item>
-                </div>
-              </div>
-            </div>
+                <app-integration-item
+                  *ngFor="let item of integrationsOthers"
+                  (updateIntegrations)="getSiteIntegrations()"
+                  [siteId]="siteId"
+                  [widget]="item"
+                ></app-integration-item>
+            </ng-container>
           </div>
         </div>
-      </div>
+      </ng-container>
 
-      <div *ngIf="tab === 2" class="tab-pane active">
+      <ng-container *ngIf="tab === 2">
         <div class="panel-body">
           <h3 class="mb-4">{{ 'settings.site.tabs.analytics' | translate }}</h3>
 
           <div class="integration-rowed">
             <!-- YMetrika -->
-            <div class="col-lg-6 analyticssync-sync-panel-wrapper" id="crmsync-ymetrika">
+            <div class="analyticssync-sync-panel-wrapper" id="crmsync-ymetrika">
               <div class="mail-sync-panel">
                 <a class="mailsync-logo" href="https://metrika.yandex.ru/" target="_blank">
                   <img alt="yandex-metrica" src="https://static.leadgenic.com/crmimages/metrika.gif" />
@@ -203,7 +183,7 @@
               </div>
             </div>
             <!-- Google analytics -->
-            <div class="col-lg-6 analyticssync-sync-panel-wrapper" id="crmsync-ganalytics">
+            <div class="analyticssync-sync-panel-wrapper" id="crmsync-ganalytics">
               <div class="mail-sync-panel">
                 <a class="mailsync-logo" href="https://www.google.com/analytics/" target="_blank">
                   <img alt="google-analytics" src="https://static.leadgenic.com/crmimages/ga.jpg" />
@@ -240,9 +220,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </ng-container>
 
-      <div *ngIf="tab === 3" class="tab-pane active">
+      <ng-container *ngIf="tab === 3">
         <div class="panel-body">
           <h3>{{ 'settings.script.title' | translate }}</h3>
           <p class="small mt-3 mb-1">
@@ -281,7 +261,7 @@
           </div>
           <p class="small">{{ 'settings.script.apicode.desc' | translate }}</p>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
   <div class="buttons">
@@ -289,7 +269,7 @@
       {{ 'settings.site.global.backButton' | translate }}
     </button>
     <button (click)="saveSite()" [disabled]="!site.name || !site.url" class="btn btn-sm btn-success" type="button">
-      <i class="fa fa-save"></i> {{ 'settings.site.global.saveButton' | translate }}
+      <span inlineSVG="./assets/images/core/save-icon.svg"></span> {{ 'settings.site.global.saveButton' | translate }}
     </button>
   </div>
 </app-card>

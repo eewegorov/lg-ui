@@ -1,35 +1,40 @@
+@import "src/scss/vars";
+@import "src/scss/mixins";
+
 .hpanel.hgreen .integration-item__body {
-  border-top: 2px solid #62cb31;
+  border-top: 5px solid #62cb31;
 }
 
 .hpanel.hred .integration-item__body {
-  border-top: 2px solid #e74c3c;
+  border-top: 5px solid #e74c3c;
 }
 
 .integration-item__body {
   background: #fff;
   border: 1px solid #e4e5e7;
-  border-radius: 2px;
+  border-radius: 4px;
   padding: 15px;
   position: relative;
 }
 
 .integration-item__header {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: space-between;
 }
 
 .integration-item__icon_wr {
-  min-width: 30px;
-  height: 30px;
+  min-width: 42px;
+  height: 42px;
   border-radius: 50%;
   overflow: hidden;
 }
 
 .integration-item__icon {
-  width: 30px;
-  height: 30px;
-  background-size: 30px;
+  width: 42px;
+  height: 42px;
+  background-size: 42px;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -76,25 +81,39 @@
 
 .integration-item__type {
   display: flex;
-  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 .label.label-warning.tariff-info {
+  display: flex;
+  padding: 2px 4px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  border-radius: 4px;
+  position: unset;
   margin: 0;
-  right: -55px;
-  top: 4px;
 }
 
 .integration-item__type-name {
-  color: #34495e;
-  line-height: 30px;
-  font-size: 14px;
-  margin-left: 6px;
+  color: $fontPrimaryColor;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 27px;
   white-space: nowrap;
 }
 
 .long-text {
+  margin-top: 20px;
   padding: 1px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 27px;
 }
 
 .integration-item__switcher label {
@@ -103,7 +122,33 @@
 }
 
 .integration-item__switcher {
-  height: 23px;
+  margin-top: 20px;
+  .pull-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+
+    span {
+      display: block;
+      width: 28px;
+      height: 28px;
+      position: relative;
+
+      @include svg-position();
+    }
+
+    @media (max-width: 767px) {
+      font-size: 14px;
+
+      span {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
 }
 
 .icons-for-sidemenu {
@@ -127,4 +172,12 @@
   outline: 0;
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
 }

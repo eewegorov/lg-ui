@@ -376,8 +376,25 @@ button.hovered-btn-blue:hover {
   border-color: #293a4a
 }
 
-.switch.checked {
-  background: $successColor;
+button[role=switch] {
+  width: 52px !important;
+  height: 28px !important;
+
+  small {
+    width: 24px !important;
+    height: 24px !important;
+    top: 50%;
+    right: calc(100% - 26px) !important;
+    transform: translateY(-50%);
+  }
+
+  &.checked {
+    background: $successColor;
+
+    small {
+      right: 2px !important;
+    }
+  }
 }
 
 #toast-container.toast-bottom-center > div, #toast-container.toast-top-center > div {

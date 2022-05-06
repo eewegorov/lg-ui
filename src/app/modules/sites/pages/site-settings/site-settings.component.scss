@@ -65,30 +65,51 @@
     .tab-content {
       width: calc(100% - 360px);
       margin-left: 40px;
+      margin-bottom: 50px;
       color: $fontPrimaryColor;
 
-      .tab-pane {
+      .panel-body {
+        position: static;
         width: 100%;
 
-        .panel-body {
-          position: static;
-          width: 100%;
+        h3 {
+          font-style: normal;
+          font-weight: 700;
+          font-size: 28px;
+          line-height: 36px;
+        }
 
-          h3 {
-            font-style: normal;
-            font-weight: 700;
-            font-size: 28px;
-            line-height: 36px;
+
+        .btn {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 22px;
+          padding: 14px;
+          border-radius: 4px;
+        }
+
+        .integration-rowed {
+          width: 100%;
+          column-count: 2;
+          gap: 30px;
+
+          .analyticssync-sync-panel-wrapper {
+            width: 100%;
           }
 
+          @media (max-width: 1399px) {
+            column-count: unset;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+          }
+        }
 
-          .btn {
-            font-style: normal;
-            font-weight: 500;
-            font-size: 18px;
-            line-height: 22px;
-            padding: 14px;
-            border-radius: 4px;
+        .form-group {
+          &:last-child {
+            margin-bottom: 0;
           }
         }
       }
@@ -105,6 +126,7 @@
       .tab-content {
         width: 100%;
         margin-left: 0;
+        margin-bottom: 30px;
       }
     }
   }
@@ -115,10 +137,31 @@
     align-items: center;
     justify-content: space-between;
     padding-left: 360px;
-    margin-top: 50px;
+
+    buttons {
+      padding: 14px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      &:last-child {
+        span {
+          width: 24px;
+          height: 24px;
+          display: flex;
+          position: relative;
+          margin-right: 15px;
+
+          @include svg-position();
+        }
+      }
+    }
 
     @media (max-width: 1199px) {
-      margin-top: 10px;
       flex-direction: column-reverse;
       padding-left: 360px;
 
@@ -133,7 +176,6 @@
 
     @media (max-width: 991px) {
       flex-direction: row;
-      margin-top: 25px;
       padding-left: 0;
 
       button {
@@ -147,7 +189,6 @@
     }
 
     @media (max-width: 575px) {
-      margin-top: 10px;
       flex-direction: column-reverse;
       padding-left: 0;
 
@@ -165,8 +206,9 @@
 h4.site-settings-h4-text {
   margin-top: 30px;
   margin-bottom: 20px;
-  font-size: 18px;
-  font-weight: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 27px;
 }
 
 .is-invalid span.validate {
@@ -184,24 +226,52 @@ h4.site-settings-h4-text {
   background-color: $dangerColor;
 }
 
-.buttons button,
-.integration-tab-flex button {
-  font-size: 15px;
-}
-
 .integration-tab-flex {
   display: flex;
   justify-content: space-between;
-}
 
-.integration-rowed {
-  display: flex;
-  margin: -10px -15px 0;
-  flex-wrap: wrap;
+  h3 {
+    text-align: left;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 14px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: $successColor;
+    background: rgba(72, 152, 168, 0.1);
+    border-radius: 4px;
+    text-align: justify-all !important;
+
+    span {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      margin-right: 15px;
+      position: relative;
+
+      @include svg-position();
+    }
+  }
+
+  @media (max-width: 1199px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    h3 {
+      width: 100%;
+    }
+  }
 }
 
 p.small {
   font-size: 11.5px;
+  margin: 0;
 }
 
 .form-control.not-readonly-hand[readonly] {
@@ -222,6 +292,6 @@ p.small {
   text-align: center;
 }
 
-.mailsync-logo img {
-  height: 50px;
-}
+//.mailsync-logo img {
+//  height: 50px;
+//}
