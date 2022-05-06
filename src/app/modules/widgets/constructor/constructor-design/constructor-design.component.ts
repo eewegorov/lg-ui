@@ -101,7 +101,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   public currentIndex = 0;
   public widgetType: WidgetTypeCode;
   public isThankShow = false;
-  public addElemFromWidget = false;
+  public addElemFromWidget = 0;
   public systemFonts = [];
   public controls: Record<string, any>;
   public globalCouponObject: object;
@@ -351,7 +351,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     if (typeof item !== 'undefined') {
       this.addElemFromWidget = item;
     } else {
-      this.addElemFromWidget = false;
+      this.addElemFromWidget = 0;
     }
 
     (this.controls.newElementModal as any).appendTo('body').modal('show');
@@ -675,11 +675,18 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     return false;
   }
 
-  public showLastElement(): void {
+  public showAddedElement(): void {
     this.checkChanges();
-    const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
-    this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
-    this.currentIndex = this.widget.guiprops.elementsList.length - 1;
+
+    if (this.addElemFromWidget) {
+      const currentElement = this.widget.guiprops.elementsList[this.addElemFromWidget + 1];
+      this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
+      this.currentIndex = this.addElemFromWidget + 1;
+    } else {
+      const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
+      this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
+      this.currentIndex = this.widget.guiprops.elementsList.length - 1;
+    }
   }
 
   public setCurrentElement(elementName: string): void {

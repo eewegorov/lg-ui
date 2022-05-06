@@ -14,7 +14,7 @@ export class ElementsAddComponent implements OnInit {
   @Input() public isContainerized: boolean;
   @Input() private widget: FullWidget;
   @Input() private sid: string;
-  @Input() private addElemFromWidget: boolean;
+  @Input() private addElemFromWidget: number;
   @Input() private controls: Record<string, any>;
   @Input() private systemFonts: object[];
   @Input() private typeClass: string[];
@@ -47,7 +47,7 @@ export class ElementsAddComponent implements OnInit {
     };
 
 
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(formElementToAdd);
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, formElementToAdd);
@@ -74,7 +74,7 @@ export class ElementsAddComponent implements OnInit {
 
     this.widget.guiprops.form.enable = true;
 
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(formElementToAdd);
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, formElementToAdd);
@@ -91,7 +91,7 @@ export class ElementsAddComponent implements OnInit {
     const closeLinkElementToAdd = {
       name: 'closelink-element'
     };
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(closeLinkElementToAdd);
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, closeLinkElementToAdd);
@@ -129,7 +129,7 @@ export class ElementsAddComponent implements OnInit {
     };
     this.widget.guiprops.button.enable = true;
 
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(buttonElementToAdd);
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, buttonElementToAdd);
@@ -158,7 +158,7 @@ export class ElementsAddComponent implements OnInit {
       }
     };
 
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(textElementToAdd);
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, textElementToAdd);
@@ -175,7 +175,7 @@ export class ElementsAddComponent implements OnInit {
     const socialElementToAdd = {
       name: 'social-element'
     };
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(socialElementToAdd);
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, socialElementToAdd);
@@ -209,7 +209,7 @@ export class ElementsAddComponent implements OnInit {
       position: this.floatBtn[0]
     };
 
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(splitElementToAdd);
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, splitElementToAdd);
@@ -231,7 +231,7 @@ export class ElementsAddComponent implements OnInit {
       position: this.floatBtn[0]
     };
 
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(videoElementToAdd);
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, videoElementToAdd);
@@ -251,7 +251,7 @@ export class ElementsAddComponent implements OnInit {
       position: this.floatBtn[1]
     };
 
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(imageElementToAdd);
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, imageElementToAdd);
@@ -267,7 +267,7 @@ export class ElementsAddComponent implements OnInit {
       padding: 20
     };
 
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(paddingElementToAdd);
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, paddingElementToAdd);
@@ -291,7 +291,7 @@ export class ElementsAddComponent implements OnInit {
       real_height: 100
     };
 
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(iframeElementToAdd);
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, iframeElementToAdd);
@@ -306,7 +306,7 @@ export class ElementsAddComponent implements OnInit {
       return;
     }
 
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push({ ...this.globalCouponObject });
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, { ...this.globalCouponObject });
@@ -317,7 +317,7 @@ export class ElementsAddComponent implements OnInit {
 
   public addTimerElement() {
     const timerModel = this.widgetConstructorService.getDefaultTimerSettings();
-    if (this.addElemFromWidget === false) {
+    if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push({ ...timerModel });
     } else {
       this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, { ...timerModel });

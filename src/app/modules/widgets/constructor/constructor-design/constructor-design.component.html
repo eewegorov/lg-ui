@@ -752,8 +752,8 @@
                     </div>
 
                     <app-elements-add
-                      (addElement)="showLastElement()"
-                      [addElemFromWidget]="addElemFromWidget"
+                      (addElement)="addElemFromWidget = 0; showAddedElement()"
+                      [addElemFromWidget]="0"
                       [controls]="controls"
                       [floatBtn]="floatBtn"
                       [globalCouponObject]="globalCouponObject"
@@ -1014,7 +1014,7 @@
 
         <div class="modal-body">
           <app-elements-add
-            (addElement)="showLastElement()"
+            (addElement)="showAddedElement()"
             [addElemFromWidget]="addElemFromWidget"
             [controls]="controls"
             [floatBtn]="floatBtn"
