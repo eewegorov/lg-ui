@@ -90,7 +90,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   public floatBtn = ['Слева', 'По центру', 'Справа'];
   public widthBtn = ['Авто', 'От края до края', 'Собственная'];
   public widgwidthBtn = ['Авто', 'Собственная'];
-  public typeClass = ['1', '2', '3', '4', '5', '6'];
+  public typeClass = ['1', '2', '3', '4'];
   public widthContentStyle = '';
   public heightContentStyle = '';
   public bgStyle = '';
