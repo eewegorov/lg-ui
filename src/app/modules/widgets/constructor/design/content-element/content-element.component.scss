@@ -624,46 +624,6 @@ hr.style6 {
   height: 103px;
 }
 
-.widget1 .text-input-class {
-  margin-top: 15px;
-  height: 42px;
-  position: relative;
-}
-
-.widget1 .text-input-area-class {
-  height: 103px;
-}
-
-.widget1 input.form-control, .widget1 textarea.form-control {
-  cursor: text;
-  height: auto;
-  padding-top: 14px;
-  padding-bottom: 6px;
-  font-size: 1.1em;
-  border: none;
-  line-height: 1.6em;
-  position: absolute;
-  margin: 0;
-}
-
-.widget1 input.widget-input-border, .widget1 textarea.widget-input-border {
-  border: 1px solid #eee;
-  padding-bottom: 5px;
-  padding-top: 13px;
-}
-
-.widget1 .form-ext-date-wrapper.widget-input-border input {
-  border: 2px solid #eee;
-  padding-bottom: 4px;
-  padding-top: 12px;
-}
-
-.widget1 .form-ext-dropdown-wrapper.widget-input-border button {
-  border: 2px solid #eee;
-  padding-bottom: 4px;
-  padding-top: 12px;
-}
-
 .form-ext-dropdown-wrapper.widget-input-border .dropdown button.dropdown-toggle label {
   padding: 8px 10px;
 }
