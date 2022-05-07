@@ -161,6 +161,15 @@
     justify-content: space-between;
     padding-left: 360px;
 
+    .btn-default {
+      border: none;
+      color: $successColor;
+
+      &:hover, &:focus-visible {
+        color: darken($successColor, 10%);
+      }
+    }
+
     buttons {
       padding: 14px;
       font-style: normal;
@@ -170,6 +179,8 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
+
+
 
       &:last-child {
         span {

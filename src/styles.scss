@@ -37,7 +37,7 @@ html {
   margin: 0;
   padding: 0;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 body {
@@ -48,6 +48,7 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
+  overflow-y: hidden;
 
   &.show-sidebar {
     .wrapper {
@@ -379,6 +380,10 @@ button.hovered-btn-blue:hover {
 button[role=switch] {
   width: 52px !important;
   height: 28px !important;
+
+  &:focus-visible {
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+  }
 
   small {
     width: 24px !important;

@@ -1,13 +1,25 @@
-<div *ngIf="sites.length > 0" class="toolbar-content widgets-toolbar">
+<div class="page-title">
   <h1 class="title-main">{{ 'sidebar.widgets' | translate }}</h1>
-  <div class="textcontent col-lg-12">
-    <div class="select-site">
-      <!-- Site selector -->
-      <div class="selector">
-        <div class="row select-site-title"><h5>{{ 'widgetsList.selectSite' | translate }}:</h5></div>
-        <div class="row dropdown site-selector">
-          <button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                  type="button">
+  <button (click)="createNewWidget()" class="btn btn-lg btn-success title-button" type="button">
+    <span class="icon" inlineSVG="./assets/images/core/plus.svg"></span>
+    <span>{{ 'widgetsList.add.title' | translate }}</span>
+  </button>
+</div>
+
+<ng-container *ngIf="sites.length">
+  <div class="widgets-filters">
+    <!-- Site selector -->
+    <div class="filter">
+      <h5>{{ 'widgetsList.selectSite' | translate }}:</h5>
+      <div class="controls">
+        <div class="dropdown">
+          <button
+            aria-expanded="true"
+            aria-haspopup="true"
+            class="btn btn-default dropdown-toggle"
+            data-toggle="dropdown"
+            type="button"
+          >
             <span class="dropdown-selected-cropp">{{ currentSite.name }}</span>
             <span class="caret"></span>
           </button>
@@ -18,123 +30,118 @@
           </ul>
         </div>
       </div>
-      <!-- Company selector -->
-      <div>
-        <div class="row select-site-title"><h5>{{ 'widgetsList.selectCompany' | translate }}:</h5></div>
-        <div class="row">
-          <div *ngIf="!newCompany.on" class="d-flex">
-            <div class="dropdown site-selector floated-left" style="min-width: 260px!important; width: 260px;">
-              <button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                      type="button">
-                <span class="dropdown-selected-cropp"
-                      style="max-width: 215px!important;">{{ currentCompany.name || defCompanyName }}</span>
-                <span class="caret"></span>
-              </button>
-              <ul *ngIf="companies.length" class="dropdown-menu">
-                <li (click)="changeCurrentCompany(company)" *ngFor="let company of companies">
-                  <a class="dropdown-item">{{ company.name || defCompanyName }}</a>
-                </li>
-              </ul>
-            </div>
+    </div>
+    <!-- Site selector end -->
 
+    <!-- Company selector -->
+    <div class="filter">
+      <h5>{{ 'widgetsList.selectCompany' | translate }}:</h5>
+      <div class="controls">
+        <ng-container *ngIf="!newCompany.on">
+          <div class="dropdown">
             <button
-              (click)="addNewCompany()"
-              class="btn btn-default btn-inline ml-1"
-              data-container="body"
-              data-placement="top"
-              data-title="{{ 'widgetsList.company.add.tooltip' | translate }}"
-              data-toggle="tooltip"
+              aria-expanded="true"
+              aria-haspopup="true"
+              class="btn btn-default dropdown-toggle"
+              data-toggle="dropdown"
+              type="button"
             >
-              <i class="fa fa-plus"></i>
+              <span class="dropdown-selected-cropp">{{ currentCompany.name || defCompanyName }}</span>
+              <span class="caret"></span>
             </button>
-            <button
-              (click)="deleteCompany()"
-              *ngIf="!currentCompany.default"
-              class="btn btn-default btn-inline ml-1"
-              data-container="body"
-              data-placement="top"
-              data-title="{{ 'widgetsList.company.delete.tooltip' | translate }}"
-              data-toggle="tooltip"
-            >
-              <i class="fa fa-trash"></i>
-            </button>
+            <ul *ngIf="companies.length" class="dropdown-menu">
+              <li (click)="changeCurrentCompany(company)" *ngFor="let company of companies">
+                <a class="dropdown-item">{{ company.name || defCompanyName }}</a>
+              </li>
+            </ul>
           </div>
-          <div *ngIf="newCompany.on" class="p-0 d-flex">
-            <div [ngClass]="(newCompany.name.trim().length === 0) ? 'is-invalid' : ''" class="mr-2">
-              <input
-                [(ngModel)]="newCompany.name"
-                class="form-control"
-                placeholder="{{ 'widgetsList.clone.company.add.label' | translate }}"
-                style="width: 245px;"
-                type="text"
-              >
-            </div>
-            <div class="mr-3">
-              <button
-                (click)="resetNewCompany()"
-                class="btn btn-default btn-inline"
-                data-container="body"
-                data-placement="top"
-                data-toggle="tooltip"
-                title="{{ 'global.cancel' | translate }}"
-              >
-                <i class="fa fa-times"></i>
-              </button>
-              <button
-                (click)="saveNewCompany()"
-                [disabled]="newCompany.name.trim().length === 0"
-                class="btn btn-success btn-inline ml-1"
-                data-container="body"
-                data-placement="top"
-                data-toggle="tooltip"
-                title="{{ 'widgetsList.company.add.tooltip' | translate }}"
-              >
-                <i class="fa fa-check"></i>
-              </button>
-            </div>
+
+          <button
+            (click)="addNewCompany()"
+            class="btn btn-default filter-action"
+            data-container="body"
+            data-placement="top"
+            data-title="{{ 'widgetsList.company.add.tooltip' | translate }}"
+            data-toggle="tooltip"
+          >
+            <span inlineSVG="./assets/images/core/plus.svg"></span>
+          </button>
+
+          <button
+            (click)="deleteCompany()"
+            *ngIf="!currentCompany.default"
+            class="btn btn-default filter-action"
+            data-container="body"
+            data-placement="top"
+            data-title="{{ 'widgetsList.company.delete.tooltip' | translate }}"
+            data-toggle="tooltip"
+          >
+            <i class="fa fa-trash"></i>
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="newCompany.on">
+          <div [class.is-invalid]="newCompany.name.trim().length === 0" class="input">
+            <input
+              [(ngModel)]="newCompany.name"
+              class="form-control"
+              placeholder="{{ 'widgetsList.clone.company.add.label' | translate }}"
+              type="text"
+            />
           </div>
-        </div>
+
+          <button
+            (click)="resetNewCompany()"
+            class="btn btn-default filter-action"
+            data-container="body"
+            data-placement="top"
+            data-toggle="tooltip"
+            title="{{ 'global.cancel' | translate }}"
+          >
+            <i class="fa fa-times"></i>
+          </button>
+
+          <button
+            (click)="saveNewCompany()"
+            [disabled]="newCompany.name.trim().length === 0"
+            class="btn btn-success filter-action"
+            data-container="body"
+            data-placement="top"
+            data-toggle="tooltip"
+            title="{{ 'widgetsList.company.add.tooltip' | translate }}"
+          >
+            <i class="fa fa-check"></i>
+          </button>
+        </ng-container>
       </div>
     </div>
-    <div class="btnpanel padding-top-75">
-      <div>
-        <button
-          (click)="createNewWidget()"
-          class="btn btn-lg w-xs btn-success"
-          type="button"
-        ><i class="fa fa-plus-circle"></i> {{ 'widgetsList.add.title' | translate }}
-        </button>
-      </div>
-      <div class="ng-binding" id="buyWidgetDevelopmentContainer"><a
-        id="buyWidgetDevelopment">{{ 'widgetsList.add.alt' | translate }}</a></div>
-    </div>
+    <!-- Company selector end -->
   </div>
-
-</div>
-
+</ng-container>
 
 <!-- smart points settings -->
-<div *ngIf="sites.length > 0 && smartPoints" class="widgets-site-settings">
-  <div class="row col-lg-12">
-    <ui-switch
-      (change)="enableDisableSP()"
-      [(ngModel)]="smartPoints.enabled"
-      class="mr-2"
-    ></ui-switch>
-    <h3 class="f-0">
-      {{ 'widgetsList.site.default.title' | translate }} <a
-      class="info-link" data-placement="bottom"
-      data-toggle="tooltip"
-      title="{{ 'widgetsList.site.default.tooltip' | translate }}"><i class="fa fa-info-circle"></i></a>
-    </h3>
-  </div>
-  <div *ngIf="smartPoints.enabled" class="column ml-5 mr-5 pl-2 widget-page__smaptpoint-container">
-    <span class="widget-page__smaptpoint-container-title">{{ 'settings.widgets.select' | translate }}:</span>
-    <app-smartpoints-control [siteId]="currentSite.id" [smartPoints]="smartPoints"></app-smartpoints-control>
-  </div>
-</div>
+<ng-container *ngIf="sites.length > 0 && smartPoints">
+  <app-card>
+    <div class="col-12 p-0 d-flex align-items-center flex-wrap">
+      <ui-switch (change)="enableDisableSP()" [(ngModel)]="smartPoints.enabled"></ui-switch>
+      <h3 class="f-0">
+        {{ 'widgetsList.site.default.title' | translate }}
+        <a
+          class="info-link"
+          data-placement="bottom"
+          data-toggle="tooltip"
+          title="{{ 'widgetsList.site.default.tooltip' | translate }}"
+          ><i class="fa fa-info-circle"></i
+        ></a>
+      </h3>
+    </div>
+    <div *ngIf="smartPoints.enabled" class="col-12 p-0">
+      <span class="widget-page__smaptpoint-container-title">{{ 'settings.widgets.select' | translate }}:</span>
+      <app-smartpoints-control [siteId]="currentSite.id" [smartPoints]="smartPoints"></app-smartpoints-control>
+    </div>
+  </app-card>
+</ng-container>
 <!-- End smart points settings -->
-
 
 <div class="row col-lg-12 no-animate" id="myWidgets">
   <div *ngIf="isHasWidgets() || filteredContainers().length" class="col-lg-12 mt-3">
@@ -181,7 +188,8 @@
         [last]="i === getFilteredWidgets(wdgTypes).length - 1"
         [next]="getFilteredWidgets(wdgTypes)[i + 1]"
         [prev]="getFilteredWidgets(wdgTypes)[i - 1]"
-        [widget]="widget">
+        [widget]="widget"
+      >
       </app-widget-item>
     </div>
   </div>

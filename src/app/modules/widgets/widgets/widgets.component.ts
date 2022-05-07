@@ -4,11 +4,19 @@ import { switchMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { Abtest } from '../../../core/models/abtests';
-import { SiteShort } from '../../../core/models/sites';
-import { Company, CompanyShort, Entities, SiteForWidget, WidgetInfo, WidgetTemplate, WidgetType } from '../../../core/models/widgets';
-import { TariffsService } from '../../../core/services/tariffs.service';
-import { CoreSitesService } from '../../../core/services/core-sites.service';
+import { Abtest } from '@core/models/abtests';
+import { SiteShort } from '@core/models/sites';
+import {
+  Company,
+  CompanyShort,
+  Entities,
+  SiteForWidget,
+  WidgetInfo,
+  WidgetTemplate,
+  WidgetType
+} from '@core/models/widgets';
+import { TariffsService } from '@core/services/tariffs.service';
+import { CoreSitesService } from '@core/services/core-sites.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
 import { WidgetService } from '../services/widget.service';
@@ -16,7 +24,6 @@ import { CampaignDeleteComponent } from '../campaign-delete/campaign-delete.comp
 import { CloneWidgetComponent } from '../clone-widget/clone-widget.component';
 import { WidgetAddComponent } from '../widget-add/widget-add.component';
 import { ActivatedRoute } from '@angular/router';
-
 
 @Component({
   selector: 'app-widgets',
@@ -63,9 +70,9 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
 
     const urlParams = this.location.path().split('=');
 
-    const selectedSite = this.enableWidgetsModal ?
-      urlParams[urlParams.length - 1] :
-      localStorage.getItem('currentSite');
+    const selectedSite = this.enableWidgetsModal
+      ? urlParams[urlParams.length - 1]
+      : localStorage.getItem('currentSite');
 
     this.translate.get('widgetsList.defCompany').subscribe((translatedValue: string) => {
       this.defCompanyName = translatedValue;
@@ -131,14 +138,14 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
     });
     modalRef.componentInstance.companies = this.companies;
     modalRef.componentInstance.deletedCompany = this.currentCompany;
-    modalRef.result.then((deletedId: boolean) => {
-      if (!deletedId) {
-        return false;
-      }
-      this.getAllWidgetsForSite(this.sitesService.getCurrentSiteId());
-    })
-      .catch(() => {
-      });
+    modalRef.result
+      .then((deletedId: boolean) => {
+        if (!deletedId) {
+          return false;
+        }
+        this.getAllWidgetsForSite(this.sitesService.getCurrentSiteId());
+      })
+      .catch(() => {});
   }
 
   public getTypesWithCompanyFilter() {
@@ -146,7 +153,7 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
       return [];
     }
     const keys = Object.keys(this.widgets);
-    return keys.filter((item) => {
+    return keys.filter(item => {
       return this.getFilteredWidgets(item).length > 0;
     });
   }
@@ -163,9 +170,11 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
   public createNewWidget() {
     // TODO: Check tariffExp
     if (this.sitesService.isSiteHasExpTariff(this.currentSite) && this.getWidgetsCount() >= 3) {
-      this.tariffsService.checkTariffPlans(this.currentSite.id,
+      this.tariffsService.checkTariffPlans(
+        this.currentSite.id,
         this.translate.instant('sitelist.tariff.improve'),
-        this.translate.instant('widgetsList.payment.limit', { siteName: this.currentSite.name }));
+        this.translate.instant('widgetsList.payment.limit', { siteName: this.currentSite.name })
+      );
     } else {
       const modalRef = this.modalService.open(WidgetAddComponent, {
         size: 'xl',
@@ -174,10 +183,11 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
       modalRef.componentInstance.currentSite = this.currentSite;
       modalRef.componentInstance.companies = this.widgetService.getUndefaultCompanies(this.companies);
       modalRef.componentInstance.currentCompany = this.currentCompany;
-      modalRef.result.then((result) => {
-        // TODO: Implement logic when close modal. Don't forget "result"
-      }).catch(() => {
-      });
+      modalRef.result
+        .then(result => {
+          // TODO: Implement logic when close modal. Don't forget "result"
+        })
+        .catch(() => {});
     }
   }
 
@@ -200,16 +210,21 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
   public saveNewCompany() {
     ($('[data-toggle="tooltip"]') as any).tooltip('hide');
 
-    this.widgetService.createCompany(this.sitesService.getCurrentSiteId(), this.newCompany.name).subscribe((response: CompanyShort) => {
-      if (response) {
-        this.companies.push(response);
-        this.widgetService.setCurrentCompanies(this.companies);
+    this.widgetService
+      .createCompany(this.sitesService.getCurrentSiteId(), this.newCompany.name)
+      .subscribe((response: CompanyShort) => {
+        if (response) {
+          this.companies.push(response);
+          this.widgetService.setCurrentCompanies(this.companies);
 
-        this.currentCompany = response as Company;
-        this.toastr.success(this.translate.instant('widgetsList.company.add.desc'), this.translate.instant('global.done') + '!');
-      }
-      this.resetNewCompany();
-    });
+          this.currentCompany = response as Company;
+          this.toastr.success(
+            this.translate.instant('widgetsList.company.add.desc'),
+            this.translate.instant('global.done') + '!'
+          );
+        }
+        this.resetNewCompany();
+      });
   }
 
   public enableDisableSP() {
@@ -222,8 +237,10 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
       for (const item of types) {
         // eslint-disable-next-line @typescript-eslint/prefer-for-of
         for (let j = 0; j < this.widgets[item].length; j++) {
-          if (this.currentCompany.id === this.widgetService.getDefaultCompany(this.companies).id ||
-            this.widgets[item][j].companyId === this.currentCompany.id) {
+          if (
+            this.currentCompany.id === this.widgetService.getDefaultCompany(this.companies).id ||
+            this.widgets[item][j].companyId === this.currentCompany.id
+          ) {
             return true;
           }
         }
@@ -239,8 +256,8 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
       return this.containers;
     }
 
-    return this.containers.filter((item) => {
-      return item.widgets.some((widget) => widget.companyId === this.currentCompany.id);
+    return this.containers.filter(item => {
+      return item.widgets.some(widget => widget.companyId === this.currentCompany.id);
     });
   }
 
@@ -261,29 +278,32 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
   }
 
   private getAllWidgetsForSite(siteId, stayCompany?) {
-    this.abtestsService.getTests().pipe(
-      switchMap((responseTests: Abtest[]) => {
-        this.abtestsService.setListOfABTests(responseTests);
-        return this.widgetService.getWidgetsList(siteId);
-      })
-    ).subscribe((response: Entities) => {
-      this.companies = response.companies;
-      this.widgetService.setCurrentCompanies(response.companies);
+    this.abtestsService
+      .getTests()
+      .pipe(
+        switchMap((responseTests: Abtest[]) => {
+          this.abtestsService.setListOfABTests(responseTests);
+          return this.widgetService.getWidgetsList(siteId);
+        })
+      )
+      .subscribe((response: Entities) => {
+        this.companies = response.companies;
+        this.widgetService.setCurrentCompanies(response.companies);
 
-      if (!stayCompany) {
-        this.currentCompany = this.widgetService.getDefaultCompany(this.companies);
-      }
-      this.containers = response.containers;
-      this.widgetService.setContainers(this.containers);
-      this.smartPoints = response.smartPoints;
-      this.widgets = response.widgets as unknown as Record<string, WidgetInfo[]>;
-      if (this.enableWidgetsModal) {
-        this.enableWidgetsModal = false;
-        setTimeout(() => {
-          this.createNewWidget();
-        }, 500);
-      }
-    });
+        if (!stayCompany) {
+          this.currentCompany = this.widgetService.getDefaultCompany(this.companies);
+        }
+        this.containers = response.containers;
+        this.widgetService.setContainers(this.containers);
+        this.smartPoints = response.smartPoints;
+        this.widgets = response.widgets as unknown as Record<string, WidgetInfo[]>;
+        if (this.enableWidgetsModal) {
+          this.enableWidgetsModal = false;
+          setTimeout(() => {
+            this.createNewWidget();
+          }, 500);
+        }
+      });
   }
 
   private getWidgetsCount(): number {
@@ -297,10 +317,9 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
 
   private getContainerizedWidgetLength(): number {
     let count = 0;
-    this.containers.forEach((container) => {
+    this.containers.forEach(container => {
       count += container.widgets.length;
     });
     return count;
   }
-
 }

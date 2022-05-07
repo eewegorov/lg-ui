@@ -71,7 +71,7 @@ import { TimerElementComponent } from './constructor/design/timer-element/timer-
 import { TimerDatepickerComponent } from './constructor/design/timer-element/timer-datepicker/timer-datepicker.component';
 import { PositionControlComponent } from './shared/position-control/position-control.component';
 import { ElementsAddComponent } from './shared/elements-add/elements-add.component';
-
+import { InlineSVGModule } from 'ng-inline-svg-2';
 
 @NgModule({
   declarations: [
@@ -130,10 +130,7 @@ import { ElementsAddComponent } from './shared/elements-add/elements-add.compone
     PositionControlComponent,
     ElementsAddComponent
   ],
-  exports: [
-    SmartpointsControlComponent,
-    TemplatesGalleryComponent
-  ],
+  exports: [SmartpointsControlComponent, TemplatesGalleryComponent],
   imports: [
     CommonModule,
     TranslateModule,
@@ -152,8 +149,8 @@ import { ElementsAddComponent } from './shared/elements-add/elements-add.compone
     NgxSummernoteModule,
     AngularEditorModule,
     NgTempusdominusBootstrapModule,
-    IconPickerModule
+    IconPickerModule,
+    InlineSVGModule
   ]
 })
-export class WidgetsModule {
-}
+export class WidgetsModule {}

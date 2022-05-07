@@ -1,4 +1,4 @@
-@import "../../../../scss/vars";
+@import "src/scss/vars";
 
 :host {
   display: flex;
@@ -21,8 +21,9 @@
   background: $mainBG;
   transition: all 0.4s ease 0s;
   position: absolute;
+  height: calc(100% - #{$headerHeight});
   min-height: calc(100% - #{$headerHeight});
-  overflow-y: auto;
+  overflow: auto;
 
   @media (max-width: 991px) {
     padding: 37px 30px;
