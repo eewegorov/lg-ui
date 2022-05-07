@@ -2183,6 +2183,10 @@ div.button-send.click-edit-cl .note-editor font span {
 .bootstrap-datetimepicker-widget {
   position: absolute;
   font-size: 14px;
+
+  .table th, .table td {
+    border: none;
+  }
 }
 
 #listImagesBlock .imageGlItem {
