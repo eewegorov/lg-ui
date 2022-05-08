@@ -160,6 +160,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     });
 
     this.initLabelMainPicker();
+    this.initGoogleFonts();
 
     $(this.controls.newModal as any).on('hidden.bs.modal', (e)=> e.currentTarget.remove());
   }
@@ -702,6 +703,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   public backToRegularElement(): void {
     this.extendedElement = null;
     this.extendedIndex = null;
+  }
+
+  private initGoogleFonts(): void {
+    const googleApi = "https://fonts.googleapis.com/css?family=";
+    this.widgetConstructorService.getGoogleFontListPicker().forEach(font => {
+      $("link:last").after('<link href="' + googleApi + font + '" rel="stylesheet" type="text/css">');
+    });
   }
 
   private initLabelMainPicker() {
