@@ -372,12 +372,12 @@
                             class="form-ext-checkbox-container"
                           >{{ variant }}
                             <div
-                              (click)="selected = variant"
+                              (click)="itemExt['multiEnable'] ? selectedVariants.push(variant) : selectedVariant = variant"
                               [style]="'background-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm) + ';border-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm)">
                               <input [name]="itemExt['multiEnable'] ? '' : ('radio-' + itemExt.id)"
                                      [attr.type]="itemExt['multiEnable'] ? 'checkbox' : 'radio'"
                                      [value]="variant"
-                                     [checked]="selected === variant"
+                                     [checked]="itemExt['multiEnable'] ? selectedVariants.includes(variant) : selectedVariant === variant"
                               >
                               <span
                                 [ngClass]="itemExt['multiEnable'] ? 'form-ext-checkbox-checkmark' : 'form-ext-checkbox-checkmark-radio'"
@@ -415,9 +415,9 @@
                           <div (click)="termClick($event)" class="form-ext-term-checkbox-container">
                             <div [style]="'background-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm) + '; border-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm)"
                                  class="form-ext-term-checkbox-container-help-cl"
-                                 (click)="selected = !selected"
+                                 (click)="selectedTerm = !selectedTerm"
                             >
-                              <input type="checkbox" [checked]="selected || itemExt.checked">
+                              <input type="checkbox" [checked]="selectedTerm || itemExt.checked">
                               <span [ngStyle]="{'background-color': widget.guiprops.formExt.model.mainSettings.rgbaInputForm, 'border-color': widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : 'transparent'}"
                                     class="form-ext-term-checkbox-checkmark"></span>
                             </div>
