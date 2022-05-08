@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Smartpoint, Smartpoints } from '../../../core/models/sites';
+import { Smartpoint, Smartpoints } from '@core/models/sites';
 import { WidgetService } from '../services/widget.service';
 
 @Component({
@@ -38,8 +38,7 @@ export class SmartpointsControlComponent implements OnInit {
     }
   ];
 
-  constructor(private widgetService: WidgetService) {
-  }
+  constructor(private widgetService: WidgetService) {}
 
   @Input() set smartPoints(smartPoints: Smartpoints) {
     if (smartPoints && smartPoints.list.length) {
@@ -49,8 +48,7 @@ export class SmartpointsControlComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public getPositionText(position: string) {
     if (position === 'RIGHT_DOWN') {
@@ -74,6 +72,4 @@ export class SmartpointsControlComponent implements OnInit {
     smartpoint.pos = position;
     this.prepareSmartpointForSave(smartpoint);
   }
-
-
 }

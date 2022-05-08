@@ -122,23 +122,24 @@
 <!-- smart points settings -->
 <ng-container *ngIf="sites.length > 0 && smartPoints">
   <app-card>
-    <div class="col-12 p-0 d-flex align-items-center flex-wrap">
+    <div class='card-item'>
       <ui-switch (change)="enableDisableSP()" [(ngModel)]="smartPoints.enabled"></ui-switch>
-      <h3 class="f-0">
+      <h3>
         {{ 'widgetsList.site.default.title' | translate }}
         <a
-          class="info-link"
           data-placement="bottom"
           data-toggle="tooltip"
           title="{{ 'widgetsList.site.default.tooltip' | translate }}"
-          ><i class="fa fa-info-circle"></i
+          inlineSVG="./assets/images/core/question.svg"
         ></a>
       </h3>
     </div>
-    <div *ngIf="smartPoints.enabled" class="col-12 p-0">
-      <span class="widget-page__smaptpoint-container-title">{{ 'settings.widgets.select' | translate }}:</span>
-      <app-smartpoints-control [siteId]="currentSite.id" [smartPoints]="smartPoints"></app-smartpoints-control>
-    </div>
+    <ng-container *ngIf="smartPoints.enabled">
+      <h4 class="widget-page__smaptpoint-container-title">{{ 'settings.widgets.select' | translate }}:</h4>
+      <div class="card-item-columns">
+        <app-smartpoints-control [siteId]="currentSite.id" [smartPoints]="smartPoints"></app-smartpoints-control>
+      </div>
+    </ng-container>
   </app-card>
 </ng-container>
 <!-- End smart points settings -->
