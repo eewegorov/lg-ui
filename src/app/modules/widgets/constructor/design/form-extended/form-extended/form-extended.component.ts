@@ -26,6 +26,9 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
   @Input() public widget: FullWidget;
   @Input() public coupons: Coupon[];
   @Input() public placePopup: string[];
+  @Input() public showErrors: boolean;
+  @Output() private setExtended = new EventEmitter<{ element: Record<string, any>, index: number }>();
+
   public optionsRound: Options = {
     floor: 0,
     ceil: 50,
@@ -33,6 +36,7 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     animate: false,
     showSelectionBar: true
   };
+
   public optionsOpacity: Options = {
     floor: 0.00,
     ceil: 1.00,
@@ -40,6 +44,7 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     animate: false,
     showSelectionBar: true
   };
+
   public onDrDr = {
     group: 'ng',
     animated: 100,
@@ -48,13 +53,13 @@ export class FormExtendedComponent implements OnInit, OnChanges, OnDestroy {
     onStart: this.onStarting.bind(this),
     onEnd: this.onEnding.bind(this)
   };
+
   public orientationTypesOfField = [];
   public visualTypesOfField = [];
   public availMainWidthTypes = [];
   public availMainWidthOrientationTypes = [];
-  @Output() private setExtended = new EventEmitter<{ element: Record<string, any>, index: number }>();
-  private isCurrentDraggedWasClosed = false;
 
+  private isCurrentDraggedWasClosed = false;
   private changeItemSub: SubscriptionLike;
 
   constructor(
