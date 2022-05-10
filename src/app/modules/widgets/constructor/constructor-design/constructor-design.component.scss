@@ -918,7 +918,8 @@ h6.title-h6-widget a:hover {
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.05);
+    padding: 14px 20px;
+    margin: -4px;
   }
 }
 
