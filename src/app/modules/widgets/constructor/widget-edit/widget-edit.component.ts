@@ -408,7 +408,8 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
             date: 'DATE',
             rating: 'RATING',
             dd: 'LISTBOX',
-            variants: 'COMBOBOX'
+            variants: 'COMBOBOX',
+            hidden: 'HIDDEN'
           };
 
           this.customFields.push({
