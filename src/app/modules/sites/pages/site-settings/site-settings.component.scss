@@ -180,8 +180,6 @@
       align-items: center;
       justify-content: flex-start;
 
-
-
       &:last-child {
         span {
           width: 24px;
@@ -273,14 +271,19 @@ h4.site-settings-h4-text {
     align-items: center;
     justify-content: flex-start;
     padding: 14px;
+    color: $successColor;
+    border-radius: 4px;
+    border: 1px solid $successColor;
+    background-color: transparentize($successColor, 0.9);
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
-    color: $successColor;
-    background: rgba(72, 152, 168, 0.1);
-    border-radius: 4px;
     text-align: justify-all !important;
+
+    &:hover, &:focus-visible {
+      background-color: transparentize($successColor, 0.7);
+    }
 
     span {
       width: 22px;

@@ -1,13 +1,12 @@
 @import "src/scss/vars";
 @import "src/scss/mixins";
 
-.smartpoints-widgets-row {
+.smartpoints-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  row-gap: 30px;
-  column-gap: 60px;
+  gap: 30px;
 
   .column {
     width: 100%;
@@ -139,8 +138,4 @@
       }
     }
   }
-}
-
-.form-group {
-  min-width: 210px;
 }

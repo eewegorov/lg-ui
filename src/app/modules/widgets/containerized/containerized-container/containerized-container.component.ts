@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { Company, Container, WidgetInfo } from '../../../../core/models/widgets';
+import { Company, Container, WidgetInfo } from '@core/models/widgets';
 import { WidgetService } from '../../services/widget.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { ContainerCodeComponent } from '../container-code/container-code.component';
@@ -13,7 +13,7 @@ import { ContainerizedAddComponent } from '../containerized-add/containerized-ad
 @Component({
   selector: 'app-containerized-container',
   templateUrl: './containerized-container.component.html',
-  styleUrls: ['../../shared/shared.scss', './containerized-container.component.scss'],
+  styleUrls: ['./containerized-container.component.scss'],
   providers: [DecimalPipe]
 })
 export class ContainerizedContainerComponent implements OnInit {
@@ -28,8 +28,7 @@ export class ContainerizedContainerComponent implements OnInit {
     private decimalPipe: DecimalPipe,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.widgetService.updateCurrentContainer.subscribe((data: string) => {
@@ -49,7 +48,12 @@ export class ContainerizedContainerComponent implements OnInit {
   }
 
   public updateDescription() {
-    this.containerizedWidgetService.updateWContainer(this.site.id, this.container.id, this.container.name, this.container.description);
+    this.containerizedWidgetService.updateWContainer(
+      this.site.id,
+      this.container.id,
+      this.container.name,
+      this.container.description
+    );
   }
 
   public openContainerCodeModal() {
@@ -70,14 +74,19 @@ export class ContainerizedContainerComponent implements OnInit {
       confirmButtonColor: '#DD6B55',
       confirmButtonText: this.translate.instant('widgetsList.widget.delete.confirm'),
       cancelButtonText: this.translate.instant('widgetsList.widget.delete.cancel')
-    }).then((isConfirm) => {
+    }).then(isConfirm => {
       if (isConfirm) {
-        this.containerizedWidgetService.deleteWContainer(this.site.id, this.container.id).subscribe((response: boolean) => {
-          if (response) {
-            this.widgetService.updateWidgetsList.next(this.site.id);
-            this.toastr.success(this.translate.instant('containerized.container.delete.desc'), this.translate.instant('global.done'));
-          }
-        });
+        this.containerizedWidgetService
+          .deleteWContainer(this.site.id, this.container.id)
+          .subscribe((response: boolean) => {
+            if (response) {
+              this.widgetService.updateWidgetsList.next(this.site.id);
+              this.toastr.success(
+                this.translate.instant('containerized.container.delete.desc'),
+                this.translate.instant('global.done')
+              );
+            }
+          });
       }
     });
   }
@@ -93,8 +102,9 @@ export class ContainerizedContainerComponent implements OnInit {
     return allValue;
   }
 
+  // Is not in use as current design does not include total for the table
   public getAllCConversion() {
-    return (this.decimalPipe.transform(((100 * this.getAllCount('target')) / this.getAllCount('shows')), '1.0-2')) + '%';
+    return this.decimalPipe.transform((100 * this.getAllCount('target')) / this.getAllCount('shows'), '1.0-2') + '%';
   }
 
   public addVariant() {
@@ -108,5 +118,4 @@ export class ContainerizedContainerComponent implements OnInit {
     modalRef.componentInstance.template = this.container.widgets[0].template;
     modalRef.componentInstance.type = this.container.widgets[0].type;
   }
-
 }

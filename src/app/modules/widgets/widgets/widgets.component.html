@@ -144,10 +144,7 @@
 </ng-container>
 <!-- End smart points settings -->
 
-<div class="row col-lg-12 no-animate" id="myWidgets">
-  <div *ngIf="isHasWidgets() || filteredContainers().length" class="col-lg-12 mt-3">
-    <h3 class="f-0">{{ 'widgetsList.listTitle' | translate }}</h3>
-  </div>
+<section id="myWidgets">
   <div *ngIf="!sites.length" class="col-lg-12 mt-3">
     <h3 class="f-0 text-center">{{ 'widgetsList.sitePlaceholder' | translate }}</h3>
     <h4 class="f-2 text-center underline-links blue-links hover-links">
@@ -158,17 +155,18 @@
   </div>
 
   <!-- Static widgets -->
-  <div *ngIf="containers.length && filteredContainers().length" class="col-lg-12 mt-3">
-    <h4 class="f-1 no-bold">{{ 'containerized.title' | translate }}:</h4>
-  </div>
-  <div *ngIf="containers.length" style="width: 100%">
+  <ng-container *ngIf="containers.length && filteredContainers().length">
+    <h2 class="subtitle">{{ 'containerized.title' | translate }}</h2>
+  </ng-container>
+  <ng-container *ngIf="containers.length">
     <app-containerized-container
       *ngFor="let container of filteredContainers()"
       [container]="container"
       [currentCompany]="currentCompany"
       [site]="currentSite"
+      class="static-widgets"
     ></app-containerized-container>
-  </div>
+  </ng-container>
   <!-- End Static widgets -->
 
   <div *ngIf="!isHasWidgets() && !filteredContainers().length && sites.length" class="col-lg-12 mt-3">
@@ -194,4 +192,4 @@
       </app-widget-item>
     </div>
   </div>
-</div>
+</section>

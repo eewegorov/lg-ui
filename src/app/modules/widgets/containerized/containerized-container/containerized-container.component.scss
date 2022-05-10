@@ -1,89 +1,231 @@
-.static-widget-block.test-item {
-  margin-top: 20px;
-  padding: 15px;
-  min-width: 1220px;
-}
+@import "src/scss/vars";
+@import "src/scss/mixins";
 
-.test-item-left {
-  width: 70%;
-}
+:host {
+  .static-widgets-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
 
-.static-widget-block button.btn-show-dialog-code {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-size: 12px;
-}
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 20px;
 
-.static-widget-block button.btn-show-dialog-code b {
-  color: #428bca;
-}
+      .static-widgets-name {
+        width: 100%;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 29px;
+        color: $fontPrimaryColor;
+      }
 
-.static-widget-block button.btn-remove-container {
-  padding-top: 3px;
-  padding-bottom: 2px;
-}
+      .static-widgets-description {
+        width: 100%;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        color: $fontGrayColor;
+      }
+    }
 
-.ab-grid__header--priority {
-  line-height: 17px;
-}
+    .header-right {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
 
-.ab-grid__header--priority a,
-.ab-grid__header--priority div {
-  text-transform: none;
-}
+      button {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 13px;
+        border: 1px solid $fontGrayColor;
+        border-radius: 5px;
+        font-style: normal;
+        font-weight: 400 !important;
+        font-size: 18px;
+        line-height: 22px;
+        color: $fontGrayColor;
+        text-align: center;
 
-.ab-grid__header--company,
-.ab-grid__header--targets,
-.ab-grid__header--priority,
-.ab-grid__header--actions-static {
-  padding: 7px 10px;
-}
+        &:last-child {
+          padding: 8px;
+          width: 50px;
+          min-width: 50px;
+          max-width: 50px;
 
-.ab-grid__header--actions-static {
-  text-align: right;
-}
+          span {
+            display: flex;
+            position: relative;
+            width: 32px;
+            height: 32px;
+            color: $fontGrayColor;
 
-.ab-grid__header--priority {
-  text-align: center;
-}
+            @include svg-position();
+          }
+        }
 
-.ab-grid__footer {
-  font-size: 16px;
-  display: flex;
-  font-weight: 600;
-  justify-content: space-between;
-}
-
-.ng-submitted .editable-input.editable-has-buttons {
-  border-color: red;
-}
-
-.grid-containerized-item {
-  display: block;
-}
-
-a.static-help-link {
-  margin-top: 9px;
-  display: block;
-  float: right;
-  color: #727477;
-  font-size: 13px;
-  text-decoration: underline;
-}
-
-a.static-help-link:hover {
-  text-decoration: none;
-}
-
-@media (max-width: 1460px) {
-  .static-wrapper-scr {
-    overflow: auto;
-    padding: 0;
-    margin-left: 15px;
-    margin-right: 15px;
+        @media (max-width: 575px) {
+          font-size: 16px;
+          line-height: 18px;
+        }
+      }
+    }
   }
 
-  .modal-flex .modal.in .modal-dialog {
+  .static-widgets-table {
+    display: block;
+    width: 100%;
+    max-height: 70vh;
+    margin-top: 22px;
+    border: 1px solid $borderColor;
+    border-radius: 5px;
     overflow: auto;
+  }
+
+  table {
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    thead {
+      width: 100%;
+      display: flex;
+      position: sticky;
+      z-index: 1;
+      top: 0;
+      background-color: #FFFFFF;
+
+      th {
+        display: table-header-group;
+        height: 100%;
+        padding: 19px 14px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        text-align: left;
+        text-transform: capitalize;
+        color: $fontGrayColor;
+        background-color: #FFFFFF;
+        border-bottom:  1px solid $borderColor;
+
+        &:not(:last-of-type) {
+          border-right:  1px solid $borderColor;
+        }
+
+        &.name {
+          width: 25%;
+          min-width: 330px;
+        }
+
+        &.campaign {
+          width: 20%;
+          min-width: 240px;
+        }
+
+        &.shows, &.targets, &.conv {
+          width: 9%;
+          min-width: 140px;
+        }
+
+        &.priority {
+          width: 10%;
+          min-width: 170px;
+          display: flex;
+          align-items: center;
+
+          a {
+            display: flex;
+            width: 22px;
+            height: 22px;
+            position: relative;
+            margin: 0 0 0 10px;
+            color: $fontGrayColor;
+
+            @include svg-position();
+          }
+        }
+
+        &.actions-static {
+          width: 27%;
+          min-width: 485px;
+        }
+      }
+    }
+
+    tbody {
+      .table-row {
+        ::ng-deep {
+          tr td {
+            border-top: 1px solid $borderColor;
+          }
+        }
+      }
+    }
+  }
+
+  .static-widgets-footer {
+    margin-top: 35px;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    button {
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border-radius: 4px;
+      border: 1px solid $successColor;
+      color: $successColor;
+      background-color: transparentize($successColor, 0.9);
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+      text-align: center;
+
+      &:hover, &:focus-visible {
+        background-color: transparentize($successColor, 0.7);
+      }
+
+      span {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        position: relative;
+        margin-right: 15px;
+
+        @include svg-position();
+      }
+    }
+
+    a {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 22px;
+      text-decoration: none;
+      color: $successColor;
+      text-align: center;
+
+      &:hover, &:focus-visible {
+        color: lighten($successColor, 20%);
+      }
+    }
   }
 }

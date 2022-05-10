@@ -5,36 +5,45 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { Abtest } from '../../../../core/models/abtests';
-import { Company, Container, WidgetInfo, WidgetStatistics } from '../../../../core/models/widgets';
-import { TariffsService } from '../../../../core/services/tariffs.service';
+import { Abtest } from '@core/models/abtests';
+import { Company, Container, WidgetInfo, WidgetStatistics } from '@core/models/widgets';
+import { TariffsService } from '@core/services/tariffs.service';
 import { AbtestsService } from '../../../abtests/services/abtests.service';
-import { CoreSitesService } from '../../../../core/services/core-sites.service';
+import { CoreSitesService } from '@core/services/core-sites.service';
 import { SitesService } from '../../../sites/services/sites.service';
 import { WidgetService } from '../../services/widget.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
 import { AbtestAddComponent } from '../../../abtests/abtest-add/abtest-add.component';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-containerized-item',
   templateUrl: './containerized-item.component.html',
-  styleUrls: ['../../shared/shared.scss', './containerized-item.component.scss'],
+  styleUrls: ['./containerized-item.component.scss'],
   providers: [DecimalPipe]
 })
 export class ContainerizedItemComponent implements OnInit {
   @Input() public item: WidgetInfo;
   @Input() public first: boolean;
   @Input() public last: boolean;
-  public widgetCurrentCompany = {} as Company;
-  public changeCompanyWidget = {
-    id: '',
-    name: '',
-    companyId: ''
-  };
   @Input() private containerId = '';
   @Input() private siteId = '';
   @Input() private prev: WidgetInfo;
   @Input() private next: WidgetInfo;
+
+  public readonly widgetNameEditing$: Observable<boolean>;
+  public readonly widgetCampaignEditing$: Observable<boolean>;
+  public widgetCampaign = {} as Company;
+  public widgetEditingCampaign = {
+    id: '',
+    name: '',
+    companyId: ''
+  };
+  public widgetEditingName: string;
+
+  private readonly _widgetNameEditing$: BehaviorSubject<boolean>;
+  private readonly _widgetCampaignEditing$: BehaviorSubject<boolean>;
 
   constructor(
     private router: Router,
@@ -49,6 +58,28 @@ export class ContainerizedItemComponent implements OnInit {
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
   ) {
+    this._widgetNameEditing$ = new BehaviorSubject<boolean>(false);
+    this._widgetCampaignEditing$ = new BehaviorSubject<boolean>(false);
+
+    this.widgetNameEditing$ = this._widgetNameEditing$.asObservable().pipe(
+      tap((state: boolean) => {
+        if (state) {
+          this.widgetEditingName = this.item.name;
+        }
+      })
+    );
+
+    this.widgetCampaignEditing$ = this._widgetCampaignEditing$.asObservable().pipe(
+      tap((state: boolean) => {
+        if (state) {
+          this.widgetEditingCampaign = {
+            id: this.item.id,
+            name: this.widgetCampaign.name,
+            companyId: this.item.companyId
+          };
+        }
+      })
+    );
   }
 
   ngOnInit(): void {
@@ -61,7 +92,10 @@ export class ContainerizedItemComponent implements OnInit {
       });
     }
 
-    this.widgetCurrentCompany = this.widgetService.getCompanyById(this.item.companyId, this.widgetService.getCurrentCompanies());
+    this.widgetCampaign = this.widgetService.getCompanyById(
+      this.item.companyId,
+      this.widgetService.getCurrentCompanies()
+    );
 
     this.widgetService.getWidgetStatistics(this.item.id).subscribe((response: WidgetStatistics) => {
       if (response) {
@@ -70,21 +104,50 @@ export class ContainerizedItemComponent implements OnInit {
     });
   }
 
-  public getCConversion() {
-    return (this.decimalPipe.transform(((100 * this.item.widgetConversion.targets) / this.item.widgetConversion.shows), '1.0-2')) + '%';
+  public toggleWidgetNameEditing(): void {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+    this._widgetNameEditing$.next(!this._widgetNameEditing$.getValue());
   }
 
-  public updateCWidget(data) {
-    if (!data) {
-      return false;
+  public toggleWidgetCampaignEditing(): void {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+    this._widgetCampaignEditing$.next(!this._widgetCampaignEditing$.getValue());
+  }
+
+  public getCConversion() {
+    return (
+      this.decimalPipe.transform(
+        (100 * this.item.widgetConversion.targets) / this.item.widgetConversion.shows,
+        '1.0-2'
+      ) + '%'
+    );
+  }
+
+  public updateCWidget(): void {
+    if (this.widgetEditingName !== this.item.name) {
+      this.containerizedWidgetService.rename(this.siteId, this.item.id, this.widgetEditingName).subscribe(
+        (result: boolean) => {
+          if (result) {
+            this.item.name = this.widgetEditingName;
+          }
+        },
+        () => {},
+        () => {
+          this.toggleWidgetNameEditing();
+          this.widgetEditingName = '';
+        }
+      );
+    } else {
+      this.toggleWidgetNameEditing();
     }
-    this.containerizedWidgetService.rename(this.siteId, this.item.id, data);
   }
 
   public swapCWidgets(isUp) {
-    this.containerizedWidgetService.swap(this.siteId, this.item.id, isUp ? this.prev.id : this.next.id).subscribe(() => {
-      this.widgetService.updateCurrentContainer.next(this.containerId);
-    });
+    this.containerizedWidgetService
+      .swap(this.siteId, this.item.id, isUp ? this.prev.id : this.next.id)
+      .subscribe(() => {
+        this.widgetService.updateCurrentContainer.next(this.containerId);
+      });
   }
 
   public switchCWidget(newValue) {
@@ -99,37 +162,39 @@ export class ContainerizedItemComponent implements OnInit {
     });
   }
 
-  public startChangeCompany() {
-    this.changeCompanyWidget = {
-      id: this.item.id,
-      name: this.widgetCurrentCompany.name,
-      companyId: this.item.companyId
-    };
-  }
-
-  public changeCurrentCompany(company) {
-    this.changeCompanyWidget.companyId = company.id;
-    this.changeCompanyWidget.name = company.name;
-    this.changeCompanyWidget.id = this.item.id;
+  public changeEditingCampaign(campaign) {
+    this.widgetEditingCampaign.companyId = campaign.id;
+    this.widgetEditingCampaign.name = campaign.name;
+    this.widgetEditingCampaign.id = this.item.id;
   }
 
   public changeCWidgetCompany() {
-    this.containerizedWidgetService.changeCWidgetCompany(this.siteId, this.item.id, this.changeCompanyWidget.companyId).subscribe(() => {
-      this.item.companyId = this.changeCompanyWidget.companyId;
-      this.widgetCurrentCompany = this.widgetService.getCompanyById(this.item.companyId, this.widgetService.getCurrentCompanies());
-      this.resetChangeCompany();
-      this.widgetService.updateCurrentContainer.next(this.containerId);
-    });
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+    if (this.widgetCampaign.id === this.widgetEditingCampaign.companyId) {
+      this.toggleWidgetCampaignEditing();
+      return;
+    }
+    this.containerizedWidgetService
+      .changeCWidgetCompany(this.siteId, this.item.id, this.widgetEditingCampaign.companyId)
+      .subscribe(() => {
+        this.item.companyId = this.widgetEditingCampaign.companyId;
+        this.widgetCampaign = this.widgetService.getCompanyById(
+          this.item.companyId,
+          this.widgetService.getCurrentCompanies()
+        );
+        this.resetChangeCompany();
+        this.widgetService.updateCurrentContainer.next(this.containerId);
+      });
   }
 
   public getFilteredCompanies() {
-    return this.widgetService.getCurrentCompanies().filter((item) => {
-      return (item.id !== this.changeCompanyWidget.companyId) && !item.default;
+    return this.widgetService.getCurrentCompanies().filter(item => {
+      return !item.default;
     });
   }
 
   public resetChangeCompany() {
-    this.changeCompanyWidget = {
+    this.widgetEditingCampaign = {
       id: '',
       name: '',
       companyId: ''
@@ -142,32 +207,36 @@ export class ContainerizedItemComponent implements OnInit {
       return false;
     }
 
-    this.containerizedWidgetService.getWContainerInfo(this.siteId, this.containerId).subscribe((container: Container) => {
-      if (container.widgets.length === 1) {
-        Swal.fire(this.translate.instant('containerized.container.widget.remove.ifone'), '', 'error');
-      } else {
-        Swal.fire({
-          title: this.translate.instant('widgetsList.widget.delete.title'),
-          text: this.translate.instant('widgetsList.widget.delete.text'),
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#DD6B55',
-          confirmButtonText: this.translate.instant('widgetsList.widget.delete.confirm'),
-          cancelButtonText: this.translate.instant('widgetsList.widget.delete.cancel'),
+    this.containerizedWidgetService
+      .getWContainerInfo(this.siteId, this.containerId)
+      .subscribe((container: Container) => {
+        if (container.widgets.length === 1) {
+          Swal.fire(this.translate.instant('containerized.container.widget.remove.ifone'), '', 'error');
+        } else {
+          Swal.fire({
+            title: this.translate.instant('widgetsList.widget.delete.title'),
+            text: this.translate.instant('widgetsList.widget.delete.text'),
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: this.translate.instant('widgetsList.widget.delete.confirm'),
+            cancelButtonText: this.translate.instant('widgetsList.widget.delete.cancel')
+          }).then(isConfirm => {
+            if (isConfirm) {
+              this.widgetService.deleteWidget(this.siteId, this.item.id).subscribe((response: boolean) => {
+                if (response) {
+                  this.toastr.success(
+                    this.translate.instant('widgetsList.widget.delete.desc'),
+                    this.translate.instant('global.done')
+                  );
+                }
 
-        }).then((isConfirm) => {
-          if (isConfirm) {
-            this.widgetService.deleteWidget(this.siteId, this.item.id).subscribe((response: boolean) => {
-              if (response) {
-                this.toastr.success(this.translate.instant('widgetsList.widget.delete.desc'), this.translate.instant('global.done'));
-              }
-
-              this.widgetService.updateWidgetsList.next(this.siteId);
-            });
-          }
-        });
-      }
-    });
+                this.widgetService.updateWidgetsList.next(this.siteId);
+              });
+            }
+          });
+        }
+      });
   }
 
   public duplicateCWidget() {
@@ -179,9 +248,11 @@ export class ContainerizedItemComponent implements OnInit {
 
     // TODO: Check if it's payment query
     if (this.sitesService.isSiteHasExpTariff(currentSite)) {
-      this.tariffsService.checkTariffPlans(this.siteId,
+      this.tariffsService.checkTariffPlans(
+        this.siteId,
         this.translate.instant('sitelist.tariff.improve'),
-        this.translate.instant('widgetsList.payment.abtest', { siteName: currentSite.name }));
+        this.translate.instant('widgetsList.payment.abtest', { siteName: currentSite.name })
+      );
     } else {
       const modalRef = this.modalService.open(AbtestAddComponent, {
         size: 'xl',
@@ -200,13 +271,13 @@ export class ContainerizedItemComponent implements OnInit {
   }
 
   public abIfTestOnWork() {
-    if (this.item.abtestInfo && this.item.abtestInfo.state && (this.item.abtestInfo.state === 'ACTIVE')) {
+    if (this.item.abtestInfo && this.item.abtestInfo.state && this.item.abtestInfo.state === 'ACTIVE') {
       return true;
     }
   }
 
   public abIfTestOnPause() {
-    if (this.item.abtestInfo && this.item.abtestInfo.state && (this.item.abtestInfo.state === 'PAUSED')) {
+    if (this.item.abtestInfo && this.item.abtestInfo.state && this.item.abtestInfo.state === 'PAUSED') {
       return true;
     }
   }
@@ -218,5 +289,4 @@ export class ContainerizedItemComponent implements OnInit {
   public goToConstructor() {
     this.router.navigate([`/widgets/edit/${this.siteId}-${this.item.id}/`]).then();
   }
-
 }

@@ -130,57 +130,84 @@
     }
   }
 
-  .card-item {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 15px;
-    color: $fontPrimaryColor;
+  app-card {
+    .card-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 15px;
+      color: $fontPrimaryColor;
 
-    h3 {
+      h3 {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 29px;
+        vertical-align: center;
+
+        a {
+          display: inline-block;
+          width: 22px;
+          height: 22px;
+          margin-left: 15px;
+          position: relative;
+          transform: translateY(15%);
+          color: $fontGrayColor;
+
+          @include svg-position();
+        }
+
+        @media (max-width: 575px) {
+          font-size: 20px;
+          line-height: 22px;
+
+          a {
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+    }
+
+    h4 {
+      width: 100%;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      margin: 28px 0 25px 0;
+      color: $fontGrayColor;
+    }
+
+    .card-item-columns {
+      width: 100%;
+    }
+  }
+
+  section {
+    margin-top: 50px;
+    width: 100%;
+    position: relative;
+
+    h2 {
+      width: 100%;
       font-style: normal;
       font-weight: 400;
       font-size: 24px;
       line-height: 29px;
-      vertical-align: center;
+      color: $fontPrimaryColor;
+      margin-bottom: 25px;
+    }
 
-      a {
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        margin-left: 15px;
-        position: relative;
-        transform: translateY(15%);
-        color: $fontGrayColor;
+    .static-widgets {
+      margin-bottom: 50px;
+      display: block;
 
-        @include svg-position();
-      }
-
-      @media (max-width: 575px) {
-        font-size: 20px;
-        line-height: 22px;
-
-        a {
-          width: 18px;
-          height: 18px;
-        }
+      &:last-of-type {
+        margin: 0;
       }
     }
-  }
-
-  h4 {
-    width: 100%;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    margin: 28px 0 25px 0;
-    color: $fontGrayColor;
-  }
-
-  .card-item-columns {
-    width: 100%;
   }
 }
 
