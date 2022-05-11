@@ -1,9 +1,23 @@
+@import "src/scss/vars";
+@import "src/scss/mixins";
+
+:host {
+  box-shadow: $boxShadow;
+  border-radius: 5px 5px $borderRadius $borderRadius;
+  width: 100%;
+  overflow: hidden;
+
+  .hpanel {
+    margin: 0;
+  }
+}
+
 .hpanel.hgreen .panel-body {
-  border-top: 2px solid #62cb31;
+  border-top: 5px solid $greenColor;
 }
 
 .hpanel.hred .panel-body {
-  border-top: 2px solid #e74c3c;
+  border-top: 5px solid $dangerColor;
 }
 
 .btn {

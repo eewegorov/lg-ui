@@ -127,6 +127,10 @@
         &.name {
           width: 25%;
           min-width: 330px;
+
+          @media (max-width: 424px) {
+            min-width: 265px;
+          }
         }
 
         &.campaign {

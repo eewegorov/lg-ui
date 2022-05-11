@@ -122,7 +122,7 @@
 <!-- smart points settings -->
 <ng-container *ngIf="sites.length > 0 && smartPoints">
   <app-card>
-    <div class='card-item'>
+    <div class="card-item">
       <ui-switch (change)="enableDisableSP()" [(ngModel)]="smartPoints.enabled"></ui-switch>
       <h3>
         {{ 'widgetsList.site.default.title' | translate }}
@@ -179,17 +179,20 @@
     </div>
   </div>
 
-  <div *ngFor="let wdgTypes of getTypesWithCompanyFilter()" class="mt-3 col-lg-4 mw-100 mb-5">
-    <h4 class="f-1 no-bold mt-3">{{ getTypeItem(wdgTypes)?.name }}:</h4>
-    <div *ngFor="let widget of getFilteredWidgets(wdgTypes); index as i" class="row">
-      <app-widget-item
-        [first]="i === 0"
-        [last]="i === getFilteredWidgets(wdgTypes).length - 1"
-        [next]="getFilteredWidgets(wdgTypes)[i + 1]"
-        [prev]="getFilteredWidgets(wdgTypes)[i - 1]"
-        [widget]="widget"
-      >
-      </app-widget-item>
-    </div>
+  <div class="widgets-container">
+    <ng-container *ngFor="let wdgTypes of getTypesWithCompanyFilter()">
+      <div class="column">
+        <h4>{{ getTypeItem(wdgTypes)?.name }}:</h4>
+        <ng-container *ngFor="let widget of getFilteredWidgets(wdgTypes); index as i">
+          <app-widget-item
+            [first]="i === 0"
+            [last]="i === getFilteredWidgets(wdgTypes).length - 1"
+            [next]="getFilteredWidgets(wdgTypes)[i + 1]"
+            [prev]="getFilteredWidgets(wdgTypes)[i - 1]"
+            [widget]="widget"
+          ></app-widget-item>
+        </ng-container>
+      </div>
+    </ng-container>
   </div>
 </section>

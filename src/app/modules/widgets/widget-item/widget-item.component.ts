@@ -5,19 +5,19 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { Abtest } from '../../../core/models/abtests';
-import { WidgetInfo, WidgetInfoShort, WidgetStatistics } from '../../../core/models/widgets';
-import { TariffsService } from '../../../core/services/tariffs.service';
+import { Abtest } from '@core/models/abtests';
+import { WidgetInfo, WidgetInfoShort, WidgetStatistics } from '@core/models/widgets';
+import { TariffsService } from '@core/services/tariffs.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
 import { AbtestAddComponent } from '../../abtests/abtest-add/abtest-add.component';
 import { WidgetService } from '../services/widget.service';
-import { CoreSitesService } from '../../../core/services/core-sites.service';
+import { CoreSitesService } from '@core/services/core-sites.service';
 
 @Component({
   selector: 'app-widget-item',
   templateUrl: './widget-item.component.html',
-  styleUrls: ['../shared/shared.scss', './widget-item.component.scss'],
+  styleUrls: ['./widget-item.component.scss'],
   providers: [DecimalPipe]
 })
 export class WidgetItemComponent implements OnInit {
@@ -44,8 +44,7 @@ export class WidgetItemComponent implements OnInit {
     private sitesService: SitesService,
     private abtestsService: AbtestsService,
     private widgetService: WidgetService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.currentSiteId = this.sitesService.getCurrentSiteId();
@@ -69,9 +68,12 @@ export class WidgetItemComponent implements OnInit {
       });
     }
 
-    this.widgetCurrentCompany = this.widgetService.getCompanyById(this.widget.companyId, this.widgetService.getCurrentCompanies());
+    this.widgetCurrentCompany = this.widgetService.getCompanyById(
+      this.widget.companyId,
+      this.widgetService.getCurrentCompanies()
+    );
 
-    this.widgetType = this.widgetService.getCurrentWidgetsTypes().find((item) => {
+    this.widgetType = this.widgetService.getCurrentWidgetsTypes().find(item => {
       return item.code === this.widget.type;
     });
   }
@@ -91,7 +93,9 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public getConversion() {
-    return (this.decimalPipe.transform(((100 * this.widgetConversion.targets) / this.widgetConversion.shows), '1.0-2')) + '%';
+    return (
+      this.decimalPipe.transform((100 * this.widgetConversion.targets) / this.widgetConversion.shows, '1.0-2') + '%'
+    );
   }
 
   public updateWidgetName(data) {
@@ -102,9 +106,11 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public swapWidgets(isUp) {
-    this.widgetService.swap(this.currentSiteId, this.widget.id, isUp ? this.prev.id : this.next.id).subscribe((response: boolean) => {
-      this.widgetService.updateWidgetsList.next(this.currentSiteId);
-    });
+    this.widgetService
+      .swap(this.currentSiteId, this.widget.id, isUp ? this.prev.id : this.next.id)
+      .subscribe((response: boolean) => {
+        this.widgetService.updateWidgetsList.next(this.currentSiteId);
+      });
   }
 
   public startChangeCompany() {
@@ -122,15 +128,16 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public changeWidgetCompany() {
-    this.widgetService.changeWidgetCompany(this.currentSiteId, this.widget.id, this.changeCompanyWidget.companyId).subscribe(
-      () => {
+    this.widgetService
+      .changeWidgetCompany(this.currentSiteId, this.widget.id, this.changeCompanyWidget.companyId)
+      .subscribe(() => {
         this.widgetService.updateWidgetsList.next(this.currentSiteId);
       });
   }
 
   public getFilteredCompanies() {
-    return this.widgetService.getCurrentCompanies().filter((item) => {
-      return (item.id !== this.changeCompanyWidget.companyId) && !item.default;
+    return this.widgetService.getCurrentCompanies().filter(item => {
+      return item.id !== this.changeCompanyWidget.companyId && !item.default;
     });
   }
 
@@ -159,13 +166,15 @@ export class WidgetItemComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
       confirmButtonText: this.translate.instant('widgetsList.widget.delete.confirm'),
-      cancelButtonText: this.translate.instant('widgetsList.widget.delete.cancel'),
-
-    }).then((isConfirm) => {
+      cancelButtonText: this.translate.instant('widgetsList.widget.delete.cancel')
+    }).then(isConfirm => {
       if (isConfirm) {
         this.widgetService.deleteWidget(this.currentSiteId, this.widget.id).subscribe((response: boolean) => {
           if (response) {
-            this.toastr.success(this.translate.instant('widgetsList.widget.delete.desc'), this.translate.instant('global.done'));
+            this.toastr.success(
+              this.translate.instant('widgetsList.widget.delete.desc'),
+              this.translate.instant('global.done')
+            );
           }
 
           this.widgetService.updateWidgetsList.next(this.currentSiteId);
@@ -179,9 +188,11 @@ export class WidgetItemComponent implements OnInit {
 
     // TODO: Check if it's payment query
     if (this.sitesService.isSiteHasExpTariff(currentSite)) {
-      this.tariffsService.checkTariffPlans(this.currentSiteId,
+      this.tariffsService.checkTariffPlans(
+        this.currentSiteId,
         this.translate.instant('sitelist.tariff.improve'),
-        this.translate.instant('widgetsList.payment.abtest', { siteName: currentSite.name }));
+        this.translate.instant('widgetsList.payment.abtest', { siteName: currentSite.name })
+      );
     } else {
       const modalRef = this.modalService.open(AbtestAddComponent, {
         size: 'lg',
@@ -200,13 +211,13 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public abIfTestOnWork() {
-    if (this.widget.abtestInfo && this.widget.abtestInfo.state && (this.widget.abtestInfo.state === 'ACTIVE')) {
+    if (this.widget.abtestInfo && this.widget.abtestInfo.state && this.widget.abtestInfo.state === 'ACTIVE') {
       return true;
     }
   }
 
   public abIfTestOnPause() {
-    if (this.widget.abtestInfo && this.widget.abtestInfo.state && (this.widget.abtestInfo.state === 'PAUSED')) {
+    if (this.widget.abtestInfo && this.widget.abtestInfo.state && this.widget.abtestInfo.state === 'PAUSED') {
       return true;
     }
   }
@@ -240,7 +251,6 @@ export class WidgetItemComponent implements OnInit {
     const elemTop = $(`#${this.widget.id}`).offset().top;
     const elemBottom = elemTop + $(`#${this.widget.id}`).height();
 
-    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+    return elemBottom <= docViewBottom && elemTop >= docViewTop;
   }
-
 }

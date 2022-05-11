@@ -55,6 +55,10 @@
         .input {
           width: 100%;
         }
+
+        @media (max-width: 424px) {
+          min-width: 265px;
+        }
       }
 
       &.campaign {

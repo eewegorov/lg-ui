@@ -2,11 +2,11 @@
 @import "src/scss/mixins";
 
 .hpanel.hgreen .integration-item__body {
-  border-top: 5px solid #62cb31;
+  border-top: 5px solid $greenColor;
 }
 
 .hpanel.hred .integration-item__body {
-  border-top: 5px solid #e74c3c;
+  border-top: 5px solid $dangerColor;
 }
 
 .integration-item__body {
@@ -203,7 +203,7 @@
       button {
         &.active {
           &:first-child {
-            color: $successColor;;
+            color: $greenColor;
           }
           &:last-child {
             color: $dangerColor;
