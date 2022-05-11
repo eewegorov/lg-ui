@@ -59,8 +59,8 @@
           <span class="caret" inlineSVG="./assets/images/core/caret-down.svg"></span>
         </button>
         <ul class="dropdown-menu">
-          <ng-container *ngFor="let company of getFilteredCompanies(); index as i">
-            <li (click)="changeEditingCampaign(company)" [attr.id]="i">
+          <ng-container *ngFor="let company of getFilteredCompanies()">
+            <li (click)="changeEditingCampaign(company)">
               <a class="dropdown-item" href="javascript:void(0);">{{ company.name }}</a>
             </li>
           </ng-container>

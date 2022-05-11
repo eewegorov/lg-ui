@@ -6,13 +6,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Abtest } from '@core/models/abtests';
-import { WidgetInfo, WidgetInfoShort, WidgetStatistics } from '@core/models/widgets';
+import { WidgetInfo, WidgetInfoShort, WidgetStatistics, WidgetType } from '@core/models/widgets';
 import { TariffsService } from '@core/services/tariffs.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
 import { AbtestAddComponent } from '../../abtests/abtest-add/abtest-add.component';
 import { WidgetService } from '../services/widget.service';
 import { CoreSitesService } from '@core/services/core-sites.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-widget-item',
@@ -24,13 +26,18 @@ export class WidgetItemComponent implements OnInit {
   @Input() public widget: WidgetInfo;
   @Input() public first: boolean;
   @Input() public last: boolean;
+  @Input() private prev: WidgetInfo;
+  @Input() private next: WidgetInfo;
+
+  public readonly widgetNameEditing$: Observable<boolean>;
+  public widgetEditingName: string;
   public widgetCurrentCompany: WidgetInfoShort;
   public widgetConversion: WidgetStatistics;
   public isConversionLoaded = false;
   public changeCompanyWidget = {} as WidgetInfoShort;
+
   public widgetType;
-  @Input() private prev: WidgetInfo;
-  @Input() private next: WidgetInfo;
+  private readonly _widgetNameEditing$: BehaviorSubject<boolean>;
   private currentSiteId: string;
 
   constructor(
@@ -44,7 +51,16 @@ export class WidgetItemComponent implements OnInit {
     private sitesService: SitesService,
     private abtestsService: AbtestsService,
     private widgetService: WidgetService
-  ) {}
+  ) {
+    this._widgetNameEditing$ = new BehaviorSubject<boolean>(false);
+    this.widgetNameEditing$ = this._widgetNameEditing$.asObservable().pipe(
+      tap((state: boolean) => {
+        if (state) {
+          this.widgetEditingName = this.widget.name;
+        }
+      })
+    );
+  }
 
   ngOnInit(): void {
     this.currentSiteId = this.sitesService.getCurrentSiteId();
@@ -73,9 +89,14 @@ export class WidgetItemComponent implements OnInit {
       this.widgetService.getCurrentCompanies()
     );
 
-    this.widgetType = this.widgetService.getCurrentWidgetsTypes().find(item => {
-      return item.code === this.widget.type;
-    });
+    this.widgetType = this.widgetService
+      .getCurrentWidgetsTypes()
+      .find((item: WidgetType) => item.id === this.widget.type);
+  }
+
+  public toggleWidgetNameEditing(): void {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+    this._widgetNameEditing$.next(!this._widgetNameEditing$.getValue());
   }
 
   public switchWidget(newValue) {
@@ -98,11 +119,23 @@ export class WidgetItemComponent implements OnInit {
     );
   }
 
-  public updateWidgetName(data) {
-    if (!data) {
-      return false;
+  public updateWidgetName() {
+    if (this.widgetEditingName !== this.widget.name) {
+      this.widgetService.rename(this.currentSiteId, this.widget.id, this.widgetEditingName).subscribe(
+        (result: boolean) => {
+          if (result) {
+            this.widget.name = this.widgetEditingName;
+          }
+        },
+        () => {},
+        () => {
+          this.toggleWidgetNameEditing();
+          this.widgetEditingName = '';
+        }
+      );
+    } else {
+      this.toggleWidgetNameEditing();
     }
-    this.widgetService.rename(this.currentSiteId, this.widget.id, data).subscribe();
   }
 
   public swapWidgets(isUp) {

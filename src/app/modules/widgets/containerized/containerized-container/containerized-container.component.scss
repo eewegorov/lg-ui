@@ -126,7 +126,7 @@
 
         &.name {
           width: 25%;
-          min-width: 330px;
+          min-width: 310px;
 
           @media (max-width: 424px) {
             min-width: 265px;
@@ -135,17 +135,17 @@
 
         &.campaign {
           width: 20%;
-          min-width: 240px;
+          min-width: 220px;
         }
 
         &.shows, &.targets, &.conv {
           width: 9%;
-          min-width: 140px;
+          min-width: 120px;
         }
 
         &.priority {
           width: 10%;
-          min-width: 170px;
+          min-width: 160px;
           display: flex;
           align-items: center;
 

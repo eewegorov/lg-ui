@@ -196,6 +196,15 @@
 
         @include svg-position();
       }
+
+      &:not(:disabled):hover {
+        background-color: $activeElementBG;
+      }
+
+      &:not(:disabled):focus {
+        position: relative;
+        z-index: 1000;
+      }
     }
 
 

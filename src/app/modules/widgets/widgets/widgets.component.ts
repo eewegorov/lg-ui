@@ -28,7 +28,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-widgets',
   templateUrl: './widgets.component.html',
-  styleUrls: ['../shared/shared.scss', './widgets.component.scss']
+  styleUrls: ['./widgets.component.scss']
 })
 export class WidgetsComponent implements OnInit, AfterViewChecked {
   public sites = [];

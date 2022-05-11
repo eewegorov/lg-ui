@@ -6,36 +6,210 @@
   border-radius: 5px 5px $borderRadius $borderRadius;
   width: 100%;
   overflow: hidden;
+  background-color: #FFFFFF;
+  display: flex;
 
-  .hpanel {
-    margin: 0;
+  .widget {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    &.hgreen {
+      border-top: 5px solid $greenColor;
+    }
+
+    &.hred {
+      border-top: 5px solid $dangerColor;
+    }
+
+    &-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      padding: 14px;
+      gap: 20px;
+
+      .action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button {
+          height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-wrap: nowrap;
+          padding: 4px 16px;
+          border-radius: 0;
+          border-color: $borderColor;
+          color: $fontSecondaryColor;
+
+          span {
+            display: flex;
+            width: 28px;
+            height: 28px;
+            position: relative;
+
+            @include svg-position();
+          }
+
+          &:not(:disabled):hover {
+            background-color: $activeElementBG;
+          }
+
+          &:not(:disabled):focus {
+            position: relative;
+            z-index: 1000;
+          }
+        }
+
+        &:not(:nth-child(2)) {
+          button {
+            &:first-child {
+              border-bottom-left-radius: 5px;
+              border-top-left-radius: 5px;
+              border-right-color: transparent;
+            }
+
+            &:last-child {
+              border-bottom-right-radius: 5px;
+              border-top-right-radius: 5px;
+            }
+          }
+        }
+
+        &:first-child {
+          button {
+            &.active {
+              background-color: $activeElementBG;
+
+              &:first-child {
+                color: $greenColor;
+              }
+
+              &:last-child {
+                color: $dangerColor;
+              }
+            }
+          }
+        }
+
+        &:nth-child(2) {
+          button {
+            border-radius: 5px;
+            gap: 14px;
+            padding: 7px 16px;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+
+            span {
+              width: 22px;
+              height: 22px;
+              border-radius: 50%;
+              background-color: $borderColor;
+            }
+
+            &.in-work {
+              span {
+                background-color: $greenColor;
+              }
+            }
+
+            &.in-pause {
+              span {
+                background-color: $yellowColor;
+              }
+            }
+          }
+        }
+
+        &:last-child {
+          button {
+            &:last-child {
+              border-left-color: transparent;
+            }
+          }
+        }
+      }
+    }
+
+    &-body {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 5px 14px 14px 7px;
+
+      .name {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 9px 7px;
+        gap: 10px;
+        border-radius: 5px;
+
+        span {
+          font-style: normal;
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 22px;
+          color: $fontPrimaryColor;
+        }
+
+        button {
+          &:not(.btn-default).btn {
+            padding: 0;
+
+            span {
+              width: 28px;
+              height: 28px;
+            }
+          }
+
+          &:not(.btn-default).btn:not(:focus) {
+            opacity: 0;
+
+            @media (max-width: 1199px) {
+              opacity: 1;
+            }
+          }
+
+          &.btn-default {
+            &:last-of-type {
+              background-color: $greenColor;
+
+              span {
+                color: #FFFFFF;
+              }
+            }
+          }
+        }
+
+        .input {
+          width: 100%;
+        }
+
+        &:hover {
+          background-color: $activeElementBG;
+
+          button {
+            &:not(.btn-default).btn {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
   }
-}
-
-.hpanel.hgreen .panel-body {
-  border-top: 5px solid $greenColor;
-}
-
-.hpanel.hred .panel-body {
-  border-top: 5px solid $dangerColor;
-}
-
-.btn {
-  border-radius: 3px;
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-.btn:hover, .btn:focus, .btn.focus {
-  text-decoration: none;
-  box-shadow: none;
-}
-
-.btn:active:not(:disabled), .btn.active:not(:disabled) {
-  background-image: none;
-  outline: 0;
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
 }
 
 .widget-item-view-header__name {
