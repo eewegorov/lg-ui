@@ -1359,6 +1359,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     const mainBl = $('#mainBlockWidget');
     const mainBlWr = $('#widgetMainWr');
     const maskTop = $('#widgetMaskTop');
+    const labelMain  = $('#labelMain');
+
     const gap18 = '-18px';
     const gap3 = '-3px';
 
@@ -1386,6 +1388,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       } else {
         this.heightImageStyle = '150px';
       }
+    }
+
+    if (this.widget.guiprops['labelMain'].place === 'Левая сторона браузера') {
+      labelMain.css({'left': - ((labelMain.innerWidth()/2) - (labelMain.innerHeight()/2)) + 'px', 'right': 'auto'});
+    } else if (this.widget.guiprops['labelMain'].place === 'Правая сторона браузера') {
+      labelMain.css({'right': - ((labelMain.innerWidth()/2) - (labelMain.innerHeight()/2) - 15) + 'px', 'left': 'auto'});
+    } else {
+      labelMain.css({'right': '', 'left': ''});
     }
 
     if (this.currentActiveTab === 'design') {
