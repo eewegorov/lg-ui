@@ -14,6 +14,7 @@ export class SocialElementComponent implements OnInit {
   @Input() public coupons: Coupon[];
   @Input() public placePopup: string[];
   @Input() public floatBtn: string[];
+  @Input() public showErrors: boolean;
 
   constructor(private widgetConstructorService: WidgetConstructorService) {
   }

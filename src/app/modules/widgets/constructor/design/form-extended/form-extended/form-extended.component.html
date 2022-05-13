@@ -11,7 +11,7 @@
         *ngFor="let extItem of widget.guiprops.formExt.model.list; index as innerIndex"
         [attr.data-to-ext]="innerIndex"
         [ngClass]="dragItemClass(extItem)"
-        [class.is-invalid]="(extItem.type === 'button' && extItem.redirect?.url === '' && showErrors)"
+        [class.is-invalid]="(extItem.type === 'button' && (extItem.redirect.type.type === 1 || extItem.redirect.type.type === 3) && extItem.redirect?.url === '' && showErrors)"
         class="form-ext-item"
     >
       <div class="form-ext-item__header-l">

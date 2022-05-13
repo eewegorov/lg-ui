@@ -770,7 +770,16 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           id: TAB_ID,
           element: el.name,
           counter: el.counter,
-          message: 'No coupon'
+          message: 'No coupon' // coupon element has their own messages in widget-edit.component.ts saveWidgetItem()
+        });
+      }
+
+      if (el.name === 'social-element' && this.widget.guiprops['social'].linkForShare === 'own' && !this.widget.guiprops['social'].linkText) {
+        errors.push({
+          id: TAB_ID,
+          element: el.name,
+          counter: el.counter,
+          message: 'Укажите URL страницы для соц.сетей'
         });
       }
 
@@ -779,7 +788,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           id: TAB_ID,
           element: el.name,
           counter: el.counter,
-          message: 'No action for form-ext'
+          message: 'No action for form-ext' // form-ext has their own messages in widget-edit.component.ts saveWidgetItem()
         });
       }
 
