@@ -783,6 +783,15 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         });
       }
 
+      if (el.name === 'timer-element' && el.expType.type === 1 && !el.expUrl) {
+        errors.push({
+          id: TAB_ID,
+          element: el.name,
+          counter: el.counter,
+          message: 'Укажите URL страницы перенаправления по окончании отсчёта'
+        });
+      }
+
       if (el.name === 'form-ext-element' && this.isTabHasErrorForFormExt()) {
         errors.push({
           id: TAB_ID,

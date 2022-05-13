@@ -150,7 +150,11 @@
       </ul>
     </div>
 
-    <div *ngIf="item.expType.type === 1" class="row-subitem row-subitem-padding form-ext-item__item-input mt-2">
+    <div
+      *ngIf="item.expType.type === 1"
+      class="row-subitem row-subitem-padding form-ext-item__item-input mt-2"
+      [class.is-invalid]="!item.expUrl && showErrors"
+    >
       <input [(ngModel)]="item.expUrl" class="form-control" placeholder="http://" type="text">
       <a (click)="item.expUrl = ''" *ngIf="item.expUrl" class="remove-widget-name remove-widget-redirect"></a>
     </div>

@@ -336,7 +336,7 @@
       <div
         *ngIf="widget.guiprops['social'].linkForShare === 'own'"
         class="widget-name-block-rel row-subitem-padding pt-1"
-        [class.is-invalid]="(!widget.guiprops['social'].linkText && showErrors)"
+        [class.is-invalid]="!widget.guiprops['social'].linkText && showErrors"
       >
         <input
           type="text"
