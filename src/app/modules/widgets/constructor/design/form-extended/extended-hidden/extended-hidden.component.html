@@ -34,7 +34,7 @@
 
 <div
   class="row-subitem mt-3 form-ext-item__item-input"
-  [ngClass]="(item.service?.length === 0) ? 'is-invalid' : ''"
+  [class.is-invalid]="item.service?.length === 0"
 >
   <label
     class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.service1' | translate }}</label>
@@ -44,7 +44,7 @@
 
 <div
   class="row-subitem mt-3 form-ext-item__item-input"
-  [ngClass]="(item.idField?.length === 0 || !checkIdField(item.idField)) ? 'is-invalid' : ''"
+  [class.is-invalid]="(item.idField?.length === 0 || !checkIdField(item.idField))"
 >
   <label class="control-label switcher-label-xs control-label-des">{{ 'widgets.formExt.email.id1' | translate }}</label>
   <input (blur)="idFocusOut()" [(ngModel)]="item.idField" class="form-control mt-1 form-control-form-ext-id-field"
@@ -93,21 +93,33 @@
   </div>
 </div>
 
-<div *ngIf="item.fieldType?.type === 'custom_parameter'" class="row-subitem mt-3 form-ext-item__item-input">
+<div
+  *ngIf="item.fieldType?.type === 'custom_parameter'"
+  class="row-subitem mt-3 form-ext-item__item-input"
+  [class.is-invalid]="!item.customParamValue && showErrors"
+>
   <label
     class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldUserParam.label' | translate }}</label>
   <input [(ngModel)]="item.customParamValue" class="form-control mt-1" type="text"/>
   <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldUserParam.desc' | translate }}</span>
 </div>
 
-<div *ngIf="item.fieldType?.type === 'cookie'" class="row-subitem mt-3 form-ext-item__item-input">
+<div
+  *ngIf="item.fieldType?.type === 'cookie'"
+  class="row-subitem mt-3 form-ext-item__item-input"
+  [class.is-invalid]="!item.cookieValue && showErrors"
+>
   <label
     class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldCookies.label' | translate }}</label>
   <input [(ngModel)]="item.cookieValue" class="form-control mt-1" type="text"/>
   <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldCookies.desc' | translate }}</span>
 </div>
 
-<div *ngIf="item.fieldType?.type === 'user_value'" class="row-subitem mt-3 form-ext-item__item-input">
+<div
+  *ngIf="item.fieldType?.type === 'user_value'"
+  class="row-subitem mt-3 form-ext-item__item-input"
+  [class.is-invalid]="!item.customUserValue && showErrors"
+>
   <label
     class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldUserValue.label' | translate }}</label>
   <input [(ngModel)]="item.customUserValue" class="form-control mt-1" type="text"/>

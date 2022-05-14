@@ -841,7 +841,8 @@
                                        [item]="extendedElement" [showErrors]="showErrors"></app-extended-button>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'hidden'">
-                  <app-extended-hidden [index]="extendedIndex" [item]="extendedElement"></app-extended-hidden>
+                  <app-extended-hidden [index]="extendedIndex" [item]="extendedElement"
+                                       [showErrors]="showErrors"></app-extended-hidden>
                 </ng-container>
               </div>
 
