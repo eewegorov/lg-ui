@@ -30,6 +30,7 @@ export class WidgetItemComponent implements OnInit {
   @Input() private next: WidgetInfo;
 
   public readonly widgetNameEditing$: Observable<boolean>;
+  public readonly widgetCampaignEditing$: Observable<boolean>;
   public widgetEditingName: string;
   public widgetCurrentCompany: WidgetInfoShort;
   public widgetConversion: WidgetStatistics;
@@ -38,6 +39,7 @@ export class WidgetItemComponent implements OnInit {
 
   public widgetType;
   private readonly _widgetNameEditing$: BehaviorSubject<boolean>;
+  private readonly _widgetCampaignEditing$: BehaviorSubject<boolean>;
   private currentSiteId: string;
 
   constructor(
@@ -53,10 +55,30 @@ export class WidgetItemComponent implements OnInit {
     private widgetService: WidgetService
   ) {
     this._widgetNameEditing$ = new BehaviorSubject<boolean>(false);
+    this._widgetCampaignEditing$ = new BehaviorSubject<boolean>(false);
+
     this.widgetNameEditing$ = this._widgetNameEditing$.asObservable().pipe(
       tap((state: boolean) => {
         if (state) {
           this.widgetEditingName = this.widget.name;
+        }
+      })
+    );
+
+    this.widgetCampaignEditing$ = this._widgetCampaignEditing$.asObservable().pipe(
+      tap((state: boolean) => {
+        if (state) {
+          this.changeCompanyWidget = {
+            id: this.widget.id,
+            name: this.widgetCurrentCompany.name,
+            companyId: this.widget.companyId
+          };
+        } else {
+          this.changeCompanyWidget = {
+            id: '',
+            name: '',
+            companyId: ''
+          };
         }
       })
     );
@@ -97,6 +119,11 @@ export class WidgetItemComponent implements OnInit {
   public toggleWidgetNameEditing(): void {
     ($('[data-toggle="tooltip"]') as any).tooltip('hide');
     this._widgetNameEditing$.next(!this._widgetNameEditing$.getValue());
+  }
+
+  public toggleWidgetCampaignEditing(): void {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+    this._widgetCampaignEditing$.next(!this._widgetCampaignEditing$.getValue());
   }
 
   public switchWidget(newValue) {
@@ -146,14 +173,6 @@ export class WidgetItemComponent implements OnInit {
       });
   }
 
-  public startChangeCompany() {
-    this.changeCompanyWidget = {
-      id: this.widget.id,
-      name: this.widgetCurrentCompany.name,
-      companyId: this.widget.companyId
-    };
-  }
-
   public changeCurrentCompany(company) {
     this.changeCompanyWidget.companyId = company.id;
     this.changeCompanyWidget.name = company.name;
@@ -161,6 +180,11 @@ export class WidgetItemComponent implements OnInit {
   }
 
   public changeWidgetCompany() {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+    if (this.changeCompanyWidget.companyId === this.widget.companyId) {
+      this.toggleWidgetCampaignEditing();
+      return;
+    }
     this.widgetService
       .changeWidgetCompany(this.currentSiteId, this.widget.id, this.changeCompanyWidget.companyId)
       .subscribe(() => {
@@ -172,14 +196,6 @@ export class WidgetItemComponent implements OnInit {
     return this.widgetService.getCurrentCompanies().filter(item => {
       return item.id !== this.changeCompanyWidget.companyId && !item.default;
     });
-  }
-
-  public resetChangeCompany() {
-    this.changeCompanyWidget = {
-      id: '',
-      name: '',
-      companyId: ''
-    };
   }
 
   public duplicateItem() {
