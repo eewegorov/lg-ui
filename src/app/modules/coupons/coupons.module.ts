@@ -6,12 +6,12 @@ import { CoolInlineEditFieldModule } from '@angular-cool/inline-edit-field';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { SharedModule } from '../../shared/shared.module';
 import { CouponsRoutingModule } from './coupons-routing.module';
-import { CouponsComponent } from './coupons/coupons.component';
-import { CouponsListComponent } from './coupons-list/coupons-list.component';
-import { CouponAddComponent } from './coupon-add/coupon-add.component';
-import { CouponMultipleComponent } from './coupon-multiple/coupon-multiple.component';
-import { CouponUniqueComponent } from './coupon-unique/coupon-unique.component';
-
+import { CouponsComponent } from './pages/coupons/coupons.component';
+import { CouponsListComponent } from './components/coupons-list/coupons-list.component';
+import { CouponAddComponent } from './components/coupon-add/coupon-add.component';
+import { CouponMultipleComponent } from './components/coupon-multiple/coupon-multiple.component';
+import { CouponUniqueComponent } from './components/coupon-unique/coupon-unique.component';
+import { InlineSVGModule } from 'ng-inline-svg-2';
 
 @NgModule({
   declarations: [
@@ -28,8 +28,8 @@ import { CouponUniqueComponent } from './coupon-unique/coupon-unique.component';
     CoolInlineEditFieldModule,
     UiSwitchModule,
     SharedModule,
-    CouponsRoutingModule
+    CouponsRoutingModule,
+    InlineSVGModule
   ]
 })
-export class CouponsModule {
-}
+export class CouponsModule {}

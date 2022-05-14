@@ -41,23 +41,23 @@
   <div class="static-widgets-table">
     <table>
       <thead>
-      <th class="name">{{ 'widgetsList.widget.widget' | translate }}</th>
-      <th class="campaign">{{ 'widgetsList.selectCompany' | translate }}</th>
-      <th class="shows">{{ 'widgetsList.widget.show.all' | translate }}</th>
-      <th class="targets">{{ 'widgetsList.widget.show.actions' | translate }}</th>
-      <th class="conv">{{ 'widgetsList.widget.show.conversion' | translate }}</th>
-      <th class="priority">
-        {{ 'widgetsList.widget.priority.title' | translate }}
-        <a
-          class="info-link"
-          data-container="#myWidgets"
-          data-placement="top"
-          data-toggle="tooltip"
-          title="{{ 'widgetsList.widget.priority.tooltip' | translate }}"
-          inlineSVG="./assets/images/core/question.svg"
-        ></a>
-      </th>
-      <th class="actions-static">{{ 'containerized.container.header.control' | translate }}</th>
+        <th class="name">{{ 'widgetsList.widget.widget' | translate }}</th>
+        <th class="campaign">{{ 'widgetsList.selectCompany' | translate }}</th>
+        <th class="shows">{{ 'widgetsList.widget.show.all' | translate }}</th>
+        <th class="targets">{{ 'widgetsList.widget.show.actions' | translate }}</th>
+        <th class="conv">{{ 'widgetsList.widget.show.conversion' | translate }}</th>
+        <th class="priority">
+          {{ 'widgetsList.widget.priority.title' | translate }}
+          <a
+            class="info-link"
+            data-container="#myWidgets"
+            data-placement="top"
+            data-toggle="tooltip"
+            title="{{ 'widgetsList.widget.priority.tooltip' | translate }}"
+            inlineSVG="./assets/images/core/question.svg"
+          ></a>
+        </th>
+        <th class="actions-static">{{ 'containerized.container.header.control' | translate }}</th>
       </thead>
       <tbody>
       <ng-container *ngFor="let widget of container.widgets; let isOdd = odd; index as i">

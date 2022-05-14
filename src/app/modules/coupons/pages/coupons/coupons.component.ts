@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CouponService } from '../services/coupon.service';
-import { Coupon } from '../../../core/models/coupons';
+import { CouponService } from '../../services/coupon.service';
+import { Coupon } from '@core/models/coupons';
 import { Location } from '@angular/common';
 import { SubscriptionLike } from 'rxjs';
-import { CouponModalService } from '../services/coupon-modal.service';
+import { CouponModalService } from '../../services/coupon-modal.service';
 
 @Component({
   selector: 'app-coupons',
@@ -11,17 +11,20 @@ import { CouponModalService } from '../services/coupon-modal.service';
   styleUrls: ['./coupons.component.scss']
 })
 export class CouponsComponent implements OnInit, OnDestroy {
-  public coupons = [{
-    id: '12121',
-    code: 'wqqwe',
-    name: 'fsdfs',
-    type: 'REUSABLE'
-  }, {
-    id: '12123',
-    code: 'wqqwe',
-    name: 'fsdfs',
-    type: 'sdfsf'
-  }];
+  public coupons = [
+    {
+      id: '12121',
+      code: 'wqqwe',
+      name: 'fsdfs',
+      type: 'REUSABLE'
+    },
+    {
+      id: '12123',
+      code: 'wqqwe',
+      name: 'fsdfs',
+      type: 'sdfsf'
+    }
+  ];
   private enableCouponModal = false;
   private couponsSub: SubscriptionLike;
 
@@ -68,5 +71,4 @@ export class CouponsComponent implements OnInit, OnDestroy {
       this.couponsSub.unsubscribe();
     }
   }
-
 }

@@ -1,22 +1,27 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { CouponById } from '../../../core/models/coupons';
-import { CouponService } from '../services/coupon.service';
-import { CouponModalService } from '../services/coupon-modal.service';
+import { CouponById } from '@core/models/coupons';
+import { CouponService } from '../../services/coupon.service';
+import { CouponModalService } from '../../services/coupon-modal.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-coupons-list',
   templateUrl: './coupons-list.component.html',
   styleUrls: ['./coupons-list.component.scss']
 })
-export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
+export class CouponsListComponent implements OnChanges, AfterViewInit {
+  @Input() public first: boolean;
   @Input() public coupon;
-  @Input() public isColoredRow = false;
   public couponCodeToPaste: string;
-  private fixedCoupon;
-  private updatedEarlier = false;
+
+  public readonly couponNameEditing$: Observable<boolean>;
+  public couponEditingName: string;
+
+  private readonly _couponNameEditing$: BehaviorSubject<boolean>;
 
   constructor(
     private translate: TranslateService,
@@ -24,9 +29,16 @@ export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
     private couponModalService: CouponModalService,
     private couponService: CouponService
   ) {
-  }
-
-  ngOnInit(): void {
+    this._couponNameEditing$ = new BehaviorSubject<boolean>(false);
+    this.couponNameEditing$ = this._couponNameEditing$.asObservable().pipe(
+      tap((state: boolean) => {
+        if (state) {
+          this.couponEditingName = this.coupon.name;
+        } else {
+          this.couponEditingName = '';
+        }
+      })
+    );
   }
 
   ngAfterViewInit(): void {
@@ -39,33 +51,37 @@ export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
     this.couponCodeToPaste = `[coupon_${this.coupon.code}]`;
   }
 
-  public fixOldCoupon(data: string) {
-    this.fixedCoupon = this.coupon.name;
+  public toggleCouponNameEditing(): void {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+    this._couponNameEditing$.next(!this._couponNameEditing$.getValue());
   }
 
-  public updateCoupon(data: string) {
-    if (this.updatedEarlier) {
-      this.updatedEarlier = false;
+  public updateCoupon(): void {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
+    if (
+      this.couponEditingName === this.coupon.name ||
+      !this.couponEditingName.length ||
+      this.couponEditingName.length > 44
+    ) {
+      this.toggleCouponNameEditing();
       return;
     }
-    if (!data || data.length > 44) {
-      setTimeout(() => {
-        this.coupon.name = this.fixedCoupon;
-      }, 0);
-      return;
-    }
-    this.coupon.name = data;
-    this.updatedEarlier = true;
-    this.couponService.getCouponById(this.coupon.id).subscribe((response: CouponById) => {
-      if (response) {
-        const couponForSave = response;
-        couponForSave.name = data;
-        this.couponService.updateCoupon(this.coupon.id, couponForSave);
-      }
-    });
+    this.coupon.name = this.couponEditingName;
+    this.couponService
+      .getCouponById(this.coupon.id)
+      .pipe(
+        switchMap((response: CouponById) => {
+          if (response) {
+            const couponForSave = response;
+            couponForSave.name = this.couponEditingName;
+            return this.couponService.updateCoupon(this.coupon.id, couponForSave);
+          }
+        })
+      )
+      .subscribe(() => this.toggleCouponNameEditing());
   }
 
-  public copyCouponCode() {
+  public copyCouponCode(): void {
     const el = document.createElement('textarea');
     el.value = this.couponCodeToPaste;
     el.setAttribute('readonly', '');
@@ -85,7 +101,7 @@ export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
     this.toastr.success(this.translate.instant('coupons.coupon.copied.desc'), this.translate.instant('global.done'));
   }
 
-  public openEditableCouponModal() {
+  public openEditableCouponModal(): void {
     this.couponService.getCouponById(this.coupon.id).subscribe((response: CouponById) => {
       if (response) {
         this.couponModalService.openCouponModal(response);
@@ -93,7 +109,7 @@ export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
     });
   }
 
-  public removeCoupon() {
+  public removeCoupon(): void {
     Swal.fire({
       title: this.translate.instant('coupons.coupon.delete.title'),
       text: this.translate.instant('coupons.coupon.delete.text'),
@@ -102,16 +118,18 @@ export class CouponsListComponent implements OnInit, OnChanges, AfterViewInit {
       confirmButtonColor: '#DD6B55',
       confirmButtonText: this.translate.instant('coupons.coupon.delete.tooltip'),
       cancelButtonText: this.translate.instant('widgetsList.widget.delete.cancel')
-    }).then((isConfirm) => {
+    }).then(isConfirm => {
       if (isConfirm) {
         this.couponService.deleteCoupon(this.coupon.id).subscribe((response: boolean) => {
           if (response) {
-            this.toastr.success(this.translate.instant('coupons.coupon.delete.desc'), this.translate.instant('global.done'));
+            this.toastr.success(
+              this.translate.instant('coupons.coupon.delete.desc'),
+              this.translate.instant('global.done')
+            );
           }
           this.couponService.updateCouponsList.next();
         });
       }
     });
   }
-
 }

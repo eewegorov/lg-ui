@@ -1,9 +1,8 @@
 import { AfterViewChecked, Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { UtilsService } from '../../../core/services/utils.service';
-import { CouponService } from '../services/coupon.service';
-
+import { UtilsService } from '@core/services/utils.service';
+import { CouponService } from '../../services/coupon.service';
 
 @Component({
   selector: 'app-coupon-add',
@@ -22,16 +21,16 @@ export class CouponAddComponent implements OnInit, AfterViewChecked {
     private activeModal: NgbActiveModal,
     private utilsService: UtilsService,
     private couponService: CouponService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     if (this.currentCoupon) {
       this.currentActiveCouponType = this.currentCoupon.type;
 
-      this.couponTypeLabel = this.currentCoupon.type === 'REUSABLE' ?
-        this.translate.instant('coupons.modal.newCoupon.tab2.title') :
-        this.translate.instant('coupons.modal.newCoupon.tab1.title');
+      this.couponTypeLabel =
+        this.currentCoupon.type === 'REUSABLE'
+          ? this.translate.instant('coupons.modal.newCoupon.tab2.title')
+          : this.translate.instant('coupons.modal.newCoupon.tab1.title');
 
       this.editableCoupon = { ...this.currentCoupon };
       if (this.currentActiveCouponType === 'REUSABLE') {
@@ -85,13 +84,13 @@ export class CouponAddComponent implements OnInit, AfterViewChecked {
       }
     }
     if (this.currentCoupon) {
-      this.couponService.updateCoupon(this.currentCoupon.id, couponForSave).subscribe((response) => {
+      this.couponService.updateCoupon(this.currentCoupon.id, couponForSave).subscribe(response => {
         if (response) {
           this.closeModal(response);
         }
       });
     } else {
-      this.couponService.createCoupon(couponForSave).subscribe((response) => {
+      this.couponService.createCoupon(couponForSave).subscribe(response => {
         if (response) {
           this.closeModal(response);
         }
@@ -106,5 +105,4 @@ export class CouponAddComponent implements OnInit, AfterViewChecked {
   private mappedCoupons(list: string[]): string {
     return list.join('\n');
   }
-
 }
