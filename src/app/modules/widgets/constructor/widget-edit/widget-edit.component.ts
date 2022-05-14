@@ -291,11 +291,11 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
       }
 
       if (element.type === 'hidden' && element.fieldType?.type === 'cookie' && !element.cookieValue) {
-        error = 'Не заполнено ID поля'
+        error = 'Не заполнено название кукис'
       }
 
       if (element.type === 'hidden' && element.fieldType?.type === 'user_value' && !element.customUserValue) {
-        error = 'Не заполнено ID поля'
+        error = 'Не заполнено пользовательское значение'
       }
     });
 

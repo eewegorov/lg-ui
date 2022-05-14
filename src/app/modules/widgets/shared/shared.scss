@@ -482,6 +482,8 @@ label.switcher-label-xs {
 }
 
 .widget-small-text {
+  position: relative;
+  z-index: 1;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
   line-height: 15px;
