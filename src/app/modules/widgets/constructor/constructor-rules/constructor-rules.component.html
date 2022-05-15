@@ -999,7 +999,12 @@
             class="mt-3"
           >
             <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoresponder.text' | translate }}</h4>
-            <angular-editor [(ngModel)]="widget.autoresponder.text" class="d-flex" placeholder=""></angular-editor>
+            <angular-editor
+              class="d-flex"
+              placeholder="Введите текст..."
+              [config]="editorConfig"
+              [(ngModel)]="widget.autoresponder.text"
+            ></angular-editor>
           </div>
         </div>
         <div class="col-lg-4">

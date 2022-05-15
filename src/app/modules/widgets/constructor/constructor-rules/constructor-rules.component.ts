@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { FullWidget } from '../../../../core/models/widgets';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-constructor-rules',
@@ -38,6 +39,10 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   ];
   public currentCategory = this.widgetSettingsCategories[0];
 
+  public editorConfig: AngularEditorConfig = {
+    editable: true,
+    toolbarHiddenButtons: [[], ['insertImage', 'insertVideo']]
+  };
 
   private ONE_MINUTE = 1000 * 60;
   private ONE_HOUR = this.ONE_MINUTE * 60;
