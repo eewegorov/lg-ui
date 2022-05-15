@@ -73,7 +73,7 @@
             {{ 'settings.site.newIntegration.group.mailing' | translate }}
           </span>
           <li (click)="changeIntegrationToAdd(item)" *ngFor="let item of integrationsAvailableMailing">
-            <a class="integration-selector-item {{ item.type }}">{{ item.name || defIntegrationToAddTitle }} <span
+            <a class="dropdown-item integration-selector-item {{ item.type }}">{{ item.name || defIntegrationToAddTitle }} <span
               *ngIf="item.isPayment"
               class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
             </a>
@@ -82,7 +82,7 @@
             {{ 'settings.site.newIntegration.group.crm' | translate }}
           </span>
           <li (click)="changeIntegrationToAdd(item)" *ngFor="let item of integrationsAvailableCRM">
-            <a class="integration-selector-item {{ item.type }}"
+            <a class="dropdown-item integration-selector-item {{ item.type }}"
             >{{ item.name || defIntegrationToAddTitle }} <span
               *ngIf="item.isPayment"
               class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
@@ -92,7 +92,7 @@
             {{'settings.site.newIntegration.group.notification' | translate }}
           </span>
           <li (click)="changeIntegrationToAdd(item)" *ngFor="let item of integrationsAvailableNotifications">
-            <a class="integration-selector-item {{ item.type }}">{{ item.name || defIntegrationToAddTitle }} <span
+            <a class="dropdown-item integration-selector-item {{ item.type }}">{{ item.name || defIntegrationToAddTitle }} <span
               *ngIf="item.isPayment"
               class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
             </a>
@@ -101,7 +101,7 @@
             {{ 'settings.site.newIntegration.group.others' | translate }}
           </span>
           <li (click)="changeIntegrationToAdd(item)" *ngFor="let item of integrationsAvailableOthers">
-            <a class="integration-selector-item {{item.type}}">{{ item.name || defIntegrationToAddTitle }} <span
+            <a class="dropdown-item integration-selector-item {{item.type}}">{{ item.name || defIntegrationToAddTitle }} <span
               *ngIf="item.isPayment"
               class="label label-warning tariff-info">{{ 'global.payment.label' | translate }}</span>
             </a>
