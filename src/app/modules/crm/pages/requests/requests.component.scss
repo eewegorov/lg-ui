@@ -1,0 +1,361 @@
+@import "src/scss/vars";
+@import "src/scss/mixins";
+@import "src/scss/page-title";
+
+
+:host {
+  .page-title {
+    margin-bottom: 35px;
+  }
+
+  h2 {
+    margin-bottom: 25px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: $fontPrimaryColor;
+  }
+
+  .filters {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .filter {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      gap: 10px;
+      flex-basis: 48%;
+
+      h5 {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        margin: 0;
+        color: $fontPrimaryColor;
+      }
+
+      .ng-select {
+        width: 100%;
+
+        ::ng-deep {
+          .ng-select-container {
+            align-items: center;
+            border-radius: 4px;
+            border: 1px solid $borderColor;
+            padding: 6px;
+            height: 50px;
+
+            .ng-value-container, .ng-clear-wrapper, .ng-arrow-wrapper {
+              padding: 0;
+            }
+
+            .ng-value-container {
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              gap: 6px;
+              flex-wrap: nowrap;
+              overflow-x: auto;
+              overflow-y: hidden;
+
+              .ng-placeholder, .ng-input {
+                padding: 8px 6px;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 22px;
+                color: $fontGrayColor;
+              }
+
+              .ng-value {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                border: 1px solid $borderColor;
+                border-radius: 4px;
+                background-color: #FFFFFF;
+                margin: 0;
+
+                span {
+                  display: flex;
+                  height: 100%;
+                  padding: 7px;
+                  border: none;
+                  font-style: normal;
+                  font-weight: 400;
+                  font-size: 18px;
+                  line-height: 22px;
+                  color: $fontGrayColor;
+                }
+
+                .ng-value-icon {
+                  font-size: 22px;
+                  line-height: 22px;
+                  padding-left: 10px;
+                  padding-right: 4px;
+
+                  &:hover {
+                    background-color: $activeElementBG;
+                  }
+                }
+
+                .ng-value-label {
+                  padding-left: 4px;
+                  padding-right: 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .btn-group__period-selector {
+        width: 100%;
+        flex-wrap: wrap;
+
+        label, button {
+          height: 50px;
+          padding: 14px;
+          font-style: normal;
+          font-weight: 500 !important;
+          font-size: 18px !important;
+          line-height: 22px !important;
+          color: $fontPrimaryColor;
+
+          &:first-child {
+            border-radius: 4px 0 0 4px;
+          }
+
+          &:last-child {
+            border-radius: 0 4px 4px 0;
+          }
+
+          &.btn.active:not(:disabled) {
+            background: rgba(72, 152, 168, 0.1);
+            border: 1px solid $successColor;
+            color: $successColor;
+            box-shadow: none;
+          }
+        }
+      }
+
+      p {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        color: $fontGrayColor;
+      }
+    }
+
+    @media (max-width: 1199px) {
+      flex-direction: column;
+
+      .filter {
+        .btn-group__period-selector {
+          label, button {
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.site-list-table__onpage select {
+  max-width: 66px;
+}
+
+.crm-notification-block {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #4894c5;
+  background-color: #eff8fb;
+  padding: 10px 7px;
+}
+
+.crm-notification-icon {
+  min-width: 36px;
+  height: 36px;
+  background-image: url("../../../../../assets/images/crm/notification.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 36px;
+  margin-right: 10px;
+}
+
+.crm-notification-text {
+  font-size: 13px;
+  flex: 1;
+  margin-right: 10px;
+  color: #6a6c6f;
+}
+
+.btn {
+  border-radius: 3px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.btn:hover, .btn:focus, .btn.focus {
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.btn:active:not(:disabled), .btn.active:not(:disabled) {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+table {
+  color: inherit;
+}
+
+.crm-table__loader {
+  height: 150px;
+  background-image: url("../../../../../assets/images/core/preloader.gif");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 40px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.crm-table-pos {
+  position: relative;
+  padding-top: 45px;
+}
+
+.crm-table-pos button.update-crm-table {
+  position: absolute;
+  right: 0;
+  top: -2px;
+  z-index: 1;
+}
+
+.dtable-max-220 {
+  width: 220px;
+  max-width: 220px;
+  min-width: 210px;
+}
+
+.dtable-max-160 {
+  width: 160px;
+  max-width: 160px;
+  min-width: 160px;
+}
+
+.crm-table-wr table thead .sorting {
+  position: relative;
+  cursor: pointer;
+}
+
+.clickable-row-info {
+  cursor: pointer;
+}
+
+.clickable-row-info.active-row {
+  background-color: #edf0f5;
+}
+
+.crm-table-widget-name {
+  color: #4898A8;
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 350px;
+}
+
+.clickable-row-info:hover .crm-table-widget-name {
+  color: #2a6496;
+}
+
+.crm-table-site-url {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 350px;
+}
+
+.table .label.lead-state-container {
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.crm-table-state__NEW {
+  background-color: #9b59b6;
+}
+
+.crm-table-state__INWORK {
+  background-color: #4898A8;
+}
+
+.crm-table-state__INVALID {
+  background-color: #c0392b;
+}
+
+.crm-table-state__SUCCESS {
+  background-color: #62cb31;
+}
+
+.site-list-table__bottom-settings {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.site-list-table__onpage {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  margin-right: 10px;
+  align-items: center;
+}
+
+.site-list-table__onpage label {
+  line-height: 30px;
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+.site-list-table__onpage #limitSelector {
+  width: 60px;
+}
+
+
+@media (max-width: 1310px) {
+  .filter-flexed__item .popover.left {
+    top: 120px;
+    left: 10px;
+  }
+
+  .filter-flexed__item .popover.left > .arrow {
+    top: -11px;
+    left: 50%;
+    margin-left: -11px;
+    border-top-width: 0;
+    border-bottom-color: #999;
+    border-bottom-color: rgba(0, 0, 0, .25);
+    right: auto;
+    margin-top: 0;
+    border-right-width: 11px;
+    border-left-color: transparent;
+  }
+}

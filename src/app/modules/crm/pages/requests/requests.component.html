@@ -1,0 +1,218 @@
+<div class="page-title">
+  <h1 class="title-main">{{ 'sidebar.crm' | translate }}</h1>
+</div>
+
+<h2>{{ 'crm.page.filter.title' | translate }}</h2>
+<app-card>
+  <div class="filters">
+    <div class="filter">
+      <h5>{{ 'sidebar.sites' | translate }}</h5>
+      <ng-select
+        (add)="checkFilters($event, 'sites')"
+        (change)="timeoutFiltering(false)"
+        [(ngModel)]="sitesIds"
+        [items]="allSites"
+        [placeholder]="'widgetsList.add.chooseSite' | translate"
+        bindLabel="name"
+        bindValue="id"
+        id="siteSelector"
+        multiple="true"
+      ></ng-select>
+    </div>
+
+    <div class="filter">
+      <h5>{{ 'crm.page.filter.period' | translate }}</h5>
+      <div
+        (ngModelChange)="changePeriod($event)"
+        [(ngModel)]="periodType"
+        class="btn-group btn-group-toggle btn-group__period-selector"
+        name="radioBasic"
+        ngbRadioGroup
+      >
+        <label class="btn btn-default" ngbButtonLabel>
+          <input [value]="'TODAY'" ngbButton type="radio"> {{ 'reports.emails.period.today' | translate }}
+        </label>
+        <label class="btn btn-default" ngbButtonLabel>
+          <input [value]="'YESTERDAY'" ngbButton type="radio"> {{ 'reports.emails.period.yesterday' | translate }}
+        </label>
+        <label class="btn btn-default" ngbButtonLabel>
+          <input [value]="'WEEK'" ngbButton type="radio"> {{ 'reports.emails.period.week' | translate }}
+        </label>
+        <label class="btn btn-default" ngbButtonLabel>
+          <input [value]="'DECADE'" ngbButton type="radio"> {{ 'reports.emails.period.decade' | translate }}
+        </label>
+        <label class="btn btn-default" ngbButtonLabel>
+          <input [value]="'MONTH'" ngbButton type="radio"> {{ 'reports.emails.period.month' | translate }}
+        </label>
+        <ng-template #popContent>
+          <div id="custom-period-container-template">
+            <div class="d-flex flex-column">
+              <div class="text-left">
+                <label class="control-label m-0">{{ 'global.period.dateStart' | translate }}:</label>
+                <div id="req-period-start">
+                  <ngbd-datepicker-i18n [(ngModel)]="periodStart"></ngbd-datepicker-i18n>
+                </div>
+              </div>
+              <div class="text-left mt-3">
+                <label class="control-label m-0">{{ 'global.period.dateEnd' | translate }}:</label>
+                <div id="req-period-end">
+                  <ngbd-datepicker-i18n [(ngModel)]="periodEnd"></ngbd-datepicker-i18n>
+                </div>
+              </div>
+            </div>
+            <div class="text-right mt-3">
+              <button (click)="periodApply()" class="btn w-xs btn-success" id="periodApply"
+                      type="button">{{ 'global.period.start' | translate }}</button>
+            </div>
+          </div>
+        </ng-template>
+        <button
+          #p="ngbPopover"
+          [autoClose]="'outside'"
+          [ngClass]="(periodType === 'USER') ? 'active' : ''"
+          [ngbPopover]="popContent"
+          class="btn btn-default"
+          container="body"
+          id="periods-custom"
+          placement="{{ innerWidth < 850 ? 'bottom' : 'left' }}"
+          type="button"
+        >
+          {{ 'reports.emails.period.user' | translate }}
+        </button>
+      </div>
+      <p class="request-period-name">
+        <span>{{ 'reports.emails.filter.from' | translate }}</span>
+        <span> {{ periodStart | date : 'd.MM.yyyy' }}</span>
+        <span> {{ 'reports.emails.filter.to' | translate }}</span>
+        <span> {{ periodEnd | date : 'd.MM.yyyy' }}</span>
+      </p>
+    </div>
+
+    <div class="filter">
+      <h5>{{ 'sidebar.widgets' | translate }}</h5>
+      <ng-select
+        (add)="checkFilters($event, 'widgets')"
+        (change)="timeoutFiltering(false)"
+        [(ngModel)]="widgetsIds"
+        [items]="allWidgets"
+        [placeholder]="'crm.page.filter.widgets.placeholder' | translate"
+        bindLabel="name"
+        bindValue="id"
+        id="widgetsSelector"
+        multiple="true"
+      ></ng-select>
+    </div>
+
+    <div class="filter">
+      <h5>{{ 'crm.page.filter.states.title' | translate }}</h5>
+      <ng-select
+        (add)="checkFilters($event, 'states')"
+        (change)="timeoutFiltering(false)"
+        [(ngModel)]="statesIds"
+        [items]="states"
+        [placeholder]="'crm.page.filter.states.placeholder' | translate"
+        bindLabel="name"
+        bindValue="id"
+        id="statesSelector"
+        multiple="true"
+      ></ng-select>
+    </div>
+  </div>
+</app-card>
+
+<div *ngIf="isNotificationEnable" class="crm-notification-container">
+  <div class="crm-notification-block">
+    <div class="crm-notification-icon"></div>
+    <div class="crm-notification-text">{{ 'crm.page.notification.text' | translate }}</div>
+    <button (click)="notificationCookieSet()"
+            class="btn btn-default">{{ 'crm.page.notification.btn' | translate }}</button>
+  </div>
+</div>
+
+<div class="crm-table-wr">
+  <div class="hpanel">
+    <div class="panel-heading">
+      <span class="panelTitle">{{ 'sidebar.crm' | translate }}</span>
+    </div>
+
+    <div class="panel-body table-container">
+      <div *ngIf="!initTables" class="crm-table__loader"></div>
+      <div *ngIf="initTables" class="crm-table-pos">
+        <button
+          (click)="timeoutFiltering(false)"
+          class="btn btn-info update-crm-table"
+        ><i class="fas fa-sync"></i> {{ 'crm.page.table.refresh' | translate }}</button>
+        <table class="table table-striped table-bordered hover">
+          <thead>
+          <tr>
+            <th>{{ 'crm.page.table.th1' | translate }}</th>
+            <th>{{ 'crm.page.table.th2' | translate }}</th>
+            <th class="dtable-max-220">{{ 'crm.page.table.th3' | translate }}</th>
+            <th>{{ 'crm.page.table.th4' | translate }}</th>
+            <th
+              (click)="changeDateSorting()"
+              class="dtable-max-160 sorting"
+            >
+              {{ 'crm.page.table.th5' | translate }}
+              <i
+                [ngClass]="sortingDesc ? 'fa-sort-amount-up' : 'fa-sort-amount-down'"
+                class="fas float-right pt-1"
+              ></i>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr
+            (click)="openLeadInfo(item, i)"
+            *ngFor="let item of leads; index as i"
+            [ngClass]="{'active-row': currentOpenedRow === i}"
+            class="clickable-row-info"
+          >
+            <td
+              class="crm-table-widget-name"
+              data-container=".table-container"
+              data-placement="top"
+              data-title="{{ 'crm.page.table.tooltip' | translate }}"
+              data-toggle="tooltip">{{ item.widgetName }}</td>
+            <td><span class="long-text" style="max-width: 200px">{{ item.siteName }}</span></td>
+            <td class="crm-table-site-url dtable-max-220"><span class="long-text">{{ item.pageUrl }}</span></td>
+            <td><span
+              class="lead-state-container label font-normal-size crm-table-state__{{ item.state }}">{{ item.status }}</span>
+            </td>
+            <td class="dtable-max-160">{{ item.date | date : "dd.MM.y, HH:mm" }}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="site-list-table__bottom-settings">
+          <div class="site-list-table__onpage">
+            <label>{{ 'sitelist.table.onPage' | translate }}</label>
+            <ng-select
+              (change)="timeoutFiltering(false)"
+              [(ngModel)]="searchParams.limit"
+              [clearable]="false"
+              [items]="limitOptions"
+              appendTo="body"
+              bindLabel="value"
+              id="limitSelector"
+            ></ng-select>
+          </div>
+          <div class="site-list-arrows btn-group">
+            <button
+              (click)="prevList()"
+              [disabled]="searchParams.offset === 0"
+              class="btn btn-default"
+            ><i class="fa fa-chevron-left"></i></button>
+            <button
+              (click)="nextList()"
+              [disabled]="leads.length < searchParams.limit.value"
+              class="btn btn-default"
+            ><i class="fa fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-lead-info *ngIf="currentOpenedRow !== null"></app-lead-info>

@@ -9,9 +9,9 @@ import { SiteShort } from '@core/models/sites';
 import { User } from '@core/models/user';
 import { Lead, LeadById, LeadRequest, LeadWidgets, Periods, StateWithIndex } from '@core/models/crm';
 import { CoreSitesService } from '@core/services/core-sites.service';
-import { SitesService } from '../../sites/services/sites.service';
-import { UserService } from '../../user/services/user.service';
-import { CrmService } from '../services/crm.service';
+import { SitesService } from '@modules/sites/services/sites.service';
+import { UserService } from '@modules/user/services/user.service';
+import { CrmService } from '../../services/crm.service';
 
 @Component({
   selector: 'app-requests',

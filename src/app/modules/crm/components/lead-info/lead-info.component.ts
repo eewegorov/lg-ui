@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
-import { LeadById, LeadByIdWithIndex } from '../../../core/models/crm';
-import { CrmService } from '../services/crm.service';
-
+import { LeadById, LeadByIdWithIndex } from '@core/models/crm';
+import { CrmService } from '../../services/crm.service';
 
 @Component({
   selector: 'app-lead-info',
@@ -17,12 +16,11 @@ export class LeadInfoComponent implements OnInit, OnDestroy {
   public isOpen = false;
   private openLeadInfoSidebarSub: SubscriptionLike;
 
-  constructor(private crmService: CrmService) {
-  }
+  constructor(private crmService: CrmService) {}
 
   ngOnInit(): void {
     this.openLeadInfoSidebarSub = this.crmService.openLeadInfoSidebar.subscribe((response: LeadByIdWithIndex) => {
-      if (this.isOpen && (this.index === response.index)) {
+      if (this.isOpen && this.index === response.index) {
         return;
       }
       this.leadInfo = response.data;
@@ -47,8 +45,9 @@ export class LeadInfoComponent implements OnInit, OnDestroy {
   }
 
   public updateComment() {
-    this.crmService.updateLeadComment(this.leadInfo.id, { comment: this.leadInfo.userComment }).subscribe(
-      (response: boolean) => {
+    this.crmService
+      .updateLeadComment(this.leadInfo.id, { comment: this.leadInfo.userComment })
+      .subscribe((response: boolean) => {
         if (response) {
           this.isUserCommentUpdated = true;
           setTimeout(() => {
@@ -63,5 +62,4 @@ export class LeadInfoComponent implements OnInit, OnDestroy {
       this.openLeadInfoSidebarSub.unsubscribe();
     }
   }
-
 }

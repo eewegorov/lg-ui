@@ -7,19 +7,13 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { CrmRoutingModule } from './crm-routing.module';
 import { SharedModule } from '../../shared/shared.module';
-import { RequestsListComponent } from './requests-list/requests-list.component';
-import { RequestsFilterComponent } from './requests-filter/requests-filter.component';
-import { RequestsComponent } from './requests/requests.component';
-import { LeadInfoComponent } from './lead-info/lead-info.component';
-
+import { RequestsListComponent } from './components/requests-list/requests-list.component';
+import { RequestsFilterComponent } from './components/requests-filter/requests-filter.component';
+import { RequestsComponent } from './pages/requests/requests.component';
+import { LeadInfoComponent } from './components/lead-info/lead-info.component';
 
 @NgModule({
-  declarations: [
-    RequestsListComponent,
-    RequestsFilterComponent,
-    RequestsComponent,
-    LeadInfoComponent
-  ],
+  declarations: [RequestsListComponent, RequestsFilterComponent, RequestsComponent, LeadInfoComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -31,5 +25,4 @@ import { LeadInfoComponent } from './lead-info/lead-info.component';
     CrmRoutingModule
   ]
 })
-export class CrmModule {
-}
+export class CrmModule {}
