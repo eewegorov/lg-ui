@@ -141,14 +141,18 @@ input.radio-left {
   padding-right: 20px;
 }
 
+.dropdown button, .input-group button, .input-group input {
+  font-size: 12px;
+}
+
 .round-button {
   border-radius: 20px;
   margin: 0 7px;
   padding: 0 10px;
 }
 
-.dropdown button, .input-group button, .input-group input {
-  font-size: 12px;
+.dropdown button.round-button {
+  font-size: 14px;
 }
 
 label.extra-header {
