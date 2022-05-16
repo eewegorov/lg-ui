@@ -643,7 +643,7 @@
                       <input
                         [(ngModel)]="widget.autoinvite.exit.desktopEnable"
                         [disabled]="!widget.autoinvite.exit.enable"
-                        (ngModelChange)="checkExitIntent($event, true)"
+                        (ngModelChange)="checkExitIntent(true)"
                         class="form-check-input"
                         type="checkbox"
                       />
@@ -660,7 +660,7 @@
                       <input
                         [(ngModel)]="widget.autoinvite.exit.mobileEnable"
                         [disabled]="!widget.autoinvite.exit.enable"
-                        (ngModelChange)="checkExitIntent($event, false)"
+                        (ngModelChange)="checkExitIntent(false)"
                         class="form-check-input"
                         type="checkbox"
                       />
