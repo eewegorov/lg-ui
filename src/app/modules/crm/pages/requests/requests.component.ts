@@ -7,7 +7,16 @@ import { CookieService } from 'ngx-cookie-service';
 import * as moment from 'moment';
 import { SiteShort } from '@core/models/sites';
 import { User } from '@core/models/user';
-import { Lead, LeadById, LeadRequest, LeadWidgets, Periods, StateWithIndex } from '@core/models/crm';
+import {
+  Lead,
+  LeadById,
+  LeadCustomFields,
+  LeadHistory,
+  LeadRequest,
+  LeadWidgets,
+  Periods,
+  StateWithIndex
+} from '@core/models/crm';
 import { CoreSitesService } from '@core/services/core-sites.service';
 import { SitesService } from '@modules/sites/services/sites.service';
 import { UserService } from '@modules/user/services/user.service';

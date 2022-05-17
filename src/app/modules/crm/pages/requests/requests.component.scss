@@ -52,24 +52,20 @@
             align-items: center;
             border-radius: 4px;
             border: 1px solid $borderColor;
-            padding: 6px;
-            height: 50px;
+            padding: 5px;
 
             .ng-value-container, .ng-clear-wrapper, .ng-arrow-wrapper {
               padding: 0;
             }
 
             .ng-value-container {
-              display: flex;
+              display: inline-flex;
               align-items: center;
               justify-content: flex-start;
-              gap: 6px;
-              flex-wrap: nowrap;
-              overflow-x: auto;
-              overflow-y: hidden;
+              gap: 5px;
 
               .ng-placeholder, .ng-input {
-                padding: 8px 6px;
+                padding: 8px 5px;
                 font-style: normal;
                 font-weight: 400;
                 font-size: 18px;
@@ -175,187 +171,307 @@
       }
     }
   }
-}
 
-.site-list-table__onpage select {
-  max-width: 66px;
-}
+  section {
+    margin-top: 35px;
 
-.crm-notification-block {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  border: 1px solid #4894c5;
-  background-color: #eff8fb;
-  padding: 10px 7px;
-}
+    .crm {
+      &-header, &-tabl, &-footer, {
+        width: 100%;
+        display: flex;
+      }
 
-.crm-notification-icon {
-  min-width: 36px;
-  height: 36px;
-  background-image: url("../../../../../assets/images/crm/notification.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 36px;
-  margin-right: 10px;
-}
+      &-header, &-footer {
+        align-items: center;
+        justify-content: flex-end;
 
-.crm-notification-text {
-  font-size: 13px;
-  flex: 1;
-  margin-right: 10px;
-  color: #6a6c6f;
-}
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
 
-.btn {
-  border-radius: 3px;
-  font-size: 14px;
-  white-space: nowrap;
-}
+      &-header {
+        margin-bottom: 30px;
 
-.btn:hover, .btn:focus, .btn.focus {
-  text-decoration: none;
-  box-shadow: none;
-}
+        button {
+          gap: 15px;
+          padding: 15px;
+          border-radius: 4px;
+          background-color: $successColor;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 22px;
+          color: #FFFFFF;
 
-.btn:active:not(:disabled), .btn.active:not(:disabled) {
-  background-image: none;
-  outline: 0;
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-}
+          span {
+            display: flex;
+            width: 24px;
+            height: 24px;
+            position: relative;
 
-table {
-  color: inherit;
-}
+            @include svg-position();
+          }
 
-.crm-table__loader {
-  height: 150px;
-  background-image: url("../../../../../assets/images/core/preloader.gif");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 40px;
-  background-color: rgba(255, 255, 255, 0.5);
-}
+          &:hover {
+            background-color: darken($successColor, 10%);
+            border-color: darken($successColor, 10%);
+          }
+        }
+      }
 
-.crm-table-pos {
-  position: relative;
-  padding-top: 45px;
-}
+      &-table {
+        display: block;
+        width: 100%;
+        max-height: 65vh;
+        border: 1px solid $borderColor;
+        border-radius: 5px;
+        overflow: auto;
 
-.crm-table-pos button.update-crm-table {
-  position: absolute;
-  right: 0;
-  top: -2px;
-  z-index: 1;
-}
+        table {
 
-.dtable-max-220 {
-  width: 220px;
-  max-width: 220px;
-  min-width: 210px;
-}
+          thead {
+            display: table-header-group;
+            position: sticky;
+            z-index: 1;
+            top: 0;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 1px $borderColor;
 
-.dtable-max-160 {
-  width: 160px;
-  max-width: 160px;
-  min-width: 160px;
-}
+            th {
+              color: $fontGrayColor;
+            }
+          }
 
-.crm-table-wr table thead .sorting {
-  position: relative;
-  cursor: pointer;
-}
+          tbody {
+            tr {
+              width: 100%;
 
-.clickable-row-info {
-  cursor: pointer;
-}
+              &:not(:first-child) {
+                border-top: 1px solid $borderColor;
+              }
 
-.clickable-row-info.active-row {
-  background-color: #edf0f5;
-}
+              &:last-child {
+                td {
+                  border-bottom: none;
+                }
+              }
 
-.crm-table-widget-name {
-  color: #4898A8;
-  font-weight: 700;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 350px;
-}
-
-.clickable-row-info:hover .crm-table-widget-name {
-  color: #2a6496;
-}
-
-.crm-table-site-url {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 350px;
-}
-
-.table .label.lead-state-container {
-  font-size: 11px;
-  font-weight: 400;
-}
-
-.crm-table-state__NEW {
-  background-color: #9b59b6;
-}
-
-.crm-table-state__INWORK {
-  background-color: #4898A8;
-}
-
-.crm-table-state__INVALID {
-  background-color: #c0392b;
-}
-
-.crm-table-state__SUCCESS {
-  background-color: #62cb31;
-}
-
-.site-list-table__bottom-settings {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.site-list-table__onpage {
-  display: flex;
-  flex-grow: 1;
-  justify-content: flex-end;
-  margin-right: 10px;
-  align-items: center;
-}
-
-.site-list-table__onpage label {
-  line-height: 30px;
-  margin-right: 10px;
-  margin-bottom: 0;
-}
-
-.site-list-table__onpage #limitSelector {
-  width: 60px;
-}
+              td {
+                color: $fontPrimaryColor;
 
 
-@media (max-width: 1310px) {
-  .filter-flexed__item .popover.left {
-    top: 120px;
-    left: 10px;
-  }
+                &.widget-name {
+                  font-weight: 600;
+                }
+              }
 
-  .filter-flexed__item .popover.left > .arrow {
-    top: -11px;
-    left: 50%;
-    margin-left: -11px;
-    border-top-width: 0;
-    border-bottom-color: #999;
-    border-bottom-color: rgba(0, 0, 0, .25);
-    right: auto;
-    margin-top: 0;
-    border-right-width: 11px;
-    border-left-color: transparent;
+              &:hover {
+                cursor: pointer;
+              }
+
+              &:hover, &.active-row {
+
+                td {
+                  background-color: $activeElementBG;
+                }
+              }
+            }
+          }
+
+          thead, tbody {
+            th, td {
+              height: 100%;
+              padding: 19px 14px;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 18px;
+              line-height: 22px;
+              text-align: left;
+              background-color: #FFFFFF;
+              border-bottom:  1px solid $borderColor;
+
+              &:not(:last-of-type) {
+                border-right:  1px solid $borderColor;
+              }
+
+              &.widget-name {
+                width: 20%;
+                min-width: 320px;
+
+                @media (max-width: 424px) {
+                  min-width: 255px;
+                }
+              }
+
+              &.site {
+                width: 17%;
+                min-width: 300px;
+              }
+
+              &.site-url {
+                width: 25%;
+                min-width: 430px;
+              }
+
+              &.status {
+                width: 19%;
+                min-width: 230px;
+
+                span {
+                  padding: 7px 10px;
+                  border-radius: 4px;
+                  font-style: normal;
+                  font-weight: 400;
+                  font-size: 18px;
+                  line-height: 22px;
+                  color: #FFFFFF;
+
+
+                  &.NEW {
+                    background-color: $purpleColor;
+                  }
+
+                  &.INWORK {
+                    background-color: $successColor;
+                  }
+
+                  &.INVALID {
+                    background-color: $dangerColor;
+                  }
+
+                  &.SUCCESS {
+                    background-color: $greenColor;
+                  }
+                }
+
+              }
+
+              &.date {
+                width: 19%;
+                min-width: 230px;
+              }
+            }
+          }
+        }
+
+        .loader {
+          width: 100%;
+          height: 150px;
+          background-image: url("../../../../../assets/images/core/preloader.gif");
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-size: 40px;
+          background-color: rgba(255, 255, 255, 0.5);
+        }
+      }
+
+      &-footer {
+        margin-top: 30px;
+        gap: 40px;
+        flex-wrap: nowrap;
+
+        .on-page {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 15px;
+
+          label {
+            margin: 0;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+            color: $fontPrimaryColor;
+          }
+
+          .ng-select {
+            border-color: $borderColor;
+
+            &.ng-select-opened {
+              ::ng-deep {
+                .ng-select-container {
+                  .ng-arrow-wrapper {
+                    background: {
+                      image: url("~src/assets/images/core/caret-up.svg");
+                    };
+                  }
+                }
+              }
+            }
+
+            ::ng-deep {
+              .ng-select-container {
+                padding: 7px 10px;
+
+                .ng-value-container {
+                  padding: 0 5px 0 0;
+                }
+
+                .ng-input {display: none}
+
+                .ng-arrow-wrapper {
+                  width: 24px;
+                  height: 24px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  background: {
+                    image: url("~src/assets/images/core/caret-down.svg");
+                    position: center;
+                    repeat: no-repeat;
+                  };
+
+                  .ng-arrow {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .btn-group {
+
+          button {
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 16px;
+            color: $fontPrimaryColor;
+            border-color: $borderColor;
+
+            span {
+              display: flex;
+              width: 28px;
+              height: 28px;
+              position: relative;
+
+              @include svg-position();
+            }
+
+            &:first-child {
+              span {
+                transform: rotate(90deg);
+              }
+            }
+
+            &:last-child {
+              span {
+                transform: rotate(-90deg);
+              }
+            }
+
+            &:hover:not(:disabled) {
+              background-color: $activeElementBG;
+            }
+          }
+        }
+      }
+    }
   }
 }

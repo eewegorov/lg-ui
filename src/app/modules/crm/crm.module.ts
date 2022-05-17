@@ -11,6 +11,7 @@ import { RequestsListComponent } from './components/requests-list/requests-list.
 import { RequestsFilterComponent } from './components/requests-filter/requests-filter.component';
 import { RequestsComponent } from './pages/requests/requests.component';
 import { LeadInfoComponent } from './components/lead-info/lead-info.component';
+import { InlineSVGModule } from 'ng-inline-svg-2';
 
 @NgModule({
   declarations: [RequestsListComponent, RequestsFilterComponent, RequestsComponent, LeadInfoComponent],
@@ -22,7 +23,8 @@ import { LeadInfoComponent } from './components/lead-info/lead-info.component';
     NgSelectModule,
     ClickOutsideModule,
     SharedModule,
-    CrmRoutingModule
+    CrmRoutingModule,
+    InlineSVGModule
   ]
 })
 export class CrmModule {}
