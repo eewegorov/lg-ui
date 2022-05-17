@@ -4,14 +4,13 @@ import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
-import { Periods } from '../../../core/models/crm';
-import { SiteShort } from '../../../core/models/sites';
-import { Email, EmailsStatistics, EmailsStatisticsView } from '../../../core/models/emails';
-import { OrderByPipe } from '../../../shared/pipes/order-by.pipe';
-import { UtilsService } from '../../../core/services/utils.service';
-import { SitesService } from '../../sites/services/sites.service';
-import { EmailsService } from '../services/emails.service';
-
+import { Periods } from '@core/models/crm';
+import { SiteShort } from '@core/models/sites';
+import { Email, EmailsStatistics, EmailsStatisticsView } from '@core/models/emails';
+import { OrderByPipe } from '@shared/pipes/order-by.pipe';
+import { UtilsService } from '@core/services/utils.service';
+import { SitesService } from '@modules/sites/services/sites.service';
+import { EmailsService } from '../../services/emails.service';
 
 @Component({
   selector: 'app-emails',
@@ -41,16 +40,18 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          callback: (value) => {
-            if (value % 1 === 0) {
-              return value;
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+            callback: value => {
+              if (value % 1 === 0) {
+                return value;
+              }
             }
           }
         }
-      }]
+      ]
     }
   };
   private ALL_SITE_ID = '0000000000000000';
@@ -64,8 +65,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
     private utilsService: UtilsService,
     private sitesService: SitesService,
     private emailsService: EmailsService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.changePeriod(this.periodType);
@@ -135,8 +135,8 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
       confirmButtonText: this.translate.instant('reports.emails.clear.yes'),
-      cancelButtonText: this.translate.instant('global.no'),
-    }).then((isConfirm) => {
+      cancelButtonText: this.translate.instant('global.no')
+    }).then(isConfirm => {
       if (isConfirm) {
         const params = {
           start: this.getISOTime(this.periodStart),
@@ -151,7 +151,10 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
             this.timeoutFiltering();
             this.getEmails();
             this.getBestSites();
-            this.toastr.success(this.translate.instant('reports.emails.clear.done.desc'), this.translate.instant('global.done'));
+            this.toastr.success(
+              this.translate.instant('reports.emails.clear.done.desc'),
+              this.translate.instant('global.done')
+            );
           }
         });
       }
@@ -171,7 +174,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
       params.dateFrom = startPeriod.getTime();
       params.dateTo = endPeriod.getTime();
     }
-    this.emailsService.downloadEmailList(params).subscribe((response) => {
+    this.emailsService.downloadEmailList(params).subscribe(response => {
       if (response) {
         const blob = new Blob([response], { type: 'text/csv;charset=UTF-8' });
         const link = document.createElement('a');
@@ -197,10 +200,12 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
 
   private getSites() {
     this.translate.get('crm.page.filter.sites').subscribe((translation: string) => {
-      this.allSites = [{
-        id: this.ALL_SITE_ID,
-        name: translation
-      }];
+      this.allSites = [
+        {
+          id: this.ALL_SITE_ID,
+          name: translation
+        }
+      ];
       this.sitesIds = [this.ALL_SITE_ID];
       this.sitesService.getSites().subscribe((response: SiteShort[]) => {
         this.allSites = this.allSites.concat(response);
@@ -214,7 +219,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
     this.emailsService.getEmailList({ limit: 5, orders: '-date' }).subscribe((response: Email[]) => {
       if (response.length) {
         response.forEach((item: Email) => {
-          this.utilsService.useGravatarIfExists(item.email).subscribe((responseGravatar) => {
+          this.utilsService.useGravatarIfExists(item.email).subscribe(responseGravatar => {
             if (responseGravatar) {
               item.gravatarUrl = responseGravatar;
             }
@@ -238,14 +243,14 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
     };
 
     this.emailsService.getEmailStatistic(params).subscribe((response: EmailsStatistics[]) => {
-      this.allSitesStats = this.allSites.slice(1).map((site) => {
+      this.allSitesStats = this.allSites.slice(1).map(site => {
         return { id: site.id, count: 0, name: site.name };
       });
 
       response.forEach((stat: EmailsStatistics) => {
         // eslint-disable-next-line guard-for-in
         for (const key in stat.items) {
-          this.allSitesStats.forEach((item) => {
+          this.allSitesStats.forEach(item => {
             if (item.id === key) {
               item.count += stat.items[key];
             }
@@ -318,7 +323,7 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
       const dd = new Date(ts);
       const date = this.getDDMMYYTime(dd);
       const item = this.getByDate(statistics, date);
-      const value = (item !== null) ? item.value : 0;
+      const value = item !== null ? item.value : 0;
       labels.push(date);
       data.push(value);
       days++;
@@ -377,5 +382,4 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
   private setChartSettings(color: string) {
     return { pointBackgroundColor: color, borderColor: color, fill: false };
   }
-
 }

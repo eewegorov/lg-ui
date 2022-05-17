@@ -7,12 +7,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ChartsModule } from 'ng2-charts';
 import { SharedModule } from '../../shared/shared.module';
 import { EmailsRoutingModule } from './emails-routing.module';
-import { EmailsBestComponent } from './emails-best/emails-best.component';
-import { EmailsLastComponent } from './emails-last/emails-last.component';
-import { EmailsStatisticsComponent } from './emails-statistics/emails-statistics.component';
-import { EmailsFilterComponent } from './emails-filter/emails-filter.component';
-import { EmailsComponent } from './emails/emails.component';
-
+import { EmailsBestComponent } from './components/emails-best/emails-best.component';
+import { EmailsLastComponent } from './components/emails-last/emails-last.component';
+import { EmailsStatisticsComponent } from './components/emails-statistics/emails-statistics.component';
+import { EmailsFilterComponent } from './components/emails-filter/emails-filter.component';
+import { EmailsComponent } from './pages/emails/emails.component';
 
 @NgModule({
   declarations: [
@@ -33,5 +32,4 @@ import { EmailsComponent } from './emails/emails.component';
     EmailsRoutingModule
   ]
 })
-export class EmailsModule {
-}
+export class EmailsModule {}
