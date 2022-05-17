@@ -12,6 +12,7 @@ import { EmailsLastComponent } from './components/emails-last/emails-last.compon
 import { EmailsStatisticsComponent } from './components/emails-statistics/emails-statistics.component';
 import { EmailsFilterComponent } from './components/emails-filter/emails-filter.component';
 import { EmailsComponent } from './pages/emails/emails.component';
+import { InlineSVGModule } from 'ng-inline-svg-2';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { EmailsComponent } from './pages/emails/emails.component';
     NgSelectModule,
     ChartsModule,
     SharedModule,
-    EmailsRoutingModule
+    EmailsRoutingModule,
+    InlineSVGModule
   ]
 })
 export class EmailsModule {}

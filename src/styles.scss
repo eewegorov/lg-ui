@@ -354,15 +354,15 @@ a.info-link {
 }
 
 .btn-success.disabled, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled.active, .btn-success[disabled], .btn-success[disabled]:hover, .btn-success[disabled]:focus, .btn-success[disabled]:active, .btn-success.active[disabled], fieldset[disabled] .btn-success, fieldset[disabled] .btn-success:hover, fieldset[disabled] .btn-success:focus, fieldset[disabled] .btn-success:active, fieldset[disabled] .btn-success.active {
-  background-color: #D4D7DD;
-  border-color: #D4D7DD;
+  background-color: $borderColor;
+  border-color: $borderColor;
   color: #A9AFBC !important;
   box-shadow: none;
 }
 
 button.hovered-btn-red:hover {
-  background-color: #e74c3c;
-  border-color: #e74c3c;
+  background-color: $dangerColor;
+  border-color: $dangerColor;
   color: #FFFFFF;
 }
 
