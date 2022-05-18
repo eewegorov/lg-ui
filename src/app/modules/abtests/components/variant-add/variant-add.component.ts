@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 import { mergeMap } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { sortBy } from 'lodash-es';
-import { Mockup, MockupGroup } from '../../../core/models/widgets';
-import { AbtestVariant } from '../../../core/models/abtests';
-import { BinsDataService } from '../services/bins-data.service';
-import { WidgetService } from '../../widgets/services/widget.service';
-import { ContainerizedWidgetService } from '../../widgets/services/containerized-widget.service';
-import { AbtestsService } from '../services/abtests.service';
-
+import { Mockup, MockupGroup } from '@core/models/widgets';
+import { AbtestVariant } from '@core/models/abtests';
+import { BinsDataService } from '../../services/bins-data.service';
+import { WidgetService } from '../../../widgets/services/widget.service';
+import { ContainerizedWidgetService } from '../../../widgets/services/containerized-widget.service';
+import { AbtestsService } from '../../services/abtests.service';
 
 @Component({
   selector: 'app-variant-add',
@@ -42,9 +41,25 @@ export class VariantAddComponent implements OnInit {
   @Input() private currentTestId;
   @Input() private currentTestIndex;
   @Input() private abtTypeWidget;
-  private colorsArray = ['#34495e', '#9b59b6', '#3498db', '#62cb31', '#ffb606', '#e67e22', '#e74c3c',
-    '#c0392b', '#58b62c', '#e43725', '#2a7aaf', '#7c4792', '#4ea227', '#b8651b',
-    '#9a2e22', '#2a3a4b', '#ffeb3b'];
+  private colorsArray = [
+    '#34495e',
+    '#9b59b6',
+    '#3498db',
+    '#62cb31',
+    '#ffb606',
+    '#e67e22',
+    '#e74c3c',
+    '#c0392b',
+    '#58b62c',
+    '#e43725',
+    '#2a7aaf',
+    '#7c4792',
+    '#4ea227',
+    '#b8651b',
+    '#9a2e22',
+    '#2a3a4b',
+    '#ffeb3b'
+  ];
   private checkboxOnArray = [];
   private testArr = [];
   private queryForMockups = { type: '', categories: '' };
@@ -59,18 +74,16 @@ export class VariantAddComponent implements OnInit {
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private abTestsService: AbtestsService
-  ) {
-  }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public closeModal(): void {
     this.activeModal.close();
   }
 
   public loadMore() {
-    for (let i = this.startItem; i < (this.startItem + this.ITEMS_TO_ADD); i++) {
+    for (let i = this.startItem; i < this.startItem + this.ITEMS_TO_ADD; i++) {
       if (this.newItem < this.testArr.length) {
         this.mockups.push(this.testArr[i]);
         this.newItem++;
@@ -100,9 +113,11 @@ export class VariantAddComponent implements OnInit {
       delete this.queryForMockups.type;
     }
     this.queryForMockups.categories = this.checkboxOnArray.join(',');
-    this.widgetService.getMockups(this.queryForMockups.type, this.queryForMockups.categories).subscribe((response: Mockup[]) => {
-      this.actionAfterTabSwitch(response);
-    });
+    this.widgetService
+      .getMockups(this.queryForMockups.type, this.queryForMockups.categories)
+      .subscribe((response: Mockup[]) => {
+        this.actionAfterTabSwitch(response);
+      });
   }
 
   public setMockupABT(mockup) {
@@ -135,13 +150,16 @@ export class VariantAddComponent implements OnInit {
 
       if (isContainerized) {
         this.containerizedWidgetService
-          .rename(this.currentSiteId, response.value, 'Вариант ' + this.currentVariantsLength).subscribe(() => {
-          this.updateVariantAfterCreating(response.value);
-        });
+          .rename(this.currentSiteId, response.value, 'Вариант ' + this.currentVariantsLength)
+          .subscribe(() => {
+            this.updateVariantAfterCreating(response.value);
+          });
       } else {
-        this.widgetService.rename(this.currentSiteId, response.value, 'Вариант ' + this.currentVariantsLength).subscribe(() => {
-          this.updateVariantAfterCreating(response.value);
-        });
+        this.widgetService
+          .rename(this.currentSiteId, response.value, 'Вариант ' + this.currentVariantsLength)
+          .subscribe(() => {
+            this.updateVariantAfterCreating(response.value);
+          });
       }
     });
   }
@@ -153,7 +171,11 @@ export class VariantAddComponent implements OnInit {
       etalon: false,
       id
     };
-    this.addMoreDataToVariant(newVariant, this.abTests[this.currentTestIndex].variants.length, this.abTests[this.currentTestIndex]);
+    this.addMoreDataToVariant(
+      newVariant,
+      this.abTests[this.currentTestIndex].variants.length,
+      this.abTests[this.currentTestIndex]
+    );
 
     this.abTests[this.currentTestIndex].variants.push(newVariant);
 
@@ -164,9 +186,10 @@ export class VariantAddComponent implements OnInit {
   private addMoreDataToVariant(variant, index, test) {
     variant.conversions = sortBy(variant.conversions, 'date');
     variant.color = this.colorsArray[index];
-    const arrayForInfo = this.binsDataService.binDist(
-      [{ s: this.getActions(variant), n: this.getShows(variant) }], { confRange: 0.8, disc: 30000 }
-    ).res;
+    const arrayForInfo = this.binsDataService.binDist([{ s: this.getActions(variant), n: this.getShows(variant) }], {
+      confRange: 0.8,
+      disc: 30000
+    }).res;
 
     variant.convInfo = arrayForInfo[0];
     variant.convInfo.conversion = this.getConvItem(variant.convInfo);
@@ -178,7 +201,9 @@ export class VariantAddComponent implements OnInit {
 
     if (test && typeof test.etalonConversion !== 'undefined') {
       variant.convInfo.betterTo =
-        test.etalonConversion !== 0 ? (((variant.convInfo.convNumber - test.etalonConversion) / test.etalonConversion) * 100) : 0;
+        test.etalonConversion !== 0
+          ? ((variant.convInfo.convNumber - test.etalonConversion) / test.etalonConversion) * 100
+          : 0;
       variant.convInfo.betterTo = Math.round(variant.convInfo.betterTo * 100) / 100;
     }
 
@@ -198,7 +223,7 @@ export class VariantAddComponent implements OnInit {
       return 0;
     }
     let total = 0;
-    variant.conversions.forEach((item) => {
+    variant.conversions.forEach(item => {
       total += item.target;
     });
     return total;
@@ -209,7 +234,7 @@ export class VariantAddComponent implements OnInit {
       return 0;
     }
     let total = 0;
-    variant.conversions.forEach((item) => {
+    variant.conversions.forEach(item => {
       total += item.shows;
     });
     return total;
@@ -241,26 +266,29 @@ export class VariantAddComponent implements OnInit {
 
     let mockups = [];
 
-    this.widgetService.getMockups(this.queryForMockups.type).pipe(
-      mergeMap(((fetchedMockups: Mockup[]) => {
-        mockups = fetchedMockups;
-        return this.widgetService.getMockupGroups(this.queryForMockups.type);
-      }))
-    ).subscribe((groups: MockupGroup[]) => {
-      // Parse groups and categories
-      this.groups = groups;
-      for (let i = 0; i < groups.length; i++) {
-        for (let j = 0; j < groups[i].categories.length; j++) {
-          this.groups[i].categories[j] = {
-            checked: false,
-            id: groups[i].categories[j].id,
-            name: groups[i].categories[j].name
-          };
+    this.widgetService
+      .getMockups(this.queryForMockups.type)
+      .pipe(
+        mergeMap((fetchedMockups: Mockup[]) => {
+          mockups = fetchedMockups;
+          return this.widgetService.getMockupGroups(this.queryForMockups.type);
+        })
+      )
+      .subscribe((groups: MockupGroup[]) => {
+        // Parse groups and categories
+        this.groups = groups;
+        for (let i = 0; i < groups.length; i++) {
+          for (let j = 0; j < groups[i].categories.length; j++) {
+            this.groups[i].categories[j] = {
+              checked: false,
+              id: groups[i].categories[j].id,
+              name: groups[i].categories[j].name
+            };
+          }
         }
-      }
 
-      this.actionAfterTabSwitch(mockups);
-    });
+        this.actionAfterTabSwitch(mockups);
+      });
   }
 
   private actionAfterTabSwitch(data) {
@@ -279,12 +307,11 @@ export class VariantAddComponent implements OnInit {
     for (let i = 0; i < this.ITEMS_TO_ADD; i++) {
       if (i < this.testArr.length) {
         this.mockups.push(this.testArr[i]);
-        this.startItem = (i + 1);
+        this.startItem = i + 1;
         this.newItem = this.startItem;
       } else {
         break;
       }
     }
   }
-
 }

@@ -7,20 +7,14 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ChartsModule } from 'ng2-charts';
 import { SharedModule } from '../../shared/shared.module';
 import { AbtestsRoutingModule } from './abtests-routing.module';
-import { AbtestsActiveComponent } from './abtests-active/abtests-active.component';
-import { AbtestsArchiveComponent } from './abtests-archive/abtests-archive.component';
-import { VariantAddComponent } from './variant-add/variant-add.component';
-import { AbtestAddComponent } from './abtest-add/abtest-add.component';
+import { AbtestsActiveComponent } from './pages/abtests-active/abtests-active.component';
+import { AbtestsArchiveComponent } from './pages/abtests-archive/abtests-archive.component';
+import { VariantAddComponent } from './components/variant-add/variant-add.component';
+import { AbtestAddComponent } from './components/abtest-add/abtest-add.component';
 import { WidgetsModule } from '../widgets/widgets.module';
 
-
 @NgModule({
-  declarations: [
-    AbtestsActiveComponent,
-    AbtestsArchiveComponent,
-    VariantAddComponent,
-    AbtestAddComponent
-  ],
+  declarations: [AbtestsActiveComponent, AbtestsArchiveComponent, VariantAddComponent, AbtestAddComponent],
   imports: [
     CommonModule,
     TranslateModule,
@@ -33,5 +27,4 @@ import { WidgetsModule } from '../widgets/widgets.module';
     WidgetsModule
   ]
 })
-export class AbtestsModule {
-}
+export class AbtestsModule {}

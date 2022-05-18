@@ -135,15 +135,16 @@
   <h2>{{ 'sidebar.crm' | translate }}</h2>
   <app-card>
     <ng-container *ngIf="initTables; else loading">
-      <div class="crm-header">
-        <button (click)="timeoutFiltering(false)" class="btn">
-          <span inlineSVG="./assets/images/crm/refresh-icon.svg"></span>
-          {{ 'crm.page.table.refresh' | translate }}
-        </button>
-      </div>
-      <div class="crm-table">
-        <table>
-          <thead>
+      <ng-container *ngIf="leads.length; else noDataTemplate">
+        <div class="crm-header">
+          <button (click)="timeoutFiltering(false)" class="btn">
+            <span inlineSVG="./assets/images/crm/refresh-icon.svg"></span>
+            {{ 'crm.page.table.refresh' | translate }}
+          </button>
+        </div>
+        <div class="crm-table">
+          <table>
+            <thead>
             <th class="widget-name">{{ 'crm.page.table.th1' | translate }}</th>
             <th class="site">{{ 'crm.page.table.th2' | translate }}</th>
             <th class="site-url">{{ 'crm.page.table.th3' | translate }}</th>
@@ -152,8 +153,8 @@
               {{ 'crm.page.table.th5' | translate }}
               <i [ngClass]="sortingDesc ? 'fa-sort-amount-up' : 'fa-sort-amount-down'" class="fas float-right pt-1"></i>
             </th>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <ng-container *ngFor="let item of leads; index as i">
               <tr
                 (click)="openLeadInfo(item, i)"
@@ -176,30 +177,34 @@
                 <td class="date">{{ item.date | date : "dd.MM.y, HH:mm" }}</td>
               </tr>
             </ng-container>
-          </tbody>
-        </table>
-      </div>
-      <div class="crm-footer">
-        <div class="on-page">
-          <label>{{ 'sitelist.table.onPage' | translate }}</label>
-          <ng-select
-            (change)="timeoutFiltering(false)"
-            [(ngModel)]="searchParams.limit"
-            [clearable]="false"
-            [items]="limitOptions"
-            bindLabel="value"
-            id="limitSelector"
-          ></ng-select>
+            </tbody>
+          </table>
         </div>
-        <div class="btn-group">
-          <button (click)="prevList()" [disabled]="searchParams.offset === 0" class="btn btn-default">
-            <span inlineSVG="./assets/images/core/caret-down.svg"></span>
-          </button>
-          <button (click)="nextList()" [disabled]="leads.length < searchParams.limit.value" class="btn btn-default">
-            <span inlineSVG="./assets/images/core/caret-down.svg"></span>
-          </button>
+        <div class="crm-footer">
+          <div class="on-page">
+            <label>{{ 'sitelist.table.onPage' | translate }}</label>
+            <ng-select
+              (change)="timeoutFiltering(false)"
+              [(ngModel)]="searchParams.limit"
+              [clearable]="false"
+              [items]="limitOptions"
+              bindLabel="value"
+              id="limitSelector"
+            ></ng-select>
+          </div>
+          <div class="btn-group">
+            <button (click)="prevList()" [disabled]="searchParams.offset === 0" class="btn btn-default">
+              <span inlineSVG="./assets/images/core/caret-down.svg"></span>
+            </button>
+            <button (click)="nextList()" [disabled]="leads.length < searchParams.limit.value" class="btn btn-default">
+              <span inlineSVG="./assets/images/core/caret-down.svg"></span>
+            </button>
+          </div>
         </div>
-      </div>
+      </ng-container>
+      <ng-template #noDataTemplate>
+        <h2>{{ 'crm.page.table.no-data' | translate }}</h2>
+      </ng-template>
     </ng-container>
     <ng-template #loading>
       <div class="loader"></div>

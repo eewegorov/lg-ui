@@ -3,27 +3,26 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { VariantAddComponent } from '../variant-add/variant-add.component';
+import { VariantAddComponent } from '../../components/variant-add/variant-add.component';
 import Swal from 'sweetalert2';
 import { sortBy, unzip } from 'lodash-es';
-import { WidgetTemplate, WidgetType } from '../../../core/models/widgets';
-import { Abtest, AbtestStatistics, NewVariant, Variant } from '../../../core/models/abtests';
-import { SiteShort } from '../../../core/models/sites';
-import { BinsDataService } from '../services/bins-data.service';
-import { TariffsService } from '../../../core/services/tariffs.service';
-import { CoreSitesService } from '../../../core/services/core-sites.service';
-import { SitesService } from '../../sites/services/sites.service';
-import { WidgetService } from '../../widgets/services/widget.service';
-import { ContainerizedWidgetService } from '../../widgets/services/containerized-widget.service';
-import { AbtestsService } from '../services/abtests.service';
+import { WidgetTemplate, WidgetType } from '@core/models/widgets';
+import { Abtest, AbtestStatistics, NewVariant, Variant } from '@core/models/abtests';
+import { SiteShort } from '@core/models/sites';
+import { BinsDataService } from '../../services/bins-data.service';
+import { TariffsService } from '@core/services/tariffs.service';
+import { CoreSitesService } from '@core/services/core-sites.service';
+import { SitesService } from '../../../sites/services/sites.service';
+import { WidgetService } from '../../../widgets/services/widget.service';
+import { ContainerizedWidgetService } from '../../../widgets/services/containerized-widget.service';
+import { AbtestsService } from '../../services/abtests.service';
 import { SubscriptionLike } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-abtests-active',
   templateUrl: './abtests-active.component.html',
-  styleUrls: ['../shared/shared.scss', './abtests-active.component.scss']
+  styleUrls: ['./abtests-active.component.scss']
 })
 export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestroy {
   public currSite = '';
@@ -38,24 +37,42 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     responsive: true,
     maintainAspectRatio: false,
     scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true,
-          callback: (value) => {
-            if (value % 1 === 0) {
-              return value;
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+            callback: value => {
+              if (value % 1 === 0) {
+                return value;
+              }
             }
           }
         }
-      }]
+      ]
     }
   };
   private fixedTest;
   private updatedEarlier = false;
   private widgetTypes = [];
-  private colorsArray = ['#34495e', '#9b59b6', '#3498db', '#62cb31', '#ffb606', '#e67e22', '#e74c3c',
-    '#c0392b', '#58b62c', '#e43725', '#2a7aaf', '#7c4792', '#4ea227', '#b8651b',
-    '#9a2e22', '#2a3a4b', '#ffeb3b'];
+  private colorsArray = [
+    '#34495e',
+    '#9b59b6',
+    '#3498db',
+    '#62cb31',
+    '#ffb606',
+    '#e67e22',
+    '#e74c3c',
+    '#c0392b',
+    '#58b62c',
+    '#e43725',
+    '#2a7aaf',
+    '#7c4792',
+    '#4ea227',
+    '#b8651b',
+    '#9a2e22',
+    '#2a3a4b',
+    '#ffeb3b'
+  ];
   private templates: WidgetTemplate[] = [];
 
   private widgetsTemplatesSub: SubscriptionLike;
@@ -73,8 +90,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private abTestsService: AbtestsService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.widgetsTemplatesSub = this.widgetService.getWidgetsTemplates().subscribe((response: WidgetTemplate[]) => {
@@ -139,7 +155,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
 
   public getClassForBetterTo(item): string {
     let className = '';
-    if (!item.etalon && (item.convInfo.n !== 0)) {
+    if (!item.etalon && item.convInfo.n !== 0) {
       if (item.convInfo.betterTo > 0) {
         className = 'set-positive-better-color';
       } else if (item.convInfo.betterTo < 0) {
@@ -159,7 +175,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     if (item.convInfo.betterTo && item.convInfo.betterTo > 0) {
       return '+' + item.convInfo.betterTo + '%';
     }
-    return item.convInfo.betterTo !== undefined ? (item.convInfo.betterTo + '%') : '-';
+    return item.convInfo.betterTo !== undefined ? item.convInfo.betterTo + '%' : '-';
   }
 
   public cloneVariant(test, variant, index, parentIndex) {
@@ -184,7 +200,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
       confirmButtonColor: '#DD6B55',
       confirmButtonText: 'Да, уверен',
       cancelButtonText: 'Отмена'
-    }).then((isConfirm) => {
+    }).then(isConfirm => {
       if (isConfirm) {
         this.abTestsService.deleteVariant(test.id, variantId).subscribe((response: boolean) => {
           if (response) {
@@ -205,7 +221,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
       confirmButtonColor: '#62cb31',
       confirmButtonText: 'Да, уверен',
       cancelButtonText: 'Отмена'
-    }).then((isConfirm) => {
+    }).then(isConfirm => {
       if (isConfirm) {
         setTimeout(() => {
           $('[role="tooltip"]').remove();
@@ -241,7 +257,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
       confirmButtonColor: '#DD6B55',
       confirmButtonText: 'Да, уверен',
       cancelButtonText: 'Отмена'
-    }).then((isConfirm) => {
+    }).then(isConfirm => {
       if (isConfirm) {
         this.abTestsService.resetStats(test.id).subscribe((response: boolean) => {
           if (response) {
@@ -309,7 +325,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
       confirmButtonColor: '#DD6B55',
       confirmButtonText: 'Да, уверен',
       cancelButtonText: 'Отмена'
-    }).then((isConfirm) => {
+    }).then(isConfirm => {
       if (isConfirm) {
         setTimeout(() => {
           $('[role="tooltip"]').remove();
@@ -355,11 +371,11 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     this.getTestsById();
     this.showWhat = state;
     if (this.showWhat === 'ACTIVE') {
-      this.abTests = this.abTests.filter((item) => {
+      this.abTests = this.abTests.filter(item => {
         return item.state === 'ACTIVE';
       });
     } else if (this.showWhat === 'PAUSED') {
-      this.abTests = this.abTests.filter((item) => {
+      this.abTests = this.abTests.filter(item => {
         return item.state === 'PAUSED';
       });
     }
@@ -393,58 +409,61 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
   }
 
   private mapABTests(tests) {
-    return tests.map((test) => {
+    return tests.map(test => {
       test.containerized = this.getCurrentType(test.type).containerized;
       return test;
     });
   }
 
   private getCurrentType(typeId) {
-    return this.widgetTypes.find((type) => {
+    return this.widgetTypes.find(type => {
       return type.id === typeId;
     });
   }
 
   private getConversions(itemNumber: number, testsLength: number) {
     if (itemNumber < testsLength) {
-      this.abTestsService.getVariants(this.abTests[itemNumber].id).pipe(
-        switchMap((variants: Variant[]) => {
-          this.abTests[itemNumber].variants = variants;
-          console.log(variants);
-          return this.abTestsService.getStatistics(this.abTests[itemNumber].id);
-        })
-      ).subscribe((response: AbtestStatistics) => {
-        if (response) {
-          this.abTests[itemNumber].chartData = [];
-          this.abTests[itemNumber].chartLabels = [];
-          this.abTests[itemNumber].chartSeries = [];
-          this.abTests[itemNumber].chartColors = [];
-          this.abTests[itemNumber].variants.forEach((variant, i) => {
-            variant.conversions = response[variant.id];
-            variant.etalon = variant.abtestInfo.type === 'ETALON';
-            this.addMoreDataToVariant(variant, i, this.abTests[itemNumber]);
-            setTimeout(() => {
-              variant = { ...variant };
-            }, 1000);
-          });
-          this.getConversions(itemNumber + 1, testsLength);
+      this.abTestsService
+        .getVariants(this.abTests[itemNumber].id)
+        .pipe(
+          switchMap((variants: Variant[]) => {
+            this.abTests[itemNumber].variants = variants;
+            console.log(variants);
+            return this.abTestsService.getStatistics(this.abTests[itemNumber].id);
+          })
+        )
+        .subscribe((response: AbtestStatistics) => {
+          if (response) {
+            this.abTests[itemNumber].chartData = [];
+            this.abTests[itemNumber].chartLabels = [];
+            this.abTests[itemNumber].chartSeries = [];
+            this.abTests[itemNumber].chartColors = [];
+            this.abTests[itemNumber].variants.forEach((variant, i) => {
+              variant.conversions = response[variant.id];
+              variant.etalon = variant.abtestInfo.type === 'ETALON';
+              this.addMoreDataToVariant(variant, i, this.abTests[itemNumber]);
+              setTimeout(() => {
+                variant = { ...variant };
+              }, 1000);
+            });
+            this.getConversions(itemNumber + 1, testsLength);
 
-          const dateArr = this.chartGetLegend(this.abTests[itemNumber].variants);
+            const dateArr = this.chartGetLegend(this.abTests[itemNumber].variants);
 
-          if (dateArr) {
-            const chartDataBuild = this.getChartDataArray(this.chartGetLegend(this.abTests[itemNumber].variants));
-            const chartLabelBuild = Object.keys(this.chartGetLegend(this.abTests[itemNumber].variants));
-            if (chartDataBuild[0].length === 1) {
-              chartLabelBuild.push('');
+            if (dateArr) {
+              const chartDataBuild = this.getChartDataArray(this.chartGetLegend(this.abTests[itemNumber].variants));
+              const chartLabelBuild = Object.keys(this.chartGetLegend(this.abTests[itemNumber].variants));
+              if (chartDataBuild[0].length === 1) {
+                chartLabelBuild.push('');
+              }
+
+              this.abTests[itemNumber].chartData = chartDataBuild;
+              this.abTests[itemNumber].chartLabels = chartLabelBuild;
             }
-
-            this.abTests[itemNumber].chartData = chartDataBuild;
-            this.abTests[itemNumber].chartLabels = chartLabelBuild;
+          } else {
+            this.getConversions(itemNumber + 1, testsLength);
           }
-        } else {
-          this.getConversions(itemNumber + 1, testsLength);
-        }
-      });
+        });
     } else {
       this.isLoad = true;
       this.startScrollToTest();
@@ -524,7 +543,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
         item.day = this.timeConverter(item.date).day;
         item.month = this.timeConverter(item.date).month;
         item.year = this.timeConverter(item.date).year;
-        const date = new Date(item.year, (item.month - 1), item.day);
+        const date = new Date(item.year, item.month - 1, item.day);
 
         if (range.min == null || date < range.min) {
           range.min = date;
@@ -532,10 +551,14 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
         if (range.max == null || date > range.max) {
           range.max = date;
         }
-        widgetsMap[i].totals.shows = (widgetsMap[i].totals.shows == null) ? item.shows : widgetsMap[i].totals.shows + item.shows;
-        widgetsMap[i].totals.targets = (widgetsMap[i].totals.targets == null) ? item.targets : widgetsMap[i].totals.targets + item.targets;
-        widgetsMap[i].conversionMap[`${item.day}.${item.month}.${item.year}`] =
-          (widgetsMap[i].totals.targets * 100 / widgetsMap[i].totals.shows).toFixed(2);
+        widgetsMap[i].totals.shows =
+          widgetsMap[i].totals.shows == null ? item.shows : widgetsMap[i].totals.shows + item.shows;
+        widgetsMap[i].totals.targets =
+          widgetsMap[i].totals.targets == null ? item.targets : widgetsMap[i].totals.targets + item.targets;
+        widgetsMap[i].conversionMap[`${item.day}.${item.month}.${item.year}`] = (
+          (widgetsMap[i].totals.targets * 100) /
+          widgetsMap[i].totals.shows
+        ).toFixed(2);
       }
     }
 
@@ -573,7 +596,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     if (this.currSite === 'allsitesid') {
       this.abTests = this.allABTests;
     } else {
-      this.abTests = this.allABTests.filter((item) => {
+      this.abTests = this.allABTests.filter(item => {
         return item.siteId === this.currSite;
       });
       if (!this.abTests.length) {
@@ -583,18 +606,21 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
   }
 
   private showPaymentDialog(siteId, description) {
-    this.tariffsService.checkTariffPlans(siteId,
+    this.tariffsService.checkTariffPlans(
+      siteId,
       this.translate.instant('sitelist.tariff.improve'),
-      description, this.getSiteName(siteId)
+      description,
+      this.getSiteName(siteId)
     );
   }
 
   private addMoreDataToVariant(variant, index, test) {
     variant.conversions = sortBy(variant.conversions, 'date');
     variant.color = this.colorsArray[index];
-    const arrayForInfo = this.binsDataService.binDist(
-      [{ s: this.getActions(variant), n: this.getShows(variant) }], { confRange: 0.8, disc: 30000 }
-    ).res;
+    const arrayForInfo = this.binsDataService.binDist([{ s: this.getActions(variant), n: this.getShows(variant) }], {
+      confRange: 0.8,
+      disc: 30000
+    }).res;
 
     variant.convInfo = arrayForInfo[0];
     variant.convInfo.conversion = this.getConvItem(variant.convInfo);
@@ -606,7 +632,9 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
 
     if (test && typeof test.etalonConversion !== 'undefined') {
       variant.convInfo.betterTo =
-        test.etalonConversion !== 0 ? (((variant.convInfo.convNumber - test.etalonConversion) / test.etalonConversion) * 100) : 0;
+        test.etalonConversion !== 0
+          ? ((variant.convInfo.convNumber - test.etalonConversion) / test.etalonConversion) * 100
+          : 0;
       variant.convInfo.betterTo = Math.round(variant.convInfo.betterTo * 100) / 100;
     }
 
@@ -626,7 +654,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
       return 0;
     }
     let total = 0;
-    variant.conversions.forEach((item) => {
+    variant.conversions.forEach(item => {
       total += item.targets;
     });
     return total;
@@ -637,7 +665,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
       return 0;
     }
     let total = 0;
-    variant.conversions.forEach((item) => {
+    variant.conversions.forEach(item => {
       total += item.shows;
     });
     return total;
@@ -679,5 +707,4 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     });
     return filteredArray[0].id;
   }
-
 }

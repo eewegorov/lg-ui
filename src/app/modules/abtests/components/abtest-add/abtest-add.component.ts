@@ -2,12 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SiteShort } from '../../../core/models/sites';
-import { WidgetInfo } from '../../../core/models/widgets';
-import { AbtestShort } from '../../../core/models/abtests';
-import { WidgetService } from '../../widgets/services/widget.service';
-import { ContainerizedWidgetService } from '../../widgets/services/containerized-widget.service';
-import { AbtestsService } from '../services/abtests.service';
+import { SiteShort } from '@core/models/sites';
+import { WidgetInfo } from '@core/models/widgets';
+import { AbtestShort } from '@core/models/abtests';
+import { WidgetService } from '../../../widgets/services/widget.service';
+import { ContainerizedWidgetService } from '../../../widgets/services/containerized-widget.service';
+import { AbtestsService } from '../../services/abtests.service';
 
 @Component({
   selector: 'app-abtest-add',
@@ -28,9 +28,7 @@ export class AbtestAddComponent implements OnInit {
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private abTestsService: AbtestsService
-  ) {
-  }
-
+  ) {}
 
   ngOnInit(): void {
     this.editableAB = this.getEmptyABTest();
@@ -41,16 +39,20 @@ export class AbtestAddComponent implements OnInit {
       step: 0,
       abtTypeWidget: this.widget.type,
       widgetVarName: this.translate.instant('abtests.create.variant1'),
-      ABTypes: [{
-        type: 'DUPLICATE',
-        title: this.translate.instant('abtests.abtypes.title.duplicate')
-      }, {
-        type: 'NEW',
-        title: this.translate.instant('abtests.abtypes.title.new')
-      }, {
-        type: 'MOCKUP',
-        title: this.translate.instant('abtests.abtypes.title.mockup')
-      }]
+      ABTypes: [
+        {
+          type: 'DUPLICATE',
+          title: this.translate.instant('abtests.abtypes.title.duplicate')
+        },
+        {
+          type: 'NEW',
+          title: this.translate.instant('abtests.abtypes.title.new')
+        },
+        {
+          type: 'MOCKUP',
+          title: this.translate.instant('abtests.abtypes.title.mockup')
+        }
+      ]
     };
   }
 
@@ -88,13 +90,21 @@ export class AbtestAddComponent implements OnInit {
 
     this.abTestsService.createTest(dataObj).subscribe((response: AbtestShort) => {
       if (this.isContainerized) {
-        this.containerizedWidgetService.rename(this.currentSite.id, response.variantId, this.newABTestInfo.widgetVarName).subscribe(() => {
-          this.router.navigate([`/widgets/edit/${this.currentSite.id}-${response.variantId}/`]).then(() => this.closeModal());
-        });
+        this.containerizedWidgetService
+          .rename(this.currentSite.id, response.variantId, this.newABTestInfo.widgetVarName)
+          .subscribe(() => {
+            this.router
+              .navigate([`/widgets/edit/${this.currentSite.id}-${response.variantId}/`])
+              .then(() => this.closeModal());
+          });
       } else {
-        this.widgetService.rename(this.currentSite.id, response.variantId, this.newABTestInfo.widgetVarName).subscribe(() => {
-          this.router.navigate([`/widgets/edit/${this.currentSite.id}-${response.variantId}/`]).then(() => this.closeModal());
-        });
+        this.widgetService
+          .rename(this.currentSite.id, response.variantId, this.newABTestInfo.widgetVarName)
+          .subscribe(() => {
+            this.router
+              .navigate([`/widgets/edit/${this.currentSite.id}-${response.variantId}/`])
+              .then(() => this.closeModal());
+          });
       }
     });
   }
@@ -110,5 +120,4 @@ export class AbtestAddComponent implements OnInit {
       mockupId: ''
     };
   }
-
 }

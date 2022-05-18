@@ -175,6 +175,10 @@
   section {
     margin-top: 35px;
 
+    h2:last-child {
+      margin: 0;
+    }
+
     .crm {
       &-header, &-tabl, &-footer, {
         width: 100%;

@@ -13,7 +13,7 @@ import { CoreSitesService } from '@core/services/core-sites.service';
 import { SitesService } from '../../../sites/services/sites.service';
 import { WidgetService } from '../../services/widget.service';
 import { ContainerizedWidgetService } from '../../services/containerized-widget.service';
-import { AbtestAddComponent } from '../../../abtests/abtest-add/abtest-add.component';
+import { AbtestAddComponent } from '../../../abtests/components/abtest-add/abtest-add.component';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 

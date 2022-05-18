@@ -10,7 +10,7 @@ import { WidgetInfo, WidgetInfoShort, WidgetStatistics, WidgetType } from '@core
 import { TariffsService } from '@core/services/tariffs.service';
 import { SitesService } from '../../sites/services/sites.service';
 import { AbtestsService } from '../../abtests/services/abtests.service';
-import { AbtestAddComponent } from '../../abtests/abtest-add/abtest-add.component';
+import { AbtestAddComponent } from '../../abtests/components/abtest-add/abtest-add.component';
 import { WidgetService } from '../services/widget.service';
 import { CoreSitesService } from '@core/services/core-sites.service';
 import { BehaviorSubject, Observable } from 'rxjs';
