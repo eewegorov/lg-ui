@@ -181,16 +181,6 @@
       width: calc(100% - 300px);
       max-width: 930px;
       height: 320px;
-
-      .reports-emails-preloader {
-        background: #fff url("../../../../../assets/images/core/preloader.gif") no-repeat center center;
-        background-size: 30px 30px;
-        height: 100%;
-        left: 0;
-        position: absolute;
-        width: 100%;
-        z-index: 999;
-      }
     }
 
     .reports-emails-stats {
@@ -207,7 +197,6 @@
         justify-content: center;
         gap: 12px;
         padding: 9px 14px;
-        border-color: $fontGrayColor;
         border-radius: 5px;
         font-style: normal;
         font-weight: 400 !important;
@@ -224,8 +213,8 @@
           @include svg-position();
         }
 
-        &:hover {
-          color: #FFFFFF;
+        &:hover, &:focus {
+          border-color: $fontGrayColor;
         }
       }
 
@@ -290,70 +279,174 @@
       }
     }
   }
-}
 
+  .last-added {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 35px;
 
+    .app-card {
+      width: 100%;
 
+      &:first-child {
+        width: calc(100% * 0.3706);
+        min-width: 300px;
+      }
 
-.report-email-stat-panel .panel-body {
-  padding-top: 0px !important;
-}
+      .panel-body {
+        width: 100%;
+        position: relative;
 
-.report-email-stat-panel .download-btn {
-  position: absolute;
-  right: 0;
-  top: 15px;
-}
+        .list {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 10px;
 
-.report-email-stat-panel #emailsChart {
-  height: 240px !important;
-}
+          &-item {
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            border-bottom: 1px solid $borderColor;
 
-.report-email-sites-sites-header,
-.report-email-sites-value-header {
-  font-weight: 600;
-  font-size: 15px;
-}
+            &:last-child {
+              border: none;
+            }
 
-.report-email-sites-sites-header {
-  padding-left: 17px;
-}
+            .report-email-last-logo {
+              width: 60px;
+              min-width: 60px;
+              height: 60px;
+              min-height: 60px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 50%;
+              background-color: $activeElementBG;
 
-.report-email-sites-value-header,
-.report-email-sites-values {
-  text-align: center;
-}
+              span {
+                width: 32px;
+                height: 32px;
+                display: flex;
+                position: relative;
 
-.report-email-sites-sites-row {
-  margin-left: 2px;
-  padding: 10px 0px;
-  font-size: 15px;
-}
+                @include svg-position();
+              }
+            }
 
-.report-email-sites-sites-rows {
-  width: 100%;
-}
+            .report-email-user-icon {
+              background-image: url("../../../../../assets/images/core/default-user-icon.png");
+              background-repeat: no-repeat;
+              background-size: contain;
+            }
 
-.report-email-last-logo {
-  border: 1px solid #e4e5e7;
-  border-radius: 25px;
-  float: left;
-  height: 50px;
-  margin-right: 10px;
-  width: 50px;
-}
+            h5 {
+              font-style: normal;
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 24px;
+              color: $fontPrimaryColor;
+              word-break: break-word;
+              margin: 0;
 
-.report-email-user-icon {
-  background-image: url("../../../../../assets/images/core/default-user-icon.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
+              &:first-child {
+                font-weight: 700;
+              }
+            }
+          }
+        }
 
-.report-email-last-name {
-  padding-top: 10px;
-}
+        .report-email-sites-sites-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 60px;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          gap: 20px;
+          line-height: 22px;
+          color: $fontPrimaryColor;
 
-.report-email-last-container div:first-child {
-  margin-top: 0px !important;
-  padding-top: 0px !important;
+          div {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48%;
+            word-break: break-word;
+
+            &:first-child {
+              justify-content: flex-start;
+            }
+          }
+        }
+
+        .report-email-sites-sites-row {
+          padding: 20px 20px 20px 0;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          color: $fontPrimaryColor;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+
+          div {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48%;
+            word-break: break-word;
+
+            &:first-child {
+              justify-content: flex-start;
+            }
+          }
+        }
+
+        @media (max-width: 991px) {
+          .report-email-sites-sites-header,
+          .report-email-sites-sites-row {
+            div:last-child {
+              text-align: right;
+              justify-content: flex-end;
+            }
+          }
+        }
+      }
+    }
+
+    @media (max-width: 1199px) {
+      flex-direction: column;
+      gap: 0;
+
+      .app-card,  {
+        &:first-child {
+          width: 100%;
+          min-width: 100%;
+        }
+      }
+    }
+  }
+
+  .reports-emails-preloader {
+    background: #fff url("../../../../../assets/images/core/preloader.gif") no-repeat center center;
+    background-size: 30px 30px;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+  }
 }

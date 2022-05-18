@@ -475,3 +475,29 @@
     }
   }
 }
+
+.crm-notification-block {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #4894c5;
+  background-color: #eff8fb;
+  padding: 10px 7px;
+}
+
+.crm-notification-icon {
+  min-width: 36px;
+  height: 36px;
+  background-image: url("../../../../../assets/images/crm/notification.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 36px;
+  margin-right: 10px;
+}
+
+.crm-notification-text {
+  font-size: 13px;
+  flex: 1;
+  margin-right: 10px;
+  color: #6a6c6f;
+}
