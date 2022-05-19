@@ -394,6 +394,10 @@ button[role=switch] {
     transform: translateY(-50%);
   }
 
+  &:not(.checked) {
+    background-color: #C6CAD2;
+  }
+
   &.checked {
     background: $successColor;
 

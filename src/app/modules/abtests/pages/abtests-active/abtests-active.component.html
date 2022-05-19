@@ -168,14 +168,37 @@
                   <tr [class.inactive]="!item.active">
                     <td class="name">
                       <div class="name-container">
-                        <div [ngStyle]="{ 'background-color': item.color }" class="colored-item-circle"></div>
-                        <cool-inline-edit-field
-                          (saved)="updateVariantName(test, item)"
-                          [emptyText]="'empty'"
-                          [ngModel]="item.name"
-                          class="test-item-desc long-text"
-                          name="desc"
-                        ></cool-inline-edit-field>
+                        <ng-container *ngIf="(variantEditing$ | async) as editableVariant">
+                          <ng-container *ngIf="editableVariant.isOpen && editableVariant.variant.id === item.id; else name">
+                            <div [class.is-invalid]="editableVariant.variant.name.trim().length === 0" class="input">
+                              <input
+                                [(ngModel)]="editableVariant.variant.name"
+                                class="form-control"
+                                placeholder="{{ 'containerized.container.add.name' | translate }}"
+                                type="text"
+                              />
+                            </div>
+                            <button (click)="closeVariantEditing()" class="btn btn-default">
+                              <span inlineSVG="./assets/images/core/cross.svg"></span>
+                            </button>
+                            <button
+                              (click)="updateVariantName(test, item)"
+                              [disabled]="editableVariant.variant.name.trim().length === 0"
+                              class="btn btn-default"
+                            >
+                              <span inlineSVG="./assets/images/core/check.svg"></span>
+                            </button>
+                          </ng-container>
+                          <ng-template #name>
+                            <div class="label">
+                              <div [ngStyle]="{ 'background-color': item.color }" class="colored-item-circle"></div>
+                              <span>{{ item.name }}</span>
+                            </div>
+                            <button (click)="openVariantEditing(item)" class="btn">
+                              <span inlineSVG="./assets/images/core/pencil.svg"></span>
+                            </button>
+                          </ng-template>
+                        </ng-container>
                       </div>
                     </td>
                     <td class="shows">

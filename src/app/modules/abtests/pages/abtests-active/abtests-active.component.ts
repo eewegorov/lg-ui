@@ -16,8 +16,13 @@ import { SitesService } from '../../../sites/services/sites.service';
 import { WidgetService } from '../../../widgets/services/widget.service';
 import { ContainerizedWidgetService } from '../../../widgets/services/containerized-widget.service';
 import { AbtestsService } from '../../services/abtests.service';
-import { SubscriptionLike } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { BehaviorSubject, from, Observable, of, SubscriptionLike } from 'rxjs';
+import { first, switchMap } from 'rxjs/operators';
+
+interface ISelectedVariant {
+  isOpen: boolean;
+  variant?: Variant;
+}
 
 @Component({
   selector: 'app-abtests-active',
@@ -25,6 +30,8 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./abtests-active.component.scss']
 })
 export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestroy {
+  public readonly variantEditing$: Observable<ISelectedVariant>;
+
   public currSite = '';
   public sites = [{ id: 'allsitesid', name: 'Все сайты' }];
   public showWhat = 'ALL';
@@ -51,6 +58,8 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
       ]
     }
   };
+
+  private readonly _variantEditing$: BehaviorSubject<ISelectedVariant>;
   private fixedTest;
   private updatedEarlier = false;
   private widgetTypes = [];
@@ -74,7 +83,6 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     '#ffeb3b'
   ];
   private templates: WidgetTemplate[] = [];
-
   private widgetsTemplatesSub: SubscriptionLike;
   private widgetsTypesSub: SubscriptionLike;
 
@@ -90,7 +98,10 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private abTestsService: AbtestsService
-  ) {}
+  ) {
+    this._variantEditing$ = new BehaviorSubject<ISelectedVariant>({ isOpen: false });
+    this.variantEditing$ = this._variantEditing$.asObservable();
+  }
 
   ngOnInit(): void {
     this.widgetsTemplatesSub = this.widgetService.getWidgetsTemplates().subscribe((response: WidgetTemplate[]) => {
@@ -107,6 +118,14 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
 
   ngAfterViewChecked(): void {
     ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
+  }
+
+  public openVariantEditing(variant): void {
+    this._variantEditing$.next({ isOpen: true, variant: variant });
+  }
+
+  public closeVariantEditing(): void {
+    this._variantEditing$.next({ isOpen: false });
   }
 
   public fixOldTest(test) {
@@ -134,11 +153,22 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
   }
 
   public updateVariantName(test, variant) {
-    if (test.containerized) {
-      this.containerizedWidgetService.rename(test.siteId, variant.id, variant.name).subscribe();
-    } else {
-      this.widgetService.rename(test.siteId, variant.id, variant.name).subscribe();
-    }
+    from(of(null))
+      .pipe(
+        first(),
+        switchMap(() => {
+          if (test.containerized) {
+            return this.containerizedWidgetService.rename(
+              test.siteId,
+              variant.id,
+              this._variantEditing$.getValue().variant.name
+            );
+          } else {
+            return this.widgetService.rename(test.siteId, variant.id, this._variantEditing$.getValue().variant.name);
+          }
+        })
+      )
+      .subscribe(() => this.closeVariantEditing());
   }
 
   public changeVariantState(variant, test) {
