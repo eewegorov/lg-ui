@@ -70,7 +70,7 @@ export class WidgetsComponent implements OnInit, AfterViewChecked {
     this.translate.get('widgetsList.defCompany').subscribe((translatedValue: string) => {
       this.defCompanyName = translatedValue;
       this.sitesService.getSites().subscribe((sites: SiteShort[]) => {
-        if (sites) {
+        if (sites.length) {
           this.sites = sites;
           this.coreSitesService.sites = sites;
           this.currentSite = selectedSite ? this.coreSitesService.getSiteById(selectedSite) : sites[0];
