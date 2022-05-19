@@ -12,6 +12,7 @@ import { AbtestsArchiveComponent } from './pages/abtests-archive/abtests-archive
 import { VariantAddComponent } from './components/variant-add/variant-add.component';
 import { AbtestAddComponent } from './components/abtest-add/abtest-add.component';
 import { WidgetsModule } from '../widgets/widgets.module';
+import { InlineSVGModule } from 'ng-inline-svg-2';
 
 @NgModule({
   declarations: [AbtestsActiveComponent, AbtestsArchiveComponent, VariantAddComponent, AbtestAddComponent],
@@ -24,7 +25,8 @@ import { WidgetsModule } from '../widgets/widgets.module';
     ChartsModule,
     SharedModule,
     AbtestsRoutingModule,
-    WidgetsModule
+    WidgetsModule,
+    InlineSVGModule
   ]
 })
 export class AbtestsModule {}

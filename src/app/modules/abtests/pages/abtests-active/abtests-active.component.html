@@ -31,25 +31,13 @@
   </div>
   <div class="filter">
     <div class="btn-group">
-      <button
-        (click)="getTestsByState('ALL')"
-        [class.active]="showWhat === 'ALL'"
-        class="btn btn-default"
-      >
+      <button (click)="getTestsByState('ALL')" [class.active]="showWhat === 'ALL'" class="btn btn-default">
         {{ 'abtests.active.all' | translate }}
       </button>
-      <button
-        (click)="getTestsByState('ACTIVE')"
-        [class.active]="showWhat === 'ACTIVE'"
-        class="btn btn-default"
-      >
+      <button (click)="getTestsByState('ACTIVE')" [class.active]="showWhat === 'ACTIVE'" class="btn btn-default">
         {{ 'abtests.active.active' | translate }}
       </button>
-      <button
-        (click)="getTestsByState('PAUSED')"
-        [class.active]="showWhat === 'PAUSED'"
-        class="btn btn-default"
-      >
+      <button (click)="getTestsByState('PAUSED')" [class.active]="showWhat === 'PAUSED'" class="btn btn-default">
         {{ 'abtests.active.paused' | translate }}
       </button>
     </div>
@@ -58,9 +46,6 @@
 
 <div class="flex-column toolbar-content">
   <div class="wrapper-test">
-
-    <div *ngIf="!isLoad" class="main-content-container-ab-loader"></div>
-
     <div *ngIf="!allABTests.length || showOnlyIfNoTestsForCurrentSite" class="mt-4">
       <h3 class="f-0 text-center">{{ 'abtests.active.noCreated.title' | translate }}</h3>
       <h4 class="f-2 text-center">{{ 'abtests.active.noCreated.desc' | translate }}</h4>
@@ -80,17 +65,16 @@
     >
       <h3 class="f-0 text-center">{{ 'abtests.active.noActive' | translate }}</h3>
     </div>
+  </div>
+</div>
 
-    <ng-container *ngIf="isLoad">
-      <div
-        *ngFor="let test of abTests; index as outerIndex"
-        [id]="'testIdNum-' + test.id"
-        [ngClass]="(test.state === 'ACTIVE') ? 'border-t-green' : 'border-t-red'"
-        class="test-item"
-      >
-        <div class="test-item-header">
-          <div class="test-item-left">
-            <div class="max-edit-text-bl">
+<ng-container *ngIf="isLoaded; else loadingTemplate">
+  <section class="tests-container">
+    <ng-container *ngFor="let test of abTests; index as outerIndex">
+      <app-card [id]="'testIdNum-' + test.id" [class.active]="test.state === 'ACTIVE'" class="app-card">
+        <div class="ab-test">
+          <div class="ab-test-header">
+            <div class="header-left">
               <cool-inline-edit-field
                 (editStarted)="fixOldTest(test)"
                 (saved)="updateTest(test)"
@@ -100,8 +84,6 @@
                 name="name"
               >
               </cool-inline-edit-field>
-            </div>
-            <div class="max-edit-text-bl">
               <cool-inline-edit-field
                 (editStarted)="fixOldTest(test)"
                 (saved)="updateTest(test)"
@@ -112,165 +94,182 @@
               >
               </cool-inline-edit-field>
             </div>
-          </div>
-          <div class="test-item-right">
-            <div class="btn-group mr-2">
-              <button
-                (click)="startTest(test)"
-                [ngClass]="(test.state === 'ACTIVE')? 'active':''"
-                class="btn btn-sm btn-default start-widget-btn"
-                data-container="body"
-                data-placement="top"
-                data-toggle="tooltip"
-                title="{{ 'abtests.active.runTest' | translate }}"
-              >
-                <i class="fa fa-play"></i>
-              </button>
-              <button
-                (click)="pauseTest(test)"
-                [ngClass]="(test.state === 'ACTIVE')?'':'active'"
-                class="btn btn-sm btn-default stop-widget-btn"
-                data-container="body"
-                data-placement="top"
-                data-toggle="tooltip"
-                title="{{ 'abtests.active.pauseTest' | translate }}"
-              >
-                <i class="fa fa-pause"></i>
-              </button>
-            </div>
-
-            <div class="btn-group">
-              <button
-                (click)="deleteTest(test.id, outerIndex)"
-                class="btn btn-sm btn-default"
-                data-container="body"
-                data-placement="top"
-                data-toggle="tooltip"
-                title="{{ 'abtests.active.stopTest' | translate }}"
-              >
-                <i class="fa fa-stop"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="test-item-graph">
-          <h4 *ngIf="!test.chartData.length" class="f-chart-no-data text-center">{{ 'global.noData' | translate }}</h4>
-          <canvas
-            *ngIf="test.chartData.length"
-            [colors]="test.chartColors"
-            [data]="test.chartData"
-            [labels]="test.chartLabels"
-            [legend]="false"
-            [options]="chartOptions"
-            baseChart
-            chartType="line"
-            id="line"
-          >
-          </canvas>
-        </div>
-
-        <div class="ab-content">
-          <div class="ab-grid">
-            <div class="ab-grid__header">
-              <div class="ab-grid__header--name">{{ 'abtests.variant' | translate }}</div>
-              <div class="ab-grid__header--shows">{{ 'abtests.actions' | translate }}</div>
-              <div class="ab-grid__header--conv">{{ 'abtests.conversion' | translate }}</div>
-              <div class="ab-grid__header--update">{{ 'abtests.improvement' | translate }}</div>
-              <div class="ab-grid__header--onoff">{{ 'abtests.active.toggle' | translate }}</div>
-              <div class="ab-grid__header--actions">{{ 'abtests.active.management' | translate }}</div>
-            </div>
-            <div class="ab-grid__body">
-              <div
-                *ngFor="let item of test.variants; index as innerIndex; trackBy: trackById; let isOdd = odd"
-                [class.bg-for-line-grid]="isOdd"
-                [ngClass]="!item.active ? 'ab-grid__item--non-active' : ''"
-                class="ab-grid__item"
-              >
-                <div class="ab-grid__item--name">
-                  <div [ngStyle]="{ 'background-color': item.color }" class="colored-item-circle"></div>
-                  <cool-inline-edit-field
-                    (saved)="updateVariantName(test, item)"
-                    [emptyText]="'empty'"
-                    [ngModel]="item.name"
-                    class="test-item-desc long-text"
-                    name="desc"
-                  >
-                  </cool-inline-edit-field>
-                </div>
-                <div class="ab-grid__item--shows">
-                  {{item.convInfo.n | thousandSuffix:2}} / {{item.convInfo.s | thousandSuffix:2}}
-                </div>
-                <div class="ab-grid__item--conv">{{ item.convInfo.conversion }}</div>
-                <div
-                  *ngIf="item.convInfo"
-                  [innerHTML]="showBetterToValue(item)"
-                  [ngClass]="getClassForBetterTo(item)"
-                  class="ab-grid__item--update"
-                ></div>
-                <div class="ab-grid__item--onoff">
-                  <ui-switch (change)="changeVariantState(item, test)" [checked]="item.active" size="small"></ui-switch>
-                </div>
-                <div class="ab-grid__item--actions">
-                  <div [ngClass]="item.etalon ? 'margined-right-76' : 'margined-right-14'" class="btn-group edit-btns">
-                    <a
-                      (click)="goToEdit(test.siteId, item.id)"
-                      class="btn btn-sm btn-default"
-                      data-container="body"
-                      data-placement="top"
-                      data-toggle="tooltip"
-                      title="{{ 'abtests.active.variant.edit' | translate }}"
-                    >
-                      <i class="fa fa-cogs"></i>
-                    </a>
-                    <button
-                      (click)="cloneVariant(test, item, innerIndex, outerIndex)"
-                      class="btn btn-sm btn-default"
-                      data-container="body"
-                      data-placement="top"
-                      data-toggle="tooltip"
-                      title="{{ 'abtests.active.variant.copy' | translate }}"
-                    >
-                      <i class="fa fa-copy"></i>
-                    </button>
-                    <button
-                      (click)="deleteVariant(test, item.id, innerIndex, outerIndex)"
-                      *ngIf="!item.etalon"
-                      class="btn btn-sm btn-default"
-                      data-container="body"
-                      data-placement="top"
-                      data-toggle="tooltip"
-                      title="{{ 'abtests.active.variant.delete' | translate }}"
-                    >
-                      <i class="fa fa-trash"></i>
-                    </button>
-                  </div>
-                  <div *ngIf="!item.etalon" class="btn-group">
-                    <button
-                      (click)="setWinner(test.id, item.id, outerIndex)"
-                      class="btn btn-sm btn-default btn-winner-st"
-                      data-container="body"
-                      data-placement="top"
-                      data-toggle="tooltip"
-                      title="{{ 'abtests.active.variant.winner' | translate }}"
-                    >
-                      <i class="fa fa-trophy"></i>
-                    </button>
-                  </div>
-                </div>
+            <div class="header-right">
+              <div class="btn-group">
+                <button
+                  (click)="startTest(test)"
+                  [class.active]="test.state === 'ACTIVE'"
+                  class="btn btn-sm btn-default start-widget-btn"
+                  data-container="body"
+                  data-placement="top"
+                  data-toggle="tooltip"
+                  title="{{ 'abtests.active.runTest' | translate }}"
+                >
+                  <span inlineSVG="./assets/images/core/play.svg"></span>
+                </button>
+                <button
+                  (click)="pauseTest(test)"
+                  [class.active]="test.state !== 'ACTIVE'"
+                  class="btn btn-sm btn-default stop-widget-btn"
+                  data-container="body"
+                  data-placement="top"
+                  data-toggle="tooltip"
+                  title="{{ 'abtests.active.pauseTest' | translate }}"
+                >
+                  <span inlineSVG="./assets/images/core/pause.svg"></span>
+                </button>
+              </div>
+              <div class="btn-group">
+                <button
+                  (click)="deleteTest(test.id, outerIndex)"
+                  class="btn btn-sm btn-default"
+                  data-container="body"
+                  data-placement="top"
+                  data-toggle="tooltip"
+                  title="{{ 'abtests.active.stopTest' | translate }}"
+                >
+                  <span inlineSVG="./assets/images/core/stop.svg"></span>
+                </button>
               </div>
             </div>
           </div>
+
+          <div class="ab-test-graph">
+            <ng-container *ngIf="test.chartData.length; else noDataTemplate">
+              <canvas
+                *ngIf="test.chartData.length"
+                [colors]="test.chartColors"
+                [data]="test.chartData"
+                [labels]="test.chartLabels"
+                [legend]="false"
+                [options]="chartOptions"
+                baseChart
+                chartType="line"
+                id="line"
+              ></canvas>
+            </ng-container>
+            <ng-template #noDataTemplate>
+              <h4>{{ 'global.noData' | translate }}</h4>
+            </ng-template>
+          </div>
+
+          <div class="ab-test-table">
+            <table>
+              <thead>
+                <th class="name">{{ 'abtests.variant' | translate }}</th>
+                <th class="shows">{{ 'abtests.actions' | translate }}</th>
+                <th class="conv">{{ 'abtests.conversion' | translate }}</th>
+                <th class="update">{{ 'abtests.improvement' | translate }}</th>
+                <th class="onoff">{{ 'abtests.active.toggle' | translate }}</th>
+                <th class="actions">{{ 'abtests.active.management' | translate }}</th>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of test.variants; index as innerIndex; trackBy: trackById">
+                  <tr [class.inactive]="!item.active">
+                    <td class="name">
+                      <div class="name-container">
+                        <div [ngStyle]="{ 'background-color': item.color }" class="colored-item-circle"></div>
+                        <cool-inline-edit-field
+                          (saved)="updateVariantName(test, item)"
+                          [emptyText]="'empty'"
+                          [ngModel]="item.name"
+                          class="test-item-desc long-text"
+                          name="desc"
+                        ></cool-inline-edit-field>
+                      </div>
+                    </td>
+                    <td class="shows">
+                      {{ item.convInfo.n | thousandSuffix:2}} / {{item.convInfo.s | thousandSuffix:2 }}
+                    </td>
+                    <td class="conv">{{ item.convInfo.conversion }}</td>
+                    <td
+                      *ngIf="item.convInfo"
+                      [innerHTML]="showBetterToValue(item)"
+                      [ngClass]="getClassForBetterTo(item)"
+                      class="update"
+                    ></td>
+                    <td class="onoff">
+                      <div class="onoff-container">
+                        <ui-switch
+                          (change)="changeVariantState(item, test)"
+                          [checked]="item.active"
+                          size="medium"
+                        ></ui-switch>
+                      </div>
+                    </td>
+                    <td class="actions">
+                      <div class="buttons-container">
+                        <div
+                          [ngClass]="item.etalon ? 'margined-right-76' : 'margined-right-14'"
+                          class="btn-group edit-btns"
+                        >
+                          <button
+                            (click)="goToEdit(test.siteId, item.id)"
+                            class="btn btn-sm btn-default"
+                            data-container="body"
+                            data-placement="top"
+                            data-toggle="tooltip"
+                            title="{{ 'abtests.active.variant.edit' | translate }}"
+                          >
+                            <span inlineSVG="./assets/images/core/settings.svg"></span>
+                          </button>
+                          <button
+                            (click)="cloneVariant(test, item, innerIndex, outerIndex)"
+                            class="btn btn-sm btn-default"
+                            data-container="body"
+                            data-placement="top"
+                            data-toggle="tooltip"
+                            title="{{ 'abtests.active.variant.copy' | translate }}"
+                          >
+                            <span inlineSVG="./assets/images/core/copy.svg"></span>
+                          </button>
+                          <button
+                            *ngIf="!item.etalon"
+                            (click)="deleteVariant(test, item.id, innerIndex, outerIndex)"
+                            class="btn btn-sm btn-default"
+                            data-container="body"
+                            data-placement="top"
+                            data-toggle="tooltip"
+                            title="{{ 'abtests.active.variant.delete' | translate }}"
+                          >
+                            <span inlineSVG="./assets/images/core/delete-icon.svg"></span>
+                          </button>
+                        </div>
+                        <div *ngIf="!item.etalon" class="btn-group">
+                          <button
+                            (click)="setWinner(test.id, item.id, outerIndex)"
+                            class="btn btn-sm btn-default"
+                            data-container="body"
+                            data-placement="top"
+                            data-toggle="tooltip"
+                            title="{{ 'abtests.active.variant.winner' | translate }}"
+                          >
+                            <span inlineSVG="./assets/images/core/trophy.svg"></span>
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="ab-test-footer">
+            <button (click)="addVariant(test, outerIndex)" class="btn" type="button">
+              <span inlineSVG="./assets/images/core/plus.svg"></span>
+              {{ 'abtests.active.variant.add' | translate }}
+            </button>
+            <button (click)="resetStats(test)" class="btn" type="button">
+              <span inlineSVG="./assets/images/core/delete-icon.svg"></span>
+              {{ 'abtests.active.reset' | translate }}
+            </button>
+          </div>
         </div>
-        <div class="ab-test-footer">
-          <button (click)="addVariant(test, outerIndex)" class="btn btn-test-var" type="button">
-            <i class="fa fa-plus"></i> {{ 'abtests.active.variant.add' | translate }}
-          </button>
-          <button (click)="resetStats(test)" class="btn hovered-btn-red" type="button">
-            <i class="fa fa-trash"></i> {{ 'abtests.active.reset' | translate }}
-          </button>
-        </div>
-      </div>
+      </app-card>
     </ng-container>
-  </div>
-</div>
+  </section>
+</ng-container>
+<ng-template #loadingTemplate>
+  <div class="main-content-container-ab-loader"></div>
+</ng-template>

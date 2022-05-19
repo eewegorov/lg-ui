@@ -30,7 +30,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
   public showWhat = 'ALL';
   public allABTests = [];
   public abTests = [];
-  public isLoad = false;
+  public isLoaded = false;
   public showOnlyIfNoTestsForCurrentSite = false;
   public chartOptions = {
     tooltipCaretSize: 0,
@@ -465,7 +465,7 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
           }
         });
     } else {
-      this.isLoad = true;
+      this.isLoaded = true;
       this.startScrollToTest();
     }
   }
