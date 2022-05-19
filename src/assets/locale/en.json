@@ -364,8 +364,6 @@
 		"password_new": "",
 		"register": "",
 		"register_title": "",
-		"remember_checkbox": "",
-		"remember_note": "",
 		"resPass": {
 			"not_success": "",
 			"success": ""
@@ -1015,6 +1013,7 @@
 		"redirect": {
 			"blank": "",
 			"description": "",
+			"description2": "",
 			"example": "",
 			"onClickRedirect": "",
 			"title": "",
@@ -1249,16 +1248,16 @@
 					"enable": ""
 				},
 				"title": "",
-				"tooltip": "",
 				"variants": {
 					"title1": "",
 					"title2": ""
 				}
 			},
 			"autoresponder": {
+				"desc": "",
+				"enable": "",
 				"subject": "",
-				"text": "",
-				"tooltip": ""
+				"text": ""
 			},
 			"close": "",
 			"integrations": {
@@ -1275,8 +1274,7 @@
 			"remove": "",
 			"restrictions": {
 				"autoinvite": {
-					"text": "",
-					"tooltip": ""
+					"text": ""
 				},
 				"count": {
 					"part1": "",
@@ -1352,11 +1350,8 @@
 				"widget": ""
 			},
 			"save": {
+				"check": "",
 				"done": {
-					"desc": "",
-					"title": ""
-				},
-				"error": {
 					"desc": "",
 					"title": ""
 				},
