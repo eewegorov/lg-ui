@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, UrlSegment } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { ConfigService } from './config.service';
   providedIn: 'root'
 })
 export class AuthService {
-  public loggedUser: string;
+  private unloggedPage: string;
   private readonly ACCESS_TOKEN = 'ACCESS_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
 
@@ -37,8 +37,18 @@ export class AuthService {
         }
       })
       .pipe(
-        tap((token: Token) => this.doLoginUser(data.username, token)),
+        tap((token: Token) => this.storeTokens(token)),
         mapTo(true),
+        tap((response: boolean) => {
+          if (response) {
+            if (this.unloggedPage) {
+              this.router.navigate([this.unloggedPage]);
+              this.unloggedPage = null;
+            } else {
+              this.router.navigate(['/']);
+            }
+          }
+        }),
         catchError(error => {
           console.log(error);
           return of(false);
@@ -77,6 +87,7 @@ export class AuthService {
       }),
       catchError((err) => {
         console.log(err);
+        this.unloggedPage = this.router.url;
         this.router.navigate(['/logout']);
         return of(false);
       })
@@ -87,13 +98,7 @@ export class AuthService {
     return localStorage.getItem(this.ACCESS_TOKEN);
   }
 
-  private doLoginUser(username: string, token: Token) {
-    this.loggedUser = username;
-    this.storeTokens(token);
-  }
-
   private doLogoutUser() {
-    this.loggedUser = null;
     this.removeTokens();
     this.router.navigate(['/']);
   }

@@ -29,11 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public submitAuth() {
-    this.authSub = this.accountService.handleAuth(this.loginForm.value).subscribe((response: boolean) => {
-      if (response) {
-        this.router.navigate(['/']);
-      }
-    });
+    this.authSub = this.accountService.handleAuth(this.loginForm.value).subscribe();
   }
 
   public authYandex(event: Event) {
