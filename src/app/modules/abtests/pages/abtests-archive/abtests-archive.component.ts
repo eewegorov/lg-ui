@@ -9,14 +9,14 @@ import { AbtestsService } from '../../services/abtests.service';
 @Component({
   selector: 'app-abtests-archive',
   templateUrl: './abtests-archive.component.html',
-  styleUrls: ['../../shared/shared.scss', './abtests-archive.component.scss']
+  styleUrls: ['../abtests-active/abtests-active.component.scss', './abtests-archive.component.scss']
 })
 export class AbtestsArchiveComponent implements OnInit, AfterViewChecked {
   public abTests: AbtestArchiveExtended[] = [];
   public sites = [{ id: 'allsitesid', name: 'Все сайты' }];
   public showWhat = 'ALL';
   public allABTests = [];
-  public isLoad = false;
+  public isLoaded = false;
 
   public currSite;
 
@@ -111,7 +111,7 @@ export class AbtestsArchiveComponent implements OnInit, AfterViewChecked {
     this.abTestsService.getArchTests().subscribe((response: AbtestArchive[]) => {
       this.allABTests = response;
       this.abTests = this.allABTests;
-      this.isLoad = true;
+      this.isLoaded = true;
       this.getConversions();
     });
   }
