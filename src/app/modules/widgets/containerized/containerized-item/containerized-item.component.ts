@@ -211,12 +211,18 @@ export class ContainerizedItemComponent implements OnInit {
       .getWContainerInfo(this.siteId, this.containerId)
       .subscribe((container: Container) => {
         if (container.widgets.length === 1) {
-          Swal.fire(this.translate.instant('containerized.container.widget.remove.ifone'), '', 'error');
+          Swal.fire({
+            title: this.translate.instant('containerized.container.widget.remove.ifone'),
+            heightAuto: false,
+            text: '',
+            icon: 'error'
+          });
         } else {
           Swal.fire({
             title: this.translate.instant('widgetsList.widget.delete.title'),
             text: this.translate.instant('widgetsList.widget.delete.text'),
             icon: 'warning',
+            heightAuto: false,
             showCancelButton: true,
             confirmButtonColor: '#DD6B55',
             confirmButtonText: this.translate.instant('widgetsList.widget.delete.confirm'),

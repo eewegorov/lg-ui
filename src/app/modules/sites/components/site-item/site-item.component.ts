@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit } from '
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import {
-  asapScheduler,
   asyncScheduler,
   BehaviorSubject,
   fromEvent,
@@ -20,7 +19,7 @@ import { SitesService } from '../../services/sites.service';
 import { Site, SiteStatistics } from '@core/models/sites';
 import { UiService } from '@core/services/ui.service';
 import { Breakpoint } from '@core/enums/ui/breakpoint';
-import { debounceTime, delay, observeOn, skip, startWith, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { debounceTime, delay, observeOn, startWith, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'app-site-item',

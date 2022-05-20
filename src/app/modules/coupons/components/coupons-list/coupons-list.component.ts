@@ -116,6 +116,7 @@ export class CouponsListComponent implements OnChanges, AfterViewInit {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
+      heightAuto: false,
       confirmButtonText: this.translate.instant('coupons.coupon.delete.tooltip'),
       cancelButtonText: this.translate.instant('widgetsList.widget.delete.cancel')
     }).then(isConfirm => {

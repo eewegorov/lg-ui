@@ -37,7 +37,7 @@ export class SitesComponent implements OnInit, OnDestroy {
   // TODO: Get rid of nested subscriptions
   public openModalForCreatingNewSite(): void {
     const modalRef = this.modalService.open(SiteAddComponent, {
-      size: 'lg',
+      size: 'xl',
       windowClass: 'animate__animated animate__slideInDown animate__faster'
     });
     modalRef.componentInstance.hidePhone = this.hidePhoneFieldInModal;

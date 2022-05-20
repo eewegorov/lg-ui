@@ -135,7 +135,8 @@ export class EmailsComponent implements OnInit, AfterViewChecked {
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
       confirmButtonText: this.translate.instant('reports.emails.clear.yes'),
-      cancelButtonText: this.translate.instant('global.no')
+      cancelButtonText: this.translate.instant('global.no'),
+      heightAuto: false
     }).then(isConfirm => {
       if (isConfirm) {
         const params = {

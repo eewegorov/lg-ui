@@ -68,6 +68,7 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
     Swal.fire({
       title: this.translate.instant('sitelist.delete.title'),
       text: this.translate.instant('sitelist.delete.text'),
+      heightAuto: false,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
@@ -76,11 +77,12 @@ export class SiteSettingsComponent implements OnInit, AfterViewChecked {
     }).then(isConfirm => {
       if (isConfirm) {
         this.sitesService.deleteSite(this.siteId).subscribe(() => {
-          Swal.fire(
-            this.translate.instant('global.done'),
-            this.translate.instant('sitelist.delete.deleted'),
-            'success'
-          ).then();
+          Swal.fire({
+            title: this.translate.instant('global.done'),
+            text: this.translate.instant('sitelist.delete.deleted'),
+            heightAuto: false,
+            icon: 'success'
+          }).then();
 
           setTimeout(() => {
             this.goBack();

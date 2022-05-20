@@ -229,7 +229,8 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
       confirmButtonText: 'Да, уверен',
-      cancelButtonText: 'Отмена'
+      cancelButtonText: 'Отмена',
+      heightAuto: false
     }).then(isConfirm => {
       if (isConfirm) {
         this.abTestsService.deleteVariant(test.id, variantId).subscribe((response: boolean) => {
@@ -250,7 +251,8 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
       showCancelButton: true,
       confirmButtonColor: '#62cb31',
       confirmButtonText: 'Да, уверен',
-      cancelButtonText: 'Отмена'
+      cancelButtonText: 'Отмена',
+      heightAuto: false
     }).then(isConfirm => {
       if (isConfirm) {
         setTimeout(() => {
@@ -261,7 +263,8 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
             icon: 'warning',
             showCancelButton: false,
             showConfirmButton: false,
-            showCloseButton: false
+            showCloseButton: false,
+            heightAuto: false
           });
 
           this.abTestsService.chooseWinner(testId, variantId).subscribe((response: boolean) => {
@@ -286,7 +289,8 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
       confirmButtonText: 'Да, уверен',
-      cancelButtonText: 'Отмена'
+      cancelButtonText: 'Отмена',
+      heightAuto: false
     }).then(isConfirm => {
       if (isConfirm) {
         this.abTestsService.resetStats(test.id).subscribe((response: boolean) => {
@@ -354,7 +358,8 @@ export class AbtestsActiveComponent implements OnInit, AfterViewChecked, OnDestr
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
       confirmButtonText: 'Да, уверен',
-      cancelButtonText: 'Отмена'
+      cancelButtonText: 'Отмена',
+      heightAuto: false
     }).then(isConfirm => {
       if (isConfirm) {
         setTimeout(() => {

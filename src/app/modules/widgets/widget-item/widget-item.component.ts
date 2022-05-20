@@ -211,6 +211,7 @@ export class WidgetItemComponent implements OnInit {
     Swal.fire({
       title: this.translate.instant('widgetsList.widget.delete.title'),
       text: this.translate.instant('widgetsList.widget.delete.text'),
+      heightAuto: false,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',

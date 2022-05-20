@@ -5,7 +5,7 @@ import { of, SubscriptionLike } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CreateSiteData, Smartpoints } from '@core/models/sites';
-import { UserService } from '../../../user/services/user.service';
+import { UserService } from '@modules/user/services/user.service';
 import { SitesService } from '../../services/sites.service';
 
 @Component({

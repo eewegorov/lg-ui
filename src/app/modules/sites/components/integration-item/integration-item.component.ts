@@ -84,6 +84,7 @@ export class IntegrationItemComponent implements OnInit, AfterViewChecked {
     Swal.fire({
       title: this.translate.instant('settings.site.integration.delete.title'),
       text: this.translate.instant('settings.site.integration.delete.text'),
+      heightAuto: false,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#DD6B55',
