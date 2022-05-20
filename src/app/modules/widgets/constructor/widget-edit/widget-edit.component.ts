@@ -231,13 +231,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     }, 0);
   }
 
-  public getCroppedString(str: string, count: number, addedSymbol: string): string {
-    if (str.length > count) {
-      return str.substring(0, count) + addedSymbol;
-    }
-    return str;
-  }
-
   public isCurrentActiveTab(tab) {
     return this.currentActiveTab === tab;
   }

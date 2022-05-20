@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, UrlSegment } from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';

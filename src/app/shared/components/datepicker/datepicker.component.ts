@@ -106,10 +106,10 @@ export class NgbdDatepickerI18n implements ControlValueAccessor {
 
   writeValue(value: Date) {
     let preparedDate;
-    if (!value || (value && isNaN(value.getTime()))) {
+    if (!value || (value && isNaN(new Date(value).getTime()))) {
       preparedDate = new Date();
     } else {
-      preparedDate = value;
+      preparedDate = new Date(value);
     }
 
     this.selectedDate = {

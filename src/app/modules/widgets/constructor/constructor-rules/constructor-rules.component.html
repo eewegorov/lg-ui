@@ -291,7 +291,7 @@
                         <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
-                        <li (click)="item.startTime = timeItem.value" *ngFor="let timeItem of getTimeList()"
+                        <li (click)="item.startTime = timeItem.value" *ngFor="let timeItem of timeList"
                             role="presentation">
                           <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
                              tabindex="-1">{{ timeItem.name }}</a>
@@ -310,7 +310,7 @@
                       <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
                         <li
                           (click)="item.endTime = timeItem.value"
-                          *ngFor="let timeItem of getTimeList()"
+                          *ngFor="let timeItem of timeList"
                           role="presentation"
                         >
                           <a class="dropdown-item" href="javascript:void(0)" role="menuitem"

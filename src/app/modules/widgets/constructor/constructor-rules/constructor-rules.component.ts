@@ -44,6 +44,8 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     toolbarHiddenButtons: [[], ['insertImage', 'insertVideo']]
   };
 
+  public timeList = [];
+
   private ONE_MINUTE = 1000 * 60;
   private ONE_HOUR = this.ONE_MINUTE * 60;
 
@@ -61,6 +63,8 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
       { id: 5, name: this.translate.instant('global.week.saturday') },
       { id: 6, name: this.translate.instant('global.week.sunday') }
     ];
+
+    this.timeList = this.getTimeList();
   }
 
   ngOnInit(): void {
