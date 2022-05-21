@@ -91,36 +91,23 @@
     </div>
     <h4>{{ 'sitelist.form.goto' | translate }}</h4>
     <div class="d-flex justify-content-between align-items-center buttons">
-      <a class="simple-link" href="/site/list">{{ 'sitelist.form.gotoaway' | translate }}</a>
+      <a class="simple-link" (click)="closeModal()">{{ 'sitelist.form.gotoaway' | translate }}</a>
       <button (click)="setTab(3)" class="btn btn-lg btn-success">{{ 'sitelist.form.gotopoints' | translate }}</button>
     </div>
   </ng-container>
 
   <ng-container *ngIf="tab === 3">
-    <div class="row text-center mb-3">
-      <div class="col-lg-12 mb-3">
-        <h4>{{ 'sitelist.form.smartpoints.settings' | translate }}</h4>
-      </div>
-      <div class="row">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-10 text-left">{{ 'sitelist.form.smartpoints.desc1' | translate }}</div>
-        <div class="col-lg-1"></div>
-      </div>
-    </div>
-
-    <div class="row widgets-options-container">
+    <h4>{{ 'sitelist.form.smartpoints.settings' | translate }}</h4>
+    <p>{{ 'sitelist.form.smartpoints.desc1' | translate }}</p>
+    <div class="widgets-options-container">
       <app-smartpoints-control [siteId]="createdSite.id" [smartPoints]="smartPoints"></app-smartpoints-control>
     </div>
-
-    <div class="row mt-3">
-      <div class="col-lg-12 text-center">
-        <h4>{{ 'sitelist.form.goto' | translate }}</h4>
-      </div>
-    </div>
-    <div class="text-center mt-3 mb-3">
-      <a (click)="goToCreateOwnWidgets()" class="btn btn-lg btn-success next" style="width: 425px">
+    <h4>{{ 'sitelist.form.goto' | translate }}</h4>
+    <div class="buttons">
+      <a class="simple-link" (click)="closeModal()">{{ 'sitelist.form.gotoaway' | translate }}</a>
+      <button (click)="goToCreateOwnWidgets()" class="btn btn-lg btn-success next">
         {{ 'sitelist.form.gotowidgets' | translate }}
-      </a>
+      </button>
     </div>
   </ng-container>
 </div>
