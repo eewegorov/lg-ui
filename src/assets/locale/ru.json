@@ -134,7 +134,7 @@
 	},
 	"billing": {
 		"modal": {
-			"footer": "Активация тарифа происходит автоматически сразу после оплаты.<br>Если вы хотите внести оплату по безналичному расчету, то пожалуйста, напишите нам на email <a href='mailto:hello@leadgenic.ru'>hello@leadgenic.ru</a> или в чат.",
+			"footer": "Активация тарифа происходит автоматически сразу после оплаты.<br>Если вы хотите внести оплату по безналичному расчету, то пожалуйста, напишите нам на email <a class=\"link\" href=\"mailto:hello@leadgenic.ru\">hello@leadgenic.ru</a> или в чат.",
 			"paysum": {
 				"btn": "Оплатить и активировать тариф",
 				"label": "Сумма к оплате"
@@ -755,7 +755,7 @@
 			},
 			"start": {
 				"desc1": "Например, <i>мой магазин</i>",
-				"desc2": "Введите доменное имя своего сайта. Например, <i>mywebsite.ru</i>. Если вы хотите добавить кириллический домен (пр. домен.рф), пожалуйста, сконвертируйте его в punnycode перед добавлением. Подробнее читайте в <a target='blank' href='http://leadgenic.userecho.com/topics/272-kak-dobavit-kirillicheskij-domen-rf/'><u>этой статье</u></a>."
+				"desc2": "Введите доменное имя своего сайта. Например, <i>mywebsite.ru</i>. Если вы хотите добавить кириллический домен (пр. домен.рф), пожалуйста, сконвертируйте его в punnycode перед добавлением. Подробнее читайте в <a class=\"link\" target=\"blank\" href=\"http://leadgenic.userecho.com/topics/272-kak-dobavit-kirillicheskij-domen-rf/\"><u>этой статье</u></a>."
 			},
 			"targets": {
 				"add": "Добавить цель",

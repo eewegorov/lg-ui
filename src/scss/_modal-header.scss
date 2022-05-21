@@ -23,3 +23,10 @@
     }
   }
 }
+
+
+::ng-deep {
+  a.link {
+    color: $successColor !important;
+  }
+}

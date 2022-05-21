@@ -1,65 +1,59 @@
-<div class="modal-header justify-content-center">
-  <div class="d-flex flex-column">
-    <h4 *ngIf="title" class="modal-title">{{ title }}</h4>
-    <h5 *ngIf="subscription" [innerHTML]="subscription" class="paymentSubscription mt-2 pr-5"></h5>
+<div class="modal-header">
+  <div>
+    <h3 *ngIf="title" class="modal-title">{{ title }}</h3>
+    <h5 *ngIf="subscription" [innerHTML]="subscription"></h5>
   </div>
-  <button (click)="closeModal()" aria-label="Close" class="close" data-dismiss="modal" type="button">
-    <span aria-hidden="true">&times;</span>
+  <button class="close btn" (click)="closeModal()">
+    <span inlineSVG="./assets/images/core/cross.svg"></span>
   </button>
 </div>
 
 <div class="modal-body">
-  <div accept-charset="UTF-8" id="paymentForm" style="display: none;">
+  <div accept-charset="UTF-8" id="paymentForm" style="display: none">
     <form action="https://wl.walletone.com/checkout/checkout/Index" method="POST" target="_blank">
-      <input name="WMI_MERCHANT_ID" value=""/><br/>
-      <input name="WMI_PAYMENT_AMOUNT" value=""/><br/>
-      <input name="WMI_CURRENCY_ID" value=""/><br/>
-      <input name="WMI_DESCRIPTION" value=""/><br/>
-      <input name="WMI_SUCCESS_URL" value=""/><br/>
-      <input name="WMI_FAIL_URL" value=""/><br/>
-      <input name="WMI_PAYMENT_NO" value=""/><br/>
-      <input name="WMI_SIGNATURE" value=""/><br/>
+      <input name="WMI_MERCHANT_ID" value="" /><br />
+      <input name="WMI_PAYMENT_AMOUNT" value="" /><br />
+      <input name="WMI_CURRENCY_ID" value="" /><br />
+      <input name="WMI_DESCRIPTION" value="" /><br />
+      <input name="WMI_SUCCESS_URL" value="" /><br />
+      <input name="WMI_FAIL_URL" value="" /><br />
+      <input name="WMI_PAYMENT_NO" value="" /><br />
+      <input name="WMI_SIGNATURE" value="" /><br />
     </form>
   </div>
 
-  <div class="d-flex flex-column">
-    <h4>{{ planLabels.activationLabel }}</h4>
-    <h4>{{ planLabels.activationDateLabel }}</h4>
+  <div class="tariff-container">
+    <p>{{ planLabels.activationLabel }}<br />{{ planLabels.activationDateLabel }}</p>
 
-    <div class="row mt-3 align-items-center">
-      <div class="col-lg-4">
-        <h4>{{ 'sitelist.tariff.length' | translate }}</h4>
-      </div>
-      <div class="col-lg-8">
-        <div class="tariff-btns btn-group" data-toggle="buttons">
-          <label
-            (click)="changePrice(price)"
-            *ngFor="let price of plan.prices"
-            [ngClass]="{'active': (activePriceId === price.id)}"
+    <div class="tariff-selection">
+      <p>{{ 'sitelist.tariff.length' | translate }}</p>
+      <div class="tariff-btns btn-group" data-toggle="buttons">
+        <div *ngFor="let price of plan.prices" class="button-container">
+          <button
+            (click)="changePrice(price); $event.preventDefault(); $event.stopPropagation();"
+            [class.active]="activePriceId === price.id"
             class="btn btn-default"
           >
-            {{ price.name }}<span class="btn-comment">{{ price.desc }}</span>
-          </label>
+            {{ price.name }}
+          </button>
+          <span>{{ price.desc }}</span>
         </div>
       </div>
     </div>
-    <div class="row mt-5">
-      <div class="col-lg-4">
-        <h2 class="sum-desc">{{ 'billing.modal.paysum.label' | translate }}</h2>
-      </div>
-      <div class="col-lg-3 pr-0">
+    <div class="tariff-confirmation">
+      <h2>{{ 'billing.modal.paysum.label' | translate }}</h2>
+
+      <div class="tariff-price">
         <h2 class="pay-sum">{{ planLabels.currentPrice }} {{ 'global.currency.ruble' | translate }}</h2>
-        <span class="pay-desc">{{ planLabels.payDescription }}</span>
+        <span>{{ planLabels.payDescription }}</span>
       </div>
-      <div class="col-lg-5">
-        <button (click)="activatePlan()" class="btn btn-lg btn-success btn-activate-plan">
-          {{ 'billing.modal.paysum.btn' | translate }}
-        </button>
-      </div>
+      <button (click)="activatePlan()" class="btn">
+        {{ 'billing.modal.paysum.btn' | translate }}
+      </button>
     </div>
   </div>
 </div>
 
 <div class="modal-footer justify-content-center">
-  <div [innerHTML]="'billing.modal.footer' | translate" class="payment-form-footer-text"></div>
+  <p [innerHTML]="'billing.modal.footer' | translate" class="payment-form-footer-text"></p>
 </div>

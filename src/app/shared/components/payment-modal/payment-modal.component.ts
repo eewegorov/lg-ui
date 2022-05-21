@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
-import { Order } from '../../../core/models/payment';
-import { CoreSitesService } from '../../../core/services/core-sites.service';
-import { BillingService } from '../../../core/services/billing.service';
+import { Order } from '@core/models/payment';
+import { CoreSitesService } from '@core/services/core-sites.service';
+import { BillingService } from '@core/services/billing.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -31,9 +31,7 @@ export class PaymentModalComponent implements OnInit {
     private datePipe: DatePipe,
     private coreSitesService: CoreSitesService,
     private billingService: BillingService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
     this.plan = this.plans[0];
@@ -44,7 +42,10 @@ export class PaymentModalComponent implements OnInit {
     this.siteName = this.siteName ? this.siteName : this.coreSitesService.getSiteById(this.siteId).name;
 
     this.planLabels = {
-      activationLabel: this.translate.instant('sitelist.tariff.activation', { tariffName: this.plan.name, siteName: this.siteName }),
+      activationLabel: this.translate.instant('sitelist.tariff.activation', {
+        tariffName: this.plan.name,
+        siteName: this.siteName
+      }),
       activationDateLabel: this.getDatesLabel(),
       payDescription: this.getPayDescription(this.firstPrice.name, this.firstPrice.desc),
       currentPrice: this.firstPrice.price
@@ -87,8 +88,15 @@ export class PaymentModalComponent implements OnInit {
   }
 
   private getPayDescription(payTerm, payDiscount) {
-    return this.translate.instant('global.for') + ' ' + payTerm + ', ' + (payDiscount.replace('-', '').trim() || '0%')
-      + ' ' + this.translate.instant('global.discount');
+    return (
+      this.translate.instant('global.for') +
+      ' ' +
+      payTerm +
+      ', ' +
+      (payDiscount.replace('-', '').trim() || '0%') +
+      ' ' +
+      this.translate.instant('global.discount')
+    );
   }
 
   private getDatesLabel(days?) {
@@ -101,5 +109,4 @@ export class PaymentModalComponent implements OnInit {
       endDate: this.datePipe.transform(endDate, 'dd.MM.yy')
     });
   }
-
 }

@@ -12,6 +12,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
 import { CardComponent } from './components/card/card.component';
+import { InlineSVGModule } from 'ng-inline-svg-2';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { CardComponent } from './components/card/card.component';
     PaymentModalComponent,
     CardComponent
   ],
-  imports: [CommonModule, FormsModule, TranslateModule, NgbDatepickerModule],
+  imports: [CommonModule, FormsModule, TranslateModule, NgbDatepickerModule, InlineSVGModule],
   exports: [
     SelectOnClickDirective,
     DropContainerDirective,

@@ -6,21 +6,18 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TariffPlan, TariffPlansResponse } from '../models/tariffPlans';
 import { CoreApiService } from './core-api.service';
-import { PaymentModalComponent } from '../../shared/components/payment-modal/payment-modal.component';
-
+import { PaymentModalComponent } from '@shared/components/payment-modal/payment-modal.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TariffsService {
-
   constructor(
     private translate: TranslateService,
     private toastr: ToastrService,
     private modalService: NgbModal,
     private coreApiService: CoreApiService
-  ) {
-  }
+  ) {}
 
   public checkTariffPlans(siteId, title, subscription, siteName?, expTime?) {
     this.getTariffPlans().subscribe((response: TariffPlan[]) => {
@@ -33,9 +30,7 @@ export class TariffsService {
   }
 
   private getTariffPlans(): Observable<TariffPlan[]> {
-    return this.coreApiService.getTariffPlans().pipe(
-      map((response: TariffPlansResponse) => response.data)
-    );
+    return this.coreApiService.getTariffPlans().pipe(map((response: TariffPlansResponse) => response.data));
   }
 
   private showTariffPlansModal(plans, siteId, title, subscription, siteName?, expTime?) {
@@ -49,6 +44,5 @@ export class TariffsService {
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.subscription = subscription;
     modalRef.componentInstance.expTime = expTime;
-
   }
 }
