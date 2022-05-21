@@ -9,7 +9,33 @@
     flex-direction: column;
     padding: 30px 40px 40px 40px;
 
-    form {
+    @media (max-width: 991px) {
+      padding: 20px;
+    }
+
+    h4 {
+      margin: 0 0 30px 0;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 29px;
+      color: $fontPrimaryColor;
+      text-align: center;
+
+      &:last-of-type {
+        margin-top: 40px;
+      }
+
+      @media (max-width: 991px) {
+        margin: 0 0 20px 0;
+
+        &:last-of-type {
+          margin-top: 20px;
+        }
+      }
+    }
+
+    form, .form {
       width: inherit;
       display: inherit;
       flex-direction: inherit;
@@ -29,22 +55,38 @@
         }
 
         lbael, .control-label {
+          display: inherit;
           font-style: normal;
           font-weight: 500;
           font-size: 18px;
           line-height: 22px;
           color: $fontPrimaryColor;
           margin: 0;
+          gap: 10px;
+
+          a {
+            display: flex;
+            width: 22px;
+            height: 22px;
+            position: relative;
+            color: $fontGrayColor;
+
+            @include svg-position();
+          }
         }
 
-        input {
-          height: 50px;
+        input, textarea {
+          min-height: 50px;
           padding: 14px;
           border-color: $borderColor;
           font-style: normal;
           font-weight: 400;
           font-size: 18px;
           line-height: 22px;
+        }
+
+        textarea {
+          background-color: $activeElementBG;
         }
 
         span, .small {
@@ -56,14 +98,41 @@
         }
       }
 
-      button {
-        padding: 14px;
-        margin-top: 15px;
+      .form-buttons {
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+          margin-top: 15px;
+        }
+
+        @media (max-width: 991px) {
+          justify-content: center;
+        }
+      }
+
+    }
+
+    button {
+      padding: 14px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+      color: #FFFFFF;
+    }
+
+    .buttons {
+      flex-wrap: wrap-reverse;
+      gap: 20px;
+
+      a {
+        text-align: center;
         font-style: normal;
         font-weight: 500;
         font-size: 18px;
         line-height: 22px;
-        color: #FFFFFF;
+        color: $successColor;
       }
     }
   }
