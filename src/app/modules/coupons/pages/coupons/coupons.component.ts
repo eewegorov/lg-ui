@@ -11,20 +11,7 @@ import { CouponModalService } from '../../services/coupon-modal.service';
   styleUrls: ['./coupons.component.scss']
 })
 export class CouponsComponent implements OnInit, OnDestroy {
-  public coupons = [
-    {
-      id: '12121',
-      code: 'wqqwe',
-      name: 'fsdfs',
-      type: 'REUSABLE'
-    },
-    {
-      id: '12123',
-      code: 'wqqwe',
-      name: 'fsdfs',
-      type: 'sdfsf'
-    }
-  ];
+  public coupons = [];
   private enableCouponModal = false;
   private couponsSub: SubscriptionLike;
 

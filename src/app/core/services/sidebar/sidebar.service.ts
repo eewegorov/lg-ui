@@ -16,7 +16,7 @@ export class SidebarService {
 
   constructor(@Inject(DOCUMENT) private readonly document: Document, private readonly uiService: UiService) {
     this._sidebarState$ = new BehaviorSubject<SidebarState>(
-      window.innerWidth >= 768 ? SidebarState.SHOWN : SidebarState.HIDDEN
+      window.innerWidth >= Breakpoint.MD ? SidebarState.SHOWN : SidebarState.HIDDEN
     );
     this.sidebarState$ = this._sidebarState$.asObservable();
     this.sidebarClassName = 'show-sidebar';

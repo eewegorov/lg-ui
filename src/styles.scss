@@ -23,7 +23,7 @@
 
 a:link, a:hover, a:visited {
   text-decoration: none;
-  color: #34495e;
+  color: $successColor;
   cursor: pointer;
 }
 
@@ -58,6 +58,12 @@ body {
       margin-left: 0;
     }
   }
+}
+
+.modal-content {
+  border: none;
+  border-radius: 10px;
+  box-shadow: $boxShadow;
 }
 
 .content {
@@ -145,20 +151,25 @@ h6 {
 }
 
 .modal-header {
+  align-items: center;
   justify-content: flex-start !important;
-  color: #16181D;
   border: none;
-  padding: 2rem 2rem 1rem;
+  padding: 40px;
+  border-bottom: 1px solid $borderColor;
 
   h3, h4, .modal-title {
-    font-weight: bold !important;
+    font-style: normal;
+    font-weight: 600;
     font-size: 24px;
+    line-height: 29px;
+    color: $fontPrimaryColor;
   }
 
   .close {
     font-size: 40px;
     font-weight: 100;
-    padding: 0.5rem 1rem;
+    //padding: 0.5rem 1rem;
+    color: $fontGrayColor;
   }
 }
 

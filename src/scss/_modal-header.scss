@@ -1,0 +1,25 @@
+@import "src/scss/vars";
+@import "src/scss/mixins";
+
+.modal-header {
+  justify-content: space-between !important;
+  align-items: flex-start;
+  gap: 20px;
+
+  button, .close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin: 0;
+
+    span {
+      display: flex;
+      width: 24px;
+      height: 24px;
+      position: relative;
+
+      @include svg-position();
+    }
+  }
+}

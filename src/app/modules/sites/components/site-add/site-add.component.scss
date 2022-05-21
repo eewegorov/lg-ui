@@ -1,3 +1,74 @@
+@import "src/scss/vars";
+@import "src/scss/mixins";
+@import "src/scss/modal-header";
+
+:host {
+  .modal-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px 40px 40px;
+
+    form {
+      width: inherit;
+      display: inherit;
+      flex-direction: inherit;
+      gap: 25px;
+
+      .form-group {
+        width: inherit;
+        display: inherit;
+        flex-direction: inherit;
+        gap: 10px;
+        margin: 0;
+
+        &.is-invalid {
+          lbael, .control-label {
+            color: #a94442;
+          }
+        }
+
+        lbael, .control-label {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 22px;
+          color: $fontPrimaryColor;
+          margin: 0;
+        }
+
+        input {
+          height: 50px;
+          padding: 14px;
+          border-color: $borderColor;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 22px;
+        }
+
+        span, .small {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 16px;
+          color: $fontPrimaryColor;
+        }
+      }
+
+      button {
+        padding: 14px;
+        margin-top: 15px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        color: #FFFFFF;
+      }
+    }
+  }
+}
+
 .form-control.not-readonly-hand[readonly] {
   cursor: pointer;
   font-size: 14px;
