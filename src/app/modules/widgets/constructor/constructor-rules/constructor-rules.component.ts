@@ -250,6 +250,14 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
       }
     }
 
+    if (this.widget.audiencesEnabled && !this.widget.audience?.groups?.length) {
+      errors.push({
+        id: TAB_ID,
+        category: this.translate.instant('widgetsList.editor.section.audience'),
+        message: 'Настройте или отключите таргетинг на аудиторию'
+      });
+    }
+
     if (this.widget.audiencesEnabled) {
       // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for (let i = 0; i < this.widget.audience?.groups?.length; i++) {

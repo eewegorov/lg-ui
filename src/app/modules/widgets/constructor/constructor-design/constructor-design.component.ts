@@ -185,7 +185,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   ngOnInit(): void {
     this.systemFonts = this.widgetConstructorService.getSystemFontList();
 
-
+    setInterval(() => {
+      this.widgetConstructorService.updateWidget.next();
+    }, 200);
 
     this.widgetService.addValidator(this.validator);
 
