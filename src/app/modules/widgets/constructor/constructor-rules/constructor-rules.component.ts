@@ -258,6 +258,14 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
       });
     }
 
+    if (this.widget.useCustomIntegrationsList && !this.widget.integrations?.length) {
+      errors.push({
+        id: TAB_ID,
+        category: this.translate.instant('widgetsList.editor.section.integrations'),
+        message: this.translate.instant('widgets.integration.saveError')
+      });
+    }
+
     if (this.widget.audiencesEnabled) {
       // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for (let i = 0; i < this.widget.audience?.groups?.length; i++) {

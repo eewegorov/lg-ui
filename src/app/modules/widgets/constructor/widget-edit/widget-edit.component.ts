@@ -577,9 +577,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     } else if (this.formExtRedirectFieldEmpty) {
       this.toastr.error(this.translate.instant('widgets.formExtId.redirectError'), this.translate.instant('widgetsList.editor.save.validation.title'));
       this.isLoading = false;
-    } else if (this.widget.useCustomIntegrationsList && !this.widget.integrations.length) {
-      this.toastr.error(this.translate.instant('widgets.integration.saveError'), this.translate.instant('widgetsList.editor.save.validation.title'));
-      this.isLoading = false;
     } else if (errorsList.length !== 0) {
       this.toastr.error(
         errorsList.length === 1 && errorsList[0].message ? errorsList[0].message : this.translate.instant('widgetsList.editor.save.validation.desc'),
