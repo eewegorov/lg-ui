@@ -987,16 +987,16 @@
           </div>
           <div
             *ngIf="widget.autoresponder?.enabled"
-            [ngClass]="(widget.autoresponder.subject?.toString().trim().length < 1 && showErrors) ? 'is-invalid' : ''"
             class="mt-3"
+            [class.is-invalid]="!widget.autoresponder.subject?.toString().trim().length && showErrors"
           >
             <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoresponder.subject' | translate }}</h4>
             <input [(ngModel)]="widget.autoresponder.subject" class="form-control">
           </div>
           <div
             *ngIf="widget.autoresponder?.enabled"
-            [ngClass]="(widget.autoresponder.text?.toString().trim().length < 1 && showErrors) ? 'is-invalid' : ''"
             class="mt-3"
+            [class.is-invalid]="!widget.autoresponder.text?.toString().trim().length && showErrors"
           >
             <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoresponder.text' | translate }}</h4>
             <angular-editor

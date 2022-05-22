@@ -258,6 +258,14 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
       });
     }
 
+    if (this.widget.autoresponder?.enabled && (!this.widget.autoresponder?.subject?.toString().trim().length || !this.widget.autoresponder?.text?.toString().trim().length)) {
+      errors.push({
+        id: TAB_ID,
+        category: this.translate.instant('widgetsList.editor.section.autoresponder'),
+        message: 'Настройте или отключите письмо автоответчика'
+      });
+    }
+
     if (this.widget.useCustomIntegrationsList && !this.widget.integrations?.length) {
       errors.push({
         id: TAB_ID,
