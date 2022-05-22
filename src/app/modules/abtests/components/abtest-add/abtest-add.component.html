@@ -48,15 +48,19 @@
 
   <ng-container *ngIf="newABTestInfo.step === 1">
     <div class="test-type-container">
-      <div (click)="setABType(type)" *ngFor="let type of newABTestInfo.ABTypes" class="widget-type-view">
+      <button
+        (click)="setABType(type)"
+        *ngFor="let type of newABTestInfo.ABTypes"
+        class="widget-type-view"
+      >
         <div class="ab-type-icon-{{ type.type }}"></div>
         <div class="view-name text-center">{{ type.title }}</div>
-      </div>
+      </button>
     </div>
   </ng-container>
 
   <ng-container *ngIf="newABTestInfo.step === 2">
-    <div class="create-widget-m" style="padding-top: 0">
+    <div class="create-widget-m p-0">
       <div class="filters-loader"></div>
       <div class="container-for-loader">
         <div class="templates-gallery-header">

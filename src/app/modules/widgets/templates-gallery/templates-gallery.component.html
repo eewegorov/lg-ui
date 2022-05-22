@@ -1,17 +1,22 @@
 <div *ngIf="types && types.length" class="filter-tabs">
-  <div
-    (click)="filterByTab(type.code, type.id)"
-    *ngFor="let type of types; trackBy: trackById"
-    [class.active]="isTabsActive(type.code)"
-    [ngClass]="type.class"
-  >
-    <span class="filter-tab-title">{{ type.name }}</span>
-    <span class="filter-tab-sub">{{ type.sub }}</span>
-  </div>
+  <ng-container *ngFor="let type of types; trackBy: trackById">
+    <div class="filter-container">
+      <div
+        (click)="filterByTab(type.code, type.id)"
+        [class.active]="isTabsActive(type.code)"
+        [ngClass]="type.class"
+        class="filter"
+      >
+        <span class="filter-tab-title">{{ type.name }}</span>
+        <span class="filter-tab-sub">{{ type.sub }}</span>
+      </div>
+      <div class="before"></div>
+      <div class="after"></div>
+    </div>
+  </ng-container>
 </div>
-<div class="just-blue-line"></div>
 
-<div [ngClass]="{'main-content-container-loader': isLoaderActive}" class="main-content-container min-w-1353">
+<div [ngClass]="{'main-content-container-loader': isLoaderActive}" class="main-content-container">
   <div class="filters-loader"></div>
 
   <div class="left-panel-filter">
@@ -52,30 +57,32 @@
       class="test-scroll-inf"
       infiniteScroll
     >
-      <div *ngFor="let mckp of mockups" class="mockup-selector-categories-mockups-item-container">
-        <div class="mockup-selector-categories-mockups-item">
-          <div class="mockup-selector-categories-mockups-item-hover">
-            <button (click)="saveWidget(mckp)" class="btn btn-success" type="button">
-              <i class="fa fa-check"></i> {{ 'widgetsList.add.params.select' | translate }}
-            </button>
-          </div>
-          <div class="mockup-selector-categories-mockups-item-content">
-            <div id="mockup-selector-categories-mockups-item-tariff-container">
+      <ng-container *ngFor="let mckp of mockups">
+        <div class="mockup-selector-categories-mockups-item-container">
+          <div class="mockup-selector-categories-mockups-item">
+            <div class="mockup-selector-categories-mockups-item-hover">
+              <button (click)="saveWidget(mckp)" class="btn btn-success" type="button">
+                <i class="fa fa-check"></i> {{ 'widgetsList.add.params.select' | translate }}
+              </button>
             </div>
-            <img [src]="mckp.preview" alt="preview">
-            <div class="mockup-selector-categories-mockups-item-title">
-              <div>
-                <div>{{ mckp.name }}</div>
+            <div class="mockup-selector-categories-mockups-item-content">
+              <div id="mockup-selector-categories-mockups-item-tariff-container">
               </div>
-            </div>
-            <div class="mockup-selector-categories-mockups-item-desc">
-              <div>
-                <div>{{ mckp.description }}</div>
+              <img [src]="mckp.preview" alt="preview">
+              <div class="mockup-selector-categories-mockups-item-title">
+                <div>
+                  <div>{{ mckp.name }}</div>
+                </div>
+              </div>
+              <div class="mockup-selector-categories-mockups-item-desc">
+                <div>
+                  <div>{{ mckp.description }}</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
 

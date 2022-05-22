@@ -12,8 +12,85 @@
       flex-direction: column;
       padding: 20px;
     }
+
+    &#step1 {
+      border-radius: $borderRadius;
+      box-shadow: $boxShadow;
+      width: 100%;
+      background-color: $activeElementBG;
+      padding: 40px 0 0;
+
+      .header-modal {
+        width: 100%;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 0 40px 40px 40px;
+
+        @media (max-width: 991px) {
+          padding: 0 20px;
+        }
+
+        & div:first-child {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+
+          & div:first-child {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+
+            h4 {
+              font-style: normal;
+              font-weight: 600;
+              font-size: 24px;
+              line-height: 29px;
+              color: $fontPrimaryColor;
+            }
+
+            button {
+              height: 50px;
+              border-radius: 4px;
+              padding: 14px;
+              font-style: normal;
+              font-weight: 500 !important;
+              font-size: 18px;
+              line-height: 22px;
+              background-color: $successColor;
+              color: #FFFFFF;
+              margin: 0;
+            }
+          }
+
+          span {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+            color: $fontPrimaryColor;
+            margin: 0;
+          }
+        }
+      }
+
+      ::ng-deep {
+        .main-content-container {
+          padding: 40px;
+          background-color: #FFFFFF;
+          border-bottom-left-radius: $borderRadius;
+          border-bottom-right-radius: $borderRadius;
+        }
+      }
+    }
   }
 }
+
 .btn-constructor {
   font-size: 15px;
 }

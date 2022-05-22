@@ -1,86 +1,124 @@
-.filter-tabs {
-  display: flex;
-  justify-content: center;
-}
+@import "src/scss/vars";
+@import "src/scss/mixins";
 
-.filter-tabs div {
-  width: 258px;
-  padding: 6px 10px 10px 75px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border: 1px solid transparent;
-  border-bottom: 1px solid transparent;
-  background-color: #f3f3f3;
-  cursor: pointer;
-  margin: 0 7px;
-}
+:host {
+  width: 100%;
 
-.filter-tabs div:first-child {
-  margin-left: 0;
-}
+  .filter-tabs {
+    display: flex;
+    justify-content: center;
+    background-color: $activeElementBG;
+    gap: 16px;
 
-.filter-tabs div:last-child {
-  margin-right: 0;
-}
 
-.filter-tabs div.active {
-  background-color: #ffffff;
-  border-color: #4fa6e0;
-  border-bottom: 1px solid #fff;
-  z-index: 4;
-}
+    .filter-container {
+      width: 258px;
+      position: relative;
+      display: block;
+      cursor: pointer;
 
-.filter-tabs span.filter-tab-title {
-  display: block;
-  font-weight: 700;
-  font-size: 14px;
-  color: #2c3239;
-  margin-bottom: 2px;
-}
+      .filter {
+        width: 100%;
+        padding: 6px 10px 10px 75px;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        background-color: $activeElementBG;
 
-.filter-tabs span.filter-tab-sub {
-  display: block;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
-  color: #2c3239;
+        &.active {
+          background-color: #FFFFFF;
+          z-index: 4;
+        }
+
+        span.filter-tab-title {
+          display: block;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 24px;
+          color: $fontPrimaryColor;
+          margin-bottom: 2px;
+        }
+
+        span.filter-tab-sub {
+          display: block;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 10px;
+          line-height: 12px;
+          color: $fontPrimaryColor;
+        }
+      }
+
+      .filter.active ~ .before, .filter.active ~ .after {
+        display: block;
+      }
+
+      .before, .after {
+        position: absolute;
+        display: none;
+        width: 16px;
+        height: 16px;
+        background-color: #FFFFFF;
+        bottom: 0;
+
+        &:before {
+          content: '';
+          position: absolute;
+          display: block;
+          width: 16px;
+          height: 16px;
+          background-color: $activeElementBG;
+        }
+      }
+
+      .before {
+        left: -16px;
+
+        &:before {
+          border-radius: 0 0 16px 0;
+        }
+      }
+
+      .after {
+        right: -16px;
+
+        &:before {
+          border-radius: 0 0 0 16px;
+        }
+      }
+    }
+  }
 }
 
 .filter-tabs div.filter-tab-on-all {
   background-image: url("~src/assets/images/widgets/preview/all_w_prev.png");
-  background-position: 10px 9px;
+  background-position: 5% center;
   background-repeat: no-repeat;
 }
 
 .filter-tabs div.filter-tab-on-popup {
   background-image: url("~src/assets/images/widgets/preview/popup_w_prev.png");
-  background-position: 10px 9px;
+  background-position: 5% center;
   background-repeat: no-repeat;
 }
 
 .filter-tabs div.filter-tab-on-containerized {
   background-image: url("~src/assets/images/widgets/preview/static_widget_prev.png");
-  background-position: 10px 9px;
+  background-position: 5% center;
   background-repeat: no-repeat;
 }
 
 .filter-tabs div.filter-tab-on-optindot {
   background-image: url("~src/assets/images/widgets/preview/dot_w_prev.png");
-  background-position: 10px 9px;
+  background-position: 5% center;
   background-repeat: no-repeat;
 }
 
 .filter-tabs div.filter-tab-on-label_widget {
   background-image: url("~src/assets/images/widgets/preview/label_w_prev.png");
-  background-position: 10px 9px;
+  background-position: 5% center;
   background-repeat: no-repeat;
 }
-
-.min-w-1353 {
-  min-width: 1353px;
-  max-width: 1353px;
-}
-
 
 p {
   font-family: Lato;
@@ -109,14 +147,5 @@ p {
     padding-left: 10px;
     width: 200px;
     background-image: none !important;
-  }
-
-  .min-w-1353 {
-    min-width: 1068px;
-    max-width: 1100px;
-  }
-
-  .test-scroll-inf {
-    justify-content: flex-start;
   }
 }

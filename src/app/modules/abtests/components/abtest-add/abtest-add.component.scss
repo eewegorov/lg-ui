@@ -118,10 +118,20 @@
         justify-content: flex-start;
         gap: 20px;
         padding: 20px;
+        background-color: transparent;
+        transition: all 0.2s ease-in-out;
 
-        @media (max-width: 575px) {
+        @media (max-width: 375px) {
           width: 100%;
           height: auto;
+        }
+
+        &:focus-visible {
+          border-color: $successColor;
+        }
+
+        &:hover, &:focus-visible {
+          box-shadow: $boxShadow;
         }
 
         .ab-type-icon {
