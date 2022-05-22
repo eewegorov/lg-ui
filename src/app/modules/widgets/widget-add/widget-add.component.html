@@ -7,16 +7,18 @@
 
 <ng-container *ngIf="newWidgetStep !== 1">
   <div class="modal-body">
-    <div *ngIf="newWidgetStep === 2" class="p-2" id="step2">
-      <label class="big-label">{{ 'widgetsList.add.chooseType.label' | translate }}:</label>
-      <div class="row">
-        <div (click)="setType(type)" *ngFor="let type of widgetTypes" class="col-lg-3 widget-type-view" tabindex="1">
-          <img alt="preview" src="{{ type.previewLink }}" />
-          <div class="view-name">{{ type.name }}</div>
-          <div class="view-desc">{{ type.description }}</div>
-        </div>
+    <ng-container *ngIf="newWidgetStep === 2">
+      <label class="big-label m-0">{{ 'widgetsList.add.chooseType.label' | translate }}</label>
+      <div class="widget-types-container">
+        <ng-container *ngFor="let type of widgetTypes">
+          <button (click)="setType(type)" class="widget-type-view">
+            <img alt="preview" src="{{ type.previewLink }}" />
+            <div class="view-name">{{ type.name }}</div>
+            <div class="view-desc">{{ type.description }}</div>
+          </button>
+        </ng-container>
       </div>
-    </div>
+    </ng-container>
 
     <div *ngIf="newWidgetStep === 3" class="p-2" id="step3">
       <label class="big-label">{{ 'widgetsList.add.chooseTemplate.label' | translate }}:</label>

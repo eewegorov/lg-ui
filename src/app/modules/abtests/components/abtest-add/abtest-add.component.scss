@@ -14,6 +14,7 @@
   @media (max-width: 991px) {
     width: 100%;
   }
+
   .modal-body {
     width: 100%;
     display: flex;
@@ -110,8 +111,8 @@
       }
 
       .widget-type-view {
-        height: 260px;
         width: 290px;
+        height: 260px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -142,6 +143,7 @@
         }
 
         .view-name {
+          text-align: left;
           margin: 0;
         }
       }
