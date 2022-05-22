@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { mergeMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
-import { Mockup, MockupGroup } from '../../../core/models/widgets';
+import { Mockup, MockupGroup } from '@core/models/widgets';
 import { WidgetService } from '../services/widget.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { WidgetService } from '../services/widget.service';
 export class TemplatesGalleryComponent implements OnInit {
   @Input() public types = [];
   public groups = [];
-  public mockups = [];
+  public mockups: Mockup[] = [];
   public isLoaderActive = false;
   @Input() private typeId = '';
   @Output() private chooseWidget = new EventEmitter<Mockup>();
@@ -25,10 +25,7 @@ export class TemplatesGalleryComponent implements OnInit {
   private testArr = [];
   private queryForMockups = { type: '', categories: '' };
 
-  constructor(
-    private translate: TranslateService,
-    private widgetService: WidgetService
-  ) {
+  constructor(private translate: TranslateService, private widgetService: WidgetService) {
     this.ALL_TYPES = {
       type: null,
       code: 'all',
@@ -70,13 +67,15 @@ export class TemplatesGalleryComponent implements OnInit {
       delete this.queryForMockups.type;
     }
     this.queryForMockups.categories = this.checkboxOnArray.join(',');
-    this.widgetService.getMockups(this.queryForMockups.type, this.queryForMockups.categories).subscribe((response: Mockup[]) => {
-      this.actionAfterTabSwitch(response);
-    });
+    this.widgetService
+      .getMockups(this.queryForMockups.type, this.queryForMockups.categories)
+      .subscribe((response: Mockup[]) => {
+        this.actionAfterTabSwitch(response);
+      });
   }
 
   public loadMore() {
-    for (let i = this.startItem; i < (this.startItem + this.ITEMS_TO_ADD); i++) {
+    for (let i = this.startItem; i < this.startItem + this.ITEMS_TO_ADD; i++) {
       if (this.newItem < this.testArr.length) {
         this.mockups.push(this.testArr[i]);
         this.newItem++;
@@ -109,26 +108,29 @@ export class TemplatesGalleryComponent implements OnInit {
 
     let mockups = [];
 
-    this.widgetService.getMockups(this.queryForMockups.type).pipe(
-      mergeMap(((fetchedMockups: Mockup[]) => {
-        mockups = fetchedMockups;
-        return this.widgetService.getMockupGroups(this.queryForMockups.type);
-      }))
-    ).subscribe((groups: MockupGroup[]) => {
-      // Parse groups and categories
-      this.groups = groups;
-      for (let i = 0; i < groups.length; i++) {
-        for (let j = 0; j < groups[i].categories.length; j++) {
-          this.groups[i].categories[j] = {
-            checked: false,
-            id: groups[i].categories[j].id,
-            name: groups[i].categories[j].name
-          };
+    this.widgetService
+      .getMockups(this.queryForMockups.type)
+      .pipe(
+        mergeMap((fetchedMockups: Mockup[]) => {
+          mockups = fetchedMockups;
+          return this.widgetService.getMockupGroups(this.queryForMockups.type);
+        })
+      )
+      .subscribe((groups: MockupGroup[]) => {
+        // Parse groups and categories
+        this.groups = groups;
+        for (let i = 0; i < groups.length; i++) {
+          for (let j = 0; j < groups[i].categories.length; j++) {
+            this.groups[i].categories[j] = {
+              checked: false,
+              id: groups[i].categories[j].id,
+              name: groups[i].categories[j].name
+            };
+          }
         }
-      }
 
-      this.actionAfterTabSwitch(mockups, newTab);
-    });
+        this.actionAfterTabSwitch(mockups, newTab);
+      });
   }
 
   private actionAfterTabSwitch(data, newTab?) {
@@ -151,7 +153,7 @@ export class TemplatesGalleryComponent implements OnInit {
     for (let i = 0; i < this.ITEMS_TO_ADD; i++) {
       if (i < this.testArr.length) {
         this.mockups.push(this.testArr[i]);
-        this.startItem = (i + 1);
+        this.startItem = i + 1;
         this.newItem = this.startItem;
       } else {
         break;
@@ -160,11 +162,10 @@ export class TemplatesGalleryComponent implements OnInit {
   }
 
   private mapTypes(types) {
-    return types.map((type) => {
+    return types.map(type => {
       type.class = `filter-tab-on-${type.code}`;
       type.sub = this.translate.instant(`widgetsList.add.modal.gallery.tab.${type.code}.desc`);
       return type;
     });
   }
-
 }

@@ -1,3 +1,19 @@
+@import "src/scss/vars";
+@import "src/scss/mixins";
+@import "src/scss/modal-header";
+
+:host {
+  .modal-body {
+    width: 100%;
+    display: flex;
+    padding: 30px 40px 40px 40px;
+
+    @media (max-width: 991px) {
+      flex-direction: column;
+      padding: 20px;
+    }
+  }
+}
 .btn-constructor {
   font-size: 15px;
 }

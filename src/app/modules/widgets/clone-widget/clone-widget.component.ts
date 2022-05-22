@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { CompanyShort, ContainerShort, WidgetCloned } from '../../../core/models/widgets';
+import { CompanyShort, ContainerShort, WidgetCloned } from '@core/models/widgets';
 import { ContainerizedWidgetService } from '../services/containerized-widget.service';
 import { WidgetService } from '../services/widget.service';
 
@@ -15,10 +15,10 @@ export class CloneWidgetComponent implements OnInit {
   @Input() public sites;
   @Input() public currentSite;
   @Input() public companies;
-  public clonable;
+  public cloneable;
   public allContainers;
   public currentContainer;
-  public clonabledSiteId;
+  public cloneableSiteId;
   @Input() private widget;
   @Input() private containerId;
 
@@ -27,15 +27,14 @@ export class CloneWidgetComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private widgetService: WidgetService,
     private containerizedWidgetService: ContainerizedWidgetService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.companies = this.widgetService.getUndefaultCompanies(this.companies);
 
     const currentCompany = this.widgetService.getCompanyById(this.widget.companyId, this.companies);
 
-    this.clonable = {
+    this.cloneable = {
       widget: this.widget,
       recipientSiteId: this.currentSite.id,
       targetSiteId: null,
@@ -51,19 +50,19 @@ export class CloneWidgetComponent implements OnInit {
   }
 
   public getFilteredCompanies() {
-    return this.companies.filter((item) => {
-      return (item.id !== this.clonable.companyId) && !item.default;
+    return this.companies.filter(item => {
+      return item.id !== this.cloneable.companyId && !item.default;
     });
   }
 
   public changeClonableCompany(company) {
-    this.clonable.companyId = company ? company.id : null;
-    this.clonable.companyName = company ? company.name : this.translate.instant('widgetsList.clone.company.chose');
+    this.cloneable.companyId = company ? company.id : null;
+    this.cloneable.companyName = company ? company.name : this.translate.instant('widgetsList.clone.company.chose');
   }
 
   public changeCurrentSite(site) {
     this.currentSite = site;
-    this.clonable.targetSiteId = site.id;
+    this.cloneable.targetSiteId = site.id;
     this.getCompaniesForCurrentSite(site.id);
     if (this.containerId) {
       this.getContainersForCurrentSite(site.id);
@@ -75,25 +74,26 @@ export class CloneWidgetComponent implements OnInit {
   }
 
   public openAddCompanyMode() {
-    this.clonable.companyMode = 1;
-    this.clonable.companyName = '';
+    this.cloneable.companyMode = 1;
+    this.cloneable.companyName = '';
   }
 
   public closeAddCompanyMode() {
-    this.clonable.companyMode = 0;
-    this.clonable.companyName = this.companies[0].name;
+    this.cloneable.companyMode = 0;
+    this.cloneable.companyName = this.companies[0].name;
   }
 
   public handleCloneWidget() {
-    if (this.clonable.companyMode === 1) {
-      this.widgetService.createCompany(this.clonable.targetSiteId || this.clonable.recipientSiteId, this.clonable.companyName)
+    if (this.cloneable.companyMode === 1) {
+      this.widgetService
+        .createCompany(this.cloneable.targetSiteId || this.cloneable.recipientSiteId, this.cloneable.companyName)
         .subscribe((response: CompanyShort) => {
           if (response) {
             this.cloneWidget(response.id);
           }
         });
     } else {
-      this.cloneWidget(this.clonable.companyId);
+      this.cloneWidget(this.cloneable.companyId);
     }
   }
 
@@ -121,7 +121,7 @@ export class CloneWidgetComponent implements OnInit {
         if (!this.companies.length) {
           this.openAddCompanyMode();
         } else {
-          this.clonable.companyMode = 0;
+          this.cloneable.companyMode = 0;
         }
       }
     });
@@ -132,33 +132,37 @@ export class CloneWidgetComponent implements OnInit {
       if (this.currentContainer.id) {
         this.cloneCWidget(companyId, this.currentContainer.id);
       } else {
-        this.containerizedWidgetService.getWContainerName(this.currentSite.id).pipe(
-          switchMap((name: string) => this.containerizedWidgetService.createWContainer(this.currentSite.id, name))
-        ).subscribe((container: ContainerShort) => {
-          this.cloneCWidget(companyId, container.id);
-        });
+        this.containerizedWidgetService
+          .getWContainerName(this.currentSite.id)
+          .pipe(
+            switchMap((name: string) => this.containerizedWidgetService.createWContainer(this.currentSite.id, name))
+          )
+          .subscribe((container: ContainerShort) => {
+            this.cloneCWidget(companyId, container.id);
+          });
       }
     } else {
-      const targetSiteId = this.clonable.targetSiteId || this.clonable.recipientSiteId;
-      this.widgetService.clone(this.clonable.recipientSiteId, this.clonable.widget.id, targetSiteId, companyId)
+      const targetSiteId = this.cloneable.targetSiteId || this.cloneable.recipientSiteId;
+      this.widgetService
+        .clone(this.cloneable.recipientSiteId, this.cloneable.widget.id, targetSiteId, companyId)
         .subscribe((response: WidgetCloned) => {
-          this.clonable.newWidgetId = response.widgetId;
-          this.clonabledSiteId = response.siteId || this.clonable.recipientSiteId;
-          this.widgetService.updateWidgetsList.next(this.clonable.recipientSiteId);
-          this.clonable.step++;
+          this.cloneable.newWidgetId = response.widgetId;
+          this.cloneableSiteId = response.siteId || this.cloneable.recipientSiteId;
+          this.widgetService.updateWidgetsList.next(this.cloneable.recipientSiteId);
+          this.cloneable.step++;
         });
     }
   }
 
   private cloneCWidget(companyId, containerId) {
-    const targetSiteId = this.clonable.targetSiteId || this.clonable.recipientSiteId;
-    this.containerizedWidgetService.clone(this.clonable.recipientSiteId, this.clonable.widget.id, targetSiteId, companyId, containerId)
+    const targetSiteId = this.cloneable.targetSiteId || this.cloneable.recipientSiteId;
+    this.containerizedWidgetService
+      .clone(this.cloneable.recipientSiteId, this.cloneable.widget.id, targetSiteId, companyId, containerId)
       .subscribe((response: WidgetCloned) => {
-        this.clonable.newWidgetId = response.widgetId;
-        this.clonabledSiteId = response.siteId || this.clonable.recipientSiteId;
-        this.widgetService.updateWidgetsList.next(this.clonable.recipientSiteId);
-        this.clonable.step++;
+        this.cloneable.newWidgetId = response.widgetId;
+        this.cloneableSiteId = response.siteId || this.cloneable.recipientSiteId;
+        this.widgetService.updateWidgetsList.next(this.cloneable.recipientSiteId);
+        this.cloneable.step++;
       });
   }
-
 }

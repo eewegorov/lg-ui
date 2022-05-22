@@ -1,3 +1,5 @@
+@import "src/scss/vars";
+
 h1:not(.title-main) {
   margin: 0 0 15px;
   font-size: 24px;
@@ -66,8 +68,11 @@ ui-switch {
 }
 
 label.big-label {
-  font-size: 20px;
-  font-weight: 300;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  color: $fontPrimaryColor;
 }
 
 .is-invalid label.big-label, .is-invalid label.control-label, .is-invalid .underline-comment {

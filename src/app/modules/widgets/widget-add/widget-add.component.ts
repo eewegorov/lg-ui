@@ -12,7 +12,7 @@ import {
   SiteForWidget,
   WidgetCreated,
   WidgetCreateRequest
-} from '../../../core/models/widgets';
+} from '@core/models/widgets';
 import { ContainerizedWidgetService } from '../services/containerized-widget.service';
 import { WidgetService } from '../services/widget.service';
 
@@ -53,9 +53,15 @@ export class WidgetAddComponent implements OnInit {
       widgetName: '',
       name: '',
       companyMode: this.companies.length === 0 ? 1 : 0,
-      company: this.currentCompany.default ? this.translate.instant('widgetsList.clone.company.chose') : this.currentCompany.name,
+      company: this.currentCompany.default
+        ? this.translate.instant('widgetsList.clone.company.chose')
+        : this.currentCompany.name,
       companyId: this.currentCompany.default ? null : this.currentCompany.id
     };
+  }
+
+  public closeModal(): void {
+    this.activeModal.close();
   }
 
   public closeNewWidgetModal(result) {
@@ -79,13 +85,14 @@ export class WidgetAddComponent implements OnInit {
   public closeAddCompanyMode() {
     this.editableWidget.companyMode = 0;
     this.editableWidget.company = this.currentCompany.default
-      ? this.translate.instant('widgetsList.clone.company.chose') : this.currentCompany.name;
+      ? this.translate.instant('widgetsList.clone.company.chose')
+      : this.currentCompany.name;
     this.editableWidget.companyId = this.currentCompany.default ? null : this.currentCompany.id;
   }
 
   public getFilteredCompanies() {
-    return this.companies.filter((item) => {
-      return (item.id !== this.editableWidget.companyId) && !item.default;
+    return this.companies.filter(item => {
+      return item.id !== this.editableWidget.companyId && !item.default;
     });
   }
 
@@ -118,7 +125,7 @@ export class WidgetAddComponent implements OnInit {
   public chooseTemplateWidget(data: Mockup) {
     this.newWidgetStep = 4;
 
-    const currentType = this.widgetTypes.find((item) => {
+    const currentType = this.widgetTypes.find(item => {
       return item.id === data.type;
     });
     if (currentType) {
@@ -153,10 +160,12 @@ export class WidgetAddComponent implements OnInit {
       newWidget.companyId = this.editableWidget.companyId;
       this.createWidget(newWidget);
     } else {
-      this.widgetService.createCompany(this.editableWidget.siteId, this.editableWidget.company).subscribe((response: CompanyShort) => {
-        newWidget.companyId = response.id;
-        this.createWidget(newWidget);
-      });
+      this.widgetService
+        .createCompany(this.editableWidget.siteId, this.editableWidget.company)
+        .subscribe((response: CompanyShort) => {
+          newWidget.companyId = response.id;
+          this.createWidget(newWidget);
+        });
     }
   }
 
@@ -164,25 +173,22 @@ export class WidgetAddComponent implements OnInit {
     const siteId = this.editableWidget.siteId;
 
     if (this.editableWidget.containerized) {
-
-      this.containerizedWidgetService.getWContainerName().pipe(
-        switchMap((name: string) => this.containerizedWidgetService.createWContainer(siteId, name)),
-        switchMap((container: ContainerShort) => {
-          widget.containerId = container.id;
-          return this.containerizedWidgetService.create(siteId, widget);
-        })
-      ).subscribe((response: WidgetCreated) => {
-        this.router.navigate([`/widgets/edit/${siteId}-${response.value}/`]).then(
-          () => this.activeModal.close()
-        );
-      });
+      this.containerizedWidgetService
+        .getWContainerName()
+        .pipe(
+          switchMap((name: string) => this.containerizedWidgetService.createWContainer(siteId, name)),
+          switchMap((container: ContainerShort) => {
+            widget.containerId = container.id;
+            return this.containerizedWidgetService.create(siteId, widget);
+          })
+        )
+        .subscribe((response: WidgetCreated) => {
+          this.router.navigate([`/widgets/edit/${siteId}-${response.value}/`]).then(() => this.activeModal.close());
+        });
     } else {
       this.widgetService.create(siteId, widget).subscribe((response: WidgetCreated) => {
-        this.router.navigate([`/widgets/edit/${siteId}-${response.value}/`]).then(
-          () => this.activeModal.close()
-        );
+        this.router.navigate([`/widgets/edit/${siteId}-${response.value}/`]).then(() => this.activeModal.close());
       });
     }
   }
-
 }

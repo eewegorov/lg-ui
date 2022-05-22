@@ -1,3 +1,93 @@
+@import "src/scss/vars";
+@import "src/scss/mixins";
+@import "src/scss/modal-header";
+
+:host {
+  .modal-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px 40px 40px;
+
+    @media (max-width: 991px) {
+      padding: 20px;
+    }
+
+    form {
+      width: inherit;
+      display: inherit;
+      flex-direction: inherit;
+      gap: 25px;
+
+      .form-group {
+        width: inherit;
+        display: inherit;
+        flex-direction: inherit;
+        gap: 10px;
+        margin: 0;
+
+        &.is-invalid {
+          lbael, .control-label {
+            color: #a94442;
+          }
+        }
+
+        lbael, .control-label {
+          display: inherit;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 22px;
+          color: $fontPrimaryColor;
+          margin: 0;
+          gap: 10px;
+
+          a {
+            display: flex;
+            width: 22px;
+            height: 22px;
+            position: relative;
+            color: $fontGrayColor;
+
+            @include svg-position();
+          }
+        }
+
+        input, textarea {
+          min-height: 50px;
+          padding: 14px;
+          border-color: $borderColor;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 22px;
+        }
+
+        span, .small {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 16px;
+          color: $fontPrimaryColor;
+        }
+      }
+
+      .form-buttons {
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+          margin-top: 15px;
+        }
+
+        @media (max-width: 991px) {
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
 .sub-text-extra-create-new-test {
   text-align: center;
   display: block;
