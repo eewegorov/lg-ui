@@ -35,101 +35,122 @@
       </div>
     </div>
 
-    <div *ngIf="newWidgetStep === 4" class="p-2" id="step4">
-      <label class="big-label">{{ 'widgetsList.add.params.label' | translate }}:</label>
-      <div class="row mt-3">
-        <div class="col-lg-12 mb-3">
-          <div class="row mb-2 ml-0 select-site-title">
-            <h5>{{ 'widgetsList.add.params.name.title' | translate }}:</h5>
-          </div>
-          <input [(ngModel)]="editableWidget.name" class="form-control" type="text" />
-          <span class="underow-comment">{{ 'widgetsList.add.params.name.tooltip' | translate }}</span>
+    <ng-container *ngIf="newWidgetStep === 4">
+      <label class="big-label">{{ 'widgetsList.add.params.label' | translate }}</label>
+      <form>
+        <div class="form-group">
+          <label class="control-label">{{ 'widgetsList.add.params.name.title' | translate }}</label>
+          <input
+            [(ngModel)]="editableWidget.name"
+            placeholder="{{ 'widgetsList.add.params.name.placeholder' | translate }}"
+            class="form-control"
+            name="name"
+            type="text"
+          />
+          <span class="small">{{ 'widgetsList.add.params.name.tooltip' | translate }}</span>
         </div>
-        <div *ngIf="editableWidget.companyMode === 0" class="col-lg-12">
-          <div class="row mb-2 ml-0 select-site-title">
-            <h5>
-              {{ 'widgetsList.selectCompany' | translate }}:
+        <ng-container *ngIf="editableWidget.companyMode === 0">
+          <div class="form-group">
+            <label class="control-label">
+              {{ 'widgetsList.selectCompany' | translate }}
               <a
                 class="info-link"
                 data-placement="top"
                 data-toggle="tooltip"
                 title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
-              ><i class="fa fa-info-circle"></i
+                inlineSVG="./assets/images/core/question"
               ></a>
-            </h5>
-          </div>
-          <div
-            [ngClass]="!editableWidget.companyId ? 'is-invalid' : ''"
-            class="dropdown widget-company-selector"
-            style="float: left; width: calc(100% - 50px)"
-          >
-            <button
-              aria-expanded="true"
-              aria-haspopup="true"
-              class="btn btn-default dropdown-toggle"
-              data-toggle="dropdown"
-              type="button"
-            >
-              <span class="dropdown-selected-cropp" style="max-width: 90%">{{ editableWidget.company }}</span>
-              <span class="caret"></span>
-            </button>
-            <ul *ngIf="companies.length" class="dropdown-menu">
-              <li (click)="changeCompany(company)" *ngFor="let company of getFilteredCompanies()">
-                <a class="dropdown-item" href="javascript:void(0);">{{ company.name }}</a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <a (click)="openAddCompanyMode()" href="javascript:void(0);">
-              <i
-                class="add-company colored-blue pe-7s-plus"
+            </label>
+            <div class="widget-company-selector">
+              <div
+                [class.is-invalid]="!editableWidget.companyId"
+                class="dropdown widget-company-selector"
+              >
+                <button
+                  aria-expanded="true"
+                  aria-haspopup="true"
+                  class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown"
+                  type="button"
+                >
+                  <span class="dropdown-selected-cropp">{{ editableWidget.company }}</span>
+                  <span class="caret"></span>
+                </button>
+                <ul *ngIf="companies.length" class="dropdown-menu">
+                  <li (click)="changeCompany(company)" *ngFor="let company of getFilteredCompanies()">
+                    <a class="dropdown-item" href="javascript:void(0);">{{ company.name }}</a>
+                  </li>
+                </ul>
+              </div>
+              <button
+                (click)="openAddCompanyMode()"
+                class="btn btn-default remove-sub-item"
                 data-container="body"
                 data-placement="top"
                 data-toggle="tooltip"
                 title="{{ 'widgetsList.company.add.tooltip' | translate }}"
-              ></i>
-            </a>
+              >
+                <span inlineSVG="./assets/images/core/plus.svg"></span>
+              </button>
+            </div>
           </div>
-        </div>
-        <div
-          *ngIf="editableWidget.companyMode === 1"
-          [ngClass]="(editableWidget.company.trim().length === 0) ? 'is-invalid' : ''"
-          class="col-lg-12"
-        >
-          <div class="row mb-2 ml-0 select-site-title">
-            <h5>
-              {{ 'widgetsList.add.params.company.add.name' | translate }}:
+        </ng-container>
+
+        <ng-container *ngIf="editableWidget.companyMode === 1">
+          <div class="form-group" [class.is-invalid]="editableWidget.company.trim().length === 0">
+            <label class="control-label">
+              {{ 'widgetsList.add.params.company.add.name' | translate }}
               <a
                 class="info-link"
                 data-placement="top"
                 data-toggle="tooltip"
                 title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"
-              ><i class="fa fa-info-circle"></i
+                inlineSVG="./assets/images/core/question.svg"
               ></a>
-            </h5>
+            </label>
+            <div class="widget-company-selector align-items-start">
+              <div class="form-group flex-column">
+                <input
+                  [(ngModel)]="editableWidget.company"
+                  class="form-control"
+                  name="companyName"
+                  placeholder="{{ 'widgetsList.clone.company.add.label' | translate }}"
+                  type="text"
+                />
+                <span class="small">{{ 'widgetsList.add.params.company.under' | translate }}</span>
+              </div>
+              <button
+                *ngIf="companies.length"
+                (click)="closeAddCompanyMode()"
+                class="btn btn-default remove-sub-item"
+                data-container="body"
+                data-placement="top"
+                data-toggle="tooltip"
+                title="{{ 'widgetsList.add.params.company.add.back' | translate }}"
+              >
+                <span inlineSVG="./assets/images/core/cross.svg"></span>
+              </button>
+            </div>
           </div>
-          <input [(ngModel)]="editableWidget.company" class="form-control" type="text" />
-          <span class="underow-comment">{{ 'widgetsList.add.params.company.under' | translate }}</span>
-          <a (click)="closeAddCompanyMode()" *ngIf="companies.length" class="companies-underline">
-            {{ 'widgetsList.add.params.company.add.back' | translate }}
-          </a>
-        </div>
-        <div class="col-lg-12 mt-4 d-flex justify-content-between">
-          <button (click)="closeNewWidgetModal(false)" class="btn btn-lg btn-default">
-            {{ 'global.cancel' | translate }}
-          </button>
-          <button
-            (click)="addWidget()"
-            [disabled]="(editableWidget.companyMode == 0 && editableWidget.companyId == null) || (editableWidget.companyMode == 1 && editableWidget.company.trim().length == 0)"
-            class="btn btn-lg btn-success"
-            type="button"
-          >
-            {{ 'widgetsList.add.modal.gallery.gotosettings' | translate }}
-          </button>
-        </div>
-      </div>
-    </div>
+        </ng-container>
+
+      </form>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="newWidgetStep === 4">
+  <div class="modal-footer border-0">
+    <button
+      (click)="addWidget()"
+      [disabled]="
+        (editableWidget.companyMode === 0 && editableWidget.companyId === null) ||
+        (editableWidget.companyMode === 1 && editableWidget.company.trim().length === 0)
+      "
+      class="btn btn-default"
+    >
+      {{ 'widgetsList.add.modal.gallery.gotosettings' | translate }}
+    </button>
   </div>
 </ng-container>
 
