@@ -47,8 +47,8 @@
   </ng-container>
 
   <ng-container *ngIf="newABTestInfo.step === 1">
-    <div class="row">
-      <div (click)="setABType(type)" *ngFor="let type of newABTestInfo.ABTypes" class="col-lg-4 widget-type-view">
+    <div class="test-type-container">
+      <div (click)="setABType(type)" *ngFor="let type of newABTestInfo.ABTypes" class="widget-type-view">
         <div class="ab-type-icon-{{ type.type }}"></div>
         <div class="view-name text-center">{{ type.title }}</div>
       </div>

@@ -614,13 +614,13 @@ button[role=switch] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 3px solid #fff;
+  border: 1px solid $borderColor;
   cursor: pointer;
+  border-radius: $borderRadius;
 }
 
 .widget-type-view:hover {
-  border: 1px solid $successColor;
-  border-radius: $borderRadius;
+  border-color: $successColor;
 }
 
 .widget-type-view div.view-name {
