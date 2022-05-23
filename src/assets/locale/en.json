@@ -64,7 +64,9 @@
 				"comment": "",
 				"create": "",
 				"description": "",
-				"title": ""
+				"descriptionPlaceholder": "",
+				"title": "",
+				"titlePlaceholder": ""
 			}
 		},
 		"show": "",
@@ -293,6 +295,7 @@
 					"default": "",
 					"widget": ""
 				},
+				"no-data": "",
 				"refresh": "",
 				"th1": "",
 				"th2": "",
@@ -687,7 +690,6 @@
 	},
 	"sitelist": {
 		"addSite": "",
-    "label": "Site",
 		"chartLegend": {
 			"emails": "",
 			"leads": "",
@@ -706,8 +708,8 @@
 		"extend": "Extend",
 		"form": {
 			"code": {
-        "title": "",
-				"desc1": ""
+				"desc1": "",
+				"title": ""
 			},
 			"goto": "",
 			"gotoaway": "",
@@ -731,6 +733,7 @@
 			"url": ""
 		},
 		"improve": "",
+		"label": "Site",
 		"notification": {
 			"crm": "",
 			"mail": "",
@@ -1165,6 +1168,7 @@
 					"title2": ""
 				},
 				"name": {
+					"placeholder": "",
 					"title": "",
 					"tooltip": ""
 				},
@@ -1430,6 +1434,9 @@
 				"title": "",
 				"tooltip": "",
 				"up": ""
+			},
+			"rename": {
+				"tooltip": ""
 			},
 			"settings": "",
 			"show": {
