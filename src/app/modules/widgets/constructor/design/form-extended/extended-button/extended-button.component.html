@@ -92,7 +92,7 @@
 <div *ngIf="item.bType" [hidden]="!(item.bType.type === 0 || item.bType.type === 1)" class="border-item mt-4">
   <div class="row-subitem">
     <div class="row-subitem-padding mb-3">
-      <h3>Текст</h3>
+      <h3>Шрифт</h3>
     </div>
     <div class="row-subitem-padding">
       <input [id]="'font-picker-ext-form' + index" type="text">
@@ -114,7 +114,7 @@
 </div>
 <!-- END FONT SETTINGS -->
 
-<div class="row-subitem mt-3">
+<div class="row-subitem mt-4">
   <h3>Вид кнопки</h3>
 
   <div class="d-flex justify-content-between mt-3">
@@ -162,11 +162,11 @@
   </div>
 </div>
 
-<div class="row-subitem mt-3">
+<div class="row-subitem mt-4">
   <h3>{{ 'widgets.formExt.widthField1' | translate }}</h3>
 </div>
 
-<div class="row-subitem mt-4 border-item">
+<div class="row-subitem mt-3 border-item">
   <div class="form-ext-item__width-settings form-ext-item__just-lined-flex">
     <div>
       <input [(ngModel)]="item.widthValue" class="form-control form-control-font form-cntrl-55w" type="number">
@@ -240,7 +240,7 @@
   </div>
 </div>
 
-<div *ngIf="item.redirect" class="row-subitem mt-3">
+<div *ngIf="item.redirect" class="row-subitem mt-4">
   <h3>{{ 'widgets.formExt.mainSettings.buttonSettings.redirect.action' | translate }}</h3>
   <div class="dropdown mt-3">
     <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">

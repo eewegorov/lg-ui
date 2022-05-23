@@ -58,14 +58,6 @@ export class ConstructorAudiencesComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public getCroppedString(str, count, addedSymbol) {
-    if (str.length > count) {
-      return str.substring(0, count) + addedSymbol;
-    }
-
-    return str;
-  }
-
   public removeItem(groupId, index) {
     for (let i = 0; i < this.widget.audience.groups.length; i++) {
       if (this.widget.audience.groups[i].id === groupId) {

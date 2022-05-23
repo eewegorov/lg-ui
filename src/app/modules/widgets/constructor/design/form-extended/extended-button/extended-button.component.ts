@@ -71,6 +71,7 @@ export class ExtendedButtonComponent implements OnInit, AfterViewInit, DoCheck {
   private initPicker() {
     setTimeout(() => {
       ($('#font-picker-ext-form' + this.index) as any).fontselect({
+        lazyLoad: false,
         placeholder: 'Выберите шрифт',
         placeholderSearch: 'Поиск...',
         systemFonts: this.widgetConstructorService.getSystemFontListPicker(),

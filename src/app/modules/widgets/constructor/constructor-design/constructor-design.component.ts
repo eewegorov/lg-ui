@@ -76,7 +76,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   ];
   public placeDh = ['', '', '', '', '', '', 'Левый нижний угол', '', 'Правый нижний угол'];
   public placeLabel = ['', '', '', 'Левая сторона браузера', '', 'Правая сторона браузера', 'Нижний левый угол', '', 'Нижний правый угол'];
-  public staticWidgetAlign = ['', '', '', 'По левому краю', 'По центру', 'По правому краю', '', '', ''];
+  public staticWidgetAlign = [null, null, null, 'По левому краю', 'По центру', 'По правому краю', null, null, null];
   public vertOrientDh = ['', 'От верхней границы', '', '', 'По центру виджета', '', '', 'От нижней границы', ''];
   public bgPositionTypesList = ['Растянуть', 'Замостить'];
   public tilesList = ['Замостить по X', 'Замостить по Y', 'Замостить по X+Y'];
@@ -90,7 +90,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   public floatBtn = ['Слева', 'По центру', 'Справа'];
   public widthBtn = ['Авто', 'От края до края', 'Собственная'];
   public widgwidthBtn = ['Авто', 'Собственная'];
-  public typeClass = ['1', '2', '3', '4', '5', '6'];
+  public typeClass = ['1', '2', '3', '4'];
   public widthContentStyle = '';
   public heightContentStyle = '';
   public bgStyle = '';
@@ -101,7 +101,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   public currentIndex = 0;
   public widgetType: WidgetTypeCode;
   public isThankShow = false;
-  public addElemFromWidget = false;
+  public addElemFromWidget = 0;
   public systemFonts = [];
   public controls: Record<string, any>;
   public globalCouponObject: object;
@@ -160,6 +160,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     });
 
     this.initLabelMainPicker();
+    this.initGoogleFonts();
 
     $(this.controls.newModal as any).on('hidden.bs.modal', (e)=> e.currentTarget.remove());
   }
@@ -351,7 +352,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     if (typeof item !== 'undefined') {
       this.addElemFromWidget = item;
     } else {
-      this.addElemFromWidget = false;
+      this.addElemFromWidget = 0;
     }
 
     (this.controls.newElementModal as any).appendTo('body').modal('show');
@@ -425,8 +426,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
         this.widgetConstructorService.isFormHasCurrentTypeOfActions(this.widget.guiprops.formExt.model.list, 0));
   }
 
-  public scrollToEl(id: string, elementName: string, elementCounter?: number) {
-    if (this.currentElement === 'form-ext-element' && elementName === 'form-ext-element') {
+  public scrollToEl(element: string, index: number | string, elementCounter?: number) {
+    if (this.currentElement === 'form-ext-element' && element === 'form-ext-element') {
       return;
     }
 
@@ -446,28 +447,31 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       'video-element',
       'timer-element',
       'form-ext-element',
-    ].includes(elementName)) {
-      this.currentElement = elementName + (elementCounter ? ('#' + elementCounter) : '');
+    ].includes(element)) {
+      this.currentElement = element + (elementCounter ? ('#' + elementCounter) : '');
+      this.currentIndex = +index;
     } else {
       this.currentElement = 'settings';
-      const accordion = $('#accordion');
-      const accordionIn = $('#accordionIn');
-      const target = $('#elemScrN' + id);
+      this.currentIndex = 0;
+      if (index) {
+        const accordion = $('#accordion');
+        const accordionIn = $('#accordionIn');
+        const target = $('#elemScrN' + index);
 
-      const scrollTo = (target.offset().top) - (accordionIn.offset().top) - 40;
-      if (((target.offset().top - accordion.offset().top - 42) <= 10) && ((target.offset().top - accordion.offset().top - 42) >= -10)) {
-        return;
+        const scrollTo = (target.offset().top) - (accordionIn.offset().top) - 40;
+        if (((target.offset().top - accordion.offset().top - 42) <= 10) && ((target.offset().top - accordion.offset().top - 42) >= -10)) {
+          return;
+        }
+        accordion.animate({ scrollTop: scrollTo }, 500, 'swing', () => {
+        });
+        target.addClass('border-active-element');
+        setTimeout(() => {
+          target.removeClass('border-active-element');
+        }, 1500);
       }
-
-      accordion.animate({ scrollTop: scrollTo }, 500, 'swing', () => {
-      });
-      target.addClass('border-active-element');
-      setTimeout(() => {
-        target.removeClass('border-active-element');
-      }, 1500);
     }
 
-    if (elementName === 'title-element' || elementName === 'form-element' || elementName === 'button-element' || elementName === 'closelink-element') {
+    if (element === 'title-element' || element === 'form-element' || element === 'button-element' || element === 'closelink-element') {
       this.downUpInitAir();
     }
   }
@@ -544,6 +548,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public getVideoId(item) {
+    console.log(item);
     if (!item.videoUrl) {
       item.videoUrl = 'https://';
     }
@@ -552,27 +557,26 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     if (item.videoType === 'youtube') {
       const regYExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
       const match = item.videoUrl.match(regYExp);
-      result = (match && match[7].length === 11) ? match[7] : false;
+      result = match ? match[7] : false;
       if (result) {
-        if (item.isVideoBG) {
-          item.videoPreview = 'https://img.youtube.com/vi/' + result + '/hqdefault.jpg';
-          result = result +
-            '?controls=0&iv_load_policy=3&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&modestbranding=1&disablekb=1&playlist=' + result;
-        }
+        item.videoPreview = 'https://img.youtube.com/vi/' + result + '/hqdefault.jpg';
+        result = result +
+          '?controls=0&iv_load_policy=3&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&modestbranding=1&disablekb=1&playlist=' + result;
         item.videoUrl = 'https://www.youtube.com/embed/' + result;
+      } else {
+        item.videoUrl = 'https://www.youtube.com/embed/FFu-JFifX28';
       }
     } else {
       const regVExp = /^.+vimeo.com\/(.*\/)?([^#\?]*)/;
       const parseUrl = item.videoUrl.match(regVExp);
-      result = (parseUrl && parseUrl[2].length === 9) ? parseUrl[2] : false;
+      result = (parseUrl && parseUrl[2].length === 9) ? parseUrl[2] : '207763253';
       result += '';
-      if (result) {
-        if (item.isVideoBG) {
-          item.videoPreview = 'https://i.vimeocdn.com/video/' + result + '.png';
-          result = result + '?background=1';
-        }
-        item.videoUrl = 'https://player.vimeo.com/video/' + result;
+
+      if (item.isVideoBG) {
+        item.videoPreview = 'https://i.vimeocdn.com/video/' + result + '.png';
+        result = result + '?background=1';
       }
+      item.videoUrl = 'https://player.vimeo.com/video/' + result;
     }
 
     item.videoId = result;
@@ -672,11 +676,18 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     return false;
   }
 
-  public showLastElement(): void {
+  public showAddedElement(): void {
     this.checkChanges();
-    const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
-    this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
-    this.currentIndex = this.widget.guiprops.elementsList.length - 1;
+
+    if (this.addElemFromWidget) {
+      const currentElement = this.widget.guiprops.elementsList[this.addElemFromWidget + 1];
+      this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
+      this.currentIndex = this.addElemFromWidget + 1;
+    } else {
+      const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
+      this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
+      this.currentIndex = this.widget.guiprops.elementsList.length - 1;
+    }
   }
 
   public setCurrentElement(elementName: string): void {
@@ -692,6 +703,13 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   public backToRegularElement(): void {
     this.extendedElement = null;
     this.extendedIndex = null;
+  }
+
+  private initGoogleFonts(): void {
+    const googleApi = "https://fonts.googleapis.com/css?family=";
+    this.widgetConstructorService.getGoogleFontListPicker().forEach(font => {
+      $("link:last").after('<link href="' + googleApi + font + '" rel="stylesheet" type="text/css">');
+    });
   }
 
   private initLabelMainPicker() {
@@ -752,7 +770,25 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           id: TAB_ID,
           element: el.name,
           counter: el.counter,
-          message: 'No coupon'
+          message: 'No coupon' // coupon element has their own messages in widget-edit.component.ts saveWidgetItem()
+        });
+      }
+
+      if (el.name === 'social-element' && this.widget.guiprops['social'].linkForShare === 'own' && !this.widget.guiprops['social'].linkText) {
+        errors.push({
+          id: TAB_ID,
+          element: el.name,
+          counter: el.counter,
+          message: 'Укажите URL страницы для соц.сетей'
+        });
+      }
+
+      if (el.name === 'timer-element' && el.expType.type === 1 && !el.expUrl) {
+        errors.push({
+          id: TAB_ID,
+          element: el.name,
+          counter: el.counter,
+          message: 'Укажите URL страницы перенаправления по окончании отсчёта'
         });
       }
 
@@ -761,7 +797,15 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           id: TAB_ID,
           element: el.name,
           counter: el.counter,
-          message: 'No action for form-ext'
+          message: 'No action for form-ext' // form-ext has their own messages in widget-edit.component.ts saveWidgetItem()
+        });
+      }
+
+      if (this.widget.guiprops.formSet.redirect.enable && !this.widget.guiprops.formSet.redirect.url.trim()) {
+        errors.push({
+          id: TAB_ID,
+          element: 'settings',
+          message: 'Укажите URL страницы перенаправления'
         });
       }
 
@@ -1333,6 +1377,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     const mainBl = $('#mainBlockWidget');
     const mainBlWr = $('#widgetMainWr');
     const maskTop = $('#widgetMaskTop');
+    const labelMain  = $('#labelMain');
+
     const gap18 = '-18px';
     const gap3 = '-3px';
 
@@ -1360,6 +1406,14 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       } else {
         this.heightImageStyle = '150px';
       }
+    }
+
+    if (this.widget.guiprops['labelMain'].place === 'Левая сторона браузера') {
+      labelMain.css({'left': - ((labelMain.innerWidth()/2) - (labelMain.innerHeight()/2)) + 'px', 'right': 'auto'});
+    } else if (this.widget.guiprops['labelMain'].place === 'Правая сторона браузера') {
+      labelMain.css({'right': - ((labelMain.innerWidth()/2) - (labelMain.innerHeight()/2) - 15) + 'px', 'left': 'auto'});
+    } else {
+      labelMain.css({'right': '', 'left': ''});
     }
 
     if (this.currentActiveTab === 'design') {

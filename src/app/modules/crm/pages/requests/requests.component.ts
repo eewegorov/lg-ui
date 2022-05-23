@@ -243,8 +243,12 @@ export class RequestsComponent implements OnInit, OnDestroy {
       ];
       this.widgetsIds = [this.ALL_SITE_ID];
       this.crmService.getLeadsFilters().subscribe((response: LeadWidgets[]) => {
-        this.allSites = this.allSites.concat(response);
-        response.forEach(site => site.widgets.forEach(widget => this.allWidgets.push(widget)));
+        if (response) {
+          this.allSites = this.allSites.concat(response);
+          response.forEach(site =>
+            site.widgets.forEach(widget => this.allWidgets.push(widget))
+          );
+        }
       });
     });
   }

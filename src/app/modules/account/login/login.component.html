@@ -31,14 +31,9 @@
         <span *ngIf="error" class="errorMessage errorMessageLogin small">{{ 'login.error' | translate }}</span>
         <span class="help-block small">{{ 'login.unique_password' | translate }}</span>
       </div>
-      <div class="checkbox">
-        <input #ichecks checked class="i-checks" id="checkRemember" name="remember-me" type="checkbox">
-        {{ 'login.remember_checkbox' | translate }}
-        <p class="help-block small">({{ 'login.remember_note' | translate }})</p>
-      </div>
 
       <button
-        class="btn btn-success btn-block"
+        class="btn btn-success btn-block mt-4"
         id="buttonLogin"
         type="submit"
       >

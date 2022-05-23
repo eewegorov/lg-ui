@@ -9,6 +9,7 @@ import { WidgetConstructorService } from '../../../../services/widget-constructo
 export class ExtendedHiddenComponent implements OnInit {
   @Input() public index: number;
   @Input() public item: Record<string, any>;
+  @Input() public showErrors: boolean;
 
   public availItemTypes = [];
   public fieldTypes = [];

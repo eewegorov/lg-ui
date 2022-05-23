@@ -487,6 +487,8 @@ label.switcher-label-xs {
 }
 
 .widget-small-text {
+  position: relative;
+  z-index: 1;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
   line-height: 15px;
@@ -802,6 +804,7 @@ button.refresh-video-element-btn {
 
 .rule-subitem-text {
   padding: 0;
+  font-size: 15px;
 }
 
 .subitem-left {
@@ -1320,6 +1323,7 @@ input.icp {
   display: inline-block;
   text-decoration: inherit;
   width: 0.8em;
+  font-size: 20px;
   margin-right: 0;
   text-align: center;
   /* opacity: .8; */

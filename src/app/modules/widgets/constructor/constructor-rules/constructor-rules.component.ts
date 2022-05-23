@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { FullWidget } from '../../../../core/models/widgets';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-constructor-rules',
@@ -38,6 +39,12 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
   ];
   public currentCategory = this.widgetSettingsCategories[0];
 
+  public editorConfig: AngularEditorConfig = {
+    editable: true,
+    toolbarHiddenButtons: [[], ['insertImage', 'insertVideo']]
+  };
+
+  public timeList = [];
 
   private ONE_MINUTE = 1000 * 60;
   private ONE_HOUR = this.ONE_MINUTE * 60;
@@ -56,6 +63,8 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
       { id: 5, name: this.translate.instant('global.week.saturday') },
       { id: 6, name: this.translate.instant('global.week.sunday') }
     ];
+
+    this.timeList = this.getTimeList();
   }
 
   ngOnInit(): void {
@@ -193,20 +202,16 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
     return rule.includes(this.autoinviteVariants[0]) ? this.autoinviteVariants[0] : this.autoinviteVariants[1];
   }
 
-  public checkExitIntent(value: boolean, isDesktop: boolean): void {
-    if (value) {
-      return;
-    }
-
+  public checkExitIntent(isDesktop: boolean): void {
     if (isDesktop && !this.widget.autoinvite.exit.mobileEnable) {
       setTimeout(() => {
-        this.widget.autoinvite.exit.desktopEnable = true;
+        this.widget.autoinvite.exit.mobileEnable = true;
       }, 0);
     }
 
     if (!isDesktop && !this.widget.autoinvite.exit.desktopEnable) {
       setTimeout(() => {
-        this.widget.autoinvite.exit.mobileEnable = true;
+        this.widget.autoinvite.exit.desktopEnable = true;
       }, 0);
     }
   }
@@ -243,6 +248,30 @@ export class ConstructorRulesComponent implements OnInit, AfterViewInit {
           });
         }
       }
+    }
+
+    if (this.widget.audiencesEnabled && !this.widget.audience?.groups?.length) {
+      errors.push({
+        id: TAB_ID,
+        category: this.translate.instant('widgetsList.editor.section.audience'),
+        message: 'Настройте или отключите таргетинг на аудиторию'
+      });
+    }
+
+    if (this.widget.autoresponder?.enabled && (!this.widget.autoresponder?.subject?.toString().trim().length || !this.widget.autoresponder?.text?.toString().trim().length)) {
+      errors.push({
+        id: TAB_ID,
+        category: this.translate.instant('widgetsList.editor.section.autoresponder'),
+        message: 'Настройте или отключите письмо автоответчика'
+      });
+    }
+
+    if (this.widget.useCustomIntegrationsList && !this.widget.integrations?.length) {
+      errors.push({
+        id: TAB_ID,
+        category: this.translate.instant('widgetsList.editor.section.integrations'),
+        message: this.translate.instant('widgets.integration.saveError')
+      });
     }
 
     if (this.widget.audiencesEnabled) {

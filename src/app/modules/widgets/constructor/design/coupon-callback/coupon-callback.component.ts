@@ -27,6 +27,7 @@ export class CouponCallbackComponent implements OnInit {
   }
 
   public refreshCouponsList() {
+    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
     this.couponService.updateCouponsList.next();
   }
 

@@ -13,6 +13,7 @@ export class TimerElementComponent implements OnInit, OnChanges {
   @Input() public index: number;
   @Input() public item: any;
   @Input() public widget: FullWidget;
+  @Input() public showErrors: boolean;
 
   public alignValues = [];
   public timerTypes = [];

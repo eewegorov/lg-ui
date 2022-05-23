@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewChecked, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { of, SubscriptionLike } from 'rxjs';
@@ -13,7 +13,7 @@ import { SitesService } from '../../services/sites.service';
   templateUrl: './site-add.component.html',
   styleUrls: ['./site-add.component.scss']
 })
-export class SiteAddComponent implements OnInit, AfterViewChecked {
+export class SiteAddComponent implements OnInit, AfterViewChecked, OnDestroy {
   @Input() public hidePhone: boolean;
   public newSiteForm: FormGroup;
   public createdSite = {} as CreateSiteData;
@@ -99,5 +99,11 @@ export class SiteAddComponent implements OnInit, AfterViewChecked {
       url: new FormControl('', [Validators.required]),
       phone: new FormControl('')
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.createSiteSub) {
+      this.createSiteSub.unsubscribe();
+    }
   }
 }

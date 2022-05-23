@@ -14,7 +14,6 @@ import { AccountService } from '../services/account.service';
 export class LoginComponent implements OnInit, OnDestroy {
   public loginForm: FormGroup;
   public error: boolean;
-  @ViewChild('ichecks', { static: true }) private ichecks: ElementRef;
   private authSub: SubscriptionLike;
 
   constructor(
@@ -26,17 +25,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.error = this.route.snapshot.queryParams.error === '';
-
-    this.initIchecks();
     this.resetForm();
   }
 
   public submitAuth() {
-    this.authSub = this.accountService.handleAuth(this.loginForm.value).subscribe((response: boolean) => {
-      if (response) {
-        this.router.navigate(['/']);
-      }
-    });
+    this.authSub = this.accountService.handleAuth(this.loginForm.value).subscribe();
   }
 
   public authYandex(event: Event) {
@@ -48,24 +41,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    if (this.authSub) {
-      this.authSub.unsubscribe();
-    }
-  }
-
-  private initIchecks() {
-    ($(this.ichecks.nativeElement) as any).iCheck({
-      checkboxClass: 'icheckbox_square-green',
-      radioClass: 'iradio_square-green',
-    });
-  }
-
   private resetForm() {
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.authSub) {
+      this.authSub.unsubscribe();
+    }
   }
 
 }

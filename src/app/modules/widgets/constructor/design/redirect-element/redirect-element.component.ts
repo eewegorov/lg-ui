@@ -8,6 +8,7 @@ import { FullWidget } from '../../../../../core/models/widgets';
 })
 export class RedirectElementComponent implements OnInit, AfterViewInit {
   @Input() public widget: FullWidget;
+  @Input() public showErrors: boolean;
 
   constructor() {
   }

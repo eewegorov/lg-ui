@@ -420,7 +420,7 @@ h6.title-h6-widget a:hover {
     position: relative;
     height: 62px;
     padding: 9px 0;
-    font-size: 10px;
+    font-size: 9px;
     line-height: 12px;
     color: #505662;
     text-align: center;
@@ -918,7 +918,8 @@ h6.title-h6-widget a:hover {
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.05);
+    padding: 14px 20px;
+    margin: -4px;
   }
 }
 
@@ -945,20 +946,16 @@ h6.title-h6-widget a:hover {
 #labelMain.wlb-right {
   left: auto;
   right: -90px;
-  bottom: auto;
   top: 40%;
-  -webkit-transform: rotate(-90deg) translate3d(0, 0, 0);
-  -moz-transform: rotate(-90deg) translate3d(0, 0, 0);
+  bottom: auto;
   transform: rotate(-90deg) translate3d(0, 0, 0);
 }
 
 #labelMain.wlb-left {
   left: -100px;
   right: auto;
-  bottom: auto;
   top: 40%;
-  -webkit-transform: rotate(90deg) translate3d(0, 0, 0);
-  -moz-transform: rotate(90deg) translate3d(0, 0, 0);
+  bottom: auto;
   transform: rotate(90deg) translate3d(0, 0, 0);
 }
 

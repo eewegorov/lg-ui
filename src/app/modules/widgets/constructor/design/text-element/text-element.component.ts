@@ -42,6 +42,7 @@ export class TextElementComponent implements OnInit, AfterViewInit {
   private initPicker() {
     setTimeout(() => {
       ($('#font-picker' + this.index) as any).fontselect({
+        lazyLoad: false,
         placeholder: 'Выберите шрифт',
         placeholderSearch: 'Поиск...',
         systemFonts: this.widgetConstructorService.getSystemFontListPicker(),

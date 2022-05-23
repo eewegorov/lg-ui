@@ -26,7 +26,7 @@
   class="row-subitem mt-3 form-ext-item__item-input"
   [ngClass]="(item.idField?.length === 0 || !checkIdField(item.idField)) ? 'is-invalid' : ''"
 >
-  <label class="control-label switcher-label-xs">{{ 'widgets.formExt.email.id1' | translate }}</label>
+  <label class="control-label switcher-label-xs control-label-des">{{ 'widgets.formExt.email.id1' | translate }}</label>
   <input (blur)="idFocusOut()" [(ngModel)]="item.idField" class="form-control mt-1 form-control-form-ext-id-field"
          type="text"/>
   <span class="input-down-sm-lab">{{ 'widgets.formExt.mainSettings.id.example' | translate }}</span>
@@ -47,7 +47,7 @@
       />
       <span class="checkmark"></span>
     </label>
-    <span class="form-check-text f-3">{{ 'widgets.formExt.mainSettings.id.useOutsideCRM' | translate }}</span>
+    <span class="form-check-text">{{ 'widgets.formExt.mainSettings.id.useOutsideCRM' | translate }}</span>
   </div>
 </div>
 
@@ -60,7 +60,7 @@
 
 <div class="row-subitem mt-3">
   <div class="row-subitem-padding mb-3">
-    <h3>Текст</h3>
+    <h3>Шрифт</h3>
   </div>
   <div class="row-subitem-padding">
     <input [id]="'font-picker-ext-form' + index" type="text">

@@ -18,7 +18,8 @@ export class ExtendedDatepickerComponent implements AfterViewInit, OnInit, OnCha
     format: 'DD.MM.YYYY',
     locale: 'ru',
     widgetPositioning: { vertical: 'bottom' },
-    widgetParent: 'body'
+    widgetParent: 'body',
+    collapse:false
   };
 
   constructor() {
@@ -31,7 +32,7 @@ export class ExtendedDatepickerComponent implements AfterViewInit, OnInit, OnCha
     $('#datetimepicker' + this.index).on('click', (event) => {
       $('.bootstrap-datetimepicker-widget').css({
         top: $('#datetimepicker' + this.index).offset().top + 50,
-        left: $('#datetimepicker' + this.index).offset().left
+        left: $('#datetimepicker' + this.index).offset().left,
       });
     });
   }
@@ -44,6 +45,7 @@ export class ExtendedDatepickerComponent implements AfterViewInit, OnInit, OnCha
   }
 
   public change($event): void {
+    $event.preventDefault();
     if ($event) {
       this.isFilled = true;
     }

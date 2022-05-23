@@ -2,6 +2,7 @@ import { AfterViewChecked, Component, OnDestroy, OnInit, ViewChild } from '@angu
 import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { asyncScheduler, SubscriptionLike } from 'rxjs';
+import { filter, first, observeOn } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { cloneDeep, isEmpty, isEqual, isObject, transform } from 'lodash-es';
@@ -10,6 +11,7 @@ import { SiteShort } from '@core/models/sites';
 import { Coupon } from '@core/models/coupons';
 import { User } from '@core/models/user';
 import { FullWidget, MockupGroup, WidgetType } from '@core/models/widgets';
+import { SidebarService } from '@core/services/sidebar/sidebar.service';
 import { TariffsService } from '@core/services/tariffs.service';
 import { CoreSitesService } from '@core/services/core-sites.service';
 import { SitesService } from '../../../sites/services/sites.service';
@@ -20,8 +22,6 @@ import { WidgetService } from '../../services/widget.service';
 import { WidgetConstructorService } from '../../services/widget-constructor.service';
 import { ConstructorDesignComponent } from '../constructor-design/constructor-design.component';
 import { ConstructorRulesComponent } from '../constructor-rules/constructor-rules.component';
-import { SidebarService } from '@core/services/sidebar/sidebar.service';
-import { filter, first, observeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-widget-edit',
@@ -243,13 +243,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     }, 0);
   }
 
-  public getCroppedString(str: string, count: number, addedSymbol: string): string {
-    if (str.length > count) {
-      return str.substring(0, count) + addedSymbol;
-    }
-    return str;
-  }
-
   public isCurrentActiveTab(tab) {
     return this.currentActiveTab === tab;
   }
@@ -297,6 +290,18 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
       if (element.idField === '') {
         error = 'Не заполнено ID поля';
       }
+
+      if (element.type === 'hidden' && element.fieldType?.type === 'custom_parameter' && !element.customParamValue) {
+        error = 'Не заполнен пользовательский параметр в URL'
+      }
+
+      if (element.type === 'hidden' && element.fieldType?.type === 'cookie' && !element.cookieValue) {
+        error = 'Не заполнено название кукис'
+      }
+
+      if (element.type === 'hidden' && element.fieldType?.type === 'user_value' && !element.customUserValue) {
+        error = 'Не заполнено пользовательское значение'
+      }
     });
 
     return error;
@@ -341,9 +346,9 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     this.resetRenaming();
     this.checkWidgetRenameTitle();
     if (this.widget.containerId) {
-      this.containerizedWidgetService.rename(this.sid, this.widget.id, this.widget.name);
+      this.containerizedWidgetService.rename(this.sid, this.widget.id, this.widget.name).subscribe();
     } else {
-      this.widgetService.rename(this.sid, this.widget.id, this.widget.name);
+      this.widgetService.rename(this.sid, this.widget.id, this.widget.name).subscribe();
     }
   }
 
@@ -420,7 +425,8 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
             date: 'DATE',
             rating: 'RATING',
             dd: 'LISTBOX',
-            variants: 'COMBOBOX'
+            variants: 'COMBOBOX',
+            hidden: 'HIDDEN'
           };
 
           this.customFields.push({
@@ -601,12 +607,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
         this.translate.instant('widgetsList.editor.save.validation.title')
       );
       this.isLoading = false;
-    } else if (this.widget.useCustomIntegrationsList && !this.widget.integrations.length) {
-      this.toastr.error(
-        this.translate.instant('widgets.integration.saveError'),
-        this.translate.instant('widgetsList.editor.save.validation.title')
-      );
-      this.isLoading = false;
     } else if (errorsList.length !== 0) {
       this.toastr.error(
         errorsList.length === 1 && errorsList[0].message
@@ -640,6 +640,9 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
             this.translate.instant('widgetsList.editor.save.done.desc'),
             this.translate.instant('widgetsList.editor.save.done.title')
           );
+
+          this.oldWidget = cloneDeep(this.widget);
+          this.showErrors = false;
         } else {
           this.toastr.error(
             errorsList.length === 1 && errorsList[0].message

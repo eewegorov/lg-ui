@@ -14,7 +14,7 @@
   <!-- Page rule item -->
   <div *ngIf="widget.guiprops['formSet'].redirect.enable === true">
     <div
-      [ngClass]="(widget.guiprops['formSet'].redirect.url === '') ? 'is-invalid' : ''"
+      [ngClass]="(widget.guiprops['formSet'].redirect.url === '' && showErrors) ? 'is-invalid' : ''"
       class="row-subitem row-subitem-padding pt-1 mt-2 widget-name-block-rel"
     >
       <label class="control-label-des">{{ 'widgets.redirect.onClickRedirect' | translate }}:</label>

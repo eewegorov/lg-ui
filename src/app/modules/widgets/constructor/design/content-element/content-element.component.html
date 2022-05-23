@@ -1,13 +1,13 @@
 <div
   *ngIf="widget.guiprops.bg"
   [class.mobile]="isMobile"
-  [ngStyle]="{'border': widget.guiprops.bg.border?.style, 'border-radius': widget.guiprops.bg.borderRadius + 'px', 'box-shadow': widget.guiprops.bg.shadow?.style}"
+  [ngStyle]="{'box-shadow': widget.guiprops.bg.shadow?.style}"
   class="widget1 block-widget-show active"
   id="mainBlockWidget"
 >
   <div
     [ngClass]="(bgStyle && widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
-    [ngStyle]="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity}"
+    [ngStyle]="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity, 'border': widget.guiprops.bg.border?.style, 'border-radius': widget.guiprops.bg.borderRadius + 'px'}"
     class="absolute-bg-content"
   >
     <div #videoBg *ngIf="widget.guiprops.bg.fillorImg === 'useVideo'" class="video-bg">
@@ -33,7 +33,7 @@
   ></div>
 
   <div
-    (click)="scrollToEl('IVBl', 'i-or-v-element'); $event.stopPropagation();"
+    (click)="scrollToEl('i-or-v-element', 'IVBl'); $event.stopPropagation();"
     *ngIf="widget.guiprops.image?.enable"
     [ngClass]="classNameImg()"
     [ngStyle]="{'width': widthImageStyle, 'height': heightImageStyle}"
@@ -41,7 +41,7 @@
   >
     <div
       *ngIf="((widget.guiprops.image.typeBl == 'imageBl') || (widget.guiprops.image.typeBl !== 'videoBl')) && (widget.guiprops.image.typeBl !== 'paddingBl')"
-      [ngStyle]="{'background':'url(' + widget.guiprops.image.url + ') center no-repeat', 'background-size':'cover', 'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
+      [ngStyle]="{'background-image': 'url(' + widget.guiprops.image.url + ')', 'background-repeat': 'no-repeat', 'background-position': 'center', 'background-size': 'cover', 'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
       class="widget-image-item-block"
     ></div>
     <div
@@ -85,7 +85,7 @@
         </div>
       </div>
       <li
-        (click)="scrollToEl(i.toString(), item.name, item.counter); $event.stopPropagation();"
+        (click)="scrollToEl(item.name, i, item.counter); $event.stopPropagation();"
         *ngFor="let item of widget.guiprops.elementsList; index as i"
         [attr.data-to]="'elemScrN' + i"
         [class]="'element-to-append-summernote margin-if-' + item.name + ' ' + addExtraClassForFullWidth(i)"
@@ -138,7 +138,7 @@
         </div>
 
         <div *ngIf="item.name == 'padding-element'">
-          <div [ngStyle]="{'height': item.padding - 15 + 'px'}" class="padding-element-block"></div>
+          <div [ngStyle]="{'height': item.padding + 'px'}" class="padding-element-block"></div>
         </div>
 
         <div *ngIf="item.name == 'video-element'" class="social-block-pd">
@@ -181,7 +181,7 @@
             <div [ngClass]="heightIfrmPosSel(item)">
               <div [id]="'elementIframeBlock' +  item.counter" [ngStyle]="{'width': item.widthpx + 'px', 'height': item.heightpx + 'px'}"
                    class="element-iframe-block" style="position: relative;">
-                <div class="iframe-before" (click)="scrollToEl(i.toString(), item.name, item.counter); $event.stopPropagation();"></div>
+                <div class="iframe-before" (click)="scrollToEl(item.name, i, item.counter); $event.stopPropagation();"></div>
                 <iframe [id]="'idFrame' + item.counter">
                   <!DOCTYPE html>
                   <html lang="en">
@@ -372,12 +372,12 @@
                             class="form-ext-checkbox-container"
                           >{{ variant }}
                             <div
-                              (click)="selected = variant"
+                              (click)="itemExt['multiEnable'] ? selectedVariants.push(variant) : selectedVariant = variant"
                               [style]="'background-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm) + ';border-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm)">
                               <input [name]="itemExt['multiEnable'] ? '' : ('radio-' + itemExt.id)"
                                      [attr.type]="itemExt['multiEnable'] ? 'checkbox' : 'radio'"
                                      [value]="variant"
-                                     [checked]="selected === variant"
+                                     [checked]="itemExt['multiEnable'] ? selectedVariants.includes(variant) : selectedVariant === variant"
                               >
                               <span
                                 [ngClass]="itemExt['multiEnable'] ? 'form-ext-checkbox-checkmark' : 'form-ext-checkbox-checkmark-radio'"
@@ -415,9 +415,9 @@
                           <div (click)="termClick($event)" class="form-ext-term-checkbox-container">
                             <div [style]="'background-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm) + '; border-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm)"
                                  class="form-ext-term-checkbox-container-help-cl"
-                                 (click)="selected = !selected"
+                                 (click)="itemExt.checked = !itemExt.checked"
                             >
-                              <input type="checkbox" [checked]="selected || itemExt.checked">
+                              <input type="checkbox" [checked]="itemExt.checked">
                               <span [ngStyle]="{'background-color': widget.guiprops.formExt.model.mainSettings.rgbaInputForm, 'border-color': widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : 'transparent'}"
                                     class="form-ext-term-checkbox-checkmark"></span>
                             </div>

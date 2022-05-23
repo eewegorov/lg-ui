@@ -3,7 +3,12 @@
     <div class="col-lg-3 widget-style-menu">
       <div class="elements-selector">
         <div *ngIf="widget.guiprops.elementsList" class="elements-selector-top">
-          <div (click)="setCurrentElement('settings')" [class.active]="currentElement === 'settings'" class="element">
+          <div
+            (click)="setCurrentElement('settings')"
+            [class.active]="currentElement === 'settings'"
+            [class.error]="isElementHasError('settings', 0) && showErrors"
+            class="element"
+          >
             <div class="before">
               <div class="square"></div>
             </div>
@@ -96,9 +101,9 @@
                 <div aria-labelledby="headingFour" class="panel-collapse collapse show" id="collapseFour"
                      role="tabpanel">
                   <div class="panel-body">
-                    <div class="border-item mb-4">
+                    <div class="border-item mb-4" [class.pb-0]="widgetType === 'containerized'">
                       <div class="d-flex row-subitem row-subitem-padding mb-3">
-                        <h3 class="marg-minus-bord-des">Расположение</h3>
+                        <h3 class="marg-minus-bord-des">Расположение на странице</h3>
                       </div>
 
                       <div *ngIf="widgetType === 'containerized'" class="row row-subitem row-static-widget-wrapper">
@@ -116,14 +121,18 @@
                       </div>
                       <div
                         *ngIf="widgetType === 'containerized'"
-                        class="d-flex row-subitem row-subitem-padding mb-1 mt-3 widget-small-text"
+                        class="row-subitem row-subitem-padding mb-1 mt-3 widget-small-text"
                       >
-                        Установите этот код в месте на странице сайта, где вы хотите разместить виджет. Обратите
-                        внимание, что для всех виджетов в одном контейнере используется единый код установки. И если
-                        этот код уже установлен, то повторная его установка не требуется.
+                        <span>
+                          Установите этот код в месте на странице сайта, где вы хотите разместить виджет. Обратите
+                          внимание, что для всех виджетов в одном контейнере используется единый код установки. И если
+                          этот код уже установлен, то повторная его установка не требуется.
+                        </span>
+
+                        <h3 class="mt-4">Выравнивание</h3>
                       </div>
 
-                      <div class="d-flex row-subitem row-subitem-padding">
+                      <div class="d-flex row-subitem row-subitem-padding" [style.margin-top]="widgetType === 'containerized' ? '-15px' : ''">
                         <app-position-control
                           (changePosition)="changePosition($event)"
                           *ngIf="widgetType === 'popup' || widgetType === 'optindot' || widgetType === 'label_widget' || widgetType === 'containerized'"
@@ -570,9 +579,7 @@
                     </ng-container>
 
                     <ng-container *ngIf="widgetType === 'containerized'">
-                      <div class="mt-3">
-                        <h3 class="marg-minus-bord-des">Настройка дизайна виджета</h3>
-                      </div>
+                      <h3>Настройка дизайна виджета</h3>
                     </ng-container>
 
                     <app-visual-element
@@ -588,7 +595,7 @@
                       [widget]="widget"
                       [widgwidthBtn]="widgwidthBtn"
                     ></app-visual-element>
-                    <app-redirect-element [widget]="widget"></app-redirect-element>
+                    <app-redirect-element [widget]="widget" [showErrors]="showErrors"></app-redirect-element>
                   </div>
                 </div>
               </div>
@@ -690,6 +697,7 @@
                           [index]="i"
                           [placePopup]="placePopup"
                           [widget]="widget"
+                          [showErrors]="showErrors"
                         ></app-social-element>
                       </div>
 
@@ -731,6 +739,7 @@
                           [index]="i"
                           [item]="item"
                           [widget]="widget"
+                          [showErrors]="showErrors"
                         ></app-timer-element>
                       </div>
 
@@ -742,13 +751,14 @@
                           [index]="i"
                           [placePopup]="placePopup"
                           [widget]="widget"
+                          [showErrors]="showErrors"
                         ></app-form-extended>
                       </div>
                     </div>
 
                     <app-elements-add
-                      (addElement)="showLastElement()"
-                      [addElemFromWidget]="addElemFromWidget"
+                      (addElement)="addElemFromWidget = 0; showAddedElement()"
+                      [addElemFromWidget]="0"
                       [controls]="controls"
                       [floatBtn]="floatBtn"
                       [globalCouponObject]="globalCouponObject"
@@ -784,7 +794,7 @@
             </div>
             <div class="extended-container pt-3">
               <div class="border-item">
-                <label class="control-label switcher-label-xs mb-1">
+                <label class="control-label control-label-des switcher-label-xs mb-1">
                   {{ 'widgets.formExt.element' | translate }}
                 </label>
                 <ng-container *ngIf="extendedElement.type === 'email'">
@@ -833,7 +843,8 @@
                                        [item]="extendedElement" [showErrors]="showErrors"></app-extended-button>
                 </ng-container>
                 <ng-container *ngIf="extendedElement.type === 'hidden'">
-                  <app-extended-hidden [index]="extendedIndex" [item]="extendedElement"></app-extended-hidden>
+                  <app-extended-hidden [index]="extendedIndex" [item]="extendedElement"
+                                       [showErrors]="showErrors"></app-extended-hidden>
                 </ng-container>
               </div>
 
@@ -871,7 +882,7 @@
             [class.active]="currentPage === 'thank'"
             class="frame-button"
             data-container="body"
-            data-original-title="Сообщение, которое видит посетитель после совершения целевого действия. Ваше сообщение благодарности будет показано посетителю, если в виджете отключена ссылка на LeadGenic, отключить ссылку можно в настройках сайта. В случае, если ссылка включена, посетителю будет показано сообщение благодарности LeadGenic."
+            data-original-title="Сообщение, которое видит посетитель после отправки формы."
             data-placement="top"
             data-toggle="tooltip"
             data-widget="thankWidget"
@@ -915,7 +926,7 @@
         </div>
 
         <div
-          (click)="scrollToEl('MainSetBl', 'main-w-element')"
+          (click)="scrollToEl('main-w-element', 'MainSetBl')"
           [ngStyle]="{'background': this.widget.guiprops.popupMain.shadow.enable ? widget.guiprops['popupMain']?.shadow.rgbaColor : 'none'}"
           class="max-wh-over"
         >
@@ -929,7 +940,7 @@
                 <app-content-element
                   (addNewElement)="addNewElementToContent($event)"
                   (removeElement)="removeCurrentElement($event.element, $event.index)"
-                  (scrollToElement)="scrollToEl($event.id, $event.elementName, $event.elementCounter)"
+                  (scrollToElement)="scrollToEl($event.element, $event.index, $event.elementCounter)"
                   (updateElementIndex)="updateIndex($event)"
                   [bgStyle]="bgStyle"
                   [heightContentStyle]="heightContentStyle"
@@ -1009,7 +1020,7 @@
 
         <div class="modal-body">
           <app-elements-add
-            (addElement)="showLastElement()"
+            (addElement)="showAddedElement()"
             [addElemFromWidget]="addElemFromWidget"
             [controls]="controls"
             [floatBtn]="floatBtn"
