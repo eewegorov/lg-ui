@@ -548,7 +548,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
   }
 
   public getVideoId(item) {
-    console.log(item);
     if (!item.videoUrl) {
       item.videoUrl = 'https://';
     }
@@ -561,7 +560,8 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
       if (result) {
         item.videoPreview = 'https://img.youtube.com/vi/' + result + '/hqdefault.jpg';
         result = result +
-          '?controls=0&iv_load_policy=3&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&modestbranding=1&disablekb=1&playlist=' + result;
+          '?controls=0&iv_load_policy=3&showinfo=0&rel=0' + (item.isVideoBG || item.autoplay ? '&autoplay=1' : '') +
+          '&loop=1&mute=1&modestbranding=1&disablekb=1&playlist=' + result;
         item.videoUrl = 'https://www.youtube.com/embed/' + result;
       } else {
         item.videoUrl = 'https://www.youtube.com/embed/FFu-JFifX28';
