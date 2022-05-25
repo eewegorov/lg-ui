@@ -50,7 +50,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(formElementToAdd);
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, formElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, formElementToAdd);
     }
     this.widget.guiprops.formExt.enable = true;
 
@@ -77,7 +77,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(formElementToAdd);
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, formElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, formElementToAdd);
     }
 
     this.addElementModalHide();
@@ -94,7 +94,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(closeLinkElementToAdd);
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, closeLinkElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, closeLinkElementToAdd);
     }
 
     this.addElementModalHide();
@@ -132,7 +132,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(buttonElementToAdd);
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, buttonElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, buttonElementToAdd);
     }
 
     this.addElementModalHide();
@@ -161,7 +161,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(textElementToAdd);
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, textElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, textElementToAdd);
     }
 
     this.addElementModalHide();
@@ -178,7 +178,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(socialElementToAdd);
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, socialElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, socialElementToAdd);
     }
 
     this.addElementModalHide();
@@ -212,7 +212,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(splitElementToAdd);
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, splitElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, splitElementToAdd);
     }
 
     this.addElementModalHide();
@@ -234,7 +234,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(videoElementToAdd);
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, videoElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, videoElementToAdd);
     }
 
     this.addElementModalHide();
@@ -254,7 +254,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(imageElementToAdd);
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, imageElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, imageElementToAdd);
     }
 
     this.addElementModalHide();
@@ -270,7 +270,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(paddingElementToAdd);
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, paddingElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, paddingElementToAdd);
     }
 
     this.addElementModalHide();
@@ -294,7 +294,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push(iframeElementToAdd);
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, iframeElementToAdd);
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, iframeElementToAdd);
     }
 
     this.addElementModalHide();
@@ -309,7 +309,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push({ ...this.globalCouponObject });
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, { ...this.globalCouponObject });
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, { ...this.globalCouponObject });
     }
 
     this.addElementModalHide();
@@ -320,7 +320,7 @@ export class ElementsAddComponent implements OnInit {
     if (this.addElemFromWidget === 0) {
       this.widget.guiprops.elementsList.push({ ...timerModel });
     } else {
-      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget + 1, 0, { ...timerModel });
+      this.widget.guiprops.elementsList.splice(+this.addElemFromWidget, 0, { ...timerModel });
     }
 
     this.addElementModalHide();

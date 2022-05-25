@@ -350,7 +350,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
   public addNewElementToContent(item?) {
     if (typeof item !== 'undefined') {
-      this.addElemFromWidget = item;
+      this.addElemFromWidget = item + 1;
     } else {
       this.addElemFromWidget = 0;
     }
@@ -680,9 +680,9 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     this.checkChanges();
 
     if (this.addElemFromWidget) {
-      const currentElement = this.widget.guiprops.elementsList[this.addElemFromWidget + 1];
+      const currentElement = this.widget.guiprops.elementsList[this.addElemFromWidget];
       this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
-      this.currentIndex = this.addElemFromWidget + 1;
+      this.currentIndex = this.addElemFromWidget;
     } else {
       const currentElement = this.widget.guiprops.elementsList[this.widget.guiprops.elementsList.length - 1];
       this.currentElement = currentElement.name + (currentElement.counter ? ('#' + currentElement.counter) : '');
