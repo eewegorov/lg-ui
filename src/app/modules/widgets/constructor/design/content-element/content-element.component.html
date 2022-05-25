@@ -10,6 +10,29 @@
     [ngStyle]="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity, 'border': widget.guiprops.bg.border?.style, 'border-radius': widget.guiprops.bg.borderRadius + 'px'}"
     class="absolute-bg-content"
   >
+    <div
+      (click)="scrollToEl('i-or-v-element', 'IVBl'); $event.stopPropagation();"
+      *ngIf="widget.guiprops.image?.enable"
+      [ngClass]="classNameImg()"
+      [ngStyle]="{'width': widthImageStyle, 'height': heightImageStyle}"
+      class="widget-image"
+    >
+      <div
+        *ngIf="((widget.guiprops.image.typeBl == 'imageBl') || (widget.guiprops.image.typeBl !== 'videoBl')) && (widget.guiprops.image.typeBl !== 'paddingBl')"
+        [ngStyle]="{'background-image': 'url(' + widget.guiprops.image.url + ')', 'background-repeat': 'no-repeat', 'background-position': 'center', 'background-size': 'cover', 'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
+        class="widget-image-item-block"
+      ></div>
+      <div
+        *ngIf="widget.guiprops.image.typeBl == 'videoBl'"
+        [ngStyle]="{'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
+        class="widget-video-item-block"
+      >
+        <iframe *ngIf="widget.guiprops.image.videoId" frameborder="0" id="idImageVideoFrame" src="" style=""></iframe>
+        <img *ngIf="!widget.guiprops.image.videoId" class="item-image-video-block"
+             src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
+      </div>
+    </div>
+    
     <div #videoBg *ngIf="widget.guiprops.bg.fillorImg === 'useVideo'" class="video-bg">
       <div *ngIf="widget.guiprops.bg.video?.videoId" [ngClass]="videoBgClass">
         <iframe frameborder="0" id="idBgVideoFrame" src="" style=""></iframe>
@@ -31,29 +54,6 @@
     class="color-bg-on-form"
     id="colorFormPod"
   ></div>
-
-  <div
-    (click)="scrollToEl('i-or-v-element', 'IVBl'); $event.stopPropagation();"
-    *ngIf="widget.guiprops.image?.enable"
-    [ngClass]="classNameImg()"
-    [ngStyle]="{'width': widthImageStyle, 'height': heightImageStyle}"
-    class="widget-image"
-  >
-    <div
-      *ngIf="((widget.guiprops.image.typeBl == 'imageBl') || (widget.guiprops.image.typeBl !== 'videoBl')) && (widget.guiprops.image.typeBl !== 'paddingBl')"
-      [ngStyle]="{'background-image': 'url(' + widget.guiprops.image.url + ')', 'background-repeat': 'no-repeat', 'background-position': 'center', 'background-size': 'cover', 'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
-      class="widget-image-item-block"
-    ></div>
-    <div
-      *ngIf="widget.guiprops.image.typeBl == 'videoBl'"
-      [ngStyle]="{'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
-      class="widget-video-item-block"
-    >
-      <iframe *ngIf="widget.guiprops.image.videoId" frameborder="0" id="idImageVideoFrame" src="" style=""></iframe>
-      <img *ngIf="!widget.guiprops.image.videoId" class="item-image-video-block"
-           src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
-    </div>
-  </div>
 
   <div [ngClass]="classNameImgMain()" [ngStyle]="{'width': widthContentStyle}" class="wigdet-main-wr" id="widgetMainWr">
     <div
