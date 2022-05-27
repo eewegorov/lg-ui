@@ -634,6 +634,10 @@ input[type="radio"]:checked {
   flex-basis: calc(12% - 10px);
   border: none;
   font-size: 18px;
+
+  i {
+    margin-left: -2px;
+  }
 }
 
 .coupons-flex-wr.loading-coupons .refresh-coupons-element-btn i.fa-sync {
