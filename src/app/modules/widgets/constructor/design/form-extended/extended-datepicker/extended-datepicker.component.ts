@@ -19,8 +19,10 @@ export class ExtendedDatepickerComponent implements AfterViewInit, OnInit, OnCha
     locale: 'ru',
     widgetPositioning: { vertical: 'bottom' },
     widgetParent: 'body',
-    collapse:false
+    collapse: false
   };
+
+  public value: any;
 
   constructor() {
   }
@@ -29,7 +31,7 @@ export class ExtendedDatepickerComponent implements AfterViewInit, OnInit, OnCha
   }
 
   ngAfterViewInit(): void {
-    $('#datetimepicker' + this.index).on('click', (event) => {
+    $('#datetimepicker' + this.index).on('click', () => {
       $('.bootstrap-datetimepicker-widget').css({
         top: $('#datetimepicker' + this.index).offset().top + 50,
         left: $('#datetimepicker' + this.index).offset().left,
@@ -45,7 +47,6 @@ export class ExtendedDatepickerComponent implements AfterViewInit, OnInit, OnCha
   }
 
   public change($event): void {
-    $event.preventDefault();
     if ($event) {
       this.isFilled = true;
     }

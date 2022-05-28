@@ -5,12 +5,12 @@
       (ngModelChange)="change($event)"
       NgTempusdominusBootstrapInput
       [attr.data-target]="'#datetimepicker' + index"
-      [ngModel]="null"
+      [ngModel]="value"
       [options]="options"
       [style]="'background: ' + st.rgbaInputForm + '; color: ' + st.colorTitleInputForm + '; border-radius: ' + st.borderRadiusInputForm + 'px; border-color: ' + st.border.color"
       class="form-control datetimepicker-input"
       type="text"
     />
-    <label [style]="'color: ' + st.colorTitleInputForm">{{ placeholder }}</label>
+    <label *ngIf="!value" [style]="'color: ' + st.colorTitleInputForm">{{ placeholder }}</label>
   </div>
 </div>
