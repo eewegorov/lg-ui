@@ -7,21 +7,15 @@
   font-display: swap;
 }
 
-//:host {
-//  position: absolute;
-//  z-index: 9;
-//  background: #F4F4F6;
-//  top: -55px;
-//  left: -182px;
-//  padding-top: 15px;
-//  height: 100vh;
-//  width: 100vw;
-//  overflow: hidden;
-//}
-
 :host {
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  overflow: hidden;
+  padding-top: 15px;
   background: #F4F4F6;
 }
 

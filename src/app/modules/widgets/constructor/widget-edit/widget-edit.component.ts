@@ -1,8 +1,7 @@
 import { AfterViewChecked, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { asyncScheduler, SubscriptionLike } from 'rxjs';
-import { filter, first, observeOn } from 'rxjs/operators';
+import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { cloneDeep, isEmpty, isEqual, isObject, transform } from 'lodash-es';
@@ -11,7 +10,6 @@ import { SiteShort } from '@core/models/sites';
 import { Coupon } from '@core/models/coupons';
 import { User } from '@core/models/user';
 import { FullWidget, MockupGroup, WidgetType } from '@core/models/widgets';
-import { SidebarService } from '@core/services/sidebar/sidebar.service';
 import { TariffsService } from '@core/services/tariffs.service';
 import { CoreSitesService } from '@core/services/core-sites.service';
 import { SitesService } from '../../../sites/services/sites.service';
@@ -85,17 +83,8 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     private userService: UserService,
     private containerizedWidgetService: ContainerizedWidgetService,
     private widgetService: WidgetService,
-    private widgetConstructorService: WidgetConstructorService,
-    private readonly sidebarService: SidebarService
-  ) {
-    this.router.events
-      .pipe(
-        filter((event: RouterEvent) => event instanceof NavigationEnd),
-        first(),
-        observeOn(asyncScheduler)
-      )
-      .subscribe(() => this.sidebarService.hideSidebar());
-  }
+    private widgetConstructorService: WidgetConstructorService
+  ) {}
 
   ngAfterViewChecked(): void {
     if ($('#renameWidgetBtn span') && $('#renameWidgetBtn span')[0]) {
@@ -292,15 +281,15 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
       }
 
       if (element.type === 'hidden' && element.fieldType?.type === 'custom_parameter' && !element.customParamValue) {
-        error = 'Не заполнен пользовательский параметр в URL'
+        error = 'Не заполнен пользовательский параметр в URL';
       }
 
       if (element.type === 'hidden' && element.fieldType?.type === 'cookie' && !element.cookieValue) {
-        error = 'Не заполнено название кукис'
+        error = 'Не заполнено название кукис';
       }
 
       if (element.type === 'hidden' && element.fieldType?.type === 'user_value' && !element.customUserValue) {
-        error = 'Не заполнено пользовательское значение'
+        error = 'Не заполнено пользовательское значение';
       }
     });
 
@@ -813,8 +802,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   }
 
   ngOnDestroy(): void {
-    this.sidebarService.showSidebar();
-
     if (this.meInfoSub) {
       this.meInfoSub.unsubscribe();
     }
