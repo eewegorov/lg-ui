@@ -11,20 +11,20 @@ export class BinsDataService {
   public binDist(variants, opts) {
     //заменить NULL на -infinity
     opts = opts || {};
-    var disc = opts.disc || 30000;//Дискретность
-    var width = opts.width || 200;//длина плашки в пикселях
-    var padding = opts.padding || 8;//отсупы в плашке в пикселях
-    var confRange = opts.confRange || 0.8;//длина дов интервал (1-коеф. значимости)
-    var confRangeExp = Math.log(confRange);//длина дов интервал (1-коеф. значимости)
+    let disc = opts.disc || 30000;//Дискретность
+    const width = opts.width || 200;//длина плашки в пикселях
+    const padding = opts.padding || 8;//отсупы в плашке в пикселях
+    const confRange = opts.confRange || 0.8;//длина дов интервал (1-коеф. значимости)
+    const confRangeExp = Math.log(confRange);//длина дов интервал (1-коеф. значимости)
     //disc=5000;
     //var apriori=opts.apriori;
 
 
-    var i, j, cur, sum;
-    var count = 0;
-    var countAll = 0;
-    var maxN = 0;
-    var average = 0;
+    let i, j, cur, sum;
+    let count = 0;
+    let countAll = 0;
+    let maxN = 0;
+    let average = 0;
 
     function round(val, lowPrecession) {
       if (lowPrecession) {
@@ -52,7 +52,7 @@ export class BinsDataService {
     function minus(a, b) {
       //Одно из чисел 0
 
-      var delta = a - b;
+      const delta = a - b;
 
       //Одно число больше другого в более чем миллион раз
       if (delta > 30) {
@@ -72,7 +72,7 @@ export class BinsDataService {
     function plus(a, b) {
       //Одно из чисел 0
 
-      var delta = a - b;
+      const delta = a - b;
 
       //Одно число больше другого в более чем миллион раз
       if (delta > 30) {
@@ -118,8 +118,8 @@ export class BinsDataService {
         }
       }
       average = !count ? 1 / 2 : average / count;
-      var A = 0;
-      var B = 0;
+      let A = 0;
+      let B = 0;
       if (average > 0.000001 && average > 0.999999 && count) {
         A = 1;
         B = 1 / average - A;
@@ -141,17 +141,17 @@ export class BinsDataService {
       disc = disc / 2;
     }
 
-    var ranges = [];//1,0.1,0.01,0.001,0.0001];
+    const ranges = [];//1,0.1,0.01,0.001,0.0001];
     for (i = 0; i < Math.max(1, Math.log(maxN) / Math.LN10); i++) {
       ranges.push(Math.pow(0.1, i));
     }
 
-    var discArr = [];
-    var discExpArr = [];
-    var discExpArrM = [];
-    var discLenArr = [];
+    const discArr = [];
+    const discExpArr = [];
+    const discExpArrM = [];
+    const discLenArr = [];
 
-    var pos = 0.0;
+    let pos = 0.0;
 
     function calcDisc() {//вычисляем точки в которых будем считать
       for (i = 0; i <= disc * 4; i++) {
@@ -203,7 +203,7 @@ export class BinsDataService {
           cur.less[disc] = -Infinity;
 
           for (j = 1; j < disc; j++) {
-            var p = discLenArr[j] + discExpArr[j] * cur.s + discExpArrM[j] * cur.f;//len * p^s * (1-p)^s
+            const p = discLenArr[j] + discExpArr[j] * cur.s + discExpArrM[j] * cur.f;//len * p^s * (1-p)^s
             //if(apriori)//умножаем на априори
             //	p += Math.log(apriori(discArr[j]));
 
@@ -231,7 +231,7 @@ export class BinsDataService {
           sum = -Infinity;
 
           //Находим максимум
-          var av = 0;
+          let av = 0;
 
           max = -Infinity;
           for (j = 1; j < disc; j++) {
@@ -242,14 +242,14 @@ export class BinsDataService {
 
             }
           }
-          var middle = cur.s / cur.n;
+          const middle = cur.s / cur.n;
           cur.min = cur.max;
 
           sum = max;
-          var sumF = 0;
+          let sumF = 0;
 
-          var minPos = av;
-          var maxPos = av;
+          let minPos = av;
+          let maxPos = av;
 
           for (j = 0; j < disc; j++) {//выбираем такое число ближайщих точек, чтобы вписатся в дов интервал
             if (minPos === 1 && maxPos === disc) {
@@ -291,7 +291,7 @@ export class BinsDataService {
     conf();
     //считаем произведение вероятностей
 
-    var lessComp = [];//В массиве храниться вероятность того, что все p < x
+    const lessComp = [];//В массиве храниться вероятность того, что все p < x
     function less() {
       for (j = 0; j <= disc; j++) {
         lessComp.push(0);
@@ -299,7 +299,7 @@ export class BinsDataService {
       lessComp[0] = -Infinity;//0
       for (i in variants) {
         if (variants.hasOwnProperty(i)) {
-          var cur = variants[i];
+          const cur = variants[i];
           for (j = 1; j < disc; j++) {
             lessComp[j] += cur.less[j];
           }//*=sum
@@ -309,9 +309,9 @@ export class BinsDataService {
 
     less();
     var max = 0;
-    var min = 1;
-    var max0 = 0;
-    var min0 = 1;
+    let min = 1;
+    let max0 = 0;
+    let min0 = 1;
 
     for (i in variants) {
       if (variants.hasOwnProperty(i)) {
@@ -331,10 +331,10 @@ export class BinsDataService {
         }
       }
     }
-    var delta = max - min;
+    const delta = max - min;
 
-    var aw = width - 2 * padding;
-    var a = aw / delta;
+    const aw = width - 2 * padding;
+    const a = aw / delta;
 
 
     for (i in variants) {
@@ -402,7 +402,7 @@ export class BinsDataService {
           cur.pCtba[0] = -Infinity;
           cur.pCtba[disc] = -Infinity;
           for (j = 1; j < disc; j++) {
-            var t = cur.eq[j] + lessComp[j] - cur.less[j];//cur.eq[j] * lessComp[j] / cur.less[j]
+            let t = cur.eq[j] + lessComp[j] - cur.less[j];//cur.eq[j] * lessComp[j] / cur.less[j]
             t = Math.exp(t);
             cur.pCtba[j] = t;
             cur.ctba += t;
@@ -415,23 +415,23 @@ export class BinsDataService {
 
     function erf(x) {
       // constants
-      var a1 = 0.254829592;
-      var a2 = -0.284496736;
-      var a3 = 1.421413741;
-      var a4 = -1.453152027;
-      var a5 = 1.061405429;
-      var p = 0.3275911;
+      const a1 = 0.254829592;
+      const a2 = -0.284496736;
+      const a3 = 1.421413741;
+      const a4 = -1.453152027;
+      const a5 = 1.061405429;
+      const p = 0.3275911;
 
       // Save the sign of x
-      var sign = 1;
+      let sign = 1;
       if (x < 0) {
         sign = -1;
       }
       x = Math.abs(x);
 
       // A&S formula 7.1.26
-      var t = 1.0 / (1.0 + p * x);
-      var y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+      const t = 1.0 / (1.0 + p * x);
+      const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
 
       return sign * y;
     }
@@ -440,17 +440,17 @@ export class BinsDataService {
       for (var i in variants) {
         if (variants.hasOwnProperty(i)) {
           variants[i].poh = 0;
-          for (var j in variants) {
+          for (const j in variants) {
             if (variants.hasOwnProperty(j) && i !== j) {
-              var v1 = variants[i];
-              var v2 = variants[j];
+              const v1 = variants[i];
+              const v2 = variants[j];
               if (!v1.n || !v2.n || v1.n < 0 || v2.n < 0) {
                 continue;
               }
-              var m1 = v1.s / v1.n;
-              var m2 = v2.s / v2.n;
-              var m = m1 - m2;
-              var s = Math.sqrt(m1 * (1 - m1) / (v1.n + 1) + m2 * (1 - m2) / (v2.n + 1));
+              const m1 = v1.s / v1.n;
+              const m2 = v2.s / v2.n;
+              const m = m1 - m2;
+              const s = Math.sqrt(m1 * (1 - m1) / (v1.n + 1) + m2 * (1 - m2) / (v2.n + 1));
 
               v1.poh = v1.poh + Math.abs(0.5 * m + 0.5 * m * erf(-m / (Math.sqrt(2) * s)) - (s * Math.exp(-m * m / (2 * s * s))) / Math.sqrt(2 * Math.PI));
             }
@@ -459,9 +459,9 @@ export class BinsDataService {
       }
       for (var i in variants) {
         if (variants.hasOwnProperty(i)) {
-          var cur = variants[i];
-          var val = cur.poh * 100
-          var den = 1;
+          const cur = variants[i];
+          let val = cur.poh * 100
+          let den = 1;
           for (let j = 0; j < 20; j++) {
             if (val > 10) {
               break;

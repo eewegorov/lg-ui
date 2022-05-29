@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import 'metismenu';
 
-declare var UE;
+declare let UE;
 
 (window as any)._ues = {
   host: 'leadgenic.userecho.com',

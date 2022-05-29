@@ -214,7 +214,7 @@ export class SitesService {
     }
   }
 
-  public generatePath(path: string, needUrl: boolean = false): string {
+  public generatePath(path: string, needUrl = false): string {
     let scriptPath = '<!-- BEGIN LEADGENIC CODE {literal} -->\r\n';
     scriptPath += '<!-- Put this script tag before the </body> tag of your page -->';
     scriptPath += '\r\n<script type="text/javascript" charset="UTF-8" async src="';

@@ -31,12 +31,12 @@
       class="widget-image"
     >
       <div
-        *ngIf="((widget.guiprops.image.typeBl == 'imageBl') || (widget.guiprops.image.typeBl !== 'videoBl')) && (widget.guiprops.image.typeBl !== 'paddingBl')"
+        *ngIf="((widget.guiprops.image.typeBl === 'imageBl') || (widget.guiprops.image.typeBl !== 'videoBl')) && (widget.guiprops.image.typeBl !== 'paddingBl')"
         [ngStyle]="{'background-image': 'url(' + widget.guiprops.image.url + ')', 'background-repeat': 'no-repeat', 'background-position': 'center', 'background-size': 'cover', 'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
         class="widget-image-item-block"
       ></div>
       <div
-        *ngIf="widget.guiprops.image.typeBl == 'videoBl'"
+        *ngIf="widget.guiprops.image.typeBl === 'videoBl'"
         [ngStyle]="{'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
         class="widget-video-item-block"
       >
@@ -116,7 +116,7 @@
           </div>
         </div>
 
-        <div *ngIf="item.name == 'title-element'" class="social-block-pd">
+        <div *ngIf="item.name === 'title-element'" class="social-block-pd">
           <div class="editorFontLine">
             <div
               [ngClass]="(item.textShadow.enable) ? '' : 'no-text-shadow-imp'"
@@ -128,7 +128,7 @@
           </div>
         </div>
 
-        <div *ngIf="item.name == 'split-element'" class="social-block-pd">
+        <div *ngIf="item.name === 'split-element'" class="social-block-pd">
           <div [ngClass]="hrPosSel(item)" class="split-element-block">
             <hr
               [ngStyle]="{'border-color': item.color, 'width': item.widthpx + 'px', 'border-top-width': item.thickness + 'px'}"
@@ -137,11 +137,11 @@
           </div>
         </div>
 
-        <div *ngIf="item.name == 'padding-element'">
+        <div *ngIf="item.name === 'padding-element'">
           <div [ngStyle]="{'height': item.padding + 'px'}" class="padding-element-block"></div>
         </div>
 
-        <div *ngIf="item.name == 'video-element'" class="social-block-pd">
+        <div *ngIf="item.name === 'video-element'" class="social-block-pd">
           <div [ngClass]="hrPosSel(item)" class="element-video-block">
             <iframe *ngIf="item.videoId" frameborder="0" id="idVideoFrame{{item.counter}}" src="" style=""></iframe>
             <img *ngIf="!item.videoId" [ngStyle]="{'width': item.widthpx + 'px'}" class="element-video-block-img"
@@ -149,13 +149,13 @@
           </div>
         </div>
 
-        <div *ngIf="item.name == 'image-element'" class="social-block-pd">
+        <div *ngIf="item.name === 'image-element'" class="social-block-pd">
           <div [ngClass]="hrPosSel(item)" class="element-image-block">
             <img [ngStyle]="{'width': item.widthpx + 'px'}" [src]="item.imageUrl" class="element-image-block-img">
           </div>
         </div>
 
-        <div *ngIf="item.name == 'coupon-element'" class="social-block-pd">
+        <div *ngIf="item.name === 'coupon-element'" class="social-block-pd">
           <div *ngIf="item.title.enable" class="editorFontLine element-coupon-title">
             <div
               [ngClass]="(item.title.textShadow.enable) ? '' : 'no-text-shadow-imp'"
@@ -176,7 +176,7 @@
           </div>
         </div>
 
-        <div *ngIf="item.name == 'iframe-element'" class="social-block-pd">
+        <div *ngIf="item.name === 'iframe-element'" class="social-block-pd">
           <div [ngClass]="hrPosSel(item)">
             <div [ngClass]="heightIfrmPosSel(item)">
               <div [id]="'elementIframeBlock' +  item.counter" [ngStyle]="{'width': item.widthpx + 'px', 'height': item.heightpx + 'px'}"
@@ -196,7 +196,7 @@
           </div>
         </div>
 
-        <div *ngIf="item.name == 'closelink-element'">
+        <div *ngIf="item.name === 'closelink-element'">
           <div *ngIf="!widget.guiprops.exit.button.enable">
             <div [ngClass]="hrPosSel(widget.guiprops['exit'])" class="widget1-btn-exit">
               <div
@@ -220,7 +220,7 @@
           </div>
         </div>
 
-        <div *ngIf="item.name == 'form-element'" [ngClass]="hrPosSelWholeForm(widget.guiprops['form'])"
+        <div *ngIf="item.name === 'form-element'" [ngClass]="hrPosSelWholeForm(widget.guiprops['form'])"
              class="color-pod">
           <div [ngStyle]="{'width': widget.guiprops.form.form_widthpx + 'px'}" class="form-whole-bl">
             <div [ngClass]="hrPosSelForm(widget.guiprops['form'])" class="widget1-form-bl" id="widgetFormBlockM">
@@ -290,7 +290,7 @@
           </div>
         </div>
 
-        <div *ngIf="item.name == 'form-ext-element'" [ngClass]="formExtHrPosSelWholeForm(widget.guiprops.formExt.model.mainSettings)"
+        <div *ngIf="item.name === 'form-ext-element'" [ngClass]="formExtHrPosSelWholeForm(widget.guiprops.formExt.model.mainSettings)"
              class="form-ext-main-wr color-pod">
           <div [ngStyle]="{'width': widget.guiprops.formExt.model.mainSettings.form_widthpx + 'px'}"
                class="widget-form-ext-wrapper">

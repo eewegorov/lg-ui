@@ -35,16 +35,16 @@ export class OrderByPipe implements PipeTransform {
 
     // As soon as a or b is smaller/greater than the other, we can immediately return
     return input.sort((a: any, b: any): number => {
-      for (let fullProp of config) {
-        let reverse = fullProp[0] === '-';
-        let prop = fullProp.substr(1);
+      for (const fullProp of config) {
+        const reverse = fullProp[0] === '-';
+        const prop = fullProp.substr(1);
 
         // Is it a subobject?
         if (prop.indexOf('.') > 0) {
-          let first = prop.split('.')[0];
-          let last = prop.split('.')[1];
+          const first = prop.split('.')[0];
+          const last = prop.split('.')[1];
 
-          let result = OrderByPipe.compare(reverse, a[first][last], b[first][last]);
+          const result = OrderByPipe.compare(reverse, a[first][last], b[first][last]);
           if (result !== 0) {
             return result;
           }
@@ -52,7 +52,7 @@ export class OrderByPipe implements PipeTransform {
           continue;
         }
 
-        let result = OrderByPipe.compare(reverse, a[prop], b[prop]);
+        const result = OrderByPipe.compare(reverse, a[prop], b[prop]);
         if (result !== 0) {
           return result;
         }

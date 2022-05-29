@@ -3,7 +3,7 @@ import { Audience } from '../../core/models/widgets';
 import { AUDIENCES_VALS } from '../../configs/audiences';
 import 'jquery-ui/ui/widgets/droppable.js';
 
-declare var require: any;
+declare let require: any;
 const $ = require('jquery');
 
 @Directive({
