@@ -413,7 +413,7 @@ button[role=switch] {
   }
 
   &.checked {
-    background: $successColor;
+    background: $greenColor;
 
     small {
       right: 2px !important;
