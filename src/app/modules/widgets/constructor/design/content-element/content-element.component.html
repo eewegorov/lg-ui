@@ -1,14 +1,14 @@
 <div
   *ngIf="widget.guiprops.bg"
   [class.mobile]="isMobile"
-  [ngStyle]="{'box-shadow': widget.guiprops.bg.shadow?.style}"
   class="widget1 block-widget-show active"
   id="mainBlockWidget"
+  [ngStyle]="{'border': widget.guiprops.bg.border?.style, 'border-radius': widget.guiprops.bg.borderRadius + 'px', 'box-shadow': widget.guiprops.bg.shadow?.style}"
 >
   <div
-    [ngClass]="(bgStyle && widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
-    [ngStyle]="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity, 'border': widget.guiprops.bg.border?.style, 'border-radius': widget.guiprops.bg.borderRadius + 'px'}"
     class="absolute-bg-content"
+    [ngClass]="(bgStyle && widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
+    [ngStyle]="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity, 'border-radius': widget.guiprops.bg.borderRadius - 6 + 'px'}"
   >
     <div
       *ngIf="widget.guiprops.bg.mask?.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo')) && widget.guiprops.bg.mask.area === 'Вся площадь виджета'"
