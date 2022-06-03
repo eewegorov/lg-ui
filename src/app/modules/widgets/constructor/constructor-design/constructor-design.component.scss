@@ -429,6 +429,12 @@ h6.title-h6-widget a:hover {
     &.error {
       background-color: #FCECE9;
       color: #E25336;
+
+      + .active {
+        .before .square {
+          background-color: #FCECE9;
+        }
+      }
     }
 
     &:not(.active):hover {
@@ -489,7 +495,7 @@ h6.title-h6-widget a:hover {
         }
       }
 
-      + :hover {
+      + :hover, + .error {
         border-radius: 0 12px 0 0;
         transition: all 0.4s, border-radius 0s;
       }
