@@ -1505,6 +1505,146 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
                   }, 200);
                 }
               }
+            } else {
+              // На ВСЮ ШИРИНУ СЛЕВА или СПРАВА
+              if (this.widgetConstructorService.ruleLeftOrRightWholeWidth(
+                this.widget.guiprops.formExt, this.widget.guiprops.form.visual, this.widget.guiprops.image.place
+              )) {
+                setTimeout(() => {
+                  $('#colorFormPod').css({ 'z-index': '2' });
+                  $('.color-pod').css({ 'margin-left': '0', 'margin-right': '0' });
+                }, 220);
+                // Размер ЗАДАН
+                if (this.widget.guiprops.image.img_width === 'Собственная') {
+                  let mainBlHeight;
+                  setTimeout(() => {
+                    mainBlockW.css({ width: this.widthImageStyle });
+                    mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
+                    if (this.widget.guiprops.bg.border.enable) {
+                      mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
+                    }
+                    mainBlockW.css({ height: mainBlHeight + 'px' });
+                  }, 100);
+
+                  if (this.widget.guiprops.image.place === 'Слева') {
+                    setTimeout(() => {
+                      $('#colorFormPod').innerWidth();
+                      $('.widget-main-img-left').css({
+                        'margin-left': mainBlockW.innerWidth() - 15 + 'px',
+                        'margin-right': 0
+                      });
+                      $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
+                      $('.extraClassFullWidth')
+                        .css({
+                          'margin-left': -mainBlockW.innerWidth() + 'px',
+                          width: $('#colorFormPod').innerWidth() - 95 + 'px',
+                          'margin-right': 0
+                        });
+
+                      maskTop.css({ left: gap3, right: gap18 });
+                    }, 200);
+                    setTimeout(() => {
+                      mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
+                      if (this.widget.guiprops.bg.border.enable) {
+                        mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
+                      }
+                      mainBlockW.css({ height: mainBlHeight + 'px' });
+                    }, 210);
+                  }
+
+                  if (this.widget.guiprops.image.place === 'Справа') {
+                    setTimeout(() => {
+                      $('.widget-main-img-right').css({
+                        'margin-right': mainBlockW.innerWidth() - 15 + 'px',
+                        'margin-left': 0
+                      });
+                      $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
+                      $('.extraClassFullWidth')
+                        .css({
+                          'margin-right': -mainBlockW.innerWidth() + 'px',
+                          width: $('#colorFormPod').innerWidth() - 95 + 'px',
+                          'margin-left': 0
+                        });
+
+                      maskTop.css({ left: gap18, right: gap3 });
+                    }, 200);
+                    setTimeout(() => {
+                      mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
+                      if (this.widget.guiprops.bg.border.enable) {
+                        mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
+                      }
+                      mainBlockW.css({ height: mainBlHeight + 'px' });
+                    }, 210);
+                  }
+                }
+                //// Размер АВТО
+                else {
+                  let imageWidgetWidthPod;
+                  let mainBlHeightAll;
+                  setTimeout(() => {
+                    imageWidgetWidthPod = (mainBlWr.innerWidth() + 60) / 2;
+                    mainBlockW.css({ width: imageWidgetWidthPod + 'px' });
+                    mainBlHeightAll = $('#colorFormPod').offset().top - mainBl.offset().top;
+                    if (this.widget.guiprops.bg.border.enable) {
+                      mainBlHeightAll = mainBlHeightAll - this.widget.guiprops.bg.border.thickness;
+                    }
+                    mainBlockW.css({ height: mainBlHeightAll + 'px' });
+                  }, 100);
+
+                  if (this.widget.guiprops.image.place === 'Слева') {
+                    setTimeout(() => {
+                      $('.widget-main-img-left').css({
+                        'margin-left': mainBlockW.innerWidth() - 15 + 'px',
+                        'margin-right': 0
+                      });
+                      $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
+                      $('.extraClassFullWidth')
+                        .css({
+                          'margin-left': -mainBlockW.innerWidth() + 'px',
+                          width: $('#colorFormPod').innerWidth() - 95 + 'px',
+                          'margin-right': 0
+                        });
+
+                      maskTop.css({ left: gap3, right: gap18 });
+                    }, 200);
+                    setTimeout(() => {
+                      mainBlHeightAll = $('#colorFormPod').offset().top - mainBl.offset().top;
+                      if (this.widget.guiprops.bg.border.enable) {
+                        mainBlHeightAll = mainBlHeightAll - this.widget.guiprops.bg.border.thickness;
+                      }
+                      mainBlockW.css({ height: mainBlHeightAll + 'px' });
+                    }, 210);
+                  }
+
+                  if (this.widget.guiprops.image.place === 'Справа') {
+                    setTimeout(() => {
+                      $('.widget-main-img-right').css({
+                        'margin-right': mainBlockW.innerWidth() - 15 + 'px',
+                        'margin-left': 0
+                      });
+                      $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
+                      $('.extraClassFullWidth')
+                        .css({
+                          'margin-right': -mainBlockW.innerWidth() + 'px',
+                          width: $('#colorFormPod').innerWidth() - 95 + 'px',
+                          'margin-left': 0
+                        });
+
+                      maskTop.css({ left: gap18, right: gap3 });
+                    }, 200);
+                    setTimeout(() => {
+                      mainBlHeightAll = $('#colorFormPod').offset().top - mainBl.offset().top;
+                      if (this.widget.guiprops.bg.border.enable) {
+                        mainBlHeightAll = mainBlHeightAll - this.widget.guiprops.bg.border.thickness;
+                      }
+                      mainBlockW.css({ height: mainBlHeightAll + 'px' });
+                    }, 210);
+                  }
+                }
+              } else {
+                $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
+                $('.extraClassFullWidth').css({ 'margin-left': '0', 'margin-right': '0', width: '100%' });
+              }
             }
 
             // Картинка сверху или снизу
@@ -1577,147 +1717,6 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
                   }, 200);
                 }
               }
-            }
-
-            // На ВСЮ ШИРИНУ СЛЕВА или СПРАВА
-            if (this.widgetConstructorService.ruleLeftOrRightWholeWidth(
-              this.widget.guiprops.formExt, this.widget.guiprops.form.visual, this.widget.guiprops.image.place
-            )) {
-              setTimeout(() => {
-                $('#colorFormPod').css({ 'z-index': '2' });
-                $('.color-pod').css({ 'margin-left': '0', 'margin-right': '0' });
-              }, 220);
-              // Размер ЗАДАН
-              if (this.widget.guiprops.image.img_width === 'Собственная') {
-                let mainBlHeight;
-                setTimeout(() => {
-                  mainBlockW.css({ width: this.widthImageStyle });
-                  mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
-                  if (this.widget.guiprops.bg.border.enable) {
-                    mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
-                  }
-                  mainBlockW.css({ height: mainBlHeight + 'px' });
-                }, 100);
-
-                if (this.widget.guiprops.image.place === 'Слева') {
-                  setTimeout(() => {
-                    $('#colorFormPod').innerWidth();
-                    $('.widget-main-img-left').css({
-                      'margin-left': mainBlockW.innerWidth() - 15 + 'px',
-                      'margin-right': 0
-                    });
-                    $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
-                    $('.extraClassFullWidth')
-                      .css({
-                        'margin-left': -mainBlockW.innerWidth() + 'px',
-                        width: $('#colorFormPod').innerWidth() - 95 + 'px',
-                        'margin-right': 0
-                      });
-
-                    maskTop.css({ left: gap3, right: gap18 });
-                  }, 200);
-                  setTimeout(() => {
-                    mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
-                    if (this.widget.guiprops.bg.border.enable) {
-                      mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
-                    }
-                    mainBlockW.css({ height: mainBlHeight + 'px' });
-                  }, 210);
-                }
-
-                if (this.widget.guiprops.image.place === 'Справа') {
-                  setTimeout(() => {
-                    $('.widget-main-img-right').css({
-                      'margin-right': mainBlockW.innerWidth() - 15 + 'px',
-                      'margin-left': 0
-                    });
-                    $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
-                    $('.extraClassFullWidth')
-                      .css({
-                        'margin-right': -mainBlockW.innerWidth() + 'px',
-                        width: $('#colorFormPod').innerWidth() - 95 + 'px',
-                        'margin-left': 0
-                      });
-
-                    maskTop.css({ left: gap18, right: gap3 });
-                  }, 200);
-                  setTimeout(() => {
-                    mainBlHeight = $('#colorFormPod').offset().top - mainBl.offset().top;
-                    if (this.widget.guiprops.bg.border.enable) {
-                      mainBlHeight = mainBlHeight - this.widget.guiprops.bg.border.thickness;
-                    }
-                    mainBlockW.css({ height: mainBlHeight + 'px' });
-                  }, 210);
-                }
-              }
-              //// Размер АВТО
-              else {
-
-                let imageWidgetWidthPod;
-                let mainBlHeightAll;
-                setTimeout(() => {
-                  imageWidgetWidthPod = (mainBlWr.innerWidth() + 60) / 2;
-                  mainBlockW.css({ width: imageWidgetWidthPod + 'px' });
-                  mainBlHeightAll = $('#colorFormPod').offset().top - mainBl.offset().top;
-                  if (this.widget.guiprops.bg.border.enable) {
-                    mainBlHeightAll = mainBlHeightAll - this.widget.guiprops.bg.border.thickness;
-                  }
-                  mainBlockW.css({ height: mainBlHeightAll + 'px' });
-                }, 100);
-
-                if (this.widget.guiprops.image.place === 'Слева') {
-                  setTimeout(() => {
-                    $('.widget-main-img-left').css({
-                      'margin-left': mainBlockW.innerWidth() - 15 + 'px',
-                      'margin-right': 0
-                    });
-                    $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
-                    $('.extraClassFullWidth')
-                      .css({
-                        'margin-left': -mainBlockW.innerWidth() + 'px',
-                        width: $('#colorFormPod').innerWidth() - 95 + 'px',
-                        'margin-right': 0
-                      });
-
-                    maskTop.css({ left: gap3, right: gap18 });
-                  }, 200);
-                  setTimeout(() => {
-                    mainBlHeightAll = $('#colorFormPod').offset().top - mainBl.offset().top;
-                    if (this.widget.guiprops.bg.border.enable) {
-                      mainBlHeightAll = mainBlHeightAll - this.widget.guiprops.bg.border.thickness;
-                    }
-                    mainBlockW.css({ height: mainBlHeightAll + 'px' });
-                  }, 210);
-                }
-
-                if (this.widget.guiprops.image.place === 'Справа') {
-                  setTimeout(() => {
-                    $('.widget-main-img-right').css({
-                      'margin-right': mainBlockW.innerWidth() - 15 + 'px',
-                      'margin-left': 0
-                    });
-                    $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
-                    $('.extraClassFullWidth')
-                      .css({
-                        'margin-right': -mainBlockW.innerWidth() + 'px',
-                        width: $('#colorFormPod').innerWidth() - 95 + 'px',
-                        'margin-left': 0
-                      });
-
-                    maskTop.css({ left: gap18, right: gap3 });
-                  }, 200);
-                  setTimeout(() => {
-                    mainBlHeightAll = $('#colorFormPod').offset().top - mainBl.offset().top;
-                    if (this.widget.guiprops.bg.border.enable) {
-                      mainBlHeightAll = mainBlHeightAll - this.widget.guiprops.bg.border.thickness;
-                    }
-                    mainBlockW.css({ height: mainBlHeightAll + 'px' });
-                  }, 210);
-                }
-              }
-            } else {
-              $('#colorFormPod').css({ width: (mainBl.innerWidth() + 60) + 'px', left: '-30px', right: 'auto' });
-              $('.extraClassFullWidth').css({ 'margin-left': '0', 'margin-right': '0', width: '100%' });
             }
 
             if ((!this.widget.guiprops.button?.enable && !this.widget.guiprops.form?.enable && !this.widget.guiprops.formExt?.enable)
