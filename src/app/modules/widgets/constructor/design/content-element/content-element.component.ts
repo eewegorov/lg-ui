@@ -40,7 +40,8 @@ export class ContentElementComponent implements OnInit, DoCheck, AfterContentChe
         ['para', ['paragraph', 'height']],
         ['insert', ['link']]
       ]
-    }
+    },
+    tooltip: false
   };
   public optionsSortable = {
     animation: 100,
