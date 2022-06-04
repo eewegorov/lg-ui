@@ -1411,7 +1411,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     if (this.widget.guiprops['labelMain'].place === 'Левая сторона браузера') {
       labelMain.css({'left': - ((labelMain.innerWidth()/2) - (labelMain.innerHeight()/2) - 10) + 'px', 'right': 'auto'});
     } else if (this.widget.guiprops['labelMain'].place === 'Правая сторона браузера') {
-      labelMain.css({'right': - ((labelMain.innerWidth()/2) - (labelMain.innerHeight()/2) - 10) + 'px', 'left': 'auto'});
+      labelMain.css({'right': - ((labelMain.innerWidth()/2) - (labelMain.innerHeight()/2) - 25) + 'px', 'left': 'auto'});
     } else {
       labelMain.css({'right': '', 'left': ''});
     }
