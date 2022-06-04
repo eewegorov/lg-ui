@@ -791,11 +791,16 @@ h6.title-h6-widget a:hover {
 
 .widget2 .f30s {
   display: block;
-  font-size: 34px;
+  font-size: 34px !important;
   line-height: 60px;
   text-align: center;
   position: relative;
   z-index: 5;
+}
+
+[class^="lgiconfont-"]::before, [class*=" lgiconfont-"]::before {
+  font-size: 34px;
+  margin-left: 0;
 }
 
 .lg-wg-dot-circle-img {
