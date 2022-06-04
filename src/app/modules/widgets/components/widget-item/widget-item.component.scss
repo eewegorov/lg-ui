@@ -33,6 +33,10 @@
       padding: 14px;
       gap: 20px;
 
+      @media (max-width: 1919px) {
+        gap: 10px;
+      }
+
       .action {
         display: flex;
         align-items: center;
@@ -49,6 +53,10 @@
           border-color: $borderColor;
           color: $fontSecondaryColor;
 
+          @media (max-width: 1919px) {
+            padding: 0.275rem 0.55rem;
+          }
+
           span {
             display: flex;
             width: 28px;
@@ -56,6 +64,11 @@
             position: relative;
 
             @include svg-position();
+
+            @media (max-width: 1919px) {
+              width: 20px;
+              height: 20px;
+            }
           }
 
           &:not(:disabled):hover {

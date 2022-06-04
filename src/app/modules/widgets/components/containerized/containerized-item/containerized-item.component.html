@@ -12,10 +12,6 @@
       <button
         (click)="toggleWidgetNameEditing()"
         class="btn btn-default"
-        data-container="body"
-        data-placement="top"
-        data-toggle="tooltip"
-        title="{{ 'global.cancel' | translate }}"
       >
         <span inlineSVG="./assets/images/core/cross.svg"></span>
       </button>
@@ -23,10 +19,6 @@
         (click)="updateCWidget()"
         [disabled]="widgetEditingName.trim().length === 0"
         class="btn btn-default"
-        data-container="body"
-        data-placement="top"
-        data-toggle="tooltip"
-        title="{{ 'widgetsList.widget.rename.tooltip' | translate }}"
       >
         <span inlineSVG="./assets/images/core/check.svg"></span>
       </button>
@@ -36,10 +28,6 @@
       <button
         (click)="toggleWidgetNameEditing()"
         class="btn"
-        data-container="body"
-        data-placement="top"
-        data-toggle="tooltip"
-        title="{{ 'widgetsList.widget.rename.tooltip' | translate }}"
       >
         <span inlineSVG="./assets/images/core/pencil.svg"></span>
       </button>
@@ -69,20 +57,12 @@
       <button
         (click)="toggleWidgetCampaignEditing()"
         class="btn btn-default"
-        data-container="body"
-        data-placement="top"
-        data-toggle="tooltip"
-        title="{{ 'global.cancel' | translate }}"
       >
         <span inlineSVG="./assets/images/core/cross.svg"></span>
       </button>
       <button
         (click)="changeCWidgetCompany()"
         class="btn btn-default"
-        data-container="body"
-        data-placement="top"
-        data-toggle="tooltip"
-        title="{{ 'widgetsList.widget.changecompany.tooltip' | translate }}"
       >
         <span inlineSVG="./assets/images/core/check.svg"></span>
       </button>
@@ -92,10 +72,6 @@
       <button
         (click)="toggleWidgetCampaignEditing()"
         class="btn"
-        data-container="body"
-        data-placement="top"
-        data-toggle="tooltip"
-        title="{{ 'widgetsList.widget.changecompany.tooltip' | translate }}"
       >
         <span inlineSVG="./assets/images/core/pencil.svg"></span>
       </button>

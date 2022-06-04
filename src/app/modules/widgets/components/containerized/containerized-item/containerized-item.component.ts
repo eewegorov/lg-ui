@@ -8,12 +8,12 @@ import Swal from 'sweetalert2';
 import { Abtest } from '@core/models/abtests';
 import { Company, Container, WidgetInfo, WidgetStatistics } from '@core/models/widgets';
 import { TariffsService } from '@core/services/tariffs.service';
-import { AbtestsService } from '../../../../abtests/services/abtests.service';
+import { AbtestsService } from '@modules/abtests/services/abtests.service';
 import { CoreSitesService } from '@core/services/core-sites.service';
-import { SitesService } from '../../../../sites/services/sites.service';
+import { SitesService } from '@modules/sites/services/sites.service';
 import { WidgetService } from '../../../services/widget.service';
 import { ContainerizedWidgetService } from '../../../services/containerized-widget.service';
-import { AbtestAddComponent } from '../../../../abtests/components/abtest-add/abtest-add.component';
+import { AbtestAddComponent } from '@modules/abtests/components/abtest-add/abtest-add.component';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 

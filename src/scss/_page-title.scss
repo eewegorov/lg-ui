@@ -30,6 +30,11 @@
 
       @include svg-position();
     }
+
+  }
+
+  @media (max-width: 1919px) {
+    padding: 14px 18px;
   }
 
   @media (max-width: 1199px) {
