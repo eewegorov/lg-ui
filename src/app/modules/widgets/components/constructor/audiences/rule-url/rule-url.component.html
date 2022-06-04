@@ -1,0 +1,94 @@
+<div class="filter-section mt-3">
+  <div *ngFor="let subitem of item.subitems; index as i" class="filterow">
+    <div *ngIf="i > 0" class="rule-subitem-text">{{ 'audience.rule.logic.or' | translate }}</div>
+    <div class="mt-3 mb-3">
+      <div class="dropdown w-25" data-field="present" data-val="true">
+        <button aria-expanded="true" class="btn btn-default dropdown-toggle w-100" data-toggle="dropdown" type="button">
+          {{ vals.conditions[vals.conditionsEnum.indexOf(subitem.condition)] }} <span class="caret"></span>
+        </button>
+        <ul aria-labelledby="dropdownMenu1" class="dropdown-menu" role="menu">
+          <li
+            (click)="subitem.condition = vals.conditionsEnum[j]"
+            *ngFor="let val of vals.conditions; index as j"
+            role="presentation"
+          >
+            <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ val }}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex justify-content-between mt-2 pt-1">
+        <div class="mr-3">
+          <h3>{{ 'audience.rule.url.value.upline' | translate }}</h3>
+          <div
+            class="input-group"
+            [class.is-invalid]="subitem.param.trim().length === 0 && showErrors"
+          >
+            <div class="input-group-prepend">
+              <button aria-expanded="false" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                      type="button">
+                {{ vals.compareTypes[vals.compareTypesEnum.indexOf(subitem.paramCompareType)] }} <span
+                class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li (click)="subitem.paramCompareType = vals.compareTypesEnum[k]"
+                    *ngFor="let val of vals.compareTypes; index as k">
+                  <a class="dropdown-item" href="javascript:void(0)">{{ val }}</a>
+                </li>
+              </ul>
+            </div>
+            <input [(ngModel)]="subitem.param" aria-label="" class="form-control" type="text">
+          </div>
+          <div class="d-flex justify-content-between small row-subitem-underline">
+            <div [class.is-invalid]="subitem.param.trim().length === 0 && showErrors">
+              <span class="underline-comment">{{ 'audience.rule.url.param.underline' | translate }}</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>{{ 'audience.rule.url.param.upline' | translate }}</h3>
+          <div class="d-flex">
+            <div
+              class="input-group subitem-left"
+              [class.is-invalid]="subitem.value.trim().length === 0 && showErrors"
+            >
+              <div class="input-group-prepend">
+                <button aria-expanded="false" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        type="button">
+                  {{ vals.compareTypes[vals.compareTypesEnum.indexOf(subitem.valueCompareType)] }} <span
+                  class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li
+                    (click)="subitem.valueCompareType = vals.compareTypesEnum[l]"
+                    *ngFor="let val of vals.compareTypes; index as l"
+                  >
+                    <a class="dropdown-item" href="javascript:void(0)">{{ val }}</a>
+                  </li>
+                </ul>
+              </div>
+              <input [(ngModel)]="subitem.value" aria-label="" class="form-control" type="text">
+            </div>
+            <div class="remove-sub-item">
+              <button (click)="removeSubItem(group.id, item.type, i, $event)" class="delete-element-button">&times;
+              </button>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between small row-subitem-underline">
+            <div
+              class="p-0"
+              [class.is-invalid]="subitem.value.trim().length === 0 && showErrors"
+            >
+              <span class="underline-comment">{{ 'audience.rule.url.value.underline' | translate }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <button (click)="addSubItem(item)" class="btn-default widget-content-add-btn">
+      <img alt="add element" src='../../../../../../../assets/images/widgets/plus.svg'/> {{ 'audience.variant.add' | translate }}
+    </button>
+  </div>
+</div>

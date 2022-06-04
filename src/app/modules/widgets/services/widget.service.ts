@@ -35,11 +35,10 @@ import {
   WidgetTemplatesResponse,
   WidgetType,
   WidgetTypesResponse
-} from '../../../core/models/widgets';
-import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+} from '@core/models/widgets';
+import { ErrorHandlerService } from '@core/services/error-handler.service';
 import { WidgetApiService } from './widget-api.service';
-import { ApiResponse } from '../../../core/models/api';
-
+import { ApiResponse } from '@core/models/api';
 
 @Injectable({
   providedIn: 'root'
@@ -57,11 +56,7 @@ export class WidgetService {
   private currentWidgetTypes = [];
   private currentWidgetTemplates = [];
 
-  constructor(
-    private errorHandlerService: ErrorHandlerService,
-    private widgetApiService: WidgetApiService
-  ) {
-  }
+  constructor(private errorHandlerService: ErrorHandlerService, private widgetApiService: WidgetApiService) {}
 
   public getWidgetsList(siteId: string): Observable<Entities> {
     return this.widgetApiService.getWidgetsList(siteId).pipe(
@@ -233,13 +228,13 @@ export class WidgetService {
 
   public getDefaultCompany(companies) {
     const currentC = companies || this.currentCompanies;
-    return currentC.find((item) => {
+    return currentC.find(item => {
       return item.default;
     });
   }
 
   public getUndefaultCompanies(companies) {
-    return companies.filter((item) => {
+    return companies.filter(item => {
       return !item.default;
     });
   }
@@ -273,7 +268,7 @@ export class WidgetService {
   }
 
   public getCompanyById(companyId, companies) {
-    return companies.find((item) => {
+    return companies.find(item => {
       return item.id === companyId;
     });
   }

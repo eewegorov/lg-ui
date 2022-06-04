@@ -1,0 +1,166 @@
+@import "../../../../../scss/vars";
+@import "../../../../../scss/mixins";
+
+:host {
+  width: 100%;
+
+  .filter-tabs {
+    display: flex;
+    justify-content: center;
+    background-color: $activeElementBG;
+    gap: 16px;
+
+
+    .filter-container {
+      width: 258px;
+      position: relative;
+      display: block;
+      cursor: pointer;
+
+      .filter {
+        width: 100%;
+        padding: 6px 10px 10px 75px;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        background-color: $activeElementBG;
+
+        &.active {
+          background-color: #FFFFFF;
+          z-index: 4;
+        }
+
+        span.filter-tab-title {
+          display: block;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 24px;
+          color: $fontPrimaryColor;
+          margin-bottom: 2px;
+        }
+
+        span.filter-tab-sub {
+          display: block;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 10px;
+          line-height: 12px;
+          color: $fontPrimaryColor;
+        }
+      }
+
+      .filter.active ~ .before, .filter.active ~ .after {
+        display: block;
+      }
+
+      .before, .after {
+        position: absolute;
+        display: none;
+        width: 16px;
+        height: 16px;
+        background-color: #FFFFFF;
+        bottom: 0;
+
+        &:before {
+          content: '';
+          position: absolute;
+          display: block;
+          width: 16px;
+          height: 16px;
+          background-color: $activeElementBG;
+        }
+      }
+
+      .before {
+        left: -16px;
+
+        &:before {
+          border-radius: 0 0 16px 0;
+        }
+      }
+
+      .after {
+        right: -16px;
+
+        &:before {
+          border-radius: 0 0 0 16px;
+        }
+      }
+    }
+  }
+}
+
+.filter-tabs div.filter-tab-on-all {
+  background: {
+    image: url("../../../../../assets/images/widgets/high-quality/templates.svg");
+    position: 5% center;
+    repeat: no-repeat;
+    size: 54px;
+  }
+}
+
+.filter-tabs div.filter-tab-on-popup {
+  background: {
+    image: url("../../../../../assets/images/widgets/high-quality/popup.svg");
+    position: 5% center;
+    repeat: no-repeat;
+    size: 54px;
+  }
+}
+
+.filter-tabs div.filter-tab-on-containerized {
+  background: {
+    image: url("../../../../../assets/images/widgets/high-quality/static.svg");
+    position: 5% center;
+    repeat: no-repeat;
+    size: 54px;
+  }
+}
+
+.filter-tabs div.filter-tab-on-optindot {
+  background: {
+    image: url("../../../../../assets/images/widgets/high-quality/optindot.svg");
+    position: 5% center;
+    repeat: no-repeat;
+    size: 54px;
+  }
+}
+
+.filter-tabs div.filter-tab-on-label_widget {
+  background: {
+    image: url("../../../../../assets/images/widgets/high-quality/tag.svg");
+    position: 5% center;
+    repeat: no-repeat;
+    size: 54px;
+  }
+}
+
+p {
+  font-family: Lato;
+}
+
+.search-results {
+  height: 100%;
+}
+
+.title {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-70%);
+  left: 0;
+  background-color: rgba(0, 0, 0, .5);
+  color: white;
+  width: 100%;
+}
+
+.title small {
+  color: #eaeaea;
+}
+
+@media (max-width: 1410px) {
+  .filter-tabs div {
+    padding-left: 10px;
+    width: 200px;
+    background-image: none !important;
+  }
+}
