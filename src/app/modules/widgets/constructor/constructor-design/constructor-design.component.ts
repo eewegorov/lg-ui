@@ -758,7 +758,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
   private validator() {
     const errors = [];
-    const TAB_ID = 'design';
+    const TAB_ID = 'design';9
 
     if (typeof this.widget.guiprops === 'undefined') {
       return;
@@ -771,6 +771,42 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
           element: el.name,
           counter: el.counter,
           message: 'No coupon' // coupon element has their own messages in widget-edit.component.ts saveWidgetItem()
+        });
+      }
+
+      if (el.name === 'social-element' && this.widget.guiprops.social.couponCallback.enable && !this.widget.guiprops.social.couponCallback.coupon.coupon.id) {
+        errors.push({
+          id: TAB_ID,
+          element: el.name,
+          counter: el.counter,
+          message: this.translate.instant('widgets.coupon.saveError')
+        });
+      }
+
+      if (el.name === 'closelink-element' && this.widget.guiprops.exit.couponCallback.enable && !this.widget.guiprops.exit.couponCallback.coupon.coupon.id) {
+        errors.push({
+          id: TAB_ID,
+          element: el.name,
+          counter: el.counter,
+          message: this.translate.instant('widgets.coupon.saveError')
+        });
+      }
+
+      if (el.name === 'form-element' && this.widget.guiprops.form.couponCallback.enable && !this.widget.guiprops.form.couponCallback.coupon.coupon.id) {
+        errors.push({
+          id: TAB_ID,
+          element: el.name,
+          counter: el.counter,
+          message: this.translate.instant('widgets.coupon.saveError')
+        });
+      }
+
+      if (el.name === 'form-ext-element' && this.widget.guiprops.formExt.couponCallback.enable && !this.widget.guiprops.formExt.couponCallback.coupon.coupon.id) {
+        errors.push({
+          id: TAB_ID,
+          element: el.name,
+          counter: el.counter,
+          message: this.translate.instant('widgets.coupon.saveError')
         });
       }
 

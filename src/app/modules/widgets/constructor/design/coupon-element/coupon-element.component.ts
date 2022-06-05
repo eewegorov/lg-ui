@@ -15,6 +15,7 @@ export class CouponElementComponent implements OnInit, AfterViewInit, OnChanges 
   @Input() public item: Record<string, any>;
   @Input() public widthBtn: string[];
   @Input() public floatBtn: string[];
+  @Input() public showErrors: boolean;
 
   public optionsRound: Options = {
     floor: 0,

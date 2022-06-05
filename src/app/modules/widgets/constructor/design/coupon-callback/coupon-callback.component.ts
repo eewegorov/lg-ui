@@ -12,6 +12,7 @@ export class CouponCallbackComponent implements OnInit {
   @Input() public coupons: Coupon[];
   @Input() public coupon: CouponCallback;
   @Input() public placePopup: string[];
+  @Input() public showErrors: boolean;
 
   constructor(
     private couponService: CouponService,

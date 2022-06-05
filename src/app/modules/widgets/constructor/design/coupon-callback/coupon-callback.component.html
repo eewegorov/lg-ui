@@ -48,7 +48,7 @@
     <div *ngIf="coupons.length" class="row-subitem row-subitem-padding mt-4">
       <h3>{{ 'widgets.coupon.couponCallback.couponChoose' | translate }}</h3>
       <div class="coupons-flex-wr mt-2">
-        <div class="dropdown btn-coupon-chose">
+        <div class="dropdown btn-coupon-chose" [class.is-invalid]="!coupon.coupon.coupon.id && showErrors">
           <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
             {{ coupon.coupon.coupon.name }}
             <span class="caret"></span>
