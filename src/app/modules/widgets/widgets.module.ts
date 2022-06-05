@@ -72,6 +72,7 @@ import { TimerDatepickerComponent } from './constructor/design/timer-element/tim
 import { PositionControlComponent } from './shared/position-control/position-control.component';
 import { ElementsAddComponent } from './shared/elements-add/elements-add.component';
 import { InlineSVGModule } from 'ng-inline-svg-2';
+import { ConstructorHeaderComponent } from './constructor/constructor-header/constructor-header.component';
 
 @NgModule({
   declarations: [
@@ -128,7 +129,8 @@ import { InlineSVGModule } from 'ng-inline-svg-2';
     TimerElementComponent,
     TimerDatepickerComponent,
     PositionControlComponent,
-    ElementsAddComponent
+    ElementsAddComponent,
+    ConstructorHeaderComponent
   ],
   exports: [SmartpointsControlComponent, TemplatesGalleryComponent],
   imports: [

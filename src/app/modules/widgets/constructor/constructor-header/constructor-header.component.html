@@ -1,56 +1,5 @@
-<app-preloader *ngIf="!widget?.guiprops"></app-preloader>
-<div *ngIf="widget?.guiprops" [@fadeInOut]>
-  <app-constructor-header
-    [widget]="widget"
-    [isLoading]="isLoading"
-    [isContainerized]="isContainerized"
-    [sid]="sid"
-  ></app-constructor-header>
-
-  <!-- Tab panes -->
-  <div *ngIf="widget?.guiprops" class="tab-content">
-    <div
-      [hidden]="!isCurrentActiveTab('design')"
-      [ngClass]="{ active: isCurrentActiveTab('design') }"
-      class="design-tab-fixed"
-      id="design"
-    >
-      <app-constructor-design
-        [SP_widget]="SP_widget"
-        [coupons]="coupons"
-        [currentActiveTab]="currentActiveTab"
-        [isButtonRedirectAndEmpty]="isButtonRedirectAndEmpty"
-        [isContainerized]="isContainerized"
-        [isFieldIdUnique]="isFieldIdUnique"
-        [isFormHasButtonWithAction]="isFormHasButtonWithAction"
-        [isFormHasSendIfAction]="isFormHasSendIfAction"
-        [isFormHasSpecElements]="isFormHasSpecElements"
-        [isPayment]="isPayment"
-        [isTabHasErrorForFormExt]="isTabHasErrorForFormExt"
-        [validateFormExtElements]="validateFormExtElements"
-        [mapFormExtFieldId]="mapFormExtFieldId"
-        [showErrors]="showErrors"
-        [sid]="sid"
-        [wid]="wid"
-        [widget]="widget"
-      ></app-constructor-design>
-    </div>
-
-    <div
-      *ngIf="isCurrentActiveTab('rules')"
-      [ngClass]="{ active: isCurrentActiveTab('rules') }"
-      id="rules"
-    >
-      <app-constructor-rules
-        [isContainerized]="isContainerized"
-        [showErrors]="showErrors"
-        [sid]="sid"
-        [widget]="widget"
-      ></app-constructor-rules>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-between title-and-tabs-container" id="headerr">
+<div class="widgets-editor-header">
+  <div class="d-flex justify-content-between title-and-tabs-container">
     <div class="title-widget-container">
       <a
         (click)="startRenameWidget(widget)"

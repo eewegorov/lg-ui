@@ -40,7 +40,6 @@ import { ConstructorRulesComponent } from '../constructor-rules/constructor-rule
   ]
 })
 export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy {
-  public renamedWidget = { id: '', name: '' };
   public widget = {} as FullWidget;
   public oldWidget = {} as FullWidget;
   /*public isDesigner = false;*/
@@ -218,20 +217,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     }
   }
 
-  public startRenameWidget(widget) {
-    ($('#renameWidgetBtn span') as any).tooltip('hide');
-    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
-
-    this.renamedWidget = {
-      id: widget.id,
-      name: widget.name
-    };
-
-    setTimeout(() => {
-      $('.widget-rename-control').trigger('focus');
-    }, 0);
-  }
-
   public isCurrentActiveTab(tab) {
     return this.currentActiveTab === tab;
   }
@@ -294,100 +279,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     });
 
     return error;
-  }
-
-  public goToTest(widget) {
-    this.router.navigate([`/abtests/active`], { queryParams: { testIdNum: widget.abtestInfo.id } }).then();
-  }
-
-  /*public saveAsMockup() {
-    let errorsList = this.runValidators();
-    this.widgetService.validators.forEach(validator => {
-      errorsList = errorsList.concat(validator.call(this));
-    });
-
-    if (errorsList.length !== 0) {
-      this.toastr.error(this.translate.instant('widgetsList.editor.save.validation.desc'), this.translate.instant('widgetsList.editor.save.validation.title'));
-    } else {
-      ($('#saveAsMockupModal') as any).modal('show');
-    }
-  }*/
-
-  public resetRenaming() {
-    this.renamedWidget = {
-      id: '',
-      name: ''
-    };
-  }
-
-  public checkKeyDown(event: KeyboardEvent): void {
-    if (event.key === 'Enter') {
-      this.renameWidget();
-    }
-  }
-
-  public renameWidget() {
-    setTimeout(() => {
-      ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
-    }, 0);
-
-    this.widget.name = this.renamedWidget.name;
-    this.resetRenaming();
-    this.checkWidgetRenameTitle();
-    if (this.widget.containerId) {
-      this.containerizedWidgetService.rename(this.sid, this.widget.id, this.widget.name).subscribe();
-    } else {
-      this.widgetService.rename(this.sid, this.widget.id, this.widget.name).subscribe();
-    }
-  }
-
-  public saveWidget() {
-    this.showErrors = true;
-
-    /*if (this.isMockup) {
-      this.saveMockupItem();
-    } else {
-      this.saveWidgetItem();
-    }*/
-
-    this.saveWidgetItem();
-  }
-
-  public switchWidget(widget, newValue) {
-    $('[role="tooltip"]').remove();
-    if (widget.active === newValue) {
-      return false;
-    }
-    if (this.isContainerized) {
-      this.containerizedWidgetService.switch(this.sid, widget.id, newValue).subscribe((response: boolean) => {
-        if (!response) {
-          return false;
-        }
-        this.widget.active = newValue;
-      });
-    } else {
-      this.widgetService.switch(this.sid, widget.id, newValue).subscribe((response: boolean) => {
-        if (!response) {
-          return false;
-        }
-        this.widget.active = newValue;
-      });
-    }
-  }
-
-  public closeWidget(): void {
-    const difference = this.difference(this.oldWidget, this.widget);
-    delete difference.sendCrm;
-
-    if (isEmpty(difference)) {
-      this.router.navigate(['/widgets/']);
-    } else {
-      const exitConfirm = confirm(this.translate.instant('widgetsList.widget.error'));
-
-      if (exitConfirm) {
-        this.router.navigate(['/widgets/']);
-      }
-    }
   }
 
   public mapFormExtFieldId() {
@@ -531,25 +422,16 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     );
   }
 
-  private difference(object: FullWidget, base: FullWidget): Partial<FullWidget> {
-    // eslint-disable-next-line @typescript-eslint/no-shadow
-    function changes(object, base) {
-      return transform(object, (result, value, key) => {
-        if (!isEqual(value, base[key])) {
-          result[key] = isObject(value) && isObject(base[key]) ? changes(value, base[key]) : value;
-        }
-      });
-    }
+  public saveWidget() {
+    this.showErrors = true;
 
-    return changes(object, base);
-  }
+    /*if (this.isMockup) {
+      this.saveMockupItem();
+    } else {
+      this.saveWidgetItem();
+    }*/
 
-  private checkWidgetRenameTitle() {
-    ($('#renameWidgetBtn') as any).tooltip('destroy');
-    if (this.widget?.name?.length > 35) {
-      ($('#renameWidgetBtn') as any).attr('title', this.widget.name);
-      ($('#renameWidgetBtn') as any).tooltip({ trigger: 'hover' });
-    }
+    this.saveWidgetItem();
   }
 
   private saveWidgetItem() {
@@ -779,7 +661,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
           this.widget.id = this.wid;
         }
         this.isContainerized = !!this.widget?.containerId;
-        this.checkWidgetRenameTitle();
         this.widgetService.loadWidgetToController.next();
       },
       () => this.router.navigate(['/widgets/'])
