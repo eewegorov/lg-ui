@@ -4,7 +4,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { SubscriptionLike } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { cloneDeep, isEmpty, isEqual, isObject, transform } from 'lodash-es';
+import { cloneDeep } from 'lodash-es';
 import * as moment from 'moment';
 import { SiteShort } from '@core/models/sites';
 import { Coupon } from '@core/models/coupons';
@@ -53,6 +53,7 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   public isLoading = false;
   public SP_widget = {} as any;
   public showErrors = false;
+
   @ViewChild(ConstructorDesignComponent) constructorDesignComponent: ConstructorDesignComponent;
   @ViewChild(ConstructorDesignComponent) constructorRulesComponent: ConstructorRulesComponent;
   private couponsErrorFlag = false;
@@ -66,9 +67,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
   private defaultCoupon = { id: null, name: 'Какой купон хотите использовать?' };
   private meInfoSub: SubscriptionLike;
   private paymentSub: SubscriptionLike;
-  private updateCouponsList: SubscriptionLike;
-  private updateWidget: SubscriptionLike;
-  private formExtIdFieldFocusOut: SubscriptionLike;
 
   constructor(
     private router: Router,
@@ -116,9 +114,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     this.loadGroups();
 
     ($('[data-toggle="tooltip"]') as any).tooltip('hide');
-    setTimeout(() => {
-      ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
-    }, 1000);
 
     this.paymentSub = this.widgetService.onChangePayment.subscribe((value: boolean) => {
       this.onChangePayment(value);
@@ -689,18 +684,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
 
     if (this.paymentSub) {
       this.paymentSub.unsubscribe();
-    }
-
-    if (this.updateCouponsList) {
-      this.updateCouponsList.unsubscribe();
-    }
-
-    if (this.updateWidget) {
-      this.updateWidget.unsubscribe();
-    }
-
-    if (this.formExtIdFieldFocusOut) {
-      this.formExtIdFieldFocusOut.unsubscribe();
     }
   }
 }

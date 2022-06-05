@@ -35,7 +35,7 @@
     <ul class="nav nav-tabs widget-editor-tabs" role="tablist">
       <li [ngClass]="{ active: isCurrentActiveTab('design') }" class="widget-editor-tab" role="presentation">
         <a
-          (click)="setActiveTab('design')"
+          (click)="setActiveTab.emit('design')"
         >
           <div class="before fade-in">
             <div class="square"></div>
@@ -58,7 +58,7 @@
         role="presentation"
       >
         <a
-          (click)="setActiveTab('rules')"
+          (click)="setActiveTab.emit('rules')"
         >
           <div class="before fade-in">
             <div class="square fade-in"></div>
@@ -122,7 +122,7 @@
 
     <div>
       <button
-        (click)="saveWidget()"
+        (click)="saveWidget.emit()"
         [ladda]="isLoading"
         class="ladda-button btn btn-success"
         data-style="slide-down"

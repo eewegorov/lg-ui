@@ -1,20 +1,38 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Router } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
+import { isEmpty, isEqual, isObject, transform } from 'lodash-es';
 import { FullWidget } from "@core/models/widgets";
 import { ContainerizedWidgetService } from "@modules/widgets/services/containerized-widget.service";
 import { WidgetService } from "@modules/widgets/services/widget.service";
-import { Router } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
+import { WidgetConstructorService } from "@modules/widgets/services/widget-constructor.service";
+
 
 @Component({
   selector: 'app-constructor-header',
   templateUrl: './constructor-header.component.html',
-  styleUrls: ['./constructor-header.component.scss']
+  styleUrls: ['../../shared/shared.scss', './constructor-header.component.scss']
 })
-export class ConstructorHeaderComponent implements OnInit {
+export class ConstructorHeaderComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @Input() public widget: FullWidget;
   @Input() public isLoading = false;
   @Input() public isContainerized: boolean;
+  @Input() public showErrors: boolean;
+  @Input() public isTabHasError: (tabId) => boolean;
+  @Input() private mapFormExtFieldId: () => any;
+  @Input() private isFieldIdUnique: (id: any) => boolean;
+  @Input() private isButtonRedirectAndEmpty: (item: any) => boolean;
+  @Input() private isFormHasSpecElements: (item: any) => boolean;
+  @Input() private isFormHasButtonWithAction: (item: any) => boolean;
+  @Input() private runValidators: () => any;
+  @Input() private validateFormExtElements: () => string;
+  @Input() private isTabHasErrorForFormExt: () => boolean;
+  @Input() private currentActiveTab: string;
   @Input() private sid: string;
+  @Input() private oldWidget: FullWidget;
+
+  @Output() public setActiveTab = new EventEmitter<string>();
+  @Output() public saveWidget = new EventEmitter<void>();
 
   public renamedWidget = { id: '', name: '' };
 
@@ -22,11 +40,24 @@ export class ConstructorHeaderComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private containerizedWidgetService: ContainerizedWidgetService,
-    private widgetService: WidgetService
+    private widgetService: WidgetService,
+    private widgetConstructorService: WidgetConstructorService // need to avoid runtume error due to call parent component method
   ) { }
+
+  ngAfterViewInit(): void {
+    ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
+  }
 
   ngOnInit(): void {
     this.checkWidgetRenameTitle();
+
+  }
+
+  ngAfterViewChecked(): void {
+  }
+
+  public isCurrentActiveTab(tab) {
+    return this.currentActiveTab === tab;
   }
 
   public goToTest(widget) {
@@ -46,20 +77,7 @@ export class ConstructorHeaderComponent implements OnInit {
     }
   }*/
 
-  public saveWidget() {
-    this.showErrors = true;
-
-    /*if (this.isMockup) {
-      this.saveMockupItem();
-    } else {
-      this.saveWidgetItem();
-    }*/
-
-    this.saveWidgetItem();
-  }
-
   public switchWidget(widget, newValue) {
-    $('[role="tooltip"]').remove();
     if (widget.active === newValue) {
       return false;
     }
@@ -96,8 +114,6 @@ export class ConstructorHeaderComponent implements OnInit {
   }
 
   public startRenameWidget(widget) {
-    ($('#renameWidgetBtn span') as any).tooltip('hide');
-    ($('[data-toggle="tooltip"]') as any).tooltip('hide');
 
     this.renamedWidget = {
       id: widget.id,
@@ -123,9 +139,6 @@ export class ConstructorHeaderComponent implements OnInit {
   }
 
   public renameWidget() {
-    setTimeout(() => {
-      ($('[data-toggle="tooltip"]') as any).tooltip({ trigger: 'hover' });
-    }, 0);
 
     this.widget.name = this.renamedWidget.name;
     this.resetRenaming();

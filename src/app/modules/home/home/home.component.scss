@@ -25,6 +25,10 @@
   min-height: calc(100% - #{$headerHeight});
   overflow: auto;
 
+  &.without-transition {
+    transition: none;
+  }
+
   @media (max-width: 991px) {
     padding: 37px 30px;
   }
