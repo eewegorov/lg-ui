@@ -41,7 +41,7 @@
             <h4 class="site-settings-h4-text">{{ 'settings.site.settings.notification.title' | translate }} :</h4>
           </div>
           <div class="form-group d-flex">
-            <ui-switch [checked]="site.needLeadNotification" size="medium"></ui-switch>
+            <ui-switch [(ngModel)]="site.needLeadNotification" size="medium"></ui-switch>
             <label class="control-label ml-2 pt-1">
               {{ 'settings.site.settings.notification.send' | translate }}
             </label>
@@ -51,7 +51,7 @@
             <h4 class="site-settings-h4-text">{{ 'settings.site.settings.stats.title' | translate }}:</h4>
           </div>
           <div class="form-group d-flex">
-            <ui-switch [checked]="site.needEmailSubscriptions" size="medium"></ui-switch>
+            <ui-switch [(ngModel)]="site.needEmailSubscriptions" size="medium"></ui-switch>
             <label class="control-label ml-2">
               {{ 'settings.site.settings.stats.email' | translate }}
               <a

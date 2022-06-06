@@ -58,7 +58,7 @@
     </div>
 
     <div class="coupon-tab-item d-flex align-items-center">
-      <ui-switch [checked]="editableCoupon.needUseDefault" class="align-self-start" size="small"></ui-switch>
+      <ui-switch [(ngModel)]="editableCoupon.needUseDefault" class="align-self-start" size="small"></ui-switch>
       <label
         class="control-label switcher-label-xs control-label-des mt-1 ml-2">{{ 'coupons.modal.newCoupon.tab2.needDefault.title' | translate }}</label>
     </div>

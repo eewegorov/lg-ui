@@ -15,11 +15,11 @@
         <span class="validate"></span>
       </div>
       <div class="form-group d-flex" data-item="ntEnabled">
-        <ui-switch [checked]="user.notificated" size="small"></ui-switch>
+        <ui-switch [(ngModel)]="user.notificated" size="small"></ui-switch>
         <label class="control-label ml-2 pt-1">{{ 'userInfo.notifications' | translate }}</label>
       </div>
       <div class="form-group d-flex" data-item="ntEnabled">
-        <ui-switch [checked]="user.needStatsNotifications" size="small"></ui-switch>
+        <ui-switch [(ngModel)]="user.needStatsNotifications" size="small"></ui-switch>
         <label class="control-label ml-2 pt-1">{{ 'userInfo.isNeedStatsNotificationss' | translate }}</label>
       </div>
       <div class="text-right">

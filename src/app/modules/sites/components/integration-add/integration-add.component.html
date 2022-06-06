@@ -341,7 +341,7 @@
 
           <div class="integration-tab-item mb-0">
             <div class="d-flex">
-              <ui-switch [checked]="newCurrentIntegration.default" size="small"></ui-switch>
+              <ui-switch [(ngModel)]="newCurrentIntegration.default" size="small"></ui-switch>
               <label class="control-label ml-2">
                 {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
                 <a class="info-link"
@@ -662,7 +662,7 @@
         </div>
         <div *ngIf="currentIntegrationSiteService.type" class="integration-tab-item mb-0">
           <div class="d-flex">
-            <ui-switch [checked]="currentIntegrationSiteService.default" size="small"></ui-switch>
+            <ui-switch [(ngModel)]="currentIntegrationSiteService.default" size="small"></ui-switch>
             <label class="control-label ml-2">
               {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
               <a class="info-link"
