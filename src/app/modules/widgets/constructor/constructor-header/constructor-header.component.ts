@@ -50,10 +50,16 @@ export class ConstructorHeaderComponent implements OnInit, AfterViewInit, AfterV
 
   ngOnInit(): void {
     this.checkWidgetRenameTitle();
-
   }
 
   ngAfterViewChecked(): void {
+    if ($('#renameWidgetBtn span') && $('#renameWidgetBtn span')[0]) {
+      if ($('#renameWidgetBtn span')[0].scrollWidth > $('#renameWidgetBtn span').innerWidth() + 0.4) {
+        ($('#renameWidgetBtn span') as any).tooltip({ trigger: 'hover' });
+      } else {
+        ($('#renameWidgetBtn span') as any).tooltip('hide');
+      }
+    }
   }
 
   public isCurrentActiveTab(tab) {

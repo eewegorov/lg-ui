@@ -138,7 +138,10 @@
     <button
       (click)="closeWidget()"
       class="close-widget-button"
-      data-placement="bottom" data-toggle="tooltip" title="{{ 'widgetsList.editor.close' | translate }}"
+      data-placement="bottom"
+      data-toggle="tooltip"
+      title="{{ 'widgetsList.editor.close' | translate }}"
+      [attr.data-original-title]="'widgetsList.editor.close' | translate"
     >
       &times;
     </button>

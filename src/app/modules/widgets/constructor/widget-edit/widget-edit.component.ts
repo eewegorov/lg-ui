@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { SubscriptionLike } from 'rxjs';
@@ -39,7 +39,7 @@ import { ConstructorRulesComponent } from '../constructor-rules/constructor-rule
     ])
   ]
 })
-export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy {
+export class WidgetEditComponent implements OnInit, OnDestroy {
   public widget = {} as FullWidget;
   public oldWidget = {} as FullWidget;
   /*public isDesigner = false;*/
@@ -82,16 +82,6 @@ export class WidgetEditComponent implements OnInit, AfterViewChecked, OnDestroy 
     private widgetService: WidgetService,
     private widgetConstructorService: WidgetConstructorService
   ) {}
-
-  ngAfterViewChecked(): void {
-    if ($('#renameWidgetBtn span') && $('#renameWidgetBtn span')[0]) {
-      if ($('#renameWidgetBtn span')[0].scrollWidth > $('#renameWidgetBtn span').innerWidth() + 0.4) {
-        ($('#renameWidgetBtn span') as any).tooltip({ trigger: 'hover' });
-      } else {
-        ($('#renameWidgetBtn span') as any).tooltip('hide');
-      }
-    }
-  }
 
   ngOnInit(): void {
     this.sid = this.route.snapshot.paramMap.get('id').split('-')[0];
