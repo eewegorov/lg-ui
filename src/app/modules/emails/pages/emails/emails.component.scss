@@ -156,9 +156,7 @@
       }
     }
 
-    @media (max-width: 1199px) {
-      flex-direction: column;
-
+    @media (max-width: 1919px) {
       .filter {
         .btn-group__period-selector {
           label, button {
@@ -166,6 +164,10 @@
           }
         }
       }
+    }
+
+    @media (max-width: 1199px) {
+      flex-direction: column;
     }
   }
 

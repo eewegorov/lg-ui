@@ -41,6 +41,8 @@
 
       @media (max-width: 1919px) {
         padding: 7px 10px;
+        font-size: 13px;
+        line-height: 18px;
       }
 
       &:not(:last-of-type) {
@@ -330,10 +332,12 @@
             line-height: 22px;
             color: $fontSecondaryColor;
             border-radius: 0;
+            user-select: none;
 
             @media (max-width: 1919px) {
               padding: 0.275rem 0.55rem !important;
-              min-width: unset !important;
+              min-width: initial !important;
+              height: initial !important;
             }
 
             &:not(:disabled):hover {
