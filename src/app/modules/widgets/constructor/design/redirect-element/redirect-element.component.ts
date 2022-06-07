@@ -14,7 +14,7 @@ export class RedirectElementComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    if (this.widget.guiprops.button.enable === true && this.widget.guiprops.form.enable === false) {
+    if (this.widget.guiprops.button?.enable === true && this.widget.guiprops.form?.enable === false) {
       this.widget.guiprops.formSet.redirect.enable = true;
     }
   }

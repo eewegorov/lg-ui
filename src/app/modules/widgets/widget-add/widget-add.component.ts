@@ -116,7 +116,7 @@ export class WidgetAddComponent implements OnInit {
     this.editableWidget.containerized = type.containerized;
     this.newWidgetStep = 3;
 
-    const templateItems = this.filterPipe.transform(this.templates, type.id);
+    const templateItems = this.filterPipe.transform(this.templates, { type: type.id } );
     if (templateItems.length === 1) {
       this.setTemplate(templateItems[0]);
     }

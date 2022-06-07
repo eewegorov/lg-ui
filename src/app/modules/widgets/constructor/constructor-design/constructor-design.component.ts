@@ -215,11 +215,11 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
     this.getHeightBlock();
 
     // Init video BG
-    if (this.widget.guiprops?.bg.video && (this.widget.guiprops?.bg.fillorImg === 'useVideo') && this.widget.guiprops?.bg.video.videoId) {
+    if (this.widget.guiprops?.bg?.video && (this.widget.guiprops?.bg?.fillorImg === 'useVideo') && this.widget.guiprops?.bg?.video?.videoId) {
       this.newVideoSize(this.widget.guiprops.bg.video);
     }
 
-    if (this.widget.guiprops.image.enable && this.widget.guiprops.image.typeBl && (this.widget.guiprops.image.typeBl === 'videoBl')) {
+    if (this.widget.guiprops?.image?.enable && this.widget.guiprops?.image?.typeBl && (this.widget.guiprops?.image?.typeBl === 'videoBl')) {
       this.newVideoSize(this.widget.guiprops.image.videoUrl);
     }
 
@@ -1318,7 +1318,7 @@ export class ConstructorDesignComponent implements OnInit, AfterViewInit, OnDest
 
     if (typeof this.widget.guiprops.labelMain === 'undefined') {
       this.widget.guiprops.labelMain = {
-        place: this.placeLabel[0],
+        place: this.placeLabel[6],
         width: 100,
         height: 30,
         text: 'Подпишитесь на нашу рассылку!',
