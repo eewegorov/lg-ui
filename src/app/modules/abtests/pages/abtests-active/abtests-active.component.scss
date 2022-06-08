@@ -216,6 +216,12 @@
               th {
                 padding: 19px 14px;
                 color: $fontGrayColor;
+
+                @media (max-width: 1919px) {
+                  padding: 7px 10px;
+                  font-size: 13px;
+                  line-height: 22px;
+                }
               }
             }
 
@@ -242,6 +248,12 @@
                 td {
                   padding: 10px 14px;
                   color: $fontPrimaryColor;
+
+                  @media (max-width: 1919px) {
+                    padding: 7px 10px;
+                    font-size: 13px;
+                    line-height: 22px;
+                  }
 
                   &.name {
                     height: 100%;
@@ -305,7 +317,12 @@
                       justify-content: flex-start;
                       gap: 10px;
 
+                      @media (max-width: 1919px) {
+                        gap: 5px;
+                      }
+
                       .btn-group {
+                        margin: 0 !important;
 
                         button {
                           display: flex;
@@ -360,12 +377,6 @@
                 &:hover {
                   cursor: pointer;
                 }
-
-                td {
-                  &:hover{
-                    background-color: $activeElementBG;
-                  }
-                }
               }
             }
 
@@ -388,34 +399,54 @@
                   width: 20%;
                   min-width: 420px;
 
-                  @media (max-width: 424px) {
-                    min-width: 255px;
+                  @media (max-width: 1919px) {
+                    min-width: 205px;
                   }
                 }
 
                 &.shows {
                   width: 17%;
                   min-width: 240px;
+
+                  @media (max-width: 1919px) {
+                    min-width: 200px;
+                  }
                 }
 
                 &.conv {
                   width: 25%;
                   min-width: 180px;
+
+                  @media (max-width: 1919px) {
+                    min-width: 120px;
+                  }
                 }
 
                 &.update {
                   width: 19%;
                   min-width: 240px;
+
+                  @media (max-width: 1919px) {
+                    min-width: 140px;
+                  }
                 }
 
                 &.onoff {
                   width: 19%;
                   min-width: 160px;
+
+                  @media (max-width: 1919px) {
+                    min-width: 120px;
+                  }
                 }
 
                 &.actions {
                   width: 19%;
                   min-width: 280px;
+
+                  @media (max-width: 1919px) {
+                    min-width: unset !important;
+                  }
                 }
               }
             }

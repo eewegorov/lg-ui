@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiResponse } from '../../../core/models/api';
+import { ApiResponse } from '@core/models/api';
 import {
   CompaniesResponse,
   CompanyRequest,
@@ -28,20 +28,14 @@ import {
   WidgetSwapRequest,
   WidgetTemplatesResponse,
   WidgetTypesResponse
-} from '../../../core/models/widgets';
-import { ConfigService } from '../../../core/services/config.service';
-
+} from '@core/models/widgets';
+import { ConfigService } from '@core/services/config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WidgetApiService {
-
-  constructor(
-    private http: HttpClient,
-    private configService: ConfigService
-  ) {
-  }
+  constructor(private http: HttpClient, private configService: ConfigService) {}
 
   public getWidgetsList(siteId: string): Observable<WidgetsResponse> {
     return this.http.get<WidgetsResponse>(`${this.configService.config.prov}/sites/${siteId}/widgets`);
@@ -104,35 +98,67 @@ export class WidgetApiService {
   }
 
   public create(siteId: string, widget: WidgetCreateRequest): Observable<WidgetCreateResponse> {
-    return this.http.post<WidgetCreateResponse>(`${this.configService.config.prov}/sites/${siteId}/sitewidgets`, widget);
+    return this.http.post<WidgetCreateResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/sitewidgets`,
+      widget
+    );
   }
 
   public switch(siteId: string, widgetId: string, action: 'start' | 'stop') {
-    return this.http.post<ApiResponse>(`${this.configService.config.prov}/sites/${siteId}/sitewidgets/${widgetId}/${action}`, null);
+    return this.http.post<ApiResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/sitewidgets/${widgetId}/${action}`,
+      null
+    );
   }
 
   public rename(siteId: string, widgetId: string, name: WidgetRename): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${this.configService.config.prov}/sites/${siteId}/sitewidgets/${widgetId}/rename`, name);
+    return this.http.post<ApiResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/sitewidgets/${widgetId}/rename`,
+      name
+    );
   }
 
   public clone(siteId: string, widgetId: string, widget: WidgetCloneRequest): Observable<WidgetCloneResponse> {
-    return this.http.post<WidgetCloneResponse>(`${this.configService.config.prov}/sites/${siteId}/sitewidgets/${widgetId}/clone`, widget);
+    return this.http.post<WidgetCloneResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/sitewidgets/${widgetId}/clone`,
+      widget
+    );
   }
 
-  public changeWidgetCompany(siteId: string, widgetId: string, company: WidgetChangeCompanyRequest): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${this.configService.config.prov}/sites/${siteId}/sitewidgets/${widgetId}/company`, company);
+  public changeWidgetCompany(
+    siteId: string,
+    widgetId: string,
+    company: WidgetChangeCompanyRequest
+  ): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/sitewidgets/${widgetId}/company`,
+      company
+    );
   }
 
   public swap(siteId: string, widgetSwap: WidgetSwapRequest): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${this.configService.config.prov}/sites/${siteId}/sitewidgets/swap`, widgetSwap);
+    return this.http.post<ApiResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/sitewidgets/swap`,
+      widgetSwap
+    );
   }
 
-  public putSmartpointType(siteId: string, smartpointType: SmartPointTypes, smartpoint: SmartPointUpdateRequest): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${this.configService.config.prov}/sites/${siteId}/smartpoints/${smartpointType}`, smartpoint);
+  public putSmartpointType(
+    siteId: string,
+    smartpointType: SmartPointTypes,
+    smartpoint: SmartPointUpdateRequest
+  ): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/smartpoints/${smartpointType}`,
+      smartpoint
+    );
   }
 
   public startStopSmartpoint(siteId: string, smartpoint: SmartPointEnableRequest): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(`${this.configService.config.prov}/sites/${siteId}/smartpoints/enable`, smartpoint);
+    return this.http.put<ApiResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/smartpoints/enable`,
+      smartpoint
+    );
   }
 
   public createCompany(siteId: string, company: CompanyRequest): Observable<CompanyResponse> {
@@ -140,7 +166,10 @@ export class WidgetApiService {
   }
 
   public deleteCompany(siteId: string, companyId: string, company: DeleteCompanyRequest): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${this.configService.config.prov}/sites/${siteId}/companies/${companyId}/delete`, company);
+    return this.http.post<ApiResponse>(
+      `${this.configService.config.prov}/sites/${siteId}/companies/${companyId}/delete`,
+      company
+    );
   }
 
   public getImages(siteId: string): Observable<ImagesResponse> {

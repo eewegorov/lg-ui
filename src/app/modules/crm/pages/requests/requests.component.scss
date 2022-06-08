@@ -159,9 +159,7 @@
       }
     }
 
-    @media (max-width: 1199px) {
-      flex-direction: column;
-
+    @media (max-width: 1919px) {
       .filter {
         .btn-group__period-selector {
           label, button {
@@ -169,6 +167,10 @@
           }
         }
       }
+    }
+
+    @media (max-width: 1199px) {
+      flex-direction: column;
     }
   }
 
@@ -297,6 +299,12 @@
               background-color: #FFFFFF;
               border-bottom:  1px solid $borderColor;
 
+              @media (max-width: 1919px) {
+                padding: 10px 7px;
+                font-size: 13px;
+                line-height: 18px;
+              }
+
               &:not(:last-of-type) {
                 border-right:  1px solid $borderColor;
               }
@@ -305,7 +313,7 @@
                 width: 20%;
                 min-width: 320px;
 
-                @media (max-width: 424px) {
+                @media (max-width: 1919px) {
                   min-width: 255px;
                 }
               }
@@ -313,11 +321,19 @@
               &.site {
                 width: 17%;
                 min-width: 300px;
+
+                @media (max-width: 1919px) {
+                  min-width: 200px;
+                }
               }
 
               &.site-url {
                 width: 25%;
                 min-width: 430px;
+
+                @media (max-width: 1919px) {
+                  min-width: 300px;
+                }
               }
 
               &.status {
@@ -351,11 +367,18 @@
                   }
                 }
 
+                @media (max-width: 1919px) {
+                  min-width: 150px;
+                }
               }
 
               &.date {
                 width: 19%;
                 min-width: 230px;
+
+                @media (max-width: 1919px) {
+                  min-width: 150px;
+                }
               }
             }
           }

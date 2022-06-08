@@ -44,6 +44,12 @@
           background-color: #FFFFFF;
           border-bottom:  1px solid $borderColor;
 
+          @media (max-width: 1919px) {
+            padding: 7px 10px;
+            font-size: 13px;
+            line-height: 22px;
+          }
+
           &:not(:last-of-type) {
             border-right:  1px solid $borderColor;
           }
@@ -52,7 +58,7 @@
             width: 25%;
             min-width: 320px;
 
-            @media (max-width: 424px) {
+            @media (max-width: 1919px) {
               min-width: 265px;
             }
           }
@@ -60,11 +66,19 @@
           &.code-coupon {
             width: 30%;
             min-width: 470px;
+
+            @media (max-width: 1919px) {
+              min-width: 300px;
+            }
           }
 
           &.type-coupon {
             width: 35%;
             min-width: 550px;
+
+            @media (max-width: 1919px) {
+              min-width: 315px;
+            }
           }
 
           &.actions-coupon {

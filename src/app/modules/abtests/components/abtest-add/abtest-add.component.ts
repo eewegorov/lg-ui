@@ -6,7 +6,7 @@ import { SiteShort } from '@core/models/sites';
 import { WidgetInfo } from '@core/models/widgets';
 import { AbtestShort } from '@core/models/abtests';
 import { WidgetService } from '../../../widgets/services/widget.service';
-import { ContainerizedWidgetService } from '../../../widgets/services/containerized-widget.service';
+import { ContainerizedWidgetService } from '@modules/widgets/services/containerized-widget.service';
 import { AbtestsService } from '../../services/abtests.service';
 
 @Component({

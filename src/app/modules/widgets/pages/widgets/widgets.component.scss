@@ -1,0 +1,248 @@
+@import '../../../../../scss/vars';
+@import '../../../../../scss/mixins';
+@import '../../../../../scss/page-title';
+
+:host {
+  .page-title {
+    margin-bottom: 30px;
+  }
+
+  .widgets-filters {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 35px;
+
+    .filter {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      width: auto;
+      gap: 10px;
+
+      .controls {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        gap: 20px;
+
+        button {
+          height: 50px;
+          width: 50px;
+          min-width: 50px;
+          background: #FFFFFF;
+          border: 1px solid $borderColor;
+          border-radius: 4px;
+
+          &.filter-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            span {
+              display: block;
+              width: 22px;
+              height: 22px;
+              color: $fontPrimaryColor;
+              position: relative;
+
+              @include svg-position();
+            }
+          }
+
+          &.btn-success {
+            color: $successColor !important;
+          }
+        }
+
+        .input, .input input {
+          height: 50px;
+          min-width: 400px;
+          max-width: 400px;
+          width: auto;
+          background: #FFFFFF;
+          border-radius: 4px;
+        }
+
+        .input {
+          input {
+            border: 1px solid $borderColor;
+            padding: 14px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+          }
+        }
+
+        .dropdown {
+          width: 100%;
+          min-width: 400px;
+
+          button {
+            width: 100%;
+            padding: 14px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+          }
+
+          ul {
+            width: 100%;
+          }
+        }
+      }
+
+      @media (max-width: 991px) {
+        width: 100%;
+
+        .controls {
+          gap: 5px;
+
+          .input, .input input  {
+            max-width: unset !important;
+            min-width: unset !important;
+            width: 100%;
+          }
+        }
+
+        .dropdown {
+          min-width: unset !important;
+        }
+      }
+    }
+
+    h5 {
+      margin: 0;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+      color: $fontPrimaryColor;
+    }
+  }
+
+  app-card {
+    .card-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 15px;
+      color: $fontPrimaryColor;
+
+      h3 {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 29px;
+        vertical-align: center;
+
+        a {
+          display: inline-block;
+          width: 22px;
+          height: 22px;
+          margin-left: 15px;
+          position: relative;
+          transform: translateY(15%);
+          color: $fontGrayColor;
+
+          @include svg-position();
+        }
+
+        @media (max-width: 575px) {
+          font-size: 20px;
+          line-height: 22px;
+
+          a {
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+    }
+
+    h4 {
+      width: 100%;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      margin: 28px 0 25px 0;
+      color: $fontGrayColor;
+    }
+
+    .card-item-columns {
+      width: 100%;
+    }
+  }
+
+  section {
+    margin-top: 50px;
+    width: 100%;
+    position: relative;
+
+    h2 {
+      width: 100%;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 29px;
+      color: $fontPrimaryColor;
+      margin-bottom: 25px;
+    }
+
+    .static-widgets {
+      margin-bottom: 50px;
+      display: block;
+
+      &:last-of-type {
+        margin: 0;
+      }
+    }
+
+    .widgets-container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 50px;
+
+      h4 {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 29px;
+        color: $fontPrimaryColor;
+        margin: 0;
+      }
+
+      .column {
+        width: 100%;
+        max-width: calc(100% * 0.33333 - 15px);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 15px;
+
+        @media (max-width: 1399px) {
+          max-width: 500px;
+        }
+
+        @media (max-width: 991px) {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
