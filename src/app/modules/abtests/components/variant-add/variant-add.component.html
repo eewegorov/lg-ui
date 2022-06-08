@@ -1,0 +1,92 @@
+<div *ngIf="step === 0" class="modal-header text-center justify-content-center">
+  <h3 class="modal-title">{{ 'abtests.modal.variant.add' | translate }}</h3>
+</div>
+
+<div class="modal-body tab-content" id="newABTabs">
+  <div *ngIf="step === 0" class="p-2" id="step1">
+    <div class="row">
+      <div (click)="setABType(type)" *ngFor="let type of ABTypes" class="col-lg-4 widget-type-view">
+        <div class="ab-type-icon-{{ type.type }}"></div>
+        <div class="view-name text-center">{{ type.title }}</div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="step == 1" class="active" id="step2">
+    <div [ngClass]="{'main-content-container-loader': isLoaderActive}" class="create-widget-m" style="padding-top: 0">
+      <div class="filters-loader"></div>
+      <div class="container-for-loader">
+        <div class="header-modal">
+          <span>{{ 'abtests.modal.template.choose' | translate }}</span>
+        </div>
+        <span class="sub-text">{{ 'abtests.modal.template.subtext' | translate }}</span>
+        <div class="just-blue-line"></div>
+        <div class="main-content-container">
+          <div class="left-panel-filter">
+            <span class="left-panel-filter-title">{{ 'abtests.modal.template.categories' | translate }}</span>
+            <div class="left-panel-filter-categories">
+              <div class="left-panel-filter-categories-container">
+                <div *ngFor="let grp of groups; index as i">
+                  <h5 [ngClass]="(i !== 0) ? 'mt-3' : ''">
+                    {{ grp.name }}
+                  </h5>
+                  <div *ngFor="let cat of grp.categories" class="left-category-item">
+                    <div class="left-panel-filter-categories-category">
+                      <label class="form-check">
+                        <input
+                          (ngModelChange)="filterByCat(cat.checked, cat.id)"
+                          [(ngModel)]="cat.checked"
+                          class="form-check-input"
+                          type="checkbox"
+                        />
+                        <span class="form-check-text">{{ cat.name }}</span>
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-widgets-list">
+            <div *ngIf="mockups.length === 0" class="alert-if-empty">
+              <h3>{{ 'abtests.modal.noWidgets' | translate }}</h3>
+            </div>
+            <div
+              (scrolled)="loadMore()"
+              [fromRoot]="true"
+              [infiniteScrollContainer]="'.panel-widgets-list'"
+              class="test-scroll-inf"
+              infiniteScroll
+            >
+              <div *ngFor="let mckp of mockups" class="mockup-selector-categories-mockups-item-container">
+                <div class="mockup-selector-categories-mockups-item">
+                  <div class="mockup-selector-categories-mockups-item-hover">
+                    <button (click)="setMockupABT(mckp)" class="btn btn-success" type="button">
+                      <i class="fa fa-check"></i> {{ 'widgetsList.add.params.select' | translate }}
+                    </button>
+                  </div>
+                  <div class="mockup-selector-categories-mockups-item-content">
+                    <div id="mockup-selector-categories-mockups-item-tariff-container">
+
+                    </div>
+                    <img [src]="mckp.preview" alt="">
+                    <div class="mockup-selector-categories-mockups-item-title">
+                      <div>
+                        <div>{{ mckp.name }}</div>
+                      </div>
+                    </div>
+                    <div class="mockup-selector-categories-mockups-item-desc">
+                      <div>
+                        <div>{{ mckp.description }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class='input-group date'>
+  <input
+    #d="ngbDatepicker"
+    (change)="onDateChange($event)"
+    (dateSelect)="onDateChange($event)"
+    [(ngModel)]="selectedDate"
+    [dayTemplate]="customDay"
+    class="form-control"
+    name="dp"
+    ngbDatepicker
+    placeholder="DD.MM.YYYY"
+  >
+  <div class="input-group-append">
+    <button (click)="d.toggle()" class="btn btn-default fa fa-calendar-alt" type="button"></button>
+  </div>
+</div>
+
+<ng-template #customDay let-currentMonth="currentMonth" let-date let-disabled="disabled" let-focused="focused"
+             let-selected="selected">
+  <span [class.bg-primary]="selected" [class.focused]="focused" [class.text-muted]="disabled"
+        [class.today]="isToday(date)" class="custom-day">
+    {{ date.day }}
+  </span>
+</ng-template>

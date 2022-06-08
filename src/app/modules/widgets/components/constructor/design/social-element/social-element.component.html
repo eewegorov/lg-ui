@@ -1,0 +1,363 @@
+<div>
+  <h3>Выберите сервисы</h3>
+
+  <div class="d-flex row-subitem mt-1 social-block-choose border-item">
+    <div class="col-sm-6 row-subitem-padding">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].vkontakte, 'vkontakte')"
+            [(ngModel)]="widget.guiprops['social'].vkontakte"
+            value="vkontakte"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Vkontakte</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].facebook, 'facebook')"
+            [(ngModel)]="widget.guiprops['social'].facebook"
+            value="facebook"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Facebook</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].googleplus, 'googleplus')"
+            [(ngModel)]="widget.guiprops['social'].googleplus"
+            value="googleplus"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Google plus</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].digg, 'digg')"
+            [(ngModel)]="widget.guiprops['social'].digg"
+            value="digg"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Digg</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].pinterest, 'pinterest')"
+            [(ngModel)]="widget.guiprops['social'].pinterest"
+            value="pinterest"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Pinterest</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].tumblr, 'tumblr')"
+            [(ngModel)]="widget.guiprops['social'].tumblr"
+            value="tumblr"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Tumblr</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].twitter, 'twitter')"
+            [(ngModel)]="widget.guiprops['social'].twitter"
+            value="twitter"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Twitter</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].mail, 'mail')"
+            [(ngModel)]="widget.guiprops['social'].mail"
+            value="mail"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Mail</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].buffer, 'buffer')"
+            [(ngModel)]="widget.guiprops['social'].buffer"
+            value="buffer"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Buffer</span>
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-6 row-subitem-padding">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].pocket, 'pocket')"
+            [(ngModel)]="widget.guiprops['social'].pocket"
+            value="pocket"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Pocket</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].xing, 'xing')"
+            [(ngModel)]="widget.guiprops['social'].xing"
+            value="xing"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Xing</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].print, 'print')"
+            [(ngModel)]="widget.guiprops['social'].print"
+            value="print"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Print</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].linkedin, 'linkedin')"
+            [(ngModel)]="widget.guiprops['social'].linkedin"
+            value="linkedin"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Linkedin</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].reddit, 'reddit')"
+            [(ngModel)]="widget.guiprops['social'].reddit"
+            value="reddit"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Reddit</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].stumbleupon, 'stumbleupon')"
+            [(ngModel)]="widget.guiprops['social'].stumbleupon"
+            value="stumbleupon"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Stumbleupon</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].odnoklassniki, 'odnoklassniki')"
+            [(ngModel)]="widget.guiprops['social'].odnoklassniki"
+            value="odnoklassniki"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Odnoklassniki</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].blogger, 'blogger')"
+            [(ngModel)]="widget.guiprops['social'].blogger"
+            value="blogger"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Blogger</span>
+        </label>
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (change)="setSocialBtn(widget.guiprops['social'].yummly, 'yummly')"
+            [(ngModel)]="widget.guiprops['social'].yummly"
+            value="yummly"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+          <span class="ml-1">Yummly</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <h3>Форма и выравнивание</h3>
+
+    <div class="d-flex justify-content-between row-subitem-padding mt-3">
+      <label class="control-label">Форма</label>
+      <div class="social-variable-bl">
+        <div
+          (click)="widget.guiprops['social'].type = 'style-1'"
+          [ngClass]="(widget.guiprops['social'].type === 'style-1') ? 'active' : ''"
+          class="social-var-el social-var-1"
+        ></div>
+        <div
+          (click)="widget.guiprops['social'].type = 'style-2'"
+          [ngClass]="(widget.guiprops['social'].type === 'style-2') ? 'active' : ''"
+          class="social-var-el social-var-2"
+        ></div>
+        <div
+          (click)="widget.guiprops['social'].type = 'style-3'"
+          [ngClass]="(widget.guiprops['social'].type === 'style-3') ? 'active' : ''"
+          class="social-var-el social-var-3"
+        ></div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3 pt-1 border-item">
+      <label class="control-label">
+        Выравнивание
+      </label>
+      <div>
+        <button
+          (click)="widget.guiprops['social'].position = floatBtn[0]"
+          [class.active]="widget.guiprops['social'].position === floatBtn[0]"
+          class="align-button icon-left"
+        ></button>
+        <button
+          (click)="widget.guiprops['social'].position = floatBtn[1]"
+          [class.active]="widget.guiprops['social'].position === floatBtn[1]"
+          class="align-button icon-center"
+        ></button>
+        <button
+          (click)="widget.guiprops['social'].position = floatBtn[2]"
+          [class.active]="widget.guiprops['social'].position === floatBtn[2]"
+          class="align-button icon-right"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="mt-4">Делиться</h3>
+  <div class="row-subitem mt-3">
+    <div class="form-group widget-selector mb-1">
+      <label>
+        <input
+          type="radio"
+          class="radio radio-info radio-inline mr-1"
+          [(ngModel)]="widget.guiprops['social'].linkForShare"
+          value="site"
+        >
+        Текущей страницей
+      </label>
+    </div>
+    <div class="form-group widget-selector mb-0">
+      <label>
+        <input
+          [(ngModel)]="widget.guiprops['social'].linkForShare"
+          class="radio radio-info radio-inline mr-1"
+          type="radio"
+          value="own"
+        >
+        Указать URL
+      </label>
+    </div>
+  </div>
+  <div class="border-item">
+    <div class="row-subitem">
+      <div
+        *ngIf="widget.guiprops['social'].linkForShare === 'own'"
+        class="widget-name-block-rel row-subitem-padding pt-1"
+        [class.is-invalid]="!widget.guiprops['social'].linkText && showErrors"
+      >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="widget.guiprops['social'].linkText"
+          placeholder="Введите URL"
+        >
+      </div>
+      <div class="widget-name-block-rel row-subitem-padding pt-1">
+        <div class="iframe-small-label">
+          Вы можете выбрать, какой страницей поделится посетитель в социальных сетях. Это может быть страница, на
+          которой он находится, или указанный вами URL.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-coupon-callback
+    [coupon]="widget.guiprops.social.couponCallback"
+    [coupons]="coupons"
+    [placePopup]="placePopup"
+    [showErrors]="showErrors"
+  ></app-coupon-callback>
+</div>

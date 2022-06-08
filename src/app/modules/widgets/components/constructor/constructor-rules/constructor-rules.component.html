@@ -1,0 +1,1102 @@
+<div class="widgets-settings-container">
+  <div class="settings-categories">
+    <div
+      (click)="currentCategory = category"
+      *ngFor="let category of widgetSettingsCategories"
+      [ngClass]="{ 'active': currentCategory === category }"
+      class="settings-category"
+    >
+      <span>{{ category }}</span>
+      <span
+        *ngIf="isTabHasError(category) && showErrors" class="info-link badge badge-pill badge-danger" data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'widgetsList.editor.tab.errors.tooltip' | translate }}"
+      ></span>
+    </div>
+  </div>
+  <div class="settings-container">
+    <div class="pb-5">
+      <!-- Section Targeting -->
+      <div
+        [hidden]="currentCategory !== widgetSettingsCategories[0]"
+        class="d-flex"
+        id="targeting"
+      >
+        <div class="col-lg-8">
+          <h1>{{ 'widgetsList.editor.section.targeting' | translate }}</h1>
+
+          <div class="rules-container pb-3">
+            <!-- Page rule item -->
+            <div class="border-item">
+              <div
+                [ngClass]="(widget.rules['pages'].enable && widget.rules['pages'].items.length > 0) ? 'mb-2' : 'rule-disabled'"
+                class="d-flex justify-content-between align-items-center position-relative"
+              >
+                <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.pageTargeting.name' | translate }} <a
+                  class="info-link" data-placement="top"
+                  data-toggle="tooltip"
+                  title="{{ 'widgetsList.editor.rules.pageTargeting.tooltip' | translate }}"><i class="far fa-question-circle"></i></a>
+                </h4>
+                <ui-switch [(ngModel)]="widget.rules['pages'].enable" size="small"></ui-switch>
+              </div>
+
+              <ng-container *ngIf="widget.rules.pages?.enable">
+                <div *ngFor="let item of widget.rules['pages'].items; index as i"
+                     class="d-flex align-items-center mt-2">
+                  <div class="d-flex align-items-center">
+                    <label class="text-addition">{{ 'widgetsList.editor.rules.widget' | translate }}</label>
+                    <div class="dropdown ml-2">
+                      <button aria-expanded="true" class="d-flex btn btn-default dropdown-toggle" data-toggle="dropdown"
+                              type="button">
+                        {{ getPageStateName(item) }}
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li (click)="item.state = 0" role="presentation">
+                          <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">
+                            {{ 'widgetsList.editor.rules.pageTargeting.hide' | translate }}
+                          </a>
+                        </li>
+                        <li (click)="item.state = 1" role="presentation">
+                          <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">
+                            {{ 'widgetsList.editor.rules.pageTargeting.show' | translate }}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-shrink-0 align-items-center ml-2">
+                    <label
+                      class="text-addition">{{ 'widgetsList.editor.rules.pageTargeting.pageInfo' | translate }}</label>
+                    <div class="dropdown ml-2">
+                      <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                              type="button">
+                        {{ getPageCompareName(item) }}
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li (click)="item.compare = 0" role="presentation">
+                          <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">
+                            {{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}
+                          </a>
+                        </li>
+                        <li (click)="item.compare = 1" class="dropdown-item" role="presentation">
+                          <a href="javascript:void(0)" role="menuitem" tabindex="-1">
+                            {{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}
+                          </a>
+                        </li>
+                        <li (click)="item.compare = 2" class="dropdown-item" role="presentation">
+                          <a href="javascript:void(0)" role="menuitem" tabindex="-1">
+                            {{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}
+                          </a>
+                        </li>
+                        <li (click)="item.compare = 3" class="dropdown-item" role="presentation">
+                          <a href="javascript:void(0)" role="menuitem" tabindex="-1">
+                            {{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}
+                          </a>
+                        </li>
+                        <li (click)="item.compare = 4" class="dropdown-item" role="presentation">
+                          <a href="javascript:void(0)" role="menuitem" tabindex="-1">
+                            {{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center ml-2">
+                    <div [ngClass]="(item.value.length == 0 && showErrors) ? 'is-invalid' : ''" class="input-group">
+                      <div class="input-group-prepend">
+                        <button aria-expanded="false" aria-haspopup="true" class="btn btn-default dropdown-toggle"
+                                data-toggle="dropdown" type="button">
+                          {{ getPageTypeName(item) }} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li (click)="item.type = 0" class="dropdown-item" role="presentation">
+                            <a href="javascript:void(0)"
+                               role="menuitem">{{ 'widgetsList.editor.rules.pageTargeting.url.title' | translate }}</a>
+                          </li>
+                          <li (click)="item.type = 1" class="dropdown-item" role="presentation">
+                            <a href="javascript:void(0)"
+                               role="menuitem">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }}</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <input [(ngModel)]="item.value" class="form-control" type="text">
+                    </div>
+                    <div *ngIf="widget.rules['pages'].items.length > 1" class="remove-sub-item">
+                      <button (click)="removePageRuleItem(i)" class="delete-element-button">&times;</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <button (click)="addPageRuleItem()" class="btn-default widget-content-add-btn">
+                    <img alt="add element" src='../../../../../../assets/images/widgets/plus.svg'/> Добавить страницу
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+            <!-- END Page rule item -->
+
+            <!-- Target to viewed pages -->
+            <div class="border-item mt-4">
+              <div
+                [ngClass]="(widget.rules['prevPages']?.enable && widget.rules['prevPages']?.items.length > 0) ? 'mb-2' : 'rule-disabled'"
+                class="d-flex justify-content-between align-items-center position-relative"
+              >
+                <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.pageVTargeting.title' | translate }}
+                  <span
+                    class="label label-warning tariff-info ">окупаемый</span> <a
+                    class="info-link" data-placement="top"
+                    data-toggle="tooltip"
+                    title="{{ 'widgetsList.editor.rules.pageVTargeting.tooltip' | translate }}"><i class="far fa-question-circle"></i></a>
+                </h4>
+
+                <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.rules['prevPages'].enable"
+                           size="small"></ui-switch>
+              </div>
+
+              <ng-container *ngIf="widget.rules['prevPages']?.enable">
+                <div *ngFor="let item of widget.rules['prevPages'].items; index as i"
+                     class="d-flex align-items-center mt-2">
+                  <div class="d-flex align-items-center">
+                    <div class="dropdown">
+                      <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                              type="button">
+                        {{ getPageCompareName(item) }}
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li (click)="item.compare = 0" role="presentation">
+                          <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
+                             tabindex="-1">{{ 'widgetsList.editor.rules.pageTargeting.contain' | translate }}</a>
+                        </li>
+                        <li (click)="item.compare = 1" role="presentation">
+                          <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
+                             tabindex="-1">{{ 'widgetsList.editor.rules.pageTargeting.notcontain' | translate }}</a>
+                        </li>
+                        <li (click)="item.compare = 2" role="presentation">
+                          <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
+                             tabindex="-1">{{ 'widgetsList.editor.rules.pageTargeting.equals' | translate }}</a>
+                        </li>
+                        <li (click)="item.compare = 3" role="presentation">
+                          <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
+                             tabindex="-1">{{ 'widgetsList.editor.rules.pageTargeting.starts' | translate }}</a>
+                        </li>
+                        <li (click)="item.compare = 4" role="presentation">
+                          <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
+                             tabindex="-1">{{ 'widgetsList.editor.rules.pageTargeting.ends' | translate }}</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center flex-grow-1 ml-2">
+                    <div [ngClass]="(item.value.length == 0 && showErrors) ? 'is-invalid' : ''" class="input-group">
+                      <div class="input-group-prepend">
+                        <button
+                          aria-expanded="false"
+                          aria-haspopup="true"
+                          class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"
+                        >
+                          {{ getPageTypeName(item) }} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li (click)="item.type = 0" role="presentation">
+                            <a class="dropdown-item" href="javascript:void(0)"
+                               role="menuitem">{{ 'widgetsList.editor.rules.pageTargeting.url.title' | translate }}</a>
+                          </li>
+                          <li (click)="item.type = 1" role="presentation">
+                            <a class="dropdown-item" href="javascript:void(0)"
+                               role="menuitem">{{ 'widgetsList.editor.rules.pageTargeting.title' | translate }}</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <input [(ngModel)]="item.value" class="form-control" type="text">
+                    </div>
+                    <div *ngIf="widget.rules['prevPages'].items.length > 1" class="remove-sub-item">
+                      <button (click)="removePrevPageRuleItem(i)" class="delete-element-button">&times;</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <button (click)="addPrevPageRuleItem()" class="btn-default widget-content-add-btn">
+                    <img alt="add element" src='../../../../../../assets/images/widgets/plus.svg'/> Добавить страницу
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+            <!-- END Target to viewed pages -->
+
+            <!-- PageNo rule -->
+            <div class="border-item mt-4">
+              <div
+                [ngClass]="widget.rules['pageNo']?.enable ? 'mb-2' : 'rule-disabled'"
+                class="d-flex justify-content-between align-items-center position-relative"
+              >
+                <h4 class="widgets-settings-subtitle">
+                  {{ 'widgetsList.editor.rules.pageNo.title' | translate }} <span
+                  class="label label-warning tariff-info">окупаемый</span>
+                  <a
+                    class="info-link" data-placement="top"
+                    data-toggle="tooltip"
+                    title="{{ 'widgetsList.editor.rules.pageNo.select.title' | translate }}"><i class="far fa-question-circle"></i></a>
+                </h4>
+
+                <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.rules.pageNo.enable" size="small"></ui-switch>
+              </div>
+
+              <div
+                *ngIf="widget.rules.pageNo?.enable"
+                [ngClass]="(widget.rules.pageNo.items.length > 0 || !showErrors) ? '' : 'is-invalid'"
+              >
+                <ng-select
+                  [(ngModel)]="widget.rules.pageNo.items"
+                  [items]="loop"
+                  [placeholder]="'widgetsList.editor.rules.pageNo.select.placeholder' | translate"
+                  appendTo="body"
+                  bindLabel="current"
+                  bindValue="current"
+                  id="widgetSelector"
+                  multiple="true"
+                ></ng-select>
+              </div>
+            </div>
+            <!-- End Page No rule -->
+
+            <!-- Time options start -->
+            <div class="border-item mt-4">
+              <div
+                [ngClass]="(widget.rules.time.enable && widget.rules['time'].items.length > 0) ? 'mb-2' : 'rule-disabled'"
+                class="d-flex justify-content-between align-items-center position-relative"
+              >
+                <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.dateTime.title' | translate }} <span
+                  class="label label-warning tariff-info">окупаемый</span> <a
+                  class="info-link" data-placement="top"
+                  data-toggle="tooltip"
+                  title="{{ 'widgetsList.editor.rules.dateTime.placeholder' | translate }}"><i class="far fa-question-circle"></i></a>
+                </h4>
+
+                <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.rules.time.enable" size="small"></ui-switch>
+              </div>
+
+              <ng-container *ngIf="widget.rules['time'].enable">
+                <div *ngFor="let item of widget.rules['time'].items; index as i" class="d-flex align-items-center mt-2">
+                  <div class="d-flex align-items-center pt-1">
+                    <div class="f-2">
+                      {{ 'widgetsList.editor.rules.time.from' | translate }}
+                    </div>
+                    <div class="dropdown ml-2" style="float: left;">
+                      <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                              type="button">
+                        {{ getStringFromTime(item.startTime) }}
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
+                        <li (click)="item.startTime = timeItem.value" *ngFor="let timeItem of timeList"
+                            role="presentation">
+                          <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
+                             tabindex="-1">{{ timeItem.name }}</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="ml-3 f-2">
+                      {{ 'widgetsList.editor.rules.time.to' | translate }}
+                    </div>
+                    <div class="dropdown ml-2" style="float: left;">
+                      <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                              type="button">
+                        {{ getStringFromTime(item.endTime) }}
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
+                        <li
+                          (click)="item.endTime = timeItem.value"
+                          *ngFor="let timeItem of timeList"
+                          role="presentation"
+                        >
+                          <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
+                             tabindex="-1">{{ timeItem.name }}</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div *ngIf="widget.rules['time'].items.length > 1" class="remove-sub-item">
+                      <button (click)="removeTimeRuleItem(i)" class="delete-element-button">&times;</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <button (click)="addTimeRuleItem()" class="btn-default widget-content-add-btn">
+                    <img alt="add element" src='../../../../../../assets/images/widgets/plus.svg'/> Добавить период
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+            <!-- End Time options -->
+
+            <!-- Days options start -->
+            <div class="border-item mt-4">
+              <div
+                [ngClass]="widget.rules.days.enable ? 'mb-2' : 'rule-disabled'"
+                class="d-flex justify-content-between align-items-center position-relative"
+              >
+                <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.rules.days.header' | translate }} <span
+                  class="label label-warning tariff-info">окупаемый</span> <a
+                  class="info-link" data-placement="top"
+                  data-toggle="tooltip"
+                  title="{{ 'widgetsList.editor.rules.days.title' | translate }}"><i class="far fa-question-circle"></i></a>
+                </h4>
+
+                <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.rules.days.enable" size="small"></ui-switch>
+              </div>
+
+              <div
+                *ngIf="widget.rules.days?.enable"
+                [ngClass]="(widget.rules.days.items.length > 0 || !showErrors) ? '' : 'is-invalid'"
+              >
+                <ng-select
+                  [(ngModel)]="widget.rules.days.items"
+                  [items]="weekDays"
+                  [placeholder]="'widgetsList.editor.rules.days.select.placeholder' | translate"
+                  appendTo="body"
+                  bindLabel="name"
+                  bindValue="id"
+                  clearable="true"
+                  id="daysSelector"
+                  multiple="true"
+                ></ng-select>
+              </div>
+            </div>
+            <!-- End days options-->
+
+            <!-- Date range -->
+            <div class="mt-3 mb-3">
+              <div
+                [ngClass]="widget.rules.period.enable ? 'mb-2' : 'rule-disabled'"
+                class="d-flex justify-content-between align-items-center position-relative"
+              >
+                <h4 class="widgets-settings-subtitle">
+                  {{ 'widgetsList.editor.rules.period.header' | translate }} <span
+                  class="label label-warning tariff-info">окупаемый</span> <a
+                  class="info-link" data-placement="top"
+                  data-toggle="tooltip"
+                  title="{{ 'widgetsList.editor.rules.period.tooltip' | translate }}"><i class="far fa-question-circle"></i></a>
+                </h4>
+
+                <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.rules.period.enable" size="small"></ui-switch>
+              </div>
+
+              <div *ngIf="widget.rules.period?.enable" class="d-flex align-items-center">
+                <div class="f-2">
+                  {{ 'widgetsList.editor.rules.time.from' | translate }}
+                </div>
+                <div class="datepicker ml-2" id="period-rule-start-date-picker">
+                  <ngbd-datepicker-i18n [(ngModel)]="widget.rules.period.start_Date"></ngbd-datepicker-i18n>
+                </div>
+                <div class="f-2 ml-3">
+                  {{ 'widgetsList.editor.rules.time.to' | translate }}
+                </div>
+                <div class="datepicker ml-2" id="period-rule-end-date-picker">
+                  <ngbd-datepicker-i18n [(ngModel)]="widget.rules.period.end_Date"></ngbd-datepicker-i18n>
+                </div>
+              </div>
+            </div>
+            <!-- End Date range -->
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <p class="mt-5 pt-2">Настройте время и выберите страницы, на которых будет показан виджет.</p>
+          <p>Вы можете активировать несколько разных опций таргетинга, и они будут дополнять друг
+            друга (между всеми активированными опциями таргетинга действует логика "И"). Например, вы можете настроить
+            показ виджета на определенных страницах, в определенное время и дни недели.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section Audience -->
+      <div
+        [hidden]="currentCategory !== widgetSettingsCategories[1]"
+        id="audience"
+      >
+        <app-constructor-audiences
+          [widget]="widget"
+          [showErrors]="showErrors"
+        ></app-constructor-audiences>
+      </div>
+
+      <div [hidden]="isContainerized">
+        <!-- Section Autoinvite -->
+        <div
+          [hidden]="currentCategory !== widgetSettingsCategories[2]"
+          class="d-flex"
+          id="autoinvite"
+        >
+          <div class="col-lg-8">
+            <h1>{{ 'widgetsList.editor.autoinvite.title' | translate }}</h1>
+
+            <div class="rules-container pb-3">
+              <div class="d-flex flex-wrap border-item mt-4">
+                <label class="control-label">
+                  {{ 'widgetsList.editor.autoinvite.variants.title1' | translate }}
+                </label>
+                <div class="dropdown">
+                  <button aria-expanded="true" class="btn btn-default dropdown-toggle round-button" data-toggle="dropdown"
+                          type="button">
+                    {{ prepareRuleLogic(widget.autoinvite.ruleLogic) }}
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li
+                      (click)="widget.autoinvite.ruleLogic = itemLogic"
+                      *ngFor="let itemLogic of autoinviteVariants"
+                      role="presentation"
+                    >
+                      <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
+                         tabindex="-1">{{ itemLogic }}</a>
+                    </li>
+                  </ul>
+                </div>
+                <label class="control-label">
+                  {{ 'widgetsList.editor.autoinvite.variants.title2' | translate }}
+                </label>
+              </div>
+
+              <!-- Autoinvite: pages -->
+              <div class="border-item mt-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    [class.rule-disabled]="!widget.autoinvite.pages.enable"
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h4
+                      class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.pages.enable' | translate }}</h4>
+                    <div
+                      [class.is-invalid]="widget.autoinvite.pages.value <= 0 && showErrors"
+                      class="d-flex"
+                    >
+                      <input
+                        [(ngModel)]="widget.autoinvite.pages.value"
+                        [disabled]="!widget.autoinvite.pages.enable"
+                        class="form-control"
+                        min="1"
+                        style="float: left; width: 70px;"
+                        type="number"
+                      />
+                    </div>
+                    <h4 class="widgets-settings-subtitle ml-2">
+                      {{ 'widgetsList.editor.autoinvite.pages.suffix' | translate }}
+                      <span class="label label-warning tariff-info ml-2">окупаемый</span>
+                    </h4>
+                  </div>
+
+                  <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.autoinvite.pages.enable"
+                             size="small"></ui-switch>
+                </div>
+              </div>
+              <!-- END Autoinvite pages -->
+
+              <!-- Autoinvite: seconds -->
+              <div class="border-item mt-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    [class.rule-disabled]="!widget.autoinvite.seconds.enable"
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h4 class="widgets-settings-subtitle">
+                      {{ 'widgetsList.editor.autoinvite.seconds.enable' | translate }}
+                    </h4>
+                    <div
+                      [class.is-invalid]="widget.autoinvite.seconds.value <= 0 && showErrors"
+                      class="d-flex"
+                    >
+                      <input
+                        [(ngModel)]="widget.autoinvite.seconds.value"
+                        [disabled]="!widget.autoinvite.seconds.enable"
+                        class="form-control"
+                        min="1"
+                        style="float: left; width: 70px;"
+                        type="number"
+                      />
+                    </div>
+                    <h4 class="widgets-settings-subtitle ml-2">
+                      {{ 'widgetsList.editor.autoinvite.seconds.suffix' | translate }}
+                    </h4>
+                  </div>
+
+                  <ui-switch [(ngModel)]="widget.autoinvite.seconds.enable" size="small"></ui-switch>
+                </div>
+              </div>
+              <!-- End Autoinvite seconds -->
+
+              <!-- Autoinvite: inactive -->
+              <div class="border-item mt-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    [class.rule-disabled]="!widget.autoinvite.inactive.enabled"
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h4 class="widgets-settings-subtitle">
+                      {{ 'widgetsList.editor.autoinvite.inactive.enabled' | translate }}
+                    </h4>
+                    <div
+                      [class.is-invalid]="widget.autoinvite.inactive.value <= 0 && showErrors"
+                      class="d-flex mt-1"
+                    >
+                      <input
+                        [(ngModel)]="widget.autoinvite.inactive.value"
+                        [disabled]="!widget.autoinvite.inactive.enabled"
+                        class="form-control"
+                        min="1"
+                        style="float: left; width: 70px;"
+                        type="number"
+                      />
+                    </div>
+                    <h4 class="widgets-settings-subtitle ml-2">
+                      {{ 'widgetsList.editor.autoinvite.inactive.suffix' | translate }}
+                      <span class="label label-warning tariff-info ml-2">окупаемый</span>
+                    </h4>
+                  </div>
+
+                  <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.autoinvite.inactive.enabled"
+                             size="small"></ui-switch>
+                </div>
+              </div>
+              <!-- End Autoinvite: inactive -->
+
+              <!-- Autoinvite: percent -->
+              <div class="border-item mt-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div
+                    [class.rule-disabled]="!widget.autoinvite.percent.enable"
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <h4 class="widgets-settings-subtitle">
+                      {{ 'widgetsList.editor.autoinvite.percent.enable' | translate }}
+                    </h4>
+                    <div
+                      [class.is-invalid]="widget.autoinvite.percent.value <= 0 && showErrors"
+                      class="d-flex mt-1"
+                    >
+                      <input
+                        [(ngModel)]="widget.autoinvite.percent.value"
+                        [disabled]="!widget.autoinvite.percent.enable"
+                        class="form-control"
+                        max="100"
+                        min="1"
+                        style="float: left; width: 70px;"
+                        type="number"
+                      />
+                    </div>
+                    <h4 class="widgets-settings-subtitle ml-2">
+                      {{ 'widgetsList.editor.autoinvite.percent.suffix' | translate }}
+                      <span class="label label-warning tariff-info ml-2">окупаемый</span>
+                    </h4>
+                  </div>
+
+                  <ui-switch (change)="onChangePayment($event)" [(ngModel)]="widget.autoinvite.percent.enable"
+                             size="small"></ui-switch>
+                </div>
+              </div>
+              <!-- End Autoinvite: percent -->
+
+              <!-- Autoinvite: click -->
+              <div [class.rule-disabled]="!widget.autoinvite.click.enable" class="border-item mt-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4 class="widgets-settings-subtitle">
+                    {{ 'widgetsList.editor.autoinvite.click.enable' | translate }}
+                  </h4>
+
+                  <ui-switch [(ngModel)]="widget.autoinvite.click.enable" size="small"></ui-switch>
+                </div>
+
+                <div
+                  [class.is-invalid]="widget.autoinvite.click.value.trim().length == 0 && showErrors"
+                  class="d-flex flex-column pt-2"
+                >
+                  <label class="control-label extra-header">
+                    {{ 'widgetsList.editor.autoinvite.click.title' | translate }}
+                  </label>
+                  <input
+                    [(ngModel)]="widget.autoinvite.click.value"
+                    [disabled]="!widget.autoinvite.click.enable"
+                    class="form-control extra-header"
+                    type="text"
+                  />
+                  <div class="row small mt-1 underline-comment">
+                    <span [innerHTML]="'widgetsList.editor.autoinvite.click.comment' | translate"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- End Autoinvite seconds -->
+
+              <!-- Autoinvite: exit-intent -->
+              <div [class.rule-disabled]="!widget.autoinvite.exit.enable" class="border-item mt-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4
+                    class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoinvite.exit.enable' | translate }}</h4>
+
+                  <ui-switch (valueChange)="changeExitIntent($event)" [(ngModel)]="widget.autoinvite.exit.enable"
+                             size="small"></ui-switch>
+                </div>
+
+                <div class="mt-2 d-flex">
+                  <div class="form-check mt-1">
+                    <label class="form-check-label">
+                      <input
+                        [(ngModel)]="widget.autoinvite.exit.desktopEnable"
+                        [disabled]="!widget.autoinvite.exit.enable"
+                        (ngModelChange)="checkExitIntent(true)"
+                        class="form-check-input"
+                        type="checkbox"
+                      />
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <h5 class="control-label switcher-label switcher-label-xs">
+                    {{ 'widgets.settings.exitIntent.desktop' | translate }}
+                  </h5>
+                </div>
+                <div class="mt-2 d-flex">
+                  <div class="form-check mt-1">
+                    <label class="form-check-label">
+                      <input
+                        [(ngModel)]="widget.autoinvite.exit.mobileEnable"
+                        [disabled]="!widget.autoinvite.exit.enable"
+                        (ngModelChange)="checkExitIntent(false)"
+                        class="form-check-input"
+                        type="checkbox"
+                      />
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <h5 class="control-label switcher-label switcher-label-xs">
+                    {{ 'widgets.settings.exitIntent.mobile' | translate }}
+                  </h5>
+                </div>
+              </div>
+              <!-- End Autoinvite: exit-intent -->
+
+              <!-- Autoinvite: sound -->
+              <div class="d-flex mt-4 mb-3">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      [(ngModel)]="widget.autoinvite.sound.enable"
+                      class="form-check-input"
+                      type="checkbox"
+                    />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <h4 class="widgets-settings-subtitle mt-0 ml-1">
+                  {{ 'widgetsList.editor.autoinvite.sound.enable' | translate }}
+                </h4>
+              </div>
+              <!-- End Autoinvite: sound -->
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <p class="mt-5 pt-2">
+              Окно виджета будет показано посетителю автоматически, в зависимости от того, какие правила
+              вы активируете и какую логику взаимодействия между ними выберете.
+            </p>
+            <p>
+              Правила показа влияют только на показ окна виджета. Если вы настраиваете виджет формата "Ярлычок" или
+              "Точка захвата", то ярлычок и точка будут видны на странице, вне зависимости от настроек правил показа.
+              При этом, окно виджета будет показано либо при клике по ярлычку или точке, либо при срабатывании правил
+              автоматического показа.
+            </p>
+            <p>
+              При настройке правил для виджета формата "Всплывающее окно", окно виджета будет показано посетителю
+              только при срабатывании правил автоматического показа.
+            </p>
+          </div>
+        </div>
+
+        <!-- Section Restrictions -->
+        <div
+          [hidden]="currentCategory !== widgetSettingsCategories[3]"
+          class="d-flex"
+          id="restrictions"
+        >
+          <div class="col-lg-8">
+            <h1>{{ 'widgetsList.editor.section.block' | translate }}</h1>
+
+            <div class="rules-container pb-3">
+              <h4 class="widgets-settings-subtitle mt-3">
+                {{ 'widgetsList.editor.restrictions.title' | translate }} <span
+                class="label label-warning tariff-info ml-2">окупаемый</span>
+              </h4>
+
+              <div class="d-flex mt-4">
+                <input
+                  (change)="onRestrictionModeChange()"
+                  [(ngModel)]="widget.restrictions.target.mode"
+                  [value]="1"
+                  class="radio-left mt-0"
+                  name="restrictions"
+                  type="radio"
+                >
+                <label class="control-label f-3 ml-1">
+                  {{ 'widgetsList.editor.restrictions.disable.title' | translate }}
+                </label>
+              </div>
+              <div class="d-flex mt-3">
+                <input
+                  (change)="onRestrictionModeChange()"
+                  [(ngModel)]="widget.restrictions.target.mode"
+                  [value]="2"
+                  class="radio-left mt-0"
+                  name="restrictions"
+                  type="radio"
+                >
+                <label class="control-label f-3 ml-1">
+                  {{ 'widgetsList.editor.restrictions.enable.title' | translate }}
+                </label>
+              </div>
+              <div class="border-item">
+                <div class="d-flex mt-3">
+                  <input
+                    (change)="onRestrictionModeChange()"
+                    [(ngModel)]="widget.restrictions.target.mode"
+                    [value]="0"
+                    class="radio-left mt-0"
+                    name="restrictions"
+                    type="radio"
+                  >
+                  <label class="control-label f-3 ml-1">
+                    {{ 'widgetsList.editor.restrictions.ontime.title' | translate }}
+                  </label>
+                </div>
+
+                <div *ngIf="widget.restrictions.target?.mode == 0" class="d-flex align-items-center mt-2">
+                  <div class="f-3">
+                    {{ 'widgetsList.editor.restrictions.disable.label' | translate }}
+                  </div>
+                  <div class="dropdown ml-2" style="float: left;">
+                    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                            type="button">
+                      {{ widget.restrictions.target.gap }}
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" style="max-height: 150px; overflow: auto;">
+                      <li
+                        (click)="widget.restrictions.target.gap = timeItem"
+                        *ngFor="let timeItem of restrictionsGaps"
+                        role="presentation"
+                      ><a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ timeItem }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="f-3 ml-2">
+                    {{ 'widgetsList.editor.restrictions.hours' | translate }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-3">
+                <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.restrictions.title2' | translate }}</h4>
+              </div>
+              <!-- Restrictions.autoinvite -->
+              <div class="d-flex mt-4">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      [(ngModel)]="widget.restrictions.autoinvite.enable"
+                      class="form-check-input"
+                      id="autoinviteEnable"
+                      name="autoinviteEnable"
+                      type="checkbox"
+                    />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <label class="control-label switcher-label label-15">
+                  {{ 'widgetsList.editor.restrictions.autoinvite.text' | translate }}<br/>
+                </label>
+              </div>
+              <div *ngIf="widget.restrictions.autoinvite?.enable" class="d-flex align-items-center mt-2 ml-4 pl-1">
+                <div class="f-3">
+                  {{ 'widgetsList.editor.restrictions.disable.label' | translate }}
+                </div>
+                <input [(ngModel)]="widget.restrictions.autoinvite.gap" class="form-control widgets-num-input ml-2" max="72" min="0"
+                       type="number"/>
+                <div class="f-3 ml-2">
+                  {{ 'widgetsList.editor.restrictions.hours' | translate }}
+                </div>
+              </div>
+              <!-- End restrictions.autoinvite -->
+
+              <!-- Restrictions.unique -->
+              <div *ngIf="widget.restrictions.unique" class="d-flex mt-4">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      [(ngModel)]="widget.restrictions.unique.enable"
+                      class="form-check-input"
+                      id="uniqueEnable"
+                      name="uniqueEnable"
+                      type="checkbox"
+                    />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <label class="control-label switcher-label label-15">
+                  {{ 'widgetsList.editor.restrictions.unique.text' | translate }}<br/>
+                </label>
+              </div>
+              <div *ngIf="widget.restrictions.unique?.enable" class="d-flex align-items-center mt-2 ml-4 pl-1">
+                <div class="f-3">
+                  {{ 'widgetsList.editor.restrictions.disable.label' | translate }}
+                </div>
+                <input [(ngModel)]="widget.restrictions.unique.gap" class="form-control widgets-num-input ml-2" min="0"
+                       type="number"/>
+                <div class="f-3 ml-2">
+                  {{ 'widgetsList.editor.restrictions.hours' | translate }}
+                </div>
+              </div>
+              <!-- END Restrictions.unique -->
+
+              <!-- Restrictions.lockAfterAction -->
+              <div *ngIf="widget.restrictions.action" class="d-flex mt-4">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      #actionEnable
+                      (change)="onChangePayment(actionEnable.checked)"
+                      [(ngModel)]="widget.restrictions.action.enable"
+                      class="form-check-input"
+                      id="actionEnable"
+                      name="actionEnable"
+                      type="checkbox"
+                    />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <label class="control-label switcher-label label-15">
+                  {{ 'widgets.settings.lockAfterAction.title' | translate }}<span
+                  class="label label-warning tariff-info ml-2">окупаемый</span><br/>
+                </label>
+              </div>
+              <div *ngIf="widget.restrictions?.action?.enable" class="d-flex align-items-center mt-2 ml-4 pl-1">
+                <div class="f-3">
+                  {{ 'widgets.settings.lockAfterAction.lock1' | translate }}
+                </div>
+                <input [(ngModel)]="widget.restrictions.action.gap" class="form-control widgets-num-input ml-2" min="0"
+                       type="number"/>
+                <div class="f-3 ml-2">
+                  {{ 'widgets.settings.lockAfterAction.lock2' | translate }}
+                </div>
+              </div>
+              <!-- END Restrictions.lockAfterAction -->
+
+              <!-- Restrictions.count -->
+              <div *ngIf="widget.restrictions.count" class="d-flex mt-4">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input
+                      #countEnable
+                      (change)="onChangePayment(countEnable.checked)"
+                      [(ngModel)]="widget.restrictions.count.enable"
+                      class="form-check-input"
+                      id="countEnable"
+                      name="countEnable"
+                      type="checkbox"
+                    />
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <label class="control-label switcher-label label-15">
+                  {{ 'widgetsList.editor.restrictions.count.text' | translate }} <span
+                  class="label label-warning tariff-info ml-2">окупаемый</span><br/>
+                </label>
+              </div>
+              <div *ngIf="widget.restrictions.count?.enable" class="ml-4 pl-1">
+                <div class="d-flex align-items-center mt-2">
+                  <div class="f-3">
+                    {{ 'widgetsList.editor.restrictions.count.part1' | translate }}
+                  </div>
+                  <input [(ngModel)]="widget.restrictions.count.count" class="form-control widgets-num-input ml-2" min="0"
+                         type="number"/>
+                  <div class="f-3 ml-2">
+                    {{ 'widgetsList.editor.restrictions.count.part2' | translate }}
+                  </div>
+                </div>
+                <div class="d-flex align-items-center mt-2">
+                  <div class="f-3">
+                    {{ 'widgetsList.editor.restrictions.count.part3' | translate }}
+                  </div>
+                  <input [(ngModel)]="widget.restrictions.count.interval" class="form-control widgets-num-input ml-2" min="0"
+                         type="number"/>
+                  <div class="dropdown ml-1" style="display: inline;">
+                    <button aria-expanded="true" class="btn btn-default dropdown-toggle f-3" data-toggle="dropdown"
+                            type="button">
+                      {{ units[widget.restrictions.count.unit] }}
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li
+                        (click)="widget.restrictions.count.unit = key"
+                        *ngFor="let key of getUnitsKeys()"
+                        role="presentation"
+                      >
+                        <a class="dropdown-item" href="javascript:void(0)" role="menuitem"
+                           tabindex="-1">{{ units[key] }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="f-3 ml-2">
+                    {{ 'widgetsList.editor.restrictions.count.part4' | translate }}
+                  </div>
+                </div>
+                <!-- END Restrictions.count -->
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <p class="mt-5 pt-2">
+              Ограничения на показ виджета влияют только на показ окна виджета. Если вы настраиваете виджет формата
+              "Ярлычок" или "Точка захвата", то ярлычок и точка будут видны на странице, вне зависимости от настроек
+              ограничений показов.
+            </p>
+            <p>
+              При настройке ограничений показов для виджета формата "всплывающее окно" и срабатывании правил, окно
+              виджета показано посетителю не будет.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Autoresponder -->
+      <div
+        [hidden]="(!isContainerized && (currentCategory !== widgetSettingsCategories[4])) || (isContainerized && (currentCategory !== widgetSettingsCategories[2]))"
+        class="d-flex"
+        id="autoresponder"
+      >
+        <div class="col-lg-8">
+          <h1>{{ 'widgetsList.editor.section.autoresponder' | translate }}</h1>
+
+          <div class="d-flex justify-content-between align-items-center mt-3 pt-1">
+            <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoresponder.enable' | translate }}</h4>
+            <ui-switch [(ngModel)]="widget.autoresponder.enabled" size="small"></ui-switch>
+          </div>
+
+          <div *ngIf="widget.autoresponder?.enabled" class="mt-1 mb-1">
+            <div
+              [innerHTML]="'widgets.coupon.autoresponder' | translate"
+              class="audience-tooolbar-desc underline-links blue-links hover-links"
+            ></div>
+          </div>
+          <div
+            *ngIf="widget.autoresponder?.enabled"
+            class="mt-3"
+            [class.is-invalid]="!widget.autoresponder.subject?.toString().trim().length && showErrors"
+          >
+            <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoresponder.subject' | translate }}</h4>
+            <input [(ngModel)]="widget.autoresponder.subject" class="form-control">
+          </div>
+          <div
+            *ngIf="widget.autoresponder?.enabled"
+            class="mt-3"
+            [class.is-invalid]="!widget.autoresponder.text?.toString().trim().length && showErrors"
+          >
+            <h4 class="widgets-settings-subtitle">{{ 'widgetsList.editor.autoresponder.text' | translate }}</h4>
+            <angular-editor
+              class="d-flex"
+              placeholder="Введите текст..."
+              [config]="editorConfig"
+              [(ngModel)]="widget.autoresponder.text"
+            ></angular-editor>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <p class="mt-5 pt-1">
+            {{ 'widgetsList.editor.autoresponder.desc' | translate }}
+          </p>
+        </div>
+      </div>
+      <!-- End autoresponder -->
+
+      <!-- Section JS Code Actions -->
+      <div
+        [hidden]="(!isContainerized && (currentCategory !== widgetSettingsCategories[5])) || (isContainerized && (currentCategory !== widgetSettingsCategories[3]))"
+        class="d-flex"
+        id="javascript"
+      >
+        <div class="col-lg-8">
+          <h1>{{ 'widgets.settings.jscode.title' | translate }}</h1>
+
+          <div class="d-flex justify-content-between align-items-center mt-3 pt-1">
+            <h4 class="widgets-settings-subtitle">{{ 'widgets.settings.jscode.onShowChecker' | translate }}</h4>
+            <ui-switch [(ngModel)]="widget.jsInfo.onShowScript.enable" size="small"></ui-switch>
+          </div>
+
+          <div *ngIf="widget.jsInfo.onShowScript.enable" class="d-flex mt-2">
+            <textarea
+              [(ngModel)]="widget.jsInfo.onShowScript.script"
+              class="form-control textar-iframe cons-settings-js-textarea"
+            ></textarea>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mt-3 pt-1">
+            <h4 class="widgets-settings-subtitle">{{ 'widgets.settings.jscode.onActionChecker' | translate }}</h4>
+            <ui-switch [(ngModel)]="widget.jsInfo.onTargetScript.enable" size="small"></ui-switch>
+          </div>
+
+          <div *ngIf="widget.jsInfo.onTargetScript.enable" class="d-flex flex-column mt-2">
+            <div class="d-flex">
+              <textarea
+                [(ngModel)]="widget.jsInfo.onTargetScript.script"
+                class="form-control textar-iframe cons-settings-js-textarea"
+              ></textarea>
+            </div>
+            <div class="d-flex mt-3 pt-2">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    #enablePlaceholding
+                    (change)="onChangePayment(enablePlaceholding.checked)"
+                    [(ngModel)]="widget.jsInfo.enablePlaceholding"
+                    class="form-check-input"
+                    id="enablePlaceholding"
+                    name="enablePlaceholding"
+                    type="checkbox"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <label class="control-label label-15">
+                {{ 'widgets.settings.jscode.autochange' | translate }} <span
+                class="label label-warning tariff-info ml-2">окупаемый</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="mt-5 pt-1">
+            Javascript код может быть выполнен как при показе виджета, так и при совершении целевого действия в нем
+            (отправка формы, шеринг или клик). Вы можете активировать поддержку автоматической подстановки значений
+            полей формы в Javascript код, выполняемый при совершении целевого действия, для этого используйте id поля,
+            заключив его в фигурные скобки:
+          </div>
+          <div>&#123;__email__&#125; — емейл;</div>
+          <div>&#123;__name__&#125; — имя;</div>
+          <div>&#123;__phone__&#125; — телефон;</div>
+          <p>&#123;__message__&#125; — сообщение.</p>
+          <p>И активируйте поддержку подстановки.</p>
+        </div>
+      </div>
+      <!-- END JS Code Actions -->
+
+      <!-- Section Integrations -->
+      <div
+        [hidden]="(!isContainerized && (currentCategory !== widgetSettingsCategories[6])) || (isContainerized && (currentCategory !== widgetSettingsCategories[4]))"
+        id="integrations"
+      >
+        <app-constructor-integrations
+          [sid]="sid"
+          [widget]="widget"
+        ></app-constructor-integrations>
+      </div>
+
+    </div>
+  </div>
+</div>

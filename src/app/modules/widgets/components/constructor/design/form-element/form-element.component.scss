@@ -1,0 +1,47 @@
+.add-sub-form-item {
+  width: auto;
+  float: right;
+  line-height: 25px;
+}
+
+.add-sub-form-item .remove-sub-item {
+  font-size: 25px;
+}
+
+.formMas .add-sub-form-item {
+  display: none;
+}
+
+.formMas .row:last-child .add-sub-form-item {
+  display: block;
+}
+
+.formItem {
+  width: 100%;
+}
+
+.greyFormBg {
+  position: relative;
+  background-color: #f2f2f2;
+  padding: 15px;
+}
+
+.form-add-title-type {
+  float: left;
+  padding-right: 5px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-rbtn-line {
+  display: inline-block;
+  font-size: 14px;
+}
+
+.form-rbtn-line label {
+  margin-right: 10px;
+}
+
+.formReqBl {
+  position: relative;
+}

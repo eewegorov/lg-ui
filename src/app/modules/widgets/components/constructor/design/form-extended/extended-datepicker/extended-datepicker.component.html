@@ -1,0 +1,16 @@
+<div [ngClass]="{'filled': isFilled}" class="w-datepicker">
+  <div NgTempusdominusBootstrap NgTempusdominusBootstrapToggle [id]="'datetimepicker' + index"
+       class="input-group date timer-datepicker-block" data-target-input="nearest">
+    <input
+      (ngModelChange)="change($event)"
+      NgTempusdominusBootstrapInput
+      [attr.data-target]="'#datetimepicker' + index"
+      [ngModel]="value"
+      [options]="options"
+      [style]="'background: ' + st.rgbaInputForm + '; color: ' + st.colorTitleInputForm + '; border-radius: ' + st.borderRadiusInputForm + 'px; border-color: ' + st.border.color"
+      class="form-control datetimepicker-input"
+      type="text"
+    />
+    <label *ngIf="!value" [style]="'color: ' + st.colorTitleInputForm">{{ placeholder }}</label>
+  </div>
+</div>

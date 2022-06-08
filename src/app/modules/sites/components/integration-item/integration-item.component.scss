@@ -1,0 +1,230 @@
+@import "src/scss/vars";
+@import "src/scss/mixins";
+
+.hpanel.hgreen .integration-item__body {
+  border-top: 5px solid $greenColor;
+}
+
+.hpanel.hred .integration-item__body {
+  border-top: 5px solid $dangerColor;
+}
+
+.integration-item__body {
+  background: #fff;
+  border: 1px solid #e4e5e7;
+  border-radius: 4px;
+  padding: 15px;
+  position: relative;
+}
+
+.integration-item__header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.integration-item__icon_wr {
+  min-width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.integration-item__icon {
+  width: 42px;
+  height: 42px;
+  background-size: 42px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.integration-item__icon--MAILCHIMP {
+  background-image: url('../../../../../assets/images/sites/mailchimp.jpg');
+}
+
+.integration-item__icon--GETRESPONSE {
+  background-image: url('../../../../../assets/images/sites/getresponse.jpg');
+}
+
+.integration-item__icon--SENDPULSE {
+  background-image: url('../../../../../assets/images/sites/sendpulse.jpg');
+}
+
+.integration-item__icon--SENDBOX {
+  background-image: url('../../../../../assets/images/sites/sendbox.jpg');
+}
+
+.integration-item__icon--UNISENDER {
+  background-image: url('../../../../../assets/images/sites/unisender.jpg');
+}
+
+.integration-item__icon--BITRIX {
+  background-image: url('../../../../../assets/images/sites/bitrix.jpg');
+}
+
+.integration-item__icon--AMOCRM {
+  background-image: url('../../../../../assets/images/sites/amo.jpg');
+}
+
+.integration-item__icon--EMAIL {
+  background-image: url('../../../../../assets/images/sites/email.jpg');
+}
+
+.integration-item__icon--ROISTAT {
+  background-image: url('../../../../../assets/images/sites/roistat.jpg');
+}
+
+.integration-item__icon--WEBHOOK {
+  background-image: url('../../../../../assets/images/sites/webhook.jpg');
+}
+
+.integration-item__type {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.label.label-warning.tariff-info {
+  display: flex;
+  padding: 2px 4px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  border-radius: 4px;
+  position: unset;
+  margin: 0;
+}
+
+.integration-item__type-name {
+  color: $fontPrimaryColor;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 27px;
+  white-space: nowrap;
+}
+
+.long-text {
+  margin-top: 20px;
+  padding: 1px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 27px;
+}
+
+.integration-item__switcher label {
+  position: relative;
+  top: -6px;
+}
+
+.integration-item__switcher {
+  margin-top: 20px;
+  .pull-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+
+    span {
+      display: block;
+      width: 28px;
+      height: 28px;
+      position: relative;
+
+      @include svg-position();
+    }
+
+    @media (max-width: 767px) {
+      font-size: 14px;
+
+      span {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.icons-for-sidemenu {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    button {
+      background-color: #ffffff;
+      padding: 4px 16px;
+      border-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-color: $borderColor;
+
+      &:first-child {
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+        border-right-color: transparent;
+      }
+
+      &:last-child {
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+
+      span {
+        width: 28px;
+        height: 28px;
+        position: relative;
+
+        @include svg-position();
+      }
+
+      &:not(:disabled):hover {
+        background-color: $activeElementBG;
+      }
+
+      &:not(:disabled):focus {
+        position: relative;
+        z-index: 1000;
+      }
+    }
+
+
+    &:first-of-type {
+      button {
+        &.active {
+          &:first-child {
+            color: $greenColor;
+          }
+          &:last-child {
+            color: $dangerColor;
+          }
+        }
+      }
+    }
+
+    &:last-of-type {
+      button {
+        color: $fontSecondaryColor;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<div class="position-control-container">
+  <div class="position-control-selector">
+    <div *ngFor="let i of [0, 3, 6]" class="position-control-row">
+      <button
+        *ngIf="!positions[0] && positions[1] && !positions[2] && !positions[3] && positions[4] && !positions[5] && !positions[6] && positions[7] && !positions[8]"
+        (click)="setNewPosition(positions[i + 1])"
+        [class.active]="currentPosition === positions[i + 1]"
+        class="position-control-big"
+      ></button>
+      <ng-container
+        *ngIf="!(!positions[0] && positions[1] && !positions[2] && !positions[3] && positions[4] && !positions[5] && !positions[6] && positions[7] && !positions[8])"
+      >
+        <button
+          (click)="setNewPosition(positions[i + j])"
+          *ngFor="let j of [0, 1, 2]"
+          [class.active]="currentPosition === positions[i + j]"
+          [class.white]="positions[i + j] === null"
+          [disabled]="!positions[i + j]"
+          class="position-control-item"
+        ></button>
+      </ng-container>
+    </div>
+  </div>
+
+  <p>
+    {{ currentPosition }}
+  </p>
+</div>

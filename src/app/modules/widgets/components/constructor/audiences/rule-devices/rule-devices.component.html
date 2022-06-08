@@ -1,0 +1,16 @@
+<div class="filter-section">
+  <div class="d-flex justify-content-between w-75">
+    <div *ngFor="let val of vals.deviceList; index as j" class="form-check mt-4">
+      <label class="form-check-label">
+        <input
+          (click)="!(checkSelected(vals.deviceListEnum[j]) >= 0) ? addSubItem(item, vals.deviceListEnum[j]) : removeSubItem(group.id, item.type, checkSelected(vals.deviceListEnum[j]), $event)"
+          [checked]="checkSelected(vals.deviceListEnum[j]) >= 0"
+          class="form-check-input"
+          type="checkbox"
+        />
+        <span class="checkmark"></span>
+      </label>
+      <span class="form-check-text">{{ val }}</span>
+    </div>
+  </div>
+</div>

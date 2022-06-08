@@ -1,0 +1,33 @@
+.input-group.date {
+  display: flex;
+}
+
+.input-group-append .btn-default {
+  border-color: #bbb;
+}
+
+.input-group-append .btn-default:hover {
+  border-color: #999;
+}
+
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+  width: 2rem;
+}
+
+.custom-day:hover, .custom-day.focused {
+  background-color: #e6e6e6;
+}
+
+.today {
+  background-color: #f0ad4e;
+  border-radius: 1rem;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}

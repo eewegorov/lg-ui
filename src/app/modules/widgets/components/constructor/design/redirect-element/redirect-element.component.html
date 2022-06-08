@@ -1,0 +1,46 @@
+<div *ngIf="widget.guiprops.formSet" class="mt-4">
+  <div class="d-flex row-subitem justify-content-between row-subitem-padding">
+    <h3 class="marg-minus-bord-des">{{ 'widgets.redirect.title' | translate }}</h3>
+    <ui-switch
+      [(ngModel)]="widget.guiprops.formSet.redirect.enable"
+      size="small"
+    ></ui-switch>
+  </div>
+  <div class="clearfix"></div>
+
+  <div class="d-flex widget-small-text mt-3">
+    {{ 'widgets.redirect.tooltip' | translate }}
+  </div>
+  <!-- Page rule item -->
+  <div *ngIf="widget.guiprops['formSet'].redirect.enable === true">
+    <div
+      [ngClass]="(widget.guiprops['formSet'].redirect.url === '' && showErrors) ? 'is-invalid' : ''"
+      class="row-subitem row-subitem-padding pt-1 mt-2 widget-name-block-rel"
+    >
+      <label class="control-label-des">{{ 'widgets.redirect.onClickRedirect' | translate }}:</label>
+      <input
+        (keyup)="validateRedirect($event)"
+        [(ngModel)]="widget.guiprops['formSet'].redirect.url"
+        class="form-control"
+        id="widgetRedirectUrl"
+        placeholder="http://"
+        type="text"
+      />
+      <a (click)="removeWidgetRedirect($event)" class="remove-widget-name remove-widget-redirect"
+         id="removeWidgetRedirect"></a>
+    </div>
+    <div class="row-subitem row-subitem-padding pt-1 mt-2">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            [(ngModel)]="widget.guiprops.formSet.redirect.blank"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+        </label>
+        <span class="form-check-text">{{ 'widgets.redirect.blank' | translate }}</span>
+      </div>
+    </div>
+  </div>
+</div>

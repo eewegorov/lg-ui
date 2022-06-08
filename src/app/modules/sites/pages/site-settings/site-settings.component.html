@@ -1,0 +1,275 @@
+<div class="page-title">
+  <h1 class="title-main">{{ 'settings.title' | translate }} "{{site?.name}}"</h1>
+</div>
+<app-card *ngIf="site">
+  <div class="tabs-left">
+    <ul>
+      <li [ngClass]="{'active' : tab === 0}">
+        <button (click)="setTab(0)">{{ 'header.settings' | translate }}</button>
+      </li>
+      <li [ngClass]="{'active' : tab === 1}">
+        <button (click)="setTab(1)">{{ 'settings.site.tabs.integrations.title' | translate }}</button>
+      </li>
+      <li [ngClass]="{'active' : tab === 2}">
+        <button (click)="setTab(2)">{{ 'settings.site.tabs.analytics' | translate }}</button>
+      </li>
+      <li [ngClass]="{'active' : tab === 3}">
+        <button (click)="setTab(3)">{{ 'settings.script.title' | translate }}</button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <ng-container *ngIf="tab === 0">
+        <div class="panel-body">
+          <h3>{{ 'header.settings' | translate }}</h3>
+          <div class="pt-1">
+            <h4 class="site-settings-h4-text">{{ 'global.general' | translate }}:</h4>
+          </div>
+          <div class="validable form-group" data-context="name">
+            <label class="control-label" for="sitename">{{ 'sitelist.form.name' | translate }}</label>
+            <input [(ngModel)]="site.name" class="form-control" id="sitename" name="name" type="text" />
+          </div>
+          <div class="validable form-group" data-context="url">
+            <label class="control-label" for="domain">{{ 'settings.site.settings.domain.title' | translate }}</label>
+            <input [(ngModel)]="site.url" class="form-control" id="domain" name="name" type="text" />
+          </div>
+          <button (click)="deleteSite()" class="btn btn-sm btn-danger" type="button">
+            <i class="far fa-trash-alt"></i> {{ 'settings.site.settings.removeSite' | translate }}
+          </button>
+
+          <div class="pt-1">
+            <h4 class="site-settings-h4-text">{{ 'settings.site.settings.notification.title' | translate }} :</h4>
+          </div>
+          <div class="form-group d-flex">
+            <ui-switch [(ngModel)]="site.needLeadNotification" size="medium"></ui-switch>
+            <label class="control-label ml-2 pt-1">
+              {{ 'settings.site.settings.notification.send' | translate }}
+            </label>
+          </div>
+
+          <div class="pt-1">
+            <h4 class="site-settings-h4-text">{{ 'settings.site.settings.stats.title' | translate }}:</h4>
+          </div>
+          <div class="form-group d-flex">
+            <ui-switch [(ngModel)]="site.needEmailSubscriptions" size="medium"></ui-switch>
+            <label class="control-label ml-2">
+              {{ 'settings.site.settings.stats.email' | translate }}
+              <a
+                class="info-link"
+                data-placement="top"
+                data-toggle="tooltip"
+                title="{{ 'settings.site.settings.stats.tooltip' | translate }}"
+              >
+                <span inlineSVG="./assets/images/core/question.svg"></span>
+              </a>
+            </label>
+          </div>
+
+          <div class="pt-1">
+            <h4 class="site-settings-h4-text">{{ 'settings.site.settings.lglinks.title' | translate }}:</h4>
+          </div>
+          <div class="form-group d-flex">
+            <ui-switch (change)="onChangePaymentLogo()" [checked]="site.needHideLogo" size="medium"></ui-switch>
+            <label class="control-label ml-2 pt-1">
+              {{ 'settings.site.settings.lglinks.link1' | translate }}
+              <span class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
+            </label>
+          </div>
+          <div class="form-group d-flex">
+            <ui-switch (change)="onChangePaymentLogo()" [checked]="site.logoRefLink" size="medium"></ui-switch>
+            <label class="control-label ml-2">
+              {{ 'settings.site.settings.lglinks.link2' | translate }}
+              <a
+                class="info-link"
+                data-placement="top"
+                data-toggle="tooltip"
+                title="{{ 'settings.site.settings.lglinks.tooltip' | translate }}"
+                ><span inlineSVG="./assets/images/core/question.svg"></span
+              ></a>
+              <span class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
+            </label>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="tab === 1">
+        <div class="panel-body">
+          <div class="integration-tab-flex">
+            <h3>{{ 'settings.site.tabs.integrations.title' | translate }}</h3>
+            <button (click)="openModalForCreatingNewIntegration()" class="btn btn-sm btn-success" type="button">
+              <span inlineSVG="./assets/images/core/plus.svg"></span> {{
+              'settings.site.tabs.integrations.addIntegration' | translate }}
+            </button>
+          </div>
+
+          <div class="tab-wrap">
+            <div *ngIf="!integrations.length" class="col-lg-12 mt-5 mb-5">
+              <h3 class="f-0 text-center">{{ 'settings.site.settings.integrations.not.title' | translate }}</h3>
+              <h4 class="f-2 text-center">{{ 'settings.site.settings.integrations.not.desc' | translate }}</h4>
+            </div>
+
+            <ng-container *ngIf="integrationsCRM.length">
+              <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.crm' | translate }}</h4>
+              <app-integration-item
+                *ngFor="let item of integrationsCRM"
+                (updateIntegrations)="getSiteIntegrations()"
+                [siteId]="siteId"
+                [widget]="item"
+              ></app-integration-item>
+            </ng-container>
+
+            <ng-container *ngIf="integrationsMailing.length">
+              <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.email' | translate }}</h4>
+              <app-integration-item
+                *ngFor="let item of integrationsMailing"
+                (updateIntegrations)="getSiteIntegrations()"
+                [siteId]="siteId"
+                [widget]="item"
+              ></app-integration-item>
+            </ng-container>
+
+            <ng-container *ngIf="integrationsNotifications.length">
+              <h4 class="f-1 mt-3">{{ 'settings.site.settings.notification.title' | translate }}</h4>
+              <app-integration-item
+                *ngFor="let item of integrationsNotifications"
+                (updateIntegrations)="getSiteIntegrations()"
+                [siteId]="siteId"
+                [widget]="item"
+              ></app-integration-item>
+            </ng-container>
+
+            <ng-container *ngIf="integrationsOthers.length">
+              <h4 class="f-1 mt-3">{{ 'settings.site.tabs.group.other' | translate }}</h4>
+              <app-integration-item
+                *ngFor="let item of integrationsOthers"
+                (updateIntegrations)="getSiteIntegrations()"
+                [siteId]="siteId"
+                [widget]="item"
+              ></app-integration-item>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="tab === 2">
+        <div class="panel-body">
+          <h3 class="mb-4">{{ 'settings.site.tabs.analytics' | translate }}</h3>
+
+          <div class="integration-rowed">
+            <!-- YMetrika -->
+            <div class="analyticssync-sync-panel-wrapper" id="crmsync-ymetrika">
+              <div class="mail-sync-panel">
+                <a class="mailsync-logo" href="https://metrika.yandex.ru/" target="_blank">
+                  <img alt="yandex-metrica" src="./assets/images/sites/metrika.png" />
+                </a>
+                <div class="row m-0 mb-2" style="max-height: 72px">
+                  <div class="col-lg-12" data-context="ymetrika-counter">
+                    <label class="control-label" for="name">
+                      {{ 'settings.site.settings.integrations.ymetrika.counter.title' | translate }}
+                    </label>
+                    <input
+                      [(ngModel)]="site.yandexAnalyticsCounter"
+                      class="form-control"
+                      id="name"
+                      name="name"
+                      type="text"
+                    />
+                    <span
+                      [innerHTML]="'settings.site.settings.integrations.ymetrika.counter.span' | translate"
+                      class="help-text"
+                    ></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Google analytics -->
+            <div class="analyticssync-sync-panel-wrapper" id="crmsync-ganalytics">
+              <div class="mail-sync-panel">
+                <a class="mailsync-logo" href="https://www.google.com/analytics/" target="_blank">
+                  <img alt="google-analytics" src="./assets/images/sites/google-analytics.png" />
+                </a>
+                <div class="row m-0 mb-2" style="max-height: 72px">
+                  <div class="col-lg-12" data-context="ganalytics-service">
+                    <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
+                    <div class="dropdown site-selector">
+                      <button
+                        aria-expanded="true"
+                        aria-haspopup="true"
+                        class="btn btn-default dropdown-toggle"
+                        data-toggle="dropdown"
+                        type="button"
+                      >
+                        <span class="dropdown-selected-cropp" style="max-width: 90%"
+                          >{{ site.googleAnalyticsService }}</span
+                        >
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li (click)="changeAnalyticGService(item.value)" *ngFor="let item of googleAnalyticsServices">
+                          <a class="dropdown-item">{{ item.name }}</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <span
+                      [innerHTML]="'settings.site.settings.integrations.ganalytics.service' | translate"
+                      class="help-text"
+                    ></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="tab === 3">
+        <div class="panel-body">
+          <h3>{{ 'settings.script.title' | translate }}</h3>
+          <p>
+            <span [innerHTML]="'sitelist.form.code.desc1' | translate"></span>
+          </p>
+          <div class="form-group mb-0">
+            <textarea
+              [(ngModel)]="codeSiteScript"
+              appSelectOnClick
+              class="form-control not-readonly-hand"
+              readonly
+              rows="5"
+            ></textarea>
+          </div>
+          <br />
+          <br />
+          <p>
+            <span>
+              {{ 'settings.script.apicode.title' | translate }}
+              <a
+                class="info-link"
+                data-placement="top"
+                data-toggle="tooltip"
+                title="{{ 'settings.script.apicode.tooltip' | translate }}"
+              ><i inlineSVG="./assets/images/core/question.svg"></i></a>
+            </span>
+          </p>
+          <div class="form-group mb-0 site-id-field" data-context="url">
+            <input
+              [(ngModel)]="siteId"
+              appSelectOnClick
+              class="form-control not-readonly-hand"
+              name="name"
+              readonly
+              type="text"
+            />
+          </div>
+          <p class="small">{{ 'settings.script.apicode.desc' | translate }}</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="buttons">
+    <button (click)="goBack()" class="btn btn-sm btn-default" type="button">
+      {{ 'settings.site.global.backButton' | translate }}
+    </button>
+    <button (click)="saveSite()" [disabled]="!site.name || !site.url" class="btn btn-sm btn-success" type="button">
+      <span inlineSVG="./assets/images/core/save-icon.svg"></span> {{ 'settings.site.global.saveButton' | translate }}
+    </button>
+  </div>
+</app-card>

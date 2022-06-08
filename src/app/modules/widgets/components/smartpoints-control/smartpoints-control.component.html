@@ -1,0 +1,211 @@
+<div class='smartpoints-container'>
+  <div class="column">
+    <div class="group">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (ngModelChange)="prepareSmartpointForSave(smWidgets.CALLBACK)"
+            [(ngModel)]="smWidgets.CALLBACK.enabled"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <h5>
+        {{ 'settings.widgets.callback.title' | translate }}
+        <a
+          data-placement="top"
+          data-title="{{ 'settings.widgets.callback.tooltip' | translate }}"
+          data-toggle="tooltip"
+          inlineSVG="./assets/images/core/question.svg"
+        ></a>
+      </h5>
+    </div>
+    <ng-container *ngIf="smWidgets.CALLBACK.enabled">
+      <div class="dropdown-container">
+        <label>{{ 'settings.widgets.invite.positions' | translate }}:</label>
+        <div class="dropdown">
+          <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+            {{ getPositionText(smWidgets.CALLBACK.pos) | translate }}
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <ng-container *ngFor="let item of positions; let isEven = even">
+              <li (click)="setPosition(smWidgets.CALLBACK, item.pos)" *ngIf="isEven">
+                <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">
+                  {{ item.text | translate }}
+                </a>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+      <div class="group">
+        <ui-switch
+          (change)="prepareSmartpointForSave(smWidgets.CALLBACK)"
+          [checked]="smWidgets.CALLBACK.autoinvite"
+          size="small"
+        ></ui-switch>
+        <h5>
+          {{ 'settings.widgets.autoinvite.title' | translate }}
+          <a
+            data-container="body"
+            data-placement="top"
+            data-title="{{ 'settings.widgets.autoinvite.tooltip' | translate }}"
+            data-toggle="tooltip"
+            inlineSVG="./assets/images/core/question.svg"
+          ></a>
+        </h5>
+      </div>
+    </ng-container>
+  </div>
+  <div class="column">
+    <div class="group">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (ngModelChange)="prepareSmartpointForSave(smWidgets.INVITE)"
+            [(ngModel)]="smWidgets.INVITE.enabled"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <h5>
+        {{ 'settings.widgets.invite.title' | translate }}
+        <a
+          data-placement="top"
+          data-title="{{ 'settings.widgets.invite.tooltip' | translate }}"
+          data-toggle="tooltip"
+          inlineSVG="./assets/images/core/question.svg"
+        ></a>
+      </h5>
+    </div>
+    <ng-container *ngIf="smWidgets.INVITE.enabled">
+      <div class="dropdown-container">
+        <label>{{ 'settings.widgets.invite.positions' | translate }}:</label>
+        <div class="dropdown">
+          <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+            {{ getPositionText(smWidgets.INVITE.pos) | translate }}
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li (click)="setPosition(smWidgets.INVITE, item.pos)" *ngFor="let item of positions">
+              <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">
+                {{ item.text | translate }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="group">
+        <ui-switch
+          (change)="prepareSmartpointForSave(smWidgets.INVITE)"
+          [checked]="smWidgets.INVITE.autoinvite"
+          size="small"
+        ></ui-switch>
+        <h5>
+          {{ 'settings.widgets.autoinvite.title' | translate }}
+          <a
+            data-container="body"
+            data-placement="top"
+            data-title="{{ 'settings.widgets.autoinvite.tooltip' | translate }}"
+            data-toggle="tooltip"
+            inlineSVG="./assets/images/core/question.svg"
+          ></a>
+        </h5>
+      </div>
+    </ng-container>
+  </div>
+  <div class="column">
+    <div class="group">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (ngModelChange)="prepareSmartpointForSave(smWidgets.INSTANT_POPUP)"
+            [(ngModel)]="smWidgets.INSTANT_POPUP.enabled"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <h5>
+        {{ 'settings.widgets.instant.title' | translate }}
+        <a
+          class="pl-1 info-link"
+          data-placement="top"
+          data-title="{{ 'settings.widgets.instant.tooltip' | translate }}"
+          data-toggle="tooltip"
+          inlineSVG="./assets/images/core/question.svg"
+        ></a>
+      </h5>
+    </div>
+    <div class="group">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (ngModelChange)="prepareSmartpointForSave(smWidgets.POPUP)"
+            [(ngModel)]="smWidgets.POPUP.enabled"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <h5>
+        {{ 'settings.widgets.smart.title' | translate }}
+        <a
+          data-placement="top"
+          data-title="{{ 'settings.widgets.smart.tooltip' | translate }}"
+          data-toggle="tooltip"
+          inlineSVG="./assets/images/core/question.svg"
+        ></a>
+      </h5>
+    </div>
+    <div class="group">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (ngModelChange)="prepareSmartpointForSave(smWidgets.MOBILE)"
+            [(ngModel)]="smWidgets.MOBILE.enabled"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <h5>
+        {{ 'settings.widgets.mobile.title' | translate }}
+        <a
+          data-placement="top"
+          data-title="{{ 'settings.widgets.mobile.tooltip' | translate }}"
+          data-toggle="tooltip"
+          inlineSVG="./assets/images/core/question.svg"
+        ></a>
+      </h5>
+    </div>
+    <div class="group">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input
+            (ngModelChange)="prepareSmartpointForSave(smWidgets.EXIT_INTENT)"
+            [(ngModel)]="smWidgets.EXIT_INTENT.enabled"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <h5>
+        {{ 'settings.widgets.exitintent.title' | translate }}
+        <a
+          data-placement="top"
+          data-title="{{ 'settings.widgets.exitintent.tooltip' | translate }}"
+          data-toggle="tooltip"
+          inlineSVG="./assets/images/core/question.svg"
+        ></a>
+      </h5>
+    </div>
+  </div>
+</div>

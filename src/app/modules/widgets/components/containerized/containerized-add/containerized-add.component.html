@@ -1,0 +1,109 @@
+<div *ngIf="newCWidgetInfo.step === 1" class="modal-header text-center justify-content-center">
+  <h4 class="modal-title">{{ 'containerized.modal.addto.title' | translate }}</h4>
+</div>
+
+<div class="modal-body">
+  <div *ngIf="newCWidgetInfo.step === 1" class="p-3 max-w-868 m-auto" id="step2">
+    <div class="row">
+      <div (click)="setNewCWidgetType(type)" *ngFor="let type of newCWidgetInfo.types"
+           class="col-lg-6 widget-type-view">
+        <div class="ab-type-icon-{{type.type}}"></div>
+        <div class="view-name">{{type.title}}</div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="newCWidgetInfo.step === 2" class="active" id="step3">
+    <div class="create-widget-m" style="padding-top: 0">
+      <div class="filters-loader"></div>
+      <div class="container-for-loader">
+        <div class="templates-gallery-header">
+          <div class="header-modal">
+            <span>{{ 'widgetsList.add.params.mockup.title2' | translate }}</span>
+          </div>
+          <span class="sub-text">{{ 'widgetsList.add.modal.gallery.desc' | translate }}</span>
+        </div>
+
+        <app-templates-gallery (chooseWidget)="chooseTemplateWidget($event)"
+                               [typeId]="newCWidgetInfo.containerizedType"></app-templates-gallery>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="newCWidgetInfo.step === 3" class="p-3" id="step4">
+    <label class="big-label">{{ 'widgetsList.add.params.label' | translate }}:</label>
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <div class="row mb-2 ml-0 select-site-title">
+          <h5>{{ 'widgetsList.add.params.name.title' | translate }}:</h5>
+        </div>
+        <input [(ngModel)]="editableCW.name" class="form-control" type="text">
+        <span class="underow-comment">{{ 'widgetsList.add.params.name.tooltip' | translate }}</span>
+      </div>
+      <div *ngIf="newCWidgetInfo.companyMode === 0" class="col-lg-12 mt-2 mb-2">
+        <div class="row mb-2 ml-0 select-site-title">
+          <h5>{{ 'widgetsList.selectCompany' | translate }}: <a
+            class="info-link" data-placement="top"
+            data-toggle="tooltip"
+            title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"><i class="fa fa-info-circle"></i></a>
+          </h5>
+        </div>
+        <div [ngClass]="!newCWidgetInfo.companyId ? 'is-invalid' : ''" class="dropdown widget-company-selector"
+             style="float: left; width: calc(100% - 50px)">
+          <button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                  type="button">
+            <span class="dropdown-selected-cropp" style="max-width:90%">{{newCWidgetInfo.company}}</span>
+            <span class="caret"></span>
+          </button>
+          <ul *ngIf="companies.length" class="dropdown-menu">
+            <li (click)="changeCompany(company)" *ngFor="let company of getFilteredCompanies()">
+              <a class="dropdown-item" href="javascript:void(0);">{{ company.name }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="remove-sub-item">
+          <a (click)="openAddCompanyMode()" href="javascript:void(0);">
+            <i class="remove-sub-item colored-blue pe-7s-plus"
+               data-container="body" data-placement="top" data-toggle="tooltip"
+               title="{{ 'widgetsList.add.params.company.add.tooltip' | translate }}"></i>
+          </a>
+        </div>
+      </div>
+
+      <div
+        *ngIf="newCWidgetInfo.companyMode === 1"
+        [ngClass]="(newCWidgetInfo.company.trim().length == 0) ? 'is-invalid' : ''"
+        class="col-lg-12 mt-2 mb-2"
+      >
+        <div class="row mb-2 ml-0 select-site-title">
+          <h5>{{ 'widgetsList.add.params.company.add.name' | translate }}: <a
+            class="info-link" data-placement="top"
+            data-toggle="tooltip"
+            title="{{ 'widgetsList.add.params.company.tooltip' | translate }}"><i class="fa fa-info-circle"></i></a>
+          </h5>
+        </div>
+        <input [(ngModel)]="newCWidgetInfo.company" class="form-control" type="text">
+        <span class="underow-comment">{{ 'widgetsList.add.params.company.under' | translate }}</span>
+        <a (click)="closeAddCompanyMode()" *ngIf="companies.length" class="companies-underline">
+          {{ 'widgetsList.add.params.company.add.back' | translate }}
+        </a>
+      </div>
+
+      <div class="col-lg-12 mt-4">
+        <button
+          (click)="closeAddCWidgetModal(false)"
+          class="btn btn-lg btn-default float-left"
+        >
+          {{ 'global.cancel' | translate }}
+        </button>
+        <button
+          (click)="addWidget()"
+          [disabled]="(newCWidgetInfo.companyMode == 0 && newCWidgetInfo.companyId == null) || (newCWidgetInfo.companyMode == 1 && newCWidgetInfo.company.trim().length == 0) || !editableCW.name"
+          class="btn btn-lg btn-success float-right"
+          type="button"
+        >
+          {{ 'widgetsList.add.modal.gallery.gotosettings' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

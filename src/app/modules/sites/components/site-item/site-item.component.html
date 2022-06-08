@@ -1,0 +1,144 @@
+<div class="data">
+  <div class="site">
+    <div class="title">
+      <div class="address">
+        <h5>{{ 'sitelist.label' | translate }}</h5>
+        <h3>{{ item.url }}</h3>
+      </div>
+
+      <button
+        (click)="goToSiteSettings()"
+        [id]="item.id + '_button'"
+        class="btn btn-default site-settings"
+        type="button"
+      >
+        <span inlineSVG="./assets/images/core/settings.svg" class="icon"></span>
+        <ng-container *ngIf="(uiBreakpoint$ | async) >= breakpoint.SM">
+          <span>{{ 'header.settings' | translate }}</span>
+        </ng-container>
+      </button>
+    </div>
+
+    <div class="tariff">
+      <ng-container *ngIf="!item.isFree; else free">
+        <div class="tariff-info">
+          <h5>{{ 'sitelist.tariff.title' | translate }}</h5>
+          <div class="tariff-expiration">
+            <div class="due-date">
+              <h3>{{ item.tariffName }}</h3>
+              <h5>{{ 'global.until' | translate }}</h5>
+              <h3>{{ item.tariffExpTime }}</h3>
+            </div>
+            <button (click)="improvePlan()" class="improve2 btn btn-success btn-xs">
+              {{ 'sitelist.extend' | translate }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #free>
+        <div class="tariff-info">
+          <h5>{{ 'sitelist.tariff.title' | translate }}</h5>
+          <div class="tariff-expiration">
+            <div class="due-date">
+              <h3>{{ 'sitelist.tariff.free' | translate }}</h3>
+            </div>
+            <button (click)="improvePlan()" class="improve2 btn btn-danger btn-xs">
+              {{ 'sitelist.improve' | translate }}
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+
+    <ng-container
+      *ngIf="(uiBreakpoint$ | async) >= breakpoint.XL"
+    >
+      <div class="statistics">
+        <h5>{{ 'sitelist.weekinfo.title' | translate }}</h5>
+        <div class="weekly-data">
+          <div class="site-item-week-info">
+            <div class="week-value">{{ actionsStatsWeekCount | thousandSuffix:2 }}</div>
+            <div [innerHTML]="'sitelist.weekinfo.actions' | translate" class="week-data-name"></div>
+          </div>
+          <div class="site-item-week-info">
+            <div class="week-value">{{ leadsStatsWeekCount | thousandSuffix:2 }}</div>
+            <div [innerHTML]="'sitelist.weekinfo.leads' | translate" class="week-data-name"></div>
+          </div>
+          <div class="site-item-week-info">
+            <div class="week-value">{{ mailStatsWeekCount | thousandSuffix:2 }}</div>
+            <div [innerHTML]="'sitelist.weekinfo.mails' | translate" class="week-data-name"></div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="chart-container" [style]="height$ | async">
+    <ng-container *ngIf="isLoading$ | async; else loaded">
+      <div class="no-data-graph-title">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #loaded>
+      <ng-container *ngIf="actionsStatsWeekCount > 0 || leadsStatsWeekCount > 0 || mailStatsWeekCount > 0; else noData">
+        <div class="chart-legend-container">
+          <ng-container *ngIf="actionsStatsWeekCount > 0">
+            <div class="chart-legend">
+              <div class="chart-icon"></div>
+              <h5>{{ 'sitelist.chartLegend.widgets' | translate }}</h5>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="leadsStatsWeekCount > 0">
+            <div class="chart-legend">
+              <div class="chart-icon"></div>
+              <h5>{{ 'sitelist.chartLegend.leads' | translate }}</h5>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="mailStatsWeekCount > 0">
+            <div class="chart-legend">
+              <div class="chart-icon"></div>
+              <h5>{{ 'sitelist.chartLegend.emails' | translate }}</h5>
+            </div>
+          </ng-container>
+        </div>
+        <canvas
+          [colors]="colors"
+          [data]="data"
+          [labels]="labels"
+          [legend]="false"
+          [options]="options"
+          baseChart
+          chartType="line"
+          height="100"
+          id="line"
+        ></canvas>
+      </ng-container>
+
+      <ng-template #noData>
+        <div class="no-data-graph-title">{{ 'global.noData' | translate }}</div>
+      </ng-template>
+    </ng-template>
+  </div>
+</div>
+
+<ng-container
+  *ngIf="!item.isFree && item.tariffExpLeftMs < 604800000 || item.hasCrmSyncErrors || item.hasMailSyncErrors"
+>
+  <div class="notification-container">
+    <div *ngIf="!item.isFree && item.tariffExpLeftMs < 604800000" class="col-lg-12 site-item-notification">
+      <div class="notify-text">{{ 'sitelist.notification.payment' | translate }}</div>
+    </div>
+    <div *ngIf="item.hasCrmSyncErrors" class="col-lg-12 site-item-notification">
+      <div class="notify-text">{{ 'sitelist.notification.crm' | translate }}</div>
+    </div>
+    <div *ngIf="item.hasMailSyncErrors" class="col-lg-12 site-item-notification">
+      <div class="notify-text">{{ 'sitelist.notification.mail' | translate }}</div>
+    </div>
+  </div>
+</ng-container>

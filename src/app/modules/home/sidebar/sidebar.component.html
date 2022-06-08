@@ -1,0 +1,69 @@
+<aside id="menu">
+  <nav id="navigation">
+    <ul #menu class="nav" id="side-menu">
+
+      <li routerLinkActive="active mm-active">
+        <a routerLink="/site/list">
+          <i class="fontello-demo1-icon icon-ic_menu_sites icons-for-sidemenu"></i>
+          <span class="nav-label">{{ 'sidebar.sites' | translate }}</span>
+        </a>
+      </li>
+
+      <li routerLinkActive="active mm-active">
+        <a routerLink="/widgets">
+          <i class="fontello-demo1-icon icon-ic_menu_widgets icons-for-sidemenu"></i>
+          <span class="nav-label">{{ 'sidebar.widgets' | translate }}</span>
+        </a>
+      </li>
+
+      <li [class.active]="abtestsMenuExpanded" [class.mm-active]="abtestsMenuExpanded">
+        <a [attr.aria-expanded]="abtestsMenuExpanded" class="has-arrow" routerLink="">
+          <i class="fontello-demo1-icon icon-ic_menu_ab_tests icons-for-sidemenu"></i>
+          <span class="nav-label">{{ 'sidebar.abtests' | translate }}</span>
+        </a>
+        <ul [class.mm-show]="abtestsMenuExpanded" class="nav nav-second-level">
+          <li routerLinkActive="active mm-active">
+            <a routerLink="/abtests/active/">{{ 'sidebar.abtests-active' | translate }}</a>
+          </li>
+          <li routerLinkActive="active mm-active">
+            <a routerLink="/abtests/archive/">{{ 'sidebar.abtests-archive' | translate }}</a>
+          </li>
+        </ul>
+      </li>
+
+      <li routerLinkActive="active mm-active">
+        <a routerLink="/coupons">
+          <i class="fontello-demo1-icon icon-ic_menu_coupons icons-for-sidemenu"></i>
+          <span class="nav-label">{{ 'sidebar.coupons' | translate }}</span>
+        </a>
+      </li>
+
+      <li routerLinkActive="active mm-active">
+        <a routerLink="/crm">
+          <i class="fontello-demo1-icon icon-ic_menu_leads icons-for-sidemenu"></i>
+          <span class="nav-label">{{ 'sidebar.crm' | translate }}</span>
+        </a>
+      </li>
+
+      <li routerLinkActive="active mm-active">
+        <a routerLink="/reports/emails">
+          <i class="fontello-demo1-icon icon-ic_menu_mail icons-for-sidemenu"></i>
+          <span class="nav-label">{{ 'sidebar.emails' | translate }}</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="http://leadgenic.userecho.com/" target="_blank">
+          <i class="fontello-demo1-icon icon-ic_menu_support icons-for-sidemenu"></i>
+          <span class="nav-label">{{ 'sidebar.help' | translate }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <button
+    (click)="showBanner()"
+    (mouseover)="preloadBanner()"
+    class="lg-sidebar-banner"
+    inlineSVG="./assets/images/banners/banner.svg"
+  ></button>
+</aside>

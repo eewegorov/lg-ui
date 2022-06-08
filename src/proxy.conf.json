@@ -1,0 +1,17 @@
+{
+  "/oauth/*": {
+    "target": "http://app-dev.leadgenic.ru",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/rest/*": {
+    "target": "http://app-dev.leadgenic.ru",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/public/*": {
+    "target": "http://stat-dev.leadgenic.ru",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

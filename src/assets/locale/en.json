@@ -1,0 +1,1453 @@
+{
+	"abtests": {
+		"ab": "",
+		"abtypes": {
+			"title": {
+				"duplicate": "",
+				"mockup": "",
+				"new": ""
+			}
+		},
+		"actions": "",
+		"active": {
+			"active": "",
+			"addDescription": "",
+			"addTitle": "",
+			"all": "",
+			"instruction": "",
+			"management": "",
+			"noActive": "",
+			"noCreated": {
+				"desc": "",
+				"title": ""
+			},
+			"noPaused": "",
+			"pauseTest": "",
+			"paused": "",
+			"reset": "",
+			"runTest": "",
+			"stopTest": "",
+			"toggle": "",
+			"variant": {
+				"add": "",
+				"copy": "",
+				"delete": "",
+				"edit": "",
+				"winner": ""
+			}
+		},
+		"archive": {
+			"completed": "",
+			"delete": "",
+			"noDescription": "",
+			"noTitle": "",
+			"title": ""
+		},
+		"conversion": "",
+		"create": {
+			"variant1": ""
+		},
+		"improvement": "",
+		"modal": {
+			"newAB": {
+				"chooseVariant": "",
+				"title": ""
+			},
+			"noWidgets": "",
+			"template": {
+				"categories": "",
+				"choose": "",
+				"subtext": ""
+			},
+			"variant": {
+				"add": "",
+				"comment": "",
+				"create": "",
+				"description": "",
+				"descriptionPlaceholder": "",
+				"title": "",
+				"titlePlaceholder": ""
+			}
+		},
+		"show": "",
+		"variant": "",
+		"widget": {
+			"deleteiftest": ""
+		}
+	},
+	"audience": {
+		"rule": {
+			"anddroppable": "",
+			"devices": {
+				"desc": "",
+				"title": ""
+			},
+			"droppable": "",
+			"logic": {
+				"and": "",
+				"or": ""
+			},
+			"nonactive": "",
+			"ordroppable": "",
+			"refer": {
+				"desc": "",
+				"title": ""
+			},
+			"social": {
+				"desc": "",
+				"title": ""
+			},
+			"type": {
+				"desc": "",
+				"title": ""
+			},
+			"url": {
+				"desc": "",
+				"param": {
+					"underline": "",
+					"upline": ""
+				},
+				"title": "",
+				"value": {
+					"underline": "",
+					"upline": ""
+				}
+			},
+			"visit": {
+				"desc": "",
+				"title": ""
+			},
+			"visit_no": {
+				"desc": "",
+				"title": "",
+				"underline": ""
+			}
+		},
+		"rules": "",
+		"variant": {
+			"add": ""
+		}
+	},
+	"billing": {
+		"modal": {
+			"footer": "",
+			"paysum": {
+				"btn": "",
+				"label": ""
+			}
+		},
+		"notify": {
+			"noPlans": ""
+		}
+	},
+	"containerized": {
+		"container": {
+			"add": {
+				"description": "",
+				"name": ""
+			},
+			"code": {
+				"tooltip": ""
+			},
+			"delete": {
+				"desc": "",
+				"text": ""
+			},
+			"header": {
+				"control": ""
+			},
+			"help": {
+				"btn": ""
+			},
+			"label": "",
+			"remove": "",
+			"widget": {
+				"add": "",
+				"remove": {
+					"ifone": ""
+				}
+			}
+		},
+		"modal": {
+			"addto": {
+				"title": ""
+			}
+		},
+		"title": ""
+	},
+	"coupons": {
+		"addCoupon": "",
+		"coupon": {
+			"copied": {
+				"desc": "",
+				"tooltip": ""
+			},
+			"delete": {
+				"desc": "",
+				"text": "",
+				"title": "",
+				"tooltip": ""
+			},
+			"edit": {
+				"tooltip": ""
+			}
+		},
+		"empty": {
+			"help": "",
+			"subtitle": "",
+			"title": ""
+		},
+		"grid": {
+			"coupon": {
+				"code": "",
+				"control": "",
+				"name": "",
+				"type": ""
+			}
+		},
+		"modal": {
+			"editCoupon": {
+				"title": ""
+			},
+			"newCoupon": {
+				"code": {
+					"desc": "",
+					"title": ""
+				},
+				"description": "",
+				"name": {
+					"desc": "",
+					"title": ""
+				},
+				"tab1": {
+					"desc": "",
+					"title": ""
+				},
+				"tab2": {
+					"desc": "",
+					"list": {
+						"desc": "",
+						"title": ""
+					},
+					"needDefault": {
+						"title": ""
+					},
+					"save": "",
+					"threshold": {
+						"desc1": "",
+						"desc2": "",
+						"title": ""
+					},
+					"title": ""
+				},
+				"title": "",
+				"value": {
+					"desc": "",
+					"title": ""
+				}
+			}
+		}
+	},
+	"crm": {
+		"page": {
+			"card": {
+				"details": "",
+				"sawPages": "",
+				"source": {
+					"linkDesc": ""
+				},
+				"status": {
+					"bad": "",
+					"email": "",
+					"message": "",
+					"name": "",
+					"new": "",
+					"notes": "",
+					"onWork": "",
+					"phone": "",
+					"success": ""
+				},
+				"visitHistory": {
+					"title": ""
+				},
+				"visitNumber": ""
+			},
+			"filter": {
+				"period": "",
+				"sites": "",
+				"states": {
+					"all": "",
+					"placeholder": "",
+					"title": ""
+				},
+				"title": "",
+				"widgets": {
+					"all": "",
+					"placeholder": ""
+				}
+			},
+			"notification": {
+				"btn": "",
+				"text": ""
+			},
+			"table": {
+				"extra": {
+					"default": "",
+					"widget": ""
+				},
+				"noData": "",
+				"refresh": "",
+				"th1": "",
+				"th2": "",
+				"th3": "",
+				"th4": "",
+				"th5": "",
+				"tooltip": ""
+			}
+		}
+	},
+	"global": {
+		"cancel": "",
+		"close": "",
+		"currency": {
+			"ruble": ""
+		},
+		"discount": "",
+		"done": "",
+		"error": "",
+		"for": "",
+		"from": "",
+		"general": "",
+		"no": "",
+		"noData": "",
+		"payment": "",
+		"period": {
+			"dateEnd": "",
+			"dateStart": "",
+			"start": ""
+		},
+		"save": "",
+		"unit": {
+			"days": "",
+			"hours": "",
+			"minutes": "",
+			"seconds": ""
+		},
+		"until": "",
+		"week": {
+			"friday": "",
+			"monday": "",
+			"saturday": "",
+			"sunday": "",
+			"thursday": "",
+			"tuesday": "",
+			"wednesday": ""
+		}
+	},
+	"header": {
+		"cabinet": "",
+		"like": "",
+		"partner": "",
+		"settings": "",
+		"yandex": ""
+	},
+	"login": {
+		"enter": "",
+		"error": "",
+		"error_password": "",
+		"forgot": "",
+		"forgot_not_found": "",
+		"forgot_password": "",
+		"forgot_remember": "",
+		"forgot_send": "",
+		"forgot_under_input": "",
+		"forgot_we_send": "",
+		"login": "",
+		"password": "",
+		"password_new": "",
+		"register": "",
+		"register_title": "",
+		"resPass": {
+			"not_success": "",
+			"success": ""
+		},
+		"unique_login": "",
+		"unique_password": "",
+		"user": "",
+		"want_back": ""
+	},
+	"partner": {
+		"add": {
+			"button": "",
+			"done": "",
+			"modal": {
+				"button": "",
+				"description": "",
+				"field": "",
+				"title": ""
+			},
+			"title": ""
+		},
+		"ads": {
+			"code": "",
+			"comment": "",
+			"panel": ""
+		},
+		"allUsers": "",
+		"earnedMoney": "",
+		"saldo": {
+			"desc": "",
+			"title": ""
+		},
+		"showcode": "",
+		"statistics": "",
+		"transactions": {
+			"credit": "",
+			"debit": "",
+			"empty": "",
+			"showMore": "",
+			"title": ""
+		},
+		"wallet": {
+			"description": "",
+			"error": {
+				"yandex": ""
+			},
+			"save": "",
+			"title": ""
+		},
+		"yourlink": {
+			"description": "",
+			"title": ""
+		}
+	},
+	"reports": {
+		"emails": {
+			"best": "",
+			"clear": {
+				"done": {
+					"desc": ""
+				},
+				"text": "",
+				"title": "",
+				"yes": ""
+			},
+			"config": "",
+			"filter": {
+				"from": "",
+				"to": ""
+			},
+			"last": "",
+			"period": {
+				"decade": "",
+				"month": "",
+				"today": "",
+				"user": "",
+				"week": "",
+				"yesterday": ""
+			},
+			"remove": {
+				"btn": ""
+			},
+			"sites": {
+				"sites": "",
+				"value": ""
+			},
+			"stat": {
+				"download": {
+					"btn": "",
+					"tooltip": ""
+				},
+				"overall": "",
+				"period": {
+					"avg": "",
+					"title": ""
+				}
+			},
+			"statistics": ""
+		},
+		"sitePlaceholder": "",
+		"sitePlaceholder2": ""
+	},
+	"settings": {
+		"script": {
+			"apicode": {
+				"desc": "",
+				"title": "",
+				"tooltip": ""
+			},
+			"header": "",
+			"title": ""
+		},
+		"site": {
+			"global": {
+				"backButton": "",
+				"saveButton": ""
+			},
+			"integration": {
+				"delete": {
+					"text": "",
+					"title": ""
+				},
+				"deleted": "",
+				"paymentLabel": ""
+			},
+			"newIntegration": {
+				"activate": "",
+				"activated": "",
+				"add": "",
+				"apikey": "",
+				"choseIntegrationService": "",
+				"connection": {
+					"api": "",
+					"title": "",
+					"webhook": ""
+				},
+				"create": {
+					"address": {
+						"desc": "",
+						"title": ""
+					},
+					"book": "",
+					"campaignId": "",
+					"code": "",
+					"copy": {
+						"noSites": ""
+					},
+					"created": "",
+					"email": "",
+					"error": "",
+					"host": "",
+					"id": "",
+					"integrationId": "",
+					"listId": "",
+					"login": "",
+					"secret": "",
+					"secretKey": "",
+					"url": "",
+					"urlExtra": {
+						"desc": "",
+						"title": ""
+					},
+					"userId": "",
+					"webhook": {
+						"desc": "",
+						"title": ""
+					}
+				},
+				"description": "",
+				"donorSite": "",
+				"edit": "",
+				"fields": {
+					"add": "",
+					"crm": "",
+					"error": "",
+					"leadgenic": "",
+					"title": "",
+					"tooltip": ""
+				},
+				"funnel": {
+					"button": "",
+					"check": {
+						"title": "",
+						"tooltip": ""
+					},
+					"name": "",
+					"status": "",
+					"title": ""
+				},
+				"group": {
+					"crm": "",
+					"mailing": "",
+					"notification": "",
+					"others": ""
+				},
+				"help": "",
+				"instruction": "",
+				"name": "",
+				"others": "",
+				"service": "",
+				"settings": "",
+				"tabs": {
+					"copy": "",
+					"new": ""
+				},
+				"title": "",
+				"updated": ""
+			},
+			"settings": {
+				"domain": {
+					"title": ""
+				},
+				"integrations": {
+					"ganalytics": {
+						"service": ""
+					},
+					"not": {
+						"desc": "",
+						"title": ""
+					},
+					"ymetrika": {
+						"counter": {
+							"span": "",
+							"title": ""
+						}
+					}
+				},
+				"lglinks": {
+					"link1": "",
+					"link2": "",
+					"title": "",
+					"tooltip": ""
+				},
+				"notification": {
+					"send": "",
+					"title": ""
+				},
+				"removeSite": "",
+				"stats": {
+					"email": "",
+					"title": "",
+					"tooltip": ""
+				}
+			},
+			"tabs": {
+				"analytics": "",
+				"group": {
+					"crm": "",
+					"email": "",
+					"other": ""
+				},
+				"integration": {
+					"defaultUse": "",
+					"tooltip": {
+						"remove": "",
+						"settings": "",
+						"start": "",
+						"stop": ""
+					},
+					"useDefault": {
+						"title": "",
+						"tooltip": ""
+					}
+				},
+				"integrations": {
+					"addIntegration": "",
+					"title": ""
+				}
+			},
+			"update": {
+				"crm": {
+					"paymentLabel": ""
+				},
+				"paymentLabel": ""
+			}
+		},
+		"title": "",
+		"widgets": {
+			"autoinvite": {
+				"title": "",
+				"tooltip": ""
+			},
+			"callback": {
+				"title": "",
+				"tooltip": ""
+			},
+			"exitintent": {
+				"title": "",
+				"tooltip": ""
+			},
+			"instant": {
+				"title": "",
+				"tooltip": ""
+			},
+			"invite": {
+				"positions": "",
+				"title": "",
+				"tooltip": ""
+			},
+			"mobile": {
+				"title": "",
+				"tooltip": ""
+			},
+			"select": "",
+			"smart": {
+				"title": "",
+				"tooltip": ""
+			}
+		}
+	},
+	"sidebar": {
+		"abtests": "",
+		"abtests-active": "",
+		"abtests-archive": "",
+		"coupons": "",
+		"crm": "",
+		"emails": "",
+		"help": "",
+		"sites": "",
+		"widgets": ""
+	},
+	"sitelist": {
+		"addSite": "",
+		"chartLegend": {
+			"emails": "",
+			"leads": "",
+			"widgets": ""
+		},
+		"delete": {
+			"confirm": "",
+			"deleted": "",
+			"text": "",
+			"title": ""
+		},
+		"empty": {
+			"subtitle": "",
+			"title": ""
+		},
+		"extend": "Extend",
+		"form": {
+			"code": {
+				"desc1": "",
+				"title": ""
+			},
+			"goto": "",
+			"gotoaway": "",
+			"gotopoints": "",
+			"gotowidgets": "",
+			"name": "",
+			"phone": {
+				"desc": "",
+				"title": ""
+			},
+			"save": "",
+			"smartpoints": {
+				"desc1": "",
+				"settings": ""
+			},
+			"start": {
+				"desc1": "",
+				"desc2": ""
+			},
+			"title": "",
+			"url": ""
+		},
+		"improve": "",
+		"label": "Site",
+		"notification": {
+			"crm": "",
+			"mail": "",
+			"payment": ""
+		},
+		"save": {
+			"done": ""
+		},
+		"table": {
+			"filter": {
+				"search": ""
+			},
+			"onPage": ""
+		},
+		"tariff": {
+			"activation": "",
+			"activationDate": "",
+			"free": "",
+			"improve": "",
+			"improvement": "",
+			"length": "",
+			"title": ""
+		},
+		"weekinfo": {
+			"actions": "",
+			"leads": "",
+			"mails": "",
+			"title": ""
+		}
+	},
+	"userInfo": {
+		"email": "",
+		"isNeedStatsNotificationss": "",
+		"notifications": "",
+		"passwordChange": "",
+		"passwordChanged": "",
+		"passwordNew": "",
+		"passwordOld": "",
+		"phone": "",
+		"saveGeneral": "",
+		"settingsChanged": ""
+	},
+	"widgets": {
+		"coupon": {
+			"autoresponder": "",
+			"couponCallback": {
+				"actionDesc1": "",
+				"actionDesc2": {
+					"closeBtn": "",
+					"form": "",
+					"social": ""
+				},
+				"couponAdd": "",
+				"couponChoose": "",
+				"couponRefresh": "",
+				"desc": "",
+				"popupWindow": {
+					"setting": {
+						"action": "",
+						"click": "",
+						"color": "",
+						"colorBg": "",
+						"hover": "",
+						"manual": "",
+						"position": "",
+						"text": "",
+						"title": ""
+					}
+				}
+			},
+			"saveError": "",
+			"setting": {
+				"actions": "",
+				"closeAfter": "",
+				"isCopyAction": ""
+			}
+		},
+		"font": {
+			"title": ""
+		},
+		"form": {
+			"phoneMask": {
+				"description": "",
+				"titleInput": "",
+				"titleSwitcher": ""
+			}
+		},
+		"formExt": {
+			"addAnotherElementToForm": "",
+			"button": {
+				"bType": {
+					"label": ""
+				},
+				"bType1": "",
+				"bType2": "",
+				"bType3": "",
+				"icon": {
+					"label": ""
+				}
+			},
+			"checkedDefault": "",
+			"date": {
+				"placeholder2": "",
+				"service2": "",
+				"type1": "",
+				"type2": "",
+				"type3": "",
+				"type4": ""
+			},
+			"dropdown": {
+				"placeholder2": ""
+			},
+			"element": "",
+			"email": {
+				"id1": "",
+				"placeholder1": "",
+				"placeholder2": "",
+				"service1": "",
+				"service2": "",
+				"service3": ""
+			},
+			"enableRequire": "",
+			"hidden": {
+				"fieldCookies": {
+					"desc": "",
+					"label": ""
+				},
+				"fieldRef": {
+					"desc": ""
+				},
+				"fieldType": {
+					"label": ""
+				},
+				"fieldType1": "",
+				"fieldType10": "",
+				"fieldType11": "",
+				"fieldType12": "",
+				"fieldType13": "",
+				"fieldType14": "",
+				"fieldType15": "",
+				"fieldType16": "",
+				"fieldType17": "",
+				"fieldType2": "",
+				"fieldType3": "",
+				"fieldType4": "",
+				"fieldType5": "",
+				"fieldType6": "",
+				"fieldType7": "",
+				"fieldType8": "",
+				"fieldType9": "",
+				"fieldUserParam": {
+					"desc": "",
+					"label": ""
+				},
+				"fieldUserValue": {
+					"desc": "",
+					"label": ""
+				},
+				"fieldUtm": {
+					"desc": "",
+					"radio": {
+						"label1": "",
+						"label2": "",
+						"title": ""
+					}
+				}
+			},
+			"mainSettings": {
+				"buttonSettings": {
+					"actions": "",
+					"isBtnAction": "",
+					"redirect": {
+						"action": "",
+						"action1": "",
+						"action2": "",
+						"action3": "",
+						"action4": ""
+					},
+					"style": "",
+					"width1": "",
+					"width2": "",
+					"width3": ""
+				},
+				"colorBGField": "",
+				"colorNameField": "",
+				"formField": {
+					"orientation": "",
+					"orientation1": "",
+					"orientation2": "",
+					"orientation3": ""
+				},
+				"id": {
+					"description": "",
+					"example": "",
+					"useOutsideCRM": ""
+				},
+				"opacityBGField": "",
+				"useBorderAroundFields": "",
+				"usePodBG": "",
+				"visualField": "",
+				"visualField1": "",
+				"visualField2": "",
+				"widthForm": {
+					"orientation1": "",
+					"orientation2": "",
+					"orientation3": ""
+				},
+				"widthForm1": "",
+				"widthForm2": ""
+			},
+			"message": {
+				"placeholder2": "",
+				"service2": ""
+			},
+			"name": {
+				"placeholder2": "",
+				"service2": ""
+			},
+			"newLineField": "",
+			"phone": {
+				"placeholder2": "",
+				"service2": ""
+			},
+			"rating": {
+				"colorActive": "",
+				"colorInactive": "",
+				"numberOfStars": "",
+				"service2": ""
+			},
+			"sendFormIfAnyAction": {
+				"desc": "",
+				"title": ""
+			},
+			"term": {
+				"placeholder2": ""
+			},
+			"text": {
+				"placeholder2": "",
+				"service2": "",
+				"useMultiLine": ""
+			},
+			"title": {
+				"placeholder2": ""
+			},
+			"typeButton": "",
+			"typeDate": "",
+			"typeDropdown": "",
+			"typeEmail": "",
+			"typeHidden": "",
+			"typeMessage": "",
+			"typeName": "",
+			"typePhone": "",
+			"typeRating": "",
+			"typeTerm": "",
+			"typeText": "",
+			"typeTitle": "",
+			"typeVariants": "",
+			"variants": {
+				"description": "",
+				"every": "",
+				"multi": "",
+				"service2": "",
+				"title": ""
+			},
+			"widthField1": "",
+			"widthField2": "",
+			"widthField3": ""
+		},
+		"formExtId": {
+			"actionButton": {
+				"saveError": ""
+			},
+			"redirectError": "",
+			"saveError": ""
+		},
+		"icon": {
+			"iconSize": ""
+		},
+		"integration": {
+			"saveError": ""
+		},
+		"redirect": {
+			"blank": "",
+			"description": "",
+			"description2": "",
+			"example": "",
+			"onClickRedirect": "",
+			"title": "",
+			"tooltip": ""
+		},
+		"settings": {
+			"exitIntent": {
+				"desktop": "",
+				"mobile": ""
+			},
+			"jscode": {
+				"autochange": "",
+				"onActionChecker": "",
+				"onShowChecker": "",
+				"title": ""
+			},
+			"lockAfterAction": {
+				"lock1": "",
+				"lock2": "",
+				"title": ""
+			}
+		},
+		"timerDirective": {
+			"countdown": {
+				"action": {
+					"title": "",
+					"type0": "",
+					"type1": "",
+					"type2": ""
+				},
+				"title": "",
+				"type0": "",
+				"type1": ""
+			},
+			"design": {
+				"align": {
+					"type0": "",
+					"type1": "",
+					"type2": ""
+				},
+				"bgHeight": "",
+				"bgWidth": "",
+				"colorBG": "",
+				"colorDivider": "",
+				"colorIntervalName": "",
+				"colorText": "",
+				"font": {
+					"choose": ""
+				},
+				"fontLabel": "",
+				"fontNumber": "",
+				"nullData": {
+					"desc": "",
+					"label": ""
+				},
+				"tempInterval": {
+					"days": "",
+					"hours": "",
+					"label": "",
+					"mins": "",
+					"secs": ""
+				},
+				"title": ""
+			},
+			"id": {
+				"desc1": "",
+				"desc2": "",
+				"label": ""
+			},
+			"label": {
+				"days": "",
+				"hours": "",
+				"mins": "",
+				"secs": ""
+			},
+			"labelShort": {
+				"days": "",
+				"hours": "",
+				"mins": ""
+			},
+			"loop": {
+				"desc": "",
+				"label": ""
+			},
+			"timezone": {
+				"gmt": "",
+				"local": "",
+				"title": ""
+			}
+		},
+		"types": {
+			"static": {
+				"step1": {
+					"desc": "",
+					"title": ""
+				},
+				"step2": {
+					"desc": "",
+					"title": ""
+				}
+			}
+		}
+	},
+	"widgetsList": {
+		"add": {
+			"alt": "",
+			"chooseSite": "",
+			"chooseTemplate": {
+				"label": ""
+			},
+			"chooseType": {
+				"label": ""
+			},
+			"modal": {
+				"gallery": {
+					"category": {
+						"title": ""
+					},
+					"desc": "",
+					"filter": {
+						"notfound": ""
+					},
+					"gotosettings": "",
+					"tab": {
+						"all": {
+							"desc": "",
+							"title": ""
+						}
+					}
+				},
+				"title": ""
+			},
+			"params": {
+				"company": {
+					"add": {
+						"back": "",
+						"name": "",
+						"tooltip": ""
+					},
+					"tooltip": "",
+					"under": ""
+				},
+				"label": "",
+				"mockup": {
+					"notselect": "",
+					"title": "",
+					"title2": ""
+				},
+				"name": {
+					"placeholder": "",
+					"title": "",
+					"tooltip": ""
+				},
+				"select": ""
+			},
+			"title": ""
+		},
+		"clone": {
+			"company": {
+				"add": {
+					"label": ""
+				},
+				"chose": "",
+				"title": ""
+			},
+			"container": {
+				"default": "",
+				"title": ""
+			},
+			"done": {
+				"desc": "",
+				"edit": "",
+				"question": "",
+				"return": "",
+				"title": ""
+			},
+			"next": "",
+			"site": "",
+			"title": ""
+		},
+		"company": {
+			"add": {
+				"desc": "",
+				"tooltip": ""
+			},
+			"delete": {
+				"desc": "",
+				"error": "",
+				"move": "",
+				"one": {
+					"company": ""
+				},
+				"remove": "",
+				"title": "",
+				"tooltip": ""
+			}
+		},
+		"defCompany": "",
+		"delete": "",
+		"edit": "",
+		"editor": {
+			"audiences": {
+				"desc1": "",
+				"desc2": "",
+				"title": ""
+			},
+			"autoinvite": {
+				"click": {
+					"comment": "",
+					"enable": "",
+					"title": ""
+				},
+				"exit": {
+					"enable": ""
+				},
+				"inactive": {
+					"enabled": "",
+					"suffix": ""
+				},
+				"pages": {
+					"enable": "",
+					"suffix": ""
+				},
+				"percent": {
+					"enable": "",
+					"suffix": ""
+				},
+				"seconds": {
+					"enable": "",
+					"suffix": ""
+				},
+				"sound": {
+					"enable": ""
+				},
+				"title": "",
+				"variants": {
+					"title1": "",
+					"title2": ""
+				}
+			},
+			"autoresponder": {
+				"desc": "",
+				"enable": "",
+				"subject": "",
+				"text": ""
+			},
+			"close": "",
+			"integrations": {
+				"createNewIntegration": "",
+				"crmSwitcher": {
+					"desc": "",
+					"title": ""
+				},
+				"defSelectTitle": "",
+				"description": "",
+				"mainSwitcher": "",
+				"title": ""
+			},
+			"remove": "",
+			"restrictions": {
+				"autoinvite": {
+					"text": ""
+				},
+				"count": {
+					"part1": "",
+					"part2": "",
+					"part3": "",
+					"part4": "",
+					"text": ""
+				},
+				"disable": {
+					"label": "",
+					"title": ""
+				},
+				"enable": {
+					"title": ""
+				},
+				"hours": "",
+				"ontime": {
+					"title": ""
+				},
+				"title": "",
+				"title2": "",
+				"unique": {
+					"text": ""
+				}
+			},
+			"rules": {
+				"dateTime": {
+					"placeholder": "",
+					"title": ""
+				},
+				"days": {
+					"header": "",
+					"select": {
+						"placeholder": ""
+					},
+					"title": ""
+				},
+				"pageNo": {
+					"select": {
+						"placeholder": "",
+						"title": ""
+					},
+					"title": ""
+				},
+				"pageTargeting": {
+					"contain": "",
+					"ends": "",
+					"equals": "",
+					"hide": "",
+					"name": "",
+					"notcontain": "",
+					"pageInfo": "",
+					"show": "",
+					"starts": "",
+					"title": "",
+					"tooltip": "",
+					"url": {
+						"title": ""
+					}
+				},
+				"pageVTargeting": {
+					"title": "",
+					"tooltip": ""
+				},
+				"period": {
+					"header": "",
+					"tooltip": ""
+				},
+				"time": {
+					"from": "",
+					"to": ""
+				},
+				"widget": ""
+			},
+			"save": {
+				"check": "",
+				"done": {
+					"desc": "",
+					"title": ""
+				},
+				"validation": {
+					"desc": "",
+					"title": ""
+				}
+			},
+			"section": {
+				"audience": "",
+				"autoresponder": "",
+				"block": "",
+				"integrations": "",
+				"javascript": "",
+				"showing": "",
+				"targeting": ""
+			},
+			"tab": {
+				"design": "",
+				"errors": {
+					"tooltip": ""
+				},
+				"rules": ""
+			}
+		},
+		"listPlaceholder": "",
+		"listPlaceholder2": "",
+		"listPlaceholder3": "",
+		"listTitle": "",
+		"payment": {
+			"abtest": "",
+			"features": "",
+			"limit": "",
+			"options": ""
+		},
+		"selectCompany": "",
+		"selectSite": "",
+		"site": {
+			"default": {
+				"title": "",
+				"tooltip": ""
+			}
+		},
+		"sitePlaceholder": "",
+		"sitePlaceholder2": "",
+		"sitePlaceholder3": "",
+		"sitePlaceholder4": "",
+		"widget": {
+			"ab": {
+				"start": {
+					"desc": ""
+				},
+				"state": {
+					"desc": ""
+				},
+				"stop": {
+					"desc": ""
+				}
+			},
+			"changecompany": {
+				"tooltip": ""
+			},
+			"delete": {
+				"cancel": "",
+				"confirm": "",
+				"desc": "",
+				"text": "",
+				"title": ""
+			},
+			"duplicate": "",
+			"error": "",
+			"priority": {
+				"down": "",
+				"title": "",
+				"tooltip": "",
+				"up": ""
+			},
+			"rename": {
+				"tooltip": ""
+			},
+			"settings": "",
+			"show": {
+				"actions": "",
+				"all": "",
+				"conversion": ""
+			},
+			"start": "",
+			"stop": "",
+			"trash": "",
+			"widget": ""
+		}
+	}
+}

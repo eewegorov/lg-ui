@@ -1,0 +1,127 @@
+<div class="row-subitem">
+  <div class="dropdown">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+      {{ item.label }}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li (click)="changeFormType(itemForm.type)" *ngFor="let itemForm of availItemTypes" role="presentation">
+        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemForm.label }}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<h3 class="mt-3">{{ 'widgets.formExt.hidden.fieldType.label' | translate }}</h3>
+
+<div *ngIf="item.fieldType" class="row-subitem mt-1">
+  <div class="dropdown">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+      {{ item.fieldType.label }}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li
+        (click)="selectFieldType(itemFieldType)"
+        *ngFor="let itemFieldType of fieldTypes"
+        role="presentation"
+      >
+        <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemFieldType.label }}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div
+  class="row-subitem mt-3 form-ext-item__item-input"
+  [class.is-invalid]="item.service?.length === 0"
+>
+  <label
+    class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.email.service1' | translate }}</label>
+  <input [(ngModel)]="item.service" class="form-control mt-1" type="text">
+  <span class="input-down-sm-lab">{{ 'widgets.formExt.email.service3' | translate }}</span>
+</div>
+
+<div
+  class="row-subitem mt-3 form-ext-item__item-input"
+  [class.is-invalid]="(item.idField?.length === 0 || !checkIdField(item.idField))"
+>
+  <label class="control-label switcher-label-xs control-label-des">{{ 'widgets.formExt.email.id1' | translate }}</label>
+  <input (blur)="idFocusOut()" [(ngModel)]="item.idField" class="form-control mt-1 form-control-form-ext-id-field"
+         type="text"/>
+  <span class="input-down-sm-lab">{{ 'widgets.formExt.mainSettings.id.example' | translate }}</span>
+</div>
+
+<div
+  [innerHTML]="'widgets.formExt.mainSettings.id.description' | translate"
+  class="row-subitem mt-3 widget-small-text border-item"
+></div>
+
+<div *ngIf="isFieldUtmOrRef(item.fieldType?.type)" class="mt-4">
+  <h3>{{ 'widgets.formExt.hidden.fieldUtm.radio.title' | translate }}</h3>
+  <div class="row-subitem-padding mt-3">
+    <div class="form-group widget-selector mb-2">
+      <label>
+        <input
+          [(ngModel)]="item.utmRefPage.currentPage"
+          [value]="true"
+          class="radio radio-info radio-inline mr-2"
+          name="hidden"
+          type="radio"
+        />
+        {{ 'widgets.formExt.hidden.fieldUtm.radio.label1' | translate }}
+      </label>
+    </div>
+  </div>
+  <div class="row-subitem-padding">
+    <div class="form-group widget-selector mb-2">
+      <label>
+        <input
+          [(ngModel)]="item.utmRefPage.currentPage"
+          [value]="false"
+          class="radio radio-info radio-inline mr-2"
+          name="hidden"
+          type="radio"
+        />
+        {{ 'widgets.formExt.hidden.fieldUtm.radio.label2' | translate }}
+      </label>
+    </div>
+  </div>
+
+  <div class="widget-small-text">
+    {{ (item.fieldType?.type === 'referrer' ? 'widgets.formExt.hidden.fieldRef.desc' : 'widgets.formExt.hidden.fieldUtm.desc') | translate }}
+  </div>
+</div>
+
+<div
+  *ngIf="item.fieldType?.type === 'custom_parameter'"
+  class="row-subitem mt-3 form-ext-item__item-input"
+  [class.is-invalid]="!item.customParamValue && showErrors"
+>
+  <label
+    class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldUserParam.label' | translate }}</label>
+  <input [(ngModel)]="item.customParamValue" class="form-control mt-1" type="text"/>
+  <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldUserParam.desc' | translate }}</span>
+</div>
+
+<div
+  *ngIf="item.fieldType?.type === 'cookie'"
+  class="row-subitem mt-3 form-ext-item__item-input"
+  [class.is-invalid]="!item.cookieValue && showErrors"
+>
+  <label
+    class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldCookies.label' | translate }}</label>
+  <input [(ngModel)]="item.cookieValue" class="form-control mt-1" type="text"/>
+  <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldCookies.desc' | translate }}</span>
+</div>
+
+<div
+  *ngIf="item.fieldType?.type === 'user_value'"
+  class="row-subitem mt-3 form-ext-item__item-input"
+  [class.is-invalid]="!item.customUserValue && showErrors"
+>
+  <label
+    class="control-label control-label-des switcher-label-xs">{{ 'widgets.formExt.hidden.fieldUserValue.label' | translate }}</label>
+  <input [(ngModel)]="item.customUserValue" class="form-control mt-1" type="text"/>
+  <span class="input-down-sm-lab">{{ 'widgets.formExt.hidden.fieldUserValue.desc' | translate }}</span>
+</div>

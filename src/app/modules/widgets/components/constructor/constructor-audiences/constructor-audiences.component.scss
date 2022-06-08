@@ -1,0 +1,150 @@
+.widgets-settings-container {
+  padding-top: 0;
+  overflow: hidden;
+}
+
+.audiences-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.rules-container {
+  max-height: calc(100vh - 160px);
+  overflow: auto;
+  padding: 0 13px 0 3px;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 35px;
+}
+
+#rules-containers {
+  padding-bottom: 50px;
+  padding-right: 30px;
+}
+
+#audiences-item {
+  overflow: hidden;
+  width: 100%;
+}
+
+.rule-droppable, .rule-droppable-or, .rule-droppable-and {
+  border: 1px dashed #e4e5e7;
+  border-radius: 4px;
+  color: #555;
+}
+
+.rule-droppable-hover {
+  border: 1px dashed #843534;
+  color: #843534;
+}
+
+.rule-droppable h4, .rule-droppable-or h4, .rule-droppable-and h4 {
+  font-size: 15px;
+  font-weight: 300;
+  padding: 30px 0px;
+  text-align: center;
+  width: 340px;
+  margin: 0 auto;
+  line-height: 1.3;
+}
+
+.rule-droppable-or h4, .rule-droppable-and h4 {
+  padding: 10px 0px;
+}
+
+.rule-groups-text {
+  display: flex;
+  justify-content: center;
+  font-size: 13px;
+  padding: 10px 0px;
+
+  span {
+    border: 1px solid #D4D7DD;
+    border-radius: 12px;
+    padding: 0 10px;
+  }
+}
+
+.rule-block {
+  border-radius: 8px;
+  background: #F4F4F6;
+  padding: 20px;
+}
+
+.rule-block .rule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 18px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #16181D;
+}
+
+.rules-templates-list {
+  padding-bottom: 50px;
+  position: relative !important;
+  right: 10px;
+}
+
+.audience-rule {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #e4e5e7;
+  border-radius: 4px;
+  color: #555;
+  cursor: move;
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding: 6px 12px;
+  min-width: 30%;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, .1);
+  }
+
+  &.disabled {
+    background-color: #F4F4F6;
+    border: 1px solid #D4D7DD;
+    color: #7E889A;
+    cursor: default;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+
+  img {
+    width: 15px;
+    height: 15px;
+    margin-right: 15px;
+  }
+}
+
+.audience-rule i {
+  float: left;
+  font-size: 18px;
+  margin-right: 10px;
+  color: #7E889A;
+}
+
+.audience-rule a {
+  float: right;
+}
+
+.label.label-warning.tariff-info.biggest {
+  font-size: 10px;
+}
+
+.toolbar-content {
+  margin-bottom: 20px;
+  padding: 3px;
+  flex-direction: column;
+}

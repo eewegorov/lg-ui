@@ -1,0 +1,75 @@
+<div class="row-subitem border-item">
+  <button
+    (click)="listFile('image', modelName)"
+    *ngIf="isDefault(modelName.imageUrl)"
+    class="widget-download-img"
+  >
+    <img alt="Загрузить изображение" src='../../../../../../../assets/images/widgets/upload.svg'/> Загрузить изображение
+  </button>
+
+  <div *ngIf="!isDefault(modelName.imageUrl)" class="image-container">
+    <img [src]="modelName.imageUrl" alt="image"/>
+    <div class="d-flex justify-content-between align-items-center">
+      <p>{{ modelName.imageUrl.split('/').pop() }}</p>
+      <div class="remove-sub-item">
+        <button (click)="removeImage()" class="delete-element-button">&times;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row-subitem mt-4">
+  <h3>Размер изображения</h3>
+
+  <div class="d-flex align-items-center justify-content-between mt-2 pt-1">
+    <label class="control-label">Ширина</label>
+    <div class="d-flex align-items-center">
+      <div
+        [class.disabled]="modelName.width_type !== widthHrType[1]"
+        class="form-control form-control-font mr-2"
+      >
+        <input
+          [(ngModel)]="modelName.widthpx"
+          [disabled]="modelName.width_type !== widthHrType[1]"
+          type="number"
+        />
+        <label>px</label>
+      </div>
+      <button
+        (click)="modelName.width_type = (modelName.width_type === widthHrType[0] ? widthHrType[1] : widthHrType[0])"
+        [class.active]="modelName.width_type === widthHrType[0]"
+        class="wide-button"
+      >
+      </button>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3">
+    <label
+      [class.disabled]="modelName.width_type === widthHrType[0]"
+      class="control-label"
+    >
+      Выравнивание
+    </label>
+    <div>
+      <button
+        (click)="modelName.position = floatBtn[0]"
+        [class.active]="modelName.position === floatBtn[0]"
+        [disabled]="modelName.width_type === widthHrType[0]"
+        class="align-button icon-left"
+      ></button>
+      <button
+        (click)="modelName.position = floatBtn[1]"
+        [class.active]="modelName.position === floatBtn[1]"
+        [disabled]="modelName.width_type === widthHrType[0]"
+        class="align-button icon-center"
+      ></button>
+      <button
+        (click)="modelName.position = floatBtn[2]"
+        [class.active]="modelName.position === floatBtn[2]"
+        [disabled]="modelName.width_type === widthHrType[0]"
+        class="align-button icon-right"
+      ></button>
+    </div>
+  </div>
+</div>

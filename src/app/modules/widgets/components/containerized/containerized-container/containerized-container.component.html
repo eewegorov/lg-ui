@@ -1,0 +1,91 @@
+<app-card>
+  <div class="static-widgets-header">
+    <div class="header-left">
+      <cool-inline-edit-field
+        (saved)="updateContainer($event)"
+        [(ngModel)]="container.name"
+        [emptyText]="'containerized.container.add.name' | translate"
+        class="static-widgets-name"
+        name="name"
+      ></cool-inline-edit-field>
+      <cool-inline-edit-field
+        (saved)="updateDescription()"
+        [(ngModel)]="container.description"
+        [emptyText]="'containerized.container.add.description' | translate"
+        class="static-widgets-description"
+        name="name"
+      ></cool-inline-edit-field>
+    </div>
+    <div class="header-right">
+      <button
+        (click)="openContainerCodeModal()"
+        class="btn btn-default"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'containerized.container.code.tooltip' | translate }}"
+      >
+        &lt;/&gt; {{ 'settings.script.title' | translate }}
+      </button>
+      <button
+        (click)="removeContainer()"
+        class="btn btn-default"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'containerized.container.remove' | translate }}"
+      >
+        <span inlineSVG="./assets/images/core/delete-icon.svg"></span>
+      </button>
+    </div>
+  </div>
+  <div class="static-widgets-table">
+    <table>
+      <thead>
+        <th class="name">{{ 'widgetsList.widget.widget' | translate }}</th>
+        <th class="campaign">{{ 'widgetsList.selectCompany' | translate }}</th>
+        <th class="shows">{{ 'widgetsList.widget.show.all' | translate }}</th>
+        <th class="targets">{{ 'widgetsList.widget.show.actions' | translate }}</th>
+        <th class="conv">{{ 'widgetsList.widget.show.conversion' | translate }}</th>
+        <th class="priority">
+          {{ 'widgetsList.widget.priority.title' | translate }}
+          <a
+            class="info-link"
+            data-container="#myWidgets"
+            data-placement="top"
+            data-toggle="tooltip"
+            title="{{ 'widgetsList.widget.priority.tooltip' | translate }}"
+            inlineSVG="./assets/images/core/question.svg"
+          ></a>
+        </th>
+        <th class="actions-static">{{ 'containerized.container.header.control' | translate }}</th>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let widget of container.widgets; let isOdd = odd; index as i">
+        <app-containerized-item
+          [class.bg-for-line-grid]="isOdd"
+          [containerId]="container.id"
+          [first]="i === 0"
+          [item]="widget"
+          [last]="i === container.widgets.length - 1"
+          [next]="container.widgets[i + 1]"
+          [prev]="container.widgets[i - 1]"
+          [siteId]="site.id"
+          class="table-row"
+        ></app-containerized-item>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <div class="static-widgets-footer">
+    <button (click)="addVariant()" class="btn btn-default" type="button">
+      <span inlineSVG="./assets/images/core/plus.svg"></span> {{ 'containerized.container.widget.add' | translate }}
+    </button>
+    <a
+      class="static-help-link"
+      href="https://leadgenic.userecho.com/knowledge-bases/2/articles/456-statichnyie-vidzhetyi-opisanie-vozmozhnostej-i-instruktsiya"
+      target="_blank"
+    >
+      {{ 'containerized.container.help.btn' | translate }}
+    </a>
+  </div>
+</app-card>

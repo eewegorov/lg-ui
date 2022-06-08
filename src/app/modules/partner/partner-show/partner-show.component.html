@@ -1,0 +1,22 @@
+<div class="modal-header text-center justify-content-center">
+  <h4 class="modal-title">{{ 'partner.ads.code' | translate }}</h4>
+</div>
+<div class="modal-body">
+  <div><label for="code">{{ 'partner.ads.comment' | translate }}:</label></div>
+  <textarea
+    [(ngModel)]="refCode"
+    appSelectOnClick
+    class="form-control"
+    cols="30"
+    id="code"
+    readonly
+    rows="5"
+  ></textarea>
+</div>
+<div class="modal-footer">
+  <div class="text-right m-r">
+    <a (click)="closeModal()"
+       class="btn btn-default"
+    >{{ 'global.close' | translate }}</a>
+  </div>
+</div>

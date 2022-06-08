@@ -1,0 +1,446 @@
+<div class="timer-template-wrapper">
+  <!-- SETTINGS -->
+  <div class="row-subitem row-subitem-padding">
+    <h3>{{ 'widgets.timerDirective.countdown.title' | translate }}</h3>
+    <div class="dropdown mt-1">
+      <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+        {{ item.type.label }}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li (click)="item.type = itemType" *ngFor="let itemType of timerTypes" role="presentation">
+          <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemType.label }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- to current date -->
+  <ng-container *ngIf="item.type.type === 0">
+    <div class="row-subitem row-subitem-padding mt-3 pt-1">
+      <app-timer-datepicker [item]="item"></app-timer-datepicker>
+    </div>
+
+    <div class="row-subitem mt-3 pt-1 border-item">
+      <h3>{{ 'widgets.timerDirective.timezone.title' | translate }}</h3>
+      <div class="flex-bl-for-radio-group mt-3">
+        <div class="row-subitem-padding radio-group-item mr-5">
+          <div class="form-group widget-selector mb-0">
+            <label>
+              <input [(ngModel)]="item.timezoneType" class="radio radio-info radio-inline" type="radio" value="local">
+              {{ 'widgets.timerDirective.timezone.local' | translate }}
+            </label>
+          </div>
+        </div>
+        <div class="row-subitem-padding radio-group-item">
+          <div class="form-group widget-selector mb-0">
+            <label>
+              <input [(ngModel)]="item.timezoneType" class="radio radio-info radio-inline" type="radio" value="gmt">
+              {{ 'widgets.timerDirective.timezone.gmt' | translate }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- to interval -->
+  <div *ngIf="item.type.type === 1">
+    <div class="type1-flexed-row row-subitem mt-4 border-item">
+      <div class="type1-flexed-row-item pr-3">
+        <label
+          class="control-label control-label-des switcher-label-xs pb-1">{{ 'widgets.timerDirective.label.days' | translate }}</label>
+        <input [(ngModel)]="item.type1Model.d" class="form-control form-control-font form-control-block" max="99" min="0"
+               type="number">
+      </div>
+
+      <div class="type1-flexed-row-item pr-3">
+        <label
+          class="control-label control-label-des switcher-label-xs pb-1">{{ 'widgets.timerDirective.label.hours' | translate }}</label>
+        <input [(ngModel)]="item.type1Model.h" class="form-control form-control-font form-control-block" max="24" min="0"
+               type="number">
+      </div>
+
+      <div class="type1-flexed-row-item pr-3">
+        <label
+          class="control-label control-label-des switcher-label-xs pb-1">{{ 'widgets.timerDirective.label.mins' | translate }}</label>
+        <input [(ngModel)]="item.type1Model.m" class="form-control form-control-font form-control-block" max="59" min="0"
+               type="number">
+      </div>
+
+      <div class="type1-flexed-row-item">
+        <label
+          class="control-label control-label-des switcher-label-xs pb-1">{{ 'widgets.timerDirective.label.secs' | translate }}</label>
+        <input [(ngModel)]="item.type1Model.s" class="form-control form-control-font form-control-block" max="59" min="0"
+               type="number">
+      </div>
+    </div>
+
+    <div class="border-item">
+      <div class="d-flex row-subitem justify-content-between row-subitem-padding mt-4">
+        <label class="control-label switcher-label-xs control-label-des">
+          {{ 'widgets.timerDirective.loop.label' | translate }}
+        </label>
+        <ui-switch
+          [(ngModel)]="item.loop.enable"
+          size="small"
+        ></ui-switch>
+      </div>
+
+      <div class="row-subitem row-subitem-padding widget-small-text mt-3">
+        {{ 'widgets.timerDirective.loop.desc' | translate }}
+      </div>
+
+      <div *ngIf="item.loop.enable">
+        <div class="type1-flexed-row row-subitem mt-3">
+          <div class="type1-flexed-row-item pr-3">
+            <label
+              class="control-label control-label-des switcher-label-xs pb-1">{{ 'widgets.timerDirective.label.days' | translate }}</label>
+            <input [(ngModel)]="item.loop.model.d" class="form-control form-control-font form-control-block" max="99" min="0"
+                   type="number">
+          </div>
+
+          <div class="type1-flexed-row-item pr-3">
+            <label
+              class="control-label control-label-des switcher-label-xs pb-1">{{ 'widgets.timerDirective.label.hours' | translate }}</label>
+            <input [(ngModel)]="item.loop.model.h" class="form-control form-control-font form-control-block" max="24" min="0"
+                   type="number">
+          </div>
+
+          <div class="type1-flexed-row-item pr-3">
+            <label
+              class="control-label control-label-des switcher-label-xs pb-1">{{ 'widgets.timerDirective.label.mins' | translate }}</label>
+            <input [(ngModel)]="item.loop.model.m" class="form-control form-control-font form-control-block" max="59" min="0"
+                   type="number">
+          </div>
+
+          <div class="type1-flexed-row-item">
+            <label
+              class="control-label control-label-des switcher-label-xs pb-1">{{ 'widgets.timerDirective.label.secs' | translate }}</label>
+            <input [(ngModel)]="item.loop.model.s" class="form-control form-control-font form-control-block" max="59" min="0"
+                   type="number">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-subitem row-subitem-padding form-ext-item__item-input mt-4 border-item">
+      <h3>{{ 'widgets.timerDirective.id.label' | translate }}</h3>
+      <input [(ngModel)]="item.id" class="form-control form-control-form-ext-id-field mt-1" type="text">
+      <span class="input-down-sm-lab">{{ 'widgets.timerDirective.id.desc1' | translate }}</span>
+      <span
+        [innerHTML]="'widgets.timerDirective.id.desc2' | translate"
+        class="row-subitem row-subitem-padding mt-3 input-down-sm-lab"
+      ></span>
+    </div>
+  </div>
+
+  <div class="row-subitem row-subitem-padding mt-4 border-item">
+    <h3>{{ 'widgets.timerDirective.countdown.action.title' | translate }}</h3>
+
+    <div class="dropdown mt-2">
+      <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+        {{ item.expType.label }}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li (click)="item.expType = itemType" *ngFor="let itemType of expTypes" role="presentation">
+          <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemType.label }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div
+      *ngIf="item.expType.type === 1"
+      class="row-subitem row-subitem-padding form-ext-item__item-input mt-2"
+      [class.is-invalid]="!item.expUrl && showErrors"
+    >
+      <input [(ngModel)]="item.expUrl" class="form-control" placeholder="http://" type="text">
+      <a (click)="item.expUrl = ''" *ngIf="item.expUrl" class="remove-widget-name remove-widget-redirect"></a>
+    </div>
+  </div>
+
+
+  <!-- DESIGN -->
+  <h3 class="mt-4">{{ 'widgets.timerDirective.design.title' | translate }}</h3>
+
+  <div class="d-flex align-items-center justify-content-between mt-2 pt-1">
+    <label class="control-label">{{ 'widgets.timerDirective.design.bgWidth' | translate }}</label>
+    <div class="align-items-center">
+      <div class="form-control form-control-font">
+        <input
+          [(ngModel)]="item.design.bgWidth"
+          type="number"
+        />
+        <label>px</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between mt-2 pt-1">
+    <label class="control-label">{{ 'widgets.timerDirective.design.bgHeight' | translate }}</label>
+    <div class="align-items-center">
+      <div class="form-control form-control-font">
+        <input
+          [(ngModel)]="item.design.bgHeight"
+          type="number"
+        />
+        <label>px</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between mt-3">
+    <label class="control-label">Скругление углов</label>
+    <div class="d-flex text-right side-ui-sm">
+      <ngx-slider [(value)]="item.design.radius" [options]="optionsRound"></ngx-slider>
+      <input
+        [(ngModel)]="item.design.radius"
+        class="picker-input slider"
+      />
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3 border-item">
+    <label class="control-label">Выравнивание</label>
+    <div>
+      <button
+        (click)="item.design.align = alignValues[0]"
+        [class.active]="item.design.align.label === alignValues[0].label"
+        class="align-button icon-left"
+      ></button>
+      <button
+        (click)="item.design.align = alignValues[1]"
+        [class.active]="item.design.align.label === alignValues[1].label"
+        class="align-button icon-center"
+      ></button>
+      <button
+        (click)="item.design.align = alignValues[2]"
+        [class.active]="item.design.align.label === alignValues[2].label"
+        class="align-button icon-right"
+      ></button>
+    </div>
+  </div>
+
+  <div class="row-subitem mt-4">
+    <h3>{{ 'widgets.timerDirective.design.fontNumber' | translate }}</h3>
+    <div class="row-subitem-padding mt-3">
+      <input [id]="'font-picker-number-timer' + index" type="text">
+    </div>
+  </div>
+  <div class="d-flex align-items-center justify-content-between mt-2 border-item">
+    <label class="control-label">Размер</label>
+    <div class="row align-items-center">
+      <div class="form-control form-control-font">
+        <input
+          [(ngModel)]="item.design.fontNumberSize"
+          type="number"
+        />
+        <label>px</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-subitem mt-4">
+    <h3>{{ 'widgets.timerDirective.design.fontLabel' | translate }}</h3>
+    <div class="row-subitem-padding mt-3">
+      <input [id]="'font-picker-label-timer' + index" type="text">
+    </div>
+  </div>
+  <div class="d-flex align-items-center justify-content-between mt-2 border-item">
+    <label class="control-label">Размер</label>
+    <div class="row align-items-center">
+      <div class="form-control form-control-font">
+        <input
+          [(ngModel)]="item.design.fontLabelSize"
+          type="number"
+        />
+        <label>px</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 border-item">
+    <h3>Цвет</h3>
+
+    <div class="d-flex justify-content-between mt-3 pt-1">
+      <label class="control-label">{{ 'widgets.timerDirective.design.colorText' | translate }}</label>
+      <div class="d-flex text-right">
+        <input
+          [(colorPicker)]="item.design.colorText"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [style.background]="item.design.colorText"
+          class="color-picker-control"
+          cpPosition="left"
+          readonly
+        />
+        <input
+          [(ngModel)]="item.design.colorText"
+          class="picker-input color"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <label class="control-label">{{ 'widgets.timerDirective.design.colorBG' | translate }}</label>
+      <div class="d-flex text-right">
+        <input
+          [(colorPicker)]="item.design.colorBG"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [style.background]="item.design.colorBG"
+          class="color-picker-control"
+          cpPosition="left"
+          readonly
+        />
+        <input
+          [(ngModel)]="item.design.colorBG"
+          class="picker-input color"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <label class="control-label">{{ 'widgets.timerDirective.design.colorDivider' | translate }}</label>
+      <div class="d-flex text-right">
+        <input
+          [(colorPicker)]="item.design.colorDivider"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [style.background]="item.design.colorDivider"
+          class="color-picker-control"
+          cpPosition="left"
+          readonly
+        />
+        <input
+          [(ngModel)]="item.design.colorDivider"
+          class="picker-input color"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <label class="control-label">{{ 'widgets.timerDirective.design.colorIntervalName' | translate }}</label>
+      <div class="d-flex text-right">
+        <input
+          [(colorPicker)]="item.design.colorIntervalName"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [style.background]="item.design.colorIntervalName"
+          class="color-picker-control"
+          cpPosition="left"
+          readonly
+        />
+        <input
+          [(ngModel)]="item.design.colorIntervalName"
+          class="picker-input color"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <label class="control-label">Прозрачность</label>
+      <div class="d-flex text-right side-ui-sm">
+        <ngx-slider
+          [(value)]="item.design.opacity"
+          [options]="optionsOpacity"
+        ></ngx-slider>
+        <input
+          [(ngModel)]="item.design.opacity"
+          class="picker-input slider"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="row-subitem mt-3">
+    <h3>{{ 'widgets.timerDirective.design.nullData.label' | translate }}</h3>
+  </div>
+  <div class="row-subitem mt-3 timer-null-data-block">
+    <div class="d-flex row-subitem-padding">
+      <div class="form-check">
+        <label class="form-check-label mr-2">
+          <input
+            (change)="setNullData('d')"
+            [(ngModel)]="item.design.nullData.d"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+        </label>
+        <span class="f-3">{{ 'widgets.timerDirective.labelShort.days' | translate }}</span>
+      </div>
+
+      <div class="form-check ml-5 pl-4">
+        <label class="form-check-label mr-2">
+          <input
+            (change)="setNullData('h')"
+            [(ngModel)]="item.design.nullData.h"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+        </label>
+        <span class="f-3">{{ 'widgets.timerDirective.labelShort.hours' | translate }}</span>
+      </div>
+
+      <div class="form-check ml-5 pl-4">
+        <label class="form-check-label mr-2">
+          <input
+            (change)="setNullData('m')"
+            [(ngModel)]="item.design.nullData.m"
+            class="form-check-input"
+            type="checkbox"
+          />
+          <span class="checkmark"></span>
+        </label>
+        <span class="f-3">{{ 'widgets.timerDirective.labelShort.mins' | translate }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-subitem row-subitem-padding widget-small-text mt-2 border-item">
+    {{ 'widgets.timerDirective.design.nullData.desc' | translate }}
+  </div>
+
+  <div class="d-flex row-subitem justify-content-between row-subitem-padding mt-3">
+    <label class="control-label switcher-label-xs control-label-des">
+      {{ 'widgets.timerDirective.design.tempInterval.label' | translate }}
+    </label>
+    <ui-switch
+      [(ngModel)]="item.design.tempInterval.enable"
+      size="small"
+    ></ui-switch>
+  </div>
+
+  <div *ngIf="item.design.tempInterval.enable">
+    <div class="row-subitem row-subitem-padding pt-1 form-ext-item__item-input mt-2">
+      <label class="control-label switcher-label-xs mb-1">
+        {{ 'widgets.timerDirective.design.tempInterval.days' | translate }}
+      </label>
+      <input [(ngModel)]="item.design.tempInterval.dText" class="form-control" type="text">
+    </div>
+
+    <div class="row-subitem row-subitem-padding pt-1 form-ext-item__item-input mt-2">
+      <label class="control-label switcher-label-xs mb-1">
+        {{ 'widgets.timerDirective.design.tempInterval.hours' | translate }}
+      </label>
+      <input [(ngModel)]="item.design.tempInterval.hText" class="form-control" type="text">
+    </div>
+
+    <div class="row-subitem row-subitem-padding pt-1 form-ext-item__item-input mt-2">
+      <label class="control-label switcher-label-xs mb-1">
+        {{ 'widgets.timerDirective.design.tempInterval.mins' | translate }}
+      </label>
+      <input [(ngModel)]="item.design.tempInterval.mText" class="form-control" type="text">
+    </div>
+
+    <div class="row-subitem row-subitem-padding pt-1 form-ext-item__item-input mt-2 mb-3">
+      <label class="control-label switcher-label-xs mb-1">
+        {{ 'widgets.timerDirective.design.tempInterval.secs' | translate }}
+      </label>
+      <input [(ngModel)]="item.design.tempInterval.sText" class="form-control" type="text">
+    </div>
+  </div>
+</div>

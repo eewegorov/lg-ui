@@ -1,0 +1,35 @@
+.w-datepicker {
+  position: relative;
+  height: 42px;
+}
+
+.w-datepicker input.form-control {
+  position: relative;
+  height: 42px;
+  background-color: #fff;
+  color: #6a6c6f;
+  font-weight: 200 !important;
+  z-index: 1;
+}
+
+.w-datepicker label {
+  cursor: text;
+  position: absolute;
+  transition: all 0.15s ease;
+  top: 10px;
+  left: 12px;
+  height: 0;
+  color: #6a6c6f;
+  font-size: 1.1em;
+  line-height: 1.6em;
+  font-weight: normal;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.w-datepicker input:focus ~ label,
+.w-datepicker.filled label {
+  font-size: 0.6em;
+  top: 3px;
+  left: 12px;
+}

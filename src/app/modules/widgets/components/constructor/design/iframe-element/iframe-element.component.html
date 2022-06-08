@@ -1,0 +1,105 @@
+<div>
+  <h3 class="mt-1">Размер</h3>
+
+  <div class="d-flex align-items-center justify-content-between mt-3">
+    <label class="control-label">Ширина</label>
+    <div class="d-flex align-items-center">
+      <div
+        [class.disabled]="modelName.width_type !== widthHrType[1]"
+        class="form-control form-control-font mr-2"
+      >
+        <input
+          [(ngModel)]="modelName.widthpx"
+          [disabled]="modelName.width_type !== widthHrType[1]"
+          type="number"
+        />
+        <label>px</label>
+      </div>
+      <button
+        (click)="modelName.width_type = (modelName.width_type === widthHrType[0] ? widthHrType[1] : widthHrType[0])"
+        [class.active]="modelName.width_type === widthHrType[0]"
+        class="wide-button"
+      >
+      </button>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3 pt-1">
+    <label
+      [class.disabled]="modelName.width_type === widthHrType[0]"
+      class="control-label"
+    >
+      Выравнивание
+    </label>
+    <div>
+      <button
+        (click)="modelName.position = floatBtn[0]"
+        [class.active]="modelName.position === floatBtn[0]"
+        [disabled]="modelName.width_type === widthHrType[0]"
+        class="align-button icon-left"
+      ></button>
+      <button
+        (click)="modelName.position = floatBtn[1]"
+        [class.active]="modelName.position === floatBtn[1]"
+        [disabled]="modelName.width_type === widthHrType[0]"
+        class="align-button icon-center"
+      ></button>
+      <button
+        (click)="modelName.position = floatBtn[2]"
+        [class.active]="modelName.position === floatBtn[2]"
+        [disabled]="modelName.width_type === widthHrType[0]"
+        class="align-button icon-right"
+      ></button>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between mt-3 border-item">
+    <label class="control-label">Высота</label>
+    <div class="d-flex align-items-center">
+      <div
+        [class.disabled]="modelName.height_type === 'Авто'"
+        class="form-control form-control-font mr-2"
+      >
+        <input
+          [(ngModel)]="modelName.heightpx"
+          [disabled]="modelName.height_type === 'Авто'"
+          min="60"
+          type="number"
+        />
+        <label>px</label>
+      </div>
+      <button
+        (click)="modelName.height_type = (modelName.height_type === widgwidthBtn[0] ? widgwidthBtn[1] : widgwidthBtn[0])"
+        [class.active]="modelName.height_type === 'Авто'"
+        class="content-type-button"
+      >
+        AUTO
+      </button>
+    </div>
+  </div>
+
+  <div class="row-subitem row-subitem-padding mt-4 position-relative">
+    <h3 class="mb-1">HTML или JAVASCRIPT код</h3>
+    <textarea (blur)="getCodeForIframe(modelName)" [(ngModel)]="modelName.html_value"
+              class="form-control textar-iframe"></textarea>
+    <span class="small">Также вы можете использовать iframe, если нужно.</span>
+    <button
+      (click)="getCodeForIframe(modelName)"
+      class="btn btn-default refresh-iframe-element-btn"
+      data-container="body"
+      data-original-title="Обновить превью виджета"
+      data-placement="top"
+      data-toggle="tooltip"
+      title=""
+    >
+      <i class="fas fa-sync"></i>
+    </button>
+  </div>
+
+  <div class="row-subitem row-subitem-padding mt-3">
+    <h3 class="mb-1">CSS стиль</h3>
+    <textarea (blur)="getCodeForIframe(modelName)" [(ngModel)]="modelName.css_value"
+              class="form-control textar-iframe"></textarea>
+    <span class="small">Можно оставить пустым. Применяется только к элементу</span>
+  </div>
+</div>

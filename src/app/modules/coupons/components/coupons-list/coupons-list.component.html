@@ -1,0 +1,90 @@
+<tr [class.no-border]="first">
+  <td class="name-coupon">
+    <ng-container *ngIf="couponNameEditing$ | async; else name">
+      <div [class.is-invalid]="couponEditingName.trim().length === 0" class="input">
+        <input
+          [(ngModel)]="couponEditingName"
+          class="form-control"
+          placeholder="{{ 'containerized.container.add.name' | translate }}"
+          type="text"
+        />
+      </div>
+      <button
+        (click)="toggleCouponNameEditing()"
+        class="btn btn-default"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'global.cancel' | translate }}"
+      >
+        <span inlineSVG="./assets/images/core/cross.svg"></span>
+      </button>
+      <button
+        (click)="updateCoupon()"
+        [disabled]="couponEditingName.trim().length === 0"
+        class="btn btn-default"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'coupons.coupon.edit.tooltip' | translate }}"
+      >
+        <span inlineSVG="./assets/images/core/check.svg"></span>
+      </button>
+    </ng-container>
+    <ng-template #name>
+      <span>{{ coupon.name }}</span>
+      <button
+        (click)="toggleCouponNameEditing()"
+        class="btn"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        data-trigger="hover"
+        title="{{ 'coupons.coupon.edit.tooltip' | translate }}"
+      >
+        <span inlineSVG="./assets/images/core/pencil.svg"></span>
+      </button>
+    </ng-template>
+  </td>
+  <td class="code-coupon">
+    <span
+      (click)="copyCouponCode()"
+      [innerHTML]="couponCodeToPaste"
+      data-container="body"
+      data-placement="top"
+      data-toggle="tooltip"
+      title="{{ 'coupons.coupon.copied.tooltip' | translate }}"
+    >
+    </span>
+  </td>
+
+  <td class="type-coupon">
+    <span *ngIf="coupon.type === 'REUSABLE'">{{ 'coupons.modal.newCoupon.tab2.title' | translate }}</span>
+    <span *ngIf="coupon.type !== 'REUSABLE'">{{ 'coupons.modal.newCoupon.tab1.title' | translate }}</span>
+  </td>
+  <td class="actions-coupon">
+    <div class="btns">
+      <button
+        (click)="openEditableCouponModal()"
+        class="btn btn-sm btn-default"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'coupons.coupon.edit.tooltip' | translate }}"
+      >
+        <span inlineSVG="./assets/images/core/settings.svg"></span>
+      </button>
+
+      <button
+        (click)="removeCoupon()"
+        class="btn btn-sm btn-default"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'coupons.coupon.delete.tooltip' | translate }}"
+      >
+        <span inlineSVG="./assets/images/core/delete-icon.svg"></span>
+      </button>
+    </div>
+  </td>
+</tr>

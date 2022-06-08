@@ -1,0 +1,184 @@
+<div class="partner">
+  <h1 class="title-main">{{ 'header.partner' | translate }}</h1>
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="hpanel">
+            <div class="panel-body">
+              <h3>{{ 'partner.ads.panel' | translate }}</h3>
+              <div class="ads-container text-center">
+                <span class="dimension">200 x 200</span>
+                <div class="code">
+                  <a href="{{ partnerUrl }}" target="_blank"><img src="/assets/images/partner/200.jpg"
+                                                                  style="width: 200px; height: 200px; cursor: pointer;"></a>
+                </div>
+                <button (click)="showCode($event)" class="show-code btn btn-info partner-btn"
+                        type="button">{{ 'partner.showcode' | translate }}</button>
+              </div>
+
+              <div class="ads-container text-center" style="width: 240px; float: left; margin-left: 70px;">
+                <span class="dimension">240 x 400</span>
+                <div class="code">
+                  <a href="{{ partnerUrl }}" target="_blank"><img src="/assets/images/partner/240.jpg"
+                                                                  style="width: 240px; height: 400px; cursor: pointer;"></a>
+                </div>
+                <button (click)="showCode($event)" class="show-code btn btn-info partner-btn"
+                        type="button">{{ 'partner.showcode' | translate }}</button>
+              </div>
+
+              <div class="ads-container text-center" style="width: 468px; float: left; margin-left: 70px;">
+                <span class="dimension">468 x 60</span>
+                <div class="code">
+                  <a href="{{ partnerUrl }}" target="_blank"><img src="/assets/images/partner/468.jpg"
+                                                                  style="width: 468px; height: 60px; cursor: pointer;"></a>
+                </div>
+                <button (click)="showCode($event)" class="show-code btn btn-info partner-btn"
+                        type="button">{{ 'partner.showcode' | translate }}</button>
+              </div>
+
+              <div class="ads-container text-center" style="width: 500px; float: left; margin-left: 70px;">
+                <span class="dimension">500 x 200</span>
+                <div class="code">
+                  <a href="{{ partnerUrl }}" target="_blank"><img src="/assets/images/partner/500.jpg"
+                                                                  style="width: 500px; height: 200px; cursor: pointer;"></a>
+                </div>
+                <button (click)="showCode($event)" class="show-code btn btn-info partner-btn"
+                        type="button">{{ 'partner.showcode' | translate }}</button>
+              </div>
+
+              <div class="ads-container text-center" style="width: 728px; float: left; margin-left: 70px;">
+                <span class="dimension">728 x 90</span>
+                <div class="code">
+                  <a href="{{ partnerUrl }}" target="_blank"><img src="/assets/images/partner/728.jpg"
+                                                                  style="width: 728px; height: 90px; cursor: pointer;"></a>
+                </div>
+                <button (click)="showCode($event)" class="show-code btn btn-info partner-btn"
+                        type="button">{{ 'partner.showcode' | translate }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="hpanel">
+            <div class="panel-body">
+              <h3>{{ 'partner.yourlink.title' | translate }}</h3>
+              <input
+                [(ngModel)]="partnerUrl"
+                appSelectOnClick
+                class="form-control"
+                id="partnerlink"
+                readonly
+                type="text"
+              >
+              <div class="row mt-1 p-2">
+                <div class="partnerlink-description col-lg-5">
+                  {{ 'partner.yourlink.description' | translate }}
+                </div>
+                <div class="partnerlink-socialnetworks col-lg-7">
+                  <i (click)="fbLink()" class="fab fa-facebook-square"></i>
+                  <i (click)="vkLink()" class="fab fa-vk"></i>
+                  <i (click)="twLink()" class="fab fa-twitter"></i>
+                </div>
+              </div>
+              <hr/>
+              <div class="row mt-1 p-2">
+                <div class="col-lg-6 partnerlink-description">{{ 'partner.add.title' | translate }}</div>
+                <div class="col-lg-6 text-right">
+                  <button
+                    (click)="createRef()"
+                    class="btn btn-success text-wrap partner-btn"
+                    id="addPartner"
+                    type="button"
+                  >
+                    {{ 'partner.add.button' | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row partner-saldo-wr">
+        <div class="col-lg-12">
+          <div class="hpanel">
+            <div class="panel-body">
+              <h3>{{ 'partner.saldo.title' | translate }}</h3>
+              <h1 class="text-center partner-payment">
+                <span class="partner-payment" id="partner-saldo">{{ partnerBalance }}</span> <i
+                class="fa fa-ruble-sign"></i>
+              </h1>
+              <h5>{{ 'partner.saldo.desc' | translate }}</h5>
+              <br>
+              <div id="wallet-container">
+                <label class="control-label mb-2" for="walletid">{{ 'partner.wallet.title' | translate }}:</label>
+                <div class="wallet-container_row">
+                  <input [(ngModel)]="walletId" autocomplete="off" class="form-control" id="walletid" type="text">
+                  <button
+                    (click)="setWallet()"
+                    [disabled]="!walletId"
+                    class="btn btn-success partner-btn"
+                    id="walletSave"
+                  >
+                    {{ 'global.save' | translate }}
+                  </button>
+                </div>
+              </div>
+
+              <hr/>
+              <div style="font-size:11px;">{{ 'partner.wallet.description' | translate }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row partner-stats-wr">
+        <div class="col-lg-12">
+          <div class="hpanel">
+            <div class="panel-body">
+              <h3>{{ 'partner.statistics' | translate }}</h3>
+              <div class="partner-stats-block">
+                <div>
+                  <span>{{ regUsers }}</span>
+                  <p [innerHTML]="'partner.allUsers' | translate"></p>
+                </div>
+                <div>
+                  <span>{{ earnedMoney }} <i class="fa fa-ruble-sign"></i></span>
+                  <p [innerHTML]="'partner.earnedMoney' | translate"></p>
+                </div>
+              </div>
+              <h4 class="mt-3">{{ 'partner.transactions.title' | translate }}:</h4>
+
+              <div *ngIf="transactions.length" class="partner-transaction-wr">
+                <div *ngFor="let item of transactions; trackBy: trackById" class="partner-transaction row">
+                  <div class="col-lg-3">{{ item.date | date:'dd.MM.yy' }}</div>
+                  <div class="col-lg-5">
+                    <div *ngIf="item.type === 'DEBIT'">{{ 'partner.transactions.debit' | translate }}</div>
+                    <div *ngIf="item.type === 'CREDIT'">{{ 'partner.transactions.credit' | translate }}</div>
+                  </div>
+                  <div class="col-lg-4 text-right">
+                    <div *ngIf="item.type === 'DEBIT'" style="color:#62cb31;">- <span>{{ item.sum }}</span> ₽</div>
+                    <div *ngIf="item.type === 'CREDIT'" style="color:#3498db;">+ <span>{{ item.sum }}</span> ₽</div>
+                  </div>
+                </div>
+
+                <div *ngIf="!loadingTransaction && !allTransactionsLoaded" class="text-center"><span (click)="loadMore()"
+                                                                                                     class="show-more">{{ 'partner.transactions.showMore' | translate }}</span>
+                </div>
+                <div *ngIf="loadingTransaction" class="show-more-spinner"></div>
+              </div>
+
+              <div *ngIf="!transactions.length || loadingTransaction"
+                   class="text-center">{{ 'partner.transactions.empty' | translate }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{ 'sitelist.form.title' | translate }}</h3>
+  <button class="close btn" (click)="closeModal()">
+    <span inlineSVG="./assets/images/core/cross.svg"></span>
+  </button>
+</div>
+<div class="modal-body">
+  <ng-container *ngIf="tab === 1">
+    <form (ngSubmit)="createSite()" [formGroup]="newSiteForm">
+      <div class="form-group">
+        <label class="control-label" for="name">{{ 'sitelist.form.name' | translate }}</label>
+        <input
+          class="form-control"
+          formControlName="name"
+          id="name"
+          placeholder="{{ 'sitelist.form.name' | translate }}..."
+          required
+          type="text"
+        />
+        <span [innerHTML]="'sitelist.form.start.desc1' | translate" class="small"></span>
+      </div>
+      <div [ngClass]="{ 'is-invalid': isUrlInvalid }" class="form-group">
+        <label class="control-label" for="url">{{ 'sitelist.form.url' | translate }}</label>
+        <input
+          (change)="enableTyping()"
+          class="form-control"
+          formControlName="url"
+          placeholder="{{ 'sitelist.form.url' | translate }}..."
+          id="url"
+          required
+          type="text"
+        />
+        <span [innerHTML]="'sitelist.form.start.desc2' | translate" class="small">.</span>
+      </div>
+      <div *ngIf="!hidePhone" class="form-group" id="phoneContainer">
+        <label class="control-label" for="phone">{{ 'sitelist.form.phone.title' | translate }}</label>
+        <input
+          class="form-control"
+          formControlName="phone"
+          placeholder="{{ 'sitelist.form.phone.title' | translate }}..."
+          id="phone"
+          type="text"
+        />
+        <span class="small">{{ 'sitelist.form.phone.desc' | translate }}</span>
+      </div>
+      <div class="form-buttons">
+        <button [disabled]="!newSiteForm.valid" class="btn btn-lg btn-success" type="submit">
+          {{ 'sitelist.form.save' | translate }}
+        </button>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="tab === 2">
+    <h4>{{ 'sitelist.save.done' | translate }}</h4>
+    <div class="form">
+      <div class="form-group">
+        <label for="siteLink" class="control-label">{{ 'sitelist.form.code.title' | translate }}</label>
+        <textarea
+          [(ngModel)]="createdSite.link"
+          appSelectOnClick
+          class="form-control not-readonly-hand"
+          id="siteLink"
+          readonly
+          rows="5"
+        ></textarea>
+        <span class="small">{{ 'sitelist.form.code.desc1' | translate }}</span>
+      </div>
+      <div class="form-group" data-context="url">
+        <label for="siteId" class="control-label">
+          {{ 'settings.script.apicode.title' | translate }}
+          <a
+            class="info-link"
+            data-container="body"
+            data-placement="top"
+            data-title="{{ 'settings.script.apicode.tooltip' | translate }}"
+            data-toggle="tooltip"
+            inlineSVG="./assets/images/core/question.svg"
+          ></a>
+        </label>
+        <input
+          [(ngModel)]="createdSite.id"
+          appSelectOnClick
+          class="form-control not-readonly-hand"
+          id="siteId"
+          name="name"
+          readonly
+          type="text"
+        />
+      </div>
+    </div>
+    <h4>{{ 'sitelist.form.goto' | translate }}</h4>
+    <div class="d-flex justify-content-between align-items-center buttons">
+      <a class="simple-link" (click)="closeModal()">{{ 'sitelist.form.gotoaway' | translate }}</a>
+      <button (click)="setTab(3)" class="btn btn-lg btn-success">{{ 'sitelist.form.gotopoints' | translate }}</button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="tab === 3">
+    <h4>{{ 'sitelist.form.smartpoints.settings' | translate }}</h4>
+    <p>{{ 'sitelist.form.smartpoints.desc1' | translate }}</p>
+    <div class="widgets-options-container">
+      <app-smartpoints-control [siteId]="createdSite.id" [smartPoints]="smartPoints"></app-smartpoints-control>
+    </div>
+    <h4>{{ 'sitelist.form.goto' | translate }}</h4>
+    <div class="buttons">
+      <a class="simple-link" (click)="closeModal()">{{ 'sitelist.form.gotoaway' | translate }}</a>
+      <button (click)="goToCreateOwnWidgets()" class="btn btn-lg btn-success next">
+        {{ 'sitelist.form.gotowidgets' | translate }}
+      </button>
+    </div>
+  </ng-container>
+</div>

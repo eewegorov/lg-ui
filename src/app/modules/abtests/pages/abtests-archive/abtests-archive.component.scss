@@ -1,0 +1,34 @@
+@import 'src/scss/vars';
+@import 'src/scss/mixins';
+
+.set-positive-better-color {
+  color: #62cb31;
+}
+
+.set-negative-better-color {
+  color: #d31112;
+}
+
+.ab-grid__item--name {
+  padding-left: 10px;
+}
+
+
+.ab-grid__header--update,
+.ab-grid__item--update {
+  flex-basis: 11%;
+  max-width: 11%;
+}
+
+.header-right {
+  button {
+    span {
+      display: flex;
+      width: 28px;
+      height: 28px;
+      position: relative;
+
+      @include svg-position();
+    }
+  }
+}

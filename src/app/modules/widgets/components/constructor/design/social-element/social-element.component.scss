@@ -1,0 +1,46 @@
+.form-check {
+  margin: 15px 0;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #000;
+}
+
+.social-block-choose label {
+  width: 100%;
+}
+
+.social-variable-bl {
+  display: flex;
+  justify-content: flex-start
+}
+
+.social-var-el {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid #7E889A;
+  margin: 0 5px 0 15px;
+  cursor: pointer;
+}
+
+.social-var-el:hover,
+.social-var-el.active {
+  border-color: #4898A8;
+}
+
+.social-var-1 {
+  border-radius: 0;
+}
+
+.social-var-2 {
+  border-radius: 6px;
+}
+
+.social-var-3 {
+  border-radius: 50%;
+}
+
+.iframe-small-label {
+  font-size: 11px;
+  line-height: 14px;
+  color: #8e8e8e;
+}

@@ -1,0 +1,179 @@
+@import "src/scss/vars";
+@import "src/scss/mixins";
+@import "src/scss/modal-header";
+
+:host {
+  .modal-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px 40px 40px;
+
+    @media (max-width: 991px) {
+      padding: 20px;
+    }
+
+    h4 {
+      margin: 0 0 30px 0;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 29px;
+      color: $fontPrimaryColor;
+      text-align: center;
+
+      &:last-of-type {
+        margin-top: 40px;
+      }
+
+      @media (max-width: 991px) {
+        margin: 0 0 20px 0;
+
+        &:last-of-type {
+          margin-top: 20px;
+        }
+      }
+    }
+
+    p {
+      margin: 0;
+      width: 100%;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 22px;
+      color: $fontSecondaryColor;
+    }
+
+    form, .form {
+      width: inherit;
+      display: inherit;
+      flex-direction: inherit;
+      gap: 25px;
+
+      .form-group {
+        width: inherit;
+        display: inherit;
+        flex-direction: inherit;
+        gap: 10px;
+        margin: 0;
+
+        &.is-invalid {
+          lbael, .control-label {
+            color: #a94442;
+          }
+        }
+
+        lbael, .control-label {
+          display: inherit;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 22px;
+          color: $fontPrimaryColor;
+          margin: 0;
+          gap: 10px;
+
+          a {
+            display: flex;
+            width: 22px;
+            height: 22px;
+            position: relative;
+            color: $fontGrayColor;
+
+            @include svg-position();
+          }
+        }
+
+        input, textarea {
+          min-height: 50px;
+          padding: 14px;
+          border-color: $borderColor;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 22px;
+        }
+
+        textarea {
+          background-color: $activeElementBG;
+        }
+
+        span, .small {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 16px;
+          color: $fontPrimaryColor;
+        }
+      }
+
+      .form-buttons {
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+          margin-top: 15px;
+        }
+
+        @media (max-width: 991px) {
+          justify-content: center;
+        }
+      }
+    }
+
+    button {
+      padding: 14px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+      color: #FFFFFF;
+    }
+
+    .buttons {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      a {
+        text-align: center;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        color: $successColor;
+        margin: 0;
+      }
+
+      button {
+        word-break: break-word;
+      }
+
+      @media (max-width: 991px) {
+        flex-wrap: wrap-reverse;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+.form-control.not-readonly-hand[readonly] {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.widgets-options-container {
+  border: 1px dashed #C6CAD2;
+  border-radius: 4px;
+  padding: 30px;
+  margin: 50px 0 10px 0;
+
+  @media (max-width: 424px) {
+    padding: 10px;
+    margin-top: 30px;
+  }
+}

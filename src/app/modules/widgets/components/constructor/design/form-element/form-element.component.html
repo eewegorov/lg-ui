@@ -1,0 +1,481 @@
+<div>
+  <!-- Page Input Form -->
+  <div class="formMas border-item">
+    <div *ngFor="let item of widget.guiprops['formSet'].items; trackBy: trackById; index as i"
+         class="row row-subitem">
+      <div class="formItem">
+        <div class="col-sm-12 mt-2 greyFormBg">
+          <label class="control-label">Введите название поля</label>
+          <input [(ngModel)]="item.placeholder" class="form-control" type="text">
+
+          <span class="small">Например: Введите email</span>
+          <div class="typeInputRBtn mt-2">
+            <div class="form-add-title-type">Тип:</div>
+            <div *ngFor="let itemType of itemVariable; index as j" class="form-rbtn-line">
+              <label (click)="getPlaceholderFrom(item, i)" *ngIf="getItemT(item, itemType)"
+                     class="d-flex align-items-center">
+                <input
+                  (click)="(item.type === 'message') ? addFirstInput(item, i) : ''"
+                  [(ngModel)]="item.type"
+                  [name]="'form' + i"
+                  [value]="itemType.type"
+                  class="radio radio-info radio-inline mr-1"
+                  type="radio"
+                />
+                {{ itemType.value }}
+              </label>
+            </div>
+          </div>
+          <div class="mt-2 formReqBl d-flex">
+            <ui-switch
+              [(ngModel)]="item.required"
+              size="small"
+            ></ui-switch>
+            <label class="switcher-label-xs ml-2 mb-0 font-normal">Поле обязательно к заполнению</label>
+          </div>
+
+          <div *ngIf="item.type === 'phone' && widget.guiprops.formSet.phoneMask" class="mt-2 formReqBl d-flex">
+            <ui-switch
+              [(ngModel)]="widget.guiprops.formSet.phoneMask.enable"
+              size="small"
+            ></ui-switch>
+            <label class="switcher-label-xs ml-2 mb-0 font-normal">
+              {{ 'widgets.form.phoneMask.titleSwitcher' | translate }}
+            </label>
+          </div>
+          <div *ngIf="item.type === 'phone' && widget.guiprops.formSet?.phoneMask?.enable" class="mt-2 formReqBl">
+            <label class="control-label">{{ 'widgets.form.phoneMask.titleInput' | translate }}</label>
+            <input (keyup)="blockedUnusedChars()" [(ngModel)]="widget.guiprops.formSet.phoneMask.maskValue" class="form-control"
+                   type="text">
+            <span class="small">{{ 'widgets.form.phoneMask.description' | translate }}</span>
+          </div>
+
+          <div *ngIf="widget.guiprops.formSet?.items.length > 1" class="remove-sub-form-item">
+            <a (click)="removePageInputItem(i)" href="javascript:void(0);"><i
+              class="remove-sub-item col-sm-1 pe-7s-close-circle"></i></a>
+          </div>
+        </div>
+
+        <div class="add-sub-form-item mt-2">
+          <a
+            (click)="addPageInputItem()"
+            *ngIf="widget.guiprops.formSet?.items.length < 4"
+            href="javascript:void(0);"
+          >Добавить еще одно поле<i class="remove-sub-item col-sm-1 fa fa-plus"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- END Page input item -->
+  </div>
+
+  <div class="mt-4 border-item">
+    <h3>Вид формы</h3>
+
+    <div class="d-flex align-items-center justify-content-between mt-3">
+      <label class="control-label">Ширина</label>
+      <div class="d-flex align-items-center">
+        <div
+          [class.disabled]="widget.guiprops.form.form_width_type !== widthHrType[1]"
+          class="form-control form-control-font mr-2"
+        >
+          <input
+            [(ngModel)]="widget.guiprops.form.form_widthpx"
+            [disabled]="widget.guiprops.form.form_width_type !== widthHrType[1]"
+            type="number"
+          />
+          <label>px</label>
+        </div>
+        <button
+          (click)="widget.guiprops.form.form_width_type = (widget.guiprops.form.form_width_type === widthHrType[0] ? widthHrType[1] : widthHrType[0])"
+          [class.active]="widget.guiprops.form.form_width_type === widthHrType[0]"
+          class="wide-button"
+        >
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3">
+      <label
+        [class.disabled]="widget.guiprops.form.form_width_type === widthHrType[0]"
+        class="control-label"
+      >
+        Выравнивание
+      </label>
+      <div>
+        <button
+          (click)="widget.guiprops.form.form_position = floatBtn[0]"
+          [class.active]="widget.guiprops.form.form_position === floatBtn[0]"
+          [disabled]="widget.guiprops.form.form_width_type === widthHrType[0]"
+          class="align-button icon-left"
+        ></button>
+        <button
+          (click)="widget.guiprops.form.form_position = floatBtn[1]"
+          [class.active]="widget.guiprops.form.form_position === floatBtn[1]"
+          [disabled]="widget.guiprops.form.form_width_type === widthHrType[0]"
+          class="align-button icon-center"
+        ></button>
+        <button
+          (click)="widget.guiprops.form.form_position = floatBtn[2]"
+          [class.active]="widget.guiprops.form.form_position === floatBtn[2]"
+          [disabled]="widget.guiprops.form.form_width_type === widthHrType[0]"
+          class="align-button icon-right"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-subitem w-100">
+    <div class="row-subitem-padding mt-4">
+      <h3>Вид полей</h3>
+      <div class="dropdown mt-1 pt-1">
+        <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+          {{ widget.guiprops.form.visual }}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li (click)="widget.guiprops.form.visual = itemVisual" *ngFor="let itemVisual of visualInputForm"
+              role="presentation">
+            <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemVisual }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between mt-2 pt-1">
+    <label class="control-label">Ширина поля</label>
+    <div class="d-flex align-items-center">
+      <div
+        [class.disabled]="widget.guiprops['form'].width_type !== widthHrType[1]"
+        class="form-control form-control-font mr-2"
+      >
+        <input
+          [(ngModel)]="widget.guiprops['form'].widthpx"
+          [disabled]="widget.guiprops['form'].width_type !== widthHrType[1]"
+          type="number"
+        />
+        <label>px</label>
+      </div>
+      <button
+        (click)="widget.guiprops['form'].width_type = (widget.guiprops['form'].width_type === widthHrType[0] ? widthHrType[1] : widthHrType[0])"
+        [class.active]="widget.guiprops['form'].width_type === widthHrType[0]"
+        class="wide-button"
+      >
+      </button>
+    </div>
+  </div>
+
+  <div class="row-subitem w-100 mt-2 pt-1">
+    <div class="row-subitem-padding">
+      <label class="control-label">Ориентация полей</label>
+      <div class="dropdown mt-1">
+        <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+          {{ widget.guiprops.form.orient }}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li (click)="widget.guiprops.form['orient'] = itemOrient" *ngFor="let itemOrient of orientInputForm"
+              role="presentation">
+            <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ itemOrient }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between mt-3 border-item">
+    <label class="control-label">Скругление углов</label>
+    <div class="d-flex text-right side-ui-sm">
+      <ngx-slider [(value)]="widget.guiprops['form'].borderRadiusInputForm" [options]="optionsRound"></ngx-slider>
+      <input
+        [(ngModel)]="widget.guiprops['form'].borderRadiusInputForm"
+        class="picker-input slider"
+      />
+    </div>
+  </div>
+
+  <h3 class="mt-4">Цвет полей</h3>
+
+  <div class="d-flex justify-content-between mt-4">
+    <label class="control-label">{{ 'widgets.formExt.mainSettings.colorBGField' | translate }}</label>
+    <div class="d-flex text-right">
+      <input
+        [(colorPicker)]="widget.guiprops['form'].bgInputForm"
+        [cpAlphaChannel]="'disabled'"
+        [cpOutputFormat]="'hex'"
+        [style.background]="widget.guiprops['form'].bgInputForm"
+        class="color-picker-control"
+        cpPosition="left"
+        readonly
+      />
+      <input
+        [(ngModel)]="widget.guiprops['form'].bgInputForm"
+        class="picker-input color"
+      />
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between mt-2 pt-1">
+    <label class="control-label">{{ 'widgets.formExt.mainSettings.opacityBGField' | translate }}</label>
+    <div class="d-flex text-right side-ui-sm">
+      <ngx-slider [(value)]="widget.guiprops['form'].opacityBgInputForm" [options]="optionsOpacity"></ngx-slider>
+      <input
+        [(ngModel)]="widget.guiprops['form'].opacityBgInputForm"
+        class="picker-input slider"
+      />
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between mt-2 mt-1 border-item">
+    <label class="control-label">{{ 'widgets.formExt.mainSettings.colorNameField' | translate }}</label>
+    <div class="d-flex text-right">
+      <input
+        [(colorPicker)]="widget.guiprops['form'].colorTitleInputForm"
+        [cpAlphaChannel]="'disabled'"
+        [cpOutputFormat]="'hex'"
+        [style.background]="widget.guiprops['form'].colorTitleInputForm"
+        class="color-picker-control"
+        cpPosition="left"
+        readonly
+      />
+      <input
+        [(ngModel)]="widget.guiprops['form'].colorTitleInputForm"
+        class="picker-input color"
+      />
+    </div>
+  </div>
+
+  <div class="row-subitem mt-4 border-item">
+    <div class="d-flex row-subitem justify-content-between">
+      <label class="control-label switcher-label-xs control-label-des">
+        {{ 'widgets.formExt.mainSettings.useBorderAroundFields' | translate }}
+      </label>
+      <ui-switch
+        [(ngModel)]="widget.guiprops.form.border.enable"
+        size="small"
+      ></ui-switch>
+    </div>
+
+    <div *ngIf="widget.guiprops['form'].border?.enable">
+      <div class="d-flex justify-content-between mt-4">
+        <label class="control-label">Цвет</label>
+        <div class="d-flex text-right">
+          <input
+            [(colorPicker)]="widget.guiprops['form'].border.color"
+            [cpAlphaChannel]="'disabled'"
+            [cpOutputFormat]="'hex'"
+            [style.background]="widget.guiprops['form'].border.color"
+            class="color-picker-control"
+            cpPosition="left"
+            readonly
+          />
+          <input
+            [(ngModel)]="widget.guiprops['form'].border.color"
+            class="picker-input color"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-subitem mt-4 border-item">
+    <div class="d-flex row-subitem justify-content-between">
+      <label class="control-label switcher-label-xs control-label-des">
+        {{ 'widgets.formExt.mainSettings.usePodBG' | translate }}
+      </label>
+      <ui-switch
+        [(ngModel)]="widget.guiprops.form.colorPod.enable"
+        size="small"
+      ></ui-switch>
+    </div>
+
+    <div *ngIf="widget.guiprops['form'].colorPod?.enable">
+      <div class="d-flex justify-content-between mt-4">
+        <label class="control-label">Цвет</label>
+        <div class="d-flex text-right">
+          <input
+            [(colorPicker)]="widget.guiprops['form'].colorPod.color"
+            [cpAlphaChannel]="'disabled'"
+            [cpOutputFormat]="'hex'"
+            [style.background]="widget.guiprops['form'].colorPod.color"
+            class="color-picker-control"
+            cpPosition="left"
+            readonly
+          />
+          <input
+            [(ngModel)]="widget.guiprops['form'].colorPod.color"
+            class="picker-input color"
+          />
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between mt-2 pt-1">
+        <label class="control-label">Прозрачность</label>
+        <div class="d-flex text-right side-ui-sm">
+          <ngx-slider [(value)]="widget.guiprops['form'].colorPod.opacityColorPod"
+                      [options]="optionsOpacity"></ngx-slider>
+          <input
+            [(ngModel)]="widget.guiprops['form'].colorPod.opacityColorPod"
+            class="picker-input slider"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-4">
+  <h3>Вид кнопки</h3>
+
+  <label class="control-label mt-3">Шрифт</label>
+  <div class="row-subitem-padding mt-1">
+    <input [id]="'font-picker' + index" type="text">
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between mt-2">
+    <label class="control-label">Размер</label>
+    <div class="align-items-center">
+      <div class="form-control form-control-font">
+        <input
+          [(ngModel)]="widget.guiprops['button'].fontSize"
+          type="number"
+        />
+        <label>px</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between mt-3">
+    <label class="control-label">Цвет кнопки</label>
+    <div class="d-flex text-right">
+      <input
+        [(colorPicker)]="widget.guiprops['button'].colorBtn"
+        [cpAlphaChannel]="'disabled'"
+        [cpOutputFormat]="'hex'"
+        [style.background]="widget.guiprops['button'].colorBtn"
+        class="color-picker-control"
+        cpPosition="left"
+        readonly
+      />
+      <input
+        [(ngModel)]="widget.guiprops['button'].colorBtn"
+        class="picker-input color"
+      />
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between mt-2 pt-1">
+    <label class="control-label">Скругление углов</label>
+    <div class="d-flex text-right side-ui-sm">
+      <ngx-slider [(value)]="widget.guiprops['button'].borderRadiusBtn" [options]="optionsRound"></ngx-slider>
+      <input
+        [(ngModel)]="widget.guiprops['button'].borderRadiusBtn"
+        class="picker-input slider"
+      />
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between mt-2 pt-1">
+    <label class="control-label">Ширина</label>
+    <div class="d-flex align-items-center">
+      <div
+        [class.disabled]="widget.guiprops.button.btn_width !== widthBtn[2]"
+        class="form-control form-control-font mr-2"
+      >
+        <input
+          [(ngModel)]="widget.guiprops['button'].btn_widthpx"
+          [disabled]="widget.guiprops.button.btn_width !== widthBtn[2]"
+          type="number"
+        />
+        <label>px</label>
+      </div>
+      <button
+        (click)="widget.guiprops.button.btn_width = (widget.guiprops.button.btn_width === widthBtn[0] ? widthBtn[2] : widthBtn[0])"
+        [class.active]="widget.guiprops.button.btn_width === widthBtn[0]"
+        class="content-type-button"
+      >
+        AUTO
+      </button>
+      <button
+        (click)="widget.guiprops.button.btn_width = (widget.guiprops.button.btn_width === widthBtn[1] ? widthBtn[2] : widthBtn[1])"
+        [class.active]="widget.guiprops.button.btn_width === widthBtn[1]"
+        class="wide-button"
+      >
+      </button>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-2 pt-1 border-item">
+    <label
+      [class.disabled]="widget.guiprops.button.btn_width === widthBtn[1]"
+      class="control-label"
+    >
+      Выравнивание
+    </label>
+    <div>
+      <button
+        (click)="widget.guiprops.button.position = floatBtn[0]"
+        [class.active]="widget.guiprops.button.position === floatBtn[0]"
+        [disabled]="widget.guiprops.button.btn_width === widthBtn[1]"
+        class="align-button icon-left"
+      ></button>
+      <button
+        (click)="widget.guiprops.button.position = floatBtn[1]"
+        [class.active]="widget.guiprops.button.position === floatBtn[1]"
+        [disabled]="widget.guiprops.button.btn_width === widthBtn[1]"
+        class="align-button icon-center"
+      ></button>
+      <button
+        (click)="widget.guiprops.button.position = floatBtn[2]"
+        [class.active]="widget.guiprops.button.position === floatBtn[2]"
+        [disabled]="widget.guiprops.button.btn_width === widthBtn[1]"
+        class="align-button icon-right"
+      ></button>
+    </div>
+  </div>
+</div>
+
+<div class="row-subitem mt-4 mb-4">
+  <h3>Стиль кнопки</h3>
+
+  <div class="dropdown mt-3 border-item">
+    <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+      {{ widget.guiprops.button.styleType }}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu dropdown-with-btn-styles" role="menu">
+      <li (click)="setBtnStyle('Default', widget.guiprops.button)" role="presentation">
+        <a
+          [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'background': widget.guiprops['button'].colorBtn}"
+          class="dropdown-item btn-var-styles btn-var-styles__default"
+          href="javascript:void(0)"
+        >Default</a></li>
+      <li (click)="setBtnStyle('Material', widget.guiprops.button)" role="presentation">
+        <a
+          [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'background': widget.guiprops['button'].colorBtn}"
+          class="dropdown-item btn-var-styles btn-var-styles__material"
+          href="javascript:void(0)"
+        >Material</a></li>
+      <li (click)="setBtnStyle('Flat', widget.guiprops.button)" role="presentation">
+        <a
+          [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'background': widget.guiprops['button'].colorBtn}"
+          class="dropdown-item btn-var-styles btn-var-styles__flat"
+          href="javascript:void(0)"
+        >Flat</a></li>
+      <li (click)="setBtnStyle('Border Style', widget.guiprops.button)" role="presentation">
+        <a
+          [ngStyle]="{'font-family': widget.guiprops['button'].font.fontFamily, 'border-color': widget.guiprops['button'].colorBtn}"
+          class="dropdown-item btn-var-styles btn-var-styles__border-style"
+          href="javascript:void(0)"
+        >Border Style</a></li>
+    </ul>
+  </div>
+
+  <!-- Coupon settings -->
+  <app-coupon-callback
+    [coupon]="widget.guiprops.form.couponCallback"
+    [coupons]="coupons"
+    [placePopup]="placePopup"
+    [showErrors]="showErrors"
+  ></app-coupon-callback>
+</div>

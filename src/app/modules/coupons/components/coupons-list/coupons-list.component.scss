@@ -1,0 +1,199 @@
+@import 'src/scss/vars';
+@import 'src/scss/mixins';
+
+:host {
+  display: flex;
+  width: inherit;
+  position: relative;
+
+  tr {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    min-width: auto;
+
+    &.no-border {
+      td {
+        border-top: none !important;
+      }
+    }
+
+    td {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 19px 14px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+      text-align: left;
+      text-transform: capitalize;
+      color: $fontPrimaryColor;
+      word-break: break-all;
+
+      @media (max-width: 1919px) {
+        padding: 7px 10px;
+        font-size: 13px;
+        line-height: 18px;
+      }
+
+
+      &:not(:last-of-type) {
+        border-right: 1px solid $borderColor !important;
+      }
+
+      &.name-coupon {
+        width: 25%;
+        min-width: 320px;
+        font-weight: 600;
+        position: relative;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 8px;
+
+        .input {
+          width: 100%;
+        }
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 8px;
+
+          &:not(.btn-default).btn {
+            padding: 4px;
+
+            span {
+              width: 28px;
+              height: 28px;
+            }
+          }
+
+          &:not(.btn-default).btn:not(:focus) {
+            opacity: 0;
+
+            @media (max-width: 1199px) {
+              opacity: 1;
+            }
+          }
+
+          &.btn {
+            width: 40px !important;
+            height: 40px !important;
+            padding: 7px;
+
+            span {
+              display: block;
+              width: 24px;
+              height: 24px;
+              position: relative;
+
+              @include svg-position();
+            }
+          }
+
+          &.btn-default:last-child {
+            background-color: $greenColor;
+
+            span {
+              color: #FFFFFF;
+            }
+          }
+        }
+
+        &:hover {
+          button {
+            &:not(.btn-default).btn {
+              opacity: 1;
+            }
+          }
+        }
+
+        @media (max-width: 1919px) {
+          min-width: 265px;
+        }
+      }
+
+      &.code-coupon {
+        width: 30%;
+        min-width: 470px;
+
+        @media (max-width: 1919px) {
+          min-width: 300px;
+        }
+      }
+
+      &.type-coupon {
+        width: 35%;
+        min-width: 550px;
+
+        @media (max-width: 1919px) {
+          min-width: 315px;
+        }
+      }
+
+      &.actions-coupon {
+        width: 10%;
+        min-width: 180px;
+        justify-content: center;
+
+        .btns {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-wrap: nowrap;
+
+          button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+            height: 36px;
+            padding: 4px 16px;
+            border: 1px solid $borderColor;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+            color: $fontSecondaryColor;
+            border-radius: 0;
+            background-color: #ffffff;
+
+            &:not(:disabled):hover {
+              background-color: $activeElementBG;
+            }
+
+            &:not(:disabled):focus {
+              position: relative;
+              z-index: 1000;
+            }
+
+            span {
+              display: flex;
+              width: 28px;
+              height: 28px;
+              position: relative;
+              color: $fontSecondaryColor;
+
+              @include svg-position();
+            }
+
+            &:first-child {
+              border-bottom-left-radius: 5px;
+              border-top-left-radius: 5px;
+              border-right-color: transparent;
+            }
+
+            &:last-child {
+              border-bottom-right-radius: 5px;
+              border-top-right-radius: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

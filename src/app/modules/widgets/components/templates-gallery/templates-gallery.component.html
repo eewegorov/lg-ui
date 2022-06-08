@@ -1,0 +1,89 @@
+<div *ngIf="types && types.length" class="filter-tabs">
+  <ng-container *ngFor="let type of types; trackBy: trackById">
+    <div class="filter-container">
+      <div
+        (click)="filterByTab(type.code, type.id)"
+        [class.active]="isTabsActive(type.code)"
+        [ngClass]="type.class"
+        class="filter"
+      >
+        <span class="filter-tab-title">{{ type.name }}</span>
+        <span class="filter-tab-sub">{{ type.sub }}</span>
+      </div>
+      <div class="before"></div>
+      <div class="after"></div>
+    </div>
+  </ng-container>
+</div>
+
+<div [ngClass]="{'main-content-container-loader': isLoaderActive}" class="main-content-container">
+  <div class="filters-loader"></div>
+
+  <div class="left-panel-filter">
+    <span class="left-panel-filter-title">{{ 'widgetsList.add.modal.gallery.category.title' | translate }}</span>
+    <div class="left-panel-filter-categories">
+      <div class="left-panel-filter-categories-container">
+        <div *ngFor="let grp of groups; index as i">
+          <h5 [ngClass]="(i !== 0) ? 'mt-2': '' ">
+            {{ grp.name }}
+          </h5>
+          <div *ngFor="let cat of grp.categories" class="left-category-item">
+            <div class="left-panel-filter-categories-category">
+              <label class="form-check">
+                <input
+                  (ngModelChange)="filterByCat(cat.checked, cat.id)"
+                  [(ngModel)]="cat.checked"
+                  class="form-check-input"
+                  type="checkbox"
+                />
+                <span class="form-check-text">{{ cat.name }}</span>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-widgets-list">
+    <div *ngIf="mockups.length === 0" class="alert-if-empty">
+      <h3>{{ 'widgetsList.add.modal.gallery.filter.notfound' | translate }}</h3>
+    </div>
+    <div
+      (scrolled)="loadMore()"
+      [fromRoot]="true"
+      [infiniteScrollContainer]="'.panel-widgets-list'"
+      class="test-scroll-inf"
+      infiniteScroll
+    >
+      <ng-container *ngFor="let mckp of mockups">
+        <div class="mockup-selector-categories-mockups-item-container">
+          <div class="mockup-selector-categories-mockups-item">
+            <div class="mockup-selector-categories-mockups-item-hover">
+              <button (click)="saveWidget(mckp)" class="btn btn-success" type="button">
+                <i class="fa fa-check"></i> {{ 'widgetsList.add.params.select' | translate }}
+              </button>
+            </div>
+            <div class="mockup-selector-categories-mockups-item-content">
+              <div id="mockup-selector-categories-mockups-item-tariff-container">
+              </div>
+              <img [src]="mckp.preview" alt="preview">
+              <div class="mockup-selector-categories-mockups-item-title">
+                <div>
+                  <div>{{ mckp.name }}</div>
+                </div>
+              </div>
+              <div class="mockup-selector-categories-mockups-item-desc">
+                <div>
+                  <div>{{ mckp.description }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+</div>

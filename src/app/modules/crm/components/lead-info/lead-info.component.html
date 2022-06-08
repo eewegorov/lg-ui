@@ -1,0 +1,148 @@
+<div
+  (clickOutside)="closeLeadInfo()"
+  [ngClass]="{ 'sidebar-open': isOpen }"
+  class="lead-info-sidebar animate__animated animate__fadeInRight"
+  id="right-sidebar"
+>
+  <div class="sidebar-title">
+    <button (click)="closeLeadInfo()" class="lead-info-sidebar__close btn">
+      <span inlineSVG="./assets/images/core/cross.svg"></span>
+    </button>
+    <h5 id="crm-details-title">
+      {{ leadInfo.title }} {{ 'global.from' | translate }} {{ leadInfo.createDate | date : "dd.MM.y, HH:mm" }}
+    </h5>
+  </div>
+  <div class="sidebar-body">
+    <div class="lead-info-card-wrapper" id="detailsContent">
+      <div id="detailsInfo">
+        <div class="lead-info-card__status">
+          <label>{{ 'crm.page.table.th4' | translate }}</label>
+          <div
+            (ngModelChange)="updateState($event)"
+            [(ngModel)]="status"
+            class="btn-group btn-group-toggle btn-group__status-selector"
+            name="radioBasic"
+            ngbRadioGroup
+          >
+            <label class="btn btn-default btn-status-new" ngbButtonLabel>
+              <input [value]="'NEW'" ngbButton type="radio" /> {{ 'crm.page.card.status.new' | translate }}
+            </label>
+            <label class="btn btn-default btn-status-inwork" ngbButtonLabel>
+              <input [value]="'INWORK'" ngbButton type="radio" /> {{ 'crm.page.card.status.onWork' | translate }}
+            </label>
+            <label class="btn btn-default btn-status-invalid" ngbButtonLabel>
+              <input [value]="'INVALID'" ngbButton type="radio" /> {{ 'crm.page.card.status.bad' | translate }}
+            </label>
+            <label class="btn btn-default btn-status-success" ngbButtonLabel>
+              <input [value]="'SUCCESS'" ngbButton type="radio" /> {{ 'crm.page.card.status.success' | translate }}
+            </label>
+          </div>
+        </div>
+
+        <div class="lead-info-card__data lead-info-card__data-notes">
+          <label for="detailsInfoComment"
+            >{{ 'crm.page.card.status.notes' | translate }}
+            <span *ngIf="isUserCommentUpdated"><i class="fa fa-check"></i></span
+          ></label>
+          <textarea
+            (blur)="updateComment()"
+            [(ngModel)]="leadInfo.userComment"
+            class="form-control"
+            id="detailsInfoComment"
+            rows="3"
+            type="text"
+          ></textarea>
+        </div>
+
+        <div class="stats-title mt-3">
+          <h4 class="colored-dark-blue">{{ 'crm.page.card.details' | translate }}</h4>
+        </div>
+
+        <div *ngIf="leadInfo.firstName" class="lead-info-card__data lead-info-card__data-colored">
+          <label class="label">{{ 'crm.page.card.status.name' | translate }}</label>
+          <div class="value">{{ leadInfo.firstName }}</div>
+        </div>
+
+        <div *ngIf="leadInfo.emails.length" class="lead-info-card__data">
+          <label class="label">{{ 'crm.page.card.status.email' | translate }}</label>
+          <div class="value"><a href="mailto:{{ leadInfo.emails[0] }}">{{ leadInfo.emails[0] }}</a></div>
+        </div>
+
+        <div *ngIf="leadInfo.phones.length" class="lead-info-card__data">
+          <label class="label">{{ 'crm.page.card.status.phone' | translate }}</label>
+          <div class="value"><a href="tel:{{ leadInfo.phones[0] }}">{{ leadInfo.phones[0] }}</a></div>
+        </div>
+
+        <div *ngFor="let field of leadInfo.fieldsValues" class="lead-info-card__data lead-info-card__data-colored">
+          <label class="label">{{ field.name }}</label>
+          <div class="value">{{ field.value }}</div>
+        </div>
+
+        <div
+          *ngIf="leadInfo.comment"
+          class="lead-info-card__data lead-info-card__data-colored lead-info-card__data-commented"
+        >
+          <label class="label">{{ 'crm.page.card.status.message' | translate }}</label>
+          <div class="value">{{ leadInfo.comment }}</div>
+        </div>
+      </div>
+
+      <div class="lead-info-card__external">
+        <div class="lead-info-card__external-item lead-info-card__external-item-marg">
+          <div class="panel-body">
+            <div class="stats-title">
+              <h4 class="colored-dark-blue">{{ 'crm.page.card.visitNumber' | translate }}</h4>
+            </div>
+            <div class="lead-info-card__external-item__value">
+              <h1><span class="ppanel-pages">{{ leadInfo.visitNo }}</span></h1>
+              <div class="pull-right">
+                <i class="fa fa-street-view fa-3x" style="color: #3498db"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lead-info-card__external-item">
+          <div class="panel-body">
+            <div class="stats-title">
+              <h4 class="colored-dark-blue">{{ 'crm.page.card.sawPages' | translate }}</h4>
+            </div>
+            <div class="lead-info-card__external-item__value">
+              <h1><span class="ppanel-pages">{{ leadInfo.history.length }}</span></h1>
+              <div class="pull-right">
+                <i class="fa fa-eye fa-3x" style="color: #9b59b6"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lead-info-card__history-wrapper">
+        <label class="colored-dark-blue">{{ 'crm.page.card.visitHistory.title' | translate }}</label>
+        <div class="lead-info-card__history v-timeline2 vertical-container">
+          <div *ngFor="let history of leadInfo.history | orderBy:['-serverDate']" class="vertical-timeline-block">
+            <div class="vertical-timeline-icon">
+              <i class="fa fa-eye"></i>
+            </div>
+            <div class="vertical-timeline-content no-corner-timeline">
+              <div class="vertical-timeline-content__padding">
+                <span class="vertical-date pull-right">
+                  <i
+                    *ngIf="index === 0"
+                    class="fa fa-flag-checkered"
+                    data-placement="top"
+                    data-title="{{ 'crm.page.card.source.linkDesc' | translate }}"
+                    data-toggle="tooltip"
+                  ></i>
+                  <small>{{ history.serverDate | date : "dd.MM.y, HH:mm" }}</small>
+                </span>
+                <h2>{{ history.title }}</h2>
+                <p class="action-url">{{ history.url }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

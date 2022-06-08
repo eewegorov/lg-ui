@@ -1,0 +1,119 @@
+<h3>{{ 'login.register_title' | translate }}</h3>
+<div [class.valid]="autoRegister" class="hpanel" id="registerPanel">
+  <div class="panel-body">
+    <form #f="ngForm" (ngSubmit)="reg(f)" id="formRegister">
+      <div class="form-group">
+        <label class="control-label" for="usernameReg">{{ 'login.user' | translate }}:</label>
+        <input
+          [(ngModel)]="registrationEmail"
+          autocomplete="off"
+          class="form-control"
+          id="usernameReg"
+          name="login"
+          placeholder="example@gmail.com"
+          required
+          type="email"
+        >
+        <span [class.valid]="!invalidLogin" class="errorMessage small">
+          {{ errorLogin ? errorLogin : 'login.error' | translate }}
+        </span>
+        <span class="help-block small">{{ 'login.unique_login' | translate }}</span>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="passwordReg">{{ 'login.password_new' | translate }}:</label>
+        <input
+          #password
+          (blur)="togglePasswordFocus($event, '********')"
+          (focus)="togglePasswordFocus($event, '')"
+          [(ngModel)]="registrationPassword"
+          autocomplete="off"
+          class="form-control"
+          id="passwordReg"
+          name="password"
+          placeholder="********"
+          required
+          type="password"
+        >
+        <span [class.valid]="!invalidPassword" class="errorMessage small">
+          {{ errorPassword ? errorPassword : 'login.error_password' | translate }}
+        </span>
+        <span
+          (mouseleave)="togglePasswordVisibility('password')"
+          (mouseover)="togglePasswordVisibility('text')"
+          class="help-block small help-block-pwds"
+          id="showPassLog"
+        >
+          <i class="pe-7s-look fa-3x pointer showPassLog"></i>Показать пароль
+        </span>
+      </div>
+      <button
+        [disabled]="!f.valid || loading"
+        class="btn btn-success btn-block"
+        id="buttonRegister"
+        type="submit"
+      >
+        {{ 'login.register' | translate }}
+      </button>
+      <span class="help-block small" style="margin-bottom: 25px;font-size: 63%;">
+        Нажимая "Зарегистрироваться", вы даете
+        <a href="https://static.leadgenic.com/oferta_ru/leadgenic_oferta.pdf" target="blank">согласие</a>
+        на обработку своих персональных данных
+      </span>
+      <span class="help-block small help-block_label">ИЛИ</span>
+      <button
+        (click)="regYandex($event)"
+        class="btn btn-warning btn-block"
+        data-auth="REG"
+        style="background-color: #ffdb4dd9;margin-bottom: 30px;"
+      >
+        Зарегистрируйтесь через <span style="color:#f00;">Я</span>ндекс
+      </button>
+
+      <span class="help-block small">Уже есть аккаунт?</span>
+      <button class="btn btn-default btn-block" data-action="loginLayer" routerLink="/account/login" type="button">
+        {{ 'login.login' | translate }}
+      </button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="autoRegister && autoRegisterPanel" class="hpanel" id="autoRegisterPanel">
+  <div class="panel-body">
+    <span class="errorMessage"></span>
+    <div class="messageCenterReset" style="height: auto;">
+      <h1>Спасибо за регистрацию!</h1>
+      <p>Пароль от LeadGenic отправлен вам на почту. Сейчас вы будете перенаправлены в свой личный кабинет.</p>
+    </div>
+  </div>
+</div>
+<div *ngIf="autoRegister && autoRegisterError" class="hpanel" id="autoRegisterErrorPanel">
+  <div class="panel-body">
+    <span class="errorMessage">
+      {{ autoRegisterErrorMessage ? autoRegisterErrorMessage : 'login.error' | translate }}
+    </span>
+  </div>
+</div>
+<div *ngIf="autoRegister && autoRegisterLoadingPanel" class="hpanel" id="autoRegisterLoadingPanel">
+  <div class="panel-loading"></div>
+</div>
+
+<form #loginForm action="/account/login" class="valid" id="formLogin" method="post">
+  <input
+    [(ngModel)]="registrationEmail"
+    autocomplete="off"
+    class="form-control"
+    id="username"
+    name="j_username"
+    placeholder="example@gmail.com"
+    type="text"
+  >
+  <input
+    [(ngModel)]="registrationPassword"
+    autocomplete="off"
+    class="form-control"
+    id="password"
+    name="j_password"
+    placeholder="********"
+    type="password"
+  >
+</form>

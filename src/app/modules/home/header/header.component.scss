@@ -1,0 +1,226 @@
+@import '../../../../scss/vars';
+@import '../../../../scss/mixins';
+
+header {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: $headerHeight;
+  margin: 0;
+  padding-right: 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  width: 100%;
+  box-shadow: $boxShadow;
+
+  @media (max-width: 991px) {
+    padding: 0 15px;
+  }
+
+  @media (max-width: 424px) {
+    padding: 0 5px;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: row;
+    width: $sideBarWidth;
+    min-width: $sideBarWidth;
+    background-color: transparent;
+    height: 100%;
+    cursor: pointer;
+    margin-right: 20px;
+
+    @media (max-width: 1199px) {
+      margin-right: 0;
+    }
+
+    &.logo-svg__menu {
+      padding: 0;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: 194px;
+
+      &.default {
+        background-image: url('~src/assets/images/header/logo_LG_black.svg');
+      }
+
+      &.yandex {
+        background-size: 140px;
+        background-image: url('~src/assets/images/header/logo_LG_yandex.svg');
+      }
+    }
+  }
+
+  nav {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .navbar-left,
+    .navbar-right {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .navbar-left {
+      justify-content: flex-start;
+
+      .small-logo {
+        font-size: 14px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+    }
+
+    .navbar-right {
+      justify-content: flex-end;
+
+      @media (max-width: 1440px) {
+        .like {
+          display: none;
+        }
+      }
+    }
+
+    a,
+    button,
+    .like {
+      user-select: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      color: $fontColor;
+      background-color: transparent;
+      border-radius: $borderRadius;
+      transition: all 0.2s linear;
+      white-space: nowrap;
+
+      @media (max-width: 991px) {
+        font-size: 14px;
+      }
+
+      @media (max-width: 374px) {
+        white-space: break-spaces;
+      }
+    }
+
+    a,
+    button {
+      margin: 0 23px;
+      padding: 14px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      @media (max-width: 1199px) {
+        margin: 0;
+      }
+
+      @media (max-width: 767px) {
+        padding: 7px;
+      }
+
+      &.active-link,
+      &.active-link span.settings {
+        color: $fontPrimaryColor;
+      }
+
+      &.settings {
+        margin: 0;
+        padding: 9px 32px;
+        background-color: #f7f8fa;
+        transition: initial;
+      }
+
+      &:hover,
+      &:focus-visible {
+        background-color: $activeElementBG;
+      }
+
+      span {
+        display: block;
+        text-align: center;
+
+        &.settings {
+          position: relative;
+          width: 25px;
+          height: 25px;
+          color: $fontColor;
+
+          @include svg-position();
+        }
+      }
+
+      i {
+        font-size: 25px;
+      }
+    }
+
+    button {
+      border: none;
+
+      &.menu-button {
+        color: $fontColor;
+
+        &:hover {
+          color: $fontPrimaryColor;
+        }
+      }
+
+      &.dropdown-toggle {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        margin-right: 0;
+
+        &:after {
+          top: 2px;
+        }
+      }
+    }
+  }
+}
+
+.toolbar-fb-like {
+  margin-right: 10px;
+  padding-top: 16px;
+}
+
+span.userinfo {
+  margin-left: 5px;
+  position: relative;
+}
+
+.dropdown-menu {
+  top: auto !important;
+  left: auto !important;
+  right: 0;
+}
+
+@media (max-width: 1440px) {
+  .like {
+    display: none;
+  }
+}

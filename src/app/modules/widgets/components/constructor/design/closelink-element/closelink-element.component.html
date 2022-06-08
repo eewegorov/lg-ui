@@ -1,0 +1,259 @@
+<div class="row-subitem">
+  <div class="row-subitem-padding mb-2">
+    <h3>Тип элемента</h3>
+  </div>
+  <div class="d-flex">
+    <div class="col-sm-6 row-subitem-padding">
+      <div class="form-group widget-selector mb-0">
+        <label>
+          <input
+            [(ngModel)]="widget.guiprops.exit.button.enable"
+            [value]="false"
+            class="radio radio-info radio-inline"
+            type="radio"
+          >
+          Ссылка закрытия
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-6 row-subitem-padding">
+      <div class="form-group widget-selector mb-0">
+        <label>
+          <input
+            [(ngModel)]="widget.guiprops.exit.button.enable"
+            [value]="true"
+            class="radio radio-info radio-inline"
+            type="radio"
+          >
+          Кнопка закрытия
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+<div [hidden]="widget.guiprops.exit?.button?.enable">
+  <div class="row-subitem mt-3">
+    <div class="row-subitem-padding mb-2 pb-1">
+      <h3>Шрифт</h3>
+    </div>
+    <div class="row-subitem-padding">
+      <input [id]="'font-picker' + index" type="text">
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between mt-2">
+    <label class="control-label">Размер</label>
+    <div class="align-items-center">
+      <div class="form-control form-control-font">
+        <input
+          [(ngModel)]="widget.guiprops['exit'].fontSize"
+          type="number"
+        />
+        <label>px</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3 border-item">
+    <label
+      class="control-label"
+    >
+      Выравнивание
+    </label>
+    <div>
+      <button
+        (click)="widget.guiprops.exit.position = floatBtn[0]"
+        [class.active]="widget.guiprops.exit.position === floatBtn[0]"
+        class="align-button icon-left"
+      ></button>
+      <button
+        (click)="widget.guiprops.exit.position = floatBtn[1]"
+        [class.active]="widget.guiprops.exit.position === floatBtn[1]"
+        class="align-button icon-center"
+      ></button>
+      <button
+        (click)="widget.guiprops.exit.position = floatBtn[2]"
+        [class.active]="widget.guiprops.exit.position === floatBtn[2]"
+        class="align-button icon-right"
+      ></button>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="!widget.guiprops.exit?.button?.enable">
+  <div class="row-subitem mt-3">
+    <div class="row-subitem-padding mb-2 pb-1">
+      <h3>Шрифт</h3>
+    </div>
+    <div class="row-subitem-padding">
+      <input [id]="'font-picker-button-l' + index" type="text">
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between mt-2 border-item">
+    <label class="control-label">Размер</label>
+    <div class="align-items-center">
+      <div class="form-control form-control-font">
+        <input
+          [(ngModel)]="widget.guiprops.exit.button.fontSize"
+          type="number"
+        />
+        <label>px</label>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row-subitem row-subitem-padding mt-3">
+    <h3 class="pb-1">Вид кнопки</h3>
+
+    <div class="d-flex justify-content-between mt-3">
+      <label class="control-label">Цвет</label>
+      <div class="d-flex text-right">
+        <input
+          [(colorPicker)]="widget.guiprops.exit.button.colorBtn"
+          [cpAlphaChannel]="'disabled'"
+          [cpOutputFormat]="'hex'"
+          [style.background]="widget.guiprops.exit.button.colorBtn"
+          class="color-picker-control"
+          cpPosition="left"
+          readonly
+        />
+        <input
+          [(ngModel)]="widget.guiprops.exit.button.colorBtn"
+          class="picker-input color"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-3">
+      <label class="control-label">Скругление углов</label>
+      <div class="d-flex text-right side-ui-sm">
+        <ngx-slider [(value)]="widget.guiprops.exit.button.borderRadiusBtn" [options]="optionsRound"></ngx-slider>
+        <input
+          [(ngModel)]="widget.guiprops.exit.button.borderRadiusBtn"
+          class="picker-input slider"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between mt-3">
+      <label class="control-label">Ширина</label>
+      <div class="d-flex align-items-center">
+        <div
+          [class.disabled]="widget.guiprops.exit.button.btn_width !== widthBtn[2]"
+          class="form-control form-control-font mr-2"
+        >
+          <input
+            [(ngModel)]="widget.guiprops.exit.button.btn_widthpx"
+            [disabled]="widget.guiprops.exit.button.btn_width !== widthBtn[2]"
+            type="number"
+          />
+          <label>px</label>
+        </div>
+        <button
+          (click)="widget.guiprops.exit.button.btn_width = (widget.guiprops.exit.button.btn_width === widthBtn[0] ? widthBtn[2] : widthBtn[0])"
+          [class.active]="widget.guiprops.exit.button.btn_width === widthBtn[0]"
+          class="content-type-button"
+        >
+          AUTO
+        </button>
+        <button
+          (click)="widget.guiprops.exit.button.btn_width = (widget.guiprops.exit.button.btn_width === widthBtn[1] ? widthBtn[2] : widthBtn[1])"
+          [class.active]="widget.guiprops.exit.button.btn_width === widthBtn[1]"
+          class="wide-button"
+        >
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-3 pt-1 border-item">
+      <label
+        [class.disabled]="widget.guiprops.exit.button.btn_width === widthBtn[1]"
+        class="control-label"
+      >
+        Выравнивание
+      </label>
+      <div>
+        <button
+          (click)="widget.guiprops.exit.button.position = floatBtn[0]"
+          [class.active]="widget.guiprops.exit.button.position === floatBtn[0]"
+          [disabled]="widget.guiprops.exit.button.btn_width === widthBtn[1]"
+          class="align-button icon-left"
+        ></button>
+        <button
+          (click)="widget.guiprops.exit.button.position = floatBtn[1]"
+          [class.active]="widget.guiprops.exit.button.position === floatBtn[1]"
+          [disabled]="widget.guiprops.exit.button.btn_width === widthBtn[1]"
+          class="align-button icon-center"
+        ></button>
+        <button
+          (click)="widget.guiprops.exit.button.position = floatBtn[2]"
+          [class.active]="widget.guiprops.exit.button.position === floatBtn[2]"
+          [disabled]="widget.guiprops.exit.button.btn_width === widthBtn[1]"
+          class="align-button icon-right"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-subitem row-subitem-padding mt-4 border-item">
+    <h3>Стиль кнопки</h3>
+    <div class="dropdown mt-3 mb-1">
+      <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+        {{ widget.guiprops.exit.button.styleType }}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-with-btn-styles" role="menu">
+        <li
+          (click)="setBtnStyle('Default', widget.guiprops.exit.button)"
+          role="presentation"
+        >
+          <a
+            [ngStyle]="{'font-family': widget.guiprops.exit.button.font?.fontFamily, 'background': widget.guiprops.exit.button.colorBtn}"
+            class="dropdown-item btn-var-styles btn-var-styles__default"
+            href="javascript:void(0)"
+          >Default</a>
+        </li>
+        <li
+          (click)="setBtnStyle('Material', widget.guiprops.exit.button)"
+          role="presentation"
+        >
+          <a
+            [ngStyle]="{'font-family': widget.guiprops.exit.button.font?.fontFamily, 'background': widget.guiprops.exit.button.colorBtn}"
+            class="dropdown-item btn-var-styles btn-var-styles__material"
+            href="javascript:void(0)"
+          >Material</a>
+        </li>
+        <li
+          (click)="setBtnStyle('Flat', widget.guiprops.exit.button)"
+          role="presentation"
+        >
+          <a
+            [ngStyle]="{'font-family': widget.guiprops.exit.button.font?.fontFamily, 'background': widget.guiprops.exit.button.colorBtn}"
+            class="dropdown-item btn-var-styles btn-var-styles__flat"
+            href="javascript:void(0)"
+          >Flat</a>
+        </li>
+        <li
+          (click)="setBtnStyle('Border Style', widget.guiprops.exit.button)"
+          role="presentation"
+        >
+          <a
+            [ngStyle]="{'font-family': widget.guiprops.exit.button.font?.fontFamily, 'border-color': widget.guiprops.exit.button.colorBtn}"
+            class="dropdown-item btn-var-styles btn-var-styles__border-style"
+            href="javascript:void(0)"
+          >Border Style</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Coupon settings -->
+<app-coupon-callback
+  [coupon]="widget.guiprops.exit.couponCallback"
+  [coupons]="coupons"
+  [placePopup]="placePopup"
+  [showErrors]="showErrors"
+></app-coupon-callback>

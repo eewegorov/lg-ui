@@ -1,0 +1,99 @@
+<div class="page-title">
+  <h1 class="title-main">{{ 'abtests.archive.title' | translate }}</h1>
+</div>
+
+<ng-container *ngIf="abTests.length">
+  <h2>{{ 'abtests.show' | translate }}</h2>
+  <div class="filters">
+    <div class="filter">
+      <div class="dropdown">
+        <button
+          aria-expanded="true"
+          aria-haspopup="true"
+          class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown"
+          type="button"
+        >
+          <span *ngIf="currSite.trim().length === 0">{{ 'widgetsList.add.chooseSite' | translate }}</span>
+          {{ getCroppedString(getSiteName(currSite), 30, '…') }}
+        </button>
+        <ul class="dropdown-menu">
+          <li (click)="setCurrSite(site)" *ngFor="let site of sites">
+            <a class="dropdown-item">{{ site.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!abTests.length && isLoaded">
+  <div class="flex-column toolbar-content">
+    <div class="wrapper-test">
+      <div class="mt-4">
+        <h3 class="f-0 text-center">{{ 'abtests.archive.completed' | translate }}</h3>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isLoaded; else loadingTemplate">
+  <section class="tests-container">
+    <ng-container *ngFor="let test of abTests; index as outerIndex">
+      <app-card [id]="'testIdNum-' + test.id" class="app-card">
+        <div class="ab-test">
+          <div class="ab-test-header">
+            <div class="header-left">
+              <div>{{ test.name || ('abtests.archive.noTitle' | translate) }}</div>
+              <div>{{ test.description || ('abtests.archive.noDescription' | translate) }}</div>
+            </div>
+            <div class="header-right">
+              <div class="btn-group">
+                <button
+                  (click)="deleteArchTest(test.id, outerIndex)"
+                  class="btn btn-sm btn-default"
+                  data-container="body"
+                  data-placement="top"
+                  data-toggle="tooltip"
+                  title="{{ 'abtests.archive.delete' | translate }}"
+                >
+                  <span inlineSVG="./assets/images/core/delete-icon.svg"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ab-test-table">
+            <table>
+              <thead>
+              <th class="name">{{ 'abtests.variant' | translate }}</th>
+              <th class="shows">{{ 'abtests.actions' | translate }}</th>
+              <th class="conv">{{ 'abtests.conversion' | translate }}</th>
+              <th class="update">{{ 'abtests.improvement' | translate }}</th>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let item of test.variants">
+                <tr>
+                  <td class="name">
+                    <span>{{item.name || 'empty'}}</span>
+                  </td>
+                  <td class="shows">{{ item.shows }} / {{ item.target }}</td>
+                  <td class="conv">{{ item.conversion }}</td>
+                  <td
+                    class="update"
+                    [innerHTML]="showBetterToValue(item)"
+                    [ngClass]="getClassForBetterTo(item)"
+                  ></td>
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </app-card>
+    </ng-container>
+  </section>
+</ng-container>
+<ng-template #loadingTemplate>
+  <div class="main-content-container-ab-loader"></div>
+</ng-template>

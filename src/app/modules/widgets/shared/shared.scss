@@ -1,0 +1,1827 @@
+@import "src/scss/vars";
+
+h1:not(.title-main) {
+  margin: 0 0 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #16181D;
+}
+
+h2 {
+  margin: 0 0 20px;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 16px;
+  color: #16181D;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+h3.f-0 {
+  color: #6a6c6f;
+}
+
+ui-switch {
+  line-height: 1;
+}
+
+.color-picker-control {
+  width: 48px;
+  height: 32px;
+  border: 1px solid #D4D7DD;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.picker-input {
+  border: 1px solid #D4D7DD;
+  border-radius: 4px;
+  height: 32px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #16181D;
+  padding: 0 3px;
+
+  &.color {
+    width: 68px;
+  }
+
+  &.slider {
+    width: 48px;
+  }
+}
+
+.title-main, .description {
+  margin-bottom: 0;
+}
+
+.btn.btn-inline {
+  font-size: 14px;
+}
+
+.btn.dropdown-toggle {
+  font-size: 14px;
+  white-space: nowrap;
+  text-align: left;
+}
+
+label.big-label {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  color: $fontPrimaryColor;
+}
+
+.is-invalid label.big-label, .is-invalid label.control-label, .is-invalid .underline-comment {
+  color: #a94442;
+}
+
+.is-invalid .form-control, .is-invalid .ng-select-container {
+  border-color: #a94442 !important;
+}
+
+.widget-company-selector button {
+  overflow: hidden;
+  text-align: left;
+  width: 100%;
+}
+
+.widget-company-selector .caret {
+  float: right;
+  position: relative;
+  top: 9px;
+}
+
+.widget-company-selector .value {
+  display: block;
+  float: left;
+  overflow: hidden;
+  width: calc(100% - 25px);
+}
+
+.widget-company-editable {
+  white-space: nowrap;
+}
+
+.hpanel .panel-body.widget-normal__body {
+  padding: 15px;
+}
+
+.widget-normal__body form.editable-wrap {
+  display: block;
+}
+
+.widget-normal__body form.editable-wrap .editable-input.editable-has-buttons {
+  width: calc(100% - 95px) !important;
+}
+
+.card-footer .reports-emails-preloader {
+  background-color: transparent;
+  background-size: 25px 25px;
+  position: relative;
+  height: 25px;
+}
+
+.test-item-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ab-grid__header--name,
+.ab-grid__item--name {
+  flex-basis: 28%;
+  max-width: 28%;
+}
+
+.ab-grid__header--company,
+.ab-grid__item--company {
+  flex-basis: 21%;
+  max-width: 21%;
+}
+
+.ab-grid__header--shows,
+.ab-grid__item--shows {
+  flex-basis: 7%;
+  max-width: 7%;
+}
+
+.ab-grid__header--targets,
+.ab-grid__item--targets {
+  flex-basis: 7%;
+  max-width: 7%;
+}
+
+.ab-grid__header--conv,
+.ab-grid__item--conv {
+  flex-basis: 7%;
+  max-width: 7%;
+}
+
+.ab-grid__header--priority,
+.ab-grid__item--priority {
+  flex-basis: 8%;
+  max-width: 8%;
+  min-width: 117px;
+}
+
+.ab-grid__header--actions-static,
+.ab-grid__item--actions-static {
+  flex-basis: 22%;
+  max-width: 22%;
+  min-width: 265px;
+}
+
+.reports-emails-preloader {
+  background-color: transparent;
+  background-size: 25px 25px;
+  position: relative;
+}
+
+.penciled .fa.fa-pencil {
+  display: none;
+}
+
+.penciled:hover .fa.fa-pencil {
+  display: inline;
+}
+
+.priority-btns i {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.priority-btns button {
+  padding: 3px 10px;
+  font-size: 14px;
+}
+
+.priority-up-widget-btn i {
+  color: #62cb31;
+}
+
+.priority-down-widget-btn i {
+  color: #e74c3c;
+}
+
+.colored-blue {
+  color: #3498D8 !important;
+}
+
+.colored-red {
+  color: #C0392B !important;
+}
+
+.companies-underline {
+  float: right;
+  margin-top: 5px;
+  text-decoration: underline;
+}
+
+.row-subitem {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.row-subitem-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.dropd-scroll-sm {
+  min-height: 112px;
+  overflow: auto;
+}
+
+.side-ui-dev .ui-slider {
+  width: 100%;
+  margin-top: 13px;
+}
+
+.control-label-colorpc {
+  position: relative;
+  line-height: 30px;
+}
+
+label.control-label-colorpc {
+  margin-bottom: 0;
+}
+
+/*New constructor********************************/
+.widget-content-add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 280px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.widget-content-add a {
+  text-decoration: underline;
+  color: #6a6c6f;
+}
+
+.widget-content-add a:hover {
+  text-decoration: none;
+}
+
+.widget-content-add span {
+  text-align: center;
+  display: block;
+  line-height: 16px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+button.widget-content-add-btn {
+  width: 196px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+  font-size: 13px;
+  font-weight: 400 !important;
+  color: #4898A8;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #FFFFFF;
+  border: 1px solid #D4D7DD;
+  border-radius: 4px;
+
+  img {
+    margin-top: -2px;
+    margin-right: 5px;
+  }
+}
+
+.widget-content-add-btn {
+  width: auto !important;
+  margin: 0 !important;
+  padding: 7px 10px;
+}
+
+.widget-content-add-btn:hover {
+  opacity: 0.9;
+}
+
+.widget-content-add-btn i.fa-plus {
+  color: #fff;
+}
+
+.border-item {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.border-item .row {
+  margin-left: 0;
+  padding-left: 0;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.border-item {
+  position: relative;
+  padding-bottom: 30px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  border-top: none;
+}
+
+.border-item-top-top {
+  border-top: 1px solid #eee;
+}
+
+h4.h4-element-title {
+  font-size: 14px;
+  margin: 0;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #3b99fc;
+}
+
+h4.h4-element-title a {
+  padding-left: 3px;
+  font-size: 15px;
+}
+
+h4.h4-element-title a .remove-sub-item {
+  width: 12px;
+  float: none;
+}
+
+h4.h4-element-title a:hover .remove-sub-item {
+  color: #ff0000;
+}
+
+.remove-sub-form-item {
+  position: absolute;
+  top: 10px;
+  right: -5px;
+}
+
+.remove-sub-form-item .remove-sub-item {
+  font-size: 25px;
+}
+
+h4.h4-text-tit {
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #16181D;
+}
+
+.form-check {
+  color: #16181D;
+}
+
+.form-control {
+  font-size: 14px;
+}
+
+.form-group label {
+  font-size: 16px;
+}
+
+.form-control-font {
+  display: inline-block;
+  width: 76px;
+  height: 34px;
+  text-align: left;
+  padding: 5px 4px;
+  font-size: 12px;
+  color: #16181D;
+
+  &.disabled {
+    background: #F4F4F6;
+    border: 1px solid #D4D7DD;
+    color: #A9AFBC;
+  }
+
+  input {
+    width: 75%;
+    border: none;
+
+    &:disabled {
+      background: #F4F4F6;
+      color: #A9AFBC;
+    }
+  }
+}
+
+input.form-cntrl-45w {
+  width: 45px;
+}
+
+input.form-cntrl-55w {
+  width: 55px;
+}
+
+.dropdown-with-btn-styles li {
+  padding: 3px 10px;
+}
+
+.dropdown-with-btn-styles li a {
+  display: block;
+  padding: 0 5px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+.dropdown-with-btn-styles li a.btn-var-styles__default {
+  color: #fff;
+}
+
+.dropdown-with-btn-styles li a.btn-var-styles__material {
+  color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+  border-radius: 2px;
+}
+
+.dropdown-with-btn-styles li a.btn-var-styles__flat {
+  color: #fff;
+  box-shadow: inset 0px -2px 0px 0px rgba(0, 0, 0, 0.25);
+  border-bottom: none !important;
+  border-radius: 3px;
+}
+
+.dropdown-with-btn-styles li a.btn-var-styles__border-style {
+  background-color: transparent;
+  color: #000;
+  border-color: #000;
+}
+
+label.control-label span:not(.tariff-info) {
+  font-weight: 400 !important;
+  font-size: 13px;
+  color: #6a6c6f;
+}
+
+label.control-label span.tariff-info {
+  color: #fff;
+  font-weight: 700;
+}
+
+label.switcher-label {
+  font-weight: 500;
+  font-size: 18px;
+  margin-top: -4px;
+}
+
+label.switcher-label-xs {
+  font-weight: 600 !important;
+}
+
+.widget-small-text {
+  position: relative;
+  z-index: 1;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+label.control-label {
+  font-weight: 400;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  color: #505662;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+label.control-label-des,
+span.control-label-des,
+h4.control-label-des,
+h5.control-label-des,
+b.control-label-des {
+  font-weight: 400;
+  font-size: 16px;
+  color: #16181D;
+  line-height: 1.4;
+  margin: 0;
+
+  &.disabled {
+    color: #d1d6de;
+  }
+}
+
+h4.widgets-settings-subtitle {
+  margin: 10px 10px 7px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #16181D;
+}
+
+.btn-default {
+  text-align: left;
+}
+
+.btn-default .caret {
+  position: absolute;
+  right: 10px;
+  margin-top: 7px;
+}
+
+.row-subitem .btn-default {
+  width: 100%;
+  text-align: left;
+}
+
+i.fa-plus {
+  float: left;
+  font-size: 18px !important;
+  color: #4898A8;
+  margin-right: 1px;
+  margin-top: 3px;
+}
+
+.ui-state-default {
+  background: #3b99fc !important;
+  cursor: pointer !important;
+}
+
+label.control-label-ui {
+  font-weight: 400 !important;
+}
+
+button.widget-download-img {
+  font-size: 14px;
+  color: #4898A8;
+  background-color: transparent;
+  border: 1px dashed #D4D7DD;
+  border-radius: 4px;
+  padding: 5px 12px;
+
+  img {
+    width: 20px;
+    height: 20px;
+    margin-top: -3px;
+    margin-right: 3px;
+  }
+
+  &:hover {
+    background-color: lighten(#4898A8, 47%);
+    transition: 0.3s;
+  }
+}
+
+.add-company {
+  font-size: 34px;
+  margin-left: 10px;
+}
+
+input[type="radio"] {
+  /* remove standard background appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* create custom radiobutton appearance */
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  padding: 3px;
+  /* background-color only for content */
+  border: 2px solid #bbbbbb;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* appearance for checked radiobutton */
+input[type="radio"]:checked {
+  border: 5px solid #4898A8;
+  padding: 1px;
+  cursor: default;
+}
+
+.coupons-flex-wr {
+  display: flex;
+
+  & > * {
+    font-size: 14px;
+  }
+}
+
+.coupons-flex-wr .btn-coupon-add,
+.coupons-flex-wr .btn-coupon-chose {
+  max-width: 88%;
+  flex-basis: 88%;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #4898A8;
+  border-color: #4898A8;
+  color: #FFFFFF;
+}
+
+.coupons-flex-wr .refresh-coupons-element-btn {
+  max-width: calc(12% - 10px);
+  flex-basis: calc(12% - 10px);
+  border: none;
+  font-size: 18px;
+
+  i {
+    margin-left: -2px;
+  }
+}
+
+.coupons-flex-wr.loading-coupons .refresh-coupons-element-btn i.fa-sync {
+  animation: rotaterefresh 0.8s linear infinite;
+}
+
+@keyframes rotaterefresh {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-coupon-chose .dropdown-menu {
+  width: 100%;
+}
+
+.btn-coupon-chose .dropdown-menu li a {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.widget-name-block-rel {
+  position: relative;
+}
+
+.info-link-wd {
+  margin-left: 3px;
+  vertical-align: super text-top;
+}
+
+span.input-down-sm-lab {
+  display: block;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  color: #6a6c6f;
+}
+
+.remove-widget-redirect {
+  position: absolute;
+  top: 35px;
+  right: 13px;
+  width: 20px;
+  height: 20px;
+  display: block;
+  background: url("~src/assets/images/widgets/close_widg_ic_gr.png") center no-repeat;
+  background-size: contain;
+}
+
+.editorFontLine {
+  width: 100% !important;
+}
+
+.editorFontLine h1, .editorFontLine h2, .editorFontLine p {
+  margin: 0;
+}
+
+.editorFontLine .note-editor .note-editing-area .note-editable {
+  line-height: 1em;
+}
+
+.absolute-bg-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.absolute-bg-content1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.absolute-bg-content .video-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.absolute-bg-content .video-bg iframe {
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.absolute-bg-content .video-bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.wide-video-bg-ext {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 300%;
+  top: -100%;
+}
+
+.narrow-video-bg-ext {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 300%;
+  height: 100%;
+}
+
+.block-widget-bg {
+  background: url("~src/assets/images/widgets/land.jpg") center no-repeat;
+  background-size: cover;
+}
+
+#globalMask {
+  position: absolute;
+  left: -5px;
+  right: -5px;
+  top: -5px;
+  bottom: -5px;
+}
+
+button.refresh-video-element-btn {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  text-align: center !important;
+  line-height: 22px;
+  width: 25px !important;
+  height: 24px;
+  border-radius: 3px;
+  background-color: #fff;
+  border: 1px solid #e4e5e7 !important;
+  padding: 0 !important;
+  color: #606265 !important;
+}
+
+.sm-video-text {
+  line-height: 16px;
+  margin-top: 5px;
+}
+
+.sm-video-text-act {
+  margin-top: 0;
+}
+
+.widgets-settings-container {
+  display: flex;
+  background-color: #ffffff;
+}
+
+.row-subitem label span:not(.checkmark) {
+  margin-left: 5px !important;
+  vertical-align: top;
+}
+
+.widget-enabler-btns {
+  position: absolute;
+  bottom: 10px;
+  left: 45%;
+}
+
+.audience-tooolbar-desc {
+  font-size: 13px;
+}
+
+.rule-subitem-text {
+  padding: 0;
+  font-size: 15px;
+}
+
+.subitem-left {
+  float: left;
+  width: calc(100% - 30px);
+}
+
+.underline-comment {
+  margin: 3px 0px 0px;
+}
+
+.underline-comment.row-subitem-underline {
+  margin: 0px !important;
+  margin-bottom: 10px !important;
+}
+
+textarea.textar-iframe {
+  height: 120px;
+}
+
+.width-900 {
+  width: 900px;
+  max-width: 900px;
+}
+
+.section-audience-row {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.element-coupon-wr {
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  line-height: 2em;
+  height: 2em;
+  padding: 0 12px;
+  position: relative;
+}
+
+.element-coupon-wr > div {
+  white-space: nowrap;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.element-coupon-wr:hover .element-coupon-name {
+  margin-top: -2em;
+}
+
+.flex-bl-for-radio-group {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.iconpicker-component {
+  width: 50px;
+  height: 35px;
+}
+
+.icp-icon .icp {
+  width: 30px;
+}
+
+.icp-icon .caret {
+  color: white;
+  position: absolute;
+  top: 17px;
+  left: 55px;
+  display: inline-block;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  z-index: 2;
+}
+
+input.icp {
+  caret-color: transparent !important;
+}
+
+.content-type-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 31px;
+  height: 22px;
+  font-size: 7px;
+  font-weight: 700;
+  color: #7E889A;
+  border: 2px solid #7E889A;
+  border-radius: 5px;
+  background: transparent;
+
+  &.active {
+    background-color: #4898A8;
+    border-color: #4898A8;
+    color: #FFFFFF;
+  }
+}
+
+.wide-button {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  mask: url("~src/assets/images/widgets/wide.svg") no-repeat;
+  mask-size: contain;
+  background-color: #7E889A;
+
+  &.active {
+    background-color: #4898A8;
+  }
+}
+
+.wide-button {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  mask: url("~src/assets/images/widgets/wide.svg") no-repeat;
+  mask-size: contain;
+  background-color: #7E889A;
+
+  &.active {
+    background-color: #4898A8;
+  }
+}
+
+.align-button {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  background-color: #7E889A;
+
+  &.icon-left {
+    mask: url("~src/assets/images/widgets/align-left.svg") no-repeat;
+    mask-size: contain;
+  }
+
+  &.icon-center {
+    mask: url("~src/assets/images/widgets/align-center.svg") no-repeat;
+    mask-size: contain;
+  }
+
+  &.icon-right {
+    mask: url("~src/assets/images/widgets/align-right.svg") no-repeat;
+    mask-size: contain;
+  }
+
+  &.active:not(:disabled) {
+    background-color: #4898A8;
+  }
+
+  &:disabled {
+    background-color: #d1d6de;
+  }
+}
+
+.delete-element-button {
+  display: inline-block;
+  border: none;
+  padding: 0;
+  font-size: 35px;
+  line-height: 35px;
+  font-weight: 200;
+  background: transparent;
+  color: #E25336;
+}
+
+.remove-sub-item .delete-element-button {
+  margin-left: 10px;
+  color: #7E889A;
+}
+
+.input-group-prepend button {
+  font-size: 13px;
+  font-weight: normal !important;
+  line-height: 1.3;
+  color: #16181D;
+}
+
+.image-container {
+  width: 100%;
+
+  img {
+    width: 80%;
+    margin-bottom: 5px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 15px;
+    color: #16181D;
+  }
+
+  .delete-element-button {
+    font-size: 28px;
+  }
+}
+
+.badge {
+  position: relative;
+  top: -10px;
+  margin-left: 2px;
+  padding: 4px;
+
+  &:empty {
+    display: inline-block;
+  }
+}
+
+
+@font-face {
+  font-family: 'fontello';
+  src: url('~src/assets/fonts/fontello/fontello.eot?68335443');
+  src: url('~src/assets/fonts/fontello/fontello.eot?68335443#iefix') format('embedded-opentype'),
+  url('~src/assets/fonts/fontello/fontello.woff?68335443') format('woff'),
+  url('~src/assets/fonts/fontello/fontello.ttf?68335443') format('truetype'),
+  url('~src/assets/fonts/fontello/fontello.svg?68335443#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.lgiconfont-gift:before {
+  content: '\e800';
+}
+
+/* '' */
+.lgiconfont-user-plus:before {
+  content: '\e801';
+}
+
+/* '' */
+.lgiconfont-ok:before {
+  content: '\e802';
+}
+
+/* '' */
+.lgiconfont-gamepad:before {
+  content: '\e803';
+}
+
+/* '' */
+.lgiconfont-heart:before {
+  content: '\e804';
+}
+
+/* '' */
+.lgiconfont-flag:before {
+  content: '\e805';
+}
+
+/* '' */
+.lgiconfont-star:before {
+  content: '\e806';
+}
+
+/* '' */
+.lgiconfont-info:before {
+  content: '\e807';
+}
+
+/* '' */
+.lgiconfont-flag-checkered:before {
+  content: '\e808';
+}
+
+/* '' */
+.lgiconfont-thumbs-up:before {
+  content: '\e809';
+}
+
+/* '' */
+.lgiconfont-tags:before {
+  content: '\e80a';
+}
+
+/* '' */
+.lgiconfont-book:before {
+  content: '\e80b';
+}
+
+/* '' */
+.lgiconfont-phone:before {
+  content: '\e80c';
+}
+
+/* '' */
+.lgiconfont-cart-plus:before {
+  content: '\e80d';
+}
+
+/* '' */
+.lgiconfont-award:before {
+  content: '\e80e';
+}
+
+/* '' */
+.lgiconfont-paper-plane-empty:before {
+  content: '\e80f';
+}
+
+/* '' */
+.lgiconfont-briefcase:before {
+  content: '\e810';
+}
+
+/* '' */
+.lgiconfont-off:before {
+  content: '\e811';
+}
+
+/* '' */
+.lgiconfont-mail-1:before {
+  content: '\e812';
+}
+
+/* '' */
+.lgiconfont-rocket:before {
+  content: '\e813';
+}
+
+/* '' */
+.lgiconfont-bug:before {
+  content: '\e814';
+}
+
+/* '' */
+.lgiconfont-users:before {
+  content: '\e815';
+}
+
+/* '' */
+.lgiconfont-comment-1:before {
+  content: '\e816';
+}
+
+/* '' */
+.lgiconfont-bullseye:before {
+  content: '\e817';
+}
+
+/* '' */
+.lgiconfont-paw:before {
+  content: '\e818';
+}
+
+/* '' */
+.lgiconfont-lifebuoy:before {
+  content: '\e819';
+}
+
+/* '' */
+.lgiconfont-angellist:before {
+  content: '\e81a';
+}
+
+/* '' */
+.lgiconfont-user-add:before {
+  content: '\e81b';
+}
+
+/* '' */
+.lgiconfont-target:before {
+  content: '\e81d';
+}
+
+/* '' */
+.lgiconfont-plus-1:before {
+  content: '\e81e';
+}
+
+/* '' */
+.lgiconfont-tag:before {
+  content: '\e81f';
+}
+
+/* '' */
+.lgiconfont-award-1:before {
+  content: '\e820';
+}
+
+/* '' */
+.lgiconfont-fire:before {
+  content: '\e821';
+}
+
+/* '' */
+.lgiconfont-emo-happy:before {
+  content: '\e822';
+}
+
+/* '' */
+.lgiconfont-bell:before {
+  content: '\e824';
+}
+
+/* '' */
+.lgiconfont-attention-alt:before {
+  content: '\e825';
+}
+
+/* '' */
+.lgiconfont-alert:before {
+  content: '\e826';
+}
+
+/* '' */
+.lgiconfont-cloud:before {
+  content: '\e828';
+}
+
+/* '' */
+.lgiconfont-bullhorn:before {
+  content: '\e829';
+}
+
+/* '' */
+.lgiconfont-download:before {
+  content: '\e82a';
+}
+
+/* '' */
+.lgiconfont-basket:before {
+  content: '\e82b';
+}
+
+/* '' */
+.lgiconfont-stop:before {
+  content: '\e82c';
+}
+
+/* '' */
+.lgiconfont-hash:before {
+  content: '\e82d';
+}
+
+/* '' */
+.lgiconfont-at:before {
+  content: '\e82e';
+}
+
+/* '' */
+.lgiconfont-help-1:before {
+  content: '\e82f';
+}
+
+/* '' */
+.lgiconfont-barcode:before {
+  content: '\e830';
+}
+
+/* '' */
+.lgiconfont-coffee:before {
+  content: '\e831';
+}
+
+/* '' */
+.lgiconfont-diamond:before {
+  content: '\e832';
+}
+
+/* '' */
+.lgiconfont-quote:before {
+  content: '\e833';
+}
+
+/* '' */
+.lgiconfont-attention-1:before {
+  content: '\e834';
+}
+
+/* '' */
+.lgiconfont-comment-alt:before {
+  content: '\e835';
+}
+
+/* '' */
+.lgiconfont-tags-1:before {
+  content: '\e836';
+}
+
+/* '' */
+
+
+@font-face {
+  font-family: 'lgiconfont';
+  src: url('~src/assets/fonts/lgiconfont/lgiconfont.eot?25301367');
+  src: url('~src/assets/fonts/lgiconfont/lgiconfont.eot?25301367#iefix') format('embedded-opentype'),
+  url('~src/assets/fonts/lgiconfont/lgiconfont.woff2?25301367') format('woff2'),
+  url('~src/assets/fonts/lgiconfont/lgiconfont.woff?25301367') format('woff'),
+  url('~src/assets/fonts/lgiconfont/lgiconfont.ttf?25301367') format('truetype'),
+  url('~src/assets/fonts/lgiconfont/lgiconfont.svg?25301367#lgiconfont') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'lgiconfont';
+    src: url('../font/lgiconfont.svg?25301367#lgiconfont') format('svg');
+  }
+}
+*/
+
+[class^="lgiconfont-"]:before, [class*=" lgiconfont-"]:before {
+  font-family: "lgiconfont", "fontello", serif;
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+
+  display: inline-block;
+  text-decoration: inherit;
+  width: 0.8em;
+  font-size: 20px;
+  margin-right: 0;
+  text-align: center;
+  /* opacity: .8; */
+
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+.lgiconfont-share:before {
+  content: '\e800';
+}
+
+/* '' */
+.lgiconfont-camera:before {
+  content: '\e801';
+}
+
+/* '' */
+.lgiconfont-download-alt:before {
+  content: '\e802';
+}
+
+/* '' */
+.lgiconfont-cogs:before {
+  content: '\e803';
+}
+
+/* '' */
+.lgiconfont-wrench:before {
+  content: '\e804';
+}
+
+/* '' */
+.lgiconfont-volume-up:before {
+  content: '\e805';
+}
+
+/* '' */
+.lgiconfont-lightbulb:before {
+  content: '\e806';
+}
+
+/* '' */
+.lgiconfont-play:before {
+  content: '\e807';
+}
+
+/* '' */
+.lgiconfont-gauge:before {
+  content: '\e808';
+}
+
+/* '' */
+.lgiconfont-asl:before {
+  content: '\e809';
+}
+
+/* '' */
+.lgiconfont-video:before {
+  content: '\e80a';
+}
+
+/* '' */
+.lgiconfont-signal:before {
+  content: '\e80b';
+}
+
+/* '' */
+.lgiconfont-flash:before {
+  content: '\e80c';
+}
+
+/* '' */
+.lgiconfont-chart-bar:before {
+  content: '\e80d';
+}
+
+/* '' */
+.lgiconfont-vkontakte:before {
+  content: '\e80e';
+}
+
+/* '' */
+.lgiconfont-youtube-play:before {
+  content: '\e80f';
+}
+
+/* '' */
+.lgiconfont-note-beamed:before {
+  content: '\e810';
+}
+
+/* '' */
+.lgiconfont-gplus-1:before {
+  content: '\e811';
+}
+
+/* '' */
+.lgiconfont-quote-right:before {
+  content: '\e812';
+}
+
+/* '' */
+.lgiconfont-phone:before {
+  content: '\e813';
+}
+
+/* '' */
+.lgiconfont-gift:before {
+  content: '\e814';
+}
+
+/* '' */
+.lgiconfont-chart-line:before {
+  content: '\e815';
+}
+
+/* '' */
+.lgiconfont-ok:before {
+  content: '\e816';
+}
+
+/* '' */
+.lgiconfont-heart:before {
+  content: '\e817';
+}
+
+/* '' */
+.lgiconfont-flag:before {
+  content: '\e818';
+}
+
+/* '' */
+.lgiconfont-star:before {
+  content: '\e819';
+}
+
+/* '' */
+.lgiconfont-info:before {
+  content: '\e81a';
+}
+
+/* '' */
+.lgiconfont-thumbs-up:before {
+  content: '\e81b';
+}
+
+/* '' */
+.lgiconfont-dollar-1:before {
+  content: '\e81c';
+}
+
+/* '' */
+.lgiconfont-videocam:before {
+  content: '\e81d';
+}
+
+/* '' */
+.lgiconfont-emo-wink:before {
+  content: '\e81e';
+}
+
+/* '' */
+.lgiconfont-tags:before {
+  content: '\e81f';
+}
+
+/* '' */
+.lgiconfont-book:before {
+  content: '\e820';
+}
+
+/* '' */
+.lgiconfont-award:before {
+  content: '\e821';
+}
+
+/* '' */
+.lgiconfont-briefcase:before {
+  content: '\e822';
+}
+
+/* '' */
+.lgiconfont-off:before {
+  content: '\e823';
+}
+
+/* '' */
+.lgiconfont-email:before {
+  content: '\e824';
+}
+
+/* '' */
+.lgiconfont-users:before {
+  content: '\e825';
+}
+
+/* '' */
+.lgiconfont-comment:before {
+  content: '\e826';
+}
+
+/* '' */
+.lgiconfont-user-add:before {
+  content: '\e827';
+}
+
+/* '' */
+.lgiconfont-target:before {
+  content: '\e828';
+}
+
+/* '' */
+.lgiconfont-plus:before {
+  content: '\e829';
+}
+
+/* '' */
+.lgiconfont-tag:before {
+  content: '\e82a';
+}
+
+/* '' */
+.lgiconfont-reddit:before {
+  content: '\e82b';
+}
+
+/* '' */
+.lgiconfont-award-1:before {
+  content: '\e82c';
+}
+
+/* '' */
+.lgiconfont-fire:before {
+  content: '\e82d';
+}
+
+/* '' */
+.lgiconfont-emo-happy:before {
+  content: '\e82e';
+}
+
+/* '' */
+.lgiconfont-bell:before {
+  content: '\e82f';
+}
+
+/* '' */
+.lgiconfont-alert:before {
+  content: '\e830';
+}
+
+/* '' */
+.lgiconfont-cloud:before {
+  content: '\e831';
+}
+
+/* '' */
+.lgiconfont-bullhorn:before {
+  content: '\e832';
+}
+
+/* '' */
+.lgiconfont-download:before {
+  content: '\e833';
+}
+
+/* '' */
+.lgiconfont-basket:before {
+  content: '\e834';
+}
+
+/* '' */
+.lgiconfont-stop:before {
+  content: '\e835';
+}
+
+/* '' */
+.lgiconfont-at:before {
+  content: '\e836';
+}
+
+/* '' */
+.lgiconfont-help:before {
+  content: '\e837';
+}
+
+/* '' */
+.lgiconfont-barcode:before {
+  content: '\e838';
+}
+
+/* '' */
+.lgiconfont-attention:before {
+  content: '\e839';
+}
+
+/* '' */
+.lgiconfont-comment-alt:before {
+  content: '\e83a';
+}
+
+/* '' */
+.lgiconfont-hash:before {
+  content: '\f029';
+}
+
+/* '' */
+.lgiconfont-twitter:before {
+  content: '\f099';
+}
+
+/* '' */
+.lgiconfont-facebook:before {
+  content: '\f09a';
+}
+
+/* '' */
+.lgiconfont-linkedin:before {
+  content: '\f0e1';
+}
+
+/* '' */
+.lgiconfont-coffee:before {
+  content: '\f0f4';
+}
+
+/* '' */
+.lgiconfont-food:before {
+  content: '\f0f5';
+}
+
+/* '' */
+.lgiconfont-gamepad:before {
+  content: '\f11b';
+}
+
+/* '' */
+.lgiconfont-flag-checkered:before {
+  content: '\f11e';
+}
+
+/* '' */
+.lgiconfont-attention-alt:before {
+  content: '\f12a';
+}
+
+/* '' */
+.lgiconfont-rocket:before {
+  content: '\f135';
+}
+
+/* '' */
+.lgiconfont-bullseye:before {
+  content: '\f140';
+}
+
+/* '' */
+.lgiconfont-ticket:before {
+  content: '\f145';
+}
+
+/* '' */
+.lgiconfont-euro:before {
+  content: '\f153';
+}
+
+/* '' */
+.lgiconfont-dollar:before {
+  content: '\f155';
+}
+
+/* '' */
+.lgiconfont-rouble:before {
+  content: '\f158';
+}
+
+/* '' */
+.lgiconfont-instagram:before {
+  content: '\f16d';
+}
+
+/* '' */
+.lgiconfont-bug:before {
+  content: '\f188';
+}
+
+/* '' */
+.lgiconfont-stumbleupon:before {
+  content: '\f1a4';
+}
+
+/* '' */
+.lgiconfont-digg:before {
+  content: '\f1a6';
+}
+
+/* '' */
+.lgiconfont-paw:before {
+  content: '\f1b0';
+}
+
+/* '' */
+.lgiconfont-lifebuoy:before {
+  content: '\f1cd';
+}
+
+/* '' */
+.lgiconfont-paper-plane-empty:before {
+  content: '\f1d9';
+}
+
+/* '' */
+.lgiconfont-bomb:before {
+  content: '\f1e2';
+}
+
+/* '' */
+.lgiconfont-angellist:before {
+  content: '\f209';
+}
+
+/* '' */
+.lgiconfont-sellsy:before {
+  content: '\f213';
+}
+
+/* '' */
+.lgiconfont-cart-plus:before {
+  content: '\f217';
+}
+
+/* '' */
+.lgiconfont-diamond:before {
+  content: '\f219';
+}
+
+/* '' */
+.lgiconfont-pinterest:before {
+  content: '\f231';
+}
+
+/* '' */
+.lgiconfont-user-plus:before {
+  content: '\f234';
+}
+
+/* '' */
+.lgiconfont-odnoklassniki:before {
+  content: '\f263';
+}
+
+/* '' */
+.lgiconfont-get-pocket:before {
+  content: '\f265';
+}
+
+/* '' */
+.lgiconfont-shopping-bag:before {
+  content: '\f290';
+}
+
+/* '' */
+.lgiconfont-shopping-basket:before {
+  content: '\f291';
+}
+
+/* '' */

@@ -1,0 +1,204 @@
+@import "../../../../scss/vars";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: -$sideBarWidth;
+  position: fixed;
+  z-index: 7;
+  top: $headerHeight;
+  left: 0;
+  bottom: 0;
+  width: $sideBarWidth;
+  height: calc(100% - #{$headerHeight});
+  transition: all 0.4s ease 0s;
+  box-shadow: $boxShadow;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #FFFFFF;
+  padding: 12px;
+
+  nav {
+    width: 100%;
+
+    ul {
+      li {
+        a {
+          display: flex;
+          align-items: center;
+          padding: 14px;
+          border-radius: $borderRadius;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 22px;
+          color: $fontPrimaryColor;
+          transition: .2s linear;
+        }
+      }
+    }
+  }
+
+  .lg-sidebar-banner {
+    padding: 0;
+    margin: 50px 0 100px 0;
+    width: 156px;
+    height: 104px;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.2s;
+
+    &:hover, &:focus-visible {
+      box-shadow: $boxShadow;
+    }
+  }
+}
+
+#side-menu li.active a {
+  font-weight: 700;
+}
+
+#side-menu li .nav-second-level {
+  flex-direction: row;
+}
+
+#side-menu li .nav-second-level li {
+  width: 100%;
+}
+
+#side-menu li .nav-second-level li a {
+  width: 100%;
+  padding: 10px 10px 10px 30px;
+  color: #6a6c6f;
+  text-transform: none;
+  font-weight: 400;
+}
+
+#side-menu li .nav-second-level li.active a, #side-menu li .nav-second-level li.active a {
+  color: #000;
+}
+
+#side-menu.nav > li > a:hover, #side-menu.nav > li > a:focus-visible {
+  background: $activeElementBG;
+}
+
+#side-menu li.mm-active {
+  background: #fff;
+}
+
+#side-menu .nav-label {
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.icons-for-sidemenu {
+  font-size: 18px;
+  width: 25px;
+  margin-top: 1.5px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+@font-face {
+  font-family: 'fontello-demo1';
+  src: url('~src/assets/fonts/fontello-demo1/fontello-demo1.eot?82114415');
+  src: url('~src/assets/fonts/fontello-demo1/fontello-demo1.eot?82114415#iefix') format('embedded-opentype'),
+  url('~src/assets/fonts/fontello-demo1/fontello-demo1.woff?82114415') format('woff'),
+  url('~src/assets/fonts/fontello-demo1/fontello-demo1.ttf?82114415') format('truetype'),
+  url('~src/assets/fonts/fontello-demo1/fontello-demo1.svg?82114415#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello-demo1.svg?68335443#fontello') format('svg');
+  }
+}
+*/
+.fontello-demo1-icon {
+  font-family: "fontello-demo1";
+  font-style: normal;
+  font-weight: normal;
+  speak: never;
+
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+
+
+  /* You can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+
+  margin-right: 7px;
+}
+
+.icon-ic_menu_support:before {
+  content: '\e800';
+}
+
+/* '' */
+.icon-ic_menu_sites:before {
+  content: '\e801';
+}
+
+/* '' */
+.icon-ic_menu_widgets:before {
+  content: '\e802';
+}
+
+/* '' */
+.icon-ic_menu_ab_tests:before {
+  content: '\e803';
+}
+
+/* '' */
+.icon-ic_menu_coupons:before {
+  content: '\e804';
+}
+
+/* '' */
+.icon-ic_menu_leads:before {
+  content: '\e805';
+}
+
+/* '' */
+.icon-ic_menu_mail:before {
+  content: '\e806';
+}
+
+/* '' */
+
+

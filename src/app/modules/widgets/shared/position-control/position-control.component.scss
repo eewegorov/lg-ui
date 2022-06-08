@@ -1,0 +1,54 @@
+.position-control-container {
+  display: flex;
+
+  p {
+    display: flex;
+    margin-bottom: 0;
+    margin-left: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.position-control-selector {
+  display: flex;
+  flex-direction: column;
+}
+
+.position-control-row {
+  display: flex;
+}
+
+.position-control-item, .position-control-big {
+  height: 24px;
+  background: #F1F1F1;
+  border: 1px;
+  border-radius: 2px;
+  margin: 3px;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+    background: #F9F9F9;
+
+    &.white {
+      background: #FFFFFF;
+    }
+  }
+
+  &:not(:disabled):hover {
+    background: lightblue;
+  }
+
+  &:not(:disabled).active {
+    background: #4898A8;
+  }
+}
+
+.position-control-item {
+  width: 48px;
+}
+
+.position-control-big {
+  width: 150px;
+}

@@ -1,0 +1,454 @@
+@import "src/scss/vars";
+@import "src/scss/mixins";
+@import "src/scss/page-title";
+
+:host {
+
+  h2 {
+    margin-top: 35px;
+    margin-bottom: 25px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: $fontPrimaryColor;
+  }
+
+  .filters {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .filter {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      gap: 10px;
+      flex-basis: 48%;
+
+      h5 {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        margin: 0;
+        color: $fontPrimaryColor;
+      }
+
+      .ng-select {
+        width: 100%;
+
+        ::ng-deep {
+          .ng-select-container {
+            align-items: center;
+            border-radius: 4px;
+            border: 1px solid $borderColor;
+            padding: 5px;
+
+            .ng-value-container, .ng-clear-wrapper, .ng-arrow-wrapper {
+              padding: 0;
+            }
+
+            .ng-value-container {
+              display: inline-flex;
+              align-items: center;
+              justify-content: flex-start;
+              gap: 5px;
+
+              .ng-placeholder, .ng-input {
+                padding: 8px 5px;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 22px;
+                color: $fontGrayColor;
+              }
+
+              .ng-value {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                border: 1px solid $borderColor;
+                border-radius: 4px;
+                background-color: #FFFFFF;
+                margin: 0;
+
+                span {
+                  display: flex;
+                  height: 100%;
+                  padding: 7px;
+                  border: none;
+                  font-style: normal;
+                  font-weight: 400;
+                  font-size: 18px;
+                  line-height: 22px;
+                  color: $fontGrayColor;
+                }
+
+                .ng-value-icon {
+                  font-size: 22px;
+                  line-height: 22px;
+                  padding-left: 10px;
+                  padding-right: 4px;
+
+                  &:hover {
+                    background-color: $activeElementBG;
+                  }
+                }
+
+                .ng-value-label {
+                  padding-left: 4px;
+                  padding-right: 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .btn-group__period-selector {
+        width: 100%;
+        flex-wrap: wrap;
+
+        label, button {
+          height: 50px;
+          padding: 14px;
+          font-style: normal;
+          font-weight: 500 !important;
+          font-size: 18px !important;
+          line-height: 22px !important;
+          color: $fontPrimaryColor;
+
+          &:first-child {
+            border-radius: 4px 0 0 4px;
+          }
+
+          &:last-child {
+            border-radius: 0 4px 4px 0;
+          }
+
+          &.btn.active:not(:disabled) {
+            background: rgba(72, 152, 168, 0.1);
+            border: 1px solid $successColor;
+            color: $successColor;
+            box-shadow: none;
+          }
+        }
+      }
+
+      p {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        color: $fontGrayColor;
+      }
+    }
+
+    @media (max-width: 1919px) {
+      .filter {
+        .btn-group__period-selector {
+          label, button {
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 1199px) {
+      flex-direction: column;
+    }
+  }
+
+  .statistics-container {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 60px;
+
+    .reports-emails-chart {
+      position: relative;
+      width: calc(100% - 300px);
+      max-width: 930px;
+      height: 320px;
+    }
+
+    .reports-emails-stats {
+      width: 100%;
+      max-width: 570px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 9px 14px;
+        border-radius: 5px;
+        font-style: normal;
+        font-weight: 400 !important;
+        line-height: 22px;
+        margin: 0;
+        color: $fontPrimaryColor;
+
+        span {
+          display: flex;
+          width: 32px;
+          height: 32px;
+          position: relative;
+
+          @include svg-position();
+        }
+
+        &:hover, &:focus {
+          border-color: $fontGrayColor;
+        }
+      }
+
+      .list-item-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 20px;
+
+        .list-item {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom: 1px solid $borderColor;
+          gap: 20px;
+
+          &:last-child {
+            border: none;
+          }
+
+          .stat {
+            h3 {
+              font-style: normal;
+              font-weight: 400;
+              font-size: 48px;
+              line-height: 58px;
+              color: $fontPrimaryColor;
+              margin-bottom: 5px;
+            }
+
+            small {
+              display: flex;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 19px;
+              color: $fontColor;
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+
+      .clear-stats {
+        margin-top: 56px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 1199px) {
+      flex-direction: column;
+
+      .reports-emails-chart, .reports-emails-stats {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+
+  .last-added {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 35px;
+
+    .app-card {
+      width: 100%;
+
+      &:first-child {
+        width: calc(100% * 0.3706);
+        min-width: 300px;
+      }
+
+      .panel-body {
+        width: 100%;
+        position: relative;
+
+        .list {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 10px;
+
+          &-item {
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            border-bottom: 1px solid $borderColor;
+
+            &:last-child {
+              border: none;
+            }
+
+            .report-email-last-logo {
+              width: 60px;
+              min-width: 60px;
+              height: 60px;
+              min-height: 60px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 50%;
+              background-color: $activeElementBG;
+
+              span {
+                width: 32px;
+                height: 32px;
+                display: flex;
+                position: relative;
+
+                @include svg-position();
+              }
+            }
+
+            .report-email-user-icon {
+              background-image: url("../../../../../assets/images/core/default-user-icon.png");
+              background-repeat: no-repeat;
+              background-size: contain;
+            }
+
+            h5 {
+              font-style: normal;
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 24px;
+              color: $fontPrimaryColor;
+              word-break: break-word;
+              margin: 0;
+
+              &:first-child {
+                font-weight: 700;
+              }
+            }
+          }
+        }
+
+        .report-email-sites-sites-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 60px;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          gap: 20px;
+          line-height: 22px;
+          color: $fontPrimaryColor;
+
+          div {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48%;
+            word-break: break-word;
+
+            &:first-child {
+              justify-content: flex-start;
+            }
+          }
+        }
+
+        .report-email-sites-sites-row {
+          padding: 20px 20px 20px 0;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          color: $fontPrimaryColor;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+
+          div {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48%;
+            word-break: break-word;
+
+            &:first-child {
+              justify-content: flex-start;
+            }
+          }
+        }
+
+        @media (max-width: 991px) {
+          .report-email-sites-sites-header,
+          .report-email-sites-sites-row {
+            div:last-child {
+              text-align: right;
+              justify-content: flex-end;
+            }
+          }
+        }
+      }
+    }
+
+    @media (max-width: 1199px) {
+      flex-direction: column;
+      gap: 0;
+
+      .app-card,  {
+        &:first-child {
+          width: 100%;
+          min-width: 100%;
+        }
+      }
+    }
+  }
+
+  .reports-emails-preloader {
+    background: #fff url("../../../../../assets/images/core/preloader.gif") no-repeat center center;
+    background-size: 30px 30px;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+  }
+}

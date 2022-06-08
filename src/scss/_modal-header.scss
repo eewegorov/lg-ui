@@ -1,0 +1,48 @@
+@import "src/scss/vars";
+@import "src/scss/mixins";
+
+.modal-header {
+  justify-content: space-between !important;
+  align-items: flex-start;
+  gap: 20px;
+
+  .modal-title-container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  h5 {
+    margin: 0;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: $fontPrimaryColor;
+  }
+
+  button, .close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin: 0;
+
+    span {
+      display: flex;
+      width: 24px;
+      height: 24px;
+      position: relative;
+
+      @include svg-position();
+    }
+  }
+}
+
+
+::ng-deep {
+  a.link {
+    color: $successColor !important;
+  }
+}

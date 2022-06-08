@@ -1,0 +1,59 @@
+<div class="modal-header">
+  <div>
+    <h3 *ngIf="title" class="modal-title">{{ title }}</h3>
+    <h5 *ngIf="subscription" [innerHTML]="subscription"></h5>
+  </div>
+  <button class="close btn" (click)="closeModal()">
+    <span inlineSVG="./assets/images/core/cross.svg"></span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <div accept-charset="UTF-8" id="paymentForm" style="display: none">
+    <form action="https://wl.walletone.com/checkout/checkout/Index" method="POST" target="_blank">
+      <input name="WMI_MERCHANT_ID" value="" /><br />
+      <input name="WMI_PAYMENT_AMOUNT" value="" /><br />
+      <input name="WMI_CURRENCY_ID" value="" /><br />
+      <input name="WMI_DESCRIPTION" value="" /><br />
+      <input name="WMI_SUCCESS_URL" value="" /><br />
+      <input name="WMI_FAIL_URL" value="" /><br />
+      <input name="WMI_PAYMENT_NO" value="" /><br />
+      <input name="WMI_SIGNATURE" value="" /><br />
+    </form>
+  </div>
+
+  <div class="tariff-container">
+    <p>{{ planLabels.activationLabel }}<br />{{ planLabels.activationDateLabel }}</p>
+
+    <div class="tariff-selection">
+      <p>{{ 'sitelist.tariff.length' | translate }}</p>
+      <div class="tariff-btns btn-group" data-toggle="buttons">
+        <div *ngFor="let price of plan.prices" class="button-container">
+          <button
+            (click)="changePrice(price); $event.preventDefault(); $event.stopPropagation();"
+            [class.active]="activePriceId === price.id"
+            class="btn btn-default"
+          >
+            {{ price.name }}
+          </button>
+          <span>{{ price.desc }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="tariff-confirmation">
+      <h2>{{ 'billing.modal.paysum.label' | translate }}</h2>
+
+      <div class="tariff-price">
+        <h2 class="pay-sum">{{ planLabels.currentPrice }} {{ 'global.currency.ruble' | translate }}</h2>
+        <span>{{ planLabels.payDescription }}</span>
+      </div>
+      <button (click)="activatePlan()" class="btn">
+        {{ 'billing.modal.paysum.btn' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer justify-content-center">
+  <p [innerHTML]="'billing.modal.footer' | translate" class="payment-form-footer-text"></p>
+</div>

@@ -1,0 +1,4 @@
+User-Agent: *
+Host: leadgenic.ru
+Disallow: /welcome/
+Disallow: /welcome

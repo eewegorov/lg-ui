@@ -1,0 +1,208 @@
+<tr [class.non-active]="!item.active" [class.no-border]="first">
+  <td class="name">
+    <ng-container *ngIf="widgetNameEditing$ | async; else name">
+      <div [class.is-invalid]="widgetEditingName.trim().length === 0" class="input">
+        <input
+          [(ngModel)]="widgetEditingName"
+          class="form-control"
+          placeholder="{{ 'containerized.container.add.name' | translate }}"
+          type="text"
+        />
+      </div>
+      <button
+        (click)="toggleWidgetNameEditing()"
+        class="btn btn-default"
+      >
+        <span inlineSVG="./assets/images/core/cross.svg"></span>
+      </button>
+      <button
+        (click)="updateCWidget()"
+        [disabled]="widgetEditingName.trim().length === 0"
+        class="btn btn-default"
+      >
+        <span inlineSVG="./assets/images/core/check.svg"></span>
+      </button>
+    </ng-container>
+    <ng-template #name>
+      <span>{{ item.name }}</span>
+      <button
+        (click)="toggleWidgetNameEditing()"
+        class="btn"
+      >
+        <span inlineSVG="./assets/images/core/pencil.svg"></span>
+      </button>
+    </ng-template>
+  </td>
+  <td class="campaign">
+    <ng-container *ngIf="widgetCampaignEditing$ | async; else campaign">
+      <div class="dropdown">
+        <button
+          class="btn btn-default dropdown-toggle"
+          aria-expanded="true"
+          aria-haspopup="true"
+          data-toggle="dropdown"
+          type="button"
+        >
+          <span class="value">{{ widgetEditingCampaign.name }}</span>
+          <span class="caret" inlineSVG="./assets/images/core/caret-down.svg"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <ng-container *ngFor="let company of getFilteredCompanies()">
+            <li (click)="changeEditingCampaign(company)">
+              <a class="dropdown-item" href="javascript:void(0);">{{ company.name }}</a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+      <button
+        (click)="toggleWidgetCampaignEditing()"
+        class="btn btn-default"
+      >
+        <span inlineSVG="./assets/images/core/cross.svg"></span>
+      </button>
+      <button
+        (click)="changeCWidgetCompany()"
+        class="btn btn-default"
+      >
+        <span inlineSVG="./assets/images/core/check.svg"></span>
+      </button>
+    </ng-container>
+    <ng-template #campaign>
+      <span>{{ widgetCampaign.name }}</span>
+      <button
+        (click)="toggleWidgetCampaignEditing()"
+        class="btn"
+      >
+        <span inlineSVG="./assets/images/core/pencil.svg"></span>
+      </button>
+    </ng-template>
+  </td>
+
+  <ng-container *ngIf="item.widgetConversion">
+    <td class="shows">{{ item.widgetConversion.shows | thousandSuffix:2 }}</td>
+    <td class="targets">{{ item.widgetConversion.targets | thousandSuffix:2 }}</td>
+    <td [innerHTML]="(item.widgetConversion.shows !== 0) ? getCConversion() : '0.00%'" class="conv"></td>
+  </ng-container>
+
+  <ng-container *ngIf="!item.widgetConversion">
+    <td class="shows reports-emails-preloader"></td>
+    <td class="targets reports-emails-preloader"></td>
+    <td class="conv reports-emails-preloader"></td>
+  </ng-container>
+
+  <td class="priority">
+    <div class="priority-btns">
+      <button (click)="swapCWidgets(true)" [disabled]="first" class="btn btn-sm btn-default">
+        <span inlineSVG="./assets/images/core/caret-up.svg"></span>
+      </button>
+
+      <button (click)="swapCWidgets(false)" [disabled]="last" class="btn btn-sm btn-default">
+        <span inlineSVG="./assets/images/core/caret-down.svg"></span>
+      </button>
+    </div>
+  </td>
+
+  <td class="actions-static">
+    <div class="play-btns">
+      <button
+        (click)="switchCWidget(true)"
+        [ngClass]="item.active ? 'active' : ''"
+        class="btn btn-sm btn-default start-widget-btn"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'widgetsList.widget.start' | translate }}"
+      >
+        <span inlineSVG="./assets/images/core/play.svg"></span>
+      </button>
+
+      <button
+        (click)="switchCWidget(false)"
+        [ngClass]="item.active ? '' : 'active'"
+        class="btn btn-sm btn-default stop-widget-btn"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'widgetsList.widget.stop' | translate }}"
+      >
+        <span inlineSVG="./assets/images/core/pause.svg"></span>
+      </button>
+    </div>
+
+    <div class="ab-btns">
+      <button
+        *ngIf="abIfNoTest()"
+        (click)="abAction()"
+        class="btn btn-sm btn-default"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'widgetsList.widget.ab.start.desc' | translate }}"
+      >
+        <span></span>
+        {{ 'abtests.ab' | translate }}
+      </button>
+
+      <button
+        *ngIf="abIfTestOnWork()"
+        (click)="goToTest()"
+        class="btn btn-sm btn-default in-work"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'widgetsList.widget.ab.state.desc' | translate }}"
+      >
+        <span></span>
+        {{ 'abtests.ab' | translate }}
+      </button>
+
+      <button
+        *ngIf="abIfTestOnPause()"
+        (click)="goToTest()"
+        class="btn btn-sm btn-default in-pause"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'widgetsList.widget.ab.stop.desc' | translate }}"
+      >
+        <span></span>
+        {{ 'abtests.ab' | translate }}
+      </button>
+    </div>
+
+    <div class="edit-btns">
+      <button
+        (click)="duplicateCWidget()"
+        class="btn btn-sm btn-default"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'widgetsList.widget.duplicate' | translate }}"
+      >
+        <span inlineSVG="./assets/images/core/copy.svg"></span>
+      </button>
+
+      <button
+        (click)="goToConstructor()"
+        class="btn btn-sm btn-default"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'widgetsList.widget.settings' | translate }}"
+      >
+        <span inlineSVG="./assets/images/core/settings.svg"></span>
+      </button>
+
+      <button
+        (click)="removeCWidget()"
+        class="btn btn-sm btn-default"
+        data-container="body"
+        data-placement="top"
+        data-toggle="tooltip"
+        title="{{ 'widgetsList.widget.trash' | translate }}"
+      >
+        <span inlineSVG="./assets/images/core/delete-icon.svg"></span>
+      </button>
+    </div>
+  </td>
+</tr>

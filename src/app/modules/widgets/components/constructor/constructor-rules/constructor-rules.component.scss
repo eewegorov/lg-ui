@@ -1,0 +1,201 @@
+h3 {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+h5 {
+  font-size: 14px;
+  line-height: 1.9;
+  margin-left: 7px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.widgets-settings-container {
+  display: flex;
+  height: 100%;
+  padding: 20px 30px;
+}
+
+.settings-categories {
+  width: 20%;
+  margin-right: 25px;
+}
+
+.settings-container {
+  width: 80%;
+
+  .row div {
+    width: 100%;
+  }
+}
+
+.settings-category {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+
+  &.active {
+    background: #F4F4F6;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  span {
+    cursor: pointer;
+
+    &.badge {
+      height: 8px;
+      top: 6px;
+    }
+  }
+}
+
+a.info-link {
+  color: #34495e;
+  font-size: 20px;
+  margin: 0 7px;
+}
+
+.width-400 {
+  width: 400px;
+}
+
+.form-control {
+  font-size: 14px;
+  margin-left: -1px;
+}
+
+.is-invalid label.control-label, .is-invalid .underline-comment {
+  color: #a94442;
+}
+
+.label.label-warning.tariff-info {
+  margin-left: 35px;
+}
+
+.input-with-remove {
+  float: left;
+  width: calc(100% - 100px);
+}
+
+span.combo-box-underow-comment-comment {
+  left: 10px;
+  position: absolute;
+  top: 63px;
+}
+
+.time-settings-fromto {
+  float: left;
+  font-size: 18px;
+  font-weight: 100;
+  line-height: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+label.smal-subtitle {
+  font-size: 16px !important;
+  color: #6a6c6f !important;
+  font-weight: 200 !important;
+}
+
+input.radio-left {
+  float: left;
+  font-size: 30px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.widgets-num-input {
+  float: left !important;
+  width: 60px !important;
+}
+
+.form-control.period-range {
+  float: left;
+  width: 100px !important;
+}
+
+.cons-settings-js-textarea {
+  width: 900px;
+  height: 180px;
+}
+
+.checkmark {
+  cursor: pointer;
+}
+
+.datepicker {
+  width: 250px;
+}
+
+.audience-tooolbar-desc {
+  width: 100%;
+}
+
+.row-subitem-padding {
+  padding-right: 20px;
+}
+
+.dropdown button, .input-group button, .input-group input {
+  font-size: 12px;
+}
+
+.round-button {
+  border-radius: 20px;
+  margin: 0 7px;
+  padding: 0 10px;
+}
+
+.dropdown button.round-button {
+  font-size: 14px;
+}
+
+label.extra-header {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.rule-disabled {
+  h4, h5, a.info-link, label.extra-header, .underline-comment span {
+    color: #7E889A;
+  }
+
+  input.extra-header {
+    border: none;
+  }
+
+  .checkmark {
+    border-color: #eee;
+  }
+
+  .form-check:hover input ~ .checkmark {
+    cursor: default;
+    background-color: #fff;
+  }
+}
+
+.rules-container {
+  height: calc(100vh - 135px);
+  overflow: auto;
+  padding: 0 13px 0 3px;
+
+  label.f-3 {
+    line-height: normal;
+    margin-top: -4px;
+  }
+}
+
+.text-addition {
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+label.label-15 {
+  margin-top: -2px;
+  font-size: 15px;
+}

@@ -1,0 +1,69 @@
+h5 {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.wrapper-test {
+  margin-top: 10px;
+  padding-bottom: 25px;
+}
+
+.wrapper-test-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper-test-filter-sites {
+  width: 300px;
+}
+
+.site-selector {
+  min-width: 300px;
+}
+
+.btn {
+  border-radius: 3px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.btn:hover, .btn:focus, .btn.focus {
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.btn:active:not(:disabled), .btn.active:not(:disabled) {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.main-content-container-ab-loader {
+  background-image: url("~src/assets/images/core/preloader.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 60px;
+  width: 60px;
+  margin-left: -30px;
+  left: 50%;
+  position: absolute;
+  top: 200px;
+}
+
+.test-item {
+  min-width: 800px;
+}
+
+.test-item-name,
+.test-item-desc {
+  display: inline-block;
+  position: relative;
+  border: none;
+  padding-right: 20px;
+  line-height: 30px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

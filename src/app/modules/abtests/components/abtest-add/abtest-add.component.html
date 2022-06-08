@@ -1,0 +1,80 @@
+<ng-container *ngIf="newABTestInfo.step === 0 || newABTestInfo.step === 1">
+  <div class="modal-header">
+    <h3 class="modal-title">{{ 'abtests.modal.newAB.title' | translate }}</h3>
+    <button class="close btn" (click)="closeModal()">
+      <span inlineSVG="./assets/images/core/cross.svg"></span>
+    </button>
+  </div>
+</ng-container>
+
+<div class="modal-body">
+  <ng-container *ngIf="newABTestInfo.step === 0">
+    <form>
+      <div class="form-group">
+        <label class="control-label">{{ 'abtests.modal.variant.title' | translate }}</label>
+        <input
+          [(ngModel)]="editableAB.name"
+          placeholder="{{ 'abtests.modal.variant.titlePlaceholder' | translate }}"
+          class="form-control"
+          name="name"
+          type="text"
+        />
+        <span class="small">{{ 'abtests.modal.variant.comment' | translate }}</span>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">{{ 'abtests.modal.variant.description' | translate }}</label>
+        <textarea
+          [(ngModel)]="editableAB.description"
+          placeholder="{{ 'abtests.modal.variant.descriptionPlaceholder' | translate }}"
+          name="description"
+          class="form-control"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="form-buttons">
+        <button
+          (click)="goToABType()"
+          [disabled]="editableAB.name.trim().length === 0"
+          class="btn btn-lg btn-success float-right"
+          type="button"
+        >
+          {{ 'abtests.modal.variant.create' | translate }}
+        </button>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="newABTestInfo.step === 1">
+    <div class="test-type-container">
+      <button
+        (click)="setABType(type)"
+        *ngFor="let type of newABTestInfo.ABTypes"
+        class="widget-type-view"
+      >
+        <div class="ab-type-icon-{{ type.type }}"></div>
+        <div class="view-name">{{ type.title }}</div>
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="newABTestInfo.step === 2">
+    <div class="create-widget-m p-0">
+      <div class="filters-loader"></div>
+      <div class="container-for-loader">
+        <div class="templates-gallery-header">
+          <div class="header-modal">
+            <span>{{ 'widgetsList.add.params.mockup.title' | translate }}</span>
+          </div>
+          <span class="sub-text">{{ 'widgetsList.add.modal.gallery.desc' | translate }}</span>
+        </div>
+
+        <app-templates-gallery
+          (chooseWidget)="chooseTemplateWidget($event)"
+          [typeId]="newABTestInfo.abtTypeWidget"
+        ></app-templates-gallery>
+      </div>
+    </div>
+  </ng-container>
+</div>

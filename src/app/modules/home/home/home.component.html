@@ -1,0 +1,5 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div [class.wrapper]="!isConstructorOpened" [class.without-transition]="withoutTransition">
+  <router-outlet></router-outlet>
+</div>

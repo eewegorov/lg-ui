@@ -1,0 +1,204 @@
+@import "src/scss/vars";
+@import "src/scss/mixins";
+@import "src/scss/modal-header";
+
+:host {
+  width: 880px;
+  border-radius: $borderRadius;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @media (max-width: 991px) {
+    width: 100%;
+  }
+
+  .modal-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px 40px 40px;
+
+    @media (max-width: 991px) {
+      padding: 20px;
+    }
+
+    p {
+      margin: 0;
+      width: 100%;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 22px;
+      color: $fontSecondaryColor;
+    }
+
+    .tariff-container {
+      width: inherit;
+      display: inherit;
+      flex-direction: inherit;
+      gap: 25px;
+
+      .tariff-selection {
+        width: inherit;
+        display: inherit;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 25px;
+
+        p {
+          width: auto !important;
+        }
+
+        .tariff-btns {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+
+          @media (max-width: 991px) {
+            width: 100%;
+          }
+
+          .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+
+            @media (max-width: 991px) {
+              margin-top: 5px;
+            }
+
+
+            &:first-child {
+              button {
+                border-radius: 4px 0 0 4px;
+              }
+            }
+
+            &:last-child {
+              button {
+                border-radius: 0 4px 4px 0;
+              }
+            }
+
+            button {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 14px;
+              border-radius: 0;
+              font-style: normal;
+              font-weight: 500 !important;
+              font-size: 18px;
+              line-height: 22px;
+              color: $fontPrimaryColor;
+
+              &:not(:disabled):focus {
+                position: relative;
+                z-index: 1000;
+              }
+
+              &.active {
+                border-color: $successColor;
+                color: $successColor;
+                background-color: rgba($successColor, 10%);
+              }
+            }
+
+            span {
+              font-style: normal;
+              font-weight: 400;
+              font-size: 18px;
+              line-height: 22px;
+              color: $greenColor;
+            }
+          }
+        }
+      }
+
+      .tariff-confirmation {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+        flex-wrap: wrap;
+
+        @media (max-width: 991px) {
+          justify-content: center;
+        }
+
+        h2:not(.pay-sum) {
+          margin: 0;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 24px;
+          line-height: 29px;
+          color: $fontPrimaryColor;
+        }
+
+        .tariff-price {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: 5px;
+
+          h2 {
+            margin: 0;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 44px;
+            color: $fontPrimaryColor;
+          }
+
+          span {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: $fontSecondaryColor;
+          }
+        }
+
+        button {
+          padding: 14px;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 22px;
+          color: #FFFFFF;
+          background-color: $successColor;
+          border-color: $successColor;
+        }
+      }
+    }
+  }
+
+  .modal-footer {
+    background-color: #f7f9fa;
+    padding: 40px;
+    border-radius: $borderRadius;
+
+    @media (max-width: 991px) {
+      padding: 20px;
+    }
+
+    .payment-form-footer-text {
+      padding: 0;
+      margin: 0;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 22px;
+      color: $fontSecondaryColor;
+      text-align: center;
+    }
+  }
+}

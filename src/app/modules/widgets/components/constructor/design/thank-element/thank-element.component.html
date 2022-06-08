@@ -1,0 +1,44 @@
+<div
+  *ngIf="widget.guiprops.bg"
+  [ngClass]="(widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
+  [ngStyle]="{'background': bgStyle, 'border': widget.guiprops.bg.border?.style, 'border-radius': widget.guiprops.bg.borderRadius + 'px', 'box-shadow': widget.guiprops.bg.shadow?.style}"
+  class="block-widget-show block-thank"
+  id="thankWidget"
+>
+  <div class="thank-text-cent">
+    <div class="editorFontLine">
+      <div
+        [ngStyle]="{'font-size': widget.guiprops['title'].fontSize + 'px', 'font-family': widget.guiprops['title'].font.fontFamily}"
+        class="element-to-append-summernote click-edit-cl"
+      >
+        <div [(ngModel)]="widget.guiprops['thank'].textSummer" [ngxSummernote]="optionsSummernote"></div>
+      </div>
+      <div
+        [ngStyle]="{'font-size': widget.guiprops['desc'].fontSize + 'px', 'font-family': widget.guiprops['desc'].font.fontFamily}"
+        class="element-to-append-summernote click-edit-cl description"
+      >
+        <div [(ngModel)]="widget.guiprops['thank2'].textSummer" [ngxSummernote]="optionsSummernote"></div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    [ngClass]="(widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
+    [ngStyle]="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity}"
+    class="absolute-bg-content"
+  >
+    <div *ngIf="widget.guiprops.bg.fillorImg === 'useVideo'" class="video-bg video-bg-thank">
+      <div *ngIf="widget.guiprops.bg.video.videoId" [ngClass]="setVideoBGThankStyle()">
+        <iframe frameborder="0" id="idBgVideoFrameThank" src="" style=""></iframe>
+      </div>
+      <img *ngIf="!widget.guiprops.bg.video.videoId" class="item-image-video-block"
+           src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
+    </div>
+  </div>
+
+  <div
+    *ngIf="widget.guiprops.bg.mask?.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo'))"
+    [ngStyle]="{'background': widget.guiprops.bg.mask.rgbaColor, 'border-radius': widget.guiprops['bg'].borderRadius + 'px'}"
+    id="globalMask"
+  ></div>
+</div>

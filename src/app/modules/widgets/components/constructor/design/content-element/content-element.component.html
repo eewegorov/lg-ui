@@ -1,0 +1,604 @@
+<div
+  *ngIf="widget.guiprops.bg"
+  [class.mobile]="isMobile"
+  class="widget1 block-widget-show active"
+  id="mainBlockWidget"
+  [ngStyle]="{'border': widget.guiprops.bg.border?.style, 'border-radius': widget.guiprops.bg.borderRadius + 'px', 'box-shadow': widget.guiprops.bg.shadow?.style}"
+>
+  <div
+    class="absolute-bg-content"
+    [ngClass]="(bgStyle && widget.guiprops['bg'].fillorImg === 'useImg') ? 'block-widget-bg' : ''"
+    [ngStyle]="{'background': bgStyle, 'opacity': widget.guiprops.bg.opacity, 'border-radius': widget.guiprops.bg.borderRadius - widget.guiprops.bg.border.thickness + 'px'}"
+  >
+    <div
+      *ngIf="widget.guiprops.bg.mask?.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo')) && widget.guiprops.bg.mask.area === 'Вся площадь виджета'"
+      [ngStyle]="{'background': widget.guiprops.bg.mask.rgbaColor}"
+      id="globalMask"
+    ></div>
+
+    <div
+      *ngIf="widget.guiprops.form?.enable || widget.guiprops.button?.enable || widget.guiprops.formExt?.enable"
+      [ngStyle]="colorPodStyles()"
+      class="color-bg-on-form"
+      id="colorFormPod"
+    ></div>
+
+    <div
+      (click)="scrollToEl('i-or-v-element', 'IVBl'); $event.stopPropagation();"
+      *ngIf="widget.guiprops.image?.enable"
+      [ngClass]="classNameImg()"
+      [ngStyle]="{'width': widthImageStyle, 'height': heightImageStyle}"
+      class="widget-image"
+    >
+      <div
+        *ngIf="((widget.guiprops.image.typeBl === 'imageBl') || (widget.guiprops.image.typeBl !== 'videoBl')) && (widget.guiprops.image.typeBl !== 'paddingBl')"
+        [ngStyle]="{'background-image': 'url(' + widget.guiprops.image.url + ')', 'background-repeat': 'no-repeat', 'background-position': 'center', 'background-size': 'cover', 'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
+        class="widget-image-item-block"
+      ></div>
+      <div
+        *ngIf="widget.guiprops.image.typeBl === 'videoBl'"
+        [ngStyle]="{'width': widget.guiprops.image.img_item_widthpx + 'px', 'height': widget.guiprops.image.img_item_heightpx + 'px'}"
+        class="widget-video-item-block"
+      >
+        <iframe *ngIf="widget.guiprops.image.videoId" frameborder="0" id="idImageVideoFrame" src="" style=""></iframe>
+        <img *ngIf="!widget.guiprops.image.videoId" class="item-image-video-block"
+             src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
+      </div>
+    </div>
+
+    <div #videoBg *ngIf="widget.guiprops.bg.fillorImg === 'useVideo'" class="video-bg">
+      <div *ngIf="widget.guiprops.bg.video?.videoId" [ngClass]="videoBgClass">
+        <iframe frameborder="0" id="idBgVideoFrame" src="" style=""></iframe>
+      </div>
+      <img *ngIf="!widget.guiprops.bg.video?.videoId" class="item-image-video-block"
+           src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
+    </div>
+
+    <div
+      *ngIf="widget.guiprops.bg.mask?.enable && ((widget.guiprops['bg'].fillorImg === 'useImg') || (widget.guiprops['bg'].fillorImg === 'useVideo')) && widget.guiprops.bg.mask.area === 'Только под контентом'"
+      [ngStyle]="{'background': widget.guiprops.bg.mask.rgbaColor}"
+      class="widget-mask"
+      id="widgetMaskTop"
+    ></div>
+  </div>
+
+  <div [ngClass]="classNameImgMain()" [ngStyle]="{'width': widthContentStyle}" class="wigdet-main-wr" id="widgetMainWr">
+    <ul
+      *ngIf="widget.guiprops.elementsList"
+      [ngClass]="classNameVerticalOrient()"
+      [ngStyle]="{'height': heightContentStyle}"
+      [sortablejsOptions]="optionsSortable"
+      [sortablejs]="widget.guiprops.elementsList"
+      class="widget-flex-dis"
+      id="mainElListUl"
+    >
+      <div *ngIf="(widget.guiprops.elementsList.length == 0 && showAddButtonOnWidget)"
+           class="help-block-add-if-not-sel">
+        <div>
+          <div class="widget-content-add">
+            <button (click)="addNewElementToContent(); $event.stopPropagation();"
+                    class="btn-default widget-content-add-btn"><i class="fa fa-plus"></i>Добавить
+              новый элемент
+            </button>
+            <span>Для добавления элемента нажмите на эту кнопку и выберите элемент из списка</span>
+            <a (click)="hiddenAddButtonOnWidget(); $event.stopPropagation();">скрыть кнопку</a>
+          </div>
+        </div>
+      </div>
+      <li
+        (click)="scrollToEl(item.name, i, item.counter); $event.stopPropagation();"
+        *ngFor="let item of widget.guiprops.elementsList; index as i"
+        [attr.data-to]="'elemScrN' + i"
+        [class]="'element-to-append-summernote margin-if-' + item.name + ' ' + addExtraClassForFullWidth(i)"
+        [ngStyle]="{'z-index': 100 - i}"
+      >
+        <div class="remove-element-from-list-view remove-sub-form-item">
+          <a
+            (click)="removeElementFromElementsList(item.name, i); $event.stopPropagation();"
+            href="javascript:void(0);"
+          ><i class="remove-sub-item far fa-trash-alt"></i></a>
+        </div>
+        <div class="move-element-view grab-handle-element"><i class="fa fa-arrows"></i></div>
+
+        <div (click)="addNewElementToContent(i); $event.stopPropagation();" [ngClass]="getItemClassData(item)"
+             class="btn-add-on-elem">
+          <i aria-hidden="true" class="fa fa-plus"></i>
+          <div class="tooltip top fade in">
+            <div class="tooltip-arrow"></div>
+            <div class="tooltip-inner">Добавить элемент</div>
+          </div>
+        </div>
+        <div (click)="copyNewElementToContent(item, i); $event.stopPropagation();" [ngClass]="getItemClassData(item)"
+             class="btn-copy-on-elem">
+          <i aria-hidden="true" class="fa fa-copy"></i>
+          <div class="tooltip top fade in">
+            <div class="tooltip-arrow"></div>
+            <div class="tooltip-inner">Клонировать элемент</div>
+          </div>
+        </div>
+
+        <div *ngIf="item.name === 'title-element'" class="social-block-pd">
+          <div class="editorFontLine">
+            <div
+              [ngClass]="(item.textShadow.enable) ? '' : 'no-text-shadow-imp'"
+              [ngStyle]="{'font-size': item.fontSize + 'px', 'font-family': item.font.fontFamily, 'text-shadow': item.textShadow.horiz + 'px ' + item.textShadow.vertical + 'px ' + item.textShadow.blur + 'px ' + getRGBAColor(item.textShadow)}"
+              class="click-edit-cl"
+            >
+              <div [(ngModel)]="item.textSummer" [ngxSummernote]="optionsSummernote"></div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="item.name === 'split-element'" class="social-block-pd">
+          <div [ngClass]="hrPosSel(item)" class="split-element-block">
+            <hr
+              [ngStyle]="{'border-color': item.color, 'width': item.widthpx + 'px', 'border-top-width': item.thickness + 'px'}"
+              class="style{{item.type}}"
+            >
+          </div>
+        </div>
+
+        <div *ngIf="item.name === 'padding-element'">
+          <div [ngStyle]="{'height': item.padding + 'px'}" class="padding-element-block"></div>
+        </div>
+
+        <div *ngIf="item.name === 'video-element'" class="social-block-pd">
+          <div [ngClass]="hrPosSel(item)" class="element-video-block">
+            <iframe *ngIf="item.videoId" frameborder="0" id="idVideoFrame{{item.counter}}" src="" style=""></iframe>
+            <img *ngIf="!item.videoId" [ngStyle]="{'width': item.widthpx + 'px'}" class="element-video-block-img"
+                 src="https://static.leadgenic.com/dev/lg_widgets_l11/img/video_example_des.png"/>
+          </div>
+        </div>
+
+        <div *ngIf="item.name === 'image-element'" class="social-block-pd">
+          <div [ngClass]="hrPosSel(item)" class="element-image-block">
+            <img [ngStyle]="{'width': item.widthpx + 'px'}" [src]="item.imageUrl" class="element-image-block-img">
+          </div>
+        </div>
+
+        <div *ngIf="item.name === 'coupon-element'" class="social-block-pd">
+          <div *ngIf="item.title.enable" class="editorFontLine element-coupon-title">
+            <div
+              [ngClass]="(item.title.textShadow.enable) ? '' : 'no-text-shadow-imp'"
+              [ngStyle]="{'font-size': item.title.fontSize + 'px', 'font-family': item.title.font.fontFamily, 'text-shadow': item.title.textShadow.horiz + 'px ' + item.title.textShadow.vertical + 'px ' + item.title.textShadow.blur + 'px ' + getRGBAColor(item.title.textShadow)}"
+              class="click-edit-cl"
+            >
+              <div [(ngModel)]="item.title.textSummer" [ngxSummernote]="optionsSummernote"></div>
+            </div>
+          </div>
+          <div [ngClass]="hrPosSel(item)" class="element-coupon-block">
+            <div
+              [ngStyle]="{'width': widthCouponStyle(item), 'background': getRGBAColor(item), 'color': item.colorText, 'border-radius': item.borderRadius + 'px', 'font-size': item.fontSize+'px', 'font-family': item.font.fontFamily}"
+              class="element-coupon-wr"
+            >
+              <div class="element-coupon-name">COUPON CODE</div>
+              <div class="element-coupon-hover">{{ item.hoverText }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="item.name === 'iframe-element'" class="social-block-pd">
+          <div [ngClass]="hrPosSel(item)">
+            <div [ngClass]="heightIfrmPosSel(item)">
+              <div [id]="'elementIframeBlock' +  item.counter" [ngStyle]="{'width': item.widthpx + 'px', 'height': item.heightpx + 'px'}"
+                   class="element-iframe-block" style="position: relative;">
+                <div class="iframe-before" (click)="scrollToEl(item.name, i, item.counter); $event.stopPropagation();"></div>
+                <iframe [id]="'idFrame' + item.counter">
+                  <!DOCTYPE html>
+                  <html lang="en">
+                  <head>
+                    <meta charset="UTF-8"/>
+                  </head>
+                  <body></body>
+                  </html>
+                </iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="item.name === 'closelink-element'">
+          <div *ngIf="!widget.guiprops.exit.button.enable">
+            <div [ngClass]="hrPosSel(widget.guiprops['exit'])" class="widget1-btn-exit">
+              <div
+                [ngStyle]="{'font-size': widget.guiprops['exit'].fontSize + 'px', 'font-family': widget.guiprops['exit'].font.fontFamily}"
+                class="click-edit-cl button-link-close"
+              >
+                <div [(ngModel)]="widget.guiprops['exit'].textSummer" [ngxSummernote]="optionsSummernote"></div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="widget.guiprops.exit.button.enable">
+            <div [ngClass]="btnPosSel(widget.guiprops.exit.button)" class="widget1-btn-bl">
+              <div
+                [ngClass]="setBtnStyleClass(widget.guiprops.exit.button)"
+                [ngStyle]="{'font-size': widget.guiprops.exit.button.fontSize + 'px', 'font-family': widget.guiprops.exit.button.font?.fontFamily, 'border-color': widget.guiprops.exit.button.colorBtn, 'background': widget.guiprops.exit.button.colorBtn, 'color': widget.guiprops.exit.button.colorTextBtn, 'border-radius': widget.guiprops.exit.button.borderRadiusBtn + 'px', 'width': widthExitBtnStyle}"
+                class="click-edit-cl button-send button-alone"
+              >
+                <div [(ngModel)]="widget.guiprops.exit.button.textSummer" [ngxSummernote]="optionsSummernote"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="item.name === 'form-element'" [ngClass]="hrPosSelWholeForm(widget.guiprops['form'])"
+             class="color-pod">
+          <div [ngStyle]="{'width': widget.guiprops.form.form_widthpx + 'px'}" class="form-whole-bl">
+            <div [ngClass]="hrPosSelForm(widget.guiprops['form'])" class="widget1-form-bl" id="widgetFormBlockM">
+              <div>
+                <div
+                  *ngFor="let item of widget.guiprops['formSet'].items"
+                  [ngClass]="classNameInputItem(item)"
+                  [ngStyle]="{'width': widget.guiprops['form'].widthpx + 'px'}"
+                  class="widget-inp-bl"
+                >
+                  <div [ngSwitch]="elementInputItem(item)">
+                    <div *ngSwitchCase="'inputEl'" class="text-input-class">
+                      <input
+                        *ngIf="item.type !== 'phone' || (widget.guiprops.formSet.phoneMask && !widget.guiprops.formSet.phoneMask.enable)"
+                        [id]="'elementid' + item.type"
+                        [ngClass]="classNameFormInput(item.type)"
+                        [style]="'background: ' + widget.guiprops['form'].rgbaInputForm + '; color: ' + widget.guiprops['form'].colorTitleInputForm + '; border-radius: ' + widget.guiprops['form'].borderRadiusInputForm + 'px; border-color: ' + widget.guiprops['form'].border.color + '!important'"
+                        class="form-control form-widget-cntrl"
+                        type="text"
+                      />
+                      <input
+                        *ngIf="item.type === 'phone' && (widget.guiprops.formSet.phoneMask && widget.guiprops.formSet.phoneMask.enable)"
+                        [id]="'elementid' + item.type"
+                        [ngClass]="classNameFormInput(item.type)"
+                        [style]="'background: ' + widget.guiprops['form'].rgbaInputForm + '; color: ' + widget.guiprops['form'].colorTitleInputForm + '; border-radius: ' + widget.guiprops['form'].borderRadiusInputForm + 'px; border-color: ' + widget.guiprops['form'].border.color + '!important'"
+                        class="form-control form-widget-cntrl"
+                        readonly
+                        type="text"
+                      />
+                      <label
+                        [for]="'elementid' + item.type"
+                        [style]="'color: ' + widget.guiprops['form'].colorTitleInputForm"
+                        class="form-widget-cntrl-label"
+                      >{{ item.placeholder }}</label>
+                      <span
+                        *ngIf="item.type === 'phone' && (widget.guiprops.formSet.phoneMask && widget.guiprops.formSet.phoneMask.enable)"
+                        [style]="'color: ' + widget.guiprops['form'].colorTitleInputForm"
+                        class="masked-span-helper"
+                      >{{ getInputFormPhoneMask() }}</span>
+                    </div>
+                    <div *ngSwitchCase="'textarEl'" class="text-input-class text-input-area-class">
+                    <textarea
+                      [id]="'elementid' + item.type"
+                      [ngClass]="classNameFormInput(item.type)"
+                      [style]="'background: ' + widget.guiprops['form'].rgbaInputForm + ';color: ' + widget.guiprops['form'].colorTitleInputForm + ';border-radius: ' + widget.guiprops['form'].borderRadiusInputForm + 'px;border-color: ' + widget.guiprops['form'].border.color + '!important'"
+                      class="form-control form-widget-cntrl"
+                    ></textarea>
+                      <label
+                        [for]="'elementid' + item.type"
+                        [style]="'color: ' + widget.guiprops['form'].colorTitleInputForm"
+                        class="form-widget-cntrl-label"
+                      >{{ item.placeholder }}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="widget.guiprops?.button?.textSummer">
+              <div [ngClass]="btnPosSel(widget.guiprops.button)" class="widget1-btn-bl widget1-btn-bl-min-marg">
+                <div [ngClass]="setBtnStyleClass(widget.guiprops.button)" [ngStyle]="{'font-size': widget.guiprops['button'].fontSize + 'px', 'font-family': widget.guiprops['button'].font.fontFamily, 'border-color': widget.guiprops['button'].colorBtn, 'background': widget.guiprops['button'].colorBtn, 'color': widget.guiprops['button'].colorTextBtn, 'border-radius': widget.guiprops['button'].borderRadiusBtn + 'px', 'width': widthBtnFormStyle}"
+                     class="click-edit-cl button-send">
+                  <div [(ngModel)]="widget.guiprops['button'].textSummer" [ngxSummernote]="optionsSummernote"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="item.name === 'form-ext-element'" [ngClass]="formExtHrPosSelWholeForm(widget.guiprops.formExt.model.mainSettings)"
+             class="form-ext-main-wr color-pod">
+          <div [ngStyle]="{'width': widget.guiprops.formExt.model.mainSettings.form_widthpx + 'px'}"
+               class="widget-form-ext-wrapper">
+            <div [ngClass]="formExtGlobalAlignmentClass(widget.guiprops.formExt.model.mainSettings)" class="widget1-form-ext-bl"
+                 id="widgetFormBlockMExt">
+
+              <ng-container *ngFor="let itemExt of widget.guiprops.formExt.model.list; index as i">
+                <div *ngIf="itemExt.type !== 'hidden'" [ngClass]="formExtItemExtraClass(itemExt)" [ngStyle]="{'width': formExtGetItemWidth(itemExt)}"
+                     class="widget-inp-bl">
+                  <div class="form-ext-element-wr form-ext-element-{{ i }}">
+                    <div class="form-ext-element-highlighted-context"></div>
+                    <div [ngSwitch]="formExtElementInputItem(itemExt)">
+                      <!-- FORM EXT NAME, TEXT, PHONE, EMAIL -->
+                      <div *ngSwitchCase="'inputElement'" class="text-input-class">
+                        <input
+                          *ngIf="itemExt.type !== 'phone' || !itemExt.mask.enable"
+                          [id]="'elementid' + itemExt.type"
+                          [ngClass]="formExtClassNameFormInput(itemExt)"
+                          [style]="'background: ' + widget.guiprops.formExt.model.mainSettings.rgbaInputForm + ';color: ' + widget.guiprops.formExt.model.mainSettings.colorTitleInputForm + ';border-radius: ' + widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm + 'px;border-color: ' + widget.guiprops.formExt.model.mainSettings.border.color + '!important'"
+                          class="form-control form-widget-cntrl"
+                          type="text">
+                        <input
+                          *ngIf="itemExt.type === 'phone' && itemExt.mask.enable"
+                          [id]="'elementid' + itemExt.type"
+                          [ngClass]="formExtClassNameFormInput(itemExt)"
+                          [style]="'background: ' + widget.guiprops.formExt.model.mainSettings.rgbaInputForm + ';color: ' + widget.guiprops.formExt.model.mainSettings.colorTitleInputForm + ';border-radius: ' + widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm + 'px;border-color: ' + widget.guiprops.formExt.model.mainSettings.border.color + '!important'"
+                          class="form-control form-widget-cntrl"
+                          readonly
+                          type="text">
+
+                        <label [for]="'elementid' + itemExt.type" [style]="'color: ' + widget.guiprops.formExt.model.mainSettings.colorTitleInputForm"
+                               class="form-widget-cntrl-label">{{ itemExt.placeholder }}</label>
+                        <span *ngIf="itemExt.type === 'phone' && itemExt.mask.enable" [innerHTML]="formExtGetInputFormPhoneMask(itemExt.mask.value)"
+                              [style]="'color:' + widget.guiprops.formExt.model.mainSettings.colorTitleInputForm"
+                              class="masked-span-helper"></span>
+                      </div>
+
+                      <!-- FORM EXT TEXTAREA -->
+                      <div *ngSwitchCase="'textareaElement'"
+                           class="text-input-class text-input-area-class text-input-class-form-ext">
+                    <textarea
+                      [id]="'elementid' + itemExt.type"
+                      [ngClass]="formExtClassNameFormInput(itemExt)"
+                      [style]="'background: ' + widget.guiprops.formExt.model.mainSettings.rgbaInputForm + ';color: ' + widget.guiprops.formExt.model.mainSettings.colorTitleInputForm + ';border-radius: ' + widget.guiprops.formExt.model.mainSettings.borderRadiusInputForm + 'px;border-color: ' + widget.guiprops.formExt.model.mainSettings.border.color + '!important'"
+                      class="form-control form-widget-cntrl"
+                      type="text"
+                    ></textarea>
+                        <label
+                          [for]="'elementid' + itemExt.type"
+                          [style]="'color: ' + widget.guiprops.formExt.model.mainSettings.colorTitleInputForm"
+                          class="form-widget-cntrl-label"
+                        >{{ itemExt.placeholder }}</label>
+                      </div>
+
+                      <!-- FORM EXT RATING -->
+                      <div *ngSwitchCase="'ratingElement'" class="rating-input-class">
+                        <div class="rating-wrapper">
+                          <div
+                            (click)="ratingStarClicked($event, itemExt)"
+                            (mouseleave)="ratingStarLeaved($event, itemExt)"
+                            (mousemove)="ratingStarMoved($event, itemExt)"
+                            [attr.data-content]="ratingStars(itemExt)"
+                            [ngStyle]="{'color': itemExt['colorInactive']}"
+                            class="rating-container"
+                          >
+                            <div [attr.data-content]="ratingStars(itemExt)" [ngStyle]="{'color': itemExt['colorActive']}"
+                                 class="rating-stars"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- FORM EXT VARIANTS -->
+                      <div *ngSwitchCase="'variantsElement'" class="checkbox-input-class">
+                        <div [ngClass]="{'form-ext-checkbox-wrapper__wrapped' : itemExt['everyNewLine']}"
+                             class="form-ext-checkbox-wrapper">
+                          <div
+                            *ngFor="let variant of itemExt['variants']"
+                            [ngStyle]="{'font-size': itemExt.fontSize + 'px', 'font-family': itemExt.font.fontFamily, 'color': itemExt['colorText']}"
+                            class="form-ext-checkbox-container"
+                          >{{ variant }}
+                            <div
+                              (click)="itemExt['multiEnable'] ? selectedVariants.push(variant) : selectedVariant = variant"
+                              [style]="'background-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm) + ';border-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm)">
+                              <input [name]="itemExt['multiEnable'] ? '' : ('radio-' + itemExt.id)"
+                                     [attr.type]="itemExt['multiEnable'] ? 'checkbox' : 'radio'"
+                                     [value]="variant"
+                                     [checked]="itemExt['multiEnable'] ? selectedVariants.includes(variant) : selectedVariant === variant"
+                              >
+                              <span
+                                [ngClass]="itemExt['multiEnable'] ? 'form-ext-checkbox-checkmark' : 'form-ext-checkbox-checkmark-radio'"
+                                [ngStyle]="{'background-color': widget.guiprops.formExt.model.mainSettings.rgbaInputForm, 'border-color': widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : 'transparent'}"
+                                class="form-ext-checkbox-checkmark"
+                              ></span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- FORM EXT DROPDOWN -->
+                      <div *ngSwitchCase="'ddElement'" class="dd-input-class">
+                        <div [ngClass]="formExtClassNameFormInput(itemExt)" class="form-ext-dropdown-wrapper">
+                          <app-extended-ddw
+                            [item]="itemExt"
+                            [st]="widget.guiprops.formExt.model.mainSettings"
+                          ></app-extended-ddw>
+                        </div>
+                      </div>
+
+                      <!-- FORM EXT TITLE TEXT -->
+                      <div *ngSwitchCase="'titleFElement'" class="title-f-input-class">
+                        <div class="form-ext-title-wrapper">
+                          <div [ngClass]="(itemExt.textShadow.enable) ? '' : 'no-text-shadow-imp'" [ngStyle]="{'font-size':itemExt.fontSize+'px', 'font-family':itemExt.font.fontFamily, 'text-shadow': itemExt.textShadow.horiz + 'px ' + itemExt.textShadow.vertical + 'px ' + itemExt.textShadow.blur + 'px ' + getRGBAColor(itemExt.textShadow)}"
+                               class="click-edit-cl">
+                            <div [(ngModel)]="itemExt['textSummer']" [ngxSummernote]="optionsSummernote"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- FORM EXT TERMS -->
+                      <div *ngSwitchCase="'termElement'" class="term-input-class">
+                        <div class="form-ext-term-wrapper">
+                          <div (click)="termClick($event)" class="form-ext-term-checkbox-container">
+                            <div [style]="'background-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm) + '; border-color: ' + (widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : widget.guiprops.formExt.model.mainSettings.colorTitleInputForm)"
+                                 class="form-ext-term-checkbox-container-help-cl"
+                                 (click)="itemExt.checked = !itemExt.checked"
+                            >
+                              <input type="checkbox" [checked]="itemExt.checked">
+                              <span [ngStyle]="{'background-color': widget.guiprops.formExt.model.mainSettings.rgbaInputForm, 'border-color': widget.guiprops.formExt.model.mainSettings.border.enable ? widget.guiprops.formExt.model.mainSettings.border.color : 'transparent'}"
+                                    class="form-ext-term-checkbox-checkmark"></span>
+                            </div>
+                            <div [ngClass]="(itemExt.textShadow.enable) ? '' : 'no-text-shadow-imp'"
+                                 [ngStyle]="{'font-size': itemExt.fontSize + 'px', 'font-family': itemExt.font.fontFamily, 'text-shadow': itemExt.textShadow.horiz + 'px ' + itemExt.textShadow.vertical + 'px ' + itemExt.textShadow.blur + 'px ' + getRGBAColor(itemExt.textShadow)}"
+                                 class="click-edit-cl">
+                              <div [(ngModel)]="itemExt['textSummer']" [ngxSummernote]="optionsSummernote"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- FORM EXT DATE -->
+                      <div *ngSwitchCase="'dateFElement'" class="date-f-input-class">
+                        <div [ngClass]="formExtClassNameFormInput(itemExt)" class="form-ext-date-wrapper">
+                          <app-extended-datepicker
+                            [dateType]="itemExt['dateType'].value"
+                            [index]="i"
+                            [placeholder]="itemExt.placeholder"
+                            [st]="widget.guiprops.formExt.model.mainSettings"
+                          ></app-extended-datepicker>
+                        </div>
+                      </div>
+
+                      <!-- FORM EXT BUTTON -->
+                      <div *ngSwitchCase="'buttonElement'" class="button-input-class">
+                        <div class="widget-form-ext-button">
+                          <div class="widget1-btn-bl">
+                            <div [ngClass]="setBtnStyleClass(itemExt)" [ngStyle]="{'font-size':itemExt.fontSize+'px', 'font-family':itemExt.font.fontFamily, 'border-color':itemExt.colorBtn, 'background':itemExt.colorBtn, 'color':itemExt.colorTextBtn, 'border-radius':itemExt.borderRadiusBtn+'px'}"
+                                 class="click-edit-cl button-send form-ext-btn-el">
+                              <div class="form-ext-btn-el-wr">
+                                <div *ngIf="itemExt['bType'].type === 1 || itemExt['bType'].type === 2">
+                                  <i [ngClass]="itemExt.icon.selectedIcon" [ngStyle]="{'color':itemExt.icon.color}"></i>
+                                </div>
+                                <div *ngIf="itemExt['bType'].type === 0 || itemExt['bType'].type === 1">
+                                  <div [(ngModel)]="itemExt['textSummer']" [ngxSummernote]="optionsSummernote"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div [ngClass]="formExtItemNewLineClass(widget.guiprops.formExt.model.list[i + 1])"></div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+
+        <div *ngIf="item.name === 'button-element'">
+          <div *ngIf="widget.guiprops?.button?.textSummer">
+            <div [ngClass]="btnPosSel(widget.guiprops.button)" class="widget1-btn-bl" id="widgetButtonBlockM">
+              <div
+                [ngClass]="setBtnStyleClass(widget.guiprops.button)"
+                [ngStyle]="{'font-size': widget.guiprops['button'].fontSize + 'px', 'font-family': widget.guiprops['button'].font.fontFamily, 'border-color': widget.guiprops['button'].colorBtn, 'background': widget.guiprops['button'].colorBtn, 'color': widget.guiprops['button'].colorTextBtn, 'border-radius': widget.guiprops['button'].borderRadiusBtn + 'px', 'width': widthBtnStyle}"
+                class="click-edit-cl button-send button-alone"
+              >
+                <div [(ngModel)]="widget.guiprops['button'].textSummer" [ngxSummernote]="optionsSummernote"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="item.name === 'social-element'" [ngClass]="hrPosSel(widget.guiprops.social)"
+             class="social-block-pd">
+          <div class="center-mode-social">
+            <div
+              *ngFor="let itemSocial of widget.guiprops['social'].items"
+              class="webicon large soc-var-1 {{ itemSocial.name }} {{ widget.guiprops['social'].type }}"></div>
+          </div>
+        </div>
+
+        <div *ngIf="item.name === 'timer-element'" class="social-block-pd">
+          <div>
+            <div [ngClass]="hrFlexedPosSel(item.design.align.type)" class="timer-wrapper">
+              <div class="timer-items">
+                <div *ngIf="isTimerTypeShown(item, 'd')" class="timer-items_item">
+                  <div class="timer-items_item-bgs-wrapper">
+                    <div [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontNumberSize + 'px', 'font-family': item.design.font.fontFamily, 'color': item.design.colorText}"
+                         class="timer-items_item-bgs">
+                      <div [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}"
+                           class="timer-item-block">
+                        <span
+                          [ngStyle]="{'line-height': item.design.bgHeight + 'px'}">{{ getTimerLabelItem(item, 'd', 0) }}</span>
+                      </div>
+                      <div [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}"
+                           class="timer-item-block">
+                        <span
+                          [ngStyle]="{'line-height': item.design.bgHeight + 'px'}">{{ getTimerLabelItem(item, 'd', 1) }}</span>
+                      </div>
+                    </div>
+                    <div [ngStyle]="{'width': (0.5 * item.design.bgWidth) + 'px', 'height': (0.5 * item.design.bgHeight) + 'px'}"
+                         class="timer-items_dots">
+                      <div [ngStyle]="{'background': item.design.colorDivider}"></div>
+                      <div [ngStyle]="{'background': item.design.colorDivider}"></div>
+                    </div>
+                  </div>
+                  <div *ngIf="item.design.tempInterval.enable" [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontLabelSize + 'px', 'font-family': item.design.fontLabel.fontFamily, 'color': item.design.colorIntervalName}"
+                       class="timer-items_label">{{item.design.tempInterval.dText}}</div>
+                </div>
+
+                <div *ngIf="isTimerTypeShown(item, 'h')" class="timer-items_item">
+                  <div class="timer-items_item-bgs-wrapper">
+                    <div [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontNumberSize + 'px', 'font-family': item.design.font.fontFamily, 'color': item.design.colorText}"
+                         class="timer-items_item-bgs">
+                      <div [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}"
+                           class="timer-item-block">
+                        <span
+                          [ngStyle]="{'line-height': item.design.bgHeight + 'px'}">{{getTimerLabelItem(item, 'h', 0)}}</span>
+                      </div>
+                      <div [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}"
+                           class="timer-item-block">
+                        <span
+                          [ngStyle]="{'line-height': item.design.bgHeight + 'px'}">{{getTimerLabelItem(item, 'h', 1)}}</span>
+                      </div>
+                    </div>
+                    <div [ngStyle]="{'width': (0.5 * item.design.bgWidth) + 'px', 'height': (0.5 * item.design.bgHeight) + 'px'}"
+                         class="timer-items_dots">
+                      <div [ngStyle]="{'background': item.design.colorDivider}"></div>
+                      <div [ngStyle]="{'background': item.design.colorDivider}"></div>
+                    </div>
+                  </div>
+                  <div *ngIf="item.design.tempInterval.enable" [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontLabelSize + 'px', 'font-family': item.design.fontLabel.fontFamily, 'color': item.design.colorIntervalName}"
+                       class="timer-items_label">{{item.design.tempInterval.hText}}</div>
+                </div>
+
+                <div *ngIf="isTimerTypeShown(item, 'm')" class="timer-items_item">
+                  <div class="timer-items_item-bgs-wrapper">
+                    <div [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontNumberSize + 'px', 'font-family': item.design.font.fontFamily, 'color': item.design.colorText}"
+                         class="timer-items_item-bgs">
+                      <div [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}"
+                           class="timer-item-block">
+                        <span
+                          [ngStyle]="{'line-height': item.design.bgHeight + 'px'}">{{getTimerLabelItem(item, 'm', 0)}}</span>
+                      </div>
+                      <div [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}"
+                           class="timer-item-block">
+                        <span
+                          [ngStyle]="{'line-height': item.design.bgHeight + 'px'}">{{getTimerLabelItem(item, 'm', 1)}}</span>
+                      </div>
+                    </div>
+                    <div [ngStyle]="{'width': (0.5 * item.design.bgWidth) + 'px', 'height': (0.5 * item.design.bgHeight) + 'px'}"
+                         class="timer-items_dots">
+                      <div [ngStyle]="{'background': item.design.colorDivider}"></div>
+                      <div [ngStyle]="{'background': item.design.colorDivider}"></div>
+                    </div>
+                  </div>
+                  <div *ngIf="item.design.tempInterval.enable" [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontLabelSize + 'px', 'font-family': item.design.fontLabel.fontFamily, 'color': item.design.colorIntervalName}"
+                       class="timer-items_label">{{item.design.tempInterval.mText}}</div>
+                </div>
+
+                <div class="timer-items_item">
+                  <div class="timer-items_item-bgs-wrapper">
+                    <div [ngStyle]="{'width': ((2 * item.design.bgWidth) + (item.design.bgWidth * 0.2)) + 'px', 'font-size': item.design.fontNumberSize + 'px', 'font-family': item.design.font.fontFamily, 'color': item.design.colorText}"
+                         class="timer-items_item-bgs">
+                      <div [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}"
+                           class="timer-item-block">
+                        <span
+                          [ngStyle]="{'line-height': item.design.bgHeight + 'px'}">{{getTimerLabelItem(item, 's', 0)}}</span>
+                      </div>
+                      <div [ngStyle]="{'width': item.design.bgWidth + 'px', 'height': item.design.bgHeight + 'px', 'background': getRGBAColorItems(item.design.colorBG, item.design.opacity), 'border-radius': item.design.radius + 'px'}"
+                           class="timer-item-block">
+                        <span
+                          [ngStyle]="{'line-height': item.design.bgHeight + 'px'}">{{getTimerLabelItem(item, 's', 1)}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="item.design.tempInterval.enable" [ngStyle]="{'font-size': item.design.fontLabelSize + 'px', 'font-family': item.design.fontLabel.fontFamily, 'color': item.design.colorIntervalName}"
+                       class="timer-items_label">{{item.design.tempInterval.sText}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+
+</div>

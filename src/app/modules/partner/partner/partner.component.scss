@@ -1,0 +1,164 @@
+.partner {
+  margin: 0 30px;
+}
+
+.ads-container {
+  width: 200px;
+  float: left;
+}
+
+.dimension {
+  display: flex;
+  padding: 5px 0;
+}
+
+.show-code {
+  margin: 15px 0 30px;
+}
+
+.partner-btn {
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+#partnerlink {
+  cursor: text;
+  font-size: 12px;
+}
+
+@media (max-width: 1360px) {
+  #partnerlink {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 1150px) {
+  #partnerlink {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 990px) {
+  #partnerlink {
+    font-size: 10px;
+  }
+}
+
+.partnerlink-description {
+  font-size: 11px;
+}
+
+.partnerlink-socialnetworks {
+  text-align: right;
+}
+
+.partnerlink-socialnetworks .fab {
+  cursor: pointer;
+  font-size: 35px;
+  margin-left: 10px;
+}
+
+@media (max-width: 1280px) {
+  .partnerlink-socialnetworks .fab {
+    margin-left: 5px;
+  }
+}
+
+.partnerlink-socialnetworks .fab:hover {
+  color: #4898A8;
+}
+
+.partner-saldo-wr h5 {
+  text-align: center;
+  color: #419641;
+  font-size: 14px;
+  margin-top: -12px;
+}
+
+.partner-payment {
+  color: #419641;
+  font-weight: 800;
+  font-size: 55px;
+}
+
+#partner-saldo {
+  padding-right: 15px;
+}
+
+.wallet-container_row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+#walletid {
+  width: calc(100% - 130px);
+}
+
+#walletSave {
+  width: 130px;
+  margin-left: 20px;
+}
+
+.partner-stats-wr .show-more-spinner {
+  background-image: url("~src/assets/images/core/preloader.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 20px;
+}
+
+.partner-stats-block {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.partner-stats-block div {
+  min-width: 50%;
+  flex-basis: 50%;
+}
+
+.partner-stats-block div:first-child {
+  margin-right: 15px;
+}
+
+.partner-stats-block span {
+  display: block;
+  font-size: 40px;
+  vertical-align: middle;
+}
+
+.partner-stats-block p {
+  font-size: 12px;
+  line-height: 14px;
+  margin: 0;
+}
+
+.partner-transaction-wr {
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.partner-stats-block .fa {
+  font-size: 25px;
+  vertical-align: middle;
+}
+
+.partner-stats-wr .show-more-spinner {
+  background-image: url("~src/assets/images/core/preloader.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 20px;
+}
+
+.show-more {
+  cursor: pointer;
+  color: #4898A8;
+}
+
+.show-more:hover {
+  color: #2f6b93;
+}

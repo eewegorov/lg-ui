@@ -1,0 +1,1164 @@
+<div class="modal-header text-center justify-content-center">
+  <h3 *ngIf="!isEditIntegration" class="modal-title">{{ 'settings.site.newIntegration.title' | translate }}</h3>
+  <h3 *ngIf="isEditIntegration" class="modal-title">{{ 'settings.site.newIntegration.edit' | translate }}</h3>
+</div>
+<div class="modal-body">
+  <div *ngIf="!isEditIntegration" class="integration-switcher-wr">
+    <h5>{{ 'settings.site.newIntegration.description' | translate }}</h5>
+    <div class="btn-group">
+      <span
+        (click)="setIntegrationType('NEW')"
+        [class.active]="tab ==='NEW'"
+        class="btn btn-default"
+      >
+        {{ 'settings.site.newIntegration.tabs.new' | translate }}
+      </span>
+      <span
+        (click)="setIntegrationType('COPY')"
+        [class.active]="tab ==='COPY'"
+        class="btn btn-default"
+      >
+        {{ 'settings.site.newIntegration.tabs.copy' | translate }}
+      </span>
+    </div>
+  </div>
+  <div class="integration-tab">
+    <div *ngIf="integrationIsOnProgress" class="integration-tab-inner-loading-state"></div>
+    <div>
+      <div *ngIf="tab ==='NEW'">
+        <div class="integration-tab-item">
+          <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
+          <div class="dropdown integration-selector">
+            <button
+              aria-expanded="true"
+              aria-haspopup="true"
+              class="btn btn-default dropdown-toggle"
+              data-display="static"
+              data-toggle="dropdown"
+              type="button"
+            >
+              <span
+                *ngIf="!currentIntegrationService.type"
+                class="dropdown-selected-cropp"
+              >{{ defIntegrationServiceName }}</span>
+              <span
+                *ngIf="currentIntegrationService.type"
+                class="dropdown-selected-cropp integration-selector-item {{currentIntegrationService.type}}"
+              >{{ currentIntegrationService.name }}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
+              <span class="integration-selector-group">{{ 'settings.site.tabs.group.email' | translate }}</span>
+              <li
+                (click)="changeCurrentIntegrationService(item)"
+                *ngFor="let item of integrationServices | filterBy: { group: 'mailing' }"
+              >
+                <a class="dropdown-item integration-selector-item {{item.type}}">
+                  {{item.name || defIntegrationServiceName}} <span
+                  *ngIf="item.isPayment"
+                  class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
+                </a>
+              </li>
+              <span class="integration-selector-group">{{ 'settings.site.tabs.group.crm' | translate }}</span>
+              <li
+                (click)="changeCurrentIntegrationService(item)"
+                *ngFor="let item of integrationServices | filterBy: { group: 'CRM' }"
+              >
+                <a class="dropdown-item integration-selector-item {{item.type}}">
+                  {{item.name || defIntegrationServiceName}} <span
+                  *ngIf="item.isPayment"
+                  class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
+                </a>
+              </li>
+              <span
+                class="integration-selector-group">{{ 'settings.site.settings.notification.title' | translate }}</span>
+              <li
+                (click)="changeCurrentIntegrationService(item)"
+                *ngFor="let item of integrationServices | filterBy: { group: 'notification' }"
+              >
+                <a class="dropdown-item integration-selector-item {{item.type}}">
+                  {{item.name || defIntegrationServiceName}} <span
+                  *ngIf="item.isPayment"
+                  class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
+                </a>
+              </li>
+              <span class="integration-selector-group">{{ 'settings.site.newIntegration.others' | translate }}</span>
+              <li
+                (click)="changeCurrentIntegrationService(item)"
+                *ngFor="let item of integrationServices | filterBy: { group: 'others' }"
+              >
+                <a class="dropdown-item integration-selector-item {{item.type}}">
+                  {{item.name || defIntegrationServiceName}} <span
+                  *ngIf="item.isPayment"
+                  class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <a
+          *ngIf="currentIntegrationService.type"
+          [href]="currentIntegrationService.helpUrl"
+          class="integration-help-link"
+          target="_blank"
+        >{{ 'settings.site.newIntegration.instruction' | translate }}</a>
+
+        <div
+          *ngIf="currentIntegrationService.type"
+          class="integration-settings mt-4 w-100"
+        >
+          <h5>
+            <strong>{{ 'settings.site.newIntegration.settings' | translate }}</strong>
+          </h5>
+          <div
+            *ngIf="currentIntegrationService.type === IntegrationTypes.AMOCRM"
+            class="small"
+          >
+            {{ 'settings.site.newIntegration.help' | translate }}
+          </div>
+
+          <!-- BITRIX SWITCH -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX" class="mt-3">
+            <label class="control-label">{{ 'settings.site.newIntegration.connection.title' | translate }}</label>
+            <div class="d-flex align-items-center">
+              <input
+                [(ngModel)]="bitrixConnectionType"
+                [value]="BitrixTypes.Webhook"
+                class="mr-2"
+                id="bitrix-webhook"
+                name="bitrix"
+                type="radio"
+              /><label class="pt-1"
+                       for="bitrix-webhook">{{ 'settings.site.newIntegration.connection.webhook' | translate }}</label>
+            </div>
+            <div class="d-flex align-items-center">
+              <input
+                [(ngModel)]="bitrixConnectionType"
+                [value]="BitrixTypes.Api"
+                class="mr-2"
+                id="bitrix-api"
+                name="bitrix"
+                type="radio"
+              /><label class="pt-1"
+                       for="bitrix-api">{{ 'settings.site.newIntegration.connection.api' | translate }}</label>
+            </div>
+          </div>
+
+          <div
+            [class.mr-3]="currentIntegrationService.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Webhook
+            || currentIntegrationService.type === IntegrationTypes.AMOCRM"
+            class="integration-tab-item mt-3"
+          >
+            <label class="control-label"
+                   for="getResponseName">{{ 'settings.site.newIntegration.name' | translate }}</label>
+            <input [(ngModel)]="newCurrentIntegration.name" class="form-control" id="getResponseName" name="getResponseName"
+                   type="text">
+          </div>
+
+          <!-- GETRESPONSE PARAMS -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.GETRESPONSE">
+            <div class="integration-tab-item">
+              <label class="control-label"
+                     for="getResponseCode">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+              <input [(ngModel)]="getResponseParams.code" class="form-control" id="getResponseCode" name="getResponseCode"
+                     type="text">
+            </div>
+            <div class="integration-tab-item">
+              <label class="control-label"
+                     for="getResponseCampaignId">{{ 'settings.site.newIntegration.create.campaignId' | translate }}</label>
+              <input [(ngModel)]="getResponseParams.campaignId" class="form-control" id="getResponseCampaignId"
+                     name="getResponseCampaignId" type="text">
+            </div>
+          </div>
+
+          <!-- MAILCHIMP PARAMS and UNISENDER -->
+          <div
+            *ngIf="currentIntegrationService.type === IntegrationTypes.MAILCHIMP || currentIntegrationService.type === IntegrationTypes.UNISENDER">
+            <div class="integration-tab-item">
+              <label class="control-label"
+                     for="mailchimpCode">{{ 'settings.site.newIntegration.apikey' | translate }}</label>
+              <input [(ngModel)]="mailchimpUniParams.code" class="form-control" id="mailchimpCode" name="mailchimpCode"
+                     type="text">
+            </div>
+            <div class="integration-tab-item">
+              <label class="control-label"
+                     for="mailchimpListId">{{ 'settings.site.newIntegration.create.listId' | translate }}</label>
+              <input [(ngModel)]="mailchimpUniParams.listId" class="form-control" id="mailchimpListId" name="mailchimpListId"
+                     type="text">
+            </div>
+          </div>
+
+          <!-- SENDPULSE and SENDBOX PARAMS -->
+          <div
+            *ngIf="currentIntegrationService.type === IntegrationTypes.SENDPULSE || currentIntegrationService.type === IntegrationTypes.SENDBOX">
+            <div class="integration-tab-item">
+              <label class="control-label"
+                     for="sendPBParamsId">{{ 'settings.site.newIntegration.create.id' | translate }}</label>
+              <input [(ngModel)]="sendPBParams.id" class="form-control" id="sendPBParamsId" name="sendPBParamsId"
+                     type="text">
+            </div>
+            <div class="integration-tab-item">
+              <label class="control-label"
+                     for="sendPBParamsSecret">{{ 'settings.site.newIntegration.create.secret' | translate }}</label>
+              <input [(ngModel)]="sendPBParams.secret" class="form-control" id="sendPBParamsSecret" name="sendPBParamsSecret"
+                     type="text">
+            </div>
+            <div class="integration-tab-item">
+              <label class="control-label"
+                     for="sendPBParamsBook">{{ 'settings.site.newIntegration.create.book' | translate }}</label>
+              <input [(ngModel)]="sendPBParams.book" class="form-control" id="sendPBParamsBook" name="sendPBParamsBook"
+                     type="text">
+            </div>
+          </div>
+
+          <!-- BITRIX WEBHOOK PARAMS -->
+          <div
+            *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Webhook">
+            <div class="d-flex">
+              <div class="w-50 pr-4 mr-1 integration-tab-item">
+                <label class="control-label"
+                       for="bitrixParamsUrl">{{ 'settings.site.newIntegration.create.address.title' | translate }}</label>
+                <input [(ngModel)]="bitrixWebhookParams.url" class="form-control" id="bitrixParamsUrl"
+                       name="bitrixParamsAddress" type="text">
+                <div class="small">{{ 'settings.site.newIntegration.create.address.desc' | translate }}</div>
+              </div>
+              <div class="w-50 ml-1 mr-3 integration-tab-item">
+                <label class="control-label"
+                       for="bitrixParamsHash">{{ 'settings.site.newIntegration.create.webhook.title' | translate }}</label>
+                <input [(ngModel)]="bitrixWebhookParams.hash" class="form-control" id="bitrixParamsHash"
+                       name="bitrixParamsWebhook" type="text">
+                <div class="small">{{ 'settings.site.newIntegration.create.webhook.desc' | translate }}</div>
+              </div>
+            </div>
+            <div class="integration-tab-item mr-3">
+              <label class="control-label"
+                     for="bitrixParamsuserId">{{ 'settings.site.newIntegration.create.userId' | translate }}</label>
+              <input [(ngModel)]="bitrixWebhookParams.userId" class="form-control" id="bitrixParamsuserId" min="1"
+                     name="bitrixParamsuserId"
+                     type="number">
+            </div>
+          </div>
+
+          <!-- BITRIX API PARAMS -->
+          <div
+            *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Api">
+            <div class="integration-tab-item">
+              <label class="control-label"
+                     for="bitrixParamsHost">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
+              <input [(ngModel)]="bitrixApiParams.host" class="form-control" id="bitrixParamsHost" name="bitrixParamsHost"
+                     type="text">
+            </div>
+            <div class="integration-tab-item">
+              <label class="control-label"
+                     for="bitrixParamsLogin">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
+              <input [(ngModel)]="bitrixApiParams.login" class="form-control" id="bitrixParamsLogin" name="bitrixParamsLogin"
+                     type="text">
+            </div>
+            <div class="integration-tab-item">
+              <label class="control-label" for="bitrixParamsPassword">{{ 'login.password' | translate }}</label>
+              <input [(ngModel)]="bitrixApiParams.password" class="form-control" id="bitrixParamsPassword"
+                     name="bitrixParamsPassword" type="password">
+            </div>
+          </div>
+
+          <!-- AMOCRM PARAMS -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.AMOCRM">
+            <div class="d-flex">
+              <div class="w-50 pr-4 mr-1 integration-tab-item">
+                <div>
+                  <label class="control-label"
+                         for="amoParamsSubdomain">{{ 'settings.site.newIntegration.create.urlExtra.title' | translate }}</label>
+                  <input [(ngModel)]="amoParams.subdomain" class="form-control" id="amoParamsSubdomain" name="amoParamsSubdomain"
+                         type="text">
+                  <div class="small">{{ 'settings.site.newIntegration.create.urlExtra.desc' | translate }}</div>
+                </div>
+              </div>
+              <div class="w-50 ml-1 mr-3 integration-tab-item">
+                <div>
+                  <label class="control-label"
+                         for="amoParamsClientId">{{ 'settings.site.newIntegration.create.integrationId' | translate }}</label>
+                  <input [(ngModel)]="amoParams.clientId" class="form-control" id="amoParamsClientId" name="amoParamsClientId"
+                         type="text">
+                </div>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div class="w-50 pr-4 mr-1 integration-tab-item">
+                <div>
+                  <label class="control-label"
+                         for="amoParamsClientSecret">{{ 'settings.site.newIntegration.create.secretKey' | translate }}</label>
+                  <input [(ngModel)]="amoParams.clientSecret" class="form-control" id="amoParamsClientSecret"
+                         name="amoParamsClientSecret"
+                         type="text">
+                </div>
+              </div>
+              <div class="w-50 ml-1 mr-3 integration-tab-item">
+                <div>
+                  <label class="control-label"
+                         for="amoParamsCode">{{ 'settings.site.newIntegration.create.code' | translate }}</label>
+                  <input [(ngModel)]="amoParams.code" class="form-control" id="amoParamsCode" name="amoParamsCode"
+                         type="text">
+                </div>
+              </div>
+            </div>
+
+            <button
+              (click)="activateIntegration(AmoGrantTypes.AuthCode)"
+              *ngIf="!isAmoActivated"
+              [disabled]="disableActivation()"
+              class="btn btn-default mt-2 mb-4"
+            >
+              <i class="fas fa-power-off mr-2"></i> {{ 'settings.site.newIntegration.activate' | translate }}
+            </button>
+            <button
+              *ngIf="isAmoActivated"
+              class="btn btn-default mt-2 mb-4"
+              disabled
+            >
+              <i class="fas fa-power-off mr-2"></i> {{ 'settings.site.newIntegration.activated' | translate }}
+            </button>
+          </div>
+
+          <!-- EMAIL PARAMS -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.EMAIL">
+            <div class="integration-tab-item">
+              <label class="control-label"
+                     for="emailParamsEmail">{{ 'settings.site.newIntegration.create.email' | translate }}</label>
+              <input [(ngModel)]="emailParams.email" class="form-control" id="emailParamsEmail" name="emailParamsEmail"
+                     type="text">
+            </div>
+          </div>
+
+          <!-- ROISTAT PARAMS -->
+          <div
+            *ngIf="currentIntegrationService.type === IntegrationTypes.ROISTAT || currentIntegrationService.type === IntegrationTypes.WEBHOOK">
+            <div class="integration-tab-item">
+              <label class="control-label"
+                     for="roistatParamsUrl">{{ 'settings.site.newIntegration.create.url' | translate }}</label>
+              <input [(ngModel)]="roistatParams.url" class="form-control" id="roistatParamsUrl" name="roistatParamsUrl"
+                     type="text">
+            </div>
+          </div>
+
+          <div class="integration-tab-item mb-0">
+            <div class="d-flex">
+              <ui-switch [(ngModel)]="newCurrentIntegration.default" size="small"></ui-switch>
+              <label class="control-label ml-2">
+                {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
+                <a class="info-link"
+                   data-container="body"
+                   data-placement="top"
+                   data-toggle="tooltip"
+                   title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
+                </a>
+              </label>
+            </div>
+          </div>
+
+          <!-- AMOCRM FUNNEL PARAMS -->
+          <div *ngIf="currentIntegrationService.type === IntegrationTypes.AMOCRM">
+            <h5 class="mt-4">
+              <strong>{{ 'settings.site.newIntegration.funnel.title' | translate }}</strong>
+            </h5>
+            <button
+              (click)="loadIntegration()"
+              [disabled]="disableActivation() || !this.amoParams.accessToken"
+              class="btn btn-default mt-2 mb-3"
+            >
+              <i class="fas fa-sync mr-2"></i> {{ 'settings.site.newIntegration.funnel.button' | translate }}
+            </button>
+            <div class="d-flex">
+              <div class="w-50 pr-4 mr-1 integration-tab-item">
+                <label class="control-label">{{ 'settings.site.newIntegration.funnel.name' | translate }}</label>
+                <div class="dropdown integration-selector">
+                  <button
+                    [disabled]="!pipelines.length"
+                    aria-expanded="true"
+                    aria-haspopup="true"
+                    class="btn btn-default dropdown-toggle"
+                    data-display="static"
+                    data-toggle="dropdown"
+                    type="button"
+                  >
+                    <span
+                      class="dropdown-selected-cropp"
+                    >{{ amoParams.funnelName }}</span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
+                    <li
+                      (click)="changeCurrentFunnelId(item.id.toString(), item.name)"
+                      *ngFor="let item of pipelines"
+                    >
+                      <a class="dropdown-item">{{ item.name }}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="w-50 ml-1 mr-3 integration-tab-item">
+                <label class="control-label">{{ 'settings.site.newIntegration.funnel.status' | translate }}</label>
+                <div class="dropdown integration-selector">
+                  <button
+                    [disabled]="!pipelines.length"
+                    aria-expanded="true"
+                    aria-haspopup="true"
+                    class="btn btn-default dropdown-toggle"
+                    data-display="static"
+                    data-toggle="dropdown"
+                    type="button"
+                  >
+                  <span
+                    class="dropdown-selected-cropp"
+                  >{{ amoParams.leadStateName }}</span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
+                    <li
+                      (click)="changeCurrentFunnelLeadStateId(item.id.toString(), item.name)"
+                      *ngFor="let item of leadStates"
+                    >
+                      <a class="dropdown-item">{{ item.name }}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="integration-tab-item mr-3">
+              <label class="control-label">{{ 'settings.site.newIntegration.funnel.check.title' | translate }}</label>
+              <a class="info-link ml-1 mt-1"
+                 data-container="body"
+                 data-placement="bottom"
+                 data-toggle="tooltip"
+                 title="{{ 'settings.site.newIntegration.funnel.check.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
+              </a>
+
+              <div class="dropdown integration-selector">
+                <button
+                  [disabled]="!pipelines.length"
+                  aria-expanded="true"
+                  aria-haspopup="true"
+                  class="btn btn-default dropdown-toggle"
+                  data-display="static"
+                  data-toggle="dropdown"
+                  type="button"
+                >
+                <span
+                  class="dropdown-selected-cropp"
+                >{{ funnelCheckDuplicates[amoParams.checkDuplicate] }}</span>
+                </button>
+                <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
+                  <li
+                    (click)="changeCurrentFunnelCheckDuplicates(item.key)"
+                    *ngFor="let item of funnelCheckDuplicates | keyvalue : returnZero"
+                  >
+                    <a class="dropdown-item">{{ item.value }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- CUSTOM FIELDS MAPPING -->
+          <div
+            *ngIf="currentIntegrationService.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Webhook
+            || currentIntegrationService.type === IntegrationTypes.AMOCRM"
+            class="d-flex flex-column mt-4"
+          >
+            <div class="d-flex">
+              <h5 class="mt-2">
+                <strong>{{ 'settings.site.newIntegration.fields.title' | translate }}</strong>
+              </h5>
+              <a class="info-link ml-1 mt-1"
+                 data-container="body"
+                 data-placement="bottom"
+                 data-toggle="tooltip"
+                 title="{{ 'settings.site.newIntegration.fields.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
+              </a>
+            </div>
+            <div class="d-flex flex-column mt-2">
+              <div class="d-flex">
+                <div class="w-50">
+                  <label class="control-label leadgenic-field">
+                    {{ 'settings.site.newIntegration.fields.leadgenic' | translate }}
+                  </label>
+                </div>
+                <div class="w-50">
+                  <label class="control-label crm-field">
+                    {{ 'settings.site.newIntegration.fields.crm' | translate }}
+                  </label>
+                </div>
+              </div>
+              <ng-container *ngFor="let integrationField of integrationFieldsIds; index as i">
+                <div class="d-flex mb-2">
+                  <div class="w-50 mr-3">
+                    <input
+                      [(ngModel)]="integrationField.leadGenicId"
+                      [class.field-error]=
+                        "integrationField.leadGenicId === 'email' ||
+                        integrationField.leadGenicId === 'phone' ||
+                        integrationField.leadGenicId === 'message' ||
+                        integrationField.leadGenicId === 'name'"
+                      [id]="'leadgenicFieldId' + i"
+                      class="form-control leadgenic-field"
+                      name="'leadgenicFieldId' + i"
+                      pattern="[0-9a-zA-Z_\-]{1,50}"
+                      type="text"
+                    >
+                  </div>
+                  <div class="w-50 ml-3 mr-3">
+                    <input
+                      [(ngModel)]="integrationField.crmId"
+                      [id]="'crmFieldId' + i"
+                      class="form-control"
+                      name="'crmFieldId' + i"
+                      pattern="^.{1,50}$"
+                      type="text"
+                    >
+                  </div>
+                  <a (click)="deleteIntegrationField(i)"><i class="fa fa-trash integration-field-delete mr-2"></i></a>
+                </div>
+                <div
+                  *ngIf="integrationField.leadGenicId === 'email' ||
+                  integrationField.leadGenicId === 'phone' ||
+                  integrationField.leadGenicId === 'message' ||
+                  integrationField.leadGenicId === 'name'"
+                  class="small mb-2"
+                >
+                  {{ 'settings.site.newIntegration.fields.error' | translate }}
+                </div>
+              </ng-container>
+
+            </div>
+            <a (click)="addIntegrationField()" class="integration-field-add">
+              <i class="fa fa-plus integration-field-add-icon"></i>
+              {{ 'settings.site.newIntegration.fields.add' | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="tab ==='COPY'">
+        <div *ngIf="!sites.length" class="integration-tab-item p-5">
+          <h4 class="f-2 text-center">{{ 'settings.site.newIntegration.create.copy.noSites' | translate }}</h4>
+        </div>
+
+        <div *ngIf="sites.length" class="integration-tab-item">
+          <label class="control-label" for="currentIntegrationSiteServiceCloneName">
+            {{ 'settings.site.newIntegration.name' | translate }}
+          </label>
+          <input
+            [(ngModel)]="currentIntegrationSiteServiceClone.name"
+            class="form-control"
+            id="currentIntegrationSiteServiceCloneName"
+            name="currentIntegrationSiteServiceCloneName"
+            type="text"
+          >
+        </div>
+
+        <div *ngIf="sites.length" class="integration-tab-item">
+          <label class="control-label">{{ 'settings.site.newIntegration.donorSite' | translate }}</label>
+          <div class="dropdown site-selector">
+            <button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                    type="button">
+              <span class="dropdown-selected-cropp"
+                    style="max-width:90%">{{ currentIntegrationSite.name || defIntegrationSiteName }}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-integration-max-240h">
+              <li (click)="changeCurrentIntegrationSite(site)" *ngFor="let site of sites">
+                <a class="dropdown-item">{{site.name}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div *ngIf="integrationSitesLoading" class="integration-site-loading-inner"></div>
+        <div *ngIf="!(integrationSitesLoading || !currentIntegrationSite.id)" class="integration-tab-item">
+          <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
+          <div class="dropdown integration-selector">
+            <button
+              aria-expanded="true"
+              aria-haspopup="true"
+              class="btn btn-default dropdown-toggle"
+              data-toggle="dropdown"
+              type="button"
+            >
+              <span
+                *ngIf="!currentIntegrationSiteService.type"
+                class="dropdown-selected-cropp"
+              >
+                {{ defIntegrationServiceName }}
+              </span>
+              <span
+                *ngIf="currentIntegrationSiteService.type"
+                class="dropdown-selected-cropp integration-selector-item {{ currentIntegrationSiteService.type }}"
+              >
+                {{ currentIntegrationSiteService.name }}
+              </span>
+            </button>
+            <ul class="dropdown-menu dropdown-integration-max-240h">
+              <span
+                *ngIf="integrationSiteServicesCRM.length"
+                class="integration-selector-group"
+              >
+                {{ 'settings.site.tabs.group.crm' | translate }}
+              </span>
+              <li
+                (click)="changeCurrentIntegrationSiteService(item)"
+                *ngFor="let item of integrationSiteServicesCRM"
+              >
+                <a class="dropdown-item integration-selector-item {{ item.type }}">
+                  {{ item.name || defIntegrationServiceName }} <span
+                  *ngIf="item.isPayment"
+                  class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
+                </a>
+              </li>
+              <span
+                *ngIf="integrationSiteServicesMailing.length"
+                class="integration-selector-group"
+              >
+                {{ 'settings.site.tabs.group.email' | translate }}
+              </span>
+              <li
+                (click)="changeCurrentIntegrationSiteService(item)"
+                *ngFor="let item of integrationSiteServicesMailing"
+              >
+                <a class="dropdown-item integration-selector-item {{ item.type }}">
+                  {{ item.name || defIntegrationServiceName }} <span
+                  *ngIf="item.isPayment"
+                  class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
+                </a>
+              </li>
+              <span
+                *ngIf="integrationSiteServicesNotifications.length"
+                class="integration-selector-group"
+              >
+                {{ 'settings.site.settings.notification.title' | translate }}
+              </span>
+              <li
+                (click)="changeCurrentIntegrationSiteService(item)"
+                *ngFor="let item of integrationSiteServicesNotifications"
+              >
+                <a class="dropdown-item integration-selector-item {{ item.type }}">
+                  {{ item.name || defIntegrationServiceName }} <span
+                  *ngIf="item.isPayment"
+                  class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
+                </a>
+              </li>
+              <span
+                *ngIf="integrationSiteServicesOthers.length"
+                class="integration-selector-group"
+              >
+                {{ 'settings.site.newIntegration.others' | translate }}
+              </span>
+              <li
+                (click)="changeCurrentIntegrationSiteService(item)"
+                *ngFor="let item of integrationSiteServicesOthers"
+              >
+                <a class="dropdown-item integration-selector-item {{ item.type }}">
+                  {{ item.name || defIntegrationServiceName }} <span
+                  *ngIf="item.isPayment"
+                  class="label label-warning tariff-info">{{ 'global.payment' | translate }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div *ngIf="currentIntegrationSiteService.type" class="integration-tab-item mb-0">
+          <div class="d-flex">
+            <ui-switch [(ngModel)]="currentIntegrationSiteService.default" size="small"></ui-switch>
+            <label class="control-label ml-2">
+              {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
+              <a class="info-link"
+                 data-container="body"
+                 data-placement="top"
+                 data-toggle="tooltip"
+                 title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
+              </a>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="tab === 'EDIT'" class="integration-settings-edit">
+        <div class="integration-tab-item d-flex" style="margin-top: 15px">
+          <label class="control-label">{{ 'settings.site.newIntegration.service' | translate }}</label>
+          <div
+            class="integration-edit-service {{ editableIntegration.type }}">{{ editableIntegrationServiceName }}</div>
+        </div>
+        <div class="integration-tab-item">
+          <label class="control-label"
+                 for="editableIntegrationName">{{ 'settings.site.newIntegration.name' | translate }}</label>
+          <input
+            [(ngModel)]="editableIntegration.name"
+            class="form-control"
+            id="editableIntegrationName"
+            name="editableIntegrationName"
+            type="text"
+          >
+        </div>
+
+        <!-- GETRESPONSE PARAMS -->
+        <div *ngIf="editableIntegration.type === IntegrationTypes.GETRESPONSE">
+          <div class="integration-tab-item">
+            <label class="control-label" for="editGetResponseCode">
+              {{ 'settings.site.newIntegration.apikey' | translate }}
+            </label>
+            <input
+              [(ngModel)]="editableIntegration.params.code"
+              class="form-control"
+              id="editGetResponseCode"
+              name="editGetResponseCode"
+              type="text"
+            >
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label" for="editGetResponseCampaignId">
+              {{ 'settings.site.newIntegration.create.campaignId' | translate }}
+            </label>
+            <input
+              [(ngModel)]="editableIntegration.params.campaignId"
+              class="form-control"
+              id="editGetResponseCampaignId"
+              name="editGetResponseCampaignId"
+              type="text"
+            >
+          </div>
+        </div>
+
+        <!-- MAILCHIMP PARAMS and UNISENDER -->
+        <div
+          *ngIf="editableIntegration.type === IntegrationTypes.MAILCHIMP || editableIntegration.type === IntegrationTypes.UNISENDER">
+          <div class="integration-tab-item">
+            <label class="control-label" for="editMailchimpCode">
+              {{ 'settings.site.newIntegration.apikey' | translate }}
+            </label>
+            <input
+              [(ngModel)]="editableIntegration.params.code"
+              class="form-control"
+              id="editMailchimpCode"
+              name="editMailchimpCode"
+              type="text"
+            >
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label" for="editMailchimpListId">
+              {{ 'settings.site.newIntegration.create.listId' | translate }}
+            </label>
+            <input
+              [(ngModel)]="editableIntegration.params.listId"
+              class="form-control"
+              id="editMailchimpListId"
+              name="editMailchimpListId"
+              type="text"
+            >
+          </div>
+        </div>
+
+        <!-- SENDPULSE and SENDBOX PARAMS -->
+        <div
+          *ngIf="editableIntegration.type === IntegrationTypes.SENDPULSE || editableIntegration.type === IntegrationTypes.SENDBOX">
+          <div class="integration-tab-item">
+            <label class="control-label" for="editSendPBParamsId">
+              {{ 'settings.site.newIntegration.create.id' | translate }}
+            </label>
+            <input
+              [(ngModel)]="editableIntegration.params.id"
+              class="form-control"
+              id="editSendPBParamsId"
+              name="editSendPBParamsId"
+              type="text"
+            >
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label" for="editSendPBParamsSecret">
+              {{ 'settings.site.newIntegration.create.secret' | translate }}
+            </label>
+            <input
+              [(ngModel)]="editableIntegration.params.secret"
+              class="form-control"
+              id="editSendPBParamsSecret"
+              name="editSendPBParamsSecret"
+              type="text"
+            >
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label" for="editSendPBParamsBook">
+              {{ 'settings.site.newIntegration.create.book' | translate }}
+            </label>
+            <input
+              [(ngModel)]="editableIntegration.params.book"
+              class="form-control"
+              id="editSendPBParamsBook"
+              name="editSendPBParamsBook"
+              type="text"
+            >
+          </div>
+        </div>
+
+        <!-- BITRIX WEBHOOK PARAMS -->
+        <div
+          *ngIf="editableIntegration.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Webhook">
+          <div class="d-flex">
+            <div class="w-50 pr-4 mr-1 integration-tab-item">
+              <label class="control-label"
+                     for="editBitrixParamsAddress">{{ 'settings.site.newIntegration.create.address.title' | translate }}</label>
+              <input [(ngModel)]="editableIntegration.params.url" class="form-control" id="editBitrixParamsAddress"
+                     name="editBitrixParamsAddress" type="text">
+              <div class="small">{{ 'settings.site.newIntegration.create.address.desc' | translate }}</div>
+            </div>
+            <div class="w-50 ml-1 mr-3 integration-tab-item">
+              <label class="control-label"
+                     for="editBitrixParamsWebhook">{{ 'settings.site.newIntegration.create.webhook.title' | translate }}</label>
+              <input [(ngModel)]="editableIntegration.params.hash" class="form-control" id="editBitrixParamsWebhook"
+                     name="editBitrixParamsWebhook" type="text">
+              <div class="small">{{ 'settings.site.newIntegration.create.webhook.desc' | translate }}</div>
+            </div>
+          </div>
+          <div class="integration-tab-item mr-3">
+            <label class="control-label"
+                   for="editBitrixParamsuserId">{{ 'settings.site.newIntegration.create.userId' | translate }}</label>
+            <input [(ngModel)]="editableIntegration.params.userId" class="form-control" id="editBitrixParamsuserId" min="1"
+                   name="editBitrixParamsuserId" type="number">
+          </div>
+        </div>
+
+        <!-- BITRIX API PARAMS -->
+        <div
+          *ngIf="editableIntegration.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Api"
+        >
+          <div class="integration-tab-item">
+            <label class="control-label"
+                   for="editBitrixParamsHost">{{ 'settings.site.newIntegration.create.host' | translate }}</label>
+            <input [(ngModel)]="editableIntegration.params.host" class="form-control" id="editBitrixParamsHost"
+                   name="editBitrixParamsHost"
+                   type="text">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label"
+                   for="editBitrixParamsLogin">{{ 'settings.site.newIntegration.create.login' | translate }}</label>
+            <input [(ngModel)]="editableIntegration.params.login" class="form-control" id="editBitrixParamsLogin"
+                   name="editBitrixParamsLogin"
+                   type="text">
+          </div>
+          <div class="integration-tab-item">
+            <label class="control-label" for="editBitrixParamsPassword">{{ 'login.password' | translate }}</label>
+            <input [(ngModel)]="editableIntegration.params.password" class="form-control" id="editBitrixParamsPassword"
+                   name="editBitrixParamsPassword" type="password">
+          </div>
+        </div>
+
+        <!-- AMOCRM PARAMS -->
+        <div *ngIf="editableIntegration.type === IntegrationTypes.AMOCRM">
+          <div class="d-flex">
+            <div class="w-50 pr-4 mr-1 integration-tab-item">
+              <div>
+                <label class="control-label"
+                       for="editAmoParamsSubdomain">{{ 'settings.site.newIntegration.create.urlExtra.title' | translate }}</label>
+                <input [(ngModel)]="editableIntegration.params.subdomain" class="form-control" id="editAmoParamsSubdomain"
+                       name="editAmoParamsSubdomain"
+                       type="text">
+                <div class="small">{{ 'settings.site.newIntegration.create.urlExtra.desc' | translate }}</div>
+              </div>
+            </div>
+            <div class="w-50 ml-1 mr-3 integration-tab-item">
+              <div>
+                <label class="control-label"
+                       for="editAmoParamsClientId">{{ 'settings.site.newIntegration.create.integrationId' | translate }}</label>
+                <input [(ngModel)]="editableIntegration.params.clientId" class="form-control" id="editAmoParamsClientId"
+                       name="editAmoParamsClientId"
+                       type="text">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="w-50 pr-4 mr-1 integration-tab-item">
+              <div>
+                <label class="control-label"
+                       for="editAmoParamsClientSecret">{{ 'settings.site.newIntegration.create.secretKey' | translate }}</label>
+                <input [(ngModel)]="editableIntegration.params.clientSecret" class="form-control" id="editAmoParamsClientSecret"
+                       name="editAmoParamsClientSecret"
+                       type="text">
+              </div>
+            </div>
+            <div class="w-50 ml-1 mr-3 integration-tab-item">
+              <div>
+                <label class="control-label"
+                       for="editAmoParamsCode">{{ 'settings.site.newIntegration.create.code' | translate }}</label>
+                <input [(ngModel)]="editableIntegration.params.code" class="form-control" id="editAmoParamsCode"
+                       name="editAmoParamsCode"
+                       type="text">
+              </div>
+            </div>
+          </div>
+
+          <button
+            (click)="activateIntegration(AmoGrantTypes.AuthCode)"
+            *ngIf="!isAmoActivated"
+            [disabled]="disableEditingActivation()"
+            class="btn btn-default mt-2 mb-4"
+          >
+            <i class="fas fa-power-off mr-2"></i> {{ 'settings.site.newIntegration.activate' | translate }}
+          </button>
+          <button
+            *ngIf="isAmoActivated"
+            class="btn btn-default mt-2 mb-4"
+            disabled
+          >
+            <i class="fas fa-power-off mr-2"></i> {{ 'settings.site.newIntegration.activated' | translate }}
+          </button>
+        </div>
+
+        <!-- EMAIL PARAMS -->
+        <div *ngIf="editableIntegration.type === IntegrationTypes.EMAIL">
+          <div class="integration-tab-item">
+            <label class="control-label" for="editEmailParamsEmail">
+              {{ 'settings.site.newIntegration.create.email' | translate }}
+            </label>
+            <input
+              [(ngModel)]="editableIntegration.params.email"
+              class="form-control"
+              id="editEmailParamsEmail"
+              name="editEmailParamsEmail"
+              type="text"
+            >
+          </div>
+        </div>
+
+        <!-- ROISTAT PARAMS -->
+        <div
+          *ngIf="editableIntegration.type === IntegrationTypes.ROISTAT || editableIntegration.type === IntegrationTypes.WEBHOOK">
+          <div class="integration-tab-item">
+            <label class="control-label" for="editRoistatParamsUrl">
+              {{ 'settings.site.newIntegration.create.url' | translate }}
+            </label>
+            <input
+              [(ngModel)]="editableIntegration.params.url"
+              class="form-control"
+              id="editRoistatParamsUrl"
+              name="editRoistatParamsUrl"
+              type="text"
+            >
+          </div>
+        </div>
+
+        <div class="integration-tab-item mb-0">
+          <div class="d-flex">
+            <ui-switch [(ngModel)]="editableIntegration.default" size="small"></ui-switch>
+            <label class="control-label ml-2">
+              {{ 'settings.site.tabs.integration.useDefault.title' | translate }}
+              <a class="info-link"
+                 data-container="body"
+                 data-placement="top"
+                 data-toggle="tooltip"
+                 title="{{ 'settings.site.tabs.integration.useDefault.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
+              </a>
+            </label>
+          </div>
+        </div>
+
+        <!-- AMOCRM FUNNEL PARAMS -->
+        <div *ngIf="editableIntegration.type === IntegrationTypes.AMOCRM">
+          <h5 class="mt-4">
+            <strong>{{ 'settings.site.newIntegration.funnel.title' | translate }}</strong>
+          </h5>
+          <button
+            (click)="loadIntegration()"
+            [disabled]="disableEditingActivation() || !this.editableIntegration.params.accessToken"
+            class="btn btn-default mt-2 mb-3"
+          >
+            <i class="fas fa-sync mr-2"></i> {{ 'settings.site.newIntegration.funnel.button' | translate }}
+          </button>
+          <div class="d-flex">
+            <div class="w-50 pr-4 mr-1 integration-tab-item">
+              <label class="control-label">{{ 'settings.site.newIntegration.funnel.name' | translate }}</label>
+              <div class="dropdown integration-selector">
+                <button
+                  [disabled]="!pipelines.length"
+                  aria-expanded="true"
+                  aria-haspopup="true"
+                  class="btn btn-default dropdown-toggle"
+                  data-display="static"
+                  data-toggle="dropdown"
+                  type="button"
+                >
+                  <span
+                    class="dropdown-selected-cropp"
+                  >{{ editableIntegration.params.funnelName }}</span>
+                </button>
+                <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
+                  <li
+                    (click)="changeCurrentFunnelId(item.id.toString(), item.name)"
+                    *ngFor="let item of pipelines"
+                  >
+                    <a class="dropdown-item">{{ item.name }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="w-50 ml-1 mr-3 integration-tab-item">
+              <label class="control-label">{{ 'settings.site.newIntegration.funnel.status' | translate }}</label>
+              <div class="dropdown integration-selector">
+                <button
+                  [disabled]="!pipelines.length"
+                  aria-expanded="true"
+                  aria-haspopup="true"
+                  class="btn btn-default dropdown-toggle"
+                  data-display="static"
+                  data-toggle="dropdown"
+                  type="button"
+                >
+                  <span
+                    class="dropdown-selected-cropp"
+                  >{{ editableIntegration.params.leadStateName }}</span>
+                </button>
+                <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
+                  <li
+                    (click)="changeCurrentFunnelLeadStateId(item.id.toString(), item.name)"
+                    *ngFor="let item of leadStates"
+                  >
+                    <a class="dropdown-item">{{ item.name }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="integration-tab-item mr-3">
+            <label class="control-label">{{ 'settings.site.newIntegration.funnel.check.title' | translate }}</label>
+            <a class="info-link ml-1 mt-1"
+               data-container="body"
+               data-placement="bottom"
+               data-toggle="tooltip"
+               title="{{ 'settings.site.newIntegration.funnel.check.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
+            </a>
+
+            <div class="dropdown integration-selector">
+              <button
+                [disabled]="!pipelines.length"
+                aria-expanded="true"
+                aria-haspopup="true"
+                class="btn btn-default dropdown-toggle"
+                data-display="static"
+                data-toggle="dropdown"
+                type="button"
+              >
+                <span
+                  class="dropdown-selected-cropp"
+                >{{ funnelCheckDuplicates[editableIntegration.params.checkDuplicate] }}</span>
+              </button>
+              <ul class="dropdown-menu dropdown-new-integration-menu dropdown-integration-max-240h">
+                <li
+                  (click)="changeCurrentFunnelCheckDuplicates(item.key)"
+                  *ngFor="let item of funnelCheckDuplicates | keyvalue : returnZero"
+                >
+                  <a class="dropdown-item">{{ item.value }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- CUSTOM FIELDS MAPPING -->
+        <div
+          *ngIf="editableIntegration.type === IntegrationTypes.BITRIX && bitrixConnectionType === BitrixTypes.Webhook
+            || editableIntegration.type === IntegrationTypes.AMOCRM"
+          class="d-flex flex-column mt-4"
+        >
+          <div class="d-flex">
+            <h5 class="mt-2">
+              <strong>{{ 'settings.site.newIntegration.fields.title' | translate }}</strong>
+            </h5>
+            <a class="info-link ml-1 mt-1"
+               data-container="body"
+               data-placement="bottom"
+               data-toggle="tooltip"
+               title="{{ 'settings.site.newIntegration.fields.tooltip' | translate }}"><i class="fa fa-info-circle"></i>
+            </a>
+          </div>
+          <div class="d-flex flex-column mt-2">
+            <div class="d-flex">
+              <div class="w-50">
+                <label class="control-label leadgenic-field">
+                  {{ 'settings.site.newIntegration.fields.leadgenic' | translate }}
+                </label>
+              </div>
+              <div class="w-50">
+                <label class="control-label crm-field">
+                  {{ 'settings.site.newIntegration.fields.crm' | translate }}
+                </label>
+              </div>
+            </div>
+            <ng-container *ngFor="let integrationField of integrationFieldsIds; index as i">
+              <div class="d-flex mb-2">
+                <div class="w-50 mr-3">
+                  <input
+                    [(ngModel)]="integrationField.leadGenicId"
+                    [class.field-error]=
+                      "integrationField.leadGenicId === 'email' ||
+                        integrationField.leadGenicId === 'phone' ||
+                        integrationField.leadGenicId === 'message' ||
+                        integrationField.leadGenicId === 'name'"
+                    [id]="'editLeadgenicFieldId' + i"
+                    class="form-control leadgenic-field"
+                    name="'leadgenicFieldId' + i"
+                    pattern="[0-9a-zA-Z_\-]{1,50}"
+                    type="text"
+                  >
+                </div>
+                <div class="w-50 ml-3 mr-3">
+                  <input
+                    [(ngModel)]="integrationField.crmId"
+                    [id]="'editCrmFieldId' + i"
+                    class="form-control"
+                    name="'crmFieldId' + i"
+                    pattern="^.{1,50}$"
+                    type="text"
+                  >
+                </div>
+                <a (click)="deleteIntegrationField(i)"><i class="fa fa-trash integration-field-delete mr-2"></i></a>
+              </div>
+              <div
+                *ngIf="integrationField.leadGenicId === 'email' ||
+                  integrationField.leadGenicId === 'phone' ||
+                  integrationField.leadGenicId === 'message' ||
+                  integrationField.leadGenicId === 'name'"
+                class="small mb-2"
+              >
+                {{ 'settings.site.newIntegration.fields.error' | translate }}
+              </div>
+            </ng-container>
+
+          </div>
+          <a (click)="addIntegrationField()" class="integration-field-add">
+            <i class="fa fa-plus integration-field-add-icon"></i>
+            {{ 'settings.site.newIntegration.fields.add' | translate }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer d-flex justify-content-between mt-1">
+  <button
+    (click)="closeModal()"
+    class="btn btn-default"
+  >
+    {{ 'global.cancel' | translate }}
+  </button>
+
+  <button
+    (click)="createIntegration()"
+    *ngIf="!editableIntegration"
+    [disabled]="disableCreation()"
+    class="btn btn-success"
+  >
+    {{ 'settings.site.newIntegration.add' | translate }}
+  </button>
+
+  <button
+    (click)="updateIntegration()"
+    *ngIf="editableIntegration"
+    [disabled]="disableUpdation()"
+    class="btn btn-success"
+  >
+    {{ 'global.save' | translate }}
+  </button>
+</div>

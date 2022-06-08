@@ -1,0 +1,810 @@
+<div class="main-settings-for-top-el-near">
+  <div class="main-settings-for-top-el" id="elemScrNMainSetBl">
+    <h3>Контент виджета</h3>
+
+    <div class="border-item">
+      <div class="d-flex align-items-center justify-content-between mt-3 mb-1">
+        <label class="control-label">Ширина</label>
+        <div class="d-flex align-items-center">
+          <div
+            [class.disabled]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
+            class="form-control form-control-font mr-2"
+          >
+            <input
+              [(ngModel)]="widget.guiprops.dhVisual.widget_content_widthpx"
+              [disabled]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
+              min="60"
+              type="number"
+            />
+            <label>px</label>
+          </div>
+          <button
+            (click)="widget.guiprops.dhVisual.widget_content_width = (widget.guiprops.dhVisual.widget_content_width === widgwidthBtn[0] ? widgwidthBtn[1] : widgwidthBtn[0])"
+            [class.active]="widget.guiprops?.dhVisual?.widget_content_width === 'Авто'"
+            class="content-type-button"
+          >
+            AUTO
+          </button>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center justify-content-between mt-2">
+        <label class="control-label">Высота</label>
+        <div class="d-flex align-items-center">
+          <div
+            [class.disabled]="widget.guiprops?.dhVisual?.widget_content_height === 'Авто'"
+            class="form-control form-control-font mr-2"
+          >
+            <input
+              [(ngModel)]="widget.guiprops.dhVisual.widget_content_heightpx"
+              [disabled]="widget.guiprops?.dhVisual?.widget_content_height === 'Авто'"
+              min="60"
+              type="number"
+            />
+            <label>px</label>
+          </div>
+          <button
+            (click)="widget.guiprops.dhVisual.widget_content_height = (widget.guiprops.dhVisual.widget_content_height === widgwidthBtn[0] ? widgwidthBtn[1] : widgwidthBtn[0])"
+            [class.active]="widget.guiprops?.dhVisual?.widget_content_height === 'Авто'"
+            class="content-type-button"
+          >
+            AUTO
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="widget.guiprops?.dhVisual?.widget_content_height === 'Собственная'" class="row-subitem mt-2">
+        <div class="row-subitem-padding pt-2">
+          <h3>Позиционирование</h3>
+          <div class="row-subitem-padding mt-2 pt-1">
+            <app-position-control
+              (changePosition)="widget.guiprops.dhVisual.widget_content_height_orient = $event"
+              [currentPosition]="widget.guiprops.dhVisual.widget_content_height_orient"
+              [positions]="vertOrientDh"
+            ></app-position-control>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page rule item -->
+    <div *ngIf="widget.guiprops.bg" class="border-item">
+      <div class="row row-subitem mt-3">
+        <div class="col-sm-12 row-subitem-padding">
+          <h4 class="h4-text-tit">Фон контента</h4>
+        </div>
+        <div class="clearfix"></div>
+        <div class="flex-bl-for-radio-group mt-2">
+          <div class="row-subitem-padding radio-group-item">
+            <div class="form-group widget-selector">
+              <label class="f-3">
+                <input
+                  [(ngModel)]="widget.guiprops['bg'].fillorImg"
+                  class="radio radio-info radio-inline"
+                  name="content"
+                  type="radio"
+                  value="fill"
+                />
+                Залить цветом
+              </label>
+            </div>
+          </div>
+          <div class="row-subitem-padding radio-group-item">
+            <div class="form-group widget-selector">
+              <label class="f-3">
+                <input
+                  [(ngModel)]="widget.guiprops['bg'].fillorImg"
+                  class="radio radio-info radio-inline"
+                  name="content"
+                  type="radio"
+                  value="useImg"
+                />
+                Изображение
+              </label>
+            </div>
+          </div>
+          <div class="row-subitem-padding">
+            <div class="form-group widget-selector">
+              <label class="f-3">
+                <input
+                  (change)="getVideoId(widget.guiprops.bg.video)"
+                  [(ngModel)]="widget.guiprops['bg'].fillorImg"
+                  class="radio radio-info radio-inline"
+                  name="content"
+                  type="radio"
+                  value="useVideo"
+                />
+                Видео
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="widget.guiprops['bg'].fillorImg === 'useImg'" class="mt-1">
+        <button
+          (click)="listFile('bg')"
+          *ngIf="isDefault(widget.guiprops.bg.url)"
+          class="widget-download-img mt-2"
+        >
+          <img alt="Загрузить изображение" src='../../../../../../../assets/images/widgets/upload.svg'/> Загрузить изображение
+        </button>
+
+        <div *ngIf="!isDefault(widget.guiprops.bg.url)" class="image-container">
+          <img [src]="widget.guiprops.bg.url" alt="image"/>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>{{ widget.guiprops.bg.url.split('/').pop() }}</p>
+            <div class="remove-sub-item">
+              <button (click)="removeImage(true)" class="delete-element-button">&times;</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row row-subitem mt-3 border-item">
+          <div class="col-sm-6 row-subitem-padding pt-1 pr-3">
+            <label class="control-label">Положение:</label>
+            <div class="dropdown">
+              <button
+                aria-expanded="true"
+                class="btn btn-default dropdown-toggle"
+                data-toggle="dropdown"
+                type="button"
+              >
+                {{ widget.guiprops.bg.positionType }}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li
+                  (click)="widget.guiprops.bg.positionType = item"
+                  *ngFor="let item of bgPositionTypesList"
+                  role="presentation"
+                >
+                  <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ item }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div *ngIf="widget.guiprops['bg'].positionType === 'Замостить'" class="col-sm-6 row-subitem-padding pt-1">
+            <div>
+              <label class="control-label">Плитка:</label>
+              <div class="dropdown">
+                <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        type="button">
+                  {{ widget.guiprops.bg.tiles }}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li
+                    (click)="widget.guiprops.bg.tiles = item"
+                    *ngFor="let item of tilesList"
+                    role="presentation"
+                  >
+                    <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ item }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="widget.guiprops['bg'].fillorImg === 'useVideo'">
+        <div class="imaget-item-video-settings mt-2 border-item">
+          <div class="row-subitem-padding mb-1">
+            <h4 class="h4-text-tit control-label-des">Источник видео</h4>
+          </div>
+          <div class="row-subitem d-flex position-relative mt-2">
+            <div class="col-sm-6 row-subitem-padding">
+              <div class="form-group widget-selector">
+                <label class="mb-0">
+                  <input
+                    (change)="getVideoId(widget.guiprops.bg.video)"
+                    [(ngModel)]="widget.guiprops.bg.video.videoType"
+                    class="radio radio-info radio-inline"
+                    name="video"
+                    type="radio"
+                    value="youtube"
+                  />
+                  Youtube
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-6 row-subitem-padding">
+              <div class="form-group widget-selector">
+                <label class="mb-0">
+                  <input
+                    (change)="getVideoId(widget.guiprops.bg.video)"
+                    [(ngModel)]="widget.guiprops.bg.video.videoType"
+                    class="radio radio-info radio-inline"
+                    name="video"
+                    type="radio"
+                    value="vimeo"
+                  />
+                  Vimeo
+                </label>
+              </div>
+            </div>
+            <button
+              (click)="getVideoId(widget.guiprops.bg.video)"
+              class="btn btn-default refresh-video-element-btn"
+              data-container="body"
+              data-original-title="Обновить превью видео"
+              data-placement="top"
+              data-toggle="tooltip"
+              title=""
+            >
+              <i class="fas fa-sync"></i>
+            </button>
+          </div>
+          <div class="row-subitem row-subitem-padding mt-1 widget-name-block-rel">
+            <input
+              (blur)="getVideoId(widget.guiprops.bg.video)"
+              [(ngModel)]="widget.guiprops.bg.video.videoUrl"
+              class="form-control widgetVideoUrl"
+              type="text"
+            />
+            <span class="input-down-sm-lab small mt-2">
+              {{ (widget.guiprops.bg.video.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253' }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="widget.guiprops['bg'].mask && ((widget.guiprops['bg'].fillorImg === 'useVideo') || (widget.guiprops['bg'].fillorImg === 'useImg'))"
+      >
+        <div class="d-flex justify-content-between row-subitem row-subitem-padding mt-4">
+          <label class="control-label switcher-label-xs control-label-des">
+            Затемнить фон виджета маской
+          </label>
+          <ui-switch
+            [(ngModel)]="widget.guiprops['bg'].mask.enable"
+            size="small"
+          ></ui-switch>
+        </div>
+        <div *ngIf="widget.guiprops['bg'].mask.enable">
+          <div class="d-flex justify-content-between mt-3">
+            <label class="control-label">Цвет маски</label>
+            <div class="d-flex text-right">
+              <input
+                [(colorPicker)]="widget.guiprops['bg'].mask.color"
+                [cpAlphaChannel]="'disabled'"
+                [cpOutputFormat]="'hex'"
+                [style.background]="widget.guiprops['bg'].mask.color"
+                class="color-picker-control"
+                cpPosition="left"
+                readonly
+              />
+              <input
+                [(ngModel)]="widget.guiprops['bg'].mask.color"
+                class="picker-input color"
+              />
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between mt-3">
+            <label class="control-label">Прозрачность</label>
+            <div class="d-flex text-right side-ui-sm">
+              <ngx-slider [(value)]="widget.guiprops['bg'].mask.opacity" [options]="optionsOpacity"></ngx-slider>
+              <input
+                [(ngModel)]="widget.guiprops['bg'].mask.opacity"
+                class="picker-input slider"
+              />
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center row-subitem mt-2 pt-1">
+            <label class="control-label">Расположение маски</label>
+            <div class="dropdown">
+              <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                      type="button">
+                {{ widget.guiprops.bg.mask.area }}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li
+                  (click)="widget.guiprops.bg.mask.area = item"
+                  *ngFor="let item of maskTypeList"
+                  role="presentation"
+                >
+                  <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ item }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="widget.guiprops['bg'].fillorImg === 'fill'">
+        <div class="row justify-content-between mt-3 mb-3">
+          <label class="control-label">Цвет фона</label>
+          <div class="d-flex text-right">
+            <input
+              [(colorPicker)]="widget.guiprops['bg'].colorBg"
+              [cpAlphaChannel]="'disabled'"
+              [cpOutputFormat]="'hex'"
+              [style.background]="widget.guiprops['bg'].colorBg"
+              class="color-picker-control"
+              cpPosition="left"
+              readonly
+            />
+            <input
+              [(ngModel)]="widget.guiprops['bg'].colorBg"
+              class="picker-input color"
+            />
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <label class="control-label">Прозрачность</label>
+          <div class="d-flex text-right side-ui-sm">
+            <ngx-slider [(value)]="widget.guiprops['bg'].opacity" [options]="optionsOpacity"></ngx-slider>
+            <input
+              [(ngModel)]="widget.guiprops['bg'].opacity"
+              class="picker-input slider"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="widget.guiprops.image" class="image-or-video-settings-bl border-item" id="elemScrNIVBl">
+      <div class="d-flex row-subitem justify-content-between row-subitem-padding mt-4">
+        <label class="control-label switcher-label-xs control-label-des">
+          Добавить изображение, видео или отступ
+        </label>
+        <ui-switch
+          [(ngModel)]="widget.guiprops.image.enable"
+          size="small"
+        ></ui-switch>
+      </div>
+      <div class="clearfix"></div>
+
+      <!-- Page rule item -->
+      <div class="d-flex widget-small-text mt-3">
+        Вы можете добавить изображение или видео и разместить его слева, справа, сверху или снизу от контента виджета.
+        Также вы можете добавить отступ. При добавлении отступа, фон виджета растягивается на всю ширину, включая
+        отступ. Обратите внимание, добавленный элемент скрывается на мобильных устройствах и работает только на
+        компьютерах и планшетах.
+      </div>
+
+      <div *ngIf="widget.guiprops['image'].enable == true">
+        <div class="border-item">
+          <div class="row row-subitem mt-3">
+            <div class="col-sm-12 row-subitem-padding">
+              <h4 class="h4-text-tit">Выберите, что вы хотите добавить</h4>
+            </div>
+            <div class="clearfix"></div>
+            <div class="flex-bl-for-radio-group">
+              <div class="row-subitem-padding radio-group-item">
+                <div class="form-group widget-selector">
+                  <label>
+                    <input
+                      [(ngModel)]="widget.guiprops['image'].typeBl"
+                      class="radio radio-info radio-inline"
+                      name="addition"
+                      type="radio"
+                      value="imageBl"
+
+                    >
+                    Изображение
+                  </label>
+                </div>
+              </div>
+              <div class="row-subitem-padding radio-group-item">
+                <div class="form-group widget-selector">
+                  <label>
+                    <input
+                      [(ngModel)]="widget.guiprops['image'].typeBl"
+                      class="radio radio-info radio-inline"
+                      name="addition"
+                      type="radio"
+                      value="videoBl"
+                    >
+                    Видео
+                  </label>
+                </div>
+              </div>
+              <div class="row-subitem-padding">
+                <div class="form-group widget-selector">
+                  <label>
+                    <input
+                      [(ngModel)]="widget.guiprops['image'].typeBl"
+                      class="radio radio-info radio-inline"
+                      name="addition"
+                      type="radio"
+                      value="paddingBl"
+                    >
+                    Отступ
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="widget.guiprops['image'].typeBl === 'imageBl'" class="mt-2 mb-1">
+            <div class="mb-1">
+              <h4 class="h4-text-tit">Настройка изображения</h4>
+
+              <button
+                (click)="listFile('imageSingle')"
+                *ngIf="isDefault(widget.guiprops.image.url)"
+                class="widget-download-img"
+              >
+                <img alt="Загрузить изображение" src='../../../../../../../assets/images/widgets/upload.svg'/> Загрузить изображение
+              </button>
+
+              <div *ngIf="!isDefault(widget.guiprops.image.url)" class="image-container">
+                <img [src]="widget.guiprops.image.url" alt="image"/>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>{{ widget.guiprops.image.url.split('/').pop() }}</p>
+                  <div class="remove-sub-item">
+                    <button (click)="removeImage(false)" class="delete-element-button">&times;</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="widget.guiprops['image'].typeBl === 'videoBl'" class="imaget-item-video-settings mb-1">
+            <h4 class="h4-text-tit control-label-des helper-title-3level mt-2 mb-1">Настройка видео</h4>
+            <div class="d-flex row-subitem position-relative">
+              <div class="col-sm-6 row-subitem-padding">
+                <div class="form-group widget-selector">
+                  <label class="mb-0">
+                    <input
+                      (change)="getVideoId(widget.guiprops.image)"
+                      [(ngModel)]="widget.guiprops.image.videoType"
+                      class="radio radio-info radio-inline"
+                      name="video2"
+                      type="radio"
+                      value="youtube"
+                    />
+                    Youtube
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-6 row-subitem-padding">
+                <div class="form-group widget-selector">
+                  <label class="mb-0">
+                    <input
+                      (change)="getVideoId(widget.guiprops.image)"
+                      [(ngModel)]="widget.guiprops.image.videoType"
+                      class="radio radio-info radio-inline"
+                      name="video2"
+                      type="radio"
+                      value="vimeo"
+                    />
+                    Vimeo
+                  </label>
+                </div>
+              </div>
+              <button
+                (click)="getVideoId(widget.guiprops.image)"
+                class="btn btn-default refresh-video-element-btn"
+                data-container="body"
+                data-original-title="Обновить превью видео"
+                data-placement="top"
+                data-toggle="tooltip"
+                title=""
+              >
+                <i class="fas fa-sync"></i>
+              </button>
+            </div>
+            <div class="row row-subitem">
+              <div class="col-sm-12 row-subitem-padding pt-1 widget-name-block-rel">
+                <input
+                  (blur)="getVideoId(widget.guiprops.image)"
+                  [(ngModel)]="widget.guiprops.image.videoUrl"
+                  class="form-control widgetVideoUrl"
+                  type="text"
+                />
+                <span class="input-down-sm-lab small mt-2">
+                {{(widget.guiprops.image.videoType === 'youtube') ? 'Например: https://www.youtube.com/watch?v=FFu-JFifX28' : 'Например: https://vimeo.com/207763253'}}
+              </span>
+              </div>
+            </div>
+
+            <div class="d-flex row-subitem mt-3">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    [(ngModel)]="widget.guiprops.image.autoplay"
+                    class="form-check-input"
+                    type="checkbox"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+                <span class="form-check-text f-3">Автоматически вопроизводить при показе</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="row-subitem mt-3">
+            <h4 class="h4-text-tit">Расположение блока</h4>
+            <div class="row-subitem-padding mt-2">
+              <app-position-control
+                (changePosition)="widget.guiprops.image.place = $event"
+                [currentPosition]="widget.guiprops.image.place"
+                [positions]="placeImg"
+              ></app-position-control>
+            </div>
+
+            <div
+              *ngIf="(widget.guiprops['image'].place === 'Слева' || widget.guiprops['image'].place === 'Справа')"
+              class="col-sm-12 row align-items-center justify-content-between mt-3 mb-1"
+            >
+              <label class="control-label">Ширина</label>
+              <div class="row align-items-center">
+                <div
+                  [class.disabled]="widget.guiprops['image'].img_width === 'Авто'"
+                  class="form-control form-control-font mr-2"
+                >
+                  <input
+                    [(ngModel)]="widget.guiprops['image'].img_widthpx"
+                    [disabled]="widget.guiprops['image'].img_width === 'Авто'"
+                    type="number"
+                  />
+                  <label>px</label>
+                </div>
+                <button
+                  (click)="widget.guiprops['image'].img_width = (widget.guiprops['image'].img_width === widgwidthBtn[0] ? widgwidthBtn[1] : widgwidthBtn[0])"
+                  [class.active]="widget.guiprops['image'].img_width === 'Авто'"
+                  class="content-type-button"
+                >
+                  AUTO
+                </button>
+              </div>
+            </div>
+
+            <div
+              *ngIf="(widget.guiprops['image'].place === 'Сверху' || widget.guiprops['image'].place === 'Снизу')"
+              class="col-sm-12 row align-items-center justify-content-between mt-3 mb-1"
+            >
+              <label class="control-label">Высота</label>
+              <div class="row align-items-center">
+                <div
+                  [class.disabled]="widget.guiprops.image.img_height === 'Авто'"
+                  class="form-control form-control-font mr-2"
+                >
+                  <input
+                    [(ngModel)]="widget.guiprops['image'].img_heightpx"
+                    [disabled]="widget.guiprops.image.img_height === 'Авто'"
+                    type="number"
+                  />
+                  <label>px</label>
+                </div>
+                <button
+                  (click)="widget.guiprops.image.img_height = (widget.guiprops.image.img_height === widgwidthBtn[0] ? widgwidthBtn[1] : widgwidthBtn[0])"
+                  [class.active]="widget.guiprops.image.img_height === 'Авто'"
+                  class="content-type-button"
+                >
+                  AUTO
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            *ngIf="widget.guiprops['image'].typeBl !== 'paddingBl'"
+            class="d-flex justify-content-between align-items-center row-subitem mt-3"
+          >
+            <label class="control-label">
+              Габариты
+            </label>
+            <div class="dropdown">
+              <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                      type="button">
+                {{ widget.guiprops.image.img_item_type }}
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li
+                  (click)="widget.guiprops.image.img_item_type = item"
+                  *ngFor="let item of imageItemsType"
+                  role="presentation"
+                >
+                  <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ item }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div *ngIf="widget.guiprops['image'].typeBl !== 'paddingBl'">
+            <div *ngIf="widget.guiprops['image'].img_item_type === 'Установить произвольные габариты'">
+              <div class="col-sm-12 row align-items-center justify-content-between mt-3 mb-1">
+                <label class="control-label">Ширина</label>
+                <div class="row align-items-center">
+                  <div class="form-control form-control-font">
+                    <input
+                      [(ngModel)]="widget.guiprops.image.img_item_widthpx"
+                      type="number"
+                    />
+                    <label>px</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-12 row align-items-center justify-content-between mt-3 mb-1">
+                <label class="control-label">Высота</label>
+                <div class="row align-items-center">
+                  <div class="form-control form-control-font">
+                    <input
+                      [(ngModel)]="widget.guiprops.image.img_item_heightpx"
+                      type="number"
+                    />
+                    <label>px</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center row-subitem mt-3">
+                <label class="control-label">Выравнивание</label>
+                <div class="dropdown">
+                  <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                          type="button">
+                    {{ widget.guiprops.image.img_item_align }}
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li
+                      (click)="widget.guiprops.image.img_item_align = item"
+                      *ngFor="let item of imageItemsAlign"
+                      role="presentation"
+                    >
+                      <a class="dropdown-item" href="javascript:void(0)" role="menuitem" tabindex="-1">{{ item }}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="widget.guiprops.bg" class="border-item mt-4">
+      <div class="d-flex row-subitem justify-content-between w-100 row-subitem-padding">
+        <label class="control-label switcher-label-xs control-label-des">
+          Скругление углов
+        </label>
+        <ui-switch
+          (change)="setBorderRadius($event)"
+          [(ngModel)]="widget.guiprops.bg.borderRadiusEnable"
+          size="small"
+        ></ui-switch>
+      </div>
+
+      <div *ngIf="widget.guiprops.bg.borderRadiusEnable" class="d-flex justify-content-between mt-4">
+        <label class="control-label">Радиус</label>
+        <div class="d-flex text-right side-ui-sm">
+          <ngx-slider [(value)]="widget.guiprops['bg'].borderRadius" [options]="optionsRound"></ngx-slider>
+          <input
+            [(ngModel)]="widget.guiprops['bg'].borderRadius"
+            class="picker-input slider"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.border" class="border-item mt-4">
+      <div class="d-flex row-subitem justify-content-between w-100 row-subitem-padding">
+        <label class="control-label switcher-label-xs control-label-des">
+          Обводка
+        </label>
+        <ui-switch
+          [(ngModel)]="widget.guiprops['bg'].border.enable"
+          size="small"
+        ></ui-switch>
+      </div>
+
+      <div *ngIf="widget.guiprops.bg.border.enable">
+        <div class="d-flex justify-content-between mt-4 mb-3">
+          <label class="control-label">Цвет</label>
+          <div class="d-flex text-right">
+            <input
+              [(colorPicker)]="widget.guiprops['bg'].border.color"
+              [cpAlphaChannel]="'disabled'"
+              [cpOutputFormat]="'hex'"
+              [style.background]="widget.guiprops['bg'].border.color"
+              class="color-picker-control"
+              cpPosition="left"
+              readonly
+            />
+            <input
+              [(ngModel)]="widget.guiprops['bg'].border.color"
+              class="picker-input color"
+            />
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <label class="control-label">Толщина</label>
+          <div class="d-flex text-right side-ui-sm">
+            <ngx-slider [(value)]="widget.guiprops['bg'].border.thickness" [options]="optionsThickness"></ngx-slider>
+            <input
+              [(ngModel)]="widget.guiprops['bg'].border.thickness"
+              class="picker-input slider"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="widget.guiprops.bg && widget.guiprops.bg.shadow" class="border-item mt-4">
+      <div class="d-flex row-subitem justify-content-between row-subitem-padding">
+        <label class="control-label switcher-label-xs control-label-des">
+          Тень
+        </label>
+        <ui-switch
+          [(ngModel)]="widget.guiprops['bg'].shadow.enable"
+          size="small"
+        ></ui-switch>
+      </div>
+
+      <div *ngIf="widget.guiprops.bg.shadow.enable">
+        <div class="d-flex justify-content-between mt-4">
+          <label class="control-label">Цвет</label>
+          <div class="d-flex text-right">
+            <input
+              [(colorPicker)]="widget.guiprops['bg'].shadow.color"
+              [cpAlphaChannel]="'disabled'"
+              [cpOutputFormat]="'hex'"
+              [style.background]="widget.guiprops['bg'].shadow.color"
+              class="color-picker-control"
+              cpPosition="left"
+              readonly
+            />
+            <input
+              [(ngModel)]="widget.guiprops['bg'].shadow.color"
+              class="picker-input color"
+            />
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <label class="control-label">Прозрачность</label>
+          <div class="d-flex text-right side-ui-sm">
+            <ngx-slider [(value)]="widget.guiprops['bg'].shadow.opacity" [options]="optionsOpacity"></ngx-slider>
+            <input
+              [(ngModel)]="widget.guiprops['bg'].shadow.opacity"
+              class="picker-input slider"
+            />
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <label class="control-label">Сдвиг</label>
+          <div>
+            <label class="control-label mr-1 pr-1">X</label>
+            <input
+              [(ngModel)]="widget.guiprops['bg'].shadow.horiz"
+              class="picker-input slider"
+              type="number"
+            />
+            <label class="control-label ml-3 pl-1 mr-1 pr-1">Y</label>
+            <input
+              [(ngModel)]="widget.guiprops['bg'].shadow.vertical"
+              class="picker-input slider"
+              type="number"
+            />
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <label class="control-label">Размытие</label>
+          <div class="d-flex text-right side-ui-sm">
+            <ngx-slider [(value)]="widget.guiprops['bg'].shadow.blur" [options]="optionsSharpness"></ngx-slider>
+            <input
+              [(ngModel)]="widget.guiprops['bg'].shadow.blur"
+              class="picker-input slider"
+              type="number"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

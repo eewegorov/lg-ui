@@ -1,0 +1,198 @@
+<div class="page-title">
+  <h1 class="title-main">{{ 'sidebar.widgets' | translate }}</h1>
+  <button (click)="createNewWidget()" class="btn btn-lg btn-success title-button" type="button">
+    <span class="icon" inlineSVG="./assets/images/core/plus.svg"></span>
+    <span>{{ 'widgetsList.add.title' | translate }}</span>
+  </button>
+</div>
+
+<ng-container *ngIf="sites.length">
+  <div class="widgets-filters">
+    <!-- Site selector -->
+    <div class="filter">
+      <h5>{{ 'widgetsList.selectSite' | translate }}:</h5>
+      <div class="controls">
+        <div class="dropdown">
+          <button
+            aria-expanded="true"
+            aria-haspopup="true"
+            class="btn btn-default dropdown-toggle"
+            data-toggle="dropdown"
+            type="button"
+          >
+            <span class="dropdown-selected-cropp">{{ currentSite.name }}</span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li (click)="changeCurrentSite(site)" *ngFor="let site of sites">
+              <a class="dropdown-item">{{ site.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Site selector end -->
+
+    <!-- Company selector -->
+    <div class="filter">
+      <h5>{{ 'widgetsList.selectCompany' | translate }}:</h5>
+      <div class="controls">
+        <ng-container *ngIf="!newCompany.on">
+          <div class="dropdown">
+            <button
+              aria-expanded="true"
+              aria-haspopup="true"
+              class="btn btn-default dropdown-toggle"
+              data-toggle="dropdown"
+              type="button"
+            >
+              <span class="dropdown-selected-cropp">{{ currentCompany.name || defCompanyName }}</span>
+              <span class="caret"></span>
+            </button>
+            <ul *ngIf="companies.length" class="dropdown-menu">
+              <li (click)="changeCurrentCompany(company)" *ngFor="let company of companies">
+                <a class="dropdown-item">{{ company.name || defCompanyName }}</a>
+              </li>
+            </ul>
+          </div>
+
+          <button
+            (click)="addNewCompany()"
+            class="btn btn-default filter-action"
+            data-container="body"
+            data-placement="top"
+            data-title="{{ 'widgetsList.company.add.tooltip' | translate }}"
+            data-toggle="tooltip"
+          >
+            <span inlineSVG="./assets/images/core/plus.svg"></span>
+          </button>
+
+          <button
+            (click)="deleteCompany()"
+            *ngIf="!currentCompany.default"
+            class="btn btn-default filter-action"
+            data-container="body"
+            data-placement="top"
+            data-title="{{ 'widgetsList.company.delete.tooltip' | translate }}"
+            data-toggle="tooltip"
+          >
+            <i class="fa fa-trash"></i>
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="newCompany.on">
+          <div [class.is-invalid]="newCompany.name.trim().length === 0" class="input">
+            <input
+              [(ngModel)]="newCompany.name"
+              class="form-control"
+              placeholder="{{ 'widgetsList.clone.company.add.label' | translate }}"
+              type="text"
+            />
+          </div>
+
+          <button
+            (click)="resetNewCompany()"
+            class="btn btn-default filter-action"
+            data-container="body"
+            data-placement="top"
+            data-toggle="tooltip"
+            title="{{ 'global.cancel' | translate }}"
+          >
+            <i class="fa fa-times"></i>
+          </button>
+
+          <button
+            (click)="saveNewCompany()"
+            [disabled]="newCompany.name.trim().length === 0"
+            class="btn btn-success filter-action"
+            data-container="body"
+            data-placement="top"
+            data-toggle="tooltip"
+            title="{{ 'widgetsList.company.add.tooltip' | translate }}"
+          >
+            <i class="fa fa-check"></i>
+          </button>
+        </ng-container>
+      </div>
+    </div>
+    <!-- Company selector end -->
+  </div>
+</ng-container>
+
+<!-- smart points settings -->
+<ng-container *ngIf="sites.length > 0 && smartPoints">
+  <app-card>
+    <div class="card-item">
+      <ui-switch (change)="enableDisableSP()" [(ngModel)]="smartPoints.enabled"></ui-switch>
+      <h3>
+        {{ 'widgetsList.site.default.title' | translate }}
+        <a
+          data-placement="bottom"
+          data-toggle="tooltip"
+          title="{{ 'widgetsList.site.default.tooltip' | translate }}"
+          inlineSVG="./assets/images/core/question.svg"
+        ></a>
+      </h3>
+    </div>
+    <ng-container *ngIf="smartPoints.enabled">
+      <h4 class="widget-page__smaptpoint-container-title">{{ 'settings.widgets.select' | translate }}:</h4>
+      <div class="card-item-columns">
+        <app-smartpoints-control [siteId]="currentSite.id" [smartPoints]="smartPoints"></app-smartpoints-control>
+      </div>
+    </ng-container>
+  </app-card>
+</ng-container>
+<!-- End smart points settings -->
+
+<section id="myWidgets">
+  <div *ngIf="!sites.length" class="col-lg-12 mt-3">
+    <h3 class="f-0 text-center">{{ 'widgetsList.sitePlaceholder' | translate }}</h3>
+    <h4 class="f-2 text-center underline-links blue-links hover-links">
+      <span>{{ 'widgetsList.sitePlaceholder2' | translate }}</span>
+      <a routerLink="/site/list">{{ 'widgetsList.sitePlaceholder3' | translate }}</a>
+      <span>{{ 'widgetsList.sitePlaceholder4' | translate }}</span>
+    </h4>
+  </div>
+
+  <!-- Static widgets -->
+  <ng-container *ngIf="containers.length && filteredContainers().length">
+    <h2 class="subtitle">{{ 'containerized.title' | translate }}</h2>
+  </ng-container>
+  <ng-container *ngIf="containers.length">
+    <app-containerized-container
+      *ngFor="let container of filteredContainers()"
+      [container]="container"
+      [currentCompany]="currentCompany"
+      [site]="currentSite"
+      class="static-widgets"
+    ></app-containerized-container>
+  </ng-container>
+  <!-- End Static widgets -->
+
+  <div *ngIf="!isHasWidgets() && !filteredContainers().length && sites.length" class="col-lg-12 mt-3">
+    <div *ngIf="currentCompany.default">
+      <h3 class="f-0 text-center">{{ 'widgetsList.listPlaceholder' | translate }}</h3>
+      <h4 class="f-2 text-center">{{ 'widgetsList.listPlaceholder2' | translate }}</h4>
+    </div>
+    <div *ngIf="!currentCompany.default">
+      <h3 class="f-0 text-center">{{ 'widgetsList.listPlaceholder3' | translate }}</h3>
+    </div>
+  </div>
+
+  <div class="widgets-container">
+    <ng-container *ngFor="let wdgTypes of getTypesWithCompanyFilter()">
+      <div class="column">
+        <h4>{{ getTypeItem(wdgTypes)?.name }}:</h4>
+        <ng-container *ngFor="let widget of getFilteredWidgets(wdgTypes); index as i">
+          <app-widget-item
+            [first]="i === 0"
+            [last]="i === getFilteredWidgets(wdgTypes).length - 1"
+            [next]="getFilteredWidgets(wdgTypes)[i + 1]"
+            [prev]="getFilteredWidgets(wdgTypes)[i - 1]"
+            [widget]="widget"
+          ></app-widget-item>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</section>

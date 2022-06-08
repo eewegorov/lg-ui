@@ -1,0 +1,242 @@
+:host {
+  max-height: 92vh;
+}
+
+.integration-switcher-wr {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.integration-switcher-wr h5 {
+  margin: -5px 0 15px;
+}
+
+.integration-switcher-wr span.btn.btn-default {
+  font-weight: 400 !important;
+}
+
+.integration-switcher-wr .btn.active {
+  background-color: darken(#4898A8, 10%);
+  border-color: darken(#4898A8, 10%);
+  color: #FFFFFF;
+}
+
+.integration-tab-inner-loading-state {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../../../../../assets/images/core/preloader.gif");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 40px;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 1;
+}
+
+.integration-tab-item {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.integration-selector {
+  min-width: 300px;
+}
+
+.integration-selector .dropdown-toggle {
+  text-align: left;
+  width: 100%;
+  min-height: 38px;
+}
+
+.integration-selector-item {
+  position: relative;
+  padding: 5px 20px 5px 35px !important;
+  font-size: 14px;
+}
+
+.integration-tab .dropdown-toggle .integration-selector-item {
+  font-size: 16px;
+}
+
+.integration-edit-service {
+  position: relative;
+  padding-left: 35px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.integration-edit-service:before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: -2px;
+  width: 25px;
+  height: 25px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 25px;
+  border-radius: 25px;
+}
+
+.integration-selector-item:before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 2px;
+  width: 25px;
+  height: 25px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 25px;
+  border-radius: 25px;
+}
+
+.integration-tab .dropdown-toggle .integration-selector-item:before {
+  top: 2px;
+  left: 0;
+  width: 29px;
+  height: 29px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 29px;
+  border-radius: 29px;
+}
+
+.integration-selector-item.MAILCHIMP:before,
+.integration-edit-service.MAILCHIMP:before {
+  background-image: url('../../../../../assets/images/sites/mailchimp.jpg');
+}
+
+.integration-selector-item.GETRESPONSE:before,
+.integration-edit-service.GETRESPONSE:before {
+  background-image: url('../../../../../assets/images/sites/getresponse.jpg');
+}
+
+.integration-selector-item.SENDPULSE:before,
+.integration-edit-service.SENDPULSE:before {
+  background-image: url('../../../../../assets/images/sites/sendpulse.jpg');
+}
+
+.integration-selector-item.SENDBOX:before,
+.integration-edit-service.SENDBOX:before {
+  background-image: url('../../../../../assets/images/sites/sendbox.jpg');
+}
+
+.integration-selector-item.UNISENDER:before,
+.integration-edit-service.UNISENDER:before {
+  background-image: url('../../../../../assets/images/sites/unisender.jpg');
+}
+
+.integration-selector-item.BITRIX:before,
+.integration-edit-service.BITRIX:before {
+  background-image: url('../../../../../assets/images/sites/bitrix.jpg');
+}
+
+.integration-selector-item.AMOCRM:before,
+.integration-edit-service.AMOCRM:before {
+  background-image: url('../../../../../assets/images/sites/amo.jpg');
+}
+
+.integration-selector-item.EMAIL:before,
+.integration-edit-service.EMAIL:before {
+  background-image: url('../../../../../assets/images/sites/email.jpg');
+}
+
+.integration-selector-item.ROISTAT:before,
+.integration-edit-service.ROISTAT:before {
+  background-image: url('../../../../../assets/images/sites/roistat.jpg');
+}
+
+.integration-selector-item.WEBHOOK:before,
+.integration-edit-service.WEBHOOK:before {
+  background-image: url('../../../../../assets/images/sites/webhook.jpg');
+}
+
+.integration-selector .dropdown-menu {
+  max-width: 100%;
+  padding-left: 5px;
+  padding-top: 0;
+}
+
+.integration-selector .dropdown-menu a.integration-selector-item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.integration-selector .dropdown-menu span.integration-selector-group {
+  font-size: 14px;
+  color: #000;
+  font-weight: 600;
+  padding: 5px;
+  margin: 5px 0 3px 0;
+  display: block;
+}
+
+.dropdown-integration-max-240h {
+  max-height: 240px;
+  min-width: 250px;
+  overflow: auto;
+}
+
+a.integration-help-link {
+  margin-top: -15px;
+  color: #6a6c6f;
+  font-size: 85%;
+  float: right;
+}
+
+a.integration-help-link:hover, a.integration-help-link:focus {
+  color: #34495e;
+}
+
+.integration-settings {
+  overflow-y: auto;
+  max-height: calc(100vh - 450px);
+  padding-left: 0.1rem;
+  padding-right: 0.3rem;
+}
+
+.integration-settings-edit {
+  overflow-y: auto;
+  max-height: calc(100vh - 280px);
+}
+
+@media (max-width: 992px) {
+  .integration-settings {
+    max-height: calc(100vh - 500px);
+  }
+}
+
+.leadgenic-field {
+  margin-left: 1px;
+}
+
+.crm-field {
+  margin-left: -4px;
+}
+
+.field-error {
+  border: 1px solid red;
+}
+
+.integration-field-delete {
+  margin-top: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.integration-field-add {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.integration-field-add:hover {
+  color: #444;
+}
+
+.integration-field-add-icon {
+  margin-left: 0.1rem;
+  margin-right: 0;
+  color: green;
+}

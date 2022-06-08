@@ -1,0 +1,60 @@
+#formRegister span.help-block a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+#formRegister span.help-block a:hover {
+  text-decoration: none;
+}
+
+#formRegister span.help-block a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+#formRegister span.help-block a:hover {
+  text-decoration: none;
+}
+
+.valid {
+  display: none;
+}
+
+.help-block-pwds {
+  height: 18px;
+  float: right;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+i.showPassLog {
+  height: 18px;
+  vertical-align: middle;
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+#buttonRegister {
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+
+#buttonRegister:disabled {
+  border-color: #ddd;
+}
+
+.messageCenterReset {
+  text-align: center;
+  margin: 15px auto 0 auto;
+  height: 64px;
+}
+
+.panel-loading {
+  background-image: url("~src/assets/images/core/preloader.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 60px;
+  width: 60px;
+  margin: 20px auto 0;
+}
